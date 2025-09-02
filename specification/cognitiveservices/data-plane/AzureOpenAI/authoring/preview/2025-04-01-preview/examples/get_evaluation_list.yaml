@@ -1,0 +1,90 @@
+parameters:
+  endpoint: https://aoairesource.openai.azure.com
+  api-key: "{api key}"
+  api-version: "2025-04-01-preview"
+responses:
+  "200":
+    headers: {}
+    body:
+      object: list
+      data:
+        - object: eval
+          id: eval_6801694950848190b10968bb628b651d
+          data_source_config:
+            type: custom
+            schema:
+              type: object
+              properties:
+                item:
+                  type: object
+                  properties:
+                    question:
+                      type: string
+                    A:
+                      type: string
+                    B:
+                      type: string
+                    C:
+                      type: string
+                    D:
+                      type: string
+                    answer:
+                      type: string
+                  type: object
+                  properties:
+                    model:
+                      type: string
+                    choices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          message:
+                            type: object
+                            properties:
+                              role:
+                                type: string
+                                enum:
+                                  - assistant
+                              content:
+                                type:
+                                  - string
+                                  - null
+                              refusal:
+                                type:
+                                  - boolean
+                                  - null
+                            required:
+                              - role
+                          finish_reason:
+                            type: string
+                        required:
+                          - index
+                          - message
+                          - finish_reason
+                    output_text:
+                      type: string
+                    output_json:
+                      type: object
+                    output_tools:
+                      type: array
+                      items:
+                        type: object
+                  required:
+                    - model
+                    - choices
+              required:
+                - item
+                - sample
+          testing_criteria:
+            - name: string check
+              type: string_check
+              input: "{{sample.output_text}}"
+              reference: "{{item.answer}}"
+              operation: eq
+          name: Math Quiz
+          created_at: 1744922953
+          metadata: {}
+      first_id: eval_6801694950848190b10968bb628b651d
+      last_id: eval_6801694950848190b10968bb628b651d
+      has_more: false

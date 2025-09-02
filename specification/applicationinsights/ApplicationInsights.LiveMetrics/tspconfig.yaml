@@ -20,14 +20,15 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "LiveMetrics"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "LiveMetrics"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "livemetrics-rest"
     generate-metadata: true
+    is-modular-library: false
     package-details:
       name: "@azure-rest/livemetrics"
       description: "LiveMetrics Service"

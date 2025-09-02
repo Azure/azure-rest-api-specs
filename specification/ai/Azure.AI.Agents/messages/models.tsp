@@ -1,4 +1,5 @@
 import "../tools/models.tsp";
+import "../common/models.tsp";
 import "@typespec/versioning";
 
 namespace Azure.AI.Agents;
@@ -217,7 +218,8 @@ model MessageAttachment {
 /** The possible tools to which files will be added by this message */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 union MessageAttachmentToolDefinition {
-  CodeInterpreterToolDefinition | FileSearchToolDefinition,
+  CodeInterpreterToolDefinition,
+  FileSearchToolDefinition,
 }
 
 // Message content types: "text" | "image_file"
@@ -605,4 +607,14 @@ model MessageDeltaTextFilePathAnnotationObject {
   /** The file ID for the annotation. */
   @encodedName("application/json", "file_id")
   fileId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
+@doc("The status of a thread message deletion operation.")
+@added(Versions.v1)
+model MessageDeletionStatus {
+  ...DeletionStatus;
+
+  @doc("The object type, which is always 'thread.message.deleted'.")
+  object: "thread.message.deleted";
 }

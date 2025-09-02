@@ -5,8 +5,6 @@ parameters:
     default: "{project-root}/azure-sdk-for-java/"
   "js-sdk-folder":
     default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-net/"
   "service-directory-name":
     default: "communication"
   "service-dir":
@@ -30,10 +28,13 @@ options:
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
     model-namespace: false
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Communication.JobRouter
-    package-dir: "Azure.Communication.JobRouter"
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Communication.JobRouter
+    model-namespace: false
   "@azure-tools/typespec-python":
     package-pprint-name: '"Communication JobRouter"'
     package-dir: "azure-communication-jobrouter"
@@ -43,7 +44,6 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-communication-jobrouter"
     package-dir: "azure-communication-jobrouter"
     namespace: com.azure.communication.jobrouter
     partial-update: true
@@ -52,10 +52,12 @@ options:
     custom-types: "CancelJobResultInternal,CloseJobResultInternal,CompleteJobResultInternal,DeclineJobOfferResultInternal,ReclassifyJobOptionsInternal,ReclassifyJobResultInternal"
     customization-class: customization/src/main/java/JobRouterSdkCustomization.java
     use-object-for-unknown: true
+    use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/communication-job-router-rest"
     package-dir: "communication-job-router-rest"
+    is-modular-library: false
     package-details:
       name: "@azure-rest/communication-job-router"
       description: "Azure client library for Azure Communication Job Router services"

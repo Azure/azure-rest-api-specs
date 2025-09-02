@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2025-01-01-preview"
   },
   "host": "management.azure.com",
@@ -41,11 +41,11 @@
         ],
         "operationId": "TuningOptions_Get",
         "x-ms-examples": {
-          "TuningOptions_Get": {
+          "Get the tuning options of a flexible server.": {
             "$ref": "./examples/Tuning_GetTuningOption.json"
           }
         },
-        "description": "Retrieve the tuning option on a server.",
+        "description": "Gets the tuning options of a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -86,14 +86,14 @@
         ],
         "operationId": "TuningIndex_ListRecommendations",
         "x-ms-examples": {
-          "TuningIndex_ListRecommendations": {
+          "List available recommendations produced by index tuning.": {
             "$ref": "./examples/TuningIndex_GetRecommendations.json"
           },
-          "TuningIndex_ListFilteredRecommendations": {
+          "List available recommendations produced by index tuning, exclusively those of create index type.": {
             "$ref": "./examples/TuningIndex_GetFilteredRecommendations.json"
           }
         },
-        "description": "Retrieve the list of available tuning index recommendations.",
+        "description": "Lists available recommendations produced by index tuning.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -452,11 +452,11 @@
         ],
         "operationId": "TuningOptions_ListByServer",
         "x-ms-examples": {
-          "TuningOptions_ListByServer": {
+          "List the tuning options of a flexible server.": {
             "$ref": "./examples/Tuning_ListTuningOptions.json"
           }
         },
-        "description": "Retrieve the list of available tuning options.",
+        "description": "Lists the tuning options of a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -497,24 +497,24 @@
       "properties": {
         "dimensionName": {
           "type": "string",
-          "description": "Dimension name"
+          "description": "Dimension name."
         },
         "unit": {
           "type": "string",
-          "description": "Dimension unit"
+          "description": "Dimension unit."
         },
         "queryId": {
           "type": "integer",
           "format": "int64",
-          "description": "Optional property that can be used to store the QueryId if the metric is for a specific query."
+          "description": "Optional property that can be used to store the identifier of the query, if the metric is for a specific query."
         },
         "absoluteValue": {
           "type": "number",
           "format": "double",
-          "description": "Absolute value"
+          "description": "Absolute value."
         }
       },
-      "description": "Stores property that features impact on some metric if this recommended action is applied."
+      "description": "Impact on some metric if this recommended action is applied."
     },
     "IndexRecommendationDetails": {
       "type": "object",
@@ -563,17 +563,17 @@
         "initialRecommendedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation time of this recommendation in UTC date-time string format."
+          "description": "Creation time (UTC) of this recommendation."
         },
         "lastRecommendedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last refresh of this recommendation in UTC date-time string format."
+          "description": "Last time (UTC) that this recommendation was produced."
         },
         "timesRecommended": {
           "format": "int32",
           "type": "integer",
-          "description": "The number of times this recommendation has encountered."
+          "description": "Number of times this recommendation has been produced."
         },
         "improvedQueryIds": {
           "type": "array",
@@ -581,7 +581,7 @@
             "type": "integer",
             "format": "int64"
           },
-          "description": "The ImprovedQueryIds. The list will only be populated for CREATE INDEX recommendations."
+          "description": "List of identifiers for all queries identified as targets for improvement if the recommendation is applied. The list is only populated for CREATE INDEX recommendations."
         },
         "recommendationReason": {
           "type": "string",
@@ -605,14 +605,14 @@
           "properties": {
             "method": {
               "type": "string",
-              "description": "Method of implementation for recommended action"
+              "description": "Method of implementation for recommended action."
             },
             "script": {
               "type": "string",
-              "description": "Implementation script for the recommended action"
+              "description": "Implementation script for the recommended action."
             }
           },
-          "description": "Stores implementation details for the recommended action."
+          "description": "Implementation details for the recommended action."
         },
         "analyzedWorkload": {
           "type": "object",
@@ -620,20 +620,20 @@
             "startTime": {
               "type": "string",
               "format": "date-time",
-              "description": "Workload start time in UTC date-time string format."
+              "description": "Start time (UTC) of the workload analyzed."
             },
             "endTime": {
               "type": "string",
               "format": "date-time",
-              "description": "Workload end time in UTC date-time string format."
+              "description": "End time (UTC) of the workload analyzed."
             },
             "queryCount": {
               "format": "int32",
               "type": "integer",
-              "description": "Workload query examined count. For DROP INDEX will be 0."
+              "description": "Number of queries from the workload that were examined to produce this recommendation. For DROP INDEX recommendations it's 0 (zero)."
             }
           },
-          "description": "Stores workload information for the recommended action."
+          "description": "Workload information for the recommended action."
         },
         "estimatedImpact": {
           "type": "array",
@@ -644,11 +644,11 @@
             "dimensionName"
           ],
           "readOnly": true,
-          "description": "The estimated impact of this recommended action"
+          "description": "Estimated impact of this recommended action."
         },
         "details": {
           "$ref": "#/definitions/IndexRecommendationDetails",
-          "description": "Stores recommendation details for the recommended action."
+          "description": "Recommendation details for the recommended action."
         }
       },
       "description": "Index recommendation properties.",
@@ -671,11 +671,11 @@
       "description": "Index recommendation properties."
     },
     "IndexRecommendationListResult": {
-      "description": "A list of available index recommendations.",
+      "description": "List of available index recommendations.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A list of available index recommendations.",
+          "description": "List of available index recommendations.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -686,7 +686,7 @@
           ]
         },
         "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       }
@@ -698,14 +698,14 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Stores property that features impact on some metric if this recommended action is applied."
+      "description": "Impact on some metric if this recommended action is applied."
     },
     "TuningOptionsListResult": {
-      "description": "A list of server tuning options.",
+      "description": "List of server tuning options.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A list of available tuning options.",
+          "description": "List of available tuning options.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -716,7 +716,7 @@
           ]
         },
         "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       }
@@ -726,41 +726,41 @@
       "properties": {
         "sessionStartTime": {
           "type": "string",
-          "description": "the tuning session start time."
+          "description": "Start time of the tuning session."
         },
         "sessionId": {
           "type": "string",
-          "description": "Session id."
+          "description": "Identifier of the tuning session."
         },
         "status": {
           "type": "string",
-          "description": "The status of the tuning session."
+          "description": "Status of the tuning session."
         },
         "preTuningAqr": {
           "type": "string",
-          "description": "The pre tuning aqr."
+          "description": "Average query runtime before tuning starts."
         },
         "postTuningAqr": {
           "type": "string",
-          "description": "The post tuning aqr."
+          "description": "Average query runtime after tuning completes."
         },
         "preTuningTps": {
           "type": "string",
-          "description": "The pre tuning tps."
+          "description": "Transactions per second before tuning starts."
         },
         "postTuningTps": {
           "type": "string",
-          "description": "The post tuning tps."
+          "description": "Transactions per second after tuning completes."
         }
       },
       "description": "Session resource properties."
     },
     "SessionsListResult": {
-      "description": "A list of tuning configuration sessions.",
+      "description": "List of tuning configuration sessions.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A list of tuning configuration sessions.",
+          "description": "List of tuning configuration sessions.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -771,7 +771,7 @@
           ]
         },
         "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       }
@@ -822,7 +822,7 @@
           ]
         },
         "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       }
@@ -860,7 +860,7 @@
         "index",
         "configuration"
       ],
-      "description": "The name of the tuning option.",
+      "description": "Name of the tuning option.",
       "x-ms-enum": {
         "name": "TuningOptionEnum",
         "modelAsString": true

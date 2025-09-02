@@ -16,14 +16,14 @@ options:
     arm-types-dir: "{project-root}/../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Migrate"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Migrate"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-migrate"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.migrate"
     generate-test: true
     generate-sample: true
     flavor: "azure"

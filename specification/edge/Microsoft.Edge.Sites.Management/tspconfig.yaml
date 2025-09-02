@@ -35,12 +35,11 @@ options:
     package-details:
       name: "@azure/arm-sitemanager"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.SiteManager"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.SiteManager"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
-    generate-sample-project: false
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/sitemanager"
     package-dir: "armsitemanager"

@@ -1,16 +1,17 @@
-import { test, describe, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 
+import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 import {
+  buildState,
   getAffectedServices,
+  getChangedSwaggers,
   getService,
   reconcileChangedFilesAndTags,
-  getChangedSwaggers,
-  buildState,
 } from "../src/processChanges.js";
-import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 
-import { isWindows } from "./test-util.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { resolve } from "node:path";
+import { isWindows } from "./test-util.js";
 
 describe("getAffectedServices", () => {
   test.skipIf(isWindows())("returns single service with multiple files", async () => {
@@ -222,17 +223,22 @@ describe("buildState", () => {
       "test/fixtures/buildState/",
     );
 
-    expect(actual).toMatchInlineSnapshot(`
-      [
-        Map {
-          "specification/edit-in-place/readme.md" => {
-            "changedTags": Set {},
-            "readme": Readme {},
+    expect(actual).toMatchObject([
+      new Map([
+        [
+          "specification/edit-in-place/readme.md",
+          {
+            changedTags: new Set<string>(),
+            readme: expect.any(Readme),
           },
-        },
-        [],
-      ]
-    `);
+        ],
+      ]),
+      [],
+    ]);
+
+    expect(actual[0].get("specification/edit-in-place/readme.md")!.readme.path).toEqual(
+      resolve("test/fixtures/buildState/", "specification/edit-in-place/readme.md"),
+    );
   });
 
   test("does not throw if a file is missing", async () => {
@@ -242,5 +248,14 @@ describe("buildState", () => {
         "test/fixtures/buildState/",
       ),
     ).not.toThrow();
+  });
+
+  test.skipIf(isWindows())("does not include readme files that has no input-file:", async () => {
+    const actual = await buildState(
+      ["specification/no-input-file/readme.md"],
+      "test/fixtures/buildState/",
+    );
+
+    expect(actual).toEqual([new Map<string, ReadmeAffectedTags>(), []]);
   });
 });

@@ -154,8 +154,10 @@ the context. If there are no TypeSpec project paths in the context, then prompt 
 from the list of paths. If user does not have a TypeSpec project, then prompt user to create a new TypeSpec project.
 
 
-### Pre-requisites
+### Prerequisites
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
+- run `npm ci` to install the dependencies
+- To use Azure MCP tool calls, the user must have PowerShell installed. Provide [PowerShell installation instructions](https://learn.microsoft.com/powershell/scripting/install/installing-powershell) if not installed, and recommend restarting the IDE to start the MCP server.
 
 
 ### Basic Rules for SDK Generation from TypeSpec
@@ -168,34 +170,25 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
     - Use the path of the `tspconfig.yaml` file already open in the editor or the `.tsp` file path as the project root.
     - If no `.tsp` file or folder is in the current context, prompt the user to select a valid TypeSpec project root path.
 
-3. **Pull Request Management**:
-    - Always start by checking if a pull request exists for spec changes before proceeding with validation or SDK 
-    generation.
-    - Use `GetPullRequestForCurrentBranch` to query pull requests instead of the `gh` CLI.
-    - Provide a detailed pull request summary, including:
-      - Title, link, author, assignee, status (open, closed, merged), and mergeability.
-      - Check statuses (success or failure) with links and detailed failure reasons.
-      - API views for generated SDKs under the heading `API View for Generated SDK APIs`.
-      - Comments and action items for the user.
-
-4. **Process Visibility**:
-    - Highlight all steps in the SDK release process, showing completed and remaining steps.
+3. **Process Visibility**:
+    - Highlight all steps in the SDK generation process, showing completed and remaining steps.
     - Do not skip any main steps. Ensure all steps are completed before moving to the next.
 
-5. **Git Operations**:
+4. **Git Operations**:
     - Avoid using the `main` branch for pull requests. Prompt the user to create or switch to a new branch if necessary.
     - Display git commands (e.g., `git checkout`, `git add`, `git commit`, `git push`) with a "Run" button instead of 
     asking the user to copy and paste.
+    - Do not run `git diff`
 
-6. **Azure-Specific Rules**:
+5. **Azure-Specific Rules**:
     - Always use `Azure` as the repo owner in MCP tool calls.
     - Confirm with the user if they want to change the repo owner or target branch, and prompt for new values if needed.
 
-7. **Exclusions**:
-    - Exclude changes in `.github` and `.vscode` folders from API spec and SDK pull requests.
+6. **Exclusions**:
+    - Exclude changes to the `.gitignore` file and contents within the `.github` and `.vscode` folders from API spec and SDK pull requests.
 
-8. **Working Branch Rule**:
-    - Ensure the TypeSpec project repository and the current working repository are not on the `main` branch:
+7. **Working Branch Rule**:
+    - If the typespec pull request already exists or is merged stay on the `main` branch, otherwise ensure the TypeSpec project repository and the current working repository are not on the `main` branch:
         - Check the current branch name for the cloned GitHub repository:
             - If the current branch is `main`, prompt the user to create a new branch using 
             `git checkout -b <branch name>`.
@@ -208,76 +201,33 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
 
 By following these rules, the SDK release process will remain clear, structured, and user-friendly.
 
-## Steps to generate and release SDK from TypeSpec API specification
+## Steps to generate SDK from TypeSpec API specification
+Follow [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
+Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps. Before using tools, check if user has Powershell installed.
 
-### Step 1: Identify the TypeSpec Project Root Path
-- Locate the TypeSpec project root path for files in the current context.
+1. **Identify TypeSpec Project**: Locate the TypeSpec project root path by checking for `tspconfig.yaml` or `main.tsp` files.
+2. **Validate TypeSpec Specification**: Ensure the TypeSpec specification compiles without errors.
+3. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
+4. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main". Do not create pull request yet.
+5. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created. This is required only if there are TypeSpec changes in current branch.
+6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
+7. **Generate SDKs via Pipeline**:  Generate SDKs using [run sdk gen pipeline](..\eng\common\instructions\azsdk-tools\run-sdk-gen-pipeline.instructions.md), monitor the pipeline status and displaying generated SDK PR links.
+8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
+9. **Validate Label and then Codeowners**: Validate the service label and codeowners for the created SDK service using both [validate service label](..\eng\common\instructions\azsdk-tools\validate-service-label.instructions.md) and [validate codeowners](..\eng\common\instructions\azsdk-tools\validate-codeowners.instructions.md).
+10. **Create a release plan**: To create a release plan refer to [create release plan](..\eng\common\instructions\azsdk-tools\create-release-plan.instructions.md)
+11. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
+12. **Release package**: Release the SDK package using `azsdk_release_sdk` tool.
 
-### Step 2: Validate the TypeSpec Project
-- Before running, inform user that TypeSpec validation takes around 20 - 30 seconds.
-- Run TypeSpec validation to ensure there are no validation errors.    
-    - If validation fails, highlight the issues for the user to fix.
-    - Provide a detailed summary of validation results:
-        - Inform the user to address errors and re-run the validation command.
-        - Notify the user about warnings and suggest addressing them.
-        - Confirm successful validation if there are no errors or warnings.
+## Release readiness of SDK and information about the release pipeline
+Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
 
-### Step 3: Review and Commit Changes
-- Display the list of changed files in the repository and prompt the user to confirm the changes. Ignore uncommitted 
-changes in `.github` and `.vscode` folders.
-    - If the user confirms:
-        - Prompt the user to commit the changes:
-            - Run `git add <changed files>` to stage the changes.
-            - Run `git commit -m "<commit message>"` to commit the changes.
-            - Push the changes to the GitHub remote, ensuring the branch name is not "main."
-                - Run `git push -u origin <branch name>` to push the changes.
-                - If the push fails due to authentication, prompt the user to run `gh auth login` and retry the push command.
-                - If the user does not confirm, prompt them to fix the changes and re-run validation.
-
-### Step 4: Manage Pull Requests
-- Check if a pull request exists for the current branch:
-    - If a pull request exists, inform the user and display its details.
-    - If no pull request exists:
-        - Ensure the current branch name is not "main." If it is, prompt the user to create a new branch using 
-        `git checkout -b <branch name>`.
-        - Push the changes to the remote branch. If the branch does not exist on GitHub, create it and push the changes.
-        - Generate a title and description for the pull request based on the changes. Prompt the user to confirm or 
-        edit them.
-        - Prompt the user to select the target branch for the pull request, defaulting to "main."
-        - Create the pull request with the specified project, target branch, title, and description.
-- Retrieve and display the pull request summary, including its status, checks, and comments. Highlight any action items.
-    - Retrieve API review links and display their details. Inform the user to check APIView for generated SDK APIs.
-
-### Step 5: Prepare the Release Plan
-- Check if the API spec is ready to generate the SDK. Provide the TypeSpec project root path and pull request number.
-- Verify if a release plan exists for the API spec pull request:
-    - If no release plan exists, create one. Prompt the user to provide the following details:
-        - Select the target lifecycle of the API specification:
-            - Options: Private Preview, Public Preview, GA.
-            - Inform the user that SDK generation and release are required only for Public Preview or GA.
-            - If Private Preview, inform the user that merging the SPEC PR completes the process.
-        - Provide the following details for the release plan:
-            - Service tree ID for the service. This is GUID type of ID for the service in service tree.
-            - Product service tree ID for the product. This is a GUID type of ID for the product in Service tree.
-            - Expected release timeline (e.g., Month YYYY).
-            - API version.
-        - If the user lacks details, suggest using the release planner. More details are available [here](https://eng.ms/docs/products/azure-developer-experience/plan/release-plan-create).
-
-### Step 6: Generate SDKs
-- Retrieve the release plan and check if SDK generation has already occurred or if an SDK pull request exists for a language:
-    - If an SDK pull request exists, display its details.
-    - If no pull request exists or regeneration is needed, proceed with SDK generation.
-- Run SDK generation for Python, .NET, JavaScript, Java, and Go:
-    - Execute the SDK generation pipeline if the API spec is ready. Required parameters include:
-        - TypeSpec project root path.
-        - Pull request number (if the API spec is not merged to the main branch).
-        - API version.
-        - SDK release type (beta for preview API versions, stable otherwise).
-        - Language options: `Python`, `.NET`, `JavaScript`, `Java`, `Go`.
-        - Release plan work item ID.
-    - Keep checking the status of SDK generation pipeline status every 2 minutes until pipeline succeeded or failed.
-    - Get SDK pull request link from pipeline and show all details once pipeline is in completed status.
-    - Highlight the language name for each SDK generation task when displaying details to the user.
-    - Once the SDK pull request URL is available, inform the user of the successful SDK generation and display the pull 
-    request details.
-
+## Instructions for GitHub coding agent to generate SDKs using GitHub.com
+Run only SDK generation step and Update SDK details back in issue description and release plan. Do not run TypeSpec validation, or service label check. This is applicable only when GitHub copilot coding agent is used to generate SDK and if a Release Plan is available in the context.
+Coding agent must wait until all SDK generation pipeline are in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running Copilot from Visual Studio and VS Code.
+  
+  steps:
+    - Run SDK generation pipeline for the given TypeSpec path for all languages mentioned in the description.
+    - Keep checking the pipeline status until pipeline is in completed or failed status.
+    - Find SDK pull request links from the pipeline run.
+  constraints:
+    - Do not invoke other steps

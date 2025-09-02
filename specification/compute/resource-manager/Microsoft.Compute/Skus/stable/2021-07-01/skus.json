@@ -1,18 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ComputeManagementClient",
-    "description": "The Compute Management Client.",
-    "version": "2021-07-01"
+    "title": "Azure Compute resource management API.",
+    "version": "2021-07-01",
+    "description": "Compute Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,36 +30,33 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/skus": {
       "get": {
-        "tags": [
-          "Skus",
-          "AvailabilitySets"
-        ],
         "operationId": "ResourceSkus_List",
         "description": "Gets the list of Microsoft.Compute SKUs available for your Subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
+            "description": "The filter to apply on the operation. Only **location** filter is supported currently.",
             "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation. Only **location** filter is supported currently."
+            "type": "string"
           },
           {
             "$ref": "#/parameters/IncludeExtendedLocationsParameter"
@@ -62,14 +64,17 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ResourceSkusResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Lists all available Resource SKUs": {
@@ -81,363 +86,381 @@
           "Lists all available Resource SKUs with Extended Location information": {
             "$ref": "./examples/skus/ListAvailableResourceSkusWithExtendedLocations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
-    "ResourceSkuCapacity": {
-      "properties": {
-        "minimum": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "The minimum capacity."
-        },
-        "maximum": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "The maximum capacity that can be set."
-        },
-        "default": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "The default capacity."
-        },
-        "scaleType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The scale type applicable to the sku.",
-          "enum": [
-            "Automatic",
-            "Manual",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceSkuCapacityScaleType",
-            "modelAsString": false
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of the extended location.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone"
           }
-        }
-      },
-      "description": "Describes scaling information of a SKU."
-    },
-    "ResourceSkuCosts": {
-      "properties": {
-        "meterID": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Used for querying price from commerce."
-        },
-        "quantity": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "The multiplier is needed to extend the base metered cost."
-        },
-        "extendedUnit": {
-          "type": "string",
-          "readOnly": true,
-          "description": "An invariant to show the extended unit."
-        }
-      },
-      "description": "Describes metadata for retrieving price info."
-    },
-    "ResourceSkuCapabilities": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "An invariant to describe the feature."
-        },
-        "value": {
-          "type": "string",
-          "readOnly": true,
-          "description": "An invariant if the feature is measured by quantity."
-        }
-      },
-      "description": "Describes The SKU capabilities object."
-    },
-    "ResourceSkuZoneDetails": {
-      "properties": {
-        "name": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          },
-          "description": "The set of zones that the SKU is available in with the specified capabilities."
-        },
-        "capabilities": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ResourceSkuCapabilities"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "A list of capabilities that are available for the SKU in the specified list of zones."
-        }
-      },
-      "description": "Describes The zonal capabilities of a SKU."
-    },
-    "ResourceSkuRestrictions": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of restrictions.",
-          "enum": [
-            "Location",
-            "Zone"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceSkuRestrictionsType",
-            "modelAsString": false
-          }
-        },
-        "values": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          },
-          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
-        },
-        "restrictionInfo": {
-          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
-          "readOnly": true,
-          "description": "The information about the restriction where the SKU cannot be used."
-        },
-        "reasonCode": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The reason for restriction.",
-          "enum": [
-            "QuotaId",
-            "NotAvailableForSubscription"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceSkuRestrictionsReasonCode",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Describes scaling information of a SKU."
+        ]
+      }
     },
     "ResourceSku": {
+      "type": "object",
+      "description": "Describes an available Compute SKU.",
       "properties": {
         "resourceType": {
-          "readOnly": true,
           "type": "string",
-          "description": "The type of resource the SKU applies to."
+          "description": "The type of resource the SKU applies to.",
+          "readOnly": true
         },
         "name": {
-          "readOnly": true,
           "type": "string",
-          "description": "The name of SKU."
+          "description": "The name of SKU.",
+          "readOnly": true
         },
         "tier": {
-          "readOnly": true,
           "type": "string",
-          "description": "Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**"
+          "description": "Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**",
+          "readOnly": true
         },
         "size": {
-          "readOnly": true,
           "type": "string",
-          "description": "The Size of the SKU."
+          "description": "The Size of the SKU.",
+          "readOnly": true
         },
         "family": {
-          "readOnly": true,
           "type": "string",
-          "description": "The Family of this particular SKU."
+          "description": "The Family of this particular SKU.",
+          "readOnly": true
         },
         "kind": {
-          "readOnly": true,
           "type": "string",
-          "description": "The Kind of resources that are supported in this SKU."
+          "description": "The Kind of resources that are supported in this SKU.",
+          "readOnly": true
         },
         "capacity": {
           "$ref": "#/definitions/ResourceSkuCapacity",
-          "readOnly": true,
-          "description": "Specifies the number of virtual machines in the scale set."
+          "description": "Specifies the number of virtual machines in the scale set.",
+          "readOnly": true
         },
         "locations": {
           "type": "array",
-          "readOnly": true,
+          "description": "The set of locations that the SKU is available.",
           "items": {
             "type": "string"
           },
-          "description": "The set of locations that the SKU is available."
+          "readOnly": true
         },
         "locationInfo": {
           "type": "array",
-          "readOnly": true,
+          "description": "A list of locations and availability zones in those locations where the SKU is available.",
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "location"
-          ],
-          "description": "A list of locations and availability zones in those locations where the SKU is available."
+          ]
         },
         "apiVersions": {
           "type": "array",
-          "readOnly": true,
+          "description": "The api versions that support this SKU.",
           "items": {
             "type": "string"
           },
-          "description": "The api versions that support this SKU."
+          "readOnly": true
         },
         "costs": {
           "type": "array",
-          "readOnly": true,
+          "description": "Metadata for retrieving price info.",
           "items": {
             "$ref": "#/definitions/ResourceSkuCosts"
           },
-          "x-ms-identifiers": [],
-          "description": "Metadata for retrieving price info."
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "capabilities": {
           "type": "array",
-          "readOnly": true,
+          "description": "A name value pair to describe the capability.",
           "items": {
             "$ref": "#/definitions/ResourceSkuCapabilities"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "A name value pair to describe the capability."
+          ]
         },
         "restrictions": {
           "type": "array",
-          "readOnly": true,
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.",
           "items": {
             "$ref": "#/definitions/ResourceSkuRestrictions"
           },
-          "x-ms-identifiers": [],
-          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
-      },
-      "description": "Describes an available Compute SKU."
+      }
+    },
+    "ResourceSkuCapabilities": {
+      "type": "object",
+      "description": "Describes The SKU capabilities object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "An invariant to describe the feature.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "An invariant if the feature is measured by quantity.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkuCapacity": {
+      "type": "object",
+      "description": "Describes scaling information of a SKU.",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum capacity.",
+          "readOnly": true
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum capacity that can be set.",
+          "readOnly": true
+        },
+        "default": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The default capacity.",
+          "readOnly": true
+        },
+        "scaleType": {
+          "$ref": "#/definitions/ResourceSkuCapacityScaleType",
+          "description": "The scale type applicable to the sku.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkuCapacityScaleType": {
+      "type": "string",
+      "description": "The scale type applicable to the sku.",
+      "enum": [
+        "Automatic",
+        "Manual",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuCapacityScaleType",
+        "modelAsString": false
+      }
+    },
+    "ResourceSkuCosts": {
+      "type": "object",
+      "description": "Describes metadata for retrieving price info.",
+      "properties": {
+        "meterID": {
+          "type": "string",
+          "description": "Used for querying price from commerce.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The multiplier is needed to extend the base metered cost.",
+          "readOnly": true
+        },
+        "extendedUnit": {
+          "type": "string",
+          "description": "An invariant to show the extended unit.",
+          "readOnly": true
+        }
+      }
     },
     "ResourceSkuLocationInfo": {
+      "type": "object",
+      "description": "Describes an available Compute SKU Location Information.",
       "properties": {
         "location": {
-          "readOnly": true,
           "type": "string",
-          "description": "Location of the SKU"
+          "description": "Location of the SKU",
+          "readOnly": true
         },
         "zones": {
-          "readOnly": true,
           "type": "array",
+          "description": "List of availability zones where the SKU is supported.",
           "items": {
             "type": "string"
           },
-          "description": "List of availability zones where the SKU is supported."
+          "readOnly": true
         },
         "zoneDetails": {
-          "readOnly": true,
           "type": "array",
+          "description": "Details of capabilities available to a SKU in specific zones.",
           "items": {
             "$ref": "#/definitions/ResourceSkuZoneDetails"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "Details of capabilities available to a SKU in specific zones."
+          ]
         },
         "extendedLocations": {
-          "readOnly": true,
           "type": "array",
+          "description": "The names of extended locations.",
           "items": {
             "type": "string"
           },
-          "description": "The names of extended locations."
+          "readOnly": true
         },
         "type": {
-          "type": "string",
-          "readOnly": true,
+          "$ref": "#/definitions/ExtendedLocationType",
           "description": "The type of the extended location.",
-          "enum": [
-            "EdgeZone"
-          ],
-          "x-ms-enum": {
-            "name": "ExtendedLocationType",
-            "modelAsString": true
-          }
+          "readOnly": true
         }
-      },
-      "description": "Describes an available Compute SKU Location Information."
+      }
     },
     "ResourceSkuRestrictionInfo": {
+      "type": "object",
+      "description": "Describes an available Compute SKU Restriction Information.",
       "properties": {
         "locations": {
-          "readOnly": true,
           "type": "array",
+          "description": "Locations where the SKU is restricted",
           "items": {
             "type": "string"
           },
-          "description": "Locations where the SKU is restricted"
+          "readOnly": true
         },
         "zones": {
-          "readOnly": true,
           "type": "array",
+          "description": "List of availability zones where the SKU is restricted.",
           "items": {
             "type": "string"
           },
-          "description": "List of availability zones where the SKU is restricted."
+          "readOnly": true
         }
-      },
-      "description": "Describes an available Compute SKU Restriction Information."
+      }
+    },
+    "ResourceSkuRestrictions": {
+      "type": "object",
+      "description": "Describes scaling information of a SKU.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceSkuRestrictionsType",
+          "description": "The type of restrictions.",
+          "readOnly": true
+        },
+        "values": {
+          "type": "array",
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "description": "The information about the restriction where the SKU cannot be used.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "$ref": "#/definitions/ResourceSkuRestrictionsReasonCode",
+          "description": "The reason for restriction.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkuRestrictionsReasonCode": {
+      "type": "string",
+      "description": "The reason for restriction.",
+      "enum": [
+        "QuotaId",
+        "NotAvailableForSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuRestrictionsReasonCode",
+        "modelAsString": false
+      }
+    },
+    "ResourceSkuRestrictionsType": {
+      "type": "string",
+      "description": "The type of restrictions.",
+      "enum": [
+        "Location",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuRestrictionsType",
+        "modelAsString": false
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "type": "object",
+      "description": "Describes The zonal capabilities of a SKU.",
+      "properties": {
+        "name": {
+          "type": "array",
+          "description": "The set of zones that the SKU is available in with the specified capabilities.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     },
     "ResourceSkusResult": {
+      "type": "object",
+      "description": "The List Resource Skus operation response.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The ResourceSku items on this page",
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
-          "x-ms-identifiers": [
-            "name",
-            "resourceType"
-          ],
-          "description": "The list of skus available for the subscription."
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to fetch the next page of Resource Skus. Call ListNext() with this URI to fetch the next page of Resource Skus"
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
         "value"
-      ],
-      "description": "The List Resource Skus operation response."
+      ]
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
     "IncludeExtendedLocationsParameter": {
       "name": "includeExtendedLocations",
       "in": "query",
+      "description": "To Include Extended Locations information or not in the response.",
       "required": false,
       "type": "string",
-      "description": "To Include Extended Locations information or not in the response.",
       "x-ms-parameter-location": "method"
     }
   }

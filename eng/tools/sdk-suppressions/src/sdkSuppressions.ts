@@ -4,8 +4,8 @@
  * - https://microsoftapc-my.sharepoint.com/:w:/g/personal/raychen_microsoft_com/EbOAA9SkhQhGlgxtf7mc0kUB-25bFue0EFbXKXS3TFLTQA
  */
 
+import { SdkName, sdkLabels } from "@azure-tools/specs-shared/sdk-types";
 import { Ajv } from "ajv";
-import { SdkName, sdkLabels } from "./sdk.js";
 
 export const sdkSuppressionsFileName = "sdk-suppressions.yaml";
 
@@ -22,9 +22,15 @@ export type SdkPackageSuppressionsEntry = {
   "breaking-changes": string[];
 };
 
-function exitWithError(error: string): never {
-    console.error("Error:", error);
-    process.exit(1);
+function errorResult(error: string): {
+  result: boolean;
+  message: string;
+} {
+  console.error("Error:", error);
+  return {
+    result: false,
+    message: error,
+  };
 }
 
 export function validateSdkSuppressionsFile(
@@ -34,11 +40,13 @@ export function validateSdkSuppressionsFile(
   message: string;
 } {
   if (suppressionContent === null) {
-    exitWithError("This suppression file is a empty file");
+    return errorResult("This suppression file is a empty file");
   }
 
   if (!suppressionContent) {
-    exitWithError("This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.");
+    return errorResult(
+      "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.",
+    );
   }
 
   const suppressionFileSchema = {
@@ -80,6 +88,9 @@ export function validateSdkSuppressionsFile(
       message: "This suppression file is a valid yaml.",
     };
   } else {
-    exitWithError("This suppression file is a valid yaml but the schema is wrong: " + suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: "\n" }));
+    return errorResult(
+      "This suppression file is a valid yaml but the schema is wrong: " +
+        suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: "\n" }),
+    );
   }
 }

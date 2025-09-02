@@ -322,8 +322,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/FaceDetectionResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -403,7 +402,7 @@
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessSession",
         "summary": "Create a new detect liveness session.",
-        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * Ability to call /detectLiveness/singleModal for up to 3 retries.\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.",
+        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.",
         "parameters": [
           {
             "name": "body",
@@ -636,7 +635,7 @@
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySessionWithVerifyImage",
         "summary": "Create a new liveness session with verify. Provide the verify image during session creation.",
-        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n>\n> *\n>   * Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation.\n>   * To retrieve a result, use the Get Liveness With Verify Session.\n>   * To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nRecommended Option: VerifyImage is provided during session creation.",
+        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n>\n> *\n>   * Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation.\n>   * To retrieve a result, use the Get Liveness With Verify Session.\n>   * To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nRecommended Option: VerifyImage is provided during session creation.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -852,8 +851,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DynamicPersonGroup"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -1212,8 +1210,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/FaceListItem"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -1600,8 +1597,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/FindSimilarResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -1734,8 +1730,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/IdentificationResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -1798,8 +1793,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/LargeFaceList"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2047,8 +2041,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/LargeFaceListFace"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2413,8 +2406,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/LargePersonGroup"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2661,8 +2653,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/LargePersonGroupPerson"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -3305,8 +3296,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/PersonGroup"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -3553,8 +3543,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/PersonGroupPerson"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -4147,8 +4136,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/PersonDirectoryPerson"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -5168,8 +5156,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/FaceDetectionResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -5196,7 +5183,7 @@
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySession",
         "summary": "Create a new liveness session with verify. Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.",
-        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n>\n> *\n>   * Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation.\n>   * To retrieve a result, use the Get Liveness With Verify Session.\n>   * To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nAlternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.\n> [!NOTE]\n> Extra measures should be taken to validate that the client is sending the expected VerifyImage.",
+        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n>\n> *\n>   * Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation.\n>   * To retrieve a result, use the Get Liveness With Verify Session.\n>   * To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nAlternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.\n> [!NOTE]\n> Extra measures should be taken to validate that the client is sending the expected VerifyImage.",
         "parameters": [
           {
             "name": "body",
@@ -5461,8 +5448,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/FindSimilarResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -5554,8 +5540,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/FindSimilarResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -5634,8 +5619,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/IdentificationResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -5714,8 +5698,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/IdentificationResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -5799,8 +5782,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/IdentificationResult"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -6802,8 +6784,7 @@
           "description": "Properties describing any accessories on a given face.",
           "items": {
             "$ref": "#/definitions/AccessoryItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "blur": {
           "$ref": "#/definitions/BlurProperties",
@@ -7059,8 +7040,7 @@
           "description": "Face ids of registered faces in the face list.",
           "items": {
             "$ref": "#/definitions/FaceListFace"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -7293,8 +7273,7 @@
             "items": {
               "$ref": "#/definitions/Azure.Core.uuid"
             }
-          },
-          "x-ms-identifiers": []
+          }
         },
         "messyGroup": {
           "type": "array",
@@ -7410,8 +7389,7 @@
           "description": "An array of candidate colors and confidence level in the presence of each.",
           "items": {
             "$ref": "#/definitions/HairColor"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -7480,8 +7458,7 @@
           "description": "Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.",
           "items": {
             "$ref": "#/definitions/IdentificationCandidate"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
