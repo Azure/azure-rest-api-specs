@@ -12,13 +12,18 @@
     "200": {
       "body": {
         "identity": {
-          "type": "None"
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-umi": {
+              "clientId": "0c29d9b7-0ae2-4014-96ea-faf8e0cf2bc7",
+              "principalId": "0c29d9b7-0ae2-4014-96ea-faf8e0cf2bc7"
+            }
+          }
         },
         "properties": {
           "databaseType": "AzureSqlDatabase",
           "serverName": "syncgroupcrud-3379.database.windows.net",
           "databaseName": "syncgroupcrud-7421",
-          "userName": "myUser",
           "syncDirection": "Bidirectional",
           "syncState": "UnProvisioned",
           "usePrivateLinkConnection": true,
