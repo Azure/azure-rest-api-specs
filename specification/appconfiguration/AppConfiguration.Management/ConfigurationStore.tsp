@@ -58,7 +58,11 @@ interface ConfigurationStores {
   update is ArmCustomPatchAsync<
     ConfigurationStore,
     PatchModel = ConfigurationStoreUpdateParameters,
-    Response = ArmResponse<ConfigurationStore> | ArmResourceCreatedResponse<ConfigurationStore>
+    Response = ArmResponse<ConfigurationStore> | ArmResourceCreatedResponse<
+      ConfigurationStore,
+      LroHeaders = ArmLroLocationHeader<FinalResult = ConfigurationStore> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
