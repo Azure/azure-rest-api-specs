@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
-- Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
+- preview/2019-08-15/containerregistry.json
 # This override adds support for directly passing in the acquired location link (Since it starts with /)
 # It also caters to passing it without / as some implementations may remove the initial / .
 directive:
@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-2019-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-07'
 input-file:
-- Microsoft.ContainerRegistry/preview/2019-07-15/containerregistry.json
+- preview/2019-07-15/containerregistry.json
 ```
 
 ### Tag: package-2018-08
@@ -60,11 +60,24 @@ These settings apply only when `--tag=package-2018-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-08'
 input-file:
-- Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
-
+- preview/2018-08-10/containerregistry.json
 ```
 
----
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file: preview/2019-08-15-preview/containerregistry.json
+```
+
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07'
+input-file: stable/2021-07-01/containerregistry.json
+```
 
 ## Swagger to SDK
 
