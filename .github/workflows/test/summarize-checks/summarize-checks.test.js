@@ -1181,17 +1181,57 @@ describe("Summarize Checks Unit Tests", () => {
 
       const github = createMockGithub();
 
-      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-        data: { artifacts: [{ name: "job-summary" }] },
-      });
-
       github.rest.actions.downloadArtifact.mockResolvedValue({
         data: Buffer.from(zip),
+      });
+
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [{ id: 1, name: "job-summary" }],
+        },
       });
 
       await expect(
         getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
       ).resolves.toEqual(impactAssessment);
+
+      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
+        owner: "test-owner",
+        repo: "test-repo",
+        artifact_id: 1,
+        archive_format: "zip",
+      });
+
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [
+            { id: 1, name: "job-summary" /* updated_at: "1970" (default) */ },
+            { id: 2, name: "job-summary", updated_at: "2025" },
+            { id: 3, name: "job-summary", updated_at: "2024" },
+          ],
+        },
+      });
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+
+      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
+        owner: "test-owner",
+        repo: "test-repo",
+        artifact_id: 2,
+        archive_format: "zip",
+      });
+    });
+
+    it("throws if no job-summary artifact", async () => {
+      const github = createMockGithub();
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[Error: Unable to find job-summary artifact for run ID: 123. This should never happen, as this section of code should only run with a valid runId.]`,
+      );
     });
   });
 });
