@@ -35,14 +35,15 @@ options:
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Analytics.OnlineExperimentation"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Analytics.OnlineExperimentation"
     generate-convenience-methods: true
     generate-protocol-methods: true
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Analytics.OnlineExperimentation
     model-namespace: false
   "@azure-tools/typespec-ts":

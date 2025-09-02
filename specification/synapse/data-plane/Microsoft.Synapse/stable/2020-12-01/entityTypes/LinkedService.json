@@ -1213,6 +1213,19 @@
           "type": "object",
           "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
         },
+        "clusterAuthType": {
+          "x-ms-enum": {
+            "name": "HDInsightClusterAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "BasicAuth",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "type": "string",
+          "description": "HDInsight cluster authentication type."
+        },
         "userName": {
           "type": "object",
           "description": "HDInsight cluster user name. Type: string (or Expression with resultType string)."
@@ -1240,6 +1253,10 @@
         "fileSystem": {
           "type": "object",
           "description": "Specify the FileSystem if the main storage for the HDInsight is ADLS Gen2. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "description": "The credential reference containing MI authentication information for the HDInsight cluster.",
+          "$ref": "../artifacts.json#/definitions/CredentialReference"
         }
       },
       "required": [
