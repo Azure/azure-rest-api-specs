@@ -5151,24 +5151,24 @@
             "type": "string"
           }
         },
-        "drillRbacOnRo": {
+        "drillRbacOnRecoveryPlan": {
           "$ref": "#/definitions/RBACState",
-          "description": "Drill object does not have the necessary RBAC to run the RO Plan."
+          "description": "Drill object does not have the necessary RBAC to run the Recovery Plan."
         },
-        "rbacNeededForDrillOnRo": {
+        "rbacNeededForDrillOnRecoveryPlan": {
           "type": "array",
-          "description": "Permissions needed by the Drill MSI to run the RO Plan.",
+          "description": "Permissions needed by the Drill MSI to run the Recovery Plan.",
           "items": {
             "type": "string"
           }
         },
-        "drillRbacOnAmw": {
+        "drillRbacOnAzureMonitoringWorkspace": {
           "$ref": "#/definitions/RBACState",
-          "description": "Drill object does not have the necessary RBAC to read the AMW account."
+          "description": "Drill object does not have the necessary RBAC to read the Azure Monitoring Workspace account."
         },
-        "rbacNeededForDrillOnAmw": {
+        "rbacNeededForDrillOnAzureMonitoringWorkspace": {
           "type": "array",
-          "description": "Permissions needed by the Drill MSI to read AMW account.",
+          "description": "Permissions needed by the Drill MSI to read Azure Monitoring Workspace account.",
           "items": {
             "type": "string"
           }
@@ -5196,11 +5196,11 @@
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "One or more Target or Capability object is deleted."
         },
-        "roAndDrillResourcesState": {
+        "recoveryPlanAndDrillResourcesState": {
           "$ref": "#/definitions/RelativeResourceCompositionState",
-          "description": "Resources associated in RO Plan and Drill are out of sync."
+          "description": "Resources associated in Recovery Plan and Drill are out of sync."
         },
-        "sgAndDrillResourcesState": {
+        "serviceGroupAndDrillResourcesState": {
           "$ref": "#/definitions/RelativeResourceCompositionState",
           "description": "Resources in Service Group and Drill are out of sync."
         },
@@ -5334,7 +5334,7 @@
         }
       }
     },
-    "ChaosExperimentProperties": {
+    "ChaosExperimentPropertiesOfDrill": {
       "type": "object",
       "description": "Chaos Experiment properties.",
       "properties": {
@@ -5375,7 +5375,7 @@
         "chaosExperimentIdentityForFaults"
       ]
     },
-    "ChaosExperimentPropertiesUpdate": {
+    "ChaosExperimentPropertiesOfDrillUpdate": {
       "type": "object",
       "description": "Chaos Experiment properties.",
       "properties": {
@@ -5845,15 +5845,15 @@
       "description": "PATCH properties for Drill.",
       "properties": {
         "metricsProperties": {
-          "$ref": "#/definitions/MetricsProperties",
+          "$ref": "#/definitions/MetricsPropertiesOfDrill",
           "description": "Metric properties."
         },
-        "roPlanProperties": {
-          "$ref": "#/definitions/RoPlanProperties",
-          "description": "ROPlan properties."
+        "recoveryPlanProperties": {
+          "$ref": "#/definitions/RecoveryPlanPropertiesOfDrill",
+          "description": "Recovery Plan properties."
         },
         "chaosExperimentProperties": {
-          "$ref": "#/definitions/ChaosExperimentProperties",
+          "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
         },
         "rbacSetupMode": {
@@ -5871,7 +5871,7 @@
           "description": "Status of the last operation.",
           "readOnly": true
         },
-        "sgId": {
+        "serviceGroupId": {
           "type": "string",
           "format": "arm-id",
           "description": "Parent SG resource.",
@@ -5885,15 +5885,19 @@
           }
         },
         "metricsProperties": {
-          "$ref": "#/definitions/MetricsProperties",
+          "$ref": "#/definitions/MetricsPropertiesOfDrill",
           "description": "Metric properties."
         },
-        "roPlanProperties": {
-          "$ref": "#/definitions/RoPlanProperties",
+        "healthModelProperties": {
+          "$ref": "#/definitions/HealthModelPropertiesOfDrill",
+          "description": "HealthModel properties."
+        },
+        "recoveryPlanProperties": {
+          "$ref": "#/definitions/RecoveryPlanPropertiesOfDrill",
           "description": "ROPlan properties."
         },
         "chaosExperimentProperties": {
-          "$ref": "#/definitions/ChaosExperimentProperties",
+          "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
         },
         "executionState": {
@@ -5901,8 +5905,8 @@
           "description": "Execution state of the Drill. Whether it is currently running or not.",
           "readOnly": true
         },
-        "readinessState": {
-          "$ref": "#/definitions/ReadinessState",
+        "executionReadinessState": {
+          "$ref": "#/definitions/ExecutionReadinessState",
           "description": "Readiness state of the Drill.",
           "readOnly": true
         },
@@ -5946,7 +5950,7 @@
       },
       "discriminator": "drillType",
       "required": [
-        "roPlanProperties",
+        "recoveryPlanProperties",
         "chaosExperimentProperties",
         "drillType"
       ]
@@ -6068,7 +6072,11 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Id of the resource."
+          "format": "arm-id",
+          "description": "ARM Id of the underlying resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "resourceType": {
           "type": "string",
@@ -6078,14 +6086,14 @@
           "$ref": "#/definitions/DrillResourceInclusionState",
           "description": "Inclusion State of the Drill resource in Drill"
         },
-        "roInclusionState": {
+        "recoveryPlanInclusionState": {
           "$ref": "#/definitions/ResourceInclusionState",
-          "description": "Inclusion State of the Drill resource in RO",
+          "description": "Inclusion State of the Drill resource in Recovery Plan",
           "readOnly": true
         },
-        "roExclusionReason": {
-          "$ref": "#/definitions/RoExclusionReason",
-          "description": "Exclusion reason of the Drill resource in RO",
+        "recoveryPlanExclusionReason": {
+          "$ref": "#/definitions/RecoveryPlanExclusionReason",
+          "description": "Exclusion reason of the Drill resource in Recovery Plan",
           "readOnly": true
         },
         "resourceProtectionSolutionType": {
@@ -6131,9 +6139,9 @@
             ]
           }
         },
-        "tAndcAssignmentError": {
+        "targetAndCapabilityAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
-          "description": "Last T&C assignment error, if any.",
+          "description": "Last Target and Capability assignment error, if any.",
           "readOnly": true
         },
         "rbacAssignmentError": {
@@ -6181,10 +6189,10 @@
       "type": "string",
       "description": "Drill Resource State (wrt SG and RO).",
       "enum": [
-        "InSGNotInDrill",
-        "InDrillNotInSG",
-        "InRONotInDrill",
-        "InDrillNotInRO",
+        "InServiceGroupNotInDrill",
+        "InDrillNotInServiceGroup",
+        "InRecoveryPlanNotInDrill",
+        "InDrillNotInRecoveryPlan",
         "ResourceStateIncompatibleWithFault"
       ],
       "x-ms-enum": {
@@ -6192,24 +6200,24 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "InSGNotInDrill",
-            "value": "InSGNotInDrill",
+            "name": "InServiceGroupNotInDrill",
+            "value": "InServiceGroupNotInDrill",
             "description": "Resource is in SG but not part of the Drill"
           },
           {
-            "name": "InDrillNotInSG",
-            "value": "InDrillNotInSG",
+            "name": "InDrillNotInServiceGroup",
+            "value": "InDrillNotInServiceGroup",
             "description": "Resource is in Drill but not part of the SG"
           },
           {
-            "name": "InRONotInDrill",
-            "value": "InRONotInDrill",
-            "description": "Resource is in ROPlan but not part of the Drill"
+            "name": "InRecoveryPlanNotInDrill",
+            "value": "InRecoveryPlanNotInDrill",
+            "description": "Resource is in RecoveryPlan but not part of the Drill"
           },
           {
-            "name": "InDrillNotInRO",
-            "value": "InDrillNotInRO",
-            "description": "Resource is in Drill but not part of the ROPlan"
+            "name": "InDrillNotInRecoveryPlan",
+            "value": "InDrillNotInRecoveryPlan",
+            "description": "Resource is in Drill but not part of the RecoveryPlan"
           },
           {
             "name": "ResourceStateIncompatibleWithFault",
@@ -6395,7 +6403,7 @@
       "type": "object",
       "description": "Properties of the Resiliency DrillRun.",
       "properties": {
-        "drillUrl": {
+        "drillId": {
           "type": "string",
           "format": "arm-id",
           "description": "Parent Drill resource.",
@@ -6410,7 +6418,12 @@
         },
         "metricValue": {
           "type": "string",
-          "description": "Measured aggregated Metric value.",
+          "description": "Measured aggregated Metric value through the drill run.",
+          "readOnly": true
+        },
+        "healthStatus": {
+          "$ref": "#/definitions/HealthStatus",
+          "description": "Measured health status through the drill run.",
           "readOnly": true
         },
         "drillMode": {
@@ -6640,7 +6653,7 @@
           "$ref": "#/definitions/DrillMode",
           "description": "Mode of starting the Drill"
         },
-        "roInputs": {
+        "recoveryPlanInputs": {
           "type": "object",
           "description": "Inputs needed for the Recovery Orchestration Plan",
           "properties": {
@@ -6656,7 +6669,7 @@
       },
       "required": [
         "mode",
-        "roInputs"
+        "recoveryPlanInputs"
       ]
     },
     "DrillType": {
@@ -6702,15 +6715,15 @@
       "description": "The updatable properties of the Drill.",
       "properties": {
         "metricsProperties": {
-          "$ref": "#/definitions/MetricsPropertiesUpdate",
+          "$ref": "#/definitions/MetricsPropertiesOfDrillUpdate",
           "description": "Metric properties."
         },
-        "roPlanProperties": {
-          "$ref": "#/definitions/RoPlanPropertiesUpdate",
-          "description": "ROPlan properties."
+        "recoveryPlanProperties": {
+          "$ref": "#/definitions/RecoveryPlanPropertiesOfDrillUpdate",
+          "description": "Recovery Plan properties."
         },
         "chaosExperimentProperties": {
-          "$ref": "#/definitions/ChaosExperimentPropertiesUpdate",
+          "$ref": "#/definitions/ChaosExperimentPropertiesOfDrillUpdate",
           "description": "Chaos Experiment properties."
         },
         "rbacSetupMode": {
@@ -6791,6 +6804,30 @@
         ]
       }
     },
+    "ExecutionReadinessState": {
+      "type": "string",
+      "description": "Drill Execution Readiness State",
+      "enum": [
+        "Ready",
+        "NeedsAttention"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionReadinessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Drill is ready to run."
+          },
+          {
+            "name": "NeedsAttention",
+            "value": "NeedsAttention",
+            "description": "Drill is not ready to run. Details captured in AttentionReason field."
+          }
+        ]
+      }
+    },
     "ExecutionState": {
       "type": "string",
       "description": "Drill Execution State",
@@ -6849,17 +6886,29 @@
       "type": "object",
       "description": "Failed Include, Exclude or Update resource.",
       "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Id of the failed drill resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "microsoft.azureresiliencemanagement/drills/drillresources"
+              }
+            ]
+          }
+        },
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource Id.",
+          "description": "Resource Id of the underlying resource of the failed Drill resource.",
           "x-ms-arm-id-details": {
             "allowedResources": []
           }
         },
-        "tAndcAssignmentError": {
+        "targetAndCapabilityAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
-          "description": "T and C assignment error.",
+          "description": "Target and Capability assignment error.",
           "readOnly": true
         },
         "rbacAssignmentError": {
@@ -6869,6 +6918,7 @@
         }
       },
       "required": [
+        "id",
         "resourceId"
       ]
     },
@@ -7466,16 +7516,76 @@
         ]
       }
     },
+    "HealthModelPropertiesOfDrill": {
+      "type": "object",
+      "description": "Health Model properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to use for Health Model operations."
+        },
+        "healthModelId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Health Model.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CloudHealth/healthmodels"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identity",
+        "healthModelId"
+      ]
+    },
+    "HealthStatus": {
+      "type": "string",
+      "description": "Enum for Health Status.",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Healthy status."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Degraded status."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Unhealthy Status."
+          }
+        ]
+      }
+    },
     "IncludeOrUpdateResource": {
       "type": "object",
       "description": "Include or Update resource",
       "properties": {
-        "resourceId": {
+        "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource Id.",
+          "description": "Id of the DrillResource to be included (NOT the ARM Id of the underlying resource).",
           "x-ms-arm-id-details": {
-            "allowedResources": []
+            "allowedResources": [
+              {
+                "type": "microsoft.azureresiliencemanagement/drills/drillresources"
+              }
+            ]
           }
         },
         "faultProperties": {
@@ -7484,7 +7594,7 @@
         }
       },
       "required": [
-        "resourceId"
+        "id"
       ]
     },
     "InitialConfig": {
@@ -8219,7 +8329,7 @@
         ]
       }
     },
-    "MetricsProperties": {
+    "MetricsPropertiesOfDrill": {
       "type": "object",
       "description": "Metrics properties.",
       "properties": {
@@ -8241,7 +8351,7 @@
         "metricsToTrack"
       ]
     },
-    "MetricsPropertiesUpdate": {
+    "MetricsPropertiesOfDrillUpdate": {
       "type": "object",
       "description": "Metrics properties.",
       "properties": {
@@ -8508,30 +8618,6 @@
             "name": "NotSet",
             "value": "NotSet",
             "description": "RBAC not set."
-          }
-        ]
-      }
-    },
-    "ReadinessState": {
-      "type": "string",
-      "description": "Drill Readiness State",
-      "enum": [
-        "Ready",
-        "NeedsAttention"
-      ],
-      "x-ms-enum": {
-        "name": "ReadinessState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Drill is ready to run."
-          },
-          {
-            "name": "NeedsAttention",
-            "value": "NeedsAttention",
-            "description": "Drill is not ready to run. Details captured in AttentionReason field."
           }
         ]
       }
@@ -9070,6 +9156,30 @@
         "jobId"
       ]
     },
+    "RecoveryPlanExclusionReason": {
+      "type": "string",
+      "description": "Enum for RecoveryPlan Exclusion reason.",
+      "enum": [
+        "ExcludedFromRecoveryPlan",
+        "ProtectionStatus"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryPlanExclusionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ExcludedFromRecoveryPlan",
+            "value": "ExcludedFromRecoveryPlan",
+            "description": "Excluded From RecoveryPlan by user."
+          },
+          {
+            "name": "ProtectionStatus",
+            "value": "ProtectionStatus",
+            "description": "Protection not configured."
+          }
+        ]
+      }
+    },
     "RecoveryPlanFailoverOperationStatus": {
       "type": "object",
       "description": "Details of the recovery orchestration plan failover operation execution.",
@@ -9193,6 +9303,48 @@
         "planDescription",
         "recoveryGroupsSetting"
       ]
+    },
+    "RecoveryPlanPropertiesOfDrill": {
+      "type": "object",
+      "description": "RecoveryPlan properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to use for RecoveryPlan operations."
+        },
+        "recoveryPlanId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Recovery Orchestration plan associated with this Drill.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans"
+              }
+            ]
+          }
+        },
+        "recoveryPlanResourceExcludedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Excluded resource count in RecoveryPlan.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "identity"
+      ]
+    },
+    "RecoveryPlanPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "RecoveryPlan properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for RecoveryPlan operations."
+        }
+      }
     },
     "RecoveryPlanPropertiesUpdate": {
       "type": "object",
@@ -9937,72 +10089,6 @@
               }
             ]
           }
-        }
-      }
-    },
-    "RoExclusionReason": {
-      "type": "string",
-      "description": "Enum for RO Exclusion reason.",
-      "enum": [
-        "ExcludedFromRo",
-        "ProtectionStatus"
-      ],
-      "x-ms-enum": {
-        "name": "RoExclusionReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ExcludedFromRo",
-            "value": "ExcludedFromRo",
-            "description": "Excluded From Ro by user."
-          },
-          {
-            "name": "ProtectionStatus",
-            "value": "ProtectionStatus",
-            "description": "Protection not configured."
-          }
-        ]
-      }
-    },
-    "RoPlanProperties": {
-      "type": "object",
-      "description": "Metrics properties.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/AssociatedIdentity",
-          "description": "Identity to use for ROPlan operations."
-        },
-        "roPlanId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Recovery Orchestration plan associated with this Drill.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.AzureResilienceManagement/recoveryPlans"
-              }
-            ]
-          }
-        },
-        "roResourceExcludedCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Identity to use for ROPlan operations.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "identity"
-      ]
-    },
-    "RoPlanPropertiesUpdate": {
-      "type": "object",
-      "description": "Metrics properties.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/AssociatedIdentityUpdate",
-          "description": "Identity to use for ROPlan operations."
         }
       }
     },
