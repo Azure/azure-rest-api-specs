@@ -278,7 +278,7 @@ model ConfigurationStoreProperties {
   /**
    * Disables all authentication methods other than AAD authentication.
    */
-  disableLocalAuth?: boolean;
+  disableLocalAuth?: boolean = false;
 
   /**
    * The amount of time in days that the configuration store will be retained when it is soft deleted.
