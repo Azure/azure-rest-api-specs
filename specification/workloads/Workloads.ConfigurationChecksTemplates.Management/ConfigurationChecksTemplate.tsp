@@ -39,9 +39,9 @@ interface ConfigurationChecksTemplates {
   >;
 
   /**
-   * Execute the configuration check template resource on demand.
+   * Evaluate the configuration check template resource on demand.
    */
-  onDemandExecution is ArmResourceActionAsync<
+  onDemandEvaluation is ArmResourceActionAsync<
     ConfigurationChecksTemplate,
     void,
     Azure.ResourceManager.Foundations.OperationStatusResult
