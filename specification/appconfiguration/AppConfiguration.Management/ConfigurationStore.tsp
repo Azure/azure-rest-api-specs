@@ -35,6 +35,11 @@ model ConfigurationStore
   sku: Sku;
 }
 
+alias ConfigurationStoresCreateLroHeader = {
+  ...ArmCombinedLroHeaders<FinalResult = ConfigurationStore>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+};
+
 @armResourceOperations
 interface ConfigurationStores {
   /**
@@ -47,8 +52,7 @@ interface ConfigurationStores {
    */
   create is ArmResourceCreateOrReplaceAsync<
     ConfigurationStore,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ConfigurationStore> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ConfigurationStoresCreateLroHeader
   >;
 
   /**
@@ -143,4 +147,10 @@ interface ConfigurationStores {
 );
 @@doc(ConfigurationStores.regenerateKey::parameters.body,
   "The parameters for regenerating an access key."
+);
+@@doc(ConfigurationStoresCreateLroHeader.location,
+  "URL to query for the operation result"
+);
+@@doc(ConfigurationStoresCreateLroHeader.azureAsyncOperation,
+  "URL to query for status of the operation."
 );

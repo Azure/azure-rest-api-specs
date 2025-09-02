@@ -539,9 +539,14 @@
               "$ref": "#/definitions/ConfigurationStore"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL to query for status of the operation."
+              },
               "Location": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "URL to query for the operation result"
               },
               "Retry-After": {
                 "type": "integer",
