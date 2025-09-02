@@ -10,3 +10,4 @@ namespace Microsoft.Kubernetes;
 // we should not need these, but somehow without these, we get incorrect code.
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id, armResourceIdentifier, "csharp");
 @@alternateType(Azure.ResourceManager.CommonTypes.TrackedResource.location, azureLocation, "csharp");
+@@alternateType(ConnectedCluster.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
