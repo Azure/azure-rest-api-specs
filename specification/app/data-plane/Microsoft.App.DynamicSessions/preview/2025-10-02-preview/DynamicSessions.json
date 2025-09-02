@@ -970,6 +970,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum length of the output streams. Default value is 4096."
+        },
+        "useEmptyKernel": {
+          "type": "boolean",
+          "description": "Whether to use empty kernel for this execution. Default is false."
         }
       }
     },
@@ -1150,7 +1154,7 @@
       "name": "recursive",
       "in": "query",
       "description": "Whether to recursively list files.",
-      "required": false,
+      "required": true,
       "type": "boolean",
       "x-ms-parameter-location": "method"
     }
