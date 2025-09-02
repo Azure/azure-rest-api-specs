@@ -27,27 +27,34 @@ interface Watchlists {
   /**
    * Get a watchlist, without its watchlist items.
    */
-  get is ArmResourceRead<Watchlist>;
+  get is Extension.Read<OperationalInsights, Watchlist, Error = CloudError>;
 
   /**
    * Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with rawContent and contentType properties.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Watchlist>;
+  createOrUpdate is Extension.CreateOrReplaceAsync<
+    OperationalInsights,
+    Watchlist,
+    Error = CloudError
+  >;
 
   /**
    * Delete a watchlist.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is Extension.DeleteWithoutOkAsync<
+    OperationalInsights,
     Watchlist,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
    * Get all watchlists, without watchlist items.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     Watchlist,
     Parameters = {
       /**
@@ -56,7 +63,8 @@ interface Watchlists {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<WatchlistList>
+    Response = ArmResponse<WatchlistList>,
+    Error = CloudError
   >;
 }
 

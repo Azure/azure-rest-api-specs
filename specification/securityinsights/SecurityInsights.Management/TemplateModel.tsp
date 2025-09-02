@@ -32,21 +32,29 @@ interface TemplateModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentTemplate_Get")
-  get is ArmResourceRead<TemplateModel>;
+  get is Extension.Read<OperationalInsights, TemplateModel, Error = CloudError>;
 
   /**
    * Install a template.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentTemplate_Install")
-  install is ArmResourceCreateOrReplaceSync<TemplateModel>;
+  install is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    TemplateModel,
+    Error = CloudError
+  >;
 
   /**
    * Delete an installed template.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentTemplate_Delete")
-  delete is ArmResourceDeleteSync<TemplateModel>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    TemplateModel,
+    Error = CloudError
+  >;
 
   /**
    * Gets all installed templates.
@@ -56,7 +64,8 @@ interface TemplateModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentTemplates_List")
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     TemplateModel,
     Parameters = {
       /**
@@ -107,7 +116,8 @@ interface TemplateModels {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<TemplateList>
+    Response = ArmResponse<TemplateList>,
+    Error = CloudError
   >;
 }
 

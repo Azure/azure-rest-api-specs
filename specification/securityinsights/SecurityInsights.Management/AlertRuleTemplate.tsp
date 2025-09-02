@@ -34,14 +34,20 @@ interface AlertRuleTemplates {
   /**
    * Gets the alert rule template.
    */
-  get is ArmResourceRead<AlertRuleTemplate>;
+  get is Extension.Read<
+    OperationalInsights,
+    AlertRuleTemplate,
+    Error = CloudError
+  >;
 
   /**
    * Gets all alert rule templates.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     AlertRuleTemplate,
-    Response = ArmResponse<AlertRuleTemplatesList>
+    Response = ArmResponse<AlertRuleTemplatesList>,
+    Error = CloudError
   >;
 }
 

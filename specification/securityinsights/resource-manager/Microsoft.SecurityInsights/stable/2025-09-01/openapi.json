@@ -146,6 +146,108 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates": {
+      "get": {
+        "operationId": "AlertRuleTemplates_List",
+        "tags": [
+          "AlertRuleTemplates"
+        ],
+        "description": "Gets all alert rule templates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplatesList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all alert rule templates.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates/{alertRuleTemplateId}": {
+      "get": {
+        "operationId": "AlertRuleTemplates_Get",
+        "tags": [
+          "AlertRuleTemplates"
+        ],
+        "description": "Gets the alert rule template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertRuleTemplateId",
+            "in": "path",
+            "description": "Alert rule template ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get alert rule template by Id.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplateById.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules": {
       "get": {
         "operationId": "AlertRules_List",
@@ -377,95 +479,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/alertRuleTemplates": {
-      "get": {
-        "operationId": "AlertRuleTemplates_List",
-        "tags": [
-          "AlertRuleTemplates"
-        ],
-        "description": "Gets all alert rule templates.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AlertRuleTemplatesList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all alert rule templates.": {
-            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplates.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/alertRuleTemplates/{alertRuleTemplateId}": {
-      "get": {
-        "operationId": "AlertRuleTemplates_Get",
-        "tags": [
-          "AlertRuleTemplates"
-        ],
-        "description": "Gets the alert rule template.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "alertRuleTemplateId",
-            "in": "path",
-            "description": "Alert rule template ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AlertRuleTemplate"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get alert rule template by Id.": {
-            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplateById.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions": {
       "get": {
         "operationId": "Actions_ListByAlertRule",
         "tags": [
@@ -481,6 +495,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "ruleId",
@@ -500,7 +521,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -514,7 +535,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}": {
       "get": {
         "operationId": "Actions_Get",
         "tags": [
@@ -530,6 +551,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "ruleId",
@@ -556,7 +584,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -583,6 +611,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ruleId",
             "in": "path",
             "description": "Alert rule ID",
@@ -602,7 +637,7 @@
             "description": "The action",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActionRequest"
+              "$ref": "#/definitions/ActionResponse"
             }
           }
         ],
@@ -622,7 +657,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -649,6 +684,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ruleId",
             "in": "path",
             "description": "Alert rule ID",
@@ -673,7 +715,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -684,7 +726,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/automationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules": {
       "get": {
         "operationId": "AutomationRules_List",
         "tags": [
@@ -700,6 +742,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -712,7 +761,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -726,7 +775,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/automationRules/{automationRuleId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules/{automationRuleId}": {
       "get": {
         "operationId": "AutomationRules_Get",
         "tags": [
@@ -742,6 +791,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "automationRuleId",
@@ -761,7 +817,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -786,6 +842,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "automationRuleId",
@@ -820,7 +883,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -847,6 +910,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "automationRuleId",
             "in": "path",
             "description": "Automation rule ID",
@@ -856,11 +926,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "additionalProperties": {}
-            }
+            "description": "Resource deleted successfully."
           },
           "204": {
             "description": "Resource does not exist."
@@ -868,7 +934,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -879,7 +945,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/bookmarks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks": {
       "get": {
         "operationId": "Bookmarks_List",
         "tags": [
@@ -895,19 +961,26 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BookmarkList"
+              "$ref": "#/definitions/BookmarkListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -921,7 +994,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}": {
       "get": {
         "operationId": "Bookmarks_Get",
         "tags": [
@@ -937,6 +1010,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "bookmarkId",
@@ -956,7 +1036,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -981,6 +1061,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "bookmarkId",
@@ -1015,7 +1102,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1042,6 +1129,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "bookmarkId",
             "in": "path",
             "description": "Bookmark ID",
@@ -1059,7 +1153,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1070,7 +1164,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/contentPackages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages": {
       "get": {
         "operationId": "ContentPackages_List",
         "tags": [
@@ -1086,6 +1180,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -1149,7 +1250,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1163,7 +1264,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}": {
       "get": {
         "operationId": "ContentPackages_Get",
         "tags": [
@@ -1179,6 +1280,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "packageId",
@@ -1198,7 +1306,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1223,6 +1331,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "packageId",
@@ -1257,7 +1372,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1284,6 +1399,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "packageId",
             "in": "path",
             "description": "package Id",
@@ -1301,7 +1423,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1312,7 +1434,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/contentProductPackages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentProductPackages": {
       "get": {
         "operationId": "ProductPackages_List",
         "tags": [
@@ -1328,6 +1450,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -1376,7 +1505,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1390,7 +1519,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/contentProductPackages/{packageId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentProductPackages/{packageId}": {
       "get": {
         "operationId": "ProductPackage_Get",
         "tags": [
@@ -1406,6 +1535,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "packageId",
@@ -1425,7 +1561,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1436,7 +1572,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/contentTemplates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentTemplates": {
       "get": {
         "operationId": "ContentTemplates_List",
         "tags": [
@@ -1452,6 +1588,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -1522,7 +1665,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1536,7 +1679,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/contentTemplates/{templateId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentTemplates/{templateId}": {
       "get": {
         "operationId": "ContentTemplate_Get",
         "tags": [
@@ -1552,6 +1695,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "templateId",
@@ -1571,7 +1721,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1596,6 +1746,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "templateId",
@@ -1630,7 +1787,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1657,6 +1814,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "templateId",
             "in": "path",
             "description": "template Id",
@@ -1674,7 +1838,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1685,7 +1849,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/contentproducttemplates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproducttemplates": {
       "get": {
         "operationId": "ProductTemplates_List",
         "tags": [
@@ -1701,6 +1865,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -1764,7 +1935,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1778,7 +1949,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/contentproducttemplates/{templateId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproducttemplates/{templateId}": {
       "get": {
         "operationId": "ProductTemplate_Get",
         "tags": [
@@ -1794,6 +1965,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "templateId",
@@ -1813,7 +1991,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1824,7 +2002,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/dataConnectorDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectorDefinitions": {
       "get": {
         "operationId": "DataConnectorDefinitions_List",
         "tags": [
@@ -1840,19 +2018,26 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataConnectorDefinitionArmCollectionWrapper"
+              "$ref": "#/definitions/DataConnectorDefinitionListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1866,7 +2051,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/dataConnectorDefinitions/{dataConnectorDefinitionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectorDefinitions/{dataConnectorDefinitionName}": {
       "get": {
         "operationId": "DataConnectorDefinitions_Get",
         "tags": [
@@ -1882,6 +2067,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "dataConnectorDefinitionName",
@@ -1902,7 +2094,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1927,6 +2119,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "dataConnectorDefinitionName",
@@ -1962,7 +2161,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1989,6 +2188,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "dataConnectorDefinitionName",
             "in": "path",
             "description": "The data connector definition name.",
@@ -2007,7 +2213,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2018,7 +2224,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/dataConnectors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
       "get": {
         "operationId": "DataConnectors_List",
         "tags": [
@@ -2034,19 +2240,26 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataConnectorList"
+              "$ref": "#/definitions/DataConnectorListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2060,7 +2273,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}": {
       "get": {
         "operationId": "DataConnectors_Get",
         "tags": [
@@ -2076,6 +2289,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "dataConnectorId",
@@ -2095,7 +2315,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2152,6 +2372,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "dataConnectorId",
             "in": "path",
             "description": "Connector ID",
@@ -2184,7 +2411,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2220,6 +2447,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "dataConnectorId",
             "in": "path",
             "description": "Connector ID",
@@ -2237,7 +2471,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2254,7 +2488,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents": {
       "get": {
         "operationId": "Incidents_List",
         "tags": [
@@ -2270,6 +2504,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -2312,7 +2553,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2326,7 +2567,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}": {
       "get": {
         "operationId": "Incidents_Get",
         "tags": [
@@ -2342,6 +2583,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2361,7 +2609,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2386,6 +2634,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2420,7 +2675,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2447,6 +2702,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "incidentId",
             "in": "path",
             "description": "Incident ID",
@@ -2464,7 +2726,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2475,7 +2737,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/{incidentIdentifier}/runPlaybook": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/{incidentIdentifier}/runPlaybook": {
       "post": {
         "operationId": "Incidents_RunPlaybook",
         "tags": [
@@ -2491,6 +2753,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2523,7 +2792,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2534,7 +2803,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/alerts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/alerts": {
       "post": {
         "operationId": "Incidents_ListAlerts",
         "tags": [
@@ -2550,6 +2819,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2569,7 +2845,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2580,7 +2856,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/bookmarks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/bookmarks": {
       "post": {
         "operationId": "Incidents_ListBookmarks",
         "tags": [
@@ -2596,6 +2872,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2615,7 +2898,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2626,7 +2909,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments": {
       "get": {
         "operationId": "IncidentComments_List",
         "tags": [
@@ -2642,6 +2925,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2690,7 +2980,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2704,7 +2994,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments/{incidentCommentId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments/{incidentCommentId}": {
       "get": {
         "operationId": "IncidentComments_Get",
         "tags": [
@@ -2720,6 +3010,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2746,7 +3043,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2771,6 +3068,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2812,7 +3116,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2839,6 +3143,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "incidentId",
             "in": "path",
             "description": "Incident ID",
@@ -2863,7 +3174,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2874,7 +3185,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/entities": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/entities": {
       "post": {
         "operationId": "Incidents_ListEntities",
         "tags": [
@@ -2890,6 +3201,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2909,7 +3227,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2920,7 +3238,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations": {
       "get": {
         "operationId": "IncidentRelations_List",
         "tags": [
@@ -2936,6 +3254,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -2984,7 +3309,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2998,7 +3323,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations/{relationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations/{relationName}": {
       "get": {
         "operationId": "IncidentRelations_Get",
         "tags": [
@@ -3014,6 +3339,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -3043,7 +3375,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3068,6 +3400,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -3112,7 +3451,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3137,6 +3476,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -3166,7 +3512,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3177,7 +3523,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks": {
       "get": {
         "operationId": "IncidentTasks_List",
         "tags": [
@@ -3193,6 +3539,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -3212,7 +3565,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3226,7 +3579,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}": {
       "get": {
         "operationId": "IncidentTasks_Get",
         "tags": [
@@ -3242,6 +3595,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -3268,7 +3628,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3293,6 +3653,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "incidentId",
@@ -3334,7 +3701,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3361,6 +3728,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "incidentId",
             "in": "path",
             "description": "Incident ID",
@@ -3385,7 +3759,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3396,7 +3770,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/indicators": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/indicators": {
       "get": {
         "operationId": "ThreatIntelligenceIndicators_List",
         "tags": [
@@ -3412,6 +3786,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -3453,7 +3834,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3467,7 +3848,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/indicators/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/indicators/{name}": {
       "get": {
         "operationId": "ThreatIntelligenceIndicator_Get",
         "tags": [
@@ -3483,6 +3864,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
@@ -3502,7 +3890,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3529,6 +3917,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Threat intelligence indicator name field.",
@@ -3541,7 +3936,7 @@
             "description": "Properties of threat intelligence indicators to create and update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceIndicatorModel"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           }
         ],
@@ -3561,7 +3956,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3588,6 +3983,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Threat intelligence indicator name field.",
@@ -3605,7 +4007,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3616,7 +4018,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/indicators/{name}/appendTags": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/indicators/{name}/appendTags": {
       "post": {
         "operationId": "ThreatIntelligenceIndicator_AppendTags",
         "tags": [
@@ -3632,6 +4034,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
@@ -3657,7 +4066,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3668,7 +4077,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/indicators/{name}/replaceTags": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/indicators/{name}/replaceTags": {
       "post": {
         "operationId": "ThreatIntelligenceIndicator_ReplaceTags",
         "tags": [
@@ -3684,6 +4093,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
@@ -3712,7 +4128,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3723,7 +4139,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/metadata": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata": {
       "get": {
         "operationId": "Metadata_List",
         "tags": [
@@ -3739,6 +4155,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -3781,7 +4204,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3798,7 +4221,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}": {
       "get": {
         "operationId": "Metadata_Get",
         "tags": [
@@ -3814,6 +4237,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "metadataName",
@@ -3834,7 +4264,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3859,6 +4289,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "metadataName",
@@ -3894,7 +4331,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3907,6 +4344,1239 @@
           }
         }
       },
+      "delete": {
+        "operationId": "Metadata_Delete",
+        "tags": [
+          "MetadataModels"
+        ],
+        "description": "Delete a Metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metadataName",
+            "in": "path",
+            "description": "The Metadata name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete metadata.": {
+            "$ref": "./examples/metadata/DeleteMetadata.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates": {
+      "get": {
+        "operationId": "SentinelOnboardingStates_List",
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Gets all Sentinel onboarding states",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingStatesList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all Sentinel onboarding states": {
+            "$ref": "./examples/onboardingStates/GetAllSentinelOnboardingStates.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates/{sentinelOnboardingStateName}": {
+      "get": {
+        "operationId": "SentinelOnboardingStates_Get",
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Get Sentinel onboarding state",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sentinelOnboardingStateName",
+            "in": "path",
+            "description": "The Sentinel onboarding state name. Supports - default",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Sentinel onboarding state": {
+            "$ref": "./examples/onboardingStates/GetSentinelOnboardingState.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SentinelOnboardingStates_Create",
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Create Sentinel onboarding state",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sentinelOnboardingStateName",
+            "in": "path",
+            "description": "The Sentinel onboarding state name. Supports - default",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sentinelOnboardingStateParameter",
+            "in": "body",
+            "description": "The Sentinel onboarding state parameter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SentinelOnboardingState' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          },
+          "201": {
+            "description": "Resource 'SentinelOnboardingState' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Sentinel onboarding state": {
+            "$ref": "./examples/onboardingStates/CreateSentinelOnboardingState.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SentinelOnboardingStates_Delete",
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Delete Sentinel onboarding state",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sentinelOnboardingStateName",
+            "in": "path",
+            "description": "The Sentinel onboarding state name. Supports - default",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Sentinel onboarding state": {
+            "$ref": "./examples/onboardingStates/DeleteSentinelOnboardingState.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings": {
+      "get": {
+        "operationId": "SecurityMLAnalyticsSettings_List",
+        "tags": [
+          "SecurityMLAnalyticsSettings"
+        ],
+        "description": "Gets all Security ML Analytics Settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityMLAnalyticsSettingsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all Security ML Analytics Settings.": {
+            "$ref": "./examples/securityMLAnalyticsSettings/GetAllSecurityMLAnalyticsSettings.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}": {
+      "get": {
+        "operationId": "SecurityMLAnalyticsSettings_Get",
+        "tags": [
+          "SecurityMLAnalyticsSettings"
+        ],
+        "description": "Gets the Security ML Analytics Settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "description": "Security ML Analytics Settings resource name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Anomaly Security ML Analytics Settings.": {
+            "$ref": "./examples/securityMLAnalyticsSettings/GetAnomalySecurityMLAnalyticsSetting.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecurityMLAnalyticsSettings_CreateOrUpdate",
+        "tags": [
+          "SecurityMLAnalyticsSettings"
+        ],
+        "description": "Creates or updates the Security ML Analytics Settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "description": "Security ML Analytics Settings resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityMLAnalyticsSetting",
+            "in": "body",
+            "description": "The security ML Analytics setting",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SecurityMLAnalyticsSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'SecurityMLAnalyticsSetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a Anomaly Security ML Analytics Settings.": {
+            "$ref": "./examples/securityMLAnalyticsSettings/CreateAnomalySecurityMLAnalyticsSetting.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecurityMLAnalyticsSettings_Delete",
+        "tags": [
+          "SecurityMLAnalyticsSettings"
+        ],
+        "description": "Delete the Security ML Analytics Settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "description": "Security ML Analytics Settings resource name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Security ML Analytics Settings.": {
+            "$ref": "./examples/securityMLAnalyticsSettings/DeleteSecurityMLAnalyticsSetting.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols": {
+      "get": {
+        "operationId": "SourceControls_List",
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Gets all source controls, without source control items.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SourceControlList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all source controls.": {
+            "$ref": "./examples/sourcecontrols/GetSourceControls.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}": {
+      "get": {
+        "operationId": "SourceControls_Get",
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Gets a source control byt its identifier.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceControlId",
+            "in": "path",
+            "description": "Source control Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a source control.": {
+            "$ref": "./examples/sourcecontrols/GetSourceControlById.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SourceControls_Create",
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Creates a source control.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceControlId",
+            "in": "path",
+            "description": "Source control Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceControl",
+            "in": "body",
+            "description": "The SourceControl",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SourceControl' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "201": {
+            "description": "Resource 'SourceControl' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a source control.": {
+            "$ref": "./examples/sourcecontrols/CreateSourceControl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}/delete": {
+      "post": {
+        "operationId": "SourceControls_Delete",
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Delete a source control.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceControlId",
+            "in": "path",
+            "description": "Source control Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repositoryAccess",
+            "in": "body",
+            "description": "The repository access credentials.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RepositoryAccessProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Warning"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a source control.": {
+            "$ref": "./examples/sourcecontrols/DeleteSourceControl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists": {
+      "get": {
+        "operationId": "Watchlists_List",
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Get all watchlists, without watchlist items.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WatchlistList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all watchlists.": {
+            "$ref": "./examples/watchlists/GetWatchlists.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
+      "get": {
+        "operationId": "Watchlists_Get",
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Get a watchlist, without its watchlist items.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistAlias",
+            "in": "path",
+            "description": "The watchlist alias",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a watchlist.": {
+            "$ref": "./examples/watchlists/GetWatchlistByAlias.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Watchlists_CreateOrUpdate",
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with rawContent and contentType properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistAlias",
+            "in": "path",
+            "description": "The watchlist alias",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlist",
+            "in": "body",
+            "description": "The watchlist",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Watchlist' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "201": {
+            "description": "Resource 'Watchlist' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a watchlist and bulk creates watchlist items.": {
+            "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
+          },
+          "Create or update a watchlist.": {
+            "$ref": "./examples/watchlists/CreateWatchlist.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Watchlist"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Watchlists_Delete",
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Delete a watchlist.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistAlias",
+            "in": "path",
+            "description": "The watchlist alias",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a watchlist.": {
+            "$ref": "./examples/watchlists/DeleteWatchlist.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
+      "get": {
+        "operationId": "WatchlistItems_List",
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Get all watchlist Items.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistAlias",
+            "in": "path",
+            "description": "The watchlist alias",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItemList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all watchlist Items.": {
+            "$ref": "./examples/watchlists/GetWatchlistItems.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
+      "get": {
+        "operationId": "WatchlistItems_Get",
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Get a watchlist item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistAlias",
+            "in": "path",
+            "description": "The watchlist alias",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistItemId",
+            "in": "path",
+            "description": "The watchlist item id (GUID)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a watchlist item.": {
+            "$ref": "./examples/watchlists/GetWatchlistItemById.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WatchlistItems_CreateOrUpdate",
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Create or update a watchlist item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistAlias",
+            "in": "path",
+            "description": "The watchlist alias",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistItemId",
+            "in": "path",
+            "description": "The watchlist item id (GUID)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistItem",
+            "in": "body",
+            "description": "The watchlist item",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WatchlistItem' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "201": {
+            "description": "Resource 'WatchlistItem' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a watchlist item.": {
+            "$ref": "./examples/watchlists/CreateWatchlistItem.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WatchlistItems_Delete",
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Delete a watchlist item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistAlias",
+            "in": "path",
+            "description": "The watchlist alias",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "watchlistItemId",
+            "in": "path",
+            "description": "The watchlist item id (GUID)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a watchlist item.": {
+            "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}": {
       "patch": {
         "operationId": "Metadata_Update",
         "tags": [
@@ -3958,1090 +5628,6 @@
         "x-ms-examples": {
           "Update metadata.": {
             "$ref": "./examples/metadata/PatchMetadata.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Metadata_Delete",
-        "tags": [
-          "MetadataModels"
-        ],
-        "description": "Delete a Metadata.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "metadataName",
-            "in": "path",
-            "description": "The Metadata name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^\\S+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete metadata.": {
-            "$ref": "./examples/metadata/DeleteMetadata.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/onboardingStates": {
-      "get": {
-        "operationId": "SentinelOnboardingStates_List",
-        "tags": [
-          "SentinelOnboardingStates"
-        ],
-        "description": "Gets all Sentinel onboarding states",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SentinelOnboardingStatesList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all Sentinel onboarding states": {
-            "$ref": "./examples/onboardingStates/GetAllSentinelOnboardingStates.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/onboardingStates/{sentinelOnboardingStateName}": {
-      "get": {
-        "operationId": "SentinelOnboardingStates_Get",
-        "tags": [
-          "SentinelOnboardingStates"
-        ],
-        "description": "Get Sentinel onboarding state",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "sentinelOnboardingStateName",
-            "in": "path",
-            "description": "The Sentinel onboarding state name. Supports - default",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SentinelOnboardingState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Sentinel onboarding state": {
-            "$ref": "./examples/onboardingStates/GetSentinelOnboardingState.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "SentinelOnboardingStates_Create",
-        "tags": [
-          "SentinelOnboardingStates"
-        ],
-        "description": "Create Sentinel onboarding state",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "sentinelOnboardingStateName",
-            "in": "path",
-            "description": "The Sentinel onboarding state name. Supports - default",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sentinelOnboardingStateParameter",
-            "in": "body",
-            "description": "The Sentinel onboarding state parameter",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SentinelOnboardingState"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SentinelOnboardingState' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SentinelOnboardingState"
-            }
-          },
-          "201": {
-            "description": "Resource 'SentinelOnboardingState' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SentinelOnboardingState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create Sentinel onboarding state": {
-            "$ref": "./examples/onboardingStates/CreateSentinelOnboardingState.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "SentinelOnboardingStates_Delete",
-        "tags": [
-          "SentinelOnboardingStates"
-        ],
-        "description": "Delete Sentinel onboarding state",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "sentinelOnboardingStateName",
-            "in": "path",
-            "description": "The Sentinel onboarding state name. Supports - default",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Sentinel onboarding state": {
-            "$ref": "./examples/onboardingStates/DeleteSentinelOnboardingState.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings": {
-      "get": {
-        "operationId": "SecurityMLAnalyticsSettings_List",
-        "tags": [
-          "SecurityMLAnalyticsSettings"
-        ],
-        "description": "Gets all Security ML Analytics Settings.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSettingsList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all Security ML Analytics Settings.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/GetAllSecurityMLAnalyticsSettings.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}": {
-      "get": {
-        "operationId": "SecurityMLAnalyticsSettings_Get",
-        "tags": [
-          "SecurityMLAnalyticsSettings"
-        ],
-        "description": "Gets the Security ML Analytics Settings.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "settingsResourceName",
-            "in": "path",
-            "description": "Security ML Analytics Settings resource name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a Anomaly Security ML Analytics Settings.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/GetAnomalySecurityMLAnalyticsSetting.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "SecurityMLAnalyticsSettings_CreateOrUpdate",
-        "tags": [
-          "SecurityMLAnalyticsSettings"
-        ],
-        "description": "Creates or updates the Security ML Analytics Settings.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "settingsResourceName",
-            "in": "path",
-            "description": "Security ML Analytics Settings resource name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "securityMLAnalyticsSetting",
-            "in": "body",
-            "description": "The security ML Analytics setting",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SecurityMLAnalyticsSetting' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
-            }
-          },
-          "201": {
-            "description": "Resource 'SecurityMLAnalyticsSetting' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates a Anomaly Security ML Analytics Settings.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/CreateAnomalySecurityMLAnalyticsSetting.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "SecurityMLAnalyticsSettings_Delete",
-        "tags": [
-          "SecurityMLAnalyticsSettings"
-        ],
-        "description": "Delete the Security ML Analytics Settings.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "settingsResourceName",
-            "in": "path",
-            "description": "Security ML Analytics Settings resource name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a Security ML Analytics Settings.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/DeleteSecurityMLAnalyticsSetting.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/sourcecontrols": {
-      "get": {
-        "operationId": "SourceControls_List",
-        "tags": [
-          "SourceControls"
-        ],
-        "description": "Gets all source controls, without source control items.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SourceControlList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all source controls.": {
-            "$ref": "./examples/sourcecontrols/GetSourceControls.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}": {
-      "get": {
-        "operationId": "SourceControls_Get",
-        "tags": [
-          "SourceControls"
-        ],
-        "description": "Gets a source control byt its identifier.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "sourceControlId",
-            "in": "path",
-            "description": "Source control Id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SourceControl"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a source control.": {
-            "$ref": "./examples/sourcecontrols/GetSourceControlById.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "SourceControls_Create",
-        "tags": [
-          "SourceControls"
-        ],
-        "description": "Creates a source control.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "sourceControlId",
-            "in": "path",
-            "description": "Source control Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sourceControl",
-            "in": "body",
-            "description": "The SourceControl",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SourceControl"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SourceControl' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SourceControl"
-            }
-          },
-          "201": {
-            "description": "Resource 'SourceControl' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SourceControl"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates a source control.": {
-            "$ref": "./examples/sourcecontrols/CreateSourceControl.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}/delete": {
-      "post": {
-        "operationId": "SourceControls_Delete",
-        "tags": [
-          "SourceControls"
-        ],
-        "description": "Delete a source control.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "sourceControlId",
-            "in": "path",
-            "description": "Source control Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "repositoryAccess",
-            "in": "body",
-            "description": "The repository access credentials.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RepositoryAccessProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Warning"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a source control.": {
-            "$ref": "./examples/sourcecontrols/DeleteSourceControl.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/watchlists": {
-      "get": {
-        "operationId": "Watchlists_List",
-        "tags": [
-          "Watchlists"
-        ],
-        "description": "Get all watchlists, without watchlist items.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/WatchlistList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all watchlists.": {
-            "$ref": "./examples/watchlists/GetWatchlists.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
-      "get": {
-        "operationId": "Watchlists_Get",
-        "tags": [
-          "Watchlists"
-        ],
-        "description": "Get a watchlist, without its watchlist items.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "watchlistAlias",
-            "in": "path",
-            "description": "The watchlist alias",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Watchlist"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a watchlist.": {
-            "$ref": "./examples/watchlists/GetWatchlistByAlias.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Watchlists_CreateOrUpdate",
-        "tags": [
-          "Watchlists"
-        ],
-        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with rawContent and contentType properties.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "watchlistAlias",
-            "in": "path",
-            "description": "The watchlist alias",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "watchlist",
-            "in": "body",
-            "description": "The watchlist",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Watchlist"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Watchlist' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Watchlist"
-            }
-          },
-          "201": {
-            "description": "Resource 'Watchlist' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Watchlist"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a watchlist and bulk creates watchlist items.": {
-            "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
-          },
-          "Create or update a watchlist.": {
-            "$ref": "./examples/watchlists/CreateWatchlist.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Watchlist"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "Watchlists_Delete",
-        "tags": [
-          "Watchlists"
-        ],
-        "description": "Delete a watchlist.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "watchlistAlias",
-            "in": "path",
-            "description": "The watchlist alias",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a watchlist.": {
-            "$ref": "./examples/watchlists/DeleteWatchlist.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
-      "get": {
-        "operationId": "WatchlistItems_List",
-        "tags": [
-          "WatchlistItems"
-        ],
-        "description": "Get all watchlist Items.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "watchlistAlias",
-            "in": "path",
-            "description": "The watchlist alias",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/WatchlistItemList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all watchlist Items.": {
-            "$ref": "./examples/watchlists/GetWatchlistItems.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
-      "get": {
-        "operationId": "WatchlistItems_Get",
-        "tags": [
-          "WatchlistItems"
-        ],
-        "description": "Get a watchlist item.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "watchlistAlias",
-            "in": "path",
-            "description": "The watchlist alias",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "watchlistItemId",
-            "in": "path",
-            "description": "The watchlist item id (GUID)",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/WatchlistItem"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a watchlist item.": {
-            "$ref": "./examples/watchlists/GetWatchlistItemById.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "WatchlistItems_CreateOrUpdate",
-        "tags": [
-          "WatchlistItems"
-        ],
-        "description": "Create or update a watchlist item.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "watchlistAlias",
-            "in": "path",
-            "description": "The watchlist alias",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "watchlistItemId",
-            "in": "path",
-            "description": "The watchlist item id (GUID)",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "watchlistItem",
-            "in": "body",
-            "description": "The watchlist item",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/WatchlistItem"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'WatchlistItem' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/WatchlistItem"
-            }
-          },
-          "201": {
-            "description": "Resource 'WatchlistItem' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/WatchlistItem"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a watchlist item.": {
-            "$ref": "./examples/watchlists/CreateWatchlistItem.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "WatchlistItems_Delete",
-        "tags": [
-          "WatchlistItems"
-        ],
-        "description": "Delete a watchlist item.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "watchlistAlias",
-            "in": "path",
-            "description": "The watchlist alias",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "watchlistItemId",
-            "in": "path",
-            "description": "The watchlist item id (GUID)",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a watchlist item.": {
-            "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
           }
         }
       }
@@ -5571,22 +6157,6 @@
       },
       "required": [
         "logicAppResourceId"
-      ]
-    },
-    "ActionRequest": {
-      "type": "object",
-      "description": "Action for alert rule.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ActionRequestProperties",
-          "description": "Action properties for put request",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceWithEtag"
-        }
       ]
     },
     "ActionRequestProperties": {
@@ -7387,9 +7957,9 @@
         }
       ]
     },
-    "BookmarkList": {
+    "BookmarkListResult": {
       "type": "object",
-      "description": "List all the bookmarks.",
+      "description": "The response of a Bookmark list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -8251,9 +8821,26 @@
         }
       ]
     },
-    "DataConnectorDefinitionArmCollectionWrapper": {
+    "DataConnectorDefinitionKind": {
+      "type": "string",
+      "description": "The kind of the data connector definitions",
+      "enum": [
+        "Customizable"
+      ],
+      "x-ms-enum": {
+        "name": "DataConnectorDefinitionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Customizable",
+            "value": "Customizable"
+          }
+        ]
+      }
+    },
+    "DataConnectorDefinitionListResult": {
       "type": "object",
-      "description": "Encapsulate the data connector definition object",
+      "description": "The response of a DataConnectorDefinition list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -8271,23 +8858,6 @@
       "required": [
         "value"
       ]
-    },
-    "DataConnectorDefinitionKind": {
-      "type": "string",
-      "description": "The kind of the data connector definitions",
-      "enum": [
-        "Customizable"
-      ],
-      "x-ms-enum": {
-        "name": "DataConnectorDefinitionKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Customizable",
-            "value": "Customizable"
-          }
-        ]
-      }
     },
     "DataConnectorKind": {
       "type": "string",
@@ -8356,9 +8926,9 @@
         ]
       }
     },
-    "DataConnectorList": {
+    "DataConnectorListResult": {
       "type": "object",
-      "description": "List all the data connectors.",
+      "description": "The response of a DataConnector list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -13984,21 +14554,6 @@
           "description": "Gets or sets a value indicating whether the permission is custom actions (POST)."
         }
       }
-    },
-    "ResourceWithEtag": {
-      "type": "object",
-      "description": "An azure resource object with an Etag property",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Etag of the azure resource"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
     },
     "RestApiPollerDataConnector": {
       "type": "object",

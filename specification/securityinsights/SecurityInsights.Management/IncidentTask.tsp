@@ -30,24 +30,34 @@ interface IncidentTasks {
   /**
    * Gets an incident task.
    */
-  get is ArmResourceRead<IncidentTask>;
+  get is Extension.Read<OperationalInsights, IncidentTask, Error = CloudError>;
 
   /**
    * Creates or updates the incident task.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<IncidentTask>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    IncidentTask,
+    Error = CloudError
+  >;
 
   /**
    * Delete the incident task.
    */
-  delete is ArmResourceDeleteSync<IncidentTask>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    IncidentTask,
+    Error = CloudError
+  >;
 
   /**
    * Gets all incident tasks.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     IncidentTask,
-    Response = ArmResponse<IncidentTaskList>
+    Response = ArmResponse<IncidentTaskList>,
+    Error = CloudError
   >;
 }
 

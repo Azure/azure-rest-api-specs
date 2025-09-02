@@ -27,24 +27,33 @@ interface Bookmarks {
   /**
    * Gets a bookmark.
    */
-  get is ArmResourceRead<Bookmark>;
+  get is Extension.Read<OperationalInsights, Bookmark, Error = CloudError>;
 
   /**
    * Creates or updates the bookmark.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Bookmark>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    Bookmark,
+    Error = CloudError
+  >;
 
   /**
    * Delete the bookmark.
    */
-  delete is ArmResourceDeleteSync<Bookmark>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    Bookmark,
+    Error = CloudError
+  >;
 
   /**
    * Gets all bookmarks.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     Bookmark,
-    Response = ArmResponse<BookmarkList>
+    Error = CloudError
   >;
 }
 

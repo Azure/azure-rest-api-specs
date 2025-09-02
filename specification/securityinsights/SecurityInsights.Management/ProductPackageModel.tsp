@@ -30,7 +30,11 @@ interface ProductPackageModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProductPackage_Get")
-  get is ArmResourceRead<ProductPackageModel>;
+  get is Extension.Read<
+    OperationalInsights,
+    ProductPackageModel,
+    Error = CloudError
+  >;
 
   /**
    * Gets all packages from the catalog.
@@ -40,7 +44,8 @@ interface ProductPackageModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProductPackages_List")
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     ProductPackageModel,
     Parameters = {
       /**
@@ -73,7 +78,8 @@ interface ProductPackageModels {
       @query("$search")
       $search?: string;
     },
-    Response = ArmResponse<ProductPackageList>
+    Response = ArmResponse<ProductPackageList>,
+    Error = CloudError
   >;
 }
 

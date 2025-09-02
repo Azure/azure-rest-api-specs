@@ -30,14 +30,19 @@ interface ProductTemplateModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProductTemplate_Get")
-  get is ArmResourceRead<ProductTemplateModel>;
+  get is Extension.Read<
+    OperationalInsights,
+    ProductTemplateModel,
+    Error = CloudError
+  >;
 
   /**
    * Gets all templates in the catalog.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProductTemplates_List")
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     ProductTemplateModel,
     Parameters = {
       /**
@@ -82,7 +87,8 @@ interface ProductTemplateModels {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<ProductTemplateList>
+    Response = ArmResponse<ProductTemplateList>,
+    Error = CloudError
   >;
 }
 

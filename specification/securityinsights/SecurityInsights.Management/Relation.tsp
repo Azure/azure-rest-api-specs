@@ -31,28 +31,37 @@ interface Relations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IncidentRelations_Get")
-  get is ArmResourceRead<Relation>;
+  get is Extension.Read<OperationalInsights, Relation, Error = CloudError>;
 
   /**
    * Creates or updates a relation for a given incident.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IncidentRelations_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Relation>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    Relation,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a relation for a given incident.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IncidentRelations_Delete")
-  delete is ArmResourceDeleteSync<Relation>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    Relation,
+    Error = CloudError
+  >;
 
   /**
    * Gets all relations for a given incident.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IncidentRelations_List")
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     Relation,
     Parameters = {
       /**
@@ -79,7 +88,8 @@ interface Relations {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<RelationList>
+    Response = ArmResponse<RelationList>,
+    Error = CloudError
   >;
 }
 

@@ -34,24 +34,33 @@ interface DataConnectors {
   /**
    * Gets a data connector.
    */
-  get is ArmResourceRead<DataConnector>;
+  get is Extension.Read<OperationalInsights, DataConnector, Error = CloudError>;
 
   /**
    * Creates or updates the data connector.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DataConnector>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    DataConnector,
+    Error = CloudError
+  >;
 
   /**
    * Delete the data connector.
    */
-  delete is ArmResourceDeleteSync<DataConnector>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    DataConnector,
+    Error = CloudError
+  >;
 
   /**
    * Gets all data connectors.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     DataConnector,
-    Response = ArmResponse<DataConnectorList>
+    Error = CloudError
   >;
 }
 

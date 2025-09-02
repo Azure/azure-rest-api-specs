@@ -26,27 +26,38 @@ interface AutomationRules {
   /**
    * Gets the automation rule.
    */
-  get is ArmResourceRead<AutomationRule>;
+  get is Extension.Read<
+    OperationalInsights,
+    AutomationRule,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates the automation rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AutomationRule>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    AutomationRule,
+    Error = CloudError
+  >;
 
   /**
    * Delete the automation rule.
    */
-  delete is ArmResourceDeleteSync<
+  delete is Extension.DeleteSync<
+    OperationalInsights,
     AutomationRule,
-    Response = ArmResponse<Record<unknown>> | ArmDeletedNoContentResponse
+    Error = CloudError
   >;
 
   /**
    * Gets all automation rules.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     AutomationRule,
-    Response = ArmResponse<AutomationRulesList>
+    Response = ArmResponse<AutomationRulesList>,
+    Error = CloudError
   >;
 }
 

@@ -28,24 +28,38 @@ interface SentinelOnboardingStates {
   /**
    * Get Sentinel onboarding state
    */
-  get is ArmResourceRead<SentinelOnboardingState>;
+  get is Extension.Read<
+    OperationalInsights,
+    SentinelOnboardingState,
+    Error = CloudError
+  >;
 
   /**
    * Create Sentinel onboarding state
    */
-  create is ArmResourceCreateOrReplaceSync<SentinelOnboardingState>;
+  create is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    SentinelOnboardingState,
+    Error = CloudError
+  >;
 
   /**
    * Delete Sentinel onboarding state
    */
-  delete is ArmResourceDeleteSync<SentinelOnboardingState>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    SentinelOnboardingState,
+    Error = CloudError
+  >;
 
   /**
    * Gets all Sentinel onboarding states
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     SentinelOnboardingState,
-    Response = ArmResponse<SentinelOnboardingStatesList>
+    Response = ArmResponse<SentinelOnboardingStatesList>,
+    Error = CloudError
   >;
 }
 

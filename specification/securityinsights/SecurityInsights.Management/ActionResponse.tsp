@@ -38,16 +38,21 @@ interface ActionResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Actions_Get")
-  get is ArmResourceRead<ActionResponse>;
+  get is Extension.Read<
+    OperationalInsights,
+    ActionResponse,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates the action of alert rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Actions_CreateOrUpdate")
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
     ActionResponse,
-    Request = ActionRequest
+    Error = CloudError
   >;
 
   /**
@@ -55,16 +60,22 @@ interface ActionResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Actions_Delete")
-  delete is ArmResourceDeleteSync<ActionResponse>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    ActionResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all actions of alert rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Actions_ListByAlertRule")
-  listByAlertRule is ArmResourceListByParent<
+  listByAlertRule is Extension.ListByTarget<
+    OperationalInsights,
     ActionResponse,
-    Response = ArmResponse<ActionsList>
+    Response = ArmResponse<ActionsList>,
+    Error = CloudError
   >;
 }
 

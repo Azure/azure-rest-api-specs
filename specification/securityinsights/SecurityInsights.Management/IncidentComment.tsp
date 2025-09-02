@@ -30,22 +30,35 @@ interface IncidentComments {
   /**
    * Gets a comment for a given incident.
    */
-  get is ArmResourceRead<IncidentComment>;
+  get is Extension.Read<
+    OperationalInsights,
+    IncidentComment,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a comment for a given incident.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<IncidentComment>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    IncidentComment,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a comment for a given incident.
    */
-  delete is ArmResourceDeleteSync<IncidentComment>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    IncidentComment,
+    Error = CloudError
+  >;
 
   /**
    * Gets all comments for a given incident.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     IncidentComment,
     Parameters = {
       /**
@@ -72,7 +85,8 @@ interface IncidentComments {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<IncidentCommentList>
+    Response = ArmResponse<IncidentCommentList>,
+    Error = CloudError
   >;
 }
 

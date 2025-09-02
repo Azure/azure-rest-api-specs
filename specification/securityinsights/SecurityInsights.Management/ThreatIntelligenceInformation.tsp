@@ -36,16 +36,21 @@ interface ThreatIntelligenceInformations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThreatIntelligenceIndicator_Get")
-  get is ArmResourceRead<ThreatIntelligenceInformation>;
+  get is Extension.Read<
+    OperationalInsights,
+    ThreatIntelligenceInformation,
+    Error = CloudError
+  >;
 
   /**
    * Update a threat Intelligence indicator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThreatIntelligenceIndicator_Create")
-  create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+  create is Extension.CreateOrReplaceSync<
+    OperationalInsights,
     ThreatIntelligenceInformation,
-    Request = ThreatIntelligenceIndicatorModel
+    Error = CloudError
   >;
 
   /**
@@ -53,14 +58,19 @@ interface ThreatIntelligenceInformations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThreatIntelligenceIndicator_Delete")
-  delete is ArmResourceDeleteSync<ThreatIntelligenceInformation>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    ThreatIntelligenceInformation,
+    Error = CloudError
+  >;
 
   /**
    * Get all threat intelligence indicators.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThreatIntelligenceIndicators_List")
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     ThreatIntelligenceInformation,
     Parameters = {
       /**
@@ -87,7 +97,8 @@ interface ThreatIntelligenceInformations {
       @query("$orderby")
       $orderby?: string;
     },
-    Response = ArmResponse<ThreatIntelligenceInformationList>
+    Response = ArmResponse<ThreatIntelligenceInformationList>,
+    Error = CloudError
   >;
 
   /**
@@ -95,10 +106,12 @@ interface ThreatIntelligenceInformations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThreatIntelligenceIndicator_AppendTags")
-  appendTags is ArmResourceActionSync<
+  appendTags is Extension.ActionSync<
+    OperationalInsights,
     ThreatIntelligenceInformation,
     ThreatIntelligenceAppendTags,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 
   /**
@@ -106,10 +119,12 @@ interface ThreatIntelligenceInformations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThreatIntelligenceIndicator_ReplaceTags")
-  replaceTags is ArmResourceActionSync<
+  replaceTags is Extension.ActionSync<
+    OperationalInsights,
     ThreatIntelligenceInformation,
     ThreatIntelligenceIndicatorModel,
-    ArmResponse<ThreatIntelligenceInformation>
+    ArmResponse<ThreatIntelligenceInformation>,
+    Error = CloudError
   >;
 }
 

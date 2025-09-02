@@ -30,22 +30,31 @@ interface WatchlistItems {
   /**
    * Get a watchlist item.
    */
-  get is ArmResourceRead<WatchlistItem>;
+  get is Extension.Read<OperationalInsights, WatchlistItem, Error = CloudError>;
 
   /**
    * Create or update a watchlist item.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<WatchlistItem>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    WatchlistItem,
+    Error = CloudError
+  >;
 
   /**
    * Delete a watchlist item.
    */
-  delete is ArmResourceDeleteSync<WatchlistItem>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    WatchlistItem,
+    Error = CloudError
+  >;
 
   /**
    * Get all watchlist Items.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     WatchlistItem,
     Parameters = {
       /**
@@ -54,7 +63,8 @@ interface WatchlistItems {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<WatchlistItemList>
+    Response = ArmResponse<WatchlistItemList>,
+    Error = CloudError
   >;
 }
 

@@ -34,24 +34,38 @@ interface SecurityMLAnalyticsSettings {
   /**
    * Gets the Security ML Analytics Settings.
    */
-  get is ArmResourceRead<SecurityMLAnalyticsSetting>;
+  get is Extension.Read<
+    OperationalInsights,
+    SecurityMLAnalyticsSetting,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates the Security ML Analytics Settings.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityMLAnalyticsSetting>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    SecurityMLAnalyticsSetting,
+    Error = CloudError
+  >;
 
   /**
    * Delete the Security ML Analytics Settings.
    */
-  delete is ArmResourceDeleteSync<SecurityMLAnalyticsSetting>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    SecurityMLAnalyticsSetting,
+    Error = CloudError
+  >;
 
   /**
    * Gets all Security ML Analytics Settings.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     SecurityMLAnalyticsSetting,
-    Response = ArmResponse<SecurityMLAnalyticsSettingsList>
+    Response = ArmResponse<SecurityMLAnalyticsSettingsList>,
+    Error = CloudError
   >;
 }
 

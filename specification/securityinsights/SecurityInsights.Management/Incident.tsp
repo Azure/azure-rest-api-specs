@@ -27,22 +27,31 @@ interface Incidents {
   /**
    * Gets a given incident.
    */
-  get is ArmResourceRead<Incident>;
+  get is Extension.Read<OperationalInsights, Incident, Error = CloudError>;
 
   /**
    * Creates or updates an incident.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Incident>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    Incident,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a given incident.
    */
-  delete is ArmResourceDeleteSync<Incident>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    Incident,
+    Error = CloudError
+  >;
 
   /**
    * Gets all incidents.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     Incident,
     Parameters = {
       /**
@@ -70,16 +79,19 @@ interface Incidents {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<IncidentList>
+    Response = ArmResponse<IncidentList>,
+    Error = CloudError
   >;
 
   /**
    * Triggers playbook on a specific incident
    */
-  runPlaybook is ArmResourceActionSync<
+  runPlaybook is Extension.ActionSync<
+    OperationalInsights,
     Incident,
     ManualTriggerRequestBody,
     NoContentResponse,
+    Error = CloudError,
     Parameters = {
       /**
        * Incident ID
@@ -95,10 +107,12 @@ interface Incidents {
    */
   @list
   @action("alerts")
-  listAlerts is ArmResourceActionSync<
+  listAlerts is Extension.ActionSync<
+    OperationalInsights,
     Incident,
     void,
-    ArmResponse<IncidentAlertList>
+    ArmResponse<IncidentAlertList>,
+    Error = CloudError
   >;
 
   /**
@@ -106,20 +120,24 @@ interface Incidents {
    */
   @list
   @action("bookmarks")
-  listBookmarks is ArmResourceActionSync<
+  listBookmarks is Extension.ActionSync<
+    OperationalInsights,
     Incident,
     void,
-    ArmResponse<IncidentBookmarkList>
+    ArmResponse<IncidentBookmarkList>,
+    Error = CloudError
   >;
 
   /**
    * Gets all entities for an incident.
    */
   @action("entities")
-  listEntities is ArmResourceActionSync<
+  listEntities is Extension.ActionSync<
+    OperationalInsights,
     Incident,
     void,
-    ArmResponse<IncidentEntitiesResponse>
+    ArmResponse<IncidentEntitiesResponse>,
+    Error = CloudError
   >;
 }
 

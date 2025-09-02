@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./virtualResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,13 +12,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
 // FIXME: AlertRule has no properties property
-
-alias OperationalInsights = Extension.ExternalResource<
-  "Microsoft.OperationalInsights",
-  "workspaces",
-  "workspaceName",
-  Description = "The name of the monitor workspace."
->;
 
 /**
  * Alert rule.

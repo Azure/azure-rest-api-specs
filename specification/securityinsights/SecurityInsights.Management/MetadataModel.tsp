@@ -29,14 +29,18 @@ interface MetadataModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Metadata_Get")
-  get is ArmResourceRead<MetadataModel>;
+  get is Extension.Read<OperationalInsights, MetadataModel, Error = CloudError>;
 
   /**
    * Create a Metadata.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Metadata_Create")
-  create is ArmResourceCreateOrReplaceSync<MetadataModel>;
+  create is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    MetadataModel,
+    Error = CloudError
+  >;
 
   /**
    * Update an existing Metadata.
@@ -51,14 +55,19 @@ interface MetadataModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Metadata_Delete")
-  delete is ArmResourceDeleteSync<MetadataModel>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    MetadataModel,
+    Error = CloudError
+  >;
 
   /**
    * List of all metadata
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Metadata_List")
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     MetadataModel,
     Parameters = {
       /**
@@ -85,7 +94,8 @@ interface MetadataModels {
       @query("$skip")
       $skip?: int32;
     },
-    Response = ArmResponse<MetadataList>
+    Response = ArmResponse<MetadataList>,
+    Error = CloudError
   >;
 }
 

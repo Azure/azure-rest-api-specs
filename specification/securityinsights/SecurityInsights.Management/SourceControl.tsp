@@ -28,28 +28,36 @@ interface SourceControls {
   /**
    * Gets a source control byt its identifier.
    */
-  get is ArmResourceRead<SourceControl>;
+  get is Extension.Read<OperationalInsights, SourceControl, Error = CloudError>;
 
   /**
    * Creates a source control.
    */
-  create is ArmResourceCreateOrReplaceSync<SourceControl>;
+  create is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    SourceControl,
+    Error = CloudError
+  >;
 
   /**
    * Gets all source controls, without source control items.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     SourceControl,
-    Response = ArmResponse<SourceControlList>
+    Response = ArmResponse<SourceControlList>,
+    Error = CloudError
   >;
 
   /**
    * Delete a source control.
    */
-  delete is ArmResourceActionSync<
+  delete is Extension.ActionSync<
+    OperationalInsights,
     SourceControl,
     RepositoryAccessProperties,
-    ArmResponse<Warning>
+    ArmResponse<Warning>,
+    Error = CloudError
   >;
 }
 
