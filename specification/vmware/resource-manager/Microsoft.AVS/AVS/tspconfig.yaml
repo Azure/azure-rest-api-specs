@@ -28,7 +28,7 @@ options:
 
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/avs"
-    emitter-output-dir: "{service-dir}/armavs"
+    emitter-output-dir: "{output-dir}/{service-dir}/armavs"
     module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
@@ -38,7 +38,7 @@ options:
     inject-spans: true
 
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{service-dir}/azure-resourcemanager-avs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-avs"
     namespace: "com.azure.resourcemanager.avs"
     service-name: "Avs"
     flavor: azure
@@ -46,7 +46,7 @@ options:
 
   "@azure-tools/typespec-python":
     service-dir: "sdk/compute"
-    emitter-output-dir: "{service-dir}/azure-mgmt-avs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-avs"
     namespace: "azure.mgmt.avs"
     flavor: "azure"
     generate-test: true
@@ -56,7 +56,7 @@ options:
     typespec-title-map:
       AzureVMwareSolutionAPIClient: AzureVMwareSolutionAPI
     experimental-extensible-enums: true
-    emitter-output-dir: "{service-dir}/arm-avs"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-avs"
     flavor: "azure"
     package-details:
       name: "@azure/arm-avs"

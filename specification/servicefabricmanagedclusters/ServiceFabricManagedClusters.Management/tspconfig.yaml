@@ -21,20 +21,20 @@ options:
     suppress-abstract-base-class:
       - "ManagedServiceProperties"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{service-dir}/azure-mgmt-servicefabricmanagedclusters"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicefabricmanagedclusters"
     namespace: "azure.mgmt.servicefabricmanagedclusters"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{service-dir}/arm-servicefabricmanagedclusters"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-servicefabricmanagedclusters"
     package-details:
       name: "@azure/arm-servicefabricmanagedclusters"
     flavor: azure
     experimental-extensible-enums: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/servicefabricmanagedclusters"
-    emitter-output-dir: "{service-dir}/armservicefabricmanagedclusters"
+    emitter-output-dir: "{output-dir}/{service-dir}/armservicefabricmanagedclusters"
     module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     module-version: "0.5.0"
     fix-const-stuttering: true
@@ -43,7 +43,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{service-dir}/azure-resourcemanager-servicefabricmanagedclusters"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicefabricmanagedclusters"
     namespace: com.azure.resourcemanager.servicefabricmanagedclusters
     flavor: azure
     service-name: Service Fabric Managed Clusters

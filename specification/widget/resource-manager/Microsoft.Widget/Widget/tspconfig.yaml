@@ -18,25 +18,25 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.Widget"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{service-dir}/azure-mgmt-widget"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-widget"
     namespace: "azure.mgmt.widget"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{service-dir}/azure-resourcemanager-widget"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-widget"
     namespace: "com.azure.resourcemanager.widget"
     service-name: "Widget" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{service-dir}/arm-widget"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-widget"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-widget"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/widget"
-    emitter-output-dir: "{service-dir}/armwidget"
+    emitter-output-dir: "{output-dir}/{service-dir}/armwidget"
     module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
