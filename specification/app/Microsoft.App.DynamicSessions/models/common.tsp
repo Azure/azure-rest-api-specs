@@ -42,7 +42,7 @@ model SessionResourceFileRecursiveListParameter {
   @doc("Whether to recursively list files.")
   @query
   @added(Versions.v2025_10_02_preview)
-  recursive: boolean;
+  recursive?: boolean;
 }
 
 @doc("The session resource file name parameter.")
