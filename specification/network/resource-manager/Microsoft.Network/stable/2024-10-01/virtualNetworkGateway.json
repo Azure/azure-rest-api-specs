@@ -796,6 +796,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_ListRadiusSecrets",
+        "description": "List all Radius servers with respective radius secrets from virtual network gateway VpnClientConfiguration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all Radius servers with respective radius secrets from virtual network gateway VpnClientConfiguration.",
+            "schema": {
+              "$ref": "#/definitions/RadiusAuthServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAllVirtualNetworkGatewayRadiusServerSecrets": {
+            "$ref": "./examples/AllVirtualNetworkGatewayRadiusServerSecretsList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes": {
       "post": {
         "tags": [
@@ -3768,7 +3814,8 @@
         },
         "radiusServerSecret": {
           "type": "string",
-          "description": "The secret used for this radius server."
+          "x-ms-secret": true,
+          "description": "The secret used for this radius server. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets."
         }
       },
       "required": [
@@ -3843,7 +3890,8 @@
         },
         "radiusServerSecret": {
           "type": "string",
-          "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection."
+          "x-ms-secret": true,
+          "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets."
         },
         "radiusServers": {
           "type": "array",
@@ -4192,6 +4240,39 @@
       },
       "description": "List of virtual network gateway routes."
     },
+    "RadiusAuthServer": {
+      "type": "object",
+      "properties": {
+        "radiusServerAddress": {
+          "type": "string",
+          "description": "Radius server IPAddress"
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "Radius server secret"
+        }
+      },
+      "description": "Gateway or VpnServerConfiguration Radius server with radius secret details"
+    },
+    "RadiusAuthServerListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RadiusAuthServer"
+          },
+          "description": "List of Radius servers with respective radius secrets.",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      },
+      "description": "List of Radius servers with respective radius secrets."
+    },
     "GatewayResiliencyInformation": {
       "type": "object",
       "properties": {
@@ -4475,6 +4556,7 @@
         },
         "sharedKey": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "The IPSec shared key."
         },
         "connectionStatus": {
@@ -5034,7 +5116,7 @@
         },
         "sharedKey": {
           "type": "string",
-          "description": "The IPSec shared key."
+          "description": "The IPSec shared key. We will no longer return sharedKey in VirtualNetworkGatewayConnection Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGatewayConnection GetSharedKey API to fetch connection sharedKey."
         },
         "connectionStatus": {
           "readOnly": true,
