@@ -1,11 +1,11 @@
+import { LogLevel, logMessage } from "../log.js";
+import { BrChMsgRecord, MessageLevel, ResultMessageRecord, getKey } from "../types/message.js";
 import {
   createBreakingChangeMdRows,
-  getMdTableHeader,
   getDeficitRow,
+  getMdTableHeader,
   rowToString,
 } from "./markdown-report-row.js";
-import { BrChMsgRecord, MessageLevel, ResultMessageRecord, getKey } from "../types/message.js";
-import { logMessage, LogLevel } from "../log.js";
 
 /**
  * Represents a markdown report for breaking change violations

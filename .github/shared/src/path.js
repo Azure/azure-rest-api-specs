@@ -9,5 +9,5 @@ import { resolve, sep } from "path";
  * @returns {boolean} True if path contains the named folder
  */
 export function includesFolder(path, folder) {
-  return resolve(path).includes(sep + folder + sep);
+  return resolve(path).split(sep).includes(folder);
 }

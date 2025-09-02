@@ -69,5 +69,6 @@ interface SignalDefinitions {
   delete is ArmResourceDeleteWithoutOkAsync<SignalDefinition>;
 
   /** List signal definitions by parent resource */
+  @list
   listByHealthDefinition is ArmResourceListByParent<SignalDefinition>;
 }

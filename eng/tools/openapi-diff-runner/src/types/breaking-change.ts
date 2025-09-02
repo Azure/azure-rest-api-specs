@@ -1,11 +1,11 @@
+import {
+  BREAKING_CHANGE_APPROVALS,
+  BREAKING_CHANGES_CHECK_TYPES,
+  REVIEW_REQUIRED_LABELS,
+  VERSIONING_APPROVALS,
+} from "@azure-tools/specs-shared/breaking-change";
 import { OadMessageProcessorContext } from "../utils/oad-message-processor.js";
 import { PullRequestProperties } from "../utils/pull-request.js";
-import {
-  VERSIONING_APPROVALS,
-  BREAKING_CHANGE_APPROVALS,
-  REVIEW_REQUIRED_LABELS,
-  BREAKING_CHANGES_CHECK_TYPES,
-} from "@azure-tools/specs-shared/breaking-change";
 
 /**
  * This file contains types used by the OpenAPI specification breaking change checks

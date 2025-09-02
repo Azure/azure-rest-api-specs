@@ -1,21 +1,32 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { readFile } from "node:fs/promises";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { Context } from "../../src/types/breaking-change.js";
 import {
   blobHref,
-  targetHref,
   branchHref,
+  checkPrTargetsProductionBranch,
+  convertRawErrorToUnifiedMsg,
+  cutoffMsg,
+  getArgumentValue,
   getGithubStyleFilePath,
   getRelativeSwaggerPathToRepo,
-  sourceBranchHref,
-  targetBranchHref,
-  specificBranchHref,
   getVersionFromInputFile,
-  getArgumentValue,
-  cutoffMsg,
   processOadRuntimeErrorMessage,
+  sourceBranchHref,
+  specificBranchHref,
   specIsPreview,
-  convertRawErrorToUnifiedMsg,
+  targetBranchHref,
+  targetHref,
 } from "../../src/utils/common-utils.js";
-import { Context } from "../../src/types/breaking-change.js";
+
+// Mock node:fs/promises module for async file operations
+vi.mock("node:fs/promises", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("node:fs/promises")>();
+  return {
+    ...actual,
+    readFile: vi.fn(),
+  };
+});
 
 describe("common-utils", () => {
   let originalEnv: NodeJS.ProcessEnv;
@@ -225,29 +236,117 @@ describe("common-utils", () => {
   });
 
   describe("getVersionFromInputFile", () => {
-    it("should extract version from data-plane path", () => {
-      const result = getVersionFromInputFile(TEST_CONSTANTS.DATA_PLANE_PATH);
+    beforeEach(() => {
+      vi.mocked(readFile).mockReset();
+    });
+
+    it("should extract version from data-plane path", async () => {
+      const result = await getVersionFromInputFile(TEST_CONSTANTS.DATA_PLANE_PATH);
       expect(result).toBe(TEST_CONSTANTS.VERSION);
     });
 
-    it("should extract version with preview from data-plane path", () => {
-      const result = getVersionFromInputFile(TEST_CONSTANTS.DATA_PLANE_PREVIEW_PATH, true);
+    it("should extract version with preview from data-plane path", async () => {
+      const result = await getVersionFromInputFile(TEST_CONSTANTS.DATA_PLANE_PREVIEW_PATH, true);
       expect(result).toBe(TEST_CONSTANTS.PREVIEW_VERSION);
     });
 
-    it("should extract version from resource-manager path", () => {
-      const result = getVersionFromInputFile(TEST_CONSTANTS.RESOURCE_MANAGER_PATH);
+    it("should extract version from resource-manager path", async () => {
+      const result = await getVersionFromInputFile(TEST_CONSTANTS.RESOURCE_MANAGER_PATH);
       expect(result).toBe(TEST_CONSTANTS.VERSION);
     });
 
-    it("should return empty string when no version found in path", () => {
-      const result = getVersionFromInputFile("test.json");
-      expect(result).toBe("");
+    it("should throw error when no version found in path", async () => {
+      const mockFileContent = JSON.stringify({
+        info: {
+          title: "Test API",
+        },
+      });
+
+      vi.mocked(readFile).mockResolvedValue(mockFileContent);
+
+      await expect(getVersionFromInputFile("test.json")).rejects.toThrow(
+        "Version not found in file: test.json",
+      );
     });
 
-    it("should return folder name when no valid API version found", () => {
-      const result = getVersionFromInputFile("invalid/path.json");
-      expect(result).toBe("invalid");
+    it("should throw error when no valid API version found", async () => {
+      const mockFileContent = JSON.stringify({
+        info: {
+          title: "Test API",
+        },
+      });
+
+      vi.mocked(readFile).mockResolvedValue(mockFileContent);
+
+      await expect(getVersionFromInputFile("invalid/path.json")).rejects.toThrow(
+        "Version not found in file: invalid/path.json",
+      );
+    });
+
+    it("should extract version from file content when path regex fails", async () => {
+      const filePath = "some/custom/path/spec.json";
+      const mockFileContent = JSON.stringify({
+        info: {
+          version: "2023-05-01",
+        },
+      });
+
+      vi.mocked(readFile).mockResolvedValue(mockFileContent);
+
+      const result = await getVersionFromInputFile(filePath);
+      expect(result).toBe("2023-05-01");
+      expect(vi.mocked(readFile)).toHaveBeenCalledWith(filePath, "utf8");
+    });
+
+    it("should extract preview version from file content when includePreview is true", async () => {
+      const filePath = "some/custom/path/spec.json";
+      const mockFileContent = JSON.stringify({
+        info: {
+          version: "2023-05-01-preview",
+        },
+      });
+
+      vi.mocked(readFile).mockResolvedValue(mockFileContent);
+
+      const result = await getVersionFromInputFile(filePath, true);
+      expect(result).toBe("2023-05-01-preview");
+      expect(vi.mocked(readFile)).toHaveBeenCalledWith(filePath, "utf8");
+    });
+
+    it("should throw error when file content has no version", async () => {
+      const filePath = "some/custom/path/spec.json";
+      const mockFileContent = JSON.stringify({
+        info: {
+          title: "Test API",
+        },
+      });
+
+      vi.mocked(readFile).mockResolvedValue(mockFileContent);
+
+      await expect(getVersionFromInputFile(filePath)).rejects.toThrow(
+        "Version not found in file: some/custom/path/spec.json",
+      );
+    });
+
+    it("should throw error when file content is invalid JSON", async () => {
+      const filePath = "some/custom/path/spec.json";
+      const mockFileContent = "invalid json content";
+
+      vi.mocked(readFile).mockResolvedValue(mockFileContent);
+
+      await expect(getVersionFromInputFile(filePath)).rejects.toThrow(
+        "Failed to read version from file:some/custom/path/spec.json",
+      );
+    });
+
+    it("should throw error when file read fails", async () => {
+      const filePath = "some/custom/path/spec.json";
+
+      vi.mocked(readFile).mockRejectedValue(new Error("File read error"));
+
+      await expect(getVersionFromInputFile(filePath)).rejects.toThrow(
+        "Failed to read version from file:some/custom/path/spec.json",
+      );
     });
   });
 
@@ -537,6 +636,97 @@ describe("common-utils", () => {
       const parsed = JSON.parse(result);
 
       expect(parsed.extra.details).toBe(errorMsg);
+    });
+  });
+
+  describe("checkPrTargetsProductionBranch", () => {
+    it("should return true for public production branch (azure-rest-api-specs + main)", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs", "main");
+      expect(result).toBe(true);
+    });
+
+    it("should return true for public production branch with extended repo name", () => {
+      const result = checkPrTargetsProductionBranch("owner/azure-rest-api-specs", "main");
+      expect(result).toBe(true);
+    });
+
+    it("should return true for private production branch (azure-rest-api-specs-pr + RPSaaSMaster)", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs-pr", "RPSaaSMaster");
+      expect(result).toBe(true);
+    });
+
+    it("should return true for private production branch with extended repo name", () => {
+      const result = checkPrTargetsProductionBranch(
+        "owner/azure-rest-api-specs-pr",
+        "RPSaaSMaster",
+      );
+      expect(result).toBe(true);
+    });
+
+    it("should return false for public repo with non-main branch", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs", "feature-branch");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for public repo with develop branch", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs", "develop");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for private repo with main branch instead of RPSaaSMaster", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs-pr", "main");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for private repo with non-RPSaaSMaster branch", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs-pr", "feature-branch");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for unrelated repository with main branch", () => {
+      const result = checkPrTargetsProductionBranch("some-other-repo", "main");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for unrelated repository with RPSaaSMaster branch", () => {
+      const result = checkPrTargetsProductionBranch("some-other-repo", "RPSaaSMaster");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for empty repository name", () => {
+      const result = checkPrTargetsProductionBranch("", "main");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for empty branch name", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs", "");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for both empty parameters", () => {
+      const result = checkPrTargetsProductionBranch("", "");
+      expect(result).toBe(false);
+    });
+
+    it("should be case sensitive for branch names", () => {
+      const result1 = checkPrTargetsProductionBranch("azure-rest-api-specs", "Main");
+      const result2 = checkPrTargetsProductionBranch("azure-rest-api-specs-pr", "rpsaasmaster");
+
+      expect(result1).toBe(false);
+      expect(result2).toBe(false);
+    });
+
+    it("should handle partial repo name matches correctly", () => {
+      const result1 = checkPrTargetsProductionBranch("azure-rest-api", "main");
+      const result2 = checkPrTargetsProductionBranch("rest-api-specs", "main");
+      const result3 = checkPrTargetsProductionBranch(
+        "azure-rest-api-specs-private",
+        "RPSaaSMaster",
+      );
+
+      expect(result1).toBe(false);
+      expect(result2).toBe(false);
+      expect(result3).toBe(false);
     });
   });
 });

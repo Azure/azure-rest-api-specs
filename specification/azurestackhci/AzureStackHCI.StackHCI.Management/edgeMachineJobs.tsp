@@ -86,14 +86,8 @@ union EdgeMachineJobType {
   @doc("Job to collect logs from the device.")
   CollectLog: "CollectLog",
 
-  @doc("Job to provide remote support to the device.")
-  RemoteSupport: "RemoteSupport",
-
   @doc("Job to provision operating system in the device.")
   ProvisionOs: "ProvisionOs",
-
-  @doc("Job to debug machine issues using AI.")
-  MachineAssistant: "MachineAssistant",
 }
 
 @doc("Represents the various statuses a job can have throughout its lifecycle.")
@@ -135,38 +129,6 @@ union JobStatus {
 
   @doc("The job is scheduled to run.")
   Scheduled: "Scheduled",
-}
-
-@doc("Properties for adding a server in the cluster.")
-model RemoteSupportJobProperties extends EdgeMachineJobProperties {
-  @doc("Job Type to support polymorphic resource.")
-  jobType: EdgeMachineJobType.RemoteSupport;
-
-  @doc("Remote support access level.")
-  accessLevel: RemoteSupportAccessLevel;
-
-  @doc("Remote support expiration timestamp.")
-  expirationTimestamp: utcDateTime;
-
-  @doc("Remote support type.")
-  type: RemoteSupportType;
-
-  @doc("log collection job reported properties.")
-  @visibility(Lifecycle.Read)
-  reportedProperties?: RemoteSupportReportedProperties;
-}
-
-@doc("Properties for running Machine Assistant Job Properties.")
-model MachineAssistantJobProperties extends EdgeMachineJobProperties {
-  @doc("Job Type to support polymorphic resource.")
-  jobType: EdgeMachineJobType.MachineAssistant;
-
-  @doc("The user intent to be checked on the device.")
-  intent: string;
-
-  @doc("Machine Assistant job reported properties.")
-  @visibility(Lifecycle.Read)
-  reportedProperties?: MachineAssistantReportedProperties;
 }
 
 @doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
@@ -218,102 +180,6 @@ union ProvisioningOsType {
 
   @doc("HCI OS.")
   HCI: "HCI",
-}
-
-@doc("Represents the reported properties of a remote support job.")
-model RemoteSupportReportedProperties {
-  ...JobReportedProperties;
-
-  @doc("Optional settings for configuring the node for remote support.")
-  @visibility(Lifecycle.Read)
-  nodeSettings?: RemoteSupportNodeSettings;
-
-  @doc("Details of the remote support session.")
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["sessionId"])
-  sessionDetails?: RemoteSupportSession[];
-}
-
-@doc("Represents the reported properties of machine assistant job.")
-model MachineAssistantReportedProperties {
-  ...JobReportedProperties;
-
-  @doc("The result obtained after checking the intent on the machine.")
-  @visibility(Lifecycle.Read)
-  summary?: string;
-}
-
-@doc("Represents the settings of a remote support node.")
-model RemoteSupportNodeSettings {
-  @doc("The state of the remote support node.")
-  @visibility(Lifecycle.Read)
-  state?: string;
-
-  @doc("The timestamp when the node settings were created, in UTC.")
-  @visibility(Lifecycle.Read)
-  createdAt?: utcDateTime;
-
-  @doc("The timestamp when the node settings were last updated, in UTC.")
-  @visibility(Lifecycle.Read)
-  updatedAt?: utcDateTime;
-
-  @doc("The current connection status of the remote support session.")
-  @visibility(Lifecycle.Read)
-  connectionStatus?: string;
-
-  @doc("The error message, if any, from the last connection attempt.")
-  @visibility(Lifecycle.Read)
-  connectionErrorMessage?: string;
-}
-
-@doc("Represents a remote support session.")
-model RemoteSupportSession {
-  @doc("Unique session Id.")
-  @visibility(Lifecycle.Read)
-  sessionId?: string;
-
-  @doc("The start time of the remote support session, in UTC.")
-  @visibility(Lifecycle.Read)
-  sessionStartTime?: utcDateTime;
-
-  @doc("The end time of the remote support session, in UTC.")
-  @visibility(Lifecycle.Read)
-  sessionEndTime?: utcDateTime;
-
-  @doc("The level of access granted during the remote support session.")
-  @visibility(Lifecycle.Read)
-  accessLevel?: RemoteSupportAccessLevel;
-
-  @doc("The location where the session transcript is stored.")
-  @visibility(Lifecycle.Read)
-  transcriptLocation?: string;
-}
-
-@doc("Defines the level of remote support access granted.")
-union RemoteSupportAccessLevel {
-  @doc("A custom access level provided as a string.")
-  string,
-
-  @doc("No remote support access is granted.")
-  None: "None",
-
-  @doc("Access is limited to diagnostics information only.")
-  Diagnostics: "Diagnostics",
-
-  @doc("Access includes diagnostics information and the ability to perform repairs.")
-  DiagnosticsAndRepair: "DiagnosticsAndRepair",
-}
-
-@doc("Defines the type of remote support action to be performed on an edge device.")
-union RemoteSupportType {
-  @doc("A custom action type provided as a string.")
-  string,
-
-  @doc("Enables remote support for the edge device.")
-  Enable: "Enable",
-
-  @doc("Revokes previously granted remote support access for the edge device.")
-  Revoke: "Revoke",
 }
 
 @doc("Properties for pausing a server in the cluster.")

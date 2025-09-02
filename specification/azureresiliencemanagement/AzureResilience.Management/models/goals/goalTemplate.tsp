@@ -16,19 +16,19 @@ namespace Microsoft.AzureResilienceManagement;
 @doc("Definition of goal template property.")
 model GoalTemplateProperties {
   @doc("Description string provided by customer.")
-  description: string;
+  description?: string;
 
   @doc("Option specified by customer under high availability section of goal template")
-  requireHighAvailability: RequirementSelected;
+  requireHighAvailability?: RequirementSelected;
 
   @doc("Option specified by customer under disaster recovery section of goal template")
-  requireDisasterRecovery: RequirementSelected;
+  requireDisasterRecovery?: RequirementSelected;
 
   @doc("Regional recovery point objective specified by customer. eg, PT15M for 15 minutes")
-  regionalRecoveryPointObjective: string;
+  regionalRecoveryPointObjective?: string;
 
   @doc("Regional recovery time objective specified by customer. eg, PT15M for 15 minutes")
-  regionalRecoveryTimeObjective: string;
+  regionalRecoveryTimeObjective?: string;
 
   @doc("Type of Goal Template created by customer")
   goalType: GoalType;

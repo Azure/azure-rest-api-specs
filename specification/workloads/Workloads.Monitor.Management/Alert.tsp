@@ -37,6 +37,7 @@ interface Alerts {
   /**
    * Gets a list of alerts in the specified SAP monitor. The operations returns various properties of each alerts.
    */
+  @list
   list is ArmResourceListByParent<Alert>;
 }
 

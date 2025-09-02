@@ -439,19 +439,82 @@ union IPPoolTypeEnum {
   string,
 }
 
-@doc("The ARM ID for a Network Interface.")
+@added(Versions.v2025_09_01_preview)
+@doc("Type of public IP addresses")
+union PublicIPAddressType {
+  @doc("IPv4 IP Address")
+  IPv4: "IPv4",
+
+  @doc("IPv6 IP Address")
+  IPv6: "IPv6",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric resource type")
+union FabricResourceTypeEnum {
+  @doc("Fabric resource of L2IsolationDomain type")
+  L2IsolationDomain: "L2IsolationDomain",
+
+  @doc("Fabric resource of L3InternalNetwork type")
+  L3InternalNetwork: "L3InternalNetwork",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric connection health state type")
+union FabricConnectionHealthEnum {
+  @doc("Fabric connection health state - healthy type")
+  Healthy: "Healthy",
+
+  @doc("Fabric connection health state - warning type")
+  Warning: "Warning",
+
+  @doc("Fabric connection health state - error type")
+  Error: "Error",
+
+  @doc("Fabric connection health state - unknown type")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric integration state type")
+union FabricIntegrationStateEnum {
+  @doc("Fabric integration state - connected type")
+  Connected: "Connected",
+
+  @doc("Fabric integration state - disconnected type")
+  Disconnected: "Disconnected",
+
+  @doc("Fabric integration state - misconfigured type")
+  Misconfigured: "Misconfigured",
+
+  @doc("Fabric integration state - notapplicable type")
+  NotApplicable: "NotApplicable",
+
+  @doc("Fabric integration state - connecting type")
+  Connecting: "Connecting",
+
+  string,
+}
+
+@doc("The Azure Resource ID for a Network Interface.")
 model NetworkInterfaceArmReference {
-  @doc("The ARM ID for a Network Interface.")
+  @doc("The Azure Resource ID for a Network Interface.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
     }
   ]>;
 }
-@doc("The ARM ID for a Network Interface.")
+@doc("The Azure Resource ID for a Network Interface.")
 model SubnetIpConfigurationReference {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
-  @doc("The ARM ID for a Network Interface.")
+  @doc("The Azure Resource ID for a Network Interface.")
   ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
@@ -459,9 +522,20 @@ model SubnetIpConfigurationReference {
   ]>;
 }
 
-@doc("The ARM ID for a Network Security Group.")
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID for a resource consuming IP on a subnet")
+model VirtualNetworkSubnetIpConfigurationReference {
+  @doc("The Azure Resource ID for a Network Interface.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    }
+  ]>;
+}
+
+@doc("The Azure Resource ID for a Network Security Group.")
 model NetworkSecurityGroupArmReference {
-  @doc("The ARM ID for a Network Security Group.")
+  @doc("The Azure Resource ID for a Network Security Group.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkSecurityGroups";
@@ -469,9 +543,9 @@ model NetworkSecurityGroupArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Logical Network.")
+@doc("The Azure Resource ID for a Logical Network.")
 model LogicalNetworkArmReference {
-  @doc("The ARM ID for a Logical Network.")
+  @doc("The Azure Resource ID for a Logical Network.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
@@ -487,13 +561,68 @@ model LogicalNetworkArmReference {
     },
     {
       type: "Microsoft.NetworkCloud/trunkedNetworks";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/virtualNetwork/subnets";
     }
   ]>;
 }
 
-@doc("The ARM ID for a Virtual Machine.")
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network")
+model ManagedNetworkFabricArmReference {
+  @doc("The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/l2isolationdomains";
+    },
+    {
+      type: "Microsoft.ManagedNetworkFabric/l3isolationdomain/internalnetworks";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID for a Virtual Network subnet")
+model VirtualNetworkSubnetArmReference {
+  @doc("The Azure Resource ID for a Virtual Network subnet.")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualnetwork/subnets";
+    }
+  ]>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID of a Public IP resource")
+model PublicIPAddressArmReference {
+  @doc("The Azure Resource ID of a Public IP resource")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/publicIPAddresses";
+    }
+  ]>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID of an IPConfiguration resource")
+model IPConfigurationArmReference {
+  @doc("The Azure Resource ID of an IPConfiguration resource")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    }
+  ]>;
+}
+
+@doc("The Azure Resource ID for a Virtual Machine.")
 model VirtualMachineArmReference {
-  @doc("The ARM ID for a Virtual Machine.")
+  @doc("The Azure Resource ID for a Virtual Machine.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
@@ -501,9 +630,9 @@ model VirtualMachineArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Storage Container.")
+@doc("The Azure Resource ID for a Storage Container.")
 model StorageContainerArmReference {
-  @doc("The ARM ID for a Storage Container.")
+  @doc("The Azure Resource ID for a Storage Container.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
@@ -511,9 +640,9 @@ model StorageContainerArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Gallery Image.")
+@doc("The Azure Resource ID for a Gallery Image.")
 model ImageArmReference {
-  @doc("The ARM ID for an image resource used by the virtual machine instance.")
+  @doc("The Azure Resource ID for an image resource used by the virtual machine instance.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   id?: armResourceIdentifier<[
     {
@@ -525,9 +654,9 @@ model ImageArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Virtual Hard Disk.")
+@doc("The Azure Resource ID for a Virtual Hard Disk.")
 model VirtualHardDiskArmReference {
-  @doc("The ARM ID for a Virtual Hard Disk.")
+  @doc("The Azure Resource ID for a Virtual Hard Disk.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualHardDisks";
@@ -701,6 +830,10 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Managed network fabric l2/l3 ISD for this logical network. If set empty, the logical network remains entirely local.")
+  fabricNetworkConfiguration?: ManagedNetworkFabricArmReference;
+
   @doc("Subnet - list of subnets under the logical network")
   @Azure.ResourceManager.identifiers(#[])
   subnets?: Subnet[];
@@ -767,6 +900,11 @@ model SubnetProperties {
 
   @doc("Vlan to use for the subnet")
   vlan?: int32;
+
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01_preview)
+  @doc("Provisioning state of the subnet resource.")
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Route table resource.")
@@ -1020,6 +1158,55 @@ model NetworkInterfaceStatusProvisioningStatus {
   status?: Status;
 }
 
+@added(Versions.v2025_09_01_preview)
+@doc("Issues exposed by managed network fabric")
+model FabricIssue {
+  @doc("Specific error/warning code.")
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  @doc("issue severity")
+  @visibility(Lifecycle.Read)
+  severity?: string;
+
+  @doc("Description of the issue")
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  @doc("specific property or resource that has the issue")
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  @doc("Timestamp of the issue as ISO 8601 string")
+  @visibility(Lifecycle.Read)
+  timestamp?: utcDateTime;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Enhanced fabric integration status with detailed health monitoring and connectivity state.")
+model FabricIntegrationStatus {
+  @doc("Current fabric integration state.")
+  @visibility(Lifecycle.Read)
+  state?: FabricIntegrationStateEnum;
+
+  @doc("Health status of the fabric connection.")
+  @visibility(Lifecycle.Read)
+  health?: FabricConnectionHealthEnum;
+
+  @doc("Timestamp of the last fabric health check as ISO 8601 string")
+  @visibility(Lifecycle.Read)
+  lastChecked?: utcDateTime;
+
+  @doc("Type of fabric resource referenced.")
+  @visibility(Lifecycle.Read)
+  resourceType?: FabricResourceTypeEnum;
+
+  @doc("Issues raised by fabric")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  issues?: FabricIssue[];
+}
+
 #suppress "deprecated" "Legacy flattening"
 @doc("The observed state of logical networks")
 model LogicalNetworkStatus {
@@ -1031,6 +1218,10 @@ model LogicalNetworkStatus {
 
   @doc("Logical network provisioning status")
   provisioningStatus?: LogicalNetworkStatusProvisioningStatus;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Enhanced fabric integration status with detailed health monitoring and connectivity state.")
+  fabricIntegration?: FabricIntegrationStatus;
 }
 
 @doc("Describes the status of the provisioning.")
@@ -1071,6 +1262,7 @@ model SubnetUpdate {
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
+  @removed(Versions.v2025_09_01_preview)
   name?: string;
 }
 
@@ -1078,6 +1270,152 @@ model SubnetUpdate {
 @doc("Properties of the subnet.")
 model SubnetUpdateProperties {
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Virtual network resource properties")
+model VirtualNetworkProperties {
+  @doc("Virtual Network address space. All subnets must be within the defined range.")
+  addressSpace: VirtualNetworkAddressSpace;
+
+  @doc("Virtual Network DHCP options. Inherited by all subnets and VMs.")
+  dhcpOptions: VirtualNetworkDhcpOptions;
+
+  @doc("The provisioning state of the virtual network resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed status of Virtual Network")
+  status?: VirtualNetworkStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Address Space Information")
+model VirtualNetworkAddressSpace {
+  @doc("A list of one or more CIDR blocks that define the address space.")
+  addressPrefixes: string[];
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("DHCP options for virtual networks")
+model VirtualNetworkDhcpOptions {
+  @doc("An array of DNS server IP addresses that VMs or wokloads in the vnet can inherit")
+  dnsServers?: string[];
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The observed status of the virtual network")
+model VirtualNetworkStatus {
+  @doc("VirtualNetwork provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("virtual network provisioning status")
+  provisioningStatus?: VirtualNetworkStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network operations")
+model VirtualNetworkStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the virtual network")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the virtual network [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("VirtualNetwork subnet resource")
+model VirtualNetworkSubnetProperties {
+  @doc("Subnet CIDR")
+  addressPrefix: string;
+
+  @doc("Network Security Group attached to the subnet.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("RouteTable defining custom routes for the subnet.")
+  routeTable?: RouteTable;
+
+  @doc("List of ip configurations for the subnet")
+  @visibility(Lifecycle.Read)
+  ipConfigurations?: VirtualNetworkSubnetIpConfigurationReference[];
+
+  @doc("The provisioning state of the virtual network subnet resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed status of the virtual network subnet resource.")
+  @visibility(Lifecycle.Read)
+  status?: VirtualNetworkSubnetStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network subnet operations")
+model VirtualNetworkSubnetStatus {
+  @doc("VirtualNetworkSubnet provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("Public IP provisioning status")
+  provisioningStatus?: VirtualNetworkSubnetStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network subnet operations")
+model VirtualNetworkSubnetStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the virtual network subnet")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the virtual network subnet [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("Public IP Properties resource.")
+model PublicIPAddressProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Whether the public IP is v4 or v6. Defaults to IPv4")
+  publicIPAddressVersion?: PublicIPAddressType;
+
+  @doc("ipAllocationScope: Azure Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP")
+  ipAllocationScope?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/publicIPAddresses";
+    }
+  ]>;
+
+  @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
+  ipAddress?: string;
+
+  @doc("network interface or LoadBalancer frontendIPconfiguration using this public IP")
+  @visibility(Lifecycle.Read)
+  ipConfiguration?: IPConfigurationArmReference;
+
+  @doc("Provisioning state of the public IP")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+}
+
+@doc("The virtual network subnet resource patch definition.")
+@added(Versions.v2025_09_01_preview)
+model VirtualNetworkSubnetUpdateRequest {
+  @doc("properties to update")
+  properties?: VirtualNetworkSubnetUpdateProperties;
+}
+
+@doc("The virtual network subnet resource patch properties definition.")
+@added(Versions.v2025_09_01_preview)
+model VirtualNetworkSubnetUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the subnet.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
@@ -1311,7 +1649,7 @@ model VirtualHardDiskStatus {
   uploadStatus?: VirtualHardDiskUploadStatus;
 
   @added(Versions.v2025_06_01_preview)
-  @doc("ARM IDs of the VMs that are consuming the VHD.")
+  @doc("Azure Resource IDs of the VMs that are consuming the VHD.")
   managedBy?: string[];
 
   @added(Versions.v2025_06_01_preview)
@@ -1397,7 +1735,7 @@ model VirtualHardDiskUploadRequest {
 @added(Versions.v2024_05_01_preview)
 @doc("Response for uploading virtual hard disk.")
 model VirtualHardDiskUploadResponse {
-  @doc("The ARM ID for a Virtual Hard Disk.")
+  @doc("The Azure Resource ID for a Virtual Hard Disk.")
   virtualHardDiskId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualHardDisks";

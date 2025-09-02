@@ -117,40 +117,40 @@ union SamplingType {
 @doc("Defines operators used in filter conditions.")
 union ConditionOperator {
   @doc("Equal to.")
-  `==`: "eq",
+  Equal: "==",
 
   @doc("Not equal to.")
-  `!=`: "ne",
+  NotEqual: "!=",
 
   @doc("Less than.")
-  `<`: "lt",
+  LessThan: "<",
 
   @doc("Less than or equal to.")
-  `<=`: "lte",
+  LessThanOrEqual: "<=",
 
   @doc("Greater than.")
-  `>`: "gt",
+  GreaterThan: ">",
 
   @doc("Greater than or equal to.")
-  `>=`: "gte",
+  GreaterThanOrEqual: ">=",
 
   @doc("In operator.")
-  in: "@in",
+  In: "@in",
 
   @doc("Not in.")
-  `!in`: "notin",
+  NotIn: "!in",
 
   @doc("Starts with.")
-  "startswith",
+  StartsWith: "startswith",
 
   @doc("Does not start with.")
-  `!startswith`: "notstartswith",
+  NotStartsWith: "!startswith",
 
   @doc("Contains the value.")
-  "contains",
+  Contains: "contains",
 
   @doc("Does not contain the value.")
-  `!contains`: "notcontains",
+  NotContains: "!contains",
 
   string,
 }
@@ -158,14 +158,46 @@ union ConditionOperator {
 @doc("Represents the spatial aggregation model.")
 model SpatialAggregation {
   @doc("Type of spatial aggregation.")
-  type: AggregationType;
+  type: SpatialAggregationType;
 
   @doc("Dimensions considered for spatial aggregation.")
   dimensions: string[];
 }
 
 @doc("Defines the available aggregation types.")
-union AggregationType {
+union TemporalAggregationType {
+  @doc("Average value.")
+  "Average",
+
+  @doc("Minimum value.")
+  "Min",
+
+  @doc("Maximum value.")
+  "Max",
+
+  @doc("Summation.")
+  "Sum",
+
+  @doc("Rate over time.")
+  "Rate",
+
+  @doc("Instance rate.")
+  "IRate",
+
+  @doc("Delta over time.")
+  "Delta",
+
+  @doc("Instance delta.")
+  "IDelta",
+
+  @doc("Increase over time.")
+  "Increase",
+
+  string,
+}
+
+@doc("Defines the available aggregation types.")
+union SpatialAggregationType {
   @doc("Average value.")
   "Average",
 
@@ -197,16 +229,16 @@ model WindowUptimeCriteria {
 @doc("Defines comparison operators for window uptime criteria.")
 union WindowUptimeCriteriaComparator {
   @doc("Less than the target value.")
-  `<`: "lt",
+  LessThan: "<",
 
   @doc("Greater than the target value.")
-  `>`: "gt",
+  GreaterThan: ">",
 
   @doc("Less than or equal to the target value.")
-  `<=`: "lte",
+  LessThanOrEqual: "<=",
 
   @doc("Greater than or equal to the target value.")
-  `>=`: "gte",
+  GreaterThanOrEqual: ">=",
 
   string,
 }
@@ -214,7 +246,7 @@ union WindowUptimeCriteriaComparator {
 @doc("Represents temporal aggregation settings.")
 model TemporalAggregation {
   @doc("Type of temporal aggregation.")
-  type: AggregationType;
+  type: TemporalAggregationType;
 
   @doc("Time window size for aggregation, in minutes.")
   windowSizeMinutes: int32;

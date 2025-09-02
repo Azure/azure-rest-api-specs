@@ -53,6 +53,7 @@ interface SAPApplicationServerInstances {
   /**
    * Lists the SAP Application Server Instance resources for a given Virtual Instance for SAP solutions resource.
    */
+  @list
   list is ArmResourceListByParent<SAPApplicationServerInstance>;
 
   /**

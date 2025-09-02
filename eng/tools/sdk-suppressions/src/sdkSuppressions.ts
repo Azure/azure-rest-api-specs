@@ -4,8 +4,8 @@
  * - https://microsoftapc-my.sharepoint.com/:w:/g/personal/raychen_microsoft_com/EbOAA9SkhQhGlgxtf7mc0kUB-25bFue0EFbXKXS3TFLTQA
  */
 
-import { Ajv } from "ajv";
 import { SdkName, sdkLabels } from "@azure-tools/specs-shared/sdk-types";
+import { Ajv } from "ajv";
 
 export const sdkSuppressionsFileName = "sdk-suppressions.yaml";
 

@@ -54,5 +54,6 @@ interface PresentationServerInstances {
   /**
    * Lists the Epic Presentation Services Instance resource for the given Virtual Instance for Epic solutions resource.
    */
+  @list
   listByEpicVirtualInstance is ArmResourceListByParent<PresentationServerInstance>;
 }

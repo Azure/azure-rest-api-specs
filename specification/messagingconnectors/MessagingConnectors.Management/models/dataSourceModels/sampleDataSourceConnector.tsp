@@ -23,6 +23,9 @@ union SampleDataDataType {
   @doc("SP500Stocks data type")
   SP500Stocks: "SP500Stocks",
 
+  @doc("Semantic Model Logs data type")
+  SemanticModelLogs: "SemanticModelLogs",
+
   string,
 }
 

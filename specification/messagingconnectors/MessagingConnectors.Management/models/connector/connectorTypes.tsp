@@ -59,6 +59,15 @@ union ConnectorType {
   @doc("SampleData source connector.")
   SampleDataSource: "SampleDataSource",
 
+  @doc("Oracle source connector.")
+  OracleSource: "OracleSource",
+
+  @doc("Http source connector.")
+  HttpSource: "HttpSource",
+
+  @doc("MongoDb source connector.")
+  MongoDbSource: "MongoDbSource",
+
   string,
 }
 
