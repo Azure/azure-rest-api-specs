@@ -13,6 +13,44 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventGrid;
 
+alias ExtensionOpsTemplate<ExtensionInstanceParameters extends {}> = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: string;
+  },
+  {},
+  ExtensionInstanceParameters
+>;
+
+alias ExtensionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: string;
+  },
+  {},
+  {
+    /** Name of the event type to be found. */
+    @path
+    @segment("eventTypes")
+    @key
+    eventTypeName: string;
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface EventSubscriptionsOperationGroup {
   /**
@@ -207,6 +245,37 @@ interface EventSubscriptionsOperationGroup {
       $top?: int32;
     }
   >;
+
+  // @operationId("EventSubscriptions_ListByResource")
+  // listByResource is ArmResourceListByParent<
+  //   EventSubscription,
+  //   Parameters = {
+  //     @path
+  //     resourceTypeName: string;
+
+  //     @path
+  //     resourceName: string;
+
+  //     /** the provider namespace */
+  //     @path
+  //     @segment("providers")
+  //     @key
+  //     providerNamespace: "microsoft.EventGrid";
+
+  //     /**
+  //      * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+  //      */
+  //     @query("$filter")
+  //     $filter?: string;
+
+  //     /**
+  //      * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+  //      */
+  //     @query("$top")
+  //     $top?: int32;
+  //   },
+  //   Response = ResourceListResult<EventSubscription>
+  // >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -217,33 +286,30 @@ interface TopicsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List topic event types.")
   @operationId("Topics_ListEventTypes")
-  @autoRoute
-  @get
   @action("eventTypes")
-  listEventTypes is ArmProviderActionSync<
-    Response = EventTypesListResult,
-    Scope = Extension.ResourceGroup,
+  @get
+  listEventTypes is ExtensionOps.List<
+    Azure.ResourceManager.Foundations.SimpleResource,
     Parameters = {
-      /**
-       * Namespace of the provider of the topic.
-       */
-      @path
-      @segment("providers")
-      providerNamespace: string;
-
       /**
        * Name of the topic type.
        */
       @path
-      @segment("{providerNamespace}")
       resourceTypeName: string;
 
       /**
        * Name of the topic.
        */
       @path
-      @segment("{resourceTypeName}")
       resourceName: string;
-    }
+
+      /**
+       * Namespace of the provider of the topic.
+       */
+      @path
+      @segment("providers")
+      extensionProviderNamespace: "microsoft.EventGrid";
+    },
+    Response = EventTypesListResult
   >;
 }

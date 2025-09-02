@@ -52,6 +52,28 @@ alias EventSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+alias EventSubScriptionExtensionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: string;
+  },
+  {},
+  {
+    /** Name of the event subscription to be found. */
+    @path
+    @segment("eventSubscriptions")
+    @key
+    eventSubscriptionName: string;
+  }
+>;
+
 @armResourceOperations
 interface EventSubscriptions {
   /**
@@ -361,6 +383,7 @@ alias EventSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.Extensio
 alias EventSubscriptionOperationOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
+
     /** the provider namespace */
     @path
     @segment("providers")
@@ -446,6 +469,68 @@ interface EventSubscriptionOperationGroup {
       $top?: int32;
     }
   >;
+
+  @operationId("EventSubscriptions_ListByResource")
+  listByResource is EventSubScriptionExtensionOps.List<
+    EventSubscription,
+    Parameters = {
+      @path
+      resourceTypeName: string;
+
+      @path
+      resourceName: string;
+
+      /** the provider namespace */
+      @path
+      @segment("providers")
+      @key
+      extensionProviderNamespace: "microsoft.EventGrid";
+
+      /**
+       * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+       */
+      @query("$top")
+      $top?: int32;
+    },
+    Response = ResourceListResult<EventSubscription>
+  >;
+
+  // @operationId("EventSubscriptions_ListByResource")
+  // listByResource is ArmResourceListByParent<
+  //   EventSubscription,
+  //   Parameters = {
+  //     @path
+  //     resourceTypeName: string;
+
+  //     @path
+  //     resourceName: string;
+
+  //     /** the provider namespace */
+  //     @path
+  //     @segment("providers")
+  //     @key
+  //     providerNamespace: string;
+
+  //     /**
+  //      * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+  //      */
+  //     @query("$filter")
+  //     $filter?: string;
+
+  //     /**
+  //      * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+  //      */
+  //     @query("$top")
+  //     $top?: int32;
+  //   },
+  //   Response = ResourceListResult<EventSubscription>
+  // >;
 
   /**
    * Get all delivery attributes for an event subscription.

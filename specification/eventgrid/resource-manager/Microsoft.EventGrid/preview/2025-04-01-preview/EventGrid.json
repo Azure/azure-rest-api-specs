@@ -1587,6 +1587,135 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/microsoft.EventGrid/eventSubscriptions": {
+      "get": {
+        "operationId": "EventSubscriptions_ListByResource",
+        "tags": [
+          "EventSubscriptionOperationGroup"
+        ],
+        "description": "List a EventSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceTypeName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EventSubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/microsoft.EventGrid/eventTypes": {
+      "get": {
+        "operationId": "Topics_ListEventTypes",
+        "summary": "List topic event types.",
+        "description": "List event types for a topic.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceTypeName",
+            "in": "path",
+            "description": "Name of the topic type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the topic.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EventTypesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Topics_ListEventTypes": {
+            "$ref": "./examples/Topics_ListEventTypes.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_ListByResource",
@@ -9448,64 +9577,6 @@
         "x-ms-examples": {
           "PrivateLinkResources_Get": {
             "$ref": "./examples/PrivateLinkResources_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/providers/{providerNamespace}/{providerNamespace}/{resourceTypeName}/{resourceTypeName}/{resourceName}/eventTypes": {
-      "get": {
-        "operationId": "Topics_ListEventTypes",
-        "summary": "List topic event types.",
-        "description": "List event types for a topic.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "Namespace of the provider of the topic.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceTypeName",
-            "in": "path",
-            "description": "Name of the topic type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "Name of the topic.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EventTypesListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Topics_ListEventTypes": {
-            "$ref": "./examples/Topics_ListEventTypes.json"
           }
         }
       }
