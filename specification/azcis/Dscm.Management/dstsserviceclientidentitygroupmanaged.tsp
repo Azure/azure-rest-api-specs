@@ -3,14 +3,17 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureCis;
 
+@added(Versions.v2024_06_24_preview)
 @doc("DSTS service client identity (SCI) group, which is managed by DSTS.")
 model DstsServiceClientIdentityGroupManagedResourceProperties {
   @doc("List of common subscriptions. Optional.")
@@ -62,6 +65,7 @@ model DstsServiceClientIdentityGroupManagedResourceProperties {
   requestId?: string;
 }
 
+@added(Versions.v2024_06_24_preview)
 @doc("DstsServiceClientIdentityGroupManaged Resource.")
 model DstsServiceClientIdentityGroupManagedResource
   is ProxyResource<DstsServiceClientIdentityGroupManagedResourceProperties> {
@@ -75,6 +79,7 @@ model DstsServiceClientIdentityGroupManagedResource
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
+@added(Versions.v2024_06_24_preview)
 @armResourceOperations
 interface DstsServiceClientIdentityGroupManaged {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsServiceClientIdentityGroupManagedResource>;

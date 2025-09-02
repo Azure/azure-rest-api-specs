@@ -3,9 +3,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureCis;
 
+@added(Versions.v2024_06_24_preview)
 @doc("The claim provisionings for a service client identity group.")
 model ClaimProvisioningsForGroup {
   @doc("The claim identity instance. Required.")
@@ -24,6 +28,7 @@ model ClaimProvisioningsForGroup {
   scopedToServiceAccountGroupServiceTreeId?: string;
 }
 
+@added(Versions.v2024_06_24_preview)
 @doc("Authentication requirement.")
 model AuthenticationRequirement {
   @doc("Authentication requirement value. E.g. SAWEnforcement or PTH. Required.")
@@ -34,6 +39,7 @@ model AuthenticationRequirement {
   requiredIpRanges?: Array<RequiredIpRange>;
 }
 
+@added(Versions.v2024_06_24_preview)
 @doc("Claim expansion for the service client identity group.")
 model ClaimExpansion {
   @doc("Expanded claim instance. Required.")
@@ -61,6 +67,7 @@ model ClaimExpansion {
   isRegionalEnforced?: boolean;
 }
 
+@added(Versions.v2024_06_24_preview)
 @doc("Cloud Id")
 union CloudId {
   string,

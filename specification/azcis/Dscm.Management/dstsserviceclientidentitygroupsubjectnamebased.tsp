@@ -3,14 +3,17 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureCis;
 
+@added(Versions.v2024_06_24_preview)
 @doc("DSTS service client identity (SCI) group, which is subjectName based.")
 model DstsServiceClientIdentityGroupSubjectNameBasedResourceProperties {
   @doc("List of common subject names for the service client identity group. Client identification is based on the combination of the Subject Name and Issuer of the certificate. For groups, the CommonSubjectNames can be explicitly specified. When creating a SubjectName-Based SCI Group and subsequently creating SCIs, the subject names associated with the group automatically appear in the SCI. Optional.")
@@ -62,6 +65,7 @@ model DstsServiceClientIdentityGroupSubjectNameBasedResourceProperties {
   requestId?: string;
 }
 
+@added(Versions.v2024_06_24_preview)
 @doc("DstsServiceClientIdentityGroupSubjectNameBased Resource")
 model DstsServiceClientIdentityGroupSubjectNameBasedResource
   is ProxyResource<DstsServiceClientIdentityGroupSubjectNameBasedResourceProperties> {
@@ -75,6 +79,7 @@ model DstsServiceClientIdentityGroupSubjectNameBasedResource
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
+@added(Versions.v2024_06_24_preview)
 @armResourceOperations
 interface DstsServiceClientIdentityGroupSubjectNameBased {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsServiceClientIdentityGroupSubjectNameBasedResource>;
