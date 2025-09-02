@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2021-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-11-01-preview'
 input-file:
-  - Microsoft.ServiceLinker/preview/2021-11-01-preview/servicelinker.json
+  - preview/2021-11-01-preview/servicelinker.json
 ```
 
 ### Tag: package-2022-01-01-preview
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2022-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-01-01-preview'
 input-file:
-  - Microsoft.ServiceLinker/preview/2022-01-01-preview/servicelinker.json
+  - preview/2022-01-01-preview/servicelinker.json
 ```
 
 ### Tag: package-2022-05-01
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2022-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-05-01'
 input-file:
-  - Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json
+  - stable/2022-05-01/servicelinker.json
 ```
 
 ### Tag: package-2022-11-01-preview
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2022-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
-  - Microsoft.ServiceLinker/preview/2022-11-01-preview/servicelinker.json
+  - preview/2022-11-01-preview/servicelinker.json
 ```
 
 ### Tag: package-2023-04-01-preview
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2023-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-04-01-preview'
 input-file:
-  - Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json
+  - preview/2023-04-01-preview/servicelinker.json
 ```
 
 ### Tag: package-2024-04-01
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-2024-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-04-01'
 input-file:
-  - Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json
+  - stable/2024-04-01/servicelinker.json
 ```
 
 ### Tag: package-2024-07-01-preview
@@ -91,7 +91,7 @@ These settings apply only when `--tag=package-2024-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-07-01-preview'
 input-file:
-  - Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json
+  - preview/2024-07-01-preview/servicelinker.json
 ```
 
 ## Suppression
