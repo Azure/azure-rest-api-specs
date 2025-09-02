@@ -27,10 +27,10 @@ import "./UpdateRun.tsp";
 import "./Update.tsp";
 import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
-import "./devicePool.tsp";
-import "./edgeMachine.tsp";
+// import "./devicePool.tsp";
+// import "./edgeMachine.tsp";
 import "./hciCommon.tsp";
-import "./edgeMachineJobs.tsp";
+// import "./edgeMachineJobs.tsp";
 import "./Operations.tsp";
 
 using TypeSpec.Rest;
