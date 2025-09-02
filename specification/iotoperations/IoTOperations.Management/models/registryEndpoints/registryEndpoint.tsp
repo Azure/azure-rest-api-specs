@@ -50,10 +50,10 @@ model RegistryEndpointProperties {
   @removed(Versions.`2025-09-01-preview`)
   trustSettings?: RegistryEndpointTrustedSettings;
 
-  /** The signing keys for the registry endpoint */
+  /** The signing certificate authorities used by artifacts in the registry endpoint */
   @added(Versions.`2025-09-01-preview`)
   @identifiers(#[])
-  signingKeys?: RegistryEndpointTrustedSigningKey[];
+  codeSigningCas?: RegistryEndpointTrustedSigningKey[];
 }
 
 /** RegistryEndpointTrustedSettings properties */
