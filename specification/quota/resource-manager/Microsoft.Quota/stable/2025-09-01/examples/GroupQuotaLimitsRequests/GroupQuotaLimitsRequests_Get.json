@@ -1,0 +1,34 @@
+{
+  "operationId": "GroupQuotaLimitsRequests_Get",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "groupQuotaName": "groupquota1",
+    "requestId": "requestId",
+    "api-version": "2025-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimitsRequests/requestId",
+        "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitsRequests",
+        "name": "requestId",
+        "properties": {
+          "requestedResource": {
+            "properties": {
+              "limit": 100,
+              "name": {
+                "value": "standardddv4family",
+                "localizedValue": "standard DDv4 Family vCPUs"
+              },
+              "region": "westus",
+              "comments": ""
+            }
+          },
+          "requestSubmitTime": "2024-03-20T05:29:34.144Z",
+          "provisioningState": "Failed",
+          "faultCode": "ResourceNotAvailableForOffer"
+        }
+      }
+    }
+  }
+}
