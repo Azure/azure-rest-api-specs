@@ -27,7 +27,7 @@ interface Artifacts {
   @doc("Get the resource")
   get is ArmResourceRead<Artifact>;
 
-  @doc("get artifact download link.")
+  @doc("Get artifact download link.")
   listDownloadUri is ArmResourceActionSync<
     Artifact,
     void,

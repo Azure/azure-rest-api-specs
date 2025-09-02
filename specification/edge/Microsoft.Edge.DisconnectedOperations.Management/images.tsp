@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
-@doc("Disconnected operations image resource.")
+@doc("Holds the release information of a disconnected operations image.")
 @parentResource(DisconnectedOperation)
 model Image is ProxyResource<ImageProperties> {
   ...ResourceNameParameter<Image>;
@@ -21,20 +21,8 @@ model Image is ProxyResource<ImageProperties> {
 
 @armResourceOperations
 interface Images {
-  @doc("List by parent")
-  @removed(Microsoft.Edge.Versions.v2025_06_01)
-  listByParent is ArmResourceListByParent<
-    Image,
-    {
-      ...ApiVersionParameter;
-      ...FilterQueryParameter;
-      ...TopQueryParameter;
-      ...SkipQueryParameter;
-    }
-  >;
-
-  @doc("List by parent")
-  listAll is ArmResourceListByParent<
+  @doc("List by disconnected operation.")
+  listByDisconnectedOperation is ArmResourceListByParent<
     Image,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Image> & {
       ...FilterQueryParameter;
@@ -43,10 +31,10 @@ interface Images {
     }
   >;
 
-  @doc("Get the resource")
+  @doc("Get the resource.")
   get is ArmResourceRead<Image>;
 
-  @doc("get deployment manifest.")
+  @doc("Get the URI to download the image.")
   listDownloadUri is ArmResourceActionSync<
     Image,
     void,

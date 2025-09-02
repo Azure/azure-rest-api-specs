@@ -87,7 +87,7 @@ model DisconnectedOperationProperties {
   provisioningState?: ResourceProvisioningState;
 
   @visibility(Lifecycle.Read)
-  @doc("The unique Id of the stamp")
+  @doc("The unique identifier of the stamp")
   stampId: string;
 
   @visibility(Lifecycle.Read)
@@ -113,7 +113,7 @@ model DisconnectedOperationProperties {
 @doc("The disconnected operation manifest")
 model DisconnectedOperationDeploymentManifest {
   @visibility(Lifecycle.Read)
-  @doc("The resource Id of the disconnected operations resource")
+  @doc("The resource identifier of the disconnected operations resource")
   resourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Edge/disconnectedOperations";
@@ -125,7 +125,7 @@ model DisconnectedOperationDeploymentManifest {
   resourceName: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The unique Id of the stamp")
+  @doc("The unique identifier of the stamp")
   stampId: string;
 
   @visibility(Lifecycle.Read)
@@ -201,11 +201,11 @@ model ImageDownloadResult {
   ...ImageProperties;
 
   @visibility(Lifecycle.Read)
-  @doc("The unique Id of the download")
+  @doc("The unique identifier of the download")
   transactionId: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The download uri")
+  @doc("The download URI")
   downloadLink: url;
 
   @visibility(Lifecycle.Read)
@@ -241,7 +241,7 @@ model ArtifactDownloadResult {
   ...ArtifactProperties;
 
   @visibility(Lifecycle.Read)
-  @doc("The download uri")
+  @doc("The download URI")
   downloadLink: url;
 
   @visibility(Lifecycle.Read)
