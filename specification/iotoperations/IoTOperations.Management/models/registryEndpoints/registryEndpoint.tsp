@@ -47,11 +47,18 @@ model RegistryEndpointProperties {
   ...ResourceHealth;
 
   /** Trust settings for the registry endpoint */
+  @removed(Versions.`2025-09-01-preview`)
   trustSettings?: RegistryEndpointTrustedSettings;
+
+  /** The signing keys for the registry endpoint */
+  @added(Versions.`2025-09-01-preview`)
+  @identifiers(#[])
+  signingKeys?: RegistryEndpointTrustedSigningKey[];
 }
 
 /** RegistryEndpointTrustedSettings properties */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-09-01-preview`)
 model RegistryEndpointTrustedSettings {
   /** The trust properties for the registry endpoint. */
   trustedSigningKeys: RegistryEndpointTrustedSigningKey;

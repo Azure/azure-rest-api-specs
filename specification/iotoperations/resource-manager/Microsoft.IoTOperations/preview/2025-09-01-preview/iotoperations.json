@@ -4443,10 +4443,6 @@
           "type": "string",
           "description": "A reference to a connector metadata document reference in a container registry."
         },
-        "displayName": {
-          "type": "string",
-          "description": "A displayname for the connector template in the Digital Operator Experience UI."
-        },
         "healthState": {
           "type": "string",
           "description": "The health state of the resource.",
@@ -10384,9 +10380,13 @@
           },
           "readOnly": true
         },
-        "trustSettings": {
-          "$ref": "#/definitions/RegistryEndpointTrustedSettings",
-          "description": "Trust settings for the registry endpoint"
+        "signingKeys": {
+          "type": "array",
+          "description": "The signing keys for the registry endpoint",
+          "items": {
+            "$ref": "#/definitions/RegistryEndpointTrustedSigningKey"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -10466,19 +10466,6 @@
           "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
         }
       }
-    },
-    "RegistryEndpointTrustedSettings": {
-      "type": "object",
-      "description": "RegistryEndpointTrustedSettings properties",
-      "properties": {
-        "trustedSigningKeys": {
-          "$ref": "#/definitions/RegistryEndpointTrustedSigningKey",
-          "description": "The trust properties for the registry endpoint."
-        }
-      },
-      "required": [
-        "trustedSigningKeys"
-      ]
     },
     "RegistryEndpointTrustedSigningKey": {
       "type": "object",
