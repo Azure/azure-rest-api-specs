@@ -25,7 +25,7 @@ model DeviceLogicalPortProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: TopologicalProvisioningState;
 
-  /** The device (e.g., NIC or Switch) this port resides on. */
+  /** The Azure resource ID of the device (e.g., NIC or Switch) this port resides on. */
   @visibility(Lifecycle.Read)
   deviceId: DeviceResourceId;
 
@@ -33,11 +33,11 @@ model DeviceLogicalPortProperties {
   @visibility(Lifecycle.Read)
   nameOnDevice: string;
 
-  /** The link that the port is interfaced with. */
+  /** The Azure resource ID of the link that the port is interfaced with. */
   @visibility(Lifecycle.Read)
   linkId?: LinkResourceId;
 
-  /** The cluster that the port is associated with, if any. */
+  /** The Azure resource ID of the cluster that the port is associated with, if any. */
   @visibility(Lifecycle.Read)
   clusterId?: ClusterResourceId;
 }

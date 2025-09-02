@@ -23,7 +23,7 @@ model RackProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: TopologicalProvisioningState;
 
-  /** The cluster that the rack is associated with, if any. */
+  /** The Azure resource ID of the cluster that the rack is associated with, if any. */
   @visibility(Lifecycle.Read)
   clusterId?: ClusterResourceId;
 }

@@ -23,19 +23,19 @@ model LinkProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: TopologicalProvisioningState;
 
-  /** The ARM resource ID of the first device connected via this network link. */
+  /** The Azure resource ID of the first device connected via this network link. */
   @visibility(Lifecycle.Read)
   deviceOneId: DeviceResourceId;
 
-  /** The ARM resource ID of the port that this network link is connected to the first device. */
+  /** The Azure resource ID of the port that this network link is connected to the first device. */
   @visibility(Lifecycle.Read)
   deviceLogicalPortOneId: DeviceLogicalPortResourceId;
 
-  /** The ARM resource ID of the second device connected via this network link. */
+  /** The Azure resource ID of the second device connected via this network link. */
   @visibility(Lifecycle.Read)
   deviceTwoId: DeviceResourceId;
 
-  /** The ARM resource ID of the port that this network link is connected to the second device. */
+  /** The Azure resource ID of the port that this network link is connected to the second device. */
   @visibility(Lifecycle.Read)
   deviceLogicalPortTwoId: DeviceLogicalPortResourceId;
 
@@ -43,7 +43,7 @@ model LinkProperties {
   @visibility(Lifecycle.Read)
   planeId: string;
 
-  /** The cluster that the link is associated with, if any. */
+  /** The Azure resource ID of the cluster that the rack is associated with, if any. */
   @visibility(Lifecycle.Read)
   clusterId?: ClusterResourceId;
 }

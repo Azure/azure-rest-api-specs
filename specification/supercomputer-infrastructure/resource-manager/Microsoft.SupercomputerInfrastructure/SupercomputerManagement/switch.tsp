@@ -27,7 +27,7 @@ model SwitchProperties {
   @visibility(Lifecycle.Read)
   networkType: NetworkType;
 
-  /** The cluster that the switch is associated with, if any. */
+  /** The Azure resource ID of the cluster that the switch is associated with, if any. */
   @visibility(Lifecycle.Read)
   clusterId?: ClusterResourceId;
 }

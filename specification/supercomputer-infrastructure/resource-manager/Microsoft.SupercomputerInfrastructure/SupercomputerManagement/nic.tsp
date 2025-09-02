@@ -23,7 +23,7 @@ model NicProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: TopologicalProvisioningState;
 
-  /** The ID of the device that the NIC resides within. */
+  /** The Azure resource ID of the device that the NIC resides within. */
   @visibility(Lifecycle.Read)
   parentDeviceId: NodeResourceId;
 }
