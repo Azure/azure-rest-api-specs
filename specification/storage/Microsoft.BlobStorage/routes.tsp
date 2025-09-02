@@ -184,7 +184,7 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("?comp=blobs")
-  op filterBlobs is StorageOperation<
+  op findBlobsByTags is StorageOperation<
     {
       ...TimeoutParameter;
       ...FilterBlobsWhereParameter;
@@ -193,8 +193,6 @@ namespace Storage.Blob {
       ...FilterBlobsIncludeParameter;
     },
     {
-      ...DateResponseHeader;
-
       /** The filter blobs enumeration results */
       @body
       enumerationResults: FilterBlobSegment;

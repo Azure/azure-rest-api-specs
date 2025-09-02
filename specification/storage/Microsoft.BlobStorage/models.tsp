@@ -2189,7 +2189,7 @@ alias FilterBlobsIncludeParameter = {
 alias FilterBlobsWhereParameter = {
   /** Filters the results to return only to return only blobs whose tags match the specified expression. */
   @query
-  where?: string;
+  where: string;
 };
 
 /** The Content-Length header. */
