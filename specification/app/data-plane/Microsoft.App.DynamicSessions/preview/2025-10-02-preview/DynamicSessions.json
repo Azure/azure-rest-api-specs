@@ -196,6 +196,9 @@
           },
           {
             "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFileRecursiveListParameter"
           }
         ],
         "responses": {
@@ -221,6 +224,9 @@
         "x-ms-examples": {
           "SessionResourceFiles_List": {
             "$ref": "./examples/SessionResourceFiles_List.json"
+          },
+          "SessionResourceFiles_List_Recursive": {
+            "$ref": "./examples/SessionResourceFiles_List_Recursive.json"
           }
         },
         "x-ms-pageable": {
@@ -1038,6 +1044,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The date time in RFC3339 format when the file was last modified."
+        },
+        "directory": {
+          "type": "string",
+          "description": "The directory path of the session resource file."
         }
       },
       "required": [
@@ -1134,6 +1144,14 @@
       "description": "The path of the file after uploaded.",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SessionResourceFileRecursiveListParameter": {
+      "name": "recursive",
+      "in": "query",
+      "description": "Whether to recursively list files.",
+      "required": false,
+      "type": "boolean",
       "x-ms-parameter-location": "method"
     }
   }
