@@ -286,7 +286,14 @@ model NetworkInterfaceAttachmentPatchModel {
   @visibility(Lifecycle.Read, Lifecycle.Update)
   tags?: Record<string>;
 
-  /** Anchor NICs (minimum 1). Required in PATCH. */
+  /** Updatable properties. */
+  properties?: NetworkInterfaceAttachmentPatchProperties;
+}
+
+/** Properties updatable via PATCH. */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachmentPatchProperties {
+  /** Anchor NICs (minimum 1). */
   anchorNics?: NetworkInterface[];
 }
 

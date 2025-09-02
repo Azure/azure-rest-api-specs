@@ -1480,9 +1480,19 @@
             "update"
           ]
         },
+        "properties": {
+          "$ref": "#/definitions/NetworkInterfaceAttachmentPatchProperties",
+          "description": "Updatable properties."
+        }
+      }
+    },
+    "NetworkInterfaceAttachmentPatchProperties": {
+      "type": "object",
+      "description": "Properties updatable via PATCH.",
+      "properties": {
         "anchorNics": {
           "type": "array",
-          "description": "Anchor NICs (minimum 1). Required in PATCH.",
+          "description": "Anchor NICs (minimum 1).",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           }
