@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2022-10-27",
+    "resourceGroupName": "testresourcegroup",
+    "resourceName": "appliance01",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "artifactProfiles": {
+          "LogsArtifactType": {
+            "endpoint": "https://<storage-account-name>.blob.core.windows.net/<container-name>?<SAS-token>"
+          }
+        },
+        "kubeconfigs": [
+          {
+            "name": "kubeconfigName1",
+            "value": "xxxxxxxxxxxxx"
+          }
+        ],
+        "sshKeys": {
+          "LogsKey": {
+            "certificate": "<Generated Certificate>",
+            "creationTimeStamp": 1660946559,
+            "expirationTimeStamp": 1724119358,
+            "privateKey": "<Generated Private Key>"
+          },
+          "ManagementCAKey": {
+            "publicKey": "<Generated Public Key>"
+          },
+          "SSHCustomerUser": {
+            "privateKey": "xxxxxxxx",
+            "publicKey": "xxxxxxxx"
+          },
+          "ScopedAccessKey": {
+            "certificate": "<Generated Certificate>",
+            "creationTimeStamp": 1660946559,
+            "expirationTimeStamp": 1724119358,
+            "privateKey": "<Generated Private Key>"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Appliances_ListKeys",
+  "title": "ListKeys Appliance"
+}
