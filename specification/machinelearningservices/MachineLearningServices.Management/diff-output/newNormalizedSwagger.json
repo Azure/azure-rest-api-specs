@@ -18350,7 +18350,8 @@
       "type": "object",
       "properties": {
         "runtime": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -18373,6 +18374,7 @@
         },
         "monthDays": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "integer",
             "format": "int32"
@@ -18380,6 +18382,7 @@
         },
         "weekDays": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -18559,13 +18562,16 @@
       "type": "object",
       "properties": {
         "cpu": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "gpu": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "memory": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -18574,6 +18580,7 @@
       "properties": {
         "contentSafetyLevel": {
           "type": "string",
+          "default": "Blocking",
           "enum": [
             "Blocking",
             "Deferred"
@@ -18677,7 +18684,8 @@
       "type": "object",
       "properties": {
         "startTime": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timeZone": {
           "type": "string",
@@ -18764,6 +18772,7 @@
         },
         "threshold": {
           "$ref": "#/definitions/MonitoringThreshold",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -18779,8 +18788,10 @@
       "properties": {
         "hyperParameters": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       },
@@ -18880,8 +18891,10 @@
         },
         "inputAssets": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/MonitoringInputDataBase"
+            "$ref": "#/definitions/MonitoringInputDataBase",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -18890,8 +18903,10 @@
         },
         "inputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -18972,7 +18987,8 @@
           }
         },
         "docker": {
-          "$ref": "#/definitions/Docker"
+          "$ref": "#/definitions/Docker",
+          "x-nullable": true
         },
         "endpoints": {
           "type": "array",
@@ -19044,14 +19060,17 @@
         "collections": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/Collection"
+            "$ref": "#/definitions/Collection",
+            "x-nullable": true
           }
         },
         "requestLogging": {
-          "$ref": "#/definitions/RequestLogging"
+          "$ref": "#/definitions/RequestLogging",
+          "x-nullable": true
         },
         "rollingRate": {
           "type": "string",
+          "default": "Hour",
           "enum": [
             "Year",
             "Month",

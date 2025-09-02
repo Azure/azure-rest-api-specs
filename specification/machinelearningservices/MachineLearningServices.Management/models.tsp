@@ -4212,7 +4212,7 @@ model CustomService {
   /**
    * Describes the docker settings for the image
    */
-  docker?: Docker;
+  docker?: Docker | null;
 
   /**
    * Configuring the endpoints for the container
@@ -7063,12 +7063,12 @@ model DataCollector {
    * Model data collector can be used for either payload logging or custom logging or both of them. Collection request and response are reserved for payload logging, others are for custom logging.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  collections: Record<Collection>;
+  collections: Record<Collection | null>;
 
   /**
    * The request logging configuration for mdc, it includes advanced logging settings for all collections. It's optional.
    */
-  requestLogging?: RequestLogging;
+  requestLogging?: RequestLogging | null;
 
   /**
    * When model data is collected to blob storage, we need to roll the data to different path to avoid logging all of them in a single blob file.
@@ -7076,7 +7076,7 @@ model DataCollector {
    * If it's day, all data will be collected in blob path /yyyy/MM/dd/.
    * The other benefit of rolling path is that model monitoring ui is able to select a time range of data very quickly.
    */
-  rollingRate?: RollingRateType;
+  rollingRate?: RollingRateType = RollingRateType.Hour;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7307,7 +7307,7 @@ model ContentSafety {
   /**
    * Specifies the current safety level for content safety.
    */
-  contentSafetyLevel?: ContentSafetyLevel;
+  contentSafetyLevel?: ContentSafetyLevel = ContentSafetyLevel.Blocking;
 
   /**
    * [Required] Specifies the status of content safety.
@@ -10302,12 +10302,12 @@ model ComputeRecurrenceSchedule {
   /**
    * List of month days for the schedule
    */
-  monthDays?: int32[];
+  monthDays?: int32[] | null;
 
   /**
    * List of days for the schedule.
    */
-  weekDays?: ComputeWeekDay[];
+  weekDays?: ComputeWeekDay[] | null;
 }
 
 /**
@@ -10317,7 +10317,7 @@ model Cron {
   /**
    * The start time in yyyy-MM-ddTHH:mm:ss format.
    */
-  startTime?: string;
+  startTime?: string | null;
 
   /**
    * Specifies time zone in which the schedule runs.
@@ -10436,7 +10436,7 @@ model ComputeInstanceVersion {
   /**
    * Runtime of compute instance.
    */
-  runtime?: string;
+  runtime?: string | null;
 }
 
 /**
@@ -11602,7 +11602,7 @@ model DataDriftMetricThresholdBase {
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  threshold?: MonitoringThreshold;
+  threshold?: MonitoringThreshold | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12138,19 +12138,19 @@ model ContainerResourceSettings {
    * Number of vCPUs request/limit for container. More info:
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
-  cpu?: string;
+  cpu?: string | null;
 
   /**
    * Number of Nvidia GPU cards request/limit for container. More info:
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
-  gpu?: string;
+  gpu?: string | null;
 
   /**
    * Memory size request/limit for container. More info:
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
-  memory?: string;
+  memory?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12317,7 +12317,7 @@ model CustomMetricThreshold {
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  threshold?: MonitoringThreshold;
+  threshold?: MonitoringThreshold | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12326,7 +12326,7 @@ model CustomModelFineTuning extends FineTuningVertical {
    * HyperParameters for fine tuning custom model.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  hyperParameters?: Record<string>;
+  hyperParameters?: Record<string | null> | null;
 
   /**
    * [Required] Enum to determine the type of fine tuning.
@@ -12369,14 +12369,14 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputAssets?: Record<MonitoringInputDataBase>;
+  inputAssets?: Record<MonitoringInputDataBase | null> | null;
 
   /**
    * Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputs?: Record<JobInput>;
+  inputs?: Record<JobInput | null> | null;
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.

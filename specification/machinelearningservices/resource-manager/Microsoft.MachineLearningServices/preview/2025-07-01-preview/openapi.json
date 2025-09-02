@@ -25482,7 +25482,8 @@
       "properties": {
         "runtime": {
           "type": "string",
-          "description": "Runtime of compute instance."
+          "description": "Runtime of compute instance.",
+          "x-nullable": true
         }
       }
     },
@@ -25572,6 +25573,7 @@
         "monthDays": {
           "type": "array",
           "description": "List of month days for the schedule",
+          "x-nullable": true,
           "items": {
             "type": "integer",
             "format": "int32"
@@ -25580,6 +25582,7 @@
         "weekDays": {
           "type": "array",
           "description": "List of days for the schedule.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeWeekDay"
           }
@@ -26512,15 +26515,18 @@
       "properties": {
         "cpu": {
           "type": "string",
-          "description": "Number of vCPUs request/limit for container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/"
+          "description": "Number of vCPUs request/limit for container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "x-nullable": true
         },
         "gpu": {
           "type": "string",
-          "description": "Number of Nvidia GPU cards request/limit for container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/"
+          "description": "Number of Nvidia GPU cards request/limit for container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "x-nullable": true
         },
         "memory": {
           "type": "string",
-          "description": "Memory size request/limit for container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/"
+          "description": "Memory size request/limit for container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "x-nullable": true
         }
       }
     },
@@ -26549,8 +26555,27 @@
       "type": "object",
       "properties": {
         "contentSafetyLevel": {
-          "$ref": "#/definitions/ContentSafetyLevel",
-          "description": "Specifies the current safety level for content safety."
+          "type": "string",
+          "description": "Specifies the current safety level for content safety.",
+          "default": "Blocking",
+          "enum": [
+            "Blocking",
+            "Deferred"
+          ],
+          "x-ms-enum": {
+            "name": "ContentSafetyLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Blocking",
+                "value": "Blocking"
+              },
+              {
+                "name": "Deferred",
+                "value": "Deferred"
+              }
+            ]
+          }
         },
         "contentSafetyStatus": {
           "$ref": "#/definitions/ContentSafetyStatus",
@@ -26598,28 +26623,6 @@
         }
       ],
       "x-ms-discriminator-value": "Azure.ContentSafety"
-    },
-    "ContentSafetyLevel": {
-      "type": "string",
-      "description": "Specifies the current safety level for content safety.",
-      "enum": [
-        "Blocking",
-        "Deferred"
-      ],
-      "x-ms-enum": {
-        "name": "ContentSafetyLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Blocking",
-            "value": "Blocking"
-          },
-          {
-            "name": "Deferred",
-            "value": "Deferred"
-          }
-        ]
-      }
     },
     "ContentSafetyStatus": {
       "type": "string",
@@ -26717,7 +26720,8 @@
       "properties": {
         "startTime": {
           "type": "string",
-          "description": "The start time in yyyy-MM-ddTHH:mm:ss format."
+          "description": "The start time in yyyy-MM-ddTHH:mm:ss format.",
+          "x-nullable": true
         },
         "timeZone": {
           "type": "string",
@@ -26815,6 +26819,7 @@
         "threshold": {
           "$ref": "#/definitions/MonitoringThreshold",
           "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -26831,8 +26836,10 @@
         "hyperParameters": {
           "type": "object",
           "description": "HyperParameters for fine tuning custom model.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       },
@@ -26979,8 +26986,10 @@
         "inputAssets": {
           "type": "object",
           "description": "Monitoring assets to take as input. Key is the component input port name, value is the data asset.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/MonitoringInputDataBase"
+            "$ref": "#/definitions/MonitoringInputDataBase",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -26990,8 +26999,10 @@
         "inputs": {
           "type": "object",
           "description": "Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -27082,7 +27093,8 @@
         },
         "docker": {
           "$ref": "#/definitions/Docker",
-          "description": "Describes the docker settings for the image"
+          "description": "Describes the docker settings for the image",
+          "x-nullable": true
         },
         "endpoints": {
           "type": "array",
@@ -27191,16 +27203,52 @@
           "type": "object",
           "description": "[Required] The collection configuration. Each collection has it own configuration to collect model data and the name of collection can be arbitrary string.\nModel data collector can be used for either payload logging or custom logging or both of them. Collection request and response are reserved for payload logging, others are for custom logging.",
           "additionalProperties": {
-            "$ref": "#/definitions/Collection"
+            "$ref": "#/definitions/Collection",
+            "x-nullable": true
           }
         },
         "requestLogging": {
           "$ref": "#/definitions/RequestLogging",
-          "description": "The request logging configuration for mdc, it includes advanced logging settings for all collections. It's optional."
+          "description": "The request logging configuration for mdc, it includes advanced logging settings for all collections. It's optional.",
+          "x-nullable": true
         },
         "rollingRate": {
-          "$ref": "#/definitions/RollingRateType",
-          "description": "When model data is collected to blob storage, we need to roll the data to different path to avoid logging all of them in a single blob file.\nIf the rolling rate is hour, all data will be collected in the blob path /yyyy/MM/dd/HH/.\nIf it's day, all data will be collected in blob path /yyyy/MM/dd/.\nThe other benefit of rolling path is that model monitoring ui is able to select a time range of data very quickly."
+          "type": "string",
+          "description": "When model data is collected to blob storage, we need to roll the data to different path to avoid logging all of them in a single blob file.\nIf the rolling rate is hour, all data will be collected in the blob path /yyyy/MM/dd/HH/.\nIf it's day, all data will be collected in blob path /yyyy/MM/dd/.\nThe other benefit of rolling path is that model monitoring ui is able to select a time range of data very quickly.",
+          "default": "Hour",
+          "enum": [
+            "Year",
+            "Month",
+            "Day",
+            "Hour",
+            "Minute"
+          ],
+          "x-ms-enum": {
+            "name": "RollingRateType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Year",
+                "value": "Year"
+              },
+              {
+                "name": "Month",
+                "value": "Month"
+              },
+              {
+                "name": "Day",
+                "value": "Day"
+              },
+              {
+                "name": "Hour",
+                "value": "Hour"
+              },
+              {
+                "name": "Minute",
+                "value": "Minute"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -38902,42 +38950,6 @@
         }
       ],
       "x-ms-discriminator-value": "Rolling"
-    },
-    "RollingRateType": {
-      "type": "string",
-      "enum": [
-        "Year",
-        "Month",
-        "Day",
-        "Hour",
-        "Minute"
-      ],
-      "x-ms-enum": {
-        "name": "RollingRateType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Year",
-            "value": "Year"
-          },
-          {
-            "name": "Month",
-            "value": "Month"
-          },
-          {
-            "name": "Day",
-            "value": "Day"
-          },
-          {
-            "name": "Hour",
-            "value": "Hour"
-          },
-          {
-            "name": "Minute",
-            "value": "Minute"
-          }
-        ]
-      }
     },
     "Route": {
       "type": "object",
