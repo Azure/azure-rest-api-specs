@@ -34,9 +34,7 @@ These settings apply only when `--tag=package-2025-05-preview` is specified on t
 
 ```yaml $(tag) == 'package-2025-05-preview'
 input-file:
-  - preview/2025-05-01-preview/advisor.json
-  - preview/2025-05-01-preview/assessments.json
-  - preview/2025-05-01-preview/resiliencyReviews.json
+  - preview/2025-05-01-preview/openapi.json
 suppressions:
   - code: ArmResourcePropertiesBag
     reason: Suppressing for now to avoid breaking change.
