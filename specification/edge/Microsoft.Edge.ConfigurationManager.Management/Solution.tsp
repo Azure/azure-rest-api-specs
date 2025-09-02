@@ -18,11 +18,17 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Solution Properties")
 model SolutionProperties {
   @doc("Solution template Id")
   @visibility(Lifecycle.Read)
   solutionTemplateId?: string;
+
+  @added(Versions.v2025_08_01)
+  @doc("Display name of the solution")
+  @visibility(Lifecycle.Read)
+  displayName?: string;
 
   @doc("List of latest revisions for available solution template versions")
   @visibility(Lifecycle.Read)
@@ -34,6 +40,17 @@ model SolutionProperties {
   provisioningState?: ProvisioningState;
 }
 
+/** The type used for update operations of the Solution. */
+model SolutionUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: SolutionUpdateProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("The updatable properties of the Solution.")
+model SolutionUpdateProperties {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Solution Resource attached to a Target")
 @parentResource(Target)
 model Solution is Azure.ResourceManager.ProxyResource<SolutionProperties> {
@@ -58,8 +75,9 @@ interface Solutions {
   @doc("Create or update a Solution Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Solution>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Update a Solution Resource")
-  update is ArmResourcePatchAsync<Solution, SolutionProperties>;
+  update is ArmCustomPatchAsync<Solution, PatchModel = SolutionUpdate>;
 
   @doc("Delete a Solution Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Solution>;
