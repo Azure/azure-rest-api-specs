@@ -307,7 +307,11 @@
           "$ref": "#/definitions/GatewayHostnameBindingCertificate",
           "description": "The hostnames of the data-plane gateway to which requests can be sent."
         }
-      }
+      },
+      "required": [
+        "hostname",
+        "keyVault"
+      ]
     },
     "GatewayHostnameBindingKeyVault": {
       "type": "object",
@@ -325,7 +329,10 @@
           "$ref": "#/definitions/GatewayHostnameBindingKeyVaultLastStatus",
           "description": "The last status of the Key Vault certificate fetch process."
         }
-      }
+      },
+      "required": [
+        "secretId"
+      ]
     },
     "GatewayHostnameBindingKeyVaultLastStatus": {
       "type": "object",
@@ -349,7 +356,6 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "optional": true,
           "description": "The last time the Key Vault certificate fetch process was successful. Only when the fetch process has succeeded at least once and current state is failed.  The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard."
         }
       }
