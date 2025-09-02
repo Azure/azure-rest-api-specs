@@ -1923,6 +1923,59 @@
         "maxRequestRate"
       ]
     },
+    "AnalysisChartCoordinate": {
+      "type": "object",
+      "description": "Coordinates for the analysis chart.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "X-axis coordinate."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Y-axis coordinate."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "AnalysisCluster": {
+      "type": "object",
+      "description": "A cluster of analysis samples.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the analysis cluster."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the analysis cluster."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight of the analysis cluster. This indicate number of samples in the cluster."
+        },
+        "parentClusterName": {
+          "type": "string",
+          "description": "The parent cluster name of the analysis cluster in case of a hierarchical structure. This is null if the cluster is at the top level."
+        },
+        "coordinates": {
+          "$ref": "#/definitions/AnalysisChartCoordinate",
+          "description": "Coordinates for the analysis chart."
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "weight",
+        "coordinates"
+      ]
+    },
     "AnalysisMetadata": {
       "type": "object",
       "description": "Metadata about the analysis.",
@@ -1940,6 +1993,45 @@
       },
       "required": [
         "createdAt"
+      ]
+    },
+    "AnalysisSample": {
+      "type": "object",
+      "description": "A sample from the analysis.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the analysis sample."
+        },
+        "contextSummary": {
+          "type": "string",
+          "description": "Summary of the context for the analysis sample."
+        },
+        "conversationSummary": {
+          "type": "object",
+          "description": "Summary of the conversation for the analysis sample.",
+          "additionalProperties": {}
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters to help with additional filtering of data.",
+          "additionalProperties": {}
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "The name of the analysis cluster in which this sample belongs."
+        },
+        "coordinates": {
+          "$ref": "#/definitions/AnalysisChartCoordinate",
+          "description": "Coordinates for the analysis chart."
+        }
+      },
+      "required": [
+        "id",
+        "contextSummary",
+        "conversationSummary",
+        "parameters",
+        "coordinates"
       ]
     },
     "AnalysisScope": {
@@ -2824,6 +2916,10 @@
         "modelConfiguration": {
           "$ref": "#/definitions/ModelConfiguration",
           "description": "Configuration of the model used in the analysis."
+        },
+        "result": {
+          "$ref": "#/definitions/ErrorClusterResult",
+          "description": "The result of the cluster analysis."
         }
       },
       "required": [
@@ -2832,6 +2928,66 @@
         "state",
         "scope",
         "scopeId"
+      ]
+    },
+    "ErrorClusterResult": {
+      "type": "object",
+      "description": "The result of the cluster analysis.",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/ErrorClusterSummary",
+          "description": "Summary of the error cluster analysis."
+        },
+        "samples": {
+          "type": "array",
+          "description": "List of samples and their associated clusters.",
+          "items": {
+            "$ref": "#/definitions/AnalysisSample"
+          }
+        },
+        "clusters": {
+          "type": "array",
+          "description": "List of clusters identified in the analysis.",
+          "items": {
+            "$ref": "#/definitions/AnalysisCluster"
+          }
+        }
+      },
+      "required": [
+        "summary",
+        "samples",
+        "clusters"
+      ]
+    },
+    "ErrorClusterSummary": {
+      "type": "object",
+      "description": "Summary of the error cluster analysis.",
+      "properties": {
+        "totalSample": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of samples analyzed."
+        },
+        "uniqueSubclusterLabel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of unique subcluster labels."
+        },
+        "uniqueClusters": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of unique clusters."
+        },
+        "method": {
+          "type": "string",
+          "description": "Method used for clustering."
+        }
+      },
+      "required": [
+        "totalSample",
+        "uniqueSubclusterLabel",
+        "uniqueClusters",
+        "method"
       ]
     },
     "Evaluation": {
