@@ -18,6 +18,14 @@ model SessionCodeExecutionRequest {
 
   @doc("Code execution timeout in seconds.")
   timeoutInSeconds: int32;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("The maximum length of the output streams. Default value is 4096.")
+  outputStreamsMaxLength?: int32;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("Whether to use empty kernel for this execution. Default is false.")
+  useEmptyKernel?: boolean;
 }
 
 @doc("The result of the code execution.")
@@ -34,14 +42,6 @@ model SessionCodeExecutionResult {
 
   @doc("The execution time of the code in milliseconds.")
   executionTimeInMilliseconds?: int64;
-
-  @added(Versions.v2025_10_02_preview)
-  @doc("The maximum length of the output streams. Default value is 4096.")
-  outputStreamsMaxLength?: int32;
-
-  @added(Versions.v2025_10_02_preview)
-  @doc("Whether to use empty kernel for this execution. Default is false.")
-  useEmptyKernel?: boolean;
 }
 
 @doc("The session code execution resource.")

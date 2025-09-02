@@ -900,6 +900,15 @@
           "type": "integer",
           "format": "int32",
           "description": "Code execution timeout in seconds."
+        },
+        "outputStreamsMaxLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum length of the output streams. Default value is 4096."
+        },
+        "useEmptyKernel": {
+          "type": "boolean",
+          "description": "Whether to use empty kernel for this execution. Default is false."
         }
       },
       "required": [
@@ -965,15 +974,6 @@
           "type": "integer",
           "format": "int64",
           "description": "The execution time of the code in milliseconds."
-        },
-        "outputStreamsMaxLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum length of the output streams. Default value is 4096."
-        },
-        "useEmptyKernel": {
-          "type": "boolean",
-          "description": "Whether to use empty kernel for this execution. Default is false."
         }
       }
     },
