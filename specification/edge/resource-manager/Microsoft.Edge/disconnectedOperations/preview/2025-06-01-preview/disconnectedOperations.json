@@ -369,11 +369,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/images": {
       "get": {
-        "operationId": "Images_ListAll",
+        "operationId": "Images_ListByDisconnectedOperation",
         "tags": [
           "Images"
         ],
-        "description": "List by parent",
+        "description": "List by disconnected operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -416,11 +416,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Images_ListAll": {
-            "$ref": "./examples/Images_ListAll_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -432,7 +427,7 @@
         "tags": [
           "Images"
         ],
-        "description": "Get the resource",
+        "description": "Get the resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -608,7 +603,7 @@
         "tags": [
           "Artifacts"
         ],
-        "description": "get artifact download link.",
+        "description": "Get artifact download link.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -671,7 +666,7 @@
         "tags": [
           "Images"
         ],
-        "description": "get deployment manifest.",
+        "description": "Get the URI to download the image.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -818,7 +813,7 @@
         "downloadLink": {
           "type": "string",
           "format": "uri",
-          "description": "The download uri",
+          "description": "The download URI",
           "readOnly": true
         },
         "linkExpiry": {
@@ -1014,7 +1009,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource Id of the disconnected operations resource",
+          "description": "The resource identifier of the disconnected operations resource",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -1031,7 +1026,7 @@
         },
         "stampId": {
           "type": "string",
-          "description": "The unique Id of the stamp",
+          "description": "The unique GUID of the stamp",
           "readOnly": true
         },
         "location": {
@@ -1096,7 +1091,7 @@
         },
         "stampId": {
           "type": "string",
-          "description": "The unique Id of the stamp",
+          "description": "The unique GUID of the stamp",
           "readOnly": true
         },
         "billingModel": {
@@ -1181,7 +1176,7 @@
     },
     "Image": {
       "type": "object",
-      "description": "Disconnected operations image resource.",
+      "description": "Holds the release information of a disconnected operations image.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ImageProperties",
@@ -1239,13 +1234,13 @@
         },
         "transactionId": {
           "type": "string",
-          "description": "The unique Id of the download",
+          "description": "The unique identifier of the download",
           "readOnly": true
         },
         "downloadLink": {
           "type": "string",
           "format": "uri",
-          "description": "The download uri",
+          "description": "The download URI",
           "readOnly": true
         },
         "linkExpiry": {
