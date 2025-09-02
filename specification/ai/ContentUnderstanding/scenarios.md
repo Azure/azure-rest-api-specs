@@ -115,28 +115,6 @@ GET /analyzers/{analyzerId}
 
 ---
 
-## Update, get, list, and delete analyzers
-
-**Customer Value:** Governs analyzer lifecycle for change management and hygiene.
-
-**REST API Flow:**
-
-```http
-PATCH /analyzers/{analyzerId}
-	Content-Type: application/json
-	{
-		"config": { /* partial updates */ }
-	}
-
-GET /analyzers/{analyzerId}
-
-GET /analyzers
-
-DELETE /analyzers/{analyzerId}
-```
-
----
-
 ## Retrieve analyzer operation status and results (including files)
 
 **Customer Value:** Supports robust job orchestration and retrieval of rich artifacts (e.g., images, keyframes, attachments).
