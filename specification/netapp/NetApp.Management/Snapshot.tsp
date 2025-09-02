@@ -86,7 +86,11 @@ interface Snapshots {
   restoreFiles is ArmResourceActionAsync<
     Snapshot,
     SnapshotRestoreFiles,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

@@ -85,7 +85,15 @@ interface Volumes {
   /**
    * Revert a volume to the snapshot specified in the body
    */
-  revert is ArmResourceActionAsync<Volume, VolumeRevert, OkResponse>;
+  revert is ArmResourceActionAsync<
+    Volume,
+    VolumeRevert,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Reset cifs password from volume
@@ -108,7 +116,11 @@ interface Volumes {
   breakFileLocks is ArmResourceActionAsync<
     Volume,
     BreakFileLocksRequest,
-    OkResponse,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -128,7 +140,11 @@ interface Volumes {
   breakReplication is ArmResourceActionAsync<
     Volume,
     BreakReplicationRequest,
-    OkResponse,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -165,12 +181,28 @@ interface Volumes {
   /**
    * Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from destination to source.
    */
-  resyncReplication is ArmResourceActionAsync<Volume, void, OkResponse>;
+  resyncReplication is ArmResourceActionAsync<
+    Volume,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Delete the replication connection on the destination volume, and send release to the source replication
    */
-  deleteReplication is ArmResourceActionAsync<Volume, void, OkResponse>;
+  deleteReplication is ArmResourceActionAsync<
+    Volume,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Authorize the replication connection on the source volume
@@ -178,14 +210,26 @@ interface Volumes {
   authorizeReplication is ArmResourceActionAsync<
     Volume,
     AuthorizeRequest,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Re-Initializes the replication connection on the destination volume
    */
   @action("reinitializeReplication")
-  reInitializeReplication is ArmResourceActionAsync<Volume, void, OkResponse>;
+  reInitializeReplication is ArmResourceActionAsync<
+    Volume,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Starts peering the external cluster for this migration volume
@@ -228,7 +272,15 @@ interface Volumes {
   /**
    * Moves volume to another pool
    */
-  poolChange is ArmResourceActionAsync<Volume, PoolChangeRequest, OkResponse>;
+  poolChange is ArmResourceActionAsync<
+    Volume,
+    PoolChangeRequest,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Relocates volume to a new stamp
@@ -236,19 +288,39 @@ interface Volumes {
   relocate is ArmResourceActionAsync<
     Volume,
     RelocateVolumeRequest,
-    OkResponse,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
   /**
    * Finalizes the relocation of the volume and cleans up the old volume.
    */
-  finalizeRelocation is ArmResourceActionAsync<Volume, void, OkResponse>;
+  finalizeRelocation is ArmResourceActionAsync<
+    Volume,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Reverts the volume relocation process, cleans up the new volume and starts using the former-existing volume.
    */
-  revertRelocation is ArmResourceActionAsync<Volume, void, OkResponse>;
+  revertRelocation is ArmResourceActionAsync<
+    Volume,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Get the latest status of the backup for a volume

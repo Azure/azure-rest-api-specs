@@ -93,8 +93,10 @@ interface NetAppAccounts {
   renewCredentials is ArmResourceActionAsync<
     NetAppAccount,
     void,
-    OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
