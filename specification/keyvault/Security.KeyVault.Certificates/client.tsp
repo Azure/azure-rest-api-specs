@@ -104,6 +104,7 @@ op getCertificate is KeyVaultOperation<
 @summary("List certificates in a specified key vault")
 @route("/certificates")
 @get
+@list
 op listCertificateProperties is KeyVaultOperation<
   {
     /**
@@ -123,6 +124,7 @@ op listCertificateProperties is KeyVaultOperation<
 @summary("List certificate issuers for a specified key vault.")
 @route("/certificates/issuers")
 @get
+@list
 op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 
 /**
@@ -133,6 +135,7 @@ op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 @summary("List the versions of a certificate.")
 @route("/certificates/{certificate-name}/versions")
 @get
+@list
 op listCertificatePropertiesVersions is KeyVaultOperation<
   {
     /**
@@ -153,6 +156,7 @@ op listCertificatePropertiesVersions is KeyVaultOperation<
 @summary("Lists the deleted certificates in the specified vault currently available for recovery.")
 @route("/deletedcertificates")
 @get
+@list
 op listDeletedCertificateProperties is KeyVaultOperation<
   {
     /**

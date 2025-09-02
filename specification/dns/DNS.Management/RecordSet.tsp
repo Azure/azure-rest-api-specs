@@ -8,7 +8,6 @@ import "./Zone.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager.Private;
 
 namespace Microsoft.Network;
@@ -197,8 +196,8 @@ interface RecordSets {
   /**
    * Lists the record sets of a specified type in a DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  @list
   @armResourceList(RecordSet)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}")
   listByType(

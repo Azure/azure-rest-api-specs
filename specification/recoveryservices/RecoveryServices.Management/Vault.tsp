@@ -13,12 +13,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * Resource information, as returned by the resource provider.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(VaultProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model Vault extends Foundations.TrackedResource {
+model Vault is Azure.ResourceManager.TrackedResource<VaultProperties, true> {
   ...ResourceNameParameter<
     Resource = Vault,
     KeyName = "vaultName",
@@ -31,13 +26,6 @@ model Vault extends Foundations.TrackedResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityData;
-
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: VaultProperties;
 
   /**
    * Identifies the unique system identifier for each Azure resource.
@@ -66,29 +54,10 @@ interface VaultOps
         KeyName = "vaultName",
         SegmentName = "vaults",
         NamePattern = ""
-      >>,
-      ErrorType = ErrorResponse
+      >>
     > {}
 
 @armResourceOperations
-interface VaultOpsWithCloudError
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = Vault,
-        KeyName = "vaultName",
-        SegmentName = "vaults",
-        NamePattern = ""
-      >>,
-      ErrorType = CloudError
-    > {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultCreateOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -105,25 +74,7 @@ interface VaultCreateOps
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface VaultCreateOpsWithCloudError
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = Vault,
-        KeyName = "vaultName",
-        SegmentName = "vaults",
-        NamePattern = ""
-      >>,
-      ErrorType = CloudError
-    > {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VaultOperationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -149,7 +100,7 @@ interface VaultOperationOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VaultStatusOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -174,7 +125,7 @@ interface VaultStatusOps
       ErrorType = CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VaultDeleteOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -199,17 +150,17 @@ interface VaultDeleteOps
         identityName: string,
       }
     > {}
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface Vaults {
   /**
    * Get the Vault details.
    */
-  get is VaultOpsWithCloudError.Read<Vault>;
+  get is VaultOps.Read<Vault, OverrideErrorType = CloudError>;
 
   /**
    * Creates or updates a Recovery Services vault.
    */
-  createOrUpdate is VaultCreateOpsWithCloudError.CreateOrUpdateAsync<
+  createOrUpdate is VaultCreateOps.CreateOrUpdateAsync<
     Vault,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -218,14 +169,15 @@ interface Vaults {
       `x-ms-authorization-auxiliary`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Updates the vault.
    */
   @patch(#{ implicitOptionality: false })
-  update is VaultOpsWithCloudError.CustomPatchAsync<
+  update is VaultOps.CustomPatchAsync<
     Vault,
     PatchModel = PatchVault,
     Parameters = {
@@ -233,7 +185,8 @@ interface Vaults {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-authorization-auxiliary`?: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -241,7 +194,8 @@ interface Vaults {
    */
   delete is VaultOps.DeleteWithoutOkAsync<
     Vault,
-    Response = ArmAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmAcceptedLroResponse | ArmDeletedNoContentResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -258,17 +212,18 @@ interface Vaults {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}")
   create is Azure.ResourceManager.Legacy.UpdateOperation<
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
+      ...Azure.ResourceManager.Legacy.Provider;
 
       /**
        * The name of the recovery services vault.
        */
       @path
+      @segment("vaults")
       vaultName: string;
 
       /**
@@ -298,15 +253,26 @@ interface Vaults {
    * Fetches the replication usages of the vault.
    */
   @get
+  @list
   @action("replicationUsages")
-  list is VaultOps.ActionSync<Vault, void, ArmResponse<ReplicationUsageList>>;
-
+  list is VaultOps.ActionSync<
+    Vault,
+    void,
+    ArmResponse<ReplicationUsageList>,
+    OverrideErrorType = ErrorResponse
+  >;
   /**
    * Fetches the usages of the vault.
    */
   @get
+  @list
   @action("usages")
-  listByVaults is VaultOps.ActionSync<Vault, void, ArmResponse<VaultUsageList>>;
+  listByVaults is VaultOps.ActionSync<
+    Vault,
+    void,
+    ArmResponse<VaultUsageList>,
+    OverrideErrorType = ErrorResponse
+  >;
 }
 @armResourceOperations
 interface GetOperationResultOps
