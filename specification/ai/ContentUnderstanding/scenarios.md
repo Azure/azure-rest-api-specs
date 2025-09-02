@@ -15,6 +15,7 @@
 @documentUrl = https://contoso.blob.core.windows.net/invoices/invoice-2025-001.pdf
 
 ### Step 1: Create Document Classifier
+# @name createClassifier
 PUT {{endpoint}}/contentunderstanding/classifiers/invoice-classifier?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -32,6 +33,7 @@ Content-Type: application/json
 // Response: {"operationId": "classifier-create-inv-001"}
 
 ### Step 2: Classify Uploaded Document
+# @name classifyDocument
 POST {{endpoint}}/contentunderstanding/classifiers/invoice-classifier:classify?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -43,12 +45,14 @@ Content-Type: application/json
 // Response: {"operationId": "classify-operation-inv-001"}
 
 ### Step 3: Get Classification Result
-GET {{endpoint}}/contentunderstanding/classifierResults/classify-operation-inv-001?api-version={{apiVersion}}
+# @name getClassificationResult
+GET {{endpoint}}/contentunderstanding/classifierResults/{{classifyDocument.response.body.operationId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 
 // Response: {"category": "Invoice", "confidence": 0.98}
 
 ### Step 4: Extract Invoice Data (Since Classified as Invoice)
+# @name analyzeInvoice
 POST {{endpoint}}/contentunderstanding/analyzers/prebuilt-invoice:analyze?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -60,7 +64,8 @@ Content-Type: application/json
 // Response: {"operationId": "invoice-analysis-001"}
 
 ### Step 5: Retrieve Extracted Invoice Fields
-GET {{endpoint}}/contentunderstanding/analyzerResults/invoice-analysis-001?api-version={{apiVersion}}
+# @name getInvoiceResults
+GET {{endpoint}}/contentunderstanding/analyzerResults/{{analyzeInvoice.response.body.operationId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 
 // Response: {
@@ -113,9 +118,9 @@ Authorization: Bearer {{bearerToken}}
 @apiVersion = 2025-05-01-preview
 @bearerToken = {{$dotenv BEARER_TOKEN}}
 @analyzerId = employment-contract-analyzer
-@operationId = contract-analysis-emp-001
 
 ### Step 1: Create Custom Employment Contract Analyzer
+# @name createHRAnalyzer
 PUT {{endpoint}}/contentunderstanding/analyzers/{{analyzerId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -144,16 +149,18 @@ Content-Type: application/json
 // Response: {"operationId": "analyzer-create-hr-001"}
 
 ### Step 2: Analyze Employment Contract
+# @name analyzeContract
 POST {{endpoint}}/contentunderstanding/analyzers/{{analyzerId}}:analyze?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/pdf
 
 < ./employment-contract-sarah-johnson.pdf
 
-// Response: {"operationId": "{{operationId}}"}
+// Response: {"operationId": "contract-analysis-emp-001"}
 
 ### Step 3: Poll Analysis Status
-GET {{endpoint}}/contentunderstanding/analyzers/{{analyzerId}}/operations/{{operationId}}?api-version={{apiVersion}}
+# @name checkAnalysisStatus
+GET {{endpoint}}/contentunderstanding/analyzers/{{analyzerId}}/operations/{{analyzeContract.response.body.operationId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 
 // Response: {
@@ -163,7 +170,8 @@ Authorization: Bearer {{bearerToken}}
 // }
 
 ### Step 4: Retrieve Extracted Employee Data
-GET {{endpoint}}/contentunderstanding/analyzerResults/{{operationId}}?api-version={{apiVersion}}
+# @name getEmployeeData
+GET {{endpoint}}/contentunderstanding/analyzerResults/{{analyzeContract.response.body.operationId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 
 // Response: {
@@ -207,12 +215,10 @@ Authorization: Bearer {{bearerToken}}
 @endpoint = {{$dotenv CONTENT_UNDERSTANDING_ENDPOINT}}
 @apiVersion = 2025-05-01-preview
 @bearerToken = {{$dotenv BEARER_TOKEN}}
-@directoryId = dir-corp-emp-2025
-@personId = person-emp-001
-@faceId = face-emp-001-primary
 @securityImageUrl = https://security.contoso.com/camera-feed/entrance-001/2025-09-02-14-30-15.jpg
 
 ### Step 1: Create Employee Directory
+# @name createDirectory
 POST {{endpoint}}/contentunderstanding/personDirectories?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -221,10 +227,11 @@ Content-Type: application/json
   "name": "Corporate-Employees-2025"
 }
 
-// Response: {"personDirectoryId": "{{directoryId}}", "name": "Corporate-Employees-2025"}
+// Response: {"personDirectoryId": "dir-corp-emp-2025", "name": "Corporate-Employees-2025"}
 
 ### Step 2: Add Employee to Directory
-POST {{endpoint}}/contentunderstanding/personDirectories/{{directoryId}}/persons?api-version={{apiVersion}}
+# @name addEmployee
+POST {{endpoint}}/contentunderstanding/personDirectories/{{createDirectory.response.body.personDirectoryId}}/persons?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
 
@@ -237,18 +244,20 @@ Content-Type: application/json
   }
 }
 
-// Response: {"personId": "{{personId}}", "name": "John Smith - EMP001"}
+// Response: {"personId": "person-emp-001", "name": "John Smith - EMP001"}
 
 ### Step 3: Add Employee Face Profile
-POST {{endpoint}}/contentunderstanding/personDirectories/{{directoryId}}/persons/{{personId}}/faces?api-version={{apiVersion}}
+# @name addFaceProfile
+POST {{endpoint}}/contentunderstanding/personDirectories/{{createDirectory.response.body.personDirectoryId}}/persons/{{addEmployee.response.body.personId}}/faces?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: image/jpeg
 
 < ./employee-photos/john-smith-emp001.jpg
 
-// Response: {"faceId": "{{faceId}}", "boundingBox": {"x": 120, "y": 80, "width": 200, "height": 240}}
+// Response: {"faceId": "face-emp-001-primary", "boundingBox": {"x": 120, "y": 80, "width": 200, "height": 240}}
 
 ### Step 4: Detect Faces in Security Camera Feed
+# @name detectFaces
 POST {{endpoint}}/contentunderstanding/faces:detect?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: image/jpeg
@@ -270,7 +279,8 @@ Content-Type: image/jpeg
 // }
 
 ### Step 5: Identify Person Against Employee Directory
-POST {{endpoint}}/contentunderstanding/personDirectories/{{directoryId}}/persons:identify?api-version={{apiVersion}}
+# @name identifyPerson
+POST {{endpoint}}/contentunderstanding/personDirectories/{{createDirectory.response.body.personDirectoryId}}/persons:identify?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
 
@@ -281,7 +291,7 @@ Content-Type: application/json
 // Response: {
 //   "candidates": [
 //     {
-//       "personId": "{{personId}}",
+//       "personId": "{{addEmployee.response.body.personId}}",
 //       "confidence": 0.96
 //     }
 //   ],
@@ -312,10 +322,9 @@ Content-Type: application/json
 @classifierId = digital-asset-classifier
 @campaignImageUrl = https://assets.contoso.com/campaigns/summer-2025/hero-image.jpg
 @brandGuidelinesUrl = https://assets.contoso.com/brand/brand-guidelines-2025.pdf
-@classifyOperationId = classify-campaign-img-001
-@docAnalysisOperationId = brand-doc-analysis-001
 
 ### Step 1: Create Content Type Classifier
+# @name createContentClassifier
 PUT {{endpoint}}/contentunderstanding/classifiers/{{classifierId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -334,16 +343,18 @@ Content-Type: application/json
 // Response: {"operationId": "classifier-create-dam-001"}
 
 ### Step 2: Classify Marketing Campaign Image
+# @name classifyImage
 POST {{endpoint}}/contentunderstanding/classifiers/{{classifierId}}:classify?_overload=classifyBinary&api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: image/jpeg
 
 < ./marketing-assets/summer-2025-hero-image.jpg
 
-// Response: {"operationId": "{{classifyOperationId}}"}
+// Response: {"operationId": "classify-campaign-img-001"}
 
 ### Step 3: Get Content Classification
-GET {{endpoint}}/contentunderstanding/classifierResults/{{classifyOperationId}}?api-version={{apiVersion}}
+# @name getContentClassification
+GET {{endpoint}}/contentunderstanding/classifierResults/{{classifyImage.response.body.operationId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 
 // Response: {
@@ -356,6 +367,7 @@ Authorization: Bearer {{bearerToken}}
 // }
 
 ### Step 4: Detect People in Marketing Image
+# @name detectPeopleInImage
 POST {{endpoint}}/contentunderstanding/faces:detect?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -394,6 +406,7 @@ Content-Type: application/json
 // }
 
 ### Step 5: Analyze Associated Brand Guidelines Document
+# @name analyzeBrandDoc
 POST {{endpoint}}/contentunderstanding/analyzers/prebuilt-documentAnalyzer:analyze?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -402,10 +415,11 @@ Content-Type: application/json
   "url": "{{brandGuidelinesUrl}}"
 }
 
-// Response: {"operationId": "{{docAnalysisOperationId}}"}
+// Response: {"operationId": "brand-doc-analysis-001"}
 
 ### Step 6: Retrieve Brand Guidelines Analysis
-GET {{endpoint}}/contentunderstanding/analyzerResults/{{docAnalysisOperationId}}?api-version={{apiVersion}}
+# @name getBrandAnalysis
+GET {{endpoint}}/contentunderstanding/analyzerResults/{{analyzeBrandDoc.response.body.operationId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 
 // Response: {
@@ -451,10 +465,9 @@ Authorization: Bearer {{bearerToken}}
 @complianceClassifier = compliance-classifier
 @financialAnalyzer = financial-document-analyzer
 @financialDocUrl = https://compliance.contoso.com/q3-2025/financial-statement.pdf
-@classifyOperationId = classify-financial-doc-001
-@analysisOperationId = financial-analysis-q3-001
 
 ### Step 1: Create Compliance Document Classifier
+# @name createComplianceClassifier
 PUT {{endpoint}}/contentunderstanding/classifiers/{{complianceClassifier}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -473,6 +486,7 @@ Content-Type: application/json
 // Response: {"operationId": "classifier-create-compliance-001"}
 
 ### Step 2: Create Custom Analyzer for Financial Documents
+# @name createFinancialAnalyzer
 PUT {{endpoint}}/contentunderstanding/analyzers/{{financialAnalyzer}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -505,6 +519,7 @@ Content-Type: application/json
 // Response: {"operationId": "analyzer-create-financial-001"}
 
 ### Step 3: Classify Uploaded Financial Document
+# @name classifyFinancialDoc
 POST {{endpoint}}/contentunderstanding/classifiers/{{complianceClassifier}}:classify?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -513,10 +528,11 @@ Content-Type: application/json
   "url": "{{financialDocUrl}}"
 }
 
-// Response: {"operationId": "{{classifyOperationId}}"}
+// Response: {"operationId": "classify-financial-doc-001"}
 
 ### Step 4: Get Document Classification
-GET {{endpoint}}/contentunderstanding/classifierResults/{{classifyOperationId}}?api-version={{apiVersion}}
+# @name getDocumentClassification
+GET {{endpoint}}/contentunderstanding/classifierResults/{{classifyFinancialDoc.response.body.operationId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 
 // Response: {
@@ -530,6 +546,7 @@ Authorization: Bearer {{bearerToken}}
 // }
 
 ### Step 5: Analyze Financial Document for Compliance Data
+# @name analyzeFinancialDoc
 POST {{endpoint}}/contentunderstanding/analyzers/{{financialAnalyzer}}:analyze?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 Content-Type: application/json
@@ -538,10 +555,11 @@ Content-Type: application/json
   "url": "{{financialDocUrl}}"
 }
 
-// Response: {"operationId": "{{analysisOperationId}}"}
+// Response: {"operationId": "financial-analysis-q3-001"}
 
 ### Step 6: Retrieve Compliance Analysis Results
-GET {{endpoint}}/contentunderstanding/analyzerResults/{{analysisOperationId}}?api-version={{apiVersion}}
+# @name getComplianceResults
+GET {{endpoint}}/contentunderstanding/analyzerResults/{{analyzeFinancialDoc.response.body.operationId}}?api-version={{apiVersion}}
 Authorization: Bearer {{bearerToken}}
 
 // Response: {
