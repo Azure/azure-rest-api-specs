@@ -35,7 +35,7 @@ model ConfigurationStore
   sku: Sku;
 }
 
-alias ConfigurationStoresCreateLroHeader = {
+alias ConfigurationStoresDeleteLroHeader = {
   ...ArmCombinedLroHeaders<FinalResult = ConfigurationStore>;
   ...Azure.Core.Foundations.RetryAfterHeader;
 };
@@ -52,7 +52,8 @@ interface ConfigurationStores {
    */
   create is ArmResourceCreateOrReplaceAsync<
     ConfigurationStore,
-    LroHeaders = ConfigurationStoresCreateLroHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = ConfigurationStore> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -75,7 +76,7 @@ interface ConfigurationStores {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConfigurationStore,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ConfigurationStoresDeleteLroHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -148,9 +149,9 @@ interface ConfigurationStores {
 @@doc(ConfigurationStores.regenerateKey::parameters.body,
   "The parameters for regenerating an access key."
 );
-@@doc(ConfigurationStoresCreateLroHeader.location,
+@@doc(ConfigurationStoresDeleteLroHeader.location,
   "URL to query for the operation result"
 );
-@@doc(ConfigurationStoresCreateLroHeader.azureAsyncOperation,
+@@doc(ConfigurationStoresDeleteLroHeader.azureAsyncOperation,
   "URL to query for status of the operation."
 );
