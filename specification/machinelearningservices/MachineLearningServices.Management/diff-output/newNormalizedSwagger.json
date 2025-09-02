@@ -15770,7 +15770,8 @@
         "enableNodePublicIp": {
           "type": "boolean",
           "title": "Enable node public IP.",
-          "default": true
+          "default": true,
+          "x-nullable": true
         },
         "propertyBag": {
           "x-nullable": true
@@ -19191,6 +19192,7 @@
       "properties": {
         "featureDataTypeOverride": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
@@ -19201,6 +19203,7 @@
         },
         "featureImportanceSettings": {
           "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -19208,6 +19211,7 @@
         },
         "features": {
           "$ref": "#/definitions/MonitoringFeatureFilterBase",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"

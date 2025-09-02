@@ -22089,7 +22089,8 @@
           "type": "boolean",
           "title": "Enable node public IP.",
           "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.",
-          "default": true
+          "default": true,
+          "x-nullable": true
         },
         "propertyBag": {
           "description": "A property bag containing additional properties.",
@@ -27348,6 +27349,7 @@
         "featureDataTypeOverride": {
           "type": "object",
           "description": "A dictionary that maps feature names to their respective data types.",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
@@ -27359,6 +27361,7 @@
         "featureImportanceSettings": {
           "$ref": "#/definitions/FeatureImportanceSettings",
           "description": "The settings for computing feature importance.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -27367,6 +27370,7 @@
         "features": {
           "$ref": "#/definitions/MonitoringFeatureFilterBase",
           "description": "The feature filter which identifies which feature to calculate drift over.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
