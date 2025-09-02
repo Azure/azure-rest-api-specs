@@ -13,26 +13,26 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/codeSigningAccount.json"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-trustedsigning"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-trustedsigning"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.trustedsigning"
     service-name: "Trusted Signing"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-trustedsigning"
+    emitter-output-dir: "{service-dir}/azure-mgmt-trustedsigning"
     namespace: "azure.mgmt.trustedsigning"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-trustedsigning"
+    emitter-output-dir: "{service-dir}/arm-trustedsigning"
     flavor: azure
     package-details:
       name: "@azure/arm-trustedsigning"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/trustedsigning"
-    package-dir: "armtrustedsigning"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armtrustedsigning"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

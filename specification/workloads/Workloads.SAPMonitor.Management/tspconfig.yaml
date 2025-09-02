@@ -15,12 +15,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/monitors/{version-status}/{version}/monitors.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-sapmonitors"
+    emitter-output-dir: "{service-dir}/arm-sapmonitors"
     flavor: azure
     package-details:
       name: "@azure/arm-sapmonitors"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-sapmonitors"
+    emitter-output-dir: "{service-dir}/azure-mgmt-sapmonitors"
     namespace: "azure.mgmt.sapmonitors"
     flavor: "azure"
     generate-test: true
