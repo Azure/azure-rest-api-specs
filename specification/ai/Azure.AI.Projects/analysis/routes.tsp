@@ -17,6 +17,20 @@ alias AnalysisServiceTraits = SupportsClientRequestId &
 
 alias AnalysisOperations = Azure.Core.ResourceOperations<AnalysisServiceTraits>;
 
+alias FilterQueryParamsTraits = {
+  @query("scopes")
+  @doc("The scope of the analysis.")
+  scopes?: AnalysisScope[];
+
+  @query("scopeIds")
+  @doc("The unique identifiers for the scopes.")
+  scopeIds?: string[];
+
+  @query("states")
+  @doc("The states of the analysis.")
+  states?: OperationState[];
+};
+
 @route("analysis")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
@@ -50,24 +64,15 @@ interface Analysis {
   @route("errors-clusters:latest")
   @doc("Get the latest cluster error analysis.")
   @get
-  getLatestErrorClusterReport is Operation<{}, OkResponse<ErrorClusterReport>>;
+  getLatestErrorClusterReport is Operation<
+    FilterQueryParamsTraits,
+    OkResponse<ErrorClusterReport>
+  >;
 
   @doc("List all cluster error analyses.")
   @get
   listErrorClusterReports is AnalysisOperations.ResourceList<
     ErrorClusterReport,
-    ListQueryParametersTrait<{
-      @query("scope")
-      @doc("The scope of the analysis.")
-      scope?: AnalysisScope;
-
-      @query("scopeId")
-      @doc("The unique identifier for the scope.")
-      scopeId?: string;
-
-      @query("state")
-      @doc("The state of the analysis.")
-      state?: OperationState;
-    }>
+    ListQueryParametersTrait<FilterQueryParamsTraits>
   >;
 }

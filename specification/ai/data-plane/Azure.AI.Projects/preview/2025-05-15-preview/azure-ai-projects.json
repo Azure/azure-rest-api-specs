@@ -61,83 +61,95 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "scopes",
             "in": "query",
             "description": "The scope of the analysis.",
             "required": false,
-            "type": "string",
-            "enum": [
-              "Agent",
-              "Evaluation"
-            ],
-            "x-ms-enum": {
-              "name": "AnalysisScope",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Agent",
-                  "value": "Agent",
-                  "description": "Analysis on an Agent."
-                },
-                {
-                  "name": "Evaluation",
-                  "value": "Evaluation",
-                  "description": "Analysis on an Evaluation result."
-                }
-              ]
-            }
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Agent",
+                "Evaluation"
+              ],
+              "x-ms-enum": {
+                "name": "AnalysisScope",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "Agent",
+                    "value": "Agent",
+                    "description": "Analysis on an Agent."
+                  },
+                  {
+                    "name": "Evaluation",
+                    "value": "Evaluation",
+                    "description": "Analysis on an Evaluation result."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
           },
           {
-            "name": "scopeId",
+            "name": "scopeIds",
             "in": "query",
-            "description": "The unique identifier for the scope.",
+            "description": "The unique identifiers for the scopes.",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
-            "name": "state",
+            "name": "states",
             "in": "query",
-            "description": "The state of the analysis.",
+            "description": "The states of the analysis.",
             "required": false,
-            "type": "string",
-            "enum": [
-              "NotStarted",
-              "Running",
-              "Succeeded",
-              "Failed",
-              "Canceled"
-            ],
-            "x-ms-enum": {
-              "name": "OperationState",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "NotStarted",
-                  "value": "NotStarted",
-                  "description": "The operation has not started."
-                },
-                {
-                  "name": "Running",
-                  "value": "Running",
-                  "description": "The operation is in progress."
-                },
-                {
-                  "name": "Succeeded",
-                  "value": "Succeeded",
-                  "description": "The operation has completed successfully."
-                },
-                {
-                  "name": "Failed",
-                  "value": "Failed",
-                  "description": "The operation has failed."
-                },
-                {
-                  "name": "Canceled",
-                  "value": "Canceled",
-                  "description": "The operation has been canceled by the user."
-                }
-              ]
-            }
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "NotStarted",
+                "Running",
+                "Succeeded",
+                "Failed",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "OperationState",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "NotStarted",
+                    "value": "NotStarted",
+                    "description": "The operation has not started."
+                  },
+                  {
+                    "name": "Running",
+                    "value": "Running",
+                    "description": "The operation is in progress."
+                  },
+                  {
+                    "name": "Succeeded",
+                    "value": "Succeeded",
+                    "description": "The operation has completed successfully."
+                  },
+                  {
+                    "name": "Failed",
+                    "value": "Failed",
+                    "description": "The operation has failed."
+                  },
+                  {
+                    "name": "Canceled",
+                    "value": "Canceled",
+                    "description": "The operation has been canceled by the user."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -285,6 +297,97 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scopes",
+            "in": "query",
+            "description": "The scope of the analysis.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Agent",
+                "Evaluation"
+              ],
+              "x-ms-enum": {
+                "name": "AnalysisScope",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "Agent",
+                    "value": "Agent",
+                    "description": "Analysis on an Agent."
+                  },
+                  {
+                    "name": "Evaluation",
+                    "value": "Evaluation",
+                    "description": "Analysis on an Evaluation result."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "scopeIds",
+            "in": "query",
+            "description": "The unique identifiers for the scopes.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "states",
+            "in": "query",
+            "description": "The states of the analysis.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "NotStarted",
+                "Running",
+                "Succeeded",
+                "Failed",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "OperationState",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "NotStarted",
+                    "value": "NotStarted",
+                    "description": "The operation has not started."
+                  },
+                  {
+                    "name": "Running",
+                    "value": "Running",
+                    "description": "The operation is in progress."
+                  },
+                  {
+                    "name": "Succeeded",
+                    "value": "Succeeded",
+                    "description": "The operation has completed successfully."
+                  },
+                  {
+                    "name": "Failed",
+                    "value": "Failed",
+                    "description": "The operation has failed."
+                  },
+                  {
+                    "name": "Canceled",
+                    "value": "Canceled",
+                    "description": "The operation has been canceled by the user."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
           }
         ],
         "responses": {
