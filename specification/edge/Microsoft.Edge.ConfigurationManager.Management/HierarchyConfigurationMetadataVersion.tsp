@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
-import "./SolutionMetadata.tsp";
+import "./HierarchyConfigurationMetadataVersion.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -18,32 +18,32 @@ namespace Microsoft.Edge;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
 @added(Versions.v2025_08_15_preview)
-@doc("Solution Metadata Version Properties")
-model SolutionMetadataVersionProperties {
-  @doc("Display name of the solution metadata resource")
+@doc("Hierarchy Configuration Metadata Version Properties")
+model HierarchyConfigurationMetadataVersionProperties {
+  @doc("Display name of the hierarchy configuration metadata resource")
   @visibility(Lifecycle.Read)
   @maxLength(61)
   @minLength(3)
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   displayName?: string;
 
-  @doc("Solution template version Id")
+  @doc("Configuration template version Id")
   @visibility(Lifecycle.Read)
-  solutionTemplateVersionId?: Azure.Core.armResourceIdentifier<[
+  configTemplateVersionId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Edge/SolutionTemplates/Versions";
+      type: "Microsoft.Edge/ConfigTemplates/Versions";
     }
   ]>;
 
-  @doc("Schema Id for the solution template version at the hierarchy")
+  @doc("Schema Id for the config template version at the hierarchy")
   @visibility(Lifecycle.Read)
   schemaId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Edge/SolutionTemplates/Versions/SolutionSchemas";
+      type: "Microsoft.Edge/ConfigTemplates/Versions/ConfigTemplateSchemas";
     }
   ]>;
 
-  @doc("Dynamic Configuration Id for the solution template version")
+  @doc("Dynamic Configuration Id for the config template version")
   @visibility(Lifecycle.Read)
   dynamicConfigurationVersionId?: Azure.Core.armResourceIdentifier<[
     {
@@ -51,14 +51,14 @@ model SolutionMetadataVersionProperties {
     }
   ]>;
 
-  @doc("Configuration status of the solution template version")
+  @doc("Configuration status of the config template version")
   @visibility(Lifecycle.Read)
-  configurationStatus?: ConfigurationState;
+  configurationStatus?: ConfigTemplateConfigurationState;
 }
 
 @added(Versions.v2025_08_15_preview)
 @doc("Configuration State Enums")
-union ConfigurationState {
+union ConfigTemplateConfigurationState {
   @doc("Configuration Completed")
   ConfigurationCompleted: "ConfigurationCompleted",
 
@@ -69,27 +69,27 @@ union ConfigurationState {
 }
 
 @added(Versions.v2025_08_15_preview)
-@doc("Solution Metadata Version Resource")
-@parentResource(SolutionMetadata)
+@doc("Configuration Metadata Version Resource")
+@parentResource(HierarchyConfigurationMetadata)
 @resource("versions")
-model SolutionMetadataVersion
-  is Azure.ResourceManager.ProxyResource<SolutionMetadataVersionProperties> {
-  @doc("Name of the solution metadata version")
+model HierarchyConfigurationMetadataVersion
+  is Azure.ResourceManager.ProxyResource<HierarchyConfigurationMetadataVersionProperties> {
+  @doc("Name of the hierarchy configuration metadata version")
   @maxLength(61)
   @minLength(3)
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
-  @key("solutionMetadataVersionName")
-  @segment("SolutionMetadataVersions")
+  @key("hierarchyConfigurationMetadataVersionName")
+  @segment("HierarchyConfigurationMetadataVersions")
   name: string;
 }
 
 @added(Versions.v2025_08_15_preview)
 @armResourceOperations
-interface SolutionMetadataVersions {
-  @doc("Get a Solution resource")
-  get is ArmResourceRead<SolutionMetadataVersion>;
+interface HierarchyConfigurationMetadataVersions {
+  @doc("Get a Hierarchy Configuration Metadata Version resource")
+  get is ArmResourceRead<HierarchyConfigurationMetadataVersion>;
 
-  @doc("List Solution resources")
-  listByParent is ArmResourceListByParent<SolutionMetadataVersion>;
+  @doc("List Hierarchy Configuration Metadata Version resources")
+  listByParent is ArmResourceListByParent<HierarchyConfigurationMetadataVersion>;
 }
