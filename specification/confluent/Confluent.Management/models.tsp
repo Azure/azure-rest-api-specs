@@ -2163,6 +2163,7 @@ model KafkaAzureBlobStorageSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Service Account Name
    */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
   serviceAccountName?: string;
 
   /**
@@ -2234,6 +2235,7 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Service Account Name
    */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
   serviceAccountName?: string;
 
   /**
@@ -2295,6 +2297,7 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Service Account Name
    */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
   serviceAccountName?: string;
 
   /**
@@ -2367,6 +2370,7 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Service Account Name
    */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
   serviceAccountName?: string;
 
   /**
@@ -2427,6 +2431,7 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Service Account Name
    */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
   serviceAccountName?: string;
 
   /**
