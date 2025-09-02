@@ -1232,8 +1232,9 @@ model AccountProperties {
   /**
    * Shows the status of disableShowmount for all volumes under the subscription, null equals false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  disableShowmount?: boolean;
+  disableShowmount?: boolean | null;
 
   /**
    * Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.
