@@ -52,6 +52,265 @@
   },
   "tags": [],
   "paths": {
+    "/analysis/error-clusters": {
+      "get": {
+        "operationId": "Analysis_ListErrorClusterReports",
+        "description": "List all cluster error analyses.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope of the analysis.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Agent",
+              "Evaluation"
+            ],
+            "x-ms-enum": {
+              "name": "AnalysisScope",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Agent",
+                  "value": "Agent",
+                  "description": "Analysis on an Agent."
+                },
+                {
+                  "name": "Evaluation",
+                  "value": "Evaluation",
+                  "description": "Analysis on an Evaluation result."
+                }
+              ]
+            }
+          },
+          {
+            "name": "scopeId",
+            "in": "query",
+            "description": "The unique identifier for the scope.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "The state of the analysis.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "NotStarted",
+              "Running",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ],
+            "x-ms-enum": {
+              "name": "OperationState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "NotStarted",
+                  "value": "NotStarted",
+                  "description": "The operation has not started."
+                },
+                {
+                  "name": "Running",
+                  "value": "Running",
+                  "description": "The operation is in progress."
+                },
+                {
+                  "name": "Succeeded",
+                  "value": "Succeeded",
+                  "description": "The operation has completed successfully."
+                },
+                {
+                  "name": "Failed",
+                  "value": "Failed",
+                  "description": "The operation has failed."
+                },
+                {
+                  "name": "Canceled",
+                  "value": "Canceled",
+                  "description": "The operation has been canceled by the user."
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedErrorClusterReport"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/analysis/error-clusters/{id}": {
+      "get": {
+        "operationId": "Analysis_GetErrorClusterReport",
+        "description": "Get a specific cluster error analysis.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the cluster analysis result.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ErrorClusterReport"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analysis/errors-clusters": {
+      "post": {
+        "operationId": "Analysis_CreateErrorClusterReport",
+        "description": "Run a one-off cluster error analysis.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorClusterReport"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ErrorClusterReport"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analysis/errors-clusters:latest": {
+      "get": {
+        "operationId": "Analysis_GetLatestErrorClusterReport",
+        "description": "Get the latest cluster error analysis.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ErrorClusterReport"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/connections": {
       "get": {
         "operationId": "Connections_List",
@@ -1664,6 +1923,49 @@
         "maxRequestRate"
       ]
     },
+    "AnalysisMetadata": {
+      "type": "object",
+      "description": "Metadata about the analysis.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the analysis was created."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the analysis was completed."
+        }
+      },
+      "required": [
+        "createdAt"
+      ]
+    },
+    "AnalysisScope": {
+      "type": "string",
+      "description": "The scope of the cluster analysis.",
+      "enum": [
+        "Agent",
+        "Evaluation"
+      ],
+      "x-ms-enum": {
+        "name": "AnalysisScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Agent",
+            "value": "Agent",
+            "description": "Analysis on an Agent."
+          },
+          {
+            "name": "Evaluation",
+            "value": "Evaluation",
+            "description": "Analysis on an Evaluation result."
+          }
+        ]
+      }
+    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1928,6 +2230,48 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
       }
     },
     "AzureAISearchIndex": {
@@ -2450,6 +2794,46 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "ErrorClusterReport": {
+      "type": "object",
+      "description": "The response body for cluster analysis.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the cluster analysis result.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/AnalysisMetadata",
+          "description": "Metadata about the cluster analysis.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current state of the analysis.",
+          "readOnly": true
+        },
+        "scope": {
+          "$ref": "#/definitions/AnalysisScope",
+          "description": "Scope of the analysis."
+        },
+        "scopeId": {
+          "type": "string",
+          "description": "Identifier for the scope. This is either the AgentId or EvaluationId depending on the scope."
+        },
+        "modelConfiguration": {
+          "$ref": "#/definitions/ModelConfiguration",
+          "description": "Configuration of the model used in the analysis."
+        }
+      },
+      "required": [
+        "id",
+        "metadata",
+        "state",
+        "scope",
+        "scopeId"
+      ]
+    },
     "Evaluation": {
       "type": "object",
       "description": "Evaluation Definition",
@@ -2803,6 +3187,25 @@
         "role"
       ]
     },
+    "ModelConfiguration": {
+      "type": "object",
+      "description": "Configuration of the model used in the analysis.",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'."
+        },
+        "modelParams": {
+          "type": "object",
+          "description": "Optional parameters passed to the model for evaluation.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "modelDeploymentName",
+        "modelParams"
+      ]
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -2916,6 +3319,27 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedErrorClusterReport": {
+      "type": "object",
+      "description": "Paged collection of ErrorClusterReport items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ErrorClusterReport items on this page",
+          "items": {
+            "$ref": "#/definitions/ErrorClusterReport"
           }
         },
         "nextLink": {
