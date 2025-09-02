@@ -38,6 +38,8 @@ import "./EventGridFilters.tsp";
 import "./SolutionSchema.tsp";
 import "./ConfigTemplateSchema.tsp";
 import "./ConfigTemplateMetadata.tsp";
+import "./HierarchyConfigurationMetadata.tsp";
+import "./HierarchyConfigurationMetadataVersion.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
