@@ -259,9 +259,129 @@
         ],
         "responses": {
           "200": {
-            "description": "Batch update completed. Check individual results for success/failure status of each pricing plan.",
+            "description": "Batch update completed successfully. All pricing plans were updated without errors.",
             "schema": {
               "$ref": "#/definitions/BatchPricingUpdateResponse"
+            },
+            "examples": {
+              "application/json": {
+                "results": [
+                  {
+                    "planName": "VirtualMachines",
+                    "success": true,
+                    "result": {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+                      "name": "VirtualMachines",
+                      "type": "Microsoft.Security/pricings",
+                      "properties": {
+                        "pricingTier": "Standard",
+                        "subPlan": "P2",
+                        "freeTrialRemainingTime": "PT0S",
+                        "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                        "enforce": "False",
+                        "resourcesCoverageStatus": "FullyCovered",
+                        "extensions": [
+                          {
+                            "name": "AgentlessVmScanning",
+                            "isEnabled": "True",
+                            "operationStatus": {
+                              "code": "Succeeded",
+                              "message": "Successfully enabled extension"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "planName": "StorageAccounts",
+                    "success": true,
+                    "result": {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
+                      "name": "StorageAccounts",
+                      "type": "Microsoft.Security/pricings",
+                      "properties": {
+                        "pricingTier": "Standard",
+                        "subPlan": "DefenderForStorageV2",
+                        "freeTrialRemainingTime": "PT0S",
+                        "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                        "enforce": "False",
+                        "resourcesCoverageStatus": "FullyCovered",
+                        "extensions": [
+                          {
+                            "name": "OnUploadMalwareScanning",
+                            "isEnabled": "True",
+                            "additionalExtensionProperties": {
+                              "capGBPerMonth": "5000"
+                            },
+                            "operationStatus": {
+                              "code": "Succeeded",
+                              "message": "Successfully enabled extension"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "summary": {
+                  "totalRequested": 2,
+                  "successfulUpdates": 2,
+                  "failedUpdates": 0
+                }
+              }
+            }
+          },
+          "207": {
+            "description": "Multi-Status: Batch update completed with mixed results. Some pricing plans were updated successfully while others failed. Check individual results for the status of each pricing plan and refer to the summary for overall statistics.",
+            "schema": {
+              "$ref": "#/definitions/BatchPricingUpdateResponse"
+            },
+            "examples": {
+              "application/json": {
+                "results": [
+                  {
+                    "planName": "VirtualMachines",
+                    "success": true,
+                    "result": {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+                      "name": "VirtualMachines",
+                      "type": "Microsoft.Security/pricings",
+                      "properties": {
+                        "pricingTier": "Standard",
+                        "subPlan": "P2",
+                        "freeTrialRemainingTime": "PT0S",
+                        "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                        "enforce": "False",
+                        "resourcesCoverageStatus": "FullyCovered",
+                        "extensions": [
+                          {
+                            "name": "AgentlessVmScanning",
+                            "isEnabled": "True",
+                            "operationStatus": {
+                              "code": "Succeeded",
+                              "message": "Successfully enabled extension"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "planName": "StorageAccounts",
+                    "success": false,
+                    "error": {
+                      "code": "InvalidConfiguration",
+                      "message": "The specified subplan 'DefenderForStorageV2' is not available in this region."
+                    }
+                  }
+                ],
+                "summary": {
+                  "totalRequested": 2,
+                  "successfulUpdates": 1,
+                  "failedUpdates": 1
+                }
+              }
             }
           },
           "400": {
@@ -641,72 +761,6 @@
           "$ref": "#/definitions/BatchOperationSummary",
           "description": "Summary statistics for the batch operation including total, successful, and failed update counts"
         }
-      },
-      "example": {
-        "results": [
-          {
-            "planName": "VirtualMachines",
-            "success": true,
-            "result": {
-              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
-              "name": "VirtualMachines",
-              "type": "Microsoft.Security/pricings",
-              "properties": {
-                "pricingTier": "Standard",
-                "subPlan": "P2",
-                "freeTrialRemainingTime": "PT0S",
-                "enablementTime": "2023-03-01T12:42:42.1921106Z",
-                "enforce": "False",
-                "resourcesCoverageStatus": "FullyCovered",
-                "extensions": [
-                  {
-                    "name": "AgentlessVmScanning",
-                    "isEnabled": "True",
-                    "operationStatus": {
-                      "code": "Succeeded",
-                      "message": "Successfully enabled extension"
-                    }
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "planName": "StorageAccounts",
-            "success": true,
-            "result": {
-              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
-              "name": "StorageAccounts",
-              "type": "Microsoft.Security/pricings",
-              "properties": {
-                "pricingTier": "Standard",
-                "subPlan": "DefenderForStorageV2",
-                "freeTrialRemainingTime": "PT0S",
-                "enablementTime": "2023-03-01T12:42:42.1921106Z",
-                "enforce": "False",
-                "resourcesCoverageStatus": "FullyCovered",
-                "extensions": [
-                  {
-                    "name": "OnUploadMalwareScanning",
-                    "isEnabled": "True",
-                    "additionalExtensionProperties": {
-                      "capGBPerMonth": "5000"
-                    },
-                    "operationStatus": {
-                      "code": "Succeeded",
-                      "message": "Successfully enabled extension"
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        ],
-        "summary": {
-          "totalRequested": 2,
-          "successfulUpdates": 2,
-          "failedUpdates": 0
-        }
       }
     },
     "BatchPricingResult": {
@@ -763,8 +817,8 @@
       },
       "example": {
         "totalRequested": 2,
-        "successfulUpdates": 2,
-        "failedUpdates": 0
+        "successfulUpdates": 1,
+        "failedUpdates": 1
       }
     }
   },
