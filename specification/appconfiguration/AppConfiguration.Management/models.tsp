@@ -293,7 +293,7 @@ model ConfigurationStoreProperties {
   /**
    * Property specifying whether protection against purge is enabled for this configuration store.
    */
-  enablePurgeProtection?: boolean;
+  enablePurgeProtection?: boolean = false;
 
   /**
    * Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM).
@@ -955,6 +955,8 @@ model SnapshotProperties {
    * A list of filters used to filter the key-values included in the snapshot.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @minItems(1)
+  @maxItems(3)
   filters: KeyValueFilter[];
 
   /**
