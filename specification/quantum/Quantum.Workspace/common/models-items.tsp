@@ -82,7 +82,20 @@ model ItemDetails {
   @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
+
+  /** Resource consumption metrics containing provider-specific usage data such as execution time, quantum shots consumed etc. */
+  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @visibility(Lifecycle.Read)
+  usage?: Usage;
 }
+
+/**
+ * Resource usage metrics represented as key-value pairs.
+ * Keys are provider-defined metric names (e.g. "standardMinutes", "shots") and values are the corresponding consumption amounts.
+ * The specific metrics available depend on the quantum provider and target used.
+ */
+@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+model Usage is Record<float64>;
 
 /** Job priority levels. */
 @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
