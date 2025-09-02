@@ -1,225 +1,586 @@
 # Champion Scenarios
 
-## Analyze a PDF using a prebuilt document analyzer (binary input)
+## Automated Invoice Processing Pipeline
 
-**Customer Value:** Extracts key content from local PDFs at scale to automate downstream workflows without manual data entry.
+**Customer Value:** Transform manual invoice processing into a fully automated AP workflow that reduces processing time from hours to minutes while improving accuracy and audit trails.
 
-**REST API Flow:**
+**Business Scenario:** A finance team receives hundreds of invoices daily via email, web uploads, and cloud storage. They need to extract key data, validate information, and route invoices to the appropriate approval workflows based on vendor, amount, and department.
 
-1. Start analysis with the prebuilt analyzer on binary content
-2. Poll operation status until completed
-3. Retrieve structured results (JSON)
-4. (Optional) Download any generated result files
+**Complete HTTP Workflow:**
 
 ```http
-POST /analyzers/prebuilt-documentAnalyzer:analyze
-	Content-Type: application/pdf
-	Body: <binary PDF>
+@endpoint = {{$dotenv CONTENT_UNDERSTANDING_ENDPOINT}}
+@apiVersion = 2025-05-01-preview
+@bearerToken = {{$dotenv BEARER_TOKEN}}
+@documentUrl = https://contoso.blob.core.windows.net/invoices/invoice-2025-001.pdf
 
-GET /analyzers/prebuilt-documentAnalyzer/operations/{operationId}
+### Step 1: Create Document Classifier
+PUT {{endpoint}}/contentunderstanding/classifiers/invoice-classifier?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
 
-GET /analyzerResults/{operationId}
+{
+  "categories": [
+    { "name": "Invoice" },
+    { "name": "Receipt" },
+    { "name": "PurchaseOrder" },
+    { "name": "Contract" },
+    { "name": "Other" }
+  ]
+}
 
-GET /analyzerResults/{operationId}/files/{path}
+// Response: {"operationId": "classifier-create-inv-001"}
+
+### Step 2: Classify Uploaded Document
+POST {{endpoint}}/contentunderstanding/classifiers/invoice-classifier:classify?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "url": "{{documentUrl}}"
+}
+
+// Response: {"operationId": "classify-operation-inv-001"}
+
+### Step 3: Get Classification Result
+GET {{endpoint}}/contentunderstanding/classifierResults/classify-operation-inv-001?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+
+// Response: {"category": "Invoice", "confidence": 0.98}
+
+### Step 4: Extract Invoice Data (Since Classified as Invoice)
+POST {{endpoint}}/contentunderstanding/analyzers/prebuilt-invoice:analyze?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "url": "{{documentUrl}}"
+}
+
+// Response: {"operationId": "invoice-analysis-001"}
+
+### Step 5: Retrieve Extracted Invoice Fields
+GET {{endpoint}}/contentunderstanding/analyzerResults/invoice-analysis-001?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+
+// Response: {
+//   "fields": {
+//     "InvoiceId": "INV-2025-001",
+//     "InvoiceDate": "2025-08-15", 
+//     "DueDate": "2025-09-14",
+//     "VendorName": "Contoso Supplies Ltd",
+//     "VendorAddress": "123 Business Park, Seattle, WA 98101",
+//     "BillToName": "Fabrikam Corp",
+//     "SubTotal": 1250.00,
+//     "TotalTax": 125.00,
+//     "InvoiceTotal": 1375.00,
+//     "Currency": "USD"
+//   },
+//   "lineItems": [
+//     {
+//       "Description": "Office Supplies - Paper & Pens",
+//       "Quantity": 50,
+//       "UnitPrice": 15.00,
+//       "Amount": 750.00
+//     },
+//     {
+//       "Description": "Printer Cartridges - HP LaserJet", 
+//       "Quantity": 10,
+//       "UnitPrice": 50.00,
+//       "Amount": 500.00
+//     }
+//   ],
+//   "confidence": {
+//     "InvoiceTotal": 0.99,
+//     "VendorName": 0.96,
+//     "InvoiceDate": 0.98
+//   }
+// }
 ```
 
 ---
 
-## Analyze a PDF and persist the raw JSON response
+## Custom Document Understanding for HR Employee Onboarding
 
-**Customer Value:** Enables auditability and offline post-processing by saving the raw analysis JSON to storage.
+**Customer Value:** Streamline employee onboarding by automatically extracting data from diverse HR documents (contracts, forms, certifications) and populating HRIS systems without manual data entry.
 
-**REST API Flow:**
+**Business Scenario:** An HR department processes employment contracts, background check forms, tax documents, and certifications. Each document type has different fields, and manual extraction is error-prone and time-consuming.
 
-1. Start analysis with the prebuilt analyzer on binary content
-2. Poll operation status until completed
-3. Retrieve structured results (JSON)
-4. Save JSON to storage (e.g., blob, filesystem)
+**Complete HTTP Workflow:**
 
 ```http
-POST /analyzers/prebuilt-documentAnalyzer:analyze
-GET /analyzers/prebuilt-documentAnalyzer/operations/{operationId}
-GET /analyzerResults/{operationId}
+@endpoint = {{$dotenv CONTENT_UNDERSTANDING_ENDPOINT}}
+@apiVersion = 2025-05-01-preview
+@bearerToken = {{$dotenv BEARER_TOKEN}}
+@analyzerId = employment-contract-analyzer
+@operationId = contract-analysis-emp-001
+
+### Step 1: Create Custom Employment Contract Analyzer
+PUT {{endpoint}}/contentunderstanding/analyzers/{{analyzerId}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "config": {
+    "schema": {
+      "fields": {
+        "EmployeeId": { "type": "string" },
+        "FullName": { "type": "string" },
+        "Position": { "type": "string" },
+        "Department": { "type": "string" },
+        "StartDate": { "type": "date" },
+        "Salary": { "type": "number" },
+        "ManagerName": { "type": "string" },
+        "WorkLocation": { "type": "string" },
+        "EmploymentType": { "type": "string" },
+        "Benefits": { "type": "array" }
+      }
+    },
+    "analysisMode": "document",
+    "processingLocation": "global"
+  }
+}
+
+// Response: {"operationId": "analyzer-create-hr-001"}
+
+### Step 2: Analyze Employment Contract
+POST {{endpoint}}/contentunderstanding/analyzers/{{analyzerId}}:analyze?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/pdf
+
+< ./employment-contract-sarah-johnson.pdf
+
+// Response: {"operationId": "{{operationId}}"}
+
+### Step 3: Poll Analysis Status
+GET {{endpoint}}/contentunderstanding/analyzers/{{analyzerId}}/operations/{{operationId}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+
+// Response: {
+//   "status": "succeeded",
+//   "createdDateTime": "2025-09-02T14:30:00Z",
+//   "lastUpdatedDateTime": "2025-09-02T14:30:45Z"
+// }
+
+### Step 4: Retrieve Extracted Employee Data
+GET {{endpoint}}/contentunderstanding/analyzerResults/{{operationId}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+
+// Response: {
+//   "fields": {
+//     "EmployeeId": "EMP-2025-0847",
+//     "FullName": "Sarah Johnson",
+//     "Position": "Senior Software Engineer",
+//     "Department": "Engineering",
+//     "StartDate": "2025-09-15",
+//     "Salary": 125000,
+//     "ManagerName": "Michael Chen",
+//     "WorkLocation": "Seattle, WA / Remote Hybrid",
+//     "EmploymentType": "Full-time",
+//     "Benefits": [
+//       "Health Insurance",
+//       "401k Match", 
+//       "Stock Options",
+//       "Flexible PTO"
+//     ]
+//   },
+//   "confidence": {
+//     "EmployeeId": 0.99,
+//     "FullName": 0.98,
+//     "Salary": 0.96,
+//     "StartDate": 0.99
+//   }
+// }
 ```
 
 ---
 
-## Analyze a document from a URL
+## Intelligent Security & Identity Verification
 
-**Customer Value:** Processes web-hosted or cloud-stored documents without downloading them locally.
+**Customer Value:** Build secure, automated identity verification systems for access control, visitor management, and compliance monitoring using face detection and person identification.
 
-**REST API Flow:**
+**Business Scenario:** A corporate office needs to manage employee access, track visitor entry, and monitor compliance with security protocols. The system should identify known employees, flag unknown persons, and maintain audit logs.
 
-1. Start analysis with a URL payload
-2. Poll operation status until completed
-3. Retrieve structured results (JSON)
+**Complete HTTP Workflow:**
 
 ```http
-POST /analyzers/prebuilt-documentAnalyzer:analyze
-	Content-Type: application/json
-	{
-		"url": "https://.../document.pdf"
-	}
+@endpoint = {{$dotenv CONTENT_UNDERSTANDING_ENDPOINT}}
+@apiVersion = 2025-05-01-preview
+@bearerToken = {{$dotenv BEARER_TOKEN}}
+@directoryId = dir-corp-emp-2025
+@personId = person-emp-001
+@faceId = face-emp-001-primary
+@securityImageUrl = https://security.contoso.com/camera-feed/entrance-001/2025-09-02-14-30-15.jpg
 
-GET /analyzers/prebuilt-documentAnalyzer/operations/{operationId}
-GET /analyzerResults/{operationId}
+### Step 1: Create Employee Directory
+POST {{endpoint}}/contentunderstanding/personDirectories?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "name": "Corporate-Employees-2025"
+}
+
+// Response: {"personDirectoryId": "{{directoryId}}", "name": "Corporate-Employees-2025"}
+
+### Step 2: Add Employee to Directory
+POST {{endpoint}}/contentunderstanding/personDirectories/{{directoryId}}/persons?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "name": "John Smith - EMP001",
+  "userData": {
+    "employeeId": "EMP001",
+    "department": "Engineering",
+    "accessLevel": "Level-3"
+  }
+}
+
+// Response: {"personId": "{{personId}}", "name": "John Smith - EMP001"}
+
+### Step 3: Add Employee Face Profile
+POST {{endpoint}}/contentunderstanding/personDirectories/{{directoryId}}/persons/{{personId}}/faces?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: image/jpeg
+
+< ./employee-photos/john-smith-emp001.jpg
+
+// Response: {"faceId": "{{faceId}}", "boundingBox": {"x": 120, "y": 80, "width": 200, "height": 240}}
+
+### Step 4: Detect Faces in Security Camera Feed
+POST {{endpoint}}/contentunderstanding/faces:detect?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: image/jpeg
+
+< ./security-camera-captures/entrance-001-current.jpg
+
+// Response: {
+//   "faces": [
+//     {
+//       "faceId": "detected-face-001",
+//       "boundingBox": {"x": 150, "y": 100, "width": 180, "height": 220},
+//       "attributes": {
+//         "age": 32,
+//         "gender": "male",
+//         "confidence": 0.94
+//       }
+//     }
+//   ]
+// }
+
+### Step 5: Identify Person Against Employee Directory
+POST {{endpoint}}/contentunderstanding/personDirectories/{{directoryId}}/persons:identify?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "faceImageUrl": "{{securityImageUrl}}"
+}
+
+// Response: {
+//   "candidates": [
+//     {
+//       "personId": "{{personId}}",
+//       "confidence": 0.96
+//     }
+//   ],
+//   "identificationResult": {
+//     "employeeId": "EMP001",
+//     "name": "John Smith",
+//     "department": "Engineering",
+//     "accessLevel": "Level-3",
+//     "accessGranted": true
+//   }
+// }
 ```
 
 ---
 
-## Extract invoice fields using the prebuilt-invoice analyzer (URL)
+## Multi-Modal Content Analysis for Digital Asset Management
 
-**Customer Value:** Automates invoice ingestion to unlock AP automation and downstream reconciliation.
+**Customer Value:** Automatically organize, categorize, and extract metadata from diverse digital content (documents, images, videos) to build searchable digital asset libraries and enable content governance.
 
-**REST API Flow:**
+**Business Scenario:** A marketing team manages thousands of digital assets including campaign materials, product photos, legal documents, and brand guidelines. They need automated tagging, content extraction, and compliance monitoring.
 
-1. Start invoice analysis with a URL payload
-2. Poll operation status until completed
-3. Retrieve structured invoice fields
+**Complete HTTP Workflow:**
 
 ```http
-POST /analyzers/prebuilt-invoice:analyze
-	Content-Type: application/json
-	{
-		"url": "https://.../invoice.pdf"
-	}
+@endpoint = {{$dotenv CONTENT_UNDERSTANDING_ENDPOINT}}
+@apiVersion = 2025-05-01-preview
+@bearerToken = {{$dotenv BEARER_TOKEN}}
+@classifierId = digital-asset-classifier
+@campaignImageUrl = https://assets.contoso.com/campaigns/summer-2025/hero-image.jpg
+@brandGuidelinesUrl = https://assets.contoso.com/brand/brand-guidelines-2025.pdf
+@classifyOperationId = classify-campaign-img-001
+@docAnalysisOperationId = brand-doc-analysis-001
 
-GET /analyzers/prebuilt-invoice/operations/{operationId}
-GET /analyzerResults/{operationId}
+### Step 1: Create Content Type Classifier
+PUT {{endpoint}}/contentunderstanding/classifiers/{{classifierId}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "categories": [
+    { "name": "Marketing-Material" },
+    { "name": "Product-Photo" },
+    { "name": "Legal-Document" },
+    { "name": "Brand-Guidelines" },
+    { "name": "Technical-Specification" },
+    { "name": "Customer-Content" }
+  ]
+}
+
+// Response: {"operationId": "classifier-create-dam-001"}
+
+### Step 2: Classify Marketing Campaign Image
+POST {{endpoint}}/contentunderstanding/classifiers/{{classifierId}}:classify?_overload=classifyBinary&api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: image/jpeg
+
+< ./marketing-assets/summer-2025-hero-image.jpg
+
+// Response: {"operationId": "{{classifyOperationId}}"}
+
+### Step 3: Get Content Classification
+GET {{endpoint}}/contentunderstanding/classifierResults/{{classifyOperationId}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+
+// Response: {
+//   "category": "Marketing-Material",
+//   "confidence": 0.95,
+//   "metadata": {
+//     "contentType": "image/jpeg",
+//     "analysisDateTime": "2025-09-02T15:45:00Z"
+//   }
+// }
+
+### Step 4: Detect People in Marketing Image
+POST {{endpoint}}/contentunderstanding/faces:detect?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "url": "{{campaignImageUrl}}"
+}
+
+// Response: {
+//   "faces": [
+//     {
+//       "boundingBox": {"x": 200, "y": 150, "width": 180, "height": 220},
+//       "attributes": {
+//         "age": 28,
+//         "gender": "female",
+//         "emotion": "happiness",
+//         "confidence": 0.92
+//       }
+//     },
+//     {
+//       "boundingBox": {"x": 450, "y": 180, "width": 160, "height": 200},
+//       "attributes": {
+//         "age": 35,
+//         "gender": "male", 
+//         "emotion": "confidence",
+//         "confidence": 0.89
+//       }
+//     }
+//   ],
+//   "analysisMetadata": {
+//     "totalFaces": 2,
+//     "averageAge": 31.5,
+//     "genderDistribution": {"female": 1, "male": 1},
+//     "emotionalTone": "positive"
+//   }
+// }
+
+### Step 5: Analyze Associated Brand Guidelines Document
+POST {{endpoint}}/contentunderstanding/analyzers/prebuilt-documentAnalyzer:analyze?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "url": "{{brandGuidelinesUrl}}"
+}
+
+// Response: {"operationId": "{{docAnalysisOperationId}}"}
+
+### Step 6: Retrieve Brand Guidelines Analysis
+GET {{endpoint}}/contentunderstanding/analyzerResults/{{docAnalysisOperationId}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+
+// Response: {
+//   "fields": {
+//     "DocumentTitle": "Contoso Brand Guidelines 2025",
+//     "Version": "v3.2",
+//     "LastUpdated": "2025-08-01",
+//     "BrandColors": ["#FF6B35", "#004E89", "#FFFFFF"],
+//     "Typography": ["Segoe UI", "Arial", "Helvetica"],
+//     "LogoUsage": "Primary logo must maintain 1:1 aspect ratio"
+//   },
+//   "pages": [
+//     {
+//       "pageNumber": 1,
+//       "content": "Brand identity standards and visual guidelines...",
+//       "sections": ["Logo Usage", "Color Palette", "Typography", "Photography Style"]
+//     }
+//   ],
+//   "complianceCheck": {
+//     "campaignImageCompliance": {
+//       "colorPalette": "compliant",
+//       "logoUsage": "not-applicable",
+//       "photographyStyle": "compliant"
+//     }
+//   }
+// }
 ```
 
 ---
 
-## Create or replace a custom analyzer
+## Regulatory Compliance & Document Audit Pipeline
 
-**Customer Value:** Tailors extraction to business-specific documents, fields, and structures.
+**Customer Value:** Ensure regulatory compliance by automatically scanning, classifying, and monitoring documents for compliance violations, sensitive data, and audit trail requirements.
 
-**REST API Flow:**
+**Business Scenario:** A financial services company must maintain compliance with regulations like SOX, GDPR, and industry standards. They need to scan thousands of documents, identify sensitive information, ensure proper retention, and generate audit reports.
 
-1. Create or replace analyzer with schema and configuration
-2. Verify analyzer exists
-
-```http
-PUT /analyzers/{analyzerId}
-	Content-Type: application/json
-	{
-		"config": {
-			"schema": { /* field definitions */ },
-			"analysisMode": "...",
-			"processingLocation": "..."
-		}
-	}
-
-GET /analyzers/{analyzerId}
-```
-
----
-
-## Retrieve analyzer operation status and results (including files)
-
-**Customer Value:** Supports robust job orchestration and retrieval of rich artifacts (e.g., images, keyframes, attachments).
-
-**REST API Flow:**
+**Complete HTTP Workflow:**
 
 ```http
-GET /analyzers/{analyzerId}/operations/{operationId}
+@endpoint = {{$dotenv CONTENT_UNDERSTANDING_ENDPOINT}}
+@apiVersion = 2025-05-01-preview
+@bearerToken = {{$dotenv BEARER_TOKEN}}
+@complianceClassifier = compliance-classifier
+@financialAnalyzer = financial-document-analyzer
+@financialDocUrl = https://compliance.contoso.com/q3-2025/financial-statement.pdf
+@classifyOperationId = classify-financial-doc-001
+@analysisOperationId = financial-analysis-q3-001
 
-GET /analyzerResults/{operationId}
+### Step 1: Create Compliance Document Classifier
+PUT {{endpoint}}/contentunderstanding/classifiers/{{complianceClassifier}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
 
-GET /analyzerResults/{operationId}/files/{path}
-```
+{
+  "categories": [
+    { "name": "Financial-Statement" },
+    { "name": "Customer-Agreement" },
+    { "name": "Privacy-Policy" },
+    { "name": "Audit-Report" },
+    { "name": "Employee-Record" },
+    { "name": "Regulatory-Filing" }
+  ]
+}
 
----
+// Response: {"operationId": "classifier-create-compliance-001"}
 
-## Classify content using a custom classifier (structured text or binary)
+### Step 2: Create Custom Analyzer for Financial Documents
+PUT {{endpoint}}/contentunderstanding/analyzers/{{financialAnalyzer}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
 
-**Customer Value:** Routes documents/content to the right workflow by category with high accuracy.
+{
+  "config": {
+    "schema": {
+      "fields": {
+        "DocumentType": { "type": "string" },
+        "CompanyName": { "type": "string" },
+        "ReportingPeriod": { "type": "string" },
+        "AuditorName": { "type": "string" },
+        "ComplianceStatus": { "type": "string" },
+        "RevenueFigures": { "type": "array" },
+        "SignatoryNames": { "type": "array" },
+        "ConfidentialityLevel": { "type": "string" },
+        "RetentionPeriod": { "type": "string" }
+      }
+    },
+    "analysisMode": "document",
+    "processingLocation": "global",
+    "complianceFeatures": {
+      "piiDetection": true,
+      "sensitiveDataMasking": true,
+      "auditLogging": true
+    }
+  }
+}
 
-**REST API Flow:**
+// Response: {"operationId": "analyzer-create-financial-001"}
 
-1. Create classifier with categories
-2. Submit content to classify (text, URL, or binary)
-3. Poll classification operation
-4. Retrieve classification result JSON
+### Step 3: Classify Uploaded Financial Document
+POST {{endpoint}}/contentunderstanding/classifiers/{{complianceClassifier}}:classify?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
 
-```http
-POST /classifiers
-	Content-Type: application/json
-	{
-		"classifierId": "{classifierId}",
-		"categories": [ { "name": "..." } ]
-	}
+{
+  "url": "{{financialDocUrl}}"
+}
 
-POST /classifiers/{classifierId}:classify
-	Content-Type: application/json | application/pdf | image/jpeg
-	Body: { "text": "..." } | { "url": "https://..." } | <binary>
+// Response: {"operationId": "{{classifyOperationId}}"}
 
-GET /classifierResults/{operationId}
-```
+### Step 4: Get Document Classification
+GET {{endpoint}}/contentunderstanding/classifierResults/{{classifyOperationId}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
 
----
+// Response: {
+//   "category": "Financial-Statement",
+//   "confidence": 0.97,
+//   "complianceFlags": {
+//     "sensitivityLevel": "high",
+//     "regulatoryScope": ["SOX", "SEC"],
+//     "retentionRequired": "7-years"
+//   }
+// }
 
-## Update, get, list, and delete classifiers
+### Step 5: Analyze Financial Document for Compliance Data
+POST {{endpoint}}/contentunderstanding/analyzers/{{financialAnalyzer}}:analyze?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
 
-**Customer Value:** Maintains classifier quality and cleans up unused models.
+{
+  "url": "{{financialDocUrl}}"
+}
 
-**REST API Flow:**
+// Response: {"operationId": "{{analysisOperationId}}"}
 
-```http
-PATCH /classifiers/{classifierId}
-	Content-Type: application/json
-	{
-		"categories": [ /* updates */ ]
-	}
+### Step 6: Retrieve Compliance Analysis Results
+GET {{endpoint}}/contentunderstanding/analyzerResults/{{analysisOperationId}}?api-version={{apiVersion}}
+Authorization: Bearer {{bearerToken}}
 
-GET /classifiers/{classifierId}
-
-GET /classifiers
-
-DELETE /classifiers/{classifierId}
-```
-
----
-
-## Detect faces in images (binary or URL)
-
-**Customer Value:** Enables privacy and safety features or identity-aware experiences by detecting faces in imagery.
-
-**REST API Flow:**
-
-1. Submit image (binary or URL) for face detection
-2. Receive bounding boxes and attributes per face
-
-```http
-POST /faces:detect
-	Content-Type: image/jpeg | application/json
-	Body: <binary image> | { "url": "https://.../image.jpg" }
-```
-
----
-
-## Manage person directories and perform identification
-
-**Customer Value:** Supports person enrollment and identity workflows such as identifying who appears in an image.
-
-**REST API Flow:**
-
-1. Create a person directory and add a person
-2. Add or update faces for that person
-3. Identify a person in a new image against the directory
-4. Find similar faces across the directory
-5. List persons and faces; clean up faces, persons, and directories
-
-```http
-POST /personDirectories
-POST /personDirectories/{directoryId}/persons
-POST /personDirectories/{directoryId}/persons/{personId}/faces
-POST /personDirectories/{directoryId}:identify
-POST /personDirectories/{directoryId}:findSimilar
-GET  /personDirectories/{directoryId}/persons
-GET  /personDirectories/{directoryId}/persons/{personId}/faces
-DELETE /personDirectories/{directoryId}/persons/{personId}/faces/{faceId}
-DELETE /personDirectories/{directoryId}/persons/{personId}
-DELETE /personDirectories/{directoryId}
+// Response: {
+//   "fields": {
+//     "DocumentType": "Quarterly Financial Statement",
+//     "CompanyName": "Contoso Financial Services Inc.",
+//     "ReportingPeriod": "Q3 2025 (Jul-Sep 2025)",
+//     "AuditorName": "Deloitte & Touche LLP",
+//     "ComplianceStatus": "SOX Compliant",
+//     "RevenueFigures": [
+//       {"Q3-2025": "$45.2M"},
+//       {"Q2-2025": "$42.8M"},
+//       {"Q3-2024": "$38.9M"}
+//     ],
+//     "SignatoryNames": [
+//       "John Anderson - CEO",
+//       "Sarah Kim - CFO",
+//       "Michael Rodriguez - Controller"
+//     ],
+//     "ConfidentialityLevel": "Internal - Financial",
+//     "RetentionPeriod": "7 years per SOX requirements"
+//   },
+//   "complianceValidation": {
+//     "requiredSignatures": "complete",
+//     "auditTrail": "verified",
+//     "dataIntegrity": "passed",
+//     "retentionPolicy": "enforced"
+//   },
+//   "sensitiveDataDetected": {
+//     "financialFigures": 12,
+//     "executiveNames": 3,
+//     "confidentialMarkings": 8
+//   },
+//   "auditMetadata": {
+//     "processedDateTime": "2025-09-02T16:20:00Z",
+//     "complianceFrameworks": ["SOX", "SEC-10Q"],
+//     "riskAssessment": "low",
+//     "nextReviewDate": "2026-09-02"
+//   }
+// }
 ```
 
