@@ -13,7 +13,6 @@ namespace Microsoft.Kubernetes;
 /**
  * Represents a connected cluster.
  */
-@subscriptionResource
 model ConnectedCluster
   is Azure.ResourceManager.TrackedResource<ConnectedClusterProperties, false> {
   ...ResourceNameParameter<
@@ -41,18 +40,12 @@ interface ConnectedClusters {
   /**
    * Returns the properties of the specified connected cluster, including name, identity, properties, and additional cluster details.
    */
-  get is ArmResourceRead<
-    ConnectedCluster,
-    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
-  >;
+  get is ArmResourceRead<ConnectedCluster>;
 
   /**
    * API to register a new Kubernetes cluster and create or replace a connected cluster tracked resource in Azure Resource Manager (ARM).
    */
-  createOrReplace is ArmResourceCreateOrReplaceAsync<
-    ConnectedCluster,
-    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
-  >;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ConnectedCluster>;
 
   /**
    * API to update certain properties of the connected cluster resource
@@ -60,8 +53,7 @@ interface ConnectedClusters {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ConnectedCluster,
-    PatchModel = ConnectedClusterPatch,
-    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+    PatchModel = ConnectedClusterPatch
   >;
 
   /**
@@ -70,7 +62,6 @@ interface ConnectedClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedCluster,
-    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
@@ -79,7 +70,6 @@ interface ConnectedClusters {
    */
   listByResourceGroup is ArmResourceListByParent<
     ConnectedCluster,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
     Response = ArmResponse<ConnectedClusterList>
   >;
 
@@ -97,8 +87,7 @@ interface ConnectedClusters {
   listClusterUserCredential is ArmResourceActionSync<
     ConnectedCluster,
     ListClusterUserCredentialProperties,
-    ArmResponse<CredentialResults>,
-    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+    ArmResponse<CredentialResults>
   >;
 }
 
