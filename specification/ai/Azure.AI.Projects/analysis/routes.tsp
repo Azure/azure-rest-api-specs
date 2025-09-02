@@ -24,7 +24,7 @@ interface Analysis {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Run a one-off cluster error analysis.")
   @post
-  @route("errors-clusters")
+  @route("error-clusters")
   createErrorClusterReport is Azure.Core.Foundations.Operation<
     {
       @header("Repeatability-Request-ID")
