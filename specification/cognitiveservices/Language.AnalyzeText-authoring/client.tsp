@@ -268,7 +268,6 @@ namespace TextAuthoringClient {
 
   op getProject is Language.Text.Authoring.TextAuthoringProject.getProject;
 
-  @access(Access.internal, "python")
   op deleteProject is Language.Text.Authoring.TextAuthoringProject.deleteProject;
 
   @access(Access.internal, "python")
