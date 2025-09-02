@@ -11,6 +11,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
 // FIXME: AlertRule has no properties property
+
+alias OperationalInsights = Extension.ExternalResource<
+  "Microsoft.OperationalInsights",
+  "workspaces",
+  "workspaceName",
+  Description = "The name of the monitor workspace."
+>;
+
 /**
  * Alert rule.
  */
@@ -34,24 +42,33 @@ interface AlertRules {
   /**
    * Gets the alert rule.
    */
-  get is ArmResourceRead<AlertRule>;
+  get is Extension.Read<OperationalInsights, AlertRule, Error = CloudError>;
 
   /**
    * Creates or updates the alert rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AlertRule>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    OperationalInsights,
+    AlertRule,
+    Error = CloudError
+  >;
 
   /**
    * Delete the alert rule.
    */
-  delete is ArmResourceDeleteSync<AlertRule>;
+  delete is Extension.DeleteSync<
+    OperationalInsights,
+    AlertRule,
+    Error = CloudError
+  >;
 
   /**
    * Gets all alert rules.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    OperationalInsights,
     AlertRule,
-    Response = ArmResponse<AlertRulesList>
+    Error = CloudError
   >;
 }
 

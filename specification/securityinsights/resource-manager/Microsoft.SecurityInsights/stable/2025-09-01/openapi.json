@@ -146,6 +146,237 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules": {
+      "get": {
+        "operationId": "AlertRules_List",
+        "tags": [
+          "AlertRules"
+        ],
+        "description": "Gets all alert rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all alert rules.": {
+            "$ref": "./examples/alertRules/GetAllAlertRules.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}": {
+      "get": {
+        "operationId": "AlertRules_Get",
+        "tags": [
+          "AlertRules"
+        ],
+        "description": "Gets the alert rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Alert rule ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Fusion alert rule.": {
+            "$ref": "./examples/alertRules/GetFusionAlertRule.json"
+          },
+          "Get a MicrosoftSecurityIncidentCreation rule.": {
+            "$ref": "./examples/alertRules/GetMicrosoftSecurityIncidentCreationAlertRule.json"
+          },
+          "Get a Scheduled alert rule.": {
+            "$ref": "./examples/alertRules/GetScheduledAlertRule.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AlertRules_CreateOrUpdate",
+        "tags": [
+          "AlertRules"
+        ],
+        "description": "Creates or updates the alert rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Alert rule ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertRule",
+            "in": "body",
+            "description": "The alert rule",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AlertRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'AlertRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a Fusion alert rule.": {
+            "$ref": "./examples/alertRules/CreateFusionAlertRule.json"
+          },
+          "Creates or updates a MicrosoftSecurityIncidentCreation rule.": {
+            "$ref": "./examples/alertRules/CreateMicrosoftSecurityIncidentCreationAlertRule.json"
+          },
+          "Creates or updates a Scheduled alert rule.": {
+            "$ref": "./examples/alertRules/CreateScheduledAlertRule.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AlertRules_Delete",
+        "tags": [
+          "AlertRules"
+        ],
+        "description": "Delete the alert rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Alert rule ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an alert rule.": {
+            "$ref": "./examples/alertRules/DeleteAlertRule.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/alertRuleTemplates": {
       "get": {
         "operationId": "AlertRuleTemplates_List",
@@ -230,209 +461,6 @@
         "x-ms-examples": {
           "Get alert rule template by Id.": {
             "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplateById.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/alertRules": {
-      "get": {
-        "operationId": "AlertRules_List",
-        "tags": [
-          "AlertRules"
-        ],
-        "description": "Gets all alert rules.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AlertRulesList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all alert rules.": {
-            "$ref": "./examples/alertRules/GetAllAlertRules.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}": {
-      "get": {
-        "operationId": "AlertRules_Get",
-        "tags": [
-          "AlertRules"
-        ],
-        "description": "Gets the alert rule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "description": "Alert rule ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AlertRule"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a Fusion alert rule.": {
-            "$ref": "./examples/alertRules/GetFusionAlertRule.json"
-          },
-          "Get a MicrosoftSecurityIncidentCreation rule.": {
-            "$ref": "./examples/alertRules/GetMicrosoftSecurityIncidentCreationAlertRule.json"
-          },
-          "Get a Scheduled alert rule.": {
-            "$ref": "./examples/alertRules/GetScheduledAlertRule.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "AlertRules_CreateOrUpdate",
-        "tags": [
-          "AlertRules"
-        ],
-        "description": "Creates or updates the alert rule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "description": "Alert rule ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "alertRule",
-            "in": "body",
-            "description": "The alert rule",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AlertRule"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'AlertRule' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/AlertRule"
-            }
-          },
-          "201": {
-            "description": "Resource 'AlertRule' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/AlertRule"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates a Fusion alert rule.": {
-            "$ref": "./examples/alertRules/CreateFusionAlertRule.json"
-          },
-          "Creates or updates a MicrosoftSecurityIncidentCreation rule.": {
-            "$ref": "./examples/alertRules/CreateMicrosoftSecurityIncidentCreationAlertRule.json"
-          },
-          "Creates or updates a Scheduled alert rule.": {
-            "$ref": "./examples/alertRules/CreateScheduledAlertRule.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "AlertRules_Delete",
-        "tags": [
-          "AlertRules"
-        ],
-        "description": "Delete the alert rule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "description": "Alert rule ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete an alert rule.": {
-            "$ref": "./examples/alertRules/DeleteAlertRule.json"
           }
         }
       }
@@ -5866,6 +5894,27 @@
         ]
       }
     },
+    "AlertRuleListResult": {
+      "type": "object",
+      "description": "The response of a AlertRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertRule items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AlertRuleTemplate": {
       "type": "object",
       "description": "Alert rule template.",
@@ -5916,27 +5965,6 @@
           "description": "The AlertRuleTemplate items on this page",
           "items": {
             "$ref": "#/definitions/AlertRuleTemplate"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AlertRulesList": {
-      "type": "object",
-      "description": "List all the alert rules.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AlertRule items on this page",
-          "items": {
-            "$ref": "#/definitions/AlertRule"
           }
         },
         "nextLink": {
@@ -7674,6 +7702,32 @@
           "$ref": "#/definitions/EntityCommonProperties"
         }
       ]
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Error response structure.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Error data"
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "readOnly": true
+        }
+      }
     },
     "ConditionType": {
       "type": "string",
