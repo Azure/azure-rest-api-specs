@@ -87,7 +87,7 @@ model DisconnectedOperationProperties {
   provisioningState?: ResourceProvisioningState;
 
   @visibility(Lifecycle.Read)
-  @doc("The unique identifier of the stamp")
+  @doc("The unique GUID of the stamp")
   stampId: string;
 
   @visibility(Lifecycle.Read)
@@ -125,7 +125,7 @@ model DisconnectedOperationDeploymentManifest {
   resourceName: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The unique identifier of the stamp")
+  @doc("The unique GUID of the stamp")
   stampId: string;
 
   @visibility(Lifecycle.Read)
