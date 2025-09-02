@@ -26,7 +26,7 @@ union SourceType {
 }
 
 @doc("The state of the connector")
-union State {
+union ConnectorState {
   @doc("Whether the connector is active")
   Active: "Active",
 

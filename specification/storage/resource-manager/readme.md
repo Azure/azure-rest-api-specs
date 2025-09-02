@@ -37,15 +37,15 @@ These settings apply only when `--tag=package-2025-07-preview` is specified on t
 
 ```yaml $(tag) == 'package-2025-07-preview'
 input-file:
-  - Microsoft.Storage/stable/2025-01-01/blob.json
-  - Microsoft.Storage/stable/2025-01-01/common.json
-  - Microsoft.Storage/stable/2025-01-01/file.json
-  - Microsoft.Storage/stable/2025-01-01/privatelinks.json
-  - Microsoft.Storage/stable/2025-01-01/queue.json
-  - Microsoft.Storage/stable/2025-01-01/storage.json
-  - Microsoft.Storage/stable/2025-01-01/table.json
-  - Microsoft.Storage/stable/2025-01-01/networkSecurityPerimeter.json
-  - Microsoft.Storage/stable/2025-01-01/storageTaskAssignments.json
+  - Microsoft.Storage/stable/2024-01-01/blob.json
+  - Microsoft.Storage/stable/2024-01-01/common.json
+  - Microsoft.Storage/stable/2024-01-01/file.json
+  - Microsoft.Storage/stable/2024-01-01/privatelinks.json
+  - Microsoft.Storage/stable/2024-01-01/queue.json
+  - Microsoft.Storage/stable/2024-01-01/storage.json
+  - Microsoft.Storage/stable/2024-01-01/table.json
+  - Microsoft.Storage/stable/2024-01-01/networkSecurityPerimeter.json
+  - Microsoft.Storage/stable/2024-01-01/storageTaskAssignments.json
   - Microsoft.Storage/storageDataManagement/preview/2025-07-01-preview/StorageDataManagementRP.json
 
 suppressions:
