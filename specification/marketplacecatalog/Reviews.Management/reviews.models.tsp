@@ -30,6 +30,28 @@ model UserHasReviewProperties {
   updatedAt: string;
 }
 
+@doc("Review email notification request.")
+model ReviewEmail is ProxyResource<ReviewEmailProperties> {
+  ...ResourceNameParameter<
+    Resource = ReviewEmail,
+    KeyName = "uniqueProductId",
+    SegmentName = "products"
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
+@doc("Properties of the review email notification request.")
+model ReviewEmailProperties {
+  @doc("The user ID.")
+  userId: string;
+
+  @doc("The full name of the user.")
+  fullName: string;
+
+  @doc("The email address of the user.")
+  email: string;
+}
+
 @armResourceOperations
 interface RatingAndReviewsOperations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi"
@@ -39,6 +61,22 @@ interface RatingAndReviewsOperations {
   @action("checkUserHasReview")
   checkUserHasReview is ArmProviderActionSync<
     Response = ArmResponse<UserHasReview>,
+    Parameters = {
+      @doc("Unique Product Id")
+      @path
+      @segment("products")
+      uniqueProductId: string;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
+  @doc("Send review email notification.")
+  @post
+  @operationId("RatingAndReviews_ReviewEmail")
+  @action("reviewEmail")
+  reviewEmail is ArmProviderActionSync<
+    Request = ReviewEmail,
+    Response = ArmNoContentResponse,
     Parameters = {
       @doc("Unique Product Id")
       @path
