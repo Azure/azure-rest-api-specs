@@ -48,16 +48,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -151,6 +151,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -165,12 +168,32 @@
             "description": "The gateway hostname binding was successfully updated.",
             "schema": {
               "$ref": "#/definitions/GatewayHostnameBindingResource"
+            },
+            "headers": {
+              "location": {
+                "description": "Location header",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              }
             }
           },
           "201": {
             "description": "The gateway hostname binding was successfully created.",
             "schema": {
               "$ref": "#/definitions/GatewayHostnameBindingResource"
+            },
+            "headers": {
+              "location": {
+                "description": "Location header",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -223,6 +246,10 @@
               "location": {
                 "description": "Location header",
                 "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
               }
             }
           },
@@ -236,7 +263,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateways/{gatewayName}/hostnameBindings/{hostnameBindingName}/refreshSecret": {
@@ -263,6 +293,9 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/GatewayHostnameBindingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -271,6 +304,10 @@
             "headers": {
               "location": {
                 "description": "Location header",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }
@@ -281,6 +318,10 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -343,7 +384,11 @@
           "enum": [
             "Success",
             "Failed"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "KeyVaultFetchCode",
+            "modelAsString": false
+          }
         },
         "timeStampUtc": {
           "readOnly": true,
