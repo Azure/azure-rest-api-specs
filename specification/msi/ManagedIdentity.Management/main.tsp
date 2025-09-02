@@ -39,24 +39,11 @@ namespace Microsoft.ManagedIdentity;
  * Azure Resource Manager service. It implements
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @Azure.ResourceManager.Private.armUpdateProviderNamespace
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @get
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationListResult> | CloudError;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      CloudError
+    > {}
 
 /**
  * The available API versions.
