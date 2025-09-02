@@ -244,7 +244,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Updates multiple Microsoft Defender for Cloud pricing configurations for the specified subscription scope. This operation uses a best-effort approach where valid plans are saved atomically, while invalid plans return detailed error information. Only subscription-level scopes are supported for batch operations. Maximum of 15 pricing plans can be updated in a single batch request.",
+        "description": "Updates multiple Microsoft Defender for Cloud pricing configurations for the specified subscription scope. This operation uses a best-effort approach where valid plans are saved atomically, while invalid plans return detailed error information. Only subscription-level scopes are supported for batch operations. Maximum of 30 pricing plans can be updated in a single batch request.",
         "operationId": "Pricings_BatchUpdate",
         "parameters": [
           {
@@ -385,7 +385,7 @@
             }
           },
           "400": {
-            "description": "Bad Request - Invalid request structure, unsupported scope (only subscription-level supported), validation errors, or batch size exceeds limit (max 15 plans).",
+            "description": "Bad Request - Invalid request structure, unsupported scope (only subscription-level supported), validation errors, or batch size exceeds limit (max 30 plans).",
             "schema": {
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
@@ -679,12 +679,12 @@
       "properties": {
         "plansConfigurations": {
           "type": "array",
-          "description": "Array of pricing plan configurations to update. Maximum of 15 plans allowed per batch request.",
+          "description": "Array of pricing plan configurations to update. Maximum of 30 plans allowed per batch request.",
           "items": {
             "$ref": "#/definitions/BatchPlanItem"
           },
           "minItems": 1,
-          "maxItems": 15
+          "maxItems": 30
         }
       },
       "example": {
@@ -802,7 +802,7 @@
           "type": "integer",
           "description": "Total number of pricing configurations requested for update in this batch",
           "minimum": 1,
-          "maximum": 15
+          "maximum": 30
         },
         "successfulUpdates": {
           "type": "integer",
@@ -845,7 +845,7 @@
       "name": "batchPricingRequest",
       "in": "body",
       "required": true,
-      "description": "Batch pricing update request containing multiple plan configurations (maximum 15 plans per batch)",
+      "description": "Batch pricing update request containing multiple plan configurations (maximum 30 plans per batch)",
       "schema": {
         "$ref": "#/definitions/BatchPricingUpdateRequest"
       },
