@@ -244,7 +244,6 @@
         "tags": [
           "Pricings"
         ],
-        "summary": "Updates multiple pricing configurations in a single atomic operation",
         "description": "Updates multiple Microsoft Defender for Cloud pricing configurations for the specified subscription scope. This operation uses a best-effort approach where valid plans are saved atomically, while invalid plans return detailed error information. Only subscription-level scopes are supported for batch operations. Maximum of 15 pricing plans can be updated in a single batch request.",
         "operationId": "Pricings_BatchUpdate",
         "parameters": [
@@ -252,7 +251,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeIdSubscriptionOnly"
           },
           {
             "$ref": "#/parameters/BatchPricingUpdateRequest"
@@ -567,6 +566,41 @@
           "minItems": 1,
           "maxItems": 15
         }
+      },
+      "example": {
+        "plansConfigurations": [
+          {
+            "planName": "VirtualMachines",
+            "properties": {
+              "pricingTier": "Standard",
+              "subPlan": "P2",
+              "enforce": "False",
+              "extensions": [
+                {
+                  "name": "AgentlessVmScanning",
+                  "isEnabled": "True"
+                }
+              ]
+            }
+          },
+          {
+            "planName": "StorageAccounts",
+            "properties": {
+              "pricingTier": "Standard",
+              "subPlan": "DefenderForStorageV2",
+              "enforce": "False",
+              "extensions": [
+                {
+                  "name": "OnUploadMalwareScanning",
+                  "isEnabled": "True",
+                  "additionalExtensionProperties": {
+                    "capGBPerMonth": "5000"
+                  }
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     "BatchPlanItem": {
@@ -606,6 +640,72 @@
         "summary": {
           "$ref": "#/definitions/BatchOperationSummary",
           "description": "Summary statistics for the batch operation including total, successful, and failed update counts"
+        }
+      },
+      "example": {
+        "results": [
+          {
+            "planName": "VirtualMachines",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+              "name": "VirtualMachines",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "P2",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered",
+                "extensions": [
+                  {
+                    "name": "AgentlessVmScanning",
+                    "isEnabled": "True",
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "planName": "StorageAccounts",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
+              "name": "StorageAccounts",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "DefenderForStorageV2",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered",
+                "extensions": [
+                  {
+                    "name": "OnUploadMalwareScanning",
+                    "isEnabled": "True",
+                    "additionalExtensionProperties": {
+                      "capGBPerMonth": "5000"
+                    },
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "summary": {
+          "totalRequested": 2,
+          "successfulUpdates": 2,
+          "failedUpdates": 0
         }
       }
     },
@@ -660,6 +760,11 @@
           "description": "Number of pricing configurations that failed to update due to validation or authorization errors",
           "minimum": 0
         }
+      },
+      "example": {
+        "totalRequested": 2,
+        "successfulUpdates": 2,
+        "failedUpdates": 0
       }
     }
   },
