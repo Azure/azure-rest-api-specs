@@ -55,6 +55,40 @@
               "sessionNetworkConfiguration": {
                 "status": "EgressEnabled"
               },
+              "templateUpdateStatus": {
+                "activeTemplate": {
+                  "details": "Running",
+                  "createdTime": "2025-10-02T00:00:00.000000Z",
+                  "status": {
+                    "expectedCount": 100,
+                    "readyCount": 100,
+                    "pendingCount": 0,
+                    "imagePullFailCount": 0,
+                    "crashCount": 0,
+                    "allocatedCount": 0
+                  },
+                  "containers": [
+                    {
+                      "image": "repo/testcontainer:v4",
+                      "name": "testinitcontainer",
+                      "resources": {
+                        "cpu": 0.25,
+                        "memory": "0.5Gi"
+                      },
+                      "command": [
+                        "/bin/sh"
+                      ],
+                      "args": [
+                        "-c",
+                        "while true; do echo hello; sleep 10;done"
+                      ]
+                    }
+                  ],
+                  "ingress": {
+                    "targetPort": 80
+                  }
+                }
+              },
               "poolManagementEndpoint": "https://testsessionpool.agreeableriver-3d30edf1.eastus.azurecontainerapps.io"
             }
           }
