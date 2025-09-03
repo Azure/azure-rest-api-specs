@@ -51,3 +51,5 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Neon.Postgres.ProjectProperties.attributes, "attribute", "csharp");
+
+@@clientName(Neon.Postgres.BranchProperties.protected, "IsProtected", "csharp");
