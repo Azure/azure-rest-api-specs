@@ -23,6 +23,7 @@ model BackupInstanceResource
     SegmentName = "backupInstances",
     NamePattern = ""
   >;
+
   /**
    * Resource tags.
    */
