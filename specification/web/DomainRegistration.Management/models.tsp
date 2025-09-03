@@ -932,7 +932,7 @@ model DomainPatchResource extends ProxyOnlyResource {
      * Current DNS type
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    dnsType?: dnsType;
+    dnsType?: DnsType;
 
     /**
      * Azure DNS Zone to use
@@ -951,15 +951,6 @@ model DomainPatchResource extends ProxyOnlyResource {
     @visibility(Lifecycle.Create, Lifecycle.Read)
     authCode?: string;
   };
-}
-
-/**
- * ARM resource for dnsType.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum dnsType {
-  AzureDns,
-  DefaultDomainRegistrarDns,
 }
 
 /**
