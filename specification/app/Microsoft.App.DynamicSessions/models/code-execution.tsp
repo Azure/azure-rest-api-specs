@@ -26,6 +26,14 @@ model SessionCodeExecutionRequest {
   @added(Versions.v2025_10_02_preview)
   @doc("Whether to use empty kernel for this execution. Default is false.")
   useEmptyKernel?: boolean;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("The command to execute, this is only needed for `Shell` typed session pools.")
+  command?: string;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("The standard input, this is only needed for `Shell` typed session pools.")
+  stdin?: string;
 }
 
 @doc("The result of the code execution.")
