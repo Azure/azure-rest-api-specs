@@ -23,7 +23,7 @@ model ResourceGuardResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Resource Tag.")
   @visibility(Lifecycle.Read)
-  etag?: string;
+  eTag?: string;
 }
 
 @armResourceOperations
