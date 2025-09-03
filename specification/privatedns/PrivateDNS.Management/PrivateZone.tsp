@@ -13,11 +13,8 @@ namespace Microsoft.Network;
 /**
  * Describes a Private DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(PrivateZoneProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model PrivateZone extends Foundations.ProxyResource {
+model PrivateZone
+  is Azure.ResourceManager.ProxyResource<PrivateZoneProperties> {
   ...ResourceNameParameter<
     Resource = PrivateZone,
     KeyName = "privateZoneName",
@@ -45,12 +42,6 @@ model PrivateZone extends Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
-
-  /**
-   * Properties of the Private DNS zone.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: PrivateZoneProperties;
 }
 
 @armResourceOperations
