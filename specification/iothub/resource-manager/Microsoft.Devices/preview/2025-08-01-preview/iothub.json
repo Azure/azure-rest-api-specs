@@ -2259,6 +2259,11 @@
         "certificate": {
           "description": "The certificate content",
           "type": "string"
+        },
+        "policyResourceId": {
+          "description": "The reference to policy stored in Azure Device Registry (ADR).",
+          "type": "string",
+          "format": "arm-id"
         }
       }
     },
@@ -2308,6 +2313,11 @@
           "description": "The certificate content",
           "type": "string",
           "readOnly": true
+        },
+        "policyResourceId": {
+          "description": "The reference to policy stored in Azure Device Registry (ADR).",
+          "type": "string",
+          "format": "arm-id"
         }
       }
     },
@@ -2489,6 +2499,10 @@
             "name": "ipVersion",
             "modelAsString": true
           }
+        },
+        "adrProperties": {
+          "description": "Represents properties related to the Azure Device Registry (ADR).",
+          "$ref": "#/definitions/AdrProperties"
         }
       }
     },
@@ -2505,7 +2519,10 @@
             "S3",
             "B1",
             "B2",
-            "B3"
+            "B3",
+            "P1",
+            "P2",
+            "P3"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2518,7 +2535,8 @@
           "enum": [
             "Free",
             "Standard",
-            "Basic"
+            "Basic",
+            "Premium"
           ],
           "type": "string",
           "readOnly": true,
@@ -4625,6 +4643,22 @@
           "readOnly": true,
           "format": "date-time",
           "description": "the last update time to root certificate flag."
+        }
+      }
+    },
+    "AdrProperties": {
+      "description": "Represents properties related to the Azure Device Registry (ADR).",
+      "type": "object",
+      "properties": {
+        "namespaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The identifier of the Azure Device Registry namespace associated with the P SKU hub."
+        },
+        "identityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The identity used to manage the ADR namespace from the data plane. "
         }
       }
     }
