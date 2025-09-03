@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
 import "./BackupVaultResource.tsp";
 
 using TypeSpec.Rest;
@@ -38,7 +37,7 @@ interface BaseBackupPolicyResources {
   /**
    * Creates or Updates a backup policy belonging to a backup vault
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BaseBackupPolicyResource,
     Response = ArmResourceUpdatedResponse<BaseBackupPolicyResource>,

@@ -5294,6 +5294,13 @@
         "properties": {
           "$ref": "#/definitions/BackupInstance",
           "description": "BackupInstanceResource properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -5457,6 +5464,16 @@
         "properties": {
           "$ref": "#/definitions/BackupVault",
           "description": "BackupVaultResource properties"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Tag.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/DppIdentityDetails",
+          "description": "Resource Identity.",
+          "readOnly": true
         }
       },
       "required": [
@@ -7818,6 +7835,11 @@
         "properties": {
           "$ref": "#/definitions/ResourceGuard",
           "description": "ResourceGuardResource properties"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Tag.",
+          "readOnly": true
         }
       },
       "allOf": [

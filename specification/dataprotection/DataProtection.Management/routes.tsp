@@ -2,7 +2,7 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "./models.tsp";
+
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DataProtection;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupVaultsOperationGroup {
   /**
    * API to check for resource name availability
@@ -35,7 +35,7 @@ interface BackupVaultsOperationGroup {
   ): ArmResponse<CheckNameAvailabilityResult> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationResultOperationGroup {
   /**
    * Gets the operation result for a resource
@@ -49,7 +49,7 @@ interface OperationResultOperationGroup {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     operationId: string,
 
@@ -68,7 +68,7 @@ interface OperationResultOperationGroup {
   } | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusOperationGroup {
   /**
    * Gets the operation status for a resource.
@@ -81,13 +81,13 @@ interface OperationStatusOperationGroup {
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     operationId: string,
   ): ArmResponse<OperationResource> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusResourceGroupContextOperationGroup {
   /**
    * Gets the operation status for an operation over a ResourceGroup's context.
@@ -100,13 +100,13 @@ interface OperationStatusResourceGroupContextOperationGroup {
     ...ResourceGroupParameter,
     ...SubscriptionIdParameter,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     operationId: string,
   ): ArmResponse<OperationResource> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DataProtectionOperationGroup {
   /**
    * Validates if a feature is supported
@@ -122,7 +122,7 @@ interface DataProtectionOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupInstancesOperationGroup {
   /**
    * Triggers Cross Region Restore for BackupInstance.
@@ -161,7 +161,7 @@ interface BackupInstancesOperationGroup {
   ): OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface FetchSecondaryRecoveryPointsOperationGroup {
   /**
    * Returns a list of Secondary Recovery Points for a DataSource in a vault, that can be used for Cross Region Restore.
@@ -195,7 +195,7 @@ interface FetchSecondaryRecoveryPointsOperationGroup {
   ): ArmResponse<AzureBackupRecoveryPointResourceList> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface FetchCrossRegionRestoreJobOperationGroup {
   /**
    * Fetches the Cross Region Restore Job
@@ -216,7 +216,7 @@ interface FetchCrossRegionRestoreJobOperationGroup {
   ): ArmResponse<AzureBackupJobResource> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface FetchCrossRegionRestoreJobsOperationGroup {
   /**
    * Fetches list of Cross Region Restore job belonging to the vault
@@ -244,7 +244,7 @@ interface FetchCrossRegionRestoreJobsOperationGroup {
   ): ArmResponse<AzureBackupJobResourceList> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupInstancesExtensionRoutingOperationGroup {
   /**
    * Gets a list of backup instances associated with a tracked resource
