@@ -19,32 +19,32 @@ alias ScheduleOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
 alias ScheduleRunOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
 
 @added(Versions.v2025_07_31_preview)
-interface Schedules {
+interface EvaluationSchedules {
   @doc("Delete a schedule.")
-  delete is ScheduleOperations.ResourceDelete<Schedule>;
+  delete is ScheduleOperations.ResourceDelete<EvaluationSchedule>;
 
   @doc("Get a schedule by id.")
-  get is ScheduleOperations.ResourceRead<Schedule>;
+  get is ScheduleOperations.ResourceRead<EvaluationSchedule>;
 
   @doc("List all schedules.")
-  list is ScheduleOperations.ResourceList<Schedule>;
+  list is ScheduleOperations.ResourceList<EvaluationSchedule>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or update a schedule by id.")
   @Http.put
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
-    Schedule,
+    EvaluationSchedule,
     {
       @doc("Schedule resource")
       @Http.bodyRoot
-      Schedule: Schedule;
+      Schedule: EvaluationSchedule;
     },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<Schedule>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationSchedule>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get a schedule run by id.")
-  @route("schedules/{scheduleId}/runs/{runId}")
+  @route("evaluation_schedules/{scheduleId}/runs/{runId}")
   getRun is Azure.Core.Foundations.Operation<
     {
       @doc("Identifier of the schedule.")
@@ -75,11 +75,11 @@ interface Schedules {
   @Rest.actionSeparator("/")
   @Rest.action("runEvent")
   createRunEvent is ScheduleOperations.ResourceAction<
-    Schedule,
+    EvaluationSchedule,
     {
       @doc("Schedule run event")
       @body
-      ScheduleEvent: ScheduleRunEvent;
+      ScheduleEvent: EvaluationScheduleRunEvent;
     },
     Http.NoContentResponse
   >;

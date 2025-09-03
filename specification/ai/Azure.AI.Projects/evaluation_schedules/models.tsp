@@ -215,10 +215,10 @@ model ScheduleTask {
   definition: unknown;
 }
 
-@resource("schedules")
+@resource("evaluation_schedules")
 @doc("Schedule model.")
 @added(Versions.v2025_07_31_preview)
-model Schedule {
+model EvaluationSchedule {
   @doc("Identifier of the schedule.")
   @key("id")
   @encodedName("application/json", "id")
@@ -268,7 +268,7 @@ union ScheduleRunTriggerStatus {
 }
 
 @doc("Schedule run model.")
-@resource("schedules/{scheduleId}/runs")
+@resource("evaluation_schedules/{scheduleId}/runs")
 @added(Versions.v2025_07_31_preview)
 model ScheduleRun {
   @doc("Identifier of the schedule run.")
@@ -302,7 +302,7 @@ union ScheduleRunEventAction {
 
 @doc("Event model for schedule run actions.")
 @added(Versions.v2025_07_31_preview)
-model ScheduleRunEvent {
+model EvaluationScheduleRunEvent {
   @doc("Index of the schedule run to be acted upon from the last triggered run. Possible values 1-5.")
   scheduleRunIndex: int32;
 

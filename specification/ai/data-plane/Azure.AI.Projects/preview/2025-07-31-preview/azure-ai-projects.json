@@ -715,6 +715,291 @@
         }
       }
     },
+    "/evaluation_schedules": {
+      "get": {
+        "operationId": "EvaluationSchedules_List",
+        "description": "List all schedules.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluationSchedule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluation_schedules/{id}": {
+      "get": {
+        "operationId": "EvaluationSchedules_Get",
+        "description": "Get a schedule by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSchedule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "EvaluationSchedules_CreateOrUpdate",
+        "description": "Create or update a schedule by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Schedule",
+            "in": "body",
+            "description": "Schedule resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationSchedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSchedule"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSchedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EvaluationSchedules_Delete",
+        "description": "Delete a schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluation_schedules/{id}/runEvent": {
+      "post": {
+        "operationId": "EvaluationSchedules_CreateRunEvent",
+        "description": "Creates a schedule run event.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "ScheduleEvent",
+            "in": "body",
+            "description": "Schedule run event",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationScheduleRunEvent"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluation_schedules/{scheduleId}/runs/{runId}": {
+      "get": {
+        "operationId": "EvaluationSchedules_GetRun",
+        "description": "Get a schedule run by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "Identifier of the schedule run.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
@@ -1328,249 +1613,9 @@
         }
       }
     },
-    "/schedules": {
-      "get": {
-        "operationId": "Schedules_List",
-        "description": "List all schedules.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedSchedule"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/schedules/{id}": {
-      "get": {
-        "operationId": "Schedules_Get",
-        "description": "Get a schedule by id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the schedule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Schedule"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Schedules_CreateOrUpdate",
-        "description": "Create or update a schedule by id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the schedule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "Schedule",
-            "in": "body",
-            "description": "Schedule resource",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Schedule"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Schedule"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Schedule"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Schedules_Delete",
-        "description": "Delete a schedule.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the schedule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/schedules/{id}/runEvent": {
-      "post": {
-        "operationId": "Schedules_CreateRunEvent",
-        "description": "Creates a schedule run event.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the schedule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "ScheduleEvent",
-            "in": "body",
-            "description": "Schedule run event",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScheduleRunEvent"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/schedules/{scheduleId}/runs": {
       "get": {
-        "operationId": "Schedules_ListRuns",
+        "operationId": "EvaluationSchedules_ListRuns",
         "description": "List all schedule runs.",
         "parameters": [
           {
@@ -1589,51 +1634,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedScheduleRun"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/schedules/{scheduleId}/runs/{runId}": {
-      "get": {
-        "operationId": "Schedules_GetRun",
-        "description": "Get a schedule run by id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "scheduleId",
-            "in": "path",
-            "description": "Identifier of the schedule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "description": "Identifier of the schedule run.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ScheduleRun"
             }
           },
           "default": {
@@ -2717,6 +2717,81 @@
         "evaluators"
       ]
     },
+    "EvaluationSchedule": {
+      "type": "object",
+      "description": "Schedule model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the schedule.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name of the schedule."
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/ScheduleProvisioningStatus",
+          "description": "Provisioning status of the schedule.",
+          "readOnly": true
+        },
+        "trigger": {
+          "$ref": "#/definitions/Trigger",
+          "description": "Trigger for the schedule."
+        },
+        "task": {
+          "$ref": "#/definitions/ScheduleTask",
+          "description": "Task for the schedule."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Schedule's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Schedule's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "type": "object",
+          "description": "System metadata for the resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "trigger",
+        "task",
+        "systemData"
+      ]
+    },
+    "EvaluationScheduleRunEvent": {
+      "type": "object",
+      "description": "Event model for schedule run actions.",
+      "properties": {
+        "scheduleRunIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the schedule run to be acted upon from the last triggered run. Possible values 1-5."
+        },
+        "action": {
+          "$ref": "#/definitions/ScheduleRunEventAction",
+          "description": "Action to be taken on the schedule run."
+        }
+      },
+      "required": [
+        "scheduleRunIndex",
+        "action"
+      ]
+    },
     "EvaluationTarget": {
       "type": "object",
       "description": "Abstract base model for defining evaluation targets.",
@@ -3235,6 +3310,27 @@
         "value"
       ]
     },
+    "PagedEvaluationSchedule": {
+      "type": "object",
+      "description": "Paged collection of EvaluationSchedule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluationSchedule items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluationSchedule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedIndex": {
       "type": "object",
       "description": "Paged collection of Index items",
@@ -3265,27 +3361,6 @@
           "description": "The RedTeam items on this page",
           "items": {
             "$ref": "#/definitions/RedTeam"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedSchedule": {
-      "type": "object",
-      "description": "Paged collection of Schedule items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Schedule items on this page",
-          "items": {
-            "$ref": "#/definitions/Schedule"
           }
         },
         "nextLink": {
@@ -3656,62 +3731,6 @@
         "type"
       ]
     },
-    "Schedule": {
-      "type": "object",
-      "description": "Schedule model.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the schedule.",
-          "readOnly": true
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Name of the schedule."
-        },
-        "provisioningStatus": {
-          "$ref": "#/definitions/ScheduleProvisioningStatus",
-          "description": "Provisioning status of the schedule.",
-          "readOnly": true
-        },
-        "trigger": {
-          "$ref": "#/definitions/Trigger",
-          "description": "Trigger for the schedule."
-        },
-        "task": {
-          "$ref": "#/definitions/ScheduleTask",
-          "description": "Task for the schedule."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Schedule's tags. Unlike properties, tags are fully mutable.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Schedule's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemData": {
-          "type": "object",
-          "description": "System metadata for the resource.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "trigger",
-        "task",
-        "systemData"
-      ]
-    },
     "ScheduleProvisioningStatus": {
       "type": "string",
       "description": "Schedule provisioning status.",
@@ -3779,25 +3798,6 @@
         "id",
         "scheduleId",
         "triggerStatus"
-      ]
-    },
-    "ScheduleRunEvent": {
-      "type": "object",
-      "description": "Event model for schedule run actions.",
-      "properties": {
-        "scheduleRunIndex": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Index of the schedule run to be acted upon from the last triggered run. Possible values 1-5."
-        },
-        "action": {
-          "$ref": "#/definitions/ScheduleRunEventAction",
-          "description": "Action to be taken on the schedule run."
-        }
-      },
-      "required": [
-        "scheduleRunIndex",
-        "action"
       ]
     },
     "ScheduleRunEventAction": {
