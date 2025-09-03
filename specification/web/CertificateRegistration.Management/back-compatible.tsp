@@ -3,20 +3,17 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.CertificateRegistration;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateOrderPatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificatePatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ReissueCertificateOrderRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RenewCertificateOrderRequest.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SiteSeal.html);
 
 @@clientName(AppServiceCertificateOrders.createOrUpdate::parameters.resource,
   "certificateDistinguishedName"
@@ -36,7 +33,7 @@ using Microsoft.CertificateRegistration;
 @@clientName(AppServiceCertificateOrders.retrieveSiteSeal::parameters.body,
   "siteSealRequest"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateOrder.properties);
 
 @@clientLocation(AppServiceCertificateResources.getCertificate,
@@ -60,7 +57,7 @@ using Microsoft.CertificateRegistration;
 @@clientLocation(AppServiceCertificateResources.listCertificates,
   "AppServiceCertificateOrders"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateResource.properties);
 
 @@clientLocation(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
@@ -69,7 +66,7 @@ using Microsoft.CertificateRegistration;
 @@clientLocation(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
   "CertificateOrdersDiagnostics"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
 
 @@clientLocation(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation,
@@ -140,58 +137,9 @@ using Microsoft.CertificateRegistration;
   "Microsoft.CertificateRegistration call to get a detector response from App Lens."
 );
 @@doc(AppServiceCertificateOrder.properties, "App Service error response.");
-
-@@errorsDoc(AppServiceCertificateOrders.list, "App Service error response.");
-@@errorsDoc(AppServiceCertificateOrders.verifyDomainOwnership,
-  "App Service error response."
+@@doc(AppServiceCertificateOrderCollection.value,
+  "[Placeholder] Discription for value property"
 );
-@@errorsDoc(AppServiceCertificateOrders.listByResourceGroup,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateOrders.get, "App Service error response.");
-@@errorsDoc(AppServiceCertificateOrders.update, "App Service error response.");
-@@errorsDoc(AppServiceCertificateOrders.delete, "App Service error response.");
-@@errorsDoc(AppServiceCertificateOrders.retrieveCertificateActions,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateOrders.retrieveCertificateEmailHistory,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateResources.listCertificates,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateResources.getCertificate,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateResources.createOrUpdateCertificate,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateResources.updateCertificate,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateResources.deleteCertificate,
-  "App Service error response."
-);
-@@errorsDoc(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
-  "App Service error response."
-);
-@@errorsDoc(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateOrders.reissue, "App Service error response.");
-@@errorsDoc(AppServiceCertificateOrders.renew, "App Service error response.");
-@@errorsDoc(AppServiceCertificateOrders.resendEmail,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateOrders.resendRequestEmails,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateOrders.retrieveSiteSeal,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateOrders.verifyDomainOwnership,
-  "App Service error response."
-);
-@@errorsDoc(AppServiceCertificateOrders.createOrUpdate,
-  "App Service error response."
+@@doc(AppServiceCertificateOrderCollection.nextLink,
+  "[Placeholder] Discription for nextLink property"
 );

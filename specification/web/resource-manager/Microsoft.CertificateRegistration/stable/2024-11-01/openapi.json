@@ -68,13 +68,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/CsmOperationCollection"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -82,9 +82,6 @@
           "List operations": {
             "$ref": "./examples/ListOperations.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -112,7 +109,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -195,7 +192,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -245,7 +242,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -293,7 +290,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AppServiceCertificateOrder' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AppServiceCertificateOrder"
             }
@@ -307,16 +304,11 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -328,7 +320,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AppServiceCertificateOrder"
         },
         "x-ms-long-running-operation": true
       },
@@ -374,7 +367,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -419,7 +412,7 @@
             "description": "Resource does not exist."
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -466,7 +459,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -486,8 +479,7 @@
       "get": {
         "operationId": "AppServiceCertificateOrders_GetCertificate",
         "tags": [
-          "AppServiceCertificateResources",
-          "AppServiceCertificateOrders"
+          "AppServiceCertificateResources"
         ],
         "summary": "Get the certificate associated with a certificate order.",
         "description": "Description for Get the certificate associated with a certificate order.",
@@ -524,7 +516,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -579,7 +571,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AppServiceCertificateResource' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AppServiceCertificateResource"
             }
@@ -593,16 +585,11 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -614,7 +601,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AppServiceCertificateResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -667,7 +655,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -719,9 +707,9 @@
             "description": "Resource does not exist."
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -766,7 +754,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -847,7 +835,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -900,7 +888,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -953,7 +941,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -997,7 +985,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1050,7 +1038,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1100,7 +1088,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1150,7 +1138,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1206,7 +1194,7 @@
             }
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1250,7 +1238,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "App Service error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1323,11 +1311,11 @@
     },
     "AppServiceCertificateOrderCollection": {
       "type": "object",
-      "description": "Collection of certificate orders.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AppServiceCertificateOrder items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AppServiceCertificateOrder"
           }
@@ -1335,7 +1323,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -1821,6 +1809,81 @@
         "modelAsString": false
       }
     },
+    "CsmOperationCollection": {
+      "type": "object",
+      "description": "Collection of Azure resource manager operation metadata.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of resources.",
+          "items": {
+            "$ref": "#/definitions/CsmOperationDescription"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next page of resources.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CsmOperationDescription": {
+      "type": "object",
+      "description": "Description of an operation available for Microsoft.Web resource provider.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "isDataAction": {
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/CsmOperationDisplay",
+          "description": "Meta data about operation used for display in portal."
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/CsmOperationDescriptionProperties",
+          "description": "Properties available for a Microsoft.Web resource provider operation."
+        }
+      }
+    },
+    "CsmOperationDescriptionProperties": {
+      "type": "object",
+      "description": "Properties available for a Microsoft.Web resource provider operation.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Resource metrics service provided by Microsoft.Insights resource provider."
+        }
+      }
+    },
+    "CsmOperationDisplay": {
+      "type": "object",
+      "description": "Meta data about operation used for display in portal.",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
     "DataProviderMetadata": {
       "type": "object",
       "description": "Additional configuration for a data providers",
@@ -1887,6 +1950,71 @@
             }
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "DefaultErrorResponse": {
+      "type": "object",
+      "description": "App Service error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DefaultErrorResponseError",
+          "description": "Error model.",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultErrorResponseError": {
+      "type": "object",
+      "description": "Error model.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Standardized string to programmatically identify the error.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed error description and debugging information.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "Detailed error description and debugging information.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DefaultErrorResponseErrorDetailsItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "type": "string",
+          "description": "More information to debug error.",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultErrorResponseErrorDetailsItem": {
+      "type": "object",
+      "description": "Detailed errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Standardized string to programmatically identify the error.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed error description and debugging information.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "Detailed error description and debugging information.",
+          "readOnly": true
         }
       }
     },
@@ -2048,6 +2176,24 @@
         }
       }
     },
+    "Dimension": {
+      "type": "object",
+      "description": "Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app,\nwhere instance name is dimension of the metric HTTP request",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "internalName": {
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean"
+        }
+      }
+    },
     "InsightStatus": {
       "type": "string",
       "description": "Level of the most severe insight generated by the detector.",
@@ -2099,6 +2245,109 @@
       "x-ms-enum": {
         "name": "KeyVaultSecretStatus",
         "modelAsString": false
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Log Definition of a single resource metric.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        },
+        "logFilterPattern": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricAvailability": {
+      "type": "object",
+      "description": "Retention policy of a resource metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Definition of a single resource metric.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayDescription": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "supportsInstanceLevelAggregation": {
+          "type": "boolean"
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean"
+        },
+        "sourceMdmAccount": {
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "type": "string"
+        },
+        "metricFilterPattern": {
+          "type": "string"
+        },
+        "fillGapWithZero": {
+          "type": "boolean"
+        },
+        "isInternal": {
+          "type": "boolean"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "category": {
+          "type": "string"
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "x-ms-identifiers": []
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "NameIdentifier": {
@@ -2356,6 +2605,30 @@
         "qid": {
           "type": "string",
           "description": "Question id of sample utterance (for stackoverflow questions titles)."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Resource metrics service provided by Microsoft.Insights resource provider.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

@@ -54,7 +54,10 @@ interface AppServiceCertificateOrders {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServiceCertificateOrder,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<AppServiceCertificateOrder> | ArmResourceCreatedResponse<
+      AppServiceCertificateOrder,
+      LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateOrder>
+    >
   >;
 
   /**
