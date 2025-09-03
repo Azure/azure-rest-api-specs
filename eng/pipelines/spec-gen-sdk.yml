@@ -14,10 +14,6 @@ parameters:
     type: string
     default: 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'
     displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
-  - name: ApiVersion
-    type: string
-    default: ''
-    displayName: 'API version'
   - name: SdkReleaseType
     type: string
     values:
@@ -40,6 +36,6 @@ extends:
     SdkRepoBranch: ${{ parameters.SdkRepoBranch }}
     ConfigType: ${{ parameters.ConfigType }}
     ConfigPath: ${{ parameters.ConfigPath }}
-    ApiVersion: ${{ parameters.ApiVersion }}
+    ApiVersion: ""
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
