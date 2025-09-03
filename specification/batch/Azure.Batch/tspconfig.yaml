@@ -12,17 +12,17 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Azure.Batch/preview/{version}/BatchService.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Compute.Batch"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     head-as-boolean: false
     namespace: Azure.Compute.Batch
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Compute.Batch
     model-namespace: false
   "@azure-tools/typespec-go":
-    emitter-output-dir: "{project-root}"
     fix-const-stuttering: true
     generate-fakes: false
     inject-spans: true
