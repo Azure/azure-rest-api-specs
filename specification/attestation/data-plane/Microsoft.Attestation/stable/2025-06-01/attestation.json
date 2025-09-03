@@ -1090,58 +1090,69 @@
         },
         "x-ms-ver": {
           "type": "string",
-          "description": "The Schema version of this structure. Current Value: 1.0"
+          "description": "The Schema version of this structure. Current Value: 1.0",
+          "x-ms-client-name": "version"
         },
         "x-ms-runtime": {
           "type": "object",
           "description": "Runtime Claims",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "runtimeClaims"
         },
         "x-ms-inittime": {
           "type": "object",
           "description": "Inittime Claims",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "inittimeClaims"
         },
         "x-ms-policy": {
           "type": "object",
           "description": "Policy Generated Claims",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "policyClaims"
         },
         "x-ms-attestation-type": {
           "type": "string",
-          "description": "The Attestation type being attested."
+          "description": "The Attestation type being attested.",
+          "x-ms-client-name": "verifierType"
         },
         "x-ms-policy-signer": {
           "$ref": "#/definitions/JsonWebKey",
-          "description": "The certificate used to sign the policy object, if specified."
+          "description": "The certificate used to sign the policy object, if specified.",
+          "x-ms-client-name": "policySigner"
         },
         "x-ms-policy-hash": {
           "type": "string",
           "format": "byte",
-          "description": "The SHA256 hash of the BASE64URL encoded policy text used for attestation"
+          "description": "The SHA256 hash of the BASE64URL encoded policy text used for attestation",
+          "x-ms-client-name": "policyHash"
         },
         "x-ms-sgx-is-debuggable": {
           "type": "boolean",
-          "description": "True if the enclave is debuggable, false otherwise"
+          "description": "True if the enclave is debuggable, false otherwise",
+          "x-ms-client-name": "isDebuggable"
         },
         "x-ms-sgx-product-id": {
           "type": "number",
           "format": "float",
-          "description": "The SGX Product ID for the enclave."
+          "description": "The SGX Product ID for the enclave.",
+          "x-ms-client-name": "productId"
         },
         "x-ms-sgx-mrenclave": {
           "type": "string",
-          "description": "The HEX encoded SGX MRENCLAVE value for the enclave."
+          "description": "The HEX encoded SGX MRENCLAVE value for the enclave.",
+          "x-ms-client-name": "mrEnclave"
         },
         "x-ms-sgx-mrsigner": {
           "type": "string",
-          "description": "The HEX encoded SGX MRSIGNER value for the enclave."
+          "description": "The HEX encoded SGX MRSIGNER value for the enclave.",
+          "x-ms-client-name": "mrSigner"
         },
         "x-ms-sgx-svn": {
           "type": "number",
@@ -1151,52 +1162,62 @@
         "x-ms-sgx-ehd": {
           "type": "string",
           "format": "byte",
-          "description": "A copy of the RuntimeData specified as an input to the attest call."
+          "description": "A copy of the RuntimeData specified as an input to the attest call.",
+          "x-ms-client-name": "enclaveHeldData"
         },
         "x-ms-sgx-collateral": {
           "type": "object",
           "description": "The SGX SVN value for the enclave.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "sgxCollateral"
         },
         "ver": {
           "type": "string",
-          "description": "DEPRECATED: Private Preview version of x-ms-ver claim."
+          "description": "DEPRECATED: Private Preview version of x-ms-ver claim.",
+          "x-ms-client-name": "deprecatedVersion"
         },
         "is-debuggable": {
           "type": "boolean",
-          "description": "DEPRECATED: Private Preview version of x-ms-sgx-is-debuggable claim."
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-is-debuggable claim.",
+          "x-ms-client-name": "deprecatedIsDebuggable"
         },
         "maa-attestationcollateral": {
           "type": "object",
           "description": "DEPRECATED: Private Preview version of x-ms-sgx-collateral claim.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "deprecatedSgxCollateral"
         },
         "aas-ehd": {
           "type": "string",
           "format": "byte",
-          "description": "DEPRECATED: Private Preview version of x-ms-sgx-ehd claim."
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.",
+          "x-ms-client-name": "deprecatedEnclaveHeldData"
         },
         "maa-ehd": {
           "type": "string",
           "format": "byte",
-          "description": "DEPRECATED: Private Preview version of x-ms-sgx-ehd claim."
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.",
+          "x-ms-client-name": "deprecatedEnclaveHeldData2"
         },
         "product-id": {
           "type": "number",
           "format": "float",
-          "description": "DEPRECATED: Private Preview version of x-ms-sgx-product-id"
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-product-id",
+          "x-ms-client-name": "deprecatedProductId"
         },
         "sgx-mrenclave": {
           "type": "string",
-          "description": "DEPRECATED: Private Preview version of x-ms-sgx-mrenclave."
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-mrenclave.",
+          "x-ms-client-name": "deprecatedMrEnclave"
         },
         "sgx-mrsigner": {
           "type": "string",
-          "description": "DEPRECATED: Private Preview version of x-ms-sgx-mrsigner."
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-mrsigner.",
+          "x-ms-client-name": "deprecatedMrSigner"
         },
         "svn": {
           "type": "number",
@@ -1205,20 +1226,24 @@
         },
         "tee": {
           "type": "string",
-          "description": "DEPRECATED: Private Preview version of x-ms-tee."
+          "description": "DEPRECATED: Private Preview version of x-ms-tee.",
+          "x-ms-client-name": "deprecatedTee"
         },
         "policy_signer": {
           "$ref": "#/definitions/JsonWebKey",
-          "description": "DEPRECATED: Private Preview version of x-ms-policy-signer"
+          "description": "DEPRECATED: Private Preview version of x-ms-policy-signer",
+          "x-ms-client-name": "deprecatedPolicySigner"
         },
         "policy_hash": {
           "type": "string",
           "format": "byte",
-          "description": "DEPRECATED: Private Preview version of x-ms-policy-hash"
+          "description": "DEPRECATED: Private Preview version of x-ms-policy-hash",
+          "x-ms-client-name": "deprecatedPolicyHash"
         },
         "rp_data": {
           "type": "string",
-          "description": "DEPRECATED: Private Preview version of nonce"
+          "description": "DEPRECATED: Private Preview version of nonce",
+          "x-ms-client-name": "deprecatedRpData"
         }
       }
     },
