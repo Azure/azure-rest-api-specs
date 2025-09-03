@@ -20,8 +20,8 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "LiveMetrics"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "LiveMetrics"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
