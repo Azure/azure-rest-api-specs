@@ -1,0 +1,33 @@
+{
+  "title": "Switches_RetrieveData",
+  "operationId": "Switches_RetrieveData",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup",
+    "supercomputerName": "MySupercomputer",
+    "switchName": "0000-0000-00t0",
+    "body": {
+      "paths": [
+        "/SHOW/interface/status/Ethernet0"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "path": "/SHOW/interface/status/Ethernet0",
+            "value": "{'Interface':'Ethernet0','Lanes':0,'Speed':'100G','MTU':9100}"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

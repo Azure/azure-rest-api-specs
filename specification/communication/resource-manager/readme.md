@@ -106,7 +106,11 @@ input-file:
   - Microsoft.Communication/preview/2024-01-01-preview/CommunicationServicesGccm.json
 ```
 
-```yaml $(tag) == 'package-preview-2024-01' && $(generate-private)
+### Tag: package-preview-2024-01-private
+
+These settings apply only when `--tag=package-preview-2024-01-private` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01-private'
 input-file:
   - Microsoft.Communication/preview/2024-01-01-preview/CommunicationServicesGccm-private.json
 ```
@@ -237,7 +241,11 @@ input-file:
   - Microsoft.Communication/stable/2020-08-20/CommunicationService.json
 ```
 
-```yaml $(tag) == 'package-2020-08-20' && $(generate-private)
+### Tag: package-2020-08-20-private
+
+These settings apply only when `--tag=package-2020-08-20-private` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-20-private'
 input-file:
   - Microsoft.Communication/stable/2020-08-20/CommunicationService-private.json
 ```
@@ -251,7 +259,11 @@ input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService.json
 ```
 
-```yaml $(tag) == 'package-2020-08-20-preview' && $(generate-private)
+### Tag: package-2020-08-20-preview-private
+
+These settings apply only when `--tag=package-2020-08-20-preview-private` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-20-preview-private'
 input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService-private.json
 ```
@@ -265,7 +277,11 @@ input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService.json
 ```
 
-```yaml $(tag) == 'package-2019-10-10-preview' && $(generate-private)
+### Tag: package-2019-10-10-preview-private
+
+These settings apply only when `--tag=package-2019-10-10-preview-private` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-10-10-preview-private'
 input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService-private.json
 ```

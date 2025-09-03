@@ -42,20 +42,23 @@ model DrillProperties {
 
   @doc("Parent SG resource.")
   @visibility(Lifecycle.Read)
-  sgId?: armResourceIdentifier<[
+  serviceGroupId?: armResourceIdentifier<[
     {
       type: "Microsoft.Management/serviceGroups";
     }
   ]>;
 
   @doc("Metric properties.")
-  metricsProperties?: MetricsProperties;
+  metricsProperties?: MetricsPropertiesOfDrill;
+
+  @doc("HealthModel properties.")
+  healthModelProperties?: HealthModelPropertiesOfDrill;
 
   @doc("ROPlan properties.")
-  roPlanProperties: RoPlanProperties;
+  recoveryPlanProperties: RecoveryPlanPropertiesOfDrill;
 
   @doc("Chaos Experiment properties.")
-  chaosExperimentProperties: ChaosExperimentProperties;
+  chaosExperimentProperties: ChaosExperimentPropertiesOfDrill;
 
   @doc("Execution state of the Drill. Whether it is currently running or not.")
   @visibility(Lifecycle.Read)
@@ -63,7 +66,7 @@ model DrillProperties {
 
   @doc("Readiness state of the Drill.")
   @visibility(Lifecycle.Read)
-  readinessState?: ReadinessState;
+  executionReadinessState?: ExecutionReadinessState;
 
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;
@@ -167,13 +170,29 @@ model RegionalDrill is ProxyResource<RegionalDrillProperties> {
  * Model that represents the metric properties
  */
 @doc("Metrics properties.")
-model MetricsProperties {
+model MetricsPropertiesOfDrill {
   @doc("Identity to use for metrics operations.")
   identity: AssociatedIdentity;
 
   @doc("Metrics associated with this Drill. These will be tracked through the Drill Run.")
   @OpenAPI.extension("x-ms-identifiers", #[])
   metricsToTrack: MetricsToTrack[];
+}
+
+/**
+ * Model that represents the Health Model properties
+ */
+@doc("Health Model properties.")
+model HealthModelPropertiesOfDrill {
+  @doc("Identity to use for Health Model operations.")
+  identity: AssociatedIdentity;
+
+  @doc("Full ARM Id of the Health Model.")
+  healthModelId: armResourceIdentifier<[
+    {
+      type: "Microsoft.CloudHealth/healthmodels";
+    }
+  ]>;
 }
 
 /**
@@ -201,31 +220,31 @@ model MetricsToTrack {
 }
 
 /**
- * Model that represents the ROPlan properties
+ * Model that represents the RecoveryPlan properties
  */
-@doc("Metrics properties.")
-model RoPlanProperties {
-  @doc("Identity to use for ROPlan operations.")
+@doc("RecoveryPlan properties.")
+model RecoveryPlanPropertiesOfDrill {
+  @doc("Identity to use for RecoveryPlan operations.")
   identity: AssociatedIdentity;
 
   @doc("Recovery Orchestration plan associated with this Drill.")
   @visibility(Lifecycle.Read)
-  roPlanId?: armResourceIdentifier<[
+  recoveryPlanId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/recoveryPlans";
     }
   ]>;
 
-  @doc("Identity to use for ROPlan operations.")
+  @doc("Excluded resource count in RecoveryPlan.")
   @visibility(Lifecycle.Read)
-  roResourceExcludedCount?: int32;
+  recoveryPlanResourceExcludedCount?: int32;
 }
 
 /**
  * Model that represents the Chaos Experiment properties
  */
 @doc("Chaos Experiment properties.")
-model ChaosExperimentProperties {
+model ChaosExperimentPropertiesOfDrill {
   @doc("Subscription for chaosExperiment resource.")
   subscription: string;
 
@@ -255,17 +274,17 @@ model AttentionReason {
   @doc("Permissions needed by the Drill MSI to run the chaos experiment.")
   rbacNeededForDrillOnExperiment?: string[];
 
-  @doc("Drill object does not have the necessary RBAC to run the RO Plan.")
-  drillRbacOnRo?: RBACState;
+  @doc("Drill object does not have the necessary RBAC to run the Recovery Plan.")
+  drillRbacOnRecoveryPlan?: RBACState;
 
-  @doc("Permissions needed by the Drill MSI to run the RO Plan.")
-  rbacNeededForDrillOnRo?: string[];
+  @doc("Permissions needed by the Drill MSI to run the Recovery Plan.")
+  rbacNeededForDrillOnRecoveryPlan?: string[];
 
-  @doc("Drill object does not have the necessary RBAC to read the AMW account.")
-  drillRbacOnAmw?: RBACState;
+  @doc("Drill object does not have the necessary RBAC to read the Azure Monitoring Workspace account.")
+  drillRbacOnAzureMonitoringWorkspace?: RBACState;
 
-  @doc("Permissions needed by the Drill MSI to read AMW account.")
-  rbacNeededForDrillOnAmw?: string[];
+  @doc("Permissions needed by the Drill MSI to read Azure Monitoring Workspace account.")
+  rbacNeededForDrillOnAzureMonitoringWorkspace?: string[];
 
   @doc("Drill object does not have the necessary RBAC to read the SLO object.")
   drillRbacOnSlo?: RBACState;
@@ -282,11 +301,11 @@ model AttentionReason {
   @doc("One or more Target or Capability object is deleted.")
   targets?: ExtensionObjectState;
 
-  @doc("Resources associated in RO Plan and Drill are out of sync.")
-  roAndDrillResourcesState?: RelativeResourceCompositionState;
+  @doc("Resources associated in Recovery Plan and Drill are out of sync.")
+  recoveryPlanAndDrillResourcesState?: RelativeResourceCompositionState;
 
   @doc("Resources in Service Group and Drill are out of sync.")
-  sgAndDrillResourcesState?: RelativeResourceCompositionState;
+  serviceGroupAndDrillResourcesState?: RelativeResourceCompositionState;
 
   @doc("User MSI associated with Drill object is deleted.")
   drillUserMsi?: ExtensionObjectState;
@@ -308,7 +327,7 @@ model DrillStartRequest {
 
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Inputs needed for the Recovery Orchestration Plan")
-  roInputs: {
+  recoveryPlanInputs: {
     @doc("Direction of the failover")
     failoverDirection: string;
   };
@@ -361,8 +380,12 @@ model ResourceLists {
 
 @doc("Include or Update resource")
 model IncludeOrUpdateResource {
-  @doc("Resource Id.")
-  resourceId: armResourceIdentifier<[]>;
+  @doc("Id of the DrillResource to be included (NOT the ARM Id of the underlying resource).")
+  id: armResourceIdentifier<[
+    {
+      type: "microsoft.azureresiliencemanagement/drills/drillresources";
+    }
+  ]>;
 
   @doc("Fault properties.")
   faultProperties?: FaultProperties;
@@ -388,12 +411,19 @@ model AddOrUpdateResourcesResponse {
 
 @doc("Failed Include, Exclude or Update resource.")
 model FailedDrillResource {
-  @doc("Resource Id.")
+  @doc("Id of the failed drill resource.")
+  id: armResourceIdentifier<[
+    {
+      type: "microsoft.azureresiliencemanagement/drills/drillresources";
+    }
+  ]>;
+
+  @doc("Resource Id of the underlying resource of the failed Drill resource.")
   resourceId: armResourceIdentifier<[]>;
 
-  @doc("T and C assignment error.")
+  @doc("Target and Capability assignment error.")
   @visibility(Lifecycle.Read)
-  tAndcAssignmentError?: ErrorDetails;
+  targetAndCapabilityAssignmentError?: ErrorDetails;
 
   @doc("RBAC assignment error.")
   @visibility(Lifecycle.Read)
@@ -403,13 +433,13 @@ model FailedDrillResource {
 @doc("PATCH properties for Drill.")
 model DrillPatchProperties {
   @doc("Metric properties.")
-  metricsProperties?: MetricsProperties;
+  metricsProperties?: MetricsPropertiesOfDrill;
 
-  @doc("ROPlan properties.")
-  roPlanProperties?: RoPlanProperties;
+  @doc("Recovery Plan properties.")
+  recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
   @doc("Chaos Experiment properties.")
-  chaosExperimentProperties?: ChaosExperimentProperties;
+  chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
 
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;
