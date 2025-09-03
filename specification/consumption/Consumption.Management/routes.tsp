@@ -40,7 +40,8 @@ interface PriceSheetOperationGroup {
       @path
       @segment("billingPeriods")
       billingPeriodName: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -92,7 +93,8 @@ interface UsageDetailsOperationGroup {
        */
       @query("metric")
       metric?: Metrictype;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -130,7 +132,8 @@ interface MarketplacesOperationGroup {
        */
       @query("$skiptoken")
       $skiptoken?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -147,7 +150,8 @@ interface TagsOperationGroup {
   @action("tags")
   get is ArmProviderActionSync<
     Response = TagsResult,
-    Scope = ExtensionActionScope
+    Scope = ExtensionActionScope,
+    Error = ErrorResponse
   >;
 }
 
@@ -189,7 +193,8 @@ interface ChargesOperationGroup {
        */
       @query("$apply")
       $apply?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -213,7 +218,8 @@ interface BalancesOperationGroup {
       @path
       @segment("billingAccounts")
       billingAccountId: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Gets the balances for a scope by billing period and billingAccountId. Balances are available via this API only for May 1, 2014 or later.
@@ -240,7 +246,8 @@ interface BalancesOperationGroup {
       @path
       @segment("billingPeriods")
       billingPeriodName: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -276,7 +283,8 @@ interface ReservationsSummariesOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Lists the reservations summaries for daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
@@ -315,7 +323,8 @@ interface ReservationsSummariesOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Lists the reservations summaries for the defined scope daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
@@ -371,7 +380,8 @@ interface ReservationsSummariesOperationGroup {
        */
       @query("reservationOrderId")
       reservationOrderId?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -401,7 +411,8 @@ interface ReservationsDetailsOperationGroup {
        */
       @query("$filter")
       $filter: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.
@@ -434,7 +445,8 @@ interface ReservationsDetailsOperationGroup {
        */
       @query("$filter")
       $filter: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.
@@ -484,7 +496,8 @@ interface ReservationsDetailsOperationGroup {
        */
       @query("reservationOrderId")
       reservationOrderId?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -514,7 +527,8 @@ interface ReservationRecommendationsOperationGroup {
       @path
       @segment("")
       resourceScope: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -574,7 +588,8 @@ interface ReservationRecommendationDetailsOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -616,7 +631,8 @@ interface ReservationTransactionsOperationGroup {
       @path
       @segment("billingAccounts")
       billingAccountId: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * List of transactions for reserved instances on billing profile scope. The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
@@ -649,7 +665,8 @@ interface ReservationTransactionsOperationGroup {
       @path
       @segment("billingProfiles")
       billingProfileId: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -679,7 +696,8 @@ interface AggregatedCostOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Provides the aggregate cost of a management group and all child management groups by specified billing period
@@ -706,7 +724,8 @@ interface AggregatedCostOperationGroup {
       @path
       @segment("billingPeriods")
       billingPeriodName: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -749,7 +768,8 @@ interface EventsOperationGroup {
        */
       @query("endDate")
       endDate: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Lists the events that decrements Azure credits or Microsoft Azure consumption commitment for a billing account or a billing profile for a given start and end date.
@@ -775,7 +795,8 @@ interface EventsOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -806,7 +827,8 @@ interface LotsOperationGroup {
       @path
       @segment("billingProfiles")
       billingProfileId: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Lists all Microsoft Azure consumption commitments for a billing account. The API is only supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing accounts.
@@ -832,7 +854,8 @@ interface LotsOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
   /**
    * Lists all Azure credits for a customer. The API is only supported for Microsoft Partner  Agreements (MPA) billing accounts.
@@ -865,6 +888,7 @@ interface LotsOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }

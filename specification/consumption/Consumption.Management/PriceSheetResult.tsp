@@ -75,7 +75,8 @@ interface PriceSheetResults {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
+    },
+    ErrorType = ErrorResponse
   >;
 }
 alias PriceSheetOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -137,7 +138,8 @@ interface PriceSheet {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
+    },
+    ErrorType = ErrorResponse
   >;
 }
 

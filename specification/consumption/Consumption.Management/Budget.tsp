@@ -30,7 +30,11 @@ interface Budgets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  get is Extension.Read<Extension.ScopeParameter, Budget>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    Budget,
+    Error = ErrorResponse
+  >;
 
   /**
    * The operation to create or update a budget. You can optionally provide an eTag if desired as a form of concurrency control. To obtain the latest eTag for a given budget, perform a get operation prior to your put operation.
@@ -39,7 +43,8 @@ interface Budgets {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
-    Budget
+    Budget,
+    Error = ErrorResponse
   >;
 
   /**
@@ -51,7 +56,8 @@ interface Budgets {
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
     Budget,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -59,7 +65,11 @@ interface Budgets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  list is Extension.ListByTarget<Extension.ScopeParameter, Budget>;
+  list is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    Budget,
+    Error = ErrorResponse
+  >;
 }
 
 @@doc(Budget.name, "Budget Name.");
