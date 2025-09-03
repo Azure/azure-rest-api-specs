@@ -160,11 +160,9 @@ interface StorageSyncServices {
   /**
    * Gets the private link resources that need to be created for a storage sync service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_ListByStorageSyncService")
   listByStorageSyncService is ArmResourceActionSync<
     StorageSyncService,
     void,

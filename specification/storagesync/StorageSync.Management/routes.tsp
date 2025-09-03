@@ -18,8 +18,6 @@ interface StorageSyncServicesOperationGroup {
   /**
    * Check the give namespace name availability.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StorageSyncServices_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityParameters,
@@ -41,10 +39,8 @@ interface StorageSyncServicesOperationGroup {
  * Get Operation status
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}")
 @get
-@operationId("LocationOperationStatus")
 op locationOperationStatusGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -75,8 +71,6 @@ interface OperationStatusOperationGroup {
   /**
    * Get Operation status
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("OperationStatus_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/locations/{locationName}/workflows/{workflowId}/operations/{operationId}")
   @get
   get(

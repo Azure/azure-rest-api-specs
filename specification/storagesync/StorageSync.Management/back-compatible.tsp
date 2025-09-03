@@ -79,13 +79,18 @@ using Microsoft.StorageSync;
 
 @@clientLocation(OperationStatusOperationGroup.get,
   "OperationStatus",
-  "python"
+  "!csharp"
 );
 @@clientLocation(StorageSyncServices.listByStorageSyncService,
   "PrivateLinkResources",
-  "python"
+  "!csharp"
 );
 @@clientLocation(StorageSyncServicesOperationGroup.checkNameAvailability,
   StorageSyncServices,
-  "python"
+  "!csharp"
 );
+@@clientName(locationOperationStatusGet, "LocationOperationStatus", "!csharp");
+
+@@clientName(CloudEndpoints.restoreheartbeat, "restoreHeartbeat", "!csharp");
+@@clientName(RegisteredServers.triggerRollover, "triggerRollover", "!csharp");
+@@clientName(ServerEndpoints.recallAction, "recallAction", "!csharp");
