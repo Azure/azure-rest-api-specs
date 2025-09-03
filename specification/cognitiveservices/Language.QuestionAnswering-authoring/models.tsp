@@ -308,6 +308,37 @@ model ImportFiles {
 }
 
 /**
+ * A single file operation for updating sources for a project. Used to add, remove or replace a source from a knowledgebase.
+ */
+@added(Versions.v2025_05_15_preview)
+model UpdateSourceFromFileOperationRecord {
+  /** Update operation type for assets. */
+  operation: updateOperationKind;
+
+  /** Display Name of the Source. */
+  fileDisplayName: string;
+
+  /** Unique Source value. */
+  fileSource: string;
+
+  /** Bool value for refresh. */
+  refresh?: boolean;
+}
+
+/**
+ * Collection of files containing project assets the needs to be imported.
+ */
+@added(Versions.v2025_05_15_preview)
+model UpdateSourceFiles {
+  ...ImportFiles;
+
+  /**
+   * Collection of file operations to perform during update of sources.
+   */
+  fileOperations: HttpPart<UpdateSourceFromFileOperationRecord>[];
+}
+
+/**
  * Represents the project.
  */
 @resource("authoring/query-knowledgebases/projects")

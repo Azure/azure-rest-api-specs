@@ -1459,6 +1459,79 @@
             "required": true,
             "type": "array",
             "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/sources?_overload=updateSourcesFromFiles": {
+      "patch": {
+        "operationId": "QuestionAnsweringProjects_UpdateSourcesFromFiles",
+        "description": "Import project assets from file.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "Collection of files",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          {
+            "name": "fileOperations",
+            "in": "formData",
+            "description": "Collection of file operations to perform during update of sources.",
+            "required": true,
+            "type": "array",
+            "items": {
               "type": "string"
             }
           }
@@ -1805,23 +1878,6 @@
           "description": "Unique ID of the QnA."
         }
       }
-    },
-    "ImportFiles": {
-      "type": "object",
-      "description": "Collection of files containing project assets the needs to be imported.",
-      "properties": {
-        "files": {
-          "type": "array",
-          "description": "Collection of files",
-          "items": {
-            "type": "object"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "files"
-      ]
     },
     "ImportJobOptions": {
       "type": "object",
@@ -3006,6 +3062,33 @@
         "source",
         "sourceUri",
         "sourceKind"
+      ]
+    },
+    "UpdateSourceFromFileOperationRecord": {
+      "type": "object",
+      "description": "A single file operation for updating sources for a project. Used to add, remove or replace a source from a knowledgebase.",
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/updateOperationKind",
+          "description": "Update operation type for assets."
+        },
+        "fileDisplayName": {
+          "type": "string",
+          "description": "Display Name of the Source."
+        },
+        "fileSource": {
+          "type": "string",
+          "description": "Unique Source value."
+        },
+        "refresh": {
+          "type": "boolean",
+          "description": "Bool value for refresh."
+        }
+      },
+      "required": [
+        "operation",
+        "fileDisplayName",
+        "fileSource"
       ]
     },
     "UpdateSourceRecord": {

@@ -290,6 +290,7 @@ interface QuestionAnsweringProjects {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
+  @sharedRoute
   @patch(#{ implicitOptionality: true })
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
   updateSources is Foundations.LongRunningOperation<
@@ -311,6 +312,42 @@ interface QuestionAnsweringProjects {
     },
     AcceptedResponse,
     {},
+    ErrorResponse
+  >;
+
+  /**
+   * Updates the sources of a project from files.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "endpoint has already been GA'd"
+  #suppress "@azure-tools/typespec-azure-core/byos" "method overload `updateSources` already support byos with fileUri"
+  #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "method overload `updateSources` already support byos with fileUri"
+  @added(Versions.v2025_05_15_preview)
+  @sharedRoute
+  @patch(#{ implicitOptionality: true })
+  @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
+  @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
+  updateSourcesFromFiles is Foundations.LongRunningOperation<
+    {
+      @doc("This request has a multi-part body.")
+      @TypeSpec.Http.header("Content-Type")
+      contentType: "multipart/form-data";
+
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
+      @path
+      projectName: string;
+
+      /**
+       * Collection of files containing project assets the needs to be imported.
+       */
+      @multipartBody
+      body: UpdateSourceFiles;
+    },
+    AcceptedResponse,
+    ServiceTraits,
     ErrorResponse
   >;
 
