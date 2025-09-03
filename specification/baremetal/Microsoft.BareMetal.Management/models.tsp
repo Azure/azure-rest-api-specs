@@ -198,7 +198,7 @@ model NetworkInterfaceAttachment
   /**
    * The name of the Network Interface Attachment resource.
    */
-  @maxLength(63)
+  @maxLength(72)
   @minLength(3)
   @pattern("^[-\\w\\._\\(\\)]+$")
   @path
