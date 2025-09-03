@@ -125,9 +125,205 @@
     },
     {
       "name": "ConfigTemplateMetadatas"
+    },
+    {
+      "name": "HierarchyConfigurationMetadatas"
+    },
+    {
+      "name": "HierarchyConfigurationMetadataVersions"
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.Edge/hierarchyConfigurationMetadatas": {
+      "get": {
+        "operationId": "HierarchyConfigurationMetadatas_ListByParent",
+        "tags": [
+          "HierarchyConfigurationMetadatas"
+        ],
+        "description": "List Solution resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchyConfigurationMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyConfigurationMetadatas_ListByParent_MaximumSet": {
+            "$ref": "./examples/HierarchyConfigurationMetadatas_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/hierarchyConfigurationMetadatas/{hierarchyConfigurationMetadataName}": {
+      "get": {
+        "operationId": "HierarchyConfigurationMetadatas_Get",
+        "tags": [
+          "HierarchyConfigurationMetadatas"
+        ],
+        "description": "Get a Hierarchy Configuration Metadata resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "hierarchyConfigurationMetadataName",
+            "in": "path",
+            "description": "Name of the hierarchy configuration metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchyConfigurationMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyConfigurationMetadatas_Get_MaximumSet": {
+            "$ref": "./examples/HierarchyConfigurationMetadatas_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/hierarchyConfigurationMetadatas/{hierarchyConfigurationMetadataName}/versions": {
+      "get": {
+        "operationId": "HierarchyConfigurationMetadataVersions_ListByParent",
+        "tags": [
+          "HierarchyConfigurationMetadataVersions"
+        ],
+        "description": "List Hierarchy Configuration Metadata Version resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "hierarchyConfigurationMetadataName",
+            "in": "path",
+            "description": "Name of the hierarchy configuration metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchyConfigurationMetadataVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyConfigurationMetadataVersions_ListByParent_MaximumSet": {
+            "$ref": "./examples/HierarchyConfigurationMetadataVersions_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/hierarchyConfigurationMetadatas/{hierarchyConfigurationMetadataName}/versions/{hierarchyConfigurationMetadataVersionName}": {
+      "get": {
+        "operationId": "HierarchyConfigurationMetadataVersions_Get",
+        "tags": [
+          "HierarchyConfigurationMetadataVersions"
+        ],
+        "description": "Get a Hierarchy Configuration Metadata Version resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "hierarchyConfigurationMetadataName",
+            "in": "path",
+            "description": "Name of the hierarchy configuration metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "hierarchyConfigurationMetadataVersionName",
+            "in": "path",
+            "description": "Name of the hierarchy configuration metadata version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchyConfigurationMetadataVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyConfigurationMetadataVersions_Get_MaximumSet": {
+            "$ref": "./examples/HierarchyConfigurationMetadataVersions_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.Edge/jobs": {
       "get": {
         "operationId": "Jobs_ListByTarget",
@@ -9634,6 +9830,30 @@
         }
       ]
     },
+    "ConfigTemplateConfigurationState": {
+      "type": "string",
+      "description": "Configuration State Enums",
+      "enum": [
+        "ConfigurationCompleted",
+        "ConfigurationPending"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigTemplateConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ConfigurationCompleted",
+            "value": "ConfigurationCompleted",
+            "description": "Configuration Completed"
+          },
+          {
+            "name": "ConfigurationPending",
+            "value": "ConfigurationPending",
+            "description": "Configuration Completed"
+          }
+        ]
+      }
+    },
     "ConfigTemplateListResult": {
       "type": "object",
       "description": "The response of a ConfigTemplate list operation.",
@@ -10736,6 +10956,163 @@
         "description"
       ]
     },
+    "HierarchyConfigurationMetadata": {
+      "type": "object",
+      "description": "Hierarchy Configuration Metadata Resource attached to a Target or Site",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HierarchyConfigurationMetadataProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HierarchyConfigurationMetadataListResult": {
+      "type": "object",
+      "description": "The response of a HierarchyConfigurationMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HierarchyConfigurationMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/HierarchyConfigurationMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HierarchyConfigurationMetadataProperties": {
+      "type": "object",
+      "description": "Hierarchy Configuration Metadata Properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the hierarchy configuration metadata resource",
+          "minLength": 3,
+          "maxLength": 61,
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$",
+          "readOnly": true
+        },
+        "configTemplateId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Configuration template Id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/ConfigTemplates"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "HierarchyConfigurationMetadataVersion": {
+      "type": "object",
+      "description": "Configuration Metadata Version Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HierarchyConfigurationMetadataVersionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HierarchyConfigurationMetadataVersionListResult": {
+      "type": "object",
+      "description": "The response of a HierarchyConfigurationMetadataVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HierarchyConfigurationMetadataVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/HierarchyConfigurationMetadataVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HierarchyConfigurationMetadataVersionProperties": {
+      "type": "object",
+      "description": "Hierarchy Configuration Metadata Version Properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the hierarchy configuration metadata resource",
+          "minLength": 3,
+          "maxLength": 61,
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$",
+          "readOnly": true
+        },
+        "configTemplateVersionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Configuration template version Id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/ConfigTemplates/Versions"
+              }
+            ]
+          }
+        },
+        "schemaId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Schema Id for the config template version at the hierarchy",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/ConfigTemplates/Versions/ConfigTemplateSchemas"
+              }
+            ]
+          }
+        },
+        "dynamicConfigurationVersionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Dynamic Configuration Id for the config template version",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/Configurations/DynamicConfigurations/Versions"
+              }
+            ]
+          }
+        },
+        "configurationStatus": {
+          "$ref": "#/definitions/ConfigTemplateConfigurationState",
+          "description": "Configuration status of the config template version",
+          "readOnly": true
+        }
+      }
+    },
     "InstallSolutionParameter": {
       "type": "object",
       "description": "Install Solution Parameter",
@@ -11198,6 +11575,7 @@
       "description": "JobType for the job. Supports extensibility via string values.",
       "enum": [
         "deploy",
+        "publish",
         "staging",
         "externalValidation"
       ],
@@ -11209,6 +11587,11 @@
             "name": "Deploy",
             "value": "deploy",
             "description": "A deployment job."
+          },
+          {
+            "name": "Publish",
+            "value": "publish",
+            "description": "A publish job."
           },
           {
             "name": "Staging",
@@ -11289,6 +11672,48 @@
         ]
       },
       "readOnly": true
+    },
+    "PublishJobParameter": {
+      "type": "object",
+      "description": "Parameters for a publish job.",
+      "properties": {
+        "parameter": {
+          "$ref": "#/definitions/SolutionVersionParameter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobParameterBase"
+        }
+      ],
+      "x-ms-discriminator-value": "publish"
+    },
+    "PublishJobStepStatistics": {
+      "type": "object",
+      "description": "Publish statistics for a job step, including total, success, and failed counts.",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of items processed in this step"
+        },
+        "successCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of successful items in this step"
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of failed items in this step"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobStepStatisticsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "publish"
     },
     "ReconciliationPolicyProperties": {
       "type": "object",
@@ -11975,15 +12400,15 @@
             ]
           }
         },
-        "dynamicSchemaVersionId": {
+        "schemaId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Dynamic Schema Id for the solution template version",
+          "description": "Schema Id for the solution template version at the hierarchy",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Edge/Schemas/DynamicSchemas/Versions"
+                "type": "Microsoft.Edge/SolutionTemplates/Versions/SolutionSchemas"
               }
             ]
           }
