@@ -14,32 +14,32 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.DataBox"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DataBox"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-databox"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-databox"
     namespace: "azure.mgmt.databox"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-databox"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-databox"
     namespace: "com.azure.resourcemanager.databox"
     service-name: "Data Box" # human-readable service name, whitespace allowed
     flavor: azure
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
-    package-dir: "arm-databox"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-databox"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-databox"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/databox"
-    package-dir: "armdatabox"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdatabox"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatabox"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

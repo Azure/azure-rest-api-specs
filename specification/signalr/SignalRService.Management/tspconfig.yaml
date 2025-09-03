@@ -14,20 +14,20 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.SignalR"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.SignalR"
     examples-dir: "{project-root}/examples"
     enable-bicep-serialization: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-signalr"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-signalr"
     namespace: "azure.mgmt.signalr"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-signalr"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-signalr"
     namespace: "com.azure.resourcemanager.signalr"
     service-name: "SignalR"
     flavor: azure
@@ -35,15 +35,15 @@ options:
       - resource: SignalRResource
         collection: SignalR
   "@azure-tools/typespec-ts":
-    package-dir: "arm-signalr"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-signalr"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-signalr"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/signalr"
-    package-dir: "armsignalr"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsignalr"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsignalr"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
