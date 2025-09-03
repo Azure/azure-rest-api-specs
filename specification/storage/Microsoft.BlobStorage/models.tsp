@@ -2136,10 +2136,9 @@ alias ContainerNamePathParameter = {
   containerName: string;
 };
 
-/** The hierarchical namespace resource path parameter */
-alias HNSResourcePathParameter = {
-  /** The name of the resource. */
-  @path
+alias HNSResourceTypeParameter = {
+  /** The type of the resource (file/directory). */
+  @query("resource")
   resourceType: string;
 };
 

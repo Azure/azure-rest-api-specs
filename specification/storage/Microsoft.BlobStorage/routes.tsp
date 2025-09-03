@@ -2436,7 +2436,7 @@ namespace Storage.Blob {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
-            ...HNSResourcePathParameter;
+            ...HNSResourceTypeParameter;
             ...TimeoutParameter;
             ...BlobContentTypeParameter;
             ...BlobContentEncodingParameter;
@@ -2494,7 +2494,7 @@ namespace Storage.Blob {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
-            ...HNSResourcePathParameter;
+            ...HNSResourceTypeParameter;
             ...TimeoutParameter;
             ...BlobContentTypeParameter;
             ...BlobContentEncodingParameter;
