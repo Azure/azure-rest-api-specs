@@ -55,13 +55,6 @@ input-file:
   - Microsoft.SecurityInsights/stable/2025-09-01/SourceControls.json
   - Microsoft.SecurityInsights/stable/2025-09-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2025-09-01/Watchlists.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    from: dataConnectors.json
-    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
-  - code: AvoidAdditionalProperties
-    from: AlertRules.json
-    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
 ```
 
 ### Tag: package-preview-2025-07-01
