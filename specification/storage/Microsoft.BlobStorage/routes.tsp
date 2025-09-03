@@ -2423,69 +2423,6 @@ namespace Storage.Blob {
           "application/octet-stream"
         >;
       }
-      #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-      namespace HierarchicalClient {
-        /** The Create operation creates a new page blob. */
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-        @put
-        @sharedRoute
-        @route("{blobName}")
-        op create is StorageOperationNoBody<
-          {
-            ...MetadataHeaders;
-            ...ContainerNamePathParameter;
-            ...BlobPathParameter;
-            ...TimeoutParameter;
-
-            /** Optional. Indicates the tier to be set on the page blob. */
-            @header("x-ms-access-tier")
-            tier?: PremiumPageBlobAccessTier;
-
-            ...BlobContentTypeParameter;
-            ...BlobContentEncodingParameter;
-            ...BlobContentLanguageParameter;
-            ...BlobContentMd5Parameter;
-            ...BlobCacheControlParameter;
-            ...LeaseIdOptionalParameter;
-            ...BlobContentDispositionParameter;
-            ...EncryptionKeyParameter;
-            ...EncryptionKeySha256Parameter;
-            ...EncryptionAlgorithmParameter;
-            ...EncryptionScopeParameter;
-            ...IfModifiedSinceParameter;
-            ...IfUnmodifiedSinceParameter;
-            ...IfNoneMatchParameter;
-            ...IfMatchParameter;
-            ...IfTagsParameter;
-            ...BlobContentLengthRequired;
-            ...SequenceNumberParameter;
-            ...BlobTagsHeaderParameter;
-            ...ImmutabilityPolicyExpiryParameter;
-            ...ImmutabilityPolicyModeParameter;
-            ...LegalHoldOptionalParameter;
-
-            /** the initial size of the page blob */
-            @header("Content-Length")
-            contentLength: 0;
-
-            /** The type of the blob. */
-            @header("x-ms-blob-type")
-            blobType: "PageBlob";
-          },
-          {
-            @statusCode statusCode: 201;
-            ...EtagResponseHeader;
-            ...LastModifiedResponseHeader;
-            ...ContentMd5ResponseHeader;
-            ...VersionIdResponseHeader;
-            ...DateResponseHeaderPrivate;
-            ...RequestServerEncryptedResponseHeader;
-            ...EncryptionKeySha256ResponseHeader;
-            ...EncryptionScopeResponseHeader;
-          }
-        >;
-      }
     }
   }
 }
