@@ -23,14 +23,14 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DocumentIntelligence.json"
   "@azure-tools/typespec-python":
     package-pprint-name: "Azure AI Document Intelligence"
-    package-dir: "azure-ai-documentintelligence"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-documentintelligence"
     namespace: "azure.ai.documentintelligence"
     package-version: 1.0.0
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-documentintelligence"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-documentintelligence"
     namespace: "com.azure.ai.documentintelligence"
     enable-sync-stack: true
     custom-types-subpackage: "implementation.models"
@@ -55,7 +55,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     title: DocumentIntelligence
-    package-dir: "ai-document-intelligence-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-document-intelligence-rest"
     is-modular-library: false
     generate-metadata: true
     package-details:

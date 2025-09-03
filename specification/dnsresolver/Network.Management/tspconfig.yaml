@@ -14,31 +14,31 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.DnsResolver"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DnsResolver"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-dnsresolver"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dnsresolver"
     namespace: "azure.mgmt.dnsresolver"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dnsresolver"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dnsresolver"
     namespace: "com.azure.resourcemanager.dnsresolver"
     service-name: "Dns Resolver" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-dnsresolver"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-dnsresolver"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-dnsresolver"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dnsresolver"
-    package-dir: "armdnsresolver"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdnsresolver"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdnsresolver"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
