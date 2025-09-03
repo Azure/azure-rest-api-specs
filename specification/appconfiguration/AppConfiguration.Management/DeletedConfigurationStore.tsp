@@ -45,7 +45,9 @@ interface DeletedConfigurationStores {
     DeletedConfigurationStore,
     void,
     OkResponse | NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    LroHeaders = Azure.ResourceManager.ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
