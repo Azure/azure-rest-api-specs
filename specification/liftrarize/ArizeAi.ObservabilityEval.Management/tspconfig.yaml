@@ -17,15 +17,15 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     service-dir: "sdk/arizeaiobservabilityeval"
-    package-dir: "azure-mgmt-arizeaiobservabilityeval"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-arizeaiobservabilityeval"
     namespace: "azure.mgmt.arizeaiobservabilityeval"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/arizeaiobservabilityeval"
-    package-dir: "armarizeaiobservabilityeval"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armarizeaiobservabilityeval"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armarizeaiobservabilityeval"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
@@ -35,14 +35,14 @@ options:
     inject-spans: true
   "@azure-tools/typespec-java":
     service-dir: "sdk/arizeaiobservabilityeval"
-    package-dir: "azure-resourcemanager-arizeaiobservabilityeval"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-arizeaiobservabilityeval"
     namespace: "com.azure.resourcemanager.arizeaiobservabilityeval"
     service-name: "Arize AI Observability Eval"
     flavor: "azure"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-arizeaiobservabilityeval"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-arizeaiobservabilityeval"
     package-details:
       name: "@azure/arm-arizeaiobservabilityeval"
 linter:
