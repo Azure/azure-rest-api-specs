@@ -7233,6 +7233,28 @@
       ],
       "x-ms-discriminator-value": "openapi"
     },
+    "RunStepDeltaSharepointToolCall": {
+      "type": "object",
+      "description": "Represents the SharePoint tool call in a streaming run step.",
+      "properties": {
+        "sharepoint_grounding": {
+          "type": "object",
+          "description": "SharePoint tool input and output.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "sharepoint_grounding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "sharepoint_grounding"
+    },
     "RunStepDeltaToolCall": {
       "type": "object",
       "description": "The abstract base representation of a single tool call within a streaming run step's delta tool call details.",
@@ -7610,7 +7632,7 @@
       "properties": {
         "sharepoint_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "SharePoint tool input and output.",
           "additionalProperties": {
             "type": "string"
           },

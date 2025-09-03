@@ -31,10 +31,10 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.MongoCluster"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.MongoCluster"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-mongocluster"

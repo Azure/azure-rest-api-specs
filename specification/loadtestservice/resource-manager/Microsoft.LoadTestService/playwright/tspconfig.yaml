@@ -43,10 +43,10 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.Playwright"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Playwright"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-playwright"
     namespace: "com.azure.resourcemanager.playwright"

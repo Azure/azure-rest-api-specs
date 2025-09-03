@@ -1,0 +1,38 @@
+{
+  "operationId": "GroupQuotaSubscriptions_CreateOrUpdate",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "groupQuotaName": "groupquota1",
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "subscriptionId": "00000000-0000-0000-0000-000000000000",
+          "provisioningState": "Accepted"
+        },
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/subscriptions/00000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.Quota/groupQuotas/subscriptions",
+        "name": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "201": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/subscriptions/00000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.Quota/groupQuotas/subscriptions",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "properties": {
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

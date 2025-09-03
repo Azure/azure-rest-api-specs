@@ -14,12 +14,9 @@ namespace Microsoft.Network;
 /**
  * Describes a link to virtual network for a Private DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(PrivateZone)
-@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkLinkProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualNetworkLink extends Foundations.ProxyResource {
+model VirtualNetworkLink
+  is Azure.ResourceManager.ProxyResource<VirtualNetworkLinkProperties> {
   ...ResourceNameParameter<
     Resource = VirtualNetworkLink,
     KeyName = "virtualNetworkLinkName",
@@ -47,12 +44,6 @@ model VirtualNetworkLink extends Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
-
-  /**
-   * Properties of the virtual network link to the Private DNS zone.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: VirtualNetworkLinkProperties;
 }
 
 @armResourceOperations

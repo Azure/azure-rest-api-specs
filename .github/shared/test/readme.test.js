@@ -26,8 +26,6 @@ describe("readme", () => {
     expect(readme.path).toBe(resolve("/specs/foo/readme.md"));
   });
 
-  // TODO: Test that path is resolved against backpointer
-
   it("can be created with string content", async () => {
     const folder = "/fake";
     const readme = new Readme(resolve(folder, "readme.md"), {
@@ -49,6 +47,59 @@ describe("readme", () => {
     ];
 
     expect(swaggerPaths.sort()).toEqual(expectedPaths.sort());
+  });
+
+  // If tag names are duplicated (with no disambiguating conditionals), it's almost certainly a bug
+  // in the readme that should be fixed.
+  it("throws if duplicate tags", async () => {
+    let content = `
+\`\`\`yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - foo.json
+\`\`\`
+\`\`\`yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - bar.json
+\`\`\`
+`;
+
+    let readme = new Readme("foo", { ...options, content });
+
+    expect(readme.getTags()).rejects.toThrowError(
+      "Multiple input-file definitions for tag package-2025-01-01",
+    );
+  });
+
+  // A few existing specs use duplicate tags, but with conditionals to disambiguate at runtime.
+  //
+  // While this may work for generating the SDK itself (where you can specify the additional values),
+  // it doesn't work for static analysis tools like LintDiff, since LintDiff wouldn't know what
+  // additional values to pass to autorest.
+  //
+  // It may be possible to support this in spec-model, by allowing duplicate tags with different conditionals.
+  // However, downstream users of the tags for static analysis would still need to throw.  Also, we only
+  // found two specs using this pattern (and only in the private repo).  So I think it's better to continue
+  // disallowing this, and instead rename the conflicting tags in the readme.  Rather than adding
+  // complexity to spec-model for an edge case (with workarounds).
+  //
+  // More details: https://github.com/Azure/azure-rest-api-specs/issues/37003
+  it("throws if duplicate tags with different conditionals", async () => {
+    let content = `
+\`\`\`yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - foo.json
+\`\`\`
+\`\`\`yaml $(tag) == 'package-2025-01-01' && $(test-condition)
+input-file:
+  - bar.json
+\`\`\`
+`;
+
+    let readme = new Readme("foo", { ...options, content });
+
+    expect(readme.getTags()).rejects.toThrowError(
+      "Multiple input-file definitions for tag package-2025-01-01",
+    );
   });
 
   it("can be created with empty content", async () => {

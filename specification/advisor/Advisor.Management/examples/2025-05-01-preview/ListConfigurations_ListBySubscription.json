@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "resourceGroup": "resourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Advisor/configurations?api-version=2025-05-01-preview&$skipToken=abc123",
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.Advisor/configurations",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
+            "properties": {
+              "digests": [
+                {
+                  "name": "digestConfigName",
+                  "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+                  "categories": [
+                    "HighAvailability",
+                    "Security",
+                    "Performance",
+                    "Cost",
+                    "OperationalExcellence"
+                  ],
+                  "frequency": 30,
+                  "state": "Active",
+                  "language": "en"
+                }
+              ],
+              "duration": "7",
+              "exclude": false,
+              "lowCpuThreshold": "5"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Configurations_ListBySubscription",
+  "title": "GetConfigurations"
+}

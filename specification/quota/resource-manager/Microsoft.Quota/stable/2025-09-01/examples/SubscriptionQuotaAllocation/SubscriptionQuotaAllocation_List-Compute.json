@@ -1,0 +1,38 @@
+{
+  "operationId": "GroupQuotaSubscriptionAllocation_List",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "groupQuotaName": "groupquota1",
+    "resourceProviderName": "Microsoft.Compute",
+    "location": "westus",
+    "api-version": "2025-09-01",
+    "$filter": "resourceName eq standardddv4family"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/quotaAllocations/westus",
+        "name": "westus",
+        "type": "Microsoft.Quota/groupQuotas/quotaAllocations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "value": [
+            {
+              "properties": {
+                "resourceName": "standardddv4family",
+                "limit": 25,
+                "shareableQuota": 15,
+                "name": {
+                  "value": "standardddv4family",
+                  "localizedValue": "standard DDv4 Family vCPUs"
+                }
+              }
+            }
+          ],
+          "nextLink": "https://yourLinkHere.com"
+        }
+      }
+    }
+  }
+}

@@ -27,13 +27,6 @@ model Endpoint
   >;
 
   /**
-   * Resource system metadata.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @added(Versions.v2025_07_01)
-  systemData?: SystemData;
-
-  /**
    * The managed service identity of the resource. This property is only available on the latest version.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"

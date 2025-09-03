@@ -4612,8 +4612,15 @@
           "description": "Specifies whether the filter is an allow list or deny list. For more detail, please refer to the FilterType model."
         },
         "filters": {
-          "$ref": "#/definitions/MimeTypeFilter",
-          "description": "Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model."
+          "type": "array",
+          "description": "Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model.",
+          "items": {
+            "$ref": "#/definitions/MimeTypeFilter"
+          },
+          "x-ms-identifiers": [
+            "media",
+            "extensions"
+          ]
         }
       }
     },

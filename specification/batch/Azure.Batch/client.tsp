@@ -213,6 +213,13 @@ interface BatchClient {
 @@access(Azure.Batch.Jobs.enableJob, Access.internal, "python");
 @@clientName(BatchClient.enableJob, "enableJobInternal", "python");
 
+// Set Python models to public
+@@access(Azure.Batch.BatchPoolResizeOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeRemoveOptions, Access.public, "python");
+@@access(Azure.Batch.BatchJobDisableOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeDeallocationOption, Access.public, "python");
+@@access(Azure.Batch.DisableBatchJobOption, Access.public, "python");
+
 /* GO OVERRIDES */
 // don't export API for this operation because it retired before the first Go SDK release
 @@access(Azure.Batch.Pools.listPoolUsageMetrics, Access.internal, "go");

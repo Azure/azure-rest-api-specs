@@ -179,9 +179,6 @@ interface AdministrationOperations {
   @action("clone")
   cloneTest is LoadTestAdministration.cloneTest;
 
-  getLatestTestRunInsights is LoadTestRun.getLatestInsights;
-  generateTestRunInsights is LoadTestRun.generateInsights;
-
   getOperationStatus is Operations.getStatus;
 }
 
@@ -225,4 +222,7 @@ interface TestRunOperations {
   @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
   @action("stop")
   stopTestProfileRun is TestProfileRunAdministration.stop;
+
+  getLatestTestRunInsights is LoadTestRun.getLatestInsights;
+  generateTestRunInsights is LoadTestRun.generateInsights;
 }

@@ -22,6 +22,10 @@ union JobType {
   @doc("A deployment job.")
   Deploy: "deploy",
 
+  @doc("A publish job.")
+  @added(Versions.v2025_08_01)
+  Publish: "publish",
+
   @doc("A staging job.")
   Staging: "staging",
 
@@ -44,6 +48,22 @@ union JobStatus {
 
   /** The job or step failed. */
   Failed: "Failed",
+}
+
+@doc("Publish statistics for a job step, including total, success, and failed counts.")
+@added(Versions.v2025_08_01)
+model PublishJobStepStatistics extends JobStepStatisticsBase {
+  @doc("Statistics type discriminator value")
+  statisticsType: JobType.Publish;
+
+  @doc("Total count of items processed in this step")
+  totalCount?: int32;
+
+  @doc("Count of successful items in this step")
+  successCount?: int32;
+
+  @doc("Count of failed items in this step")
+  failedCount?: int32;
 }
 
 // Base model for polymorphic job step statistics
@@ -90,6 +110,15 @@ model DeployJobParameter extends JobParameterBase {
   jobType: JobType.Deploy;
 
   parameter?: InstallSolutionParameter;
+}
+
+@doc("Parameters for a publish job.")
+@added(Versions.v2025_08_01)
+model PublishJobParameter extends JobParameterBase {
+  @doc("Job type discriminator value")
+  jobType: JobType.Publish;
+
+  parameter?: SolutionVersionParameter;
 }
 
 @doc("Job Step")

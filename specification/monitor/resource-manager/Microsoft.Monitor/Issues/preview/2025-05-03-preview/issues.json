@@ -1,0 +1,1394 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Workspaces Control Plane API",
+    "version": "2025-05-03-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Issue"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues": {
+      "get": {
+        "operationId": "Issue_List",
+        "tags": [
+          "Issue"
+        ],
+        "description": "List all issues under the parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IssueResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_List_MaximumSet": {
+            "$ref": "./examples/Issue_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues/{issueName}": {
+      "get": {
+        "operationId": "Issue_Get",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Get issue properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Get_MaximumSet": {
+            "$ref": "./examples/Issue_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Issue_Create",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Create a new issue or updates an existing one",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "related",
+            "in": "query",
+            "description": "Related resource or alert that is to be added to the issue (default: empty - the issue will be created without any related resources or alerts)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startInvestigation",
+            "in": "query",
+            "description": "Whether to automatically start an investigation once the issue is created (default: false)",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IssueResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'IssueResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Create_MaximumSet": {
+            "$ref": "./examples/Issue_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Issue_Update",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Update an issue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Update_MaximumSet": {
+            "$ref": "./examples/Issue_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Issue_Delete",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Delete an issue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Delete_MaximumSet": {
+            "$ref": "./examples/Issue_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues/{issueName}/addOrUpdateAlerts": {
+      "post": {
+        "operationId": "Issue_AddOrUpdateAlerts",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Add or update alerts in the issue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelatedAlerts"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RelatedAlerts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_AddOrUpdateAlerts_MaximumSet": {
+            "$ref": "./examples/Issue_AddOrUpdateAlerts_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues/{issueName}/addOrUpdateResources": {
+      "post": {
+        "operationId": "Issue_AddOrUpdateResources",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Add or update resources in the issue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelatedResources"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RelatedResources"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_AddOrUpdateResources_MaximumSet": {
+            "$ref": "./examples/Issue_AddOrUpdateResources_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues/{issueName}/fetchInvestigationResult": {
+      "post": {
+        "operationId": "Issue_FetchInvestigationResult",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Fetch investigation result",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FetchInvestigationResultParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InvestigationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_FetchInvestigationResult_MaximumSet": {
+            "$ref": "./examples/Issue_FetchInvestigationResult_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues/{issueName}/listAlerts": {
+      "post": {
+        "operationId": "Issue_ListAlerts",
+        "tags": [
+          "Issue"
+        ],
+        "description": "List all alerts in the issue - this method uses pagination to return all alerts",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedRelatedAlert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_ListAlerts_MaximumSet": {
+            "$ref": "./examples/Issue_ListAlerts_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues/{issueName}/listResources": {
+      "post": {
+        "operationId": "Issue_ListResources",
+        "tags": [
+          "Issue"
+        ],
+        "description": "List all resources in the issue - this method uses pagination to return all resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedRelatedResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_ListResources_MaximumSet": {
+            "$ref": "./examples/Issue_ListResources_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues/{issueName}/startInvestigation": {
+      "post": {
+        "operationId": "Issue_StartInvestigation",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Start a new investigation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartInvestigationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InvestigationMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_StartInvestigation_MaximumSet": {
+            "$ref": "./examples/Issue_StartInvestigation_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddedByType": {
+      "type": "string",
+      "description": "The type of entity that added data to the issue",
+      "enum": [
+        "Manual",
+        "Automatic"
+      ],
+      "x-ms-enum": {
+        "name": "AddedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The data was added manually by a user"
+          },
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "The data was added automatically"
+          }
+        ]
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "FetchInvestigationResultParameters": {
+      "type": "object",
+      "description": "Parameters provided to get the investigation result",
+      "properties": {
+        "investigationId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the investigation"
+        }
+      },
+      "required": [
+        "investigationId"
+      ]
+    },
+    "InvestigationExecution": {
+      "type": "object",
+      "description": "Details about the execution of the investigation",
+      "properties": {
+        "runState": {
+          "$ref": "#/definitions/InvestigationExecutionRunState",
+          "description": "The state of the investigation execution"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the investigation execution completed (in UTC)"
+        }
+      },
+      "required": [
+        "runState"
+      ]
+    },
+    "InvestigationExecutionRunState": {
+      "type": "string",
+      "description": "The execution state of the investigation",
+      "enum": [
+        "None",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "InvestigationExecutionRunState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The investigation execution didn't start"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The investigation execution is in progress"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The investigation execution completed successfully"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The investigation execution failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The investigation execution was canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "InvestigationMetadata": {
+      "type": "object",
+      "description": "Properties of the current investigation",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the investigation"
+        },
+        "execution": {
+          "$ref": "#/definitions/InvestigationExecution",
+          "description": "The execution details of the investigation"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the investigation (in UTC)"
+        },
+        "runParameters": {
+          "$ref": "#/definitions/RunParameters",
+          "description": "The parameters that were used to start the investigation"
+        }
+      },
+      "required": [
+        "id",
+        "execution",
+        "createdAt",
+        "runParameters"
+      ]
+    },
+    "InvestigationResult": {
+      "type": "object",
+      "description": "Details about the investigation result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the investigation"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The origin of the investigation"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the investigation (in UTC)"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the investigation (in UTC)"
+        },
+        "execution": {
+          "$ref": "#/definitions/InvestigationExecution",
+          "description": "The execution details of the investigation"
+        },
+        "runParameters": {
+          "$ref": "#/definitions/RunParameters",
+          "description": "The parameters used to run the investigation"
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of this investigation"
+        }
+      },
+      "required": [
+        "id",
+        "origin",
+        "createdAt",
+        "lastModifiedAt",
+        "execution",
+        "runParameters",
+        "result"
+      ]
+    },
+    "InvestigationScope": {
+      "type": "object",
+      "description": "A single scope of the investigation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ID of the scope of the investigation - either an Azure alert ID or an Azure resource ID"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The origin of the scope"
+        },
+        "relevance": {
+          "$ref": "#/definitions/Relevance",
+          "description": "The relevance of the scope"
+        }
+      },
+      "required": [
+        "id",
+        "origin"
+      ]
+    },
+    "IssueProperties": {
+      "type": "object",
+      "description": "The issue properties",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The issue title"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The issue status"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The issue severity"
+        },
+        "investigations": {
+          "type": "array",
+          "description": "The list of investigations in the issue",
+          "items": {
+            "$ref": "#/definitions/InvestigationMetadata"
+          },
+          "readOnly": true
+        },
+        "impactTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The issue impact time (in UTC)"
+        },
+        "investigationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of investigations in the issue",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "title",
+        "status",
+        "severity",
+        "investigations",
+        "impactTime",
+        "investigationsCount"
+      ]
+    },
+    "IssuePropertiesUpdate": {
+      "type": "object",
+      "description": "The issue properties",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The issue title"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The issue status"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The issue severity"
+        },
+        "impactTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The issue impact time (in UTC)"
+        }
+      }
+    },
+    "IssueResource": {
+      "type": "object",
+      "description": "The Issue resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IssueProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IssueResourceListResult": {
+      "type": "object",
+      "description": "The response of a IssueResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IssueResource items on this page",
+          "items": {
+            "$ref": "#/definitions/IssueResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IssueResourceUpdate": {
+      "type": "object",
+      "description": "The Issue resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IssuePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ListParameter": {
+      "type": "object",
+      "description": "Parameters for listing related entities",
+      "properties": {
+        "filter": {
+          "type": "string",
+          "description": "The filter to apply on the operation. For example, to filter by relevance, use \"$filter=relevance eq 'Relevant'\". Note: this property is currently a placeholder and is not in use."
+        }
+      }
+    },
+    "Origin": {
+      "type": "object",
+      "description": "Details about the origin of the entity - the source that added it to the issue",
+      "properties": {
+        "addedBy": {
+          "type": "string",
+          "description": "The ID of the origin - for example, in case of 'Manual', the user ID/app ID, and in case of 'Automatic', the name of the automatic system"
+        },
+        "addedByType": {
+          "$ref": "#/definitions/AddedByType",
+          "description": "The source of the origin - Manual or Automatic"
+        }
+      },
+      "required": [
+        "addedBy",
+        "addedByType"
+      ]
+    },
+    "PagedRelatedAlert": {
+      "type": "object",
+      "description": "Paged collection of RelatedAlert items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RelatedAlert items on this page",
+          "items": {
+            "$ref": "#/definitions/RelatedAlert"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedRelatedResource": {
+      "type": "object",
+      "description": "Paged collection of RelatedResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RelatedResource items on this page",
+          "items": {
+            "$ref": "#/definitions/RelatedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RelatedAlert": {
+      "type": "object",
+      "description": "Properties of an alert which is related to the issue",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The alert ID"
+        },
+        "relevance": {
+          "$ref": "#/definitions/Relevance",
+          "description": "The alerts's relevance status"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The source that related the alert to the issue",
+          "readOnly": true
+        },
+        "addedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this relation was added to the issue (in UTC)",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of this relation (in UTC)",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "relevance",
+        "origin",
+        "addedAt",
+        "lastModifiedAt"
+      ]
+    },
+    "RelatedAlerts": {
+      "type": "object",
+      "description": "A list of related alerts",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of related alerts",
+          "items": {
+            "$ref": "#/definitions/RelatedAlert"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RelatedResource": {
+      "type": "object",
+      "description": "Properties of a resource which is related to the issue",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID"
+        },
+        "relevance": {
+          "$ref": "#/definitions/Relevance",
+          "description": "The resource's relevance status"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The source that related the resource to the issue",
+          "readOnly": true
+        },
+        "addedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this relation was added to the issue (in UTC)",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of this relation (in UTC)",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "relevance",
+        "origin",
+        "addedAt",
+        "lastModifiedAt"
+      ]
+    },
+    "RelatedResources": {
+      "type": "object",
+      "description": "A list of related resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of related resources",
+          "items": {
+            "$ref": "#/definitions/RelatedResource"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Relevance": {
+      "type": "string",
+      "description": "The relevance status of the resource",
+      "enum": [
+        "None",
+        "Relevant",
+        "Irrelevant"
+      ],
+      "x-ms-enum": {
+        "name": "Relevance",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No relevance status for the resource"
+          },
+          {
+            "name": "Relevant",
+            "value": "Relevant",
+            "description": "The resource is relevant to the issue"
+          },
+          {
+            "name": "Irrelevant",
+            "value": "Irrelevant",
+            "description": "The resource is irrelevant to the issue"
+          }
+        ]
+      }
+    },
+    "RunParameters": {
+      "type": "object",
+      "description": "The parameters used to run the investigation",
+      "properties": {
+        "impactTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The impact time to investigate (in UTC)"
+        },
+        "alerts": {
+          "type": "array",
+          "description": "The alerts used to run the investigation",
+          "items": {
+            "$ref": "#/definitions/InvestigationScope"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "description": "The resources used to run the investigation",
+          "items": {
+            "$ref": "#/definitions/InvestigationScope"
+          }
+        }
+      },
+      "required": [
+        "impactTime",
+        "alerts",
+        "resources"
+      ]
+    },
+    "StartInvestigationParameters": {
+      "type": "object",
+      "description": "Parameters provided to start an investigation operation",
+      "properties": {
+        "impactTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The impact time to use for this investigation - by default, the impact time from the issue is used (in UTC)"
+        },
+        "investigationScopes": {
+          "type": "array",
+          "description": "The scope of the investigation (resources and alerts) - by default, the resources and alerts related to the issue are used. Note: this property is currently a placeholder and is not in use.",
+          "items": {
+            "$ref": "#/definitions/InvestigationScope"
+          }
+        }
+      },
+      "required": [
+        "investigationScopes"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "The issue status",
+      "enum": [
+        "New",
+        "InProgress",
+        "Mitigated",
+        "Closed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New",
+            "description": "The issue is new"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The issue is in progress"
+          },
+          {
+            "name": "Mitigated",
+            "value": "Mitigated",
+            "description": "The issue is mitigated"
+          },
+          {
+            "name": "Closed",
+            "value": "Closed",
+            "description": "The issue is closed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The issue is canceled"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -13,13 +13,8 @@ namespace Microsoft.Maintenance;
 /**
  * Configuration Assignment
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(
-  ConfigurationAssignmentProperties
-)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model ConfigurationAssignment extends Foundations.ProxyResource {
+model ConfigurationAssignment
+  is Azure.ResourceManager.ProxyResource<ConfigurationAssignmentProperties> {
   ...ResourceNameParameter<
     Resource = ConfigurationAssignment,
     KeyName = "configurationAssignmentName",
@@ -32,13 +27,6 @@ model ConfigurationAssignment extends Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
-
-  /**
-   * Properties of the configuration assignment
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: ConfigurationAssignmentProperties;
 }
 
 @armResourceOperations

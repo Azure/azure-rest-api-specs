@@ -1,8 +1,8 @@
 parameters:
-  - name: SdkRepoCommit
+  - name: SdkRepoBranch
     type: string
     default: 'main'
-    displayName: 'SDK repository commit'
+    displayName: 'SDK repository branch'
   - name: ConfigType
     type: string
     values:
@@ -37,7 +37,7 @@ extends:
   parameters:
     SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
     SdkRepoUrl: $(SdkRepoUrl)
-    SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
+    SdkRepoBranch: ${{ parameters.SdkRepoBranch }}
     ConfigType: ${{ parameters.ConfigType }}
     ConfigPath: ${{ parameters.ConfigPath }}
     ApiVersion: ${{ parameters.ApiVersion }}
