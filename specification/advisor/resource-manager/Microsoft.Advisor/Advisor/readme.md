@@ -39,13 +39,13 @@ suppressions:
   - code: ArmResourcePropertiesBag
     reason: Suppressing for now to avoid breaking change.
     from:
-      - assessments.json
+      - openapi.json
     where:
       - $.definitions["AssessmentResult"]
   - code: RequiredPropertiesMissingInResourceModel
     reason: Suppressing for now to avoid breaking change.
     from:
-      - assessments.json
+      - openapi.json
     where:
       - $.definitions["AssessmentTypeListResult"]
       - $.definitions["WorkloadListResult"]
