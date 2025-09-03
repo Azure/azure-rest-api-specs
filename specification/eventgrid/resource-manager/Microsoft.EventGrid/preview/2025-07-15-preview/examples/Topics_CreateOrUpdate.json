@@ -29,8 +29,7 @@
               "keyEncryptionKeyIdentity": {
                 "type": "UserAssigned",
                 "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id"
-              },
-              "keyEncryptionKeyStatusFriendlyDescription": "Customer Managed Key (CMK) Encryption is 'Active' and running normally."
+              }
             }
           ]
         }
@@ -43,6 +42,18 @@
         "properties": {
           "endpoint": "https://exampletopic1.westus2-1.eventgrid.azure.net/api/events",
           "provisioningState": "Succeeded",
+          "encryption": {
+            "customerManagedKeyEncryption": [
+              {
+                "keyEncryptionKeyUrl": "https://ege2ekeyvault.vault.azure.net/keys/ValidKey1",
+                "keyEncryptionKeyIdentity": {
+                  "type": "UserAssigned",
+                  "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id"
+                },
+                "keyEncryptionKeyStatusFriendlyDescription": "Customer Managed Key (CMK) Encryption is 'Active' and running normally."
+              }
+            ]
+          },
           "platformCapabilities": {
             "confidentialCompute": {
               "mode": "Enabled"
