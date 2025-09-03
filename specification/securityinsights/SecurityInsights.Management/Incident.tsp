@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -22,18 +21,42 @@ model Incident is Azure.ResourceManager.ProxyResource<IncidentProperties> {
   >;
 }
 
-/**
- * Represents an incident in Azure Security Insights.
- */
-// FIXME(xiaofei): Only key name difference from Incident resource
-model IncidentIdentifier is Azure.ResourceManager.ProxyResource<IncidentProperties> {
-  ...ResourceNameParameter<
-    Resource = IncidentIdentifier,
-    KeyName = "incidentIdentifier",
-    SegmentName = "incidents",
-    NamePattern = ""
-  >;
-}
+// Added manually only to fix KeyName difference from Incident resource, A.K.A. incidentId vs incidentIdentifier
+alias IncidentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.OperationalInsights";
+
+    /**
+     * The name of the workspace.
+     */
+    @segment("workspaces")
+    @key
+    @path
+    workspaceName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Incident>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Incident>;
+
+    /**
+     * The guest configuration assignment name.
+     */
+    @path
+    @key
+    @segment("incidents")
+    incidentIdentifier: string;
+  }
+>;
 
 @armResourceOperations
 interface Incidents {
@@ -99,12 +122,11 @@ interface Incidents {
   /**
    * Triggers playbook on a specific incident
    */
-  runPlaybook is Extension.ActionSync<
-    OperationalInsights,
-    IncidentIdentifier,
-    ManualTriggerRequestBody,
-    NoContentResponse,
-    Error = CloudError,
+  runPlaybook is IncidentOps.ActionSync<
+    Incident,
+    Request = ManualTriggerRequestBody,
+    Response = NoContentResponse,
+    ErrorType = CloudError,
     OptionalRequestBody = true
   >;
 
