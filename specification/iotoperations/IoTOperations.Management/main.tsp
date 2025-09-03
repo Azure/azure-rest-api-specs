@@ -19,6 +19,7 @@ import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
 import "./models/akri/discoveryHandler.tsp";
+import "./models/diagnostics/diagnostic.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -182,4 +183,14 @@ interface AkriDiscoveryHandler {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriDiscoveryHandlerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AkriDiscoveryHandlerResource>;
   listByInstanceResource is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
+}
+
+// /instance/diagnostics resource Operations
+@armResourceOperations
+@added(Versions.`2025-09-01-preview`)
+interface Diagnostic {
+  get is ArmResourceRead<DiagnosticResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiagnosticResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DiagnosticResource>;
+  listByInstanceResource is ArmResourceListByParent<DiagnosticResource>;
 }
