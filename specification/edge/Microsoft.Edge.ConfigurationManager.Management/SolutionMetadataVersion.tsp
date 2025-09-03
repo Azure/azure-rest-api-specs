@@ -35,11 +35,11 @@ model SolutionMetadataVersionProperties {
     }
   ]>;
 
-  @doc("Dynamic Schema Id for the solution template version")
+  @doc("Schema Id for the solution template version at the hierarchy")
   @visibility(Lifecycle.Read)
-  dynamicSchemaVersionId?: Azure.Core.armResourceIdentifier<[
+  schemaId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Edge/Schemas/DynamicSchemas/Versions";
+      type: "Microsoft.Edge/SolutionTemplates/Versions/SolutionSchemas";
     }
   ]>;
 
