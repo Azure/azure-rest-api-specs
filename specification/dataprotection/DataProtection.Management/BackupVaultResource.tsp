@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -21,6 +21,18 @@ model BackupVaultResource
     SegmentName = "backupVaults",
     NamePattern = ""
   >;
+
+  // etag not included in TrackedResource
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Resource Tag.")
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  // identity not included in TrackedResource
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Resource Identity.")
+  @visibility(Lifecycle.Read)
+  identity?: DppIdentityDetails;
 }
 
 @armResourceOperations
@@ -56,7 +68,7 @@ interface BackupVaultResources {
   createOrUpdate is BackupVaultResourceOps.CreateOrUpdateAsync<
     BackupVaultResource,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
@@ -75,7 +87,7 @@ interface BackupVaultResources {
     BackupVaultResource,
     PatchModel = PatchResourceRequestInput,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
@@ -86,7 +98,7 @@ interface BackupVaultResources {
   /**
    * Deletes a BackupVault resource from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is BackupVaultResourceOps.DeleteWithoutOkAsync<
     BackupVaultResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -96,8 +108,6 @@ interface BackupVaultResources {
   /**
    * Returns resource collection belonging to a subscription.
    */
-  // /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults
-  // /subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/backupVaults
   @list
   getInSubscription is ArmListBySubscription<
     BackupVaultResource,
@@ -113,7 +123,7 @@ interface BackupVaultResources {
     BackupVaultResource,
     Response = ArmResponse<OperationResource>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @segment("operationStatus")
       @path
       operationId: string;

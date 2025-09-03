@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+
 import "./BackupVaultResource.tsp";
 
 using TypeSpec.Rest;
@@ -23,6 +23,12 @@ model BackupInstanceResource
     SegmentName = "backupInstances",
     NamePattern = ""
   >;
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -65,11 +71,11 @@ interface BackupInstanceResources {
   /**
    * Create or update a backup instance in a backup vault
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is BackupInstanceResourceOps.CreateOrUpdateAsync<
     BackupInstanceResource,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
@@ -85,11 +91,11 @@ interface BackupInstanceResources {
   /**
    * Delete a backup instance in a backup vault
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is BackupInstanceResourceOps.DeleteWithoutOkAsync<
     BackupInstanceResource,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
@@ -143,7 +149,7 @@ interface BackupInstanceResources {
     OperationJobExtendedInfo,
     Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
@@ -182,7 +188,7 @@ interface BackupInstanceResources {
     OkResponse,
     Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
@@ -200,7 +206,7 @@ interface BackupInstanceResources {
     OkResponse,
     Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
