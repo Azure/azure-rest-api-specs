@@ -1,7 +1,7 @@
 {
-  "title": "CreateOrReplace_IoTHub_With_TlsCompatMode",
+  "title": "CreateOrReplace_IoTHub_With_AdrProperties",
   "operationId": "IotHubResource_CreateOrUpdate",
-  "description": "Create an IoT Hub with tlsCompatibilityMode flag set",
+  "description": "Create an IoT Hub with ADR properties",
   "parameters": {
     "resourceName": "testHub",
     "resourceGroupName": "myResourceGroup",
@@ -79,15 +79,18 @@
         },
         "features": "None",
         "minTlsVersion": "1.2",
-        "tlsCompatibilityMode": true,
         "enableDataResidency": true,
         "rootCertificate": {
           "enableRootCertificateV2": true
         },
-        "ipVersion": "ipv4ipv6"
+        "ipVersion": "ipv4ipv6",
+        "adrProperties": {
+          "namespaceResourceId": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/testNamespace",
+          "identityResourceId": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+        }
       },
       "sku": {
-        "name": "S1",
+        "name": "P1",
         "capacity": 1
       }
     }
@@ -189,17 +192,20 @@
           },
           "features": "None",
           "minTlsVersion": "1.2",
-          "tlsCompatibilityMode": true,
           "enableDataResidency": true,
           "rootCertificate": {
             "enableRootCertificateV2": true,
             "lastUpdatedTimeUtc": "2022-04-08T11:16:49.0748958-07:00"
           },
-          "ipVersion": "ipv4ipv6"
+          "ipVersion": "ipv4ipv6",
+          "adrProperties": {
+            "namespaceResourceId": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/testNamespace",
+            "identityResourceId": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+          }
         },
         "sku": {
-          "name": "S1",
-          "tier": "Standard",
+          "name": "P1",
+          "tier": "Premium",
           "capacity": 1
         },
         "systemData": {
@@ -303,17 +309,20 @@
           },
           "features": "None",
           "minTlsVersion": "1.2",
-          "tlsCompatibilityMode": true,
           "enableDataResidency": true,
           "rootCertificate": {
             "enableRootCertificateV2": true,
             "lastUpdatedTimeUtc": "2022-04-08T11:16:49.0748958-07:00"
           },
-          "ipVersion": "ipv4ipv6"
+          "ipVersion": "ipv4ipv6",
+          "adrProperties": {
+            "namespaceResourceId": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/testNamespace",
+            "identityResourceId": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+          }
         },
         "sku": {
-          "name": "S1",
-          "tier": "Standard",
+          "name": "P1",
+          "tier": "Premium",
           "capacity": 1
         },
         "systemData": {
