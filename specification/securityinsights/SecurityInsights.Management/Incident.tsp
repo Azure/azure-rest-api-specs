@@ -22,6 +22,19 @@ model Incident is Azure.ResourceManager.ProxyResource<IncidentProperties> {
   >;
 }
 
+/**
+ * Represents an incident in Azure Security Insights.
+ */
+// FIXME(xiaofei): Only key name difference from Incident resource
+model IncidentIdentifier is Azure.ResourceManager.ProxyResource<IncidentProperties> {
+  ...ResourceNameParameter<
+    Resource = IncidentIdentifier,
+    KeyName = "incidentIdentifier",
+    SegmentName = "incidents",
+    NamePattern = ""
+  >;
+}
+
 @armResourceOperations
 interface Incidents {
   /**
@@ -88,17 +101,10 @@ interface Incidents {
    */
   runPlaybook is Extension.ActionSync<
     OperationalInsights,
-    Incident,
+    IncidentIdentifier,
     ManualTriggerRequestBody,
     NoContentResponse,
     Error = CloudError,
-    Parameters = {
-      /**
-       * Incident ID
-       */
-      @path
-      incidentIdentifier: string;
-    },
     OptionalRequestBody = true
   >;
 

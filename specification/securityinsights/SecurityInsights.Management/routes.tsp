@@ -13,6 +13,16 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
 
+@armVirtualResource
+model EntityResource {
+  ...ResourceNameParameter<
+    Resource = EntityResource,
+    KeyName = "entityIdentifier",
+    SegmentName = "entities",
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+  >;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface EntitiesOperationGroup {
   /**
@@ -21,28 +31,7 @@ interface EntitiesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Entities_RunPlaybook")
   @autoRoute
-  runPlaybook is ArmProviderActionSync<
-    Request = EntityManualTriggerRequestBody,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The name of the workspace.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
-      @path
-      @segment("workspaces")
-      workspaceName: string;
-
-      /**
-       * Entity ID
-       */
-      @path
-      @segment("entities")
-      entityIdentifier: string;
-    }
-  >;
+  runPlaybook is Extension.ActionSync<OperationalInsights, EntityResource, Request = EntityManualTriggerRequestBody, Response = void>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -68,17 +57,6 @@ interface SourceControlOperationGroup {
       @segment("workspaces")
       workspaceName: string;
     }
-  >;
-}
-
-@armVirtualResource
-@singleton("main")
-model ThreatIntelligenceMain {
-  ...ResourceNameParameter<
-    Resource = ThreatIntelligenceMain,
-    KeyName = "name",
-    SegmentName = "threatIntelligence",
-    NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
   >;
 }
 

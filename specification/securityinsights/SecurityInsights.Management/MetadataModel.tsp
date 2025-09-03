@@ -48,7 +48,11 @@ interface MetadataModels {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Metadata_Update")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<MetadataModel, PatchModel = MetadataPatch>;
+  update is Extension.CustomPatchSync<
+    OperationalInsights,
+    MetadataModel,
+    PatchModel = MetadataPatch
+  >;
 
   /**
    * Delete a Metadata.

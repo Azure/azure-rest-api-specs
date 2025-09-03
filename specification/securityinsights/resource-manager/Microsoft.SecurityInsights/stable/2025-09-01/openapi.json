@@ -2488,6 +2488,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityIdentifier}/runPlaybook": {
+      "post": {
+        "operationId": "Entities_RunPlaybook",
+        "description": "Triggers playbook on a specific entity.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityIdentifier",
+            "in": "path",
+            "description": "The name of the EntityResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityManualTriggerRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_RunPlaybook": {
+            "$ref": "./examples/manualTrigger/Entities_RunPlaybook.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents": {
       "get": {
         "operationId": "Incidents_List",
@@ -2733,72 +2790,6 @@
         "x-ms-examples": {
           "Delete an incident.": {
             "$ref": "./examples/incidents/DeleteIncident.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/{incidentIdentifier}/runPlaybook": {
-      "post": {
-        "operationId": "Incidents_RunPlaybook",
-        "tags": [
-          "Incidents"
-        ],
-        "description": "Triggers playbook on a specific incident",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the monitor workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "incidentId",
-            "in": "path",
-            "description": "Incident ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "incidentIdentifier",
-            "in": "path",
-            "description": "Incident ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "Describes the request body for triggering a playbook on an incident.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ManualTriggerRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Incidents_RunPlaybook": {
-            "$ref": "./examples/manualTrigger/Incidents_RunPlaybook.json"
           }
         }
       }
@@ -3523,6 +3514,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentIdentifier}/runPlaybook": {
+      "post": {
+        "operationId": "Incidents_RunPlaybook",
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Triggers playbook on a specific incident",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "incidentIdentifier",
+            "in": "path",
+            "description": "The name of the IncidentIdentifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Describes the request body for triggering a playbook on an incident.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ManualTriggerRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Incidents_RunPlaybook": {
+            "$ref": "./examples/manualTrigger/Incidents_RunPlaybook.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks": {
       "get": {
         "operationId": "IncidentTasks_List",
@@ -3770,375 +3820,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/indicators": {
-      "get": {
-        "operationId": "ThreatIntelligenceIndicators_List",
-        "tags": [
-          "ThreatIntelligenceInformations"
-        ],
-        "description": "Get all threat intelligence indicators.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the monitor workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results, based on a Boolean condition. Optional.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns only the first n results. Optional.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Sorts the results. Optional.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceInformationList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all threat intelligence indicators": {
-            "$ref": "./examples/threatintelligence/GetThreatIntelligence.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/indicators/{name}": {
-      "get": {
-        "operationId": "ThreatIntelligenceIndicator_Get",
-        "tags": [
-          "ThreatIntelligenceInformations"
-        ],
-        "description": "View a threat intelligence indicator by name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the monitor workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Threat intelligence indicator name field.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceInformation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "View a threat intelligence indicator by name": {
-            "$ref": "./examples/threatintelligence/GetThreatIntelligenceById.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "ThreatIntelligenceIndicator_Create",
-        "tags": [
-          "ThreatIntelligenceInformations"
-        ],
-        "description": "Update a threat Intelligence indicator.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the monitor workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Threat intelligence indicator name field.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ThreatIntelligenceProperties",
-            "in": "body",
-            "description": "Properties of threat intelligence indicators to create and update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceInformation"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'ThreatIntelligenceInformation' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceInformation"
-            }
-          },
-          "201": {
-            "description": "Resource 'ThreatIntelligenceInformation' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceInformation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a threat Intelligence indicator": {
-            "$ref": "./examples/threatintelligence/UpdateThreatIntelligence.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "ThreatIntelligenceIndicator_Delete",
-        "tags": [
-          "ThreatIntelligenceInformations"
-        ],
-        "description": "Delete a threat intelligence indicator.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the monitor workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Threat intelligence indicator name field.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a threat intelligence indicator": {
-            "$ref": "./examples/threatintelligence/DeleteThreatIntelligence.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/indicators/{name}/appendTags": {
-      "post": {
-        "operationId": "ThreatIntelligenceIndicator_AppendTags",
-        "tags": [
-          "ThreatIntelligenceInformations"
-        ],
-        "description": "Append tags to a threat intelligence indicator.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the monitor workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Threat intelligence indicator name field.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ThreatIntelligenceAppendTags",
-            "in": "body",
-            "description": "The threat intelligence append tags request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceAppendTags"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Append tags to a threat intelligence indicator": {
-            "$ref": "./examples/threatintelligence/AppendTagsThreatIntelligence.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/indicators/{name}/replaceTags": {
-      "post": {
-        "operationId": "ThreatIntelligenceIndicator_ReplaceTags",
-        "tags": [
-          "ThreatIntelligenceInformations"
-        ],
-        "description": "Replace tags added to a threat intelligence indicator.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the monitor workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Threat intelligence indicator name field.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ThreatIntelligenceReplaceTags",
-            "in": "body",
-            "description": "Tags in the threat intelligence indicator to be replaced.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceIndicatorModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceInformation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Replace tags to a Threat Intelligence": {
-            "$ref": "./examples/threatintelligence/ReplaceTagsThreatIntelligence.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata": {
       "get": {
         "operationId": "Metadata_List",
@@ -4341,6 +4022,67 @@
           },
           "Create/update minimal metadata.": {
             "$ref": "./examples/metadata/PutMetadataMinimal.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Metadata_Update",
+        "tags": [
+          "MetadataModels"
+        ],
+        "description": "Update an existing Metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metadataName",
+            "in": "path",
+            "description": "The Metadata name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S+$"
+          },
+          {
+            "name": "metadataPatch",
+            "in": "body",
+            "description": "Partial metadata request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetadataPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetadataModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update metadata.": {
+            "$ref": "./examples/metadata/PatchMetadata.json"
           }
         }
       },
@@ -5114,6 +4856,375 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators": {
+      "get": {
+        "operationId": "ThreatIntelligenceIndicators_List",
+        "tags": [
+          "ThreatIntelligenceInformations"
+        ],
+        "description": "Get all threat intelligence indicators.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Optional.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Returns only the first n results. Optional.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results. Optional.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all threat intelligence indicators": {
+            "$ref": "./examples/threatintelligence/GetThreatIntelligence.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}": {
+      "get": {
+        "operationId": "ThreatIntelligenceIndicator_Get",
+        "tags": [
+          "ThreatIntelligenceInformations"
+        ],
+        "description": "View a threat intelligence indicator by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Threat intelligence indicator name field.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "View a threat intelligence indicator by name": {
+            "$ref": "./examples/threatintelligence/GetThreatIntelligenceById.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ThreatIntelligenceIndicator_Create",
+        "tags": [
+          "ThreatIntelligenceInformations"
+        ],
+        "description": "Update a threat Intelligence indicator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Threat intelligence indicator name field.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ThreatIntelligenceProperties",
+            "in": "body",
+            "description": "Properties of threat intelligence indicators to create and update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ThreatIntelligenceInformation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            }
+          },
+          "201": {
+            "description": "Resource 'ThreatIntelligenceInformation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a threat Intelligence indicator": {
+            "$ref": "./examples/threatintelligence/UpdateThreatIntelligence.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ThreatIntelligenceIndicator_Delete",
+        "tags": [
+          "ThreatIntelligenceInformations"
+        ],
+        "description": "Delete a threat intelligence indicator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Threat intelligence indicator name field.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a threat intelligence indicator": {
+            "$ref": "./examples/threatintelligence/DeleteThreatIntelligence.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}/appendTags": {
+      "post": {
+        "operationId": "ThreatIntelligenceIndicator_AppendTags",
+        "tags": [
+          "ThreatIntelligenceInformations"
+        ],
+        "description": "Append tags to a threat intelligence indicator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Threat intelligence indicator name field.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ThreatIntelligenceAppendTags",
+            "in": "body",
+            "description": "The threat intelligence append tags request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceAppendTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Append tags to a threat intelligence indicator": {
+            "$ref": "./examples/threatintelligence/AppendTagsThreatIntelligence.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}/replaceTags": {
+      "post": {
+        "operationId": "ThreatIntelligenceIndicator_ReplaceTags",
+        "tags": [
+          "ThreatIntelligenceInformations"
+        ],
+        "description": "Replace tags added to a threat intelligence indicator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Threat intelligence indicator name field.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ThreatIntelligenceReplaceTags",
+            "in": "body",
+            "description": "Tags in the threat intelligence indicator to be replaced.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceIndicatorModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Replace tags to a Threat Intelligence": {
+            "$ref": "./examples/threatintelligence/ReplaceTagsThreatIntelligence.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics": {
       "get": {
         "operationId": "ThreatIntelligenceIndicatorMetrics_List",
@@ -5719,121 +5830,6 @@
         "x-ms-examples": {
           "Delete a watchlist item.": {
             "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}": {
-      "patch": {
-        "operationId": "Metadata_Update",
-        "tags": [
-          "MetadataModels"
-        ],
-        "description": "Update an existing Metadata.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "metadataName",
-            "in": "path",
-            "description": "The Metadata name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^\\S+$"
-          },
-          {
-            "name": "metadataPatch",
-            "in": "body",
-            "description": "Partial metadata request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MetadataPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetadataModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update metadata.": {
-            "$ref": "./examples/metadata/PatchMetadata.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/workspaces/{workspaceName}/entities/{entityIdentifier}/runPlaybook": {
-      "post": {
-        "operationId": "Entities_RunPlaybook",
-        "description": "Triggers playbook on a specific entity.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
-          },
-          {
-            "name": "entityIdentifier",
-            "in": "path",
-            "description": "Entity ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EntityManualTriggerRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Entities_RunPlaybook": {
-            "$ref": "./examples/manualTrigger/Entities_RunPlaybook.json"
           }
         }
       }
