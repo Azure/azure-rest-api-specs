@@ -71,30 +71,30 @@ interface SourceControlOperationGroup {
   >;
 }
 
+@armVirtualResource
+@singleton("main")
+model ThreatIntelligenceMain {
+  ...ResourceNameParameter<
+    Resource = ThreatIntelligenceMain,
+    KeyName = "name",
+    SegmentName = "threatIntelligence",
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+  >;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ThreatIntelligenceIndicatorOperationGroup {
   /**
    * Create a new threat intelligence indicator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicator_CreateIndicator")
   @autoRoute
-  @action("threatIntelligence/main/createIndicator")
-  createIndicator is ArmProviderActionSync<
+  @action("createIndicator")
+  createIndicator is Extension.ActionSync<
+    OperationalInsights,
+    ThreatIntelligenceMain,
     Request = ThreatIntelligenceIndicatorModel,
-    Response = ThreatIntelligenceInformation,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The name of the workspace.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
-      @path
-      @segment("workspaces")
-      workspaceName: string;
-    }
+    Response = ThreatIntelligenceInformation
   >;
   /**
    * Query threat intelligence indicators as per filtering criteria.
@@ -102,22 +102,12 @@ interface ThreatIntelligenceIndicatorOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThreatIntelligenceIndicator_QueryIndicators")
   @autoRoute
-  @action("threatIntelligence/main/queryIndicators")
-  queryIndicators is ArmProviderActionSync<
+  @action("queryIndicators")
+  queryIndicators is Extension.ActionSync<
+    OperationalInsights,
+    ThreatIntelligenceMain,
     Request = ThreatIntelligenceFilteringCriteria,
     Response = ThreatIntelligenceInformationList,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The name of the workspace.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
-      @path
-      @segment("workspaces")
-      workspaceName: string;
-    }
   >;
 }
 
@@ -127,23 +117,13 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
    * Get threat intelligence indicators metrics (Indicators counts by Type, Threat Type, Source).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicatorMetrics_List")
   @autoRoute
   @get
-  @action("threatIntelligence/main/metrics")
-  list is ArmProviderActionSync<
+  @action("metrics")
+  list is Extension.ActionSync<
+    OperationalInsights,
+    ThreatIntelligenceMain,
+    Request = void,
     Response = ThreatIntelligenceMetricsList,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The name of the workspace.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
-      @path
-      @segment("workspaces")
-      workspaceName: string;
-    }
   >;
 }
