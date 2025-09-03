@@ -301,36 +301,6 @@
         }
       }
     },
-    "CustomDomain": {
-      "description": "Custom Domain of a Container App",
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "description": "Hostname.",
-          "type": "string"
-        },
-        "bindingType": {
-          "description": "Custom Domain binding type.",
-          "enum": [
-            "Disabled",
-            "SniEnabled",
-            "Auto"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "bindingType",
-            "modelAsString": true
-          }
-        },
-        "certificateId": {
-          "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
-          "type": "string"
-        }
-      }
-    },
     "CustomDomainConfiguration": {
       "type": "object",
       "description": "Configuration properties for apps environment custom domain",
@@ -1562,17 +1532,6 @@
           "description": "Resource tags."
         }
       }
-    }
-  },
-  "parameters": {
-    "EnvironmentNameParameter": {
-      "name": "environmentName",
-      "in": "path",
-      "description": "Name of the Managed Environment.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
