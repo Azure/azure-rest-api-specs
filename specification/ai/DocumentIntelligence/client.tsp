@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
 using DocumentIntelligence;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2025_09_01)
+@TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2024_11_30)
 namespace ClientCustomizations;
 
 @client({
