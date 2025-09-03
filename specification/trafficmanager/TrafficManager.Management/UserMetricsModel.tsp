@@ -28,22 +28,22 @@ model UserMetricsModel
 @armResourceOperations
 interface UserMetricsModelOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
-    {
-      ...ApiVersionParameter,
-      ...SubscriptionIdParameter,
-      ...Azure.ResourceManager.Legacy.Provider,
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-      /**
-       * The user metrics keys. The default value is "default".
-       */
-      @path
-      @segment("trafficManagerUserMetricsKeys")
-      @key("trafficManagerUserMetricsKeys")
-      trafficManagerUserMetricsKeys: "default",
-    },
-    {},
-    ErrorType = CloudError
-  >{}
+        /**
+         * The user metrics keys. The default value is "default".
+         */
+        @path
+        @segment("trafficManagerUserMetricsKeys")
+        @key("trafficManagerUserMetricsKeys")
+        trafficManagerUserMetricsKeys: "default",
+      },
+      {},
+      ErrorType = CloudError
+    > {}
 
 @armResourceOperations
 interface UserMetricsModels {
@@ -68,7 +68,7 @@ interface UserMetricsModels {
   createOrUpdate is UserMetricsModelOps.CreateOrUpdateSync<
     UserMetricsModel,
     Request = void,
-    Response = ArmResourceCreatedSyncResponse<UserMetricsModel>,
+    Response = ArmResourceCreatedSyncResponse<UserMetricsModel>
   >;
 
   /**

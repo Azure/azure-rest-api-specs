@@ -39,7 +39,11 @@ interface Profiles {
    * Update a Traffic Manager profile.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Profile, PatchModel = Profile, Error = CloudError>;
+  update is ArmCustomPatchSync<
+    Profile,
+    PatchModel = Profile,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a Traffic Manager profile.
