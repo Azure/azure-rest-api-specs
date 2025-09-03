@@ -213,6 +213,49 @@ export class TspConfigCommonAzServiceDirMatchPatternSubRule extends TspconfigPar
   }
 }
 
+// ----- Java sub rules -----
+export class TspConfigJavaAzEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-java",
+      "emitter-output-dir",
+      new RegExp(/^(\{output-dir\}\/)?\{service-dir\}\/azure(-\w+)+$/),
+    );
+  }
+
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+    if (option === undefined) {
+      // at present, we don't require service use emitter-output-dir
+      return { success: true };
+    }
+    return super.validate(config);
+  }
+}
+
+export class TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-java",
+      "emitter-output-dir",
+      new RegExp(/^(\{output-dir\}\/)?\{service-dir\}\/azure-resourcemanager(-\w+)+$/),
+    );
+  }
+
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+    if (option === undefined) {
+      // at present, we don't require service use emitter-output-dir
+      return { success: true };
+    }
+    return super.validate(config);
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
+  }
+}
+
 export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
@@ -476,6 +519,8 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
 
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
+  new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
+  new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
