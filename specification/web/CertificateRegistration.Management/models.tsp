@@ -1251,6 +1251,7 @@ model CsmOperationCollection {
   /**
    * Collection of resources.
    */
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: CsmOperationDescription[]; // required
 
@@ -1259,5 +1260,6 @@ model CsmOperationCollection {
    */
   @doc("Link to next page of resources.")
   @visibility(Lifecycle.Read)
+  @nextLink
   nextLink?: string;
 }

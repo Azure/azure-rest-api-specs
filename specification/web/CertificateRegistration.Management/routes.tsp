@@ -26,6 +26,7 @@ interface AppServiceCertificateOrdersOperationGroup {
   validatePurchaseInformation is ArmProviderActionSync<
     Request = AppServiceCertificateOrder,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = DefaultErrorResponse
   >;
 }

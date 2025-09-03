@@ -32,7 +32,10 @@ interface AppServiceCertificateResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceCertificateOrders_GetCertificate")
-  getCertificate is ArmResourceRead<AppServiceCertificateResource>;
+  getCertificate is ArmResourceRead<
+    AppServiceCertificateResource,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates or updates a certificate and associates with key vault secret.
@@ -44,7 +47,8 @@ interface AppServiceCertificateResources {
     Response = ArmResponse<AppServiceCertificateResource> | ArmResourceCreatedResponse<
       AppServiceCertificateResource,
       LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateResource>
-    >
+    >,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -55,7 +59,8 @@ interface AppServiceCertificateResources {
   @patch(#{ implicitOptionality: false })
   updateCertificate is ArmCustomPatchSync<
     AppServiceCertificateResource,
-    PatchModel = AppServiceCertificatePatchResource
+    PatchModel = AppServiceCertificatePatchResource,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -75,7 +80,8 @@ interface AppServiceCertificateResources {
   @operationId("AppServiceCertificateOrders_ListCertificates")
   listCertificates is ArmResourceListByParent<
     AppServiceCertificateResource,
-    Response = ArmResponse<AppServiceCertificateCollection>
+    Response = ArmResponse<AppServiceCertificateCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 

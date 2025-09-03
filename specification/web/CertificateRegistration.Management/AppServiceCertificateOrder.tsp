@@ -47,7 +47,10 @@ interface AppServiceCertificateOrders {
   /**
    * Description for Get a certificate order.
    */
-  get is ArmResourceRead<AppServiceCertificateOrder>;
+  get is ArmResourceRead<
+    AppServiceCertificateOrder,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Create or update a certificate purchase order.
@@ -57,7 +60,8 @@ interface AppServiceCertificateOrders {
     Response = ArmResponse<AppServiceCertificateOrder> | ArmResourceCreatedResponse<
       AppServiceCertificateOrder,
       LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateOrder>
-    >
+    >,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -66,20 +70,25 @@ interface AppServiceCertificateOrders {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AppServiceCertificateOrder,
-    PatchModel = AppServiceCertificateOrderPatchResource
+    PatchModel = AppServiceCertificateOrderPatchResource,
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Description for Delete an existing certificate order.
    */
-  delete is ArmResourceDeleteSync<AppServiceCertificateOrder>;
+  delete is ArmResourceDeleteSync<
+    AppServiceCertificateOrder,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get certificate orders in a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     AppServiceCertificateOrder,
-    Response = ArmResponse<AppServiceCertificateOrderCollection>
+    Response = ArmResponse<AppServiceCertificateOrderCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -87,7 +96,8 @@ interface AppServiceCertificateOrders {
    */
   list is ArmListBySubscription<
     AppServiceCertificateOrder,
-    Response = ArmResponse<AppServiceCertificateOrderCollection>
+    Response = ArmResponse<AppServiceCertificateOrderCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -96,7 +106,8 @@ interface AppServiceCertificateOrders {
   reissue is ArmResourceActionSync<
     AppServiceCertificateOrder,
     ReissueCertificateOrderRequest,
-    NoContentResponse
+    NoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -105,7 +116,8 @@ interface AppServiceCertificateOrders {
   renew is ArmResourceActionSync<
     AppServiceCertificateOrder,
     RenewCertificateOrderRequest,
-    NoContentResponse
+    NoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -114,7 +126,8 @@ interface AppServiceCertificateOrders {
   resendEmail is ArmResourceActionSync<
     AppServiceCertificateOrder,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -123,7 +136,8 @@ interface AppServiceCertificateOrders {
   resendRequestEmails is ArmResourceActionSync<
     AppServiceCertificateOrder,
     NameIdentifier,
-    NoContentResponse
+    NoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -132,7 +146,8 @@ interface AppServiceCertificateOrders {
   retrieveSiteSeal is ArmResourceActionSync<
     AppServiceCertificateOrder,
     SiteSealRequest,
-    ArmResponse<SiteSeal>
+    ArmResponse<SiteSeal>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -141,7 +156,8 @@ interface AppServiceCertificateOrders {
   verifyDomainOwnership is ArmResourceActionSync<
     AppServiceCertificateOrder,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -150,7 +166,8 @@ interface AppServiceCertificateOrders {
   retrieveCertificateActions is AppServiceCertificateOrderOps.ActionSync<
     AppServiceCertificateOrder,
     void,
-    ArmResponse<CertificateOrderAction[]>
+    ArmResponse<CertificateOrderAction[]>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -160,7 +177,8 @@ interface AppServiceCertificateOrders {
   retrieveCertificateEmailHistory is AppServiceCertificateOrderOps.ActionSync<
     AppServiceCertificateOrder,
     void,
-    ArmResponse<CertificateEmail[]>
+    ArmResponse<CertificateEmail[]>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

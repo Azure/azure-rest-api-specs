@@ -53,7 +53,8 @@ interface CertificateOrdersDiagnostics {
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -63,7 +64,8 @@ interface CertificateOrdersDiagnostics {
   @operationId("CertificateOrdersDiagnostics_ListAppServiceCertificateOrderDetectorResponse")
   listAppServiceCertificateOrderDetectorResponse is ArmResourceListByParent<
     DetectorResponse,
-    Response = ArmResponse<DetectorResponseCollection>
+    Response = ArmResponse<DetectorResponseCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 
