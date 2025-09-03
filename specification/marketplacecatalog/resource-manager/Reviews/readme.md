@@ -26,6 +26,7 @@ These are the global settings for Reviews Client.
 
 ```yaml
 openapi-type: arm
+tag: package-2025-05-01
 ```
 
 ### Tag: package-2023-01-01-preview
