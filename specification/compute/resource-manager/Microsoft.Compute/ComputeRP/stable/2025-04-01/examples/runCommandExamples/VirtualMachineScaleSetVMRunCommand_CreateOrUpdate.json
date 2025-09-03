@@ -99,6 +99,40 @@
           "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
         }
       }
+    },
+    "202": {
+      "body": {
+        "name": "myRunCommand",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+        "location": "westus",
+        "properties": {
+          "source": {
+            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
+          },
+          "parameters": [
+            {
+              "name": "param1",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "value": "value2"
+            }
+          ],
+          "asyncExecution": false,
+          "treatFailureAsDeploymentFailure": true,
+          "runAsUser": "user1",
+          "timeoutInSeconds": 3600,
+          "provisioningState": "Creating",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}?api-version=2025-04-01",
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}&monitor=true&api-version=2025-04-01"
+      }
     }
   },
   "operationId": "VirtualMachineScaleSetVMRunCommands_CreateOrUpdate",
