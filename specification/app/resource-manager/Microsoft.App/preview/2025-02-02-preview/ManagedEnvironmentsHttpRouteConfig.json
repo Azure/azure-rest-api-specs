@@ -20,7 +20,7 @@
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "Get the specified Http Route Config.",
+        "summary": "Get the specified Managed Http Route Config.",
         "operationId": "HttpRouteConfig_Get",
         "parameters": [
           {
@@ -81,7 +81,7 @@
           {
             "name": "httpRouteConfigEnvelope",
             "in": "body",
-            "description": "Http Route Config to be created or updated",
+            "description": "Http Route config to be created or updated",
             "schema": {
               "$ref": "#/definitions/HttpRouteConfig"
             }
@@ -127,8 +127,8 @@
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "Update tags of a Http Route Config object",
-        "description": "Patches a Http Route Config resource. Only patching of tags is supported",
+        "summary": "Update tags of a manged http route object",
+        "description": "Patches an http route config resource. Only patching of tags is supported",
         "operationId": "HttpRouteConfig_Update",
         "parameters": [
           {
@@ -166,7 +166,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Http Route Config updated successfully.",
+            "description": "Managed Http Routes updated successfully.",
             "schema": {
               "$ref": "#/definitions/HttpRouteConfig"
             }
@@ -179,7 +179,7 @@
           }
         },
         "x-ms-examples": {
-          "Patch a Http Route Config": {
+          "Patch Managed Http Route": {
             "$ref": "./examples/HttpRouteConfig_Patch.json"
           }
         }
@@ -188,7 +188,7 @@
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "Deletes the specified Http Route Config.",
+        "summary": "Deletes the specified Managed Http Route.",
         "operationId": "HttpRouteConfig_Delete",
         "parameters": [
           {
@@ -208,13 +208,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Delete operation is in progress",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            }
+          "200": {
+            "description": "Delete operation completed"
           },
           "204": {
             "description": "Http Route does not exist"
@@ -222,16 +217,15 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Delete a Http Route Config": {
+          "Delete Certificate": {
             "$ref": "./examples/HttpRouteConfig_Delete.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/httpRouteConfigs": {
@@ -239,7 +233,7 @@
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "List the Http Route Configs in a given managed environment.",
+        "summary": "Get the Managed Http Routes in a given managed environment.",
         "operationId": "HttpRouteConfig_List",
         "parameters": [
           {
@@ -270,7 +264,7 @@
           }
         },
         "x-ms-examples": {
-          "List Http Route Configs by Managed Environment": {
+          "List Managed Http Routes by Managed Environment": {
             "$ref": "./examples/HttpRouteConfig_ListByManagedEnvironment.json"
           }
         },
@@ -282,7 +276,7 @@
   },
   "definitions": {
     "HttpRouteConfig": {
-      "description": "A set of host names and http request routing rules for a Container App Environment",
+      "description": "Advanced Ingress routing for path/header based routing for a Container App Environment",
       "type": "object",
       "allOf": [
         {
@@ -295,7 +289,7 @@
           "type": "object",
           "properties": {
             "provisioningState": {
-              "description": "The provisioning state of the Http Route Config",
+              "description": "The provisioning state of the Http Route Config in cluster",
               "$ref": "#/definitions/HttpRouteProvisioningState"
             },
             "provisioningErrors": {
@@ -312,7 +306,7 @@
               "readOnly": true
             },
             "customDomains": {
-              "description": "Custom domain bindings for Http Routes' hostnames.",
+              "description": "Custom domain bindings for http Routes' hostnames.",
               "type": "array",
               "items": {
                 "$ref": "./CommonDefinitions.json#/definitions/CustomDomain"
@@ -322,7 +316,7 @@
               ]
             },
             "rules": {
-              "description": "Routing Rules for the Http Route resource.",
+              "description": "Routing Rules for http route resource.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/HttpRouteRule"
@@ -337,7 +331,7 @@
       "x-ms-client-flatten": true
     },
     "HttpRouteProvisioningErrors": {
-      "description": "List of provisioning errors for a Http Route Config object",
+      "description": "List of provisioning errors for a http route config object",
       "type": "object",
       "properties": {
         "timestamp": {
@@ -369,8 +363,15 @@
           "type": "string"
         },
         "label": {
-          "description": "Label to route requests to",
+          "description": "Label/Revision to route requests to",
           "type": "string"
+        },
+        "weight": {
+          "description": "Weighted routing",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100
         }
       }
     },
@@ -407,7 +408,7 @@
       }
     },
     "HttpRoute": {
-      "description": "Http Routes, including paths to match on and whether or not rewrites are to be done.",
+      "description": "Http Routes configuration, including paths to match on and whether or not rewrites are to be done.",
       "type": "object",
       "properties": {
         "match": {
@@ -421,7 +422,7 @@
       }
     },
     "HttpRouteRule": {
-      "description": "A set of routing conditions and targets.",
+      "description": "Http Route rule.",
       "type": "object",
       "properties": {
         "targets": {
@@ -469,7 +470,7 @@
       }
     },
     "HttpRouteConfigCollection": {
-      "description": "Collection of rule based Http Route Config resources.",
+      "description": "Collection of Advanced Ingress Routing Config resources.",
       "required": [
         "value"
       ],
