@@ -2425,7 +2425,7 @@ namespace Storage.Blob {
       }
       #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
       namespace HierarchicalClient {
-        /** The Create operation creates a new page blob. */
+        /** The Create operation creates a new block blob. */
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
         #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
         @put
@@ -2437,11 +2437,6 @@ namespace Storage.Blob {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
             ...TimeoutParameter;
-
-            /** Optional. Indicates the tier to be set on the page blob. */
-            @header("x-ms-access-tier")
-            tier?: PremiumPageBlobAccessTier;
-
             ...BlobContentTypeParameter;
             ...BlobContentEncodingParameter;
             ...BlobContentLanguageParameter;
@@ -2465,13 +2460,13 @@ namespace Storage.Blob {
             ...ImmutabilityPolicyModeParameter;
             ...LegalHoldOptionalParameter;
 
-            /** the initial size of the page blob */
+            /** the initial size of the file/directory blob */
             @header("Content-Length")
             contentLength: 0;
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: "PageBlob";
+            blobType: "BlockBlob";
           },
           {
             @statusCode statusCode: 201;
