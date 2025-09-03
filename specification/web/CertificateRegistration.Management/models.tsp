@@ -154,7 +154,7 @@ enum InsightStatus {
 }
 
 /**
- * [Placeholder] Discription for page model
+ * Collection of certificate orders.
  */
 model AppServiceCertificateOrderCollection
   is Azure.Core.Page<AppServiceCertificateOrder>;

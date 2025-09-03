@@ -137,9 +137,7 @@ using Microsoft.CertificateRegistration;
   "Microsoft.CertificateRegistration call to get a detector response from App Lens."
 );
 @@doc(AppServiceCertificateOrder.properties, "App Service error response.");
-@@doc(AppServiceCertificateOrderCollection.value,
-  "[Placeholder] Discription for value property"
-);
+@@doc(AppServiceCertificateOrderCollection.value, "Collection of resources.");
 @@doc(AppServiceCertificateOrderCollection.nextLink,
-  "[Placeholder] Discription for nextLink property"
+  "Link to next page of resources."
 );
