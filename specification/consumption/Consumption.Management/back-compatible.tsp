@@ -47,11 +47,11 @@ using Microsoft.Consumption;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ModernUsageDetail.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LegacyReservationRecommendation.properties);
+// #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+// @@flattenProperty(LegacyReservationRecommendation.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ModernReservationRecommendation.properties);
+// #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+// @@flattenProperty(ModernReservationRecommendation.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(LegacyChargeSummary.properties);
