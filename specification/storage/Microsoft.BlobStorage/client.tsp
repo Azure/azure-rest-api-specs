@@ -21,7 +21,10 @@ model BlobServiceClientParameters {
 );
 @@clientNamespace(Storage.Blob.Container.Blob.BlockBlob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container.Blob.PageBlob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Container.Blob.HierarchicalClient,
+@@clientNamespace(Storage.Blob.Container.Blob.HierarchicalFileClient,
+  "Azure.Storage.Blobs"
+);
+@@clientNamespace(Storage.Blob.Container.Blob.HierarchicalDirectoryClient,
   "Azure.Storage.Blobs"
 );
 
@@ -34,8 +37,12 @@ model BlobServiceClientParameters {
 );
 @@clientName(Storage.Blob.Container.Blob.BlockBlob, "BlockBlobClient", "rust");
 @@clientName(Storage.Blob.Container.Blob.PageBlob, "PageBlobClient", "rust");
-@@clientName(Storage.Blob.Container.Blob.HierarchicalClient,
-  "HierarchicalBlobClient",
+@@clientName(Storage.Blob.Container.Blob.HierarchicalFileClient,
+  "HierarchicalFileClient",
+  "rust"
+);
+@@clientName(Storage.Blob.Container.Blob.HierarchicalDirectoryClient,
+  "HierarchicalDirectoryClient",
   "rust"
 );
 
@@ -70,7 +77,14 @@ model BlobServiceClientParameters {
   }
 );
 
-@@clientInitialization(Storage.Blob.Container.Blob.HierarchicalClient,
+@@clientInitialization(Storage.Blob.Container.Blob.HierarchicalFileClient,
+  {
+    parameters: BlobServiceClientParameters,
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  }
+);
+
+@@clientInitialization(Storage.Blob.Container.Blob.HierarchicalDirectoryClient,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,

@@ -2136,6 +2136,13 @@ alias ContainerNamePathParameter = {
   containerName: string;
 };
 
+/** The hierarchical namespace resource path parameter */
+alias HNSResourcePathParameter = {
+  /** The name of the resource. */
+  @path
+  resourceType: string;
+};
+
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeadersParameter = {
   /** The metadata headers. */

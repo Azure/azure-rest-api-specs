@@ -2424,7 +2424,7 @@ namespace Storage.Blob {
         >;
       }
       #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-      namespace HierarchicalClient {
+      namespace HierarchicalFileClient {
         /** The Create operation creates a new block blob. */
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
         #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
@@ -2436,6 +2436,7 @@ namespace Storage.Blob {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
+            ...HNSResourcePathParameter;
             ...TimeoutParameter;
             ...BlobContentTypeParameter;
             ...BlobContentEncodingParameter;
@@ -2453,7 +2454,64 @@ namespace Storage.Blob {
             ...IfNoneMatchParameter;
             ...IfMatchParameter;
             ...IfTagsParameter;
-            ...BlobContentLengthRequired;
+            ...SequenceNumberParameter;
+            ...BlobTagsHeaderParameter;
+            ...ImmutabilityPolicyExpiryParameter;
+            ...ImmutabilityPolicyModeParameter;
+            ...LegalHoldOptionalParameter;
+
+            /** the initial size of the file/directory blob */
+            @header("Content-Length")
+            contentLength: 0;
+
+            /** The type of the blob. */
+            @header("x-ms-blob-type")
+            blobType: "BlockBlob";
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...VersionIdResponseHeader;
+            ...DateResponseHeaderPrivate;
+            ...RequestServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+          }
+        >;
+      }
+      #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+      namespace HierarchicalDirectoryClient {
+        /** The Create operation creates a new block blob. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        @put
+        @sharedRoute
+        @route("{blobName}")
+        op create is StorageOperationNoBody<
+          {
+            ...MetadataHeaders;
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...HNSResourcePathParameter;
+            ...TimeoutParameter;
+            ...BlobContentTypeParameter;
+            ...BlobContentEncodingParameter;
+            ...BlobContentLanguageParameter;
+            ...BlobContentMd5Parameter;
+            ...BlobCacheControlParameter;
+            ...LeaseIdOptionalParameter;
+            ...BlobContentDispositionParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
+            ...IfTagsParameter;
             ...SequenceNumberParameter;
             ...BlobTagsHeaderParameter;
             ...ImmutabilityPolicyExpiryParameter;
