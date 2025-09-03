@@ -64,8 +64,6 @@ union PendingUploadType {
   BlobReference: "BlobReference",
 }
 
-
-
 @doc("The type of credential used to access the storage account.")
 union PendingUploadCredentialType {
   string,
@@ -133,7 +131,6 @@ model AssetCredentialResponse {
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
 @added(Versions.v2025_05_15_preview)
 model AzureOpenAIModelConfiguration extends TargetConfig {
-  @visibility(Lifecycle.Read)
   type: "AzureOpenAIModel";
 
   @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).")
