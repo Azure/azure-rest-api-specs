@@ -5,8 +5,6 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerService;
 
-const StageMaxConcurrencySystemLimit = "50";
-const StageMaxConcurrencyDefault = "10";
 const GroupMaxConcurrencyDefault = "1";
 
 @doc("""
@@ -43,7 +41,7 @@ model UpdateStage {
     The max number of upgrades that can run concurrently across all groups in this stage.
     Acts as a ceiling (and not a quota) for the number of concurrent upgrades within the stage you want to tolerate at a time.
     Actual concurrency may be lower depending on group-level concurrency limits or individual member conditions.
-    Stage maxConcurrency has a min value of "1". The max value is the min(number of clusters in this stage, system-defined limit of \"${StageMaxConcurrencySystemLimit}\").
+    Stage maxConcurrency has a min value of "1".
     Accepts either:
         • A fixed count, e.g., "3"
         • A percentage, e.g., "25%" (range 1–100). Percentage is of the total number of clusters across all groups in the stage.
