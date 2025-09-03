@@ -33,7 +33,10 @@ interface DomainOwnershipIdentifiers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Domains_GetOwnershipIdentifier")
-  getOwnershipIdentifier is ArmResourceRead<DomainOwnershipIdentifier>;
+  getOwnershipIdentifier is ArmResourceRead<
+    DomainOwnershipIdentifier,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates an ownership identifier for a domain or updates identifier details for an existing identifier
@@ -43,7 +46,8 @@ interface DomainOwnershipIdentifiers {
   @operationId("Domains_CreateOrUpdateOwnershipIdentifier")
   createOrUpdateOwnershipIdentifier is ArmResourceCreateOrReplaceSync<
     DomainOwnershipIdentifier,
-    Response = ArmResourceUpdatedResponse<DomainOwnershipIdentifier>
+    Response = ArmResourceUpdatedResponse<DomainOwnershipIdentifier>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -54,7 +58,8 @@ interface DomainOwnershipIdentifiers {
   @patch(#{ implicitOptionality: false })
   updateOwnershipIdentifier is ArmCustomPatchSync<
     DomainOwnershipIdentifier,
-    PatchModel = DomainOwnershipIdentifier
+    PatchModel = DomainOwnershipIdentifier,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -62,7 +67,10 @@ interface DomainOwnershipIdentifiers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Domains_DeleteOwnershipIdentifier")
-  deleteOwnershipIdentifier is ArmResourceDeleteSync<DomainOwnershipIdentifier>;
+  deleteOwnershipIdentifier is ArmResourceDeleteSync<
+    DomainOwnershipIdentifier,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Lists domain ownership identifiers.
@@ -71,7 +79,8 @@ interface DomainOwnershipIdentifiers {
   @operationId("Domains_ListOwnershipIdentifiers")
   listOwnershipIdentifiers is ArmResourceListByParent<
     DomainOwnershipIdentifier,
-    Response = ArmResponse<DomainOwnershipIdentifierCollection>
+    Response = ArmResponse<DomainOwnershipIdentifierCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 

@@ -29,7 +29,10 @@ interface Domains {
   /**
    * Description for Get a domain.
    */
-  get is ArmResourceRead<Domain>;
+  get is ArmResourceRead<
+    Domain,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates or updates a domain.
@@ -39,11 +42,12 @@ interface Domains {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Domain,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     Response = ArmResourceUpdatedResponse<Domain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
       @bodyRoot
       _: Domain;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -59,7 +63,8 @@ interface Domains {
     Response = ArmResponse<Domain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
       @bodyRoot
       _: Domain;
-    })
+    }),
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -73,7 +78,8 @@ interface Domains {
        */
       @query("forceHardDeleteDomain")
       forceHardDeleteDomain?: boolean;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -81,7 +87,8 @@ interface Domains {
    */
   listByResourceGroup is ArmResourceListByParent<
     Domain,
-    Response = ArmResponse<DomainCollection>
+    Response = ArmResponse<DomainCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -89,7 +96,8 @@ interface Domains {
    */
   list is ArmListBySubscription<
     Domain,
-    Response = ArmResponse<DomainCollection>
+    Response = ArmResponse<DomainCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -100,7 +108,8 @@ interface Domains {
   renew is ArmResourceActionSync<
     Domain,
     void,
-    OkResponse | AcceptedResponse | NoContentResponse
+    OkResponse | AcceptedResponse | NoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -111,7 +120,8 @@ interface Domains {
   transferOut is ArmResourceActionSync<
     Domain,
     void,
-    ArmResponse<Domain> | ArmBadRequestResponse
+    ArmResponse<Domain> | ArmBadRequestResponse,
+    Error = DefaultErrorResponse
   >;
 }
 

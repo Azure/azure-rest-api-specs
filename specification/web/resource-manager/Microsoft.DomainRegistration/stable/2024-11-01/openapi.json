@@ -68,13 +68,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/CsmOperationCollection"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -120,7 +120,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -156,7 +156,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -193,7 +193,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -236,7 +236,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -275,7 +275,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -321,7 +321,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -373,7 +373,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -415,7 +415,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -465,7 +465,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -531,7 +531,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -602,7 +602,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -659,7 +659,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -706,7 +706,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -763,7 +763,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -824,7 +824,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -885,7 +885,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -937,7 +937,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -987,7 +987,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -1038,7 +1038,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -1148,6 +1148,88 @@
         "phone"
       ]
     },
+    "CsmOperationCollection": {
+      "type": "object",
+      "description": "Collection of Azure resource manager operation metadata.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of resources.",
+          "items": {
+            "$ref": "#/definitions/CsmOperationDescription"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next page of resources.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CsmOperationDescription": {
+      "type": "object",
+      "description": "Description of an operation available for Microsoft.Web resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name, e.g. Microsoft.Web/sites/write."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Operation display name."
+        },
+        "display": {
+          "$ref": "#/definitions/CsmOperationDisplay",
+          "description": "Meta data about operation used for display in portal."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation, e.g. \"system\" or \"user\"."
+        },
+        "properties": {
+          "$ref": "#/definitions/CsmOperationDescriptionProperties",
+          "description": "Properties available for a Microsoft.Web resource provider operation."
+        }
+      }
+    },
+    "CsmOperationDescriptionProperties": {
+      "type": "object",
+      "description": "Properties available for a Microsoft.Web resource provider operation.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Resource metrics service provided by Microsoft.Insights resource provider."
+        }
+      }
+    },
+    "CsmOperationDisplay": {
+      "type": "object",
+      "description": "Meta data about operation used for display in portal.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource type."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      }
+    },
     "CustomHostNameDnsRecordType": {
       "type": "string",
       "description": "Type of the DNS record.",
@@ -1158,6 +1240,94 @@
       "x-ms-enum": {
         "name": "CustomHostNameDnsRecordType",
         "modelAsString": false
+      }
+    },
+    "DefaultErrorResponse": {
+      "type": "object",
+      "description": "App Service error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DefaultErrorResponseError",
+          "description": "Error model.",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultErrorResponseError": {
+      "type": "object",
+      "description": "Error model.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Standardized string to programmatically identify the error.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed error description and debugging information.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "Detailed error description and debugging information.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details.",
+          "items": {
+            "$ref": "#/definitions/DefaultErrorResponseErrorDetailsItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "type": "string",
+          "description": "More information to debug error.",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultErrorResponseErrorDetailsItem": {
+      "type": "object",
+      "description": "Detailed errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Standardized string to programmatically identify the error.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed error description and debugging information.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "Detailed error description and debugging information.",
+          "readOnly": true
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app,\nwhere instance name is dimension of the metric HTTP request",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Dimension of the internal name."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Dimension to be exported for shoebox."
+        }
       }
     },
     "DnsType": {
@@ -1706,6 +1876,132 @@
         "modelAsString": false
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Log Definition of a single resource metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the log."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of the log."
+        },
+        "logFilterPattern": {
+          "type": "string",
+          "description": "Log filtered pattern of the log."
+        }
+      }
+    },
+    "MetricAvailability": {
+      "type": "object",
+      "description": "Retention policy of a resource metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "description": "Metric availability time grain."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Metric availability blob duration."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Definition of a single resource metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the resource metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Description of the resource metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Resource metric unit."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Resource metric aggregation type."
+        },
+        "supportsInstanceLevelAggregation": {
+          "type": "boolean",
+          "description": "Resource metric supported aggregation types."
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Resource metric supported time grain types."
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "Resource metric source MDM account."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "Resource metric source MDM namespace."
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Resource metric filter pattern."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Resource metric fill gap with zero."
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Resource metric is internal."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Resource metric dimensions.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "description": "Resource metric category."
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "Resource metric availability.",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "x-ms-identifiers": []
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "Resource metric supported time grain types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Resource metric supported aggregation types.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "NameIdentifier": {
       "type": "object",
       "description": "Identifies an object.",
@@ -1777,6 +2073,32 @@
           "type": "string",
           "description": "Resource type.",
           "readOnly": true
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Resource metrics service provided by Microsoft.Insights resource provider.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Resource metrics service name.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Resource logs service provided by Microsoft.Insights resource provider.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

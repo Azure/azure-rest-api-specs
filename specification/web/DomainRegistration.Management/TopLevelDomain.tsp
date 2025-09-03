@@ -32,7 +32,8 @@ interface TopLevelDomains {
    */
   get is ArmResourceRead<
     TopLevelDomain,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -41,7 +42,8 @@ interface TopLevelDomains {
   list is ArmResourceListByParent<
     TopLevelDomain,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<TopLevelDomainCollection>
+    Response = ArmResponse<TopLevelDomainCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -53,7 +55,8 @@ interface TopLevelDomains {
     TopLevelDomain,
     TopLevelDomainAgreementOption,
     ArmResponse<TldLegalAgreementCollection>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = DefaultErrorResponse
   >;
 }
 

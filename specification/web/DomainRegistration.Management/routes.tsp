@@ -27,7 +27,8 @@ interface DomainsOperationGroup {
     Request = NameIdentifier,
     Response = DomainAvailabilityCheckResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Generate a single sign-on request for the domain management portal.
@@ -40,7 +41,8 @@ interface DomainsOperationGroup {
   getControlCenterSsoRequest is ArmProviderActionSync<
     Response = DomainControlCenterSsoRequest,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Get domain name recommendations based on keywords.
@@ -55,6 +57,7 @@ interface DomainsOperationGroup {
     Request = DomainRecommendationSearchParameters,
     Response = NameIdentifierCollection,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = DefaultErrorResponse
   >;
 }

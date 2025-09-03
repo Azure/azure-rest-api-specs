@@ -1089,3 +1089,23 @@ union domainNotRenewableReasonsProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SubscriptionNotActive: "SubscriptionNotActive",
 }
+
+/**
+ * Collection of Azure resource manager operation metadata.
+ */
+model CsmOperationCollection {
+  /**
+   * Collection of resources.
+  */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value: CsmOperationDescription[]; // required
+
+  /**
+  * Link to next page of resources.
+  */
+  @doc("Link to next page of resources.")
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
