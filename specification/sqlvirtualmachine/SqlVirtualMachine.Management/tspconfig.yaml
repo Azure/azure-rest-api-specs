@@ -13,18 +13,18 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
     service-dir: "sdk/sql"
-    package-dir: "azure-mgmt-sqlvirtualmachine"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sqlvirtualmachine"
     namespace: "azure.mgmt.sqlvirtualmachine"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-sqlvirtualmachine"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sqlvirtualmachine"
     namespace: "com.azure.resourcemanager.sqlvirtualmachine"
     service-name: "SqlVirtualMachine" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-sqlvirtualmachine"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sqlvirtualmachine"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -32,8 +32,8 @@ options:
       name: "@azure/arm-sqlvirtualmachine"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/sqlvirtualmachine"
-    package-dir: "armsqlvirtualmachine"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsqlvirtualmachine"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsqlvirtualmachine"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

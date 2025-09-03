@@ -24,7 +24,7 @@ options:
     "package-pprint-name": "Key Vault Secrets"
     "package-version": "4.9.0"
     "namespace": "azure.keyvault.secrets._generated"
-    "package-dir": "azure-keyvault-secrets"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-secrets"
   "@azure-tools/typespec-java":
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-secrets"
@@ -51,7 +51,7 @@ options:
     service-dir: "sdk/security/keyvault"
     module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets"
     module-version: "0.0.1"
-    emitter-output-dir: "{project-root}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azsecrets"
     override-client-name: "Client"
     single-client: true
     inject-spans: true

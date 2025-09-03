@@ -22,26 +22,26 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.MonitorAccounts"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-monitoraccounts"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitoraccounts"
     namespace: "azure.mgmt.monitoraccounts"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-monitoraccounts"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitoraccounts"  
     namespace: "com.azure.resourcemanager.monitoraccounts"
     service-name: "Monitor Accounts"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-monitoraccounts"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-monitoraccounts"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-monitoraccounts"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/monitor"
-    package-dir: "armmonitor"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitor"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

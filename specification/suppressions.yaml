@@ -451,6 +451,7 @@
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-csharp.*
   paths:
     - containerservice/Fleet.Management/tspconfig.yaml
 
@@ -522,6 +523,7 @@
   sub-rules:
     - options.@azure-tools/typespec-csharp.*
     - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-python.*
   paths:
     - edge/Microsoft.Edge.ConfigurationManager.Management/tspconfig.yaml
     - edge/Microsoft.Edge.Configurations.Management/tspconfig.yaml
@@ -666,6 +668,7 @@
     - options.@azure-tools/typespec-ts.package-details.name
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
+    - options.@azure-tools/typespec-csharp.*
   paths:
     - keyvault/Security.KeyVault.Certificates/tspconfig.yaml
     - keyvault/Security.KeyVault.Keys/tspconfig.yaml
@@ -718,19 +721,11 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.namespace
   paths:
-    - loadtestservice/LoadTestService/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.generate-samples
-  paths:
-    - loadtestservice/LoadTestService.Management/tspconfig.yaml
-    - loadtestservice/Playwright.Management/tspconfig.yaml
+    - loadtestservice/data-plane/loadtesting/tspconfig.yaml
+    - loadtestservice/data-plane/playwright/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -762,6 +757,17 @@
     - options.@azure-tools/typespec-java.*
   paths:
     - machinelearningservices/AzureAI.Assets/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+  paths:
+    - marketplacecatalog/Products/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated

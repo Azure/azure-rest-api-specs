@@ -19,26 +19,27 @@ options:
     namespace: "Azure.ResourceManager.ComputeRecommender"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-computerecommender"
     namespace: "azure.mgmt.computerecommender"
     generate-test: true
     generate-sample: true
     flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computerecommender"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-computerecommender"
     namespace: "com.azure.resourcemanager.computerecommender"
     service-name: "Compute Recommender"
     flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-computerecommender"
   "@azure-tools/typespec-ts":
     package-dir: "arm-computerecommender"
     flavor: azure
     experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computerecommender"
     package-details:
       name: "@azure/arm-computerecommender"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/computerecommender"
-    package-dir: "armcomputerecommender"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcomputerecommender"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcomputerecommender"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
