@@ -96,7 +96,6 @@ interface Appliances {
    * Gets the upgrade graph of an Appliance with a specified resource group and name and specific release train.
    */
   @get
-  @action("{upgradeGraph}")
   getUpgradeGraph is ArmResourceActionSync<
     Appliance,
     void,
@@ -106,7 +105,8 @@ interface Appliances {
        * Upgrade graph version, ex - stable
        */
       @path
-      upgradeGraph: string;
+      @segment("upgradeGraphs")
+      upgradeGraph?: string;
     }
   >;
 }

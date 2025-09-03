@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2022-10-27",
-    "subscriptionId": "11111111-2222-3333-4444-555555555555",
     "resourceGroupName": "testresourcegroup",
-    "resourceName": "appliance01"
+    "resourceName": "appliance01",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
   },
   "responses": {
     "200": {
@@ -20,27 +20,29 @@
           }
         ],
         "sshKeys": {
-          "SSHCustomerUser": {
-            "privateKey": "xxxxxxxx",
-            "publicKey": "xxxxxxxx"
+          "LogsKey": {
+            "certificate": "<Generated Certificate>",
+            "creationTimeStamp": 1660946559,
+            "expirationTimeStamp": 1724119358,
+            "privateKey": "<Generated Private Key>"
           },
           "ManagementCAKey": {
             "publicKey": "<Generated Public Key>"
           },
-          "LogsKey": {
-            "privateKey": "<Generated Private Key>",
-            "creationTimeStamp": 1660946559,
-            "expirationTimeStamp": 1724119358,
-            "certificate": "<Generated Certificate>"
+          "SSHCustomerUser": {
+            "privateKey": "xxxxxxxx",
+            "publicKey": "xxxxxxxx"
           },
           "ScopedAccessKey": {
-            "privateKey": "<Generated Private Key>",
+            "certificate": "<Generated Certificate>",
             "creationTimeStamp": 1660946559,
             "expirationTimeStamp": 1724119358,
-            "certificate": "<Generated Certificate>"
+            "privateKey": "<Generated Private Key>"
           }
         }
       }
     }
-  }
+  },
+  "operationId": "Appliances_ListKeys",
+  "title": "ListKeys Appliance"
 }

@@ -1,0 +1,799 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "appliances",
+    "version": "2022-10-27",
+    "description": "The appliances Rest API spec."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/microsoft.ResourceConnector/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ResourceConnector/appliances": {
+      "get": {
+        "operationId": "Appliances_ListBySubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplianceListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Appliances by subscription": {
+            "$ref": "./examples/AppliancesListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ResourceConnector/telemetryconfig": {
+      "get": {
+        "operationId": "Appliances_GetTelemetryConfig",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplianceGetTelemetryConfigResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTelemetryConfig Appliance": {
+            "$ref": "./examples/TelemetryConfig.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ResourceConnector/appliances": {
+      "get": {
+        "operationId": "Appliances_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplianceListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Appliances by resource group": {
+            "$ref": "./examples/AppliancesListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ResourceConnector/appliances/{resourceName}": {
+      "get": {
+        "operationId": "Appliances_Get",
+        "parameters": [
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Appliance"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Appliance": {
+            "$ref": "./examples/AppliancesGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Appliances_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Appliance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Appliance"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Appliance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update Appliance": {
+            "$ref": "./examples/AppliancesCreate_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Appliance"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Appliances_Update",
+        "parameters": [
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchableAppliance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Appliance"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Appliance": {
+            "$ref": "./examples/AppliancesPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Appliances_Delete",
+        "parameters": [
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Appliance": {
+            "$ref": "./examples/AppliancesDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ResourceConnector/appliances/{resourceName}/listClusterUserCredential": {
+      "post": {
+        "operationId": "Appliances_ListClusterUserCredential",
+        "parameters": [
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplianceListCredentialResults"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListClusterUserCredentialAppliance": {
+            "$ref": "./examples/AppliancesListClusterUserCredential.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ResourceConnector/appliances/{resourceName}/listkeys": {
+      "post": {
+        "operationId": "Appliances_ListKeys",
+        "parameters": [
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "artifactType",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplianceListKeysResults"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListKeys Appliance": {
+            "$ref": "./examples/AppliancesListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs{upgradeGraph}/getUpgradeGraph": {
+      "get": {
+        "operationId": "Appliances_GetUpgradeGraph",
+        "parameters": [
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "upgradeGraph",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/UpgradeGraph"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Appliance Upgrade Graph": {
+            "$ref": "./examples/UpgradeGraph.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Appliance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplianceProperties",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ApplianceCredentialKubeconfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "clusterUser",
+            "clusterCustomerUser"
+          ],
+          "x-ms-enum": {
+            "name": "AccessProfileType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplianceGetTelemetryConfigResult": {
+      "type": "object",
+      "properties": {
+        "telemetryInstrumentationKey": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplianceListCredentialResults": {
+      "type": "object",
+      "properties": {
+        "hybridConnectionConfig": {
+          "$ref": "#/definitions/HybridConnectionConfig",
+          "readOnly": true
+        },
+        "kubeconfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplianceCredentialKubeconfig"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ApplianceListKeysResults": {
+      "type": "object",
+      "properties": {
+        "artifactProfiles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArtifactProfile"
+          },
+          "readOnly": true
+        },
+        "kubeconfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplianceCredentialKubeconfig"
+          },
+          "readOnly": true
+        },
+        "sshKeys": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSHKey"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ApplianceListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Appliance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplianceProperties": {
+      "type": "object",
+      "properties": {
+        "distro": {
+          "type": "string",
+          "default": "AKSEdge",
+          "enum": [
+            "AKSEdge"
+          ],
+          "x-ms-enum": {
+            "name": "Distro",
+            "modelAsString": true
+          }
+        },
+        "infrastructureConfig": {
+          "$ref": "#/definitions/AppliancePropertiesInfrastructureConfig"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicKey": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "WaitingForHeartbeat",
+            "Validating",
+            "Connecting",
+            "Connected",
+            "Running",
+            "PreparingForUpgrade",
+            "ETCDSnapshotFailed",
+            "UpgradePrerequisitesCompleted",
+            "ValidatingSFSConnectivity",
+            "ValidatingImageDownload",
+            "ValidatingImageUpload",
+            "ValidatingETCDHealth",
+            "PreUpgrade",
+            "UpgradingKVAIO",
+            "WaitingForKVAIO",
+            "ImagePending",
+            "ImageProvisioning",
+            "ImageProvisioned",
+            "ImageDownloading",
+            "ImageDownloaded",
+            "ImageDeprovisioning",
+            "ImageUnknown",
+            "UpdatingCloudOperator",
+            "WaitingForCloudOperator",
+            "UpdatingCAPI",
+            "UpdatingCluster",
+            "PostUpgrade",
+            "UpgradeComplete",
+            "UpgradeClusterExtensionFailedToDelete",
+            "UpgradeFailed",
+            "Offline",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "AppliancePropertiesInfrastructureConfig": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": [
+            "VMWare",
+            "HCI",
+            "SCVMM"
+          ],
+          "x-ms-enum": {
+            "name": "Provider",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ArtifactProfile": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HybridConnectionConfig": {
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hybridConnectionName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "relay": {
+          "type": "string",
+          "readOnly": true
+        },
+        "token": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PatchableAppliance": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SSHKey": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "readOnly": true
+        },
+        "creationTimeStamp": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "expirationTimeStamp": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "privateKey": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicKey": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedVersion": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/SupportedVersionMetadata",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedVersionCatalogVersion": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/SupportedVersionCatalogVersionData",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "namespace": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedVersionCatalogVersionData": {
+      "type": "object",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "readOnly": true
+        },
+        "catalog": {
+          "type": "string",
+          "readOnly": true
+        },
+        "offer": {
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedVersionMetadata": {
+      "type": "object",
+      "properties": {
+        "catalogVersion": {
+          "$ref": "#/definitions/SupportedVersionCatalogVersion",
+          "readOnly": true
+        }
+      }
+    },
+    "UpgradeGraph": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/UpgradeGraphProperties"
+        }
+      }
+    },
+    "UpgradeGraphProperties": {
+      "type": "object",
+      "properties": {
+        "applianceVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedVersion"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
