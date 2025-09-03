@@ -1556,12 +1556,25 @@ model PrivateLinkResourceListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResource
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Resource properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PrivateLinkResourceProperties;
+
+  /**
+   * Azure location of the key vault resource.
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Tags assigned to the key vault resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**

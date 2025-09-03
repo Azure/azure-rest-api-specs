@@ -5112,11 +5112,24 @@
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure location of the key vault resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags assigned to the key vault resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
