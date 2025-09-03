@@ -455,7 +455,6 @@ model ApnsCredential {
   /**
    * Description of a NotificationHub ApnsCredential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: ApnsCredentialProperties;
 }
 
@@ -523,7 +522,6 @@ model WnsCredential {
   /**
    * Description of a NotificationHub WnsCredential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: WnsCredentialProperties;
 }
 
@@ -569,7 +567,6 @@ model GcmCredential {
   /**
    * Description of a NotificationHub GcmCredential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: GcmCredentialProperties;
 }
 
@@ -598,7 +595,6 @@ model MpnsCredential {
   /**
    * Description of a NotificationHub MpnsCredential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: MpnsCredentialProperties;
 }
 
@@ -635,7 +631,6 @@ model AdmCredential {
   /**
    * Description of a NotificationHub AdmCredential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: AdmCredentialProperties;
 }
 
@@ -672,7 +667,6 @@ model BaiduCredential {
   /**
    * Description of a NotificationHub BaiduCredential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: BaiduCredentialProperties;
 }
 
@@ -709,7 +703,6 @@ model BrowserCredential {
   /**
    * Description of a NotificationHub BrowserCredential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: BrowserCredentialProperties;
 }
 
@@ -746,7 +739,6 @@ model XiaomiCredential {
   /**
    * Description of a NotificationHub XiaomiCredentialProperties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: XiaomiCredentialProperties;
 }
 
@@ -774,7 +766,6 @@ model FcmV1Credential {
   /**
    * Description of a NotificationHub FcmV1Credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: FcmV1CredentialProperties;
 }
 
@@ -811,7 +802,6 @@ model NotificationHubPatchParameters {
   /**
    * NotificationHub properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: NotificationHubProperties;
 
   /**
@@ -835,7 +825,6 @@ model DebugSendResponse
   /**
    * Result of DebugSend operations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DebugSendResult;
 
   /**
@@ -964,7 +953,6 @@ model PnsCredentialsResource
   /**
    * Collection of Notification Hub or Notification Hub Namespace PNS credentials.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PnsCredentials;
 
   /**
