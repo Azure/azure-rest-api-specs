@@ -4,7 +4,7 @@
     "resourceGroupName": "examplerg",
     "environmentName": "testcontainerenv",
     "httpRouteName": "httproutefriendlyname",
-    "api-version": "2025-02-02-preview",
+    "api-version": "2025-07-01",
     "httpRouteConfigEnvelope": {
       "properties": {
         "customDomains": [
@@ -19,13 +19,13 @@
             "targets": [
               {
                 "containerApp": "capp-1",
-                "label": "label-1"
+                "revision": "capp-1--0000001"
               }
             ],
             "routes": [
               {
                 "match": {
-                  "pathSeparatedPrefix": "/v1",
+                  "path": "/v1",
                   "caseSensitive": true
                 },
                 "action": {
@@ -60,13 +60,13 @@
               "targets": [
                 {
                   "containerApp": "capp-1",
-                  "label": "label-1"
+                  "revision": "capp-1--0000001"
                 }
               ],
               "routes": [
                 {
                   "match": {
-                    "pathSeparatedPrefix": "/v1",
+                    "path": "/v1",
                     "caseSensitive": true
                   },
                   "action": {
@@ -100,13 +100,13 @@
               "targets": [
                 {
                   "containerApp": "capp-1",
-                  "label": "label-1"
+                  "revision": "capp-1--0000001"
                 }
               ],
               "routes": [
                 {
                   "match": {
-                    "pathSeparatedPrefix": "/v1",
+                    "path": "/v1",
                     "caseSensitive": true
                   },
                   "action": {
