@@ -79,6 +79,18 @@ union Architecture {
   string,
 }
 
+@added(Versions.v2025_04_01_preview)
+@doc("Disk controller type")
+union DiskControllerType {
+  @doc("scsi disk controller")
+  scsi: "scsi",
+
+  @doc("nvme disk controller")
+  nvme: "nvme",
+
+  string,
+}
+
 @minValue(1)
 @maxValue(2)
 scalar VhdGeneration extends int32;
@@ -94,6 +106,10 @@ model Image {
 
   @doc("Options are x64 or arm64. Defaults to x64")
   architecture?: Architecture = Architecture.x64;
+
+  @added(Versions.v2025_04_01_preview)
+  @doc("Options are scsi or nvme.")
+  diskControllerType?: DiskControllerType;
 }
 
 @doc("VHD image type object")

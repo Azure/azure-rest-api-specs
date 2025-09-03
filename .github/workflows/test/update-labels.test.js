@@ -210,6 +210,41 @@ describe("updateLabelsImpl", () => {
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
   });
 
+  it("throws for invalid label name", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: "label-foo=true" },
+          { name: "label-bar=false" },
+          { name: "label-=true" },
+        ],
+      },
+    });
+
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        issue_number: 123,
+        run_id: 456,
+        github: github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: Invalid value for label name: '']`);
+
+    expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
+      owner: "owner",
+      repo: "repo",
+      run_id: 456,
+      per_page: PER_PAGE_MAX,
+    });
+
+    // Ensure no labels are added or removed if any are invalid
+    expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+  });
+
   it.each([404, 500, 501])("handles error removing label (%s)", async (status) => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({

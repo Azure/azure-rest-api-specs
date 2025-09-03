@@ -1,0 +1,77 @@
+{
+  "operationId": "ProviderAccounts_ListByResourceGroup",
+  "title": "ProviderAccounts_ListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "quantumResourcegroup",
+    "api-version": "2025-08-11-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/quantumResourcegroup/providers/Microsoft.Quantum/ProviderAccounts/providerAccount1",
+            "name": "providerAccount1",
+            "type": "Microsoft.Quantum/ProviderAccounts",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "providerId": "provider1",
+              "displayName": "Contoso Provider Account 1",
+              "description": "Contoso Provider Account 1 description",
+              "companyName": "Contoso",
+              "subscriptions": [
+                {
+                  "id": "00000000-1111-2222-3333-444444444444",
+                  "name": "Fabrikam Subscription 1"
+                },
+                {
+                  "id": "00000000-1111-2222-3333-555555555555",
+                  "name": "Fabrikam Subscription 2"
+                }
+              ],
+              "queues": [
+                {
+                  "id": "contoso-queue-1",
+                  "name": "Contoso Queue 1",
+                  "targets": [
+                    {
+                      "id": "provider1.target1",
+                      "name": "Contoso Provider 1 - Target 1",
+                      "description": "Contoso Provider 1 - Target 1 description"
+                    }
+                  ]
+                }
+              ],
+              "managedOnBehalfOfConfiguration": {
+                "moboBrokerResources": [
+                  {
+                    "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/quantumResourcegroup/providers/Microsoft.Storage/storageAccounts/testStorageAccount"
+                  }
+                ]
+              }
+            },
+            "location": "West US",
+            "tags": {
+              "department": "MightyMight",
+              "company": "Contoso"
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444"
+            },
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2025-02-15T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-02-15T17:18:19.1234567Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

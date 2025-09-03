@@ -1207,25 +1207,11 @@
           "minLength": 2,
           "maxLength": 50
         },
-        "allowedSubscriptions": {
-          "type": "array",
-          "description": "Deprecated. List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
-          "items": {
-            "$ref": "#/definitions/ProviderAccount.SubscriptionId"
-          }
-        },
         "subscriptions": {
           "type": "array",
           "description": "List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
           "items": {
             "$ref": "#/definitions/ProviderAccount.ProviderAccountSubscription"
-          }
-        },
-        "targets": {
-          "type": "array",
-          "description": "Deprecated. List of Targets available in this ProviderAccount.",
-          "items": {
-            "$ref": "#/definitions/ProviderAccount.ProviderAccountTarget"
           }
         },
         "queues": {
@@ -1277,25 +1263,11 @@
           "minLength": 2,
           "maxLength": 50
         },
-        "allowedSubscriptions": {
-          "type": "array",
-          "description": "Deprecated. List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
-          "items": {
-            "$ref": "#/definitions/ProviderAccount.SubscriptionId"
-          }
-        },
         "subscriptions": {
           "type": "array",
           "description": "List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
           "items": {
             "$ref": "#/definitions/ProviderAccount.ProviderAccountSubscription"
-          }
-        },
-        "targets": {
-          "type": "array",
-          "description": "Deprecated. List of Targets available in this ProviderAccount.",
-          "items": {
-            "$ref": "#/definitions/ProviderAccount.ProviderAccountTarget"
           }
         }
       }
@@ -1336,11 +1308,8 @@
       "description": "A subscription that is allowed to access resources from a ProviderAccount.",
       "properties": {
         "id": {
-          "type": "string",
-          "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-          "minLength": 36,
-          "maxLength": 36,
-          "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$"
+          "$ref": "#/definitions/ProviderAccount.SubscriptionId",
+          "description": "The Azure subscription ID."
         },
         "name": {
           "type": "string",

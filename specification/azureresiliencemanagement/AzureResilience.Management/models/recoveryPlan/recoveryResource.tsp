@@ -55,7 +55,7 @@ model RecoveryResourceProperties {
   resourceProtectionSolutions?: ResourceProtectionSolutionSettings[];
 
   @doc("A setting that indicates the protection solution selected.")
-  selectedProtectionSolutionType: ResourceProtectionSolutionType;
+  selectedProtectionSolutionType?: ResourceProtectionSolutionType;
 
   @doc("Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.")
   selectedProtectionSolutionSetting?: ResourceBaseProtectionSolutionSetting;

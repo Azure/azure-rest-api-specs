@@ -802,6 +802,11 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   supportsIpv4Connections?: BoolValue;
 
   /**
+   * Indicates whether Deep Discovery has been performed on the instance.
+   */
+  deepDiscoveryPerformed?: BoolValue;
+
+  /**
    * The number of compute IOPS (Input/Output Operations Per Second) collected.
    */
   computeIopsCollected?: int32;
@@ -979,6 +984,11 @@ model PgsqlInstanceResourcePatch {
    * Indicates whether the system supports IPv4 connections.
    */
   supportsIpv4Connections?: BoolValue;
+
+  /**
+   * Indicates whether Deep Discovery has been performed on the instance.
+   */
+  deepDiscoveryPerformed?: BoolValue;
 
   /**
    * The number of compute IOPS (Input/Output Operations Per Second) collected.
@@ -1442,7 +1452,7 @@ model SiteTagsPatch {
 }
 
 /**
- * Represents a Collation in PostgreSQL.
+ * Represents the properties of the machine where the PostgreSQL instance is running.
  */
 model HostMachineProperties {
   /**
@@ -1454,4 +1464,14 @@ model HostMachineProperties {
    * The allocated RAM in Machine.
    */
   allocatedMemoryInMb?: int64;
+
+  /**
+   * The machine storage size in GB.
+   */
+  totalStorageInGb?: int64;
+
+  /**
+   * The number of PostgreSQL instances on the machine.
+   */
+  pgInstanceCount?: int64;
 }

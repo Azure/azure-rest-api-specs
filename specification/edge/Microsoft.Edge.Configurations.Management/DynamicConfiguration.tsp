@@ -23,6 +23,11 @@ model DynamicConfigurationProperties {
   @doc("Current Version of dynamic configuration")
   currentVersion: string;
 
+  @added(Versions.v2025_08_01)
+  @doc("Display name of the dynamic configuration")
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
   @doc("Type of dynamic configuration")
   @visibility(Lifecycle.Read)
   dynamicConfigurationType?: ConfigurationType;

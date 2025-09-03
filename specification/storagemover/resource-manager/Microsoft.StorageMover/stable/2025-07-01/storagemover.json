@@ -1,0 +1,3624 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StorageMoverClient",
+    "version": "2025-07-01",
+    "description": "The Azure Storage Mover REST API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "StorageMovers"
+    },
+    {
+      "name": "Agents"
+    },
+    {
+      "name": "Endpoints"
+    },
+    {
+      "name": "Projects"
+    },
+    {
+      "name": "JobDefinitions"
+    },
+    {
+      "name": "JobRuns"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.StorageMover/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageMover/storageMovers": {
+      "get": {
+        "operationId": "StorageMovers_ListBySubscription",
+        "tags": [
+          "StorageMovers"
+        ],
+        "description": "Lists all Storage Movers in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageMoverList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageMovers_List": {
+            "$ref": "./examples/StorageMovers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers": {
+      "get": {
+        "operationId": "StorageMovers_List",
+        "tags": [
+          "StorageMovers"
+        ],
+        "description": "Lists all Storage Movers in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageMoverList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageMovers_List": {
+            "$ref": "./examples/StorageMovers_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}": {
+      "get": {
+        "operationId": "StorageMovers_Get",
+        "tags": [
+          "StorageMovers"
+        ],
+        "description": "Gets a Storage Mover resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageMover"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageMovers_Get": {
+            "$ref": "./examples/StorageMovers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StorageMovers_CreateOrUpdate",
+        "tags": [
+          "StorageMovers"
+        ],
+        "description": "Creates or updates a top-level Storage Mover resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageMover",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageMover"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StorageMover' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageMover"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageMovers_CreateOrUpdate": {
+            "$ref": "./examples/StorageMovers_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "StorageMovers_Update",
+        "tags": [
+          "StorageMovers"
+        ],
+        "description": "Updates properties for a Storage Mover resource. Properties not specified in the request body will be unchanged.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageMover",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageMoverUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageMover"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageMovers_Update": {
+            "$ref": "./examples/StorageMovers_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StorageMovers_Delete",
+        "tags": [
+          "StorageMovers"
+        ],
+        "description": "Deletes a Storage Mover resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageMovers_Delete": {
+            "$ref": "./examples/StorageMovers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/agents": {
+      "get": {
+        "operationId": "Agents_List",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Lists all Agents in a Storage Mover.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_List_MaximumSet": {
+            "$ref": "./examples/Agents_List_MaximumSet.json"
+          },
+          "Agents_List_MinimumSet": {
+            "$ref": "./examples/Agents_List_MinimumSet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/agents/{agentName}": {
+      "get": {
+        "operationId": "Agents_Get",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Gets an Agent resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Get_MaximumSet": {
+            "$ref": "./examples/Agents_Get_MaximumSet.json"
+          },
+          "Agents_Get_MinimumSet": {
+            "$ref": "./examples/Agents_Get_MinimumSet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Agents_CreateOrUpdate",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Creates or updates an Agent resource, which references a hybrid compute machine that can run jobs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agent",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Agent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Agents_CreateOrUpdate_MaximumSet.json"
+          },
+          "Agents_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/Agents_CreateOrUpdate_MinimumSet.json"
+          },
+          "Agents_CreateOrUpdate_WithOvernightUploadLimitSchedule": {
+            "$ref": "./examples/Agents_CreateOrUpdate_UploadLimitSchedule_Overnight.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Agents_Update",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Creates or updates an Agent resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agent",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Update": {
+            "$ref": "./examples/Agents_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Agents_Delete",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Deletes an Agent resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Delete": {
+            "$ref": "./examples/Agents_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/endpoints": {
+      "get": {
+        "operationId": "Endpoints_List",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Lists all Endpoints in a Storage Mover.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EndpointList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_List": {
+            "$ref": "./examples/Endpoints_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/endpoints/{endpointName}": {
+      "get": {
+        "operationId": "Endpoints_Get",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Gets an Endpoint resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Endpoint resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_Get_AzureMultiCloudConnector": {
+            "$ref": "./examples/Endpoints_Get_AzureMultiCloudConnector.json"
+          },
+          "Endpoints_Get_AzureStorageBlobContainer": {
+            "$ref": "./examples/Endpoints_Get_AzureStorageBlobContainer.json"
+          },
+          "Endpoints_Get_AzureStorageNfsFileShare": {
+            "$ref": "./examples/Endpoints_Get_AzureStorageNfsFileShare.json"
+          },
+          "Endpoints_Get_AzureStorageSmbFileShare": {
+            "$ref": "./examples/Endpoints_Get_AzureStorageSmbFileShare.json"
+          },
+          "Endpoints_Get_NfsMount": {
+            "$ref": "./examples/Endpoints_Get_NfsMount.json"
+          },
+          "Endpoints_Get_SmbMount": {
+            "$ref": "./examples/Endpoints_Get_SmbMount.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Endpoints_CreateOrUpdate",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Creates or updates an Endpoint resource, which represents a data transfer source or destination.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Endpoint resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpoint",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Endpoint' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_CreateOrUpdate_AzureMultiCloudConnector": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_AzureMultiCloudConnector.json"
+          },
+          "Endpoints_CreateOrUpdate_AzureStorageBlobContainer": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_AzureStorageBlobContainer.json"
+          },
+          "Endpoints_CreateOrUpdate_AzureStorageNfsFileShare": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_AzureStorageNfsFileShare.json"
+          },
+          "Endpoints_CreateOrUpdate_AzureStorageSmbFileShare": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_AzureStorageSmbFileShare.json"
+          },
+          "Endpoints_CreateOrUpdate_NfsMount": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_NfsMount.json"
+          },
+          "Endpoints_CreateOrUpdate_SmbMount": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_SmbMount.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Endpoints_Update",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Updates properties for an Endpoint resource. Properties not specified in the request body will be unchanged.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Endpoint resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpoint",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointBaseUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_Update_AzureMultiCloudConnector": {
+            "$ref": "./examples/Endpoints_Update_AzureMultiCloudConnector.json"
+          },
+          "Endpoints_Update_AzureStorageBlobContainer": {
+            "$ref": "./examples/Endpoints_Update_AzureStorageBlobContainer.json"
+          },
+          "Endpoints_Update_AzureStorageNfsFileShare": {
+            "$ref": "./examples/Endpoints_Update_AzureStorageNfsFileShare.json"
+          },
+          "Endpoints_Update_AzureStorageSmbFileShare": {
+            "$ref": "./examples/Endpoints_Update_AzureStorageSmbFileShare.json"
+          },
+          "Endpoints_Update_NfsMount": {
+            "$ref": "./examples/Endpoints_Update_NfsMount.json"
+          },
+          "Endpoints_Update_SmbMount": {
+            "$ref": "./examples/Endpoints_Update_SmbMount.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Endpoints_Delete",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Deletes an Endpoint resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Endpoint resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_Delete": {
+            "$ref": "./examples/Endpoints_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/projects": {
+      "get": {
+        "operationId": "Projects_List",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Lists all Projects in a Storage Mover.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProjectList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/Projects_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/projects/{projectName}": {
+      "get": {
+        "operationId": "Projects_Get",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Gets a Project resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Get": {
+            "$ref": "./examples/Projects_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Projects_CreateOrUpdate",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Creates or updates a Project resource, which is a logical grouping of related jobs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Project' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_CreateOrUpdate": {
+            "$ref": "./examples/Projects_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Projects_Update",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Updates properties for a Project resource. Properties not specified in the request body will be unchanged.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Update": {
+            "$ref": "./examples/Projects_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Projects_Delete",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Deletes a Project resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Delete": {
+            "$ref": "./examples/Projects_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/projects/{projectName}/jobDefinitions": {
+      "get": {
+        "operationId": "JobDefinitions_List",
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "Lists all Job Definitions in a Project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDefinitionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobDefinitions_List": {
+            "$ref": "./examples/JobDefinitions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/projects/{projectName}/jobDefinitions/{jobDefinitionName}": {
+      "get": {
+        "operationId": "JobDefinitions_Get",
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "Gets a Job Definition resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the Job Definition resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobDefinitions_Get": {
+            "$ref": "./examples/JobDefinitions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "JobDefinitions_CreateOrUpdate",
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "Creates or updates a Job Definition resource, which contains configuration for a single unit of managed data transfer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the Job Definition resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinition",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'JobDefinition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JobDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobDefinitions_CreateOrUpdate": {
+            "$ref": "./examples/JobDefinitions_CreateOrUpdate.json"
+          },
+          "JobDefinitions_CreateOrUpdate_CloudToCloud": {
+            "$ref": "./examples/JobDefinitions_CreateOrUpdate_CloudToCloud.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "JobDefinitions_Update",
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "Updates properties for a Job Definition resource. Properties not specified in the request body will be unchanged.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the Job Definition resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinition",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobDefinitionUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobDefinitions_Update": {
+            "$ref": "./examples/JobDefinitions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JobDefinitions_Delete",
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "Deletes a Job Definition resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the Job Definition resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Delete": {
+            "$ref": "./examples/JobDefinitions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/projects/{projectName}/jobDefinitions/{jobDefinitionName}/jobRuns": {
+      "get": {
+        "operationId": "JobRuns_List",
+        "tags": [
+          "JobRuns"
+        ],
+        "description": "Lists all Job Runs in a Job Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the Job Definition resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobRunList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobRuns_List": {
+            "$ref": "./examples/JobRuns_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/projects/{projectName}/jobDefinitions/{jobDefinitionName}/jobRuns/{jobRunName}": {
+      "get": {
+        "operationId": "JobRuns_Get",
+        "tags": [
+          "JobRuns"
+        ],
+        "description": "Gets a Job Run resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the Job Definition resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobRunName",
+            "in": "path",
+            "description": "The name of the Job Run resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobRuns_Get": {
+            "$ref": "./examples/JobRuns_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/projects/{projectName}/jobDefinitions/{jobDefinitionName}/startJob": {
+      "post": {
+        "operationId": "JobDefinitions_StartJob",
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "Creates a new Job Run resource for the specified Job Definition and passes it to the Agent for execution.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the Job Definition resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobRunResourceId"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobDefinitions_StartJob": {
+            "$ref": "./examples/JobDefinitions_StartJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/projects/{projectName}/jobDefinitions/{jobDefinitionName}/stopJob": {
+      "post": {
+        "operationId": "JobDefinitions_StopJob",
+        "tags": [
+          "JobDefinitions"
+        ],
+        "description": "Requests the Agent of any active instance of this Job Definition to stop.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageMoverName",
+            "in": "path",
+            "description": "The name of the Storage Mover resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the Job Definition resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobRunResourceId"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobDefinitions_StopJob": {
+            "$ref": "./examples/JobDefinitions_StopJob.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Agent": {
+      "type": "object",
+      "description": "The Agent resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AgentList": {
+      "type": "object",
+      "description": "List of Agents.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Agent items on this page",
+          "items": {
+            "$ref": "#/definitions/Agent"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgentProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for the Agent."
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "The Agent version.",
+          "readOnly": true
+        },
+        "arcResourceId": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the Hybrid Compute resource for the Agent.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "arcVmUuid": {
+          "type": "string",
+          "description": "The VM UUID of the Hybrid Compute resource for the Agent.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "agentStatus": {
+          "$ref": "#/definitions/AgentStatus",
+          "description": "The Agent status.",
+          "readOnly": true
+        },
+        "lastStatusUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last updated time of the Agent status.",
+          "readOnly": true
+        },
+        "localIPAddress": {
+          "type": "string",
+          "description": "Local IP address reported by the Agent.",
+          "readOnly": true
+        },
+        "memoryInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Available memory reported by the Agent, in MB.",
+          "readOnly": true
+        },
+        "numberOfCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Available compute cores reported by the Agent.",
+          "readOnly": true
+        },
+        "uptimeInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Uptime of the Agent in seconds.",
+          "readOnly": true
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The agent's local time zone represented in Windows format.",
+          "readOnly": true
+        },
+        "uploadLimitSchedule": {
+          "$ref": "#/definitions/UploadLimitSchedule",
+          "description": "The WAN-link upload limit schedule that applies to any Job Run the agent executes. Data plane operations (migrating files) are affected. Control plane operations ensure seamless migration functionality and are not limited by this schedule. The schedule is interpreted with the agent's local time."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/AgentPropertiesErrorDetails",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "arcResourceId",
+        "arcVmUuid"
+      ]
+    },
+    "AgentPropertiesErrorDetails": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code reported by Agent"
+        },
+        "message": {
+          "type": "string",
+          "description": "Expanded description of reported error code"
+        }
+      }
+    },
+    "AgentStatus": {
+      "type": "string",
+      "description": "The Agent status.",
+      "enum": [
+        "Registering",
+        "Offline",
+        "Online",
+        "Executing",
+        "RequiresAttention",
+        "Unregistering"
+      ],
+      "x-ms-enum": {
+        "name": "AgentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registering",
+            "value": "Registering"
+          },
+          {
+            "name": "Offline",
+            "value": "Offline"
+          },
+          {
+            "name": "Online",
+            "value": "Online"
+          },
+          {
+            "name": "Executing",
+            "value": "Executing"
+          },
+          {
+            "name": "RequiresAttention",
+            "value": "RequiresAttention"
+          },
+          {
+            "name": "Unregistering",
+            "value": "Unregistering"
+          }
+        ]
+      }
+    },
+    "AgentUpdateParameters": {
+      "type": "object",
+      "description": "The Agent resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AgentUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for the Agent."
+        },
+        "uploadLimitSchedule": {
+          "$ref": "#/definitions/UploadLimitSchedule",
+          "description": "The WAN-link upload limit schedule that applies to any Job Run the agent executes. Data plane operations (migrating files) are affected. Control plane operations ensure seamless migration functionality and are not limited by this schedule. The schedule is interpreted with the agent's local time."
+        }
+      }
+    },
+    "AzureKeyVaultSmbCredentials": {
+      "type": "object",
+      "description": "The Azure Key Vault secret URIs which store the credentials.",
+      "properties": {
+        "usernameUri": {
+          "type": "string",
+          "description": "The Azure Key Vault secret URI which stores the username. Use empty string to clean-up existing value."
+        },
+        "passwordUri": {
+          "type": "string",
+          "description": "The Azure Key Vault secret URI which stores the password. Use empty string to clean-up existing value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Credentials"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureKeyVaultSmb"
+    },
+    "AzureMultiCloudConnectorEndpointProperties": {
+      "type": "object",
+      "description": "The properties of Azure MultiCloudConnector endpoint.",
+      "properties": {
+        "multiCloudConnectorId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the MultiCloud Connector resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridConnectivity/publicCloudConnectors"
+              }
+            ]
+          }
+        },
+        "awsS3BucketId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The AWS S3 bucket ARM resource Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AwsConnector/s3Buckets"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "multiCloudConnectorId",
+        "awsS3BucketId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMultiCloudConnector"
+    },
+    "AzureMultiCloudConnectorEndpointUpdateProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage NFS file share endpoint to update.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMultiCloudConnector"
+    },
+    "AzureStorageBlobContainerEndpointProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage blob container endpoint.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the storage account that is the target destination.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "blobContainerName": {
+          "type": "string",
+          "description": "The name of the Storage blob container that is the target destination.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "storageAccountResourceId",
+        "blobContainerName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageBlobContainer"
+    },
+    "AzureStorageBlobContainerEndpointUpdateProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageBlobContainer"
+    },
+    "AzureStorageNfsFileShareEndpointProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage NFS file share endpoint.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the storage account.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "fileShareName": {
+          "type": "string",
+          "description": "The name of the Azure Storage NFS file share.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "storageAccountResourceId",
+        "fileShareName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageNfsFileShare"
+    },
+    "AzureStorageNfsFileShareEndpointUpdateProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage NFS file share endpoint to update.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageNfsFileShare"
+    },
+    "AzureStorageSmbFileShareEndpointProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage SMB file share endpoint.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the storage account.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "fileShareName": {
+          "type": "string",
+          "description": "The name of the Azure Storage file share.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "storageAccountResourceId",
+        "fileShareName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageSmbFileShare"
+    },
+    "AzureStorageSmbFileShareEndpointUpdateProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage SMB file share endpoint to update.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageSmbFileShare"
+    },
+    "CopyMode": {
+      "type": "string",
+      "description": "Strategy to use for copy.",
+      "enum": [
+        "Additive",
+        "Mirror"
+      ],
+      "x-ms-enum": {
+        "name": "CopyMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Additive",
+            "value": "Additive"
+          },
+          {
+            "name": "Mirror",
+            "value": "Mirror"
+          }
+        ]
+      }
+    },
+    "CredentialType": {
+      "type": "string",
+      "description": "The Credentials type.",
+      "enum": [
+        "AzureKeyVaultSmb"
+      ],
+      "x-ms-enum": {
+        "name": "CredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureKeyVaultSmb",
+            "value": "AzureKeyVaultSmb"
+          }
+        ]
+      }
+    },
+    "Credentials": {
+      "type": "object",
+      "description": "The Credentials.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CredentialType",
+          "description": "The Credentials type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "The day of week.",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": false
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "The Endpoint resource, which contains information about file sources and targets.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointBaseProperties",
+          "description": "The resource specific properties for the Storage Mover resource."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identity of the resource. This property is only available on the latest version."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EndpointBaseProperties": {
+      "type": "object",
+      "description": "The resource specific properties for the Storage Mover resource.",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "The Endpoint resource type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for the Endpoint."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of this resource.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "endpointType",
+      "required": [
+        "endpointType"
+      ]
+    },
+    "EndpointBaseUpdateParameters": {
+      "type": "object",
+      "description": "The Endpoint resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties",
+          "description": "The Endpoint resource, which contains information about file sources and targets."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed system identity assigned to this resource."
+        }
+      }
+    },
+    "EndpointBaseUpdateProperties": {
+      "type": "object",
+      "description": "The Endpoint resource, which contains information about file sources and targets.",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "The Endpoint resource type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for the Endpoint."
+        }
+      },
+      "discriminator": "endpointType",
+      "required": [
+        "endpointType"
+      ]
+    },
+    "EndpointList": {
+      "type": "object",
+      "description": "List of Endpoints.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Endpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EndpointType": {
+      "type": "string",
+      "description": "The Endpoint resource type.",
+      "enum": [
+        "AzureStorageBlobContainer",
+        "NfsMount",
+        "AzureStorageSmbFileShare",
+        "SmbMount",
+        "AzureMultiCloudConnector",
+        "AzureStorageNfsFileShare"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureStorageBlobContainer",
+            "value": "AzureStorageBlobContainer"
+          },
+          {
+            "name": "NfsMount",
+            "value": "NfsMount"
+          },
+          {
+            "name": "AzureStorageSmbFileShare",
+            "value": "AzureStorageSmbFileShare"
+          },
+          {
+            "name": "SmbMount",
+            "value": "SmbMount"
+          },
+          {
+            "name": "AzureMultiCloudConnector",
+            "value": "AzureMultiCloudConnector"
+          },
+          {
+            "name": "AzureStorageNfsFileShare",
+            "value": "AzureStorageNfsFileShare"
+          }
+        ]
+      }
+    },
+    "JobDefinition": {
+      "type": "object",
+      "description": "The Job Definition resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobDefinitionProperties",
+          "description": "Job definition properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobDefinitionList": {
+      "type": "object",
+      "description": "List of Job Definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/JobDefinition"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobDefinitionProperties": {
+      "type": "object",
+      "description": "Job definition properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for the Job Definition. OnPremToCloud is for migrating data from on-premises to cloud. CloudToCloud is for migrating data between cloud to cloud."
+        },
+        "jobType": {
+          "type": "string",
+          "description": "The type of the Job.",
+          "default": "OnPremToCloud",
+          "enum": [
+            "OnPremToCloud",
+            "CloudToCloud"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "OnPremToCloud",
+                "value": "OnPremToCloud"
+              },
+              {
+                "name": "CloudToCloud",
+                "value": "CloudToCloud"
+              }
+            ]
+          }
+        },
+        "copyMode": {
+          "$ref": "#/definitions/CopyMode",
+          "description": "Strategy to use for copy."
+        },
+        "sourceName": {
+          "type": "string",
+          "description": "The name of the source Endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource ID of the source Endpoint.",
+          "readOnly": true
+        },
+        "sourceSubpath": {
+          "type": "string",
+          "description": "The subpath to use when reading from the source Endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetName": {
+          "type": "string",
+          "description": "The name of the target Endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource ID of the target Endpoint.",
+          "readOnly": true
+        },
+        "targetSubpath": {
+          "type": "string",
+          "description": "The subpath to use when writing to the target Endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "latestJobRunName": {
+          "type": "string",
+          "description": "The name of the Job Run in a non-terminal state, if exists.",
+          "readOnly": true
+        },
+        "latestJobRunResourceId": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the Job Run in a non-terminal state, if exists.",
+          "readOnly": true
+        },
+        "latestJobRunStatus": {
+          "$ref": "#/definitions/JobRunStatus",
+          "description": "The current status of the Job Run in a non-terminal state, if exists.",
+          "readOnly": true
+        },
+        "agentName": {
+          "type": "string",
+          "description": "Name of the Agent to assign for new Job Runs of this Job Definition."
+        },
+        "agentResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource id of the Agent to assign for new Job Runs of this Job Definition.",
+          "readOnly": true
+        },
+        "sourceTargetMap": {
+          "type": "object",
+          "description": "The list of cloud endpoints to migrate.",
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SourceTargetMap"
+              },
+              "readOnly": true,
+              "x-ms-identifiers": []
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "copyMode",
+        "sourceName",
+        "targetName"
+      ]
+    },
+    "JobDefinitionUpdateParameters": {
+      "type": "object",
+      "description": "The Job Definition resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobDefinitionUpdateProperties",
+          "description": "Job definition properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobDefinitionUpdateProperties": {
+      "type": "object",
+      "description": "Job definition properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for the Job Definition."
+        },
+        "copyMode": {
+          "$ref": "#/definitions/CopyMode",
+          "description": "Strategy to use for copy."
+        },
+        "agentName": {
+          "type": "string",
+          "description": "Name of the Agent to assign for new Job Runs of this Job Definition."
+        }
+      }
+    },
+    "JobRun": {
+      "type": "object",
+      "description": "The Job Run resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobRunProperties",
+          "description": "Job run properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobRunError": {
+      "type": "object",
+      "description": "Error type",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code of the given entry."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message of the given entry."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the given error entry."
+        }
+      }
+    },
+    "JobRunList": {
+      "type": "object",
+      "description": "List of Job Runs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobRun items on this page",
+          "items": {
+            "$ref": "#/definitions/JobRun"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobRunProperties": {
+      "type": "object",
+      "description": "Job run properties.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/JobRunStatus",
+          "description": "The state of the job execution.",
+          "readOnly": true
+        },
+        "scanStatus": {
+          "$ref": "#/definitions/JobRunScanStatus",
+          "description": "The status of Agent's scanning of source.",
+          "readOnly": true
+        },
+        "agentName": {
+          "type": "string",
+          "description": "Name of the Agent assigned to this run.",
+          "readOnly": true
+        },
+        "agentResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource id of the Agent assigned to this run.",
+          "readOnly": true
+        },
+        "executionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the run. Null if no Agent reported that the job has started.",
+          "readOnly": true
+        },
+        "executionEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the run. Null if Agent has not reported that the job has ended.",
+          "readOnly": true
+        },
+        "lastStatusUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last updated time of the Job Run.",
+          "readOnly": true
+        },
+        "itemsScanned": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items scanned so far in source.",
+          "readOnly": true
+        },
+        "itemsExcluded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items that will not be transferred, as they are excluded by user configuration.",
+          "readOnly": true
+        },
+        "itemsUnsupported": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items that will not be transferred, as they are unsupported on target.",
+          "readOnly": true
+        },
+        "itemsNoTransferNeeded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items that will not be transferred, as they are already found on target (e.g. mirror mode).",
+          "readOnly": true
+        },
+        "itemsFailed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items that were attempted to transfer and failed.",
+          "readOnly": true
+        },
+        "itemsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items successfully transferred to target.",
+          "readOnly": true
+        },
+        "bytesScanned": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bytes of data scanned so far in source.",
+          "readOnly": true
+        },
+        "bytesExcluded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bytes of data that will not be transferred, as they are excluded by user configuration.",
+          "readOnly": true
+        },
+        "bytesUnsupported": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bytes of data that will not be transferred, as they are unsupported on target.",
+          "readOnly": true
+        },
+        "bytesNoTransferNeeded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bytes of data that will not be transferred, as they are already found on target (e.g. mirror mode).",
+          "readOnly": true
+        },
+        "bytesFailed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bytes of data that were attempted to transfer and failed.",
+          "readOnly": true
+        },
+        "bytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bytes of data successfully transferred to target.",
+          "readOnly": true
+        },
+        "sourceName": {
+          "type": "string",
+          "description": "Name of source Endpoint resource. This resource may no longer exist.",
+          "readOnly": true
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource id of source Endpoint. This id may no longer exist.",
+          "readOnly": true
+        },
+        "sourceProperties": {
+          "description": "Copy of source Endpoint resource's properties at time of Job Run creation.",
+          "readOnly": true
+        },
+        "targetName": {
+          "type": "string",
+          "description": "Name of target Endpoint resource. This resource may no longer exist.",
+          "readOnly": true
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource id of of Endpoint. This id may no longer exist.",
+          "readOnly": true
+        },
+        "targetProperties": {
+          "description": "Copy of Endpoint resource's properties at time of Job Run creation.",
+          "readOnly": true
+        },
+        "jobDefinitionProperties": {
+          "description": "Copy of parent Job Definition's properties at time of Job Run creation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/JobRunError",
+          "description": "Error details.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobRunResourceId": {
+      "type": "object",
+      "description": "Response that identifies a Job Run.",
+      "properties": {
+        "jobRunResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource id of the Job Run.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobRunScanStatus": {
+      "type": "string",
+      "description": "The status of Agent's scanning of source.",
+      "enum": [
+        "NotStarted",
+        "Scanning",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "JobRunScanStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted"
+          },
+          {
+            "name": "Scanning",
+            "value": "Scanning"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed"
+          }
+        ]
+      }
+    },
+    "JobRunStatus": {
+      "type": "string",
+      "description": "The current status of the Job Run in a non-terminal state, if exists.",
+      "enum": [
+        "Queued",
+        "Started",
+        "Running",
+        "CancelRequested",
+        "Canceling",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "PausedByBandwidthManagement"
+      ],
+      "x-ms-enum": {
+        "name": "JobRunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Queued",
+            "value": "Queued"
+          },
+          {
+            "name": "Started",
+            "value": "Started"
+          },
+          {
+            "name": "Running",
+            "value": "Running"
+          },
+          {
+            "name": "CancelRequested",
+            "value": "CancelRequested"
+          },
+          {
+            "name": "Canceling",
+            "value": "Canceling"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "PausedByBandwidthManagement",
+            "value": "PausedByBandwidthManagement"
+          }
+        ]
+      }
+    },
+    "NfsMountEndpointProperties": {
+      "type": "object",
+      "description": "The properties of NFS share endpoint.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The host name or IP address of the server exporting the file system.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "nfsVersion": {
+          "$ref": "#/definitions/NfsVersion",
+          "description": "The NFS protocol version.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "export": {
+          "type": "string",
+          "description": "The directory being exported from the server.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "host",
+        "export"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "NfsMount"
+    },
+    "NfsMountEndpointUpdateProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "NfsMount"
+    },
+    "NfsVersion": {
+      "type": "string",
+      "description": "The NFS protocol version.",
+      "enum": [
+        "NFSauto",
+        "NFSv3",
+        "NFSv4"
+      ],
+      "x-ms-enum": {
+        "name": "NfsVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NFSauto",
+            "value": "NFSauto"
+          },
+          {
+            "name": "NFSv3",
+            "value": "NFSv3"
+          },
+          {
+            "name": "NFSv4",
+            "value": "NFSv4"
+          }
+        ]
+      }
+    },
+    "Project": {
+      "type": "object",
+      "description": "The Project resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "Project properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProjectList": {
+      "type": "object",
+      "description": "List of Project resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Project items on this page",
+          "items": {
+            "$ref": "#/definitions/Project"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProjectProperties": {
+      "type": "object",
+      "description": "Project properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for the Project."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectUpdateParameters": {
+      "type": "object",
+      "description": "The Project resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectUpdateProperties",
+          "description": "Project properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProjectUpdateProperties": {
+      "type": "object",
+      "description": "Project properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for the Project."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          }
+        ]
+      }
+    },
+    "Recurrence": {
+      "type": "object",
+      "description": "The schedule recurrence.",
+      "properties": {
+        "startTime": {
+          "$ref": "#/definitions/Time",
+          "description": "The start time of the schedule recurrence. Full hour and 30-minute intervals are supported."
+        },
+        "endTime": {
+          "$ref": "#/definitions/Time",
+          "description": "The end time of the schedule recurrence. Full hour and 30-minute intervals are supported."
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
+    "SmbMountEndpointProperties": {
+      "type": "object",
+      "description": "The properties of SMB share endpoint.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The host name or IP address of the server exporting the file system.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "shareName": {
+          "type": "string",
+          "description": "The name of the SMB share being exported from the server.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "credentials": {
+          "$ref": "#/definitions/AzureKeyVaultSmbCredentials",
+          "description": "The Azure Key Vault secret URIs which store the required credentials to access the SMB share."
+        }
+      },
+      "required": [
+        "host",
+        "shareName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SmbMount"
+    },
+    "SmbMountEndpointUpdateProperties": {
+      "type": "object",
+      "description": "The properties of SMB share endpoint to update.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/AzureKeyVaultSmbCredentials",
+          "description": "The Azure Key Vault secret URIs which store the required credentials to access the SMB share."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SmbMount"
+    },
+    "SourceEndpoint": {
+      "type": "object",
+      "description": "The source endpoint resource for source and target mapping.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceEndpointProperties",
+          "description": "The properties of the cloud source endpoint to migrate."
+        }
+      }
+    },
+    "SourceEndpointProperties": {
+      "type": "object",
+      "description": "The properties of the cloud source endpoint to migrate.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the cloud source endpoint to migrate."
+        },
+        "sourceEndpointResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ARM resource ID of the cloud source endpoint to migrate.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageMover/storageMovers/endpoints"
+              }
+            ]
+          }
+        },
+        "awsS3BucketId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ARM resource ID of the AWS S3 bucket to migrate.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageMover/storageMovers/endpoints"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SourceTargetMap": {
+      "type": "object",
+      "description": "The properties of cloud endpoints to migrate.",
+      "properties": {
+        "sourceEndpoint": {
+          "$ref": "#/definitions/SourceEndpoint"
+        },
+        "targetEndpoint": {
+          "$ref": "#/definitions/TargetEndpoint"
+        }
+      },
+      "required": [
+        "sourceEndpoint",
+        "targetEndpoint"
+      ]
+    },
+    "StorageMover": {
+      "type": "object",
+      "description": "The Storage Mover resource, which is a container for a group of Agents, Projects, and Endpoints.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageMoverProperties",
+          "description": "The resource specific properties for the Storage Mover resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageMoverList": {
+      "type": "object",
+      "description": "List of Storage Movers.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StorageMover items on this page",
+          "items": {
+            "$ref": "#/definitions/StorageMover"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StorageMoverProperties": {
+      "type": "object",
+      "description": "The resource specific properties for the Storage Mover resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for the Storage Mover."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageMoverUpdateParameters": {
+      "type": "object",
+      "description": "The Storage Mover resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageMoverUpdateProperties",
+          "description": "The resource specific properties for the Storage Mover resource.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StorageMoverUpdateProperties": {
+      "type": "object",
+      "description": "The resource specific properties for the Storage Mover resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for the Storage Mover."
+        }
+      }
+    },
+    "TargetEndpoint": {
+      "type": "object",
+      "description": "The target endpoint resource for source and target mapping.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TargetEndpointProperties",
+          "description": "The properties of the cloud target endpoint to migrate."
+        }
+      }
+    },
+    "TargetEndpointProperties": {
+      "type": "object",
+      "description": "The properties of the cloud target endpoint to migrate.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the cloud target endpoint to migrate."
+        },
+        "targetEndpointResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ARM resource ID of the cloud target endpoint to migrate.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageMover/storageMovers/endpoints"
+              }
+            ]
+          }
+        },
+        "azureStorageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ARM resource ID of the Azure Storage account.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "azureStorageBlobContainerName": {
+          "type": "string",
+          "description": "The name of the Azure Storage blob container.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "Time": {
+      "type": "object",
+      "description": "The time of day.",
+      "properties": {
+        "hour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The hour element of the time. Allowed values range from 0 (start of the selected day) to 24 (end of the selected day). Hour value 24 cannot be combined with any other minute value but 0.",
+          "minimum": 0,
+          "maximum": 24
+        },
+        "minute": {
+          "type": "number",
+          "description": "The minute element of the time. Allowed values are 0 and 30. If not specified, its value defaults to 0.",
+          "default": 0,
+          "enum": [
+            0,
+            30
+          ],
+          "x-ms-enum": {
+            "name": "Minute",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "0",
+                "value": 0
+              },
+              {
+                "name": "30",
+                "value": 30
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "hour"
+      ]
+    },
+    "UploadLimitSchedule": {
+      "type": "object",
+      "description": "The WAN-link upload limit schedule. Overlapping recurrences are not allowed.",
+      "properties": {
+        "weeklyRecurrences": {
+          "type": "array",
+          "description": "The set of weekly repeating recurrences of the WAN-link upload limit schedule.",
+          "items": {
+            "$ref": "#/definitions/UploadLimitWeeklyRecurrence"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "UploadLimitWeeklyRecurrence": {
+      "type": "object",
+      "description": "The weekly recurrence of the WAN-link upload limit schedule. The start time must be earlier in the day than the end time. The recurrence must not span across multiple days.",
+      "properties": {
+        "limitInMbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The WAN-link upload bandwidth (maximum data transfer rate) in megabits per second. Value of 0 indicates no throughput is allowed and any running migration job is effectively paused for the duration of this recurrence. Only data plane operations are governed by this limit. Control plane operations ensure seamless functionality. The agent may exceed this limit with control messages, if necessary.",
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "limitInMbps"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WeeklyRecurrence"
+        }
+      ]
+    },
+    "WeeklyRecurrence": {
+      "type": "object",
+      "description": "The weekly recurrence of the schedule.",
+      "properties": {
+        "days": {
+          "type": "array",
+          "description": "The set of days of week for the schedule recurrence. A day must not be specified more than once in a recurrence.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
+        }
+      },
+      "required": [
+        "days"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrence"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}
