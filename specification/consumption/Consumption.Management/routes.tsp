@@ -1,0 +1,846 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Consumption;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface PriceSheetOperationGroup {
+  /**
+   * Generates the pricesheet for the provided billing period asynchronously based on the enrollment id
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PriceSheet_DownloadByBillingAccountPeriod")
+  @autoRoute
+  @action("pricesheets/download")
+  downloadByBillingAccountPeriod is ArmProviderActionAsync<
+    Response = OperationStatus,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * Billing Period Name.
+       */
+      @pattern("^[0-9]*$")
+      @path
+      @segment("billingPeriods")
+      billingPeriodName: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface UsageDetailsOperationGroup {
+  /**
+   * Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later.
+   *
+   * **Note:Microsoft will be retiring the Consumption Usage Details API at some point in the future. We do not recommend that you take a new dependency on this API. Please use the Cost Details API instead. We will notify customers once a date for retirement has been determined.For Learn more,see [Generate Cost Details Report - Create Operation](https://learn.microsoft.com/en-us/rest/api/cost-management/generate-cost-details-report/create-operation?tabs=HTTP)**
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("UsageDetails_List")
+  @autoRoute
+  @get
+  @action("usageDetails")
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<UsageDetail>,
+    Scope = ExtensionActionScope,
+    Parameters = {
+      /**
+       * May be used to expand the properties/additionalInfo or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.
+       */
+      @query("$expand")
+      $expand?: string;
+
+      /**
+       * May be used to filter usageDetails by properties/resourceGroup, properties/resourceName, properties/resourceId, properties/chargeType, properties/reservationId, properties/publisherType or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:). PublisherType Filter accepts two values azure and marketplace and it is currently supported for Web Direct Offer Type
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
+       */
+      @query("$skiptoken")
+      $skiptoken?: string;
+
+      /**
+       * May be used to limit the number of results to the most recent N usageDetails.
+       */
+      @maxValue(1000)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Allows to select different type of cost/usage records.
+       */
+      @query("metric")
+      metric?: Metrictype;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface MarketplacesOperationGroup {
+  /**
+   * Lists the marketplaces for a scope at the defined scope. Marketplaces are available via this API only for May 1, 2014 or later.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Marketplaces_List")
+  @autoRoute
+  @get
+  @action("marketplaces")
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<Marketplace>,
+    Scope = ExtensionActionScope,
+    Parameters = {
+      /**
+       * May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * May be used to limit the number of results to the most recent N marketplaces.
+       */
+      @maxValue(1000)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
+       */
+      @query("$skiptoken")
+      $skiptoken?: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface TagsOperationGroup {
+  /**
+   * Get all available tag keys for the defined scope
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Tags_Get")
+  @autoRoute
+  @get
+  @action("tags")
+  get is ArmProviderActionSync<
+    Response = TagsResult,
+    Scope = ExtensionActionScope
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ChargesOperationGroup {
+  /**
+   * Lists the charges based for the defined scope.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Charges_List")
+  @autoRoute
+  @get
+  @action("charges")
+  list is ArmProviderActionSync<
+    Response = ChargesListResult,
+    Scope = ExtensionActionScope,
+    Parameters = {
+      /**
+       * Start date
+       */
+      @query("startDate")
+      startDate?: string;
+
+      /**
+       * End date
+       */
+      @query("endDate")
+      endDate?: string;
+
+      /**
+       * May be used to filter charges by properties/usageEnd (Utc time), properties/usageStart (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * May be used to group charges for billingAccount scope by properties/billingProfileId, properties/invoiceSectionId, properties/customerId (specific for Partner Led), or for billingProfile scope by properties/invoiceSectionId.
+       */
+      @query("$apply")
+      $apply?: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface BalancesOperationGroup {
+  /**
+   * Gets the balances for a scope by billingAccountId. Balances are available via this API only for May 1, 2014 or later.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Balances_GetByBillingAccount")
+  @autoRoute
+  @get
+  @action("balances")
+  getByBillingAccount is ArmProviderActionSync<
+    Response = Balance,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+    }
+  >;
+  /**
+   * Gets the balances for a scope by billing period and billingAccountId. Balances are available via this API only for May 1, 2014 or later.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Balances_GetForBillingPeriodByBillingAccount")
+  @autoRoute
+  @get
+  @action("balances")
+  getForBillingPeriodByBillingAccount is ArmProviderActionSync<
+    Response = Balance,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * Billing Period Name.
+       */
+      @path
+      @segment("billingPeriods")
+      billingPeriodName: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ReservationsSummariesOperationGroup {
+  /**
+   * Lists the reservations summaries for daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationsSummaries_ListByReservationOrder")
+  @autoRoute
+  @get
+  @action("reservationSummaries")
+  listByReservationOrder is ArmProviderActionSync<
+    Response = ResourceListResult<ReservationSummary>,
+    Parameters = {
+      /**
+       * Order Id of the reservation
+       */
+      @path
+      @segment("reservationorders")
+      reservationOrderId: string;
+
+      /**
+       * Can be daily or monthly
+       */
+      @query("grain")
+      grain: Datagrain;
+
+      /**
+       * Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+  /**
+   * Lists the reservations summaries for daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationsSummaries_ListByReservationOrderAndReservation")
+  @autoRoute
+  @get
+  @action("reservationSummaries")
+  listByReservationOrderAndReservation is ArmProviderActionSync<
+    Response = ResourceListResult<ReservationSummary>,
+    Parameters = {
+      /**
+       * Order Id of the reservation
+       */
+      @path
+      @segment("reservationorders")
+      reservationOrderId: string;
+
+      /**
+       * Id of the reservation
+       */
+      @path
+      @segment("reservations")
+      reservationId: string;
+
+      /**
+       * Can be daily or monthly
+       */
+      @query("grain")
+      grain: Datagrain;
+
+      /**
+       * Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+  /**
+   * Lists the reservations summaries for the defined scope daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationsSummaries_List")
+  @autoRoute
+  @get
+  @action("reservationSummaries")
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<ReservationSummary>,
+    Parameters = {
+      /**
+       * The scope associated with reservations summaries operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
+       */
+      @path
+      @segment("")
+      resourceScope: string;
+
+      /**
+       * Can be daily or monthly
+       */
+      @query("grain")
+      grain: Datagrain;
+
+      /**
+       * Start date. Only applicable when querying with billing profile
+       */
+      @query("startDate")
+      startDate?: string;
+
+      /**
+       * End date. Only applicable when querying with billing profile
+       */
+      @query("endDate")
+      endDate?: string;
+
+      /**
+       * Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation
+       */
+      @query("reservationId")
+      reservationId?: string;
+
+      /**
+       * Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order
+       */
+      @query("reservationOrderId")
+      reservationOrderId?: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ReservationsDetailsOperationGroup {
+  /**
+   * Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationsDetails_ListByReservationOrder")
+  @autoRoute
+  @get
+  @action("reservationDetails")
+  listByReservationOrder is ArmProviderActionSync<
+    Response = ResourceListResult<ReservationDetail>,
+    Parameters = {
+      /**
+       * Order Id of the reservation
+       */
+      @path
+      @segment("reservationorders")
+      reservationOrderId: string;
+
+      /**
+       * Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'
+       */
+      @query("$filter")
+      $filter: string;
+    }
+  >;
+  /**
+   * Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationsDetails_ListByReservationOrderAndReservation")
+  @autoRoute
+  @get
+  @action("reservationDetails")
+  listByReservationOrderAndReservation is ArmProviderActionSync<
+    Response = ResourceListResult<ReservationDetail>,
+    Parameters = {
+      /**
+       * Order Id of the reservation
+       */
+      @path
+      @segment("reservationorders")
+      reservationOrderId: string;
+
+      /**
+       * Id of the reservation
+       */
+      @path
+      @segment("reservations")
+      reservationId: string;
+
+      /**
+       * Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'
+       */
+      @query("$filter")
+      $filter: string;
+    }
+  >;
+  /**
+   * Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationsDetails_List")
+  @autoRoute
+  @get
+  @action("reservationDetails")
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<ReservationDetail>,
+    Parameters = {
+      /**
+       * The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
+       */
+      @path
+      @segment("")
+      resourceScope: string;
+
+      /**
+       * Start date. Only applicable when querying with billing profile
+       */
+      @query("startDate")
+      startDate?: string;
+
+      /**
+       * End date. Only applicable when querying with billing profile
+       */
+      @query("endDate")
+      endDate?: string;
+
+      /**
+       * Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation
+       */
+      @query("reservationId")
+      reservationId?: string;
+
+      /**
+       * Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order
+       */
+      @query("reservationOrderId")
+      reservationOrderId?: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ReservationRecommendationsOperationGroup {
+  /**
+   * List of recommendations for purchasing reserved instances.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationRecommendations_List")
+  @autoRoute
+  @get
+  @action("reservationRecommendations")
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<ReservationRecommendation>,
+    Parameters = {
+      /**
+       * May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope
+       */
+      @path
+      @segment("")
+      resourceScope: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ReservationRecommendationDetailsOperationGroup {
+  /**
+   * Details of a reservation recommendation for what-if analysis of reserved instances.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationRecommendationDetails_Get")
+  @autoRoute
+  @get
+  @action("reservationRecommendationDetails")
+  get is ArmProviderActionSync<
+    Response = ReservationRecommendationDetailsModel,
+    Parameters = {
+      /**
+       * The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope
+       */
+      @path
+      @segment("")
+      resourceScope: string;
+
+      /**
+       * Scope of the reservation.
+       */
+      @query("scope")
+      scope: Scope;
+
+      /**
+       * Used to select the region the recommendation should be generated for.
+       */
+      @query("region")
+      region: string;
+
+      /**
+       * Specify length of reservation recommendation term.
+       */
+      @query("term")
+      term: Term;
+
+      /**
+       * Filter the time period on which reservation recommendation results are based.
+       */
+      @query("lookBackPeriod")
+      lookBackPeriod: LookBackPeriod;
+
+      /**
+       * Filter the products for which reservation recommendation results are generated. Examples: Standard_DS1_v2 (for VM), Premium_SSD_Managed_Disks_P30 (for Managed Disks)
+       */
+      @query("product")
+      product: string;
+
+      /**
+       * Used to filter reservation recommendation details by: properties/subscriptionId can be specified for billing account and billing profile paths.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ReservationTransactionsOperationGroup {
+  /**
+   * List of transactions for reserved instances on billing account scope. Note: The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationTransactions_List")
+  @autoRoute
+  @get
+  @action("reservationTransactions")
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<ReservationTransaction>,
+    Parameters = {
+      /**
+       * Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for the entire December 2020 month (i.e. will contain records for dates December 30 and 31)
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Applies mark up to the transactions if the caller is a partner.
+       */
+      @query("useMarkupIfPartner")
+      useMarkupIfPartner?: boolean;
+
+      /**
+       * Preview markup percentage to be applied.
+       */
+      @query("previewMarkupPercentage")
+      previewMarkupPercentage?: decimal;
+
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+    }
+  >;
+  /**
+   * List of transactions for reserved instances on billing profile scope. The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReservationTransactions_ListByBillingProfile")
+  @autoRoute
+  @get
+  @action("reservationTransactions")
+  listByBillingProfile is ArmProviderActionSync<
+    Response = ResourceListResult<ModernReservationTransaction>,
+    Parameters = {
+      /**
+       * Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for entire December 2020 month (i.e. will contain records for dates December 30 and 31)
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * Azure Billing Profile ID.
+       */
+      @path
+      @segment("billingProfiles")
+      billingProfileId: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface AggregatedCostOperationGroup {
+  /**
+   * Provides the aggregate cost of a management group and all child management groups by current billing period.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AggregatedCost_GetByManagementGroup")
+  @autoRoute
+  @get
+  @action("aggregatedcost")
+  getByManagementGroup is ArmProviderActionSync<
+    Response = ManagementGroupAggregatedCostResult,
+    Parameters = {
+      /**
+       * Azure Management Group ID.
+       */
+      @path
+      @segment("managementGroups")
+      managementGroupId: string;
+
+      /**
+       * May be used to filter aggregated cost by properties/usageStart (Utc time), properties/usageEnd (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+  /**
+   * Provides the aggregate cost of a management group and all child management groups by specified billing period
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AggregatedCost_GetForBillingPeriodByManagementGroup")
+  @autoRoute
+  @get
+  @action("aggregatedCost")
+  getForBillingPeriodByManagementGroup is ArmProviderActionSync<
+    Response = ManagementGroupAggregatedCostResult,
+    Parameters = {
+      /**
+       * Azure Management Group ID.
+       */
+      @path
+      @segment("managementGroups")
+      managementGroupId: string;
+
+      /**
+       * Billing Period Name.
+       */
+      @path
+      @segment("billingPeriods")
+      billingPeriodName: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface EventsOperationGroup {
+  /**
+   * Lists the events that decrements Azure credits or Microsoft Azure consumption commitment for a billing account or a billing profile for a given start and end date.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Events_ListByBillingProfile")
+  @autoRoute
+  @get
+  @action("events")
+  listByBillingProfile is ArmProviderActionSync<
+    Response = Events,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * Azure Billing Profile ID.
+       */
+      @path
+      @segment("billingProfiles")
+      billingProfileId: string;
+
+      /**
+       * Start date
+       */
+      @query("startDate")
+      startDate: string;
+
+      /**
+       * End date
+       */
+      @query("endDate")
+      endDate: string;
+    }
+  >;
+  /**
+   * Lists the events that decrements Azure credits or Microsoft Azure consumption commitment for a billing account or a billing profile for a given start and end date.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Events_ListByBillingAccount")
+  @autoRoute
+  @get
+  @action("events")
+  listByBillingAccount is ArmProviderActionSync<
+    Response = Events,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * May be used to filter the events by lotId, lotSource etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface LotsOperationGroup {
+  /**
+   * Lists all Azure credits for a billing account or a billing profile. The API is only supported for Microsoft Customer Agreements (MCA) billing accounts.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Lots_ListByBillingProfile")
+  @autoRoute
+  @get
+  @action("lots")
+  listByBillingProfile is ArmProviderActionSync<
+    Response = Lots,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * Azure Billing Profile ID.
+       */
+      @path
+      @segment("billingProfiles")
+      billingProfileId: string;
+    }
+  >;
+  /**
+   * Lists all Microsoft Azure consumption commitments for a billing account. The API is only supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing accounts.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Lots_ListByBillingAccount")
+  @autoRoute
+  @get
+  @action("lots")
+  listByBillingAccount is ArmProviderActionSync<
+    Response = Lots,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+  /**
+   * Lists all Azure credits for a customer. The API is only supported for Microsoft Partner  Agreements (MPA) billing accounts.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Lots_ListByCustomer")
+  @autoRoute
+  @get
+  @action("lots")
+  listByCustomer is ArmProviderActionSync<
+    Response = Lots,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * Customer ID
+       */
+      @path
+      @segment("customers")
+      customerId: string;
+
+      /**
+       * May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. Tag filter is a key value pair string where key and value is separated by a colon (:).
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+}
