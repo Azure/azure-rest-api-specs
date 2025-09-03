@@ -1365,31 +1365,31 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4037
     from: definitions.json
-    reason: We want customers to be able to supply any valid JSON token, object or otherwise    
+    reason: We want customers to be able to supply any valid JSON token, object or otherwise
   - suppress: R4009
     from: apimprivatelink.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimprivatelink.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimportalsettings.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimportalconfigs.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimpolicyfragments.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: LroErrorContent
     from: apimapis.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
   - suppress: LroErrorContent
     from: apimusers.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
   - suppress: LroErrorContent
     from: apimpolicyrestrictionsvalidation.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     from: definitions.json
@@ -1408,7 +1408,7 @@ suppressions:
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspacediagnostics.json
-    where: 
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/diagnostics"].get.responses["200"].schema.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/diagnostics"].get.responses.["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.

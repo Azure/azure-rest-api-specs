@@ -1980,6 +1980,10 @@
           "$ref": "#/definitions/BackendCircuitBreaker",
           "description": "Backend Circuit Breaker Configuration"
         },
+        "azureRegion": {
+          "type": "string",
+          "description": "Azure region in which the backend is deployed. Can be optionally specified to use features such as carbon-optimized load balancer."
+        },
         "pool": {
           "allOf": [
             {
@@ -2655,6 +2659,21 @@
           "maximum": 100,
           "example": {
             "priority": 1
+          }
+        },
+        "preferredCarbonEmission": {
+          "type": "string",
+          "description": "Scope 2 carbon emission preference for the backend. When specified, the load balancer will optimize traffic flow by routing to regions that have carbon emission less than or equal to the specified category. However, when all other backends are not available it will route traffic to these regions anyway. This requires the backend to be attributed with 'azureRegion' information.",
+          "enum": [
+            "VeryLow",
+            "Low",
+            "Medium",
+            "High",
+            "VeryHigh"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "CarbonEmissionCategory"
           }
         }
       },
