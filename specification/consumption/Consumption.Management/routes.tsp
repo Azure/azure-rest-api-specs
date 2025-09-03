@@ -56,6 +56,7 @@ interface UsageDetailsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("UsageDetails_List")
   @autoRoute
+  @list
   @get
   @action("usageDetails")
   list is ArmProviderActionSync<
@@ -107,6 +108,7 @@ interface MarketplacesOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Marketplaces_List")
   @autoRoute
+  @list
   @get
   @action("marketplaces")
   list is ArmProviderActionSync<
@@ -260,6 +262,7 @@ interface ReservationsSummariesOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationsSummaries_ListByReservationOrder")
   @autoRoute
+  @list
   @get
   @action("reservationSummaries")
   listByReservationOrder is ArmProviderActionSync<
@@ -293,6 +296,7 @@ interface ReservationsSummariesOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationsSummaries_ListByReservationOrderAndReservation")
   @autoRoute
+  @list
   @get
   @action("reservationSummaries")
   listByReservationOrderAndReservation is ArmProviderActionSync<
@@ -333,6 +337,7 @@ interface ReservationsSummariesOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationsSummaries_List")
   @autoRoute
+  @list
   @get
   @action("reservationSummaries")
   list is ArmProviderActionSync<
@@ -394,6 +399,7 @@ interface ReservationsDetailsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationsDetails_ListByReservationOrder")
   @autoRoute
+  @list
   @get
   @action("reservationDetails")
   listByReservationOrder is ArmProviderActionSync<
@@ -421,6 +427,7 @@ interface ReservationsDetailsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationsDetails_ListByReservationOrderAndReservation")
   @autoRoute
+  @list
   @get
   @action("reservationDetails")
   listByReservationOrderAndReservation is ArmProviderActionSync<
@@ -455,6 +462,7 @@ interface ReservationsDetailsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationsDetails_List")
   @autoRoute
+  @list
   @get
   @action("reservationDetails")
   list is ArmProviderActionSync<
@@ -510,6 +518,7 @@ interface ReservationRecommendationsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationRecommendations_List")
   @autoRoute
+  @list
   @get
   @action("reservationRecommendations")
   list is ArmProviderActionSync<
@@ -589,7 +598,7 @@ interface ReservationRecommendationDetailsOperationGroup {
       @query("$filter")
       $filter?: string;
     },
-    Error = ErrorResponse
+    Error = HighCasedErrorResponse
   >;
 }
 
@@ -602,6 +611,7 @@ interface ReservationTransactionsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationTransactions_List")
   @autoRoute
+  @list
   @get
   @action("reservationTransactions")
   list is ArmProviderActionSync<
@@ -641,6 +651,7 @@ interface ReservationTransactionsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("ReservationTransactions_ListByBillingProfile")
   @autoRoute
+  @list
   @get
   @action("reservationTransactions")
   listByBillingProfile is ArmProviderActionSync<
@@ -738,6 +749,7 @@ interface EventsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Events_ListByBillingProfile")
   @autoRoute
+  @list
   @get
   @action("events")
   listByBillingProfile is ArmProviderActionSync<
@@ -778,6 +790,7 @@ interface EventsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Events_ListByBillingAccount")
   @autoRoute
+  @list
   @get
   @action("events")
   listByBillingAccount is ArmProviderActionSync<
@@ -809,6 +822,7 @@ interface LotsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Lots_ListByBillingProfile")
   @autoRoute
+  @list
   @get
   @action("lots")
   listByBillingProfile is ArmProviderActionSync<
@@ -837,6 +851,7 @@ interface LotsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Lots_ListByBillingAccount")
   @autoRoute
+  @list
   @get
   @action("lots")
   listByBillingAccount is ArmProviderActionSync<
@@ -864,6 +879,7 @@ interface LotsOperationGroup {
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Lots_ListByCustomer")
   @autoRoute
+  @list
   @get
   @action("lots")
   listByCustomer is ArmProviderActionSync<
