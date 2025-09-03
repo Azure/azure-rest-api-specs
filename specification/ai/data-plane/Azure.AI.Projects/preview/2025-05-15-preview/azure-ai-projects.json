@@ -2048,9 +2048,9 @@
       "type": "object",
       "description": "A cluster of analysis samples.",
       "properties": {
-        "name": {
+        "label": {
           "type": "string",
-          "description": "The name of the analysis cluster."
+          "description": "The label of the analysis cluster."
         },
         "description": {
           "type": "string",
@@ -2061,9 +2061,9 @@
           "format": "int32",
           "description": "The weight of the analysis cluster. This indicate number of samples in the cluster."
         },
-        "parentClusterName": {
+        "parentClusterLabel": {
           "type": "string",
-          "description": "The parent cluster name of the analysis cluster in case of a hierarchical structure. This is null if the cluster is at the top level."
+          "description": "The parent cluster label of the analysis cluster in case of a hierarchical structure. This is null if the cluster is at the top level."
         },
         "coordinates": {
           "$ref": "#/definitions/AnalysisChartCoordinate",
@@ -2071,7 +2071,7 @@
         }
       },
       "required": [
-        "name",
+        "label",
         "description",
         "weight",
         "coordinates"
@@ -2104,23 +2104,24 @@
           "type": "string",
           "description": "The unique identifier for the analysis sample."
         },
-        "contextSummary": {
-          "type": "string",
-          "description": "Summary of the context for the analysis sample."
-        },
-        "conversationSummary": {
+        "evaluationResult": {
           "type": "object",
-          "description": "Summary of the conversation for the analysis sample.",
+          "description": "Evaluation result for the analysis sample.",
+          "additionalProperties": {}
+        },
+        "conversationInfo": {
+          "type": "object",
+          "description": "Info about the conversation for the analysis sample.",
           "additionalProperties": {}
         },
         "parameters": {
           "type": "object",
-          "description": "Parameters to help with additional filtering of data.",
+          "description": "Parameters to help with additional filtering of data in UX.",
           "additionalProperties": {}
         },
-        "clusterName": {
+        "clusterLabel": {
           "type": "string",
-          "description": "The name of the analysis cluster in which this sample belongs."
+          "description": "The label of the analysis cluster in which this sample belongs."
         },
         "coordinates": {
           "$ref": "#/definitions/AnalysisChartCoordinate",
@@ -2129,8 +2130,8 @@
       },
       "required": [
         "id",
-        "contextSummary",
-        "conversationSummary",
+        "evaluationResult",
+        "conversationInfo",
         "parameters",
         "coordinates"
       ]

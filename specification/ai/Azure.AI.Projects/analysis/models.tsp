@@ -128,17 +128,17 @@ model AnalysisSample {
   @doc("The unique identifier for the analysis sample.")
   id: string;
 
-  @doc("Summary of the context for the analysis sample.")
-  contextSummary: string;
+  @doc("Evaluation result for the analysis sample.")
+  evaluationResult: Record<unknown>;
 
-  @doc("Summary of the conversation for the analysis sample.")
-  conversationSummary: Record<unknown>;
+  @doc("Info about the conversation for the analysis sample.")
+  conversationInfo: Record<unknown>;
 
-  @doc("Parameters to help with additional filtering of data.")
+  @doc("Parameters to help with additional filtering of data in UX.")
   parameters: Record<unknown>;
 
-  @doc("The name of the analysis cluster in which this sample belongs.")
-  clusterName?: string;
+  @doc("The label of the analysis cluster in which this sample belongs.")
+  clusterLabel?: string;
 
   @doc("Coordinates for the analysis chart.")
   coordinates: AnalysisChartCoordinate;
@@ -148,8 +148,8 @@ model AnalysisSample {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model AnalysisCluster {
-  @doc("The name of the analysis cluster.")
-  name: string;
+  @doc("The label of the analysis cluster.")
+  label: string;
 
   @doc("Description of the analysis cluster.")
   description: string;
@@ -157,8 +157,8 @@ model AnalysisCluster {
   @doc("The weight of the analysis cluster. This indicate number of samples in the cluster.")
   weight: int32;
 
-  @doc("The parent cluster name of the analysis cluster in case of a hierarchical structure. This is null if the cluster is at the top level.")
-  parentClusterName?: string;
+  @doc("The parent cluster label of the analysis cluster in case of a hierarchical structure. This is null if the cluster is at the top level.")
+  parentClusterLabel?: string;
 
   @doc("Coordinates for the analysis chart.")
   coordinates: AnalysisChartCoordinate;
