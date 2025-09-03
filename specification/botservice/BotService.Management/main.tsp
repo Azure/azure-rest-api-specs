@@ -49,7 +49,7 @@ enum Versions {
 }
 
 interface Operations
- extends Azure.ResourceManager.Legacy.Operations<
-     ArmResponse<OperationEntityListResult>,
-     Error
-   > {}
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationEntityListResult>,
+      Error
+    > {}
