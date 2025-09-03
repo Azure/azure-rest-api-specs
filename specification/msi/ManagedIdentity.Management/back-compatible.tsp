@@ -6,7 +6,6 @@ using Microsoft.ManagedIdentity;
 #suppress "deprecated" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(IdentityUpdate.properties);
 
-#suppress "deprecated" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(Identities.update,
   "Identities.update::parameters.properties",
   "parameters"

@@ -3,11 +3,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedIdentity;
 /**
@@ -28,15 +27,11 @@ interface Identities {
   /**
    * Gets the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("UserAssignedIdentities_Get")
   get is ArmResourceRead<Identity, Error = CloudError>;
 
   /**
    * Create or update an identity in the specified subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("UserAssignedIdentities_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Identity,
     Error = CloudError
@@ -45,23 +40,16 @@ interface Identities {
   /**
    * Update an identity in the specified subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("UserAssignedIdentities_Update")
   update is ArmCustomPatchSync<Identity, IdentityUpdate, Error = CloudError>;
 
   /**
    * Deletes the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("UserAssignedIdentities_Delete")
   delete is ArmResourceDeleteSync<Identity, Error = CloudError>;
 
   /**
    * Lists all the userAssignedIdentities available under the specified ResourceGroup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("UserAssignedIdentities_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Identity,
     Response = UserAssignedIdentitiesListResult,
@@ -71,8 +59,6 @@ interface Identities {
   /**
    * Lists all the userAssignedIdentities available under the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("UserAssignedIdentities_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     Identity,
     Response = UserAssignedIdentitiesListResult,

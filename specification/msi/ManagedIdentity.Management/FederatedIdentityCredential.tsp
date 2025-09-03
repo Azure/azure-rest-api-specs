@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./main.tsp";
 import "./Identity.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -44,7 +44,6 @@ interface FederatedIdentityCredentials {
   /**
    * Deletes the federated identity credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     FederatedIdentityCredential,
     Error = CloudError

@@ -8,4 +8,5 @@ using Microsoft.ManagedIdentity;
   "javascript, java"
 );
 
+#suppress "deprecated" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Identity.properties, "java");
