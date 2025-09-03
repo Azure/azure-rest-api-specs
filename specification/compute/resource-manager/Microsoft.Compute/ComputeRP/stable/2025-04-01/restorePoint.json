@@ -600,6 +600,10 @@
             "$ref": "#/definitions/RestorePoint"
           },
           "description": "A list containing all restore points created under this restore point collection."
+        },
+        "instantAccess": {
+          "type": "boolean",
+          "description": "This property determines whether instant access snapshot is enabled for restore points created under this restore point collection for Premium SSD v2 or Ultra disk. Instant access snapshot for Premium SSD v2 or Ultra disk is instantaneously available for restoring disk with fast restore performance."
         }
       },
       "description": "The restore point collection properties."
@@ -932,6 +936,10 @@
         "replicationStatus": {
           "$ref": "#/definitions/DiskRestorePointReplicationStatus",
           "description": "The disk restore point replication status information."
+        },
+        "snapshotAccessState": {
+          "$ref": "#/definitions/SnapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot."
         }
       },
       "description": "The instance view of a disk restore point."
@@ -996,9 +1004,56 @@
           "$ref": "#/definitions/RestorePointInstanceView",
           "readOnly": true,
           "description": "The restore point instance view."
+        },
+        "instantAccessDurationMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property determines the time in minutes the snapshot is retained as instant access for restoring Premium SSD v2 or Ultra disk with fast restore performance in this restore point."
         }
       },
       "description": "The restore point properties."
+    },
+    "SnapshotAccessState": {
+      "type": "string",
+      "description": "The state of snapshot which determines the access availability of the snapshot.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Available",
+        "InstantAccess",
+        "AvailableWithInstantAccess"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Default value."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The snapshot cannot be used for restore, copy or download to offline."
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The snapshot can be used for restore, copy to different region, and download to offline."
+          },
+          {
+            "name": "InstantAccess",
+            "value": "InstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded."
+          },
+          {
+            "name": "AvailableWithInstantAccess",
+            "value": "AvailableWithInstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance, copied and downloaded."
+          }
+        ]
+      }
     }
   }
 }
