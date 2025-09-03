@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Marketplace;
@@ -31,6 +33,7 @@ model UserHasReviewProperties {
 }
 
 @doc("Review email notification request.")
+@added(Versions.v2025_05_01)
 model ReviewEmail is ProxyResource<ReviewEmailProperties> {
   ...ResourceNameParameter<
     Resource = ReviewEmail,
@@ -41,6 +44,7 @@ model ReviewEmail is ProxyResource<ReviewEmailProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 @doc("Properties of the review email notification request.")
+@added(Versions.v2025_05_01)
 model ReviewEmailProperties {
   @doc("The user ID.")
   userId: string;
@@ -74,6 +78,7 @@ interface RatingAndReviewsOperations {
   @post
   @operationId("RatingAndReviews_ReviewEmail")
   @action("reviewEmail")
+  @added(Versions.v2025_05_01)
   reviewEmail is ArmProviderActionSync<
     Request = ReviewEmail,
     Response = ArmNoContentResponse,

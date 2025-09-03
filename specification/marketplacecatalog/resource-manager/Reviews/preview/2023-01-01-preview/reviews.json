@@ -122,88 +122,9 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviewEmail": {
-      "post": {
-        "operationId": "RatingAndReviews_ReviewEmail",
-        "tags": [
-          "RatingAndReviewsOperations"
-        ],
-        "description": "Send review email notification.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "uniqueProductId",
-            "in": "path",
-            "description": "Unique Product Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReviewEmail"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "ReviewEmail": {
-      "type": "object",
-      "description": "Review email notification request.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ReviewEmailProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ReviewEmailProperties": {
-      "type": "object",
-      "description": "Properties of the review email notification request.",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "The user ID."
-        },
-        "fullName": {
-          "type": "string",
-          "description": "The full name of the user."
-        },
-        "email": {
-          "type": "string",
-          "description": "The email address of the user."
-        }
-      },
-      "required": [
-        "userId",
-        "fullName",
-        "email"
-      ]
-    },
     "UserHasReview": {
       "type": "object",
       "description": "Response to check user has already submitted a review for the product.",
