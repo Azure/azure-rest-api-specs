@@ -26,7 +26,6 @@ model Baseline {
 
   @doc("Specifies how evaluation is calculated, either based on calendar days or a rolling window.")
   evaluationCalculationType: EvaluationCalculationType;
-
 }
 
 @doc("Specifies the method for evaluation calculation.")
