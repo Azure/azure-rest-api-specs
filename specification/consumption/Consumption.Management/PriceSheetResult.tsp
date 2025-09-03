@@ -51,6 +51,7 @@ interface PriceSheetResults {
    * Gets the price sheet for a subscription. Price sheet is available via this API only for May 1, 2014 or later.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("PriceSheet_Get")
   get is PriceSheetResultOps.Read<
     PriceSheetResult,
@@ -113,6 +114,7 @@ interface PriceSheet {
   /**
    * Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available via this API only for May 1, 2014 or later.
    */
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   getByBillingPeriod is PriceSheetOps.Read<
     PriceSheetResult,
     Parameters = {

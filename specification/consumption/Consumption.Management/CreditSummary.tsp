@@ -36,6 +36,7 @@ interface CreditSummaries {
    * The credit summary by billingAccountId and billingProfileId.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Credits_Get")
   get is ArmResourceRead<
     CreditSummary,
