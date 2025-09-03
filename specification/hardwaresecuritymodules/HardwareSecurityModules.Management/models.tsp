@@ -10,9 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.HardwareSecurityModules;
 
-@@nextLink(CommonTypes.PrivateLinkResourceListResult.nextLink);
-@@pageItems(CommonTypes.PrivateLinkResourceListResult.value);
-
 /**
  * State of security domain activation
  */
@@ -493,7 +490,6 @@ model BackupResult {
   /**
    * Properties of the Cloud HSM Cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: BackupResultProperties;
 }
 
