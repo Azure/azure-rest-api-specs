@@ -297,7 +297,9 @@ model UpdateGroupStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The max number of upgrades that can run concurrently in this group, resolved from the UpdateStrategy.UpdateGroup.maxConcurrency value. If no value was provided, this value defaults to "${GroupMaxConcurrencyDefault}".")
+  @doc("""
+      The max number of upgrades that can run concurrently in this group, resolved from the UpdateStrategy.UpdateGroup.maxConcurrency value. If no value was provided, this value defaults to "${GroupMaxConcurrencyDefault}".
+    """)
   @added(Versions.v2025_10_01_preview)
   maxConcurrency?: int32;
 
