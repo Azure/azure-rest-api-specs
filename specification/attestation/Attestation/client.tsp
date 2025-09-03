@@ -4,35 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Attestation;
 
-@@clientName(JsonWebKey.x5c, "x5C");
-
-@@clientName(AttestationResult.`x-ms-inittime`, "inittimeClaims");
-@@clientName(AttestationResult.`x-ms-policy`, "policyClaims");
-@@clientName(AttestationResult.`x-ms-attestation-type`, "verifierType");
-@@clientName(AttestationResult.`x-ms-policy-signer`, "policySigner");
-@@clientName(AttestationResult.`x-ms-policy-hash`, "policyHash");
-@@clientName(AttestationResult.`x-ms-sgx-is-debuggable`, "IsDebuggable");
-@@clientName(AttestationResult.`x-ms-sgx-product-id`, "productId");
-@@clientName(AttestationResult.`x-ms-sgx-mrenclave`, "mrEnclave");
-@@clientName(AttestationResult.`x-ms-sgx-mrsigner`, "mrSigner");
 @@clientName(AttestationResult.`x-ms-sgx-svn`, "svn");
-@@clientName(AttestationResult.`x-ms-sgx-ehd`, "enclaveHeldData");
-@@clientName(AttestationResult.`x-ms-sgx-collateral`, "sgxCollateral");
-@@clientName(AttestationResult.ver, "deprecatedVersion");
-@@clientName(AttestationResult.`is-debuggable`, "deprecatedIsDebuggable");
-@@clientName(AttestationResult.`maa-attestationcollateral`,
-  "deprecatedSgxCollateral"
-);
-@@clientName(AttestationResult.`aas-ehd`, "deprecatedEnclaveHeldData");
-@@clientName(AttestationResult.`maa-ehd`, "deprecatedEnclaveHeldData2");
-@@clientName(AttestationResult.`product-id`, "deprecatedProductId");
-@@clientName(AttestationResult.`sgx-mrenclave`, "deprecatedMrEnclave");
-@@clientName(AttestationResult.`sgx-mrsigner`, "deprecatedMrSigner");
 @@clientName(AttestationResult.svn, "deprecatedSvn");
-@@clientName(AttestationResult.tee, "deprecatedTee");
-@@clientName(AttestationResult.policy_signer, "deprecatedPolicySigner");
-@@clientName(AttestationResult.policy_hash, "deprecatedPolicyHash");
-@@clientName(AttestationResult.rp_data, "deprecatedRpData");
 
 @@clientLocation(PolicyOperationGroup.get, "Policy");
 @@clientLocation(PolicyOperationGroup.set, "Policy");

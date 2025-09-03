@@ -823,8 +823,8 @@ model AttestationResult {
   /**
    * The SGX SVN value for the enclave.
    */
-  @encodedName("application/json", "x-ms-sgx-svn")
-  sgxSvn?: float32;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
+  `x-ms-sgx-svn`?: float32;
 
   /**
    * A copy of the RuntimeData specified as an input to the attest call.
@@ -889,8 +889,7 @@ model AttestationResult {
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-svn.
    */
-  @encodedName("application/json", "svn")
-  deprecatedSvn?: float32;
+  svn?: float32;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-tee.
