@@ -4722,10 +4722,11 @@
           "type": "boolean"
         },
         "task": {
-          "$ref": "#/definitions/EnhancedModelTask"
+          "description": "The task used in enhanced mode, such as `transcribe` or `translate`.",
+          "type": "string"
         },
         "targetLanguage": {
-          "description": "A value indicating the target language when Task is set to `translate`.",
+          "description": "A value indicating the target language when task is set to `translate`.",
           "type": "string"
         },
         "prompt": {
@@ -4736,14 +4737,6 @@
           }
         }
       }
-    },
-    "EnhancedModelTask": {
-      "description": "The task used in enhanced mode.",
-      "enum": [
-        "Transcribe",
-        "Translate"
-      ],
-      "type": "string"
     },
     "EntityError": {
       "title": "EntityError",
