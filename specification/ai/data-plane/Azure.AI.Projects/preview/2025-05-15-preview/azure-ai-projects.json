@@ -1978,13 +1978,12 @@
           "description": "The unique identifier for the analysis sample."
         },
         "evaluationResult": {
-          "type": "object",
-          "description": "Evaluation result for the analysis sample.",
-          "additionalProperties": {}
+          "$ref": "#/definitions/EvalResult",
+          "description": "Evaluation result for the analysis sample."
         },
-        "conversationInfo": {
+        "correlationInfo": {
           "type": "object",
-          "description": "Info about the conversation for the analysis sample.",
+          "description": "Info about the correlation for the analysis sample.",
           "additionalProperties": {}
         },
         "parameters": {
@@ -2004,7 +2003,7 @@
       "required": [
         "id",
         "evaluationResult",
-        "conversationInfo",
+        "correlationInfo",
         "parameters",
         "coordinates"
       ]
@@ -2973,6 +2972,35 @@
         "uniqueSubclusterLabel",
         "uniqueClusters",
         "method"
+      ]
+    },
+    "EvalResult": {
+      "type": "object",
+      "description": "Result of the evaluation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the check"
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the check"
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "score"
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "indicates if the check passed or failed"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "score",
+        "passed"
       ]
     },
     "Evaluation": {

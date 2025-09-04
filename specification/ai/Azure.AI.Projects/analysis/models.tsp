@@ -158,10 +158,10 @@ model AnalysisSample {
   id: string;
 
   @doc("Evaluation result for the analysis sample.")
-  evaluationResult: Record<unknown>;
+  evaluationResult: EvalResult;
 
-  @doc("Info about the conversation for the analysis sample.")
-  conversationInfo: Record<unknown>;
+  @doc("Info about the correlation for the analysis sample.")
+  correlationInfo: Record<unknown>;
 
   @doc("Parameters to help with additional filtering of data in UX.")
   parameters: Record<unknown>;
@@ -171,6 +171,23 @@ model AnalysisSample {
 
   @doc("Coordinates for the analysis chart.")
   coordinates: AnalysisChartCoordinate;
+}
+
+@doc("Result of the evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model EvalResult {
+  @doc("name of the check")
+  name: string;
+
+  @doc("type of the check")
+  type: string;
+
+  @doc("score")
+  score: float32;
+
+  @doc("indicates if the check passed or failed")
+  passed: boolean;
 }
 
 @doc("A cluster of analysis samples.")
