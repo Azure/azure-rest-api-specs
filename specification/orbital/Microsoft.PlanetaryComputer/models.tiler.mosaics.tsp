@@ -96,7 +96,8 @@ model RegisterMosaic {
   /**
    * Geographic bounding box to filter items [west, south, east, north]
    */
-  bbox?: float64;
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64;
 
   /**
    * GeoJSON geometry to spatially filter items by intersection

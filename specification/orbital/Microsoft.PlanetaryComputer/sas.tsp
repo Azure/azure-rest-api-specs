@@ -17,7 +17,7 @@ model SasToken {
    */
   @summary("Msft:Expiry")
   @encodedName("application/json", "msft:expiry")
-  msftExpiry: utcDateTime;
+  expiresOn: utcDateTime;
 
   /**
    * The SAS token string used for authentication.
@@ -36,7 +36,7 @@ model UnsignedLink {
    */
   @summary("Msft:Expiry")
   @encodedName("application/json", "msft:expiry")
-  msftExpiry?: utcDateTime;
+  expiresOn?: utcDateTime;
 
   /**
    * The URL of the unsigned link.

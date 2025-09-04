@@ -308,8 +308,9 @@ namespace StacItems {
      * the extent or all relevant geometries.
      */
     #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+    @query("bbox")
     @query(#{ explode: true })
-    bbox?: string[],
+    boundingBox?: string[],
 
     /**
      * Either a date-time or an interval, open or closed. Date and time expressions

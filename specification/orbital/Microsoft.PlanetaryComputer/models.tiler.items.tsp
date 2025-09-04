@@ -530,7 +530,8 @@ model GeoJsonStatisticsItemCollectionResponse {
   /**
    * Bounding box coordinates [west, south, east, north]
    */
-  bbox?: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64[];
 
   /**
    * Stac Version
@@ -543,20 +544,20 @@ model GeoJsonStatisticsItemCollectionResponse {
    * MSFT Created
    */
   @encodedName("application/json", "msft:_created")
-  msftCreated?: string;
+  createdOn?: string;
 
   /**
    * MSFT Updated
    */
   @encodedName("application/json", "msft:_updated")
-  msftUpdated?: string;
+  updatedOn?: string;
 
   /**
    * MSFT Short Description
    */
   @maxLength(300)
-  @encodedName("application/json", "msft:short_description")
-  msftShortDescription?: string;
+  @encodedName("application/json", "short_description")
+  shortDescription?: string;
 
   /**
    * List of STAC extension URLs used by this item collection
@@ -606,13 +607,13 @@ model GeoJsonStatisticsItemResponse {
    * MSFT Timestamp
    */
   @encodedName("application/json", "_msft:ts")
-  msftTimestamp?: string;
+  timestamp?: string;
 
   /**
    * MSFT ETag
    */
   @encodedName("application/json", "_msft:etag")
-  msftEtag?: string;
+  etag?: string;
 
   /**
    * List of STAC extension URLs used by this item

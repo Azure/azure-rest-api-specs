@@ -15,7 +15,8 @@ model FeatureCollection {
   /**
    * Bounding box coordinates for the collection
    */
-  bbox?: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64[];
 }
 
 /**
@@ -42,7 +43,8 @@ model FeatureBase {
   /**
    * Bounding box coordinates for the feature
    */
-  bbox: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox: float64[];
 }
 /**
  * GeoJSON Feature object representing a geographic entity
@@ -92,7 +94,8 @@ model Geometry {
   /**
    * Optional bounding box of the geometry.
    */
-  bbox?: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64[];
 }
 
 /**
@@ -197,7 +200,8 @@ model GeometryCollection {
   /**
    * The bounding box of the geometry collection.
    */
-  bbox?: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64[];
 }
 
 /**

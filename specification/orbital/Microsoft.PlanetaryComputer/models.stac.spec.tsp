@@ -210,7 +210,8 @@ model SearchPostRequest {
   /**
    * Bounding box for spatial filtering in format [west, south, east, north].
    */
-  bbox?: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64[];
 
   /**
    * GeoJSON geometry for spatial filtering.
@@ -546,7 +547,8 @@ model SpatialExtent {
   /**
    * Array of bounding boxes defining the spatial extent, in format [[west, south, east, north]].
    */
-  bbox?: float64[][];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64[][];
 }
 
 /**
@@ -699,13 +701,13 @@ model StacItem extends StacItemOrItemCollection {
    * MSFT Timestamp
    */
   @encodedName("application/json", "_msft:ts")
-  msftTimestamp?: string;
+  timestamp?: string;
 
   /**
    * MSFT ETag
    */
   @encodedName("application/json", "_msft:etag")
-  msftEtag?: string;
+  Etag?: string;
 }
 
 /**
@@ -766,7 +768,8 @@ model ItemCollection extends StacItemOrItemCollection {
   /**
    * Bounding box of all items in format [west, south, east, north].
    */
-  bbox?: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64[];
 
   /**
    * Context information for the search response.
@@ -782,20 +785,20 @@ model MicrosoftStacProperties {
    * MSFT Created
    */
   @encodedName("application/json", "msft:_created")
-  msftCreated?: string;
+  createdOn?: string;
 
   /**
    * MSFT Updated
    */
   @encodedName("application/json", "msft:_updated")
-  msftUpdated?: string;
+  updatedOn?: string;
 
   /**
    * MSFT Short Description
    */
   @maxLength(300)
   @encodedName("application/json", "msft:short_description")
-  msftShortDescription?: string;
+  shortDescription?: string;
 }
 
 /**
