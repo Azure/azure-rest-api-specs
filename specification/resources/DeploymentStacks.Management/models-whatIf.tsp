@@ -41,7 +41,7 @@ alias DeploymentStackWhatIfNameParameter = ResourceNameParameter<
  * DeploymentStack WhatIfResult Properties
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfResultProperties extends DeploymentStackSharedProperties {
+model DeploymentStackWhatIfResultProperties is DeploymentStackSharedProperties {
     
     /**
      * The deployment stack id to use as the basis for comparison.
@@ -57,20 +57,39 @@ model DeploymentStackWhatIfResultProperties extends DeploymentStackSharedPropert
     // TODO (R) - This only captures result format (for now), which is implicitly possible by get vs. POST on the whatif resource - so I'm thinking we skip this.
     whatIfSettings?: DeploymentStackWhatIfSettings;
 */
+    /**
+     * All of the changes predicted by the deployment stack what-if operation.
+     */
     @visibility(Lifecycle.Read)
     changes?: DeploymentStackWhatIfChange;
 
+    /**
+     * List of resource diagnostics detected by What-If operation.
+     */
     @visibility(Lifecycle.Read)
+    @OpenAPI.extension("x-ms-identifiers", #[])
     diagnostics?: DeploymentStackDiagnostics[];
 }
 
+/**
+ * Changes predicted to the deployment stack as a result of the what-if operation.
+ */
 @added(Versions.v2025_07_01)
 model DeploymentStackWhatIfChange { 
     
+    /**
+     * List of resource changes predicted by What-If operation.
+     */
     resourceChanges: DeploymentStackWhatIfResourceChange[];
 
+    /**
+     * Predicted changes to the deployment stack deny settings.
+     */
     denySettingsChange: DeploymentStackChangeDelta<DenySettings>;
 
+    /**
+     * Predicted changes to the deployment scope for the deployment stack.
+     */
     deploymentScopeChange: DeploymentStackChangeBase<string>;
 }
 
@@ -78,12 +97,20 @@ model DeploymentStackWhatIfChange {
  * Information about a single resource change predicted by What-If operation.
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfResourceChange extends ResourceChangeDelta {
-    
+model DeploymentStackWhatIfResourceChange is ResourceChangeDelta {
+    /**
+     * The resource id of the resource being changed.
+     */
     resourceId: string;
 
+    /**
+     * The resource id of the Deployment responsible for this change.
+     */
     deploymentId: string;
 
+    /**
+     * The symbolic name of the resource being changed.
+     */
     symbolicName: string;
 
     /** 
@@ -91,16 +118,29 @@ model DeploymentStackWhatIfResourceChange extends ResourceChangeDelta {
      */
     identifiers: unknown;    
 
+    /**
+     * Type of change that will be made to the resource when the deployment is executed.
+     */
     changeType: DeploymentStackWhatIfChangeType;
 
+    /**
+     * The confidence level of the predicted change.
+     */
     changeCertainty: DeploymentStackWhatIfChangeCertainty;
 
-    propertyChanges: DeploymentStackWhatIfPropertyChange[];
-
+    /**
+     * The predicted changes to the deployment stack management status of the resource.
+     */
     managementStatusChange: DeploymentStackChangeBase<DeploymentStackManagementStatus>;
 
+    /**
+     * The predicted changes to the deployment stack deny status of the resource.
+     */
     denyStatusChange: DeploymentStackChangeBase<DenyStatusMode>;
 
+    /**
+     * The explanation about why the resource is unsupported by What-If.
+     */
     unsupportedReason: string;
 }
 
@@ -121,10 +161,12 @@ union DeploymentStackWhatIfChangeCertainty {
     Potential: "potential";
 }
 
-// TODO (R) - is this modeled correctly? Would before/after be just a string for deployment scope?
-// Ideally I'd model as object - should see what we do for deployments
+/**
+ * Base model for properties with the before-and-after property values.
+ */
 @added(Versions.v2025_07_01)
 model DeploymentStackChangeBase<T> {
+    
     /**
      * The predicted value before the deployment is executed.
      */
@@ -136,12 +178,19 @@ model DeploymentStackChangeBase<T> {
     after?: T;
 }
 
-@added(Versions.v2025_07_01)
+/**
+ * Model for resource changes to show the before-and-after property values for resource properties.
+ */
 model ResourceChangeBase is DeploymentStackChangeBase<Record<unknown>>;
 
-@added(Versions.v2025_07_01)
+/**
+ * Model for resource changes to show the before-and-after property values, along with the delta between them.
+ */
 model ResourceChangeDelta is DeploymentStackChangeDelta<Record<unknown>>;
 
+/**
+ * Model to show the before-and-after property values, along with the delta between them.
+ */
 @added(Versions.v2025_07_01)
 model DeploymentStackChangeDelta<T> {
     ... DeploymentStackChangeBase<T>;
@@ -205,8 +254,8 @@ model DeploymentStackDiagnostics {
     /**
      * Additional error information.
      */
-    // TODO (R) - finish -- point to ErrorAdditionalInfo
-    additionalInfo?: DeploymentStackDiagnostics[];
+    @OpenAPI.extension("x-ms-identifiers", #[])
+    additionalInfo?: ErrorAdditionalInfo[];
 }
 
 
@@ -239,8 +288,14 @@ union DeploymentStackManagementStatus {
     Unknown: "unknown";
 }
 
+/**
+ * Type of change that will be made to the resource when the deployment is executed.
+ */
 @added(Versions.v2025_07_01)
+@OpenAPI.extension("x-ms-enum", #{ modelAsString: true })
 union DeploymentStackWhatIfChangeType {
+    string,
+
     /**
      * The resource does not exist in the current state but is present in the desired state. The resource will be created when the deployment is executed.
      */
@@ -268,6 +323,9 @@ union DeploymentStackWhatIfChangeType {
     NoChange: "noChange";
 }
 
+/**
+ * The type of property change.
+ */
 union DeploymentStackWhatIfPropertyChangeType {
   string,
     /**

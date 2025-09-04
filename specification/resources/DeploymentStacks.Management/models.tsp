@@ -213,7 +213,7 @@ model ActionOnUnmanageDeleteParameters {
 /**
  * Deployment stack shared properties.
  */
-model DeploymentStackSharedProperties extends DeploymentStacksError {
+model DeploymentStackSharedProperties is DeploymentStacksError {
 /**
    * The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
@@ -285,13 +285,19 @@ model DeploymentStackSharedProperties extends DeploymentStacksError {
   @visibility(Lifecycle.Read)
   @example("01234567-89ab-cdef-0000-000000000000")
   correlationId?: string;
+
+  /**
+   * The validation level of the deployment stack
+   */
+  @added(Versions.v2025_07_01)
+  validationLevel?: ValidationLevel;
 }
 
 /**
  * Deployment stack properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compat. TSP doc instructs this for 'allOf' for OpenAPI"
-model DeploymentStackProperties extends DeploymentStackSharedProperties {
+model DeploymentStackProperties is DeploymentStackSharedProperties {
 
   /**
    * Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.
@@ -675,6 +681,23 @@ model DeploymentExtension {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of this object are determined by the extension's config schema which is server-side data."
   config?: Record<DeploymentExtensionConfig>;
+}
+
+/**
+ * The level of validation performed on the deployment.
+ */
+@added(Versions.v2025_07_01)
+union ValidationLevel {
+  string,
+
+  /** Static analysis of the template is performed. */
+  Template: "Template",
+
+  /** Static analysis of the template is performed and resource declarations are sent to resource providers for semantic validation. Validates that the caller has RBAC write permissions on each resource. */
+  Provider: "Provider",
+
+  /** Static analysis of the template is performed and resource declarations are sent to resource providers for semantic validation. Skips validating that the caller has RBAC write permissions on each resource. */
+  ProviderNoRbac: "ProviderNoRbac",
 }
 
 /**
