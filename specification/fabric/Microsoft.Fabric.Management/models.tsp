@@ -111,10 +111,10 @@ model RpSkuEnumerationForNewResourceResult {
   @doc("The collection of available SKUs for new resources")
   @identifiers(#[])
   @pageItems
-  value: Array<RpSkuDetailsForNewResource>;
+  value: RpSkuDetailsForNewResource[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @TypeSpec.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -132,7 +132,7 @@ model RpSkuProperties {
   name: string;
 
   @doc("The list of available locations for the SKU")
-  locations: Array<Azure.Core.azureLocation>;
+  locations: Azure.Core.azureLocation[];
 }
 
 @doc("An object that represents enumerating SKUs for existing resources")
@@ -141,10 +141,10 @@ model RpSkuEnumerationForExistingResourceResult {
   @doc("The SKU details")
   @pageItems
   @identifiers(#[])
-  value: Array<RpSkuDetailsForExistingResource>;
+  value: RpSkuDetailsForExistingResource[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @TypeSpec.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -155,17 +155,6 @@ model RpSkuDetailsForExistingResource {
 
   @doc("The SKU details")
   sku: RpSku;
-}
-
-@doc("The name of the capacity.")
-model CapacityNameParameter {
-  @doc("The name of the capacity.")
-  @maxLength(63)
-  @minLength(3)
-  @pattern("^[a-z][a-z0-9]*$")
-  @TypeSpec.Rest.segment("capacities")
-  @path
-  capacityName: string;
 }
 
 @added(Versions.v2025_01_15_preview)
