@@ -39,7 +39,7 @@ model ImageRequest {
   /**
    * Output format for the generated image
    */
-  format?: ImageRequestFormat = ImageRequestFormat.png;
+  format?: TilerImageExportFormat = TilerImageExportFormat.png;
 
   /**
    * Whether to include branding on the output image

@@ -61,7 +61,7 @@ interface StacSearchOperations {
        */
       @query("bbox")
       @query(#{ explode: true })
-      bbox?: float64[];
+      boundingBox?: float64[];
 
       /**
        * GeoJSON geometry for spatial filtering.

@@ -276,7 +276,7 @@ union PixelSelection {
 /**
  * Format specification for image request outputs
  */
-union ImageRequestFormat {
+union TilerImageExportFormat {
   string,
 
   /**
