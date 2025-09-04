@@ -48,7 +48,10 @@ interface DeletedBackupInstanceResources {
   undelete is ArmResourceActionAsync<
     DeletedBackupInstanceResource,
     void,
-    OkResponse,
+    {
+      @body body: void
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader & ArmLroLocationHeader<FinalResult=void>,
     Error = CloudError
   >;
 }

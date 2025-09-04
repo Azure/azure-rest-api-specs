@@ -22,11 +22,11 @@ model BackupVaultResource
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @doc("Resource Tag.")
+  @doc("Optional ETag.")
   eTag?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @doc("Resource Identity.")
+  @doc("Input Managed Identity Details")
   identity?: DppIdentityDetails;
 }
 

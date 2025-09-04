@@ -2877,7 +2877,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -2906,8 +2906,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -5297,7 +5296,7 @@
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "Proxy Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
@@ -5467,11 +5466,11 @@
         },
         "eTag": {
           "type": "string",
-          "description": "Resource Tag."
+          "description": "Optional ETag."
         },
         "identity": {
           "$ref": "#/definitions/DppIdentityDetails",
-          "description": "Resource Identity."
+          "description": "Input Managed Identity Details"
         }
       },
       "required": [
@@ -7836,7 +7835,7 @@
         },
         "eTag": {
           "type": "string",
-          "description": "Resource Tag."
+          "description": "Optional ETag."
         }
       },
       "allOf": [
@@ -8738,10 +8737,6 @@
       "required": [
         "objectType"
       ]
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UnlockDeleteRequest": {
       "type": "object",
