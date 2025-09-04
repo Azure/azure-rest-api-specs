@@ -2600,6 +2600,11 @@
       "type": "object",
       "description": "A SQL virtual machine.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVirtualMachineProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
           "description": "DO NOT USE. This value will be deprecated. Azure Active Directory identity of the server.",
@@ -2607,11 +2612,6 @@
             "read",
             "create"
           ]
-        },
-        "properties": {
-          "$ref": "#/definitions/SqlVirtualMachineProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       },
       "allOf": [
