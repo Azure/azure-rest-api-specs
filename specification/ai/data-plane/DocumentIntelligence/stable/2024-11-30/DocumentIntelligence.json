@@ -1136,6 +1136,52 @@
         }
       }
     },
+    "/documentModels/{modelId}/analyzeResults/{resultId}/png": {
+      "get": {
+        "operationId": "DocumentModels_GetAnalyzeResultPng",
+        "description": "Gets the generated searchable PNG output from document analysis.",
+        "produces": [
+          "application/png",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Unique document model name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DocumentIntelligenceErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/documentModels:authorizeCopy": {
       "post": {
         "operationId": "DocumentModels_AuthorizeModelCopy",

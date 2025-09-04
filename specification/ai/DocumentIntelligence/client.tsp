@@ -18,7 +18,7 @@ namespace ClientCustomizations;
 interface DocumentIntelligenceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   analyzeDocument is DocumentModels.analyzeDocument;
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultPdf is DocumentModels.getAnalyzeResultPdf;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultPng is DocumentModels.getAnalyzeResultPng;
