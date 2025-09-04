@@ -395,8 +395,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Tilejson Tilematrixsetid As Path",
-        "description": "Return the Tilejson Tilematrixsetid As a path",
+        "summary": "TileJson Tilematrixsetid As Path",
+        "description": "Return the TileJson Tilematrixsetid As a path",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3012,8 +3012,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Tilejson",
-        "description": "Return Tilejson",
+        "summary": "TileJson",
+        "description": "Return TileJson",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4156,7 +4156,7 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Tilejson Tilematrixsetid As Path",
+        "summary": "TileJson Tilematrixsetid As Path",
         "description": "Return TileJSON document for a searchId.",
         "parameters": [
           {
@@ -4640,7 +4640,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TitilerPgstacModelInfo"
+              "$ref": "#/definitions/TilerStacSearchRegistration"
             }
           },
           "default": {
@@ -4669,7 +4669,7 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Tilejson",
+        "summary": "TileJson",
         "description": "Return TileJSON document for a searchId.",
         "parameters": [
           {
@@ -7113,7 +7113,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RegisterResponse"
+              "$ref": "#/definitions/TilerMosaicSearchRegistrationResponse"
             }
           },
           "default": {
@@ -8476,7 +8476,7 @@
               "false"
             ],
             "x-ms-enum": {
-              "name": "SignType",
+              "name": "StacAssetUrlSigningMode",
               "modelAsString": true,
               "values": [
                 {
@@ -8625,7 +8625,7 @@
               "false"
             ],
             "x-ms-enum": {
-              "name": "SignType",
+              "name": "StacAssetUrlSigningMode",
               "modelAsString": true,
               "values": [
                 {
@@ -10719,7 +10719,7 @@
               "false"
             ],
             "x-ms-enum": {
-              "name": "SignType",
+              "name": "StacAssetUrlSigningMode",
               "modelAsString": true,
               "values": [
                 {
@@ -12736,24 +12736,6 @@
         "coordinates"
       ]
     },
-    "Extent": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#extent-object\n\nRepresents the spatial and temporal extent of a STAC collection.",
-      "properties": {
-        "spatial": {
-          "$ref": "#/definitions/SpatialExtent",
-          "description": "Spatial extent defined by bounding boxes.\n\nSee the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object)."
-        },
-        "temporal": {
-          "$ref": "#/definitions/TimeInterval",
-          "description": "Temporal extent defined by time intervals.\n\nSee the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object)."
-        }
-      },
-      "required": [
-        "spatial",
-        "temporal"
-      ]
-    },
     "FeatureCollections": {
       "type": "object",
       "description": "http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_collections_rootcollections\n\nRepresents a collection of STAC collections with links.",
@@ -12981,7 +12963,7 @@
         "_msft:etag": {
           "type": "string",
           "description": "MSFT ETag",
-          "x-ms-client-name": "etag"
+          "x-ms-client-name": "eTag"
         },
         "stac_extensions": {
           "type": "array",
@@ -14936,27 +14918,6 @@
         }
       }
     },
-    "RegisterResponse": {
-      "type": "object",
-      "description": "Response from a successful mosaic registration with search ID and related links",
-      "properties": {
-        "searchid": {
-          "type": "string",
-          "description": "Unique identifier for the registered search",
-          "x-ms-client-name": "searchId"
-        },
-        "links": {
-          "type": "array",
-          "description": "Related links for the registered mosaic",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        }
-      },
-      "required": [
-        "searchid"
-      ]
-    },
     "RenderOption": {
       "type": "object",
       "description": "Defines visualization parameters for rendering data on a map.",
@@ -15269,10 +15230,11 @@
         "conf": {
           "type": "object",
           "description": "Conf\n\nOverrides datetime validation from the base request model.",
-          "additionalProperties": {}
+          "additionalProperties": {},
+          "x-ms-client-name": "conformanceClass"
         },
         "sign": {
-          "$ref": "#/definitions/SignType",
+          "$ref": "#/definitions/StacAssetUrlSigningMode",
           "description": "Whether to sign asset URLs in the response."
         },
         "duration": {
@@ -15369,7 +15331,37 @@
         }
       }
     },
-    "SignType": {
+    "SignedHrefResponse": {
+      "type": "object",
+      "description": "Successful Response",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/UnsignedLink",
+          "title": "Response Signed Href Api Sign Get",
+          "description": "Response body"
+        }
+      }
+    },
+    "SortExtension": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-api-spec/tree/master/extensions/sort#sort-api-extension\n\nRepresents a sort specification for STAC API queries.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The field name to sort by.",
+          "minLength": 1
+        },
+        "direction": {
+          "$ref": "#/definitions/StacQueryResultsSortingDirection",
+          "description": "The sort direction (ascending or descending)."
+        }
+      },
+      "required": [
+        "field",
+        "direction"
+      ]
+    },
+    "StacAssetUrlSigningMode": {
       "type": "string",
       "description": "Represent the signature type for asset URLs.",
       "enum": [
@@ -15377,7 +15369,7 @@
         "false"
       ],
       "x-ms-enum": {
-        "name": "SignType",
+        "name": "StacAssetUrlSigningMode",
         "modelAsString": true,
         "values": [
           {
@@ -15391,78 +15383,6 @@
             "description": "Do not sign asset URLs in the response."
           }
         ]
-      }
-    },
-    "SignedHrefResponse": {
-      "type": "object",
-      "description": "Successful Response",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/UnsignedLink",
-          "title": "Response Signed Href Api Sign Get",
-          "description": "Response body"
-        }
-      }
-    },
-    "SortDirections": {
-      "type": "string",
-      "description": "Defines the sorting directions for query results in STAC API.",
-      "enum": [
-        "asc",
-        "desc"
-      ],
-      "x-ms-enum": {
-        "name": "SortDirections",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "asc",
-            "value": "asc",
-            "description": "Sort results in ascending order."
-          },
-          {
-            "name": "desc",
-            "value": "desc",
-            "description": "Sort results in descending order."
-          }
-        ]
-      }
-    },
-    "SortExtension": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-api-spec/tree/master/extensions/sort#sort-api-extension\n\nRepresents a sort specification for STAC API queries.",
-      "properties": {
-        "field": {
-          "type": "string",
-          "description": "The field name to sort by.",
-          "minLength": 1
-        },
-        "direction": {
-          "$ref": "#/definitions/SortDirections",
-          "description": "The sort direction (ascending or descending)."
-        }
-      },
-      "required": [
-        "field",
-        "direction"
-      ]
-    },
-    "SpatialExtent": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object\n\nRepresents the spatial extent of a STAC collection with bounding boxes.",
-      "properties": {
-        "bbox": {
-          "type": "array",
-          "description": "Array of bounding boxes defining the spatial extent, in format [[west, south, east, north]].",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          "x-ms-client-name": "boundingBox"
-        }
       }
     },
     "StacCollection": {
@@ -15547,7 +15467,7 @@
           "minLength": 1
         },
         "extent": {
-          "$ref": "#/definitions/Extent",
+          "$ref": "#/definitions/StacExtensionExtent",
           "description": "Spatial and temporal extent of the collection."
         },
         "keywords": {
@@ -15581,6 +15501,61 @@
       "type": "object",
       "description": "Represents a collection summary",
       "additionalProperties": {}
+    },
+    "StacCollectionTemporalExtent": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#temporal-extent-object\n\nRepresents the temporal extent of a STAC collection with time intervals.",
+      "properties": {
+        "interval": {
+          "type": "array",
+          "description": "Array of time intervals in format [[start_datetime, end_datetime]].",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "interval"
+      ]
+    },
+    "StacExtensionExtent": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#extent-object\n\nRepresents the spatial and temporal extent of a STAC collection.",
+      "properties": {
+        "spatial": {
+          "$ref": "#/definitions/StacExtensionSpatialExtent",
+          "description": "Spatial extent defined by bounding boxes.\n\nSee the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object)."
+        },
+        "temporal": {
+          "$ref": "#/definitions/StacCollectionTemporalExtent",
+          "description": "Temporal extent defined by time intervals.\n\nSee the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object)."
+        }
+      },
+      "required": [
+        "spatial",
+        "temporal"
+      ]
+    },
+    "StacExtensionSpatialExtent": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object\n\nRepresents the spatial extent of a STAC collection with bounding boxes.",
+      "properties": {
+        "bbox": {
+          "type": "array",
+          "description": "Array of bounding boxes defining the spatial extent, in format [[west, south, east, north]].",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "x-ms-client-name": "boundingBox"
+        }
+      }
     },
     "StacExtensionsList": {
       "type": "object",
@@ -15802,6 +15777,30 @@
       "description": "Represent a STAC query\n\nhttps://github.com/stac-api-extensions/query",
       "additionalProperties": {}
     },
+    "StacQueryResultsSortingDirection": {
+      "type": "string",
+      "description": "Defines the sorting directions for query results in STAC API.",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "StacQueryResultsSortingDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "asc",
+            "value": "asc",
+            "description": "Sort results in ascending order."
+          },
+          {
+            "name": "desc",
+            "value": "desc",
+            "description": "Sort results in descending order."
+          }
+        ]
+      }
+    },
     "StacQueryable": {
       "type": "object",
       "description": "Definition of a queryable field for STAC API filtering.",
@@ -15971,13 +15970,37 @@
         ]
       }
     },
+    "TileAddressingScheme": {
+      "type": "string",
+      "description": "Scheme for tile addressing in TileJSON specification",
+      "enum": [
+        "xyz",
+        "tms"
+      ],
+      "x-ms-enum": {
+        "name": "TileAddressingScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "xyz",
+            "value": "xyz",
+            "description": "XYZ tile addressing scheme with origin at top-left"
+          },
+          {
+            "name": "tms",
+            "value": "tms",
+            "description": "TMS tile addressing scheme with origin at bottom-left"
+          }
+        ]
+      }
+    },
     "TileJsonResponse": {
       "type": "object",
       "description": "TileJSON model.\n\nBased on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0TileJSON metadata describing a tile set according to the TileJSON specification",
       "properties": {
         "tilejson": {
           "type": "string",
-          "description": "Tilejson",
+          "description": "TileJson",
           "default": "2.2.0"
         },
         "name": {
@@ -16014,7 +16037,7 @@
             "tms"
           ],
           "x-ms-enum": {
-            "name": "TileJsonScheme",
+            "name": "TileAddressingScheme",
             "modelAsString": true,
             "values": [
               {
@@ -16092,30 +16115,6 @@
       "required": [
         "tiles"
       ]
-    },
-    "TileJsonScheme": {
-      "type": "string",
-      "description": "Scheme for tile addressing in TileJSON specification",
-      "enum": [
-        "xyz",
-        "tms"
-      ],
-      "x-ms-enum": {
-        "name": "TileJsonScheme",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "xyz",
-            "value": "xyz",
-            "description": "XYZ tile addressing scheme with origin at top-left"
-          },
-          {
-            "name": "tms",
-            "value": "tms",
-            "description": "TMS tile addressing scheme with origin at bottom-left"
-          }
-        ]
-      }
     },
     "TileMatrix": {
       "type": "object",
@@ -16688,7 +16687,28 @@
         "properties"
       ]
     },
-    "TilerMosaicStacSearch": {
+    "TilerMosaicSearchRegistrationResponse": {
+      "type": "object",
+      "description": "Response from a successful mosaic registration with search ID and related links",
+      "properties": {
+        "searchid": {
+          "type": "string",
+          "description": "Unique identifier for the registered search",
+          "x-ms-client-name": "searchId"
+        },
+        "links": {
+          "type": "array",
+          "description": "Related links for the registered mosaic",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      },
+      "required": [
+        "searchid"
+      ]
+    },
+    "TilerStacSearchDefinition": {
       "type": "object",
       "description": "PgSTAC Search entry.\n\nref:\nhttps://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915Stored search query in the PgSTAC database",
       "properties": {
@@ -16737,23 +16757,24 @@
         "metadata"
       ]
     },
-    "TimeInterval": {
+    "TilerStacSearchRegistration": {
       "type": "object",
-      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#temporal-extent-object\n\nRepresents the temporal extent of a STAC collection with time intervals.",
+      "description": "Information about a registered STAC search query",
       "properties": {
-        "interval": {
+        "search": {
+          "$ref": "#/definitions/TilerStacSearchDefinition",
+          "description": "Details of the saved search query\n\nSee the [PgSTAC Search table definition](https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915)."
+        },
+        "links": {
           "type": "array",
-          "description": "Array of time intervals in format [[start_datetime, end_datetime]].",
+          "description": "Related links for the search query",
           "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "$ref": "#/definitions/Link"
           }
         }
       },
       "required": [
-        "interval"
+        "search"
       ]
     },
     "TitilerCoreModelsResponsesPoint": {
@@ -16789,26 +16810,6 @@
         "coordinates",
         "values",
         "band_names"
-      ]
-    },
-    "TitilerPgstacModelInfo": {
-      "type": "object",
-      "description": "Information about a registered STAC search query",
-      "properties": {
-        "search": {
-          "$ref": "#/definitions/TilerMosaicStacSearch",
-          "description": "Details of the saved search query\n\nSee the [PgSTAC Search table definition](https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915)."
-        },
-        "links": {
-          "type": "array",
-          "description": "Related links for the search query",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        }
-      },
-      "required": [
-        "search"
       ]
     },
     "TokenResponse": {

@@ -236,7 +236,8 @@ model SearchPostRequest {
    * Overrides datetime validation from the base request model.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC conf requires union types."
-  conf?: Record<unknown>;
+  @encodedName("application/json", "conf")
+  conformanceClass?: Record<unknown>;
 
   /**
    * Whether to sign asset URLs in the response.
