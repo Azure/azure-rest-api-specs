@@ -709,8 +709,9 @@ model JobDefinitionProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
+
 /**
- * The properties of cloud endpoints to migrate.
+ * The properties of Source Target Map Wrapper.
  */
 @added(Versions.v2025_07_01)
 SourceTargetMapWrapper?: {
