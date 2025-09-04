@@ -5970,9 +5970,6 @@
         "x-ms-examples": {
           "Buckets_CreateOrUpdate": {
             "$ref": "examples/Buckets_CreateOrUpdate.json"
-          },
-          "Buckets_CreateOrUpdateWithAkv": {
-            "$ref": "examples/Buckets_CreateOrUpdateWithAkv.json"
           }
         }
       },
@@ -6049,9 +6046,6 @@
         "x-ms-examples": {
           "Buckets_Update": {
             "$ref": "examples/Buckets_Update.json"
-          },
-          "Buckets_UpdateWithAkv": {
-            "$ref": "examples/Buckets_UpdateWithAkv.json"
           }
         }
       },
@@ -6177,141 +6171,6 @@
         "x-ms-examples": {
           "Buckets_GenerateCredentials": {
             "$ref": "examples/Buckets_GenerateCredentials.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/generateAkvCredentials": {
-      "post": {
-        "tags": [
-          "Buckets"
-        ],
-        "summary": "Generate bucket access credentials and store in Azure Key Vault",
-        "description": "Generate the access key and secret key used for accessing the specified volume bucket and store in Azure Key Vault.",
-        "operationId": "Buckets_GenerateAkvCredentials",
-        "parameters": [
-          {
-            "name": "body",
-            "description": "The bucket's Access and Secret key pair expiry time expressed as the number of days from now.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/bucketCredentialsExpiry"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/BucketName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted -- Operation to generate bucket credentials will continue asynchronously",
-            "headers": {
-              "Location": {
-                "description": "URL to poll the status of the operation",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URL that can be used to check the status of the asynchronous operation",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Buckets_GenerateAkvCredentials": {
-            "$ref": "examples/Buckets_GenerateAkvCredentials.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/refreshCertificate": {
-      "post": {
-        "tags": [
-          "Buckets"
-        ],
-        "summary": "Refresh the bucket certificate from Azure Key Vault",
-        "description": "This operation will fetch the certificate from Azure Key Vault and install it on the bucket server.",
-        "operationId": "Buckets_RefreshCertificate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/BucketName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted - Certificate refresh operation is in progress",
-            "headers": {
-              "Location": {
-                "description": "URL to poll the status of the asynchronous operation",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URL to check the status of the asynchronous operation",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Buckets_RefreshCertificate": {
-            "$ref": "examples/Buckets_RefreshCertificate.json"
           }
         }
       }
@@ -7648,78 +7507,6 @@
         }
       }
     },
-    "onCertificateConflictAction": {
-      "type": "string",
-      "description": "This action is triggered when a certificate conflict occurs. A conflict arises if you try to create a new bucket while one or more already exist on the server, or if you update a bucket when multiple buckets are present. This happens because a single certificate is shared among all buckets on the same server.\n\nNote: This applies both to certificates provided directly via the certificateObject property and to those retrieved from Azure Key Vault. Details for the latter case are specified in the akvDetails.certificateAkvDetails section.",
-      "enum": [
-        "Update",
-        "Fail"
-      ],
-      "x-ms-enum": {
-        "name": "onCertificateConflictAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Update",
-            "description": "Update the existing certificate regardless of whether there is a conflict or not. This means all buckets on the server will now use the new certificate."
-          },
-          {
-            "value": "Fail",
-            "description": "Fail the operation if a conflict occurs, meaning the bucket operation will fail, and the existing certificate will continue to be in use."
-          }
-        ]
-      }
-    },
-    "akvDetails": {
-      "description": "Specifies the Azure Key Vault settings. These are used when\na) retrieving the bucket server certificate, and\nb) storing the bucket credentials\n\nNotes:\n\n1. If a bucket certificate was previously provided directly using the certificateObject property, it is possible to subsequently use the Azure Key Vault for certificate management by using these 'akvDetails' properties. However, once Azure Key Vault is configured, it is no longer possible to provide the certificate directly via the certificateObject property.\n\n2. These properties are mutually exclusive with the server.certificateObject property.",
-      "type": "object",
-      "properties": {
-        "certificateAkvDetails": {
-          "$ref": "#/definitions/certificateAkvDetails"
-        },
-        "credentialsAkvDetails": {
-          "$ref": "#/definitions/credentialsAkvDetails"
-        }
-      }
-    },
-    "certificateAkvDetails": {
-      "description": "Specifies the Azure Key Vault settings for retrieving the bucket server certificate.",
-      "type": "object",
-      "properties": {
-        "certificateKeyVaultUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The base URI of the Azure Key Vault that is used when retrieving the bucket certificate.",
-          "example": "https://<REDACTED>.vault.azure.net/"
-        },
-        "certificateName": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 127,
-          "pattern": "^[a-zA-Z0-9-]{1,127}$",
-          "description": "The name of the bucket server certificate stored in the Azure Key Vault."
-        }
-      }
-    },
-    "credentialsAkvDetails": {
-      "description": "Specifies the Azure Key Vault settings for storing the bucket credentials.",
-      "type": "object",
-      "properties": {
-        "credentialsKeyVaultUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The base URI of the Azure Key Vault that is used when storing the bucket credentials.",
-          "example": "https://<REDACTED>.vault.azure.net/"
-        },
-        "secretName": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 127,
-          "pattern": "^[a-zA-Z0-9-]{1,127}$",
-          "description": "The associated key pair has the following structure:\n\n{\n\"access_key_id\": \"&lt;REDACTED&gt;\",\n\"secret_access_key\": \"&lt;REDACTED&gt;\"\n}"
-        }
-      }
-    },
     "bucketPermissions": {
       "title": "Bucket Permissions",
       "description": "Access permissions for the bucket. Either ReadOnly or ReadWrite. The default is ReadOnly if no value is provided during bucket creation.",
@@ -7787,9 +7574,6 @@
         },
         "certificateObject": {
           "$ref": "#/definitions/bucketServerCertificateObject"
-        },
-        "onCertificateConflictAction": {
-          "$ref": "#/definitions/onCertificateConflictAction"
         }
       }
     },
@@ -7802,9 +7586,6 @@
         },
         "certificateObject": {
           "$ref": "#/definitions/bucketServerCertificateObject"
-        },
-        "onCertificateConflictAction": {
-          "$ref": "#/definitions/onCertificateConflictAction"
         }
       }
     },
@@ -7934,9 +7715,6 @@
         "server": {
           "$ref": "#/definitions/bucketServerProperties"
         },
-        "akvDetails": {
-          "$ref": "#/definitions/akvDetails"
-        },
         "permissions": {
           "$ref": "#/definitions/bucketPermissions"
         }
@@ -7960,9 +7738,6 @@
         },
         "server": {
           "$ref": "#/definitions/bucketServerPatchProperties"
-        },
-        "akvDetails": {
-          "$ref": "#/definitions/akvDetails"
         },
         "permissions": {
           "$ref": "#/definitions/bucketPatchPermissions"
@@ -8120,7 +7895,7 @@
       "type": "string",
       "maxLength": 10240,
       "minLength": 1,
-      "description": "A base64-encoded PEM file, which includes both the bucket server's certificate and private key. It is generated by the end user and allows the user access volume data in a read-only manner.\n\nNote: This is only used when Azure Key Vault is not configured. This property is mutually exclusive with the Azure Key Vault 'akv' properties.",
+      "description": "A base64-encoded PEM file, which includes both the bucket server's certificate and private key. It is used to authenticate the user and allows access to volume data in a read-only manner.",
       "x-ms-secret": true,
       "x-ms-mutability": [
         "create",
