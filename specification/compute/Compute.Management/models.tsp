@@ -1245,6 +1245,39 @@ union RestorePointExpandOptions {
   instanceView: "instanceView",
 }
 
+/**
+ * The state of snapshot which determines the access availability of the snapshot.
+ */
+@added(Versions.v2025_04_01)
+union SnapshotAccessState {
+  string,
+
+  /**
+   * Default value.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The snapshot cannot be used for restore, copy or download to offline.
+   */
+  Pending: "Pending",
+
+  /**
+   * The snapshot can be used for restore, copy to different region, and download to offline.
+   */
+  Available: "Available",
+
+  /**
+   * The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded.
+   */
+  InstantAccess: "InstantAccess",
+
+  /**
+   * The snapshot can be used for restoring disks with fast performance, copied and downloaded.
+   */
+  AvailableWithInstantAccess: "AvailableWithInstantAccess",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetCapacityReservationGroups {
   string,
@@ -7754,6 +7787,12 @@ model RestorePointCollectionProperties {
    */
   @visibility(Lifecycle.Read)
   restorePoints?: RestorePoint[];
+
+  /**
+   * This property determines whether instant access snapshot is enabled for restore points created under this restore point collection for Premium SSD v2 or Ultra disk. Instant access snapshot for Premium SSD v2 or Ultra disk is instantaneously available for restoring disk with fast restore performance.
+   */
+  @added(Versions.v2025_04_01)
+  instantAccess?: boolean;
 }
 
 /**
@@ -7813,6 +7852,12 @@ model RestorePointProperties {
    */
   @visibility(Lifecycle.Read)
   instanceView?: RestorePointInstanceView;
+
+  /**
+   * This property determines the time in minutes the snapshot is retained as instant access for restoring Premium SSD v2 or Ultra disk with fast restore performance in this restore point.
+   */
+  @added(Versions.v2025_04_01)
+  instantAccessDurationMinutes?: int32;
 }
 
 /**
@@ -8052,6 +8097,12 @@ model DiskRestorePointInstanceView {
    * Disk restore point Id.
    */
   id?: string;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @added(Versions.v2025_04_01)
+  snapshotAccessState?: SnapshotAccessState;
 
   /**
    * The disk restore point replication status information.
