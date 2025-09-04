@@ -151,7 +151,6 @@ model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties associated with the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   properties?: UserAssignedIdentityProperties;
 }
 
