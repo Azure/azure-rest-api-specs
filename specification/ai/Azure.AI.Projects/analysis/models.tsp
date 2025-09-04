@@ -38,6 +38,7 @@ model ErrorClusterReport {
   modelConfiguration?: ModelConfiguration;
 
   @doc("The result of the cluster analysis.")
+  @visibility(Lifecycle.Read)
   result?: ErrorClusterResult;
 }
 
