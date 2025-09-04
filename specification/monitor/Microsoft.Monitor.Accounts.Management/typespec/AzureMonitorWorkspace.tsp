@@ -7,40 +7,9 @@ import "@typespec/openapi";
 import "./models.tsp";
 import "./service.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 
 namespace Microsoft.Monitor {
-  /**
-   * An Azure Monitor Workspace definition
-   */
-  model AzureMonitorWorkspaceResource
-    is Azure.ResourceManager.TrackedResource<AzureMonitorWorkspace> {
-    ...ResourceNameParameter<
-      Resource = AzureMonitorWorkspaceResource,
-      KeyName = "azureMonitorWorkspaceName",
-      SegmentName = "accounts",
-      NamePattern = "^(?!-)[a-zA-Z0-9-]+[^-]$"
-    >;
-  }
-
-  /**
-   * Metrics container resource for an Azure Monitor Workspace.
-   */
-  @parentResource(AzureMonitorWorkspaceResource)
-  model MacMetricsContainerResource
-    is Azure.ResourceManager.ProxyResource<MacMetricsContainer> {
-    ...ResourceNameParameter<
-      Resource = MacMetricsContainer,
-      KeyName = "metricsContainerName",
-      SegmentName = "metricsContainers",
-      /**
-       * The name of the metrics container. Always 'default'.
-       */
-      NamePattern = "^default$"
-    >;
-  }
-
   @armResourceOperations
   interface AzureMonitorWorkspaces {
     /**
