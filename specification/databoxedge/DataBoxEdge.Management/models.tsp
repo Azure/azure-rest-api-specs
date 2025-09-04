@@ -1110,13 +1110,13 @@ model ServiceSpecification {
    * Metric specification as defined by shoebox.
    */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  metricSpecifications?: MetricSpecificationV1[];
+  metricSpecifications?: MetricSpecification_V1[];
 }
 
 /**
  * Metric specification version 1.
  */
-model MetricSpecificationV1 {
+model MetricSpecification_V1 {
   /**
    * Name of the metric.
    */
@@ -1146,7 +1146,7 @@ model MetricSpecificationV1 {
    * Metric dimensions, other than default dimension which is resource.
    */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  dimensions?: MetricDimensionV1[];
+  dimensions?: MetricDimension_V1[];
 
   /**
    * Set true to fill the gaps with zero.
@@ -1177,7 +1177,7 @@ model MetricSpecificationV1 {
 /**
  * Metric Dimension v1.
  */
-model MetricDimensionV1 {
+model MetricDimension_V1 {
   /**
    * Name of the metrics dimension.
    */
@@ -4586,3 +4586,24 @@ model PeriodicTimerSourceInfo {
    */
   topic?: string;
 }
+
+/**
+ * The list of operations supported by Microsoft.DataBoxEdge resource provider.
+ */
+model OperationsList {
+  /**
+   * The list of operations.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @pageItems
+  value: Operation[];
+
+  /**
+   * The URL to get the next page of operations.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);
+@@visibility(OperationsList.value, Lifecycle.Read);
