@@ -9,7 +9,7 @@ namespace Microsoft.PlanetaryComputer;
 /**
  * Defines the sorting directions for query results in STAC API.
  */
-union SortDirections {
+union StacQueryResultsSortingDirection {
   string,
 
   /**
@@ -314,7 +314,7 @@ model SortExtension {
   /**
    * The sort direction (ascending or descending).
    */
-  direction: SortDirections;
+  direction: StacQueryResultsSortingDirection;
 }
 
 /**
