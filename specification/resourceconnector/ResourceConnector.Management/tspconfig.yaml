@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/resourceconnector"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,43 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ResourceConnector"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-resourceconnector"
+    namespace: "azure.mgmt.resourceconnector"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-resourceconnector"
+    namespace: "com.azure.resourcemanager.resourceconnector"
+    service-name: "ResourceConnector" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-resourceconnector"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourceconnector"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resourceconnector"
+    package-dir: "armstorageactions"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    package-name: "Azure.ResourceManager.ResourceConnector"
+    namespace: "{package-name}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

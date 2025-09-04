@@ -24,7 +24,7 @@ model Appliance is Azure.ResourceManager.TrackedResource<ApplianceProperties> {
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 }
 
@@ -49,7 +49,7 @@ interface Appliances {
   /**
    * Deletes an Appliance with the specified Resource Name, Resource Group, and Subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Appliance,
     LroHeaders = ArmAsyncOperationHeader &
