@@ -42,8 +42,12 @@ interface DnssecConfigs {
   /**
    * Creates or updates the DNSSEC configuration on a DNS zone.
    */
-  createOrUpdate is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodyAsync<
+  @put
+  createOrUpdate is Azure.ResourceManager.Legacy.CustomPatchAsync<
     DnssecConfig,
+    PatchModel = {
+      @body body: void;
+    },
     Parameters = {
       /**
        * The etag of the DNSSEC configuration. Omit this value to always overwrite the DNSSEC configuration. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
@@ -59,8 +63,11 @@ interface DnssecConfigs {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = DnssecConfig> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResponse<DnssecConfig> | ArmResourceCreatedResponse<
+      DnssecConfig,
+      LroHeaders = ArmLroLocationHeader<FinalResult = DnssecConfig> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     Error = CloudError
   >;
 
