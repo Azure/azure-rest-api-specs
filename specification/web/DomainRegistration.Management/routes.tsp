@@ -18,9 +18,7 @@ interface DomainsOperationGroup {
   /**
    * Description for Check if a domain is available for registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Check if a domain is available for registration.")
-  @operationId("Domains_CheckAvailability")
   @autoRoute
   @action("checkDomainAvailability")
   checkAvailability is ArmProviderActionSync<
@@ -30,12 +28,11 @@ interface DomainsOperationGroup {
     Parameters = {},
     Error = DefaultErrorResponse
   >;
+
   /**
    * Description for Generate a single sign-on request for the domain management portal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Generate a single sign-on request for the domain management portal.")
-  @operationId("Domains_GetControlCenterSsoRequest")
   @autoRoute
   @action("generateSsoRequest")
   getControlCenterSsoRequest is ArmProviderActionSync<
@@ -44,12 +41,11 @@ interface DomainsOperationGroup {
     Parameters = {},
     Error = DefaultErrorResponse
   >;
+
   /**
    * Description for Get domain name recommendations based on keywords.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get domain name recommendations based on keywords.")
-  @operationId("Domains_ListRecommendations")
   @autoRoute
   @action("listDomainRecommendations")
   @list

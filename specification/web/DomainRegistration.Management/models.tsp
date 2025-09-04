@@ -1090,7 +1090,7 @@ model CsmOperationCollection {
    */
   @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  value: CsmOperationDescription[]; // required
+  value: CsmOperationDescription[];
 
   /**
    * Link to next page of resources.
