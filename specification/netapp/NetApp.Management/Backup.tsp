@@ -44,7 +44,8 @@ interface Backups {
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Backup,
     PatchModel = BackupPatch,
-    Response = ArmResponse<Backup> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Backup> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetAppAccount> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Backup;
     }),

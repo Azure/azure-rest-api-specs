@@ -51,7 +51,8 @@ interface NetAppAccounts {
   update is ArmCustomPatchAsync<
     NetAppAccount,
     PatchModel = NetAppAccountPatch,
-    Response = ArmResponse<NetAppAccount> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<NetAppAccount> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetAppAccount> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: NetAppAccount;
     })

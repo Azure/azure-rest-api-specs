@@ -46,7 +46,8 @@ interface SnapshotPolicies {
   update is ArmCustomPatchAsync<
     SnapshotPolicy,
     PatchModel = SnapshotPolicyPatch,
-    Response = ArmResponse<SnapshotPolicy> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<SnapshotPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SnapshotPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: SnapshotPolicy;
     })

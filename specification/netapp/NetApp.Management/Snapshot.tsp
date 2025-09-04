@@ -53,7 +53,8 @@ interface Snapshots {
     Snapshot,
     Response = ArmResourceCreatedResponse<
       Snapshot,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = Snapshot> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 

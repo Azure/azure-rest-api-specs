@@ -47,7 +47,8 @@ interface VolumeGroups {
     VolumeGroupDetails,
     Response = ArmResourceCreatedResponse<
       VolumeGroupDetails,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = VolumeGroupDetails> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
