@@ -315,10 +315,14 @@ model UpdateSourceFromFileOperationRecord {
   /** Update operation type for assets. */
   operation: updateOperationKind;
 
-  /** Display Name of the Source. */
-  fileDisplayName: string;
+  /**
+   * Friendly name of the Source. If not provided, would be equal to fileSource
+   */
+  @maxLength(200)
+  @minLength(1)
+  fileDisplayName?: string;
 
-  /** Unique Source value. */
+  /** Unique Source value. Typically this would name of the file. */
   fileSource: string;
 
   /** Bool value for refresh. */

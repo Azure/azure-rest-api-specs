@@ -3084,11 +3084,13 @@
         },
         "fileDisplayName": {
           "type": "string",
-          "description": "Display Name of the Source."
+          "description": "Friendly name of the Source. If not provided, would be equal to fileSource",
+          "minLength": 1,
+          "maxLength": 200
         },
         "fileSource": {
           "type": "string",
-          "description": "Unique Source value."
+          "description": "Unique Source value. Typically this would name of the file."
         },
         "refresh": {
           "type": "boolean",
@@ -3097,7 +3099,6 @@
       },
       "required": [
         "operation",
-        "fileDisplayName",
         "fileSource"
       ]
     },
