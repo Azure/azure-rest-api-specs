@@ -711,10 +711,13 @@ model JobDefinitionProperties {
 }
 
 /**
- * The properties of Source Target Map Wrapper.
+ * The properties of SourceTargetMapWrapper.
  */
 @added(Versions.v2025_07_01)
-SourceTargetMapWrapper?: {
+model SourceTargetMapWrapper {
+  /** 
+   * Collection of mappings between source and target entities. 
+   */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_01)
   @OpenAPI.extension("x-ms-identifiers", #[])
