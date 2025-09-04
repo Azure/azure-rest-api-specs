@@ -1723,25 +1723,20 @@
       "type": "object",
       "description": "Analysis on set of Agent Evaluation Results",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of analysis scope.",
-          "enum": [
-            "Agent"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "agentId": {
           "type": "string",
           "description": "Identifier for the agent."
         }
       },
       "required": [
-        "kind",
         "agentId"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisScope"
+        }
+      ],
+      "x-ms-discriminator-value": "Agent"
     },
     "AgentEvaluation": {
       "type": "object",
@@ -2903,10 +2898,6 @@
           "$ref": "#/definitions/AnalysisScope",
           "description": "Scope of the analysis."
         },
-        "scopeId": {
-          "type": "string",
-          "description": "Identifier for the scope. This is either the AgentId or EvaluationId depending on the scope."
-        },
         "modelConfiguration": {
           "$ref": "#/definitions/ModelConfiguration",
           "description": "Configuration of the model used in the analysis."
@@ -2920,8 +2911,7 @@
         "id",
         "metadata",
         "state",
-        "scope",
-        "scopeId"
+        "scope"
       ]
     },
     "ErrorClusterResult": {
@@ -3047,16 +3037,6 @@
       "type": "object",
       "description": "Analysis on set of Evaluation Results",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of analysis scope.",
-          "enum": [
-            "Evaluation"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "evaluationNames": {
           "type": "array",
           "description": "List of evaluation names for the analysis.",
@@ -3066,9 +3046,14 @@
         }
       },
       "required": [
-        "kind",
         "evaluationNames"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisScope"
+        }
+      ],
+      "x-ms-discriminator-value": "Evaluation"
     },
     "EvaluationTarget": {
       "type": "object",

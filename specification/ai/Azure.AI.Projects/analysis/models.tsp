@@ -34,9 +34,6 @@ model ErrorClusterReport {
   @doc("Scope of the analysis.")
   scope: AnalysisScope;
 
-  @doc("Identifier for the scope. This is either the AgentId or EvaluationId depending on the scope.")
-  scopeId: string;
-
   @doc("Configuration of the model used in the analysis.")
   modelConfiguration?: ModelConfiguration;
 
@@ -56,7 +53,7 @@ model AnalysisScope {
 @doc("Analysis on set of Evaluation Results")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model EvaluationAnalysisScope {
+model EvaluationAnalysisScope extends AnalysisScope {
   @doc("The kind of analysis scope.")
   kind: AnalysisScopeType.Evaluation;
 
@@ -67,7 +64,7 @@ model EvaluationAnalysisScope {
 @doc("Analysis on set of Agent Evaluation Results")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model AgentAnalysisScope {
+model AgentAnalysisScope extends AnalysisScope {
   @doc("The kind of analysis scope.")
   kind: AnalysisScopeType.Agent;
 
