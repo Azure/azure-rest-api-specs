@@ -74,7 +74,7 @@ union Resampling {
 /**
  * Image format specifier for tile and image requests
  */
-union ImageType {
+union TilerImageFormat {
   string,
 
   /**

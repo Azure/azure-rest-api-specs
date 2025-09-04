@@ -147,7 +147,7 @@ interface MosaicsTileJsonOperations {
        * not (jpeg).
        */
       @query("tile_format")
-      tileFormat?: ImageType;
+      tileFormat?: TilerImageFormat;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -271,7 +271,7 @@ interface MosaicsTileMatrixSetsTileJson {
        * not (jpeg).
        */
       @query("tile_format")
-      tileFormat?: ImageType;
+      tileFormat?: TilerImageFormat;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -320,7 +320,7 @@ interface MosaicsWmtsMosaics {
        * Output image type. Default is png.
        */
       @query("tile_format")
-      tileFormat?: ImageType = ImageType.png;
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -371,7 +371,7 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
        * Output image type. Default is png.
        */
       @query("tile_format")
-      tileFormat?: ImageType = ImageType.png;
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
