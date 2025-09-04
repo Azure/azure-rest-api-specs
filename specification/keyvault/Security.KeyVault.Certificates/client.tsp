@@ -277,7 +277,8 @@ op listDeletedCertificateProperties is KeyVaultOperation<
   "ListDeletedCertificateProperties",
   "rust"
 );
-@@clientName(updateCertificate, "UpdateCertificateProperties", "rust");
+// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
+@@clientName(KeyVault.updateCertificate, "UpdateCertificateProperties", "rust");
 
 @@clientName(getCertificateContacts, "GetContacts", "rust");
 @@clientName(deleteCertificateContacts, "DeleteContacts", "rust");

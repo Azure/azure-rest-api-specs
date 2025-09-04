@@ -131,7 +131,8 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
 @@clientName(getSecrets, "ListSecretProperties", "go");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");
-@@clientName(updateSecret, "UpdateSecretProperties", "go");
+// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
+@@clientName(KeyVault.updateSecret, "UpdateSecretProperties", "go");
 
 // renaming SecretItem to SecretProperties.
 // renaming existing SecretProperties to something else
