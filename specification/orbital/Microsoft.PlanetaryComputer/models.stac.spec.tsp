@@ -96,7 +96,7 @@ union QueryableDefinitionDataType {
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "JSON Schema requires union types."
 @doc("JSON Schema structure for STAC Queryables")
-model JsonSchema is Record<unknown>;
+model StacQueryableJsonSchema is Record<unknown>;
 
 /**
  * Represents the GeoJSON feature collection type for STAC item collections.
