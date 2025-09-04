@@ -55,7 +55,10 @@ namespace Customizations;
   "csharp"
 );
 @@clientName(InfoOperationResponse, "InfoOperationResult", "csharp");
-@@clientName(RegisterResponse, "RegisterResult", "csharp");
+@@clientName(TilerMosaicSearchRegistrationResponse,
+  "TilerMosaicSearchRegistrationResult",
+  "csharp"
+);
 @@clientName(StatisticsResponse, "StatisticsResult", "csharp");
 @@clientName(TileJsonResponse, "TileJsonResult", "csharp");
 @@clientName(IngestionSources.IngestionSourcesPagedResponse,

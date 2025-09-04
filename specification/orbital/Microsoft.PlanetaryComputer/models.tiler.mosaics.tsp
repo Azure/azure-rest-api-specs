@@ -184,7 +184,7 @@ model Metadata {
 /**
  * Response from a successful mosaic registration with search ID and related links
  */
-model RegisterResponse {
+model TilerMosaicSearchRegistrationResponse {
   /**
    * Unique identifier for the registered search
    */
@@ -200,13 +200,13 @@ model RegisterResponse {
 /**
  * Information about a registered STAC search query
  */
-model TitilerPgstacModelInfo {
+model TilerStacSearchRegistration {
   /**
    * Details of the saved search query
    *
    * See the [PgSTAC Search table definition](https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915).
    */
-  search: TilerMosaicStacSearch;
+  search: TilerStacSearchDefinition;
 
   /**
    * Related links for the search query
@@ -223,7 +223,7 @@ model TitilerPgstacModelInfo {
 /**
  * Stored search query in the PgSTAC database
  */
-model TilerMosaicStacSearch {
+model TilerStacSearchDefinition {
   /**
    * Unique hash identifier for the search query
    */

@@ -399,7 +399,7 @@ interface MosaicsRegisterSearch {
   @post
   register is Azure.Core.Foundations.Operation<
     RegisterMosaic,
-    RegisterResponse
+    TilerMosaicSearchRegistrationResponse
   >;
 }
 
@@ -422,7 +422,7 @@ interface MosaicsInfoSearch {
       @pattern(".*")
       searchId: string;
     },
-    TitilerPgstacModelInfo
+    TilerStacSearchRegistration
   >;
 }
 
