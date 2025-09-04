@@ -1,0 +1,43 @@
+{
+  "title": "SessionResourceFiles_List_Recursive",
+  "operationId": "SessionResourceFiles_List",
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "identifier": "testSessionIdentifier",
+    "path": "test-directory",
+    "recursive": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "directory-level1",
+            "directory": "",
+            "type": "directory",
+            "contentType": "application/octet-stream",
+            "sizeInBytes": 4096,
+            "lastModifiedAt": "2025-08-15T07:54:52.6564504Z"
+          },
+          {
+            "name": "directory-level2",
+            "directory": "level1",
+            "type": "directory",
+            "contentType": "application/octet-stream",
+            "sizeInBytes": 4096,
+            "lastModifiedAt": "2025-08-15T07:54:52.6564504Z"
+          },
+          {
+            "name": "testfile.yaml",
+            "directory": "directory-level1/directory-level2",
+            "type": "File",
+            "contentType": "application/yaml",
+            "sizeInBytes": 4,
+            "lastModifiedAt": "2024-05-29T00:00:00.000Z"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

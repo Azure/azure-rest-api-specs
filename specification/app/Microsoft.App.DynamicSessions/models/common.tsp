@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
@@ -33,6 +34,15 @@ model SessionResourceFilePathQueryParameter {
   @doc("The path of the file after uploaded.")
   @query
   path?: string;
+}
+
+@doc("The session resource file recursive list parameter.")
+@added(Versions.v2025_10_02_preview)
+model SessionResourceFileRecursiveListParameter {
+  @doc("Whether to recursively list files.")
+  @query
+  @added(Versions.v2025_10_02_preview)
+  recursive?: boolean;
 }
 
 @doc("The session resource file name parameter.")

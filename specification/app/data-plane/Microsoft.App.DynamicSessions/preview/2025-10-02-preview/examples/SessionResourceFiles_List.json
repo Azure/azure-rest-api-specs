@@ -1,0 +1,34 @@
+{
+  "title": "SessionResourceFiles_List",
+  "operationId": "SessionResourceFiles_List",
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "identifier": "testSessionIdentifier",
+    "path": "test-directory"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testfile.yaml",
+            "directory": "test-sub-directory",
+            "type": "File",
+            "contentType": "application/yaml",
+            "sizeInBytes": 4,
+            "lastModifiedAt": "2024-05-29T00:00:00.000Z"
+          },
+          {
+            "name": "test-sub-directory",
+            "directory": "",
+            "type": "Directory",
+            "contentType": "application/octet-stream",
+            "sizeInBytes": 4096,
+            "lastModifiedAt": "2024-04-29T00:00:00.000Z"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
