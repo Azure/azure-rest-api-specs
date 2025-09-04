@@ -74,9 +74,9 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-03'  || $(tag) == 'package-2021-03-only'
 input-file:
-    - /stable/2021-03-01/AppServiceCertificateOrders.json
-    - /stable/2021-03-01/CertificateOrdersDiagnostics.json
-    - /stable/2021-03-01/CertificateRegistrationProvider.json
+    - stable/2021-03-01/AppServiceCertificateOrders.json
+    - stable/2021-03-01/CertificateOrdersDiagnostics.json
+    - stable/2021-03-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -121,9 +121,9 @@ These settings apply only when `--tag=package-2021-01-15` is specified on the co
 
 ```yaml $(tag) == 'package-2021-01-15' || $(tag) == 'package-2021-01-15-only'
 input-file:
-    - /stable/2021-01-15/AppServiceCertificateOrders.json
-    - /stable/2021-01-15/CertificateOrdersDiagnostics.json
-    - /stable/2021-01-15/CertificateRegistrationProvider.json
+    - stable/2021-01-15/AppServiceCertificateOrders.json
+    - stable/2021-01-15/CertificateOrdersDiagnostics.json
+    - stable/2021-01-15/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -146,9 +146,9 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-01' || $(tag) == 'package-2021-01-only'
 input-file:
-    - /stable/2021-01-01/AppServiceCertificateOrders.json
-    - /stable/2021-01-01/CertificateOrdersDiagnostics.json
-    - /stable/2021-01-01/CertificateRegistrationProvider.json
+    - stable/2021-01-01/AppServiceCertificateOrders.json
+    - stable/2021-01-01/CertificateOrdersDiagnostics.json
+    - stable/2021-01-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -172,9 +172,9 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2020-12' || $(tag) == 'package-2020-12-only'
 input-file:
-    - /stable/2020-12-01/AppServiceCertificateOrders.json
-    - /stable/2020-12-01/CertificateOrdersDiagnostics.json
-    - /stable/2020-12-01/CertificateRegistrationProvider.json
+    - stable/2020-12-01/AppServiceCertificateOrders.json
+    - stable/2020-12-01/CertificateOrdersDiagnostics.json
+    - stable/2020-12-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -198,8 +198,8 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2020-10' || $(tag) == 'package-2020-10-only'
 input-file:
-    - /stable/2020-10-01/AppServiceCertificateOrders.json
-    - /stable/2020-10-01/CertificateRegistrationProvider.json
+    - stable/2020-10-01/AppServiceCertificateOrders.json
+    - stable/2020-10-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3016 error
   - suppress: OAV107
@@ -214,8 +214,8 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2020-09' || $(tag) == 'package-2020-09-only'
 input-file:
-    - /stable/2020-09-01/AppServiceCertificateOrders.json
-    - /stable/2020-09-01/CertificateRegistrationProvider.json
+    - stable/2020-09-01/AppServiceCertificateOrders.json
+    - stable/2020-09-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3016 error
   - suppress: OAV107
@@ -230,8 +230,8 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2020-06' || $(tag) == 'package-2020-06-only'
 input-file:
-    - /stable/2020-06-01/AppServiceCertificateOrders.json
-    - /stable/2020-06-01/CertificateRegistrationProvider.json
+    - stable/2020-06-01/AppServiceCertificateOrders.json
+    - stable/2020-06-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3016 error
   - suppress: OAV107
@@ -246,8 +246,8 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2019-08' || $(tag) == 'package-2019-08-only'
 input-file:
-    - /stable/2019-08-01/AppServiceCertificateOrders.json
-    - /stable/2019-08-01/CertificateRegistrationProvider.json
+    - stable/2019-08-01/AppServiceCertificateOrders.json
+    - stable/2019-08-01/CertificateRegistrationProvider.json
 directive:
   - suppress: OAV107
     from: AppServiceCertificateOrders.json
@@ -260,8 +260,8 @@ These settings apply only when `--tag=package-2018-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-12'
 input-file:
-    - /stable/2018-02-01/AppServiceCertificateOrders.json
-    - /stable/2018-02-01/CertificateRegistrationProvider.json
+    - stable/2018-02-01/AppServiceCertificateOrders.json
+    - stable/2018-02-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -275,8 +275,8 @@ These settings apply only when `--tag=package-2018-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-11'
 input-file:
-    - /stable/2018-02-01/AppServiceCertificateOrders.json
-    - /stable/2018-02-01/CertificateRegistrationProvider.json
+    - stable/2018-02-01/AppServiceCertificateOrders.json
+    - stable/2018-02-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -290,8 +290,8 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-02'
 input-file:
-    - /stable/2018-02-01/AppServiceCertificateOrders.json
-    - /stable/2018-02-01/CertificateRegistrationProvider.json
+    - stable/2018-02-01/AppServiceCertificateOrders.json
+    - stable/2018-02-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -305,8 +305,8 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-02-only'
 input-file:
-    - /stable/2018-02-01/AppServiceCertificateOrders.json
-    - /stable/2018-02-01/CertificateRegistrationProvider.json
+    - stable/2018-02-01/AppServiceCertificateOrders.json
+    - stable/2018-02-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -320,8 +320,8 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2016-09'
 input-file:
-    - /stable/2015-08-01/AppServiceCertificateOrders.json
-    - /stable/2015-08-01/CertificateRegistrationProvider.json
+    - stable/2015-08-01/AppServiceCertificateOrders.json
+    - stable/2015-08-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -335,8 +335,8 @@ These settings apply only when `--tag=package-2015-08-only` is specified on the 
 
 ```yaml $(tag) == 'package-2015-08-only'
 input-file:
-  - /stable/2015-08-01/AppServiceCertificateOrders.json
-  - /stable/2015-08-01/CertificateRegistrationProvider.json
+  - stable/2015-08-01/AppServiceCertificateOrders.json
+  - stable/2015-08-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -350,8 +350,8 @@ These settings apply only when `--tag=package-2015-08-certificate-registration` 
 
 ```yaml $(tag) == 'package-2015-08-certificate-registration'
 input-file:
-  - /stable/2015-08-01/AppServiceCertificateOrders.json
-  - /stable/2015-08-01/CertificateRegistrationProvider.json
+  - stable/2015-08-01/AppServiceCertificateOrders.json
+  - stable/2015-08-01/CertificateRegistrationProvider.json
 directive:
   - suppress: OAV107
     from: AppServiceCertificateOrders.json
