@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -6657,7 +6658,8 @@ model VirtualMachineImageProperties {
   /**
    * Used for establishing the purchase context of any 3rd Party artifact through MarketPlace.
    */
-  plan?: PurchasePlan;
+  @renamedFrom(Versions.v2025_09_01, "plan")
+  planz?: PurchasePlan;
 
   /**
    * Contains the os disk image information.
