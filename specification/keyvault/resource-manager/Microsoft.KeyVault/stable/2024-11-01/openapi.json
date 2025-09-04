@@ -1326,9 +1326,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'MhsmPrivateEndpointConnection' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/MHSMPrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "(specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous."
+              }
             }
           },
           "default": {
@@ -2302,9 +2308,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "(specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous."
+              }
             }
           },
           "default": {
