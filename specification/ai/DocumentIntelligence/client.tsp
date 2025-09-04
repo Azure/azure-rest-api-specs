@@ -5,6 +5,7 @@ import "@typespec/versioning";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 using DocumentIntelligence;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
@@ -21,6 +22,7 @@ interface DocumentIntelligenceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultPdf is DocumentModels.getAnalyzeResultPdf;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(DocumentIntelligence.Versions.v2024_11_30)
   getAnalyzeResultPng is DocumentModels.getAnalyzeResultPng;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultFigure is DocumentModels.getAnalyzeResultFigure;
