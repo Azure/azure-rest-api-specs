@@ -15162,6 +15162,10 @@
           "$ref": "#/definitions/ArcSyncType",
           "description": "The type of sync, currently supporting Manual and Periodic."
         },
+        "tagSync": {
+          "$ref": "#/definitions/TagSyncType",
+          "description": "Tag Sync Confirmation. If Enabled, tags on Arc resources will be synced to Azure Migrate resources."
+        },
         "lastSuccessfulSyncTime": {
           "type": "string",
           "format": "date-time",
@@ -15200,6 +15204,10 @@
         "syncType": {
           "$ref": "#/definitions/ArcSyncType",
           "description": "The type of sync, currently supporting Manual and Periodic only."
+        },
+        "tagSync": {
+          "$ref": "#/definitions/TagSyncType",
+          "description": "Tag Sync Confirmation. If true, tags on Arc resources will be synced to Azure Migrate resources."
         }
       }
     },
@@ -15241,6 +15249,30 @@
             "name": "Periodic",
             "value": "Periodic",
             "description": "Periodic sync of arc resources."
+          }
+        ]
+      }
+    },
+    "TagSyncType": {
+      "type": "string",
+      "description": "Tag sync type.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "TagSyncType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enable tag sync of arc resources."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disable tag sync of arc resources."
           }
         ]
       }
