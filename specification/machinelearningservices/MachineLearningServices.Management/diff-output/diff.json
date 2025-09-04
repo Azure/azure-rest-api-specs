@@ -12976,16 +12976,6 @@
     "DataFactory": {
       "type__added": "object"
     },
-    "DataGenerationVertical": {
-      "properties": {
-        "promptSettings": {
-          "x-nullable__deleted": true
-        },
-        "teacherModelSettings": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "DataLakeAnalytics": {
       "type__added": "object",
       "properties__added": {
@@ -13004,36 +12994,6 @@
           }
         ]
       ]
-    },
-    "DataPathAssetReference": {
-      "properties": {
-        "datastoreId": {
-          "x-nullable__deleted": true
-        },
-        "path": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "DataQualityMetricThresholdBase": {
-      "properties": {
-        "threshold": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "DataQualityMonitoringSignal": {
-      "properties": {
-        "featureDataTypeOverride": {
-          "x-nullable__deleted": true
-        },
-        "featureImportanceSettings": {
-          "x-nullable__deleted": true
-        },
-        "features": {
-          "x-nullable__deleted": true
-        }
-      }
     },
     "DataVersionBase": {
       "discriminator__deleted": "dataType",
@@ -13147,16 +13107,6 @@
         ]
       ]
     },
-    "DatasetReference": {
-      "properties": {
-        "name": {
-          "x-nullable__deleted": true
-        },
-        "id": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "Datastore": {
       "discriminator__deleted": "datastoreType",
       "x-ms-client-name__deleted": "DatastoreProperties",
@@ -13230,88 +13180,18 @@
         }
       }
     },
-    "DeltaModelCurrentState": {
-      "properties": {
-        "count": {
-          "default__deleted": 0
-        },
-        "sampleInstanceID": {
-          "x-nullable__deleted": true
-        },
-        "status": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "DeltaModelListRequest": {
-      "properties": {
-        "skipToken": {
-          "x-nullable__deleted": true
-        },
-        "targetBaseModel": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "DeltaModelModifyRequest": {
       "properties": {
         "addDeltaModels": {
-          "uniqueItems__deleted": true,
-          "x-nullable__deleted": true
+          "uniqueItems__deleted": true
         },
         "removeDeltaModels": {
-          "uniqueItems__deleted": true,
-          "x-nullable__deleted": true
-        },
-        "targetBaseModel": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "DeltaModelStatusRequest": {
-      "properties": {
-        "deltaModels": {
-          "x-nullable__deleted": true
-        },
-        "targetBaseModel": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "DeltaModelStatusResponse": {
-      "properties": {
-        "actualInstanceCount": {
-          "default__deleted": 0
-        },
-        "deltaModels": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        },
-        "expectedInstanceCount": {
-          "default__deleted": 0
-        },
-        "revisionId": {
-          "x-nullable__deleted": true
-        },
-        "targetBaseModel": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "DeploymentLogs": {
-      "properties": {
-        "content": {
-          "x-nullable__deleted": true
+          "uniqueItems__deleted": true
         }
       }
     },
     "DeploymentLogsRequest": {
       "properties": {
-        "containerType": {
-          "default__deleted": "InferenceServer"
-        },
         "tail": {
           "x-nullable__deleted": true
         }

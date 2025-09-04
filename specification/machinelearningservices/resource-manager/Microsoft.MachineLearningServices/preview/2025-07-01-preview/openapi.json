@@ -26531,27 +26531,6 @@
         }
       }
     },
-    "ContainerType": {
-      "type": "string",
-      "enum": [
-        "StorageInitializer",
-        "InferenceServer"
-      ],
-      "x-ms-enum": {
-        "name": "ContainerType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "StorageInitializer",
-            "value": "StorageInitializer"
-          },
-          {
-            "name": "InferenceServer",
-            "value": "InferenceServer"
-          }
-        ]
-      }
-    },
     "ContentSafety": {
       "type": "object",
       "properties": {
@@ -27514,7 +27493,8 @@
         },
         "promptSettings": {
           "$ref": "#/definitions/PromptSettings",
-          "description": "Prompt Settings."
+          "description": "Prompt Settings.",
+          "x-nullable": true
         },
         "teacherModelEndpoint": {
           "$ref": "#/definitions/TeacherModelEndpoint",
@@ -27525,7 +27505,8 @@
           ]
         },
         "teacherModelSettings": {
-          "$ref": "#/definitions/TeacherModelSettings"
+          "$ref": "#/definitions/TeacherModelSettings",
+          "x-nullable": true
         }
       },
       "discriminator": "dataGenerationType",
@@ -27565,11 +27546,13 @@
       "properties": {
         "datastoreId": {
           "type": "string",
-          "description": "ARM resource ID of the datastore where the asset is located."
+          "description": "ARM resource ID of the datastore where the asset is located.",
+          "x-nullable": true
         },
         "path": {
           "type": "string",
-          "description": "The path of the file/directory in the datastore."
+          "description": "The path of the file/directory in the datastore.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -27593,6 +27576,7 @@
         "threshold": {
           "$ref": "#/definitions/MonitoringThreshold",
           "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -27610,6 +27594,7 @@
         "featureDataTypeOverride": {
           "type": "object",
           "description": "A dictionary that maps feature names to their respective data types.",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
@@ -27621,6 +27606,7 @@
         "featureImportanceSettings": {
           "$ref": "#/definitions/FeatureImportanceSettings",
           "description": "The settings for computing feature importance.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -27629,6 +27615,7 @@
         "features": {
           "$ref": "#/definitions/MonitoringFeatureFilterBase",
           "description": "The features to calculate drift over.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -27873,11 +27860,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the dataset reference."
+          "description": "The name of the dataset reference.",
+          "x-nullable": true
         },
         "id": {
           "type": "string",
-          "description": "The fully qualified ARM id of the dataset reference."
+          "description": "The fully qualified ARM id of the dataset reference.",
+          "x-nullable": true
         }
       }
     },
@@ -28112,15 +28101,18 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets Count of instances with model."
+          "description": "Gets or sets Count of instances with model.",
+          "default": 0
         },
         "sampleInstanceID": {
           "type": "string",
-          "description": "Gets or sets sample of instances with model."
+          "description": "Gets or sets sample of instances with model.",
+          "x-nullable": true
         },
         "status": {
           "type": "string",
-          "description": "Gets or sets status."
+          "description": "Gets or sets status.",
+          "x-nullable": true
         }
       }
     },
@@ -28135,11 +28127,13 @@
         },
         "skipToken": {
           "type": "string",
-          "description": "Gets or sets skip token for paginated response."
+          "description": "Gets or sets skip token for paginated response.",
+          "x-nullable": true
         },
         "targetBaseModel": {
           "type": "string",
-          "description": "Gets or sets target base model."
+          "description": "Gets or sets target base model.",
+          "x-nullable": true
         }
       }
     },
@@ -28150,6 +28144,7 @@
         "addDeltaModels": {
           "type": "array",
           "description": "Gets or sets delta models to remove.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -28157,13 +28152,15 @@
         "removeDeltaModels": {
           "type": "array",
           "description": "Gets or sets delta models to remove.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "targetBaseModel": {
           "type": "string",
-          "description": "Gets or sets target base model."
+          "description": "Gets or sets target base model.",
+          "x-nullable": true
         }
       }
     },
@@ -28173,13 +28170,15 @@
         "deltaModels": {
           "type": "array",
           "description": "Gets or sets collection of delta models to retrieve status for.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "targetBaseModel": {
           "type": "string",
-          "description": "Gets or sets target base model."
+          "description": "Gets or sets target base model.",
+          "x-nullable": true
         }
       }
     },
@@ -28190,30 +28189,36 @@
         "actualInstanceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets actual instance count."
+          "description": "Gets or sets actual instance count.",
+          "default": 0
         },
         "deltaModels": {
           "type": "object",
           "description": "Gets or sets dictionary representing modelID and its current state.",
+          "x-nullable": true,
           "additionalProperties": {
             "items": {
               "$ref": "#/definitions/DeltaModelCurrentState"
             },
-            "type": "array"
+            "type": "array",
+            "x-nullable": true
           }
         },
         "expectedInstanceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets expected instance count."
+          "description": "Gets or sets expected instance count.",
+          "default": 0
         },
         "revisionId": {
           "type": "string",
-          "description": "Gets or sets revision ID."
+          "description": "Gets or sets revision ID.",
+          "x-nullable": true
         },
         "targetBaseModel": {
           "type": "string",
-          "description": "Gets or sets target base model."
+          "description": "Gets or sets target base model.",
+          "x-nullable": true
         }
       }
     },
@@ -28222,7 +28227,8 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "The retrieved online deployment logs."
+          "description": "The retrieved online deployment logs.",
+          "x-nullable": true
         }
       }
     },
@@ -28230,8 +28236,27 @@
       "type": "object",
       "properties": {
         "containerType": {
-          "$ref": "#/definitions/ContainerType",
-          "description": "The type of container to retrieve logs from."
+          "type": "string",
+          "description": "The type of container to retrieve logs from.",
+          "default": "InferenceServer",
+          "enum": [
+            "StorageInitializer",
+            "InferenceServer"
+          ],
+          "x-ms-enum": {
+            "name": "ContainerType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "StorageInitializer",
+                "value": "StorageInitializer"
+              },
+              {
+                "name": "InferenceServer",
+                "value": "InferenceServer"
+              }
+            ]
+          }
         },
         "tail": {
           "type": "integer",

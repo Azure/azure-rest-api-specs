@@ -19300,7 +19300,8 @@
           ]
         },
         "promptSettings": {
-          "$ref": "#/definitions/PromptSettings"
+          "$ref": "#/definitions/PromptSettings",
+          "x-nullable": true
         },
         "teacherModelEndpoint": {
           "$ref": "#/definitions/TeacherModelEndpoint",
@@ -19310,7 +19311,8 @@
           ]
         },
         "teacherModelSettings": {
-          "$ref": "#/definitions/TeacherModelSettings"
+          "$ref": "#/definitions/TeacherModelSettings",
+          "x-nullable": true
         }
       },
       "discriminator": "dataGenerationType",
@@ -19346,10 +19348,12 @@
       "type": "object",
       "properties": {
         "datastoreId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -19379,6 +19383,7 @@
         },
         "threshold": {
           "$ref": "#/definitions/MonitoringThreshold",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -19395,6 +19400,7 @@
       "properties": {
         "featureDataTypeOverride": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
@@ -19405,6 +19411,7 @@
         },
         "featureImportanceSettings": {
           "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -19412,6 +19419,7 @@
         },
         "features": {
           "$ref": "#/definitions/MonitoringFeatureFilterBase",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -19596,10 +19604,12 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -19735,13 +19745,16 @@
       "properties": {
         "count": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "sampleInstanceID": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -19754,10 +19767,12 @@
           "default": -1
         },
         "skipToken": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "targetBaseModel": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -19766,18 +19781,21 @@
       "properties": {
         "addDeltaModels": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "removeDeltaModels": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "targetBaseModel": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -19786,12 +19804,14 @@
       "properties": {
         "deltaModels": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "targetBaseModel": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -19800,26 +19820,32 @@
       "properties": {
         "actualInstanceCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "deltaModels": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "items": {
               "$ref": "#/definitions/DeltaModelCurrentState"
             },
-            "type": "array"
+            "type": "array",
+            "x-nullable": true
           }
         },
         "expectedInstanceCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "revisionId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "targetBaseModel": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -19827,7 +19853,8 @@
       "type": "object",
       "properties": {
         "content": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -19836,6 +19863,7 @@
       "properties": {
         "containerType": {
           "type": "string",
+          "default": "InferenceServer",
           "enum": [
             "StorageInitializer",
             "InferenceServer"

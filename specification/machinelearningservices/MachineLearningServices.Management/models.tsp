@@ -1,10 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/json-schema";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -4274,7 +4278,7 @@ model Docker {
   /**
    * Indicate whether container shall run in privileged or non-privileged mode.
    */
-  privileged?: boolean;
+  privileged?: boolean | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5347,12 +5351,12 @@ model DatasetReference {
   /**
    * The name of the dataset reference.
    */
-  name?: string;
+  name?: string | null;
 
   /**
    * The fully qualified ARM id of the dataset reference.
    */
-  id?: string;
+  id?: string | null;
 }
 
 /**
@@ -5753,17 +5757,17 @@ model DestinationAsset {
   /**
    * Destination asset name
    */
-  destinationName?: string;
+  destinationName?: string | null;
 
   /**
    * Destination asset version
    */
-  destinationVersion?: string;
+  destinationVersion?: string | null;
 
   /**
    * Destination registry name
    */
-  registryName?: string;
+  registryName?: string | null;
 }
 
 /**
@@ -6507,12 +6511,12 @@ model DeltaModelStatusRequest {
   /**
    * Gets or sets collection of delta models to retrieve status for.
    */
-  deltaModels?: string[];
+  deltaModels?: string[] | null;
 
   /**
    * Gets or sets target base model.
    */
-  targetBaseModel?: string;
+  targetBaseModel?: string | null;
 }
 
 /**
@@ -6522,28 +6526,28 @@ model DeltaModelStatusResponse {
   /**
    * Gets or sets actual instance count.
    */
-  actualInstanceCount?: int32;
+  actualInstanceCount?: int32 = 0;
 
   /**
    * Gets or sets dictionary representing modelID and its current state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  deltaModels?: Record<DeltaModelCurrentState[]>;
+  deltaModels?: Record<DeltaModelCurrentState[] | null> | null;
 
   /**
    * Gets or sets expected instance count.
    */
-  expectedInstanceCount?: int32;
+  expectedInstanceCount?: int32 = 0;
 
   /**
    * Gets or sets revision ID.
    */
-  revisionId?: string;
+  revisionId?: string | null;
 
   /**
    * Gets or sets target base model.
    */
-  targetBaseModel?: string;
+  targetBaseModel?: string | null;
 }
 
 /**
@@ -6553,17 +6557,17 @@ model DeltaModelCurrentState {
   /**
    * Gets or sets Count of instances with model.
    */
-  count?: int32;
+  count?: int32 = 0;
 
   /**
    * Gets or sets sample of instances with model.
    */
-  sampleInstanceID?: string;
+  sampleInstanceID?: string | null;
 
   /**
    * Gets or sets status.
    */
-  status?: string;
+  status?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6576,12 +6580,12 @@ model DeltaModelListRequest {
   /**
    * Gets or sets skip token for paginated response.
    */
-  skipToken?: string;
+  skipToken?: string | null;
 
   /**
    * Gets or sets target base model.
    */
-  targetBaseModel?: string;
+  targetBaseModel?: string | null;
 }
 
 /**
@@ -6601,17 +6605,20 @@ model DeltaModelModifyRequest {
   /**
    * Gets or sets delta models to remove.
    */
-  addDeltaModels?: string[];
+  @TypeSpec.JsonSchema.uniqueItems
+  addDeltaModels?: string[] | null;
 
   /**
    * Gets or sets delta models to remove.
    */
-  removeDeltaModels?: string[];
+  @TypeSpec.JsonSchema.uniqueItems
+  removeDeltaModels?: string[] | null;
 
   /**
    * Gets or sets target base model.
    */
-  targetBaseModel?: string;
+  @uniqueItems
+  targetBaseModel?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7149,12 +7156,12 @@ model DeploymentLogsRequest {
   /**
    * The type of container to retrieve logs from.
    */
-  containerType?: ContainerType;
+  containerType?: ContainerType = ContainerType.InferenceServer;
 
   /**
    * The maximum number of lines to tail.
    */
-  tail?: int32;
+  tail?: int32 | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7162,7 +7169,7 @@ model DeploymentLogs {
   /**
    * The retrieved online deployment logs.
    */
-  content?: string;
+  content?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -11490,12 +11497,12 @@ model EarlyTerminationPolicy {
   /**
    * Number of intervals by which to delay the first evaluation.
    */
-  delayEvaluation?: int32;
+  delayEvaluation?: int32 = 0;
 
   /**
    * Interval (number of runs) between policy evaluations.
    */
-  evaluationInterval?: int32;
+  evaluationInterval?: int32 = 0;
 
   /**
    * [Required] Name of policy configuration
@@ -11642,7 +11649,7 @@ model DataQualityMetricThresholdBase {
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  threshold?: MonitoringThreshold;
+  threshold?: MonitoringThreshold | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12561,7 +12568,7 @@ model DataGenerationVertical {
   /**
    * Prompt Settings.
    */
-  promptSettings?: PromptSettings;
+  promptSettings?: PromptSettings | null;
 
   /**
    * [Required] Teacher Model Endpoint Details.
@@ -12570,7 +12577,7 @@ model DataGenerationVertical {
   teacherModelEndpoint: TeacherModelEndpoint;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  teacherModelSettings?: TeacherModelSettings;
+  teacherModelSettings?: TeacherModelSettings | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12618,12 +12625,12 @@ model DataPathAssetReference extends AssetReferenceBase {
   /**
    * ARM resource ID of the datastore where the asset is located.
    */
-  datastoreId?: string;
+  datastoreId?: string | null;
 
   /**
    * The path of the file/directory in the datastore.
    */
-  path?: string;
+  path?: string | null;
 
   /**
    * [Required] Specifies the type of asset reference.
@@ -12638,19 +12645,19 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
+  featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
   /**
    * The settings for computing feature importance.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  featureImportanceSettings?: FeatureImportanceSettings;
+  featureImportanceSettings?: FeatureImportanceSettings | null;
 
   /**
    * The features to calculate drift over.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  features?: MonitoringFeatureFilterBase;
+  features?: MonitoringFeatureFilterBase | null;
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
@@ -12704,13 +12711,13 @@ model DistillationJob extends JobBaseProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  outputs: Record<JobOutput>;
+  outputs: Record<JobOutput | null>;
 
   /**
    * Queue settings for the job
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  queueSettings?: QueueSettings;
+  queueSettings?: QueueSettings | null;
 
   /**
    * Instance types and other resources for the job
@@ -12754,12 +12761,12 @@ model DockerCredential extends DataReferenceCredential {
   /**
    * DockerCredential user password
    */
-  password?: string;
+  password?: string | null;
 
   /**
    * DockerCredential user name
    */
-  userName?: string;
+  userName?: string | null;
 
   /**
    * [Required] Credential type used to authentication with storage.
