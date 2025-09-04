@@ -25,7 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for Reviews Client.
 
 ``` yaml
-tag: package-2025-05-01
+tag: package-2023-01-01-preview
 openapi-type: arm
 ```
 
