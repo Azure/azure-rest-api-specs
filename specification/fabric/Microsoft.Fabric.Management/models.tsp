@@ -106,18 +106,9 @@ union ResourceState {
   string,
 }
 
+@@identifiers(RpSkuEnumerationForNewResourceResult.value, #[]);
 @doc("An object that represents enumerating SKUs for new resources.")
-model RpSkuEnumerationForNewResourceResult {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
-  @doc("The collection of available SKUs for new resources")
-  @identifiers(#[])
-  @pageItems
-  value: Array<RpSkuDetailsForNewResource>;
-
-  @doc("Url for the next page.  Null if no more pages available")
-  @TypeSpec.nextLink
-  nextLink?: string;
-}
+model RpSkuEnumerationForNewResourceResult is Page<RpSkuDetailsForNewResource>;
 
 @doc("The SKU details")
 model RpSkuDetailsForNewResource {
@@ -133,21 +124,12 @@ model RpSkuProperties {
   name: string;
 
   @doc("The list of available locations for the SKU")
-  locations: Array<Azure.Core.azureLocation>;
+  locations: Azure.Core.azureLocation[];
 }
 
+@@identifiers(RpSkuEnumerationForExistingResourceResult.value, #[]);
 @doc("An object that represents enumerating SKUs for existing resources")
-model RpSkuEnumerationForExistingResourceResult {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
-  @doc("The SKU details")
-  @pageItems
-  @identifiers(#[])
-  value: Array<RpSkuDetailsForExistingResource>;
-
-  @doc("Url for the next page.  Null if no more pages available")
-  @TypeSpec.nextLink
-  nextLink?: string;
-}
+model RpSkuEnumerationForExistingResourceResult is Page<RpSkuDetailsForExistingResource>;
 
 @doc("An object that represents SKU details for existing resources")
 model RpSkuDetailsForExistingResource {
@@ -156,17 +138,6 @@ model RpSkuDetailsForExistingResource {
 
   @doc("The SKU details")
   sku: RpSku;
-}
-
-@doc("The name of the capacity.")
-model CapacityNameParameter {
-  @doc("The name of the capacity.")
-  @maxLength(63)
-  @minLength(3)
-  @pattern("^[a-z][a-z0-9]*$")
-  @TypeSpec.Rest.segment("capacities")
-  @path
-  capacityName: string;
 }
 
 @doc("Describes Resource Quota")

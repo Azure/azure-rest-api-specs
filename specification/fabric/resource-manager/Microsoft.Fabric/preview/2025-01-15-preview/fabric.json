@@ -190,7 +190,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedQuota"
             }
@@ -637,12 +637,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CapacityNameParameter"
+            "name": "capacityName",
+            "in": "path",
+            "description": "The name of the Microsoft Fabric capacity. It must be a minimum of 3 characters, and a maximum of 63.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RpSkuEnumerationForExistingResourceResult"
             }
@@ -1117,7 +1124,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SKU details",
+          "description": "The RpSkuDetailsForExistingResource items on this page",
           "items": {
             "$ref": "#/definitions/RpSkuDetailsForExistingResource"
           },
@@ -1125,7 +1132,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Url for the next page.  Null if no more pages available"
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1138,7 +1146,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The collection of available SKUs for new resources",
+          "description": "The RpSkuDetailsForNewResource items on this page",
           "items": {
             "$ref": "#/definitions/RpSkuDetailsForNewResource"
           },
@@ -1146,7 +1154,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Url for the next page.  Null if no more pages available"
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1193,17 +1202,5 @@
       }
     }
   },
-  "parameters": {
-    "CapacityNameParameter": {
-      "name": "capacityName",
-      "in": "path",
-      "description": "The name of the capacity.",
-      "required": true,
-      "type": "string",
-      "minLength": 3,
-      "maxLength": 63,
-      "pattern": "^[a-z][a-z0-9]*$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
