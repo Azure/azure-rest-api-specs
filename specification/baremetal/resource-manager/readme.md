@@ -25,7 +25,23 @@ title: BootstrapRP
 description: BootstrapRP Client
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2025-02-01-preview
+tag: package-2025-08-01-preview
+```
+
+### Tag: 2025-08-01-preview
+
+These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-08-01-preview'
+input-file:
+    - Microsoft.BareMetal/preview/2025-08-01-preview/BootstrapRP.json
+suppressions:
+    - code: XmsPageableForListCalls
+      where: $.paths["/providers/Microsoft.BareMetal/locations/{location}/utilization"].get
+      reason: Partner wants to ensure return value of existing API doesn't change
+    - code: GetCollectionOnlyHasValueAndNextLink
+      where: $.paths["/providers/Microsoft.BareMetal/locations/{location}/utilization"].get.responses["200"].schema.properties
+      reason: Partner wants to ensure return value of existing API doesn't change
 ```
 
 ### Tag: 2025-02-01-preview
