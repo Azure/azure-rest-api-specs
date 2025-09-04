@@ -21,13 +21,11 @@ model BackupVaultResource
     NamePattern = ""
   >;
 
-  // etag not included in TrackedResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Resource Tag.")
   @visibility(Lifecycle.Read)
   eTag?: string;
 
-  // identity not included in TrackedResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Resource Identity.")
   @visibility(Lifecycle.Read)

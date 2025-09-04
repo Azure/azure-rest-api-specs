@@ -19,7 +19,6 @@ model ResourceGuardResource
     NamePattern = ""
   >;
 
-  // etag not included in TrackedResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Resource Tag.")
   @visibility(Lifecycle.Read)

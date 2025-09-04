@@ -24,11 +24,9 @@ model BackupInstanceResource
     NamePattern = ""
   >;
 
-  /**
-   * Resource tags.
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("Resource tags.")
   tags?: Record<string>;
 }
 
