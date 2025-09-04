@@ -14,6 +14,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Resources.DeploymentStacks;
 
 // Interface for all what-if operations for deployment stacks.
+@added(Versions.v2025_07_01)
 interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Model> {
   /** Gets the Deployment stack with the given name. */
   getWhatIf is ArmResourceRead<DeploymentStackWhatIfResult, BaseParameters = TBaseParams>;
@@ -49,16 +50,19 @@ interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Mo
 }
 
 @armResourceOperations
+@added(Versions.v2025_07_01)
 @tag("DeploymentStacksWhatIfResultsAtResourceGroup")
 interface DeploymentStacksWhatIfResultsAtResourceGroup
   extends DeploymentStackWhatIfCommon<ResourceGroupBaseParameters> {}
 
 @armResourceOperations
+@added(Versions.v2025_07_01)
 @tag("DeploymentStacksWhatIfResultsAtSubscription")
 interface DeploymentStacksWhatIfResultsAtSubscription
   extends DeploymentStackWhatIfCommon<SubscriptionBaseParameters> {}
 
 @armResourceOperations
+@added(Versions.v2025_07_01)
 @tag("DeploymentStacksWhatIfResultsAtManagementGroup")
 interface DeploymentStacksWhatIfResultsAtManagementGroup
   extends DeploymentStackWhatIfCommon<ManagementGroupIdBaseParameters> {}
