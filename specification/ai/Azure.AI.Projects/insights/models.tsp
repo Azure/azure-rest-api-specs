@@ -17,7 +17,7 @@ namespace Azure.AI.Projects;
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 @resource("insights")
-model ProjectInsight {
+model Insight {
   @doc("The unique identifier for the insights report.")
   @key("id")
   @visibility(Lifecycle.Read)
@@ -31,6 +31,9 @@ model ProjectInsight {
   @visibility(Lifecycle.Read)
   state: OperationState;
 
+  @doc("User friendly display name for the insight.")
+  displayName: string;
+
   @doc("Request for the insights analysis.")
   request: AnalysisRequest;
 
@@ -42,42 +45,42 @@ model ProjectInsight {
   result?: InsightResult;
 }
 
-@doc("The scope of the insights report.")
+@doc("The request of the insights report.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-@discriminator("kind")
+@discriminator("type")
 model AnalysisRequest {
-  @doc("The kind of analysis scope.")
-  kind: AnalysisRequestType;
+  @doc("The type of analysis request.")
+  type: AnalysisType;
 }
 
 @doc("Analysis on set of Evaluation Results")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model EvaluationRunClusterAnalysis extends AnalysisRequest {
-  @doc("The kind of analysis scope.")
-  kind: AnalysisRequestType.EvaluationRunClusterAnalysis;
+  @doc("The type of analysis request.")
+  type: AnalysisType.EvaluationRunClusterAnalysis;
 
-  @doc("List of evaluation names for the analysis.")
-  evaluationNames: string[];
+  @doc("List of evaluation IDs for the analysis.")
+  evalIds: string[];
 }
 
 @doc("Analysis on set of Agent Evaluation Results")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model AgentClusterAnalysis extends AnalysisRequest {
-  @doc("The kind of analysis scope.")
-  kind: AnalysisRequestType.AgentClusterAnalysis;
+  @doc("The type of analysis request.")
+  type: AnalysisType.AgentClusterAnalysis;
 
   @doc("Identifier for the agent.")
-  agentId: string;
+  agentName: string;
 }
 
-@doc("The scope of the cluster analysis.")
+@doc("The request of the cluster analysis.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-union AnalysisRequestType {
-  @doc("Analysis on an Evaluation result.")
+union AnalysisType {
+  @doc("Analysis on an Evaluation run result.")
   EvaluationRunClusterAnalysis: "EvaluationRunClusterAnalysis",
 
   @doc("Analysis on an Agent.")
@@ -104,26 +107,23 @@ model ModelConfiguration {
   @doc("The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.")
   modelDeploymentName: string;
 
-  @doc("Optional parameters passed to the model for evaluation.")
+  @doc("Optional parameters passed to the model for analysis and insight generation.")
   modelParams: Record<unknown>;
 }
 
-@doc("The result of the cluster analysis.")
+@doc("The result of the analysis.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-@discriminator("kind")
+@discriminator("type")
 model InsightResult {
   @doc("The type of insights result.")
-  kind: InsightResultType;
+  type: AnalysisType;
 }
 
 @doc("Insights from the cluster analysis.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model ClusterAnalysisInsights extends InsightResult {
-  @doc("Insights from the cluster analysis.")
-  kind: InsightResultType.ClusterAnalysisInsights;
-
+model ClusterAnalysisInsights {
   @doc("Summary of the insights report.")
   summary: InsightSummary;
 
@@ -132,6 +132,26 @@ model ClusterAnalysisInsights extends InsightResult {
 
   @doc("List of clusters identified in the analysis.")
   clusters: AnalysisCluster[];
+}
+
+@doc("Insights from the evaluation run cluster analysis.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model EvaluationRunClusterInsightResult extends InsightResult {
+  @doc("The type of insights result.")
+  type: AnalysisType.EvaluationRunClusterAnalysis;
+
+  ...ClusterAnalysisInsights;
+}
+
+@doc("Insights from the agent cluster analysis.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model AgentClusterInsightResult extends InsightResult {
+  @doc("The type of insights result.")
+  type: AnalysisType.AgentClusterAnalysis;
+
+  ...ClusterAnalysisInsights;
 }
 
 @doc("The type of insights result.")
@@ -149,13 +169,13 @@ union InsightResultType {
 @removed(Versions.v1)
 model InsightSummary {
   @doc("Total number of samples analyzed.")
-  totalSample: int32;
+  sampleCount: int32;
 
   @doc("Total number of unique subcluster labels.")
-  uniqueSubclusterLabel: int32;
+  uniqueSubclusterCount: int32;
 
   @doc("Total number of unique clusters.")
-  uniqueClusters: int32;
+  uniqueClusterCount: int32;
 
   @doc("Method used for clustering.")
   method: string;

@@ -1362,47 +1362,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "analysisRequestType",
+            "name": "filter",
             "in": "query",
-            "description": "The type of analysis request.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "EvaluationRunClusterAnalysis",
-              "AgentClusterAnalysis"
-            ],
-            "x-ms-enum": {
-              "name": "AnalysisRequestType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "EvaluationRunClusterAnalysis",
-                  "value": "EvaluationRunClusterAnalysis",
-                  "description": "Analysis on an Evaluation result."
-                },
-                {
-                  "name": "AgentClusterAnalysis",
-                  "value": "AgentClusterAnalysis",
-                  "description": "Analysis on an Agent."
-                }
-              ]
-            }
-          },
-          {
-            "name": "evaluationNames",
-            "in": "query",
-            "description": "The unique names for the evaluations.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "name": "agentId",
-            "in": "query",
-            "description": "The unique identifier for the agent.",
+            "description": "Filter in odata format",
             "required": false,
             "type": "string"
           },
@@ -1414,7 +1376,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProjectInsight"
+              "$ref": "#/definitions/PagedInsight"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -1471,7 +1433,7 @@
             "description": "Complete evaluation configuration including data source, evaluators, and result settings",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProjectInsight"
+              "$ref": "#/definitions/Insight"
             }
           }
         ],
@@ -1479,7 +1441,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/ProjectInsight"
+              "$ref": "#/definitions/Insight"
             }
           },
           "default": {
@@ -1520,7 +1482,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectInsight"
+              "$ref": "#/definitions/Insight"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -1554,47 +1516,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "analysisRequestType",
+            "name": "filter",
             "in": "query",
-            "description": "The type of analysis request.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "EvaluationRunClusterAnalysis",
-              "AgentClusterAnalysis"
-            ],
-            "x-ms-enum": {
-              "name": "AnalysisRequestType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "EvaluationRunClusterAnalysis",
-                  "value": "EvaluationRunClusterAnalysis",
-                  "description": "Analysis on an Evaluation result."
-                },
-                {
-                  "name": "AgentClusterAnalysis",
-                  "value": "AgentClusterAnalysis",
-                  "description": "Analysis on an Agent."
-                }
-              ]
-            }
-          },
-          {
-            "name": "evaluationNames",
-            "in": "query",
-            "description": "The unique names for the evaluations.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "name": "agentId",
-            "in": "query",
-            "description": "The unique identifier for the agent.",
+            "description": "Filter in odata format",
             "required": false,
             "type": "string"
           }
@@ -1603,7 +1527,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectInsight"
+              "$ref": "#/definitions/Insight"
             }
           },
           "default": {
@@ -1777,17 +1701,52 @@
       "type": "object",
       "description": "Analysis on set of Agent Evaluation Results",
       "properties": {
-        "agentId": {
+        "agentName": {
           "type": "string",
           "description": "Identifier for the agent."
         }
       },
       "required": [
-        "agentId"
+        "agentName"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AgentClusterAnalysis"
+    },
+    "AgentClusterInsightResult": {
+      "type": "object",
+      "description": "Insights from the agent cluster analysis.",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/InsightSummary",
+          "description": "Summary of the insights report."
+        },
+        "samples": {
+          "type": "array",
+          "description": "List of samples and their associated clusters.",
+          "items": {
+            "$ref": "#/definitions/AnalysisSample"
+          }
+        },
+        "clusters": {
+          "type": "array",
+          "description": "List of clusters identified in the analysis.",
+          "items": {
+            "$ref": "#/definitions/AnalysisCluster"
+          }
+        }
+      },
+      "required": [
+        "summary",
+        "samples",
+        "clusters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightResult"
         }
       ],
       "x-ms-discriminator-value": "AgentClusterAnalysis"
@@ -2025,41 +1984,17 @@
     },
     "AnalysisRequest": {
       "type": "object",
-      "description": "The scope of the insights report.",
+      "description": "The request of the insights report.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalysisRequestType",
-          "description": "The kind of analysis scope."
+        "type": {
+          "$ref": "#/definitions/AnalysisType",
+          "description": "The type of analysis request."
         }
       },
-      "discriminator": "kind",
+      "discriminator": "type",
       "required": [
-        "kind"
+        "type"
       ]
-    },
-    "AnalysisRequestType": {
-      "type": "string",
-      "description": "The scope of the cluster analysis.",
-      "enum": [
-        "EvaluationRunClusterAnalysis",
-        "AgentClusterAnalysis"
-      ],
-      "x-ms-enum": {
-        "name": "AnalysisRequestType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EvaluationRunClusterAnalysis",
-            "value": "EvaluationRunClusterAnalysis",
-            "description": "Analysis on an Evaluation result."
-          },
-          {
-            "name": "AgentClusterAnalysis",
-            "value": "AgentClusterAnalysis",
-            "description": "Analysis on an Agent."
-          }
-        ]
-      }
     },
     "AnalysisSample": {
       "type": "object",
@@ -2099,6 +2034,30 @@
         "parameters",
         "coordinates"
       ]
+    },
+    "AnalysisType": {
+      "type": "string",
+      "description": "The request of the cluster analysis.",
+      "enum": [
+        "EvaluationRunClusterAnalysis",
+        "AgentClusterAnalysis"
+      ],
+      "x-ms-enum": {
+        "name": "AnalysisType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EvaluationRunClusterAnalysis",
+            "value": "EvaluationRunClusterAnalysis",
+            "description": "Analysis on an Evaluation run result."
+          },
+          {
+            "name": "AgentClusterAnalysis",
+            "value": "AgentClusterAnalysis",
+            "description": "Analysis on an Agent."
+          }
+        ]
+      }
     },
     "ApiKeyCredentials": {
       "type": "object",
@@ -2529,13 +2488,7 @@
         "summary",
         "samples",
         "clusters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InsightResult"
-        }
-      ],
-      "x-ms-discriminator-value": "ClusterAnalysisInsights"
+      ]
     },
     "Connection": {
       "type": "object",
@@ -3055,20 +3008,55 @@
       "type": "object",
       "description": "Analysis on set of Evaluation Results",
       "properties": {
-        "evaluationNames": {
+        "evalIds": {
           "type": "array",
-          "description": "List of evaluation names for the analysis.",
+          "description": "List of evaluation IDs for the analysis.",
           "items": {
             "type": "string"
           }
         }
       },
       "required": [
-        "evaluationNames"
+        "evalIds"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationRunClusterAnalysis"
+    },
+    "EvaluationRunClusterInsightResult": {
+      "type": "object",
+      "description": "Insights from the evaluation run cluster analysis.",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/InsightSummary",
+          "description": "Summary of the insights report."
+        },
+        "samples": {
+          "type": "array",
+          "description": "List of samples and their associated clusters.",
+          "items": {
+            "$ref": "#/definitions/AnalysisSample"
+          }
+        },
+        "clusters": {
+          "type": "array",
+          "description": "List of clusters identified in the analysis.",
+          "items": {
+            "$ref": "#/definitions/AnalysisCluster"
+          }
+        }
+      },
+      "required": [
+        "summary",
+        "samples",
+        "clusters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightResult"
         }
       ],
       "x-ms-discriminator-value": "EvaluationRunClusterAnalysis"
@@ -3322,18 +3310,63 @@
       ],
       "x-ms-discriminator-value": "dataset"
     },
+    "Insight": {
+      "type": "object",
+      "description": "The response body for cluster analysis.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the insights report.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/AnalysisMetadata",
+          "description": "Metadata about the insights report.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current state of the analysis.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User friendly display name for the insight."
+        },
+        "request": {
+          "$ref": "#/definitions/AnalysisRequest",
+          "description": "Request for the insights analysis."
+        },
+        "modelConfiguration": {
+          "$ref": "#/definitions/ModelConfiguration",
+          "description": "Configuration of the model used in the analysis."
+        },
+        "result": {
+          "$ref": "#/definitions/InsightResult",
+          "description": "The result of the insights report.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "metadata",
+        "state",
+        "displayName",
+        "request"
+      ]
+    },
     "InsightResult": {
       "type": "object",
-      "description": "The result of the cluster analysis.",
+      "description": "The result of the analysis.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/InsightResultType",
+        "type": {
+          "$ref": "#/definitions/AnalysisType",
           "description": "The type of insights result."
         }
       },
-      "discriminator": "kind",
+      "discriminator": "type",
       "required": [
-        "kind"
+        "type"
       ]
     },
     "InsightResultType": {
@@ -3358,17 +3391,17 @@
       "type": "object",
       "description": "Summary of the error cluster analysis.",
       "properties": {
-        "totalSample": {
+        "sampleCount": {
           "type": "integer",
           "format": "int32",
           "description": "Total number of samples analyzed."
         },
-        "uniqueSubclusterLabel": {
+        "uniqueSubclusterCount": {
           "type": "integer",
           "format": "int32",
           "description": "Total number of unique subcluster labels."
         },
-        "uniqueClusters": {
+        "uniqueClusterCount": {
           "type": "integer",
           "format": "int32",
           "description": "Total number of unique clusters."
@@ -3379,9 +3412,9 @@
         }
       },
       "required": [
-        "totalSample",
-        "uniqueSubclusterLabel",
-        "uniqueClusters",
+        "sampleCount",
+        "uniqueSubclusterCount",
+        "uniqueClusterCount",
         "method"
       ]
     },
@@ -3440,7 +3473,7 @@
         },
         "modelParams": {
           "type": "object",
-          "description": "Optional parameters passed to the model for evaluation.",
+          "description": "Optional parameters passed to the model for analysis and insight generation.",
           "additionalProperties": {}
         }
       },
@@ -3616,15 +3649,15 @@
         "value"
       ]
     },
-    "PagedProjectInsight": {
+    "PagedInsight": {
       "type": "object",
-      "description": "Paged collection of ProjectInsight items",
+      "description": "Paged collection of Insight items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProjectInsight items on this page",
+          "description": "The Insight items on this page",
           "items": {
-            "$ref": "#/definitions/ProjectInsight"
+            "$ref": "#/definitions/Insight"
           }
         },
         "nextLink": {
@@ -3759,46 +3792,6 @@
           }
         ]
       }
-    },
-    "ProjectInsight": {
-      "type": "object",
-      "description": "The response body for cluster analysis.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier for the insights report.",
-          "readOnly": true
-        },
-        "metadata": {
-          "$ref": "#/definitions/AnalysisMetadata",
-          "description": "Metadata about the insights report.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The current state of the analysis.",
-          "readOnly": true
-        },
-        "request": {
-          "$ref": "#/definitions/AnalysisRequest",
-          "description": "Request for the insights analysis."
-        },
-        "modelConfiguration": {
-          "$ref": "#/definitions/ModelConfiguration",
-          "description": "Configuration of the model used in the analysis."
-        },
-        "result": {
-          "$ref": "#/definitions/InsightResult",
-          "description": "The result of the insights report.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "metadata",
-        "state",
-        "request"
-      ]
     },
     "RedTeam": {
       "type": "object",

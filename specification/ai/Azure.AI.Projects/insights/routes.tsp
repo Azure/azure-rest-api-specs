@@ -18,17 +18,9 @@ alias InsightsServiceTraits = SupportsClientRequestId &
 alias InsightsOperations = Azure.Core.ResourceOperations<InsightsServiceTraits>;
 
 alias FilterQueryParamsTraits = {
-  @query("analysisRequestType")
-  @doc("The type of analysis request.")
-  analysisRequestType?: AnalysisRequestType;
-
-  @query("evaluationNames")
-  @doc("The unique names for the evaluations.")
-  evaluationNames?: string[];
-
-  @query("agentId")
-  @doc("The unique identifier for the agent.")
-  agentId?: string;
+  @query("filter")
+  @doc("Filter in odata format")
+  filter?: string;
 };
 
 @added(Versions.v2025_05_15_preview)
@@ -50,14 +42,14 @@ interface Insights {
 
       @doc("Complete evaluation configuration including data source, evaluators, and result settings")
       @body
-      request: ProjectInsight;
+      request: Insight;
     },
-    ResourceCreatedResponse<ProjectInsight>
+    ResourceCreatedResponse<Insight>
   >;
 
   @doc("Get a specific insights report.")
   @get
-  getInsights is InsightsOperations.ResourceRead<ProjectInsight>;
+  getInsights is InsightsOperations.ResourceRead<Insight>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("insights:latest")
@@ -65,13 +57,13 @@ interface Insights {
   @get
   getLatestInsightsReport is Operation<
     FilterQueryParamsTraits,
-    OkResponse<ProjectInsight>
+    OkResponse<Insight>
   >;
 
   @doc("List all insights reports.")
   @get
   listInsightsReports is InsightsOperations.ResourceList<
-    ProjectInsight,
+    Insight,
     ListQueryParametersTrait<FilterQueryParamsTraits>
   >;
 }
