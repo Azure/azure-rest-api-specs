@@ -35,6 +35,10 @@ using Azure.ClientGenerator.Core;
   "creationTimestamp",
   "java"
 );
+@@clientName(Microsoft.NetApp.VolumeGroupListProperties.groupMetaData,
+  "groupMetadata",
+  "java"
+);
 
 // Fix model name changes
 @@clientName(Microsoft.NetApp.VolumeGroupMetaData,
