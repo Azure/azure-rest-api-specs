@@ -34,12 +34,12 @@ These settings apply only when `--tag=package-2021-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-11'
 input-file:
-- Microsoft.Relay/stable/2021-11-01/authorizationRules.json
-- Microsoft.Relay/stable/2021-11-01/hybridConnections.json
-- Microsoft.Relay/stable/2021-11-01/Namespaces.json
-- Microsoft.Relay/stable/2021-11-01/NetworkRuleSets.json
-- Microsoft.Relay/stable/2021-11-01/operations.json
-- Microsoft.Relay/stable/2021-11-01/wcfRelays.json
+- stable/2021-11-01/authorizationRules.json
+- stable/2021-11-01/hybridConnections.json
+- stable/2021-11-01/Namespaces.json
+- stable/2021-11-01/NetworkRuleSets.json
+- stable/2021-11-01/operations.json
+- stable/2021-11-01/wcfRelays.json
 ```
 
 ### Tag: package-2017-04
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.Relay/stable/2017-04-01/relay.json
+- stable/2017-04-01/relay.json
 ```
 
 
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2016-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-07'
 input-file:
-- Microsoft.Relay/stable/2016-07-01/relay.json
+- stable/2016-07-01/relay.json
 ```
 
 
@@ -68,10 +68,10 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-01-preview'
 input-file:
-- Microsoft.Relay/preview/2018-01-01-preview/Namespaces-preview.json
-- Microsoft.Relay/preview/2018-01-01-preview/NetworkRuleSets-preview.json
-- Microsoft.Relay/preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
-- Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
+- preview/2018-01-01-preview/Namespaces-preview.json
+- preview/2018-01-01-preview/NetworkRuleSets-preview.json
+- preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
+- preview/2018-01-01-preview/PrivateLinkResources-preview.json
 ```
 
 ### Tag: package-2024-01-01
@@ -80,12 +80,12 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-01'
 input-file:
-- Microsoft.Relay/stable/2024-01-01/authorizationRules.json
-- Microsoft.Relay/stable/2024-01-01/hybridConnections.json
-- Microsoft.Relay/stable/2024-01-01/Namespaces.json
-- Microsoft.Relay/stable/2024-01-01/NetworkRuleSets.json
-- Microsoft.Relay/stable/2024-01-01/operations.json
-- Microsoft.Relay/stable/2024-01-01/wcfRelays.json
+- stable/2024-01-01/authorizationRules.json
+- stable/2024-01-01/hybridConnections.json
+- stable/2024-01-01/Namespaces.json
+- stable/2024-01-01/NetworkRuleSets.json
+- stable/2024-01-01/operations.json
+- stable/2024-01-01/wcfRelays.json
 ```
 
 ---
