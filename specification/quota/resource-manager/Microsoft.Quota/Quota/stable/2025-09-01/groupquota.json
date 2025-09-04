@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Quota Extension API",
-    "version": "2025-03-15-preview",
+    "version": "2025-09-01",
     "description": "Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota using GroupQuota Entity."
   },
   "host": "management.azure.com",
@@ -59,7 +59,7 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "GroupQuotaPutRequestBody",
@@ -95,13 +95,13 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/LROResponse"
+              "$ref": "#/definitions/GroupQuotasEntity"
             }
           },
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -130,7 +130,7 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": " GroupQuotasPatchRequestBody",
@@ -169,7 +169,7 @@
           "default": {
             "description": "Bad Request",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -194,7 +194,7 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -207,7 +207,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -236,7 +236,7 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -264,7 +264,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -283,7 +283,7 @@
         "operationId": "GroupQuotas_List",
         "x-ms-examples": {
           "GroupQuotas_List_Request_ForCompute": {
-            "$ref": "./examples/GroupQuotas/GetGroupQuotasList.json"
+            "$ref": "./examples/GroupQuotas/ListGroupQuotas.json"
           }
         },
         "parameters": [
@@ -291,7 +291,7 @@
             "$ref": "#/parameters/ManagementGroupId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -304,7 +304,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -335,10 +335,10 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -366,13 +366,13 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/LROResponse"
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
             }
           },
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -401,10 +401,10 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -435,7 +435,7 @@
           "default": {
             "description": "Error response",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -464,10 +464,10 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -495,7 +495,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -520,10 +520,10 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -536,7 +536,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -566,7 +566,7 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -579,7 +579,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -609,7 +609,7 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -622,7 +622,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -652,7 +652,7 @@
             "$ref": "#/parameters/RequestId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -665,7 +665,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -699,10 +699,10 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "groupQuotaRequest",
@@ -741,7 +741,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -769,10 +769,10 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -785,7 +785,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -815,7 +815,7 @@
             "$ref": "#/parameters/RequestId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -828,7 +828,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -861,7 +861,7 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterResourceAndLocationInQuery"
@@ -877,7 +877,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -905,7 +905,7 @@
             "$ref": "#/parameters/ManagementGroupId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/GroupQuotaName"
@@ -914,10 +914,10 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "allocateQuotaRequest",
@@ -957,7 +957,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -979,7 +979,7 @@
             "$ref": "#/parameters/ManagementGroupId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/GroupQuotaName"
@@ -988,10 +988,10 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1004,7 +1004,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1028,7 +1028,7 @@
             "$ref": "#/parameters/ManagementGroupId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/GroupQuotaName"
@@ -1040,7 +1040,7 @@
             "$ref": "#/parameters/AllocationId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1053,7 +1053,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1080,7 +1080,7 @@
             "$ref": "#/parameters/ManagementGroupId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/GroupQuotaName"
@@ -1089,7 +1089,7 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterLocationInQuery"
@@ -1105,7 +1105,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1138,10 +1138,10 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1154,7 +1154,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1166,7 +1166,7 @@
           "GroupQuotaLocationSettings"
         ],
         "summary": "Enables the GroupQuotas enforcement settings for the resource provider and the location specified.",
-        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level.\nThe subscriptions share the GroupQuotaLimits assigned to the GroupQuota. If the GroupQuotaLimits is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.\nOnce the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement -\n 1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).\n 2. Ten delete the GroupQuota (Check the example - GroupQuotas_Delete).",
+        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level since it is now part of an enforced group.\nThe subscriptions share the GroupQuotaLimits assigned to the GroupQuota. If the GroupQuotaLimits is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.\nOnce the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement -\n 1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).\n 2. Then delete the GroupQuota (Check the example - GroupQuotas_Delete).",
         "operationId": "GroupQuotaLocationSettings_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaLocationSettings_CreateOrUpdate": {
@@ -1188,17 +1188,17 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "LocationSettings",
             "in": "body",
             "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
             }
           }
         ],
@@ -1206,7 +1206,7 @@
           "200": {
             "description": "OK, Create or Update",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
             }
           },
           "201": {
@@ -1227,13 +1227,13 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/LROResponse"
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
             }
           },
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1243,7 +1243,7 @@
           "GroupQuotaLocationSettings"
         ],
         "summary": "Enables the GroupQuotas enforcement settings for the resource provider and the location specified.",
-        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level.\nThe subscriptions share the GroupQuotaLimits assigned to the GroupQuota. If the GroupQuotaLimits is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.\nOnce the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement -\n 1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).\n 2. Ten delete the GroupQuota (Check the example - GroupQuotas_Delete).",
+        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota.  The subscriptions cannot request quota at subscription level since it is now part of an enforced group.\nThe subscriptions share the GroupQuotaLimits assigned to the GroupQuota. If the GroupQuotaLimits is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.\nOnce the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement -\n 1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).\n 2. Ten delete the GroupQuota (Check the example - GroupQuotas_Delete).",
         "operationId": "GroupQuotaLocationSettings_Update",
         "x-ms-examples": {
           "GroupQuotaLocationSettings_Patch": {
@@ -1262,17 +1262,17 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "LocationSettings",
             "in": "body",
             "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
             }
           }
         ],
@@ -1280,7 +1280,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
             }
           },
           "202": {
@@ -1304,7 +1304,7 @@
           "default": {
             "description": "Bad Request",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1332,69 +1332,23 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
             }
           },
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettings": {
-      "get": {
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "tags": [
-          "GroupQuotaLocationSettings"
-        ],
-        "summary": "Returns a list of the Azure regions settings, where the GroupQuotas enforcement is enabled.",
-        "description": "Returns only the list of the Azure regions settings, where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.",
-        "operationId": "GroupQuotaLocationSettings_List",
-        "x-ms-examples": {
-          "GroupQuotaEnforcement_List": {
-            "$ref": "./examples/GroupQuotasEnforcement/ListGroupQuotaEnforcement.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/GroupQuotaName"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementListResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1409,6 +1363,7 @@
         "Created",
         "Invalid",
         "Succeeded",
+        "Escalated",
         "Failed",
         "InProgress",
         "Canceled"
@@ -1417,7 +1372,41 @@
       "type": "string",
       "x-ms-enum": {
         "name": "RequestState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Escalated",
+            "description": "The quota request has been escalated for further review. Please file a support ticket. A support engineer will follow up."
+          },
+          {
+            "value": "InProgress",
+            "description": "The quota request is currently being processed."
+          },
+          {
+            "value": "Canceled",
+            "description": "The quota request has been canceled."
+          },
+          {
+            "value": "Failed",
+            "description": "The quota request has failed."
+          },
+          {
+            "value": "Accepted",
+            "description": "The quota request has been accepted."
+          },
+          {
+            "value": "Created",
+            "description": "The quota request has been created."
+          },
+          {
+            "value": "Invalid",
+            "description": "The quota request is invalid."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The quota request has succeeded."
+          }
+        ]
       }
     },
     "QuotaAllocationRequestStatus": {
@@ -1425,7 +1414,7 @@
       "description": "The subscription quota allocation status.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1479,7 +1468,7 @@
       "description": "The provisioning state for the operation.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1678,7 +1667,7 @@
       "description": "List of Group Quota Limit details.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1710,7 +1699,7 @@
       "description": "The new quota limit request status.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1759,7 +1748,7 @@
       "description": "This represents a Azure subscriptionId that is associated with a GroupQuotasEntity.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1890,7 +1879,7 @@
       "description": "Status of a single GroupQuota request.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1962,7 +1951,7 @@
       "description": "Subscription quota list.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2033,7 +2022,7 @@
       "description": "Resource details with usages and GroupQuota.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2088,12 +2077,27 @@
           "type": "string"
         },
         "groupType": {
-          "description": "Group type.",
-          "$ref": "#/definitions/GroupType"
-        },
-        "location": {
-          "description": "Location of the GroupQuota entity.",
-          "type": "string"
+          "description": "Type of the group.",
+          "enum": [
+            "AllocationGroup",
+            "EnforcedGroup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "GroupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AllocationGroup",
+                "description": "The group is used for subscription group quota allocations."
+              },
+              {
+                "value": "EnforcedGroup",
+                "description": "The group is used for the enforced shared limit scenario"
+              }
+            ]
+          },
+          "readOnly": true
         },
         "provisioningState": {
           "description": "Provisioning state of the operation.",
@@ -2122,7 +2126,7 @@
       "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2142,7 +2146,7 @@
       "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         },
         {
           "type": "object",
@@ -2159,18 +2163,6 @@
           }
         }
       ]
-    },
-    "GroupType": {
-      "type": "string",
-      "description": "Group type.",
-      "enum": [
-        "EnforcedGroup",
-        "AllocationGroup"
-      ],
-      "x-ms-enum": {
-        "name": "GroupType",
-        "modelAsString": true
-      }
     },
     "GroupQuotaList": {
       "type": "object",
@@ -2198,7 +2190,7 @@
           "type": "array",
           "description": "List of Azure Regions.",
           "items": {
-            "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            "$ref": "#/definitions/GroupQuotasEnforcementStatus"
           }
         },
         "nextLink": {
@@ -2221,12 +2213,12 @@
         "modelAsString": true
       }
     },
-    "GroupQuotasEnforcementResponse": {
+    "GroupQuotasEnforcementStatus": {
       "type": "object",
       "description": "The GroupQuota Enforcement status for a Azure Location/Region.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2239,7 +2231,8 @@
             },
             "enforcedGroupName": {
               "type": "string",
-              "description": "The EnforcedGroupQuota name, which is enforced for the Azure region."
+              "description": "The name of the group that is enforced.",
+              "readOnly": true
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
