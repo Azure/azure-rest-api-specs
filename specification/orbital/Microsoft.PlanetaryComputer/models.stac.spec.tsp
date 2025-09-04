@@ -241,7 +241,7 @@ model SearchPostRequest {
   /**
    * Whether to sign asset URLs in the response.
    */
-  sign?: SignType;
+  sign?: StacAssetUrlSigningMode;
 
   /**
    * URL signature duration in minutes.
@@ -998,7 +998,7 @@ union LinkType {
 /**
  * Represent the signature type for asset URLs.
  */
-union SignType {
+union StacAssetUrlSigningMode {
   string,
 
   /**

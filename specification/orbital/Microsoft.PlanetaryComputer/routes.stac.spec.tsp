@@ -85,7 +85,7 @@ interface StacSearchOperations {
        * Whether to sign asset URLs in the response.
        */
       @query("sign")
-      sign?: SignType;
+      sign?: StacAssetUrlSigningMode;
 
       /**
        * URL signature duration in minutes.
