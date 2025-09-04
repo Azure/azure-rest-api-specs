@@ -1,13 +1,18 @@
 {
   "operationId": "QuestionAnsweringProjects_UpdateSourcesFromFiles",
-  "title": "Create project from file",
+  "title": "Update sources from files",
   "parameters": {
     "Content-Type": "multipart/form-data",
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "api-version": "2025-05-15-preview",
-    "files": "{raw binary files}",
-    "fileOperations": "[{ \"operation\": \"add\", \"fileDisplayName\": \"DemoSourceFile\", \"fileSource\": \"DemoSourceFile.pdf\" }]"
+    "files": [
+      "{binary file 1}",
+      "{binary file 2}"
+    ],
+    "fileOperations": [
+      "{ \"operation\": \"add\", \"fileDisplayName\": \"DemoSourceFile\", \"fileSource\": \"DemoSourceFile.pdf\" }"
+    ]
   },
   "responses": {
     "202": {
