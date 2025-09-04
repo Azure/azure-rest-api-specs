@@ -1488,6 +1488,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create project from file": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulImportProjectFromFile.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "operation-location"
         },
@@ -1497,7 +1502,7 @@
     "/authoring/query-knowledgebases/projects/{projectName}/sources?_overload=updateSourcesFromFiles": {
       "patch": {
         "operationId": "QuestionAnsweringProjects_UpdateSourcesFromFiles",
-        "description": "Import project assets from file.",
+        "description": "Updates the sources of a project from files.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -1558,6 +1563,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create project from file": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSourcesFromFile.json"
           }
         },
         "x-ms-long-running-operation-options": {
