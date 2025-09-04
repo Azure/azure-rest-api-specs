@@ -206,7 +206,7 @@ model TitilerPgstacModelInfo {
    *
    * See the [PgSTAC Search table definition](https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915).
    */
-  search: PgStacSearch;
+  search: TilerMosaicStacSearch;
 
   /**
    * Related links for the search query
@@ -223,7 +223,7 @@ model TitilerPgstacModelInfo {
 /**
  * Stored search query in the PgSTAC database
  */
-model PgStacSearch {
+model TilerMosaicStacSearch {
   /**
    * Unique hash identifier for the search query
    */
