@@ -1,0 +1,939 @@
+{
+  "operationId": "Documents_SearchPost",
+  "title": "SearchIndexSearchDocumentsPost",
+  "parameters": {
+    "endpoint": "https://stableexampleservice.search.windows.net",
+    "indexName": "stable-test",
+    "api-version": "2025-09-01",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "searchRequest": {
+      "count": true,
+      "facets": [
+        "ownerId"
+      ],
+      "filter": "category eq 'purple' or category eq 'pink'",
+      "highlight": "category",
+      "highlightPostTag": "</em>",
+      "highlightPreTag": "</em>",
+      "minimumCoverage": 100,
+      "queryType": "semantic",
+      "scoringStatistics": "global",
+      "sessionId": "mysessionid",
+      "scoringParameters": [
+        "categoryTag:desiredCategoryValue"
+      ],
+      "scoringProfile": "stringFieldBoost",
+      "debug": "vector",
+      "search": "purple",
+      "searchFields": "id,name,description,category,ownerId",
+      "searchMode": "any",
+      "select": "id,name,description,category,ownerId",
+      "skip": 0,
+      "top": 10,
+      "semanticConfiguration": "testconfig",
+      "semanticErrorHandling": "partial",
+      "semanticMaxWaitInMilliseconds": 5000,
+      "semanticQuery": "find all purple",
+      "answers": "extractive",
+      "captions": "extractive",
+      "vectorQueries": [
+        {
+          "vector": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "kind": "vector",
+          "k": 50,
+          "fields": "vector22, vector1b",
+          "exhaustive": true,
+          "weight": 1
+        }
+      ],
+      "vectorFilterMode": "preFilter"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.count": 42,
+        "@search.coverage": 100.0,
+        "@search.facets": {
+          "ownerId": [
+            {
+              "count": 26,
+              "value": "sam"
+            },
+            {
+              "count": 12,
+              "value": "ryan"
+            },
+            {
+              "count": 4,
+              "value": "benny"
+            }
+          ]
+        },
+        "@search.answers": [],
+        "value": [
+          {
+            "@search.score": 0.04419642686843872,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7178425788879395,
+            "@search.rerankerBoostedScore": 1.7178425788879395,
+            "@search.captions": [
+              {
+                "text": "test10 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.3862943649291992
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00011109876504633576,
+                        "vectorSimilarity": 94.86833055544514
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0002499375259503722,
+                        "vectorSimilarity": 63.24555189615253
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "10",
+            "name": "test",
+            "description": "test10 hello",
+            "category": "purple",
+            "ownerId": "benny"
+          },
+          {
+            "@search.score": 0.012820512987673283,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7079174518585205,
+            "@search.rerankerBoostedScore": 1.7079174518585205,
+            "@search.captions": [
+              {
+                "text": "no vector.",
+                "highlights": "</em>no vector.</em>"
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.0779930353164673
+                  },
+                  "vectors": [
+                    {}
+                  ]
+                }
+              }
+            },
+            "id": "empty-vectors",
+            "name": "test",
+            "description": "no vector",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.011627906933426857,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7079174518585205,
+            "@search.rerankerBoostedScore": 1.7079174518585205,
+            "@search.captions": [
+              {
+                "text": "no vector.",
+                "highlights": "</em>no vector.</em>"
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {}
+                  ]
+                }
+              }
+            },
+            "id": "no-vectors",
+            "name": "test",
+            "description": "no vector",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.0431547611951828,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6994102001190186,
+            "@search.rerankerBoostedScore": 1.6994102001190186,
+            "@search.captions": [
+              {
+                "text": "test4 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00017358097829855978,
+                        "vectorSimilarity": 75.89466323761327
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0005099439295008779,
+                        "vectorSimilarity": 44.27188622909418
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "4",
+            "name": "test",
+            "description": "test4 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04460374265909195,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6937386989593506,
+            "@search.rerankerBoostedScore": 1.6937386989593506,
+            "@search.captions": [
+              {
+                "text": "test2 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00020656888955272734,
+                        "vectorSimilarity": 69.5701087211589
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0006939625018276274,
+                        "vectorSimilarity": 37.947332584023194
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "2",
+            "name": "test",
+            "description": "test2 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.042533937841653824,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6923208236694336,
+            "@search.rerankerBoostedScore": 1.6923208236694336,
+            "@search.captions": [
+              {
+                "text": "test5 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00015997439913917333,
+                        "vectorSimilarity": 79.0569427290381
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0004442470089998096,
+                        "vectorSimilarity": 47.43416449302081
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "5",
+            "name": "test",
+            "description": "test5 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04651741310954094,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.691611886024475,
+            "@search.rerankerBoostedScore": 1.691611886024475,
+            "@search.captions": [
+              {
+                "text": "test7 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.9616584777832031
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00013715539535041898,
+                        "vectorSimilarity": 85.38149735825786
+                      },
+                      "vector1b": {
+                        "searchScore": 0.00034590106224641204,
+                        "vectorSimilarity": 53.758721003860366
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "7",
+            "name": "test",
+            "description": "test7 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04703196510672569,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6781420707702637,
+            "@search.rerankerBoostedScore": 1.6781420707702637,
+            "@search.captions": [
+              {
+                "text": "test0 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.0779930353164673
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.0002499375259503722,
+                        "vectorSimilarity": 63.24555189615253
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0009990009712055326,
+                        "vectorSimilarity": 31.622777042048124
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "0",
+            "name": "test",
+            "description": "test0 hello",
+            "category": "purple",
+            "ownerId": "benny"
+          },
+          {
+            "@search.score": 0.043300654739141464,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6653810739517212,
+            "@search.rerankerBoostedScore": 1.6653810739517212,
+            "@search.captions": [
+              {
+                "text": "test8 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.1507283449172974
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00012753476039506495,
+                        "vectorSimilarity": 88.5437719937623
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0003085467324126512,
+                        "vectorSimilarity": 56.92099902893652
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "8",
+            "name": "test",
+            "description": "test8 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04082724079489708,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6618363857269287,
+            "@search.rerankerBoostedScore": 1.6618363857269287,
+            "@search.captions": [
+              {
+                "text": "test11 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00010404744534753263,
+                        "vectorSimilarity": 98.03060760075451
+                      },
+                      "vector1b": {
+                        "searchScore": 0.00022670596081297845,
+                        "vectorSimilarity": 66.40783109116562
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "11",
+            "name": "test",
+            "description": "test11 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          }
+        ]
+      }
+    },
+    "206": {
+      "body": {
+        "@odata.count": 42,
+        "@search.coverage": 100.0,
+        "@search.facets": {
+          "ownerId": [
+            {
+              "count": 26,
+              "value": "sam"
+            },
+            {
+              "count": 12,
+              "value": "ryan"
+            },
+            {
+              "count": 4,
+              "value": "benny"
+            }
+          ]
+        },
+        "@search.answers": [],
+        "value": [
+          {
+            "@search.score": 0.04419642686843872,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7178425788879395,
+            "@search.rerankerBoostedScore": 1.7178425788879395,
+            "@search.captions": [
+              {
+                "text": "test10 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.3862943649291992
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00011109876504633576,
+                        "vectorSimilarity": 94.86833055544514
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0002499375259503722,
+                        "vectorSimilarity": 63.24555189615253
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "10",
+            "name": "test",
+            "description": "test10 hello",
+            "category": "purple",
+            "ownerId": "benny"
+          },
+          {
+            "@search.score": 0.012820512987673283,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7079174518585205,
+            "@search.rerankerBoostedScore": 1.7079174518585205,
+            "@search.captions": [
+              {
+                "text": "no vector.",
+                "highlights": "</em>no vector.</em>"
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.0779930353164673
+                  },
+                  "vectors": [
+                    {}
+                  ]
+                }
+              }
+            },
+            "id": "empty-vectors",
+            "name": "test",
+            "description": "no vector",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.011627906933426857,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7079174518585205,
+            "@search.rerankerBoostedScore": 1.7079174518585205,
+            "@search.captions": [
+              {
+                "text": "no vector.",
+                "highlights": "</em>no vector.</em>"
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {}
+                  ]
+                }
+              }
+            },
+            "id": "no-vectors",
+            "name": "test",
+            "description": "no vector",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.0431547611951828,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6994102001190186,
+            "@search.rerankerBoostedScore": 1.6994102001190186,
+            "@search.captions": [
+              {
+                "text": "test4 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00017358097829855978,
+                        "vectorSimilarity": 75.89466323761327
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0005099439295008779,
+                        "vectorSimilarity": 44.27188622909418
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "4",
+            "name": "test",
+            "description": "test4 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04460374265909195,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6937386989593506,
+            "@search.rerankerBoostedScore": 1.6937386989593506,
+            "@search.captions": [
+              {
+                "text": "test2 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00020656888955272734,
+                        "vectorSimilarity": 69.5701087211589
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0006939625018276274,
+                        "vectorSimilarity": 37.947332584023194
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "2",
+            "name": "test",
+            "description": "test2 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.042533937841653824,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6923208236694336,
+            "@search.rerankerBoostedScore": 1.6923208236694336,
+            "@search.captions": [
+              {
+                "text": "test5 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00015997439913917333,
+                        "vectorSimilarity": 79.0569427290381
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0004442470089998096,
+                        "vectorSimilarity": 47.43416449302081
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "5",
+            "name": "test",
+            "description": "test5 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04651741310954094,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.691611886024475,
+            "@search.rerankerBoostedScore": 1.691611886024475,
+            "@search.captions": [
+              {
+                "text": "test7 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.9616584777832031
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00013715539535041898,
+                        "vectorSimilarity": 85.38149735825786
+                      },
+                      "vector1b": {
+                        "searchScore": 0.00034590106224641204,
+                        "vectorSimilarity": 53.758721003860366
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "7",
+            "name": "test",
+            "description": "test7 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04703196510672569,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6781420707702637,
+            "@search.rerankerBoostedScore": 1.6781420707702637,
+            "@search.captions": [
+              {
+                "text": "test0 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.0779930353164673
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.0002499375259503722,
+                        "vectorSimilarity": 63.24555189615253
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0009990009712055326,
+                        "vectorSimilarity": 31.622777042048124
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "0",
+            "name": "test",
+            "description": "test0 hello",
+            "category": "purple",
+            "ownerId": "benny"
+          },
+          {
+            "@search.score": 0.043300654739141464,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6653810739517212,
+            "@search.rerankerBoostedScore": 1.6653810739517212,
+            "@search.captions": [
+              {
+                "text": "test8 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 1.1507283449172974
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00012753476039506495,
+                        "vectorSimilarity": 88.5437719937623
+                      },
+                      "vector1b": {
+                        "searchScore": 0.0003085467324126512,
+                        "vectorSimilarity": 56.92099902893652
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "8",
+            "name": "test",
+            "description": "test8 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04082724079489708,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6618363857269287,
+            "@search.rerankerBoostedScore": 1.6618363857269287,
+            "@search.captions": [
+              {
+                "text": "test11 hello.",
+                "highlights": ""
+              }
+            ],
+            "@search.documentDebugInfo": {
+              "vectors": {
+                "subscores": {
+                  "documentBoost": 1.0,
+                  "text": {
+                    "searchScore": 0.3250378668308258
+                  },
+                  "vectors": [
+                    {
+                      "vector22": {
+                        "searchScore": 0.00010404744534753263,
+                        "vectorSimilarity": 98.03060760075451
+                      },
+                      "vector1b": {
+                        "searchScore": 0.00022670596081297845,
+                        "vectorSimilarity": 66.40783109116562
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "id": "11",
+            "name": "test",
+            "description": "test11 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          }
+        ]
+      }
+    }
+  }
+}
