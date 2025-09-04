@@ -230,4 +230,6 @@ Coding agent must wait until all SDK generation pipeline are in completed status
     - Keep checking the pipeline status until pipeline is in completed or failed status.
     - Find SDK pull request links from the pipeline run.
   constraints:
-    - Do not invoke other steps
+    - Do not invoke other steps.
+    - Do not modify main.tsp file or any files in TypeSpec project.
+    - Do not add API version to an existing main.tsp if input API version is not present.
