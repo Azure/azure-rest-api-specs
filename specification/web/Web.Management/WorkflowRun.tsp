@@ -1,0 +1,62 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Site.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Web;
+/**
+ * The workflow run.
+ */
+@parentResource(Site)
+model WorkflowRun
+  is Azure.ResourceManager.ProxyResource<WorkflowRunProperties> {
+  ...ResourceNameParameter<
+    Resource = WorkflowRun,
+    KeyName = "runName",
+    SegmentName = "runs",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface WorkflowRuns {
+  /**
+   * Gets a workflow run.
+   */
+  get is ArmResourceRead<WorkflowRun>;
+
+  /**
+   * Gets a list of workflow runs.
+   */
+  list is ArmResourceListByParent<
+    WorkflowRun,
+    Parameters = {
+      /**
+       * The number of items to be included in the result.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * The filter to apply on the operation. Options for filters include: Status, StartTime, and ClientTrackingId.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Cancels a workflow run.
+   */
+  cancel is ArmResourceActionSync<WorkflowRun, void, OkResponse>;
+}
+
+@@doc(WorkflowRun.name, "The workflow run name.");
+@@doc(WorkflowRun.properties, "The workflow run properties.");
