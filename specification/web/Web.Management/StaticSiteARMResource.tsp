@@ -114,6 +114,7 @@ interface StaticSiteARMResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_ListStaticSiteUsers")
   @action("listUsers")
+  @list
   listStaticSiteUsers is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
@@ -123,6 +124,7 @@ interface StaticSiteARMResources {
        * The auth provider for the users.
        */
       @path
+      @segment("authprovider")
       authprovider: string;
     }
   >;
@@ -159,25 +161,26 @@ interface StaticSiteARMResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_UpdateStaticSiteUser")
   @patch(#{ implicitOptionality: true })
-  @action("{userid}")
-  updateStaticSiteUser is ArmResourceActionSync<
-    StaticSiteARMResource,
-    StaticSiteUserARMResource,
-    ArmResponse<StaticSiteUserARMResource>,
-    Parameters = {
-      /**
-       * The auth provider for this user.
-       */
-      @path
-      authprovider: string;
+  updateStaticSiteUser(
+    ...ResourceInstanceParameters<StaticSiteARMResource>,
 
-      /**
-       * The user id of the user.
-       */
-      @path
-      userid: string;
-    }
-  >;
+    /**
+     * The auth provider for this user.
+     */
+    @path
+    @segment("authprovider")
+    authprovider: string,
+
+    /**
+     * The user id of the user.
+     */
+    @path
+    @segment("users")
+    userid: string,
+
+    @body
+    staticSiteUserEnvelope: StaticSiteUserARMResource,
+  ): ArmResponse<StaticSiteUserARMResource>;
 
   /**
    * Description for Creates or updates the app settings of a static site.
@@ -348,7 +351,7 @@ interface StaticSiteARMResources {
 @@doc(StaticSiteARMResources.updateStaticSite::parameters.properties,
   "A JSON representation of the staticsite properties. See example."
 );
-@@doc(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
+@@doc(StaticSiteARMResources.updateStaticSiteUser::parameters.staticSiteUserEnvelope,
   "A JSON representation of the StaticSiteUser properties. See example."
 );
 @@doc(StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,

@@ -65,6 +65,8 @@ interface WorkflowEnvelopeOps
         @segment("workflows")
         @key
         @pattern("^[a-z][a-z0-9]*$")
+        @maxLength(63)
+        @minLength(3)
         workflowName: string,
       }
     > {}
@@ -76,7 +78,10 @@ interface WorkflowEnvelopes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceWorkflowSlot")
-  getInstanceWorkflowSlot is WorkflowEnvelopeOps.Read<WorkflowEnvelope>;
+  getInstanceWorkflowSlot is WorkflowEnvelopeOps.Read<
+    WorkflowEnvelope,
+    Response = ArmResponse<WorkflowEnvelope> | ArmNotFoundResponse
+  >;
 
   /**
    * List the workflows for a web site, or a deployment slot.
@@ -109,6 +114,8 @@ interface WorkflowEnvelopeOperationGroupOps
         @segment("workflows")
         @key
         @pattern("^[a-z][a-z0-9]*$")
+        @maxLength(63)
+        @minLength(3)
         workflowName: string,
       }
     > {}
@@ -120,7 +127,10 @@ interface WorkflowEnvelopeOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetWorkflow")
-  getWorkflow is WorkflowEnvelopeOperationGroupOps.Read<WorkflowEnvelope>;
+  getWorkflow is WorkflowEnvelopeOperationGroupOps.Read<
+    WorkflowEnvelope,
+    Response = ArmResponse<WorkflowEnvelope> | ArmNotFoundResponse
+  >;
 
   /**
    * List the workflows for a web site, or a deployment slot.

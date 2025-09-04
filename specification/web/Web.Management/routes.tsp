@@ -14,12 +14,61 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Web;
 
 /**
+ * Description for Validate whether a resource can be moved.
+ */
+@summary("Validate whether a resource can be moved.")
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
+@post
+op validateMove(
+  ...ApiVersionParameter,
+  ...ResourceGroupParameter,
+  ...SubscriptionIdParameter,
+
+  /**
+   * Object that represents the resource to move.
+   */
+  @bodyRoot
+  moveResourceEnvelope: CsmMoveResourceEnvelope,
+): ErrorResponse;
+/**
+ * Description for Validate if a resource can be created.
+ */
+@summary("Validate if a resource can be created.")
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate")
+@post
+op validate(
+  ...ApiVersionParameter,
+  ...ResourceGroupParameter,
+  ...SubscriptionIdParameter,
+
+  /**
+   * Request with the resources to validate.
+   */
+  @bodyRoot
+  validateRequest: ValidateRequest,
+): ArmResponse<ValidateResponse> | ErrorResponse;
+
+/**
+ * Description for Gets list of available geo regions plus ministamps
+ */
+@summary("Gets list of available geo regions plus ministamps")
+@autoRoute
+@get
+@action("deploymentLocations")
+op getSubscriptionDeploymentLocations is ArmProviderActionSync<
+  Response = DeploymentLocations,
+  Scope = SubscriptionActionScope,
+  Parameters = {}
+>;
+
+/**
  * Description for get a list of available ASE regions and its supported Skus.
  */
 @summary("Get a list of available ASE regions and its supported Skus.")
 @autoRoute
 @get
 @action("aseRegions")
+@list
 op listAseRegions is ArmProviderActionSync<
   Response = AseRegionCollection,
   Scope = SubscriptionActionScope,
@@ -34,6 +83,7 @@ op listAseRegions is ArmProviderActionSync<
 @autoRoute
 @get
 @action("billingMeters")
+@list
 op listBillingMeters is ArmProviderActionSync<
   Response = BillingMeterCollection,
   Scope = SubscriptionActionScope,
@@ -72,6 +122,7 @@ op checkNameAvailability is ArmProviderActionSync<
 @autoRoute
 @get
 @action("customhostnameSites")
+@list
 op listCustomHostNameSites is ArmProviderActionSync<
   Response = CustomHostnameSitesCollection,
   Scope = SubscriptionActionScope,
@@ -91,6 +142,7 @@ op listCustomHostNameSites is ArmProviderActionSync<
 @autoRoute
 @get
 @action("geoRegions")
+@list
 op listGeoRegions is ArmProviderActionSync<
   Response = GeoRegionCollection,
   Scope = SubscriptionActionScope,
@@ -127,6 +179,7 @@ op listGeoRegions is ArmProviderActionSync<
 @summary("List all apps that are assigned to a hostname.")
 @autoRoute
 @action("listSitesAssignedToHostName")
+@list
 op listSiteIdentifiersAssignedToHostName is ArmProviderActionSync<
   Request = NameIdentifier,
   Response = IdentifierCollection,
@@ -154,6 +207,7 @@ op regionalCheckNameAvailability is ArmProviderActionSync<
 @autoRoute
 @get
 @action("premieraddonoffers")
+@list
 op listPremierAddOnOffers is ArmProviderActionSync<
   Response = PremierAddOnOfferCollection,
   Scope = SubscriptionActionScope,
@@ -238,6 +292,7 @@ interface ProviderOperationGroup {
   @autoRoute
   @get
   @action("availableStacks")
+  @list
   getAvailableStacks is ArmProviderActionSync<
     Response = ApplicationStackCollection,
     Parameters = {
@@ -255,6 +310,7 @@ interface ProviderOperationGroup {
   @autoRoute
   @get
   @action("functionAppStacks")
+  @list
   getFunctionAppStacks is ArmProviderActionSync<
     Response = FunctionAppStackCollection,
     Parameters = {
@@ -274,6 +330,7 @@ interface ProviderOperationGroup {
   @autoRoute
   @get
   @action("functionAppStacks")
+  @list
   getFunctionAppStacksForLocation is ArmProviderActionSync<
     Response = FunctionAppStackCollection,
     Parameters = {
@@ -295,6 +352,7 @@ interface ProviderOperationGroup {
   @autoRoute
   @get
   @action("webAppStacks")
+  @list
   getWebAppStacksForLocation is ArmProviderActionSync<
     Response = WebAppStackCollection,
     Parameters = {
@@ -316,6 +374,7 @@ interface ProviderOperationGroup {
   @autoRoute
   @get
   @action("webAppStacks")
+  @list
   getWebAppStacks is ArmProviderActionSync<
     Response = WebAppStackCollection,
     Parameters = {
@@ -335,6 +394,7 @@ interface ProviderOperationGroup {
   @autoRoute
   @get
   @action("availableStacks")
+  @list
   getAvailableStacksOnPrem is ArmProviderActionSync<
     Response = ApplicationStackCollection,
     Scope = SubscriptionActionScope,
@@ -357,6 +417,7 @@ interface RecommendationsOperationGroup {
   @autoRoute
   @get
   @action("recommendations")
+  @list
   list is ArmProviderActionSync<
     Response = RecommendationCollection,
     Scope = SubscriptionActionScope,
@@ -398,14 +459,14 @@ interface RecommendationsOperationGroup {
     Response = {
       @body body: void;
     },
-    Scope = SubscriptionActionScope,
+    Scope = Extension.Subscription,
     Parameters = {
-      // /**
-      //  * Rule name
-      //  */
-      // @path
-      // @segment("recommendations")
-      // name: string;
+      /**
+       * Rule name
+       */
+      @path
+      @segment("recommendations")
+      name: string;
     }
   >;
 }
@@ -421,6 +482,7 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
   @autoRoute
   @get
   @action("resourceHealthMetadata")
+  @list
   list is ArmProviderActionSync<
     Response = ResourceHealthMetadataCollection,
     Scope = SubscriptionActionScope,
@@ -439,55 +501,6 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
     ...ResourceGroupParameter,
     ...SubscriptionIdParameter,
   ): ArmResponse<ResourceHealthMetadataCollection> | ErrorResponse;
-
-  /**
-   * Description for Gets list of available geo regions plus ministamps
-   */
-  @summary("Gets list of available geo regions plus ministamps")
-  @autoRoute
-  @get
-  @action("deploymentLocations")
-  getSubscriptionDeploymentLocations is ArmProviderActionSync<
-    Response = DeploymentLocations,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-
-  /**
-   * Description for Validate if a resource can be created.
-   */
-  @summary("Validate if a resource can be created.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate")
-  @post
-  validate(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Request with the resources to validate.
-     */
-    @bodyRoot
-    validateRequest: ValidateRequest,
-  ): ArmResponse<ValidateResponse> | ErrorResponse;
-
-  /**
-   * Description for Validate whether a resource can be moved.
-   */
-  @summary("Validate whether a resource can be moved.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
-  @post
-  validateMove(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Object that represents the resource to move.
-     */
-    @bodyRoot
-    moveResourceEnvelope: CsmMoveResourceEnvelope,
-  ): ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -501,6 +514,7 @@ interface GetUsagesInLocationOperationGroup {
   @autoRoute
   @get
   @action("usages")
+  @list
   list is ArmProviderActionSync<
     Response = CsmUsageQuotaCollection,
     Scope = SubscriptionActionScope,

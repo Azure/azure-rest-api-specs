@@ -26,16 +26,70 @@ model WorkflowRunAction
 }
 
 @armResourceOperations
+interface WorkflowRunActionsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: "runtime",
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: "workflow",
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: "management",
+
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: string,
+
+        /** The workflow run name. */
+        @path
+        @segment("runs")
+        @key
+        runName: string,
+      },
+      {
+        /** The workflow action name. */
+        @path
+        @segment("actions")
+        @key
+        actionName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface WorkflowRunActions {
   /**
    * Gets a workflow run action.
    */
-  get is ArmResourceRead<WorkflowRunAction>;
+  get is WorkflowRunActionsOps.Read<WorkflowRunAction>;
 
   /**
    * Gets a list of workflow run actions.
    */
-  list is ArmResourceListByParent<
+  list is WorkflowRunActionsOps.List<
     WorkflowRunAction,
     Parameters = {
       /**
@@ -55,7 +109,8 @@ interface WorkflowRunActions {
   /**
    * Lists a workflow run expression trace.
    */
-  listExpressionTraces is ArmResourceActionSync<
+  @list
+  listExpressionTraces is WorkflowRunActionsOps.ActionSync<
     WorkflowRunAction,
     void,
     ArmResponse<ExpressionTraces>

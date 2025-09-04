@@ -66,7 +66,8 @@ interface StaticSiteLinkedBackendARMResources {
   @operationId("StaticSites_LinkBackend")
   linkBackend is StaticSiteLinkedBackendARMResourceOps.CreateOrUpdateAsync<
     StaticSiteLinkedBackendARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteLinkedBackendARMResource>,
+    Response = ArmResourceUpdatedResponse<StaticSiteLinkedBackendARMResource> &
+      ArmLroLocationHeader<FinalResult = StaticSiteLinkedBackendARMResource>,
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteLinkedBackendARMResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -156,7 +157,8 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   @operationId("StaticSites_LinkBackendToBuild")
   linkBackendToBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.CreateOrUpdateAsync<
     StaticSiteLinkedBackendARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteLinkedBackendARMResource>,
+    Response = ArmResourceUpdatedResponse<StaticSiteLinkedBackendARMResource> &
+      ArmLroLocationHeader<FinalResult = StaticSiteLinkedBackendARMResource>,
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteLinkedBackendARMResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;

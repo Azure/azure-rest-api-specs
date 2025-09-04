@@ -47,19 +47,19 @@ interface WorkflowRunActionRepetitionDefinitionOps
         @path
         @segment("hostruntime")
         @key
-        runtime: string,
+        runtime: "runtime",
 
         /** undefined */
         @path
         @segment("webhooks")
         @key
-        workflow: string,
+        workflow: "workflow",
 
         /** undefined */
         @path
         @segment("api")
         @key
-        management: string,
+        management: "management",
 
         /** The workflow name. */
         @path
@@ -101,7 +101,6 @@ interface WorkflowRunActionRepetitionDefinitions {
    * Get all of a workflow run action repetitions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @action("scopeRepetitions")
   @operationId("WorkflowRunActionRepetitions_List")
   list is WorkflowRunActionRepetitionDefinitionOps.List<
     WorkflowRunActionRepetitionDefinition,
@@ -113,6 +112,7 @@ interface WorkflowRunActionRepetitionDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkflowRunActionRepetitions_ListExpressionTraces")
+  @list
   listExpressionTraces is WorkflowRunActionRepetitionDefinitionOps.ActionSync<
     WorkflowRunActionRepetitionDefinition,
     void,
@@ -138,19 +138,19 @@ interface WorkflowRunActionScopeRepetitionOps
         @path
         @segment("hostruntime")
         @key
-        runtime: string,
+        runtime: "runtime",
 
         /** undefined */
         @path
         @segment("webhooks")
         @key
-        workflow: string,
+        workflow: "workflow",
 
         /** undefined */
         @path
         @segment("api")
         @key
-        management: string,
+        management: "management",
 
         /** The workflow name. */
         @path

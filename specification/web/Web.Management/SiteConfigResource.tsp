@@ -45,7 +45,7 @@ interface SiteConfigResourceOps
         @path
         @segment("config")
         @key
-        web: string,
+        web: "web",
       }
     > {}
 
@@ -86,7 +86,8 @@ interface SiteConfigResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListConfigurationSnapshotInfo")
   @get
-  @action("config/web/snapshots")
+  @action("snapshots")
+  @list
   listConfigurationSnapshotInfo is ArmResourceActionSync<
     SiteConfigResource,
     void,
@@ -112,7 +113,7 @@ interface SiteConfigResourceOperationGroupOps
         @path
         @segment("config")
         @key
-        web: string,
+        web: "web",
       },
       {
         /** The ID of the snapshot to read. */
@@ -120,6 +121,30 @@ interface SiteConfigResourceOperationGroupOps
         @segment("snapshots")
         @key
         snapshotId: string,
+      }
+    > {}
+
+@armResourceOperations
+interface ListConfigurationsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the app. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+      },
+      {
+        /** undefined */
+        @path
+        @segment("config")
+        @key
+        web: "web",
       }
     > {}
 
@@ -137,7 +162,7 @@ interface SiteConfigResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListConfigurations")
-  listConfigurations is SiteConfigResourceOperationGroupOps.List<
+  listConfigurations is ListConfigurationsOps.List<
     SiteConfigResource,
     Response = ArmResponse<SiteConfigResourceCollection>
   >;
@@ -155,7 +180,7 @@ interface SiteConfigResourceOperationGroup {
   >;
 }
 @armResourceOperations
-interface SiteConfigResourceOperationGroupOps_2
+interface SiteConfigSlotResourceOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -180,18 +205,18 @@ interface SiteConfigResourceOperationGroupOps_2
         @path
         @segment("config")
         @key
-        web: string,
+        web: "web",
       }
     > {}
 
 @armResourceOperations
-interface SiteConfigResourceOperationGroup_2 {
+interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetConfigurationSlot")
-  getConfigurationSlot is SiteConfigResourceOperationGroupOps_2.Read<SiteConfigResource>;
+  getConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.Read<SiteConfigResource>;
 
   /**
    * Description for Updates the configuration of an app.
@@ -199,7 +224,7 @@ interface SiteConfigResourceOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_CreateOrUpdateConfigurationSlot")
-  createOrUpdateConfigurationSlot is SiteConfigResourceOperationGroupOps_2.CreateOrUpdateSync<
+  createOrUpdateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CreateOrUpdateSync<
     SiteConfigResource,
     Response = ArmResourceUpdatedResponse<SiteConfigResource>
   >;
@@ -210,7 +235,7 @@ interface SiteConfigResourceOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateConfigurationSlot")
   @patch(#{ implicitOptionality: false })
-  updateConfigurationSlot is SiteConfigResourceOperationGroupOps_2.CustomPatchSync<
+  updateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CustomPatchSync<
     SiteConfigResource,
     PatchModel = SiteConfigResource
   >;
@@ -222,14 +247,16 @@ interface SiteConfigResourceOperationGroup_2 {
   @operationId("WebApps_ListConfigurationSnapshotInfoSlot")
   @get
   @action("snapshots")
-  listConfigurationSnapshotInfoSlot is SiteConfigResourceOperationGroupOps_2.ActionSync<
+  @list
+  listConfigurationSnapshotInfoSlot is SiteConfigSlotResourceOperationGroupOps.ActionSync<
     SiteConfigResource,
     void,
     ArmResponse<SiteConfigurationSnapshotInfoCollection>
   >;
 }
+
 @armResourceOperations
-interface SiteConfigResourceOperationGroupOps_3
+interface SiteConfigResourceSnapshotSlotOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -253,7 +280,7 @@ interface SiteConfigResourceOperationGroupOps_3
         @path
         @segment("config")
         @key
-        web: string,
+        web: "web",
       },
       {
         /** The ID of the snapshot to read. */
@@ -265,21 +292,50 @@ interface SiteConfigResourceOperationGroupOps_3
     > {}
 
 @armResourceOperations
-interface SiteConfigResourceOperationGroup_3 {
+interface ListConfigurationsSlotOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the app. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** Name of the deployment slot. If a slot is not specified, the API will return configuration for the production slot. */
+        @path
+        @segment("slots")
+        @key
+        slot: string,
+      },
+      {
+        /** undefined */
+        @path
+        @segment("config")
+        @key
+        web: "web",
+      }
+    > {}
+
+@armResourceOperations
+interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetConfigurationSnapshotSlot")
-  getConfigurationSnapshotSlot is SiteConfigResourceOperationGroupOps_3.Read<SiteConfigResource>;
+  getConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.Read<SiteConfigResource>;
 
   /**
    * Description for List the configurations of an app
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListConfigurationsSlot")
-  @segment("config")
-  listConfigurationsSlot is SiteConfigResourceOperationGroupOps_2.List<
+  listConfigurationsSlot is ListConfigurationsSlotOps.List<
     SiteConfigResource,
     Response = ArmResponse<SiteConfigResourceCollection>
   >;
@@ -290,7 +346,7 @@ interface SiteConfigResourceOperationGroup_3 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_RecoverSiteConfigurationSnapshotSlot")
   @action("recover")
-  recoverSiteConfigurationSnapshotSlot is SiteConfigResourceOperationGroupOps_3.ActionSync<
+  recoverSiteConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.ActionSync<
     SiteConfigResource,
     void,
     NoContentResponse
@@ -305,9 +361,9 @@ interface SiteConfigResourceOperationGroup_3 {
 @@doc(SiteConfigResources.updateConfiguration::parameters.properties,
   "JSON representation of a SiteConfig object. See example."
 );
-// @@doc(SiteConfigResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
-//   "JSON representation of a SiteConfig object. See example."
-// );
-// @@doc(SiteConfigResourceOperationGroup.updateConfigurationSlot::parameters.properties,
-//   "JSON representation of a SiteConfig object. See example."
-// );
+@@doc(SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
+  "JSON representation of a SiteConfig object. See example."
+);
+@@doc(SiteConfigSlotResourceOperationGroup.updateConfigurationSlot::parameters.properties,
+  "JSON representation of a SiteConfig object. See example."
+);

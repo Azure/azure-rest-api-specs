@@ -476,12 +476,11 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListPublishingCredentials")
   @action("config/publishingcredentials/list")
-  listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsync<
+  listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
-    void,
-    ArmResponse<User>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Site>
+    Request = void,
+    Response = ArmResponse<User> & ArmLroLocationHeader<FinalResult = User>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>
   >;
 
   /**
@@ -574,7 +573,11 @@ interface Sites {
   @operationId("WebApps_GetFunctionsAdminToken")
   @get
   @action("functions/admin/token")
-  getFunctionsAdminToken is SiteOps.ActionSync<Site, void, ArmResponse<string>>;
+  getFunctionsAdminToken is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<stringApplicationJson>
+  >;
 
   /**
    * Description for Get host secrets for a function app.
@@ -734,7 +737,7 @@ interface Sites {
     void,
     ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @bodyRoot
-      _: "paths·vfwt7g·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-networktrace-operationresults-operationid·get·responses·202·content·application-json·schema";
+      _: NetworkTrace[];
     }),
     Parameters = {
       /**
@@ -851,7 +854,7 @@ interface Sites {
     void,
     ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @bodyRoot
-      _: "paths·chvwy·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-networktraces-current-operationresults-operationid·get·responses·202·content·application-json·schema";
+      _: NetworkTrace[];
     }),
     Parameters = {
       /**
@@ -1557,7 +1560,7 @@ interface WebApps {
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse
+    File | NoContentResponse
   >;
 
   /**
@@ -1694,7 +1697,7 @@ interface WebApps {
     Site,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @bodyRoot
-      _: "paths·fho602·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-slots-slot-networktrace-operationresults-operationid·get·responses·202·content·application-json·schema";
+      _: NetworkTrace[];
     }),
     Parameters = {
       /**
@@ -1800,7 +1803,7 @@ interface WebApps {
     Site,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @bodyRoot
-      _: "paths·nokhyf·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-slots-slot-networktraces-current-operationresults-operationid·get·responses·202·content·application-json·schema";
+      _: NetworkTrace[];
     }),
     Parameters = {
       /**
@@ -1816,19 +1819,20 @@ interface WebApps {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   @get
-  @action("networkTraces/{operationId}")
-  getNetworkTracesSlotV2 is WebAppOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<NetworkTrace[]>,
-    Parameters = {
-      /**
-       * GUID of the operation.
-       */
-      @path
-      operationId: string;
-    }
-  >;
+  getNetworkTracesSlotV2(
+    ...ResourceInstanceParameters<Site>,
+
+    /** Name of the deployment slot. By default, this API returns the production slot. */
+    @path
+    @segment("slots")
+    @key
+    slot: string,
+
+    @path
+    @key
+    @segment("networkTraces")
+    operationId: string,
+  ): ErrorResponse | ArmResponse<NetworkTrace[]>;
 
   /**
    * Description for Generates a new publishing password for an app (or deployment slot, if specified).
@@ -1898,7 +1902,7 @@ interface WebApps {
   listPublishingProfileXmlWithSecretsSlot is WebAppOps.ActionSync<
     Site,
     CsmPublishingProfileOptions,
-    OkResponse
+    File
   >;
 
   /**
@@ -2217,7 +2221,13 @@ interface WebApps {
 @@doc(WebApps.createOrUpdateHostSecretSlot::parameters.body,
   "The key to create or update"
 );
-// @@doc(WebApps.`listPublishingProfileXmlWithSecretsSlot`::parameters.body, "Specifies publishingProfileOptions for publishing profile. For example, use {"format": "FileZilla3"} to get a FileZilla publishing profile.");
+// @@doc(WebApps.listPublishingProfileXmlWithSecretsSlot::parameters.body,
+//   "Specifies publishingProfileOptions for publishing profile. For example, use {",
+//   format,
+//   ": ",
+//   FileZilla3,
+//   "} to get a FileZilla publishing profile."
+// );
 @@doc(WebApps.restoreFromBackupBlobSlot::parameters.body,
   "Information on restore request ."
 );

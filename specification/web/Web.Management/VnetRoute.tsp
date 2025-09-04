@@ -33,7 +33,7 @@ interface VnetRoutes {
   @operationId("AppServicePlans_GetRouteForVnet")
   getRouteForVnet is ArmResourceRead<
     VnetRoute,
-    Response = ArmResponse<VnetRoute[]>
+    Response = ArmResponse<VnetRoute[]> | ArmNotFoundResponse
   >;
 
   /**
@@ -44,7 +44,7 @@ interface VnetRoutes {
   @operationId("AppServicePlans_CreateOrUpdateVnetRoute")
   createOrUpdateVnetRoute is ArmResourceCreateOrReplaceSync<
     VnetRoute,
-    Response = ArmResourceUpdatedResponse<VnetRoute>
+    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -53,7 +53,11 @@ interface VnetRoutes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServicePlans_UpdateVnetRoute")
   @patch(#{ implicitOptionality: false })
-  updateVnetRoute is ArmCustomPatchSync<VnetRoute, PatchModel = VnetRoute>;
+  updateVnetRoute is ArmCustomPatchSync<
+    VnetRoute,
+    PatchModel = VnetRoute,
+    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Delete a Virtual Network route in an App Service plan.
@@ -63,7 +67,7 @@ interface VnetRoutes {
   @operationId("AppServicePlans_DeleteVnetRoute")
   deleteVnetRoute is ArmResourceDeleteSync<
     VnetRoute,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 
   /**

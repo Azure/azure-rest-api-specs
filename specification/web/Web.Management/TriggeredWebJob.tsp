@@ -62,7 +62,10 @@ interface TriggeredWebJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetTriggeredWebJobSlot")
-  getTriggeredWebJobSlot is TriggeredWebJobOps.Read<TriggeredWebJob>;
+  getTriggeredWebJobSlot is TriggeredWebJobOps.Read<
+    TriggeredWebJob,
+    Response = ArmResponse<TriggeredWebJob> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Delete a triggered web job by its ID for an app, or a deployment slot.
@@ -90,7 +93,7 @@ interface TriggeredWebJobs {
   runTriggeredWebJobSlot is TriggeredWebJobOps.ActionSync<
     TriggeredWebJob,
     void,
-    OkResponse
+    OkResponse | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
@@ -124,7 +127,10 @@ interface TriggeredWebJobOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetTriggeredWebJob")
-  getTriggeredWebJob is TriggeredWebJobOperationGroupOps.Read<TriggeredWebJob>;
+  getTriggeredWebJob is TriggeredWebJobOperationGroupOps.Read<
+    TriggeredWebJob,
+    Response = ArmResponse<TriggeredWebJob> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Delete a triggered web job by its ID for an app, or a deployment slot.
@@ -152,7 +158,7 @@ interface TriggeredWebJobOperationGroup {
   runTriggeredWebJob is TriggeredWebJobOperationGroupOps.ActionSync<
     TriggeredWebJob,
     void,
-    OkResponse
+    OkResponse | ArmNotFoundResponse
   >;
 }
 

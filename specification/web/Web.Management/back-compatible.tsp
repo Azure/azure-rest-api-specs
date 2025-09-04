@@ -652,24 +652,24 @@ using Microsoft.Web;
 @@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
   WebApps
 );
-// @@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionList,
-//   WebApps
-// );
-// @@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionSlot,
-//   WebApps
-// );
-// @@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
-//   WebApps
-// );
-// @@clientName(RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
-//   "privateEndpointWrapper"
-// );
-// @@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnectionSlot,
-//   WebApps
-// );
-// @@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionListSlot,
-//   WebApps
-// );
+@@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionList,
+  WebApps
+);
+@@clientLocation(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
+  WebApps
+);
+@@clientLocation(PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
+  WebApps
+);
+@@clientName(PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
+  "privateEndpointWrapper"
+);
+@@clientLocation(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
+  WebApps
+);
+@@clientLocation(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionListSlot,
+  WebApps
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RemotePrivateEndpointConnectionARMResource.properties);
 
@@ -744,25 +744,25 @@ using Microsoft.Web;
 @@clientName(VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
   "connectionEnvelope"
 );
-// @@clientLocation(VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
-//   WebApps
-// );
-// @@clientLocation(VnetInfoResourceOperationGroup.listVnetConnectionsSlot,
-//   WebApps
-// );
-// @@clientLocation(VnetInfoResourceOperationGroup.getVnetConnection, WebApps);
-// @@clientLocation(VnetInfoResourceOperationGroup.createOrUpdateVnetConnection,
-//   WebApps
-// );
-// @@clientName(VnetInfoResourceOperationGroup.createOrUpdateVnetConnection::parameters.resource,
-//   "connectionEnvelope"
-// );
-// @@clientLocation(VnetInfoResourceOperationGroup.updateVnetConnection, WebApps);
-// @@clientName(VnetInfoResourceOperationGroup.updateVnetConnection::parameters.properties,
-//   "connectionEnvelope"
-// );
-// @@clientLocation(VnetInfoResourceOperationGroup.deleteVnetConnection, WebApps);
-// @@clientLocation(VnetInfoResourceOperationGroup.listVnetConnections, WebApps);
+@@clientLocation(VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
+  WebApps
+);
+@@clientLocation(VnetInfoResourceOperationGroup.listVnetConnectionsSlot,
+  WebApps
+);
+@@clientLocation(VnetConnectionOperationGroup.getVnetConnection, WebApps);
+@@clientLocation(VnetConnectionOperationGroup.createOrUpdateVnetConnection,
+  WebApps
+);
+@@clientName(VnetConnectionOperationGroup.createOrUpdateVnetConnection::parameters.resource,
+  "connectionEnvelope"
+);
+@@clientLocation(VnetConnectionOperationGroup.updateVnetConnection, WebApps);
+@@clientName(VnetConnectionOperationGroup.updateVnetConnection::parameters.properties,
+  "connectionEnvelope"
+);
+@@clientLocation(VnetConnectionOperationGroup.deleteVnetConnection, WebApps);
+@@clientLocation(VnetConnectionOperationGroup.listVnetConnections, WebApps);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VnetInfoResource.properties);
 
@@ -787,28 +787,30 @@ using Microsoft.Web;
 @@clientLocation(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
   WebApps
 );
-// @@clientName(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
-//   "connectionEnvelope"
-// );
-// @@clientLocation(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
-//   WebApps
-// );
-// @@clientName(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
-//   "connectionEnvelope"
-// );
-// @@clientLocation(VnetGatewayOperationGroup.getVnetConnectionGateway, WebApps);
-// @@clientLocation(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGateway,
-//   WebApps
-// );
-// @@clientName(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
-//   "connectionEnvelope"
-// );
-// @@clientLocation(VnetGatewayOperationGroup.updateVnetConnectionGateway,
-//   WebApps
-// );
-// @@clientName(VnetGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
-//   "connectionEnvelope"
-// );
+@@clientName(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
+  "connectionEnvelope"
+);
+@@clientLocation(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
+  WebApps
+);
+@@clientName(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
+  "connectionEnvelope"
+);
+@@clientLocation(VnetConnectionGatewayOperationGroup.getVnetConnectionGateway,
+  WebApps
+);
+@@clientLocation(VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway,
+  WebApps
+);
+@@clientName(VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
+  "connectionEnvelope"
+);
+@@clientLocation(VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway,
+  WebApps
+);
+@@clientName(VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
+  "connectionEnvelope"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VnetGateway.properties);
 
@@ -923,15 +925,15 @@ using Microsoft.Web;
 @@clientLocation(ResourceHealthMetadataOperationGroup.getBySite,
   "ResourceHealthMetadata"
 );
-// @@clientLocation(ResourceHealthMetadataOperationGroup.listBySite,
-//   "ResourceHealthMetadata"
-// );
-// @@clientLocation(ResourceHealthMetadataOperationGroup.getBySiteSlot,
-//   "ResourceHealthMetadata"
-// );
-// @@clientLocation(ResourceHealthMetadataOperationGroup.listBySiteSlot,
-//   "ResourceHealthMetadata"
-// );
+@@clientLocation(ResourceHealthMetadataOperationGroup.listBySite,
+  "ResourceHealthMetadata"
+);
+@@clientLocation(BySiteSlotOperationGroup.getBySiteSlot,
+  "ResourceHealthMetadata"
+);
+@@clientLocation(BySiteSlotOperationGroup.listBySiteSlot,
+  "ResourceHealthMetadata"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ResourceHealthMetadata.properties);
 
@@ -1002,9 +1004,7 @@ using Microsoft.Web;
 @@clientLocation(StaticSiteARMResources.listStaticSiteUsers, StaticSites);
 @@clientLocation(StaticSiteARMResources.deleteStaticSiteUser, StaticSites);
 @@clientLocation(StaticSiteARMResources.updateStaticSiteUser, StaticSites);
-@@clientName(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
-  "staticSiteUserEnvelope"
-);
+
 @@clientLocation(StaticSiteARMResources.createOrUpdateStaticSiteAppSettings,
   StaticSites
 );
@@ -1328,36 +1328,36 @@ using Microsoft.Web;
   WebApps
 );
 @@clientLocation(SiteConfigResourceOperationGroup.listConfigurations, WebApps);
-// @@clientLocation(SiteConfigResourceOperationGroup.recoverSiteConfigurationSnapshot,
-//   WebApps
-// );
-// @@clientLocation(SiteConfigResourceOperationGroup.getConfigurationSlot,
-//   WebApps
-// );
-// @@clientLocation(SiteConfigResourceOperationGroup.createOrUpdateConfigurationSlot,
-//   WebApps
-// );
-// @@clientName(SiteConfigResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
-//   "siteConfig"
-// );
-// @@clientLocation(SiteConfigResourceOperationGroup.updateConfigurationSlot,
-//   WebApps
-// );
-// @@clientName(SiteConfigResourceOperationGroup.updateConfigurationSlot::parameters.properties,
-//   "siteConfig"
-// );
-// @@clientLocation(SiteConfigResourceOperationGroup.listConfigurationSnapshotInfoSlot,
-//   WebApps
-// );
-// @@clientLocation(SiteConfigResourceOperationGroup.getConfigurationSnapshotSlot,
-//   WebApps
-// );
-// @@clientLocation(SiteConfigResourceOperationGroup.listConfigurationsSlot,
-//   WebApps
-// );
-// @@clientLocation(SiteConfigResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
-//   WebApps
-// );
+@@clientLocation(SiteConfigResourceOperationGroup.recoverSiteConfigurationSnapshot,
+  WebApps
+);
+@@clientLocation(SiteConfigSlotResourceOperationGroup.getConfigurationSlot,
+  WebApps
+);
+@@clientLocation(SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot,
+  WebApps
+);
+@@clientName(SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
+  "siteConfig"
+);
+@@clientLocation(SiteConfigSlotResourceOperationGroup.updateConfigurationSlot,
+  WebApps
+);
+@@clientName(SiteConfigSlotResourceOperationGroup.updateConfigurationSlot::parameters.properties,
+  "siteConfig"
+);
+@@clientLocation(SiteConfigSlotResourceOperationGroup.listConfigurationSnapshotInfoSlot,
+  WebApps
+);
+@@clientLocation(SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
+  WebApps
+);
+@@clientLocation(SiteConfigSnapshotSlotResourceOperationGroup.listConfigurationsSlot,
+  WebApps
+);
+@@clientLocation(SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
+  WebApps
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SiteConfigResource.properties);
 
@@ -1503,30 +1503,32 @@ using Microsoft.Web;
 @@clientLocation(MSDeployStatusOperationGroup.createInstanceMSDeployOperation,
   WebApps
 );
-// @@clientName(MSDeployStatusOperationGroup.createInstanceMSDeployOperation::parameters.resource,
-//   "MSDeploy"
-// );
-// @@clientLocation(MSDeployStatusOperationGroup.getInstanceMSDeployLog, WebApps);
-// @@clientLocation(MSDeployStatusOperationGroup.getMSDeployStatusSlot, WebApps);
-// @@clientLocation(MSDeployStatusOperationGroup.createMSDeployOperationSlot,
-//   WebApps
-// );
-// @@clientName(MSDeployStatusOperationGroup.createMSDeployOperationSlot::parameters.resource,
-//   "MSDeploy"
-// );
-// @@clientLocation(MSDeployStatusOperationGroup.getMSDeployLogSlot, WebApps);
-// @@clientLocation(MSDeployStatusOperationGroup.getInstanceMsDeployStatusSlot,
-//   WebApps
-// );
-// @@clientLocation(MSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot,
-//   WebApps
-// );
-// @@clientName(MSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot::parameters.resource,
-//   "MSDeploy"
-// );
-// @@clientLocation(MSDeployStatusOperationGroup.getInstanceMSDeployLogSlot,
-//   WebApps
-// );
+@@clientName(MSDeployStatusOperationGroup.createInstanceMSDeployOperation::parameters.resource,
+  "MSDeploy"
+);
+@@clientLocation(MSDeployStatusOperationGroup.getInstanceMSDeployLog, WebApps);
+@@clientLocation(MSDeployStatusSlotOperationGroup.getMSDeployStatusSlot,
+  WebApps
+);
+@@clientLocation(MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot,
+  WebApps
+);
+@@clientName(MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot::parameters.resource,
+  "MSDeploy"
+);
+@@clientLocation(MSDeployStatusSlotOperationGroup.getMSDeployLogSlot, WebApps);
+@@clientLocation(InstanceMSDeployStatusOperationGroup.getInstanceMsDeployStatusSlot,
+  WebApps
+);
+@@clientLocation(InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot,
+  WebApps
+);
+@@clientName(InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot::parameters.resource,
+  "MSDeploy"
+);
+@@clientLocation(InstanceMSDeployStatusOperationGroup.getInstanceMSDeployLogSlot,
+  WebApps
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(MSDeployStatus.properties);
 
@@ -1653,38 +1655,46 @@ using Microsoft.Web;
 @@clientLocation(ProcessInfos.listInstanceProcessThreads, WebApps);
 @@clientLocation(ProcessInfoOperationGroup.getProcess, WebApps);
 @@clientLocation(ProcessInfoOperationGroup.deleteProcess, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.listProcesses, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.getProcessDump, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.listProcessThreads, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.getInstanceProcessSlot, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.deleteInstanceProcessSlot, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.listInstanceProcessesSlot, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.getInstanceProcessDumpSlot, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.listInstanceProcessThreadsSlot,
-//   WebApps
-// );
-// @@clientLocation(ProcessInfoOperationGroup.getProcessSlot, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.deleteProcessSlot, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.listProcessesSlot, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.getProcessDumpSlot, WebApps);
-// @@clientLocation(ProcessInfoOperationGroup.listProcessThreadsSlot, WebApps);
+@@clientLocation(ProcessInfoOperationGroup.listProcesses, WebApps);
+@@clientLocation(ProcessInfoOperationGroup.getProcessDump, WebApps);
+@@clientLocation(ProcessInfoOperationGroup.listProcessThreads, WebApps);
+@@clientLocation(InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
+  WebApps
+);
+@@clientLocation(InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
+  WebApps
+);
+@@clientLocation(InstanceProcessSlotOperationGroup.listInstanceProcessesSlot,
+  WebApps
+);
+@@clientLocation(InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
+  WebApps
+);
+@@clientLocation(InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+  WebApps
+);
+@@clientLocation(ProcessSlotOperationGroup.getProcessSlot, WebApps);
+@@clientLocation(ProcessSlotOperationGroup.deleteProcessSlot, WebApps);
+@@clientLocation(ProcessSlotOperationGroup.listProcessesSlot, WebApps);
+@@clientLocation(ProcessSlotOperationGroup.getProcessDumpSlot, WebApps);
+@@clientLocation(ProcessSlotOperationGroup.listProcessThreadsSlot, WebApps);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ProcessInfo.properties);
 
 @@clientLocation(ProcessModuleInfos.getInstanceProcessModule, WebApps);
-// @@clientLocation(ProcessModuleInfos.listInstanceProcessModules, WebApps);
-// @@clientLocation(ProcessModuleInfoOperationGroup.getProcessModule, WebApps);
-// @@clientLocation(ProcessModuleInfoOperationGroup.listProcessModules, WebApps);
-// @@clientLocation(ProcessModuleInfoOperationGroup.getInstanceProcessModuleSlot,
-//   WebApps
-// );
-// @@clientLocation(ProcessModuleInfoOperationGroup.listInstanceProcessModulesSlot,
-//   WebApps
-// );
-// @@clientLocation(ProcessModuleInfoOperationGroup.getProcessModuleSlot, WebApps);
-// @@clientLocation(ProcessModuleInfoOperationGroup.listProcessModulesSlot,
-//   WebApps
-// );
+@@clientLocation(ProcessModuleInfos.listInstanceProcessModules, WebApps);
+@@clientLocation(ProcessModuleInfoOperationGroup.getProcessModule, WebApps);
+@@clientLocation(ProcessModuleInfoOperationGroup.listProcessModules, WebApps);
+@@clientLocation(InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
+  WebApps
+);
+@@clientLocation(InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
+  WebApps
+);
+@@clientLocation(ProcessModuleSlotOperationGroup.getProcessModuleSlot, WebApps);
+@@clientLocation(ProcessModuleSlotOperationGroup.listProcessModulesSlot,
+  WebApps
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ProcessModuleInfo.properties);
 
@@ -1733,7 +1743,7 @@ using Microsoft.Web;
 @@flattenProperty(SwiftVirtualNetwork.properties);
 
 @@clientLocation(NetworkFeaturesOperationGroup.listNetworkFeatures, WebApps);
-@@clientLocation(NetworkFeaturesOperationGroup.listNetworkFeaturesSlot,
+@@clientLocation(NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
   WebApps
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -1970,3 +1980,6 @@ using Microsoft.Web;
 );
 @@clientName(regionalCheckNameAvailability::parameters.body, "request");
 @@clientName(verifyHostingEnvironmentVnet::parameters.body, "parameters");
+@@clientName(StaticSitesOperationGroup.previewWorkflow::parameters.body,
+  "staticSitesWorkflowPreviewRequest"
+);

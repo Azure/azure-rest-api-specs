@@ -26,16 +26,63 @@ model WorkflowTrigger
 }
 
 @armResourceOperations
+interface WorkflowTriggersOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: "runtime",
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: "workflow",
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: "management",
+
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: string,
+      },
+      {
+        @path
+        @segment("triggers")
+        @key
+        triggerName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface WorkflowTriggers {
   /**
    * Gets a workflow trigger.
    */
-  get is ArmResourceRead<WorkflowTrigger>;
+  get is WorkflowTriggersOps.Read<WorkflowTrigger>;
 
   /**
    * Gets a list of workflow triggers.
    */
-  list is ArmResourceListByParent<
+  list is WorkflowTriggersOps.List<
     WorkflowTrigger,
     Parameters = {
       /**
@@ -55,7 +102,7 @@ interface WorkflowTriggers {
   /**
    * Get the callback URL for a workflow trigger.
    */
-  listCallbackUrl is ArmResourceActionSync<
+  listCallbackUrl is WorkflowTriggersOps.ActionSync<
     WorkflowTrigger,
     void,
     ArmResponse<WorkflowTriggerCallbackUrl>
@@ -64,14 +111,14 @@ interface WorkflowTriggers {
   /**
    * Runs a workflow trigger.
    */
-  run is ArmResourceActionAsync<WorkflowTrigger, void, OkResponse>;
+  run is WorkflowTriggersOps.ActionAsync<WorkflowTrigger, void, OkResponse>;
 
   /**
    * Get the trigger schema as JSON.
    */
   @get
   @action("json")
-  getSchemaJson is ArmResourceActionSync<
+  getSchemaJson is WorkflowTriggersOps.ActionSync<
     WorkflowTrigger,
     void,
     ArmResponse<JsonSchema>

@@ -46,7 +46,7 @@ interface ResourceHealthMetadataOperationGroupOps
         @path
         @segment("resourceHealthMetadata")
         @key
-        default: string,
+        default: "default",
       }
     > {}
 
@@ -70,7 +70,7 @@ interface ResourceHealthMetadataOperationGroup {
   >;
 }
 @armResourceOperations
-interface ResourceHealthMetadataOperationGroupOps_2
+interface BySiteSlotOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -95,18 +95,18 @@ interface ResourceHealthMetadataOperationGroupOps_2
         @path
         @segment("resourceHealthMetadata")
         @key
-        default: string,
+        default: "default",
       }
     > {}
 
 @armResourceOperations
-interface ResourceHealthMetadataOperationGroup_2 {
+interface BySiteSlotOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceHealthMetadata_GetBySiteSlot")
-  getBySiteSlot is ResourceHealthMetadataOperationGroupOps_2.Read<ResourceHealthMetadata>;
+  getBySiteSlot is BySiteSlotOperationGroupOps.Read<ResourceHealthMetadata>;
 
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site as a collection
@@ -114,7 +114,7 @@ interface ResourceHealthMetadataOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceHealthMetadata_ListBySiteSlot")
   @segment("resourceHealthMetadata")
-  listBySiteSlot is ResourceHealthMetadataOperationGroupOps_2.List<
+  listBySiteSlot is BySiteSlotOperationGroupOps.List<
     ResourceHealthMetadata,
     Response = ArmResponse<ResourceHealthMetadataCollection>
   >;

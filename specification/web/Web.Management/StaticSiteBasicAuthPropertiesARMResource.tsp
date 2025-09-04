@@ -21,7 +21,7 @@ model StaticSiteBasicAuthPropertiesARMResource
     Resource = StaticSiteBasicAuthPropertiesARMResource,
     KeyName = "basicAuthName",
     SegmentName = "basicAuth",
-    NamePattern = "",
+    NamePattern = "default",
     Type = BasicAuthName
   >;
 }

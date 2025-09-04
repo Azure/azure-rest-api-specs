@@ -26,16 +26,64 @@ model WorkflowRun
 }
 
 @armResourceOperations
+interface WorkflowRunsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: "runtime",
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: "workflow",
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: "management",
+
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: string,
+      },
+      {
+        /** The workflow run name. */
+        @path
+        @segment("runs")
+        @key
+        runName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface WorkflowRuns {
   /**
    * Gets a workflow run.
    */
-  get is ArmResourceRead<WorkflowRun>;
+  get is WorkflowRunsOps.Read<WorkflowRun>;
 
   /**
    * Gets a list of workflow runs.
    */
-  list is ArmResourceListByParent<
+  list is WorkflowRunsOps.List<
     WorkflowRun,
     Parameters = {
       /**
@@ -55,7 +103,7 @@ interface WorkflowRuns {
   /**
    * Cancels a workflow run.
    */
-  cancel is ArmResourceActionSync<WorkflowRun, void, OkResponse>;
+  cancel is WorkflowRunsOps.ActionSync<WorkflowRun, void, OkResponse>;
 }
 
 @@doc(WorkflowRun.name, "The workflow run name.");

@@ -26,20 +26,86 @@ model RequestHistory
 }
 
 @armResourceOperations
+interface RequestHistoryOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: "runtime",
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: string,
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: "management",
+
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: "workflowName",
+
+        /** The workflow run name. */
+        @path
+        @segment("runs")
+        @key
+        runName: string,
+
+        /** The workflow action name. */
+        @path
+        @segment("actions")
+        @key
+        actionName: string,
+
+        /** The workflow repetition. */
+        @path
+        @segment("repetitions")
+        @key
+        repetitionName: string,
+      },
+      {
+        /** The workflow repetition. */
+        @path
+        @segment("requestHistories")
+        @key
+        requestHistoryName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface RequestHistories {
   /**
    * Gets a workflow run repetition request history.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkflowRunActionRepetitionsRequestHistories_Get")
-  get is ArmResourceRead<RequestHistory>;
+  get is RequestHistoryOps.Read<RequestHistory>;
 
   /**
    * List a workflow run repetition request history.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkflowRunActionRepetitionsRequestHistories_List")
-  list is ArmResourceListByParent<RequestHistory>;
+  list is RequestHistoryOps.List<RequestHistory>;
 }
 
 @@doc(RequestHistory.name, "The request history name.");

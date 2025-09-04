@@ -68,7 +68,10 @@ interface ProcessModuleInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceProcessModule")
-  getInstanceProcessModule is ProcessModuleInfoOps.Read<ProcessModuleInfo>;
+  getInstanceProcessModule is ProcessModuleInfoOps.Read<
+    ProcessModuleInfo,
+    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
@@ -77,7 +80,7 @@ interface ProcessModuleInfos {
   @operationId("WebApps_ListInstanceProcessModules")
   listInstanceProcessModules is ProcessModuleInfoOps.List<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfoCollection>
+    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
@@ -117,21 +120,23 @@ interface ProcessModuleInfoOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetProcessModule")
-  getProcessModule is ProcessModuleInfoOperationGroupOps.Read<ProcessModuleInfo>;
+  getProcessModule is ProcessModuleInfoOperationGroupOps.Read<
+    ProcessModuleInfo,
+    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListProcessModules")
-  @action("modules")
   listProcessModules is ProcessModuleInfoOperationGroupOps.List<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfoCollection>
+    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
-interface ProcessModuleInfoOperationGroupOps_2
+interface InstanceProcessModuleSlotOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -173,27 +178,30 @@ interface ProcessModuleInfoOperationGroupOps_2
     > {}
 
 @armResourceOperations
-interface ProcessModuleInfoOperationGroup_2 {
+interface InstanceProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceProcessModuleSlot")
-  getInstanceProcessModuleSlot is ProcessModuleInfoOperationGroupOps_2.Read<ProcessModuleInfo>;
+  getInstanceProcessModuleSlot is InstanceProcessModuleSlotOperationGroupOps.Read<
+    ProcessModuleInfo,
+    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListInstanceProcessModulesSlot")
-  @action("modules")
-  listInstanceProcessModulesSlot is ProcessModuleInfoOperationGroupOps_2.List<
+  @segment("modules")
+  listInstanceProcessModulesSlot is InstanceProcessModuleSlotOperationGroupOps.List<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfoCollection>
+    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
-interface ProcessModuleInfoOperationGroupOps_GetProcessModuleSlot
+interface ProcessModuleSlotOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -229,22 +237,25 @@ interface ProcessModuleInfoOperationGroupOps_GetProcessModuleSlot
     > {}
 
 @armResourceOperations
-interface ProcessModuleInfoOperationGroup_3 {
+interface ProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetProcessModuleSlot")
-  getProcessModuleSlot is ProcessModuleInfoOperationGroupOps_GetProcessModuleSlot.Read<ProcessModuleInfo>;
+  getProcessModuleSlot is ProcessModuleSlotOperationGroupOps.Read<
+    ProcessModuleInfo,
+    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListProcessModulesSlot")
-  listProcessModulesSlot is ProcessModuleInfoOperationGroupOps.List<
+  listProcessModulesSlot is ProcessModuleSlotOperationGroupOps.List<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfoCollection>
+    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse
   >;
 }
 

@@ -26,16 +26,68 @@ model WorkflowTriggerHistory
 }
 
 @armResourceOperations
+interface WorkflowTriggerHistoriesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: "runtime",
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: "workflow",
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: "management",
+
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: string,
+
+        @path
+        @segment("triggers")
+        @key
+        triggerName: string,
+      },
+      {
+        @path
+        @segment("histories")
+        @key
+        historyName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface WorkflowTriggerHistories {
   /**
    * Gets a workflow trigger history.
    */
-  get is ArmResourceRead<WorkflowTriggerHistory>;
+  get is WorkflowTriggerHistoriesOps.Read<WorkflowTriggerHistory>;
 
   /**
    * Gets a list of workflow trigger histories.
    */
-  list is ArmResourceListByParent<
+  list is WorkflowTriggerHistoriesOps.List<
     WorkflowTriggerHistory,
     Parameters = {
       /**
@@ -55,11 +107,11 @@ interface WorkflowTriggerHistories {
   /**
    * Resubmits a workflow run based on the trigger history.
    */
-  resubmit is ArmResourceActionAsyncBase<
+  resubmit is WorkflowTriggerHistoriesOps.ActionAsync<
     WorkflowTriggerHistory,
-    void,
-    ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WorkflowTriggerHistory>
+    Request = void,
+    Result = void,
+    Response = ArmAcceptedLroResponse
   >;
 }
 

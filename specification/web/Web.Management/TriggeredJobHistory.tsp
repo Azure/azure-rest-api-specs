@@ -68,7 +68,10 @@ interface TriggeredJobHistories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetTriggeredWebJobHistorySlot")
-  getTriggeredWebJobHistorySlot is TriggeredJobHistoryOps.Read<TriggeredJobHistory>;
+  getTriggeredWebJobHistorySlot is TriggeredJobHistoryOps.Read<
+    TriggeredJobHistory,
+    Response = ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for List a triggered web job's history for an app, or a deployment slot.
@@ -77,7 +80,7 @@ interface TriggeredJobHistories {
   @operationId("WebApps_ListTriggeredWebJobHistorySlot")
   listTriggeredWebJobHistorySlot is TriggeredJobHistoryOps.List<
     TriggeredJobHistory,
-    Response = ArmResponse<TriggeredJobHistoryCollection>
+    Response = ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
@@ -117,7 +120,10 @@ interface TriggeredJobHistoryOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetTriggeredWebJobHistory")
-  getTriggeredWebJobHistory is TriggeredJobHistoryOperationGroupOps.Read<TriggeredJobHistory>;
+  getTriggeredWebJobHistory is TriggeredJobHistoryOperationGroupOps.Read<
+    TriggeredJobHistory,
+    Response = ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for List a triggered web job's history for an app, or a deployment slot.
@@ -126,7 +132,7 @@ interface TriggeredJobHistoryOperationGroup {
   @operationId("WebApps_ListTriggeredWebJobHistory")
   listTriggeredWebJobHistory is TriggeredJobHistoryOperationGroupOps.List<
     TriggeredJobHistory,
-    Response = ArmResponse<TriggeredJobHistoryCollection>
+    Response = ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse
   >;
 }
 

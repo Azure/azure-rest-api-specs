@@ -21,7 +21,7 @@ model StaticSiteBuildARMResource
     Resource = StaticSiteBuildARMResource,
     KeyName = "environmentName",
     SegmentName = "builds",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9]+$"
   >;
 }
 
@@ -61,7 +61,7 @@ interface StaticSiteBuildARMResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_CreateOrUpdateStaticSiteBuildAppSettings")
   @put
-  @action("appsettings")
+  @action("config/appsettings")
   createOrUpdateStaticSiteBuildAppSettings is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     StringDictionary,
@@ -74,7 +74,7 @@ interface StaticSiteBuildARMResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_CreateOrUpdateStaticSiteBuildFunctionAppSettings")
   @put
-  @action("functionappsettings")
+  @action("config/functionappsettings")
   createOrUpdateStaticSiteBuildFunctionAppSettings is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     StringDictionary,
@@ -88,6 +88,7 @@ interface StaticSiteBuildARMResources {
   @operationId("StaticSites_ListStaticSiteBuildFunctions")
   @get
   @action("functions")
+  @list
   listStaticSiteBuildFunctions is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     void,

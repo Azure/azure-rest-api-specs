@@ -115,6 +115,7 @@ interface WorkerPoolResources {
   @operationId("AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions")
   @get
   @action("metricdefinitions")
+  @list
   listMultiRolePoolInstanceMetricDefinitions is WorkerPoolResourceOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -136,6 +137,7 @@ interface WorkerPoolResources {
   @operationId("AppServiceEnvironments_ListMultiRoleMetricDefinitions")
   @get
   @action("metricdefinitions")
+  @list
   listMultiRoleMetricDefinitions is WorkerPoolResourceOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -149,6 +151,7 @@ interface WorkerPoolResources {
   @operationId("AppServiceEnvironments_ListMultiRolePoolSkus")
   @get
   @action("skus")
+  @list
   listMultiRolePoolSkus is WorkerPoolResourceOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -162,6 +165,7 @@ interface WorkerPoolResources {
   @operationId("AppServiceEnvironments_ListMultiRoleUsages")
   @get
   @action("usages")
+  @list
   listMultiRoleUsages is WorkerPoolResourceOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -242,6 +246,7 @@ interface AppServiceEnvironments {
    */
   @get
   @action("metricdefinitions")
+  @list
   listWorkerPoolInstanceMetricDefinitions is AppServiceEnvironmentOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -261,6 +266,7 @@ interface AppServiceEnvironments {
    */
   @get
   @action("metricdefinitions")
+  @list
   listWebWorkerMetricDefinitions is AppServiceEnvironmentOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -272,6 +278,7 @@ interface AppServiceEnvironments {
    */
   @get
   @action("skus")
+  @list
   listWorkerPoolSkus is AppServiceEnvironmentOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -283,6 +290,7 @@ interface AppServiceEnvironments {
    */
   @get
   @action("usages")
+  @list
   listWebWorkerUsages is AppServiceEnvironmentOps.ActionSync<
     WorkerPoolResource,
     void,

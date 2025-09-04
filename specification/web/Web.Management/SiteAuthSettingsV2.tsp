@@ -46,7 +46,7 @@ interface SiteAuthSettingsV2Ops
         @path
         @segment("config")
         @key
-        authsettingsV2: string,
+        authsettingsV2: "authsettingsV2",
       }
     > {}
 
@@ -109,7 +109,7 @@ interface SiteAuthSettingsV2OperationGroupOps
         @path
         @segment("config")
         @key
-        authsettingsV2: string,
+        authsettingsV2: "authsettingsV2",
       }
     > {}
 

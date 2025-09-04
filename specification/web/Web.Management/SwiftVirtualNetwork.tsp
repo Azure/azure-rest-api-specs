@@ -46,7 +46,7 @@ interface SwiftVirtualNetworkOps
         @path
         @segment("networkConfig")
         @key
-        virtualNetwork: string,
+        virtualNetwork: "virtualNetwork",
       }
     > {}
 
@@ -91,7 +91,7 @@ interface SwiftVirtualNetworks {
   @operationId("WebApps_DeleteSwiftVirtualNetwork")
   deleteSwiftVirtualNetwork is SwiftVirtualNetworkOps.DeleteSync<
     SwiftVirtualNetwork,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
@@ -120,7 +120,7 @@ interface SwiftVirtualNetworkOperationGroupOps
         @path
         @segment("networkConfig")
         @key
-        virtualNetwork: string,
+        virtualNetwork: "virtualNetwork",
       }
     > {}
 
@@ -165,7 +165,7 @@ interface SwiftVirtualNetworkOperationGroup {
   @operationId("WebApps_DeleteSwiftVirtualNetworkSlot")
   deleteSwiftVirtualNetworkSlot is SwiftVirtualNetworkOperationGroupOps.DeleteSync<
     SwiftVirtualNetwork,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 }
 

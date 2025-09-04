@@ -88,7 +88,7 @@ interface RelayServiceConnectionEntities {
   @operationId("WebApps_DeleteRelayServiceConnection")
   deleteRelayServiceConnection is RelayServiceConnectionEntityOps.DeleteSync<
     RelayServiceConnectionEntity,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
@@ -160,7 +160,7 @@ interface RelayServiceConnectionEntityOperationGroup {
   @operationId("WebApps_DeleteRelayServiceConnectionSlot")
   deleteRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.DeleteSync<
     RelayServiceConnectionEntity,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 }
 

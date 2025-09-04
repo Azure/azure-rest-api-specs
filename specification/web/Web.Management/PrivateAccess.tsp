@@ -46,7 +46,7 @@ interface PrivateAccessOps
         @path
         @segment("privateAccess")
         @key
-        virtualNetworks: string,
+        virtualNetworks: "virtualNetworks",
       }
     > {}
 
@@ -96,10 +96,11 @@ interface PrivateAccessOperationGroupOps
         @path
         @segment("privateAccess")
         @key
-        virtualNetworks: string,
+        virtualNetworks: "virtualNetworks",
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface PrivateAccessOperationGroup {
   /**

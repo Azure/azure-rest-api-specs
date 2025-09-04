@@ -11,10 +11,31 @@ using Azure.Core;
 
 namespace Microsoft.Web;
 
+@mediaTypeHint("application/json")
+scalar stringApplicationJson extends string;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@error
+model ArmBadRequestResponse {
+  ...TypeSpec.Http.Response<400>;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
 @error
 model ArmNotFoundResponse {
   ...TypeSpec.Http.Response<404>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@error
+model ArmConflictResponse {
+  ...TypeSpec.Http.Response<409>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@error
+model ArmTooManyRequestsResponse {
+  ...TypeSpec.Http.Response<429>;
 }
 
 /**
@@ -1846,6 +1867,7 @@ model DefaultErrorResponse {
 /**
  * Error model.
  */
+@error
 model DefaultErrorResponseError {
   /**
    * Standardized string to programmatically identify the error.

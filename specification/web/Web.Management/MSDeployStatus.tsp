@@ -14,6 +14,7 @@ namespace Microsoft.Web;
 /**
  * MSDeploy ARM response
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @singleton("MSDeploy")
 @parentResource(Site)
 model MSDeployStatus
@@ -26,6 +27,7 @@ model MSDeployStatus
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface MSDeployStatusOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -46,16 +48,19 @@ interface MSDeployStatusOps
         @path
         @segment("extensions")
         @key
-        MSDeploy: string,
+        mSDeploy: "mSDeploy",
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface MSDeployStatuses {
   /**
    * Description for Get the status of the last MSDeploy operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("WebApps_GetMSDeployStatus")
   getMSDeployStatus is MSDeployStatusOps.Read<MSDeployStatus>;
 
@@ -64,28 +69,33 @@ interface MSDeployStatuses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("WebApps_CreateMSDeployOperation")
   createMSDeployOperation is MSDeployStatusOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
       MSDeployStatus,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    > | ArmConflictResponse,
+    Request = MSDeploy
   >;
 
   /**
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("WebApps_GetMSDeployLog")
   @get
   @action("log")
   getMSDeployLog is MSDeployStatusOps.ActionSync<
     MSDeployStatus,
     void,
-    ArmResponse<MSDeployLog>
+    ArmResponse<MSDeployLog> | ArmNotFoundResponse
   >;
 }
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface MSDeployStatusOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -112,10 +122,11 @@ interface MSDeployStatusOperationGroupOps
         @path
         @segment("extensions")
         @key
-        MSDeploy: string,
+        mSDeploy: "mSDeploy",
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface MSDeployStatusOperationGroup {
   /**
@@ -130,30 +141,35 @@ interface MSDeployStatusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("WebApps_CreateInstanceMSDeployOperation")
   createInstanceMSDeployOperation is MSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
       MSDeployStatus,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    > | ArmConflictResponse,
+    Request = MSDeploy
   >;
 
   /**
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("WebApps_GetInstanceMSDeployLog")
   @get
   @action("log")
   getInstanceMSDeployLog is MSDeployStatusOperationGroupOps.ActionSync<
     MSDeployStatus,
     void,
-    ArmResponse<MSDeployLog>
+    ArmResponse<MSDeployLog> | ArmNotFoundResponse
   >;
 }
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
-interface MSDeployStatusOperationGroupOps_2
+interface MSDeployStatusSlotOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -178,18 +194,19 @@ interface MSDeployStatusOperationGroupOps_2
         @path
         @segment("extensions")
         @key
-        MSDeploy: string,
+        mSDeploy: "mSDeploy",
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
-interface MSDeployStatusOperationGroup_2 {
+interface MSDeployStatusSlotOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetMSDeployStatusSlot")
-  getMSDeployStatusSlot is MSDeployStatusOperationGroupOps_2.Read<MSDeployStatus>;
+  getMSDeployStatusSlot is MSDeployStatusSlotOperationGroupOps.Read<MSDeployStatus>;
 
   /**
    * Description for Invoke the MSDeploy web app extension.
@@ -197,12 +214,13 @@ interface MSDeployStatusOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_CreateMSDeployOperationSlot")
-  createMSDeployOperationSlot is MSDeployStatusOperationGroupOps_2.CreateOrUpdateAsync<
+  createMSDeployOperationSlot is MSDeployStatusSlotOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
       MSDeployStatus,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    > | ArmConflictResponse,
+    Request = MSDeploy
   >;
 
   /**
@@ -212,14 +230,16 @@ interface MSDeployStatusOperationGroup_2 {
   @operationId("WebApps_GetMSDeployLogSlot")
   @get
   @action("log")
-  getMSDeployLogSlot is MSDeployStatusOperationGroupOps_2.ActionSync<
+  getMSDeployLogSlot is MSDeployStatusSlotOperationGroupOps.ActionSync<
     MSDeployStatus,
     void,
-    ArmResponse<MSDeployLog>
+    ArmResponse<MSDeployLog> | ArmNotFoundResponse
   >;
 }
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
-interface MSDeployStatusOperationGroupOps_3
+interface InstanceMSDeployStatusOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -250,44 +270,49 @@ interface MSDeployStatusOperationGroupOps_3
         @path
         @segment("extensions")
         @key
-        MSDeploy: string,
+        mSDeploy: "mSDeploy",
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
-interface MSDeployStatusOperationGroup_3 {
+interface InstanceMSDeployStatusOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceMsDeployStatusSlot")
-  getInstanceMsDeployStatusSlot is MSDeployStatusOperationGroupOps_3.Read<MSDeployStatus>;
+  getInstanceMsDeployStatusSlot is InstanceMSDeployStatusOperationGroupOps.Read<MSDeployStatus>;
 
   /**
    * Description for Invoke the MSDeploy web app extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("WebApps_CreateInstanceMSDeployOperationSlot")
-  createInstanceMSDeployOperationSlot is MSDeployStatusOperationGroupOps_3.CreateOrUpdateAsync<
+  createInstanceMSDeployOperationSlot is InstanceMSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
       MSDeployStatus,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    > | ArmConflictResponse,
+    Request = MSDeploy
   >;
 
   /**
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("WebApps_GetInstanceMSDeployLogSlot")
   @get
   @action("log")
-  getInstanceMSDeployLogSlot is MSDeployStatusOperationGroupOps_3.ActionSync<
+  getInstanceMSDeployLogSlot is InstanceMSDeployStatusOperationGroupOps.ActionSync<
     MSDeployStatus,
     void,
-    ArmResponse<MSDeployLog>
+    ArmResponse<MSDeployLog> | ArmNotFoundResponse
   >;
 }
 
@@ -299,9 +324,9 @@ interface MSDeployStatusOperationGroup_3 {
 @@doc(MSDeployStatusOperationGroup.createInstanceMSDeployOperation::parameters.resource,
   "Details of MSDeploy operation"
 );
-// @@doc(MSDeployStatusOperationGroup.createMSDeployOperationSlot::parameters.resource,
-//   "Details of MSDeploy operation"
-// );
-// @@doc(MSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot::parameters.resource,
-//   "Details of MSDeploy operation"
-// );
+@@doc(MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot::parameters.resource,
+  "Details of MSDeploy operation"
+);
+@@doc(InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot::parameters.resource,
+  "Details of MSDeploy operation"
+);

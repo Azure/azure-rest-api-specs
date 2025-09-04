@@ -52,7 +52,7 @@ interface SiteSourceControlOps
         @path
         @segment("sourcecontrols")
         @key
-        web: string,
+        web: "web",
       }
     > {}
 
@@ -119,7 +119,7 @@ interface SiteSourceControls {
       @query("additionalFlags")
       additionalFlags?: string;
     },
-    Response = ArmDeletedResponse | AcceptedResponse
+    Response = ArmDeletedResponse | AcceptedResponse | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
@@ -142,7 +142,7 @@ interface SiteSourceControlOperationGroupOps
         @path
         @segment("sourcecontrols")
         @key
-        web: string,
+        web: "web",
       }
     > {}
 
@@ -209,7 +209,7 @@ interface SiteSourceControlOperationGroup {
       @query("additionalFlags")
       additionalFlags?: string;
     },
-    Response = ArmDeletedResponse | AcceptedResponse
+    Response = ArmDeletedResponse | AcceptedResponse | ArmNotFoundResponse
   >;
 }
 

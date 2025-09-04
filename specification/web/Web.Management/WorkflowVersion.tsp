@@ -26,16 +26,63 @@ model WorkflowVersion
 }
 
 @armResourceOperations
+interface WorkflowVersionsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: "runtime",
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: "workflow",
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: "management",
+
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: string,
+      },
+      {
+        @path
+        @segment("versions")
+        @key
+        versionId: string,
+      }
+    > {}
+
+@armResourceOperations
 interface WorkflowVersions {
   /**
    * Gets a workflow version.
    */
-  get is ArmResourceRead<WorkflowVersion>;
+  get is WorkflowVersionsOps.Read<WorkflowVersion>;
 
   /**
    * Gets a list of workflow versions.
    */
-  list is ArmResourceListByParent<
+  list is WorkflowVersionsOps.List<
     WorkflowVersion,
     Parameters = {
       /**

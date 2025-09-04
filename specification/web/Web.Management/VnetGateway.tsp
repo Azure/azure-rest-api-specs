@@ -118,7 +118,10 @@ interface VnetGatewayOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetVnetConnectionGatewaySlot")
-  getVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.Read<VnetGateway>;
+  getVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.Read<
+    VnetGateway,
+    Response = ArmResponse<VnetGateway> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
@@ -143,7 +146,7 @@ interface VnetGatewayOperationGroup {
   >;
 }
 @armResourceOperations
-interface VnetGatewayOperationGroupOps_2
+interface VnetConnectionGatewayOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -173,13 +176,16 @@ interface VnetGatewayOperationGroupOps_2
     > {}
 
 @armResourceOperations
-interface VnetGatewayOperationGroup_2 {
+interface VnetConnectionGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetVnetConnectionGateway")
-  getVnetConnectionGateway is VnetGatewayOperationGroupOps_2.Read<VnetGateway>;
+  getVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.Read<
+    VnetGateway,
+    Response = ArmResponse<VnetGateway> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
@@ -187,7 +193,7 @@ interface VnetGatewayOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_CreateOrUpdateVnetConnectionGateway")
-  createOrUpdateVnetConnectionGateway is VnetGatewayOperationGroupOps_2.CreateOrUpdateSync<
+  createOrUpdateVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.CreateOrUpdateSync<
     VnetGateway,
     Response = ArmResourceUpdatedResponse<VnetGateway>
   >;
@@ -198,10 +204,10 @@ interface VnetGatewayOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateVnetConnectionGateway")
   @patch(#{ implicitOptionality: false })
-  @segment("gateways")
-  updateVnetConnectionGateway is VnetGatewayOperationGroupOps_2.CustomPatchSync<
+  updateVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.CustomPatchSync<
     VnetGateway,
-    PatchModel = VnetGateway
+    PatchModel = VnetGateway,
+    Response = ArmResponse<VnetGateway>
   >;
 }
 
@@ -218,9 +224,9 @@ interface VnetGatewayOperationGroup_2 {
 @@doc(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
   "The properties to update this gateway with."
 );
-// @@doc(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
-//   "The properties to update this gateway with."
-// );
-// @@doc(VnetGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
-//   "The properties to update this gateway with."
-// );
+@@doc(VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
+  "The properties to update this gateway with."
+);
+@@doc(VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
+  "The properties to update this gateway with."
+);

@@ -46,7 +46,7 @@ interface SiteLogsConfigOps
         @path
         @segment("config")
         @key
-        logs: string,
+        logs: "logs",
       }
     > {}
 
@@ -96,7 +96,7 @@ interface SiteLogsConfigOperationGroupOps
         @path
         @segment("config")
         @key
-        logs: string,
+        logs: "logs",
       }
     > {}
 

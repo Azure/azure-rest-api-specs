@@ -62,7 +62,10 @@ interface ProcessInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceProcess")
-  getInstanceProcess is ProcessInfoOps.Read<ProcessInfo>;
+  getInstanceProcess is ProcessInfoOps.Read<
+    ProcessInfo,
+    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.
@@ -72,7 +75,7 @@ interface ProcessInfos {
   @operationId("WebApps_DeleteInstanceProcess")
   deleteInstanceProcess is ProcessInfoOps.DeleteSync<
     ProcessInfo,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -82,7 +85,7 @@ interface ProcessInfos {
   @operationId("WebApps_ListInstanceProcesses")
   listInstanceProcesses is ProcessInfoOps.List<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfoCollection>
+    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse
   >;
 
   /**
@@ -95,7 +98,7 @@ interface ProcessInfos {
   getInstanceProcessDump is ProcessInfoOps.ActionSync<
     ProcessInfo,
     void,
-    OkResponse
+    File | ArmNotFoundResponse
   >;
 
   /**
@@ -104,11 +107,12 @@ interface ProcessInfos {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListInstanceProcessThreads")
   @get
+  @list
   @action("threads")
   listInstanceProcessThreads is ProcessInfoOps.ActionSync<
     ProcessInfo,
     void,
-    ArmResponse<ProcessThreadInfoCollection>
+    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
@@ -142,7 +146,10 @@ interface ProcessInfoOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetProcess")
-  getProcess is ProcessInfoOperationGroupOps.Read<ProcessInfo>;
+  getProcess is ProcessInfoOperationGroupOps.Read<
+    ProcessInfo,
+    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.
@@ -152,7 +159,7 @@ interface ProcessInfoOperationGroup {
   @operationId("WebApps_DeleteProcess")
   deleteProcess is ProcessInfoOperationGroupOps.DeleteSync<
     ProcessInfo,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -162,7 +169,7 @@ interface ProcessInfoOperationGroup {
   @operationId("WebApps_ListProcesses")
   listProcesses is ProcessInfoOperationGroupOps.List<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfoCollection>
+    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse
   >;
 
   /**
@@ -175,7 +182,7 @@ interface ProcessInfoOperationGroup {
   getProcessDump is ProcessInfoOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    OkResponse
+    File | ArmNotFoundResponse
   >;
 
   /**
@@ -192,7 +199,7 @@ interface ProcessInfoOperationGroup {
   >;
 }
 @armResourceOperations
-interface ProcessInfoOperationGroupOps_2
+interface InstanceProcessSlotOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -228,13 +235,16 @@ interface ProcessInfoOperationGroupOps_2
     > {}
 
 @armResourceOperations
-interface ProcessInfoOperationGroup_2 {
+interface InstanceProcessSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceProcessSlot")
-  getInstanceProcessSlot is ProcessInfoOperationGroupOps_2.Read<ProcessInfo>;
+  getInstanceProcessSlot is InstanceProcessSlotOps.Read<
+    ProcessInfo,
+    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.
@@ -242,9 +252,9 @@ interface ProcessInfoOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_DeleteInstanceProcessSlot")
-  deleteInstanceProcessSlot is ProcessInfoOperationGroupOps_2.DeleteSync<
+  deleteInstanceProcessSlot is InstanceProcessSlotOps.DeleteSync<
     ProcessInfo,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -253,9 +263,9 @@ interface ProcessInfoOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListInstanceProcessesSlot")
   @segment("processes")
-  listInstanceProcessesSlot is ProcessInfoOperationGroupOps_2.List<
+  listInstanceProcessesSlot is InstanceProcessSlotOps.List<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfoCollection>
+    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse
   >;
 
   /**
@@ -265,10 +275,10 @@ interface ProcessInfoOperationGroup_2 {
   @operationId("WebApps_GetInstanceProcessDumpSlot")
   @get
   @action("dump")
-  getInstanceProcessDumpSlot is ProcessInfoOperationGroupOps_2.ActionSync<
+  getInstanceProcessDumpSlot is InstanceProcessSlotOps.ActionSync<
     ProcessInfo,
     void,
-    OkResponse
+    File | ArmNotFoundResponse
   >;
 
   /**
@@ -277,15 +287,16 @@ interface ProcessInfoOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListInstanceProcessThreadsSlot")
   @get
+  @list
   @action("threads")
-  listInstanceProcessThreadsSlot is ProcessInfoOperationGroupOps_2.ActionSync<
+  listInstanceProcessThreadsSlot is InstanceProcessSlotOps.ActionSync<
     ProcessInfo,
     void,
-    ArmResponse<ProcessThreadInfoCollection>
+    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
-interface ProcessInfoOperationGroupOps_3
+interface ProcessSlotOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -315,13 +326,16 @@ interface ProcessInfoOperationGroupOps_3
     > {}
 
 @armResourceOperations
-interface ProcessInfoOperationGroup_3 {
+interface ProcessSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetProcessSlot")
-  getProcessSlot is ProcessInfoOperationGroupOps_3.Read<ProcessInfo>;
+  getProcessSlot is ProcessSlotOperationGroupOps.Read<
+    ProcessInfo,
+    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.
@@ -329,9 +343,9 @@ interface ProcessInfoOperationGroup_3 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_DeleteProcessSlot")
-  deleteProcessSlot is ProcessInfoOperationGroupOps_3.DeleteSync<
+  deleteProcessSlot is ProcessSlotOperationGroupOps.DeleteSync<
     ProcessInfo,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -340,9 +354,9 @@ interface ProcessInfoOperationGroup_3 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListProcessesSlot")
   @action("processes")
-  listProcessesSlot is ProcessInfoOperationGroupOps_3.List<
+  listProcessesSlot is ProcessSlotOperationGroupOps.List<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfoCollection>
+    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse
   >;
 
   /**
@@ -352,10 +366,10 @@ interface ProcessInfoOperationGroup_3 {
   @operationId("WebApps_GetProcessDumpSlot")
   @get
   @action("dump")
-  getProcessDumpSlot is ProcessInfoOperationGroupOps_3.ActionSync<
+  getProcessDumpSlot is ProcessSlotOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    OkResponse
+    File | ArmNotFoundResponse
   >;
 
   /**
@@ -364,11 +378,12 @@ interface ProcessInfoOperationGroup_3 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListProcessThreadsSlot")
   @get
+  @list
   @action("threads")
-  listProcessThreadsSlot is ProcessInfoOperationGroupOps_3.ActionSync<
+  listProcessThreadsSlot is ProcessSlotOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    ArmResponse<ProcessThreadInfoCollection>
+    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse
   >;
 }
 
