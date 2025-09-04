@@ -3,10 +3,9 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using OpenAPI;
 
 namespace Microsoft.Fabric;
 
@@ -169,6 +168,7 @@ model CapacityNameParameter {
   capacityName: string;
 }
 
+@added(Versions.v2025_01_15_preview)
 @doc("Describes Resource Quota")
 model Quota {
   @doc("The name of the quota.")
@@ -186,8 +186,10 @@ model Quota {
 }
 
 @@identifiers(PagedQuota.value, #[]);
+@added(Versions.v2025_01_15_preview)
 model PagedQuota is Page<Quota>;
 
+@added(Versions.v2025_01_15_preview)
 @doc("The Quota Names")
 model QuotaName {
   @doc("The name of the resource.")

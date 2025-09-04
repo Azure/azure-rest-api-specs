@@ -6,7 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Fabric;
@@ -89,6 +89,7 @@ interface FabricCapacities {
   ): RpSkuEnumerationForNewResourceResult | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+  @added(Versions.v2025_01_15_preview)
   @get
   @doc("List the current consumption and limit in this location for the provided subscription")
   @segment("usages")
