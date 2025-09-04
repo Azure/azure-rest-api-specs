@@ -14,7 +14,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    model-namespace: false
+    model-namespace: true
     namespace: "Azure.ResourceManager.StorageMover"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-storagemover"
@@ -25,8 +25,9 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-storagemover"
     namespace: "com.azure.resourcemanager.storagemover"
-    service-name: "StorageMover" # human-readable service name, whitespace allowed
+    service-name: "Storage Mover"
     flavor: azure
+    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     service-dir: sdk/storagemover
     package-dir: "arm-storagemover"
