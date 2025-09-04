@@ -519,6 +519,13 @@ model ResourceReference {
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   type?: string;
+  
+  /**
+   * The extensible resource identifiers.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  identifiers?: Record<unknown>;
 
   /**
    * The API version the resource was deployed with
