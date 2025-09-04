@@ -58,6 +58,10 @@ interface Domains {
   update is ArmCustomPatchSync<
     Domain,
     PatchModel = DomainPatchResource,
+    Response = ArmResponse<Domain> | (AcceptedResponse & {
+      @bodyRoot
+      _: Domain;
+    }),
     Error = DefaultErrorResponse
   >;
 
