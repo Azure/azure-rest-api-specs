@@ -187,7 +187,7 @@ union TileMatrixSetId {
 /**
  * Scheme for tile addressing in TileJSON specification
  */
-union TileJsonScheme {
+union TileAddressingScheme {
   string,
 
   /**
@@ -380,7 +380,7 @@ model TileJsonResponse {
   /**
    * Tile addressing scheme (xyz or tms)
    */
-  scheme?: TileJsonScheme = TileJsonScheme.xyz;
+  scheme?: TileAddressingScheme = TileAddressingScheme.xyz;
 
   /**
    * Array of tile URL templates
