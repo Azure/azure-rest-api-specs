@@ -1,31 +1,33 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
+    "publisherName": "TestPublisher",
     "resourceGroupName": "rg",
-    "publisherName": "TestPublisher"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
             "name": "TestArtifactStore",
             "type": "microsoft.hybridnetwork/publishers/artifactStores",
+            "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
             "location": "eastus",
             "properties": {
-              "storeType": "AzureContainerRegistry",
-              "replicationStrategy": "SingleReplication",
-              "storageResourceId": "TestResourceId",
               "managedResourceGroupConfiguration": {
                 "name": "testRg",
                 "location": "eastus"
-              }
+              },
+              "replicationStrategy": "SingleReplication",
+              "storageResourceId": "TestResourceId",
+              "storeType": "AzureContainerRegistry"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ArtifactStores_ListByPublisher",
+  "title": "Get application groups under a publisher resource"
 }

@@ -1,22 +1,21 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "artifactStoreName": "TestArtifactStore",
     "publisherName": "TestPublisher",
-    "artifactStoreName": "TestArtifactStore"
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
             "name": "TestManifest",
             "type": "microsoft.hybridnetwork/publishers/artifactStores/artifactManifests",
+            "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
             "location": "eastus",
             "properties": {
-              "provisioningState": "Succeeded",
               "artifactManifestState": "Uploaded",
               "artifacts": [
                 {
@@ -29,11 +28,14 @@
                   "artifactType": "OCIArtifact",
                   "artifactVersion": "v1"
                 }
-              ]
+              ],
+              "provisioningState": "Succeeded"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ArtifactManifests_ListByArtifactStore",
+  "title": "Get artifact manifest list resource"
 }

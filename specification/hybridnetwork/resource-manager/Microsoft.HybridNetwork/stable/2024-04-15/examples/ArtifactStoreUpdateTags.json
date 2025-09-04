@@ -1,38 +1,40 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "publisherName": "TestPublisher",
     "artifactStoreName": "TestArtifactStore",
     "parameters": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "TestArtifactStore",
-        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
         "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
         "location": "eastus",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
-          "storeType": "AzureContainerRegistry",
-          "replicationStrategy": "SingleReplication",
-          "storageResourceId": "TestResourceId",
           "managedResourceGroupConfiguration": {
             "name": "testRg",
             "location": "eastus"
-          }
+          },
+          "replicationStrategy": "SingleReplication",
+          "storageResourceId": "TestResourceId",
+          "storeType": "AzureContainerRegistry"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
         }
       }
     }
-  }
+  },
+  "operationId": "ArtifactStores_Update",
+  "title": "Update artifact store resource tags"
 }

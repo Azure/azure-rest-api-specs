@@ -1,28 +1,30 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "artifactStoreName": "TestArtifactStoreName",
     "publisherName": "TestPublisher",
-    "artifactStoreName": "TestArtifactStoreName"
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
         "name": "TestArtifactStore",
         "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
         "location": "eastus",
         "properties": {
-          "storeType": "AzureContainerRegistry",
-          "replicationStrategy": "SingleReplication",
-          "storageResourceId": "TestResourceId",
           "managedResourceGroupConfiguration": {
             "name": "testRg",
             "location": "eastus"
-          }
+          },
+          "replicationStrategy": "SingleReplication",
+          "storageResourceId": "TestResourceId",
+          "storeType": "AzureContainerRegistry"
         }
       }
     }
-  }
+  },
+  "operationId": "ArtifactStores_Get",
+  "title": "Get a artifact store resource"
 }

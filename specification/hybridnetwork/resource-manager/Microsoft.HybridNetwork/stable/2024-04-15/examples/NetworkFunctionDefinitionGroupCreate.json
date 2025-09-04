@@ -1,20 +1,20 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "publisherName": "TestPublisher",
     "networkFunctionDefinitionGroupName": "TestNetworkFunctionDefinitionGroupName",
     "parameters": {
       "location": "eastus"
-    }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "TestPublisherSkuVersion",
-        "id": "/subscriptions/subid/resourcegroups/rg/rgproviders/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName",
         "type": "Microsoft.HybridNetwork/publishers/networkFunctionDefinitionGroups",
+        "id": "/subscriptions/subid/resourcegroups/rg/rgproviders/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName",
         "location": "eastus",
         "properties": {}
       }
@@ -22,11 +22,13 @@
     "201": {
       "body": {
         "name": "TestPublisherSkuVersion",
-        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName",
         "type": "Microsoft.HybridNetwork/publishers/networkFunctionDefinitionGroups",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName",
         "location": "eastus",
         "properties": {}
       }
     }
-  }
+  },
+  "operationId": "NetworkFunctionDefinitionGroups_CreateOrUpdate",
+  "title": "Create or update the network function definition group"
 }

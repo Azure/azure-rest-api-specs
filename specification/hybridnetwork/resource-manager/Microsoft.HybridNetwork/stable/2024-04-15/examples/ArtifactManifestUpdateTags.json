@@ -1,31 +1,26 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "publisherName": "TestPublisher",
-    "artifactStoreName": "TestArtifactStore",
     "artifactManifestName": "TestManifest",
+    "artifactStoreName": "TestArtifactStore",
     "parameters": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourcegroups/rg/providers/microsoft.hybridnetwork/publishers/UnityCloud/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
         "name": "TestManifest",
         "type": "microsoft.hybridnetwork/publishers/artifactStores/artifactManifests",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/microsoft.hybridnetwork/publishers/UnityCloud/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
         "location": "eastus",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
-          "provisioningState": "Succeeded",
           "artifactManifestState": "Uploaded",
           "artifacts": [
             {
@@ -38,9 +33,16 @@
               "artifactType": "OCIArtifact",
               "artifactVersion": "v1"
             }
-          ]
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
         }
       }
     }
-  }
+  },
+  "operationId": "ArtifactManifests_Update",
+  "title": "Update a artifact manifest resource tags"
 }

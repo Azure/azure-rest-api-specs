@@ -1,22 +1,24 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "networkFunctionDefinitionGroupName": "TestNetworkFunctionDefinitionGroupName",
     "publisherName": "TestPublisher",
-    "networkFunctionDefinitionGroupName": "TestNetworkFunctionDefinitionGroupName"
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "TestNetworkFunctionDefinitionVersion",
-        "id": "/subscriptions/subid/resourcegroups/rg/rgproviders/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName",
         "type": "Microsoft.HybridNetwork/publishers/networkFunctionDefinitionGroups",
+        "id": "/subscriptions/subid/resourcegroups/rg/rgproviders/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName",
         "location": "eastus",
         "properties": {
           "description": "Test NFD group"
         }
       }
     }
-  }
+  },
+  "operationId": "NetworkFunctionDefinitionGroups_Get",
+  "title": "Get a networkFunctionDefinition group resource"
 }

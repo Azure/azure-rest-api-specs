@@ -1,59 +1,61 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "publisherName": "TestPublisher",
     "artifactStoreName": "TestArtifactStore",
     "parameters": {
       "location": "eastus",
       "properties": {
-        "storeType": "AzureStorageAccount",
-        "replicationStrategy": "SingleReplication",
         "backingResourcePublicNetworkAccess": "Enabled",
         "managedResourceGroupConfiguration": {
           "name": "testRg",
           "location": "eastus"
-        }
+        },
+        "replicationStrategy": "SingleReplication",
+        "storeType": "AzureStorageAccount"
       }
-    }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "TestArtifactStore",
-        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
         "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
         "location": "eastus",
         "properties": {
-          "storeType": "AzureStorageAccount",
-          "replicationStrategy": "SingleReplication",
           "backingResourcePublicNetworkAccess": "Enabled",
-          "storageResourceId": "TestResourceId",
           "managedResourceGroupConfiguration": {
             "name": "testRg",
             "location": "eastus"
-          }
+          },
+          "replicationStrategy": "SingleReplication",
+          "storageResourceId": "TestResourceId",
+          "storeType": "AzureStorageAccount"
         }
       }
     },
     "201": {
       "body": {
         "name": "TestArtifactStore",
-        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
         "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
         "location": "eastus",
         "properties": {
-          "storeType": "AzureStorageAccount",
-          "replicationStrategy": "SingleReplication",
           "backingResourcePublicNetworkAccess": "Enabled",
-          "storageResourceId": "TestResourceId",
           "managedResourceGroupConfiguration": {
             "name": "testRg",
             "location": "eastus"
-          }
+          },
+          "replicationStrategy": "SingleReplication",
+          "storageResourceId": "TestResourceId",
+          "storeType": "AzureStorageAccount"
         }
       }
     }
-  }
+  },
+  "operationId": "ArtifactStores_CreateOrUpdate",
+  "title": "Create or update an artifact store of publisher resource with storage"
 }

@@ -1,61 +1,63 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
+    "networkFunctionName": "testNf",
     "resourceGroupName": "rg",
-    "networkFunctionName": "testNf"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "nextLink",
         "value": [
           {
-            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf/components/testComponent",
             "name": "testComponent",
             "type": "Microsoft.HybridNetwork/networkFunctions/components",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf/components/testComponent",
             "properties": {
-              "provisioningState": "Succeeded",
               "deploymentProfile": "{\"chart\":{\"name\":\"testChartName\",\"version\":\"v1.0.0\"},\"releaseName\":\"testReleaseName\",\"targetNamespace\":\"testTargetNameSpace\",\"values\":{\".repoBase\":\"testrepo.azurecr.io/\"}}",
               "deploymentStatus": {
-                "status": "Installing",
+                "nextExpectedUpdateAt": "2023-07-10T02:06:01.116+00:00",
                 "resources": {
                   "deployments": [
                     {
                       "name": "nginix",
-                      "namespace": "core",
-                      "desired": 3,
-                      "ready": 3,
-                      "upToDate": 3,
                       "available": 3,
-                      "creationTime": "2023-07-10T02:05:01.116+00:00"
+                      "creationTime": "2023-07-10T02:05:01.116+00:00",
+                      "desired": 3,
+                      "namespace": "core",
+                      "ready": 3,
+                      "upToDate": 3
                     }
                   ],
                   "pods": [
                     {
                       "name": "nginix",
-                      "namespace": "core",
-                      "desired": 3,
-                      "ready": 3,
-                      "status": "Succeeded",
                       "creationTime": "2023-07-10T02:05:01.116+00:00",
+                      "desired": 3,
                       "events": [
                         {
                           "type": "Normal",
-                          "reason": "Pulling",
+                          "lastSeenTime": "2023-07-10T02:06:01.116+00:00",
                           "message": "Pulling image nginx",
-                          "lastSeenTime": "2023-07-10T02:06:01.116+00:00"
+                          "reason": "Pulling"
                         }
-                      ]
+                      ],
+                      "namespace": "core",
+                      "ready": 3,
+                      "status": "Succeeded"
                     }
                   ]
                 },
-                "nextExpectedUpdateAt": "2023-07-10T02:06:01.116+00:00"
-              }
+                "status": "Installing"
+              },
+              "provisioningState": "Succeeded"
             }
           }
-        ],
-        "nextLink": "nextLink"
+        ]
       }
     }
-  }
+  },
+  "operationId": "Components_ListByNetworkFunction",
+  "title": "List components in network function"
 }

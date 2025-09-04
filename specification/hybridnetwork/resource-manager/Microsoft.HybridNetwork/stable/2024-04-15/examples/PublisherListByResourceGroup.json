@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg"
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -10,8 +10,8 @@
         "value": [
           {
             "name": "TestPublisher",
-            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher",
             "type": "Microsoft.HybridNetwork/publishers",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher",
             "location": "eastus",
             "properties": {
               "provisioningState": "Succeeded",
@@ -20,8 +20,8 @@
           },
           {
             "name": "TestPublisher2",
-            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher2",
             "type": "Microsoft.HybridNetwork/publishers",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher2",
             "location": "eastus",
             "properties": {
               "provisioningState": "Succeeded",
@@ -31,5 +31,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Publishers_ListByResourceGroup",
+  "title": "List all publisher resources in a resource group"
 }

@@ -1,39 +1,41 @@
 {
   "parameters": {
     "api-version": "2024-04-15",
-    "subscriptionId": "subid",
-    "resourceGroupName": "TestResourceGroup",
-    "publisherName": "TestPublisher",
+    "artifactName": "fedrbac",
     "artifactStoreName": "TestArtifactStoreName",
-    "artifactName": "fedrbac"
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "TestResourceGroup",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "{refererHeaderUrl}?$skipToken={opaqueString}",
         "value": [
           {
             "name": "fedrbac",
-            "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactVersions",
             "type": "Microsoft.HybridNetwork/publishers/artifactStores/artifactVersions",
+            "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactVersions",
             "properties": {
-              "artifactVersion": "1.0.0",
+              "artifactState": "Deprecated",
               "artifactType": "OCIArtifact",
-              "artifactState": "Deprecated"
+              "artifactVersion": "1.0.0"
             }
           },
           {
             "name": "fedrbac",
-            "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactVersions",
             "type": "Microsoft.HybridNetwork/publishers/artifactStores/artifactVersions",
+            "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactVersions",
             "properties": {
-              "artifactVersion": "2.0.0",
+              "artifactState": "Active",
               "artifactType": "OCIArtifact",
-              "artifactState": "Active"
+              "artifactVersion": "2.0.0"
             }
           }
-        ],
-        "nextLink": "{refererHeaderUrl}?$skipToken={opaqueString}"
+        ]
       }
     }
-  }
+  },
+  "operationId": "ProxyArtifact_Get",
+  "title": "Get an artifact overview"
 }
