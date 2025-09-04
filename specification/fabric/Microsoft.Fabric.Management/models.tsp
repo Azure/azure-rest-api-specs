@@ -105,9 +105,18 @@ union ResourceState {
   string,
 }
 
-@@identifiers(RpSkuEnumerationForNewResourceResult.value, #[]);
 @doc("An object that represents enumerating SKUs for new resources.")
-model RpSkuEnumerationForNewResourceResult is Page<RpSkuDetailsForNewResource>;
+model RpSkuEnumerationForNewResourceResult {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  @doc("The collection of available SKUs for new resources")
+  @identifiers(#[])
+  @pageItems
+  value: RpSkuDetailsForNewResource[];
+
+  @doc("Url for the next page.  Null if no more pages available")
+  @nextLink
+  nextLink?: string;
+}
 
 @doc("The SKU details")
 model RpSkuDetailsForNewResource {
@@ -126,10 +135,18 @@ model RpSkuProperties {
   locations: Azure.Core.azureLocation[];
 }
 
-@@identifiers(RpSkuEnumerationForExistingResourceResult.value, #[]);
 @doc("An object that represents enumerating SKUs for existing resources")
-model RpSkuEnumerationForExistingResourceResult
-  is Page<RpSkuDetailsForExistingResource>;
+model RpSkuEnumerationForExistingResourceResult {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  @doc("The SKU details")
+  @pageItems
+  @identifiers(#[])
+  value: RpSkuDetailsForExistingResource[];
+
+  @doc("Url for the next page.  Null if no more pages available")
+  @nextLink
+  nextLink?: string;
+}
 
 @doc("An object that represents SKU details for existing resources")
 model RpSkuDetailsForExistingResource {
