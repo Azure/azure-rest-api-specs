@@ -97,7 +97,8 @@ model DeploymentStackWhatIfChange {
  * Information about a single resource change predicted by What-If operation.
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfResourceChange is ResourceChangeDelta {
+model DeploymentStackWhatIfResourceChange {
+    ... ResourceChangeDelta;
     /**
      * The resource id of the resource being changed.
      */
@@ -206,7 +207,8 @@ model DeploymentStackChangeDelta<T> {
 /**
  * The predicted change to the resource property.
 */
-model DeploymentStackWhatIfPropertyChange extends ResourceChangeBase {
+model DeploymentStackWhatIfPropertyChange {
+    ... ResourceChangeBase;
 
     /**
      * Type of change that will be made to the resource when the deployment is executed.

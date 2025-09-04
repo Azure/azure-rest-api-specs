@@ -2661,6 +2661,16 @@
       "type": "object",
       "description": "The predicted change to the resource property.",
       "properties": {
+        "before": {
+          "type": "object",
+          "description": "The predicted value before the deployment is executed.",
+          "additionalProperties": {}
+        },
+        "after": {
+          "type": "object",
+          "description": "The predicted value after the deployment is executed.",
+          "additionalProperties": {}
+        },
         "path": {
           "type": "string",
           "description": "Type of change that will be made to the resource when the deployment is executed."
@@ -2683,11 +2693,6 @@
       "required": [
         "path",
         "changeType"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceChangeBase"
-        }
       ]
     },
     "DeploymentStackWhatIfPropertyChangeType": {
@@ -3163,22 +3168,6 @@
           "$ref": "#/definitions/ResourceReference"
         }
       ]
-    },
-    "ResourceChangeBase": {
-      "type": "object",
-      "description": "Model for resource changes to show the before-and-after property values for resource properties.",
-      "properties": {
-        "before": {
-          "type": "object",
-          "description": "The predicted value before the deployment is executed.",
-          "additionalProperties": {}
-        },
-        "after": {
-          "type": "object",
-          "description": "The predicted value after the deployment is executed.",
-          "additionalProperties": {}
-        }
-      }
     },
     "ResourceReference": {
       "type": "object",
