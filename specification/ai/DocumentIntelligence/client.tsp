@@ -22,7 +22,7 @@ interface DocumentIntelligenceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultPdf is DocumentModels.getAnalyzeResultPdf;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentIntelligence.Versions.v2024_11_30)
+  @added(DocumentIntelligence.Versions.v2025_09_01)
   getAnalyzeResultPng is DocumentModels.getAnalyzeResultPng;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultFigure is DocumentModels.getAnalyzeResultFigure;

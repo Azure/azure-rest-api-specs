@@ -183,7 +183,7 @@ interface DocumentModels {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(Versions.v2024_11_30)
+  @added(Versions.v2025_09_01)
   @doc("Gets the generated searchable PNG output from document analysis.")
   @route("/documentModels/{modelId}/analyzeResults/{resultId}/png")
   @get
