@@ -25,7 +25,6 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for Reviews Client.
 
 ``` yaml
-tag: package-2023-01-01-preview
 openapi-type: arm
 ```
 
@@ -37,15 +36,6 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ``` yaml $(tag) == 'package-2025-05-01'
 input-file:
   - stable/2025-05-01/reviews.json
-```
-
-### Tag: package-2023-01-01-preview
-
-These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-01-01-preview'
-input-file:
-  - preview/2023-01-01-preview/reviews.json
 ```
 
 ---
