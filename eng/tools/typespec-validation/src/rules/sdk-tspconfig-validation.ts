@@ -171,11 +171,16 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
 
     let pathToValidate: string;
 
-    // Check if the path contains {output-dir}/{service-dir} prefix
-    const prefixPattern = "{output-dir}/{service-dir}/";
-    if (actualValue.startsWith(prefixPattern)) {
+    // Check if the path contains {output-dir}/{service-dir} or {cwd}/{service-dir} prefix
+    const outputDirPrefix = "{output-dir}/{service-dir}/";
+    const cwdPrefix = "{cwd}/{service-dir}/";
+
+    if (actualValue.startsWith(outputDirPrefix)) {
       // Extract the part after {output-dir}/{service-dir}/
-      pathToValidate = actualValue.substring(prefixPattern.length);
+      pathToValidate = actualValue.substring(outputDirPrefix.length);
+    } else if (actualValue.startsWith(cwdPrefix)) {
+      // Extract the part after {cwd}/{service-dir}/
+      pathToValidate = actualValue.substring(cwdPrefix.length);
     } else {
       // Use existing logic - extract the last part of the path (after the last '/')
       const pathParts = actualValue.split("/");
