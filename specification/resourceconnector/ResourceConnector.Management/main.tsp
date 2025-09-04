@@ -41,4 +41,8 @@ enum Versions {
   v2022_10_27: "2022-10-27",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<ApplianceOperationsList>,
+      ErrorResponse
+    > {}

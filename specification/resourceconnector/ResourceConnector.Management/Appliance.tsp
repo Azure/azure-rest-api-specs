@@ -57,14 +57,24 @@ interface Appliances {
   >;
 
   /**
+
    * Gets a list of Appliances in the specified subscription and resource group. The operation returns properties of each Appliance.
+
    */
-  listByResourceGroup is ArmResourceListByParent<Appliance>;
+  listByResourceGroup is ArmResourceListByParent<
+    Appliance,
+    Response = ApplianceListResult
+  >;
 
   /**
+
    * Gets a list of Appliances in the specified subscription. The operation returns properties of each Appliance
+
    */
-  listBySubscription is ArmListBySubscription<Appliance>;
+  listBySubscription is ArmListBySubscription<
+    Appliance,
+    Response = ApplianceListResult
+  >;
 
   /**
    * Returns the cluster user credentials for the dedicated appliance.
@@ -96,19 +106,20 @@ interface Appliances {
    * Gets the upgrade graph of an Appliance with a specified resource group and name and specific release train.
    */
   @get
-  getUpgradeGraph is ArmResourceActionSync<
-    Appliance,
-    void,
-    ArmResponse<UpgradeGraph>,
-    Parameters = {
-      /**
-       * Upgrade graph version, ex - stable
-       */
-      @path
-      @segment("upgradeGraphs")
-      upgradeGraph?: string;
-    }
-  >;
+  @armResourceRead(Appliance)
+  getUpgradeGraph(
+    ...ResourceInstanceParameters<Appliance>,
+
+    /**
+
+     * Upgrade graph version, ex - stable
+
+     */
+    @path
+    @key
+    @segment("upgradeGraphs")
+    upgradeGraph: string,
+  ): UpgradeGraph | ErrorResponse;
 }
 
 @@maxLength(Appliance.name, 63);

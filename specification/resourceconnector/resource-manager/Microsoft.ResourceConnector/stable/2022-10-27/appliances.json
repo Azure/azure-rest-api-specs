@@ -40,16 +40,16 @@
   },
   "tags": [
     {
-      "name": "Operations"
+      "name": "Appliances"
     },
     {
-      "name": "Appliances"
+      "name": "Operations"
     }
   ],
   "paths": {
     "/providers/Microsoft.ResourceConnector/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Appliances_ListOperations",
         "tags": [
           "Operations"
         ],
@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/applianceOperationsList"
             }
           },
           "default": {
@@ -71,6 +71,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Appliances operations": {
+            "$ref": "./examples/AppliancesListOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -95,9 +100,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ApplianceListResult"
+              "$ref": "#/definitions/applianceListResult"
             }
           },
           "default": {
@@ -134,7 +139,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ApplianceGetTelemetryConfigResult"
+              "$ref": "#/definitions/applianceGetTelemetryConfigResult"
             }
           },
           "default": {
@@ -171,9 +176,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ApplianceListResult"
+              "$ref": "#/definitions/applianceListResult"
             }
           },
           "default": {
@@ -225,7 +230,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             }
           },
           "default": {
@@ -273,7 +278,7 @@
             "description": "Parameters supplied to create or update an Appliance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             }
           }
         ],
@@ -281,13 +286,13 @@
           "200": {
             "description": "Resource 'Appliance' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             }
           },
           "201": {
             "description": "Resource 'Appliance' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -315,7 +320,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Appliance"
+          "final-state-schema": "#/definitions/appliance"
         },
         "x-ms-long-running-operation": true
       },
@@ -351,7 +356,7 @@
             "description": "The updatable fields of an existing Appliance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchableAppliance"
+              "$ref": "#/definitions/patchableAppliance"
             }
           }
         ],
@@ -359,7 +364,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             }
           },
           "default": {
@@ -470,7 +475,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApplianceListCredentialResults"
+              "$ref": "#/definitions/applianceListCredentialResults"
             }
           },
           "default": {
@@ -526,7 +531,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApplianceListKeysResults"
+              "$ref": "#/definitions/applianceListKeysResults"
             }
           },
           "default": {
@@ -543,7 +548,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs{upgradeGraph}/getUpgradeGraph": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs/{upgradeGraph}": {
       "get": {
         "operationId": "Appliances_GetUpgradeGraph",
         "tags": [
@@ -580,7 +585,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/UpgradeGraph"
             }
@@ -621,181 +626,6 @@
             "value": "clusterCustomerUser"
           }
         ]
-      }
-    },
-    "Appliance": {
-      "type": "object",
-      "description": "Appliances definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ApplianceProperties",
-          "description": "The set of properties specific to an Appliance",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "Identity for the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "ApplianceCredentialKubeconfig": {
-      "type": "object",
-      "description": "Cluster User Credential appliance.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/AccessProfileType",
-          "description": "Name which contains the role of the kubeconfig.",
-          "readOnly": true
-        },
-        "value": {
-          "type": "string",
-          "description": "Contains the kubeconfig value.",
-          "readOnly": true
-        }
-      }
-    },
-    "ApplianceGetTelemetryConfigResult": {
-      "type": "object",
-      "description": "The Get Telemetry Config Result appliance.",
-      "properties": {
-        "telemetryInstrumentationKey": {
-          "type": "string",
-          "description": "Telemetry instrumentation key.",
-          "readOnly": true
-        }
-      }
-    },
-    "ApplianceListCredentialResults": {
-      "type": "object",
-      "description": "The List Cluster User Credential appliance.",
-      "properties": {
-        "hybridConnectionConfig": {
-          "$ref": "#/definitions/HybridConnectionConfig",
-          "description": "Contains the REP (rendezvous endpoint) and “Listener” access token from notification service (NS).",
-          "readOnly": true
-        },
-        "kubeconfigs": {
-          "type": "array",
-          "description": "The list of appliance kubeconfigs.",
-          "items": {
-            "$ref": "#/definitions/ApplianceCredentialKubeconfig"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "ApplianceListKeysResults": {
-      "type": "object",
-      "description": "The List Cluster Keys Results appliance.",
-      "properties": {
-        "artifactProfiles": {
-          "type": "object",
-          "description": "Map of artifacts that contains a list of ArtifactProfile used to upload artifacts such as logs.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ArtifactProfile"
-          },
-          "readOnly": true
-        },
-        "kubeconfigs": {
-          "type": "array",
-          "description": "The list of appliance kubeconfigs.",
-          "items": {
-            "$ref": "#/definitions/ApplianceCredentialKubeconfig"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "sshKeys": {
-          "type": "object",
-          "description": "Map of Customer User Public, Private SSH Keys and Certificate when available.",
-          "additionalProperties": {
-            "$ref": "#/definitions/SSHKey"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ApplianceListResult": {
-      "type": "object",
-      "description": "The response of a Appliance list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Appliance items on this page",
-          "items": {
-            "$ref": "#/definitions/Appliance"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ApplianceProperties": {
-      "type": "object",
-      "description": "Properties for an appliance.",
-      "properties": {
-        "distro": {
-          "type": "string",
-          "description": "Represents a supported Fabric/Infra. (AKSEdge etc...).",
-          "default": "AKSEdge",
-          "enum": [
-            "AKSEdge"
-          ],
-          "x-ms-enum": {
-            "name": "Distro",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "AKSEdge",
-                "value": "AKSEdge"
-              }
-            ]
-          }
-        },
-        "infrastructureConfig": {
-          "$ref": "#/definitions/AppliancePropertiesInfrastructureConfig",
-          "description": "Contains infrastructure information about the Appliance"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "The current deployment or provisioning state, which only appears in the response.",
-          "readOnly": true
-        },
-        "publicKey": {
-          "type": "string",
-          "description": "Certificates pair used to download MSI certificate from HIS. Can only be set once."
-        },
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "Appliance’s health and state of connection to on-prem",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the Appliance"
-        }
-      }
-    },
-    "AppliancePropertiesInfrastructureConfig": {
-      "type": "object",
-      "description": "Contains infrastructure information about the Appliance",
-      "properties": {
-        "provider": {
-          "$ref": "#/definitions/Provider",
-          "description": "Information about the connected appliance."
-        }
       }
     },
     "ArtifactProfile": {
@@ -853,19 +683,6 @@
         "type": {
           "$ref": "#/definitions/ResourceIdentityType",
           "description": "The identity type."
-        }
-      }
-    },
-    "PatchableAppliance": {
-      "type": "object",
-      "description": "The Appliances patchable resource definition.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1234,6 +1051,268 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "appliance": {
+      "type": "object",
+      "description": "Appliances definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/applianceProperties",
+          "description": "The set of properties specific to an Appliance",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "applianceCredentialKubeconfig": {
+      "type": "object",
+      "description": "Cluster User Credential appliance.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/AccessProfileType",
+          "description": "Name which contains the role of the kubeconfig.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Contains the kubeconfig value.",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceGetTelemetryConfigResult": {
+      "type": "object",
+      "description": "The Get Telemetry Config Result appliance.",
+      "properties": {
+        "telemetryInstrumentationKey": {
+          "type": "string",
+          "description": "Telemetry instrumentation key.",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceListCredentialResults": {
+      "type": "object",
+      "description": "The List Cluster User Credential appliance.",
+      "properties": {
+        "hybridConnectionConfig": {
+          "$ref": "#/definitions/HybridConnectionConfig",
+          "description": "Contains the REP (rendezvous endpoint) and “Listener” access token from notification service (NS).",
+          "readOnly": true
+        },
+        "kubeconfigs": {
+          "type": "array",
+          "description": "The list of appliance kubeconfigs.",
+          "items": {
+            "$ref": "#/definitions/applianceCredentialKubeconfig"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "applianceListKeysResults": {
+      "type": "object",
+      "description": "The List Cluster Keys Results appliance.",
+      "properties": {
+        "artifactProfiles": {
+          "type": "object",
+          "description": "Map of artifacts that contains a list of ArtifactProfile used to upload artifacts such as logs.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArtifactProfile"
+          },
+          "readOnly": true
+        },
+        "kubeconfigs": {
+          "type": "array",
+          "description": "The list of appliance kubeconfigs.",
+          "items": {
+            "$ref": "#/definitions/applianceCredentialKubeconfig"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "sshKeys": {
+          "type": "object",
+          "description": "Map of Customer User Public, Private SSH Keys and Certificate when available.",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSHKey"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "applianceListResult": {
+      "type": "object",
+      "description": "Paged collection of Appliance items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Appliance items on this page",
+          "items": {
+            "$ref": "#/definitions/appliance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "applianceOperation": {
+      "type": "object",
+      "description": "Appliances operation.",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/applianceOperationValueDisplay",
+          "description": "Describes the properties of an Appliances Operation Value Display.",
+          "x-ms-client-flatten": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Is this Operation a data plane operation",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the compute operation.",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of the compute operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceOperationValueDisplay": {
+      "type": "object",
+      "description": "Describes the properties of an Appliances Operation Value Display.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The display name of the compute operation.",
+          "readOnly": true
+        },
+        "provider": {
+          "type": "string",
+          "description": "The resource provider for the operation.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The display name of the resource the operation applies to.",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceOperationsList": {
+      "type": "object",
+      "description": "Paged collection of ApplianceOperation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplianceOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/applianceOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "applianceProperties": {
+      "type": "object",
+      "description": "Properties for an appliance.",
+      "properties": {
+        "distro": {
+          "type": "string",
+          "description": "Represents a supported Fabric/Infra. (AKSEdge etc...).",
+          "default": "AKSEdge",
+          "enum": [
+            "AKSEdge"
+          ],
+          "x-ms-enum": {
+            "name": "Distro",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AKSEdge",
+                "value": "AKSEdge"
+              }
+            ]
+          }
+        },
+        "infrastructureConfig": {
+          "$ref": "#/definitions/appliancePropertiesInfrastructureConfig",
+          "description": "Contains infrastructure information about the Appliance"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response.",
+          "readOnly": true
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "Certificates pair used to download MSI certificate from HIS. Can only be set once."
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Appliance’s health and state of connection to on-prem",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the Appliance"
+        }
+      }
+    },
+    "appliancePropertiesInfrastructureConfig": {
+      "type": "object",
+      "description": "Contains infrastructure information about the Appliance",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/Provider",
+          "description": "Information about the connected appliance."
+        }
+      }
+    },
+    "patchableAppliance": {
+      "type": "object",
+      "description": "The Appliances patchable resource definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

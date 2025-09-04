@@ -14,13 +14,13 @@
   "paths": {
     "/providers/microsoft.ResourceConnector/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Appliances_ListOperations",
         "parameters": [],
         "responses": {
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/applianceOperationsList"
             }
           },
           "default": {
@@ -28,6 +28,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Appliances operations": {
+            "$ref": "./examples/AppliancesListOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -43,7 +48,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ApplianceListResult"
+              "$ref": "#/definitions/applianceListResult"
             }
           },
           "default": {
@@ -71,7 +76,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ApplianceGetTelemetryConfigResult"
+              "$ref": "#/definitions/applianceGetTelemetryConfigResult"
             }
           },
           "default": {
@@ -96,7 +101,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ApplianceListResult"
+              "$ref": "#/definitions/applianceListResult"
             }
           },
           "default": {
@@ -134,7 +139,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             }
           },
           "default": {
@@ -167,7 +172,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             }
           }
         ],
@@ -175,13 +180,13 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             }
           },
           "201": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -204,7 +209,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Appliance"
+          "final-state-schema": "#/definitions/appliance"
         },
         "x-ms-long-running-operation": true
       },
@@ -225,7 +230,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchableAppliance"
+              "$ref": "#/definitions/patchableAppliance"
             }
           }
         ],
@@ -233,7 +238,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/appliance"
             }
           },
           "default": {
@@ -311,7 +316,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ApplianceListCredentialResults"
+              "$ref": "#/definitions/applianceListCredentialResults"
             }
           },
           "default": {
@@ -351,7 +356,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ApplianceListKeysResults"
+              "$ref": "#/definitions/applianceListKeysResults"
             }
           },
           "default": {
@@ -368,7 +373,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs{upgradeGraph}/getUpgradeGraph": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs/{upgradeGraph}": {
       "get": {
         "operationId": "Appliances_GetUpgradeGraph",
         "parameters": [
@@ -411,204 +416,6 @@
     }
   },
   "definitions": {
-    "Appliance": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ApplianceProperties",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "ApplianceCredentialKubeconfig": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "enum": [
-            "clusterUser",
-            "clusterCustomerUser"
-          ],
-          "x-ms-enum": {
-            "name": "AccessProfileType",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "value": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ApplianceGetTelemetryConfigResult": {
-      "type": "object",
-      "properties": {
-        "telemetryInstrumentationKey": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ApplianceListCredentialResults": {
-      "type": "object",
-      "properties": {
-        "hybridConnectionConfig": {
-          "$ref": "#/definitions/HybridConnectionConfig",
-          "readOnly": true
-        },
-        "kubeconfigs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplianceCredentialKubeconfig"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ApplianceListKeysResults": {
-      "type": "object",
-      "properties": {
-        "artifactProfiles": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ArtifactProfile"
-          },
-          "readOnly": true
-        },
-        "kubeconfigs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplianceCredentialKubeconfig"
-          },
-          "readOnly": true
-        },
-        "sshKeys": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/SSHKey"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ApplianceListResult": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Appliance"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ApplianceProperties": {
-      "type": "object",
-      "properties": {
-        "distro": {
-          "type": "string",
-          "default": "AKSEdge",
-          "enum": [
-            "AKSEdge"
-          ],
-          "x-ms-enum": {
-            "name": "Distro",
-            "modelAsString": true
-          }
-        },
-        "infrastructureConfig": {
-          "$ref": "#/definitions/AppliancePropertiesInfrastructureConfig"
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        },
-        "publicKey": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "WaitingForHeartbeat",
-            "Validating",
-            "Connecting",
-            "Connected",
-            "Running",
-            "PreparingForUpgrade",
-            "ETCDSnapshotFailed",
-            "UpgradePrerequisitesCompleted",
-            "ValidatingSFSConnectivity",
-            "ValidatingImageDownload",
-            "ValidatingImageUpload",
-            "ValidatingETCDHealth",
-            "PreUpgrade",
-            "UpgradingKVAIO",
-            "WaitingForKVAIO",
-            "ImagePending",
-            "ImageProvisioning",
-            "ImageProvisioned",
-            "ImageDownloading",
-            "ImageDownloaded",
-            "ImageDeprovisioning",
-            "ImageUnknown",
-            "UpdatingCloudOperator",
-            "WaitingForCloudOperator",
-            "UpdatingCAPI",
-            "UpdatingCluster",
-            "PostUpgrade",
-            "UpgradeComplete",
-            "UpgradeClusterExtensionFailedToDelete",
-            "UpgradeFailed",
-            "Offline",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "version": {
-          "type": "string"
-        }
-      }
-    },
-    "AppliancePropertiesInfrastructureConfig": {
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "enum": [
-            "VMWare",
-            "HCI",
-            "SCVMM"
-          ],
-          "x-ms-enum": {
-            "name": "Provider",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "ArtifactProfile": {
       "type": "object",
       "properties": {
@@ -660,17 +467,6 @@
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": true
-          }
-        }
-      }
-    },
-    "PatchableAppliance": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
           }
         }
       }
@@ -791,6 +587,279 @@
             "$ref": "#/definitions/SupportedVersion"
           },
           "readOnly": true
+        }
+      }
+    },
+    "appliance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/applianceProperties",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "applianceCredentialKubeconfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "clusterUser",
+            "clusterCustomerUser"
+          ],
+          "x-ms-enum": {
+            "name": "AccessProfileType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceGetTelemetryConfigResult": {
+      "type": "object",
+      "properties": {
+        "telemetryInstrumentationKey": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceListCredentialResults": {
+      "type": "object",
+      "properties": {
+        "hybridConnectionConfig": {
+          "$ref": "#/definitions/HybridConnectionConfig",
+          "readOnly": true
+        },
+        "kubeconfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/applianceCredentialKubeconfig"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "applianceListKeysResults": {
+      "type": "object",
+      "properties": {
+        "artifactProfiles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArtifactProfile"
+          },
+          "readOnly": true
+        },
+        "kubeconfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/applianceCredentialKubeconfig"
+          },
+          "readOnly": true
+        },
+        "sshKeys": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSHKey"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "applianceListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/appliance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "applianceOperation": {
+      "type": "object",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/applianceOperationValueDisplay",
+          "x-ms-client-flatten": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceOperationValueDisplay": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceOperationsList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/applianceOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "applianceProperties": {
+      "type": "object",
+      "properties": {
+        "distro": {
+          "type": "string",
+          "default": "AKSEdge",
+          "enum": [
+            "AKSEdge"
+          ],
+          "x-ms-enum": {
+            "name": "Distro",
+            "modelAsString": true
+          }
+        },
+        "infrastructureConfig": {
+          "$ref": "#/definitions/appliancePropertiesInfrastructureConfig"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicKey": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "WaitingForHeartbeat",
+            "Validating",
+            "Connecting",
+            "Connected",
+            "Running",
+            "PreparingForUpgrade",
+            "ETCDSnapshotFailed",
+            "UpgradePrerequisitesCompleted",
+            "ValidatingSFSConnectivity",
+            "ValidatingImageDownload",
+            "ValidatingImageUpload",
+            "ValidatingETCDHealth",
+            "PreUpgrade",
+            "UpgradingKVAIO",
+            "WaitingForKVAIO",
+            "ImagePending",
+            "ImageProvisioning",
+            "ImageProvisioned",
+            "ImageDownloading",
+            "ImageDownloaded",
+            "ImageDeprovisioning",
+            "ImageUnknown",
+            "UpdatingCloudOperator",
+            "WaitingForCloudOperator",
+            "UpdatingCAPI",
+            "UpdatingCluster",
+            "PostUpgrade",
+            "UpgradeComplete",
+            "UpgradeClusterExtensionFailedToDelete",
+            "UpgradeFailed",
+            "Offline",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "appliancePropertiesInfrastructureConfig": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": [
+            "VMWare",
+            "HCI",
+            "SCVMM"
+          ],
+          "x-ms-enum": {
+            "name": "Provider",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "patchableAppliance": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

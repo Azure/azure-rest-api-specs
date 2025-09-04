@@ -569,3 +569,9 @@ model SupportedVersionCatalogVersionData {
   @visibility(Lifecycle.Read)
   version?: string;
 }
+
+model ApplianceOperationsList is Azure.Core.Page<ApplianceOperation>;
+
+model ApplianceListResult is Azure.Core.Page<Appliance>;
+
+@@visibility(ApplianceListResult.value, Lifecycle.Read);

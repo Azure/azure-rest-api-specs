@@ -12,3 +12,22 @@ using Microsoft.ResourceConnector;
 @@flattenProperty(Appliance.properties);
 
 @@clientLocation(AppliancesOperationGroup.getTelemetryConfig, Appliances);
+@@clientLocation(Operations.list, Appliances);
+@@clientName(Operations.list, "ListOperations");
+
+@@clientName(PatchableAppliance, "patchableAppliance");
+@@clientName(ApplianceOperation, "applianceOperation");
+@@clientName(ApplianceOperationsList, "applianceOperationsList");
+@@clientName(ApplianceProperties, "applianceProperties");
+@@clientName(Appliance, "appliance");
+@@clientName(ApplianceListResult, "applianceListResult");
+@@clientName(ApplianceListCredentialResults, "applianceListCredentialResults");
+@@clientName(ApplianceListKeysResults, "applianceListKeysResults");
+@@clientName(ApplianceGetTelemetryConfigResult,
+  "applianceGetTelemetryConfigResult"
+);
+@@clientName(ApplianceOperationValueDisplay, "applianceOperationValueDisplay");
+@@clientName(ApplianceCredentialKubeconfig, "applianceCredentialKubeconfig");
+@@clientName(AppliancePropertiesInfrastructureConfig,
+  "appliancePropertiesInfrastructureConfig"
+);
