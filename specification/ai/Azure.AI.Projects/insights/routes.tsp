@@ -42,7 +42,7 @@ interface Insights {
 
       @doc("Complete evaluation configuration including data source, evaluators, and result settings")
       @body
-      request: Insight;
+      insight: Insight;
     },
     ResourceCreatedResponse<Insight>
   >;
