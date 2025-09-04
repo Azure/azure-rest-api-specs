@@ -100,7 +100,7 @@ interface GroupQuotasEnforcementStatuses {
   createOrUpdate is GroupQuotasEnforcementStatusesOps.CreateOrUpdateAsync<
     GroupQuotasEnforcementStatus,
     Response = ArmResourceUpdatedResponse<GroupQuotasEnforcementStatus> | ArmResourceCreatedResponse<
-      LROResponse,
+      GroupQuotasEnforcementStatus,
       ArmCombinedLroHeaders<FinalResult = GroupQuotasEnforcementStatus> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
@@ -121,33 +121,6 @@ interface GroupQuotasEnforcementStatuses {
     Response = ArmResponse<GroupQuotasEnforcementStatus> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEnforcementStatus> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
-  >;
-
-  /**
-   * Returns only the list of the Azure regions settings, where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.
-   */
-  list is GroupQuotasEnforcementStatusesOps.List<
-    GroupQuotasEnforcementStatus,
-    Parameters = {
-      /**
-       * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
-       */
-      @path
-      @segment("groupQuotas")
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[a-z][a-z0-9]*$")
-      groupQuotaName: string;
-
-      /**
-       * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
-       */
-      @path
-      @segment("resourceProviders")
-      @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
-      resourceProviderName: string;
-    },
-    Response = ArmResponse<GroupQuotasEnforcementListResponse>
   >;
 }
 

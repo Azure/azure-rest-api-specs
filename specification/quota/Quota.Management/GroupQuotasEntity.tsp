@@ -80,7 +80,7 @@ interface GroupQuotasEntities {
   createOrUpdate is GroupQuotasEntitiesOps.CreateOrUpdateAsync<
     GroupQuotasEntity,
     Response = ArmResourceUpdatedResponse<GroupQuotasEntity> | ArmResourceCreatedResponse<
-      LROResponse,
+      GroupQuotasEntity,
       ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
         Azure.Core.Foundations.RetryAfterHeader
     >,

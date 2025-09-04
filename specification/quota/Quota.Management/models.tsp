@@ -11,23 +11,66 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Quota;
 
 /**
+ * Type of the group.
+ */
+union GroupType {
+  string,
+
+  /**
+   * The group is used for subscription group quota allocations.
+   */
+  AllocationGroup: "AllocationGroup",
+
+  /**
+   * The group is used for the enforced shared limit scenario
+   */
+  EnforcedGroup: "EnforcedGroup",
+}
+
+/**
  * Request status.
  */
 union RequestState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The quota request has been accepted.
+   */
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The quota request has been created.
+   */
   Created: "Created",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The quota request is invalid.
+   */
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The quota request has succeeded.
+   */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The quota request has been escalated for further review. Please file a support ticket. A support engineer will follow up.
+   */
+  Escalated: "Escalated",
+
+  /**
+   * The quota request has failed.
+   */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The quota request is currently being processed.
+   */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The quota request has been canceled.
+   */
   Canceled: "Canceled",
 }
 
@@ -124,6 +167,12 @@ model GroupQuotasEntityBase {
    * Display name of the GroupQuota entity.
    */
   displayName?: string;
+
+  /**
+   * Type of the group.
+   */
+  @visibility(Lifecycle.Read)
+  groupType?: GroupType;
 
   /**
    * Provisioning state of the operation.
@@ -226,6 +275,7 @@ model GroupQuotaSubscriptionRequestStatusProperties {
   /**
    * The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -301,7 +351,6 @@ model GroupQuotaDetails {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: GroupQuotaDetailsName;
 
@@ -372,6 +421,7 @@ model SubmittedResourceRequestStatusProperties {
    * The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -391,7 +441,6 @@ model SubmittedResourceRequestStatusProperties {
  * The new GroupQuota limit requested.
  */
 model GroupQuotaRequestBase {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: GroupQuotaRequestBaseProperties;
 }
@@ -406,7 +455,6 @@ model GroupQuotaRequestBaseProperties {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: GroupQuotaRequestBasePropertiesName;
 
@@ -505,7 +553,6 @@ model SubscriptionQuotaDetails {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: SubscriptionQuotaDetailsName;
 }
@@ -538,6 +585,7 @@ model QuotaAllocationRequestStatusProperties {
    * The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -557,7 +605,6 @@ model QuotaAllocationRequestStatusProperties {
  * The new quota request allocated to subscription.
  */
 model QuotaAllocationRequestBase {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: QuotaAllocationRequestBaseProperties;
 }
@@ -572,7 +619,7 @@ model QuotaAllocationRequestBaseProperties {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: QuotaAllocationRequestBasePropertiesName;
 
@@ -628,7 +675,6 @@ model GroupQuotaUsagesBase {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: GroupQuotaUsagesBaseName;
 
   /**
@@ -672,6 +718,12 @@ model GroupQuotasEnforcementStatusProperties {
   enforcementEnabled?: EnforcementState;
 
   /**
+   * The name of the group that is enforced.
+   */
+  @visibility(Lifecycle.Read)
+  enforcedGroupName?: string;
+
+  /**
    * Request status.
    */
   @visibility(Lifecycle.Read)
@@ -687,9 +739,18 @@ model GroupQuotasEnforcementStatusProperties {
 /**
  * List of Azure regions, where the group quotas is enabled for enforcement.
  */
-model GroupQuotasEnforcementListResponse
-  is Azure.Core.Page<GroupQuotasEnforcementStatus>;
+model GroupQuotasEnforcementListResponse {
+  /**
+   * List of Azure Regions.
+   */
+  value?: GroupQuotasEnforcementStatus[];
 
+  /**
+   * The URL to use for getting the next set of results.
+   */
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 /**
  * Usage properties for the specified resource.
  */
@@ -919,6 +980,7 @@ model QuotaRequestProperties {
    * The quota request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -1173,7 +1235,6 @@ model QuotaRequestOneResourceSubmitResponse {
   /**
    * Quota request details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: QuotaRequestOneResourceProperties;
 }
 
@@ -1197,6 +1258,7 @@ model QuotaRequestOneResourceProperties {
    * Quota request submission time. The date conforms to the following ISO 8601 standard format: yyyy-MM-ddTHH:mm:ssZ.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -1250,7 +1312,6 @@ model QuotaRequestOneResourceProperties {
    * Additional properties for the specific resource provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: unknown;
 }
 
@@ -1307,7 +1368,6 @@ model QuotaRequestSubmitResponse202 {
   /**
    * Quota request status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: QuotaRequestStatusDetails;
 }
 
@@ -1361,7 +1421,6 @@ model QuotaRequestStatusDetails {
    * Additional properties for the specific resource provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: unknown;
 }
 

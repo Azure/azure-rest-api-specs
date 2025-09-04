@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.2
- * Date: 2025-07-22T02:43:23.334Z
+ * Version: 0.11.5
+ * Date: 2025-09-03T07:05:15.767Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -47,11 +47,11 @@ namespace Microsoft.Quota;
  */
 enum Versions {
   /**
-   * The 2025-07-15 API version.
+   * The 2025-09-01 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2025_07_15: "2025-07-15",
+  v2025_09_01: "2025-09-01",
 }
 
 @armResourceOperations

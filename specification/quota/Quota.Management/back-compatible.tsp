@@ -94,11 +94,6 @@ using Microsoft.Quota;
 @@clientName(GroupQuotasEnforcementStatuses.update::parameters.properties,
   "LocationSettings"
 );
-@@clientLocation(GroupQuotasEnforcementStatuses.list,
-  "GroupQuotaLocationSettings",
-  "!csharp"
-);
-
 @@clientLocation(GroupQuotaSubscriptionRequestStatuses.get,
   "GroupQuotaSubscriptionRequests",
   "!csharp"
@@ -138,19 +133,6 @@ using Microsoft.Quota;
   "GroupQuotaSubscriptions",
   "!csharp"
 );
-@@clientLocation(GroupQuotaSubscriptionIds.update,
-  "GroupQuotaSubscriptions",
-  "!csharp"
-);
-@@clientLocation(GroupQuotaSubscriptionIds.delete,
-  "GroupQuotaSubscriptions",
-  "!csharp"
-);
-@@clientLocation(GroupQuotaSubscriptionIds.list,
-  "GroupQuotaSubscriptions",
-  "!csharp"
-);
-
 @@clientLocation(QuotaAllocationRequestStatuses.get,
   "GroupQuotaSubscriptionAllocationRequest",
   "!csharp"
@@ -174,3 +156,6 @@ using Microsoft.Quota;
 
 @@maxLength(Azure.ResourceManager.Extension.ManagementGroup.name, 63);
 @@minLength(Azure.ResourceManager.Extension.ManagementGroup.name, 3);
+@@clientName(QuotaRequestOneResourceProperties,
+  "quotaRequestOneResourceProperties"
+);
