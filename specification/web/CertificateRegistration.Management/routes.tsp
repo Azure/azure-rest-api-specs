@@ -18,9 +18,7 @@ interface AppServiceCertificateOrdersOperationGroup {
   /**
    * Description for Validate information for a certificate order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Validate information for a certificate order.")
-  @operationId("AppServiceCertificateOrders_ValidatePurchaseInformation")
   @autoRoute
   @action("validateCertificateRegistrationInformation")
   validatePurchaseInformation is ArmProviderActionSync<

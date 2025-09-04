@@ -13,11 +13,8 @@ namespace Microsoft.CertificateRegistration;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ResourceNotRenewableReason {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RegistrationStatusNotSupportedForRenewal: "RegistrationStatusNotSupportedForRenewal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ExpirationNotInRenewalTimeRange: "ExpirationNotInRenewalTimeRange",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SubscriptionNotActive: "SubscriptionNotActive",
 }
 
@@ -370,13 +367,9 @@ model CertificateDetails {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CertificateOrderContact {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   email?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nameFirst?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nameLast?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   phone?: string;
 }
 
@@ -496,7 +489,6 @@ model AppServiceCertificateOrderPatchResource extends ProxyOnlyResource {
   /**
    * AppServiceCertificateOrderPatchResource resource specific properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AppServiceCertificateOrderPatchResourceProperties;
 }
 
@@ -670,7 +662,6 @@ model AppServiceCertificatePatchResource extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AppServiceCertificate;
 }
 
@@ -682,7 +673,6 @@ model ReissueCertificateOrderRequest extends ProxyOnlyResource {
   /**
    * ReissueCertificateOrderRequest resource specific properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ReissueCertificateOrderRequestProperties;
 }
 
@@ -719,7 +709,6 @@ model RenewCertificateOrderRequest extends ProxyOnlyResource {
   /**
    * RenewCertificateOrderRequest resource specific properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: RenewCertificateOrderRequestProperties;
 }
 
@@ -775,7 +764,6 @@ model SiteSeal {
   /**
    * HTML snippet
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   html: string;
 }
 
@@ -1036,7 +1024,6 @@ model DataProviderMetadata {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model KeyValuePairStringObject {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   key?: string;
 
@@ -1253,7 +1240,7 @@ model CsmOperationCollection {
    */
   @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  value: CsmOperationDescription[]; // required
+  value: CsmOperationDescription[];
 
   /**
    * Link to next page of resources.
