@@ -631,6 +631,7 @@ namespace IngestionSources {
   @doc("SAS Token connection information")
   model SharedAccessSignatureTokenConnection {
     @doc("Azure Blob Storage container URL")
+    @encodedName("application/json", "containerUri")
     containerUrl: url;
 
     @doc("SAS token")
@@ -654,6 +655,7 @@ namespace IngestionSources {
   @doc("Managed Identity connection information")
   model ManagedIdentityConnection {
     @doc("Azure Blob Storage container URL")
+    @encodedName("application/json", "containerUri")
     containerUrl: url;
 
     @doc("Azure Managed Identity configured in the Geo-Catalog with access to the container")
