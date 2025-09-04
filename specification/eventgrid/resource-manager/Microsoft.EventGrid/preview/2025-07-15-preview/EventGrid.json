@@ -17980,6 +17980,7 @@
             "Revoked"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "KeyEncryptionKeyStatus",
             "modelAsString": true
@@ -17987,7 +17988,8 @@
         },
         "keyEncryptionKeyStatusFriendlyDescription": {
           "description": "Friendly description about the Customer Managed Key (CMK) encryption state. This is a read-only property which determines why the associated key is revoked which\r\nwill help user to mitigate the issue and re-enable the CMK key.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18026,8 +18028,16 @@
           }
         },
         "userAssignedIdentityResourceId": {
-          "description": "ARM fully qualified Id for the user-assigned identity associated with the resource. The resource Id takes the following format:\r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "type": "string"
+          "format": "arm-id",
+          "description": "Azure Resource fully qualified Id for the user-assigned identity associated with the resource. The resourcre Id takes the following format:\r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       }
     },
