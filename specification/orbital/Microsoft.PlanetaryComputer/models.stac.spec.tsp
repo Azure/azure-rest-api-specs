@@ -427,7 +427,7 @@ model StacCollection {
   /**
    * Spatial and temporal extent of the collection.
    */
-  extent: Extent;
+  extent: StacExtensionExtent;
 
   /**
    * Keywords describing the collection.
@@ -521,20 +521,20 @@ model Provider {
  *
  * Represents the spatial and temporal extent of a STAC collection.
  */
-model Extent {
+model StacExtensionExtent {
   /**
    * Spatial extent defined by bounding boxes.
    *
    * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
-  spatial: SpatialExtent;
+  spatial: StacExtensionSpatialExtent;
 
   /**
    * Temporal extent defined by time intervals.
    *
    * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
-  temporal: TimeInterval;
+  temporal: StacCollectionTemporalExtent;
 }
 
 /**
@@ -543,7 +543,7 @@ model Extent {
  *
  * Represents the spatial extent of a STAC collection with bounding boxes.
  */
-model SpatialExtent {
+model StacExtensionSpatialExtent {
   /**
    * Array of bounding boxes defining the spatial extent, in format [[west, south, east, north]].
    */
@@ -557,7 +557,7 @@ model SpatialExtent {
  *
  * Represents the temporal extent of a STAC collection with time intervals.
  */
-model TimeInterval {
+model StacCollectionTemporalExtent {
   /**
    * Array of time intervals in format [[start_datetime, end_datetime]].
    */

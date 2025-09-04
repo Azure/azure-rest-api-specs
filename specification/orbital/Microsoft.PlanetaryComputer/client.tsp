@@ -83,7 +83,6 @@ namespace Customizations;
 
 // Generic single-word class names - add descriptive prefixes
 @@clientName(Asset, "StacAsset", "csharp");
-@@clientName(Extent, "StacExtent", "csharp");
 @@clientName(Link, "StacLink", "csharp");
 @@clientName(Metadata, "MosaicMetadata", "csharp");
 @@clientName(Geometry, "GeoJsonGeometry", "csharp");
