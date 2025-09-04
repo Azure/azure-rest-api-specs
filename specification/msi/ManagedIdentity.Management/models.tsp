@@ -56,9 +56,9 @@ model SystemAssignedIdentityProperties {
 /**
  * An error response from the ManagedServiceIdentity service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @error
-@extension("x-ms-external", true)
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * A list of additional details about the error.
@@ -69,8 +69,8 @@ model CloudError {
 /**
  * An error response from the ManagedServiceIdentity service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-@extension("x-ms-external", true)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error.
@@ -94,22 +94,10 @@ model CloudErrorBody {
   details?: CloudErrorBody[];
 }
 
-@friendlyName("Paged{name}", Resource)
-@doc("Paged collection of {name} items", Resource)
-model Page<Resource extends TypeSpec.Reflection.Model> {
-  @doc("The {name} items on this page", Resource)
-  @pageItems
-  value?: Resource[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<Resource>;
-}
-
 /**
  * Values returned by the List operation.
  */
-model UserAssignedIdentitiesListResult is Page<Identity>;
+model UserAssignedIdentitiesListResult is Azure.Core.Page<Identity>;
 
 /**
  * The properties associated with the user assigned identity.
@@ -164,7 +152,6 @@ model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
    * The properties associated with the identity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UserAssignedIdentityProperties;
 }
 
@@ -172,7 +159,7 @@ model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
  * Values returned by the List operation for federated identity credentials.
  */
 model FederatedIdentityCredentialsListResult
-  is Page<FederatedIdentityCredential>;
+  is Azure.Core.Page<FederatedIdentityCredential>;
 @@extension(FederatedIdentityCredentialsListResult.value,
   "x-ms-identifiers",
   #["id"]
@@ -201,34 +188,10 @@ model FederatedIdentityCredentialProperties {
 }
 
 /**
- * The default resourceUri parameter type.
- */
-@doc("The default resourceUri parameter type.")
-model ScopeParameter {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @path(#{ allowReserved: true })
-  @doc("The fully qualified Azure Resource manager identifier of the resource.")
-  @Azure.ResourceManager.Private.resourceParameterBaseFor(
-    [Azure.ResourceManager.CommonTypes.ResourceHome.Extension]
-  )
-  scope: string;
-}
-
-/**
- * Base parameters for a resource.
- * @template Resource The type of the resource.
- */
-@Azure.ResourceManager.Private.resourceBaseParametersOf(Resource)
-model ScopeParameters<Resource extends {}> {
-  ...ApiVersionParameter;
-  ...ScopeParameter;
-}
-
-/**
  * A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
  */
 @summary("Operations List.")
-model OperationListResult is Page<Operation>;
+model OperationListResult is Azure.Core.Page<Operation>;
 @@summary(OperationListResult.value, "Operations List.");
 @@summary(OperationListResult.nextLink, "Next Link");
 @@extension(OperationListResult.value, "x-ms-identifiers", #["name"]);

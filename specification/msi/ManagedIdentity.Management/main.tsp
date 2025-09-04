@@ -27,7 +27,6 @@ using Azure.ResourceManager;
  * The Managed Service Identity Client.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service(#{ title: "ManagedServiceIdentityClient" })
 @versioned(Versions)
 @armCommonTypesVersion(CommonTypes.Versions.v4)
@@ -52,7 +51,5 @@ enum Versions {
   /**
    * The 2024-11-30 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_11_30: "2024-11-30",
 }
