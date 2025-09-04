@@ -4292,7 +4292,7 @@ model OrchestrationServiceSummary {
   latestOperationStatus?: OrchestrationServiceOperationStatus;
 
   /**
-   * The last time when the operation status changed. Minimum API version for this property is 2025-04-01.
+   * The last UTC time when the operation status changed. Minimum API version for this property is 2025-04-01.
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_04_01)
