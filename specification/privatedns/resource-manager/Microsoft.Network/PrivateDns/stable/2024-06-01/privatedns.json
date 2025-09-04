@@ -1502,6 +1502,11 @@
       "type": "object",
       "description": "Describes a Private DNS zone.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateZoneProperties",
+          "description": "Properties of the Private DNS zone.",
+          "x-ms-client-flatten": true
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -1525,11 +1530,6 @@
         "etag": {
           "type": "string",
           "description": "The ETag of the zone."
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateZoneProperties",
-          "description": "Properties of the Private DNS zone.",
-          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1668,14 +1668,14 @@
       "type": "object",
       "description": "Describes a DNS record set (a collection of DNS records with the same name and type) in a Private DNS zone.",
       "properties": {
-        "etag": {
-          "type": "string",
-          "description": "The ETag of the record set."
-        },
         "properties": {
           "$ref": "#/definitions/RecordSetProperties",
           "description": "The properties of the record set.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the record set."
         }
       },
       "allOf": [
@@ -1906,6 +1906,11 @@
       "type": "object",
       "description": "Describes a link to virtual network for a Private DNS zone.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkLinkProperties",
+          "description": "Properties of the virtual network link to the Private DNS zone.",
+          "x-ms-client-flatten": true
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -1929,11 +1934,6 @@
         "etag": {
           "type": "string",
           "description": "The ETag of the virtual network link."
-        },
-        "properties": {
-          "$ref": "#/definitions/VirtualNetworkLinkProperties",
-          "description": "Properties of the virtual network link to the Private DNS zone.",
-          "x-ms-client-flatten": true
         }
       },
       "allOf": [
