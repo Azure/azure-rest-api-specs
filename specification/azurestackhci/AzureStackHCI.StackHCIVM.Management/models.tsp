@@ -487,9 +487,6 @@ union LoadBalancerBackendAddressAdminState {
   @doc("Down - forced admin state down")
   Down: "Down",
 
-  @doc("Drain - no new connections must be forwarded to the backend")
-  Drain: "Drain",
-
   string,
 }
 
