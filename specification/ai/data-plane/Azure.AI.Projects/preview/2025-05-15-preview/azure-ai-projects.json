@@ -61,40 +61,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "scopes",
+            "name": "evaluationNames",
             "in": "query",
-            "description": "The scope of the analysis.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "Agent",
-                "Evaluation"
-              ],
-              "x-ms-enum": {
-                "name": "AnalysisScope",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "Agent",
-                    "value": "Agent",
-                    "description": "Analysis on an Agent."
-                  },
-                  {
-                    "name": "Evaluation",
-                    "value": "Evaluation",
-                    "description": "Analysis on an Evaluation result."
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "name": "scopeIds",
-            "in": "query",
-            "description": "The unique identifiers for the scopes.",
+            "description": "The unique names for the evaluations.",
             "required": false,
             "type": "array",
             "items": {
@@ -103,53 +72,11 @@
             "collectionFormat": "csv"
           },
           {
-            "name": "states",
+            "name": "agentId",
             "in": "query",
-            "description": "The states of the analysis.",
+            "description": "The unique identifier for the agent.",
             "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "NotStarted",
-                "Running",
-                "Succeeded",
-                "Failed",
-                "Canceled"
-              ],
-              "x-ms-enum": {
-                "name": "OperationState",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "NotStarted",
-                    "value": "NotStarted",
-                    "description": "The operation has not started."
-                  },
-                  {
-                    "name": "Running",
-                    "value": "Running",
-                    "description": "The operation is in progress."
-                  },
-                  {
-                    "name": "Succeeded",
-                    "value": "Succeeded",
-                    "description": "The operation has completed successfully."
-                  },
-                  {
-                    "name": "Failed",
-                    "value": "Failed",
-                    "description": "The operation has failed."
-                  },
-                  {
-                    "name": "Canceled",
-                    "value": "Canceled",
-                    "description": "The operation has been canceled by the user."
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -299,40 +226,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "scopes",
+            "name": "evaluationNames",
             "in": "query",
-            "description": "The scope of the analysis.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "Agent",
-                "Evaluation"
-              ],
-              "x-ms-enum": {
-                "name": "AnalysisScope",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "Agent",
-                    "value": "Agent",
-                    "description": "Analysis on an Agent."
-                  },
-                  {
-                    "name": "Evaluation",
-                    "value": "Evaluation",
-                    "description": "Analysis on an Evaluation result."
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "name": "scopeIds",
-            "in": "query",
-            "description": "The unique identifiers for the scopes.",
+            "description": "The unique names for the evaluations.",
             "required": false,
             "type": "array",
             "items": {
@@ -341,53 +237,11 @@
             "collectionFormat": "csv"
           },
           {
-            "name": "states",
+            "name": "agentId",
             "in": "query",
-            "description": "The states of the analysis.",
+            "description": "The unique identifier for the agent.",
             "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "NotStarted",
-                "Running",
-                "Succeeded",
-                "Failed",
-                "Canceled"
-              ],
-              "x-ms-enum": {
-                "name": "OperationState",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "NotStarted",
-                    "value": "NotStarted",
-                    "description": "The operation has not started."
-                  },
-                  {
-                    "name": "Running",
-                    "value": "Running",
-                    "description": "The operation is in progress."
-                  },
-                  {
-                    "name": "Succeeded",
-                    "value": "Succeeded",
-                    "description": "The operation has completed successfully."
-                  },
-                  {
-                    "name": "Failed",
-                    "value": "Failed",
-                    "description": "The operation has failed."
-                  },
-                  {
-                    "name": "Canceled",
-                    "value": "Canceled",
-                    "description": "The operation has been canceled by the user."
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1865,6 +1719,30 @@
     }
   },
   "definitions": {
+    "AgentAnalysisScope": {
+      "type": "object",
+      "description": "Analysis on set of Agent Evaluation Results",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of analysis scope.",
+          "enum": [
+            "Agent"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "agentId": {
+          "type": "string",
+          "description": "Identifier for the agent."
+        }
+      },
+      "required": [
+        "kind",
+        "agentId"
+      ]
+    },
     "AgentEvaluation": {
       "type": "object",
       "description": "Evaluation response for agent evaluation run.",
@@ -2137,25 +2015,39 @@
       ]
     },
     "AnalysisScope": {
+      "type": "object",
+      "description": "The scope of the cluster analysis.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalysisScopeType",
+          "description": "The kind of analysis scope."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "AnalysisScopeType": {
       "type": "string",
       "description": "The scope of the cluster analysis.",
       "enum": [
-        "Agent",
-        "Evaluation"
+        "Evaluation",
+        "Agent"
       ],
       "x-ms-enum": {
-        "name": "AnalysisScope",
+        "name": "AnalysisScopeType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Agent",
-            "value": "Agent",
-            "description": "Analysis on an Agent."
-          },
           {
             "name": "Evaluation",
             "value": "Evaluation",
             "description": "Analysis on an Evaluation result."
+          },
+          {
+            "name": "Agent",
+            "value": "Agent",
+            "description": "Analysis on an Agent."
           }
         ]
       }
@@ -3149,6 +3041,33 @@
         "id",
         "data",
         "evaluators"
+      ]
+    },
+    "EvaluationAnalysisScope": {
+      "type": "object",
+      "description": "Analysis on set of Evaluation Results",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of analysis scope.",
+          "enum": [
+            "Evaluation"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "evaluationNames": {
+          "type": "array",
+          "description": "List of evaluation names for the analysis.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "evaluationNames"
       ]
     },
     "EvaluationTarget": {

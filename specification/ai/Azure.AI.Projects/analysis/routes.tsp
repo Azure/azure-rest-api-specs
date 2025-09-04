@@ -18,17 +18,13 @@ alias AnalysisServiceTraits = SupportsClientRequestId &
 alias AnalysisOperations = Azure.Core.ResourceOperations<AnalysisServiceTraits>;
 
 alias FilterQueryParamsTraits = {
-  @query("scopes")
-  @doc("The scope of the analysis.")
-  scopes?: AnalysisScope[];
+  @query("evaluationNames")
+  @doc("The unique names for the evaluations.")
+  evaluationNames?: string[];
 
-  @query("scopeIds")
-  @doc("The unique identifiers for the scopes.")
-  scopeIds?: string[];
-
-  @query("states")
-  @doc("The states of the analysis.")
-  states?: OperationState[];
+  @query("agentId")
+  @doc("The unique identifier for the agent.")
+  agentId?: string;
 };
 
 @route("analysis")

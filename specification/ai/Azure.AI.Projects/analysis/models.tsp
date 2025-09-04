@@ -47,12 +47,43 @@ model ErrorClusterReport {
 @doc("The scope of the cluster analysis.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-union AnalysisScope {
-  @doc("Analysis on an Agent.")
-  Agent: "Agent",
+@discriminator("kind")
+model AnalysisScope {
+  @doc("The kind of analysis scope.")
+  kind: AnalysisScopeType;
+}
 
+@doc("Analysis on set of Evaluation Results")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model EvaluationAnalysisScope {
+  @doc("The kind of analysis scope.")
+  kind: AnalysisScopeType.Evaluation;
+
+  @doc("List of evaluation names for the analysis.")
+  evaluationNames: string[];
+}
+
+@doc("Analysis on set of Agent Evaluation Results")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model AgentAnalysisScope {
+  @doc("The kind of analysis scope.")
+  kind: AnalysisScopeType.Agent;
+
+  @doc("Identifier for the agent.")
+  agentId: string;
+}
+
+@doc("The scope of the cluster analysis.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union AnalysisScopeType {
   @doc("Analysis on an Evaluation result.")
   Evaluation: "Evaluation",
+
+  @doc("Analysis on an Agent.")
+  Agent: "Agent",
 
   string,
 }
