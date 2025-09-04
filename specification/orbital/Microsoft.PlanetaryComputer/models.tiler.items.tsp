@@ -613,7 +613,7 @@ model GeoJsonStatisticsItemResponse {
    * MSFT ETag
    */
   @encodedName("application/json", "_msft:etag")
-  etag?: string;
+  eTag?: string;
 
   /**
    * List of STAC extension URLs used by this item

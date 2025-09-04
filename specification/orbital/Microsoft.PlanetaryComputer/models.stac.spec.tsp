@@ -707,7 +707,7 @@ model StacItem extends StacItemOrItemCollection {
    * MSFT ETag
    */
   @encodedName("application/json", "_msft:etag")
-  Etag?: string;
+  eTag?: string;
 }
 
 /**

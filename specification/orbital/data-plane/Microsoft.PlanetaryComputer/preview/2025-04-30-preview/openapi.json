@@ -13304,10 +13304,11 @@
       "type": "object",
       "description": "Managed Identity connection information",
       "properties": {
-        "containerUrl": {
+        "containerUri": {
           "type": "string",
           "format": "uri",
-          "description": "Azure Blob Storage container URL"
+          "description": "Azure Blob Storage container URL",
+          "x-ms-client-name": "containerUrl"
         },
         "objectId": {
           "$ref": "#/definitions/Azure.Core.uuid",
@@ -13315,7 +13316,7 @@
         }
       },
       "required": [
-        "containerUrl",
+        "containerUri",
         "objectId"
       ]
     },
@@ -13368,15 +13369,16 @@
       "type": "object",
       "description": "SAS Token connection information",
       "properties": {
-        "containerUrl": {
+        "containerUri": {
           "type": "string",
           "format": "uri",
-          "description": "Azure Blob Storage container URL"
+          "description": "Azure Blob Storage container URL",
+          "x-ms-client-name": "containerUrl"
         },
         "sasToken": {
           "type": "string",
           "description": "SAS token",
-          "x-ms-client-name": "sharedAccessSignatureToken",
+          "x-ms-client-name": "haredAccessSignatureToken",
           "x-ms-mutability": [
             "update",
             "create"
@@ -13390,7 +13392,7 @@
         }
       },
       "required": [
-        "containerUrl"
+        "containerUri"
       ]
     },
     "IngestionSources.SharedAccessSignatureTokenIngestionSource": {
@@ -15643,7 +15645,7 @@
         "_msft:etag": {
           "type": "string",
           "description": "MSFT ETag",
-          "x-ms-client-name": "Etag"
+          "x-ms-client-name": "eTag"
         }
       },
       "required": [
@@ -15761,7 +15763,7 @@
         "_msft:etag": {
           "type": "string",
           "description": "MSFT ETag",
-          "x-ms-client-name": "Etag"
+          "x-ms-client-name": "eTag"
         }
       },
       "allOf": [
