@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Fabric;
@@ -86,6 +87,7 @@ interface FabricCapacities {
     Scope = Extension.Subscription
   >;
 
+  @added(Versions.v2025_01_15_preview)
   @doc("List the current consumption and limit in this location for the provided subscription")
   @get
   @action("usages")
