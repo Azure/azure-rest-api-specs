@@ -19,10 +19,10 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2025-01-21 version */
+  /** 2025-09-04 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2025-01-21`,
+  `2025-09-04`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -272,6 +272,10 @@ model PoolImage {
 
   @doc("The ephemeral type of the image.")
   ephemeralType?: EphemeralType;
+
+  @doc("Read only. Determines if the image is ephemeral.")
+  @visibility(Lifecycle.Read)
+  isEphemeral: boolean;
 }
 
 @doc("The OS profile of the machines in the pool.")
@@ -324,6 +328,13 @@ union LogonType {
 model NetworkProfile {
   @doc("The subnet id on which to put all machines created in the pool.")
   subnetId: string;
+
+  @doc("The number of static IP addresses to reserve in the subnet. These IPs will be used for the machines in the pool.")
+  staticIpAddressCount: int32;
+
+  @doc("Read only. The list of static IP addresses to reserve in the subnet. These IPs will be used for the machines in the pool.")
+  @visibility(Lifecycle.Read)
+  ipAddresses: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -527,7 +538,23 @@ union ResourceStatus {
 
 @armResourceOperations
 interface ResourceDetails {
+  @delete
+  @doc("Deletes a list of resources by their IDs.")
+  deleteResources(
+    ...ApiVersionParameter,
+
+    @body
+    @doc("List of resource IDs to delete.")
+    content: DeleteResourcesDetails,
+  ): ArmDeletedResponse | ErrorResponse;
+
   listByPool is ArmResourceListByParent<ResourceDetailsObject>;
+}
+
+/** Request body for deleting many resources by their IDs. */
+model DeleteResourcesDetails {
+  @doc("List of resource IDs to delete.")
+  resourceIds: string[];
 }
 
 /** Represents how SKU capacity scales. */
@@ -537,7 +564,7 @@ union ResourceSkuCapacityScaleType {
   /** Capacity scales automatically. */
   "Automatic",
 
-  /** Capactiy scales manually. */
+  /** Capacity scales manually. */
   "Manual",
 
   /** Capacity does not scale. */
