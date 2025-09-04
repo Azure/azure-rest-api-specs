@@ -16,14 +16,14 @@ namespace Azure.AI.Projects;
 @doc("The response body for cluster analysis.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-@resource("error-clusters")
-model ErrorClusterReport {
-  @doc("The unique identifier for the cluster analysis result.")
+@resource("insights")
+model ProjectInsight {
+  @doc("The unique identifier for the insights report.")
   @key("id")
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("Metadata about the cluster analysis.")
+  @doc("Metadata about the insights report.")
   @visibility(Lifecycle.Read)
   metadata: AnalysisMetadata;
 
@@ -31,32 +31,32 @@ model ErrorClusterReport {
   @visibility(Lifecycle.Read)
   state: OperationState;
 
-  @doc("Scope of the analysis.")
-  scope: AnalysisScope;
+  @doc("Request for the insights analysis.")
+  request: AnalysisRequest;
 
   @doc("Configuration of the model used in the analysis.")
   modelConfiguration?: ModelConfiguration;
 
-  @doc("The result of the cluster analysis.")
+  @doc("The result of the insights report.")
   @visibility(Lifecycle.Read)
-  result?: ErrorClusterResult;
+  result?: InsightResult;
 }
 
-@doc("The scope of the cluster analysis.")
+@doc("The scope of the insights report.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 @discriminator("kind")
-model AnalysisScope {
+model AnalysisRequest {
   @doc("The kind of analysis scope.")
-  kind: AnalysisScopeType;
+  kind: AnalysisRequestType;
 }
 
 @doc("Analysis on set of Evaluation Results")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model EvaluationAnalysisScope extends AnalysisScope {
+model EvaluationRunClusterAnalysis extends AnalysisRequest {
   @doc("The kind of analysis scope.")
-  kind: AnalysisScopeType.Evaluation;
+  kind: AnalysisRequestType.EvaluationRunClusterAnalysis;
 
   @doc("List of evaluation names for the analysis.")
   evaluationNames: string[];
@@ -65,9 +65,9 @@ model EvaluationAnalysisScope extends AnalysisScope {
 @doc("Analysis on set of Agent Evaluation Results")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model AgentAnalysisScope extends AnalysisScope {
+model AgentClusterAnalysis extends AnalysisRequest {
   @doc("The kind of analysis scope.")
-  kind: AnalysisScopeType.Agent;
+  kind: AnalysisRequestType.AgentClusterAnalysis;
 
   @doc("Identifier for the agent.")
   agentId: string;
@@ -76,12 +76,12 @@ model AgentAnalysisScope extends AnalysisScope {
 @doc("The scope of the cluster analysis.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-union AnalysisScopeType {
+union AnalysisRequestType {
   @doc("Analysis on an Evaluation result.")
-  Evaluation: "Evaluation",
+  EvaluationRunClusterAnalysis: "EvaluationRunClusterAnalysis",
 
   @doc("Analysis on an Agent.")
-  Agent: "Agent",
+  AgentClusterAnalysis: "AgentClusterAnalysis",
 
   string,
 }
@@ -111,9 +111,21 @@ model ModelConfiguration {
 @doc("The result of the cluster analysis.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model ErrorClusterResult {
-  @doc("Summary of the error cluster analysis.")
-  summary: ErrorClusterSummary;
+@discriminator("kind")
+model InsightResult {
+  @doc("The type of insights result.")
+  kind: InsightResultType;
+}
+
+@doc("Insights from the cluster analysis.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model ClusterAnalysisInsights extends InsightResult {
+  @doc("Insights from the cluster analysis.")
+  kind: InsightResultType.ClusterAnalysisInsights;
+
+  @doc("Summary of the insights report.")
+  summary: InsightSummary;
 
   @doc("List of samples and their associated clusters.")
   samples: AnalysisSample[];
@@ -122,10 +134,20 @@ model ErrorClusterResult {
   clusters: AnalysisCluster[];
 }
 
+@doc("The type of insights result.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union InsightResultType {
+  @doc("Insights from the cluster analysis.")
+  ClusterAnalysisInsights: "ClusterAnalysisInsights",
+
+  string,
+}
+
 @doc("Summary of the error cluster analysis.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model ErrorClusterSummary {
+model InsightSummary {
   @doc("Total number of samples analyzed.")
   totalSample: int32;
 

@@ -11,13 +11,17 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-alias AnalysisServiceTraits = SupportsClientRequestId &
+alias InsightsServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
   NoConditionalRequests;
 
-alias AnalysisOperations = Azure.Core.ResourceOperations<AnalysisServiceTraits>;
+alias InsightsOperations = Azure.Core.ResourceOperations<InsightsServiceTraits>;
 
 alias FilterQueryParamsTraits = {
+  @query("analysisRequestType")
+  @doc("The type of analysis request.")
+  analysisRequestType?: AnalysisRequestType;
+
   @query("evaluationNames")
   @doc("The unique names for the evaluations.")
   evaluationNames?: string[];
@@ -27,15 +31,14 @@ alias FilterQueryParamsTraits = {
   agentId?: string;
 };
 
-@route("analysis")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-interface Analysis {
+interface Insights {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Run a one-off cluster error analysis.")
+  @doc("Generate Insights")
   @post
-  @route("error-clusters")
-  createErrorClusterReport is Azure.Core.Foundations.Operation<
+  @route("insights")
+  generateInsights is Azure.Core.Foundations.Operation<
     {
       @header("Repeatability-Request-ID")
       @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
@@ -47,28 +50,28 @@ interface Analysis {
 
       @doc("Complete evaluation configuration including data source, evaluators, and result settings")
       @body
-      request: ErrorClusterReport;
+      request: ProjectInsight;
     },
-    ResourceCreatedResponse<ErrorClusterReport>
+    ResourceCreatedResponse<ProjectInsight>
   >;
 
-  @doc("Get a specific cluster error analysis.")
+  @doc("Get a specific insights report.")
   @get
-  getErrorClusterReport is AnalysisOperations.ResourceRead<ErrorClusterReport>;
+  getInsights is InsightsOperations.ResourceRead<ProjectInsight>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("errors-clusters:latest")
-  @doc("Get the latest cluster error analysis.")
+  @route("insights:latest")
+  @doc("Get the latest insights report.")
   @get
-  getLatestErrorClusterReport is Operation<
+  getLatestInsightsReport is Operation<
     FilterQueryParamsTraits,
-    OkResponse<ErrorClusterReport>
+    OkResponse<ProjectInsight>
   >;
 
-  @doc("List all cluster error analyses.")
+  @doc("List all insights reports.")
   @get
-  listErrorClusterReports is AnalysisOperations.ResourceList<
-    ErrorClusterReport,
+  listInsightsReports is InsightsOperations.ResourceList<
+    ProjectInsight,
     ListQueryParametersTrait<FilterQueryParamsTraits>
   >;
 }

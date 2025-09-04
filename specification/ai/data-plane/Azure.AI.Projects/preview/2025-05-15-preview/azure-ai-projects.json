@@ -52,220 +52,6 @@
   },
   "tags": [],
   "paths": {
-    "/analysis/error-clusters": {
-      "get": {
-        "operationId": "Analysis_ListErrorClusterReports",
-        "description": "List all cluster error analyses.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "evaluationNames",
-            "in": "query",
-            "description": "The unique names for the evaluations.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "name": "agentId",
-            "in": "query",
-            "description": "The unique identifier for the agent.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedErrorClusterReport"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post": {
-        "operationId": "Analysis_CreateErrorClusterReport",
-        "description": "Run a one-off cluster error analysis.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "repeatabilityRequestId"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "x-ms-client-name": "repeatabilityFirstSent"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorClusterReport"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/ErrorClusterReport"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/analysis/error-clusters/{id}": {
-      "get": {
-        "operationId": "Analysis_GetErrorClusterReport",
-        "description": "Get a specific cluster error analysis.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier for the cluster analysis result.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorClusterReport"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/analysis/errors-clusters:latest": {
-      "get": {
-        "operationId": "Analysis_GetLatestErrorClusterReport",
-        "description": "Get the latest cluster error analysis.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "evaluationNames",
-            "in": "query",
-            "description": "The unique names for the evaluations.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "name": "agentId",
-            "in": "query",
-            "description": "The unique identifier for the agent.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorClusterReport"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/connections": {
       "get": {
         "operationId": "Connections_List",
@@ -1567,6 +1353,274 @@
         }
       }
     },
+    "/insights": {
+      "get": {
+        "operationId": "Insights_ListInsightsReports",
+        "description": "List all insights reports.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analysisRequestType",
+            "in": "query",
+            "description": "The type of analysis request.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "EvaluationRunClusterAnalysis",
+              "AgentClusterAnalysis"
+            ],
+            "x-ms-enum": {
+              "name": "AnalysisRequestType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "EvaluationRunClusterAnalysis",
+                  "value": "EvaluationRunClusterAnalysis",
+                  "description": "Analysis on an Evaluation result."
+                },
+                {
+                  "name": "AgentClusterAnalysis",
+                  "value": "AgentClusterAnalysis",
+                  "description": "Analysis on an Agent."
+                }
+              ]
+            }
+          },
+          {
+            "name": "evaluationNames",
+            "in": "query",
+            "description": "The unique names for the evaluations.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "agentId",
+            "in": "query",
+            "description": "The unique identifier for the agent.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedProjectInsight"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Insights_GenerateInsights",
+        "description": "Generate Insights",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectInsight"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ProjectInsight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insights/{id}": {
+      "get": {
+        "operationId": "Insights_GetInsights",
+        "description": "Get a specific insights report.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the insights report.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectInsight"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insights:latest": {
+      "get": {
+        "operationId": "Insights_GetLatestInsightsReport",
+        "description": "Get the latest insights report.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analysisRequestType",
+            "in": "query",
+            "description": "The type of analysis request.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "EvaluationRunClusterAnalysis",
+              "AgentClusterAnalysis"
+            ],
+            "x-ms-enum": {
+              "name": "AnalysisRequestType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "EvaluationRunClusterAnalysis",
+                  "value": "EvaluationRunClusterAnalysis",
+                  "description": "Analysis on an Evaluation result."
+                },
+                {
+                  "name": "AgentClusterAnalysis",
+                  "value": "AgentClusterAnalysis",
+                  "description": "Analysis on an Agent."
+                }
+              ]
+            }
+          },
+          {
+            "name": "evaluationNames",
+            "in": "query",
+            "description": "The unique names for the evaluations.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "agentId",
+            "in": "query",
+            "description": "The unique identifier for the agent.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectInsight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_List",
@@ -1719,7 +1773,7 @@
     }
   },
   "definitions": {
-    "AgentAnalysisScope": {
+    "AgentClusterAnalysis": {
       "type": "object",
       "description": "Analysis on set of Agent Evaluation Results",
       "properties": {
@@ -1733,10 +1787,10 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalysisScope"
+          "$ref": "#/definitions/AnalysisRequest"
         }
       ],
-      "x-ms-discriminator-value": "Agent"
+      "x-ms-discriminator-value": "AgentClusterAnalysis"
     },
     "AgentEvaluation": {
       "type": "object",
@@ -1969,6 +2023,44 @@
         "createdAt"
       ]
     },
+    "AnalysisRequest": {
+      "type": "object",
+      "description": "The scope of the insights report.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalysisRequestType",
+          "description": "The kind of analysis scope."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "AnalysisRequestType": {
+      "type": "string",
+      "description": "The scope of the cluster analysis.",
+      "enum": [
+        "EvaluationRunClusterAnalysis",
+        "AgentClusterAnalysis"
+      ],
+      "x-ms-enum": {
+        "name": "AnalysisRequestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EvaluationRunClusterAnalysis",
+            "value": "EvaluationRunClusterAnalysis",
+            "description": "Analysis on an Evaluation result."
+          },
+          {
+            "name": "AgentClusterAnalysis",
+            "value": "AgentClusterAnalysis",
+            "description": "Analysis on an Agent."
+          }
+        ]
+      }
+    },
     "AnalysisSample": {
       "type": "object",
       "description": "A sample from the analysis.",
@@ -2007,44 +2099,6 @@
         "parameters",
         "coordinates"
       ]
-    },
-    "AnalysisScope": {
-      "type": "object",
-      "description": "The scope of the cluster analysis.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalysisScopeType",
-          "description": "The kind of analysis scope."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
-    "AnalysisScopeType": {
-      "type": "string",
-      "description": "The scope of the cluster analysis.",
-      "enum": [
-        "Evaluation",
-        "Agent"
-      ],
-      "x-ms-enum": {
-        "name": "AnalysisScopeType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Evaluation",
-            "value": "Evaluation",
-            "description": "Analysis on an Evaluation result."
-          },
-          {
-            "name": "Agent",
-            "value": "Agent",
-            "description": "Analysis on an Agent."
-          }
-        ]
-      }
     },
     "ApiKeyCredentials": {
       "type": "object",
@@ -2447,6 +2501,41 @@
         "storageAccountArmId",
         "credential"
       ]
+    },
+    "ClusterAnalysisInsights": {
+      "type": "object",
+      "description": "Insights from the cluster analysis.",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/InsightSummary",
+          "description": "Summary of the insights report."
+        },
+        "samples": {
+          "type": "array",
+          "description": "List of samples and their associated clusters.",
+          "items": {
+            "$ref": "#/definitions/AnalysisSample"
+          }
+        },
+        "clusters": {
+          "type": "array",
+          "description": "List of clusters identified in the analysis.",
+          "items": {
+            "$ref": "#/definitions/AnalysisCluster"
+          }
+        }
+      },
+      "required": [
+        "summary",
+        "samples",
+        "clusters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightResult"
+        }
+      ],
+      "x-ms-discriminator-value": "ClusterAnalysisInsights"
     },
     "Connection": {
       "type": "object",
@@ -2874,106 +2963,6 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
-    "ErrorClusterReport": {
-      "type": "object",
-      "description": "The response body for cluster analysis.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier for the cluster analysis result.",
-          "readOnly": true
-        },
-        "metadata": {
-          "$ref": "#/definitions/AnalysisMetadata",
-          "description": "Metadata about the cluster analysis.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The current state of the analysis.",
-          "readOnly": true
-        },
-        "scope": {
-          "$ref": "#/definitions/AnalysisScope",
-          "description": "Scope of the analysis."
-        },
-        "modelConfiguration": {
-          "$ref": "#/definitions/ModelConfiguration",
-          "description": "Configuration of the model used in the analysis."
-        },
-        "result": {
-          "$ref": "#/definitions/ErrorClusterResult",
-          "description": "The result of the cluster analysis.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "metadata",
-        "state",
-        "scope"
-      ]
-    },
-    "ErrorClusterResult": {
-      "type": "object",
-      "description": "The result of the cluster analysis.",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/ErrorClusterSummary",
-          "description": "Summary of the error cluster analysis."
-        },
-        "samples": {
-          "type": "array",
-          "description": "List of samples and their associated clusters.",
-          "items": {
-            "$ref": "#/definitions/AnalysisSample"
-          }
-        },
-        "clusters": {
-          "type": "array",
-          "description": "List of clusters identified in the analysis.",
-          "items": {
-            "$ref": "#/definitions/AnalysisCluster"
-          }
-        }
-      },
-      "required": [
-        "summary",
-        "samples",
-        "clusters"
-      ]
-    },
-    "ErrorClusterSummary": {
-      "type": "object",
-      "description": "Summary of the error cluster analysis.",
-      "properties": {
-        "totalSample": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of samples analyzed."
-        },
-        "uniqueSubclusterLabel": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of unique subcluster labels."
-        },
-        "uniqueClusters": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of unique clusters."
-        },
-        "method": {
-          "type": "string",
-          "description": "Method used for clustering."
-        }
-      },
-      "required": [
-        "totalSample",
-        "uniqueSubclusterLabel",
-        "uniqueClusters",
-        "method"
-      ]
-    },
     "EvalResult": {
       "type": "object",
       "description": "Result of the evaluation.",
@@ -3062,7 +3051,7 @@
         "evaluators"
       ]
     },
-    "EvaluationAnalysisScope": {
+    "EvaluationRunClusterAnalysis": {
       "type": "object",
       "description": "Analysis on set of Evaluation Results",
       "properties": {
@@ -3079,10 +3068,10 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalysisScope"
+          "$ref": "#/definitions/AnalysisRequest"
         }
       ],
-      "x-ms-discriminator-value": "Evaluation"
+      "x-ms-discriminator-value": "EvaluationRunClusterAnalysis"
     },
     "EvaluationTarget": {
       "type": "object",
@@ -3333,6 +3322,69 @@
       ],
       "x-ms-discriminator-value": "dataset"
     },
+    "InsightResult": {
+      "type": "object",
+      "description": "The result of the cluster analysis.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/InsightResultType",
+          "description": "The type of insights result."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "InsightResultType": {
+      "type": "string",
+      "description": "The type of insights result.",
+      "enum": [
+        "ClusterAnalysisInsights"
+      ],
+      "x-ms-enum": {
+        "name": "InsightResultType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClusterAnalysisInsights",
+            "value": "ClusterAnalysisInsights",
+            "description": "Insights from the cluster analysis."
+          }
+        ]
+      }
+    },
+    "InsightSummary": {
+      "type": "object",
+      "description": "Summary of the error cluster analysis.",
+      "properties": {
+        "totalSample": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of samples analyzed."
+        },
+        "uniqueSubclusterLabel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of unique subcluster labels."
+        },
+        "uniqueClusters": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of unique clusters."
+        },
+        "method": {
+          "type": "string",
+          "description": "Method used for clustering."
+        }
+      },
+      "required": [
+        "totalSample",
+        "uniqueSubclusterLabel",
+        "uniqueClusters",
+        "method"
+      ]
+    },
     "ManagedAzureAISearchIndex": {
       "type": "object",
       "description": "Managed Azure AI Search Index Definition",
@@ -3522,27 +3574,6 @@
         "value"
       ]
     },
-    "PagedErrorClusterReport": {
-      "type": "object",
-      "description": "Paged collection of ErrorClusterReport items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ErrorClusterReport items on this page",
-          "items": {
-            "$ref": "#/definitions/ErrorClusterReport"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PagedEvaluation": {
       "type": "object",
       "description": "Paged collection of Evaluation items",
@@ -3573,6 +3604,27 @@
           "description": "The Index items on this page",
           "items": {
             "$ref": "#/definitions/Index"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedProjectInsight": {
+      "type": "object",
+      "description": "Paged collection of ProjectInsight items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProjectInsight items on this page",
+          "items": {
+            "$ref": "#/definitions/ProjectInsight"
           }
         },
         "nextLink": {
@@ -3707,6 +3759,46 @@
           }
         ]
       }
+    },
+    "ProjectInsight": {
+      "type": "object",
+      "description": "The response body for cluster analysis.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the insights report.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/AnalysisMetadata",
+          "description": "Metadata about the insights report.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current state of the analysis.",
+          "readOnly": true
+        },
+        "request": {
+          "$ref": "#/definitions/AnalysisRequest",
+          "description": "Request for the insights analysis."
+        },
+        "modelConfiguration": {
+          "$ref": "#/definitions/ModelConfiguration",
+          "description": "Configuration of the model used in the analysis."
+        },
+        "result": {
+          "$ref": "#/definitions/InsightResult",
+          "description": "The result of the insights report.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "metadata",
+        "state",
+        "request"
+      ]
     },
     "RedTeam": {
       "type": "object",
