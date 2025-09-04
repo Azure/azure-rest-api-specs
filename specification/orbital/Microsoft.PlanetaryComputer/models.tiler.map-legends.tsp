@@ -63,7 +63,7 @@ model IntervalLegendsResponse {
 alias Interval = int64[];
 
 /**
- * Classmap legend color.
+ * ClassMap legend color.
  *
  * The color is represented as a 4-tuple of integers, each in the range [0, 255].
  * The first three integers represent the red, green, and blue components of the
@@ -72,6 +72,6 @@ alias Interval = int64[];
 alias RgbaColor = int64[];
 
 /**
- * Classmap legend response model.
+ * ClassMap legend response model.
  */
-model ClassmapLegendResponse is Record<RgbaColor>;
+model ClassMapLegendResponse is Record<RgbaColor>;

@@ -44,7 +44,7 @@ namespace Customizations;
 // Models ending with "Response" - rename to "Result"
 @@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
 @@clientName(BoundsResponse, "BoundsResult", "csharp");
-@@clientName(ClassmapLegendResponse, "ClassmapLegendResult", "csharp");
+@@clientName(ClassMapLegendResponse, "ClassMapLegendResult", "csharp");
 @@clientName(GeoJsonStatisticsItemCollectionResponse,
   "GeoJsonStatisticsItemCollectionResult",
   "csharp"
@@ -276,8 +276,8 @@ interface Tiler {
   getWmtsCapabilitiesWithMatrixSet is TilerWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Map Legends
-  getClassmapLegend is MapsClassmapLegends.get;
-  getIntervalLegend is MapsIntervalLegends.getByClassmapName;
+  getClassMapLegend is MapsClassMapLegends.get;
+  getIntervalLegend is MapsIntervalLegends.getByClassMapName;
   getLegend is MapsLegends.get;
 
   // Mosaic Assets
