@@ -128,7 +128,8 @@ model RpSkuProperties {
 
 @@identifiers(RpSkuEnumerationForExistingResourceResult.value, #[]);
 @doc("An object that represents enumerating SKUs for existing resources")
-model RpSkuEnumerationForExistingResourceResult is Page<RpSkuDetailsForExistingResource>;
+model RpSkuEnumerationForExistingResourceResult
+  is Page<RpSkuDetailsForExistingResource>;
 
 @doc("An object that represents SKU details for existing resources")
 model RpSkuDetailsForExistingResource {
