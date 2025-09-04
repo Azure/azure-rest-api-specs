@@ -34,10 +34,6 @@ namespace DocumentIntelligence;
 @doc("Service API versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-11-30 GA version of the DocumentIntelligence service.")
-  v2024_11_30: "2024-11-30",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2025-09-01 GA version of the DocumentIntelligence service.")
   v2025_09_01: "2025-09-01",
 }
