@@ -4243,6 +4243,10 @@
     "ContainerGroupProfileProperties": {
       "type": "object",
       "description": "The container group profile properties",
+      "required": [
+          "containers",
+          "osType"
+      ],
       "properties": {
         "sku": {
           "description": "The SKU for a container group.",
@@ -4341,11 +4345,13 @@
           "$ref": "#/definitions/SecurityContextDefinition"
         },
         "revision": {
+          "readOnly": true,
           "description": "Container group profile current revision number",
           "type": "integer",
           "format": "int64"
         },
         "registeredRevisions": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "type": "integer",
