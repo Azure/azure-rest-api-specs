@@ -15162,8 +15162,8 @@
           "$ref": "#/definitions/ArcSyncType",
           "description": "The type of sync, currently supporting Manual and Periodic."
         },
-        "tagSync": {
-          "$ref": "#/definitions/TagSyncType",
+        "tagSyncMode": {
+          "$ref": "#/definitions/TagSyncMode",
           "description": "Tag Sync Confirmation. If Enabled, tags on Arc resources will be synced to Azure Migrate resources."
         },
         "lastSuccessfulSyncTime": {
@@ -15205,8 +15205,8 @@
           "$ref": "#/definitions/ArcSyncType",
           "description": "The type of sync, currently supporting Manual and Periodic only."
         },
-        "tagSync": {
-          "$ref": "#/definitions/TagSyncType",
+        "tagSyncMode": {
+          "$ref": "#/definitions/TagSyncMode",
           "description": "Tag Sync Confirmation. If true, tags on Arc resources will be synced to Azure Migrate resources."
         }
       }
@@ -15253,15 +15253,15 @@
         ]
       }
     },
-    "TagSyncType": {
+    "TagSyncMode": {
       "type": "string",
-      "description": "Tag sync type.",
+      "description": "Tag sync mode.",
       "enum": [
         "Enabled",
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "TagSyncType",
+        "name": "TagSyncMode",
         "modelAsString": true,
         "values": [
           {
