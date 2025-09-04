@@ -50,7 +50,7 @@ model MosaicTileQueryParameters {
 /**
  * Supported algorithms for terrain and index-based analysis
  */
-union Algorithm {
+union TerrainAlgorithm {
   string,
 
   /**

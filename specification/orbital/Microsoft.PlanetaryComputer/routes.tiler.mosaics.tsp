@@ -29,7 +29,7 @@ interface MosaicsTiles {
 
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
 
       /**
@@ -81,7 +81,7 @@ interface MosaicsTileMatrixSets {
 
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * Identifier selecting one of the TileMatrixSetId supported
@@ -193,13 +193,13 @@ interface MosaicsTileJsonOperations {
       pixelSelection?: PixelSelection = PixelSelection.first;
 
       /**
-       * Algorithm name
+       * Terrain algorithm name
        */
       @query("algorithm")
-      algorithm?: Algorithm;
+      algorithm?: TerrainAlgorithm;
 
       /**
-       * Algorithm parameter
+       * Terrain algorithm parameters
        */
       @query("algorithm_params")
       algorithmParams?: string;
@@ -254,7 +254,7 @@ interface MosaicsTileMatrixSetsTileJson {
 
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * Identifier selecting one of the TileMatrixSetId supported
@@ -299,7 +299,7 @@ interface MosaicsWmtsMosaics {
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * Search Id (pgSTAC Search Hash)
@@ -349,7 +349,7 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * Search Id (pgSTAC Search Hash)

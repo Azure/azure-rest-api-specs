@@ -82,7 +82,6 @@ namespace Customizations;
 );
 
 // Generic single-word class names - add descriptive prefixes
-@@clientName(Algorithm, "AlgorithmInfo", "csharp");
 @@clientName(Asset, "StacAsset", "csharp");
 @@clientName(Extent, "StacExtent", "csharp");
 @@clientName(Link, "StacLink", "csharp");

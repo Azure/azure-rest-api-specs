@@ -276,7 +276,7 @@ interface TilerTiles {
   getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -337,7 +337,7 @@ interface TilerTileMatrixSets {
   getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -399,7 +399,7 @@ interface TilerTileJsonOperations {
   get is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -474,7 +474,7 @@ interface TilerTileJsonTileMatrixSets {
       itemId: string;
 
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * Identifier selecting one of the TileMatrixSetId supported
@@ -518,7 +518,7 @@ interface TilerWmts {
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -576,7 +576,7 @@ interface TilerWmtsTileMatrixSets {
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -692,7 +692,7 @@ interface TilerPreviews {
   getFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -758,7 +758,7 @@ interface TilerPreviews {
   get is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -825,7 +825,7 @@ interface TilerParts {
   getCroppedToBoundingBoxWidthByHeight is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -910,7 +910,7 @@ interface TilerParts {
   getCroppedToBoundingBox is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -987,7 +987,7 @@ interface TilerGeoJsons {
   cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -1070,7 +1070,7 @@ interface TilerGeoJsons {
   cropFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier

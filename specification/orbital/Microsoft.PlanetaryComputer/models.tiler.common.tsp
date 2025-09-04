@@ -488,15 +488,15 @@ model AssetQueryParameters {
 /**
  * Parameters for specifying which algorithm to apply to raster data and its configuration
  */
-model AlgorithmQueryParameters {
+model TerrainAlgorithmQueryParameters {
   /**
-   * Algorithm name
+   * Terrain algorithm name
    */
   @query("algorithm")
-  algorithm?: Algorithm;
+  algorithm?: TerrainAlgorithm;
 
   /**
-   * Algorithm parameter
+   * Terrain algorithm parameters
    */
   @query("algorithm_params")
   algorithmParams?: string;
