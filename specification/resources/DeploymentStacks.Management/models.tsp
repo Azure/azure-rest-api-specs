@@ -765,4 +765,10 @@ model DeploymentStackValidateProperties {
    */
   @added(Versions.v2025_07_01)
   deploymentExtensions?: DeploymentExtension[];
+
+  /**
+   * The validation level of the deployment stack
+   */
+  @added(Versions.v2025_07_01)
+  validationLevel?: ValidationLevel;
 }
