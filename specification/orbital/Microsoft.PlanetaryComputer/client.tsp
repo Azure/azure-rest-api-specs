@@ -75,7 +75,7 @@ namespace Customizations;
 );
 
 // Models ending with "Operation" - rename to "Info"
-@@clientName(Operation, "OperationInfo", "csharp");
+@@clientName(Operation, "LongRunningOperation", "csharp");
 @@clientName(Ingestions.IngestionRuns.IngestionRunOperation,
   "IngestionRunInfo",
   "csharp"
