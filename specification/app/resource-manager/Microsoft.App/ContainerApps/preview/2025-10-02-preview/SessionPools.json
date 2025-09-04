@@ -165,6 +165,9 @@
         "x-ms-examples": {
           "Get Session Pool": {
             "$ref": "./examples/SessionPools_Get.json"
+          },
+          "Get Session Pool during update": {
+            "$ref": "./examples/SessionPools_Get_InProgress.json"
           }
         }
       },
@@ -346,6 +349,88 @@
     }
   },
   "definitions": {
+    "TemplatePoolStatus": {
+      "description": "The status of pods in the pool of this template.",
+      "type": "object",
+      "properties": {
+        "expectedCount": {
+          "description": "The expected count of pods in this pool",
+          "type": "integer",
+          "format": "int32"
+        },
+        "readyCount": {
+          "description": "The ready count of pods in this pool",
+          "type": "integer",
+          "format": "int32"
+        },
+        "pendingCount": {
+          "description": "The pending count of pods in this pool",
+          "type": "integer",
+          "format": "int32"
+        },
+        "imagePullFailCount": {
+          "description": "The image pull fail count of pods in this pool",
+          "type": "integer",
+          "format": "int32"
+        },
+        "crashCount": {
+          "description": "The crash count of pods in this pool",
+          "type": "integer",
+          "format": "int32"
+        },
+        "allocatedCount": {
+          "description": "The allocated count of pods in this pool",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TemplateStatus": {
+      "description": "The status of the session pool template.",
+      "type": "object",
+      "properties": {
+        "details": {
+          "description": "The detailed status of this template.",
+          "type": "string"
+        },
+        "createdTime": {
+          "description": "The creation time of this template.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "description": "The status of this template.",
+          "$ref": "#/definitions/TemplatePoolStatus"
+        },
+        "containers": {
+          "description": "List of container definitions for the sessions of this template.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "ingress": {
+          "description": "Session pool ingress configuration of this template.",
+          "$ref": "#/definitions/SessionIngress"
+        }
+      }
+    },
+    "TemplateUpdateStatus": {
+      "type": "object",
+      "properties": {
+        "activeTemplate": {
+          "description": "The status of the current active template.",
+          "$ref": "#/definitions/TemplateStatus"
+        },
+        "desiredTemplate": {
+          "description": "The status of the desired template during session pool update.",
+          "$ref": "#/definitions/TemplateStatus"
+        }
+      }
+    },
     "ScaleConfiguration": {
       "description": "Scale configuration.",
       "type": "object",
@@ -774,6 +859,14 @@
             "sessionNetworkConfiguration": {
               "description": "The network configuration of the sessions in the session pool.",
               "$ref": "#/definitions/SessionNetworkConfiguration"
+            },
+            "templateUpdateStatus": {
+              "description": "The template status of the session pool, showing active template, or desired template during session pool update. This is only available if the containerType is CustomContainer.",
+              "$ref": "#/definitions/TemplateUpdateStatus",
+              "readOnly": true,
+              "x-ms-mutability": [
+                "read"
+              ]
             },
             "poolManagementEndpoint": {
               "description": "The endpoint to manage the pool.",
