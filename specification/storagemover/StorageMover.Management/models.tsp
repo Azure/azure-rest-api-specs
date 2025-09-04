@@ -701,18 +701,23 @@ model JobDefinitionProperties {
    * The list of cloud endpoints to migrate.
    */
   @added(Versions.v2025_07_01)
-  sourceTargetMap?: {
-    @visibility(Lifecycle.Read)
-    @added(Versions.v2025_07_01)
-    @OpenAPI.extension("x-ms-identifiers", #[])
-    value?: SourceTargetMap[];
-  };
+  sourceTargetMap?: SourceTargetMapWrapper;
 
   /**
    * The provisioning state of this resource.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+/**
+ * The properties of cloud endpoints to migrate.
+ */
+@added(Versions.v2025_07_01)
+SourceTargetMapWrapper?: {
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_07_01)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value?: SourceTargetMap[];
 }
 
 /**
