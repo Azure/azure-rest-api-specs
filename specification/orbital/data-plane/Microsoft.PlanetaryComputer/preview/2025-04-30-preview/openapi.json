@@ -12796,7 +12796,7 @@
         ]
       }
     },
-    "FilterLang": {
+    "FilterLanguage": {
       "type": "string",
       "description": "Choices for filter-lang value in a POST request.\n\nBased on\nhttps://github.com/stac-api-extensions/filter#queryables\n\nNote the addition of cql2-json, which is used by the pgstac backend,\nbut is not included in the spec above.\n\nDefines the supported filter languages for STAC API queries.",
       "enum": [
@@ -12805,7 +12805,7 @@
         "cql2-text"
       ],
       "x-ms-enum": {
-        "name": "FilterLang",
+        "name": "FilterLanguage",
         "modelAsString": true,
         "values": [
           {
@@ -14908,9 +14908,9 @@
           "x-ms-client-name": "sortBy"
         },
         "filter-lang": {
-          "$ref": "#/definitions/FilterLang",
+          "$ref": "#/definitions/FilterLanguage",
           "description": "Query language format used in the filter parameter",
-          "x-ms-client-name": "filterLang"
+          "x-ms-client-name": "filterLanguage"
         },
         "metadata": {
           "$ref": "#/definitions/Metadata",
@@ -15269,7 +15269,7 @@
         "filter-crs": {
           "type": "string",
           "description": "Coordinate reference system for the filter.",
-          "x-ms-client-name": "filterCrs"
+          "x-ms-client-name": "filterCoordinateReferenceSystem"
         },
         "filter-lang": {
           "type": "string",
@@ -15281,7 +15281,7 @@
             "cql2-text"
           ],
           "x-ms-enum": {
-            "name": "FilterLang",
+            "name": "FilterLanguage",
             "modelAsString": true,
             "values": [
               {

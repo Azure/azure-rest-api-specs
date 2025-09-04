@@ -34,7 +34,7 @@ union StacQueryResultsSortingDirection {
  *
  * Defines the supported filter languages for STAC API queries.
  */
-union FilterLang {
+union FilterLanguage {
   string,
 
   /**
@@ -285,13 +285,13 @@ model SearchPostRequest {
    * Coordinate reference system for the filter.
    */
   @encodedName("application/json", "filter-crs")
-  filterCrs?: string;
+  filterCoordinateReferenceSystem?: string;
 
   /**
    * Filter language to use for the filter expression.
    */
   @encodedName("application/json", "filter-lang")
-  filterLang?: FilterLang = FilterLang.`cql-json`;
+  filterLang?: FilterLanguage = FilterLanguage.`cql-json`;
 
   /**
    * Pagination token for fetching the next set of results.

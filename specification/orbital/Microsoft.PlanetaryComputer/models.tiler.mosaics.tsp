@@ -131,7 +131,7 @@ model RegisterMosaic {
    * Query language format used in the filter parameter
    */
   @encodedName("application/json", "filter-lang")
-  filterLang?: FilterLang;
+  filterLanguage?: FilterLanguage;
 
   /**
    * Additional metadata to associate with the mosaic
