@@ -1455,7 +1455,7 @@
           {
             "name": "files",
             "in": "formData",
-            "description": "Collection of files",
+            "description": "Collection of files where the fileName is required.",
             "required": true,
             "type": "array",
             "items": {
@@ -1522,7 +1522,7 @@
           {
             "name": "files",
             "in": "formData",
-            "description": "Collection of files",
+            "description": "Collection of files where the fileName is required.",
             "required": true,
             "type": "array",
             "items": {
@@ -3088,9 +3088,9 @@
           "minLength": 1,
           "maxLength": 200
         },
-        "fileSource": {
+        "fileName": {
           "type": "string",
-          "description": "Unique Source value. Typically this would name of the file."
+          "description": "This would be name of the file. This links to the fileName of the file being sent in multipart."
         },
         "refresh": {
           "type": "boolean",
@@ -3099,7 +3099,7 @@
       },
       "required": [
         "operation",
-        "fileSource"
+        "fileName"
       ]
     },
     "UpdateSourceRecord": {

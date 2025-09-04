@@ -302,7 +302,7 @@ union updateOperationKind {
 @added(Versions.v2025_05_15_preview)
 model ImportFiles {
   /**
-   * Collection of files
+   * Collection of files where the fileName is required.
    */
   files: HttpPart<File>[];
 }
@@ -322,8 +322,8 @@ model UpdateSourceFromFileOperationRecord {
   @minLength(1)
   fileDisplayName?: string;
 
-  /** Unique Source value. Typically this would name of the file. */
-  fileSource: string;
+  /** This would be name of the file. This links to the fileName of the file being sent in multipart. */
+  fileName: string;
 
   /** Bool value for refresh. */
   refresh?: boolean;
