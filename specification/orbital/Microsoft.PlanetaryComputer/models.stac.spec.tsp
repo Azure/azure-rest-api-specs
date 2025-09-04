@@ -57,7 +57,7 @@ union FilterLang {
  * Queryable data types for the queryables extension.
  * These are the data types supported by Basic CQL2.
  */
-union QueryableDefinitionDataType {
+union StacQueryableDefinitionDataType {
   /**
    * Character strings.
    * Example: 'This is a literal string.'
@@ -565,15 +565,15 @@ model TimeInterval {
 }
 
 /**
- * QueryableDefinitionType
+ * StacQueryableDefinitionType
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model QueryableDefinitionType is Record<unknown>;
+model StacQueryableDefinitionType is Record<unknown>;
 
 /**
  * Definition of a queryable field for STAC API filtering.
  */
-model QueryableDefinition {
+model StacQueryable {
   /**
    * Name of the queryable field.
    */
@@ -584,7 +584,7 @@ model QueryableDefinition {
    * Metadata for the queryable field.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  definition: QueryableDefinitionType;
+  definition: StacQueryableDefinitionType;
 
   /**
    * Whether to create a database index for this field.
@@ -596,7 +596,7 @@ model QueryableDefinition {
    * Data type of the queryable field.
    */
   @encodedName("application/json", "data_type")
-  dataType?: QueryableDefinitionDataType = QueryableDefinitionDataType.string;
+  dataType?: StacQueryableDefinitionDataType = StacQueryableDefinitionDataType.string;
 }
 
 /**

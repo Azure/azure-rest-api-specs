@@ -68,7 +68,7 @@ namespace Customizations;
 @@clientName(SearchPostRequest, "SearchPostContent", "csharp");
 
 // Models ending with "Definition" - rename appropriately
-@@clientName(QueryableDefinition, "QueryableProperty", "csharp");
+@@clientName(StacQueryable, "QueryableProperty", "csharp");
 @@clientName(Ingestions.IngestionDefinition,
   "IngestionConfiguration",
   "csharp"

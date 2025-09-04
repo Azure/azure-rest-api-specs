@@ -711,13 +711,13 @@ interface StacQueryables {
        */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" ""
       @body
-      body: QueryableDefinition[];
+      body: StacQueryable[];
     },
     {
       ...CreatedResponse;
 
       @body
-      body: QueryableDefinition[];
+      body: StacQueryable[];
     }
   >;
   /**
@@ -751,13 +751,13 @@ interface StacQueryables {
        * Request queryable definition body
        */
       @body
-      body: QueryableDefinition;
+      body: StacQueryable;
     },
     {
       ...CreatedResponse;
 
       @body
-      body: QueryableDefinition;
-    } | QueryableDefinition
+      body: StacQueryable;
+    } | StacQueryable
   >;
 }
