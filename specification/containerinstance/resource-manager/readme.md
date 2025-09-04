@@ -26,16 +26,7 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-05-01-preview
-```
-
-### Tag: package-preview-2024-05-01-preview
-
-These settings apply only when `--tag=package-preview-2024-05-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-05-01-preview'
-input-file:
-  - Microsoft.ContainerInstance/preview/2024-05-01-preview/containerInstance.json
+tag: package-preview-2024-11
 ```
 
 ### Tag: package-preview-2024-11
