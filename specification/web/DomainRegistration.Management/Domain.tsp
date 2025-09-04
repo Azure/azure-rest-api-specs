@@ -29,10 +29,7 @@ interface Domains {
   /**
    * Description for Get a domain.
    */
-  get is ArmResourceRead<
-    Domain,
-    Error = DefaultErrorResponse
-  >;
+  get is ArmResourceRead<Domain, Error = DefaultErrorResponse>;
 
   /**
    * Description for Creates or updates a domain.
@@ -42,7 +39,8 @@ interface Domains {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Domain,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Response = ArmResourceUpdatedResponse<Domain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
       @bodyRoot
       _: Domain;
@@ -60,10 +58,6 @@ interface Domains {
   update is ArmCustomPatchSync<
     Domain,
     PatchModel = DomainPatchResource,
-    Response = ArmResponse<Domain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
-      @bodyRoot
-      _: Domain;
-    }),
     Error = DefaultErrorResponse
   >;
 

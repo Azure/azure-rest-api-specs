@@ -587,18 +587,6 @@
               "$ref": "#/definitions/Domain"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/Domain"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -610,12 +598,7 @@
           "Update App Service Domain": {
             "$ref": "./examples/UpdateAppServiceDomain.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Domain"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "Domains_Delete",

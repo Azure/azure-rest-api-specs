@@ -1087,14 +1087,14 @@ union domainNotRenewableReasonsProperties {
 model CsmOperationCollection {
   /**
    * Collection of resources.
-  */
+   */
   @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: CsmOperationDescription[]; // required
 
   /**
-  * Link to next page of resources.
-  */
+   * Link to next page of resources.
+   */
   @doc("Link to next page of resources.")
   @visibility(Lifecycle.Read)
   @nextLink

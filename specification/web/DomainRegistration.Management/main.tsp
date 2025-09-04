@@ -49,6 +49,6 @@ enum Versions {
 
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
-    ArmResponse<CsmOperationCollection>,
-    DefaultErrorResponse
-  > {}
+      ArmResponse<CsmOperationCollection>,
+      DefaultErrorResponse
+    > {}
