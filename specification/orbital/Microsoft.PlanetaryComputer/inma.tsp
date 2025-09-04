@@ -614,28 +614,29 @@ namespace IngestionSources {
     string,
 
     @doc("Azure Blob Storage SAS token")
-    SasToken: "SasToken",
+    SharedAccessSignatureToken: "SasToken",
 
     @doc("Azure Blob Managed Identity")
     BlobManagedIdentity: "BlobManagedIdentity",
   }
 
   @doc("SAS Token ingestion source")
-  model SasTokenIngestionSource extends IngestionSource {
-    kind: IngestionSourceType.SasToken;
+  model SharedAccessSignatureTokenIngestionSource extends IngestionSource {
+    kind: IngestionSourceType.SharedAccessSignatureToken;
 
     @doc("SAS token connection information")
-    connectionInfo: SasTokenConnection;
+    connectionInfo: SharedAccessSignatureTokenConnection;
   }
 
   @doc("SAS Token connection information")
-  model SasTokenConnection {
+  model SharedAccessSignatureTokenConnection {
     @doc("Azure Blob Storage container URL")
     containerUrl: url;
 
     @doc("SAS token")
     @visibility(Lifecycle.Create, Lifecycle.Update)
-    sasToken?: string;
+    @encodedName("application/json", "sasToken")
+    haredAccessSignatureToken?: string;
 
     @doc("Azure Blob Storage SAS token expiration in UTC format")
     @visibility(Lifecycle.Read)

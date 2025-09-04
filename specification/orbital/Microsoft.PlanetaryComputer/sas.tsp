@@ -10,8 +10,8 @@ namespace Microsoft.PlanetaryComputer;
 /**
  * Represents a Shared Access Signature (SAS) token response for accessing Azure Blob Storage.
  */
-@summary("SasToken")
-model SasToken {
+@summary("Managed Storage Shared Access Signature (SAS) Token")
+model ManagedStorageSharedAccessSignatureToken {
   /**
    * The expiration date and time of the SAS token in UTC.
    */
@@ -57,7 +57,7 @@ model TokenResponse {
    * Response body
    */
   @body
-  body: SasToken;
+  body: ManagedStorageSharedAccessSignatureToken;
 }
 
 /**
