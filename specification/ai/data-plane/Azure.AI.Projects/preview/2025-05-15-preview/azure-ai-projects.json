@@ -1507,44 +1507,6 @@
         }
       }
     },
-    "/insights:latest": {
-      "get": {
-        "operationId": "Insights_GetLatestInsightsReport",
-        "description": "Get the latest insights report.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter in odata format",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Insight"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_List",

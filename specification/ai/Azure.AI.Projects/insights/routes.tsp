@@ -51,15 +51,6 @@ interface Insights {
   @get
   getInsights is InsightsOperations.ResourceRead<Insight>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("insights:latest")
-  @doc("Get the latest insights report.")
-  @get
-  getLatestInsightsReport is Operation<
-    FilterQueryParamsTraits,
-    OkResponse<Insight>
-  >;
-
   @doc("List all insights reports.")
   @get
   listInsightsReports is InsightsOperations.ResourceList<
