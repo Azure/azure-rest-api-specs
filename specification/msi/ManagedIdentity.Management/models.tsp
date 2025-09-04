@@ -222,16 +222,16 @@ model OperationDisplay {
   provider?: string;
 
   /** 
-    The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
-     */
-  @summary("Resource Type.")
-  resource?: string;
-
-  /** 
     The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
      */
   @summary("Operation Type.")
   operation?: string;
+
+    /** 
+    The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+     */
+  @summary("Resource Type.")
+  resource?: string;
 
   /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
   @summary("Operation description")
