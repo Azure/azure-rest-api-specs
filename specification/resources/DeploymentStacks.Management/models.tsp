@@ -523,6 +523,7 @@ model ResourceReference {
   /**
    * The extensible resource identifiers.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The schema of tis object is determined by the deployment extension."
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   identifiers?: Record<unknown>;
