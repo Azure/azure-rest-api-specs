@@ -18,7 +18,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ---
 
-## Configurations
+## Configuration
 
 ### Basic Information
 
@@ -26,7 +26,6 @@ These are the global settings for the resourcenotifications.
 
 ```yaml
 openapi-type: arm
-
 tag: package-2025-08-01-preview
 ```
 
@@ -37,119 +36,106 @@ These settings apply only when `--tag=package-2025-08-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
   - Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
-directive:
-  - from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
-    where: $.paths
-    transform: |
-      for (const path in $) {
-        if (path.includes('notificationSessions')) {
-          $[path].post['x-ms-long-running-operation'] = false;
-        }
-      }
-```
-
-### Suppressions
-
-```yaml
-directive:
+suppressions:
   # Core suppressions for tenant-scoped notification session API
-  - suppress: PathForResourceAction
+  - code: PathForResourceAction
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: These are tenant-scoped notification session operations that do not follow standard ARM resource naming patterns by design.
 
-  - suppress: R3023
+  - code: R3023
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: This is a tenant-scoped API for notification sessions, not a standard ARM resource API.
 
-  - suppress: R4010
+  - code: R4010
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: This is a tenant-scoped API with custom error responses.
 
-  - suppress: R4041
+  - code: R4041
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: This API does not have array identifiers (tenant-scoped).
 
-  - suppress: RequiredSystemDataInNewApiVersions
+  - code: RequiredSystemDataInNewApiVersions
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: This tenant-scoped notification session API intentionally does not include systemData as it's not a traditional ARM resource.
 
-  - suppress: NoErrorCodeResponses
+  - code: NoErrorCodeResponses
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Error response codes 400, 401, 429, 500 are appropriately used for client, authentication, and server errors in this notification session API.
 
-  - suppress: MissingXmsErrorResponse
+  - code: MissingXmsErrorResponse
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Error responses now properly include x-ms-error-response property for all error status codes.
 
-  - suppress: PostResponseCodes
+  - code: PostResponseCodes
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: These are specialized action POST operations for notification sessions that require additional error response codes beyond the standard ARM pattern.
 
-  - suppress: AvoidAdditionalProperties
+  - code: AvoidAdditionalProperties
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: The metadata property in TenantLocationProperties is used for valid additional location metadata, not user-defined tags.
 
-  - suppress: PostOperationIdContainsUrlVerb
+  - code: PostOperationIdContainsUrlVerb
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: These notification session operations use descriptive action-based operation IDs that are more appropriate for tenant-scoped APIs than URL verb patterns.
 
-  - suppress: ParameterNotUsingCommonTypes
+  - code: ParameterNotUsingCommonTypes
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Location parameters now properly use common-types LocationParameter reference.
 
-  - suppress: LocationMustHaveXmsMutability
+  - code: LocationMustHaveXmsMutability
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Location property now includes proper x-ms-mutability annotation for read and create operations.
 
   # Additional common suppressions that may be needed
-  - suppress: OperationsAPIImplementation
+  - code: OperationsAPIImplementation
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Operations API is implemented appropriately for this service.
 
-  - suppress: BodyTopLevelProperties
+  - code: BodyTopLevelProperties
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Body properties follow appropriate patterns for notification session operations.
 
-  - suppress: ResourceNameRestriction
+  - code: ResourceNameRestriction
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Resource naming follows appropriate patterns for notification sessions.
 
-  - suppress: ParametersInPointGet
+  - code: ParametersInPointGet
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Parameters are appropriately defined for GET operations.
 
-  - suppress: PathContainsResourceType
+  - code: PathContainsResourceType
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Path structure is appropriate for notification session operations.
 
-  - suppress: OperationIdNounVerb
+  - code: OperationIdNounVerb
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Operation IDs follow appropriate conventions for this service.
 
-  - suppress: XmsPageableForListCalls
+  - code: XmsPageableForListCalls
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Pagination is correctly implemented where applicable.
 
-  - suppress: DefinitionsPropertiesNamesCamelCase
+  - code: DefinitionsPropertiesNamesCamelCase
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Property names follow established service conventions.
 
-  - suppress: IntegerTypeMustHaveFormat
+  - code: IntegerTypeMustHaveFormat
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Integer types have appropriate formats where required.
 
-  - suppress: MissingTypeObject
+  - code: MissingTypeObject
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Object types are properly defined.
 
-  - suppress: ValidFormats
+  - code: ValidFormats
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Date and other formats are used appropriately.
 
-  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+  - code: XMS_EXAMPLE_NOTFOUND_ERROR
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
     reason: Examples are provided for all operations.
 ```
+
 # Code Generation
 
 ## Swagger to SDK
