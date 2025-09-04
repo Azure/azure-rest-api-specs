@@ -64,7 +64,7 @@ suppressions:
 
   - code: MissingXmsErrorResponse
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
-    reason: Error responses now properly include x-ms-error-response property for all error status codes.
+    reason: All error responses now properly include x-ms-error-response property for error status codes including 429 for rate limiting.
 
   - code: PostResponseCodes
     from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json

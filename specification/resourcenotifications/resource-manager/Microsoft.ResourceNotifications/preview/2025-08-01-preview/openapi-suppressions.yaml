@@ -37,6 +37,9 @@ suppressions:
   - code: LocationMustHaveXmsMutability
     reason: Location property now includes proper x-ms-mutability annotation for read and create operations.
 
+  - code: LroExtension
+    reason: The createNotificationSession operation has been updated to be synchronous and no longer returns 202 responses that would require LRO extensions.
+
   # Additional common suppressions that may be needed
   - code: OperationsAPIImplementation
     reason: Operations API is implemented appropriately for this service.

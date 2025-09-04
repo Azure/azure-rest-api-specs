@@ -103,16 +103,18 @@
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "401": {
             "description": "Access is unauthorized.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "429": {
-            "description": "Client error",
+            "description": "Too many requests - rate limiting.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             },
@@ -120,20 +122,27 @@
               "Retry-After": {
                 "type": "string"
               }
-            }
+            },
+            "x-ms-error-response": true
           },
           "500": {
             "description": "Server error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Create a notification session": {
@@ -181,25 +190,29 @@
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "401": {
             "description": "Access is unauthorized.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "500": {
             "description": "Server error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -259,23 +272,27 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           },
+          "x-ms-error-response": true,
           "401": {
             "description": "Access is unauthorized.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "500": {
             "description": "Server error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
