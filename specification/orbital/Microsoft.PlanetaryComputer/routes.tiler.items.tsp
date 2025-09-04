@@ -389,10 +389,10 @@ interface TilerTileMatrixSets {
 
 interface TilerTileJsonOperations {
   /**
-   * Return Tilejson
+   * Return TileJson
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tilejson")
+  @summary("TileJson")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tilejson.json")
   @get
@@ -448,10 +448,10 @@ interface TilerTileJsonOperations {
 
 interface TilerTileJsonTileMatrixSets {
   /**
-   * Return the Tilejson Tilematrixsetid As a path
+   * Return the TileJson Tilematrixsetid As a path
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tilejson Tilematrixsetid As Path")
+  @summary("TileJson Tilematrixsetid As Path")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json")
   @get

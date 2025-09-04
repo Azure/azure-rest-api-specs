@@ -342,7 +342,7 @@ model TilerInfoGeoJsonFeature {
  */
 model TileJsonResponse {
   /**
-   * Tilejson
+   * TileJson
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
   tilejson?: string = "2.2.0";
