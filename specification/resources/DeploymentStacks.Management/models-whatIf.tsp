@@ -292,7 +292,6 @@ union DeploymentStackManagementStatus {
  * Type of change that will be made to the resource when the deployment is executed.
  */
 @added(Versions.v2025_07_01)
-@OpenAPI.extension("x-ms-enum", #{ modelAsString: true })
 union DeploymentStackWhatIfChangeType {
     string,
 

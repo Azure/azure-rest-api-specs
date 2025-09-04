@@ -2189,7 +2189,35 @@
         "noChange"
       ],
       "x-ms-enum": {
-        "modelAsString": true
+        "name": "DeploymentStackWhatIfChangeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "create",
+            "description": "The resource does not exist in the current state but is present in the desired state. The resource will be created when the deployment is executed."
+          },
+          {
+            "name": "Delete",
+            "value": "delete",
+            "description": "The resource exists in the current state and is missing from the desired state. The resource will be deleted from Azure after the deployment is executed."
+          },
+          {
+            "name": "Detach",
+            "value": "detach",
+            "description": "The resource exists in the current state and is missing from the desired state. The resource will be removed from the deployment stack, but will remain in Azure, after the deployment is executed."
+          },
+          {
+            "name": "Modify",
+            "value": "modify",
+            "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will change."
+          },
+          {
+            "name": "NoChange",
+            "value": "noChange",
+            "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will not change."
+          }
+        ]
       }
     },
     "DeploymentStackWhatIfPropertyChange": {
