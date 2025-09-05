@@ -1,0 +1,45 @@
+parameters:
+  "service-dir":
+    default: "sdk/privatedns"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/privatedns.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/network"
+    package-dir: "azure-mgmt-privatedns"
+    namespace: "azure.mgmt.privatedns"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-privatednslibrary"
+    namespace: "com.azure.resourcemanager.privatednslibrary"
+    service-name: "PrivateDns" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-privatedns"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-privatedns"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/privatedns"
+    package-dir: "armprivatedns"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
