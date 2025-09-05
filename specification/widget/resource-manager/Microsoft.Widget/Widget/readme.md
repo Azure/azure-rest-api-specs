@@ -34,6 +34,7 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 ```yaml $(tag) == 'package-2021-11-01'
 input-file:
   - stable/2021-11-01/widget.json
+  - stable/2021-11-01/does-not-exist.json
 suppressions:
   - code: PathContainsResourceType
   - code: PathResourceProviderMatchNamespace
