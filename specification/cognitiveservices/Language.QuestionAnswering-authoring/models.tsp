@@ -310,6 +310,7 @@ model ImportFiles {
 /**
  * A single file operation for updating sources for a project. Used to add, remove or replace a source from a knowledgebase.
  */
+#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "known issue Multipart parts can only be represented as primitive types in swagger 2.0. Information is lost for part 'fileOperations'"
 @added(Versions.v2025_05_15_preview)
 model UpdateSourceFromFileOperationRecord {
   /** Update operation type for assets. */
