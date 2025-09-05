@@ -27,7 +27,7 @@ namespace Customizations;
 //   "csharp"
 // );
 @@clientName(ItemProperties.datetime, "date_time", "python");
-@@clientName(SearchPostRequest.datetime, "date_time", "python");
+@@clientName(SearchOptions.datetime, "date_time", "python");
 
 // Disable convenient API for JSON-Merge patch operations
 @@convenientAPI(Ingestions.update, false, "csharp,java");
@@ -37,7 +37,7 @@ namespace Customizations;
 @@alternateType(IntervalLegendsResponse.body, Record<unknown>[]);
 
 // Use CQL2-TEXT for strongly typed languages
-@@alternateType(SearchPostRequest.filter, string, "csharp,java");
+@@alternateType(SearchOptions.filter, string, "csharp,java");
 @@alternateType(RegisterMosaic.filter, string, "csharp,java");
 
 // Address naming convention violations for C# SDK
@@ -68,7 +68,7 @@ namespace Customizations;
 
 // Models ending with "Request" - rename to "Content"
 @@clientName(ImageRequest, "ImageContent", "csharp");
-@@clientName(SearchPostRequest, "SearchPostContent", "csharp");
+@@clientName(SearchOptions, "SearchPostContent", "csharp");
 
 // Models ending with "Definition" - rename appropriately
 @@clientName(StacQueryable, "QueryableProperty", "csharp");

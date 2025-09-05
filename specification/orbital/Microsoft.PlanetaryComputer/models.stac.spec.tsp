@@ -191,12 +191,10 @@ model StacQuery is Record<unknown>;
 
 /**
  * Search model.
- *
- * Overrides the validation for datetime from the base request model.
- *
+ * *
  * Defines parameters for a STAC search POST request.
  */
-model SearchPostRequest {
+model SearchOptions {
   /**
    * List of collection IDs to search within.
    */
@@ -271,7 +269,7 @@ model SearchPostRequest {
    *
    * See the [STAC Fields Extension](https://github.com/stac-api-extensions/fields).
    */
-  fields?: SearchPostRequestFields[];
+  fields?: SearchOptionsFields[];
 
   /**
    * CQL2 Filter
@@ -327,7 +325,7 @@ model SortExtension {
  *
  * Controls which fields to include or exclude from the response.
  */
-model SearchPostRequestFields {
+model SearchOptionsFields {
   /**
    * Array of field names to include in the response.
    */

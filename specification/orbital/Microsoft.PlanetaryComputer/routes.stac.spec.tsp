@@ -139,7 +139,7 @@ interface StacSearchOperations {
        * Request body
        */
       @body
-      body: SearchPostRequest;
+      body: SearchOptions;
     },
     ItemCollection
   >;
