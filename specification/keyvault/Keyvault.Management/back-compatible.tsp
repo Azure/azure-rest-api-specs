@@ -101,8 +101,6 @@ using Azure.Core;
 @@clientName(VaultsOperationGroup.checkNameAvailability::parameters.body,
   "vaultName"
 );
-@@visibility(DeletedVault.properties, Lifecycle.Read);
-@@visibility(DeletedManagedHsm.properties, Lifecycle.Read);
 @@clientName(MhsmPrivateEndpointConnection, "MHSMPrivateEndpointConnection");
 @@clientName(MhsmPrivateLinkResource, "MHSMPrivateLinkResource");
 @@clientName(MhsmPrivateLinkResourceListResult,
