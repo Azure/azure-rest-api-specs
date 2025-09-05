@@ -1,0 +1,54 @@
+parameters:
+  "service-dir":
+    default: "sdk/mysql"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+    arm-resource-flattening: true
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.MySql"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/mysqlflexibleservers"
+    package-dir: "azure-mgmt-mysqlflexibleservers"
+    namespace: "azure.mgmt.mysqlflexibleservers"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-mysqlflexibleserver"
+    service-dir: "sdk/mysqlflexibleserver"
+    namespace: "com.azure.resourcemanager.mysqlflexibleserver"
+    service-name: "MySql"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-mysql-flexible"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-mysql-flexible"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/mysql"
+    package-dir: "armmysqlflexibleservers"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
