@@ -1,8 +1,8 @@
 # Getting started with Typespec ARM specifications
 
-Swagger APIs and examples are generated from Typespec definitions in folder `DocumentDB.MongoCluster.Management`.
+Swagger APIs and examples are generated from TypeSpec definitions in folder `resource-manager/Microsoft.DocumentDB/MongoCluster`.
 
-The generated specs and examples are located under `resource-manager/Microsoft.DocumentDB` and should not be edited directly.
+The generated specs and examples are located under `resource-manager/Microsoft.DocumentDB/MongoCluster/preview` and `resource-manager/Microsoft.DocumentDB/MongoCluster/stable` directories and should not be edited directly.
 
 # Setup local environment
 
@@ -12,30 +12,31 @@ See instructions [here](https://github.com/Azure/azure-rest-api-specs/blob/main/
 
 ```
 mongocluster
-├── DocumentDB.MongoCluster.Management  [ARM API TypeSpec Definition]
-|   ├── tspconfig.yaml
-|   ├── main.tsp
-|   ├── MongoCluster.tsp
-|   ├── common.tsp
-|   ├── ...
-|   └── examples                         [API Examples]
-|       ├── 2023-11-15-preview
-|       |   ├── MongoClusterCreate.json
-|       |   ├── MongoClusterGet.json
-|       |   ├── ...
-|       └── 2024-03-01-preview
-|           ├── ...
 └── resource-manager
     └── Microsoft.DocumentDB
-        └── preview
-            ├── 2023-11-15-preview
-            |   ├── mongoCluster.json     [Swagger specs generated from TypeSpec]
-            |   └── examples
-            |   |   └── ...               [examples generated from TypeSpec]
-            |   └── scenarios             [API Test Scenarios - non-generated]
-            |       └── basic.yaml
-            ├── 2024-03-01-preview
-            ├── ...
+        └── MongoCluster                 
+            ├──tspconfig.yaml             ┐
+            ├──main.tsp                   │ 
+            ├──MongoCluster.tsp           | [ARM API TypeSpec Definition]
+            ├──common.tsp                 │
+            ├──...                        ┘ 
+            ├──examples                  [API Examples]
+            |   ├── 2023-11-15-preview
+            |   |   ├── MongoClusterCreate.json
+            |   |   ├── MongoClusterGet.json
+            |   |   ├── ...
+            |   └── 2024-03-01-preview
+            |       ├── ...
+            |
+            └── preview
+                ├── 2023-11-15-preview
+                |   ├── mongoCluster.json     [Swagger specs generated from TypeSpec]
+                |   └── examples
+                |   |   └── ...               [examples generated from TypeSpec]
+                |   └── scenarios             [API Test Scenarios - non-generated]
+                |       └── basic.yaml
+                ├── 2024-03-01-preview
+                ├── ...
 ```
 
 # Authoring Typespec definition
@@ -54,14 +55,13 @@ Use VS Code to edit TypeSpec definition files.
 
 # Compiling TypeSpec
 
-From folder `DocumentDB.MongoCluster.Management`, run:
+From folder `resource-manager/Microsoft.DocumentDB/MongoCluster`, run:
 
 ```bash
 npx tsp compile .
 ```
 
-This will re-generate the Swagger API specifications nuder `resource-manager/Microsoft.DocumentDB`.
-Assuming you have made no updates, this should make no changes to the files.
+This will re-generate the Swagger API specifications under `resource-manager/Microsoft.DocumentDB/MongoCluster`. Assuming you have made no updates, this should make no changes to the files.
 
 # Management API scenario tests
 
@@ -76,15 +76,16 @@ API scenario file are located alongside examples for each API version
 mongocluster
 └── resource-manager
     └── Microsoft.DocumentDB
-        ├── preview
-            ├── 2023-11-15-preview
-            |   ├──   ...
-            |   └── scenarios
-            |       └── basic.yaml
-            └── 2024-03-01-preview
-                └── scenarios
-                    ├── basic.yaml
-                    └── new-scenario.yaml
+        └── MongoCluster
+            └── preview
+                ├── 2023-11-15-preview
+                |   ├──   ...
+                |   └── scenarios
+                |       └── basic.yaml
+                └── 2024-03-01-preview
+                    └── scenarios
+                        ├── basic.yaml
+                        └── new-scenario.yaml
 ```
 
 ## Adding or editing scenario definitions
