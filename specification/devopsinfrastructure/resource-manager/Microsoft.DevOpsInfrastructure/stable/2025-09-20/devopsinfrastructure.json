@@ -89,6 +89,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ResourceDetails_DeleteResources": {
+            "$ref": "./examples/ResourceDetails_DeleteResources.json"
+          }
         }
       }
     },
@@ -116,6 +121,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/ListOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -160,6 +170,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Pools_CheckNameAvailability": {
+            "$ref": "./examples/Pools_CheckNameAvailability.json"
+          }
         }
       }
     },
@@ -200,6 +215,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Sku_ListByLocation": {
+            "$ref": "./examples/Sku_ListByLocation.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -237,6 +257,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SubscriptionUsages_Usages": {
+            "$ref": "./examples/SubscriptionUsages_Usages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -269,6 +294,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListBySubscription": {
+            "$ref": "./examples/ListPoolsBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -316,6 +346,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ImageVersions_ListByImage": {
+            "$ref": "./examples/ImageVersions_ListByImage.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -351,6 +386,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListByResourceGroup": {
+            "$ref": "./examples/ListPoolsBySubscriptionAndResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -396,6 +436,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Get": {
+            "$ref": "./examples/GetPool.json"
           }
         }
       },
@@ -458,6 +503,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_CreateOrUpdate": {
+            "$ref": "./examples/CreateOrUpdatePool.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -527,6 +577,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Pools_Update": {
+            "$ref": "./examples/UpdatePool.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -582,6 +637,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Pools_Delete": {
+            "$ref": "./examples/DeletePool.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -626,6 +686,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceDetails_ListByPool": {
+            "$ref": "./examples/ResourceDetails_ListByPool.json"
           }
         },
         "x-ms-pageable": {
@@ -716,10 +781,15 @@
         "permissionProfile": {
           "$ref": "#/definitions/AzureDevOpsPermissionProfile",
           "description": "The type of permission which determines which accounts are admins on the Azure DevOps pool."
+        },
+        "alias": {
+          "type": "string",
+          "description": "An alias to reference the Azure DevOps pool name."
         }
       },
       "required": [
-        "organizations"
+        "organizations",
+        "alias"
       ],
       "allOf": [
         {
@@ -1162,11 +1232,11 @@
         "staticIpAddressCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of static IP addresses to reserve in the subnet. These IPs will be used for the machines in the pool."
+          "description": "The number of static public IP addresses for outgoing connections assigned to the pool."
         },
         "ipAddresses": {
           "type": "array",
-          "description": "Read only. The list of static IP addresses to reserve in the subnet. These IPs will be used for the machines in the pool.",
+          "description": "Read only. The list of static public IP addresses for outgoing connections assigned to the pool.",
           "items": {
             "type": "string"
           },
@@ -1203,10 +1273,15 @@
         "openAccess": {
           "type": "boolean",
           "description": "Determines if the pool should have open access to all projects in this organization."
+        },
+        "alias": {
+          "type": "string",
+          "description": "An alias to reference the Azure DevOps pool name."
         }
       },
       "required": [
-        "url"
+        "url",
+        "alias"
       ]
     },
     "OrganizationProfile": {
