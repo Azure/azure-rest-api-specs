@@ -83,6 +83,28 @@ model Evaluation {
   target?: EvaluationTarget;
 }
 
+@doc("Evaluation Group Definition")
+@resource("evals")
+@added(Versions.v2025_07_31_preview)
+model EvaluationGroup {
+
+  @doc("Identifier of the evaluation group.")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Name for evaluation group. It helps to find the evaluation group easily in AI Foundry. It does not need to be unique.")
+  name?: string;
+
+  @doc("Evaluation Group's key-value pairs metadata")
+  metadata?: Record<string>;
+
+  @doc("Data source configuration for the evaluation group.")
+  data_source_config: DataSourceConfiguration;
+
+  @doc("Evaluators to be used for the evaluation.")
+  testing_criteria: EvaluatorConfiguration[];
+}
+
 @doc("Definition for sampling strategy.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
