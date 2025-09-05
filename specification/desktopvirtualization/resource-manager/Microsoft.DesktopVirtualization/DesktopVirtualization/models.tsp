@@ -29,6 +29,20 @@ union ManagementType {
   Standard: "Standard",
 }
 
+union AllowRDPSPWithPL {
+  string,
+
+  /**
+   * Using RDP Shortpath with Private link is disabled. This is the default value.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Using RDP Shortpath with Private link is enabled. Customer has consented to use RDP Shortpath with Private link.
+   */
+  Enabled: "Enabled",
+}
+
 /**
  * Action types for controlling hostpool update.
  */
@@ -2566,6 +2580,12 @@ model HostPoolProperties {
    */
   @added(Versions.v2025_08_01_preview)
   oboTenantId?: string;
+
+  /**
+   * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+   */
+  @added(Versions.v2025_09_01_preview)
+  allowRDPShortPathWithPrivateLink?: AllowRDPSPWithPL;
 }
 
 /**
