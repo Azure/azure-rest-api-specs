@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TrafficController",
-    "version": "2023-05-01-preview",
+    "version": "2025-03-01-preview",
     "description": "Traffic Controller Provider management API.",
     "x-typespec-generated": [
       {
@@ -46,6 +46,9 @@
       "name": "FrontendsInterface"
     },
     {
+      "name": "SecurityPoliciesInterface"
+    },
+    {
       "name": "TrafficControllerInterface"
     },
     {
@@ -62,20 +65,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -98,15 +101,15 @@
         "description": "List TrafficController resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficControllerListResult"
             }
@@ -114,7 +117,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -137,18 +140,18 @@
         "description": "List TrafficController resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficControllerListResult"
             }
@@ -156,7 +159,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -179,13 +182,13 @@
         "description": "Get a TrafficController",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -198,7 +201,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficController"
             }
@@ -206,7 +209,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -224,13 +227,13 @@
         "description": "Create a TrafficController",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -273,7 +276,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -295,13 +298,13 @@
         "description": "Update a TrafficController",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -323,7 +326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficController"
             }
@@ -331,7 +334,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -349,13 +352,13 @@
         "description": "Delete a TrafficController",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -367,30 +370,27 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -414,13 +414,13 @@
         "description": "List Association resources by TrafficController",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -433,7 +433,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssociationListResult"
             }
@@ -441,7 +441,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -464,13 +464,13 @@
         "description": "Get a Association",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -491,7 +491,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Association"
             }
@@ -499,7 +499,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -517,13 +517,13 @@
         "description": "Create a Association",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -574,7 +574,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -596,13 +596,13 @@
         "description": "Update a Association",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -632,7 +632,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Association"
             }
@@ -640,7 +640,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -658,13 +658,13 @@
         "description": "Delete a Association",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -684,30 +684,27 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -731,13 +728,13 @@
         "description": "List Frontend resources by TrafficController",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -750,7 +747,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FrontendListResult"
             }
@@ -758,7 +755,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -781,13 +778,13 @@
         "description": "Get a Frontend",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -808,7 +805,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Frontend"
             }
@@ -816,7 +813,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -834,13 +831,13 @@
         "description": "Create a Frontend",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -891,7 +888,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -913,13 +910,13 @@
         "description": "Update a Frontend",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -949,7 +946,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Frontend"
             }
@@ -957,7 +954,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -975,13 +972,13 @@
         "description": "Delete a Frontend",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -1001,36 +998,353 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Delete Frontend": {
             "$ref": "./examples/FrontendDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicies": {
+      "get": {
+        "operationId": "SecurityPoliciesInterface_ListByTrafficController",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "List SecurityPolicy resources by TrafficController",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SecurityPolicies": {
+            "$ref": "./examples/SecurityPoliciesGetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicies/{securityPolicyName}": {
+      "get": {
+        "operationId": "SecurityPoliciesInterface_Get",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "Get a SecurityPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "securityPolicyName",
+            "in": "path",
+            "description": "SecurityPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SecurityPolicy": {
+            "$ref": "./examples/SecurityPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecurityPoliciesInterface_CreateOrUpdate",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "Create a SecurityPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "securityPolicyName",
+            "in": "path",
+            "description": "SecurityPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SecurityPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'SecurityPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put IpAccessRules SecurityPolicy": {
+            "$ref": "./examples/IpAccessRulesSecurityPolicyPut.json"
+          },
+          "Put WAF SecurityPolicy": {
+            "$ref": "./examples/WafSecurityPolicyPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SecurityPoliciesInterface_Update",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "Update a SecurityPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "securityPolicyName",
+            "in": "path",
+            "description": "SecurityPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update IpAccessRules SecurityPolicy": {
+            "$ref": "./examples/IpAccessRulesSecurityPolicyPatch.json"
+          },
+          "Update WAF SecurityPolicy": {
+            "$ref": "./examples/WafSecurityPolicyPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecurityPoliciesInterface_Delete",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "Delete a SecurityPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "securityPolicyName",
+            "in": "path",
+            "description": "SecurityPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete SecurityPolicy": {
+            "$ref": "./examples/SecurityPolicyDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1048,16 +1362,12 @@
         "properties": {
           "$ref": "#/definitions/AssociationProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1129,12 +1439,20 @@
     },
     "AssociationType": {
       "type": "string",
+      "description": "Association Type Enum",
       "enum": [
         "subnets"
       ],
       "x-ms-enum": {
         "name": "AssociationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "subnets",
+            "value": "subnets",
+            "description": "Association of Type Subnet"
+          }
+        ]
       }
     },
     "AssociationUpdate": {
@@ -1150,6 +1468,7 @@
         },
         "properties": {
           "$ref": "#/definitions/AssociationUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -1170,21 +1489,17 @@
     },
     "Frontend": {
       "type": "object",
-      "description": "Frontend Subresource of Traffic Controller.",
+      "description": "Frontend Sub Resource of Traffic Controller.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FrontendProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1218,6 +1533,10 @@
           "description": "The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.",
           "readOnly": true
         },
+        "securityPolicyConfigurations": {
+          "$ref": "#/definitions/SecurityPolicyConfigurations",
+          "description": "Frontend Security Policy Configuration"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State of Traffic Controller Frontend Resource",
@@ -1235,11 +1554,148 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/FrontendUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
+      }
+    },
+    "FrontendUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Frontend.",
+      "properties": {
+        "securityPolicyConfigurations": {
+          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
+          "description": "Frontend Security Policy Configuration"
+        }
+      }
+    },
+    "IpAccessRule": {
+      "type": "object",
+      "description": "Ip Access Policy Rules",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Ip Access Rule"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 500. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "description": "Source Address Prefixed Applied by the Rule. Asterisk '*' can also be used to match all source IPs.",
+          "maxItems": 50,
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "$ref": "#/definitions/IpAccessRuleAction",
+          "description": "Action of the Rule"
+        }
+      },
+      "required": [
+        "name",
+        "priority",
+        "sourceAddressPrefixes",
+        "action"
+      ]
+    },
+    "IpAccessRuleAction": {
+      "type": "string",
+      "description": "Action of Ip Access Rule",
+      "enum": [
+        "allow",
+        "deny"
+      ],
+      "x-ms-enum": {
+        "name": "IpAccessRuleAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "allow",
+            "description": "Allow Source Ip Prefixes"
+          },
+          {
+            "name": "Deny",
+            "value": "deny",
+            "description": "Deny Source Ip Prefixes"
+          }
+        ]
+      }
+    },
+    "IpAccessRulesPolicy": {
+      "type": "object",
+      "description": "Ip Access Policy",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "Ip Access Policy Rules List",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/IpAccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "IpAccessRulesSecurityPolicy": {
+      "type": "object",
+      "description": "IpAccessRules Security Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Ip Access Rules Security Policy"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "IpAccessRulesSecurityPolicyUpdate": {
+      "type": "object",
+      "description": "IpAccessRules Security Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Ip Access Rules Security Policy"
+        }
+      }
+    },
+    "PolicyType": {
+      "type": "string",
+      "description": "Policy Type of the Security Policy",
+      "enum": [
+        "waf",
+        "ipAccessRules"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WAF",
+            "value": "waf",
+            "description": "Policy of Type WAF"
+          },
+          {
+            "name": "IpAccessRules",
+            "value": "ipAccessRules",
+            "description": "Policy of Type IpAccessRules"
+          }
+        ]
       }
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "Resource Provisioning State Enum",
       "enum": [
         "Provisioning",
         "Updating",
@@ -1251,8 +1707,46 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
-      }
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource in Provisioning State"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource in Updating State"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource in Deleting State"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource in Accepted State"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource in Succeeded State"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource in Failed State"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource in Canceled State"
+          }
+        ]
+      },
+      "readOnly": true
     },
     "ResourceId": {
       "type": "object",
@@ -1267,6 +1761,127 @@
         "id"
       ]
     },
+    "SecurityPolicy": {
+      "type": "object",
+      "description": "SecurityPolicy Subresource of Traffic Controller.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityPolicyProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SecurityPolicyConfigurations": {
+      "type": "object",
+      "description": "SecurityPolicyConfigurations Subresource of Traffic Controller.",
+      "properties": {
+        "wafSecurityPolicy": {
+          "$ref": "#/definitions/WafSecurityPolicy",
+          "description": "Contains reference to a WAF-type security policy."
+        },
+        "ipAccessRulesSecurityPolicy": {
+          "$ref": "#/definitions/IpAccessRulesSecurityPolicy",
+          "description": "Contains reference to a IpAccessRules-type security policy."
+        }
+      }
+    },
+    "SecurityPolicyConfigurationsUpdate": {
+      "type": "object",
+      "description": "SecurityPolicyConfigurations Subresource of Traffic Controller.",
+      "properties": {
+        "wafSecurityPolicy": {
+          "$ref": "#/definitions/WafSecurityPolicyUpdate",
+          "description": "Contains reference to a WAF-type security policy."
+        },
+        "ipAccessRulesSecurityPolicy": {
+          "$ref": "#/definitions/IpAccessRulesSecurityPolicyUpdate",
+          "description": "Contains reference to a IpAccessRules-type security policy."
+        }
+      }
+    },
+    "SecurityPolicyListResult": {
+      "type": "object",
+      "description": "The response of a SecurityPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecurityPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecurityPolicyProperties": {
+      "type": "object",
+      "description": "SecurityPolicy Properties.",
+      "properties": {
+        "policyType": {
+          "$ref": "#/definitions/PolicyType",
+          "description": "Type of the Traffic Controller Security Policy",
+          "readOnly": true
+        },
+        "wafPolicy": {
+          "$ref": "#/definitions/WafPolicy",
+          "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
+        },
+        "ipAccessRulesPolicy": {
+          "$ref": "#/definitions/IpAccessRulesPolicy",
+          "description": "Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of Traffic Controller SecurityPolicy Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityPolicyUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the SecurityPolicy.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SecurityPolicyUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SecurityPolicyUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SecurityPolicy.",
+      "properties": {
+        "wafPolicy": {
+          "$ref": "#/definitions/WafPolicyUpdate",
+          "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
+        },
+        "ipAccessRulesPolicy": {
+          "$ref": "#/definitions/IpAccessRulesPolicy",
+          "description": "Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
+        }
+      }
+    },
     "TrafficController": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -1274,16 +1889,12 @@
         "properties": {
           "$ref": "#/definitions/TrafficControllerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1336,6 +1947,18 @@
           },
           "readOnly": true
         },
+        "securityPolicies": {
+          "type": "array",
+          "description": "Security Policies References List",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "readOnly": true
+        },
+        "securityPolicyConfigurations": {
+          "$ref": "#/definitions/SecurityPolicyConfigurations",
+          "description": "Security Policy Configuration"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -1353,6 +1976,67 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/TrafficControllerUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TrafficControllerUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the TrafficController.",
+      "properties": {
+        "securityPolicyConfigurations": {
+          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
+          "description": "Security Policy Configuration"
+        }
+      }
+    },
+    "WafPolicy": {
+      "type": "object",
+      "description": "Web Application Firewall Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the WAF"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "WafPolicyUpdate": {
+      "type": "object",
+      "description": "Web Application Firewall Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the WAF"
+        }
+      }
+    },
+    "WafSecurityPolicy": {
+      "type": "object",
+      "description": "Web Application Firewall Security Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Waf Security Policy"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "WafSecurityPolicyUpdate": {
+      "type": "object",
+      "description": "Web Application Firewall Security Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Waf Security Policy"
         }
       }
     }
