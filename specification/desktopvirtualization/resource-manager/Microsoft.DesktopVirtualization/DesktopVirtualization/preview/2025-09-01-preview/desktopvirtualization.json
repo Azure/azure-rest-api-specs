@@ -6190,6 +6190,7 @@
     },
     "AllowRDPSPWithPL": {
       "type": "string",
+      "description": "Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.",
       "enum": [
         "Disabled",
         "Enabled"
@@ -7750,6 +7751,10 @@
         "relayUDP": {
           "$ref": "#/definitions/RelayUDP",
           "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections"
+        },
+        "allowRDPShortPathWithPrivateLink": {
+          "$ref": "#/definitions/AllowRDPSPWithPL",
+          "description": "Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes."
         }
       }
     },
