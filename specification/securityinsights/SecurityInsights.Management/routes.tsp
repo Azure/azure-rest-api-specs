@@ -39,25 +39,45 @@ interface SourceControlOperationGroup {
   /**
    * Gets a list of repositories metadata.
    */
+  // Due to TypeSpec provider action limitation: https://github.com/Azure/typespec-azure/issues/3224#issuecomment-3257368342
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControl_listRepositories")
   @autoRoute
-  listRepositories is ArmProviderActionSync<
-    Request = RepositoryAccessProperties,
-    Response = RepoList,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The name of the workspace.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
-      @path
-      @segment("workspaces")
-      workspaceName: string;
-    }
-  >;
+  @list
+  @post
+  listRepositories(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    operationalInsights: "Microsoft.OperationalInsights",
+
+    /**
+     * The name of the workspace.
+     */
+    @maxLength(90)
+    @minLength(1)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    @segment("workspaces")
+    @key
+    @path
+    workspaceName: string,
+
+    @path
+    @segment("providers")
+    @key
+    securityInsights: "Microsoft.SecurityInsights",
+
+    @path
+    route: "listRepositories",
+
+    @doc("The content of the action request")
+    body: RepositoryAccessProperties,
+    ): RepoList | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

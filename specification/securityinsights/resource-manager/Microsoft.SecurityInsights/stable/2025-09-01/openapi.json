@@ -3541,7 +3541,7 @@
           {
             "name": "incidentIdentifier",
             "in": "path",
-            "description": "The guest configuration assignment name.",
+            "description": "The incident identifier.",
             "required": true,
             "type": "string"
           },
@@ -3817,6 +3817,72 @@
           "IncidentTasks_Delete": {
             "$ref": "./examples/incidents/tasks/IncidentTasks_Delete.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/listRepositories": {
+      "post": {
+        "operationId": "SourceControl_listRepositories",
+        "description": "Gets a list of repositories metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "body": {
+                  "$ref": "#/definitions/RepositoryAccessProperties",
+                  "description": "The content of the action request"
+                }
+              },
+              "required": [
+                "body"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RepoList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get repository list.": {
+            "$ref": "./examples/repositories/GetRepositories.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5830,61 +5896,6 @@
         "x-ms-examples": {
           "Delete a watchlist item.": {
             "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/workspaces/{workspaceName}/listRepositories": {
-      "post": {
-        "operationId": "SourceControl_listRepositories",
-        "description": "Gets a list of repositories metadata.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RepositoryAccessProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RepoList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get repository list.": {
-            "$ref": "./examples/repositories/GetRepositories.json"
           }
         }
       }
