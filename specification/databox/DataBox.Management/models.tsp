@@ -2303,9 +2303,7 @@ model AddressValidationOutput {
   /**
    * The address validation properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AddressValidationProperties;
 }
 
@@ -2375,9 +2373,7 @@ model ValidationResponse {
   /**
    * Properties of pre job creation validation response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ValidationResponseProperties;
 }
 
@@ -2407,8 +2403,6 @@ model JobResourceUpdateParameter {
   /**
    * Properties of a job to be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UpdateJobProperties;
 
   /**
@@ -2734,9 +2728,7 @@ model SkuInformation {
   /**
    * Properties of the sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SkuProperties;
 }
 
