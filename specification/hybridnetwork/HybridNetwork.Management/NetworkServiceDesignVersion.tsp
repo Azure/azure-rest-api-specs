@@ -35,7 +35,12 @@ interface NetworkServiceDesignVersions {
   /**
    * Creates or updates a network service design version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkServiceDesignVersion>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkServiceDesignVersion>;
 
   /**
    * Updates a network service design version resource.
@@ -49,7 +54,10 @@ interface NetworkServiceDesignVersions {
   /**
    * Deletes the specified network service design version.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkServiceDesignVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkServiceDesignVersion,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information about a list of network service design versions under a network service design group.
@@ -64,7 +72,8 @@ interface NetworkServiceDesignVersions {
   updateState is ArmResourceActionAsync<
     NetworkServiceDesignVersion,
     NetworkServiceDesignVersionUpdateState,
-    ArmResponse<NetworkServiceDesignVersionUpdateState>
+    ArmResponse<NetworkServiceDesignVersionUpdateState>,
+    LroHeaders = ArmLroLocationHeader
   >;
 }
 

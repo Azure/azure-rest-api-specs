@@ -35,7 +35,12 @@ interface ArtifactStores {
   /**
    * Creates or updates a artifact store.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ArtifactStore>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ArtifactStore>;
 
   /**
    * Update artifact store resource.
@@ -46,7 +51,10 @@ interface ArtifactStores {
   /**
    * Deletes the specified artifact store.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ArtifactStore>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ArtifactStore,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information of the ArtifactStores under publisher.
@@ -59,7 +67,7 @@ interface ArtifactStores {
   addNetworkFabricControllerEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     ArtifactStoreNetworkFabricControllerEndPoints,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
@@ -69,7 +77,7 @@ interface ArtifactStores {
   deleteNetworkFabricControllerEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     ArtifactStoreNetworkFabricControllerEndPoints,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
@@ -80,7 +88,8 @@ interface ArtifactStores {
   listNetworkFabricControllerPrivateEndPoints is ArmResourceActionAsync<
     ArtifactStore,
     void,
-    ArmResponse<ArtifactStoreNetworkFabricControllerEndPointsList>
+    ArmResponse<ArtifactStoreNetworkFabricControllerEndPointsList>,
+    LroHeaders = ArmLroLocationHeader
   >;
 
   /**
@@ -89,7 +98,7 @@ interface ArtifactStores {
   approvePrivateEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     ArtifactStorePrivateEndPointsFormat,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
@@ -99,7 +108,7 @@ interface ArtifactStores {
   removePrivateEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     ArtifactStorePrivateEndPointsFormat,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
@@ -110,7 +119,8 @@ interface ArtifactStores {
   listPrivateEndPoints is ArmResourceActionAsync<
     ArtifactStore,
     void,
-    ArmResponse<ArtifactStorePrivateEndPointsListResult>
+    ArmResponse<ArtifactStorePrivateEndPointsListResult>,
+    LroHeaders = ArmLroLocationHeader
   >;
 
   /**
@@ -177,7 +187,8 @@ interface ArtifactStores {
       @pattern("^[^\\s]*[^\\s]+[^\\s]*$")
       @path
       artifactVersionName: string;
-    }
+    },
+    LroHeaders = ArmLroLocationHeader
   >;
 }
 

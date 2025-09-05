@@ -34,7 +34,12 @@ interface Publishers {
   /**
    * Creates or updates a publisher.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Publisher>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Publisher>;
 
   /**
    * Update a publisher resource.
@@ -49,7 +54,10 @@ interface Publishers {
   /**
    * Deletes the specified publisher.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Publisher>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Publisher,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Lists all the publishers in a resource group.

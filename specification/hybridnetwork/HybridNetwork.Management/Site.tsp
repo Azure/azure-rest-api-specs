@@ -32,7 +32,12 @@ interface Sites {
   /**
    * Creates or updates a network site.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Site>;
 
   /**
    * Updates a site update tags.
@@ -43,7 +48,10 @@ interface Sites {
   /**
    * Deletes the specified network site.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Site>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Site,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Lists all sites in the network service.

@@ -35,7 +35,12 @@ interface NetworkServiceDesignGroups {
   /**
    * Creates or updates a network service design group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkServiceDesignGroup>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkServiceDesignGroup>;
 
   /**
    * Updates a network service design groups resource.
@@ -49,7 +54,10 @@ interface NetworkServiceDesignGroups {
   /**
    * Deletes a specified network service design group.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkServiceDesignGroup>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkServiceDesignGroup,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information of the network service design groups under a publisher.

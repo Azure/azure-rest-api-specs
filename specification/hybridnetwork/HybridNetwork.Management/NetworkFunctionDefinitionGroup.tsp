@@ -35,7 +35,12 @@ interface NetworkFunctionDefinitionGroups {
   /**
    * Creates or updates a network function definition group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFunctionDefinitionGroup>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkFunctionDefinitionGroup>;
 
   /**
    * Updates a network function definition group resource.
@@ -49,7 +54,10 @@ interface NetworkFunctionDefinitionGroups {
   /**
    * Deletes a specified network function definition group.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkFunctionDefinitionGroup>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkFunctionDefinitionGroup,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information of the network function definition groups under a publisher.

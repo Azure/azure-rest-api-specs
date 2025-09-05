@@ -35,7 +35,12 @@ interface ArtifactManifests {
   /**
    * Creates or updates a artifact manifest.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ArtifactManifest>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ArtifactManifest>;
 
   /**
    * Updates a artifact manifest resource.
@@ -46,7 +51,10 @@ interface ArtifactManifests {
   /**
    * Deletes the specified artifact manifest.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ArtifactManifest>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ArtifactManifest,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information about the artifact manifest.
@@ -68,7 +76,8 @@ interface ArtifactManifests {
   updateState is ArmResourceActionAsync<
     ArtifactManifest,
     ArtifactManifestUpdateState,
-    ArmResponse<ArtifactManifestUpdateState>
+    ArmResponse<ArtifactManifestUpdateState>,
+    LroHeaders = ArmLroLocationHeader
   >;
 }
 

@@ -40,7 +40,12 @@ interface SiteNetworkServices {
   /**
    * Creates or updates a network site.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SiteNetworkService>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SiteNetworkService>;
 
   /**
    * Updates a site update tags.
@@ -51,7 +56,10 @@ interface SiteNetworkServices {
   /**
    * Deletes the specified site network service.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<SiteNetworkService>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    SiteNetworkService,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Lists all site network services.

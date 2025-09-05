@@ -35,7 +35,12 @@ interface ConfigurationGroupSchemas {
   /**
    * Creates or updates a configuration group schema.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigurationGroupSchema>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ConfigurationGroupSchema>;
 
   /**
    * Updates a configuration group schema resource.
@@ -49,7 +54,10 @@ interface ConfigurationGroupSchemas {
   /**
    * Deletes a specified configuration group schema.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ConfigurationGroupSchema>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ConfigurationGroupSchema,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information of the configuration group schemas under a publisher.
@@ -64,7 +72,8 @@ interface ConfigurationGroupSchemas {
   updateState is ArmResourceActionAsync<
     ConfigurationGroupSchema,
     ConfigurationGroupSchemaVersionUpdateState,
-    ArmResponse<ConfigurationGroupSchemaVersionUpdateState>
+    ArmResponse<ConfigurationGroupSchemaVersionUpdateState>,
+    LroHeaders = ArmLroLocationHeader
   >;
 }
 

@@ -41,7 +41,12 @@ interface NetworkFunctions {
   /**
    * Creates or updates a network function resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFunction>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkFunction>;
 
   /**
    * Updates the tags for the network function resource.
@@ -55,7 +60,7 @@ interface NetworkFunctions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkFunction,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -74,7 +79,8 @@ interface NetworkFunctions {
   executeRequest is ArmResourceActionAsync<
     NetworkFunction,
     ExecuteRequestParameters,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader
   >;
 }
 

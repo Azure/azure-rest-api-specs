@@ -33,7 +33,12 @@ interface ConfigurationGroupValues {
   /**
    * Creates or updates a hybrid configuration group value.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigurationGroupValue>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ConfigurationGroupValue>;
 
   /**
    * Updates a hybrid configuration group tags.
@@ -47,7 +52,10 @@ interface ConfigurationGroupValues {
   /**
    * Deletes the specified hybrid configuration group value.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ConfigurationGroupValue>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ConfigurationGroupValue,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Lists all the hybrid network configurationGroupValues in a resource group.

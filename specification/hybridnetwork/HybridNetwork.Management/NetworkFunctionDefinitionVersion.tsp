@@ -35,7 +35,12 @@ interface NetworkFunctionDefinitionVersions {
   /**
    * Creates or updates a network function definition version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFunctionDefinitionVersion>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @extension("x-ms-long-running-operation", true)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkFunctionDefinitionVersion>;
 
   /**
    * Updates a network function definition version resource.
@@ -49,7 +54,10 @@ interface NetworkFunctionDefinitionVersions {
   /**
    * Deletes the specified network function definition version.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkFunctionDefinitionVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkFunctionDefinitionVersion,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information about a list of network function definition versions under a network function definition group.
@@ -64,7 +72,8 @@ interface NetworkFunctionDefinitionVersions {
   updateState is ArmResourceActionAsync<
     NetworkFunctionDefinitionVersion,
     NetworkFunctionDefinitionVersionUpdateState,
-    ArmResponse<NetworkFunctionDefinitionVersionUpdateState>
+    ArmResponse<NetworkFunctionDefinitionVersionUpdateState>,
+    LroHeaders = ArmLroLocationHeader
   >;
 }
 
