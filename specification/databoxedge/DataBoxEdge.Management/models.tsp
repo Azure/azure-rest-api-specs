@@ -2188,6 +2188,8 @@ model GenerateCertResponse {
    * Gets or sets base64 encoded private part of the certificate,
    * needed to form the activation key
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "This needs to be a secret"
+  @OpenAPI.extension("x-ms-secret", true)
   privateKey?: string;
 
   /**
@@ -2331,6 +2333,8 @@ model AsymmetricEncryptedSecret {
   /**
    * Thumbprint certificate used to encrypt \"Value\". If the value is unencrypted, it will be null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "This needs to be a secret"
+  @OpenAPI.extension("x-ms-secret", true)
   encryptionCertThumbprint?: string;
 
   /**
