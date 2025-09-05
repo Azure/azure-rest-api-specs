@@ -91,8 +91,12 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "Retry-After": {
+              "Azure-AsyncOperation": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               },
               "location": {
                 "type": "string"
@@ -110,7 +114,11 @@
           "Create a notification session": {
             "$ref": "./examples/NotificationsSessions_CreateNotificationSession.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession": {
@@ -216,6 +224,50 @@
         "x-ms-examples": {
           "Get session details with connection information": {
             "$ref": "./examples/NotificationsSessions_GetSessionDetails.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}/status": {
+      "get": {
+        "operationId": "NotificationsSessions_CreateNotificationSessionStatus",
+        "tags": [
+          "NotificationsSessions"
+        ],
+        "description": "Create a notification session status check operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "notificationSessionName",
+            "in": "path",
+            "description": "Name of the notification session.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSessionStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -495,6 +547,31 @@
         ]
       }
     },
+    "NotificationSessionStatusResponse": {
+      "type": "object",
+      "description": "Status response model for notification session operations.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID."
+        },
+        "status": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The current status of the operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/NotificationSessionProperties",
+          "description": "The properties of the notification session."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error information if the operation failed."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the resource.",
@@ -514,17 +591,17 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Resource has been created."
+            "description": "The operation completed successfully."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Resource creation failed."
+            "description": "The operation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Resource creation was canceled."
+            "description": "The operation was canceled."
           },
           {
             "name": "Provisioning",
