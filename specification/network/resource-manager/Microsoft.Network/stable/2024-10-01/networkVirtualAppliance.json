@@ -1086,6 +1086,31 @@
       "description": "NetworkVirtualAppliance Resource."
     },
     "NetworkVirtualAppliancePropertiesFormat": {
+      "oneOf": [
+        {
+          "properties": {
+            "virtualHub": {
+              "readOnly": false,
+              "$ref": "./network.json#/definitions/SubResource",
+              "description": "The Virtual Hub where Network Virtual Appliance is being deployed."
+            }
+          }
+        },
+        {
+          "properties": {
+            "nvaInterfaceConfigurations": {
+              "type": "array",
+              "readOnly": false,
+              "description": "The NVA in VNet interface configurations details",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": {
+                "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
+              }
+            }
+          }
+        }
+      ],
       "properties": {
         "nvaSku": {
           "readOnly": false,
@@ -1104,11 +1129,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "virtualHub": {
-          "readOnly": false,
-          "$ref": "./network.json#/definitions/SubResource",
-          "description": "The Virtual Hub where Network Virtual Appliance is being deployed."
         },
         "cloudInitConfigurationBlobs": {
           "type": "array",
@@ -1217,10 +1237,6 @@
         "partnerManagedResource": {
           "description": "The delegation for the Virtual Appliance",
           "$ref": "#/definitions/PartnerManagedResourceProperties"
-        },
-        "nvaInterfaceConfigurations": {
-          "description": "The NVA in VNet interface configurations",
-          "$ref": "#/definitions/NvaInterfaceConfigurations"
         },
         "privateIpAddress": {
           "readOnly": true,
@@ -1788,16 +1804,6 @@
         }
       },
       "description": "Specifies input parameters required to retrieve the boot diagnostic logs for an NVA instance"
-    },
-    "NvaInterfaceConfigurations": {
-      "type": "array",
-      "readOnly": false,
-      "description": "The NVA in VNet interface configurations details",
-      "minItems": 2,
-      "maxItems": 3,
-      "items": {
-        "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
-      }
     },
     "NvaInterfaceConfigurationsProperties": {
       "type": "object",
