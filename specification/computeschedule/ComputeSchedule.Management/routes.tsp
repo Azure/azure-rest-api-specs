@@ -102,51 +102,68 @@ interface ScheduledActions {
   >;
 
   /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteCreate")
-  @post
-  virtualMachinesExecuteCreate(
-    ...Params,
-    @body @doc("The request body") requestBody: ExecuteCreateRequest,
-  ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
+  virtualMachinesExecuteCreate is ArmProviderActionSync<
+    Request = {
+      /** The request body */
+      @bodyRoot
+      @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+      requestBody: ExecuteCreateRequest;
+    },
+    Response = ArmResponse<CreateResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
 
   /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDelete")
-  @post
-  virtualMachinesExecuteDelete(
-    ...Params,
-    @body @doc("The request body") requestBody: ExecuteDeleteRequest,
-  ): ArmResponse<DeleteResourceOperationResponse> | ErrorResponse;
+  virtualMachinesExecuteDelete is ArmProviderActionSync<
+    Request = {
+      /** The request body */
+      @bodyRoot
+      @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+      requestBody: ExecuteDeleteRequest;
+    },
+    Response = ArmResponse<DeleteResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
 
   /** VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationStatus")
-  @post
-  virtualMachinesGetOperationStatus(
-    ...Params,
-    @body @doc("The request body") requestBody: GetOperationStatusRequest,
-  ): ArmResponse<GetOperationStatusResponse> | ErrorResponse;
+  virtualMachinesGetOperationStatus is ArmProviderActionSync<
+    Request = {
+      /** The request body */
+      @bodyRoot
+      requestBody: GetOperationStatusRequest;
+    },
+    Response = ArmResponse<GetOperationStatusResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
 
   /** VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesCancelOperations")
-  @post
-  virtualMachinesCancelOperations(
-    ...Params,
-    @body @doc("The request body") requestBody: CancelOperationsRequest,
-  ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
+  virtualMachinesCancelOperations is ArmProviderActionSync<
+    Request = {
+      /** The request body */
+      @bodyRoot
+      requestBody: CancelOperationsRequest;
+    },
+    Response = ArmResponse<CancelOperationsResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
 
   /** VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors")
-  @post
-  virtualMachinesGetOperationErrors(
-    ...Params,
-    @body @doc("The request body") requestBody: GetOperationErrorsRequest,
-  ): ArmResponse<GetOperationErrorsResponse> | ErrorResponse;
+  virtualMachinesGetOperationErrors is ArmProviderActionSync<
+    Request = {
+      /** The request body */
+      @bodyRoot
+      requestBody: GetOperationErrorsRequest;
+    },
+    Response = ArmResponse<GetOperationErrorsResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
 
   // Recurring scheduledaction routes
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
