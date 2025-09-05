@@ -7661,25 +7661,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "BulkDeploySolutionParameter": {
       "type": "object",
       "description": "Bulk deploy solution parameter",
@@ -9268,6 +9249,7 @@
       "description": "JobType for the job. Supports extensibility via string values.",
       "enum": [
         "deploy",
+        "publish",
         "staging",
         "externalValidation"
       ],
@@ -9279,6 +9261,11 @@
             "name": "Deploy",
             "value": "deploy",
             "description": "A deployment job."
+          },
+          {
+            "name": "Publish",
+            "value": "publish",
+            "description": "A publish job."
           },
           {
             "name": "Staging",
@@ -9359,6 +9346,48 @@
         ]
       },
       "readOnly": true
+    },
+    "PublishJobParameter": {
+      "type": "object",
+      "description": "Parameters for a publish job.",
+      "properties": {
+        "parameter": {
+          "$ref": "#/definitions/SolutionVersionParameter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobParameterBase"
+        }
+      ],
+      "x-ms-discriminator-value": "publish"
+    },
+    "PublishJobStepStatistics": {
+      "type": "object",
+      "description": "Publish statistics for a job step, including total, success, and failed counts.",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of items processed in this step"
+        },
+        "successCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of successful items in this step"
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of failed items in this step"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobStepStatisticsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "publish"
     },
     "ReconciliationPolicyProperties": {
       "type": "object",
@@ -10068,9 +10097,26 @@
         "capabilities"
       ]
     },
-    "SolutionTemplatePropertiesUpdate": {
+    "SolutionTemplateUpdate": {
       "type": "object",
-      "description": "Solution Template Properties",
+      "description": "The type used for update operations of the SolutionTemplate.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionTemplateUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "SolutionTemplateUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SolutionTemplate.",
       "properties": {
         "description": {
           "type": "string",
@@ -10092,21 +10138,6 @@
           "description": "Flag to enable external validation"
         }
       }
-    },
-    "SolutionTemplateUpdate": {
-      "type": "object",
-      "description": "Solution Template Resource. Contains capabilities and operations for creating versions.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SolutionTemplatePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "SolutionTemplateVersion": {
       "type": "object",
