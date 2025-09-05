@@ -30,6 +30,14 @@
           "kubeletDiskType": "OS",
           "maxPods": 110
         },
+        "localDNSProfile": {
+          "mode": "Preferred",
+          "vnetDNSOverrides": {
+            "cluster.local": {
+              "queryLogging": "Error"
+            }
+          }
+        },
         "tags": {
           "name1": "val1"
         },
@@ -69,6 +77,15 @@
             "kubeletDiskType": "OS",
             "maxPods": 110,
             "nodeName": "aks-nodepool1-machine1-25481572-vm0"
+          },
+          "localDNSProfile": {
+            "mode": "Preferred",
+            "state": "Enabled",
+            "vnetDNSOverrides": {
+              "cluster.local": {
+                "queryLogging": "Error"
+              }
+            }
           },
           "tags": {
             "name1": "val1"
@@ -114,6 +131,15 @@
             "kubeletDiskType": "OS",
             "maxPods": 110,
             "nodeName": "aks-nodepool1-machine1-25481572-vm0"
+          },
+          "localDNSProfile": {
+            "mode": "Preferred",
+            "state": "Enabled",
+            "vnetDNSOverrides": {
+              "cluster.local": {
+                "queryLogging": "Error"
+              }
+            }
           },
           "tags": {
             "name1": "val1"
