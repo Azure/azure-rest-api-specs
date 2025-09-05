@@ -32,6 +32,8 @@ interface Sites {
   /**
    * Creates or updates a network site.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
+  #suppress "@azure-tools/typespec-azure-resource-manager/retry-after"
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "azure-async-operation" }

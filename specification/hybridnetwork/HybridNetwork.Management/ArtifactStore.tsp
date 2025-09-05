@@ -35,6 +35,8 @@ interface ArtifactStores {
   /**
    * Creates or updates a artifact store.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
+  #suppress "@azure-tools/typespec-azure-resource-manager/retry-after"
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "azure-async-operation" }
@@ -164,6 +166,7 @@ interface ArtifactStores {
    * Change artifact state defined in artifact store.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@typespec/http/patch-implicit-optional"
   @operationId("ProxyArtifact_UpdateState")
   @patch
   @action("{artifactVersionName}")

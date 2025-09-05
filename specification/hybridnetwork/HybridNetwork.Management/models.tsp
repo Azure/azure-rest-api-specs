@@ -513,6 +513,7 @@ model ConfigurationGroupSchemaPropertiesFormat {
 /**
  * Tags object for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 model TagsObject {
   /**
    * Resource tags.
@@ -1399,6 +1400,7 @@ model ArtifactManifestUpdateState {
  * The proxy artifact overview.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model ProxyArtifactListOverview
   extends Azure.ResourceManager.CommonTypes.ProxyResource {}
 
@@ -1480,6 +1482,7 @@ model SitePropertiesFormat {
 /**
  * The NFVI object.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("nfviType")
 model NFVIs {
   /**
@@ -2409,6 +2412,7 @@ model ArmResourceDefinitionResourceElementTemplate {
 /**
  * Artifact profile properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model NSDArtifactProfile {
   /**
    * The artifact store resource id
@@ -2484,6 +2488,7 @@ model AzureCoreNfviDetails extends NFVIs {
 /**
  * The AzureArcK8sCluster NFVI detail.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model AzureArcK8SClusterNfviDetails extends NFVIs {
   /**
    * The reference to the custom location.
