@@ -301,9 +301,9 @@ model PoolImage {
   ephemeralType?: EphemeralType;
 
   @doc("Read only. Determines if the image is ephemeral.")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   @visibility(Lifecycle.Read)
-  isEphemeral: boolean;
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  isEphemeral?: boolean;
 }
 
 @doc("The OS profile of the machines in the pool.")
@@ -359,12 +359,12 @@ model NetworkProfile {
 
   @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
-  staticIpAddressCount: int32;
+  staticIpAddressCount?: int32;
 
   @doc("Read only. The list of static public IP addresses for outgoing connections assigned to the pool.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   @visibility(Lifecycle.Read)
-  ipAddresses: string[];
+  ipAddresses?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
