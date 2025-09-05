@@ -22,10 +22,10 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.WidgetAnalytics"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.WidgetAnalytics"
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "widget-analytics-rest"
@@ -33,7 +33,7 @@ options:
       name: "@azure-rest/azure-widget-analytics"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-widget-analytics"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-widget-analytics"
     namespace: com.azure.widget.analytics
     flavor: azure
   "@azure-tools/typespec-go":

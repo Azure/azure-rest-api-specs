@@ -12,10 +12,10 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.BotService"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.BotService"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-botservice"
     namespace: "azure.mgmt.botservice"
@@ -23,7 +23,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-botservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-botservice"
     namespace: "com.azure.resourcemanager.botservice"
     service-name: "BotService" # human-readable service name, whitespace allowed
     flavor: azure

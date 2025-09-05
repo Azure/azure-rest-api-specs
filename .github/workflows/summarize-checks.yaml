@@ -1,14 +1,15 @@
-name: "[TEST-IGNORE] Summarize Checks"
+name: "Summarize Checks"
 
 on:
   workflow_run:
     workflows:
-      - "\\[TEST-IGNORE\\] Swagger SemanticValidation - Set Status"
-      - "\\[TEST-IGNORE\\] Swagger ModelValidation - Set Status"
-      - "\\[TEST-IGNORE\\] Summarize PR Impact"
+      - "Swagger SemanticValidation - Set Status"
+      - "Swagger ModelValidation - Set Status"
+      - "Summarize PR Impact"
       - "Swagger Avocado - Set Status"
       - "Swagger LintDiff - Set Status"
       - "SDK Validation Status"
+      - "TypeSpec Validation"
       - "Update Labels"
     types:
       - completed
@@ -19,6 +20,9 @@ on:
       - opened
       - synchronize
       - reopened
+      - edited
+      - ready_for_review
+      - converted_to_draft
 
 permissions:
   actions: read # to inspect workflow_run metadata
@@ -31,7 +35,7 @@ permissions:
 jobs:
   run-summarize-checks:
     if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
-    name: "[TEST-IGNORE] Summarize Checks"
+    name: "Summarize Checks"
     runs-on: ubuntu-24.04
 
     steps:

@@ -13,11 +13,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Watcher.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     flavor: azure
     model-namespace: false
-    namespace: "{package-dir}"
-    package-dir: "Azure.ResourceManager.DatabaseWatcher"
+    namespace: "Azure.ResourceManager.DatabaseWatcher"
   "@azure-tools/typespec-python":
     flavor: azure
     generate-sample: true
@@ -25,9 +25,9 @@ options:
     package-dir: "azure-mgmt-databasewatcher"
     namespace: "azure.mgmt.databasewatcher"
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-databasewatcher"
     flavor: azure
     namespace: "com.azure.resourcemanager.databasewatcher"
-    package-dir: "azure-resourcemanager-databasewatcher"
     service-name: "Database Watcher"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
