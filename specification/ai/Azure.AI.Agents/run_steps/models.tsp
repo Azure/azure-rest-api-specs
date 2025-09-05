@@ -346,6 +346,27 @@ model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
   codeInterpreter?: RunStepDeltaCodeInterpreterDetailItemObject;
 }
 
+/** Represents an image generation tool call within a streaming run step's tool call details. */
+@added(Versions.v2025_05_01)
+model RunStepDeltaImageGenerationToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "image_generation." */
+  type: "image_generation";
+
+  /** The image generation data for the tool call. */
+  @encodedName("application/json", "image_generation")
+  imageGeneration?: RunStepDeltaImageGenerationDetailItemObject;
+}
+
+/** Represents the image generation tool call data in a streaming run step's tool calls. */
+@added(Versions.v2025_05_01)
+model RunStepDeltaImageGenerationDetailItemObject {
+  /** The prompt used for image generation or editing. */
+  prompt?: string;
+
+  /** The generated image output. */
+  output?: string;
+}
+
 /** Represents the function data in a streaming run step MCP call. */
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaMcpToolCall extends RunStepDeltaToolCall {
