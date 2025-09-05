@@ -146,17 +146,8 @@ union JsonWebKeyCurveName {
 union JsonWebKeyWrapAlgorithm {
   string,
 
-  /** [Not recommended] RSAES-PKCS1-V1_5 key wrap, as described in https://tools.ietf.org/html/rfc3447. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_1_5, which is included solely for backwards compatibility. Cryptographic standards no longer consider RSA with the PKCS#1 v1.5 padding scheme secure for encryption. */
-  RSA1_5: "RSA1_5",
-  /**
-   * RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_OAEP, which is included solely for backwards compatibility. RSA_OAEP utilizes SHA1, which has known collision problems.
-   */
-  RSA_OAEP: "RSA-OAEP",
   /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256. */
   RSA_OAEP256: "RSA-OAEP-256",
-
-  /** [Not recommended] algorithm for wrapping keys. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. */
-  RSA_RAW: "RSA-RAW",
 
   /** 128-bit AES key wrap. */
   A128_KW: "A128KW",
@@ -170,6 +161,11 @@ union JsonWebKeyWrapAlgorithm {
   A128_KWPAD: "A128KWPAD",
   /** 256-bit AES key wrap with padding. */
   A192_KWPAD: "A192KWPAD",
+
+  /** CKM AES key wrap. */
+  CKM_AES_KEY_WRAP: "CKM_AES_KEY_WRAP",
+  /** CKM AES key wrap with padding. */
+  CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
 }
 
 /**

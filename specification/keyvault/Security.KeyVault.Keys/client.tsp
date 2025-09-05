@@ -294,13 +294,14 @@ op unwrapKey is KeyVaultOperation<
 >;
 
 /**
- * The SECURE WRAP operation creates a new 256 bit AES key within the trusted execution environment(TEE) and encrypts the same with a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.
+ * The SECURE WRAP operation generates a new 256 bit OCT key within the trusted execution environment(TEE) and encrypts the same with a key encryption key in Azure KeyVault.
+ * Once wrapped, the generated key is erased from the TEE. This operation requires the keys/wrapKey permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("securewrapkey")
 @Versioning.added(KeyVault.Versions.v2026_01_01_preview)
-@summary("Creates a new 256 bit AES key within the trusted execution environment and wraps this key using a specified key.")
+@summary("Generates a new 256 bit OCT key within the trusted execution environment and wraps this key using a specified key.")
 @route("/keys/{key-name}/{key-version}/securewrapkey")
 @post
 op secureWrapKey is KeyVaultOperation<
@@ -331,14 +332,15 @@ op secureWrapKey is KeyVaultOperation<
 >;
 
 /**
- * The SECURE UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the SECURE WRAP operation. The SECURE UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.
- * The SECURE UNWRAP operation ensures that MAA (Microsoft Azure Attestation Service) is used to attest the TEE (Trusted Execution Environment) before the key is unwrapped.
+ * The SECURE UNWRAP operation supports the unwrap of previously wrapped key. 
+ * It ensures the target token satisfies the release policy associated with the key encryption key.
+ * This operation requires the keys/unwrapKey permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("secureunwrapkey")
 @Versioning.added(KeyVault.Versions.v2026_01_01_preview)
-@summary("Creates a new 256 bit AES key within the trusted execution environment and wraps a symmetric key using a specified key.")
+@summary("Unwraps a previously wrapped key using a specified key that was used for wrapping that key.")
 @route("/keys/{key-name}/{key-version}/secureunwrapkey")
 @post
 op secureUnwrapKey is KeyVaultOperation<

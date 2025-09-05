@@ -2023,40 +2023,24 @@
       "type": "string",
       "description": "An algorithm used for key wrapping and unwrapping.",
       "enum": [
-        "RSA1_5",
-        "RSA-OAEP",
         "RSA-OAEP-256",
-        "RSA-RAW",
         "A128KW",
         "A192KW",
         "A256KW",
         "A256KWPAD",
         "A128KWPAD",
-        "A192KWPAD"
+        "A192KWPAD",
+        "CKM_AES_KEY_WRAP",
+        "CKM_AES_KEY_WRAP_PAD"
       ],
       "x-ms-enum": {
         "name": "JsonWebKeyWrapAlgorithm",
         "modelAsString": true,
         "values": [
           {
-            "name": "RSA1_5",
-            "value": "RSA1_5",
-            "description": "[Not recommended] RSAES-PKCS1-V1_5 key wrap, as described in https://tools.ietf.org/html/rfc3447. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_1_5, which is included solely for backwards compatibility. Cryptographic standards no longer consider RSA with the PKCS#1 v1.5 padding scheme secure for encryption."
-          },
-          {
-            "name": "RSA_OAEP",
-            "value": "RSA-OAEP",
-            "description": "RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_OAEP, which is included solely for backwards compatibility. RSA_OAEP utilizes SHA1, which has known collision problems."
-          },
-          {
             "name": "RSA_OAEP256",
             "value": "RSA-OAEP-256",
             "description": "RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256."
-          },
-          {
-            "name": "RSA_RAW",
-            "value": "RSA-RAW",
-            "description": "[Not recommended] algorithm for wrapping keys. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security."
           },
           {
             "name": "A128_KW",
@@ -2087,6 +2071,16 @@
             "name": "A192_KWPAD",
             "value": "A192KWPAD",
             "description": "256-bit AES key wrap with padding."
+          },
+          {
+            "name": "CKM_AES_KEY_WRAP",
+            "value": "CKM_AES_KEY_WRAP",
+            "description": "CKM AES key wrap."
+          },
+          {
+            "name": "CKM_AES_KEY_WRAP_PAD",
+            "value": "CKM_AES_KEY_WRAP_PAD",
+            "description": "CKM AES key wrap with padding."
           }
         ]
       }
