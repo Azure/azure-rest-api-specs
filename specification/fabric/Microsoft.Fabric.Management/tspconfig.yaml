@@ -17,6 +17,7 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.Fabric"
+    api-version: "2023-11-01"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-fabric"
     flavor: "azure"
@@ -30,7 +31,7 @@ options:
     package-details:
       name: "@azure/arm-fabric"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-fabric"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-fabric"
     flavor: azure
     namespace: "com.azure.resourcemanager.fabric"
   "@azure-tools/typespec-go":
