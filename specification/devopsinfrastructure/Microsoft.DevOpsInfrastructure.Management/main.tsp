@@ -329,10 +329,10 @@ model NetworkProfile {
   @doc("The subnet id on which to put all machines created in the pool.")
   subnetId: string;
 
-  @doc("The number of static IP addresses to reserve in the subnet. These IPs will be used for the machines in the pool.")
+  @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
   staticIpAddressCount: int32;
 
-  @doc("Read only. The list of static IP addresses to reserve in the subnet. These IPs will be used for the machines in the pool.")
+  @doc("Read only. The list of static public IP addresses for outgoing connections assigned to the pool.")
   @visibility(Lifecycle.Read)
   ipAddresses: string[];
 }
