@@ -243,7 +243,6 @@ model MaintenanceConfigurationProperties {
   /**
    * Definition of a MaintenanceWindow
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maintenanceWindow?: MaintenanceWindow;
 
   /**
@@ -580,7 +579,6 @@ model Update {
   /**
    * Properties of the apply update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: UpdateProperties;
 }
 

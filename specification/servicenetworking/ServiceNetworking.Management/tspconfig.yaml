@@ -41,12 +41,12 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-servicenetworking"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicenetworking"
     namespace: "com.azure.resourcemanager.servicenetworking"
     flavor: "azure"
     service-name: "Traffic Controller"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.ServiceNetworking"
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ServiceNetworking"

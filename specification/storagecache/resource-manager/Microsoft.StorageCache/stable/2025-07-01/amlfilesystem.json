@@ -1,0 +1,2969 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Azure Managed Lustre provides a fully managed Lustre® file system, integrated with Blob storage, for use on demand. These operations create and manage Azure Managed Lustre file systems.",
+    "title": "Managed Lustre client",
+    "version": "2025-07-01"
+  },
+  "host": "management.azure.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/amlFilesystems": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of AML file systems. Note that entity references might replace complete file system objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "amlFilesystems_List": {
+            "$ref": "./examples/amlFilesystems_List.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Returns all AML file systems the user has access to under a subscription.",
+        "operationId": "amlFilesystems_List"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of AmlFilesystem objects. Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_ListByResourceGroup": {
+            "$ref": "./examples/amlFilesystems_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Returns all AML file systems the user has access to under a resource group.",
+        "operationId": "amlFilesystems_ListByResourceGroup"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AML file system deleted."
+          },
+          "202": {
+            "description": "Started the AML file system's transition to Deleted state. Poll the AML file system to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "AML file system deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Delete": {
+            "$ref": "./examples/amlFilesystems_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Schedules an AML file system for deletion.",
+        "operationId": "amlFilesystems_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the AML file system object corresponding to amlFilesystemName.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Get": {
+            "$ref": "./examples/amlFilesystems_Get.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Returns an AML file system.",
+        "operationId": "amlFilesystems_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the AML file system. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "amlFilesystem",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The AML file system has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          },
+          "201": {
+            "description": "AML file system creation has been initiated. Poll the AML file system's provisioningState property to monitor creation progress.",
+            "headers": {
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_CreateOrUpdate": {
+            "$ref": "./examples/amlFilesystems_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Create or update an AML file system.",
+        "operationId": "amlFilesystems_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the AML file system. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "amlFilesystem",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the AML file system.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          },
+          "202": {
+            "description": "AML file system update has been initiated. Poll the AML file system's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Update": {
+            "$ref": "./examples/amlFilesystems_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Update an AML file system instance.",
+        "operationId": "amlFilesystems_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/archive": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "name": "archiveInfo",
+            "in": "body",
+            "description": "Information about the archive operation",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemArchiveInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AML file system has started the archive operation. Poll the AML file system's hsm.archiveStatus field to monitor the progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Archive": {
+            "$ref": "./examples/amlFilesystems_Archive.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Archive data from the AML file system.",
+        "operationId": "amlFilesystems_Archive"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/cancelArchive": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AML file system has started the cancellation of the archive operation. Poll the AML file system's hsm.archiveStatus field to monitor the progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_cancelArchive": {
+            "$ref": "./examples/amlFilesystems_CancelArchive.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Cancel archiving data from the AML file system.",
+        "operationId": "amlFilesystems_CancelArchive"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoExportJobs/{autoExportJobName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoExportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started the auto export job's transition to Deleted state. Poll the auto export job to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Auto export job deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJobs_Delete": {
+            "$ref": "./examples/autoExportJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "autoExportJobs"
+        ],
+        "description": "Schedules an auto export job for deletion.",
+        "operationId": "autoExportJobs_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoExportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the auto export job object corresponding to amlFilesystemName.",
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJobs_Get": {
+            "$ref": "./examples/autoExportJobs_Get.json"
+          }
+        },
+        "tags": [
+          "autoExportJobs"
+        ],
+        "description": "Returns an auto export job.",
+        "operationId": "autoExportJobs_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoExportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the auto export job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "autoExportJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The auto export job has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          },
+          "201": {
+            "description": "auto export job creation has been initiated. Poll the auto export job's provisioningState property to monitor creation progress.",
+            "headers": {
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJobs_CreateOrUpdate": {
+            "$ref": "./examples/autoExportJobs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "autoExportJob"
+        ],
+        "description": "Create or update an auto export job.",
+        "operationId": "autoExportJobs_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoExportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the auto export job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "autoExportJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoExportJobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the auto export job.",
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          },
+          "202": {
+            "description": "Auto export job update has been initiated. Poll the auto export job's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJobs_Update": {
+            "$ref": "./examples/autoExportJobs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "autoExportJob"
+        ],
+        "description": "Update an auto export job instance.",
+        "operationId": "autoExportJobs_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoExportJobs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of auto export jobs. History is maintained for 10 most recent jobs, although more than 10 jobs can be returned in the list if they were run recently. If there are more than 10 job records, the inactive auto export jobs will be automatically deleted from the list 72 hours after completion.Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/AutoExportJobsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJobs_ListByAmlFilesystem": {
+            "$ref": "./examples/autoExportJobs_ListByAmlFilesystem.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "autoExportJob"
+        ],
+        "description": "Returns all the auto export jobs the user has access to under an AML File System.",
+        "operationId": "autoExportJobs_ListByAmlFilesystem"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/importJobs/{importJobName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ImportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started the import job's transition to Deleted state. Poll the import job to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Import job deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "importJobs_Delete": {
+            "$ref": "./examples/importJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "importJobs"
+        ],
+        "description": "Schedules an import job for deletion.",
+        "operationId": "importJobs_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ImportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the import job object corresponding to amlFilesystemName.",
+            "schema": {
+              "$ref": "#/definitions/ImportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "importJobs_Get": {
+            "$ref": "./examples/importJobs_Get.json"
+          }
+        },
+        "tags": [
+          "importJobs"
+        ],
+        "description": "Returns an import job.",
+        "operationId": "importJobs_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the import job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "importJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The import job has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ImportJob"
+            }
+          },
+          "201": {
+            "description": "Import job creation has been initiated. Poll the import job's provisioningState property to monitor creation progress.",
+            "headers": {
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "importJobs_CreateOrUpdate": {
+            "$ref": "./examples/importJobs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "importJobs"
+        ],
+        "description": "Create or update an import job.",
+        "operationId": "importJobs_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the import job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "importJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportJobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the import job.",
+            "schema": {
+              "$ref": "#/definitions/ImportJob"
+            }
+          },
+          "202": {
+            "description": "Import job update has been initiated. Poll the import job's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "importJobs_Update": {
+            "$ref": "./examples/importJob_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "importJobs"
+        ],
+        "description": "Update an import job instance.",
+        "operationId": "importJobs_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/importJobs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of import jobs. History is maintained on 10 most recent jobs, although more than 10 jobs can be present in the list if they were run recently. If there are more than 10 job records, the inactive import jobs will be automatically deleted from the list 72 hours after completion. Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/ImportJobsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "importJobs_ListByAmlFilesystem": {
+            "$ref": "./examples/importJobs_ListByAmlFilesystem.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "importJobs"
+        ],
+        "description": "Returns all import jobs the user has access to under an AML File System.",
+        "operationId": "importJobs_ListByAmlFilesystem"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoImportJobs/{autoImportJobName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoImportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started the auto import job's transition to Deleted state. Poll the auto import job to monitor.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Auto import job deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_Delete": {
+            "$ref": "./examples/autoImportJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Schedules an auto import job for deletion.",
+        "operationId": "autoImportJobs_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoImportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the auto import job object corresponding to amlFilesystemName.",
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_Get": {
+            "$ref": "./examples/autoImportJobs_Get.json"
+          }
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Returns an auto import job.",
+        "operationId": "autoImportJobs_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoImportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the auto import job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "autoImportJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The auto import job has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          },
+          "201": {
+            "description": "Auto import job creation has been initiated. Poll the auto import job's provisioningState property to monitor creation progress.",
+            "headers": {
+              "azure-async-operation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_CreateOrUpdate": {
+            "$ref": "./examples/autoImportJobs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Create or update an auto import job.",
+        "operationId": "autoImportJobs_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoImportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the auto import job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "autoImportJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoImportJobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the auto import job.",
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          },
+          "202": {
+            "description": "Auto import job update has been initiated. Poll the auto import job's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_Update": {
+            "$ref": "./examples/autoImportJobs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Update an auto import job instance.",
+        "operationId": "autoImportJobs_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoImportJobs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of auto import jobs. History is maintained for 10 most recent jobs, although more than 10 jobs can be returned in the list if they were run recently. If there are more than 10 job records, the inactive auto import jobs will be automatically deleted from the list 72 hours after completion. Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/AutoImportJobsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_ListByAmlFilesystem": {
+            "$ref": "./examples/autoImportJobs_ListByAmlFilesystem.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Returns all the auto import jobs the user has access to under an AML File System.",
+        "operationId": "autoImportJobs_ListByAmlFilesystem"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/checkAmlFSSubnets": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "amlFilesystemSubnetInfo",
+            "in": "body",
+            "description": "Information about the subnets to validate.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemSubnetInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subnets provided meet the requirements for AML file system create."
+          },
+          "400": {
+            "description": "The subnets provided do not meet the requirements for AML file system create.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemCheckSubnetError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "checkAmlFSSubnets": {
+            "$ref": "./examples/checkAmlFSSubnets.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Check that subnets will be valid for AML file system create calls.",
+        "operationId": "checkAmlFSSubnets"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/getRequiredAmlFSSubnetsSize": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "requiredAMLFilesystemSubnetsSizeInfo",
+            "in": "body",
+            "description": "Information to determine the number of available IPs a subnet will need to host the AML file system.",
+            "schema": {
+              "$ref": "#/definitions/RequiredAmlFilesystemSubnetsSizeInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The number of available IP addresses a subnet will need for an AML file system.",
+            "schema": {
+              "$ref": "#/definitions/RequiredAmlFilesystemSubnetsSize"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getRequiredAmlFilesystemSubnetsSize": {
+            "$ref": "./examples/getRequiredAmlFSSubnetsSize.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Get the number of available IP addresses needed for the AML file system information provided.",
+        "operationId": "getRequiredAmlFSSubnetsSize"
+      }
+    }
+  },
+  "definitions": {
+    "AmlFilesystemIdentity": {
+      "type": "object",
+      "description": "Managed Identity properties.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID for the user-assigned identity of the resource."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID associated with the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the resource.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "AmlFilesystemIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.",
+          "$ref": "#/definitions/UserAssignedIdentities"
+        }
+      }
+    },
+    "AmlFilesystem": {
+      "description": "An AML file system instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AmlFilesystemIdentity",
+          "description": "The managed identity used by the AML file system, if configured."
+        },
+        "sku": {
+          "description": "SKU for the resource.",
+          "$ref": "#/definitions/SkuName"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability zones for resources. This field should only contain a single element in the array.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the AML file system.",
+          "properties": {
+            "storageCapacityTiB": {
+              "description": "The size of the AML file system, in TiB. This might be rounded up.",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "type": "number",
+              "format": "float"
+            },
+            "health": {
+              "description": "Health of the AML file system.",
+              "readOnly": true,
+              "$ref": "#/definitions/AmlFilesystemHealth"
+            },
+            "provisioningState": {
+              "description": "ARM provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "AmlFilesystemProvisioningStateType",
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "filesystemSubnet": {
+              "description": "Subnet used for managing the AML file system and for client-facing operations. This subnet should have at least a /24 subnet mask within the VNET's address space.",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "$ref": "storagecache.json#/definitions/URLString"
+            },
+            "clientInfo": {
+              "$ref": "#/definitions/AmlFilesystemClientInfo",
+              "description": "Client information for the AML file system."
+            },
+            "throughputProvisionedMBps": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Throughput provisioned in MB per sec, calculated as storageCapacityTiB * per-unit storage throughput",
+              "readOnly": true
+            },
+            "encryptionSettings": {
+              "$ref": "#/definitions/AmlFilesystemEncryptionSettings",
+              "description": "Specifies encryption settings of the AML file system."
+            },
+            "maintenanceWindow": {
+              "description": "Start time of a 30-minute weekly maintenance window.",
+              "type": "object",
+              "properties": {
+                "dayOfWeek": {
+                  "type": "string",
+                  "enum": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "x-ms-enum": {
+                    "name": "MaintenanceDayOfWeekType",
+                    "modelAsString": false
+                  },
+                  "description": "Day of the week on which the maintenance window will occur."
+                },
+                "timeOfDayUTC": {
+                  "type": "string",
+                  "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+                  "description": "The time of day (in UTC) to start the maintenance window."
+                }
+              }
+            },
+            "hsm": {
+              "type": "object",
+              "description": "Hydration and archive settings and status",
+              "properties": {
+                "settings": {
+                  "$ref": "#/definitions/AmlFilesystemHsmSettings",
+                  "description": "Specifies HSM settings of the AML file system."
+                },
+                "archiveStatus": {
+                  "type": "array",
+                  "readOnly": true,
+                  "description": "Archive status",
+                  "items": {
+                    "$ref": "#/definitions/AmlFilesystemArchive"
+                  },
+                  "x-ms-identifiers": [
+                    "filesystemPath"
+                  ]
+                }
+              }
+            },
+            "rootSquashSettings": {
+              "$ref": "#/definitions/AmlFilesystemRootSquashSettings",
+              "description": "Specifies root squash settings of the AML file system."
+            }
+          },
+          "type": "object",
+          "required": [
+            "filesystemSubnet",
+            "storageCapacityTiB",
+            "maintenanceWindow"
+          ]
+        }
+      }
+    },
+    "AmlFilesystemUpdate": {
+      "description": "An AML file system update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the AML file system.",
+          "properties": {
+            "encryptionSettings": {
+              "$ref": "#/definitions/AmlFilesystemEncryptionSettings",
+              "description": "Specifies encryption settings of the AML file system."
+            },
+            "maintenanceWindow": {
+              "description": "Start time of a 30-minute weekly maintenance window.",
+              "type": "object",
+              "properties": {
+                "dayOfWeek": {
+                  "type": "string",
+                  "enum": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "x-ms-enum": {
+                    "name": "MaintenanceDayOfWeekType",
+                    "modelAsString": false
+                  },
+                  "description": "Day of the week on which the maintenance window will occur."
+                },
+                "timeOfDayUTC": {
+                  "type": "string",
+                  "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+                  "description": "The time of day (in UTC) to start the maintenance window."
+                }
+              }
+            },
+            "rootSquashSettings": {
+              "$ref": "#/definitions/AmlFilesystemRootSquashSettings",
+              "description": "Specifies root squash settings of the AML file system."
+            }
+          }
+        }
+      }
+    },
+    "AmlFilesystemName": {
+      "readOnly": true,
+      "description": "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "AmlFilesystemsListResult": {
+      "description": "Result of the request to list AML file systems. It contains a list of AML file systems and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of AML file system list results, if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of AML file systems.",
+          "items": {
+            "$ref": "#/definitions/AmlFilesystem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AmlFilesystemHealth": {
+      "description": "An indication of AML file system health. Gives more information about health than just that related to provisioning.",
+      "readOnly": true,
+      "properties": {
+        "state": {
+          "description": "List of AML file system health states.",
+          "enum": [
+            "Unavailable",
+            "Available",
+            "Degraded",
+            "Transitioning",
+            "Maintenance"
+          ],
+          "x-ms-enum": {
+            "name": "AmlFilesystemHealthStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "statusCode": {
+          "description": "Server-defined error code for the AML file system health",
+          "type": "string"
+        },
+        "statusDescription": {
+          "description": "Describes the health state.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AmlFilesystemEncryptionSettings": {
+      "description": "AML file system encryption settings.",
+      "properties": {
+        "keyEncryptionKey": {
+          "$ref": "storagecache.json#/definitions/KeyVaultKeyReference",
+          "description": "Specifies the location of the encryption key in Key Vault."
+        }
+      },
+      "type": "object"
+    },
+    "AmlFilesystemHsmSettings": {
+      "description": "AML file system HSM settings.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "type": "object",
+      "properties": {
+        "container": {
+          "description": "Resource ID of storage container used for hydrating the namespace and archiving from the namespace. The resource provider must have permission to create SAS tokens on the storage account.",
+          "$ref": "storagecache.json#/definitions/URLString"
+        },
+        "loggingContainer": {
+          "description": "Resource ID of storage container used for logging events and errors.  Must be a separate container in the same storage account as the hydration and archive container. The resource provider must have permission to create SAS tokens on the storage account.",
+          "$ref": "storagecache.json#/definitions/URLString"
+        },
+        "importPrefix": {
+          "description": "Only blobs in the non-logging container that start with this path/prefix get imported into the cluster namespace. This is only used during initial creation of the AML file system. It automatically creates an import job resource that can be deleted.",
+          "type": "string",
+          "default": "/"
+        },
+        "importPrefixesInitial": {
+          "type": "array",
+          "description": "Only blobs in the non-logging container that start with one of the paths/prefixes in this array get imported into the cluster namespace. This is only used during initial creation of the AML file system and has '/' as the default value. It automatically creates an import job resource that can be deleted.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "container",
+        "loggingContainer"
+      ]
+    },
+    "AmlFilesystemRootSquashSettings": {
+      "description": "AML file system squash settings.",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Squash mode of the AML file system. 'All': User and Group IDs on files will be squashed to the provided values for all users on non-trusted systems. 'RootOnly': User and Group IDs on files will be squashed to provided values for solely the root user on non-trusted systems. 'None': No squashing of User and Group IDs is performed for any users on any systems.",
+          "enum": [
+            "None",
+            "RootOnly",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "AmlFilesystemSquashMode",
+            "modelAsString": true
+          }
+        },
+        "noSquashNidLists": {
+          "description": "Semicolon separated NID IP Address list(s) to be added to the TrustedSystems.",
+          "type": "string"
+        },
+        "squashUID": {
+          "type": "integer",
+          "description": "User ID to squash to.",
+          "format": "int64"
+        },
+        "squashGID": {
+          "type": "integer",
+          "description": "Group ID to squash to.",
+          "format": "int64"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "AML file system squash status."
+        }
+      },
+      "type": "object"
+    },
+    "AmlFilesystemClientInfo": {
+      "type": "object",
+      "description": "AML file system client information",
+      "readOnly": true,
+      "properties": {
+        "mgsAddress": {
+          "description": "The IPv4 address used by clients to mount the AML file system's Lustre Management Service (MGS).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mountCommand": {
+          "description": "Recommended command to mount the AML file system",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lustreVersion": {
+          "type": "string",
+          "description": "The version of Lustre running in the AML file system",
+          "readOnly": true
+        },
+        "containerStorageInterface": {
+          "$ref": "#/definitions/AmlFilesystemContainerStorageInterface",
+          "description": "Container Storage Interface information for the AML file system."
+        }
+      }
+    },
+    "AmlFilesystemContainerStorageInterface": {
+      "type": "object",
+      "description": "AML file system container storage interface information",
+      "readOnly": true,
+      "properties": {
+        "persistentVolumeClaim": {
+          "description": "Recommended AKS Persistent Volume Claim for the CSI driver, in Base64 encoded YAML",
+          "readOnly": true,
+          "type": "string"
+        },
+        "persistentVolume": {
+          "description": "Recommended AKS Persistent Volume for the CSI driver, in Base64 encoded YAML",
+          "readOnly": true,
+          "type": "string"
+        },
+        "storageClass": {
+          "description": "Recommended AKS Storage Class for the CSI driver, in Base64 encoded YAML",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "AmlFilesystemArchiveInfo": {
+      "type": "object",
+      "description": "Information required to execute the archive operation",
+      "properties": {
+        "filesystemPath": {
+          "type": "string",
+          "description": "Lustre file system path to archive relative to the file system root.  Specify '/' to archive all modified data.",
+          "default": "/"
+        }
+      }
+    },
+    "AmlFilesystemArchive": {
+      "description": "Information about the AML file system archive",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "filesystemPath": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Lustre file system path to archive relative to the file system root.  Specify '/' to archive all modified data."
+        },
+        "status": {
+          "description": "The status of the archive",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "state": {
+              "readOnly": true,
+              "description": "The state of the archive operation",
+              "type": "string",
+              "enum": [
+                "NotConfigured",
+                "Idle",
+                "InProgress",
+                "Canceled",
+                "Completed",
+                "Failed",
+                "Cancelling",
+                "FSScanInProgress"
+              ],
+              "x-ms-enum": {
+                "name": "ArchiveStatusType",
+                "modelAsString": true
+              }
+            },
+            "lastCompletionTime": {
+              "readOnly": true,
+              "description": "The time of the last completed archive operation",
+              "type": "string",
+              "format": "date-time"
+            },
+            "lastStartedTime": {
+              "readOnly": true,
+              "description": "The time the latest archive operation started",
+              "type": "string",
+              "format": "date-time"
+            },
+            "percentComplete": {
+              "readOnly": true,
+              "description": "The completion percentage of the archive operation",
+              "type": "integer",
+              "format": "int32"
+            },
+            "errorCode": {
+              "readOnly": true,
+              "description": "Server-defined error code for the archive operation",
+              "type": "string"
+            },
+            "errorMessage": {
+              "readOnly": true,
+              "description": "Server-defined error message for the archive operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "AutoExportJob": {
+      "description": "An auto export job instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Properties of the auto export job.",
+          "properties": {
+            "provisioningState": {
+              "description": "ARM provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "AutoExportJobProvisioningStateType",
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.",
+              "default": "Enable",
+              "enum": [
+                "Enable",
+                "Disable"
+              ],
+              "x-ms-enum": {
+                "name": "AutoExportJobAdminStatus",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "autoExportPrefixes": {
+              "type": "array",
+              "description": "An array of blob paths/prefixes that get auto exported to the cluster namespace. It has '/' as the default value. Number of maximum allowed paths for now is 1.",
+              "items": {
+                "type": "string"
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "status": {
+              "x-ms-client-flatten": true,
+              "description": "The status of the auto export",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "state": {
+                  "description": "The operational state of auto export. InProgress indicates the export is running.  Disabling indicates the user has requested to disable the export but the disabling is still in progress. Disabled indicates auto export has been disabled.  DisableFailed indicates the disabling has failed.  Failed means the export was unable to continue, due to a fatal error.",
+                  "type": "string",
+                  "enum": [
+                    "InProgress",
+                    "Disabling",
+                    "Disabled",
+                    "DisableFailed",
+                    "Failed"
+                  ],
+                  "x-ms-enum": {
+                    "name": "AutoExportStatusType",
+                    "modelAsString": true
+                  }
+                },
+                "statusCode": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Server-defined status code for auto export job."
+                },
+                "statusMessage": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Server-defined status message for auto export job."
+                },
+                "totalFilesExported": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Total files exported since the start of the export. This is accumulative, some files may be counted repeatedly.",
+                  "format": "int64"
+                },
+                "totalMiBExported": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Total data (in MiB) exported since the start of the export. This is accumulative, some files may be counted repeatedly.",
+                  "format": "int64"
+                },
+                "totalFilesFailed": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Total files failed to be export since the last successfully completed iteration. This is accumulative, some files may be counted repeatedly.",
+                  "format": "int64"
+                },
+                "exportIterationCount": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Number of iterations completed since the start of the export.",
+                  "format": "int32"
+                },
+                "lastSuccessfulIterationCompletionTimeUTC": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Time (in UTC) of the last successfully completed export iteration. Look at logging container for details.",
+                  "format": "date-time"
+                },
+                "currentIterationFilesDiscovered": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Files discovered for export in current iteration. It may increase while more export items are found.",
+                  "format": "int64"
+                },
+                "currentIterationMiBDiscovered": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Data (in MiB) discovered for export in current iteration. It may increase while more export items are found.",
+                  "format": "int64"
+                },
+                "currentIterationFilesExported": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Files that have been exported in current iteration.",
+                  "format": "int64"
+                },
+                "currentIterationMiBExported": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Data (in MiB) that have been exported in current iteration.",
+                  "format": "int64"
+                },
+                "currentIterationFilesFailed": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Files failed to export in current iteration.",
+                  "format": "int64"
+                },
+                "lastStartedTimeUTC": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) the latest auto export job started.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "lastCompletionTimeUTC": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) of the last completed auto export job.",
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AutoExportJobUpdate": {
+      "description": "An auto export job update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.",
+              "enum": [
+                "Enable",
+                "Disable"
+              ],
+              "x-ms-enum": {
+                "name": "AutoExportJobAdminStatus",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "AutoExportJobsListResult": {
+      "description": "Result of the request to list auto export jobs. It contains a list of auto export jobs and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of auto export job list results, if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of auto export jobs.",
+          "items": {
+            "$ref": "#/definitions/AutoExportJob"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ImportJob": {
+      "description": "An import job instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Properties of the import job.",
+          "properties": {
+            "provisioningState": {
+              "description": "ARM provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "ImportJobProvisioningStateType",
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the import job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active import job. By default it is set to 'Active'.",
+              "default": "Active",
+              "enum": [
+                "Active",
+                "Cancel"
+              ],
+              "x-ms-enum": {
+                "name": "ImportJobAdminStatus",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "importPrefixes": {
+              "type": "array",
+              "description": "An array of blob paths/prefixes that get imported into the cluster namespace. It has '/' as the default value.",
+              "items": {
+                "type": "string"
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "conflictResolutionMode": {
+              "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
+              "type": "string",
+              "enum": [
+                "Fail",
+                "Skip",
+                "OverwriteIfDirty",
+                "OverwriteAlways"
+              ],
+              "default": "Fail",
+              "x-ms-enum": {
+                "name": "ConflictResolutionMode",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "maximumErrors": {
+              "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
+              "type": "integer",
+              "format": "int32",
+              "default": 0,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "status": {
+              "x-ms-client-flatten": true,
+              "description": "The status of the import",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "state": {
+                  "readOnly": true,
+                  "description": "The operational state of the import job. InProgress indicates the import is still running. Canceled indicates it has been canceled by the user. Completed indicates import finished, successfully importing all discovered blobs into the Lustre namespace. CompletedPartial indicates the import finished but some blobs either were found to be conflicting and could not be imported or other errors were encountered. Failed means the import was unable to complete due to a fatal error.",
+                  "type": "string",
+                  "enum": [
+                    "InProgress",
+                    "Cancelling",
+                    "Canceled",
+                    "Completed",
+                    "CompletedPartial",
+                    "Failed"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ImportStatusType",
+                    "modelAsString": true
+                  }
+                },
+                "statusMessage": {
+                  "readOnly": true,
+                  "description": "The status message of the import job.",
+                  "type": "string"
+                },
+                "totalBlobsWalked": {
+                  "readOnly": true,
+                  "description": "The total blob objects walked.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "blobsWalkedPerSecond": {
+                  "readOnly": true,
+                  "description": "A recent and frequently updated rate of blobs walked per second.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "totalBlobsImported": {
+                  "readOnly": true,
+                  "description": "The total blobs that have been imported since import began.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "importedFiles": {
+                  "readOnly": true,
+                  "description": "New or modified files that have been imported into the filesystem.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "importedDirectories": {
+                  "readOnly": true,
+                  "description": "New or modified directories that have been imported into the filesystem.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "importedSymlinks": {
+                  "readOnly": true,
+                  "description": "Newly added symbolic links into the filesystem.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingFiles": {
+                  "readOnly": true,
+                  "description": "Files that already exist in the filesystem and have not been modified.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingDirectories": {
+                  "readOnly": true,
+                  "description": "Directories that already exist in the filesystem and have not been modified.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingSymlinks": {
+                  "readOnly": true,
+                  "description": "Symbolic links that already exist in the filesystem and have not been modified.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "blobsImportedPerSecond": {
+                  "readOnly": true,
+                  "description": "A recent and frequently updated rate of total files, directories, and symlinks imported per second.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "lastCompletionTime": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) of the last completed import job.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "lastStartedTime": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) the latest import job started.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "totalErrors": {
+                  "readOnly": true,
+                  "description": "Number of errors in the import job.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "totalConflicts": {
+                  "readOnly": true,
+                  "description": "Number of conflicts in the import job.",
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ImportJobUpdate": {
+      "description": "An import job update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the import job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active import job.",
+              "enum": [
+                "Active",
+                "Cancel"
+              ],
+              "x-ms-enum": {
+                "name": "ImportJobAdminStatus",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "ImportJobsListResult": {
+      "description": "Result of the request to list import jobs. It contains a list of import jobs and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of import job list results, if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of import jobs.",
+          "items": {
+            "$ref": "#/definitions/ImportJob"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "RequiredAmlFilesystemSubnetsSizeInfo": {
+      "type": "object",
+      "description": "Information required to get the number of available IP addresses a subnet should have that will be used in AML file system create",
+      "properties": {
+        "storageCapacityTiB": {
+          "description": "The size of the AML file system, in TiB.",
+          "type": "number",
+          "format": "float"
+        },
+        "sku": {
+          "description": "SKU for the resource.",
+          "$ref": "#/definitions/SkuName"
+        }
+      }
+    },
+    "RequiredAmlFilesystemSubnetsSize": {
+      "type": "object",
+      "description": "Information about the number of available IP addresses that are required for the AML file system.",
+      "properties": {
+        "filesystemSubnetSize": {
+          "description": "The number of available IP addresses that are required for the AML file system.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AmlFilesystemSubnetInfo": {
+      "type": "object",
+      "description": "Information required to validate the subnet that will be used in AML file system create",
+      "properties": {
+        "filesystemSubnet": {
+          "description": "Subnet used for managing the AML file system and for client-facing operations. This subnet should have at least a /24 subnet mask within the VNET's address space.",
+          "$ref": "storagecache.json#/definitions/URLString"
+        },
+        "storageCapacityTiB": {
+          "description": "The size of the AML file system, in TiB.",
+          "type": "number",
+          "format": "float"
+        },
+        "sku": {
+          "description": "SKU for the resource.",
+          "$ref": "#/definitions/SkuName"
+        },
+        "location": {
+          "description": "Region that the AML file system will be created in.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "AmlFilesystemCheckSubnetError": {
+      "type": "object",
+      "description": "The error details provided when the checkAmlFSSubnets call fails.",
+      "readOnly": true,
+      "properties": {
+        "filesystemSubnet": {
+          "type": "object",
+          "description": "The error details for the AML file system's subnet.",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "Ok",
+                "Invalid"
+              ],
+              "x-ms-enum": {
+                "name": "FilesystemSubnetStatusType",
+                "modelAsString": true
+              },
+              "description": "The status of the AML file system subnet check."
+            },
+            "message": {
+              "type": "string",
+              "description": "The details of the AML file system subnet check."
+            }
+          }
+        }
+      }
+    },
+    "UserAssignedIdentities": {
+      "type": "object",
+      "description": "A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.",
+      "additionalProperties": {
+        "type": "object",
+        "x-ms-client-name": "userAssignedIdentitiesValue",
+        "properties": {
+          "principalId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The principal ID of the user-assigned identity."
+          },
+          "clientId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The client ID of the user-assigned identity."
+          }
+        }
+      }
+    },
+    "SkuName": {
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "description": "SKU for the resource.",
+      "properties": {
+        "name": {
+          "description": "SKU name for this resource.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AutoImportJob": {
+      "description": "An auto import job instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Properties of the auto import job.",
+          "properties": {
+            "provisioningState": {
+              "description": "ARM provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the auto import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto import job. By default it is set to 'Enable'.",
+              "default": "Enable",
+              "enum": [
+                "Enable",
+                "Disable"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              }
+            },
+            "autoImportPrefixes": {
+              "type": "array",
+              "description": "An array of blob paths/prefixes that get auto imported to the cluster namespace. It has '/' as the default value. Number of maximum allowed paths is 100.",
+              "items": {
+                "type": "string"
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "conflictResolutionMode": {
+              "description": "How the auto import job will handle conflicts. For example, if the auto import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the auto import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the auto import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or is currently released. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/blob-integration#conflict-resolution-mode for a thorough explanation of these resolution modes.",
+              "type": "string",
+              "default": "Skip",
+              "enum": [
+                "Fail",
+                "Skip",
+                "OverwriteIfDirty",
+                "OverwriteAlways"
+              ],
+              "x-ms-enum": {
+                "name": "ConflictResolutionMode",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "enableDeletions": {
+              "type": "boolean",
+              "description": "Whether or not to enable deletions during auto import. This only affects overwrite-dirty.",
+              "default": false,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "maximumErrors": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Total non-conflict-oriented errors (e.g., OS errors) Import will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately on any error.",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "status": {
+              "x-ms-client-flatten": true,
+              "description": "The status of the auto import job.",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "state": {
+                  "readOnly": true,
+                  "description": "The state of the auto import operation.",
+                  "type": "string",
+                  "enum": [
+                    "InProgress",
+                    "Failed",
+                    "Disabling",
+                    "Disabled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "AutoImportJobState",
+                    "modelAsString": true
+                  }
+                },
+                "statusCode": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Server-defined status code for auto import job."
+                },
+                "statusMessage": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Server-defined status message for auto import job."
+                },
+                "scanStartTime": {
+                  "readOnly": true,
+                  "description": "Date and time of when the currently running full scan began.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "scanEndTime": {
+                  "readOnly": true,
+                  "description": "Date and time of when the full scan ended.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "totalBlobsWalked": {
+                  "readOnly": true,
+                  "description": "Total number of blobs walked during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "rateOfBlobWalk": {
+                  "readOnly": true,
+                  "description": "Rate of blobs walked during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "totalBlobsImported": {
+                  "readOnly": true,
+                  "description": "Total number of blobs imported during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "rateOfBlobImport": {
+                  "readOnly": true,
+                  "description": "Rate of blob import during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "importedFiles": {
+                  "readOnly": true,
+                  "description": "Number of files imported during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "importedDirectories": {
+                  "readOnly": true,
+                  "description": "Number of directories imported during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "importedSymlinks": {
+                  "readOnly": true,
+                  "description": "Number of symlinks imported during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingFiles": {
+                  "readOnly": true,
+                  "description": "Number of preexisting files during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingDirectories": {
+                  "readOnly": true,
+                  "description": "Number of preexisting directories during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingSymlinks": {
+                  "readOnly": true,
+                  "description": "Number of preexisting symlinks during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "totalErrors": {
+                  "readOnly": true,
+                  "description": "Total errors encountered during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "totalConflicts": {
+                  "readOnly": true,
+                  "description": "Total conflicts encountered during full scan.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "blobSyncEvents": {
+                  "description": "The storage account blob change feed status of the auto import job.",
+                  "type": "object",
+                  "readOnly": true,
+                  "properties": {
+                    "importedFiles": {
+                      "readOnly": true,
+                      "description": "Number of files imported during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "importedDirectories": {
+                      "readOnly": true,
+                      "description": "Number of directories imported during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "importedSymlinks": {
+                      "readOnly": true,
+                      "description": "Number of symlinks imported during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "preexistingFiles": {
+                      "readOnly": true,
+                      "description": "Number of preexisting files during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "preexistingDirectories": {
+                      "readOnly": true,
+                      "description": "Number of preexisting directories during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "preexistingSymlinks": {
+                      "readOnly": true,
+                      "description": "Number of preexisting symlinks during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "totalBlobsImported": {
+                      "readOnly": true,
+                      "description": "Total number of blobs imported during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "rateOfBlobImport": {
+                      "readOnly": true,
+                      "description": "Rate of blob import per second during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "totalErrors": {
+                      "readOnly": true,
+                      "description": "Total errors encountered during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "totalConflicts": {
+                      "readOnly": true,
+                      "description": "Total conflicts encountered during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "deletions": {
+                      "readOnly": true,
+                      "description": "Number of deletions during auto import.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "lastChangeFeedEventConsumedTime": {
+                      "readOnly": true,
+                      "description": "Date and time of the last Change Feed event consumed.",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "lastTimeFullySynchronized": {
+                      "readOnly": true,
+                      "description": "Date and time when last fully synchronized.",
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "lastStartedTimeUTC": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) the latest auto import job started.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "lastCompletionTimeUTC": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) of the last completed auto import job.",
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AutoImportJobUpdate": {
+      "description": "An auto import job update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the auto import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto import job. By default it is set to 'Enable'.",
+              "enum": [
+                "Enable",
+                "Disable"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "AutoImportJobsListResult": {
+      "description": "Result of the request to list auto import jobs. It contains a list of auto import jobs and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of auto import jobs.",
+          "items": {
+            "$ref": "#/definitions/AutoImportJob"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "URL to get the next set of auto import job list results, if there are any.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "AmlFilesystemNameParameter": {
+      "description": "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "in": "path",
+      "name": "amlFilesystemName",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "ImportJobNameParameter": {
+      "description": "Name for the import job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "in": "path",
+      "name": "importJobName",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "AutoExportJobNameParameter": {
+      "description": "Name for the auto export job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "in": "path",
+      "name": "autoExportJobName",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "AutoImportJobNameParameter": {
+      "description": "Name for the auto import job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "in": "path",
+      "name": "autoImportJobName",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
