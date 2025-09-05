@@ -50,7 +50,8 @@ interface ThreatIntelligenceInformations {
   @operationId("ThreatIntelligenceIndicator_Create")
   create is Extension.CreateOrReplaceSync<
     OperationalInsights,
-    ThreatIntelligenceInformation,
+    ThreatIntelligenceIndicatorModel,
+    Response = ArmResourceUpdatedResponse<ThreatIntelligenceInformation> | ArmResourceCreatedSyncResponse<ThreatIntelligenceInformation>,
     Error = CloudError
   >;
 

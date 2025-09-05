@@ -4443,6 +4443,8 @@ model WarningBody {
 /**
  * Threat intelligence indicator entity.
  */
+@discriminator(ThreatIntelligenceResourceInnerKind.indicator)
+@parentResource(ThreatIntelligenceMain)
 model ThreatIntelligenceIndicatorModel extends ThreatIntelligenceInformation {
   /**
    * Threat Intelligence Entity properties
@@ -4450,11 +4452,6 @@ model ThreatIntelligenceIndicatorModel extends ThreatIntelligenceInformation {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ThreatIntelligenceIndicatorProperties;
-
-  /**
-   * The kind of the entity.
-   */
-  kind: ThreatIntelligenceResourceInnerKind.indicator;
 }
 
 /**
@@ -7411,6 +7408,7 @@ model MdatpDataConnectorProperties {
 /**
  * Represents threat intelligence data connector.
  */
+@discriminator("ThreatIntelligence")
 model TIDataConnector extends DataConnector {
   /**
    * TI (Threat Intelligence) data connector properties.
@@ -7418,11 +7416,6 @@ model TIDataConnector extends DataConnector {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TIDataConnectorProperties;
-
-  /**
-   * The data connector kind
-   */
-  kind: "ThreatIntelligence";
 }
 
 /**
