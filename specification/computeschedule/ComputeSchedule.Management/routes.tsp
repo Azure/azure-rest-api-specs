@@ -24,9 +24,7 @@ alias LocationParameter = {
   locationparameter: Azure.Core.azureLocation;
 };
 
-@armResourceOperations(#{
-  omitTags: true,
-})
+@armResourceOperations(#{ omitTags: true })
 interface ScheduledActions {
   // -------------- Routes -------------
   /** VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future. */
