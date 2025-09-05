@@ -7647,7 +7647,7 @@
           "readOnly": true
         },
         "nfsV4IDDomain": {
-          "type": "string",
+          "$ref": "#/definitions/VfsV4IDDomain",
           "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
           "x-nullable": true
         },
@@ -11034,6 +11034,11 @@
         ]
       }
     },
+    "UnixPermissions": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 4
+    },
     "UpdateNetworkSiblingSetRequest": {
       "type": "object",
       "description": "Network sibling set update.",
@@ -11193,6 +11198,11 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255
+    },
+    "VfsV4IDDomain": {
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
     },
     "Volume": {
       "type": "object",
@@ -11641,7 +11651,7 @@
           "default": 0
         },
         "unixPermissions": {
-          "type": "string",
+          "$ref": "#/definitions/UnixPermissions",
           "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.",
           "x-nullable": true
         },
@@ -12105,7 +12115,7 @@
           "description": "coolAccessTieringPolicy determines which cold data blocks are moved to cool tier. The possible values for this field are: Auto - Moves cold user data blocks in both the Snapshot copies and the active file system to the cool tier tier. This policy is the default. SnapshotOnly - Moves user data blocks of the Volume Snapshot copies that are not associated with the active file system to the cool tier."
         },
         "unixPermissions": {
-          "type": "string",
+          "$ref": "#/definitions/UnixPermissions",
           "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.",
           "x-nullable": true
         },

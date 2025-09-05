@@ -1241,9 +1241,7 @@ model AccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  @maxLength(255)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
-  nfsV4IDDomain?: string | null;
+  nfsV4IDDomain?: VfsV4IDDomain | null;
 
   /**
    * MultiAD Status for the account
@@ -1251,6 +1249,10 @@ model AccountProperties {
   @visibility(Lifecycle.Read)
   multiAdStatus?: MultiAdStatus;
 }
+
+@maxLength(255)
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
+scalar VfsV4IDDomain extends string;
 
 /**
  * Active Directory
@@ -2044,9 +2046,7 @@ model VolumeProperties {
    * UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  @maxLength(4)
-  @minLength(4)
-  unixPermissions?: string | null;
+  unixPermissions?: UnixPermissions | null;
 
   /**
    * When a volume is being restored from another volume's snapshot, will show the percentage completion of this cloning process. When this value is empty/null there is no cloning process currently happening on this volume. This value will update every 5 minutes during cloning.
@@ -2574,9 +2574,7 @@ model VolumePatchProperties {
    * UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  @maxLength(4)
-  @minLength(4)
-  unixPermissions?: string | null;
+  unixPermissions?: UnixPermissions | null;
 
   /**
    * Specifies whether Cool Access(tiering) is enabled for the volume.
@@ -2619,6 +2617,10 @@ model VolumePatchProperties {
    */
   smbNonBrowsable?: SmbNonBrowsable;
 }
+
+@maxLength(4)
+@minLength(4)
+scalar UnixPermissions extends string;
 
 /**
  * Set of export policy rules
