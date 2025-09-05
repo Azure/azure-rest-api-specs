@@ -51,44 +51,6 @@
         "Location": "/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
         "Retry-After": "30"
       }
-    },
-    "400": {
-      "headers": {},
-      "body": {
-        "error": {
-          "code": "InvalidSessionName",
-          "message": "The notification session name 'MyTestSession' is invalid. Session names must be between 3 and 64 characters and contain only alphanumeric characters and hyphens."
-        }
-      }
-    },
-    "401": {
-      "headers": {},
-      "body": {
-        "error": {
-          "code": "Unauthorized",
-          "message": "The request is not authorized. Please ensure you have valid authentication credentials and proper permissions to create notification sessions."
-        }
-      }
-    },
-    "429": {
-      "headers": {
-        "Retry-After": "60"
-      },
-      "body": {
-        "error": {
-          "code": "TooManyRequests",
-          "message": "Too many requests have been made. Please wait and retry after the specified time period."
-        }
-      }
-    },
-    "500": {
-      "headers": {},
-      "body": {
-        "error": {
-          "code": "InternalServerError",
-          "message": "An internal server error occurred while creating the notification session. Please try again later."
-        }
-      }
     }
   }
 }
