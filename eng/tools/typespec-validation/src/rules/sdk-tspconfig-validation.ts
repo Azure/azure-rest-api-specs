@@ -377,7 +377,7 @@ export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigE
     super(
       "@azure-tools/typespec-go",
       "emitter-output-dir",
-      new RegExp(/^(\{output-dir\}\/)?(\{service-dir\}\/|sdk\/).*\/az.*/),
+      new RegExp(/^(\{output-dir\}\/)?(\{service-dir\}\/|sdk\/).*[^\/]*az.*/),
     );
   }
   protected skip(_: any, folder: string) {
