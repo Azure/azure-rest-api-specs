@@ -190,10 +190,10 @@ model NotificationSessionResource
 model InnerErrorDetails {
   /** The specific error code. */
   code?: string;
-  
+
   /** The error message. */
   message?: string;
-  
+
   /** Stack trace information. */
   stackTrace?: string;
 }
@@ -202,13 +202,13 @@ model InnerErrorDetails {
 model BadRequestErrorDetails {
   /** Error code indicating the type of bad request. */
   code: string;
-  
+
   /** Detailed error message. */
   message: string;
-  
+
   /** The target of the error. */
   target?: string;
-  
+
   /** Additional error details. */
   details?: string[];
 }
@@ -217,10 +217,10 @@ model BadRequestErrorDetails {
 model TooManyRequestsErrorDetails {
   /** Error code indicating the type of rate limiting error. */
   code: string;
-  
+
   /** Detailed error message. */
   message: string;
-  
+
   /** Additional error information. */
   innerError?: InnerErrorDetails;
 }
@@ -229,10 +229,10 @@ model TooManyRequestsErrorDetails {
 model UnauthorizedErrorDetails {
   /** Error code indicating the type of authorization error. */
   code: string;
-  
+
   /** Detailed error message. */
   message: string;
-  
+
   /** Additional error information. */
   innerError?: InnerErrorDetails;
 }
@@ -241,10 +241,10 @@ model UnauthorizedErrorDetails {
 model InternalServerErrorDetails {
   /** Error code indicating the type of internal error. */
   code: string;
-  
+
   /** Detailed error message. */
   message: string;
-  
+
   /** Additional error information. */
   innerError?: InnerErrorDetails;
 }
@@ -280,7 +280,6 @@ model InternalServerError {
   /** Error details for internal server error. */
   error: InternalServerErrorDetails;
 }
-
 
 /*
  * Request/Response Models for Operations
@@ -454,7 +453,7 @@ interface NotificationsSessions {
         @statusCode _: 200;
         @body body: CloseSessionResponse;
       }
-    |{
+    | {
         @statusCode _: 400;
         @body body: BadRequestError;
       }
