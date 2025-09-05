@@ -13,13 +13,13 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-msi"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-msi"
     namespace: "azure.mgmt.msi"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-msi"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-msi"
     namespace: "com.azure.resourcemanager.msi"
     service-name: "Msi"
     flavor: azure
@@ -27,15 +27,15 @@ options:
     enable-sync-stack: false
     service-dir: "sdk/msi"
   "@azure-tools/typespec-ts":
-    package-dir: "arm-msi"
+    emitter-output-dir: "{cwd}/{service-dir}/arm-msi"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-msi"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/msi"
-    package-dir: "armmsi"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmsi"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmsi"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
