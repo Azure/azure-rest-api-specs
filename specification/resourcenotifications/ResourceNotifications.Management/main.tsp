@@ -414,10 +414,6 @@ interface NotificationsSessions {
     | {
         @statusCode _: 500;
         @body body: InternalServerError;
-      }
-    | {
-        @statusCode _: "default";
-        @body body: Default;
       };
 
   /** Get session details. */
@@ -455,10 +451,6 @@ interface NotificationsSessions {
     | {
         @statusCode _: 500;
         @body body: InternalServerError;
-      }
-    | {
-        @statusCode _: "default";
-        @body body: Default;
       };
 
   /** Close the session. */
@@ -492,9 +484,5 @@ interface NotificationsSessions {
     | {
         @statusCode _: 500;
         @body body: InternalServerError;
-      }
-    | {
-        @statusCode _: "default";
-        @body body: Default;
       };
 }

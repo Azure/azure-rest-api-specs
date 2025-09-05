@@ -122,13 +122,26 @@
             "schema": {
               "$ref": "#/definitions/InternalServerError"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
           "Create a notification session": {
             "$ref": "./examples/NotificationsSessions_CreateNotificationSession.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession": {
@@ -182,6 +195,18 @@
             "description": "Server error",
             "schema": {
               "$ref": "#/definitions/InternalServerError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -252,6 +277,18 @@
             "description": "Server error",
             "schema": {
               "$ref": "#/definitions/InternalServerError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -380,6 +417,38 @@
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system metadata related to this resource."
+        }
+      }
+    },
+    "Default": {
+      "type": "object",
+      "description": "Error response for bad request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DefaultErrorDetails",
+          "description": "Error details for bad request."
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "x-ms-error-response": true
+    },
+    "DefaultErrorDetails": {
+      "type": "object",
+      "description": "Inner error details for server errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The specific error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "stackTrace": {
+          "type": "string",
+          "description": "Stack trace information."
         }
       }
     },
