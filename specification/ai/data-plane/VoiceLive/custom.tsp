@@ -201,7 +201,7 @@ union AudioInputTranscriptionModel {
 @doc("Configuration for input audio transcription.")
 model AudioInputTranscriptionSettings {
   @doc("The model used for transcription. E.g., 'whisper-1', 'azure-fast-transcription', 's2s-ingraph'.")
-  `model`: "whisper-1" | "azure-fast-transcription" | "s2s-ingraph";
+  `model`: string | "whisper-1" | "azure-fast-transcription" | "s2s-ingraph" | "azure-speech";
 
   @doc("The language code to use for transcription, if specified.")
   language?: string;
