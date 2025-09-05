@@ -5,7 +5,12 @@
   "parameters": {
     "api-version": "2025-08-01-preview",
     "location": "westus2",
-    "notificationSessionName": "MyTestSession"
+    "notificationSessionName": "MyTestSession",
+    "body": {
+      "description": "Test creation of notification session",
+      "maxDurationMinutes": 1440,
+      "configuration": "{\"retryPolicy\": \"exponential\", \"maxRetries\": 3}"
+    }
   },
   "responses": {
     "200": {
@@ -16,7 +21,7 @@
         "type": "Microsoft.ResourceNotifications/notificationSessions",
         "location": "westus2",
         "properties": {
-          "description": "Test notification session for development purposes",
+          "description": "Test creation of notification session",
           "status": "Active",
           "maxDurationMinutes": 1440,
           "startTime": "2025-01-27T14:30:00.000Z",
@@ -48,6 +53,7 @@
     },
     "202": {
       "headers": {
+        "Azure-AsyncOperation": "/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession/operationStatuses/3c998dad-3936-4e9a-8c7e-ce6cde53ccea",
         "Location": "/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
         "Retry-After": "30"
       }

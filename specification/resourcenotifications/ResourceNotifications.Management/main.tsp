@@ -305,8 +305,31 @@ model NotificationSessionStatusResponse {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "These are custom operations for notification sessions, not standard ARM resource operations"
 @tag("NotificationsSessions")
 interface NotificationsSessions {
+  /** Create a notification session status check operation. */
+  @get
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
+  createNotificationSessionStatus(
+    @doc("The location name.")
+    @path
+    @pattern("^[a-z0-9]+$")
+    location: string,
+
+    @doc("Name of the notification session.")
+    @path
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
+    notificationSessionName: string,
+
+    ...ApiVersionParameter,
+  ): {
+    @statusCode _: 200;
+    @body body: NotificationSessionStatusResponse;
+  } | ErrorResponse;
+
   /** Create a notification session. */
   @put
+  @pollingOperation(NotificationsSessions.createNotificationSessionStatus)
+  @finalOperation(NotificationsSessions.createNotificationSessionStatus)
+  @useFinalStateVia("azure-async-operation")
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
   createNotificationSession(
     @doc("The location name.")
@@ -324,13 +347,28 @@ interface NotificationsSessions {
     body: CreateNotificationSessionRequest,
 
     ...ApiVersionParameter,
-  ): {
-    @statusCode _: 200;
-    @body body: CreateNotificationSessionResponse;
-  } | {
-    @statusCode _: 201;
-    @body body: CreateNotificationSessionResponse;
-  } | ErrorResponse;
+  ):
+    | {
+        @statusCode _: 200;
+        @body body: CreateNotificationSessionResponse;
+      }
+    | {
+        @statusCode _: 201;
+        @body body: CreateNotificationSessionResponse;
+      }
+    | {
+        @statusCode _: 202;
+
+        @pollingLocation
+        @header("Azure-AsyncOperation")
+        azureAsyncOperation?: string;
+
+        @header("Retry-After")
+        retryAfter?: int32;
+
+        @header location?: string;
+      }
+    | ErrorResponse;
 
   /** Get session details. */
   @post
