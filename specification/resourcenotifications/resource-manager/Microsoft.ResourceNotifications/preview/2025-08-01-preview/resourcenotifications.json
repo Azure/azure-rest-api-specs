@@ -48,6 +48,48 @@
   ],
   "paths": {
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}": {
+      "get": {
+        "operationId": "NotificationsSessions_CreateNotificationSessionStatus",
+        "tags": [
+          "NotificationsSessions"
+        ],
+        "description": "Create a notification session status check operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "notificationSessionName",
+            "in": "path",
+            "description": "Name of the notification session.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSessionStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "operationId": "NotificationsSessions_CreateNotificationSession",
         "tags": [
@@ -97,6 +139,21 @@
               "$ref": "#/definitions/CreateNotificationSessionResponse"
             }
           },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -108,7 +165,11 @@
           "Create a notification session": {
             "$ref": "./examples/NotificationsSessions_CreateNotificationSession.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:getSessionDetails": {

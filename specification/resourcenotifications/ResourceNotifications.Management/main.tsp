@@ -302,28 +302,6 @@ model NotificationSessionStatusResponse {
  */
 
 /** Operations for notification sessions. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "These are custom operations for notification sessions, not standard ARM resource operations"
-@tag("NotificationsSessions")
-interface NotificationsSessions {
-  /** Create a notification session status check operation. */
-  @get
-  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
-  createNotificationSessionStatus(
-    @doc("The location name.")
-    @path
-    @pattern("^[a-z0-9]+$")
-    location: string,
-
-    @doc("Name of the notification session.")
-    @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionName: string,
-
-    ...ApiVersionParameter,
-  ): {
-    @statusCode _: 200;
-    @body body: NotificationSessionStatusResponse;
-  } | ErrorResponse;
 
   /** Create a notification session. */
   @put
