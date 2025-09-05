@@ -42,10 +42,11 @@ interface Watchlists {
    * Delete a watchlist.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is Extension.DeleteWithoutOkAsync<
     OperationalInsights,
     Watchlist,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;

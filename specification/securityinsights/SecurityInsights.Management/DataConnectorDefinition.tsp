@@ -15,6 +15,7 @@ namespace Microsoft.SecurityInsights;
  * An Azure resource, which encapsulate the entire info requires to display a data connector page in Azure portal,
  * and the info required to define data connections.
  */
+@discriminator("kind")
 model DataConnectorDefinition is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = DataConnectorDefinition,
@@ -65,6 +66,7 @@ interface DataConnectorDefinitions {
   list is Extension.ListByTarget<
     OperationalInsights,
     DataConnectorDefinition,
+    Response = ArmResponse<DataConnectorDefinitionArmCollectionWrapper>,
     Error = CloudError
   >;
 }

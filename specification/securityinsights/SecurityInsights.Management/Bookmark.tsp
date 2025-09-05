@@ -53,6 +53,7 @@ interface Bookmarks {
   list is Extension.ListByTarget<
     OperationalInsights,
     Bookmark,
+    Response = ArmResponse<BookmarkList>,
     Error = CloudError
   >;
 }

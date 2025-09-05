@@ -14,6 +14,7 @@ namespace Microsoft.SecurityInsights;
 /**
  * Threat intelligence information object.
  */
+@discriminator("kind")
 @parentResource(ThreatIntelligenceMain)
 model ThreatIntelligenceInformation is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<

@@ -50,7 +50,7 @@ using Microsoft.SecurityInsights;
 @@flattenProperty(AADDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AatpDataConnector.properties);
+@@flattenProperty(AATPDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ASCDataConnector.properties);
@@ -62,16 +62,16 @@ using Microsoft.SecurityInsights;
 @@flattenProperty(RestApiPollerDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(McasDataConnector.properties);
+@@flattenProperty(MCASDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(MdatpDataConnector.properties);
+@@flattenProperty(MDATPDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TIDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(MstiDataConnector.properties);
+@@flattenProperty(MSTIDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PremiumMicrosoftDefenderForThreatIntelligence.properties);
@@ -291,8 +291,14 @@ using Microsoft.SecurityInsights;
 @@clientLocation(ThreatIntelligenceIndicatorOperationGroup.createIndicator,
   "ThreatIntelligenceIndicator"
 );
+@@clientName(ThreatIntelligenceIndicatorOperationGroup.createIndicator::parameters.body,
+  "ThreatIntelligenceProperties"
+);
 @@clientLocation(ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
   "ThreatIntelligenceIndicator"
+);
+@@clientName(ThreatIntelligenceIndicatorOperationGroup.queryIndicators::parameters.body,
+  "ThreatIntelligenceFilteringCriteria"
 );
 
 @@clientLocation(ThreatIntelligenceIndicatorMetricsOperationGroup.list,

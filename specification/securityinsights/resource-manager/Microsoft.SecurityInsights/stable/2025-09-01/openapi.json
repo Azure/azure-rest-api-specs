@@ -277,7 +277,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AlertRuleListResult"
+              "$ref": "#/definitions/AlertRulesList"
             }
           },
           "default": {
@@ -974,7 +974,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BookmarkListResult"
+              "$ref": "#/definitions/BookmarkList"
             }
           },
           "default": {
@@ -2031,7 +2031,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataConnectorDefinitionListResult"
+              "$ref": "#/definitions/DataConnectorDefinitionArmCollectionWrapper"
             }
           },
           "default": {
@@ -2253,7 +2253,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataConnectorListResult"
+              "$ref": "#/definitions/DataConnectorList"
             }
           },
           "default": {
@@ -2515,7 +2515,7 @@
             "description": "The name of the EntityResource",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
@@ -3845,20 +3845,12 @@
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
-            "name": "body",
+            "name": "repositoryAccess",
             "in": "body",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "body": {
-                  "$ref": "#/definitions/RepositoryAccessProperties",
-                  "description": "The content of the action request"
-                }
-              },
-              "required": [
-                "body"
-              ]
+              "$ref": "#/definitions/RepositoryAccessProperties"
             }
           }
         ],
@@ -4892,7 +4884,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "ThreatIntelligenceProperties",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -4903,7 +4895,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ThreatIntelligenceInformation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            }
+          },
+          "201": {
+            "description": "Resource 'ThreatIntelligenceInformation' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
@@ -4911,7 +4909,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5088,7 +5086,7 @@
             "description": "Properties of threat intelligence indicators to create and update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceInformation"
+              "$ref": "#/definitions/ThreatIntelligenceIndicatorModel"
             }
           }
         ],
@@ -5356,7 +5354,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "ThreatIntelligenceFilteringCriteria",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -5375,7 +5373,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5383,6 +5381,9 @@
           "Query threat intelligence indicators as per filtering criteria": {
             "$ref": "./examples/threatintelligence/QueryThreatIntelligence.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5616,7 +5617,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -5910,30 +5916,49 @@
           "$ref": "#/definitions/AADDataConnectorProperties",
           "description": "AAD (Azure Active Directory) data connector properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "AzureActiveDirectory"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureActiveDirectory"
     },
     "AADDataConnectorProperties": {
       "type": "object",
       "description": "AAD (Azure Active Directory) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id to connect to, and get the data from."
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      }
+    },
+    "AATPDataConnector": {
+      "type": "object",
+      "description": "Represents AATP (Azure Advanced Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AATPDataConnectorProperties",
+          "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureAdvancedThreatProtection"
+    },
+    "AATPDataConnectorProperties": {
+      "type": "object",
+      "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5953,26 +5978,14 @@
           "$ref": "#/definitions/ASCDataConnectorProperties",
           "description": "ASC (Azure Security Center) data connector properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "AzureSecurityCenter"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureSecurityCenter"
     },
     "ASCDataConnectorProperties": {
       "type": "object",
@@ -6011,49 +6024,6 @@
         }
       ],
       "x-ms-discriminator-value": "AWS"
-    },
-    "AatpDataConnector": {
-      "type": "object",
-      "description": "Represents AATP (Azure Advanced Threat Protection) data connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AatpDataConnectorProperties",
-          "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
-          "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "AzureAdvancedThreatProtection"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnector"
-        }
-      ]
-    },
-    "AatpDataConnectorProperties": {
-      "type": "object",
-      "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant id to connect to, and get the data from."
-        },
-        "dataTypes": {
-          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
-          "description": "The available data types for the connector."
-        }
-      }
     },
     "AccountEntity": {
       "type": "object",
@@ -6426,6 +6396,7 @@
           "description": "The alert rule kind"
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -6462,27 +6433,6 @@
         ]
       }
     },
-    "AlertRuleListResult": {
-      "type": "object",
-      "description": "The response of a AlertRule list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AlertRule items on this page",
-          "items": {
-            "$ref": "#/definitions/AlertRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AlertRuleTemplate": {
       "type": "object",
       "description": "Alert rule template.",
@@ -6497,6 +6447,7 @@
           "description": "The alert rule kind"
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -6533,6 +6484,27 @@
           "description": "The AlertRuleTemplate items on this page",
           "items": {
             "$ref": "#/definitions/AlertRuleTemplate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertRulesList": {
+      "type": "object",
+      "description": "List all the alert rules.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertRule items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertRule"
           }
         },
         "nextLink": {
@@ -6641,26 +6613,14 @@
           "$ref": "#/definitions/AnomalySecurityMLAnalyticsSettingsProperties",
           "description": "Anomaly Security ML Analytics Settings properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of security ML Analytics Settings",
-          "enum": [
-            "Anomaly"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SecurityMLAnalyticsSetting"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Anomaly"
     },
     "AnomalySecurityMLAnalyticsSettingsProperties": {
       "type": "object",
@@ -7161,7 +7121,8 @@
       "type": "string",
       "description": "Describes an array condition evaluation type.",
       "enum": [
-        "AnyItem"
+        "AnyItem",
+        "AllItems"
       ],
       "x-ms-enum": {
         "name": "AutomationRulePropertyArrayConditionSupportedArrayConditionType",
@@ -7171,6 +7132,11 @@
             "name": "AnyItem",
             "value": "AnyItem",
             "description": "Evaluate the condition as true if any item fulfills it"
+          },
+          {
+            "name": "AllItems",
+            "value": "AllItems",
+            "description": "Evaluate the condition as true if all items fulfill it"
           }
         ]
       }
@@ -7809,26 +7775,14 @@
           "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties",
           "description": "Amazon Web Services CloudTrail data connector properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "AmazonWebServicesCloudTrail"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
     },
     "AwsCloudTrailDataConnectorDataTypes": {
       "type": "object",
@@ -7955,9 +7909,9 @@
         }
       ]
     },
-    "BookmarkListResult": {
+    "BookmarkList": {
       "type": "object",
-      "description": "The response of a Bookmark list operation.",
+      "description": "List all the bookmarks.",
       "properties": {
         "value": {
           "type": "array",
@@ -8612,26 +8566,14 @@
           "$ref": "#/definitions/CustomizableConnectorDefinitionProperties",
           "description": "Customizable properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "Customizable"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorDefinition"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Customizable"
     },
     "CustomizableConnectorDefinitionProperties": {
       "type": "object",
@@ -8777,6 +8719,7 @@
           "description": "The data connector kind"
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -8810,6 +8753,7 @@
           "description": "The data connector kind"
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -8817,6 +8761,27 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "DataConnectorDefinitionArmCollectionWrapper": {
+      "type": "object",
+      "description": "Encapsulate the data connector definition object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataConnectorDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/DataConnectorDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DataConnectorDefinitionKind": {
@@ -8835,27 +8800,6 @@
           }
         ]
       }
-    },
-    "DataConnectorDefinitionListResult": {
-      "type": "object",
-      "description": "The response of a DataConnectorDefinition list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DataConnectorDefinition items on this page",
-          "items": {
-            "$ref": "#/definitions/DataConnectorDefinition"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "DataConnectorKind": {
       "type": "string",
@@ -8924,9 +8868,9 @@
         ]
       }
     },
-    "DataConnectorListResult": {
+    "DataConnectorList": {
       "type": "object",
-      "description": "The response of a DataConnector list operation.",
+      "description": "List all the data connectors.",
       "properties": {
         "value": {
           "type": "array",
@@ -9869,26 +9813,14 @@
           "$ref": "#/definitions/FusionAlertRuleProperties",
           "description": "Fusion alert rule properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The alert rule kind",
-          "enum": [
-            "Fusion"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AlertRule"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Fusion"
     },
     "FusionAlertRuleProperties": {
       "type": "object",
@@ -9954,26 +9886,14 @@
           "$ref": "#/definitions/FusionAlertRuleTemplateProperties",
           "description": "Fusion alert rule template properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The alert rule kind",
-          "enum": [
-            "Fusion"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AlertRuleTemplate"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Fusion"
     },
     "FusionAlertRuleTemplateProperties": {
       "type": "object",
@@ -11656,6 +11576,154 @@
         ]
       }
     },
+    "MCASDataConnector": {
+      "type": "object",
+      "description": "Represents MCAS (Microsoft Cloud App Security) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MCASDataConnectorProperties",
+          "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "x-ms-discriminator-value": "MicrosoftCloudAppSecurity"
+    },
+    "MCASDataConnectorDataTypes": {
+      "type": "object",
+      "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
+      "properties": {
+        "alerts": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Alerts log data type connection."
+        },
+        "discoveryLogs": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Discovery log data type connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
+        }
+      ]
+    },
+    "MCASDataConnectorProperties": {
+      "type": "object",
+      "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id to connect to, and get the data from."
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/MCASDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      }
+    },
+    "MDATPDataConnector": {
+      "type": "object",
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MDATPDataConnectorProperties",
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
+    },
+    "MDATPDataConnectorProperties": {
+      "type": "object",
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id to connect to, and get the data from."
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      }
+    },
+    "MSTIDataConnector": {
+      "type": "object",
+      "description": "Represents Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTIDataConnectorProperties",
+          "description": "Microsoft Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTIDataConnectorDataTypes": {
+      "type": "object",
+      "description": "The available data types for Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "microsoftEmergingThreatFeed": {
+          "$ref": "#/definitions/MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
+          "description": "Data type for Microsoft Threat Intelligence data connector."
+        }
+      },
+      "required": [
+        "microsoftEmergingThreatFeed"
+      ]
+    },
+    "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed": {
+      "type": "object",
+      "description": "Data type for Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "lookbackPeriod": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The lookback period for the feed to be imported. The date-time to begin importing the feed from, for example: 2024-01-01T00:00:00.000Z."
+        }
+      },
+      "required": [
+        "lookbackPeriod"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon"
+        }
+      ]
+    },
+    "MSTIDataConnectorProperties": {
+      "type": "object",
+      "description": "Microsoft Threat Intelligence data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MSTIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ]
+    },
     "MailClusterEntity": {
       "type": "object",
       "description": "Represents a mail cluster entity.",
@@ -12100,107 +12168,6 @@
         ]
       }
     },
-    "McasDataConnector": {
-      "type": "object",
-      "description": "Represents MCAS (Microsoft Cloud App Security) data connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/McasDataConnectorProperties",
-          "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
-          "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "MicrosoftCloudAppSecurity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnector"
-        }
-      ]
-    },
-    "McasDataConnectorDataTypes": {
-      "type": "object",
-      "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
-      "properties": {
-        "discoveryLogs": {
-          "$ref": "#/definitions/DataConnectorDataTypeCommon",
-          "description": "Discovery log data type connection."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
-        }
-      ]
-    },
-    "McasDataConnectorProperties": {
-      "type": "object",
-      "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant id to connect to, and get the data from."
-        },
-        "dataTypes": {
-          "$ref": "#/definitions/McasDataConnectorDataTypes",
-          "description": "The available data types for the connector."
-        }
-      }
-    },
-    "MdatpDataConnector": {
-      "type": "object",
-      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MdatpDataConnectorProperties",
-          "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
-          "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "MicrosoftDefenderAdvancedThreatProtection"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnector"
-        }
-      ]
-    },
-    "MdatpDataConnectorProperties": {
-      "type": "object",
-      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant id to connect to, and get the data from."
-        },
-        "dataTypes": {
-          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
-          "description": "The available data types for the connector."
-        }
-      }
-    },
     "MetadataAuthor": {
       "type": "object",
       "description": "Publisher or creator of the content item.",
@@ -12579,26 +12546,14 @@
           "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleProperties",
           "description": "MicrosoftSecurityIncidentCreation rule properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The alert rule kind",
-          "enum": [
-            "MicrosoftSecurityIncidentCreation"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AlertRule"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
     "MicrosoftSecurityIncidentCreationAlertRuleCommonProperties": {
       "type": "object",
@@ -12682,26 +12637,14 @@
           "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
           "description": "MicrosoftSecurityIncidentCreation rule template properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The alert rule kind",
-          "enum": [
-            "MicrosoftSecurityIncidentCreation"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AlertRuleTemplate"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
     "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
       "type": "object",
@@ -12810,85 +12753,6 @@
           }
         ]
       }
-    },
-    "MstiDataConnector": {
-      "type": "object",
-      "description": "Represents Microsoft Threat Intelligence data connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MstiDataConnectorProperties",
-          "description": "Microsoft Threat Intelligence data connector properties.",
-          "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "MicrosoftThreatIntelligence"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnector"
-        }
-      ]
-    },
-    "MstiDataConnectorDataTypes": {
-      "type": "object",
-      "description": "The available data types for Microsoft Threat Intelligence data connector.",
-      "properties": {
-        "microsoftEmergingThreatFeed": {
-          "$ref": "#/definitions/MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed",
-          "description": "Data type for Microsoft Threat Intelligence data connector."
-        }
-      },
-      "required": [
-        "microsoftEmergingThreatFeed"
-      ]
-    },
-    "MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed": {
-      "type": "object",
-      "description": "Data type for Microsoft Threat Intelligence data connector.",
-      "properties": {
-        "lookbackPeriod": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The lookback period for the feed to be imported. The date-time to begin importing the feed from, for example: 2024-01-01T00:00:00.000Z."
-        }
-      },
-      "required": [
-        "lookbackPeriod"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorDataTypeCommon"
-        }
-      ]
-    },
-    "MstiDataConnectorProperties": {
-      "type": "object",
-      "description": "Microsoft Threat Intelligence data connector properties.",
-      "properties": {
-        "dataTypes": {
-          "$ref": "#/definitions/MstiDataConnectorDataTypes",
-          "description": "The available data types for the connector."
-        }
-      },
-      "required": [
-        "dataTypes"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ]
     },
     "NoneAuthModel": {
       "type": "object",
@@ -13041,26 +12905,14 @@
           "$ref": "#/definitions/OfficeDataConnectorProperties",
           "description": "Office data connector properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "Office365"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Office365"
     },
     "OfficeDataConnectorDataTypes": {
       "type": "object",
@@ -13470,26 +13322,14 @@
           "$ref": "#/definitions/PremiumMdtiDataConnectorProperties",
           "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "PremiumMicrosoftDefenderForThreatIntelligence"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "PremiumMicrosoftDefenderForThreatIntelligence"
     },
     "ProcessEntity": {
       "type": "object",
@@ -14561,26 +14401,14 @@
           "$ref": "#/definitions/RestApiPollerDataConnectorProperties",
           "description": "Rest Api Poller data connector properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "RestApiPoller"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "RestApiPoller"
     },
     "RestApiPollerDataConnectorProperties": {
       "type": "object",
@@ -14924,26 +14752,14 @@
           "$ref": "#/definitions/ScheduledAlertRuleProperties",
           "description": "Scheduled alert rule properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The alert rule kind",
-          "enum": [
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AlertRule"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Scheduled"
     },
     "ScheduledAlertRuleCommonProperties": {
       "type": "object",
@@ -15079,26 +14895,14 @@
           "$ref": "#/definitions/ScheduledAlertRuleTemplateProperties",
           "description": "Scheduled alert rule template properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The alert rule kind",
-          "enum": [
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AlertRuleTemplate"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Scheduled"
     },
     "ScheduledAlertRuleTemplateProperties": {
       "type": "object",
@@ -15456,6 +15260,7 @@
           "description": "The kind of security ML Analytics Settings"
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -15982,26 +15787,14 @@
           "$ref": "#/definitions/TIDataConnectorProperties",
           "description": "TI (Threat Intelligence) data connector properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The data connector kind",
-          "enum": [
-            "ThreatIntelligence"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ThreatIntelligence"
     },
     "TIDataConnectorDataTypes": {
       "type": "object",
@@ -16442,26 +16235,14 @@
           "$ref": "#/definitions/ThreatIntelligenceIndicatorProperties",
           "description": "Threat Intelligence Entity properties",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of the entity.",
-          "enum": [
-            "indicator"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ThreatIntelligenceInformation"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "indicator"
     },
     "ThreatIntelligenceIndicatorProperties": {
       "type": "object",
@@ -16638,6 +16419,7 @@
           "description": "The kind of the entity."
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],

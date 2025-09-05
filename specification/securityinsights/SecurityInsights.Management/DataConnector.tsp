@@ -14,6 +14,7 @@ namespace Microsoft.SecurityInsights;
 /**
  * Data connector.
  */
+@discriminator("kind")
 model DataConnector is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = DataConnector,
@@ -60,6 +61,7 @@ interface DataConnectors {
   list is Extension.ListByTarget<
     OperationalInsights,
     DataConnector,
+    Response = ArmResponse<DataConnectorList>,
     Error = CloudError
   >;
 }

@@ -14,6 +14,7 @@ namespace Microsoft.SecurityInsights;
 /**
  * Alert rule template.
  */
+@discriminator("kind")
 model AlertRuleTemplate is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = AlertRuleTemplate,

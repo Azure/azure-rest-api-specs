@@ -1311,6 +1311,11 @@ union AutomationRulePropertyArrayConditionSupportedArrayConditionType {
    * Evaluate the condition as true if any item fulfills it
    */
   AnyItem: "AnyItem",
+
+  /**
+   * Evaluate the condition as true if all items fulfill it
+   */
+  AllItems: "AllItems",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4443,7 +4448,6 @@ model WarningBody {
 /**
  * Threat intelligence indicator entity.
  */
-@discriminator(ThreatIntelligenceResourceInnerKind.indicator)
 @parentResource(ThreatIntelligenceMain)
 model ThreatIntelligenceIndicatorModel extends ThreatIntelligenceInformation {
   /**
@@ -4452,6 +4456,8 @@ model ThreatIntelligenceIndicatorModel extends ThreatIntelligenceInformation {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ThreatIntelligenceIndicatorProperties;
+
+  kind: ThreatIntelligenceResourceInnerKind.indicator;
 }
 
 /**
@@ -6390,7 +6396,6 @@ model AADDataConnector extends DataConnector {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AADDataConnectorProperties;
-
   /**
    * The data connector kind
    */
@@ -6435,13 +6440,13 @@ model DataConnectorDataTypeCommon {
 /**
  * Represents AATP (Azure Advanced Threat Protection) data connector.
  */
-model AatpDataConnector extends DataConnector {
+model AATPDataConnector extends DataConnector {
   /**
    * AATP (Azure Advanced Threat Protection) data connector properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: AatpDataConnectorProperties;
+  properties?: AATPDataConnectorProperties;
 
   /**
    * The data connector kind
@@ -6452,7 +6457,7 @@ model AatpDataConnector extends DataConnector {
 /**
  * AATP (Azure Advanced Threat Protection) data connector properties.
  */
-model AatpDataConnectorProperties {
+model AATPDataConnectorProperties {
   /**
    * The tenant id to connect to, and get the data from.
    */
@@ -7333,13 +7338,13 @@ model DataConnectorTenantId {
 /**
  * Represents MCAS (Microsoft Cloud App Security) data connector.
  */
-model McasDataConnector extends DataConnector {
+model MCASDataConnector extends DataConnector {
   /**
    * MCAS (Microsoft Cloud App Security) data connector properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: McasDataConnectorProperties;
+  properties?: MCASDataConnectorProperties;
 
   /**
    * The data connector kind
@@ -7350,7 +7355,7 @@ model McasDataConnector extends DataConnector {
 /**
  * MCAS (Microsoft Cloud App Security) data connector properties.
  */
-model McasDataConnectorProperties {
+model MCASDataConnectorProperties {
   /**
    * The tenant id to connect to, and get the data from.
    */
@@ -7359,14 +7364,18 @@ model McasDataConnectorProperties {
   /**
    * The available data types for the connector.
    */
-  dataTypes?: McasDataConnectorDataTypes;
+  dataTypes?: MCASDataConnectorDataTypes;
 }
 
 /**
  * The available data types for MCAS (Microsoft Cloud App Security) data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model McasDataConnectorDataTypes extends AlertsDataTypeOfDataConnector {
+model MCASDataConnectorDataTypes extends AlertsDataTypeOfDataConnector {
+  /**
+   * Alerts log data type connection.
+   */
+  alerts?: DataConnectorDataTypeCommon;
   /**
    * Discovery log data type connection.
    */
@@ -7376,13 +7385,13 @@ model McasDataConnectorDataTypes extends AlertsDataTypeOfDataConnector {
 /**
  * Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.
  */
-model MdatpDataConnector extends DataConnector {
+model MDATPDataConnector extends DataConnector {
   /**
    * MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: MdatpDataConnectorProperties;
+  properties?: MDATPDataConnectorProperties;
 
   /**
    * The data connector kind
@@ -7393,7 +7402,7 @@ model MdatpDataConnector extends DataConnector {
 /**
  * MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
  */
-model MdatpDataConnectorProperties {
+model MDATPDataConnectorProperties {
   /**
    * The tenant id to connect to, and get the data from.
    */
@@ -7408,7 +7417,6 @@ model MdatpDataConnectorProperties {
 /**
  * Represents threat intelligence data connector.
  */
-@discriminator("ThreatIntelligence")
 model TIDataConnector extends DataConnector {
   /**
    * TI (Threat Intelligence) data connector properties.
@@ -7416,6 +7424,11 @@ model TIDataConnector extends DataConnector {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TIDataConnectorProperties;
+
+  /**
+   * The data connector kind
+   */
+  kind: "ThreatIntelligence";
 }
 
 /**
@@ -7458,13 +7471,13 @@ model TIDataConnectorDataTypesIndicators extends DataConnectorDataTypeCommon {}
 /**
  * Represents Microsoft Threat Intelligence data connector.
  */
-model MstiDataConnector extends DataConnector {
+model MSTIDataConnector extends DataConnector {
   /**
    * Microsoft Threat Intelligence data connector properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: MstiDataConnectorProperties;
+  properties?: MSTIDataConnectorProperties;
 
   /**
    * The data connector kind
@@ -7476,28 +7489,28 @@ model MstiDataConnector extends DataConnector {
  * Microsoft Threat Intelligence data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model MstiDataConnectorProperties extends DataConnectorTenantId {
+model MSTIDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
    */
-  dataTypes: MstiDataConnectorDataTypes;
+  dataTypes: MSTIDataConnectorDataTypes;
 }
 
 /**
  * The available data types for Microsoft Threat Intelligence data connector.
  */
-model MstiDataConnectorDataTypes {
+model MSTIDataConnectorDataTypes {
   /**
    * Data type for Microsoft Threat Intelligence data connector.
    */
-  microsoftEmergingThreatFeed: MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed;
+  microsoftEmergingThreatFeed: MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed;
 }
 
 /**
  * Data type for Microsoft Threat Intelligence data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed
+model MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed
   extends DataConnectorDataTypeCommon {
   /**
    * The lookback period for the feed to be imported. The date-time to begin importing the feed from, for example: 2024-01-01T00:00:00.000Z.

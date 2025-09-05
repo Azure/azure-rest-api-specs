@@ -18,8 +18,7 @@ model EntityResource {
   ...ResourceNameParameter<
     Resource = EntityResource,
     KeyName = "entityIdentifier",
-    SegmentName = "entities",
-    NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+    SegmentName = "entities"
   >;
 }
 
@@ -76,7 +75,8 @@ interface SourceControlOperationGroup {
     route: "listRepositories",
 
     @doc("The content of the action request")
-    body: RepositoryAccessProperties,
+    @body
+    repositoryAccess: RepositoryAccessProperties,
     ): RepoList | CloudError;
 }
 
@@ -92,7 +92,11 @@ interface ThreatIntelligenceIndicatorOperationGroup {
     OperationalInsights,
     ThreatIntelligenceMain,
     Request = ThreatIntelligenceIndicatorModel,
-    Response = ThreatIntelligenceInformation
+    Response = ArmResourceUpdatedResponse<ThreatIntelligenceInformation> | ArmResourceCreatedResponse<
+      ThreatIntelligenceInformation,
+      {}
+    >,
+    Error = CloudError
   >;
   /**
    * Query threat intelligence indicators as per filtering criteria.
@@ -101,11 +105,13 @@ interface ThreatIntelligenceIndicatorOperationGroup {
   @operationId("ThreatIntelligenceIndicator_QueryIndicators")
   @autoRoute
   @action("queryIndicators")
+  @list
   queryIndicators is Extension.ActionSync<
     OperationalInsights,
     ThreatIntelligenceMain,
     Request = ThreatIntelligenceFilteringCriteria,
     Response = ThreatIntelligenceInformationList,
+    Error = CloudError
   >;
 }
 

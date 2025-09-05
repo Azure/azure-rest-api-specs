@@ -16,6 +16,7 @@ namespace Microsoft.SecurityInsights;
 /**
  * Alert rule.
  */
+@discriminator("kind")
 model AlertRule is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = AlertRule,
@@ -62,6 +63,7 @@ interface AlertRules {
   list is Extension.ListByTarget<
     OperationalInsights,
     AlertRule,
+    Response = ArmResponse<AlertRulesList>,
     Error = CloudError
   >;
 }
