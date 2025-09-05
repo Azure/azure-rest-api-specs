@@ -286,6 +286,10 @@ export class TspConfigJavaMgmtEmitterOutputDirSubRule extends TspconfigEmitterOp
     }
     return super.validate(config);
   }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
+  }
 }
 
 export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
