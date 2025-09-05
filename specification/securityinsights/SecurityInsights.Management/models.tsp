@@ -4454,7 +4454,7 @@ model ThreatIntelligenceIndicatorModel extends ThreatIntelligenceInformation {
   /**
    * The kind of the entity.
    */
-  kind: "indicator";
+  kind: ThreatIntelligenceResourceInnerKind.indicator;
 }
 
 /**

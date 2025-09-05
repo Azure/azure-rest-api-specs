@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/securityinsights"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,11 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-securityinsights"
+    namespace: "com.azure.resourcemanager.securityinsights"
+    flavor: "azure"
+    service-name: "Security Insights"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

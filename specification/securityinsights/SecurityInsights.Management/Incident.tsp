@@ -49,7 +49,7 @@ alias IncidentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     ...Extension.ExtensionProviderNamespace<Incident>;
 
     /**
-     * The guest configuration assignment name.
+     * The incident identifier.
      */
     @path
     @key
