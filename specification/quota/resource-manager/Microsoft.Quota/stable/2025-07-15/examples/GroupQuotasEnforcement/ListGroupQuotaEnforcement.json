@@ -1,56 +1,55 @@
 {
   "operationId": "GroupQuotaLocationSettings_List",
   "parameters": {
-    "api-version": "2025-07-15",
-    "groupQuotaName": "groupquota1",
     "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
-    "resourceProviderName": "Microsoft.Compute"
+    "groupQuotaName": "groupquota1",
+    "resourceProviderName": "Microsoft.Compute",
+    "api-version": "2025-07-15"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://yourLinkHere.com",
         "value": [
           {
-            "name": "eastus",
-            "type": "Microsoft.Quota/groupQuotas/locationSettings",
             "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSettings/eastus",
+            "type": "Microsoft.Quota/groupQuotas/locationSettings",
+            "name": "eastus",
             "properties": {
               "enforcementEnabled": "Enabled",
               "provisioningState": "Succeeded"
             }
           },
           {
-            "name": "westus",
-            "type": "Microsoft.Quota/groupQuotas/locationSettings",
             "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSettings/westus",
+            "type": "Microsoft.Quota/groupQuotas/locationSettings",
+            "name": "westus",
             "properties": {
               "enforcementEnabled": "Enabled",
               "provisioningState": "Succeeded"
             }
           },
           {
-            "name": "westus2",
-            "type": "Microsoft.Quota/groupQuotas/locationSettings",
             "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSettings/westus2",
+            "type": "Microsoft.Quota/groupQuotas/locationSettings",
+            "name": "westus2",
             "properties": {
               "enforcementEnabled": "Enabled",
               "provisioningState": "InProgress"
             }
           },
           {
-            "name": "eastasia",
-            "type": "Microsoft.Quota/groupQuotas/groupQlocationSettingsuotasEnforcement",
             "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSettings/eastasia",
+            "type": "Microsoft.Quota/groupQuotas/groupQlocationSettingsuotasEnforcement",
+            "name": "eastasia",
             "properties": {
               "enforcementEnabled": "Enabled",
-              "faultCode": "RegionNotSupported",
-              "provisioningState": "Failed"
+              "provisioningState": "Failed",
+              "faultCode": "RegionNotSupported"
             }
           }
-        ]
+        ],
+        "nextLink": "https://yourLinkHere.com"
       }
     }
-  },
-  "title": "GroupQuotaEnforcement_List"
+  }
 }
