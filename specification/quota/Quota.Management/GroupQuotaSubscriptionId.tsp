@@ -26,6 +26,45 @@ model GroupQuotaSubscriptionId
 }
 
 @armResourceOperations
+interface GroupQuotaSubscriptionIdsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+
+        /**
+         * The provider namespace for the resource.
+         */
+        @path
+        @segment("providers")
+        providerNameSpace: "Microsoft.Management",
+
+        /**
+         * Management Group Id.
+         */
+        @path
+        @segment("managementGroups")
+        @minLength(3)
+        @maxLength(63)
+        managementGroupId: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+         */
+        @path
+        @segment("groupQuotas")
+        @minLength(3)
+        @maxLength(63)
+        @pattern("^[a-z][a-z0-9]*$")
+        groupQuotaName: string,
+      },
+      {
+        ...SubscriptionIdParameter,
+      }
+    > {}
+
+@armResourceOperations
 interface GroupQuotaSubscriptionIds {
   /**
    * Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not a member of GroupQuota, it will return 404, else 200.
@@ -40,14 +79,14 @@ interface GroupQuotaSubscriptionIds {
    * Adds a subscription to GroupQuotas. The subscriptions will be validated based on the additionalAttributes defined in the GroupQuota. The additionalAttributes works as filter for the subscriptions, which can be included in the GroupQuotas. The request's TenantId is validated against the subscription's TenantId.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is Azure.ResourceManager.CustomExtension.CreateOrUpdateWithoutBodyAsync<
-    Extension.ManagementGroup<"managementGroupId">,
+  createOrUpdate is GroupQuotaSubscriptionIdsOps.CreateOrUpdateAsync<
     GroupQuotaSubscriptionId,
     Response = ArmResourceUpdatedResponse<GroupQuotaSubscriptionId> | ArmResourceCreatedResponse<
       GroupQuotaSubscriptionId,
       ArmCombinedLroHeaders<FinalResult = GroupQuotaSubscriptionId> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    Request = void
   >;
 
   // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
@@ -56,10 +95,9 @@ interface GroupQuotaSubscriptionIds {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  update is Azure.ResourceManager.CustomExtension.CustomPatchWithoutBodyAsync<
-    Extension.ManagementGroup<"managementGroupId">,
+  update is GroupQuotaSubscriptionIdsOps.CustomPatchAsync<
     GroupQuotaSubscriptionId,
-    PatchModel = {},
+    PatchModel = void,
     Response = ArmResponse<GroupQuotaSubscriptionId> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotaSubscriptionId> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
