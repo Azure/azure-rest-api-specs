@@ -7507,25 +7507,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "BulkDeploySolutionParameter": {
       "type": "object",
       "description": "Bulk deploy solution parameter",
@@ -9761,9 +9742,26 @@
         "capabilities"
       ]
     },
-    "SolutionTemplatePropertiesUpdate": {
+    "SolutionTemplateUpdate": {
       "type": "object",
-      "description": "Solution Template Properties",
+      "description": "The type used for update operations of the SolutionTemplate.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionTemplateUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "SolutionTemplateUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SolutionTemplate.",
       "properties": {
         "description": {
           "type": "string",
@@ -9785,21 +9783,6 @@
           "description": "Flag to enable external validation"
         }
       }
-    },
-    "SolutionTemplateUpdate": {
-      "type": "object",
-      "description": "Solution Template Resource. Contains capabilities and operations for creating versions.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SolutionTemplatePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "SolutionTemplateVersion": {
       "type": "object",
