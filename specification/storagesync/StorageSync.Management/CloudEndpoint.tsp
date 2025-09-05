@@ -64,7 +64,8 @@ interface CloudEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudEndpoint> & ArmLroLocationHeader<FinalResult = CloudEndpoint> &
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudEndpoint> &
+      ArmLroLocationHeader<FinalResult = CloudEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -92,7 +93,8 @@ interface CloudEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudEndpoint> & ArmLroLocationHeader<FinalResult = CloudEndpoint> &
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudEndpoint> &
+      ArmLroLocationHeader<FinalResult = CloudEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -133,7 +135,7 @@ interface CloudEndpoints {
       @header("Location")
       @doc("Operation Status Location URI")
       location?: string;
-      
+
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;

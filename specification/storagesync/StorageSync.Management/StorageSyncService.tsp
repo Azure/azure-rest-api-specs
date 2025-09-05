@@ -55,7 +55,8 @@ interface StorageSyncServices {
       DefaultBaseParameters<StorageSyncService>
     >,
     StorageSyncServiceCreateParameters,
-    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> & ArmLroLocationHeader<FinalResult = StorageSyncService> &
+    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> &
+      ArmLroLocationHeader<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -84,7 +85,8 @@ interface StorageSyncServices {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> & ArmLroLocationHeader<FinalResult = StorageSyncService> &
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> &
+      ArmLroLocationHeader<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -113,7 +115,8 @@ interface StorageSyncServices {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> & ArmLroLocationHeader<FinalResult = StorageSyncService> &
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> &
+      ArmLroLocationHeader<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")

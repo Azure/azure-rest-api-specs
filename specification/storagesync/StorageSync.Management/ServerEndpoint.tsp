@@ -64,7 +64,9 @@ interface ServerEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ServerEndpoint> & ArmLroLocationHeader<FinalResult = ServerEndpoint> & Azure.Core.Foundations.RetryAfterHeader> & {
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ServerEndpoint> &
+      ArmLroLocationHeader<FinalResult = ServerEndpoint> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;
@@ -92,7 +94,8 @@ interface ServerEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ServerEndpoint> & ArmLroLocationHeader<FinalResult = ServerEndpoint> &
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ServerEndpoint> &
+      ArmLroLocationHeader<FinalResult = ServerEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")

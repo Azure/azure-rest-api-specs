@@ -34,7 +34,8 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("location")
   create is PrivateEndpointOperations.CreateOrUpdateAsync<
     StorageSyncService,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> & ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
+      ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -56,7 +57,8 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("location")
   delete is PrivateEndpointOperations.DeleteAsync<
     StorageSyncService,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> & ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
+      ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")

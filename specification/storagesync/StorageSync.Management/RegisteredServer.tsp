@@ -64,7 +64,9 @@ interface RegisteredServers {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = RegisteredServer> & ArmLroLocationHeader<FinalResult = RegisteredServer> & Azure.Core.Foundations.RetryAfterHeader> & {
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = RegisteredServer> &
+      ArmLroLocationHeader<FinalResult = RegisteredServer> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;
@@ -92,7 +94,9 @@ interface RegisteredServers {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = RegisteredServer> & ArmLroLocationHeader<FinalResult = RegisteredServer> & Azure.Core.Foundations.RetryAfterHeader> & {
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = RegisteredServer> &
+      ArmLroLocationHeader<FinalResult = RegisteredServer> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;
