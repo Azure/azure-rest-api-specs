@@ -212,34 +212,34 @@ stages:
 
           if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
             optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
-            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',`n"
+            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
           elif [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
             optional_params="$optional_params --readme-relative-path ${{ parameters.ConfigPath }}"
-            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',`n"
+            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
           fi
 
           updatedSpecRepoCommit="$(SpecRepoCommit)"
           if [ "$(Build.Reason)" = "PullRequest" ]; then
             optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
             specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
-            sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl`n"
+            sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
             updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
           fi
 
           if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
             optional_params="$optional_params --batch-type ${{ parameters.SpecBatchTypes }}"
-            sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},`n"
+            sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
           fi
 
           if [ "${{ parameters.ApiVersion }}" != "" ]; then
             optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
-            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},`n"
+            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
           fi
-          sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'`n"
+          sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
 
           if [ "$(Build.Reason)" = "Manual" ]; then
-            sdk_gen_info="$sdk_gen_info Pipeline run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)`n"
-            sdk_gen_info="$sdk_gen_info Refer to https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites to prepare for SDK release.`n"
+            sdk_gen_info="$sdk_gen_info Pipeline run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
+            sdk_gen_info="$sdk_gen_info Refer to https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites to prepare for SDK release."
           fi
           echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
           echo "$sdk_gen_info"
