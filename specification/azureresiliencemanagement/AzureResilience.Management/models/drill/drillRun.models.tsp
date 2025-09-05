@@ -41,15 +41,19 @@ model DrillRunProperties extends JobProperties {
 
   @doc("Parent Drill resource.")
   @visibility(Lifecycle.Read)
-  drillUrl?: armResourceIdentifier<[
+  drillId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/drills";
     }
   ]>;
 
-  @doc("Measured aggregated Metric value.")
+  @doc("Measured aggregated Metric value through the drill run.")
   @visibility(Lifecycle.Read)
   metricValue?: string;
+
+  @doc("Measured health status through the drill run.")
+  @visibility(Lifecycle.Read)
+  healthStatus?: HealthStatus;
 
   @doc("Drill mode.")
   @visibility(Lifecycle.Read)

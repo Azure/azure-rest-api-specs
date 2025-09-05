@@ -41,7 +41,7 @@ model ConfigTemplateMetadataProperties {
 
 @added(Versions.v2025_08_15_preview)
 @doc("SolutionSchema Resource")
-@parentResource(ConfigTemplateVersion)
+@parentResource(ConfigTemplate)
 model ConfigTemplateMetadata
   is ProxyResource<ConfigTemplateMetadataProperties> {
   @doc("The name of the ConfigTemplateMetadataProperties")
@@ -60,6 +60,6 @@ interface ConfigTemplateMetadatas {
   @doc("Get a ConfigTemplateMetadata Resource")
   get is ArmResourceRead<ConfigTemplateMetadata>;
 
-  @doc("List by ConfigTemplateVersion")
-  listByConfigTemplateVersion is ArmResourceListByParent<ConfigTemplateMetadata>;
+  @doc("List by ConfigTemplate")
+  listByConfigTemplate is ArmResourceListByParent<ConfigTemplateMetadata>;
 }

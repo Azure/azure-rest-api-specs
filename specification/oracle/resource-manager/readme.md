@@ -27,7 +27,7 @@ These are the global settings for the Oracle.Database.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-08-15-preview
+tag: package-2025-09-01
 ```
 
 ### Tag: package-2023-09-01
@@ -138,6 +138,15 @@ These settings apply only when `--tag=package-2025-08-15-preview` is specified o
 ```yaml $(tag) == 'package-2025-08-15-preview'
 input-file:
   - Oracle.Database/preview/2025-08-15-preview/openapi.json
+```
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Oracle.Database/stable/2025-09-01/openapi.json
 ```
 
 ---
