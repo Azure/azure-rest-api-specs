@@ -587,9 +587,9 @@ union RelationshipStatus {
 }
 
 /**
- * Status of the mirror relationship
+ * Status of the volume replication relationship
  */
-union ReplicationRelationshipStatus {
+union VolumeReplicationRelationshipStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Idle: "Idle",
@@ -2730,7 +2730,7 @@ model ReplicationStatus {
   /**
    * Status of the mirror relationship
    */
-  relationshipStatus?: ReplicationRelationshipStatus;
+  relationshipStatus?: VolumeReplicationRelationshipStatus;
 
   /**
    * The status of the replication

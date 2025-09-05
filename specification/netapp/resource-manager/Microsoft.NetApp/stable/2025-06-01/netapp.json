@@ -10324,28 +10324,6 @@
         }
       }
     },
-    "ReplicationRelationshipStatus": {
-      "type": "string",
-      "description": "Status of the mirror relationship",
-      "enum": [
-        "Idle",
-        "Transferring"
-      ],
-      "x-ms-enum": {
-        "name": "ReplicationRelationshipStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Idle",
-            "value": "Idle"
-          },
-          {
-            "name": "Transferring",
-            "value": "Transferring"
-          }
-        ]
-      }
-    },
     "ReplicationSchedule": {
       "type": "string",
       "description": "Schedule",
@@ -10382,7 +10360,7 @@
           "description": "Replication health check"
         },
         "relationshipStatus": {
-          "$ref": "#/definitions/ReplicationRelationshipStatus",
+          "$ref": "#/definitions/VolumeReplicationRelationshipStatus",
           "description": "Status of the mirror relationship"
         },
         "mirrorState": {
@@ -12454,6 +12432,28 @@
           "description": "Has relocation finished and is ready to be cleaned up",
           "readOnly": true
         }
+      }
+    },
+    "VolumeReplicationRelationshipStatus": {
+      "type": "string",
+      "description": "Status of the volume replication relationship",
+      "enum": [
+        "Idle",
+        "Transferring"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeReplicationRelationshipStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Idle",
+            "value": "Idle"
+          },
+          {
+            "name": "Transferring",
+            "value": "Transferring"
+          }
+        ]
       }
     },
     "VolumeRevert": {
