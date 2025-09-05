@@ -50,9 +50,6 @@ using Microsoft.NetApp;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BackupPatch.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SnapshotPolicyDetails.properties);
-
 @@clientLocation(SubscriptionQuotaItems.get, "NetAppResourceQuotaLimits");
 @@clientLocation(SubscriptionQuotaItems.list, "NetAppResourceQuotaLimits");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

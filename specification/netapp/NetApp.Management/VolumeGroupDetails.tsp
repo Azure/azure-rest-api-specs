@@ -32,6 +32,169 @@ model VolumeGroupDetails
   location?: string;
 }
 
+/**
+ * List of volume group resources
+ */
+model VolumeGroupList is Azure.Core.Page<VolumeGroup>;
+
+/**
+ * Volume group resource
+ */
+model VolumeGroup {
+  /**
+   * Resource location
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Volume group properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: VolumeGroupListProperties;
+}
+
+/**
+ * Volume group properties
+ */
+model VolumeGroupListProperties {
+  /**
+   * Azure lifecycle management
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * Volume group details
+   */
+  groupMetaData?: VolumeGroupMetaData;
+}
+
+/**
+ * Volume group properties
+ */
+model VolumeGroupMetaData {
+  /**
+   * Group Description
+   */
+  groupDescription?: string;
+
+  /**
+   * Application Type
+   */
+  applicationType?: ApplicationType;
+
+  /**
+   * Application specific identifier
+   */
+  applicationIdentifier?: string;
+
+  /**
+   * Application specific placement rules for the volume group
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  globalPlacementRules?: PlacementKeyValuePairs[];
+
+  /**
+   * Number of volumes in volume group
+   */
+  @visibility(Lifecycle.Read)
+  volumesCount?: int64;
+}
+
+/**
+ * Application Type
+ */
+union ApplicationType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `SAP-HANA`: "SAP-HANA",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ORACLE: "ORACLE",
+}
+
+/**
+ * Volume group properties
+ */
+model VolumeGroupProperties {
+  /**
+   * Azure lifecycle management
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * Volume group details
+   */
+  groupMetaData?: VolumeGroupMetaData;
+
+  /**
+   * List of volumes from group
+   */
+  volumes?: VolumeGroupVolumeProperties[];
+}
+
+/**
+ * Volume resource
+ */
+model VolumeGroupVolumeProperties {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Availability Zone
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  zones?: string[];
+
+  /**
+   * Volume properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties: VolumeProperties;
+}
+
 @armResourceOperations
 interface VolumeGroups {
   /**

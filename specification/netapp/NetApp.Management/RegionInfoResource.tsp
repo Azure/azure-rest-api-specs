@@ -24,6 +24,11 @@ model RegionInfoResource is Azure.ResourceManager.ProxyResource<RegionInfo> {
   >;
 }
 
+/**
+ * List of regionInfo resources
+ */
+model RegionInfosList is Azure.Core.Page<RegionInfoResource>;
+
 @armResourceOperations
 interface RegionInfoResources {
   /**

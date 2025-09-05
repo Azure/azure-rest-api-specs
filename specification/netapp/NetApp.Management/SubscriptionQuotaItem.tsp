@@ -24,6 +24,29 @@ model SubscriptionQuotaItem
   >;
 }
 
+/**
+ * List of Subscription Quota Items
+ */
+model SubscriptionQuotaItemList is Azure.Core.Page<SubscriptionQuotaItem>;
+
+/**
+ * SubscriptionQuotaItem Properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model SubscriptionQuotaItemProperties {
+  /**
+   * The current quota value.
+   */
+  @visibility(Lifecycle.Read)
+  current?: int32;
+
+  /**
+   * The default quota value.
+   */
+  @visibility(Lifecycle.Read)
+  default?: int32;
+}
+
 @armResourceOperations
 interface SubscriptionQuotaItems {
   /**

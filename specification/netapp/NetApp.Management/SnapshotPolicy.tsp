@@ -26,6 +26,204 @@ model SnapshotPolicy
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+/**
+ * List of Snapshot Policies
+ */
+model SnapshotPoliciesList is Azure.Core.Page<SnapshotPolicy>;
+
+/**
+ * Snapshot policy properties
+ */
+model SnapshotPolicyProperties {
+  /**
+   * Schedule for hourly snapshots
+   */
+  hourlySchedule?: HourlySchedule;
+
+  /**
+   * Schedule for daily snapshots
+   */
+  dailySchedule?: DailySchedule;
+
+  /**
+   * Schedule for weekly snapshots
+   */
+  weeklySchedule?: WeeklySchedule;
+
+  /**
+   * Schedule for monthly snapshots
+   */
+  monthlySchedule?: MonthlySchedule;
+
+  /**
+   * The property to decide policy is enabled or not
+   */
+  enabled?: boolean;
+
+  /**
+   * Azure lifecycle management
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+}
+
+/**
+ * Hourly Schedule properties
+ */
+model HourlySchedule {
+  /**
+   * Hourly snapshot count to keep
+   */
+  snapshotsToKeep?: int32;
+
+  /**
+   * Indicates which minute snapshot should be taken
+   */
+  minute?: int32;
+
+  /**
+   * Resource size in bytes, current storage usage for the volume in bytes
+   */
+  usedBytes?: int64;
+}
+
+/**
+ * Daily Schedule properties
+ */
+model DailySchedule {
+  /**
+   * Daily snapshot count to keep
+   */
+  snapshotsToKeep?: int32;
+
+  /**
+   * Indicates which hour in UTC timezone a snapshot should be taken
+   */
+  hour?: int32;
+
+  /**
+   * Indicates which minute snapshot should be taken
+   */
+  minute?: int32;
+
+  /**
+   * Resource size in bytes, current storage usage for the volume in bytes
+   */
+  usedBytes?: int64;
+}
+
+/**
+ * Weekly Schedule properties, make a snapshot every week at a specific day or days
+ */
+model WeeklySchedule {
+  /**
+   * Weekly snapshot count to keep
+   */
+  snapshotsToKeep?: int32;
+
+  /**
+   * Indicates which weekdays snapshot should be taken, accepts a comma separated list of week day names in english
+   */
+  day?: string;
+
+  /**
+   * Indicates which hour in UTC timezone a snapshot should be taken
+   */
+  hour?: int32;
+
+  /**
+   * Indicates which minute snapshot should be taken
+   */
+  minute?: int32;
+
+  /**
+   * Resource size in bytes, current storage usage for the volume in bytes
+   */
+  usedBytes?: int64;
+}
+
+/**
+ * Monthly Schedule properties
+ */
+model MonthlySchedule {
+  /**
+   * Monthly snapshot count to keep
+   */
+  snapshotsToKeep?: int32;
+
+  /**
+   * Indicates which days of the month snapshot should be taken. A comma delimited string.
+   */
+  daysOfMonth?: string;
+
+  /**
+   * Indicates which hour in UTC timezone a snapshot should be taken
+   */
+  hour?: int32;
+
+  /**
+   * Indicates which minute snapshot should be taken
+   */
+  minute?: int32;
+
+  /**
+   * Resource size in bytes, current storage usage for the volume in bytes
+   */
+  usedBytes?: int64;
+}
+
+/**
+ * Snapshot policy Details for create and update
+ */
+model SnapshotPolicyPatch {
+  /**
+   * Resource location
+   */
+  location?: string;
+
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Snapshot Policy properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SnapshotPolicyProperties;
+}
+
+/**
+ * Volumes associated with snapshot policy
+ */
+model SnapshotPolicyVolumeList {
+  /**
+   * List of volumes
+   */
+  value?: Volume[];
+}
+
 @armResourceOperations
 interface SnapshotPolicies {
   /**

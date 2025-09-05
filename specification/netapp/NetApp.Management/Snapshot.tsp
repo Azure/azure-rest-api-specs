@@ -33,6 +33,56 @@ model Snapshot is Azure.ResourceManager.ProxyResource<SnapshotProperties> {
 }
 
 /**
+ * List of Snapshots
+ */
+model SnapshotsList is Azure.Core.Page<Snapshot>;
+
+/**
+ * Snapshot properties
+ */
+model SnapshotProperties {
+  /**
+   * UUID v4 used to identify the Snapshot
+   */
+  @visibility(Lifecycle.Read)
+  @maxLength(36)
+  @minLength(36)
+  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+  snapshotId?: string;
+
+  /**
+   * The creation date of the snapshot
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  created?: utcDateTime;
+
+  /**
+   * Azure lifecycle management
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+}
+
+/**
+ * Restore payload for Single File Snapshot Restore
+ */
+model SnapshotRestoreFiles {
+  /**
+   * List of files to be restored
+   */
+  @maxItems(10)
+  @minItems(1)
+  filePaths: FileName[];
+
+  /**
+   * Destination folder where the files will be restored
+   */
+  destinationPath?: string;
+}
+
+/**
  * Snapshot of a Volume
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"

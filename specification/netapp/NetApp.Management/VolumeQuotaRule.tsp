@@ -26,6 +26,84 @@ model VolumeQuotaRule
   >;
 }
 
+/**
+ * List of Volume Quota Rules
+ */
+model VolumeQuotaRulesList is Azure.Core.Page<VolumeQuotaRule>;
+
+/**
+ * Volume Quota Rule properties
+ */
+model VolumeQuotaRulesProperties {
+  /**
+   * Gets the status of the VolumeQuotaRule at the time the operation was called.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Size of quota
+   */
+  quotaSizeInKiBs?: int64;
+
+  /**
+   * Type of quota
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  quotaType?: Type;
+
+  /**
+   * UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running ‘id’ or ‘getent’ command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  quotaTarget?: string;
+}
+
+/**
+ * Type of quota
+ */
+union Type {
+  string,
+
+  /**
+   * Default user quota
+   */
+  DefaultUserQuota: "DefaultUserQuota",
+
+  /**
+   * Default group quota
+   */
+  DefaultGroupQuota: "DefaultGroupQuota",
+
+  /**
+   * Individual user quota
+   */
+  IndividualUserQuota: "IndividualUserQuota",
+
+  /**
+   * Individual group quota
+   */
+  IndividualGroupQuota: "IndividualGroupQuota",
+}
+
+/**
+ * Patchable Quota Rule of a Volume
+ */
+model VolumeQuotaRulePatch {
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Volume Quota Rule Properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: VolumeQuotaRulesProperties;
+}
+
 @armResourceOperations
 interface VolumeQuotaRules {
   /**

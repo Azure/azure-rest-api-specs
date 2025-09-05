@@ -25,6 +25,34 @@ model BackupVault
   >;
 }
 
+/**
+ * List of Backup Vaults
+ */
+model BackupVaultsList is Azure.Core.Page<BackupVault>;
+
+/**
+ * Backup Vault properties
+ */
+model BackupVaultProperties {
+  /**
+   * Azure lifecycle management
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+}
+
+/**
+ * Backup Vault information
+ */
+model BackupVaultPatch {
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
 @armResourceOperations
 interface BackupVaults {
   /**

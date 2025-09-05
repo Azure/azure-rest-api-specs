@@ -25,6 +25,157 @@ model SubvolumeInfo
   >;
 }
 
+/**
+ * List of Subvolumes
+ */
+model SubvolumesList is Azure.Core.Page<SubvolumeInfo>;
+
+/**
+ * This represents path associated with the subvolume
+ */
+model SubvolumeProperties {
+  /**
+   * Path to the subvolume
+   */
+  path?: string;
+
+  /**
+   * Truncate subvolume to the provided size in bytes
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  size?: int64 | null;
+
+  /**
+   * parent path to the subvolume
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  parentPath?: string | null;
+
+  /**
+   * Azure lifecycle management
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+}
+
+/**
+ * Subvolume Patch Request properties
+ */
+model SubvolumePatchRequest {
+  /**
+   * Subvolume Properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SubvolumePatchParams;
+}
+
+/**
+ * Parameters with which a subvolume can be updated
+ */
+model SubvolumePatchParams {
+  /**
+   * Truncate subvolume to the provided size in bytes
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  size?: int64 | null;
+
+  /**
+   * path to the subvolume
+   */
+  path?: string;
+}
+
+/**
+ * Result of the post subvolume and action is to get metadata of the subvolume.
+ */
+model SubvolumeModel {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * It represents the minimal properties of the subvolume.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SubvolumeModelProperties;
+}
+
+/**
+ * Properties which represents actual subvolume model which is stored as a file in the system.
+ */
+model SubvolumeModelProperties {
+  /**
+   * Path to the subvolume
+   */
+  path?: string;
+
+  /**
+   * Path to the parent subvolume
+   */
+  parentPath?: string;
+
+  /**
+   * Size of subvolume
+   */
+  size?: int64;
+
+  /**
+   * Bytes used
+   */
+  bytesUsed?: int64;
+
+  /**
+   * Permissions of the subvolume
+   */
+  permissions?: string;
+
+  /**
+   * Creation time and date
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  creationTimeStamp?: utcDateTime;
+
+  /**
+   * Most recent access time and date
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  accessedTimeStamp?: utcDateTime;
+
+  /**
+   * Most recent modification time and date
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  modifiedTimeStamp?: utcDateTime;
+
+  /**
+   * Most recent change time and date
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  changedTimeStamp?: utcDateTime;
+
+  /**
+   * Azure lifecycle management
+   */
+  provisioningState?: string;
+}
+
 @armResourceOperations
 interface SubvolumeInfos {
   /**

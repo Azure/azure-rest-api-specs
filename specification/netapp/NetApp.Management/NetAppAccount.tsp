@@ -25,6 +25,430 @@ model NetAppAccount
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+@minLength(1)
+@maxLength(255)
+scalar UserName extends string;
+
+/**
+ * List of NetApp account resources
+ */
+model NetAppAccountList is Azure.Core.Page<NetAppAccount>;
+
+/**
+ * NetApp account properties
+ */
+model AccountProperties {
+  /**
+   * Azure lifecycle management
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * Active Directories
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["activeDirectoryId"])
+  activeDirectories?: ActiveDirectory[];
+
+  /**
+   * Encryption settings
+   */
+  encryption?: AccountEncryption;
+
+  /**
+   * Shows the status of disableShowmount for all volumes under the subscription, null equals false
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  disableShowmount?: boolean | null;
+
+  /**
+   * Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  nfsV4IDDomain?: VfsV4IDDomain | null;
+
+  /**
+   * MultiAD Status for the account
+   */
+  @visibility(Lifecycle.Read)
+  multiAdStatus?: MultiAdStatus;
+}
+
+@maxLength(255)
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
+scalar VfsV4IDDomain extends string;
+
+/**
+ * Active Directory
+ */
+model ActiveDirectory {
+  /**
+   * Id of the Active Directory
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  activeDirectoryId?: string | null;
+
+  /**
+   * A domain user account with permission to create machine accounts
+   */
+  username?: string;
+
+  /**
+   * Plain text password of Active Directory domain administrator, value is masked in the response
+   */
+  @secret
+  @maxLength(64)
+  password?: string;
+
+  /**
+   * Name of the Active Directory domain
+   */
+  domain?: string;
+
+  /**
+   * Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain
+   */
+  @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$")
+  dns?: string;
+
+  /**
+   * Status of the Active Directory
+   */
+  @visibility(Lifecycle.Read)
+  status?: ActiveDirectoryStatus;
+
+  /**
+   * Any details in regards to the Status of the Active Directory
+   */
+  @visibility(Lifecycle.Read)
+  statusDetails?: string;
+
+  /**
+   * NetBIOS name of the SMB server. This name will be registered as a computer account in the AD and used to mount volumes
+   */
+  smbServerName?: string;
+
+  /**
+   * The Organizational Unit (OU) within the Windows Active Directory
+   */
+  organizationalUnit?: string = "CN=Computers";
+
+  /**
+   * The Active Directory site the service will limit Domain Controller discovery to
+   */
+  site?: string;
+
+  /**
+   * Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier
+   */
+  backupOperators?: UserName[];
+
+  /**
+   * Users to be added to the Built-in Administrators active directory group. A list of unique usernames without domain specifier
+   */
+  administrators?: UserName[];
+
+  /**
+   * kdc server IP address for the active directory machine. This optional parameter is used only while creating kerberos volume.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
+  kdcIP?: string;
+
+  /**
+   * Name of the active directory machine. This optional parameter is used only while creating kerberos volume
+   */
+  @maxLength(64)
+  @minLength(1)
+  adName?: string;
+
+  /**
+   * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @maxLength(10240)
+  @minLength(1)
+  @secret
+  serverRootCACertificate?: string;
+
+  /**
+   * If enabled, AES encryption will be enabled for SMB communication.
+   */
+  aesEncryption?: boolean;
+
+  /**
+   * Specifies whether or not the LDAP traffic needs to be signed.
+   */
+  ldapSigning?: boolean;
+
+  /**
+   * Domain Users in the Active directory to be given SeSecurityPrivilege privilege (Needed for SMB Continuously available shares for SQL). A list of unique usernames without domain specifier
+   */
+  securityOperators?: UserName[];
+
+  /**
+   * Specifies whether or not the LDAP traffic needs to be secured via TLS.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  ldapOverTLS?: boolean;
+
+  /**
+   *  If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes.
+   */
+  allowLocalNfsUsersWithLdap?: boolean;
+
+  /**
+   * If enabled, Traffic between the SMB server to Domain Controller (DC) will be encrypted.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  encryptDCConnections?: boolean;
+
+  /**
+   * LDAP Search scope options
+   */
+  ldapSearchScope?: LdapSearchScopeOpt;
+
+  /**
+   * Comma separated list of IPv4 addresses of preferred servers for LDAP client. At most two comma separated IPv4 addresses can be passed.
+   */
+  @maxLength(32)
+  @pattern("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?)?$")
+  preferredServersForLdapClient?: string;
+}
+
+/**
+ * LDAP search scope
+ */
+model LdapSearchScopeOpt {
+  /**
+   * This specifies the user DN, which overrides the base DN for user lookups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @maxLength(255)
+  userDN?: string;
+
+  /**
+   * This specifies the group DN, which overrides the base DN for group lookups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @maxLength(255)
+  groupDN?: string;
+
+  /**
+   * This specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.
+   */
+  @maxLength(255)
+  groupMembershipFilter?: string;
+}
+
+/**
+ * Encryption settings
+ */
+model AccountEncryption {
+  /**
+   * The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault
+   */
+  keySource?: KeySource = KeySource.`Microsoft.NetApp`;
+
+  /**
+   * Properties provided by KeVault. Applicable if keySource is 'Microsoft.KeyVault'.
+   */
+  keyVaultProperties?: KeyVaultProperties;
+
+  /**
+   * Identity used to authenticate to KeyVault. Applicable if keySource is 'Microsoft.KeyVault'.
+   */
+  identity?: EncryptionIdentity;
+}
+
+/**
+ * Properties of key vault.
+ */
+model KeyVaultProperties {
+  /**
+   * UUID v4 used to identify the Azure Key Vault configuration
+   */
+  @visibility(Lifecycle.Read)
+  @maxLength(36)
+  @minLength(36)
+  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+  keyVaultId?: string;
+
+  /**
+   * The Uri of KeyVault.
+   */
+  keyVaultUri: url;
+
+  /**
+   * The name of KeyVault key.
+   */
+  keyName: string;
+
+  /**
+   * The resource ID of KeyVault.
+   */
+  keyVaultResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
+
+  /**
+   * Status of the KeyVault connection.
+   */
+  @visibility(Lifecycle.Read)
+  status?: KeyVaultStatus;
+}
+
+/**
+ * Identity used to authenticate with key vault.
+ */
+model EncryptionIdentity {
+  /**
+   * The principal ID (object ID) of the identity used to authenticate with key vault. Read-only.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The ARM resource identifier of the user assigned identity used to authenticate with key vault. Applicable if identity.type has 'UserAssigned'. It should match key of identity.userAssignedIdentities.
+   */
+  userAssignedIdentity?: string;
+
+  /**
+   * ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults.
+   */
+  federatedClientId?: string;
+}
+
+/**
+ * NetApp account patch resource
+ */
+model NetAppAccountPatch {
+  /**
+   * Resource location
+   */
+  location?: string;
+
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * NetApp Account properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: AccountProperties;
+
+  /**
+   * The identity used for the resource.
+   */
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+}
+
+/**
+ * Change key vault request
+ */
+model ChangeKeyVault {
+  /**
+   * The URI of the key vault/managed HSM that should be used for encryption.
+   */
+  keyVaultUri: url;
+
+  /**
+   * The name of the key that should be used for encryption.
+   */
+  keyName: string;
+
+  /**
+   * Azure resource ID of the key vault/managed HSM that should be used for encryption.
+   */
+  keyVaultResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
+
+  /**
+   * Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["virtualNetworkId"])
+  keyVaultPrivateEndpoints: KeyVaultPrivateEndpoint[];
+}
+
+/**
+ * Status of the KeyVault connection.
+ */
+union KeyVaultStatus {
+  string,
+
+  /**
+   * KeyVault connection created but not in use
+   */
+  Created: "Created",
+
+  /**
+   * KeyVault connection in use by SMB Volume
+   */
+  InUse: "InUse",
+
+  /**
+   * KeyVault connection Deleted
+   */
+  Deleted: "Deleted",
+
+  /**
+   * Error with the KeyVault connection
+   */
+  Error: "Error",
+
+  /**
+   * KeyVault connection Updating
+   */
+  Updating: "Updating",
+}
+
+/**
+ * MultiAD Status for the account
+ */
+union MultiAdStatus {
+  string,
+
+  /**
+   * Account is MultiAD disabled, Means its a SharedAD or SingleAD account.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Account is MultiAD enabled
+   */
+  Enabled: "Enabled",
+}
+
 @armResourceOperations
 interface NetAppAccounts {
   /**
