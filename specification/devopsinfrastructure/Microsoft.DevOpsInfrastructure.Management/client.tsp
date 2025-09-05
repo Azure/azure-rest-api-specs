@@ -86,6 +86,8 @@ using Microsoft.DevOpsInfrastructure;
   "csharp"
 );
 
+@@clientName(DeleteResourcesDetails, "DevOpsDeleteResourcesDetails", "csharp");
+
 @@clientName(ResourceStatus, "DevOpsResourceStatus", "csharp");
 
 @@clientName(ResourceSku, "DevOpsResourceSku", "csharp");
