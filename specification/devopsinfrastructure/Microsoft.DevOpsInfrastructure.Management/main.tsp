@@ -95,6 +95,9 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
 
   @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
   permissionProfile?: AzureDevOpsPermissionProfile;
+
+  @doc("An alias to reference the Azure DevOps pool name.")
+  `alias`: string;
 }
 
 @doc("Defines an Azure DevOps organization.")
@@ -110,6 +113,9 @@ model Organization {
 
   @doc("Determines if the pool should have open access to all projects in this organization.")
   openAccess?: boolean;
+
+  @doc("An alias to reference the Azure DevOps pool name.")
+  `alias`: string;
 }
 @doc("Defines the type of Azure DevOps pool permission.")
 model AzureDevOpsPermissionProfile {
