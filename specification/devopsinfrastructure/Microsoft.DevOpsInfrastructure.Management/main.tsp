@@ -128,7 +128,7 @@ model Organization {
 
   @doc("An alias to reference the Azure DevOps pool name.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
-  `alias?`: string;
+  `alias`?: string;
 }
 @doc("Defines the type of Azure DevOps pool permission.")
 model AzureDevOpsPermissionProfile {
