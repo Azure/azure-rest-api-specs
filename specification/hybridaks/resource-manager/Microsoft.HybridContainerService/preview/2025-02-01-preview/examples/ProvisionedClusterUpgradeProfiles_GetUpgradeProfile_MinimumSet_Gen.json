@@ -1,0 +1,36 @@
+{
+  "title": "ProvisionedClusterUpgradeProfiles_GetUpgradeProfile_MinimumSet_Gen",
+  "operationId": "ProvisionedClusterUpgradeProfiles_GetUpgradeProfile",
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "connectedClusterResourceUri": "subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "controlPlaneProfile": {
+            "kubernetesVersion": "1.29.2",
+            "osType": "ProvisionedClusters_Get_LinuxBaremetal",
+            "upgrades": [
+              {
+                "kubernetesVersion": "1.29.4"
+              }
+            ]
+          }
+        },
+        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/upgradeprofiles/default",
+        "name": "default",
+        "systemData": {
+          "createdBy": "usrname1",
+          "createdByType": "User",
+          "createdAt": "2024-08-26T06:06:04.872Z",
+          "lastModifiedBy": "usrname1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-26T06:06:04.872Z"
+        }
+      }
+    }
+  }
+}
