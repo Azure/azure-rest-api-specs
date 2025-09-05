@@ -36,12 +36,12 @@ union AllowRDPSPWithPL {
   string,
 
   /**
-   * Using RDP Shortpath with Private link is disabled. This is the default value.
+   * Blocks the use of RDPShortPath if the hostpool PublicNetworkAccess setting is configured to require private link.
    */
   Disabled: "Disabled",
 
   /**
-   * Using RDP Shortpath with Private link is enabled. Customer has consented to use RDP Shortpath with Private link.
+   * Allows the use of RDPShortPath even if the hostpool PublicNetworkAccess is configured to require the use of private link.
    */
   Enabled: "Enabled",
 }
