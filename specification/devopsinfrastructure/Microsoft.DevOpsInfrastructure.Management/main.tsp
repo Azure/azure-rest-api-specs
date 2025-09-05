@@ -11,18 +11,24 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-@armCommonTypesVersion(CommonTypes.Versions.v6)
 @armProviderNamespace
 @service(#{ title: "Managed DevOps Infrastructure" })
-@versioned(Versions)
+@versioned(Microsoft.DevOpsInfrastructure.Versions)
 namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
+  /** 2025-01-21 version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(CommonTypes.Versions.v5)
+  v2025_01_21: "2025-01-21",
+
   /** 2025-09-20 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2025-09-20`,
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  v2025_09_20: "2025-09-20",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -61,6 +67,7 @@ model PoolProperties {
   devCenterProjectResourceId: string;
 
   @doc("The runtime configuration of the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   runtimeConfiguration?: RuntimeConfiguration;
 }
 
@@ -101,6 +108,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   permissionProfile?: AzureDevOpsPermissionProfile;
 
   @doc("An alias to reference the Azure DevOps pool name.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   `alias`: string;
 }
 
@@ -119,6 +127,7 @@ model Organization {
   openAccess?: boolean;
 
   @doc("An alias to reference the Azure DevOps pool name.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   `alias`: string;
 }
 @doc("Defines the type of Azure DevOps pool permission.")
@@ -175,6 +184,7 @@ model VmssFabricProfile extends FabricProfile {
 }
 
 @doc("The runtime configuration of the pool.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
 model RuntimeConfiguration {
   @doc("The target work folder of the task agent on the machine.")
   workFolder?: string;
@@ -291,6 +301,7 @@ model PoolImage {
   ephemeralType?: EphemeralType;
 
   @doc("Read only. Determines if the image is ephemeral.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   @visibility(Lifecycle.Read)
   isEphemeral: boolean;
 }
@@ -347,9 +358,11 @@ model NetworkProfile {
   subnetId: string;
 
   @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   staticIpAddressCount: int32;
 
   @doc("Read only. The list of static public IP addresses for outgoing connections assigned to the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   @visibility(Lifecycle.Read)
   ipAddresses: string[];
 }
@@ -557,6 +570,7 @@ union ResourceStatus {
 interface ResourceDetails {
   @delete
   @doc("Deletes a list of resources by their IDs.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   deleteResources(
     ...ApiVersionParameter,
 
@@ -569,6 +583,7 @@ interface ResourceDetails {
 }
 
 /** Request body for deleting many resources by their IDs. */
+@added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
 model DeleteResourcesDetails {
   @doc("List of resource IDs to delete.")
   resourceIds: string[];
