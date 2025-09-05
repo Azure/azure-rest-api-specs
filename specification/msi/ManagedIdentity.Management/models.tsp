@@ -227,7 +227,7 @@ model OperationDisplay {
   @summary("Operation Type.")
   operation?: string;
 
-    /** 
+  /** 
     The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
      */
   @summary("Resource Type.")
