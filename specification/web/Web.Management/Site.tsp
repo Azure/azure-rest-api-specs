@@ -35,6 +35,54 @@ model Site is Azure.ResourceManager.TrackedResource<SiteProperties> {
 }
 
 @armResourceOperations
+interface SiteOpsTemporary
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the app. */
+        @path
+        @segment("sites")
+        @key
+        siteName: string,
+      },
+      {
+        /** Name of the app. */
+        @path
+        @segment("recommendationHistory")
+        @key
+        recommendationHistory: string,
+      }
+    > {}
+
+@armResourceOperations
+interface SiteOps2Temporary
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the app. */
+        @path
+        @segment("sites")
+        @key
+        siteName: string,
+      },
+      {
+        /** Name of the app. */
+        @path
+        @segment("recommendations")
+        @key
+        recommendations: string,
+      }
+    > {}
+
+@armResourceOperations
 interface SiteOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -179,18 +227,10 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_ListHistoryForWebApp")
   @get
-  @action("recommendationHistory")
-  listHistoryForWebApp is SiteOps.ActionSync<
+  listHistoryForWebApp is SiteOpsTemporary.List<
     Site,
-    void,
-    ArmResponse<RecommendationCollection>,
+    Response = ArmResponse<RecommendationCollection>,
     Parameters = {
-      /**
-       * Name of the app.
-       */
-      @path
-      siteName: string;
-
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
        */
@@ -211,18 +251,10 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_ListRecommendedRulesForWebApp")
   @get
-  @action("recommendations")
-  listRecommendedRulesForWebApp is SiteOps.ActionSync<
+  listRecommendedRulesForWebApp is SiteOps2Temporary.List<
     Site,
-    void,
-    ArmResponse<RecommendationCollection>,
+    Response = ArmResponse<RecommendationCollection>,
     Parameters = {
-      /**
-       * Name of the app.
-       */
-      @path
-      siteName: string;
-
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
@@ -240,40 +272,54 @@ interface Sites {
   /**
    * Description for Disable all recommendations for an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_DisableAllForWebApp")
-  @action("recommendations/disable")
-  disableAllForWebApp is SiteOps.ActionSync<
-    Site,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * Name of the app.
-       */
-      @path
-      siteName: string;
-    }
-  >;
+  @post
+  disableAllForWebApp(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+
+    /** Name of the app. */
+    @path
+    @key
+    @segment("sites")
+    siteName: string,
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @key
+    @segment("recommendations")
+    disable: "disable",
+  ): NoContentResponse;
 
   /**
    * Description for Reset all recommendation opt-out settings for an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_ResetAllFiltersForWebApp")
-  @action("recommendations/reset")
-  resetAllFiltersForWebApp is SiteOps.ActionSync<
-    Site,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * Name of the app.
-       */
-      @path
-      siteName: string;
-    }
-  >;
+  @post
+  resetAllFiltersForWebApp(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+
+    /** Name of the app. */
+    @path
+    @key
+    @segment("sites")
+    siteName: string,
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @key
+    @segment("recommendations")
+    reset: "reset",
+  ): NoContentResponse;
 
   /**
    * Description for Analyze a custom hostname.

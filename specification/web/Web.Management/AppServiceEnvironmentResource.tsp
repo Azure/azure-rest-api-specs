@@ -23,6 +23,54 @@ model AppServiceEnvironmentResource
   >;
 }
 
+@armResourceOperations
+interface AppServiceEnvironmentOpsTemporary
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the app. */
+        @path
+        @segment("hostingEnvironments")
+        @key
+        hostingEnvironmentName: string,
+      },
+      {
+        /** Name of the app. */
+        @path
+        @segment("recommendations")
+        @key
+        recommendations: string,
+      }
+    > {}
+
+@armResourceOperations
+interface AppServiceEnvironmentOps2Temporary
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the app. */
+        @path
+        @segment("hostingEnvironments")
+        @key
+        hostingEnvironmentName: string,
+      },
+      {
+        /** Name of the app. */
+        @path
+        @segment("recommendationHistory")
+        @key
+        recommendationHistory: string,
+      }
+    > {}
+
 alias DiagnosticsParameters = {
   ...ResourceInstanceParameters<AppServiceEnvironmentResource>;
 
@@ -361,19 +409,11 @@ interface AppServiceEnvironmentResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_ListHistoryForHostingEnvironment")
   @get
-  @action("recommendationHistory")
   @list
-  listHistoryForHostingEnvironment is ArmResourceActionSync<
+  listHistoryForHostingEnvironment is AppServiceEnvironmentOps2Temporary.List<
     AppServiceEnvironmentResource,
-    void,
-    ArmResponse<RecommendationCollection>,
+    Response = ArmResponse<RecommendationCollection>,
     Parameters = {
-      /**
-       * Name of the hosting environment.
-       */
-      @path
-      hostingEnvironmentName: string;
-
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
        */
@@ -394,19 +434,11 @@ interface AppServiceEnvironmentResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_ListRecommendedRulesForHostingEnvironment")
   @get
-  @action("recommendations")
   @list
-  listRecommendedRulesForHostingEnvironment is ArmResourceActionSync<
+  listRecommendedRulesForHostingEnvironment is AppServiceEnvironmentOpsTemporary.List<
     AppServiceEnvironmentResource,
-    void,
-    ArmResponse<RecommendationCollection>,
+    Response = ArmResponse<RecommendationCollection>,
     Parameters = {
-      /**
-       * Name of the app.
-       */
-      @path
-      hostingEnvironmentName: string;
-
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
@@ -426,48 +458,62 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_DisableAllForHostingEnvironment")
-  @action("recommendations/disable")
-  disableAllForHostingEnvironment is ArmResourceActionSync<
-    AppServiceEnvironmentResource,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * Name of the app.
-       */
-      @query("environmentName")
-      environmentName: string;
+  disableAllForHostingEnvironment(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      @path
-      @segment("hostingEnvironments")
-      hostingEnvironmentName: string;
-    }
-  >;
+    /**
+     * Name of the app.
+     */
+    @query("environmentName")
+    environmentName: string,
+
+    /** Name of the app. */
+    @path
+    @key
+    @segment("hostingEnvironments")
+    hostingEnvironmentName: string,
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @key
+    @segment("recommendations")
+    disable: "disable",
+  ): NoContentResponse;
 
   /**
    * Description for Reset all recommendation opt-out settings for an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_ResetAllFiltersForHostingEnvironment")
-  @action("recommendations/reset")
-  resetAllFiltersForHostingEnvironment is ArmResourceActionSync<
-    AppServiceEnvironmentResource,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * Name of the app.
-       */
-      @query("environmentName")
-      environmentName: string;
+  @post
+  resetAllFiltersForHostingEnvironment(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      @path
-      @segment("hostingEnvironments")
-      hostingEnvironmentName: string;
-    }
-  >;
+    /**
+     * Name of the app.
+     */
+    @query("environmentName")
+    environmentName: string,
+
+    /** Name of the app. */
+    @path
+    @key
+    @segment("hostingEnvironments")
+    hostingEnvironmentName: string,
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @key
+    @segment("recommendations")
+    reset: "reset",
+  ): NoContentResponse;
 }
 
 @@doc(AppServiceEnvironmentResource.name,
