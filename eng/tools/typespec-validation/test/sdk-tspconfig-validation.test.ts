@@ -21,6 +21,7 @@ import {
   TspConfigGoMgmtModuleEqualStringSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigJavaAzEmitterOutputDirSubRule,
+  TspConfigJavaMgmtEmitterOutputDirSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
   TspConfigPythonDpEmitterOutputDirSubRule,
   TspConfigPythonMgmtEmitterOutputDirSubRule,
@@ -366,13 +367,23 @@ const goDpServiceDirTestCases = createEmitterOptionTestCases(
   [new TspConfigGoDpServiceDirMatchPatternSubRule()],
 );
 
-const javaManagementEmitterOutputDirTestCases = createEmitterOptionTestCases(
+const javaAzEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-java",
   "",
   "emitter-output-dir",
   "{output-dir}/{service-dir}/azure-aaa",
   "{output-dir}/{service-dir}/aaa",
   [new TspConfigJavaAzEmitterOutputDirSubRule()],
+);
+
+const javaMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-java",
+  managementTspconfigFolder,
+  "emitter-output-dir",
+  "{service-dir}/azure-resourcemanager-aaa-bbb",
+  "azure-aaa",
+  [new TspConfigJavaMgmtEmitterOutputDirSubRule()],
+  true,
 );
 
 const javaMgmtNamespaceTestCases = createEmitterOptionTestCases(
@@ -613,7 +624,8 @@ describe("tspconfig", function () {
     ...goDpEmitterOutputDirTestCases,
     ...goDpServiceDirTestCases,
     // java
-    ...javaManagementEmitterOutputDirTestCases,
+    ...javaAzEmitterOutputDirTestCases,
+    ...javaMgmtEmitterOutputDirTestCases,
     ...javaMgmtNamespaceTestCases,
     ...javaMgmtNamespaceExtendedTestCases,
     // python

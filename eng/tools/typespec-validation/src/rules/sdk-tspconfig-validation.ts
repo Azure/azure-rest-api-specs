@@ -269,7 +269,7 @@ export class TspConfigJavaAzEmitterOutputDirSubRule extends TspconfigEmitterOpti
   }
 }
 
-export class TspConfigJavaMgmtEmitterOutputDirFormatSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+export class TspConfigJavaMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-java",
@@ -278,8 +278,13 @@ export class TspConfigJavaMgmtEmitterOutputDirFormatSubRule extends TspconfigEmi
     );
   }
 
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+    if (option === undefined) {
+      // at present, we don't require service use emitter-output-dir
+      return { success: true };
+    }
+    return super.validate(config);
   }
 }
 
@@ -555,7 +560,7 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirSubRule(),
-  new TspConfigJavaMgmtEmitterOutputDirFormatSubRule(),
+  new TspConfigJavaMgmtEmitterOutputDirSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularEmitterOutputDirSubRule(),
