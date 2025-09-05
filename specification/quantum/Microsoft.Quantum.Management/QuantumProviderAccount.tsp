@@ -103,7 +103,7 @@ model ProviderAccountSubscription {
 
   /** Indicates whether this subscription is enabled for access to the ProviderAccount resources. */
   @added(Versions.v2025_02_15_preview)
-  enabled: boolean = true;
+  enabled?: boolean = true;
 
   /** Quota allocations for this subscription. */
   @added(Versions.v2025_02_15_preview)
