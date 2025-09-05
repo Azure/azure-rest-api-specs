@@ -2697,18 +2697,8 @@
           "readOnly": true
         },
         "sourceTargetMap": {
-          "type": "object",
-          "description": "The list of cloud endpoints to migrate.",
-          "properties": {
-            "value": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SourceTargetMap"
-              },
-              "readOnly": true,
-              "x-ms-identifiers": []
-            }
-          }
+          "$ref": "#/definitions/SourceTargetMapWrapper",
+          "description": "The list of sourceTargetMap."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3379,6 +3369,21 @@
         "sourceEndpoint",
         "targetEndpoint"
       ]
+    },
+    "SourceTargetMapWrapper": {
+      "type": "object",
+      "description": "The properties of SourceTargetMapWrapper.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of mappings between source and target entities.",
+          "items": {
+            "$ref": "#/definitions/SourceTargetMap"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
     },
     "StorageMover": {
       "type": "object",
