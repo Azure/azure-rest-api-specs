@@ -3,7 +3,7 @@
   "info": {
     "title": "DnsManagementClient",
     "description": "The DNS Management Client.",
-    "version": "2017-09-01"
+    "version": "2016-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -15,17 +15,6 @@
   "produces": [
     "application/json"
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}": {
       "patch": {
@@ -36,7 +25,7 @@
         "description": "Updates a record set within a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -62,7 +51,6 @@
             "enum": [
               "A",
               "AAAA",
-              "CAA",
               "CNAME",
               "MX",
               "NS",
@@ -94,10 +82,10 @@
             "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -113,11 +101,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Patch CAA recordset": {
-            "$ref": "./examples/PatchCaaRecordset.json"
-          }
         }
       },
       "put": {
@@ -128,7 +111,7 @@
         "description": "Creates or updates a record set within a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -154,7 +137,6 @@
             "enum": [
               "A",
               "AAAA",
-              "CAA",
               "CNAME",
               "MX",
               "NS",
@@ -194,10 +176,10 @@
             "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -219,11 +201,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create CAA recordset": {
-            "$ref": "./examples/CreateOrUpdateCaaRecordset.json"
-          }
         }
       },
       "delete": {
@@ -234,7 +211,7 @@
         "description": "Deletes a record set from a DNS zone. This operation cannot be undone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -260,7 +237,6 @@
             "enum": [
               "A",
               "AAAA",
-              "CAA",
               "CNAME",
               "MX",
               "NS",
@@ -283,10 +259,10 @@
             "description": "The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -302,11 +278,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete CAA recordset": {
-            "$ref": "./examples/DeleteCaaRecordset.json"
-          }
         }
       },
       "get": {
@@ -317,7 +288,7 @@
         "description": "Gets a record set.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -343,7 +314,6 @@
             "enum": [
               "A",
               "AAAA",
-              "CAA",
               "CNAME",
               "MX",
               "NS",
@@ -358,10 +328,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -377,11 +347,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get CAA recordset": {
-            "$ref": "./examples/GetCaaRecordset.json"
-          }
         }
       }
     },
@@ -394,7 +359,7 @@
         "description": "Lists the record sets of a specified type in a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -412,7 +377,6 @@
             "enum": [
               "A",
               "AAAA",
-              "CAA",
               "CNAME",
               "MX",
               "NS",
@@ -442,10 +406,10 @@
             "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -464,11 +428,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List CAA recordset": {
-            "$ref": "./examples/ListCaaRecordset.json"
-          }
         }
       }
     },
@@ -481,7 +440,7 @@
         "description": "Lists all record sets in a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -506,10 +465,10 @@
             "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -528,11 +487,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List recordsets by zone": {
-            "$ref": "./examples/ListRecordSetsByZone.json"
-          }
         }
       }
     },
@@ -545,7 +499,7 @@
         "description": "Creates or updates a DNS zone. Does not modify DNS records within the zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -580,10 +534,10 @@
             "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -605,11 +559,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create zone": {
-            "$ref": "./examples/CreateOrUpdateZone.json"
-          }
         }
       },
       "delete": {
@@ -620,7 +569,7 @@
         "description": "Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -638,10 +587,10 @@
             "description": "The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -652,7 +601,10 @@
             "description": "The DNS zone delete operation has been accepted and will complete asynchronously."
           },
           "200": {
-            "description": "The DNS zone has been deleted."
+            "description": "The DNS zone has been deleted.",
+            "schema": {
+              "$ref": "#/definitions/ZoneDeleteResult"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
@@ -661,12 +613,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Delete zone": {
-            "$ref": "./examples/DeleteZone.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -676,7 +623,7 @@
         "description": "Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "zoneName",
@@ -686,10 +633,10 @@
             "description": "The name of the DNS zone (without a terminating dot)."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -705,11 +652,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get zone": {
-            "$ref": "./examples/GetZone.json"
-          }
         }
       }
     },
@@ -722,7 +664,7 @@
         "description": "Lists the DNS zones within a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "$top",
@@ -733,10 +675,10 @@
             "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -755,11 +697,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List zones by resource group": {
-            "$ref": "./examples/ListZonesByResourceGroup.json"
-          }
         }
       }
     },
@@ -780,10 +717,10 @@
             "description": "The maximum number of DNS zones to return. If not specified, returns up to 100 zones."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -802,11 +739,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List zones by subscription": {
-            "$ref": "./examples/ListZonesBySubscription.json"
-          }
         }
       }
     }
@@ -946,24 +878,6 @@
       },
       "description": "An SOA record."
     },
-    "CaaRecord": {
-      "properties": {
-        "flags": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The flags for this CAA record as an integer between 0 and 255."
-        },
-        "tag": {
-          "type": "string",
-          "description": "The tag for this CAA record."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value for this CAA record."
-        }
-      },
-      "description": "A CAA record."
-    },
     "RecordSetProperties": {
       "properties": {
         "metadata": {
@@ -1047,14 +961,6 @@
           "$ref": "#/definitions/SoaRecord",
           "x-ms-client-name": "SoaRecord",
           "description": "The SOA record in the record set."
-        },
-        "caaRecords": {
-          "type": "array",
-          "x-ms-client-name": "CaaRecords",
-          "items": {
-            "$ref": "#/definitions/CaaRecord"
-          },
-          "description": "The list of CAA records in the record set."
         }
       },
       "description": "Represents the properties of the records in the record set."
@@ -1063,18 +969,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the record set.",
-          "readOnly": true
+          "description": "The ID of the record set."
         },
         "name": {
           "type": "string",
-          "description": "The name of the record set.",
-          "readOnly": true
+          "description": "The name of the record set."
         },
         "type": {
           "type": "string",
-          "description": "The type of the record set.",
-          "readOnly": true
+          "description": "The type of the record set."
         },
         "etag": {
           "type": "string",
@@ -1109,8 +1012,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The continuation token for the next page of results.",
-          "readOnly": true
+          "description": "The continuation token for the next page of results."
         }
       },
       "description": "The response to a record set List operation."
@@ -1120,8 +1022,7 @@
         "maxNumberOfRecordSets": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
-          "readOnly": true
+          "description": "The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored."
         },
         "maxNumberOfRecordsPerRecordSet": {
           "type": "integer",
@@ -1132,8 +1033,7 @@
         "numberOfRecordSets": {
           "type": "integer",
           "format": "int64",
-          "description": "The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
-          "readOnly": true
+          "description": "The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored."
         },
         "nameServers": {
           "type": "array",
@@ -1173,10 +1073,90 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes a DNS zone."
+    },
+    "ZoneDeleteResult": {
+      "properties": {
+        "azureAsyncOperation": {
+          "type": "string",
+          "description": "Users can perform a Get on Azure-AsyncOperation to get the status of their delete Zone operations."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": false
+          }
+        },
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": false
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The response to a Zone Delete operation."
     },
     "ZoneListResult": {
       "properties": {
@@ -1189,8 +1169,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The continuation token for the next page of results.",
-          "readOnly": true
+          "description": "The continuation token for the next page of results."
         }
       },
       "description": "The response to a Zone List or ListAll operation."
@@ -1202,8 +1181,7 @@
           "description": "Resource Id."
         }
       },
-      "x-ms-external": true,
-      "description": "A reference to a another resource"
+      "x-ms-external": true
     },
     "CloudError": {
       "type": "object",
