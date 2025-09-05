@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-09-01'
 input-file:
-- Microsoft.AppConfiguration/stable/2024-09-01/appconfiguration.json
+- stable/2024-09-01/appconfiguration.json
 ```
 
 ### Tag: package-2023-11-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2023-11-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-11-01'
 input-file:
-- Microsoft.AppConfiguration/stable/2023-11-01/appconfiguration.json
+- stable/2023-11-01/appconfiguration.json
 ```
 
 ### Tag: package-2023-10-01
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2023-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-10-01'
 input-file:
-- Microsoft.AppConfiguration/stable/2023-10-01/appconfiguration.json
+- stable/2023-10-01/appconfiguration.json
 ```
 
 ### Tag: package-2023-05-01-preview
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2023-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-05-01-preview'
 input-file:
-- Microsoft.AppConfiguration/preview/2023-05-01-preview/appconfiguration.json
+- preview/2023-05-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2022-11-01-preview
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2022-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
-- Microsoft.AppConfiguration/preview/2022-11-01-preview/appconfiguration.json
+- preview/2022-11-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2019-07
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-1-0` is specified on the command l
 
 ``` yaml $(tag) == 'package-1-0'
 input-file:
-- Microsoft.AppConfiguration/stable/1.0/appconfiguration.json
+- stable/1.0/appconfiguration.json
 ```
 
 ---
@@ -152,9 +152,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.AppConfiguration/stable/2023-11-01/appconfiguration.json
-  - $(this-folder)/Microsoft.AppConfiguration/stable/2023-10-01/appconfiguration.json
-  - $(this-folder)/Microsoft.AppConfiguration/stable/1.0/appconfiguration.json
+  - $(this-folder)/stable/2023-11-01/appconfiguration.json
+  - $(this-folder)/stable/2023-10-01/appconfiguration.json
+  - $(this-folder)/stable/1.0/appconfiguration.json
 
 ```
 
@@ -165,4 +165,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/file.json
 ```
-
