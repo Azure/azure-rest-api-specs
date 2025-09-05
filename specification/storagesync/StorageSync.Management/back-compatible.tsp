@@ -94,3 +94,7 @@ using Microsoft.StorageSync;
 @@clientName(CloudEndpoints.restoreheartbeat, "restoreHeartbeat", "!csharp");
 @@clientName(RegisteredServers.triggerRollover, "triggerRollover", "!csharp");
 @@clientName(ServerEndpoints.recallAction, "recallAction", "!csharp");
+
+@@clientLocation(locationOperationStatusGet, "MicrosoftStorageSync", "go");
+@@clientName(CloudEndpoints.restoreheartbeat, "restoreheartbeat", "go");
+@@alternateType(CheckNameAvailabilityParameters.type, "string", "go");
