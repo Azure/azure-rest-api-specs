@@ -155,7 +155,7 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(SecretListResult, "SecretPropertiesListResult", "go");
 @@clientName(SecretRestoreParameters.secretBundleBackup, "SecretBackup", "go");
 @@clientName(SecretBundle.kid, "KID", "go");
-@@alternateType(SecretAttributes.recoveryLevel, "string", "go");
+@@alternateType(SecretAttributes.recoveryLevel, string, "go");
 
 // Rust configuration
 @@clientName(SecretProperties, "OmitSecretProperties", "rust");
