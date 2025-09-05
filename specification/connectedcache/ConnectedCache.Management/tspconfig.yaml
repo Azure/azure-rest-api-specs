@@ -11,10 +11,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ConnectedCache.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.ConnectedCache"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ConnectedCache"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-connectedcache"
     namespace: "azure.mgmt.connectedcache"
@@ -22,7 +22,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-connectedcache"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-connectedcache"
     namespace: "com.azure.resourcemanager.connectedcache"
     service-name: "Connected Cache"
     flavor: azure
