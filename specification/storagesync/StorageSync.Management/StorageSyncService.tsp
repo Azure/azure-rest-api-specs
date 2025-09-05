@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -164,6 +163,7 @@ interface StorageSyncServices {
   /**
    * Gets the private link resources that need to be created for a storage sync service.
    */
+  #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
   listByStorageSyncService is ArmResourceActionSync<
