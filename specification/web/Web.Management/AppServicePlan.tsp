@@ -64,6 +64,7 @@ interface AppServicePlans {
    * Description for Creates or updates an App Service Plan.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AppServicePlan,

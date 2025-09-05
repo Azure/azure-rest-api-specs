@@ -23,6 +23,35 @@ model VnetRoute is Azure.ResourceManager.ProxyResource<VnetRouteProperties> {
     NamePattern = ""
   >;
 }
+@armResourceOperations
+interface VnetRoutesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the App Service plan. */
+        @path
+        @segment("serverfarms")
+        @key
+        name: string,
+
+        /** Name of the Virtual Network. */
+        @path
+        @segment("virtualNetworkConnections")
+        @key
+        vnetName: string,
+      },
+      {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        @path
+        @segment("routes")
+        @key
+        routeName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface VnetRoutes {
@@ -75,9 +104,9 @@ interface VnetRoutes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServicePlans_ListRoutesForVnet")
-  listRoutesForVnet is ArmResourceListByParent<
+  listRoutesForVnet is VnetRoutesOps.ListSinglePage<
     VnetRoute,
-    Response = ArmResponse<Azure.Core.Page<VnetRoute>>
+    Response = ArmResponse<VnetRoute[]>
   >;
 }
 

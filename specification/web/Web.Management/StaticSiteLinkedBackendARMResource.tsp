@@ -14,6 +14,7 @@ namespace Microsoft.Web;
 /**
  * Static Site Linked Backend ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(StaticSiteARMResource)
 model StaticSiteLinkedBackendARMResource
   is Azure.ResourceManager.ProxyResource<StaticSiteLinkedBackendARMResourceProperties> {
@@ -25,6 +26,7 @@ model StaticSiteLinkedBackendARMResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteLinkedBackendARMResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -49,6 +51,7 @@ interface StaticSiteLinkedBackendARMResourceOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteLinkedBackendARMResources {
   /**
@@ -101,6 +104,7 @@ interface StaticSiteLinkedBackendARMResources {
   /**
    * Validates that a backend can be linked to a static site
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_ValidateBackend")
   @action("validate")
@@ -110,6 +114,7 @@ interface StaticSiteLinkedBackendARMResources {
     NoContentResponse
   >;
 }
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteLinkedBackendARMResourceOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -140,6 +145,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroupOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
@@ -192,6 +198,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Validates that a backend can be linked to a static site build
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_ValidateBackendForBuild")
   @action("validate")

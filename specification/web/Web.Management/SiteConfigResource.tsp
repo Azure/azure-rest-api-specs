@@ -321,6 +321,7 @@ interface ListConfigurationsSlotOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**

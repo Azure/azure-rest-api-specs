@@ -16,6 +16,7 @@ namespace Microsoft.Web;
 /**
  * Description for Validate whether a resource can be moved.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Validate whether a resource can be moved.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
 @post
@@ -33,6 +34,7 @@ op validateMove(
 /**
  * Description for Validate if a resource can be created.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Validate if a resource can be created.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate")
 @post
@@ -51,6 +53,7 @@ op validate(
 /**
  * Description for Gets list of available geo regions plus ministamps
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Gets list of available geo regions plus ministamps")
 @autoRoute
 @get
@@ -64,6 +67,7 @@ op getSubscriptionDeploymentLocations is ArmProviderActionSync<
 /**
  * Description for get a list of available ASE regions and its supported Skus.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Get a list of available ASE regions and its supported Skus.")
 @autoRoute
 @get
@@ -78,6 +82,7 @@ op listAseRegions is ArmProviderActionSync<
 /**
  * Description for Gets a list of meters for a given location.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @summary("Gets a list of meters for a given location.")
 @autoRoute
@@ -105,6 +110,7 @@ op listBillingMeters is ArmProviderActionSync<
 /**
  * Description for Check if a resource name is available.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Check if a resource name is available.")
 @autoRoute
 @action("checknameavailability")
@@ -118,6 +124,7 @@ op checkNameAvailability is ArmProviderActionSync<
 /**
  * Get custom hostnames under this subscription
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Get custom hostnames under this subscription")
 @autoRoute
 @get
@@ -138,6 +145,7 @@ op listCustomHostNameSites is ArmProviderActionSync<
 /**
  * Description for Get a list of available geographical regions.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Get a list of available geographical regions.")
 @autoRoute
 @get
@@ -176,6 +184,7 @@ op listGeoRegions is ArmProviderActionSync<
 /**
  * Description for List all apps that are assigned to a hostname.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("List all apps that are assigned to a hostname.")
 @autoRoute
 @action("listSitesAssignedToHostName")
@@ -190,6 +199,7 @@ op listSiteIdentifiersAssignedToHostName is ArmProviderActionSync<
 /**
  * Check if a resource name is available for DNL sites.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Check if a resource name is available for DNL sites.")
 @autoRoute
 @action("checknameavailability")
@@ -203,6 +213,7 @@ op regionalCheckNameAvailability is ArmProviderActionSync<
 /**
  * Description for List all premier add-on offers.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("List all premier add-on offers.")
 @autoRoute
 @get
@@ -217,6 +228,7 @@ op listPremierAddOnOffers is ArmProviderActionSync<
 /**
  * Description for List all SKUs.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("List all SKUs.")
 @autoRoute
 @get
@@ -230,6 +242,7 @@ op listSkus is ArmProviderActionSync<
 /**
  * Description for Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.")
 @autoRoute
 op verifyHostingEnvironmentVnet is ArmProviderActionSync<
@@ -242,6 +255,7 @@ op verifyHostingEnvironmentVnet is ArmProviderActionSync<
 /**
  * Description for Move resources between resource groups.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 @summary("Move resources between resource groups.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
 @post
@@ -263,6 +277,7 @@ interface GlobalOperationGroup {
    * Description for Gets an operation in a subscription and given region
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   @summary("Gets an operation in a subscription and given region")
   @operationId("Global_GetSubscriptionOperationWithAsyncResponse")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/operations/{operationId}")
@@ -492,10 +507,12 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
    * Description for List all ResourceHealthMetadata for all sites in the resource group in the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   @summary("List all ResourceHealthMetadata for all sites in the resource group in the subscription.")
   @operationId("ResourceHealthMetadata_ListByResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/resourceHealthMetadata")
   @get
+  @list
   listByResourceGroup(
     ...ApiVersionParameter,
     ...ResourceGroupParameter,

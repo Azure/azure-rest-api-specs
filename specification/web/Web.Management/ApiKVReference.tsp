@@ -14,6 +14,7 @@ namespace Microsoft.Web;
 /**
  * Description of site key vault references.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(Site)
 model ApiKVReference
   is Azure.ResourceManager.ProxyResource<ApiKVReferenceProperties> {
@@ -25,6 +26,7 @@ model ApiKVReference
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface ApiKVReferenceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<

@@ -11,6 +11,7 @@ using Azure.Core;
 
 namespace Microsoft.Web;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @mediaTypeHint("application/json")
 scalar stringApplicationJson extends string;
 
@@ -1924,6 +1925,7 @@ model DefaultErrorResponseErrorDetailsItem {
 /**
  * ARM resource for a app service environment.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AppServiceEnvironmentPatchResource extends ProxyOnlyResource {
   /**
@@ -2037,6 +2039,7 @@ model VirtualIPMapping {
   /**
    * Virtual IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   virtualIP?: string;
 
   /**
@@ -2406,6 +2409,7 @@ model HostNameSslState {
   /**
    * Virtual IP address assigned to the hostname if IP based SSL is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   virtualIP?: string;
 
   /**
@@ -2572,6 +2576,7 @@ model SiteConfig {
   /**
    * If using user managed identity, the user managed identity ClientId
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   acrUserManagedIdentityID?: string;
 
   /**
@@ -3093,6 +3098,7 @@ model AutoHealTriggers {
   /**
    * A rule based on private bytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   privateBytesInKB?: int32;
 
   /**
@@ -3555,6 +3561,7 @@ model FunctionsScaleAndConcurrency {
   /**
    * Set the amount of memory allocated to each instance of the function app in MB. CPU and network bandwidth are allocated proportionally.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   instanceMemoryMB?: int32;
 
   /**
@@ -4340,6 +4347,7 @@ model PrivateEndpointConnectionCollection
 /**
  * RemotePrivateEndpointConnectionARMResource resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model RemotePrivateEndpointConnectionARMResourceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -4666,6 +4674,7 @@ model LocalizableString {
 /**
  * ARM resource for a app service plan.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AppServicePlanPatchResource extends ProxyOnlyResource {
   /**
@@ -4895,9 +4904,11 @@ model HybridConnectionKeyProperties {
  * Collection of resources.
  */
 model ResourceCollection {
+  /** Collection of resources. */
   @TypeSpec.pageItems
   value: string[];
 
+  /** Link to next page of resources. */
   @TypeSpec.nextLink
   nextLink?: string;
 }
@@ -5156,6 +5167,7 @@ model CertificateProperties {
 /**
  * ARM resource for a certificate.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CertificatePatchResource extends ProxyOnlyResource {
   /**
@@ -5498,6 +5510,7 @@ model DataTableResponseObject {
   /**
    * Raw row values
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   rows?: string[][];
 }
 
@@ -5580,8 +5593,9 @@ model KeyValuePairStringObject {
   /**
    * Any object
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  value?: Record<unknown>;
+  value?: unknown;
 }
 
 /**
@@ -5779,7 +5793,8 @@ model DetectorAbnormalTimePeriod {
   /**
    * Downtime metadata
    */
-  metaData?: NameValuePair[][];
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  metaData?: NameValuePair[];
 
   /**
    * Represents the type of the Detector
@@ -5824,12 +5839,14 @@ model Solution {
   /**
    * Solution Data.
    */
-  data?: NameValuePair[][];
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  data?: NameValuePair[];
 
   /**
    * Solution Metadata.
    */
-  metadata?: NameValuePair[][];
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  metadata?: NameValuePair[];
 }
 
 /**
@@ -5855,7 +5872,8 @@ model AnalysisData {
   /**
    * Additional Source Data
    */
-  data?: NameValuePair[][];
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  data?: NameValuePair[];
 
   /**
    * Detector Meta Data
@@ -6054,7 +6072,8 @@ model DiagnosticDetectorResponseProperties {
   /**
    * Additional Data that detector wants to send.
    */
-  data?: NameValuePair[][];
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  data?: NameValuePair[];
 
   /**
    * Meta Data
@@ -6151,6 +6170,7 @@ model KubeEnvironmentProperties {
   containerAppsConfiguration?: ContainerAppsConfiguration;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read, Lifecycle.Create)
   aksResourceID?: string;
 }
@@ -6214,6 +6234,7 @@ model ContainerAppsConfiguration {
   /**
    * Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read, Lifecycle.Create)
   daprAIInstrumentationKey?: string;
 
@@ -6226,6 +6247,7 @@ model ContainerAppsConfiguration {
   /**
    * An IP address from the IP range defined by platformReservedCidr that will be reserved for the internal DNS server
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read, Lifecycle.Create)
   platformReservedDnsIP?: string;
 
@@ -6251,6 +6273,7 @@ model ContainerAppsConfiguration {
 /**
  * ARM resource for a KubeEnvironment when patching
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model KubeEnvironmentPatchResource extends ProxyOnlyResource {
   /**
@@ -6315,6 +6338,7 @@ model KubeEnvironmentPatchResourceProperties {
   containerAppsConfiguration?: ContainerAppsConfiguration;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read, Lifecycle.Create)
   aksResourceID?: string;
 }
@@ -7632,6 +7656,7 @@ model CustomHostnameSitesProperties {
  * Identifier resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IdentifierProperties {
   /**
    * String representation of the identity.
@@ -7767,6 +7792,7 @@ model AseRegionProperties {
   /**
    * Available OSs in region.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   availableOS?: string[];
 }
 
@@ -8727,6 +8753,7 @@ model StaticSiteDatabaseConnectionConfigurationFileOverview {
 /**
  * ARM resource for a static site when patching
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model StaticSitePatchResource extends ProxyOnlyResource {
   /**
@@ -8746,6 +8773,7 @@ model StaticSiteUserCollection is Azure.Core.Page<StaticSiteUserARMResource>;
  * Static Site User ARM resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model StaticSiteUserARMResource extends ProxyOnlyResource {
   /**
    * StaticSiteUserARMResource resource specific properties
@@ -8758,6 +8786,7 @@ model StaticSiteUserARMResource extends ProxyOnlyResource {
 /**
  * StaticSiteUserARMResource resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model StaticSiteUserARMResourceProperties {
   /**
    * The identity provider for the static site user.
@@ -8792,6 +8821,7 @@ model StaticSiteBuildCollection is Azure.Core.Page<StaticSiteBuildARMResource>;
  * StaticSiteBuildARMResource resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteBuildARMResourceProperties {
   /**
    * An identifier for the static site build.
@@ -8957,6 +8987,7 @@ model StaticSiteFunctionOverviewCollection
  * Static Site Function Overview ARM resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteFunctionOverviewARMResource extends ProxyOnlyResource {
   /**
    * StaticSiteFunctionOverviewARMResource resource specific properties
@@ -8969,6 +9000,7 @@ model StaticSiteFunctionOverviewARMResource extends ProxyOnlyResource {
 /**
  * StaticSiteFunctionOverviewARMResource resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteFunctionOverviewARMResourceProperties {
   /**
    * The name for the function
@@ -8993,6 +9025,7 @@ model StaticSiteUserProvidedFunctionAppsCollection
  * StaticSiteUserProvidedFunctionAppARMResource resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteUserProvidedFunctionAppARMResourceProperties {
   /**
    * The resource id of the function app registered with the static site
@@ -9016,6 +9049,7 @@ model StaticSiteUserProvidedFunctionAppARMResourceProperties {
  * Static site zip deployment ARM resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteZipDeploymentARMResource extends ProxyOnlyResource {
   /**
    * Core resource properties
@@ -9065,6 +9099,7 @@ model StaticSiteBasicAuthPropertiesCollection
  * StaticSiteBasicAuthPropertiesARMResource resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteBasicAuthPropertiesARMResourceProperties {
   /**
    * The password for basic auth.
@@ -9177,6 +9212,7 @@ model StaticSiteCustomDomainOverviewCollection
  * StaticSiteCustomDomainOverviewARMResource resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteCustomDomainOverviewARMResourceProperties {
   /**
    * The domain name for the static site custom domain.
@@ -9212,6 +9248,7 @@ model StaticSiteCustomDomainOverviewARMResourceProperties {
  * Static Site Custom Domain Request Properties ARM resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteCustomDomainRequestPropertiesARMResource
   extends ProxyOnlyResource {
   /**
@@ -9225,6 +9262,7 @@ model StaticSiteCustomDomainRequestPropertiesARMResource
 /**
  * StaticSiteCustomDomainRequestPropertiesARMResource resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteCustomDomainRequestPropertiesARMResourceProperties {
   /**
    * Validation method for adding a custom domain
@@ -9247,6 +9285,7 @@ model StringList extends ProxyOnlyResource {
  * Static Site Reset Properties ARM resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteResetPropertiesARMResource extends ProxyOnlyResource {
   /**
    * StaticSiteResetPropertiesARMResource resource specific properties
@@ -9259,6 +9298,7 @@ model StaticSiteResetPropertiesARMResource extends ProxyOnlyResource {
 /**
  * StaticSiteResetPropertiesARMResource resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteResetPropertiesARMResourceProperties {
   /**
    * The token which proves admin privileges to the repository.
@@ -9274,6 +9314,7 @@ model StaticSiteResetPropertiesARMResourceProperties {
 /**
  * StaticSiteLinkedBackendARMResource resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model StaticSiteLinkedBackendARMResourceProperties {
   /**
    * The resource id of the backend linked to the static site
@@ -9309,6 +9350,7 @@ model StaticSiteLinkedBackendsCollection
 /**
  * ARM resource for a site.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SitePatchResource extends ProxyOnlyResource {
   /**
@@ -9651,6 +9693,7 @@ model CustomHostnameAnalysisResultProperties {
   /**
    * Alternate CName records controller can see for this hostname.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   alternateCNameRecords?: string[];
 
   /**
@@ -9788,6 +9831,7 @@ model BackupItemProperties {
   /**
    * Id of the backup.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: int32;
 
@@ -9806,6 +9850,7 @@ model BackupItemProperties {
   /**
    * Name of this backup.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -10118,6 +10163,7 @@ model SiteAuthSettingsProperties {
    * This setting is optional. If not specified, "openid", "profile", and "email" are used as default scopes.
    * Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   googleOAuthScopes?: string[];
 
   /**
@@ -10144,6 +10190,7 @@ model SiteAuthSettingsProperties {
    * This setting is optional.
    * Facebook Login documentation: https://developers.facebook.com/docs/facebook-login
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   facebookOAuthScopes?: string[];
 
   /**
@@ -10168,6 +10215,7 @@ model SiteAuthSettingsProperties {
    * The OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
    * This setting is optional
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   gitHubOAuthScopes?: string[];
 
   /**
@@ -10215,6 +10263,7 @@ model SiteAuthSettingsProperties {
    * This setting is optional. If not specified, "wl.basic" is used as the default scope.
    * Microsoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   microsoftAccountOAuthScopes?: string[];
 
   /**
@@ -10457,6 +10506,7 @@ model AzureActiveDirectoryLogin {
   /**
    * <code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   disableWWWAuthenticate?: boolean;
 }
 
@@ -11052,12 +11102,14 @@ model AzureStoragePropertyDictionaryResource extends ProxyOnlyResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ApiKVReferenceCollection is Azure.Core.Page<ApiKVReference>;
 
 /**
  * ApiKVReference resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ApiKVReferenceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   reference?: string;
@@ -11356,16 +11408,19 @@ model ContinuousWebJobProperties {
   /**
    * Detailed status.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   detailed_status?: string;
 
   /**
    * Log URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   log_url?: string;
 
   /**
    * Run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   run_command?: string;
 
   /**
@@ -11376,11 +11431,13 @@ model ContinuousWebJobProperties {
   /**
    * Extra Info URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   extra_info_url?: string;
 
   /**
    * Job type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   web_job_type?: WebJobType;
 
   /**
@@ -11391,6 +11448,7 @@ model ContinuousWebJobProperties {
   /**
    * Using SDK?
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   using_sdk?: boolean;
 
   /**
@@ -11480,18 +11538,21 @@ model DeploymentProperties {
   /**
    * Author email.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   author_email?: string;
 
   /**
    * Start time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   start_time?: utcDateTime;
 
   /**
    * End time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   end_time?: utcDateTime;
 
   /**
@@ -11508,6 +11569,7 @@ model DeploymentProperties {
 /**
  * MSDeployStatus resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSDeployStatusProperties {
   /**
    * Username of deployer
@@ -11546,6 +11608,7 @@ model MSDeployStatusProperties {
  * MSDeploy ARM PUT information
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSDeploy extends ProxyOnlyResource {
   /**
    * Core resource properties
@@ -11558,6 +11621,7 @@ model MSDeploy extends ProxyOnlyResource {
 /**
  * MSDeploy ARM PUT core information
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSDeployCore {
   /**
    * Package URI
@@ -11604,6 +11668,7 @@ model MSDeployCore {
  * MSDeploy log
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSDeployLog extends ProxyOnlyResource {
   /**
    * MSDeployLog resource specific properties
@@ -11616,6 +11681,7 @@ model MSDeployLog extends ProxyOnlyResource {
 /**
  * MSDeployLog resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSDeployLogProperties {
   /**
    * List of log entry messages
@@ -11628,6 +11694,7 @@ model MSDeployLogProperties {
 /**
  * MSDeploy log entry
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSDeployLogEntry {
   /**
    * Timestamp of log entry
@@ -11662,31 +11729,37 @@ model FunctionEnvelopeProperties {
   /**
    * Function App ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   function_app_id?: string;
 
   /**
    * Script root path URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   script_root_path_href?: string;
 
   /**
    * Script URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   script_href?: string;
 
   /**
    * Config URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   config_href?: string;
 
   /**
    * Test data URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   test_data_href?: string;
 
   /**
    * Secrets file URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   secrets_file_href?: string;
 
   /**
@@ -11697,7 +11770,8 @@ model FunctionEnvelopeProperties {
   /**
    * Config information.
    */
-  config?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  config?: unknown;
 
   /**
    * File list.
@@ -11708,11 +11782,13 @@ model FunctionEnvelopeProperties {
   /**
    * Test data used when testing via the Azure Portal.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   test_data?: string;
 
   /**
    * The invocation URL
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   invoke_url_template?: string;
 
   /**
@@ -11753,6 +11829,7 @@ model FunctionSecrets {
   /**
    * Trigger URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   trigger_url?: string;
 }
 
@@ -11839,6 +11916,7 @@ model HostNameBindingProperties {
   /**
    * Virtual IP address assigned to the hostname if IP based SSL is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   virtualIP?: string;
 }
@@ -12016,6 +12094,7 @@ model ProcessInfoProperties {
   /**
    * Deployment name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   deployment_name?: string;
 
   /**
@@ -12031,16 +12110,19 @@ model ProcessInfoProperties {
   /**
    * Is profile running?
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   is_profile_running?: boolean;
 
   /**
    * Is the IIS Profile running?
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   is_iis_profile_running?: boolean;
 
   /**
    * IIS Profile timeout (seconds).
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   iis_profile_timeout_in_seconds?: float64;
 
   /**
@@ -12061,6 +12143,7 @@ model ProcessInfoProperties {
   /**
    * List of open files.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   open_file_handles?: string[];
 
   /**
@@ -12071,119 +12154,142 @@ model ProcessInfoProperties {
   /**
    * File name of this process.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   file_name?: string;
 
   /**
    * Command line.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   command_line?: string;
 
   /**
    * User name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   user_name?: string;
 
   /**
    * Handle count.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   handle_count?: int32;
 
   /**
    * Module count.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   module_count?: int32;
 
   /**
    * Thread count.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   thread_count?: int32;
 
   /**
    * Start time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   start_time?: utcDateTime;
 
   /**
    * Total CPU time.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   total_cpu_time?: string;
 
   /**
    * User CPU time.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   user_cpu_time?: string;
 
   /**
    * Privileged CPU time.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   privileged_cpu_time?: string;
 
   /**
    * Working set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   working_set?: int64;
 
   /**
    * Peak working set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   peak_working_set?: int64;
 
   /**
    * Private memory size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   private_memory?: int64;
 
   /**
    * Virtual memory size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   virtual_memory?: int64;
 
   /**
    * Peak virtual memory usage.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   peak_virtual_memory?: int64;
 
   /**
    * Paged system memory.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   paged_system_memory?: int64;
 
   /**
    * Non-paged system memory.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   non_paged_system_memory?: int64;
 
   /**
    * Paged memory.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   paged_memory?: int64;
 
   /**
    * Peak paged memory.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   peak_paged_memory?: int64;
 
   /**
    * Time stamp.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   time_stamp?: utcDateTime;
 
   /**
    * List of environment variables.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   environment_variables?: Record<string>;
 
   /**
    * Is this the SCM site?
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   is_scm_site?: boolean;
 
   /**
    * Is this a Web Job?
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   is_webjob?: boolean;
 
   /**
@@ -12228,37 +12334,44 @@ model ProcessThreadInfoProperties {
   /**
    * Start address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   start_address?: string;
 
   /**
    * Current thread priority.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   current_priority?: int32;
 
   /**
    * Thread priority level.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   priority_level?: string;
 
   /**
    * Base priority.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   base_priority?: int32;
 
   /**
    * Start time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   start_time?: utcDateTime;
 
   /**
    * Total processor time.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   total_processor_time?: string;
 
   /**
    * User processor time.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   user_processor_time?: string;
 
   /**
@@ -12269,6 +12382,7 @@ model ProcessThreadInfoProperties {
   /**
    * Wait reason.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   wait_reason?: string;
 }
 
@@ -12280,11 +12394,13 @@ model ProcessModuleInfoProperties {
   /**
    * Base address. Used as module identifier in ARM resource URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   base_address?: string;
 
   /**
    * File name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   file_name?: string;
 
   /**
@@ -12295,21 +12411,25 @@ model ProcessModuleInfoProperties {
   /**
    * File path.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   file_path?: string;
 
   /**
    * Module memory size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   module_memory_size?: int32;
 
   /**
    * File version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   file_version?: string;
 
   /**
    * File description.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   file_description?: string;
 
   /**
@@ -12320,11 +12440,13 @@ model ProcessModuleInfoProperties {
   /**
    * Product version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   product_version?: string;
 
   /**
    * Is debug?
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   is_debug?: boolean;
 
   /**
@@ -12722,6 +12844,7 @@ model PremierAddOnProperties {
 /**
  * ARM resource for a PremierAddOn.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PremierAddOnPatchResource extends ProxyOnlyResource {
   /**
@@ -12902,6 +13025,7 @@ model DeletedAppRestoreRequestProperties {
   /**
    * If true, the snapshot is retrieved from DRSecondary endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   useDRSecondary?: boolean;
 }
 
@@ -12952,6 +13076,7 @@ model SnapshotRestoreRequestProperties {
   /**
    * If true, the snapshot is retrieved from DRSecondary endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   useDRSecondary?: boolean;
 }
 
@@ -13039,6 +13164,7 @@ model SiteContainerProperties {
   /**
    * List of volume mounts
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   volumeMounts?: VolumeMount[];
 
   /**
@@ -13100,6 +13226,7 @@ model SiteExtensionInfoProperties {
   /**
    * Site extension ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   extension_id?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -13108,6 +13235,7 @@ model SiteExtensionInfoProperties {
   /**
    * Site extension type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   extension_type?: SiteExtensionType;
 
   /**
@@ -13128,26 +13256,31 @@ model SiteExtensionInfoProperties {
   /**
    * Extension URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   extension_url?: string;
 
   /**
    * Project URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   project_url?: string;
 
   /**
    * Icon URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   icon_url?: string;
 
   /**
    * License URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   license_url?: string;
 
   /**
    * Feed URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   feed_url?: string;
 
   /**
@@ -13158,33 +13291,39 @@ model SiteExtensionInfoProperties {
   /**
    * Installer command line parameters.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   installer_command_line_params?: string;
 
   /**
    * Published timestamp.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   published_date_time?: utcDateTime;
 
   /**
    * Count of downloads.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   download_count?: int32;
 
   /**
    * <code>true</code> if the local version is the latest version; <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   local_is_latest_version?: boolean;
 
   /**
    * Local path.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   local_path?: string;
 
   /**
    * Installed timestamp.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   installed_date_time?: utcDateTime;
 
   /**
@@ -13394,21 +13533,25 @@ model TriggeredWebJobProperties {
   /**
    * Latest job run information.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   latest_run?: TriggeredJobRun;
 
   /**
    * History URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   history_url?: string;
 
   /**
    * Scheduler Logs URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   scheduler_logs_url?: string;
 
   /**
    * Run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   run_command?: string;
 
   /**
@@ -13419,11 +13562,13 @@ model TriggeredWebJobProperties {
   /**
    * Extra Info URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   extra_info_url?: string;
 
   /**
    * Job type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   web_job_type?: WebJobType;
 
   /**
@@ -13434,6 +13579,7 @@ model TriggeredWebJobProperties {
   /**
    * Using SDK?
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   using_sdk?: boolean;
 
   /**
@@ -13460,11 +13606,13 @@ model TriggeredJobRun {
   /**
    * Job ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   web_job_id?: string;
 
   /**
    * Job name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   web_job_name?: string;
 
   /**
@@ -13476,12 +13624,14 @@ model TriggeredJobRun {
    * Start time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   start_time?: utcDateTime;
 
   /**
    * End time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   end_time?: utcDateTime;
 
   /**
@@ -13492,11 +13642,13 @@ model TriggeredJobRun {
   /**
    * Output URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   output_url?: string;
 
   /**
    * Error URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   error_url?: string;
 
   /**
@@ -13507,6 +13659,7 @@ model TriggeredJobRun {
   /**
    * Job name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   job_name?: string;
 
   /**
@@ -13545,6 +13698,7 @@ model WebJobProperties {
   /**
    * Run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   run_command?: string;
 
   /**
@@ -13555,11 +13709,13 @@ model WebJobProperties {
   /**
    * Extra Info URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   extra_info_url?: string;
 
   /**
    * Job type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   web_job_type?: WebJobType;
 
   /**
@@ -13570,6 +13726,7 @@ model WebJobProperties {
   /**
    * Using SDK?
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   using_sdk?: boolean;
 
   /**
@@ -13586,13 +13743,14 @@ model WorkflowArtifacts {
   /**
    * Application settings of the workflow.
    */
-  appSettings?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  appSettings?: unknown;
 
   /**
    * Files of the app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  files?: Record<Record<unknown>>;
+  files?: Record<unknown>;
 
   /**
    * Files of the app to delete.
@@ -13719,8 +13877,9 @@ model WorkflowRunProperties {
   /**
    * Gets the error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  error?: Record<unknown>;
+  error?: unknown;
 
   /**
    * Gets the correlation id.
@@ -13804,8 +13963,10 @@ model WorkflowRunTrigger {
   /**
    * Gets the inputs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  inputs?: Record<unknown>;
+  inputs?: unknown;
 
   /**
    * Gets the link to inputs.
@@ -13816,8 +13977,9 @@ model WorkflowRunTrigger {
   /**
    * Gets the outputs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  outputs?: Record<unknown>;
+  outputs?: unknown;
 
   /**
    * Gets the link to outputs.
@@ -13872,14 +14034,16 @@ model WorkflowRunTrigger {
   /**
    * Gets the error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  error?: Record<unknown>;
+  error?: unknown;
 
   /**
    * Gets the tracked properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  trackedProperties?: Record<unknown>;
+  trackedProperties?: unknown;
 }
 
 /**
@@ -13912,8 +14076,9 @@ model ContentLink {
   /**
    * The metadata.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  metadata?: Record<unknown>;
+  metadata?: unknown;
 }
 
 /**
@@ -13939,8 +14104,9 @@ model WorkflowOutputParameter extends WorkflowParameter {
   /**
    * Gets the error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  error?: Record<unknown>;
+  error?: unknown;
 }
 
 /**
@@ -13955,12 +14121,14 @@ model WorkflowParameter {
   /**
    * The value.
    */
-  value?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  value?: unknown;
 
   /**
    * The metadata.
    */
-  metadata?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  metadata?: unknown;
 
   /**
    * The description.
@@ -14013,8 +14181,9 @@ model WorkflowRunActionProperties {
   /**
    * Gets the error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  error?: Record<unknown>;
+  error?: unknown;
 
   /**
    * Gets the tracking id.
@@ -14042,8 +14211,9 @@ model WorkflowRunActionProperties {
   /**
    * Gets the tracked properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  trackedProperties?: Record<unknown>;
+  trackedProperties?: unknown;
 
   /**
    * Gets the retry histories.
@@ -14143,6 +14313,7 @@ model Expression {
   /**
    * Anything
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: unknown;
 
   /**
@@ -14232,8 +14403,9 @@ model OperationResult extends OperationResultProperties {
   /**
    * Gets the inputs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  inputs?: Record<unknown>;
+  inputs?: unknown;
 
   /**
    * Gets the link to inputs.
@@ -14244,8 +14416,9 @@ model OperationResult extends OperationResultProperties {
   /**
    * Gets the outputs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  outputs?: Record<unknown>;
+  outputs?: unknown;
 
   /**
    * Gets the link to outputs.
@@ -14256,8 +14429,9 @@ model OperationResult extends OperationResultProperties {
   /**
    * Gets the tracked properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  trackedProperties?: Record<unknown>;
+  trackedProperties?: unknown;
 
   /**
    * Gets the retry histories.
@@ -14303,6 +14477,7 @@ model OperationResultProperties {
   /**
    * Anything
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: unknown;
 }
 
@@ -14375,7 +14550,8 @@ model Request {
   /**
    * A list of all the headers attached to the request.
    */
-  headers?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  headers?: unknown;
 
   /**
    * The destination for the request.
@@ -14395,7 +14571,8 @@ model Response {
   /**
    * A list of all the headers attached to the response.
    */
-  headers?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  headers?: unknown;
 
   /**
    * The status code of the response.
@@ -14593,8 +14770,9 @@ model WorkflowTriggerHistoryProperties {
   /**
    * Gets the error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  error?: Record<unknown>;
+  error?: unknown;
 
   /**
    * Gets the tracking id.
@@ -14678,6 +14856,7 @@ model WorkflowTriggerListCallbackUrlQueries {
   /**
    * The api version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `api-version`?: string;
 
   /**
@@ -14804,7 +14983,8 @@ model WorkflowProperties {
   /**
    * The definition.
    */
-  definition?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  definition?: unknown;
 
   /**
    * The parameters.
@@ -15033,7 +15213,8 @@ model WorkflowVersionProperties {
   /**
    * The definition.
    */
-  definition?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  definition?: unknown;
 
   /**
    * The parameters.

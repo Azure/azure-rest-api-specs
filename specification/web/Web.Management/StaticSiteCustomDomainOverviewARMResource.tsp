@@ -14,6 +14,7 @@ namespace Microsoft.Web;
 /**
  * Static Site Custom Domain Overview ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(StaticSiteARMResource)
 model StaticSiteCustomDomainOverviewARMResource
   is Azure.ResourceManager.ProxyResource<StaticSiteCustomDomainOverviewARMResourceProperties> {
@@ -25,6 +26,7 @@ model StaticSiteCustomDomainOverviewARMResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteCustomDomainOverviewARMResources {
   /**

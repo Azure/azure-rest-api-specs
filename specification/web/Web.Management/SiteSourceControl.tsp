@@ -62,6 +62,8 @@ interface SiteSourceControls {
    * Description for Gets the source control configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @operationId("WebApps_GetSourceControlSlot")
   getSourceControlSlot is SiteSourceControlOps.Read<
     SiteSourceControl,
@@ -95,6 +97,7 @@ interface SiteSourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @operationId("WebApps_UpdateSourceControlSlot")
   @patch(#{ implicitOptionality: false })
   updateSourceControlSlot is SiteSourceControlOps.CustomPatchSync<
@@ -111,6 +114,7 @@ interface SiteSourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @operationId("WebApps_DeleteSourceControlSlot")
   deleteSourceControlSlot is SiteSourceControlOps.DeleteSync<
     SiteSourceControl,
@@ -152,6 +156,8 @@ interface SiteSourceControlOperationGroup {
    * Description for Gets the source control configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @operationId("WebApps_GetSourceControl")
   getSourceControl is SiteSourceControlOperationGroupOps.Read<
     SiteSourceControl,
@@ -184,6 +190,7 @@ interface SiteSourceControlOperationGroup {
    * Description for Updates the source control configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("WebApps_UpdateSourceControl")
   @patch(#{ implicitOptionality: false })
@@ -200,6 +207,7 @@ interface SiteSourceControlOperationGroup {
    * Description for Deletes the source control configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_DeleteSourceControl")
   deleteSourceControl is SiteSourceControlOperationGroupOps.DeleteSync<

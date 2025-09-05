@@ -140,14 +140,14 @@ interface FtpAllowedSlotOps
         @key
         name: string,
 
-        /**  */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("slots")
         @key
         slot: string,
       },
       {
-        /** undefined */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("basicPublishingCredentialsPolicies")
         @key

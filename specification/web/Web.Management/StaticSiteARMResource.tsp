@@ -11,8 +11,8 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Web;
 /**
- * Static Site ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model StaticSiteARMResource
   is Azure.ResourceManager.TrackedResource<StaticSite> {
   ...ResourceNameParameter<
@@ -35,6 +35,7 @@ model StaticSiteARMResource
   identity?: ManagedServiceIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteARMResources {
   /**
@@ -66,6 +67,7 @@ interface StaticSiteARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @operationId("StaticSites_UpdateStaticSite")
   @patch(#{ implicitOptionality: false })
   updateStaticSite is ArmCustomPatchSync<
@@ -158,6 +160,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Updates a user entry with the listed roles
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_UpdateStaticSiteUser")
   @patch(#{ implicitOptionality: true })
@@ -185,6 +188,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Creates or updates the app settings of a static site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_CreateOrUpdateStaticSiteAppSettings")
   @put
@@ -198,6 +202,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Creates or updates the function app settings of a static site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_CreateOrUpdateStaticSiteFunctionAppSettings")
   @put

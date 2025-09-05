@@ -72,6 +72,7 @@ interface ProcessInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("WebApps_DeleteInstanceProcess")
   deleteInstanceProcess is ProcessInfoOps.DeleteSync<
     ProcessInfo,
@@ -156,6 +157,7 @@ interface ProcessInfoOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("WebApps_DeleteProcess")
   deleteProcess is ProcessInfoOperationGroupOps.DeleteSync<
     ProcessInfo,
@@ -251,6 +253,7 @@ interface InstanceProcessSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("WebApps_DeleteInstanceProcessSlot")
   deleteInstanceProcessSlot is InstanceProcessSlotOps.DeleteSync<
     ProcessInfo,
@@ -342,6 +345,7 @@ interface ProcessSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("WebApps_DeleteProcessSlot")
   deleteProcessSlot is ProcessSlotOperationGroupOps.DeleteSync<
     ProcessInfo,

@@ -14,6 +14,7 @@ namespace Microsoft.Web;
 /**
  * Static site basic auth properties ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(StaticSiteARMResource)
 model StaticSiteBasicAuthPropertiesARMResource
   is Azure.ResourceManager.ProxyResource<StaticSiteBasicAuthPropertiesARMResourceProperties> {
@@ -26,6 +27,8 @@ model StaticSiteBasicAuthPropertiesARMResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteBasicAuthPropertiesARMResources {
   /**

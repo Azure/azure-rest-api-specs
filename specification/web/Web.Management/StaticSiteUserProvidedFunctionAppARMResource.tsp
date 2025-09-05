@@ -14,6 +14,7 @@ namespace Microsoft.Web;
 /**
  * Static Site User Provided Function App ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(StaticSiteBuildARMResource)
 model StaticSiteUserProvidedFunctionAppARMResource
   is Azure.ResourceManager.ProxyResource<StaticSiteUserProvidedFunctionAppARMResourceProperties> {
@@ -25,6 +26,7 @@ model StaticSiteUserProvidedFunctionAppARMResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -55,6 +57,7 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResources {
   /**
@@ -105,6 +108,7 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
     Response = ArmResponse<StaticSiteUserProvidedFunctionAppsCollection>
   >;
 }
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -129,6 +133,7 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
   /**

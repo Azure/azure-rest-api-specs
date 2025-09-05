@@ -39,7 +39,7 @@ interface WebSiteInstanceStatusOps
         name: string,
       },
       {
-        /**  */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("instances")
         @key
@@ -88,7 +88,7 @@ interface WebSiteInstanceStatusOperationGroupOps
         slot: string,
       },
       {
-        /**  */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("instances")
         @key

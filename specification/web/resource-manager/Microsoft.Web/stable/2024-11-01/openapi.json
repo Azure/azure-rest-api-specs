@@ -3056,12 +3056,6 @@
             "schema": {
               "$ref": "#/definitions/StampCapacityCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
@@ -5996,6 +5990,9 @@
           "List ResourceHealthMetadata for a resource group": {
             "$ref": "./examples/ListResourceHealthMetadataByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6847,7 +6844,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedVnetInfoResource"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetInfoResource"
+              }
             }
           },
           "default": {
@@ -6856,9 +6856,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7067,7 +7064,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedVnetRoute"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetRoute"
+              }
             }
           },
           "default": {
@@ -7076,9 +7076,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -14557,6 +14554,7 @@
           {
             "name": "triggerName",
             "in": "path",
+            "description": "The workflow trigger name.",
             "required": true,
             "type": "string"
           }
@@ -14616,6 +14614,7 @@
           {
             "name": "triggerName",
             "in": "path",
+            "description": "The workflow trigger name.",
             "required": true,
             "type": "string"
           },
@@ -14693,12 +14692,14 @@
           {
             "name": "triggerName",
             "in": "path",
+            "description": "The workflow trigger name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "historyName",
             "in": "path",
+            "description": "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.",
             "required": true,
             "type": "string"
           }
@@ -14758,12 +14759,14 @@
           {
             "name": "triggerName",
             "in": "path",
+            "description": "The workflow trigger name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "historyName",
             "in": "path",
+            "description": "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.",
             "required": true,
             "type": "string"
           }
@@ -14835,6 +14838,7 @@
           {
             "name": "triggerName",
             "in": "path",
+            "description": "The workflow trigger name.",
             "required": true,
             "type": "string"
           }
@@ -14894,6 +14898,7 @@
           {
             "name": "triggerName",
             "in": "path",
+            "description": "The workflow trigger name.",
             "required": true,
             "type": "string"
           }
@@ -14953,6 +14958,7 @@
           {
             "name": "triggerName",
             "in": "path",
+            "description": "The workflow trigger name.",
             "required": true,
             "type": "string"
           }
@@ -15092,6 +15098,7 @@
           {
             "name": "versionId",
             "in": "path",
+            "description": "The workflow versionId.",
             "required": true,
             "type": "string"
           }
@@ -27505,6 +27512,7 @@
           {
             "name": "operationId",
             "in": "path",
+            "description": "GUID of the operation.",
             "required": true,
             "type": "string"
           }
@@ -31562,7 +31570,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedVnetInfoResource"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetInfoResource"
+              }
             }
           },
           "default": {
@@ -31571,9 +31582,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -33443,7 +33451,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedVnetInfoResource"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetInfoResource"
+              }
             }
           },
           "default": {
@@ -33452,9 +33463,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -38666,11 +38674,11 @@
           "type": "array",
           "description": "Additional Source Data",
           "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NameValuePair"
-            }
-          }
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "detectorMetaData": {
           "$ref": "#/definitions/ResponseMetaData",
@@ -41454,9 +41462,7 @@
           "readOnly": true
         },
         "metadata": {
-          "type": "object",
           "description": "The metadata.",
-          "additionalProperties": {},
           "readOnly": true
         }
       }
@@ -42262,7 +42268,8 @@
             "items": {
               "type": "string"
             }
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -42884,11 +42891,11 @@
           "type": "array",
           "description": "Downtime metadata",
           "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NameValuePair"
-            }
-          }
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "type": {
           "$ref": "#/definitions/IssueType",
@@ -43314,11 +43321,11 @@
           "type": "array",
           "description": "Additional Data that detector wants to send.",
           "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NameValuePair"
-            }
-          }
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "responseMetaData": {
           "$ref": "#/definitions/ResponseMetaData",
@@ -44273,9 +44280,7 @@
           "description": "Function URI."
         },
         "config": {
-          "type": "object",
-          "description": "Config information.",
-          "additionalProperties": {}
+          "description": "Config information."
         },
         "files": {
           "type": "object",
@@ -45557,9 +45562,7 @@
           "readOnly": true
         },
         "value": {
-          "type": "object",
           "description": "Any object",
-          "additionalProperties": {},
           "readOnly": true
         }
       }
@@ -46663,9 +46666,7 @@
           "readOnly": true
         },
         "inputs": {
-          "type": "object",
           "description": "Gets the inputs.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "inputsLink": {
@@ -46674,9 +46675,7 @@
           "readOnly": true
         },
         "outputs": {
-          "type": "object",
           "description": "Gets the outputs.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "outputsLink": {
@@ -46685,9 +46684,7 @@
           "readOnly": true
         },
         "trackedProperties": {
-          "type": "object",
           "description": "Gets the tracked properties.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "retryHistory": {
@@ -46821,48 +46818,6 @@
           "description": "Enables Backup and Restore operations over virtual network. Previously called VnetBackupRestoreEnabled"
         }
       }
-    },
-    "PagedVnetInfoResource": {
-      "type": "object",
-      "description": "Paged collection of VnetInfoResource items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The VnetInfoResource items on this page",
-          "items": {
-            "$ref": "#/definitions/VnetInfoResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedVnetRoute": {
-      "type": "object",
-      "description": "Paged collection of VnetRoute items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The VnetRoute items on this page",
-          "items": {
-            "$ref": "#/definitions/VnetRoute"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "ParameterType": {
       "type": "string",
@@ -48684,9 +48639,7 @@
       "description": "A request.",
       "properties": {
         "headers": {
-          "type": "object",
-          "description": "A list of all the headers attached to the request.",
-          "additionalProperties": {}
+          "description": "A list of all the headers attached to the request."
         },
         "uri": {
           "type": "string",
@@ -48799,12 +48752,14 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "Collection of resources.",
           "items": {
             "type": "string"
           }
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -49064,9 +49019,7 @@
       "description": "A response.",
       "properties": {
         "headers": {
-          "type": "object",
-          "description": "A list of all the headers attached to the response.",
-          "additionalProperties": {}
+          "description": "A list of all the headers attached to the response."
         },
         "statusCode": {
           "type": "integer",
@@ -50387,7 +50340,8 @@
           "description": "List of volume mounts",
           "items": {
             "$ref": "#/definitions/VolumeMount"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "inheritAppSettingsAndConnectionStrings": {
           "type": "boolean",
@@ -51810,21 +51764,21 @@
           "type": "array",
           "description": "Solution Data.",
           "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NameValuePair"
-            }
-          }
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metadata": {
           "type": "array",
           "description": "Solution Metadata.",
           "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NameValuePair"
-            }
-          }
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -52201,7 +52155,7 @@
     },
     "StaticSiteARMResource": {
       "type": "object",
-      "description": "Static Site ARM resource.",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StaticSite",
@@ -55107,17 +55061,12 @@
       "description": "The workflow filter.",
       "properties": {
         "appSettings": {
-          "type": "object",
-          "description": "Application settings of the workflow.",
-          "additionalProperties": {}
+          "description": "Application settings of the workflow."
         },
         "files": {
           "type": "object",
           "description": "Files of the app.",
-          "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
-          }
+          "additionalProperties": {}
         },
         "filesToDelete": {
           "type": "array",
@@ -55234,9 +55183,7 @@
       "description": "The workflow output parameter.",
       "properties": {
         "error": {
-          "type": "object",
           "description": "Gets the error.",
-          "additionalProperties": {},
           "readOnly": true
         }
       },
@@ -55255,14 +55202,10 @@
           "description": "The type."
         },
         "value": {
-          "type": "object",
-          "description": "The value.",
-          "additionalProperties": {}
+          "description": "The value."
         },
         "metadata": {
-          "type": "object",
-          "description": "The metadata.",
-          "additionalProperties": {}
+          "description": "The metadata."
         },
         "description": {
           "type": "string",
@@ -55327,9 +55270,7 @@
           "description": "The integration service environment."
         },
         "definition": {
-          "type": "object",
-          "description": "The definition.",
-          "additionalProperties": {}
+          "description": "The definition."
         },
         "parameters": {
           "type": "object",
@@ -55578,9 +55519,7 @@
           "readOnly": true
         },
         "error": {
-          "type": "object",
           "description": "Gets the error.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "trackingId": {
@@ -55603,9 +55542,7 @@
           "readOnly": true
         },
         "trackedProperties": {
-          "type": "object",
           "description": "Gets the tracked properties.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "retryHistory": {
@@ -55733,9 +55670,7 @@
           "readOnly": true
         },
         "error": {
-          "type": "object",
           "description": "Gets the error.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "correlationId": {
@@ -55782,9 +55717,7 @@
           "readOnly": true
         },
         "inputs": {
-          "type": "object",
           "description": "Gets the inputs.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "inputsLink": {
@@ -55793,9 +55726,7 @@
           "readOnly": true
         },
         "outputs": {
-          "type": "object",
           "description": "Gets the outputs.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "outputsLink": {
@@ -55841,15 +55772,11 @@
           "readOnly": true
         },
         "error": {
-          "type": "object",
           "description": "Gets the error.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "trackedProperties": {
-          "type": "object",
           "description": "Gets the tracked properties.",
-          "additionalProperties": {},
           "readOnly": true
         }
       }
@@ -56155,9 +56082,7 @@
           "readOnly": true
         },
         "error": {
-          "type": "object",
           "description": "Gets the error.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "trackingId": {
@@ -56517,9 +56442,7 @@
           "description": "The integration account."
         },
         "definition": {
-          "type": "object",
-          "description": "The definition.",
-          "additionalProperties": {}
+          "description": "The definition."
         },
         "parameters": {
           "type": "object",

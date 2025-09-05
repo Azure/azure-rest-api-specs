@@ -65,6 +65,7 @@ interface WorkflowVersionsOps
         workflowName: string,
       },
       {
+        /** The workflow versionId. */
         @path
         @segment("versions")
         @key

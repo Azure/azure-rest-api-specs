@@ -88,6 +88,7 @@ interface TriggeredWebJobs {
    * Description for Run a triggered web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RunTriggeredWebJobSlot")
   @action("run")
   runTriggeredWebJobSlot is TriggeredWebJobOps.ActionSync<
@@ -153,6 +154,7 @@ interface TriggeredWebJobOperationGroup {
    * Description for Run a triggered web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RunTriggeredWebJob")
   @action("run")
   runTriggeredWebJob is TriggeredWebJobOperationGroupOps.ActionSync<

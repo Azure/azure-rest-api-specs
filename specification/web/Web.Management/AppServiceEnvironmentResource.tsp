@@ -67,6 +67,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @operationId("AppServiceEnvironments_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -117,25 +118,26 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the used, available, and total worker capacity an App Service Environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_ListCapacities")
   @get
   @list
-  @action("compute")
-  listCapacities is ArmResourceActionSync<
-    AppServiceEnvironmentResource,
-    void,
-    ArmResponse<StampCapacityCollection>,
-    Parameters = {
-      @path("capacities")
-      capacities: "capacities";
-    }
-  >;
+  listCapacities(
+    ...ResourceInstanceParameters<AppServiceEnvironmentResource>,
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+    @path
+    @key
+    @segment("capacities")
+    compute: "compute",
+  ): ArmResponse<StampCapacityCollection>;
 
   /**
    * Description for Move an App Service Environment to a different VNET.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("AppServiceEnvironments_ChangeVnet")
   @action("changeVirtualNetwork")
   @list
@@ -165,6 +167,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get a diagnostics item for an App Service Environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_GetDiagnosticsItem")
   @get
@@ -252,6 +255,8 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Reboot all machines in an App Service Environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_Reboot")
   reboot is ArmResourceActionSync<
@@ -264,6 +269,7 @@ interface AppServiceEnvironmentResources {
    * Description for Resume an App Service Environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("AppServiceEnvironments_Resume")
   @list
   resume is ArmResourceActionAsyncBase<
@@ -315,6 +321,7 @@ interface AppServiceEnvironmentResources {
    * Description for Suspend an App Service Environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("AppServiceEnvironments_Suspend")
   @list
   suspend is ArmResourceActionAsyncBase<

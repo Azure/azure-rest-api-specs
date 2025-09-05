@@ -65,6 +65,7 @@ interface WorkflowTriggersOps
         workflowName: string,
       },
       {
+        /** The workflow trigger name. */
         @path
         @segment("triggers")
         @key

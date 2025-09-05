@@ -81,6 +81,7 @@ interface ContinuousWebJobs {
   /**
    * Description for Start a continuous web job for an app, or a deployment slot.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_StartContinuousWebJob")
   @action("start")
@@ -94,6 +95,7 @@ interface ContinuousWebJobs {
    * Description for Stop a continuous web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StopContinuousWebJob")
   @action("stop")
   stopContinuousWebJob is ContinuousWebJobOps.ActionSync<
@@ -165,6 +167,7 @@ interface ContinuousWebJobOperationGroup {
    * Description for Start a continuous web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StartContinuousWebJobSlot")
   @action("start")
   startContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
@@ -177,6 +180,7 @@ interface ContinuousWebJobOperationGroup {
    * Description for Stop a continuous web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StopContinuousWebJobSlot")
   @action("stop")
   stopContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<

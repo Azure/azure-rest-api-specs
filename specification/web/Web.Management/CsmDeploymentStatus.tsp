@@ -55,6 +55,7 @@ interface CsmDeploymentStatuses {
    * Gets the deployment status for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("WebApps_GetProductionSiteDeploymentStatus")
   getProductionSiteDeploymentStatus is CsmDeploymentStatusOps.Read<
     CsmDeploymentStatus,
@@ -110,6 +111,7 @@ interface CsmDeploymentStatusOperationGroup {
    * Gets the deployment status for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @operationId("WebApps_GetSlotSiteDeploymentStatusSlot")
   getSlotSiteDeploymentStatusSlot is CsmDeploymentStatusOperationGroupOps.Read<
     CsmDeploymentStatus,

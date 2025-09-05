@@ -65,9 +65,9 @@ interface VnetInfoResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServicePlans_ListVnets")
-  listVnets is VnetInfoResourceOps.List<
+  listVnets is VnetInfoResourceOps.ListSinglePage<
     VnetInfoResource,
-    Response = ArmResponse<Azure.Core.Page<VnetInfoResource>>
+    Response = ArmResponse<VnetInfoResource[]>
   >;
 }
 @armResourceOperations
@@ -147,9 +147,9 @@ interface VnetInfoResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListVnetConnectionsSlot")
-  listVnetConnectionsSlot is VnetInfoResourceOperationGroupOps.List<
+  listVnetConnectionsSlot is VnetInfoResourceOperationGroupOps.ListSinglePage<
     VnetInfoResource,
-    Response = ArmResponse<Azure.Core.Page<VnetInfoResource>>
+    Response = ArmResponse<VnetInfoResource[]>
   >;
 }
 @armResourceOperations
@@ -224,9 +224,9 @@ interface VnetConnectionOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListVnetConnections")
   @segment("virtualNetworkConnections")
-  listVnetConnections is VnetConnectionOperationGroupOps.List<
+  listVnetConnections is VnetConnectionOperationGroupOps.ListSinglePage<
     VnetInfoResource,
-    Response = ArmResponse<Azure.Core.Page<VnetInfoResource>>
+    Response = ArmResponse<VnetInfoResource[]>
   >;
 }
 

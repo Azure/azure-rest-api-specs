@@ -64,12 +64,14 @@ interface WorkflowTriggerHistoriesOps
         @key
         workflowName: string,
 
+        /** The workflow trigger name. */
         @path
         @segment("triggers")
         @key
         triggerName: string,
       },
       {
+        /** The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run. */
         @path
         @segment("histories")
         @key

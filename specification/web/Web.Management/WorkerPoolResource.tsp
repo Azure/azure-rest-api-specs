@@ -55,6 +55,7 @@ interface WorkerPoolResourceOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface WorkerPoolResources {
   /**
@@ -86,6 +87,7 @@ interface WorkerPoolResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @operationId("AppServiceEnvironments_UpdateMultiRolePool")
   @patch(#{ implicitOptionality: false })
   updateMultiRolePool is WorkerPoolResourceOps.CustomPatchSync<
@@ -222,6 +224,7 @@ interface AppServiceEnvironments {
    * Description for Create or update a worker pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @patch(#{ implicitOptionality: false })
   updateWorkerPool is AppServiceEnvironmentOps.CustomPatchSync<
     WorkerPoolResource,

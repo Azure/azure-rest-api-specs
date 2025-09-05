@@ -14,6 +14,7 @@ namespace Microsoft.Web;
 /**
  * Static Site Build ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(StaticSiteARMResource)
 model StaticSiteBuildARMResource
   is Azure.ResourceManager.ProxyResource<StaticSiteBuildARMResourceProperties> {
@@ -25,6 +26,7 @@ model StaticSiteBuildARMResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface StaticSiteBuildARMResources {
   /**
@@ -58,6 +60,7 @@ interface StaticSiteBuildARMResources {
   /**
    * Description for Creates or updates the app settings of a static site build.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_CreateOrUpdateStaticSiteBuildAppSettings")
   @put
@@ -71,6 +74,7 @@ interface StaticSiteBuildARMResources {
   /**
    * Description for Creates or updates the function app settings of a static site build.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_CreateOrUpdateStaticSiteBuildFunctionAppSettings")
   @put

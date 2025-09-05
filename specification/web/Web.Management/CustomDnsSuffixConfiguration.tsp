@@ -50,6 +50,8 @@ interface CustomDnsSuffixConfigurations {
    * Delete Custom Dns Suffix configuration of an App Service Environment
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_DeleteAseCustomDnsSuffixConfiguration")
   deleteAseCustomDnsSuffixConfiguration is ArmResourceDeleteSync<
     CustomDnsSuffixConfiguration,
