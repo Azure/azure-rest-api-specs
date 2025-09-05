@@ -1,0 +1,2454 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkSecurityPerimeter",
+    "description": "The Network Security Perimeter API provides a RESTful set of web services that interact with network security perimeter resource.",
+    "version": "2024-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_Get",
+        "description": "Gets the specified network security perimeter by the name.",
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns the resulting network security perimeter resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterGet": {
+            "$ref": "./examples/NetworkSecurityPerimeterGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_CreateOrUpdate",
+        "description": "Creates or updates a Network Security Perimeter.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            },
+            "description": "Parameter supplied to create or update the network security perimeter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource Updated. Returns the network security perimeter.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "201": {
+            "description": "Resource Created. Returns the network security perimeter.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          }
+        ],
+        "description": "Deletes a network security perimeter.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Delete in progress.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Azure async operation header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterDelete": {
+            "$ref": "./examples/NetworkSecurityPerimeterDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_Patch",
+        "description": "Patch Tags for a Network Security Perimeter.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTagsRequest"
+            },
+            "description": "Parameter supplied to the network security perimeter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns the resulting network security perimeter resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkSecurityPerimeters": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_ListBySubscription",
+        "description": "List all network security perimeters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns the list of the network security perimeters.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimetersList": {
+            "$ref": "./examples/NetworkSecurityPerimeterListAll.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_List",
+        "description": "List network security perimeters in a resource group.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns a list of network security perimeters.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProfileNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterProfiles"
+        ],
+        "operationId": "NetworkSecurityPerimeterProfiles_Get",
+        "description": "Gets the specified NSP profile.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP profile.",
+            "schema": {
+              "$ref": "#/definitions/NspProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesGet": {
+            "$ref": "./examples/NspProfileGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkSecurityPerimeterProfiles"
+        ],
+        "operationId": "NetworkSecurityPerimeterProfiles_CreateOrUpdate",
+        "description": "Creates or updates a network profile.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspProfile"
+            },
+            "description": "Parameters that hold the NspProfile resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update - Profile is immutable resource. Returns the existing profile resource.",
+            "schema": {
+              "$ref": "#/definitions/NspProfile"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspProfile resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesPut": {
+            "$ref": "./examples/NspProfilePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkSecurityPerimeterProfiles"
+        ],
+        "operationId": "NetworkSecurityPerimeterProfiles_Delete",
+        "description": "Deletes an NSP profile.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesDelete": {
+            "$ref": "./examples/NspProfileDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterProfiles"
+        ],
+        "operationId": "NetworkSecurityPerimeterProfiles_List",
+        "description": "Lists the NSP profiles in the specified network security perimeter.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP profiles.",
+            "schema": {
+              "$ref": "#/definitions/NspProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesList": {
+            "$ref": "./examples/NspProfileList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProfileNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AccessRuleNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterAccessRules"
+        ],
+        "operationId": "NetworkSecurityPerimeterAccessRules_Get",
+        "description": "Gets the specified NSP access rule by name.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP access rule.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRuleGet": {
+            "$ref": "./examples/NspAccessRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkSecurityPerimeterAccessRules"
+        ],
+        "operationId": "NetworkSecurityPerimeterAccessRules_CreateOrUpdate",
+        "description": "Creates or updates a network access rule.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAccessRule"
+            },
+            "description": "Parameters that hold the NspAccessRule resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing access rule is updated. Returns the resource.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRule"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspAccessRule resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRulePut": {
+            "$ref": "./examples/NspAccessRulePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkSecurityPerimeterAccessRules"
+        ],
+        "operationId": "NetworkSecurityPerimeterAccessRules_Delete",
+        "description": "Deletes an NSP access rule.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRulesDelete": {
+            "$ref": "./examples/NspAccessRuleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterAccessRules"
+        ],
+        "operationId": "NetworkSecurityPerimeterAccessRules_List",
+        "description": "Lists the NSP access rules in the specified NSP profile.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP access rules.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRulesList": {
+            "$ref": "./examples/NspAccessRuleList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AssociationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterAssociations"
+        ],
+        "operationId": "NetworkSecurityPerimeterAssociations_Get",
+        "description": "Gets the specified NSP association by name.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP resource association.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationGet": {
+            "$ref": "./examples/NspAssociationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkSecurityPerimeterAssociations"
+        ],
+        "operationId": "NetworkSecurityPerimeterAssociations_CreateOrUpdate",
+        "description": "Creates or updates a NSP resource association.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            },
+            "description": "Parameters that hold the NspAssociation resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing resource association is updated. Returns the resource.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspAssociation resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns the NspAssociation resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Azure async operation header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NspAssociationPut": {
+            "$ref": "./examples/NspAssociationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkSecurityPerimeterAssociations"
+        ],
+        "operationId": "NetworkSecurityPerimeterAssociations_Delete",
+        "description": "Deletes an NSP association resource.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Delete in progress.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Azure async operation header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NspAssociationDelete": {
+            "$ref": "./examples/NspAssociationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterAssociations"
+        ],
+        "operationId": "NetworkSecurityPerimeterAssociations_List",
+        "description": "Lists the NSP resource associations.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP resource associations.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationList": {
+            "$ref": "./examples/NspAssociationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AssociationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterAssociations"
+        ],
+        "operationId": "NetworkSecurityPerimeterAssociations_Reconcile",
+        "description": "Reconcile NSP association",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAssociationReconcile"
+            },
+            "description": "Parameters for NSP association reconcile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconcile NSP association.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociationReconcile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationReconcile": {
+            "$ref": "./examples/NspAssociationReconcile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterAssociableResourceTypes"
+        ],
+        "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List",
+        "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the list of resources that are onboarded with network security perimeter feature.",
+            "schema": {
+              "$ref": "#/definitions/PerimeterAssociableResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterAssociableResourceTypes": {
+            "$ref": "./examples/PerimeterAssociableResourcesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProfileNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AccessRuleNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterAccessRules"
+        ],
+        "operationId": "NetworkSecurityPerimeterAccessRules_Reconcile",
+        "description": "Reconcile NSP access rules",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAccessRuleReconcile"
+            },
+            "description": "Parameters for NSP access rule reconcile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconcile NSP access rule.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRuleReconcile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRuleReconcile": {
+            "$ref": "./examples/NspAccessRuleReconcile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LinkNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterLinks"
+        ],
+        "operationId": "NetworkSecurityPerimeterLinks_Get",
+        "description": "Gets the specified NSP link resource.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns NSP link resource.",
+            "schema": {
+              "$ref": "#/definitions/NspLink"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinksGet": {
+            "$ref": "./examples/NspLinkGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkSecurityPerimeterLinks"
+        ],
+        "operationId": "NetworkSecurityPerimeterLinks_CreateOrUpdate",
+        "description": "Creates or updates NSP link resource.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspLink"
+            },
+            "description": "Parameters that hold the NspLink resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing NspLink resource is updated. Returns the resource.",
+            "schema": {
+              "$ref": "#/definitions/NspLink"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspLink resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspLink"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinksPut": {
+            "$ref": "./examples/NspLinkPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkSecurityPerimeterLinks"
+        ],
+        "operationId": "NetworkSecurityPerimeterLinks_Delete",
+        "description": "Deletes an NSP Link resource.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Delete in progress.",
+            "headers": {
+              "location": {
+                "description": "location header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NspLinkDelete": {
+            "$ref": "./examples/NspLinkDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterLinks"
+        ],
+        "operationId": "NetworkSecurityPerimeterLinks_List",
+        "description": "Lists the NSP Link resources in the specified network security perimeter.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP link resources.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkList": {
+            "$ref": "./examples/NspLinkList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LinkReferenceNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterLinkReferences"
+        ],
+        "operationId": "NetworkSecurityPerimeterLinkReferences_Get",
+        "description": "Gets the specified NSP linkReference resource.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns the NSP linkReference resource.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkReference"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkReferencesGet": {
+            "$ref": "./examples/NspLinkReferenceGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkSecurityPerimeterLinkReferences"
+        ],
+        "operationId": "NetworkSecurityPerimeterLinkReferences_Delete",
+        "description": "Deletes an NSP LinkReference resource.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Delete in progress.",
+            "headers": {
+              "location": {
+                "description": "location header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NspLinkReferenceDelete": {
+            "$ref": "./examples/NspLinkReferenceDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterLinkReferences"
+        ],
+        "operationId": "NetworkSecurityPerimeterLinkReferences_List",
+        "description": "Lists the NSP LinkReference resources in the specified network security perimeter.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP linkReference resources.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkReferenceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkReferenceList": {
+            "$ref": "./examples/NspLinkReferenceList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations/{loggingConfigurationName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LoggingConfigurationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterLoggingConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterLoggingConfigurations_Get",
+        "description": "Gets the NSP logging configuration.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns NSP logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationGet": {
+            "$ref": "./examples/NspLoggingConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkSecurityPerimeterLoggingConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterLoggingConfigurations_CreateOrUpdate",
+        "description": "Creates or updates NSP logging configuration.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            },
+            "description": "Parameters that hold the NspLoggingConfiguration to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing NspLoggingConfiguration is updated. Returns the logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspLoggingConfiguration resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationPut": {
+            "$ref": "./examples/NspLoggingConfigurationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkSecurityPerimeterLoggingConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterLoggingConfigurations_Delete",
+        "description": "Deletes an NSP Logging configuration.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The logging configuration does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationDelete": {
+            "$ref": "./examples/NspLoggingConfigurationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterLoggingConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterLoggingConfigurations_List",
+        "description": "Lists the NSP logging configuration.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationList": {
+            "$ref": "./examples/NspLoggingConfigurationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/LocationParameter"
+        },
+        {
+          "$ref": "#/parameters/OperationIdParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterOperationStatuses"
+        ],
+        "operationId": "NetworkSecurityPerimeterOperationStatuses_Get",
+        "description": "Gets the operation status for the given operation id.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the Nsp operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspOperationStatusGet": {
+            "$ref": "./examples/NspOperationStatusGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/nspServiceTags": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterServiceTags"
+        ],
+        "operationId": "NetworkSecurityPerimeterServiceTags_List",
+        "description": "Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the list of service tags supported by NSP.",
+            "schema": {
+              "$ref": "#/definitions/NspServiceTagsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NSPServiceTagsList": {
+            "$ref": "./examples/NspServiceTagsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkSecurityPerimeter": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkSecurityPerimeterProperties",
+          "description": "The network security perimeter properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The Network Security Perimeter resource"
+    },
+    "NetworkSecurityPerimeterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
+          },
+          "description": "Gets a page of NetworkSecurityPerimeter"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NetworkSecurityPerimeter. It contains a list of network security perimeters and a URL link to get the next set of results."
+    },
+    "NetworkSecurityPerimeterProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/NSPProvisioningState",
+          "description": "The provisioning state of the scope assignment resource."
+        },
+        "perimeterGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "perimeter guid of the network security perimeter."
+        }
+      },
+      "description": "Properties of network security perimeter."
+    },
+    "UpdateTagsRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
+          "description": "Network security perimeter identifier."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "List of tags for Network Security Perimeter"
+        }
+      },
+      "description": "Update tags request."
+    },
+    "NspProfile": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspProfileProperties",
+          "description": "Properties of the network security perimeter profile"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The network security perimeter profile resource"
+    },
+    "NspProfileListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspProfile"
+          },
+          "description": "Gets a page of NSP profile"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP profiles. Contains a list of NSP profiles and a URL link to get the next set of results."
+    },
+    "NspProfileProperties": {
+      "type": "object",
+      "properties": {
+        "accessRulesVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Version number that increases with every update to access rules within the profile."
+        },
+        "diagnosticSettingsVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Version number that increases with every update to diagnostic settings within the profile."
+        }
+      },
+      "description": "Properties of NSP profile."
+    },
+    "NspAccessRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspAccessRuleProperties",
+          "description": "Properties of the NSP access rule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The NSP access rule resource"
+    },
+    "NspAccessRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspAccessRule"
+          },
+          "description": "Gets a page of NSP access rule"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP access rules. Contains a list of NSP access rules and a URL link to get the next set of results."
+    },
+    "NspAccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/NSPProvisioningState",
+          "description": "The provisioning state of the scope assignment resource."
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "AccessRuleDirection",
+            "modelAsString": true
+          },
+          "description": "Direction that specifies whether the access rules is inbound/outbound."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Inbound address prefixes (IPv4/IPv6)"
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Outbound rules in fully qualified domain name format."
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SubscriptionId"
+          },
+          "description": "List of subscription ids"
+        },
+        "networkSecurityPerimeters": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/PerimeterBasedAccessRule"
+          },
+          "description": "Rule specified by the perimeter id."
+        },
+        "emailAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Outbound rules in email address format. This access rule type is currently unavailable for use."
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Outbound rules in phone number format. This access rule type is currently unavailable for use."
+        },
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Inbound rules of type service tag. This access rule type is currently unavailable for use."
+        }
+      },
+      "description": "Properties of NSP access rule."
+    },
+    "SubscriptionId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/subscriptions"
+              }
+            ]
+          },
+          "description": "Subscription id in the ARM id format."
+        }
+      }
+    },
+    "PerimeterBasedAccessRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
+          "description": "NSP id in the ARM id format."
+        },
+        "perimeterGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource guid of the NSP supplied."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the NSP supplied."
+        }
+      }
+    },
+    "NspAssociation": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspAssociationProperties",
+          "description": "Properties of the NSP resource association."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The NSP resource association resource"
+    },
+    "NspAssociationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspAssociation"
+          },
+          "description": "Gets a page of NSP resource associations"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP resource associations. Contains a list of NSP resource associations and a URL link to get the next set of results."
+    },
+    "NspAssociationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/NSPProvisioningState",
+          "description": "The provisioning state of the resource  association resource."
+        },
+        "privateLinkResource": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The PaaS resource to be associated."
+        },
+        "profile": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Profile id to which the PaaS resource is associated."
+        },
+        "accessMode": {
+          "type": "string",
+          "enum": [
+            "Learning",
+            "Enforced",
+            "Audit"
+          ],
+          "x-ms-enum": {
+            "name": "AssociationAccessMode",
+            "modelAsString": true
+          },
+          "description": "Access mode on the association."
+        },
+        "hasProvisioningIssues": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies if there are provisioning issues"
+        }
+      }
+    },
+    "NspAssociationReconcile": {
+      "type": "object",
+      "properties": {},
+      "description": "Request object for NSP association."
+    },
+    "PerimeterAssociableResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PerimeterAssociableResourceProperties",
+          "description": "Properties of the perimeter associable resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier of the perimeter associable resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "description": "Resource that is onboarded to use network security perimeter. Also referred as perimeter associable resource."
+    },
+    "PerimeterAssociableResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerimeterAssociableResource"
+          },
+          "description": "Gets paged list of perimeter associable resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Paged list of perimeter associable resources."
+    },
+    "PerimeterAssociableResourceProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A friendly name for the properties of perimeter associable resources."
+        },
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type/provider name."
+        },
+        "publicDnsZones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Public DNS zone names of the resources."
+        }
+      },
+      "description": "Properties of the perimeter associable resources."
+    },
+    "NSPProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "nspProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "NSPLinkProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state of NSP Link/LinkReference.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Failed",
+        "WaitForRemoteCompletion"
+      ],
+      "x-ms-enum": {
+        "name": "nspLinkProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "NspAccessRuleReconcile": {
+      "type": "object",
+      "properties": {},
+      "description": "Request object for NSP reconcile."
+    },
+    "NspLink": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspLinkProperties",
+          "description": "Properties of the network security perimeter link resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The network security perimeter link resource"
+    },
+    "NspLinkListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspLink"
+          },
+          "description": "Gets a page of NSP Link resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP link resources. Contains a list of NSP link resources and a URL link to get the next set of results."
+    },
+    "NspLinkProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/NSPLinkProvisioningState",
+          "description": "The provisioning state of the NSP Link resource."
+        },
+        "autoApprovedRemotePerimeterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
+          "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. It should be used when the NSP admin have Microsoft.Network/networkSecurityPerimeters/linkPerimeter/action permission on the remote NSP resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "remotePerimeterGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Remote NSP Guid with which the link gets created."
+        },
+        "remotePerimeterLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Remote NSP location with which the link gets created."
+        },
+        "localInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
+          "uniqueItems": true
+        },
+        "localOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
+          "uniqueItems": true
+        },
+        "remoteInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Remote Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. This property can only be updated in auto-approval mode.",
+          "uniqueItems": true
+        },
+        "remoteOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Remote Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
+          "uniqueItems": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A message passed to the owner of the remote NSP link resource with this connection request. In case of Auto-approved flow, it is default to 'Auto Approved'. Restricted to 140 chars."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The NSP link state.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "nspLinkStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Properties of NSP Link resource."
+    },
+    "NspLinkReference": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspLinkReferenceProperties",
+          "description": "Properties of the network security perimeter linkReference resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The network security perimeter linkReference resource"
+    },
+    "NspLinkReferenceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspLinkReference"
+          },
+          "description": "Gets a page of NSP LinkReference resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP linkReference resources. Contains a list of NSP linkReference resources and a URL link to get the next set of results."
+    },
+    "NspLinkReferenceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/NSPLinkProvisioningState",
+          "description": "The provisioning state of the NSP LinkReference resource."
+        },
+        "remotePerimeterResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          },
+          "description": "Perimeter ARM Id for the remote NSP with which the link is created."
+        },
+        "remotePerimeterGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Remote NSP Guid with which the link is created."
+        },
+        "remotePerimeterLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Remote NSP location with which the link gets created."
+        },
+        "localInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
+          "uniqueItems": true
+        },
+        "localOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
+          "uniqueItems": true
+        },
+        "remoteInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Remote Inbound profile names to which Inbound is allowed. ['*'] value implies inbound is allowed to all profiles at remote perimeter. This property can only be updated from corresponding link resource present in remote perimeter."
+        },
+        "remoteOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Remote Outbound profile names from which Outbound is allowed. ['*'] value implies outbound is allowed from all profiles at remote perimeter. This property can only be updated from corresponding link resource present in remote perimeter."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A message sent by the remote NSP link admin for connection request. In case of Auto-approved flow, it is default to 'Auto Approved'."
+        },
+        "status": {
+          "type": "string",
+          "description": "The NSP linkReference state. It cannot be changed if link is created in auto-approval mode.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "nspLinkStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Properties of NSP LinkReference resource."
+    },
+    "NspLoggingConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspLoggingConfigurationProperties",
+          "description": "Properties of the NSP logging configuration."
+        }
+      },
+      "description": "The NSP logging configuration",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NspLoggingConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The log categories to enable in the NSP logging configuration."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the NSP logging configuration."
+        }
+      },
+      "description": "The NSP logging configuration properties."
+    },
+    "NspLoggingConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspLoggingConfiguration"
+          },
+          "description": "Gets a page of NSP logging configuration"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP logging configuration. Contains a list of NSP logging configurations and a URL link to get the next set of results."
+    },
+    "NspServiceTagsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspServiceTagsResource"
+          },
+          "description": "Gets paged list of NSP service tags."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP service tags."
+    },
+    "NspServiceTagsResource": {
+      "type": "object",
+      "properties": {
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "NSP service tags."
+        }
+      },
+      "description": "Resource containing list of NSP service tags."
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkSecurityPerimeterNameParameter": {
+      "name": "networkSecurityPerimeterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network security perimeter.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
+    },
+    "ProfileNameParameter": {
+      "name": "profileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP profile.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
+    },
+    "AccessRuleNameParameter": {
+      "name": "accessRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP access rule.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
+    },
+    "AssociationNameParameter": {
+      "name": "associationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP association.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
+    },
+    "LinkNameParameter": {
+      "name": "linkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP link.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
+    },
+    "LinkReferenceNameParameter": {
+      "name": "linkReferenceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP linkReference.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
+    },
+    "ListTopParameter": {
+      "name": "$top",
+      "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 20,
+      "x-ms-parameter-location": "method"
+    },
+    "ListSkipTokenParameter": {
+      "name": "$skipToken",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkSecurityPerimeterProfileParameter": {
+      "name": "networkSecurityPerimeterProfile",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network security perimeter profile.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The location of network security perimeter.",
+      "x-ms-parameter-location": "method"
+    },
+    "LoggingConfigurationNameParameter": {
+      "name": "loggingConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP logging configuration. Accepts 'instance' as name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The operation id of the async operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "ForceDeleteParameter": {
+      "name": "forceDeletion",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Deletes the resource even if it contains any child associations.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
