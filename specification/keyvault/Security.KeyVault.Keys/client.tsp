@@ -294,6 +294,83 @@ op unwrapKey is KeyVaultOperation<
 >;
 
 /**
+ * The SECURE WRAP operation generates a new 256 bit OCT key within the trusted execution environment(TEE) and encrypts the same with a key encryption key in Azure KeyVault.
+ * Once wrapped, the generated key is erased from the TEE. This operation requires the keys/wrapKey permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("securewrapkey")
+@Versioning.added(KeyVault.Versions.v2026_01_01_preview)
+@summary("Generates a new 256 bit OCT key within the trusted execution environment and wraps this key using a specified key.")
+@route("/keys/{key-name}/{key-version}/securewrapkey")
+@post
+op secureWrapKey is KeyVaultOperation<
+  {
+    /**
+     * The name of the key.
+     */
+    @path("key-name")
+    @clientName("name", "go")
+    keyName: string;
+
+    /**
+     * The version of the key.
+     */
+    @path("key-version")
+    @clientName("version", "go")
+    keyVersion: string;
+
+    /**
+     * The parameters for wrap operation.
+     */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @flattenProperty
+    parameters: SecureKeyWrapOperationParameters;
+  },
+  SecureKeyOperationResult
+>;
+
+/**
+ * The SECURE UNWRAP operation supports the unwrap of previously wrapped key. 
+ * It ensures the target token satisfies the release policy associated with the key encryption key.
+ * This operation requires the keys/unwrapKey permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+@operationId("secureunwrapkey")
+@Versioning.added(KeyVault.Versions.v2026_01_01_preview)
+@summary("Unwraps a previously wrapped key using a specified key that was used for wrapping that key.")
+@route("/keys/{key-name}/{key-version}/secureunwrapkey")
+@post
+op secureUnwrapKey is KeyVaultOperation<
+  {
+    /**
+     * The name of the key.
+     */
+    @path("key-name")
+    @clientName("name", "go")
+    keyName: string;
+
+    /**
+     * The version of the key.
+     */
+    @path("key-version")
+    @clientName("version", "go")
+    keyVersion: string;
+
+    /**
+     * The parameters for unwrap operation.
+     */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @flattenProperty
+    parameters: SecureKeyUnWrapOperationParameters;
+  },
+  SecureKeyOperationResult
+>;
+
+/**
  * The release key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/release permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
