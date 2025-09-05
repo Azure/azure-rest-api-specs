@@ -1,8 +1,8 @@
-import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
+import "@typespec/openapi";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using OpenAPI;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.ResourceNotifications Management Service" })
@@ -182,6 +183,83 @@ model NotificationSessionResource
 }
 
 /*
+ * Error Models
+ */
+
+/** Inner error details for server errors. */
+model InnerErrorDetails {
+  /** The specific error code. */
+  code?: string;
+  
+  /** The error message. */
+  message?: string;
+  
+  /** Stack trace information. */
+  stackTrace?: string;
+}
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for bad request.")
+model BadRequestError {
+  /** Error code indicating the type of bad request. */
+  code: string;
+  
+  /** Detailed error message. */
+  message: string;
+  
+  /** The target of the error. */
+  target?: string;
+  
+  /** Additional error details. */
+  details?: string[];
+}
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for too many requests.")
+model TooManyRequests {
+  /** Error code indicating the type of rate limiting error. */
+  code: string;
+  
+  /** Detailed error message. */
+  message: string;
+  
+  /** Additional error information. */
+  innerError?: InnerErrorDetails;
+}
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for unauthorized.")
+model Unauthorized {
+  /** Error code indicating the type of authorization error. */
+  code: string;
+  
+  /** Detailed error message. */
+  message: string;
+  
+  /** Additional error information. */
+  innerError?: InnerErrorDetails;
+}
+
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for internal server error.")
+model InternalServerError {
+  /** Error code indicating the type of internal error. */
+  code: string;
+  
+  /** Detailed error message. */
+  message: string;
+  
+  /** Additional error information. */
+  innerError?: InnerErrorDetails;
+}
+
+
+/*
  * Request/Response Models for Operations
  */
 
@@ -281,22 +359,20 @@ interface NotificationsSessions {
       }
     | {
         @statusCode _: 400;
-        @body body: CommonTypes.ErrorResponse;
+        @body body: BadRequestError;
       }
     | {
         @statusCode _: 401;
-        @body body: CommonTypes.ErrorResponse;
+        @body body: Unauthorized;
       }
     | {
         @statusCode _: 429;
-        @header("Retry-After") retryAfter?: string;
-        @body body: CommonTypes.ErrorResponse;
+        @body body: TooManyRequests;
       }
     | {
         @statusCode _: 500;
-        @body body: CommonTypes.ErrorResponse;
-      }
-    | CommonTypes.ErrorResponse;
+        @body body: InternalServerError;
+      };
 
   /** Get session details. */
   @post
@@ -324,17 +400,16 @@ interface NotificationsSessions {
       }
     | {
         @statusCode _: 400;
-        @body body: CommonTypes.ErrorResponse;
+        @body body: BadRequestError;
       }
     | {
         @statusCode _: 401;
-        @body body: CommonTypes.ErrorResponse;
+        @body body: Unauthorized;
       }
     | {
         @statusCode _: 500;
-        @body body: CommonTypes.ErrorResponse;
-      }
-    | CommonTypes.ErrorResponse;
+        @body body: InternalServerError;
+      };
 
   /** Close the session. */
   @post
@@ -356,17 +431,16 @@ interface NotificationsSessions {
         @statusCode _: 200;
         @body body: CloseSessionResponse;
       }
-    | {
+    |{
         @statusCode _: 400;
-        @body body: CommonTypes.ErrorResponse;
+        @body body: BadRequestError;
       }
     | {
         @statusCode _: 401;
-        @body body: CommonTypes.ErrorResponse;
+        @body body: Unauthorized;
       }
     | {
         @statusCode _: 500;
-        @body body: CommonTypes.ErrorResponse;
-      }
-    | CommonTypes.ErrorResponse;
+        @body body: InternalServerError;
+      };
 }
