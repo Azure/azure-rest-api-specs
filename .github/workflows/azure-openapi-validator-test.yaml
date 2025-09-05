@@ -31,5 +31,19 @@ jobs:
           ref: ${{ inputs.ref }}
           path: aov
 
-      - name: Verify checkout
-        run: pwd; find . -maxdepth 2 -type d
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: (aov) rush install
+        run: node common/scripts/install-run-rush.js install
+        working-directory: aov
+
+      - name: (aov) rush build
+        run: node common/scripts/install-run-rush.js build --verbose
+        working-directory: aov
+
+      - name: (aov) rush pack
+        run: node common/scripts/install-run-rush.js pack --verbose
+        working-directory: aov
