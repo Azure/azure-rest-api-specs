@@ -11,11 +11,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.RecoveryServices"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.RecoveryServices"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-recoveryservices"
     namespace: "azure.mgmt.recoveryservices"
@@ -23,7 +23,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-recoveryservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-recoveryservices"
     namespace: "com.azure.resourcemanager.recoveryservices"
     service-name: "RecoveryServices" # human-readable service name, whitespace allowed
     flavor: azure

@@ -16,10 +16,10 @@ options:
     arm-resource-flattening: true
     emit-common-types-schema: "never"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.PureStorageBlock"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.PureStorageBlock"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-purestorageblock"
     namespace: "azure.mgmt.purestorageblock"
@@ -27,7 +27,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-purestorageblock"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-purestorageblock"
     namespace: "com.azure.resourcemanager.purestorageblock"
     flavor: "azure"
     service-name: "Pure Storage Block"
