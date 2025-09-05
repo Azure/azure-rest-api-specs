@@ -118,9 +118,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationsList"
             }
           },
           "default": {
@@ -4814,7 +4814,8 @@
           "description": "The Addon items on this page",
           "items": {
             "$ref": "#/definitions/Addon"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -4979,7 +4980,8 @@
           "description": "The Alert items on this page",
           "items": {
             "$ref": "#/definitions/Alert"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -5151,7 +5153,8 @@
         },
         "encryptionCertThumbprint": {
           "type": "string",
-          "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null."
+          "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null.",
+          "x-ms-secret": true
         },
         "encryptionAlgorithm": {
           "$ref": "#/definitions/EncryptionAlgorithm",
@@ -5305,7 +5308,8 @@
           "description": "The BandwidthSchedule items on this page",
           "items": {
             "$ref": "#/definitions/BandwidthSchedule"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -5704,7 +5708,8 @@
           "description": "The Container items on this page",
           "items": {
             "$ref": "#/definitions/Container"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -6001,7 +6006,8 @@
           "description": "The DataBoxEdgeDevice items on this page",
           "items": {
             "$ref": "#/definitions/DataBoxEdgeDevice"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -6317,7 +6323,8 @@
           "description": "The DataBoxEdgeSku items on this page",
           "items": {
             "$ref": "#/definitions/DataBoxEdgeSku"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -6492,6 +6499,7 @@
         "vmPlacementQuery": {
           "type": "array",
           "description": "Array containing the sizes of the VMs for checking if its feasible to create them on the appliance.",
+          "uniqueItems": true,
           "items": {
             "type": "array",
             "items": {
@@ -6792,7 +6800,8 @@
         },
         "privateKey": {
           "type": "string",
-          "description": "Gets or sets base64 encoded private part of the certificate,\nneeded to form the activation key"
+          "description": "Gets or sets base64 encoded private part of the certificate,\nneeded to form the activation key",
+          "x-ms-secret": true
         },
         "expiryTimeInUTC": {
           "type": "string",
@@ -7837,6 +7846,75 @@
         "roleStatus"
       ]
     },
+    "MetricAggregationType": {
+      "type": "string",
+      "description": "Metric aggregation type.",
+      "enum": [
+        "NotSpecified",
+        "None",
+        "Average",
+        "Minimum",
+        "Maximum",
+        "Total",
+        "Count"
+      ],
+      "x-ms-enum": {
+        "name": "MetricAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          },
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "Average",
+            "value": "Average"
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum"
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum"
+          },
+          {
+            "name": "Total",
+            "value": "Total"
+          },
+          {
+            "name": "Count",
+            "value": "Count"
+          }
+        ]
+      }
+    },
+    "MetricCategory": {
+      "type": "string",
+      "description": "Metric category.",
+      "enum": [
+        "Capacity",
+        "Transaction"
+      ],
+      "x-ms-enum": {
+        "name": "MetricCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Capacity",
+            "value": "Capacity"
+          },
+          {
+            "name": "Transaction",
+            "value": "Transaction"
+          }
+        ]
+      }
+    },
     "MetricConfiguration": {
       "type": "object",
       "description": "Metric configuration.",
@@ -7941,6 +8019,138 @@
         "sourceName"
       ]
     },
+    "MetricDimension_V1": {
+      "type": "object",
+      "description": "Metric Dimension v1.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metrics dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the metrics dimension."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "To be exported to shoe box."
+        }
+      }
+    },
+    "MetricSpecification_V1": {
+      "type": "object",
+      "description": "Metric specification version 1.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Description of the metric to be displayed."
+        },
+        "unit": {
+          "$ref": "#/definitions/MetricUnit",
+          "description": "Metric units."
+        },
+        "aggregationType": {
+          "$ref": "#/definitions/MetricAggregationType",
+          "description": "Metric aggregation type."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Metric dimensions, other than default dimension which is resource.",
+          "items": {
+            "$ref": "#/definitions/MetricDimension_V1"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Set true to fill the gaps with zero."
+        },
+        "category": {
+          "$ref": "#/definitions/MetricCategory",
+          "description": "Metric category."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "Resource name override."
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "Support granularity of metrics.",
+          "items": {
+            "$ref": "#/definitions/TimeGrain"
+          }
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Support metric aggregation type.",
+          "items": {
+            "$ref": "#/definitions/MetricAggregationType"
+          }
+        }
+      }
+    },
+    "MetricUnit": {
+      "type": "string",
+      "description": "Metric units.",
+      "enum": [
+        "NotSpecified",
+        "Percent",
+        "Count",
+        "Seconds",
+        "Milliseconds",
+        "Bytes",
+        "BytesPerSecond",
+        "CountPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "MetricUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          },
+          {
+            "name": "Percent",
+            "value": "Percent"
+          },
+          {
+            "name": "Count",
+            "value": "Count"
+          },
+          {
+            "name": "Seconds",
+            "value": "Seconds"
+          },
+          {
+            "name": "Milliseconds",
+            "value": "Milliseconds"
+          },
+          {
+            "name": "Bytes",
+            "value": "Bytes"
+          },
+          {
+            "name": "BytesPerSecond",
+            "value": "BytesPerSecond"
+          },
+          {
+            "name": "CountPerSecond",
+            "value": "CountPerSecond"
+          }
+        ]
+      }
+    },
     "MonitoringMetricConfiguration": {
       "type": "object",
       "description": "The metric setting details for the role",
@@ -7969,7 +8179,8 @@
           "description": "The MonitoringMetricConfiguration items on this page",
           "items": {
             "$ref": "#/definitions/MonitoringMetricConfiguration"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -8383,7 +8594,8 @@
           "description": "The Node items on this page",
           "items": {
             "$ref": "#/definitions/Node"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -8523,6 +8735,90 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "Operations.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Is data action."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Properties displayed for the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Operation properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Operation display properties.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The type of resource in which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation to be performed on the resource."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation to be performed."
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Operation properties.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specification."
+        }
+      }
+    },
+    "OperationsList": {
+      "type": "object",
+      "description": "The list of operations supported by Microsoft.DataBoxEdge resource provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of operations.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to get the next page of operations."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Order": {
       "type": "object",
       "description": "The order details.",
@@ -8553,7 +8849,8 @@
           "description": "The Order items on this page",
           "items": {
             "$ref": "#/definitions/Order"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -9112,7 +9409,8 @@
           "description": "The Role items on this page",
           "items": {
             "$ref": "#/definitions/Role"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -9273,6 +9571,22 @@
         "deviceAdminPassword"
       ]
     },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Metric specification as defined by shoebox.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification_V1"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "Share": {
       "type": "object",
       "description": "Represents a share on the  Data Box Edge/Gateway device.",
@@ -9368,7 +9682,8 @@
           "description": "The Share items on this page",
           "items": {
             "$ref": "#/definitions/Share"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -9881,7 +10196,8 @@
           "description": "The StorageAccountCredential items on this page",
           "items": {
             "$ref": "#/definitions/StorageAccountCredential"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -9945,7 +10261,8 @@
           "description": "The StorageAccount items on this page",
           "items": {
             "$ref": "#/definitions/StorageAccount"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10133,6 +10450,57 @@
         }
       }
     },
+    "TimeGrain": {
+      "type": "string",
+      "enum": [
+        "PT1M",
+        "PT5M",
+        "PT15M",
+        "PT30M",
+        "PT1H",
+        "PT6H",
+        "PT12H",
+        "PT1D"
+      ],
+      "x-ms-enum": {
+        "name": "TimeGrain",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PT1M",
+            "value": "PT1M"
+          },
+          {
+            "name": "PT5M",
+            "value": "PT5M"
+          },
+          {
+            "name": "PT15M",
+            "value": "PT15M"
+          },
+          {
+            "name": "PT30M",
+            "value": "PT30M"
+          },
+          {
+            "name": "PT1H",
+            "value": "PT1H"
+          },
+          {
+            "name": "PT6H",
+            "value": "PT6H"
+          },
+          {
+            "name": "PT12H",
+            "value": "PT12H"
+          },
+          {
+            "name": "PT1D",
+            "value": "PT1D"
+          }
+        ]
+      }
+    },
     "TrackingInfo": {
       "type": "object",
       "description": "Tracking courier information.",
@@ -10209,7 +10577,8 @@
           "description": "The Trigger items on this page",
           "items": {
             "$ref": "#/definitions/Trigger"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10818,7 +11187,8 @@
           "description": "The User items on this page",
           "items": {
             "$ref": "#/definitions/User"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
