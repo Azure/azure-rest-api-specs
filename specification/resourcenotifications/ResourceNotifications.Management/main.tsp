@@ -183,125 +183,6 @@ model NotificationSessionResource
 }
 
 /*
- * Error Models
- */
-
-/** Inner error details for server errors. */
-model DefaultErrorDetails {
-  /** The specific error code. */
-  code?: string;
-
-  /** The error message. */
-  message?: string;
-
-  /** Stack trace information. */
-  stackTrace?: string;
-}
-
-/** Inner error details for server errors. */
-model InnerErrorDetails {
-  /** The specific error code. */
-  code?: string;
-
-  /** The error message. */
-  message?: string;
-
-  /** Stack trace information. */
-  stackTrace?: string;
-}
-
-/** Bad request error details. */
-model BadRequestErrorDetails {
-  /** Error code indicating the type of bad request. */
-  code: string;
-
-  /** Detailed error message. */
-  message: string;
-
-  /** The target of the error. */
-  target?: string;
-
-  /** Additional error details. */
-  details?: string[];
-}
-
-/** Too many requests error details. */
-model TooManyRequestsErrorDetails {
-  /** Error code indicating the type of rate limiting error. */
-  code: string;
-
-  /** Detailed error message. */
-  message: string;
-
-  /** Additional error information. */
-  innerError?: InnerErrorDetails;
-}
-
-/** Unauthorized error details. */
-model UnauthorizedErrorDetails {
-  /** Error code indicating the type of authorization error. */
-  code: string;
-
-  /** Detailed error message. */
-  message: string;
-
-  /** Additional error information. */
-  innerError?: InnerErrorDetails;
-}
-
-/** Internal server error details. */
-model InternalServerErrorDetails {
-  /** Error code indicating the type of internal error. */
-  code: string;
-
-  /** Detailed error message. */
-  message: string;
-
-  /** Additional error information. */
-  innerError?: InnerErrorDetails;
-}
-
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for bad request.")
-model Default {
-  /** Error details for bad request. */
-  error: DefaultErrorDetails;
-}
-
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for bad request.")
-model BadRequestError {
-  /** Error details for bad request. */
-  error: BadRequestErrorDetails;
-}
-
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for too many requests.")
-model TooManyRequests {
-  /** Error details for too many requests. */
-  error: TooManyRequestsErrorDetails;
-}
-
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for unauthorized.")
-model Unauthorized {
-  /** Error details for unauthorized. */
-  error: UnauthorizedErrorDetails;
-}
-
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for internal server error.")
-model InternalServerError {
-  /** Error details for internal server error. */
-  error: InternalServerErrorDetails;
-}
-
-/*
  * Request/Response Models for Operations
  */
 
@@ -399,22 +280,7 @@ interface NotificationsSessions {
         @header location?: string;
         @header("Retry-After") retryAfter?: string;
       }
-    | {
-        @statusCode _: 400;
-        @body body: BadRequestError;
-      }
-    | {
-        @statusCode _: 401;
-        @body body: Unauthorized;
-      }
-    | {
-        @statusCode _: 429;
-        @body body: TooManyRequests;
-      }
-    | {
-        @statusCode _: 500;
-        @body body: InternalServerError;
-      };
+    | ErrorResponse;
 
   /** Get session details. */
   @post
@@ -440,18 +306,7 @@ interface NotificationsSessions {
         @statusCode _: 200;
         @body body: GetSessionDetailsResponse;
       }
-    | {
-        @statusCode _: 400;
-        @body body: BadRequestError;
-      }
-    | {
-        @statusCode _: 401;
-        @body body: Unauthorized;
-      }
-    | {
-        @statusCode _: 500;
-        @body body: InternalServerError;
-      };
+    | ErrorResponse;
 
   /** Close the session. */
   @post
@@ -473,16 +328,5 @@ interface NotificationsSessions {
         @statusCode _: 200;
         @body body: CloseSessionResponse;
       }
-    | {
-        @statusCode _: 400;
-        @body body: BadRequestError;
-      }
-    | {
-        @statusCode _: 401;
-        @body body: Unauthorized;
-      }
-    | {
-        @statusCode _: 500;
-        @body body: InternalServerError;
-      };
+    | ErrorResponse;
 }

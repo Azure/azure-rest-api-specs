@@ -99,28 +99,10 @@
               }
             }
           },
-          "400": {
-            "description": "The server could not understand the request due to invalid syntax.",
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/BadRequestError"
-            }
-          },
-          "401": {
-            "description": "Access is unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/Unauthorized"
-            }
-          },
-          "429": {
-            "description": "Client error",
-            "schema": {
-              "$ref": "#/definitions/TooManyRequests"
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/InternalServerError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -166,22 +148,10 @@
               "$ref": "#/definitions/CloseSessionResponse"
             }
           },
-          "400": {
-            "description": "The server could not understand the request due to invalid syntax.",
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/BadRequestError"
-            }
-          },
-          "401": {
-            "description": "Access is unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/Unauthorized"
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/InternalServerError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -236,22 +206,10 @@
               "$ref": "#/definitions/GetSessionDetailsResponse"
             }
           },
-          "400": {
-            "description": "The server could not understand the request due to invalid syntax.",
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/BadRequestError"
-            }
-          },
-          "401": {
-            "description": "Access is unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/Unauthorized"
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/InternalServerError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -300,49 +258,6 @@
     }
   },
   "definitions": {
-    "BadRequestError": {
-      "type": "object",
-      "description": "Error response for bad request.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/BadRequestErrorDetails",
-          "description": "Error details for bad request."
-        }
-      },
-      "required": [
-        "error"
-      ],
-      "x-ms-error-response": true
-    },
-    "BadRequestErrorDetails": {
-      "type": "object",
-      "description": "Bad request error details.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code indicating the type of bad request."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "Additional error details.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "CloseSessionResponse": {
       "type": "object",
       "description": "Response model for close session operation.",
@@ -383,38 +298,6 @@
         }
       }
     },
-    "Default": {
-      "type": "object",
-      "description": "Error response for bad request.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/DefaultErrorDetails",
-          "description": "Error details for bad request."
-        }
-      },
-      "required": [
-        "error"
-      ],
-      "x-ms-error-response": true
-    },
-    "DefaultErrorDetails": {
-      "type": "object",
-      "description": "Inner error details for server errors.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The specific error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "stackTrace": {
-          "type": "string",
-          "description": "Stack trace information."
-        }
-      }
-    },
     "GetSessionDetailsRequest": {
       "type": "object",
       "description": "Request model for get session details operation.",
@@ -451,60 +334,6 @@
           "description": "Timestamp until which the session is valid."
         }
       }
-    },
-    "InnerErrorDetails": {
-      "type": "object",
-      "description": "Inner error details for server errors.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The specific error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "stackTrace": {
-          "type": "string",
-          "description": "Stack trace information."
-        }
-      }
-    },
-    "InternalServerError": {
-      "type": "object",
-      "description": "Error response for internal server error.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/InternalServerErrorDetails",
-          "description": "Error details for internal server error."
-        }
-      },
-      "required": [
-        "error"
-      ],
-      "x-ms-error-response": true
-    },
-    "InternalServerErrorDetails": {
-      "type": "object",
-      "description": "Internal server error details.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code indicating the type of internal error."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed error message."
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorDetails",
-          "description": "Additional error information."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "NotificationSessionConnectionDetails": {
       "type": "object",
@@ -760,78 +589,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "TooManyRequests": {
-      "type": "object",
-      "description": "Error response for too many requests.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/TooManyRequestsErrorDetails",
-          "description": "Error details for too many requests."
-        }
-      },
-      "required": [
-        "error"
-      ],
-      "x-ms-error-response": true
-    },
-    "TooManyRequestsErrorDetails": {
-      "type": "object",
-      "description": "Too many requests error details.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code indicating the type of rate limiting error."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed error message."
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorDetails",
-          "description": "Additional error information."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Unauthorized": {
-      "type": "object",
-      "description": "Error response for unauthorized.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/UnauthorizedErrorDetails",
-          "description": "Error details for unauthorized."
-        }
-      },
-      "required": [
-        "error"
-      ],
-      "x-ms-error-response": true
-    },
-    "UnauthorizedErrorDetails": {
-      "type": "object",
-      "description": "Unauthorized error details.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code indicating the type of authorization error."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed error message."
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorDetails",
-          "description": "Additional error information."
-        }
-      },
-      "required": [
-        "code",
-        "message"
       ]
     }
   },
