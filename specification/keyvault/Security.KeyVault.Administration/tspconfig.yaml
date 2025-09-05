@@ -24,7 +24,7 @@ options:
     "package-pprint-name": "Key Vault Administration"
     "package-version": "4.5.0"
     "namespace": "azure.keyvault.administration._generated"
-    "package-dir": "azure-keyvault-administration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-administration"
   "@azure-tools/typespec-java":
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-administration"
@@ -47,8 +47,9 @@ options:
     "output-path": "./src/Generated"
     flavor: azure
     use-model-reader-writer: false
+    clear-output-folder: true
   "@azure-tools/typespec-ts":
-    package-dir: "keyvault-admin"
+    emitter-output-dir: "{cwd}/{service-dir}/keyvault-admin"
     generate-metadata: true
     src-folder: "src/generated"
     experimental-extensible-enums: true
