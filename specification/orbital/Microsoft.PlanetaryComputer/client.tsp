@@ -10,11 +10,6 @@ using Microsoft.PlanetaryComputer;
 @useDependency(Versions.v2025_04_30_Preview)
 namespace Customizations;
 
-@@clientNamespace(Microsoft.PlanetaryComputer,
-  "com.azure.planetarycomputer",
-  "java"
-);
-
 // Client name conflicts
 @@clientName(Ingestions, "IngestionsManagement", "csharp");
 @@clientName(StacItems, "StacItemsManagement", "csharp");
