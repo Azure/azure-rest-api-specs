@@ -29,6 +29,9 @@ union ManagementType {
   Standard: "Standard",
 }
 
+/**
+ * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+ */
 union AllowRDPSPWithPL {
   string,
 
@@ -2577,6 +2580,7 @@ model HostPoolProperties {
   /**
    * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.v2025_09_01_preview)
   allowRDPShortPathWithPrivateLink?: AllowRDPSPWithPL;
 }
@@ -3595,6 +3599,13 @@ model HostPoolPatchProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
+
+   /**
+   * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
+  @added(Versions.v2025_09_01_preview)
+  allowRDPShortPathWithPrivateLink?: AllowRDPSPWithPL;
 }
 
 /**
