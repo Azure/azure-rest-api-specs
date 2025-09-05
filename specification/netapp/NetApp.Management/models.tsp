@@ -3877,71 +3877,6 @@ model BackupsMigrationRequest {
 }
 
 /**
- * Identity for the resource.
- */
-model ResourceIdentity {
-  /**
-   * Object id of the identity resource
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The tenant id of the resource
-   */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /**
-   * Type of Identity. Supported values are: 'None', 'SystemAssigned'
-   */
-  type?: string;
-}
-
-/**
- * Mount Target
- */
-model MountTarget {
-  /**
-   * Resource location
-   */
-  location: string;
-
-  /**
-   * Resource Id
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  tags?: Record<string>;
-
-  /**
-   * Mount Target Properties
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties: MountTargetProperties;
-}
-
-/**
  * Snapshot policy properties
  */
 model SnapshotPolicyDetails {
@@ -3981,31 +3916,6 @@ model SnapshotPolicyDetails {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SnapshotPolicyProperties;
-}
-
-/**
- * An error response from the service.
- */
-model CloudError {
-  /**
-   * Cloud error body.
-   */
-  error?: CloudErrorBody;
-}
-
-/**
- * An error response from the service.
- */
-model CloudErrorBody {
-  /**
-   * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
-   */
-  code?: string;
-
-  /**
-   * A message describing the error, intended to be suitable for display in a user interface.
-   */
-  message?: string;
 }
 
 /**
