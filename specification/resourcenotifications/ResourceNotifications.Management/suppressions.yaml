@@ -1,0 +1,15 @@
+- tool: TypeSpecValidation
+  paths: 
+    - "tspconfig.yaml"
+  reason: "Resource Notifications service does not require Go SDK generation"
+  rules: 
+    - "SdkTspConfigValidation"
+  subRules: 
+    - "options.@azure-tools/typespec-go.*"
+
+- tool: TypeSpecValidation
+  paths:
+    - "main.tsp"
+  reason: "x-ms-error-response extension is required for proper error response handling. @error decorator alone is insufficient."
+  rules:
+    - "@azure-tools/typespec-azure-core/no-openapi"
