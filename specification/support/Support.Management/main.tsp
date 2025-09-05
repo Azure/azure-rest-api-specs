@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./Service.tsp";
+import "./ServiceClassification.tsp";
 import "./ProblemClassification.tsp";
 import "./SupportTicketDetails.tsp";
 import "./CommunicationDetails.tsp";
@@ -47,6 +48,13 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_04_01: "2024-04-01",
+
+  /**
+   * The 2025-06-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_06_01_preview: "2025-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
