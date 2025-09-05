@@ -58,6 +58,9 @@ model PoolProperties {
 
   @doc("The resource id of the DevCenter Project the pool belongs to.")
   devCenterProjectResourceId: string;
+
+  @doc("The runtime configuration of the pool.")
+  runtimeConfiguration?: RuntimeConfiguration;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -147,6 +150,7 @@ union AzureDevOpsPermissionType {
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
+
 @doc("The agents will run on Virtual Machine Scale Sets.")
 model VmssFabricProfile extends FabricProfile {
   @doc("Virtual Machine Scale Sets")
@@ -167,6 +171,12 @@ model VmssFabricProfile extends FabricProfile {
 
   @doc("The network profile of the machines in the pool.")
   networkProfile?: NetworkProfile;
+}
+
+@doc("The runtime configuration of the pool.")
+model RuntimeConfiguration {
+  @doc("The target work folder of the task agent on the machine.")
+  workFolder?: string;
 }
 
 @doc("The Azure SKU of the machines in the pool.")
