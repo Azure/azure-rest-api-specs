@@ -59,6 +59,14 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2024_11_01: "2024-11-01",
+
+  /**
+   * The 2025-09-01 API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2025_09_01: "2025-09-01",
 }
 
 interface Operations extends Azure.ResourceManager.Legacy.ComputeOperations {}
