@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "registryName": "myRegistry",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "taskName": "myTask"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "fa153151-b9fd-46f4-9088-5e6600f2689v",
+          "tenantId": "f686d426-8d16-42db-81b7-abu4gm510ccd"
+        },
+        "location": "eastus",
+        "properties": {
+          "agentConfiguration": {
+            "cpu": 2
+          },
+          "credentials": {
+            "customRegistries": {
+              "myregistry.azure-test.io": {
+                "identity": "[system]",
+                "password": {
+                  "type": "Vaultsecret",
+                  "value": "https://myacbvault.vault.azure.net/secrets/username"
+                },
+                "userName": {
+                  "type": "Opaque",
+                  "value": "username"
+                }
+              }
+            },
+            "sourceRegistry": null
+          },
+          "isSystemTask": false,
+          "logTemplate": null,
+          "platform": {
+            "architecture": "amd64",
+            "os": "Linux"
+          },
+          "status": "Enabled",
+          "step": {
+            "type": "Docker",
+            "arguments": [
+              {
+                "name": "mytestargument",
+                "isSecret": false,
+                "value": "mytestvalue"
+              },
+              {
+                "name": "mysecrettestargument",
+                "isSecret": true,
+                "value": "mysecrettestvalue"
+              }
+            ],
+            "contextPath": "src",
+            "dockerFilePath": "src/DockerFile",
+            "imageNames": [
+              "azurerest:testtag"
+            ],
+            "isPushEnabled": true,
+            "noCache": false
+          },
+          "trigger": {
+            "baseImageTrigger": {
+              "name": "myBaseImageTrigger",
+              "baseImageTriggerType": "Runtime",
+              "status": "Enabled",
+              "updateTriggerEndpoint": "https://user:pass@mycicd.webhook.com?token=foo",
+              "updateTriggerPayloadType": "Token"
+            },
+            "sourceTriggers": [
+              {
+                "name": "mySourceTrigger",
+                "sourceRepository": {
+                  "branch": "master",
+                  "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
+                  "sourceControlAuthProperties": {
+                    "token": "xxxxx",
+                    "tokenType": "PAT"
+                  },
+                  "sourceControlType": "Github"
+                },
+                "sourceTriggerEvents": [
+                  "commit"
+                ],
+                "status": "Enabled"
+              }
+            ],
+            "timerTriggers": [
+              {
+                "name": "myTimerTrigger",
+                "schedule": "30 9 * * 1-5",
+                "status": "Enabled"
+              }
+            ]
+          }
+        },
+        "tags": {
+          "testkey": "value"
+        }
+      }
+    }
+  },
+  "operationId": "Tasks_GetDetails",
+  "title": "Tasks_GetDetails"
+}

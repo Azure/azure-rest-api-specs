@@ -1,0 +1,1405 @@
+{
+  "info": {
+    "description__added": "The Microsoft Azure Container Registry management API provides create, read, update, and delete functionality for Azure Container Registry resources including registries, replications, webhooks, tasks, runs, and other registry components."
+  },
+  "paths": {
+    "/providers/microsoft.ContainerRegistry/operations": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/OperationListResult",
+                "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ContainerRegistry/checkNameAvailability": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ContainerRegistry/registries": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Registry"
+        }
+      },
+      "patch": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Registry"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/cacheRules/{cacheRuleName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/CacheRule"
+        }
+      },
+      "patch": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/CacheRule"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ConnectedRegistry"
+        }
+      },
+      "patch": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ConnectedRegistry"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}/deactivate": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/credentialSets/{credentialSetName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/CredentialSet"
+        }
+      },
+      "patch": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/CredentialSet"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ExportPipeline"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/generateCredentials": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/importImage": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ImportPipeline"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/listCredentials": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/listUsages": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives/{archiveName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Archive"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives/{archiveName}/versions/{archiveVersionName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ArchiveVersion"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns/{pipelineRunName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/PipelineRun"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/PrivateEndpointConnection"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/privateLinkResources": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/regenerateCredential": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/replications": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Replication"
+        }
+      },
+      "patch": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Replication"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/scopeMaps/{scopeMapName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ScopeMap"
+        }
+      },
+      "patch": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ScopeMap"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/tokens/{tokenName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Token"
+        }
+      },
+      "patch": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Token"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/webhooks": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Webhook"
+        }
+      },
+      "patch": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description__added": "A link to the status monitor"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Webhook"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/getCallbackConfig": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/listEvents": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/ping": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActiveDirectoryObject__deleted": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationDefinition__deleted": {
+      "type": "object",
+      "properties": {
+        "origin": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayDefinition"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesDefinition",
+          "x-ms-client-flatten": true
+        },
+        "isDataAction": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OperationDisplayDefinition__deleted": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/OperationDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "OperationLogSpecificationDefinition__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationMetricSpecificationDefinition__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayDescription": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "internalMetricName": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationPropertiesDefinition__deleted": {
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationServiceSpecificationDefinition"
+        }
+      }
+    },
+    "OperationServiceSpecificationDefinition__deleted": {
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricSpecificationDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationLogSpecificationDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "PackageType__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProxyResource__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "StorageAccountProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SystemData__deleted": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "CreatedByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "LastModifiedByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "readOnly": true
+    },
+    "TypeSpec.Http.OkResponse__added": {
+      "type": "object"
+    },
+    "Archive": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ArchiveVersion": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "CacheRule": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ConnectedRegistry": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "CredentialSet": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ExportPipeline": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ImportPipeline": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "PipelineRun": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "PrivateEndpointConnection": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "PrivateLinkResource": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id__deleted": {
+          "type": "string"
+        },
+        "name__deleted": {
+          "type": "string"
+        }
+      }
+    },
+    "QuarantinePolicy": {
+      "properties": {
+        "status": {
+          "default__deleted": "disabled"
+        }
+      }
+    },
+    "Registry": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/Resource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "RegistryNameCheckRequest": {
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "name__deleted": "ContainerRegistryResourceType"
+          }
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "default__deleted": "Unsecure"
+        }
+      }
+    },
+    "RegistryProperties": {
+      "properties": {
+        "adminUserEnabled": {
+          "default__deleted": false
+        },
+        "publicNetworkAccess": {
+          "default__deleted": "Enabled"
+        },
+        "networkRuleBypassOptions": {
+          "default__deleted": "AzureServices"
+        },
+        "networkRuleBypassAllowedForTasks": {
+          "default__deleted": false
+        },
+        "zoneRedundancy": {
+          "default__deleted": "Disabled"
+        },
+        "anonymousPullEnabled": {
+          "default__deleted": false
+        },
+        "metadataSearch": {
+          "default__deleted": "Disabled"
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "default__deleted": "Unsecure"
+        },
+        "roleAssignmentMode": {
+          "default__deleted": "LegacyRegistryPermissions"
+        }
+      }
+    },
+    "RegistryPropertiesUpdateParameters": {
+      "properties": {
+        "networkRuleBypassOptions": {
+          "default__deleted": "AzureServices"
+        },
+        "metadataSearch": {
+          "default__deleted": "Disabled"
+        }
+      }
+    },
+    "Replication": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/Resource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ReplicationProperties": {
+      "properties": {
+        "zoneRedundancy": {
+          "default__deleted": "Disabled"
+        }
+      }
+    },
+    "RetentionPolicy": {
+      "properties": {
+        "status": {
+          "default__deleted": "disabled"
+        }
+      }
+    },
+    "ScopeMap": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SoftDeletePolicy": {
+      "properties": {
+        "status": {
+          "default__deleted": "disabled"
+        }
+      }
+    },
+    "Token": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "TrustPolicy": {
+      "properties": {
+        "status": {
+          "default__deleted": "disabled"
+        }
+      }
+    },
+    "Webhook": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/Resource",
+              "__new": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "WebhookPropertiesCreateParameters": {
+      "properties": {
+        "serviceUri": {
+          "x-ms-secret__deleted": true
+        },
+        "customHeaders": {
+          "x-ms-secret__deleted": true
+        }
+      }
+    },
+    "WebhookPropertiesUpdateParameters": {
+      "properties": {
+        "serviceUri": {
+          "x-ms-secret__deleted": true
+        },
+        "customHeaders": {
+          "x-ms-secret__deleted": true
+        }
+      }
+    }
+  }
+}
