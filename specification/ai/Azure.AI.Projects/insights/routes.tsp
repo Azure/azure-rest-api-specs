@@ -18,9 +18,21 @@ alias InsightsServiceTraits = SupportsClientRequestId &
 alias InsightsOperations = Azure.Core.ResourceOperations<InsightsServiceTraits>;
 
 alias FilterQueryParamsTraits = {
-  @query("filter")
-  @doc("Filter in odata format")
-  filter?: string;
+  @query("type")
+  @doc("Filter by the type of analysis.")
+  type?: AnalysisType;
+
+  @query("evalId")
+  @doc("Filter by the evaluation ID.")
+  evalId?: string;
+
+  @query("runId")
+  @doc("Filter by the evaluation run ID.")
+  runId?: string;
+
+  @query("agentName")
+  @doc("Filter by the agent name.")
+  agentName?: string;
 };
 
 @added(Versions.v2025_05_15_preview)

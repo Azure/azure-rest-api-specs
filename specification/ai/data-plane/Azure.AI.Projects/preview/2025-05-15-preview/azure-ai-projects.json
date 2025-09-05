@@ -1362,9 +1362,50 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "filter",
+            "name": "type",
             "in": "query",
-            "description": "Filter in odata format",
+            "description": "Filter by the type of analysis.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "EvaluationRunClusterAnalysis",
+              "AgentClusterAnalysis"
+            ],
+            "x-ms-enum": {
+              "name": "AnalysisType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "EvaluationRunClusterAnalysis",
+                  "value": "EvaluationRunClusterAnalysis",
+                  "description": "Analysis on an Evaluation run result."
+                },
+                {
+                  "name": "AgentClusterAnalysis",
+                  "value": "AgentClusterAnalysis",
+                  "description": "Analysis on an Agent."
+                }
+              ]
+            }
+          },
+          {
+            "name": "evalId",
+            "in": "query",
+            "description": "Filter by the evaluation ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "query",
+            "description": "Filter by the evaluation run ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "description": "Filter by the agent name.",
             "required": false,
             "type": "string"
           },
@@ -2970,16 +3011,21 @@
       "type": "object",
       "description": "Analysis on set of Evaluation Results",
       "properties": {
-        "evalIds": {
+        "evalId": {
+          "type": "string",
+          "description": "Evaluation Id for the analysis."
+        },
+        "runIds": {
           "type": "array",
-          "description": "List of evaluation IDs for the analysis.",
+          "description": "List of evaluation run IDs for the analysis.",
           "items": {
             "type": "string"
           }
         }
       },
       "required": [
-        "evalIds"
+        "evalId",
+        "runIds"
       ],
       "allOf": [
         {

@@ -61,8 +61,11 @@ model EvaluationRunClusterAnalysis extends AnalysisRequest {
   @doc("The type of analysis request.")
   type: AnalysisType.EvaluationRunClusterAnalysis;
 
-  @doc("List of evaluation IDs for the analysis.")
-  evalIds: string[];
+  @doc("Evaluation Id for the analysis.")
+  evalId: string;
+
+  @doc("List of evaluation run IDs for the analysis.")
+  runIds: string[];
 }
 
 @doc("Analysis on set of Agent Evaluation Results")
