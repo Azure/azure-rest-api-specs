@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/json-schema";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -4286,6 +4285,7 @@ model Endpoint {
   /**
    * Protocol over which communication will happen over this endpoint
    */
+  @summary("Endpoint Communication Protocol")
   protocol?: Protocol = Protocol.tcp;
 
   /**
@@ -4301,12 +4301,12 @@ model Endpoint {
   /**
    * Port over which the application is exposed from container.
    */
-  published?: int32;
+  published?: int32 | null;
 
   /**
    * Host IP over which the application is exposed from the container
    */
-  hostIp?: string;
+  hostIp?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5405,14 +5405,14 @@ model EndpointPropertiesBase {
   /**
    * Description of the inference endpoint.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * EndpointAuthKeys to set initially on an Endpoint.
    * This property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.
    */
   @visibility(Lifecycle.Create)
-  keys?: EndpointAuthKeys;
+  keys?: EndpointAuthKeys | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
@@ -5424,13 +5424,13 @@ model EndpointPropertiesBase {
    * Endpoint URI.
    */
   @visibility(Lifecycle.Read)
-  scoringUri?: url;
+  scoringUri?: url | null;
 
   /**
    * Endpoint Swagger URI.
    */
   @visibility(Lifecycle.Read)
-  swaggerUri?: url;
+  swaggerUri?: url | null;
 }
 
 /**
@@ -5441,13 +5441,13 @@ model EndpointAuthKeys {
    * The primary key.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  primaryKey?: string;
+  primaryKey?: string | null;
 
   /**
    * The secondary key.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  secondaryKey?: string;
+  secondaryKey?: string | null;
 }
 
 /**
@@ -5640,29 +5640,29 @@ model EndpointDeploymentPropertiesBase {
   /**
    * Code configuration for the endpoint deployment.
    */
-  codeConfiguration?: CodeConfiguration;
+  codeConfiguration?: CodeConfiguration | null;
 
   /**
    * Description of the endpoint deployment.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * ARM resource ID or AssetId of the environment specification for the endpoint deployment.
    */
-  environmentId?: string;
+  environmentId?: string | null;
 
   /**
    * Environment variables configuration for the deployment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  environmentVariables?: Record<string>;
+  environmentVariables?: Record<string | null> | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<string>;
+  properties?: Record<string | null> | null;
 }
 
 /**
@@ -6605,19 +6605,18 @@ model DeltaModelModifyRequest {
   /**
    * Gets or sets delta models to remove.
    */
-  @TypeSpec.JsonSchema.uniqueItems
+  @uniqueItems
   addDeltaModels?: string[] | null;
 
   /**
    * Gets or sets delta models to remove.
    */
-  @TypeSpec.JsonSchema.uniqueItems
+  @uniqueItems
   removeDeltaModels?: string[] | null;
 
   /**
    * Gets or sets target base model.
    */
-  @uniqueItems
   targetBaseModel?: string | null;
 }
 
@@ -7192,22 +7191,22 @@ model EndpointAuthToken {
   /**
    * Access token for endpoint authentication.
    */
-  accessToken?: string;
+  accessToken?: string | null;
 
   /**
    * Access token expiry time (UTC).
    */
-  expiryTimeUtc?: int64;
+  expiryTimeUtc?: int64 = 0;
 
   /**
    * Refresh access token after time (UTC).
    */
-  refreshAfterTimeUtc?: int64;
+  refreshAfterTimeUtc?: int64 = 0;
 
   /**
    * Access token type.
    */
-  tokenType?: string;
+  tokenType?: string | null;
 }
 
 /**
@@ -8567,7 +8566,6 @@ model EndpointModelProperties {
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
-  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 
   /**

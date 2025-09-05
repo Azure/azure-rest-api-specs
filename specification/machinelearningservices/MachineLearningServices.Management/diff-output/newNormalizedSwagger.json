@@ -19875,7 +19875,8 @@
         },
         "tail": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         }
       }
     },
@@ -19891,13 +19892,16 @@
       "type": "object",
       "properties": {
         "destinationName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "destinationVersion": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "registryName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -20086,7 +20090,8 @@
         "outputs": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -20095,6 +20100,7 @@
         },
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -20149,7 +20155,8 @@
       "type": "object",
       "properties": {
         "privileged": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         }
       },
       "additionalProperties": {}
@@ -20158,10 +20165,12 @@
       "type": "object",
       "properties": {
         "password": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "userName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -20176,11 +20185,13 @@
       "properties": {
         "delayEvaluation": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "evaluationInterval": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "policyType": {
           "type": "string",
@@ -20264,6 +20275,7 @@
       "properties": {
         "protocol": {
           "type": "string",
+          "title": "Endpoint Communication Protocol",
           "default": "tcp",
           "enum": [
             "tcp",
@@ -20284,10 +20296,12 @@
         },
         "published": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "hostIp": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -20296,6 +20310,7 @@
       "properties": {
         "primaryKey": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -20303,6 +20318,7 @@
         },
         "secondaryKey": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -20314,18 +20330,22 @@
       "type": "object",
       "properties": {
         "accessToken": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "expiryTimeUtc": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "default": 0
         },
         "refreshAfterTimeUtc": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "default": 0
         },
         "tokenType": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -20350,24 +20370,31 @@
       "type": "object",
       "properties": {
         "codeConfiguration": {
-          "$ref": "#/definitions/CodeConfiguration"
+          "$ref": "#/definitions/CodeConfiguration",
+          "x-nullable": true
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "environmentId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "environmentVariables": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "properties": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -20516,8 +20543,7 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         },
         "version": {
           "type": "string"
@@ -20664,10 +20690,12 @@
           }
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "keys": {
           "$ref": "#/definitions/EndpointAuthKeys",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create"
           ]
@@ -20681,11 +20709,13 @@
         "scoringUri": {
           "type": "string",
           "format": "uri",
+          "x-nullable": true,
           "readOnly": true
         },
         "swaggerUri": {
           "type": "string",
           "format": "uri",
+          "x-nullable": true,
           "readOnly": true
         }
       },

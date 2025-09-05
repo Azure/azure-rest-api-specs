@@ -28261,7 +28261,8 @@
         "tail": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of lines to tail."
+          "description": "The maximum number of lines to tail.",
+          "x-nullable": true
         }
       }
     },
@@ -28353,15 +28354,18 @@
       "properties": {
         "destinationName": {
           "type": "string",
-          "description": "Destination asset name"
+          "description": "Destination asset name",
+          "x-nullable": true
         },
         "destinationVersion": {
           "type": "string",
-          "description": "Destination asset version"
+          "description": "Destination asset version",
+          "x-nullable": true
         },
         "registryName": {
           "type": "string",
-          "description": "Destination registry name"
+          "description": "Destination registry name",
+          "x-nullable": true
         }
       }
     },
@@ -28587,7 +28591,8 @@
           "type": "object",
           "description": "[Required]",
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -28597,6 +28602,7 @@
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
           "description": "Queue settings for the job",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -28673,7 +28679,8 @@
       "properties": {
         "privileged": {
           "type": "boolean",
-          "description": "Indicate whether container shall run in privileged or non-privileged mode."
+          "description": "Indicate whether container shall run in privileged or non-privileged mode.",
+          "x-nullable": true
         }
       },
       "additionalProperties": {}
@@ -28684,11 +28691,13 @@
       "properties": {
         "password": {
           "type": "string",
-          "description": "DockerCredential user password"
+          "description": "DockerCredential user password",
+          "x-nullable": true
         },
         "userName": {
           "type": "string",
-          "description": "DockerCredential user name"
+          "description": "DockerCredential user name",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -28705,12 +28714,14 @@
         "delayEvaluation": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of intervals by which to delay the first evaluation."
+          "description": "Number of intervals by which to delay the first evaluation.",
+          "default": 0
         },
         "evaluationInterval": {
           "type": "integer",
           "format": "int32",
-          "description": "Interval (number of runs) between policy evaluations."
+          "description": "Interval (number of runs) between policy evaluations.",
+          "default": 0
         },
         "policyType": {
           "$ref": "#/definitions/EarlyTerminationPolicyType",
@@ -28881,6 +28892,7 @@
       "properties": {
         "protocol": {
           "type": "string",
+          "title": "Endpoint Communication Protocol",
           "description": "Protocol over which communication will happen over this endpoint",
           "default": "tcp",
           "enum": [
@@ -28919,11 +28931,13 @@
         "published": {
           "type": "integer",
           "format": "int32",
-          "description": "Port over which the application is exposed from container."
+          "description": "Port over which the application is exposed from container.",
+          "x-nullable": true
         },
         "hostIp": {
           "type": "string",
-          "description": "Host IP over which the application is exposed from the container"
+          "description": "Host IP over which the application is exposed from the container",
+          "x-nullable": true
         }
       }
     },
@@ -28934,6 +28948,7 @@
         "primaryKey": {
           "type": "string",
           "description": "The primary key.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -28942,6 +28957,7 @@
         "secondaryKey": {
           "type": "string",
           "description": "The secondary key.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -28982,21 +28998,25 @@
       "properties": {
         "accessToken": {
           "type": "string",
-          "description": "Access token for endpoint authentication."
+          "description": "Access token for endpoint authentication.",
+          "x-nullable": true
         },
         "expiryTimeUtc": {
           "type": "integer",
           "format": "int64",
-          "description": "Access token expiry time (UTC)."
+          "description": "Access token expiry time (UTC).",
+          "default": 0
         },
         "refreshAfterTimeUtc": {
           "type": "integer",
           "format": "int64",
-          "description": "Refresh access token after time (UTC)."
+          "description": "Refresh access token after time (UTC).",
+          "default": 0
         },
         "tokenType": {
           "type": "string",
-          "description": "Access token type."
+          "description": "Access token type.",
+          "x-nullable": true
         }
       }
     },
@@ -29054,28 +29074,35 @@
       "properties": {
         "codeConfiguration": {
           "$ref": "#/definitions/CodeConfiguration",
-          "description": "Code configuration for the endpoint deployment."
+          "description": "Code configuration for the endpoint deployment.",
+          "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "Description of the endpoint deployment."
+          "description": "Description of the endpoint deployment.",
+          "x-nullable": true
         },
         "environmentId": {
           "type": "string",
-          "description": "ARM resource ID or AssetId of the environment specification for the endpoint deployment."
+          "description": "ARM resource ID or AssetId of the environment specification for the endpoint deployment.",
+          "x-nullable": true
         },
         "environmentVariables": {
           "type": "object",
           "description": "Environment variables configuration for the deployment.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "properties": {
           "type": "object",
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -29217,8 +29244,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
+          "description": "Metadata pertaining to creation and last modification of the resource."
         },
         "version": {
           "type": "string",
@@ -29371,11 +29397,13 @@
         },
         "description": {
           "type": "string",
-          "description": "Description of the inference endpoint."
+          "description": "Description of the inference endpoint.",
+          "x-nullable": true
         },
         "keys": {
           "$ref": "#/definitions/EndpointAuthKeys",
           "description": "EndpointAuthKeys to set initially on an Endpoint.\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create"
           ]
@@ -29391,12 +29419,14 @@
           "type": "string",
           "format": "uri",
           "description": "Endpoint URI.",
+          "x-nullable": true,
           "readOnly": true
         },
         "swaggerUri": {
           "type": "string",
           "format": "uri",
           "description": "Endpoint Swagger URI.",
+          "x-nullable": true,
           "readOnly": true
         }
       },

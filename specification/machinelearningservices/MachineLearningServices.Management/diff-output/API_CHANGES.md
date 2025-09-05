@@ -1170,10 +1170,6 @@
 | `definitions.BatchRetrySettings.properties.timeout.default__deleted` | deleted | `PT30S` |
 | `definitions.CommandJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.DistillationJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.EarlyTerminationPolicy.properties.delayEvaluation.default__deleted` | deleted | `0` |
-| `definitions.EarlyTerminationPolicy.properties.evaluationInterval.default__deleted` | deleted | `0` |
-| `definitions.EndpointAuthToken.properties.expiryTimeUtc.default__deleted` | deleted | `0` |
-| `definitions.EndpointAuthToken.properties.refreshAfterTimeUtc.default__deleted` | deleted | `0` |
 | `definitions.FeatureImportanceSettings.properties.mode.default__deleted` | deleted | `Disabled` |
 | `definitions.FineTuningJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.Forecasting.properties.primaryMetric.default__deleted` | deleted | `NormalizedRootMeanSquaredError` |
@@ -1647,7 +1643,6 @@
 |------|------------|-------|
 | `definitions.ComputeInstanceConnectivityEndpoints.readOnly__deleted` | deleted | `true` |
 | `definitions.ComputeInstanceCreatedBy.readOnly__deleted` | deleted | `true` |
-| `definitions.EndpointModelProperties.properties.systemData.readOnly__added` | added | `true` |
 | `definitions.ListAmlUserFeatureResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.ListUsagesResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.ListWorkspaceQuotas.properties.value.readOnly__deleted` | deleted | `true` |
@@ -1678,34 +1673,8 @@
 | `definitions.ComputeInstanceProperties.properties.enableSSO['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceProperties.properties.releaseQuotaOnStop['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DeploymentLogsRequest.properties.tail['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DestinationAsset.properties.destinationName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DestinationAsset.properties.destinationVersion['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DestinationAsset.properties.registryName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DistillationJob.properties.outputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DistillationJob.properties.queueSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Docker.properties.privileged['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DockerCredential.properties.password['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DockerCredential.properties.userName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Endpoint.properties.hostIp['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Endpoint.properties.published['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointAuthKeys.properties.primaryKey['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointAuthKeys.properties.secondaryKey['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointAuthToken.properties.accessToken['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointAuthToken.properties.tokenType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointDeploymentPropertiesBase.properties.codeConfiguration['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointDeploymentPropertiesBase.properties.description['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointDeploymentPropertiesBase.properties.environmentId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointDeploymentPropertiesBase.properties.environmentVariables.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointDeploymentPropertiesBase.properties.environmentVariables['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointDeploymentPropertiesBase.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointDeploymentPropertiesBase.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointPropertiesBase.properties.description['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointPropertiesBase.properties.keys['x-nullable__deleted']` | deleted | `true` |
 | `definitions.EndpointPropertiesBase.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
 | `definitions.EndpointPropertiesBase.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointPropertiesBase.properties.scoringUri['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointPropertiesBase.properties.swaggerUri['x-nullable__deleted']` | deleted | `true` |
 | `definitions.FeatureAttributionDriftMonitoringSignal.properties.featureDataTypeOverride['x-nullable__deleted']` | deleted | `true` |
 | `definitions.FeatureAttributionMetricThreshold.properties.threshold['x-nullable__deleted']` | deleted | `true` |
 | `definitions.FeatureImportanceSettings.properties.targetColumn['x-nullable__deleted']` | deleted | `true` |
@@ -2141,7 +2110,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Endpoint.properties.protocol.title__deleted` | deleted | `Endpoint Communication Protocol` |
 | `definitions.EnvironmentVariable.properties.type.title__deleted` | deleted | `Type of Environment Variable` |
 | `definitions.EstimatedVMPrice.properties.osType.title__deleted` | deleted | `OS type` |
 | `definitions.EstimatedVMPrice.properties.retailPrice.title__deleted` | deleted | `Retail price` |
