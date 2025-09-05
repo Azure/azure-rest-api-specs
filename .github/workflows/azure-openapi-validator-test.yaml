@@ -1,0 +1,49 @@
+name: azure-openapi-validator - Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: ref to test (eg refs/pull/1/merge)
+        required: true
+        default: main
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: specs
+          sparse-checkout: |
+            .github
+
+      - name: Checkout azure-openapi-validator@${{ inputs.ref }}
+        uses: actions/checkout@v4
+        with:
+          repository: Azure/azure-openapi-validator
+          ref: ${{ inputs.ref }}
+          path: aov
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: (aov) rush install
+        run: node common/scripts/install-run-rush.js install
+        working-directory: aov
+
+      - name: (aov) rush build
+        run: node common/scripts/install-run-rush.js build --verbose
+        working-directory: aov
+
+      - name: (aov) rush pack
+        run: node common/scripts/install-run-rush.js pack
+        working-directory: aov
