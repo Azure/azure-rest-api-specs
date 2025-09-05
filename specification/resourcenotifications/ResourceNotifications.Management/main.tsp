@@ -186,6 +186,18 @@ model NotificationSessionResource
  * Error Models
  */
 
+ /** Inner error details for server errors. */
+model DefaultErrorDetails {
+  /** The specific error code. */
+  code?: string;
+
+  /** The error message. */
+  message?: string;
+
+  /** Stack trace information. */
+  stackTrace?: string;
+}
+
 /** Inner error details for server errors. */
 model InnerErrorDetails {
   /** The specific error code. */
@@ -247,6 +259,14 @@ model InternalServerErrorDetails {
 
   /** Additional error information. */
   innerError?: InnerErrorDetails;
+}
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for bad request.")
+model Default {
+  /** Error details for bad request. */
+  error: DefaultErrorDetails;
 }
 
 @error
@@ -394,6 +414,10 @@ interface NotificationsSessions {
     | {
         @statusCode _: 500;
         @body body: InternalServerError;
+      }
+    | {
+        @statusCode _: "default";
+        @body body: Default;
       };
 
   /** Get session details. */
@@ -431,6 +455,10 @@ interface NotificationsSessions {
     | {
         @statusCode _: 500;
         @body body: InternalServerError;
+      }
+    | {
+        @statusCode _: "default";
+        @body body: Default;
       };
 
   /** Close the session. */
@@ -464,5 +492,9 @@ interface NotificationsSessions {
     | {
         @statusCode _: 500;
         @body body: InternalServerError;
+      }
+    | {
+        @statusCode _: "default";
+        @body body: Default;
       };
 }
