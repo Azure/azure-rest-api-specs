@@ -304,6 +304,20 @@
       "type": "object",
       "description": "Error response for bad request.",
       "properties": {
+        "error": {
+          "$ref": "#/definitions/BadRequestErrorDetails",
+          "description": "Error details for bad request."
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "x-ms-error-response": true
+    },
+    "BadRequestErrorDetails": {
+      "type": "object",
+      "description": "Bad request error details.",
+      "properties": {
         "code": {
           "type": "string",
           "description": "Error code indicating the type of bad request."
@@ -327,8 +341,7 @@
       "required": [
         "code",
         "message"
-      ],
-      "x-ms-error-response": true
+      ]
     },
     "CloseSessionResponse": {
       "type": "object",
@@ -429,6 +442,20 @@
       "type": "object",
       "description": "Error response for internal server error.",
       "properties": {
+        "error": {
+          "$ref": "#/definitions/InternalServerErrorDetails",
+          "description": "Error details for internal server error."
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "x-ms-error-response": true
+    },
+    "InternalServerErrorDetails": {
+      "type": "object",
+      "description": "Internal server error details.",
+      "properties": {
         "code": {
           "type": "string",
           "description": "Error code indicating the type of internal error."
@@ -445,8 +472,7 @@
       "required": [
         "code",
         "message"
-      ],
-      "x-ms-error-response": true
+      ]
     },
     "NotificationSessionConnectionDetails": {
       "type": "object",
@@ -708,6 +734,20 @@
       "type": "object",
       "description": "Error response for too many requests.",
       "properties": {
+        "error": {
+          "$ref": "#/definitions/TooManyRequestsErrorDetails",
+          "description": "Error details for too many requests."
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "x-ms-error-response": true
+    },
+    "TooManyRequestsErrorDetails": {
+      "type": "object",
+      "description": "Too many requests error details.",
+      "properties": {
         "code": {
           "type": "string",
           "description": "Error code indicating the type of rate limiting error."
@@ -724,12 +764,25 @@
       "required": [
         "code",
         "message"
-      ],
-      "x-ms-error-response": true
+      ]
     },
     "Unauthorized": {
       "type": "object",
       "description": "Error response for unauthorized.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/UnauthorizedErrorDetails",
+          "description": "Error details for unauthorized."
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "x-ms-error-response": true
+    },
+    "UnauthorizedErrorDetails": {
+      "type": "object",
+      "description": "Unauthorized error details.",
       "properties": {
         "code": {
           "type": "string",
@@ -747,8 +800,7 @@
       "required": [
         "code",
         "message"
-      ],
-      "x-ms-error-response": true
+      ]
     }
   },
   "parameters": {}

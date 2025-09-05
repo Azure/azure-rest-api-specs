@@ -198,10 +198,8 @@ model InnerErrorDetails {
   stackTrace?: string;
 }
 
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for bad request.")
-model BadRequestError {
+/** Bad request error details. */
+model BadRequestErrorDetails {
   /** Error code indicating the type of bad request. */
   code: string;
   
@@ -215,10 +213,8 @@ model BadRequestError {
   details?: string[];
 }
 
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for too many requests.")
-model TooManyRequests {
+/** Too many requests error details. */
+model TooManyRequestsErrorDetails {
   /** Error code indicating the type of rate limiting error. */
   code: string;
   
@@ -229,10 +225,8 @@ model TooManyRequests {
   innerError?: InnerErrorDetails;
 }
 
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for unauthorized.")
-model Unauthorized {
+/** Unauthorized error details. */
+model UnauthorizedErrorDetails {
   /** Error code indicating the type of authorization error. */
   code: string;
   
@@ -243,11 +237,8 @@ model Unauthorized {
   innerError?: InnerErrorDetails;
 }
 
-
-@error
-@extension("x-ms-error-response", true)
-@doc("Error response for internal server error.")
-model InternalServerError {
+/** Internal server error details. */
+model InternalServerErrorDetails {
   /** Error code indicating the type of internal error. */
   code: string;
   
@@ -256,6 +247,38 @@ model InternalServerError {
   
   /** Additional error information. */
   innerError?: InnerErrorDetails;
+}
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for bad request.")
+model BadRequestError {
+  /** Error details for bad request. */
+  error: BadRequestErrorDetails;
+}
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for too many requests.")
+model TooManyRequests {
+  /** Error details for too many requests. */
+  error: TooManyRequestsErrorDetails;
+}
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for unauthorized.")
+model Unauthorized {
+  /** Error details for unauthorized. */
+  error: UnauthorizedErrorDetails;
+}
+
+@error
+@extension("x-ms-error-response", true)
+@doc("Error response for internal server error.")
+model InternalServerError {
+  /** Error details for internal server error. */
+  error: InternalServerErrorDetails;
 }
 
 
