@@ -29,13 +29,7 @@ model PlannedQuotaResourceProperties {
   @doc("Stage name")
   stage?: string;
 
-  @doc("Region name")
-  @added(Microsoft.PlannedQuota.Versions.v2023_08_22)
-  @removed(Microsoft.PlannedQuota.Versions.v2024_06_24_preview)
-  region: string;
-
   @doc("The Azure location")
-  @added(Microsoft.PlannedQuota.Versions.v2024_06_24_preview)
   azureLocation: azureLocation;
 
   @doc("Plan version")
