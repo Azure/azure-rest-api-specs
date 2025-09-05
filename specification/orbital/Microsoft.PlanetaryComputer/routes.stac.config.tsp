@@ -639,7 +639,7 @@ interface StacQueryables {
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac/queryables")
   @get
-  getAll is Azure.Core.Foundations.Operation<{}, StacQueryableJsonSchema>;
+  getAll is Azure.Core.Foundations.Operation<{}, Record<unknown>>;
   /**
    * Delete queryables by name for specified collection.
    */
@@ -686,7 +686,7 @@ interface StacQueryables {
       @pattern(".*")
       collectionId: string;
     },
-    StacQueryableJsonSchema
+    Record<unknown>
   >;
   /**
    * Set queryables for a collection given a list of queryable definitions

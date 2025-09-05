@@ -263,7 +263,7 @@ model MosaicInfo {
    * A list of CQL-JSON expressions to use as the default for  this collection.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  defaultCustomQuery?: CqlFilter;
+  defaultCustomQuery?: Record<unknown>;
 }
 
 /**
@@ -293,7 +293,7 @@ model Mosaic {
    * A list of valid CQL2-JSON expressions used to filter the collection to moasic.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  cql: CqlFilter[];
+  cql: Record<unknown>[];
 }
 
 /**

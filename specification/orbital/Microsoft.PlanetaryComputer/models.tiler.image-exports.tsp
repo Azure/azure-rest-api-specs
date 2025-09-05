@@ -13,7 +13,7 @@ model ImageRequest {
    * Cql
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  cql: CqlFilter;
+  cql: Record<unknown>;
 
   /**
    * Geometry

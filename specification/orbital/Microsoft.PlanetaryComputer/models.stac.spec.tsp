@@ -94,10 +94,6 @@ union StacQueryableDefinitionDataType {
   string,
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "JSON Schema requires union types."
-@doc("JSON Schema structure for STAC Queryables")
-model StacQueryableJsonSchema is Record<unknown>;
-
 /**
  * Represents the GeoJSON feature collection type for STAC item collections.
  */
@@ -174,22 +170,6 @@ model ConformanceClasses {
 }
 
 /**
- * Represent a CQL2 query
- *
- * https://github.com/stac-api-extensions/filter
- */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-model CqlFilter is Record<unknown>;
-
-/**
- * Represent a STAC query
- *
- * https://github.com/stac-api-extensions/query
- */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-model StacQuery is Record<unknown>;
-
-/**
  * Search model.
  * *
  * Defines parameters for a STAC search POST request.
@@ -254,7 +234,7 @@ model SearchOptions {
    * See the [STAC Query Extension](https://github.com/stac-api-extensions/query).
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC query requires union types."
-  query?: StacQuery;
+  query?: Record<unknown>;
 
   /**
    * Sort criteria for the search results.
@@ -277,7 +257,7 @@ model SearchOptions {
    * See the [STAC Filter Extension](https://github.com/stac-api-extensions/filter).
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  filter?: CqlFilter;
+  filter?: Record<unknown>;
 
   /**
    * Coordinate reference system for the filter.
@@ -355,12 +335,6 @@ model FeatureCollections {
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
   collections: StacCollection[];
 }
-
-/**
- * Represents a collection summary
- */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model StacCollectionSummaries is Record<unknown>;
 
 /**
  *
@@ -444,7 +418,7 @@ model StacCollection {
    * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  summaries?: StacCollectionSummaries;
+  summaries?: Record<unknown>;
 }
 
 /**
@@ -564,12 +538,6 @@ model StacCollectionTemporalExtent {
 }
 
 /**
- * StacQueryableDefinitionType
- */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model StacQueryableDefinitionType is Record<unknown>;
-
-/**
  * Definition of a queryable field for STAC API filtering.
  */
 model StacQueryable {
@@ -583,7 +551,7 @@ model StacQueryable {
    * Metadata for the queryable field.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  definition: StacQueryableDefinitionType;
+  definition: Record<unknown>;
 
   /**
    * Whether to create a database index for this field.

@@ -108,13 +108,13 @@ model RegisterMosaic {
    * Query
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC query requires union types."
-  query?: StacQuery;
+  query?: Record<unknown>;
 
   /**
    * Filter
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  filter?: CqlFilter;
+  filter?: Record<unknown>;
 
   /**
    * Temporal filter in RFC 3339 format or interval
@@ -234,7 +234,7 @@ model TilerStacSearchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
-  search: CqlFilter;
+  search: Record<unknown>;
 
   /**
    * SQL WHERE clause representing the search filters

@@ -2290,7 +2290,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TitilerCoreModelsResponsesPoint"
+              "$ref": "#/definitions/TilerCoreModelsResponsesPoint"
             }
           },
           "default": {
@@ -10288,7 +10288,8 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StacQueryableJsonSchema"
+              "type": "object",
+              "additionalProperties": {}
             }
           },
           "default": {
@@ -10615,7 +10616,8 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StacQueryableJsonSchema"
+              "type": "object",
+              "additionalProperties": {}
             }
           },
           "default": {
@@ -10824,7 +10826,7 @@
             "description": "Request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchPostRequest"
+              "$ref": "#/definitions/SearchOptions"
             }
           }
         ],
@@ -12708,11 +12710,6 @@
         "returned"
       ]
     },
-    "CqlFilter": {
-      "type": "object",
-      "description": "Represent a CQL2 query\n\nhttps://github.com/stac-api-extensions/filter",
-      "additionalProperties": {}
-    },
     "DefaultLocation": {
       "type": "object",
       "description": "Defines a default geographic location for map visualization.",
@@ -13067,8 +13064,9 @@
       "description": "Parameters for requesting a rendered image from a collection",
       "properties": {
         "cql": {
-          "$ref": "#/definitions/CqlFilter",
-          "description": "Cql"
+          "type": "object",
+          "description": "Cql",
+          "additionalProperties": {}
         },
         "geometry": {
           "$ref": "#/definitions/Geometry",
@@ -14356,7 +14354,8 @@
           "type": "array",
           "description": "A list of valid CQL2-JSON expressions used to filter the collection to moasic.",
           "items": {
-            "$ref": "#/definitions/CqlFilter"
+            "type": "object",
+            "additionalProperties": {}
           }
         }
       },
@@ -14389,8 +14388,9 @@
           "description": "Default map location when displaying this collection."
         },
         "defaultCustomQuery": {
-          "$ref": "#/definitions/CqlFilter",
-          "description": "A list of CQL-JSON expressions to use as the default for  this collection."
+          "type": "object",
+          "description": "A list of CQL-JSON expressions to use as the default for  this collection.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -14888,12 +14888,14 @@
           "description": "GeoJSON geometry to spatially filter items by intersection"
         },
         "query": {
-          "$ref": "#/definitions/StacQuery",
-          "description": "Query"
+          "type": "object",
+          "description": "Query",
+          "additionalProperties": {}
         },
         "filter": {
-          "$ref": "#/definitions/CqlFilter",
-          "description": "Filter"
+          "type": "object",
+          "description": "Filter",
+          "additionalProperties": {}
         },
         "datetime": {
           "type": "string",
@@ -15184,9 +15186,9 @@
         ]
       }
     },
-    "SearchPostRequest": {
+    "SearchOptions": {
       "type": "object",
-      "description": "Search model.\n\nOverrides the validation for datetime from the base request model.\n\nDefines parameters for a STAC search POST request.",
+      "description": "Search model.\n*\nDefines parameters for a STAC search POST request.",
       "properties": {
         "collections": {
           "type": "array",
@@ -15244,8 +15246,9 @@
           "x-ms-client-name": "durationInMinutes"
         },
         "query": {
-          "$ref": "#/definitions/StacQuery",
-          "description": "STAC Query\n\nSee the [STAC Query Extension](https://github.com/stac-api-extensions/query)."
+          "type": "object",
+          "description": "STAC Query\n\nSee the [STAC Query Extension](https://github.com/stac-api-extensions/query).",
+          "additionalProperties": {}
         },
         "sortby": {
           "type": "array",
@@ -15259,12 +15262,13 @@
           "type": "array",
           "description": "Specifies which fields to include or exclude in the STAC search results.\n\nSee the [STAC Fields Extension](https://github.com/stac-api-extensions/fields).",
           "items": {
-            "$ref": "#/definitions/SearchPostRequestFields"
+            "$ref": "#/definitions/SearchOptionsFields"
           }
         },
         "filter": {
-          "$ref": "#/definitions/CqlFilter",
-          "description": "CQL2 Filter\n\nSee the [STAC Filter Extension](https://github.com/stac-api-extensions/filter)."
+          "type": "object",
+          "description": "CQL2 Filter\n\nSee the [STAC Filter Extension](https://github.com/stac-api-extensions/filter).",
+          "additionalProperties": {}
         },
         "filter-crs": {
           "type": "string",
@@ -15309,7 +15313,7 @@
         }
       }
     },
-    "SearchPostRequestFields": {
+    "SearchOptionsFields": {
       "type": "object",
       "description": "FieldsExtension.\n\nAttributes:\ninclude: set of fields to include.\nexclude: set of fields to exclude.\n\nControls which fields to include or exclude from the response.",
       "properties": {
@@ -15485,8 +15489,9 @@
           }
         },
         "summaries": {
-          "$ref": "#/definitions/StacCollectionSummaries",
-          "description": "Summaries\n\nSee the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object)."
+          "type": "object",
+          "description": "Summaries\n\nSee the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -15496,11 +15501,6 @@
         "license",
         "extent"
       ]
-    },
-    "StacCollectionSummaries": {
-      "type": "object",
-      "description": "Represents a collection summary",
-      "additionalProperties": {}
     },
     "StacCollectionTemporalExtent": {
       "type": "object",
@@ -15772,11 +15772,6 @@
         ]
       }
     },
-    "StacQuery": {
-      "type": "object",
-      "description": "Represent a STAC query\n\nhttps://github.com/stac-api-extensions/query",
-      "additionalProperties": {}
-    },
     "StacQueryResultsSortingDirection": {
       "type": "string",
       "description": "Defines the sorting directions for query results in STAC API.",
@@ -15811,8 +15806,9 @@
           "minLength": 1
         },
         "definition": {
-          "$ref": "#/definitions/StacQueryableDefinitionType",
-          "description": "Metadata for the queryable field."
+          "type": "object",
+          "description": "Metadata for the queryable field.",
+          "additionalProperties": {}
         },
         "create_index": {
           "type": "boolean",
@@ -15910,16 +15906,6 @@
           }
         ]
       }
-    },
-    "StacQueryableDefinitionType": {
-      "type": "object",
-      "description": "StacQueryableDefinitionType",
-      "additionalProperties": {}
-    },
-    "StacQueryableJsonSchema": {
-      "type": "object",
-      "description": "JSON Schema structure for STAC Queryables",
-      "additionalProperties": {}
     },
     "StatisticsResponse": {
       "type": "object",
@@ -16428,6 +16414,41 @@
         "maxItemsPerTile"
       ]
     },
+    "TilerCoreModelsResponsesPoint": {
+      "type": "object",
+      "description": "Point model.\n\nresponse model for `/point` endpointsResponse model for point query operations providing values at a specific location",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Geographic coordinates [longitude, latitude] of the queried point",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "Array of pixel values at the queried point for each band",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "band_names": {
+          "type": "array",
+          "description": "Names of each band in the raster data",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bandNames"
+        }
+      },
+      "required": [
+        "coordinates",
+        "values",
+        "band_names"
+      ]
+    },
     "TilerImageExportFormat": {
       "type": "string",
       "description": "Format specification for image request outputs",
@@ -16717,8 +16738,9 @@
           "description": "Unique hash identifier for the search query"
         },
         "search": {
-          "$ref": "#/definitions/CqlFilter",
-          "description": "Search"
+          "type": "object",
+          "description": "Search",
+          "additionalProperties": {}
         },
         "_where": {
           "type": "string",
@@ -16775,41 +16797,6 @@
       },
       "required": [
         "search"
-      ]
-    },
-    "TitilerCoreModelsResponsesPoint": {
-      "type": "object",
-      "description": "Point model.\n\nresponse model for `/point` endpointsResponse model for point query operations providing values at a specific location",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "Geographic coordinates [longitude, latitude] of the queried point",
-          "items": {
-            "type": "number",
-            "format": "float"
-          }
-        },
-        "values": {
-          "type": "array",
-          "description": "Array of pixel values at the queried point for each band",
-          "items": {
-            "type": "number",
-            "format": "float"
-          }
-        },
-        "band_names": {
-          "type": "array",
-          "description": "Names of each band in the raster data",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "bandNames"
-        }
-      },
-      "required": [
-        "coordinates",
-        "values",
-        "band_names"
       ]
     },
     "TokenResponse": {
