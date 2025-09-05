@@ -676,7 +676,7 @@ interface TilerPoints {
       @query("resampling")
       resampling?: Resampling = Resampling.nearest;
     },
-    TitilerCoreModelsResponsesPoint
+    TilerCoreModelsResponsesPoint
   >;
 }
 

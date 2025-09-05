@@ -175,7 +175,7 @@ model BoundingBoxPathParameters {
 /**
  * Response model for point query operations providing values at a specific location
  */
-model TitilerCoreModelsResponsesPoint {
+model TilerCoreModelsResponsesPoint {
   /**
    * Geographic coordinates [longitude, latitude] of the queried point
    */
