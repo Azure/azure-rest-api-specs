@@ -186,7 +186,7 @@ model NotificationSessionResource
  * Error Models
  */
 
- /** Inner error details for server errors. */
+/** Inner error details for server errors. */
 model DefaultErrorDetails {
   /** The specific error code. */
   code?: string;
