@@ -154,10 +154,10 @@ the context. If there are no TypeSpec project paths in the context, then prompt 
 from the list of paths. If user does not have a TypeSpec project, then prompt user to create a new TypeSpec project.
 
 
-### Pre-requisites
+### Prerequisites
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
 - run `npm ci` to install the dependencies
-- To use MCP tool calls, user must have Powershell installed. Provide [Powershell installation instructions](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.5) if not installed, and recommend restarting VSCode to start the MCP server.
+- To use Azure MCP tool calls, the user must have PowerShell installed. Provide [PowerShell installation instructions](https://learn.microsoft.com/powershell/scripting/install/installing-powershell) if not installed, and recommend restarting the IDE to start the MCP server.
 
 
 ### Basic Rules for SDK Generation from TypeSpec
@@ -213,10 +213,23 @@ Do not skip the step that choose SDK generation method to ensure the user select
 6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
 7. **Generate SDKs via Pipeline**:  Generate SDKs using [run sdk gen pipeline](..\eng\common\instructions\azsdk-tools\run-sdk-gen-pipeline.instructions.md), monitor the pipeline status and displaying generated SDK PR links.
 8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
-9. **Create a release plan**: To create a release plan refer to [create release plan](..\eng\common\instructions\azsdk-tools\create-release-plan.instructions.md)
-10. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
-11. **Release package**: Release the SDK package using `ReleaseSdkPackage` tool.
-
+9. **Validate Label and then Codeowners**: Validate the service label and codeowners for the created SDK service using both [validate service label](..\eng\common\instructions\azsdk-tools\validate-service-label.instructions.md) and [validate codeowners](..\eng\common\instructions\azsdk-tools\validate-codeowners.instructions.md).
+10. **Create a release plan**: To create a release plan refer to [create release plan](..\eng\common\instructions\azsdk-tools\create-release-plan.instructions.md)
+11. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
+12. **Release package**: Release the SDK package using `azsdk_release_sdk` tool.
 
 ## Release readiness of SDK and information about the release pipeline
 Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+
+## Instructions for GitHub coding agent to generate SDKs using GitHub.com
+Run only SDK generation step and Update SDK details back in issue description and release plan. Do not run TypeSpec validation, or service label check. This is applicable only when GitHub copilot coding agent is used to generate SDK and if a Release Plan is available in the context.
+Coding agent must wait until all SDK generation pipeline are in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running Copilot from Visual Studio and VS Code.
+  
+  steps:
+    - Run SDK generation pipeline for the given TypeSpec path for all languages mentioned in the description.
+    - Keep checking the pipeline status until pipeline is in completed or failed status.
+    - Find SDK pull request links from the pipeline run.
+  constraints:
+    - Do not invoke other steps.
+    - Do not modify main.tsp file or any files in TypeSpec project.
+    - Do not add API version to an existing main.tsp if input API version is not present.

@@ -13,10 +13,7 @@ namespace ClientCustomizations;
   "java"
 );
 
-@@clientNamespace(LogsIngestion,
-  "Azure.Monitor.Ingestion",
-  "csharp"
-);
+@@clientNamespace(LogsIngestion, "Azure.Monitor.Ingestion", "csharp");
 
 @@clientName(LogsIngestion, "Client", "go");
 
