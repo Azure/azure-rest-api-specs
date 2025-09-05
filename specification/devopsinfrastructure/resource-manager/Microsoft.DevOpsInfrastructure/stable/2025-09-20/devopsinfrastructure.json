@@ -1472,6 +1472,10 @@
         "devCenterProjectResourceId": {
           "type": "string",
           "description": "The resource id of the DevCenter Project the pool belongs to."
+        },
+        "runtimeConfiguration": {
+          "$ref": "#/definitions/RuntimeConfiguration",
+          "description": "The runtime configuration of the pool."
         }
       },
       "required": [
@@ -1534,6 +1538,10 @@
         "devCenterProjectResourceId": {
           "type": "string",
           "description": "The resource id of the DevCenter Project the pool belongs to."
+        },
+        "runtimeConfiguration": {
+          "$ref": "#/definitions/RuntimeConfiguration",
+          "description": "The runtime configuration of the pool."
         }
       }
     },
@@ -2131,6 +2139,16 @@
             "description": "Represents a machine resource that is reimaging."
           }
         ]
+      }
+    },
+    "RuntimeConfiguration": {
+      "type": "object",
+      "description": "The runtime configuration of the pool.",
+      "properties": {
+        "workFolder": {
+          "type": "string",
+          "description": "The target work folder of the task agent on the machine."
+        }
       }
     },
     "SecretsManagementSettings": {
