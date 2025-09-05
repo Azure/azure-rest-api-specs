@@ -1,0 +1,35 @@
+name: azure-openapi-validator - Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref to checkout in azure-openapi-validator repo (eg refs/pull/123/merge)
+        required: true
+        default: main
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout self
+        uses: actions/checkout@v4
+        with:
+          path: specs
+          sparse-checkout: |
+            .github
+
+      - name: Checkout azure-openapi-validator at ${{ inputs.ref }}
+        uses: actions/checkout@v4
+        with:
+          repository: Azure/azure-openapi-validator
+          ref: ${{ inputs.ref }}
+          path: aov
+
+      - name: Verify checkout
+        run: pwd; ls -al
