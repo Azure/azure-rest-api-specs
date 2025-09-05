@@ -32,9 +32,10 @@ interface PrivateEndpointConnections {
    * Update the state of specified private endpoint connection associated with the storage sync service.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("location")
   create is PrivateEndpointOperations.CreateOrUpdateAsync<
     StorageSyncService,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> & ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -53,9 +54,11 @@ interface PrivateEndpointConnections {
    * Deletes the specified private endpoint connection associated with the storage sync service.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("location")
   delete is PrivateEndpointOperations.DeleteAsync<
     StorageSyncService,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> & ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
@@ -70,7 +73,6 @@ interface PrivateEndpointConnections {
   /**
    * Get a PrivateEndpointConnection List.
    */
-  #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
   listByStorageSyncService is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
     StorageSyncService,

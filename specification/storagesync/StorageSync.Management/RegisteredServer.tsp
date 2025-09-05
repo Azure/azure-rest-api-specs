@@ -50,6 +50,7 @@ interface RegisteredServers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
+  @Azure.Core.useFinalStateVia("location")
   create is ArmCreateOperation<
     ResourceInstanceParameters<
       RegisteredServer,
@@ -64,8 +65,7 @@ interface RegisteredServers {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RegisteredServer> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = RegisteredServer> & ArmLroLocationHeader<FinalResult = RegisteredServer> & Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;
@@ -81,6 +81,7 @@ interface RegisteredServers {
    * Update registered server.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("location")
   update is ArmCustomPatchAsync<
     RegisteredServer,
     PatchModel = RegisteredServerUpdateParameters,
@@ -92,8 +93,7 @@ interface RegisteredServers {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RegisteredServer> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = RegisteredServer> & ArmLroLocationHeader<FinalResult = RegisteredServer> & Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;

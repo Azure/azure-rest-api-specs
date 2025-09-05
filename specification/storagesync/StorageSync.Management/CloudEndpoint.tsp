@@ -50,6 +50,7 @@ interface CloudEndpoints {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
+  @Azure.Core.useFinalStateVia("location")
   create is ArmCreateOperation<
     ResourceInstanceParameters<
       CloudEndpoint,
@@ -64,7 +65,7 @@ interface CloudEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CloudEndpoint> &
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudEndpoint> & ArmLroLocationHeader<FinalResult = CloudEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -81,6 +82,7 @@ interface CloudEndpoints {
    * Delete a given CloudEndpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("location")
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudEndpoint,
     Response = (ArmDeletedResponse & {
@@ -91,7 +93,8 @@ interface CloudEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse & {
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudEndpoint> & ArmLroLocationHeader<FinalResult = CloudEndpoint> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
@@ -128,6 +131,10 @@ interface CloudEndpoints {
     CloudEndpoint,
     BackupRequest,
     Response = (OkResponse & {
+      @header("Location")
+      @doc("Operation Status Location URI")
+      location?: string;
+      
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;
@@ -156,6 +163,10 @@ interface CloudEndpoints {
     CloudEndpoint,
     BackupRequest,
     (PostBackupResponse & {
+      @header("Location")
+      @doc("Operation Status Location URI")
+      location?: string;
+
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;

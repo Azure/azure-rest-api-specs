@@ -49,13 +49,14 @@ interface StorageSyncServices {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
+  @Azure.Core.useFinalStateVia("location")
   create is ArmCreateOperation<
     ResourceInstanceParameters<
       StorageSyncService,
       DefaultBaseParameters<StorageSyncService>
     >,
     StorageSyncServiceCreateParameters,
-    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageSyncService> &
+    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> & ArmLroLocationHeader<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -72,6 +73,7 @@ interface StorageSyncServices {
    * Patch a given StorageSyncService.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("location")
   update is Legacy.CustomPatchSync<
     StorageSyncService,
     PatchModel = StorageSyncServiceUpdateParameters,
@@ -83,7 +85,7 @@ interface StorageSyncServices {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageSyncService> &
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> & ArmLroLocationHeader<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -101,6 +103,7 @@ interface StorageSyncServices {
    * Delete a given StorageSyncService.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("location")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageSyncService,
     Response = (ArmDeletedResponse & {
@@ -111,7 +114,8 @@ interface StorageSyncServices {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse & {
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> & ArmLroLocationHeader<FinalResult = StorageSyncService> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
@@ -160,7 +164,6 @@ interface StorageSyncServices {
   /**
    * Gets the private link resources that need to be created for a storage sync service.
    */
-  #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
   listByStorageSyncService is ArmResourceActionSync<
