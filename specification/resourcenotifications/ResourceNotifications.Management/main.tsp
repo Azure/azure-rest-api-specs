@@ -301,12 +301,10 @@ interface NotificationsSessions {
     body: GetSessionDetailsRequest,
 
     ...ApiVersionParameter,
-  ):
-    | {
-        @statusCode _: 200;
-        @body body: GetSessionDetailsResponse;
-      }
-    | ErrorResponse;
+  ): {
+    @statusCode _: 200;
+    @body body: GetSessionDetailsResponse;
+  } | ErrorResponse;
 
   /** Close the session. */
   @post
@@ -323,10 +321,8 @@ interface NotificationsSessions {
     notificationSessionId: string,
 
     ...ApiVersionParameter,
-  ):
-    | {
-        @statusCode _: 200;
-        @body body: CloseSessionResponse;
-      }
-    | ErrorResponse;
+  ): {
+    @statusCode _: 200;
+    @body body: CloseSessionResponse;
+  } | ErrorResponse;
 }
