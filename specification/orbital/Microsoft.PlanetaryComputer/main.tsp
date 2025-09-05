@@ -21,9 +21,13 @@ import "./sas.tsp";
 // InMa
 import "./inma.tsp";
 
+// Client customizations
+import "./client.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+// Comment out to workaround AZC0006 and AZC0007 warnings in C# SDK
 @server("https://contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com")
 @useAuth(
   OAuth2Auth<[

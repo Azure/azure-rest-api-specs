@@ -3,8 +3,9 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tiler.common.tsp";
 import "./models.common.images.tsp";
+import "@azure-tools/typespec-client-generator-core";
+import "./models.stac.spec.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
@@ -49,7 +50,7 @@ model MosaicTileQueryParameters {
 /**
  * Supported algorithms for terrain and index-based analysis
  */
-union Algorithm {
+union TerrainAlgorithm {
   string,
 
   /**
@@ -95,22 +96,25 @@ model RegisterMosaic {
   /**
    * Geographic bounding box to filter items [west, south, east, north]
    */
-  bbox?: float64;
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64;
 
   /**
    * GeoJSON geometry to spatially filter items by intersection
    */
-  intersects?: GeoJson;
+  intersects?: Geometry;
 
   /**
    * Query
    */
-  query?: Record<StringRecord>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC query requires union types."
+  query?: Record<unknown>;
 
   /**
    * Filter
    */
-  filter?: CqlFilter;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+  filter?: Record<unknown>;
 
   /**
    * Temporal filter in RFC 3339 format or interval
@@ -120,13 +124,14 @@ model RegisterMosaic {
   /**
    * Criteria for ordering items in the mosaic
    */
-  sortby?: SortExtension[];
+  @encodedName("application/json", "sortby")
+  sortBy?: SortExtension[];
 
   /**
    * Query language format used in the filter parameter
    */
   @encodedName("application/json", "filter-lang")
-  filterLang?: FilterLang;
+  filterLanguage?: FilterLanguage;
 
   /**
    * Additional metadata to associate with the mosaic
@@ -151,12 +156,14 @@ model Metadata {
   /**
    * Minimum zoom level supported
    */
-  minzoom?: int32;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int32;
 
   /**
    * Maximum zoom level supported
    */
-  maxzoom?: int32;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int32;
 
   /**
    * Human-readable name for the resource
@@ -177,10 +184,11 @@ model Metadata {
 /**
  * Response from a successful mosaic registration with search ID and related links
  */
-model RegisterResponse {
+model TilerMosaicSearchRegistrationResponse {
   /**
    * Unique identifier for the registered search
    */
+  @encodedName("application/json", "searchid")
   searchId: string;
 
   /**
@@ -192,16 +200,13 @@ model RegisterResponse {
 /**
  * Information about a registered STAC search query
  */
-model TitilerPgstacModelInfo {
+model TilerStacSearchRegistration {
   /**
-   * PgSTAC Search entry.
-   *
-   * ref:
-   * https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915
-   *
    * Details of the saved search query
+   *
+   * See the [PgSTAC Search table definition](https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915).
    */
-  search: PgStacSearch;
+  search: TilerStacSearchDefinition;
 
   /**
    * Related links for the search query
@@ -218,7 +223,7 @@ model TitilerPgstacModelInfo {
 /**
  * Stored search query in the PgSTAC database
  */
-model PgStacSearch {
+model TilerStacSearchDefinition {
   /**
    * Unique hash identifier for the search query
    */
@@ -228,7 +233,8 @@ model PgStacSearch {
    * Search
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  search: Cql;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+  search: Record<unknown>;
 
   /**
    * SQL WHERE clause representing the search filters
@@ -239,17 +245,20 @@ model PgStacSearch {
   /**
    * SQL ORDER BY clause for sorting results
    */
-  orderby: string;
+  @encodedName("application/json", "orderby")
+  orderBy: string;
 
   /**
    * Timestamp when the search was last accessed
    */
-  lastused: utcDateTime;
+  @encodedName("application/json", "lastused")
+  lastUsed: utcDateTime;
 
   /**
    * Number of times the search has been accessed
    */
-  usecount: int32;
+  @encodedName("application/json", "usecount")
+  useCount: int32;
 
   /**
    * Additional metadata associated with the search
@@ -269,9 +278,10 @@ model ApplicationJsonResponse {
   /**
    * body
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Third-party API using anonymous array type."
   @bodyRoot
   @summary("Response Assets For Point Api Mosaic  searchId   Lon   Lat  Assets Get")
-  body: {}[];
+  body: unknown[];
 }
 
 /**
@@ -300,12 +310,12 @@ model MosaicSearchQueryParameters {
    * Return as soon as the geometry is fully covered (defaults to True in PgSTAC).
    */
   @query("exitwhenfull")
-  exitwhenfull?: boolean;
+  exitWhenFull?: boolean;
 
   /**
    * Skip any items that would show up completely under the previous items (defaults
    * to True in PgSTAC).
    */
   @query("skipcovered")
-  skipcovered?: boolean;
+  skipCovered?: boolean;
 }
