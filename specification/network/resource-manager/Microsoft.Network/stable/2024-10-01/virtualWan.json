@@ -1376,6 +1376,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets": {
+      "post": {
+        "tags": [
+          "vpnServerConfigurations"
+        ],
+        "operationId": "vpnServerConfigurations_ListRadiusSecrets",
+        "description": "List all Radius servers with respective radius secrets from VpnServerConfiguration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the VpnServerConfiguration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all Radius servers with respective radius secrets from VpnServerConfiguration.",
+            "schema": {
+              "$ref": "./virtualNetworkGateway.json#/definitions/RadiusAuthServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAllVpnServerConfigurationRadiusServerSecrets": {
+            "$ref": "./examples/AllVpnServerConfigurationRadiusServerSecretsList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
       "get": {
         "operationId": "VirtualHubs_Get",
@@ -7761,7 +7808,7 @@
         },
         "sharedKey": {
           "type": "string",
-          "description": "SharedKey for the vpn connection."
+          "description": "Deprecated: SharedKey for the vpn connection. This is no more used."
         },
         "enableBgp": {
           "type": "boolean",
@@ -7957,7 +8004,8 @@
         },
         "sharedKey": {
           "type": "string",
-          "description": "SharedKey for the vpn connection."
+          "x-ms-secret": true,
+          "description": "SharedKey for the vpn link connection. We will no longer return sharedKey in any Create/Update/Get/List/UpdateTags VpnGateway/VpnConnection/VpnLinkConnection APIs response. Please use 'Vpn Link Connections - List Default Shared Key' API to fetch Vpn link connection sharedKey."
         },
         "enableBgp": {
           "type": "boolean",
@@ -8531,7 +8579,8 @@
         },
         "radiusServerSecret": {
           "type": "string",
-          "description": "The radius secret property of the VpnServerConfiguration resource for point to site client connection."
+          "x-ms-secret": true,
+          "description": "The radius secret property of the VpnServerConfiguration resource for point to site client connection. We will no longer return radiusServerSecret in VpnServerConfiguration Create/Update/Get/List/UpdateTags APIs response. Please use VpnServerConfiguration ListRadiusSecrets API to fetch radius server secrets."
         },
         "radiusServers": {
           "type": "array",
