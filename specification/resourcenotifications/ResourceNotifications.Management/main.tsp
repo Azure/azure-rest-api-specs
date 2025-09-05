@@ -201,6 +201,18 @@ model GetSessionDetailsRequest {
   durationInMinutes: int32;
 }
 
+/** Request model for create notification session operation. */
+model CreateNotificationSessionRequest {
+  /** Description of the notification session. */
+  description?: string;
+
+  /** The maximum duration for the session in minutes. */
+  maxDurationMinutes?: int32;
+
+  /** Configuration settings as key-value pairs. */
+  configuration?: string;
+}
+
 /** Connection details for a notification session. */
 model NotificationSessionConnectionDetails {
   /** Connection string for the session. */
@@ -252,13 +264,31 @@ model CreateNotificationSessionResponse {
   systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
+/** Operation Status. */
+@lroStatus
+union OperationStatus {
+  string,
+
+  /** The operation is in progress. */
+  InProgress: "InProgress",
+
+  /** The operation completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** The operation failed. */
+  Failed: "Failed",
+
+  /** The operation was canceled. */
+  Canceled: "Canceled",
+}
+
 /** Status response model for notification session operations. */
 model NotificationSessionStatusResponse {
   @doc("The resource ID.")
   id?: string;
 
   @doc("The current status of the operation.")
-  status: ProvisioningState;
+  status: OperationStatus;
 
   @doc("The properties of the notification session.")
   properties?: NotificationSessionProperties;
@@ -275,33 +305,8 @@ model NotificationSessionStatusResponse {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "These are custom operations for notification sessions, not standard ARM resource operations"
 @tag("NotificationsSessions")
 interface NotificationsSessions {
-  /** Create a notification session status check operation. */
-  @get
-  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}/status")
-  createNotificationSessionStatus(
-    @doc("The location name.")
-    @path
-    @pattern("^[a-z0-9]+$")
-    location: string,
-
-    @doc("Name of the notification session.")
-    @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionName: string,
-
-    ...ApiVersionParameter,
-  ):
-    | {
-        @statusCode _: 200;
-        @body body: NotificationSessionStatusResponse;
-      }
-    | ErrorResponse;
-
   /** Create a notification session. */
-  @post
-  @pollingOperation(NotificationsSessions.createNotificationSessionStatus)
-  @finalOperation(NotificationsSessions.createNotificationSessionStatus)
-  @useFinalStateVia("azure-async-operation")
+  @put
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
   createNotificationSession(
     @doc("The location name.")
@@ -314,40 +319,32 @@ interface NotificationsSessions {
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
     notificationSessionName: string,
 
+    @doc("Request body containing notification session parameters.")
+    @body
+    body: CreateNotificationSessionRequest,
+
     ...ApiVersionParameter,
-  ):
-    | {
-        @statusCode _: 200;
-        @body body: CreateNotificationSessionResponse;
-      }
-    | {
-        @statusCode _: 201;
-        @body body: CreateNotificationSessionResponse;
-      }
-    | {
-        @statusCode _: 202;
-        @pollingLocation
-        @header("Azure-AsyncOperation")
-        azureAsyncOperation?: string;
-        @header("Retry-After")
-        retryAfter?: int32;
-        @header location?: string;
-      }
-    | ErrorResponse;
+  ): {
+    @statusCode _: 200;
+    @body body: CreateNotificationSessionResponse;
+  } | {
+    @statusCode _: 201;
+    @body body: CreateNotificationSessionResponse;
+  } | ErrorResponse;
 
   /** Get session details. */
   @post
-  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails")
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:getSessionDetails")
   getSessionDetails(
     @doc("The location name.")
     @path
     @pattern("^[a-z0-9]+$")
     location: string,
 
-    @doc("ID of the notification session.")
+    @doc("Name of the notification session.")
     @path
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionId: string,
+    notificationSessionName: string,
 
     @doc("Request body containing session details parameters.")
     @body
@@ -361,17 +358,17 @@ interface NotificationsSessions {
 
   /** Close the session. */
   @post
-  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession")
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:closeSession")
   closeSession(
     @doc("The location name.")
     @path
     @pattern("^[a-z0-9]+$")
     location: string,
 
-    @doc("ID of the notification session.")
+    @doc("Name of the notification session.")
     @path
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionId: string,
+    notificationSessionName: string,
 
     ...ApiVersionParameter,
   ): {

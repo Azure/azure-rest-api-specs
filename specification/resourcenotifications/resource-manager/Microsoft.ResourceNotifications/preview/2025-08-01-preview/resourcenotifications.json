@@ -48,7 +48,7 @@
   ],
   "paths": {
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}": {
-      "post": {
+      "put": {
         "operationId": "NotificationsSessions_CreateNotificationSession",
         "tags": [
           "NotificationsSessions"
@@ -73,6 +73,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body containing notification session parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateNotificationSessionRequest"
+            }
           }
         ],
         "responses": {
@@ -88,21 +97,6 @@
               "$ref": "#/definitions/CreateNotificationSessionResponse"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -114,63 +108,10 @@
           "Create a notification session": {
             "$ref": "./examples/NotificationsSessions_CreateNotificationSession.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession": {
-      "post": {
-        "operationId": "NotificationsSessions_CloseSession",
-        "tags": [
-          "NotificationsSessions"
-        ],
-        "description": "Close the session.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "notificationSessionId",
-            "in": "path",
-            "description": "ID of the notification session.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CloseSessionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Close a notification session": {
-            "$ref": "./examples/NotificationsSessions_CloseSession.json"
-          }
         }
       }
     },
-    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails": {
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:getSessionDetails": {
       "post": {
         "operationId": "NotificationsSessions_GetSessionDetails",
         "tags": [
@@ -187,9 +128,9 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "notificationSessionId",
+            "name": "notificationSessionName",
             "in": "path",
-            "description": "ID of the notification session.",
+            "description": "Name of the notification session.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
@@ -228,13 +169,13 @@
         }
       }
     },
-    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}/status": {
-      "get": {
-        "operationId": "NotificationsSessions_CreateNotificationSessionStatus",
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:closeSession": {
+      "post": {
+        "operationId": "NotificationsSessions_CloseSession",
         "tags": [
           "NotificationsSessions"
         ],
-        "description": "Create a notification session status check operation.",
+        "description": "Close the session.",
         "parameters": [
           {
             "name": "location",
@@ -260,7 +201,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NotificationSessionStatusResponse"
+              "$ref": "#/definitions/CloseSessionResponse"
             }
           },
           "default": {
@@ -268,6 +209,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Close a notification session": {
+            "$ref": "./examples/NotificationsSessions_CloseSession.json"
           }
         }
       }
@@ -317,6 +263,25 @@
         "message": {
           "type": "string",
           "description": "Success message for the close session operation."
+        }
+      }
+    },
+    "CreateNotificationSessionRequest": {
+      "type": "object",
+      "description": "Request model for create notification session operation.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the notification session."
+        },
+        "maxDurationMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum duration for the session in minutes."
+        },
+        "configuration": {
+          "type": "string",
+          "description": "Configuration settings as key-value pairs."
         }
       }
     },
@@ -556,7 +521,7 @@
           "description": "The resource ID."
         },
         "status": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/OperationStatus",
           "description": "The current status of the operation."
         },
         "properties": {
@@ -571,6 +536,43 @@
       "required": [
         "status"
       ]
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Operation Status.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "ProvisioningState": {
       "type": "string",
