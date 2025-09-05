@@ -28,6 +28,12 @@ parameters:
   - name: SpecBatchTypes
     type: string
     default: ''
+  - name: ReleasePlanWorkItemId
+    type: string
+    default: ''
+  - name: Language
+    type: string
+    default: ''
 
 stages:
 - stage: Build
@@ -113,6 +119,10 @@ stages:
           $checkoutCommitish = '${{ parameters.SdkRepoBranch }}'
           Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
           Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
+          $prStatus = 'draft'
+          Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+          $releasePlanInfo = ''
+          Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
         displayName: "Create Run Time Variables"
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
@@ -202,34 +212,34 @@ stages:
 
           if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
             optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
-            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
+            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',`n"
           elif [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
             optional_params="$optional_params --readme-relative-path ${{ parameters.ConfigPath }}"
-            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
+            sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',`n"
           fi
 
           updatedSpecRepoCommit="$(SpecRepoCommit)"
           if [ "$(Build.Reason)" = "PullRequest" ]; then
             optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
             specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
-            sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
+            sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl`n"
             updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
           fi
 
           if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
             optional_params="$optional_params --batch-type ${{ parameters.SpecBatchTypes }}"
-            sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
+            sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},`n"
           fi
 
           if [ "${{ parameters.ApiVersion }}" != "" ]; then
             optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
-            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
+            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},`n"
           fi
-          sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
+          sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'`n"
 
           if [ "$(Build.Reason)" = "Manual" ]; then
-            sdk_gen_info="$sdk_gen_info Pipeline run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
-            sdk_gen_info="$sdk_gen_info Refer to https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites to prepare for SDK release."
+            sdk_gen_info="$sdk_gen_info Pipeline run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)`n"
+            sdk_gen_info="$sdk_gen_info Refer to https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites to prepare for SDK release.`n"
           fi
           echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
           echo "$sdk_gen_info"
@@ -273,6 +283,27 @@ stages:
           workingDirectory: $(SdkRepoDirectory)
           displayName: "Create SDK PR branch variable"
 
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, '') }}:
+          - pwsh: |
+              . $(SpecRepoDirectory)/eng/common/scripts/common.ps1
+              . $(SpecRepoDirectory)/eng/common/scripts/Helpers/DevOps-WorkItem-Helpers.ps1
+              $releasePlan = Get-ReleasePlan-Link ${{ parameters.ReleasePlanWorkItemId }}
+              if ($null -eq $releasePlan)
+              {
+                echo "Failed to retrieve the Release Plan work item or the work item is not a Release Plan."
+              }
+              else
+              {
+                $releasePlanLink = $releasePlan["Custom.ReleasePlanLink"]
+                $title = $releasePlan["System.Title"]
+                $submittedBy = $releasePlan["Custom.ReleasePlanSubmittedby"]
+                $releasePlanInfo = "`n`n## Release plan details`nTitle: $title`nLink: [$releasePlanLink]($releasePlanLink)`nSubmitted by: $submittedBy"
+                echo "Release plan info: $releasePlanInfo"
+                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+              }
+            displayName: "Get Release Plan details"
+            condition: succeeded()
+
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
             BaseRepoBranch: $(SdkPullRequestSourceBranch)
@@ -298,8 +329,27 @@ stages:
               -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-              -PRBody "$(GeneratedSDKInformation)"
+              -PRBody "$(GeneratedSDKInformation)$(ReleasePlanInfo)"
               -OpenAsDraft $true
+
+        - pwsh: |
+            $prStatus = 'Failed to generate SDK.'
+            Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+          displayName: 'Set PR generation status'
+          condition: Failed()
+
+        - task: PowerShell@2
+          displayName: Link pull request to release plan
+          condition: and(succeededOrFailed(), eq(variables['HasChanges'], 'true'), not(endsWith(variables['SdkRepoName'], '-pr')))
+          inputs:
+            pwsh: true
+            workingDirectory: $(SdkRepoDirectory)
+            filePath: $(SdkRepoDirectory)/eng/common/scripts/Update-PullRequest-In-ReleasePlan.ps1
+            arguments: >
+              -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+              -PullRequestUrl "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
+              -Status "$(SdkPrStatus)"
+              -LanguageName "${{ parameters.Language }}"
 
       - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - pwsh: |
