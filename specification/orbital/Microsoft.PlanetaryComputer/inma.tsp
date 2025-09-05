@@ -631,8 +631,8 @@ namespace IngestionSources {
   @doc("SAS Token connection information")
   model SharedAccessSignatureTokenConnection {
     @doc("Azure Blob Storage container URL")
-    @encodedName("application/json", "containerUri")
-    containerUrl: url;
+    @encodedName("application/json", "containerUrl")
+    containerUri: url;
 
     @doc("SAS token")
     @visibility(Lifecycle.Create, Lifecycle.Update)
@@ -655,8 +655,8 @@ namespace IngestionSources {
   @doc("Managed Identity connection information")
   model ManagedIdentityConnection {
     @doc("Azure Blob Storage container URL")
-    @encodedName("application/json", "containerUri")
-    containerUrl: url;
+    @encodedName("application/json", "containerUrl")
+    containerUri: url;
 
     @doc("Azure Managed Identity configured in the Geo-Catalog with access to the container")
     objectId: uuid;
