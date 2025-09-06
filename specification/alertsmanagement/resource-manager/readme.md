@@ -72,6 +72,12 @@ directive:
     from: AlertsManagement.json
   - suppress: MULTIPLE_API_VERSION
     reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
+  - suppress: OperationsAPIImplementation
+    reason: Operations API is available in Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json and not needed in preview version
+    from: Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
+  - code: ValidFormats
+    where: $.definitions["Azure.Core.eTag"].format
+    reason: eTag should be an allowed format
 ```
 
 ``` yaml
@@ -82,6 +88,15 @@ tag: package-2023-03
 ```
 
 =======
+### Tag: package-preview-2025-07-01-preview
+
+These settings apply only when `--tag=package-preview-2025-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07-01-preview'
+input-file:
+  - Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
+```
+
 ### Tag: package-preview-2025-05-25-preview
 
 These settings apply only when `--tag=package-preview-2025-05-25-preview` is specified on the command line.
@@ -170,6 +185,7 @@ input-file:
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
   - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
+  - Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
 ```
 
 ### Important Note
