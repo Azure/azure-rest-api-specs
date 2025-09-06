@@ -491,13 +491,13 @@
       "properties": {
         "actionGroupId": {
           "type": "string",
-          "description": "the id of the action group to use."
+          "description": "The id of the action group to use."
         },
         "webHookProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string",
-            "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
+            "description": "The dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
           },
           "description": "This field allows specifying custom properties, which would be appended to the alert payload sent as input to the webhook."
         }
@@ -515,7 +515,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "the description of the metric alert that will be included in the alert email."
+          "description": "The description of the metric alert that will be included in the alert email."
         },
         "severity": {
           "type": "integer",
@@ -524,40 +524,40 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "the flag that indicates whether the metric alert is enabled."
+          "description": "The flag that indicates whether the metric alert is enabled."
         },
         "scopes": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "the list of resource id's that this metric alert is scoped to. You cannot change the scope of a metric rule based on logs."
+          "description": "The list of resource id's that this metric alert is scoped to. You cannot change the scope of a metric rule based on logs."
         },
         "evaluationFrequency": {
           "type": "string",
           "format": "duration",
-          "description": "how often the metric alert is evaluated represented in ISO 8601 duration format."
+          "description": "How often the metric alert is evaluated represented in ISO 8601 duration format."
         },
         "windowSize": {
           "type": "string",
           "format": "duration",
-          "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
+          "description": "The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
         },
         "targetResourceType": {
           "type": "string",
-          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
+          "description": "The resource type of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
         },
         "targetResourceRegion": {
           "type": "string",
-          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
+          "description": "The region of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
         },
         "criteria": {
           "$ref": "#/definitions/MetricAlertCriteria",
-          "description": "defines the specific alert criteria information."
+          "description": "Defines the specific alert criteria information."
         },
         "autoMitigate": {
           "type": "boolean",
-          "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
+          "description": "The flag that indicates whether the alert should be auto resolved or not. The default is true."
         },
         "resolveConfiguration": {
           "$ref": "#/definitions/ResolveConfiguration",
@@ -571,7 +571,7 @@
           "x-ms-identifiers": [
             "actionGroupId"
           ],
-          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+          "description": "The array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
         },
         "lastUpdatedTime": {
           "readOnly": true,
@@ -581,7 +581,7 @@
         },
         "isMigrated": {
           "type": "boolean",
-          "description": "the value indicating whether this alert rule is migrated.",
+          "description": "The value indicating whether this alert rule is migrated.",
           "readOnly": true
         },
         "customProperties": {
@@ -608,7 +608,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "the description of the metric alert that will be included in the alert email."
+          "description": "The description of the metric alert that will be included in the alert email."
         },
         "severity": {
           "type": "integer",
@@ -617,40 +617,40 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "the flag that indicates whether the metric alert is enabled."
+          "description": "The flag that indicates whether the metric alert is enabled."
         },
         "scopes": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "the list of resource id's that this metric alert is scoped to."
+          "description": "The list of resource id's that this metric alert is scoped to."
         },
         "evaluationFrequency": {
           "type": "string",
           "format": "duration",
-          "description": "how often the metric alert is evaluated represented in ISO 8601 duration format."
+          "description": "How often the metric alert is evaluated represented in ISO 8601 duration format."
         },
         "windowSize": {
           "type": "string",
           "format": "duration",
-          "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
+          "description": "The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
         },
         "targetResourceType": {
           "type": "string",
-          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+          "description": "The resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
         },
         "targetResourceRegion": {
           "type": "string",
-          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+          "description": "The region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
         },
         "criteria": {
           "$ref": "#/definitions/MetricAlertCriteria",
-          "description": "defines the specific alert criteria information."
+          "description": "Defines the specific alert criteria information."
         },
         "autoMitigate": {
           "type": "boolean",
-          "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
+          "description": "The flag that indicates whether the alert should be auto resolved or not. The default is true."
         },
         "resolveConfiguration": {
           "$ref": "#/definitions/ResolveConfiguration",
@@ -664,7 +664,7 @@
           "x-ms-identifiers": [
             "actionGroupId"
           ],
-          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+          "description": "The array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
         },
         "lastUpdatedTime": {
           "readOnly": true,
@@ -674,7 +674,7 @@
         },
         "isMigrated": {
           "type": "boolean",
-          "description": "the value indicating whether this alert rule is migrated.",
+          "description": "The value indicating whether this alert rule is migrated.",
           "readOnly": true
         },
         "customProperties": {
@@ -745,7 +745,7 @@
           "items": {
             "$ref": "#/definitions/MetricAlertResource"
           },
-          "description": "the values for the alert rule resources.",
+          "description": "The values for the alert rule resources.",
           "x-ms-identifiers": [
             "id"
           ]
@@ -761,7 +761,7 @@
           "items": {
             "$ref": "#/definitions/MetricAlertStatus"
           },
-          "description": "the values for the alert rule resources.",
+          "description": "The values for the alert rule resources.",
           "x-ms-identifiers": [
             "id"
           ]
@@ -782,7 +782,7 @@
         },
         "status": {
           "type": "string",
-          "description": "status value"
+          "description": "Status value"
         },
         "timestamp": {
           "type": "string",
@@ -918,12 +918,12 @@
             "name": "Operator",
             "modelAsString": true
           },
-          "description": "the criteria operator. Previously undocumented values might be returned"
+          "description": "The criteria operator. Previously undocumented values might be returned"
         },
         "threshold": {
           "type": "number",
           "format": "double",
-          "description": "the criteria threshold value that activates the alert."
+          "description": "The criteria threshold value that activates the alert."
         }
       },
       "description": "Criterion to filter metrics."
@@ -942,14 +942,14 @@
         },
         "operator": {
           "type": "string",
-          "description": "the dimension operator. Only 'Include' and 'Exclude' are supported"
+          "description": "The dimension operator. Only 'Include' and 'Exclude' are supported"
         },
         "values": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "list of dimension values."
+          "description": "List of dimension values."
         }
       },
       "description": "Specifies a metric dimension."
@@ -971,7 +971,7 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "the list of multiple metric criteria for this 'all of' operation. "
+          "description": "The list of multiple metric criteria for this 'all of' operation."
         }
       },
       "description": "Specifies the metric alert criteria for multiple resource that has multiple metric criteria."
@@ -1020,7 +1020,7 @@
             "name": "AggregationTypeEnum",
             "modelAsString": true
           },
-          "description": "the criteria time aggregation types. Previously undocumented values might be returned"
+          "description": "The criteria time aggregation types. Previously undocumented values might be returned"
         },
         "dimensions": {
           "type": "array",
@@ -1118,7 +1118,7 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "the list of promQL criteria. Alert will be raised when all conditions are met."
+          "description": "The list of promQL criteria. Alert will be raised when all conditions are met."
         }
       },
       "description": "Specifies the PromQL criteria for the metric alert resource."
@@ -1167,7 +1167,7 @@
         }
       ],
       "properties": {},
-      "description": "the criterion for static prom query."
+      "description": "The criterion for static prom query."
     },
     "DynamicPromQLCriteria": {
       "x-ms-discriminator-value": "DynamicThresholdCriterion",
@@ -1214,7 +1214,7 @@
           "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)"
         }
       },
-      "description": "the criterion for dynamic prom query."
+      "description": "The criterion for dynamic prom query."
     },
     "DynamicThresholdFailingPeriods": {
       "type": "object",
@@ -1243,7 +1243,8 @@
         },
         "timeToResolve": {
           "type": "string",
-          "description": "The time after which the alert should be auto resolved"
+          "format": "duration",
+          "description": "The time (in ISO 8601 duration format) after which the alert should be auto resolved"
         }
       },
       "required": [
@@ -1276,7 +1277,7 @@
           }
         },
         "userAssignedIdentities": {
-          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/UserIdentityProperties"
