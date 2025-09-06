@@ -24,6 +24,5 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @doc("API versions")
 enum Versions {
   @doc("Preview release version 2024-02-01-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_02_01_preview: "2024-02-01-preview",
 }

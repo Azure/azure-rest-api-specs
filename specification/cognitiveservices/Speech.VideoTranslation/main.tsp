@@ -52,11 +52,9 @@ alias VideoTranslationServiceTraits = NoRepeatableRequests &
 alias ops = Azure.Core.ResourceOperations<VideoTranslationServiceTraits>;
 
 enum ApiVersions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-05-20-preview version of the VideoTranslation service.")
   v2024_05_20_preview: "2024-05-20-preview",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2025-05-20 GA version of the VideoTranslation service.")
   v2025_05_20: "2025-05-20",
 }
