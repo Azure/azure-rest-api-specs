@@ -2092,6 +2092,11 @@
       "type": "object",
       "description": "Resource information with extended details.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/DedicatedHsmProperties",
+          "description": "Properties of the dedicated HSM",
+          "x-ms-client-flatten": true
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SKU details"
@@ -2102,16 +2107,11 @@
           "items": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/DedicatedHsmProperties",
-          "description": "Properties of the dedicated HSM",
-          "x-ms-client-flatten": true
         }
       },
       "required": [
-        "sku",
-        "properties"
+        "properties",
+        "sku"
       ],
       "allOf": [
         {

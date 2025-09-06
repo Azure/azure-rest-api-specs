@@ -1118,6 +1118,51 @@
             "$ref": "./examples/Messages_UpdateMessage_MinimumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "Messages_Delete",
+        "description": "Deletes an existing message on an existing thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Identifier of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Identifier of the message.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MessageDeletionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AgentV1Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Messages_Delete_MaximumSet": {
+            "$ref": "./examples/Messages_Delete_MaximumSet_Gen.json"
+          },
+          "Messages_Delete_MinimumSet": {
+            "$ref": "./examples/Messages_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/threads/{threadId}/runs": {
@@ -2759,6 +2804,62 @@
         }
       }
     },
+    "ActivityFunctionDefinition": {
+      "type": "object",
+      "description": "The activity definition information for a function.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of what the function does, used by the model to choose when and how to call the function."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ActivityFunctionParameters",
+          "description": "The parameters the functions accepts, described as a JSON Schema object."
+        }
+      },
+      "required": [
+        "parameters"
+      ]
+    },
+    "ActivityFunctionParameters": {
+      "type": "object",
+      "description": "The parameters used for activity function definition.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The parameter type, it is always object.",
+          "enum": [
+            "object"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "The dictionary of function arguments.",
+          "additionalProperties": {
+            "$ref": "#/definitions/FunctionArgument"
+          }
+        },
+        "required": {
+          "type": "array",
+          "description": "The list of the required parameters.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "boolean",
+          "description": "If true the function has additional parameters."
+        }
+      },
+      "required": [
+        "type",
+        "properties",
+        "required"
+      ]
+    },
     "Agent": {
       "type": "object",
       "description": "Represents an agent that can call the model and use tools.",
@@ -3477,6 +3578,24 @@
         "queue_service_endpoint",
         "queue_name"
       ]
+    },
+    "AzureFunctionToolCallDetails": {
+      "type": "object",
+      "description": "The Azure function call description. All the fields are present in the completed run step, however\nonly some fields are present in the RunStepDeltaAzureFunctionToolCall.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Azure function name"
+        },
+        "arguments": {
+          "type": "string",
+          "description": "JSON serialized function arguments."
+        },
+        "output": {
+          "type": "string",
+          "description": "The function output."
+        }
+      }
     },
     "AzureFunctionToolDefinition": {
       "type": "object",
@@ -4520,6 +4639,23 @@
         ]
       }
     },
+    "FunctionArgument": {
+      "type": "object",
+      "description": "The function argument and description.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of an argument, for example 'string' or 'number'."
+        },
+        "description": {
+          "type": "string",
+          "description": "The argument description."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "FunctionDefinition": {
       "type": "object",
       "description": "The input definition information for a function.",
@@ -4842,6 +4978,35 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "MessageDeletionStatus": {
+      "type": "object",
+      "description": "The status of a thread message deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'thread.message.deleted'.",
+          "enum": [
+            "thread.message.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
       ]
     },
     "MessageDelta": {
@@ -6242,6 +6407,28 @@
         "metadata"
       ]
     },
+    "RunStepActivityDetails": {
+      "type": "object",
+      "description": "The detailed information associated with a run step activities.",
+      "properties": {
+        "activities": {
+          "type": "array",
+          "description": "A list of activities for this run step.",
+          "items": {
+            "$ref": "#/definitions/RunStepDetailsActivity"
+          }
+        }
+      },
+      "required": [
+        "activities"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "activities"
+    },
     "RunStepAzureAISearchToolCall": {
       "type": "object",
       "description": "A record of a call to an Azure AI Search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Azure AI search.",
@@ -6265,13 +6452,32 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "RunStepAzureFunctionToolCall": {
+      "type": "object",
+      "description": "A record of a call to an Azure Function tool.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionToolCallDetails",
+          "description": "The description of an Azure function call."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "RunStepBingCustomSearchToolCall": {
       "type": "object",
-      "description": "A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing custom search.",
+      "description": "A record of a call to a Bing Custom Search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with Bing Custom Search.",
       "properties": {
         "bing_custom_search": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Custom Search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6294,7 +6500,7 @@
       "properties": {
         "bing_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Grounding search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6591,13 +6797,32 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "RunStepDeltaAzureFunctionToolCall": {
+      "type": "object",
+      "description": "Represents the Azure Function tool call in a streaming run step.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionToolCallDetails",
+          "description": "Partial description of an Azure function call."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "RunStepDeltaBingGroundingToolCall": {
       "type": "object",
       "description": "Represents the bing grounding tool call in a streaming run step.",
       "properties": {
         "bing_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Grounding search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6760,6 +6985,29 @@
       ],
       "x-ms-discriminator-value": "connected_agent"
     },
+    "RunStepDeltaCustomBingGroundingToolCall": {
+      "type": "object",
+      "description": "Represents the Bing Custom Search tool call in a streaming run step.",
+      "properties": {
+        "bing_custom_search": {
+          "type": "object",
+          "description": "The dictionary with request and response from Bing Custom Search tool.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingCustomSearch"
+        }
+      },
+      "required": [
+        "bing_custom_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search"
+    },
     "RunStepDeltaDeepResearchToolCall": {
       "type": "object",
       "description": "Represents the Deep research in a streaming run step.",
@@ -6868,7 +7116,7 @@
     },
     "RunStepDeltaMcpToolCall": {
       "type": "object",
-      "description": "Represents the function data in a streaming run step MCP call.*",
+      "description": "Represents the function data in a streaming run step MCP call.",
       "properties": {
         "index": {
           "type": "integer",
@@ -6919,6 +7167,29 @@
         }
       }
     },
+    "RunStepDeltaMicrosoftFabricToolCall": {
+      "type": "object",
+      "description": "Represents the Microsoft Fabric tool call in a streaming run step.",
+      "properties": {
+        "fabric_dataagent": {
+          "type": "object",
+          "description": "Fabric input and output.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "microsoftFabric"
+        }
+      },
+      "required": [
+        "fabric_dataagent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "fabric_dataagent"
+    },
     "RunStepDeltaOpenAPIObject": {
       "type": "object",
       "description": "Represents an invocation of openapi as part of a streaming run step.",
@@ -6961,6 +7232,28 @@
         }
       ],
       "x-ms-discriminator-value": "openapi"
+    },
+    "RunStepDeltaSharepointToolCall": {
+      "type": "object",
+      "description": "Represents the SharePoint tool call in a streaming run step.",
+      "properties": {
+        "sharepoint_grounding": {
+          "type": "object",
+          "description": "SharePoint tool input and output.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "sharepoint_grounding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "sharepoint_grounding"
     },
     "RunStepDeltaToolCall": {
       "type": "object",
@@ -7019,6 +7312,44 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "RunStepDetailsActivity": {
+      "type": "object",
+      "description": "Represents the list of activities, associated with the given step.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The activity type, which is always 'mcp_list_tools'.",
+          "enum": [
+            "mcp_list_tools"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The activity ID."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "Server label.",
+          "x-ms-client-name": "serverLabel"
+        },
+        "tools": {
+          "type": "object",
+          "description": "The supported function list.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ActivityFunctionDefinition"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "server_label",
+        "tools"
       ]
     },
     "RunStepError": {
@@ -7255,7 +7586,7 @@
       "properties": {
         "fabric_dataagent": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "Fabric input and output.",
           "additionalProperties": {
             "type": "string"
           },
@@ -7301,7 +7632,7 @@
       "properties": {
         "sharepoint_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "SharePoint tool input and output.",
           "additionalProperties": {
             "type": "string"
           },
@@ -7461,7 +7792,8 @@
       "description": "The possible types of run steps.",
       "enum": [
         "message_creation",
-        "tool_calls"
+        "tool_calls",
+        "activities"
       ],
       "x-ms-enum": {
         "name": "RunStepType",
@@ -7476,6 +7808,11 @@
             "name": "toolCalls",
             "value": "tool_calls",
             "description": "Represents a run step that calls tools."
+          },
+          {
+            "name": "activities",
+            "value": "activities",
+            "description": "Represents a run step with activities information."
           }
         ]
       }

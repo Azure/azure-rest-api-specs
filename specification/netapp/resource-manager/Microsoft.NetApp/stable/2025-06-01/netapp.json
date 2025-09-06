@@ -1907,6 +1907,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Operation completed",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
           "202": {
             "description": "Operation Accepted",
             "headers": {
@@ -1914,9 +1920,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "Operation completed"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
