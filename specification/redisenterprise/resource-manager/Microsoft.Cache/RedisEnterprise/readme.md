@@ -34,6 +34,10 @@ tag: package-2025-07-01
 
 These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
 
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
 ```yaml $(tag) == 'package-2025-07-01'
 input-file:
   - stable/2025-07-01/redisenterprise.json
@@ -100,6 +104,14 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - preview/2024-03-01-preview/redisenterprise.json
+```
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.Cache/stable/2024-02-01/redisenterprise.json
 ```
 
 ### Tag: package-2023-11
