@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-07-01",
+    "version": "2025-08-01-preview",
     "title": "RedisEnterpriseManagementClient",
     "description": "REST API for managing Redis Enterprise resources in Azure."
   },
@@ -1767,6 +1767,226 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations": {
+      "get": {
+        "tags": [
+          "RedisEnterprise",
+          "Migration"
+        ],
+        "operationId": "Migration_List",
+        "description": "Gets information about all migrations attempts in a Redis Enterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseMigrationList": {
+            "$ref": "./examples/RedisEnterpriseMigrationList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found the migration",
+            "schema": {
+              "$ref": "#/definitions/MigrationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default": {
+      "put": {
+        "tags": [
+          "RedisEnterprise",
+          "Migration"
+        ],
+        "operationId": "Migration_Start",
+        "description": "Starts a new migration",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseMigrationStart": {
+            "$ref": "./examples/RedisEnterpriseMigrationStart.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            },
+            "description": "Parameters supplied to start a migration operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The migration was/is being started. Check the migration for detailed status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "201": {
+            "description": "The migration was/is being started. Check the migration for detailed status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RedisEnterprise",
+          "Migration"
+        ],
+        "operationId": "Migration_Get",
+        "description": "Gets information about a migration in a Redis Enterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseMigrationGet": {
+            "$ref": "./examples/RedisEnterpriseMigrationGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found the migration",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default/cancel": {
+      "post": {
+        "tags": [
+          "RedisEnterprise",
+          "Migration"
+        ],
+        "operationId": "Migration_Cancel",
+        "description": "Cancel or rollback the migration operation in a Redis Enterprise cluster.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RedisEnterpriseMigrationCancel": {
+            "$ref": "./examples/RedisEnterpriseMigrationCancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The migration was/is being canceled. Check the migration for detailed status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2819,6 +3039,155 @@
         }
       },
       "description": "The response of a listSkusForScaling operation."
+    },
+    "MigrationProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Current provisioning status",
+      "enum": [
+        "Accepted",
+        "InProgress",
+        "ReadyForDnsSwitch",
+        "Succeeded",
+        "Failed",
+        "Cancelling",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "Migration": {
+      "description": "Describes the current migration operation on a Redis Enterprise cluster.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "Properties of the migration operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MigrationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Migration"
+          },
+          "description": "List of migration operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URI to fetch the next page of results."
+        }
+      },
+      "description": "The response of a list-all migrations."
+    },
+    "MigrationProperties": {
+      "title": "Redis Enterprise migration properties",
+      "description": "Properties for Redis Enterprise migration operation.",
+      "type": "object",
+      "discriminator": "sourceType",
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "description": "Describes the source of the migration operation.",
+          "enum": [
+            "AzureCacheForRedis"
+          ],
+          "x-ms-enum": {
+            "name": "SourceType",
+            "modelAsString": true
+          }
+        },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/redisEnterprise/Cluster"
+              }
+            ]
+          },
+          "readOnly": true,
+          "description": "The Azure resource ID of the AMR destination cache to migrate."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/MigrationProvisioningState",
+          "readOnly": true,
+          "description": "Current provisioning status of the migration"
+        },
+        "statusDetails": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Additional details about the migration operation's status in free text format."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp when the migration operation was created."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp when the migration operation was last updated."
+        }
+      },
+      "required": [
+        "sourceType"
+      ]
+    },
+    "AzureCacheForRedisMigrationProperties": {
+      "title": "Redis Enterprise migration properties for Azure Cache for Redis",
+      "description": "Properties for Redis Enterprise migration operation for Azure Cache for Redis.",
+      "x-ms-discriminator-value": "AzureCacheForRedis",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrationProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceResourceId": {
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.Cache/redis/RedisResource"
+                  }
+                ]
+              },
+              "description": "The source resource Id to migrate from. This is the resource Id of the Azure Cache for Redis."
+            },
+            "switchDns": {
+              "type": "boolean",
+              "description": "Sets whether the DNS is switched automatically after the data is transferred from the source cache to the target cache. This property must be true during the preview."
+            },
+            "skipDataMigration": {
+              "type": "boolean",
+              "description": "Sets whether the data is migrated from source to target or not. This property must be true during the preview."
+            }
+          },
+          "required": [
+            "sourceResourceId",
+            "switchDns",
+            "skipDataMigration"
+          ]
+        }
+      ]
     }
   },
   "parameters": {
