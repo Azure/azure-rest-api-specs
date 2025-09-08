@@ -10,11 +10,11 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/contoso.json"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Contoso"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Contoso"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-contoso"
     namespace: "azure.mgmt.contoso"
@@ -22,7 +22,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-contoso"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-contoso"
     namespace: "com.azure.resourcemanager.contoso"
     service-name: "Contoso" # human-readable service name, whitespace allowed
     flavor: azure
