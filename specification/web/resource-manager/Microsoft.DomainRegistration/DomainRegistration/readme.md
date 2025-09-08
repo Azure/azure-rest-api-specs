@@ -37,6 +37,94 @@ openapi-type: arm
 tag: package-2024-11
 ```
 
+### Tag: package-2024-11
+
+These settings apply only when `--tag=package-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11'
+input-file:
+  - stable/2024-11-01/DomainRegistrationProvider.json
+  - stable/2024-11-01/Domains.json
+  - stable/2024-11-01/TopLevelDomains.json
+```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - stable/2024-04-01/DomainRegistrationProvider.json
+  - stable/2024-04-01/Domains.json
+  - stable/2024-04-01/TopLevelDomains.json
+```
+
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12'
+input-file:
+  - stable/2023-12-01/Domains.json
+  - stable/2023-12-01/TopLevelDomains.json
+  - stable/2023-12-01/DomainRegistrationProvider.json
+directive:
+  # suppress each RPC 3016 error
+  - suppress: R4009
+    from: Domains.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: TopLevelDomains.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - stable/2023-01-01/Domains.json
+  - stable/2023-01-01/TopLevelDomains.json
+  - stable/2023-01-01/DomainRegistrationProvider.json
+directive:
+  # suppress each RPC 3016 error
+  - suppress: R4009
+    from: Domains.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: TopLevelDomains.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - stable/2022-09-01/Domains.json
+  - stable/2022-09-01/TopLevelDomains.json
+  - stable/2022-09-01/DomainRegistrationProvider.json
+directive:
+  # suppress each RPC 3016 error
+  - suppress: R4009
+    from: Domains.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: TopLevelDomains.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
