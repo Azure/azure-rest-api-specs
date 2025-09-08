@@ -2038,6 +2038,7 @@ model Policies {
   /**
    * The policy for using Azure Resource Manager audience token for a container registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureADAuthenticationAsArmPolicy?: AzureADAuthenticationAsArmPolicy;
 
   /**
@@ -2106,6 +2107,7 @@ model ExportPolicy {
 /**
  * The policy for using Azure Resource Manager audience token for a container registry.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureADAuthenticationAsArmPolicy {
   /**
    * The value that indicates whether the policy is enabled or not.
@@ -2473,6 +2475,7 @@ model ScopeMapProperties {
   /**
    * The type of the scope map. E.g. BuildIn scope map.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   type?: string;
 
@@ -3041,6 +3044,7 @@ model Source {
   /**
    * The running instance of an application. Changes after each restart.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceID?: string;
 }
 
