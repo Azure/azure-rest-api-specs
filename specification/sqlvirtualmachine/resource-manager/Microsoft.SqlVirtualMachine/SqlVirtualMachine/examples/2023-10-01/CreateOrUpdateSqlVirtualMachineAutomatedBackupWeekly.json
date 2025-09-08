@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "autoBackupSettings": {
+          "backupScheduleType": "Manual",
+          "backupSystemDbs": true,
+          "daysOfWeek": [
+            "Monday",
+            "Friday"
+          ],
+          "enable": true,
+          "enableEncryption": true,
+          "fullBackupFrequency": "Weekly",
+          "fullBackupStartTime": 6,
+          "fullBackupWindowHours": 11,
+          "logBackupFrequency": 10,
+          "password": "<Password>",
+          "retentionPeriod": 17,
+          "storageAccessKey": "<primary storage access key>",
+          "storageAccountUrl": "https://teststorage.blob.core.windows.net/",
+          "storageContainerName": "testcontainer"
+        },
+        "autoPatchingSettings": {
+          "dayOfWeek": "Sunday",
+          "enable": true,
+          "maintenanceWindowDuration": 60,
+          "maintenanceWindowStartingHour": 2
+        },
+        "keyVaultCredentialSettings": {
+          "enable": false
+        },
+        "serverConfigurationsManagementSettings": {
+          "additionalFeaturesServerConfigurations": {
+            "isRServicesEnabled": false
+          },
+          "sqlConnectivityUpdateSettings": {
+            "connectivityType": "PRIVATE",
+            "port": 1433,
+            "sqlAuthUpdatePassword": "<password>",
+            "sqlAuthUpdateUserName": "sqllogin"
+          },
+          "sqlStorageUpdateSettings": {
+            "diskConfigurationType": "NEW",
+            "diskCount": 1,
+            "startingDeviceId": 2
+          },
+          "sqlWorkloadTypeUpdateSettings": {
+            "sqlWorkloadType": "OLTP"
+          }
+        },
+        "sqlImageSku": "Enterprise",
+        "sqlServerLicenseType": "PAYG",
+        "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "additionalVmPatch": "WU",
+          "enableAutomaticUpgrade": false,
+          "leastPrivilegeMode": "Enabled",
+          "osType": "Windows",
+          "provisioningState": "Updating",
+          "sqlImageOffer": "SQL2022-WS2022",
+          "sqlImageSku": "Enterprise",
+          "sqlManagement": "Full",
+          "sqlServerLicenseType": "PAYG",
+          "virtualMachineIdentitySettings": {
+            "type": "SystemAssigned"
+          },
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "enableAutomaticUpgrade": true,
+          "leastPrivilegeMode": "NotSet",
+          "provisioningState": "Provisioning",
+          "sqlImageSku": "Unknown",
+          "sqlServerLicenseType": "PAYG",
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+        }
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachines_CreateOrUpdate",
+  "title": "Creates or updates a SQL virtual machine for Automated Back up Settings with Weekly and Days of the week to run the back up."
+}

@@ -11,6 +11,7 @@ When the user provides a service folder name, look for the `tspconfig.yaml` unde
 If the user provides a `tspconfig.yaml` file, use the information in that file directly to guide the migration. In this case, {TypeSpec-folder} is the folder containing that file.
 
 If the user does not provide this information, be sure to ask. Use this information to customize your guidance, especially in the following cases:
+
 - Selecting appropriate conversion commands
 - Providing service-type-related examples
 
@@ -19,17 +20,18 @@ If the user does not provide this information, be sure to ask. Use this informat
 ## Step 1: Locate the tspconfig.yaml file
 
 1. **Check the `tspconfig.yaml` file**
+
    - Location: `{ServiceName}.Management/tspconfig.yaml` or the `tspconfig.yaml` file directly provided by the user
 
 2. **Check the disable section in the tspconfig.yaml file**
    - Look for all configurations under `disable:`, for example:
-    ```yaml
-    linter:
-      extends:
-        - "@azure-tools/typespec-azure-rulesets/resource-manager"
-      disable:
-        "@azure-tools/typespec-azure-core/no-nullable": "backward-compatibility"
-    ```
+   ```yaml
+   linter:
+     extends:
+       - "@azure-tools/typespec-azure-rulesets/resource-manager"
+     disable:
+       "@azure-tools/typespec-azure-core/no-nullable": "backward-compatibility"
+   ```
    - These configurations represent global suppressions that you need to convert to inline suppressions.
 
 ## Step 2: Migrate global suppressions to inline suppressions

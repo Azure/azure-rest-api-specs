@@ -27,10 +27,128 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-04-01
+tag: package-preview-2025-07-01
 ```
 
 ---
+
+### Tag: package-preview-2025-07-01
+
+These settings apply only when `--tag=package-preview-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/BusinessApplicationAgents.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/EnrichmentWithWorkspace.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ThreatIntelligenceQuery.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerMembers.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: Entities.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueries.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueryTemplates.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: Recommendations.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAnonymousTypes
+    from: Recommendations.json
+    reason: These properties are unknown (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: TriggeredAnalyticsRuleRuns.json
+    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
+  - code: AvoidAdditionalProperties
+    from: ThreatIntelligenceQuery.json
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: PutRequestResponseSchemeArm
+    from: EntityQueries.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DeleteResponseCodes
+    from: FileImports.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+```
+
+### Tag: package-2025-06-01
+
+These settings apply only when `--tag=package-2025-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-01'
+input-file:
+  - Microsoft.SecurityInsights/stable/2025-06-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/operations.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/SourceControls.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+```
 
 ### Tag: package-preview-2025-04-01
 

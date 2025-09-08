@@ -19,16 +19,16 @@ options:
     generate-sample: true
     package-name: "azure-mgmt-programmableconnectivity"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-programmableconnectivity"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-programmableconnectivity"
     namespace: "com.azure.resourcemanager.programmableconnectivity"
     flavor: "azure"
     service-name: "Programmable Connectivity"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.ProgrammableConnectivity"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ProgrammableConnectivity"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
