@@ -23,7 +23,7 @@ options:
     flavor: azure
     namespace: azure.monitor.ingestion
   "@azure-tools/typespec-java":
-    package-dir: "azure-monitor-ingestion"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-ingestion"
     namespace: com.azure.monitor.ingestion
     flavor: azure
     partial-update: true
@@ -44,6 +44,7 @@ options:
     namespace: "{package-name}"
     generate-convenience-methods: false
     model-namespace: false
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     package-dir: "monitor-ingestion"
     is-modular-library: true

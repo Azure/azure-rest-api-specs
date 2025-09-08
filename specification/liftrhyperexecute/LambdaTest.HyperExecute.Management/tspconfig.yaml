@@ -11,11 +11,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.LambdaTestHyperExecute"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
-    service-dir: "sdk/lambdatesthyperexecute"
+    namespace: "Azure.ResourceManager.LambdaTestHyperExecute"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-lambdatesthyperexecute"
     namespace: "azure.mgmt.lambdatesthyperexecute"
@@ -23,7 +22,7 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-lambdatesthyperexecute"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-lambdatesthyperexecute"
     flavor: azure
     namespace: "com.azure.resourcemanager.lambdatesthyperexecute"
     service-name: "LambdaTest HyperExecute"

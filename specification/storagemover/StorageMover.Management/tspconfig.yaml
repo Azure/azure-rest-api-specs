@@ -11,11 +11,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storagemover.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.StorageMover"
     clear-output-folder: true
-    model-namespace: false
-    namespace: "{package-dir}"
+    model-namespace: true
+    namespace: "Azure.ResourceManager.StorageMover"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-storagemover"
     namespace: "azure.mgmt.storagemover"
@@ -23,10 +23,11 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-storagemover"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storagemover"
     namespace: "com.azure.resourcemanager.storagemover"
-    service-name: "StorageMover" # human-readable service name, whitespace allowed
+    service-name: "Storage Mover"
     flavor: azure
+    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     service-dir: sdk/storagemover
     package-dir: "arm-storagemover"
