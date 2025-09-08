@@ -45,6 +45,93 @@ directive:
     from: AppServiceCertificateOrders.json
     reason: Will fix in next version.
 ```
+### Tag: package-2024-11
+
+These settings apply only when `--tag=package-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11'
+input-file:
+  - stable/2024-11-01/AppServiceCertificateOrders.json
+  - stable/2024-11-01/CertificateOrdersDiagnostics.json
+  - stable/2024-11-01/CertificateRegistrationProvider.json
+```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - stable/2024-04-01/AppServiceCertificateOrders.json
+  - stable/2024-04-01/CertificateOrdersDiagnostics.json
+  - stable/2024-04-01/CertificateRegistrationProvider.json
+```
+
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12'
+input-file:
+  - stable/2023-12-01/AppServiceCertificateOrders.json
+  - stable/2023-12-01/CertificateOrdersDiagnostics.json
+  - stable/2023-12-01/CertificateRegistrationProvider.json
+directive:
+  # suppress each RPC 3016 error
+  - suppress: R4009
+    from: AppServiceCertificateOrders.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CertificateOrdersDiagnostics.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CertificateRegistrationProvider.json
+    reason: SystemData will implement in next version.
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - stable/2023-01-01/AppServiceCertificateOrders.json
+  - stable/2023-01-01/CertificateOrdersDiagnostics.json
+  - stable/2023-01-01/CertificateRegistrationProvider.json
+directive:
+  # suppress each RPC 3016 error
+  - suppress: R4009
+    from: AppServiceCertificateOrders.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CertificateOrdersDiagnostics.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CertificateRegistrationProvider.json
+    reason: SystemData will implement in next version.
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - stable/2022-09-01/AppServiceCertificateOrders.json
+  - stable/2022-09-01/CertificateOrdersDiagnostics.json
+  - stable/2022-09-01/CertificateRegistrationProvider.json
+directive:
+  # suppress each RPC 3016 error
+  - suppress: R4009
+    from: AppServiceCertificateOrders.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CertificateOrdersDiagnostics.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CertificateRegistrationProvider.json
+    reason: SystemData will implement in next version.
+```
 
 ### Tag: package-2022-03
 
