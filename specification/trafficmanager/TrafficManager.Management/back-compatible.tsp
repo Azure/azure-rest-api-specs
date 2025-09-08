@@ -34,10 +34,16 @@ using Microsoft.Network;
 @@flattenProperty(HeatMapModel.properties);
 
 @@clientLocation(UserMetricsModels.get, "TrafficManagerUserMetricsKeys");
+@@clientName(UserMetricsModels.get, "Get");
+
 @@clientLocation(UserMetricsModels.createOrUpdate,
   "TrafficManagerUserMetricsKeys"
 );
+@@clientName(UserMetricsModels.createOrUpdate, "CreateOrUpdate");
+
 @@clientLocation(UserMetricsModels.delete, "TrafficManagerUserMetricsKeys");
+@@clientName(UserMetricsModels.delete, "Delete");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(UserMetricsModel.properties);
 
@@ -50,3 +56,6 @@ using Microsoft.Network;
 @@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
   "checkTrafficManagerNameAvailabilityV2"
 );
+
+@@clientLocation(HeatMapModels.get, "HeatMap");
+@@clientName(HeatMapModels.get, "Get");

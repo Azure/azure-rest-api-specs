@@ -50,8 +50,6 @@ interface UserMetricsModels {
   /**
    * Get the subscription-level key used for Real User Metrics collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TrafficManagerUserMetricsKeys_Get")
   get is ArmResourceRead<
     UserMetricsModel,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -62,9 +60,7 @@ interface UserMetricsModels {
   /**
    * Create or update a subscription-level key used for Real User Metrics collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TrafficManagerUserMetricsKeys_CreateOrUpdate")
   createOrUpdate is UserMetricsModelOps.CreateOrUpdateSync<
     UserMetricsModel,
     Request = void,
@@ -74,9 +70,7 @@ interface UserMetricsModels {
   /**
    * Delete a subscription-level key used for Real User Metrics collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TrafficManagerUserMetricsKeys_Delete")
   delete is ArmResourceDeleteSync<
     UserMetricsModel,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
