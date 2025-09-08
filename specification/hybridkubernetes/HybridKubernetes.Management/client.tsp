@@ -7,7 +7,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Kubernetes;
 
-// we should not need these, but somehow without these, we get incorrect code.
+// This RP is using common-types v3, in which the type of this id is still string.
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
