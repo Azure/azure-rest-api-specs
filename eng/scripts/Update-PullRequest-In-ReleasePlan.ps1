@@ -6,7 +6,7 @@ param(
     [Parameter(Mandatory = $true)]
     $Status,
     [Parameter(Mandatory = $true)]
-    $LanguageName
+    $SdkRepoName
 )
 
 <#
@@ -22,8 +22,8 @@ The URL of the pull request to set in the release plan.
 .PARAMETER Status
 The status of the pull request.
 
-.PARAMETER LanguageName
-The programming language associated with the pull request.
+.PARAMETER SdkRepoName
+The name of the repository associated with the pull request.
 
 #>
 
@@ -32,5 +32,5 @@ Set-StrictMode -Version 3
 
 
 Write-Host "Updating pull request [$PullRequestUrl] in release plan [$ReleasePlanWorkItemId] for language [$LanguageName]"
-Update-PullRequestInReleasePlan $ReleasePlanWorkItemId $PullRequestUrl $Status $LanguageName
+Update-PullRequestInReleasePlan $ReleasePlanWorkItemId $PullRequestUrl $Status $SdkRepoName.replace('azure-sdk-for-', '')
 Write-Host "Updated pull request in release plan"
