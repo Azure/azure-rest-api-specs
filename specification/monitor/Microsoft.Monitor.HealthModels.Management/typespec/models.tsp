@@ -633,8 +633,8 @@ model DiscoveryRuleProperties {
   deletionDate?: utcDateTime;
 
   @visibility(Lifecycle.Read)
-  @doc("Error message if the last discovery operation failed.")
-  errorMessage?: string;
+  @doc("Error details if the last discovery operation failed.")
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 
   @visibility(Lifecycle.Read)
   @doc("Number of discovered entities in the last discovery operation.")
