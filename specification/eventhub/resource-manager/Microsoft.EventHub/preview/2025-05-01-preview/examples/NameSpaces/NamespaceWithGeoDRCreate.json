@@ -1,14 +1,11 @@
 {
   "parameters": {
-    "namespaceName": "NamespaceGeoDRCreateSample",
-    "resourceGroupName": "ResurceGroupSample",
     "api-version": "2025-05-01-preview",
-    "subscriptionId": "SampleSubscription",
+    "namespaceName": "NamespaceGeoDRCreateSample",
     "parameters": {
       "location": "East US",
       "properties": {
         "geoDataReplication": {
-          "maxReplicationLagDurationInSeconds": 60,
           "locations": [
             {
               "locationName": "eastus",
@@ -22,108 +19,113 @@
               "locationName": "centralus",
               "roleType": "Secondary"
             }
-          ]
+          ],
+          "maxReplicationLagDurationInSeconds": 60
         }
       }
-    }
+    },
+    "resourceGroupName": "ResurceGroupSample",
+    "subscriptionId": "SampleSubscription"
   },
   "responses": {
     "200": {
       "body": {
-        "sku": {
-          "name": "Standard",
-          "tier": "Standard",
-          "capacity": 1
-        },
-        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceGeoDRCreateSample",
         "name": "NamespaceGeoDRCreateSample",
         "type": "Microsoft.EventHub/Namespaces",
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceGeoDRCreateSample",
         "location": "East US",
-        "tags": {},
         "properties": {
+          "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
+          "createdAt": "2021-02-16T22:36:06.107Z",
+          "disableLocalAuth": false,
           "geoDataReplication": {
-            "maxReplicationLagDurationInSeconds": 60,
             "locations": [
               {
                 "locationName": "eastus",
-                "roleType": "Primary",
-                "replicaState": "Active"
+                "replicaState": "Active",
+                "roleType": "Primary"
               },
               {
                 "locationName": "westus",
-                "roleType": "Secondary",
-                "replicaState": "Active"
+                "replicaState": "Active",
+                "roleType": "Secondary"
               },
               {
                 "locationName": "centralus",
-                "roleType": "Secondary",
-                "replicaState": "Creating"
+                "replicaState": "Creating",
+                "roleType": "Secondary"
               }
-            ]
+            ],
+            "maxReplicationLagDurationInSeconds": 60
           },
-          "zoneRedundant": false,
           "isAutoInflateEnabled": false,
-          "disableLocalAuth": false,
-          "maximumThroughputUnits": 0,
-          "minimumTlsVersion": "1.2",
-          "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
           "kafkaEnabled": false,
-          "provisioningState": "Succeeded",
+          "maximumThroughputUnits": 0,
           "metricId": "MetricGUID:NamespaceGeoDRCreateSample",
-          "createdAt": "2021-02-16T22:36:06.107Z",
+          "minimumTlsVersion": "1.2",
+          "provisioningState": "Succeeded",
+          "serviceBusEndpoint": "https://NamespaceGeoDRCreateSample.servicebus.windows-int.net:443/",
           "updatedAt": "2021-02-16T22:37:42.29Z",
-          "serviceBusEndpoint": "https://NamespaceGeoDRCreateSample.servicebus.windows-int.net:443/"
-        }
+          "zoneRedundant": false
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "tags": {}
       }
     },
     "201": {
       "body": {
-        "sku": {
-          "name": "Standard",
-          "tier": "Standard",
-          "capacity": 1
-        },
-        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceGeoDRCreateSample",
         "name": "NamespaceGeoDRCreateSample",
         "type": "Microsoft.EventHub/Namespaces",
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceGeoDRCreateSample",
         "location": "East US",
-        "tags": {},
         "properties": {
+          "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
+          "createdAt": "2021-02-16T22:36:06.107Z",
+          "disableLocalAuth": false,
           "geoDataReplication": {
-            "maxReplicationLagDurationInSeconds": 60,
             "locations": [
               {
                 "locationName": "eastus",
-                "roleType": "Primary",
-                "replicaState": "Active"
+                "replicaState": "Active",
+                "roleType": "Primary"
               },
               {
                 "locationName": "westus",
-                "roleType": "Secondary",
-                "replicaState": "Active"
+                "replicaState": "Active",
+                "roleType": "Secondary"
               },
               {
                 "locationName": "centralus",
-                "roleType": "Secondary",
-                "replicaState": "Creating"
+                "replicaState": "Creating",
+                "roleType": "Secondary"
               }
-            ]
+            ],
+            "maxReplicationLagDurationInSeconds": 60
           },
-          "zoneRedundant": false,
           "isAutoInflateEnabled": false,
-          "disableLocalAuth": false,
-          "maximumThroughputUnits": 0,
-          "minimumTlsVersion": "1.2",
-          "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
           "kafkaEnabled": false,
-          "provisioningState": "Succeeded",
+          "maximumThroughputUnits": 0,
           "metricId": "MetricGUID:NamespaceGeoDRCreateSample",
-          "createdAt": "2021-02-16T22:36:06.107Z",
+          "minimumTlsVersion": "1.2",
+          "provisioningState": "Succeeded",
+          "serviceBusEndpoint": "https://NamespaceGeoDRCreateSample.servicebus.windows-int.net:443/",
           "updatedAt": "2021-02-16T22:37:42.29Z",
-          "serviceBusEndpoint": "https://NamespaceGeoDRCreateSample.servicebus.windows-int.net:443/"
-        }
+          "zoneRedundant": false
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "tags": {}
       }
     },
     "202": {}
-  }
+  },
+  "operationId": "Namespaces_CreateOrUpdate",
+  "title": "NamespaceWithGeoDRCreate"
 }
