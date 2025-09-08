@@ -14,7 +14,8 @@ namespace Microsoft.Network;
  * Class representing a Traffic Manager profile.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
+model Profile
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProfileProperties> {
   ...ResourceNameParameter<
     Resource = Profile,
     KeyName = "profileName",
