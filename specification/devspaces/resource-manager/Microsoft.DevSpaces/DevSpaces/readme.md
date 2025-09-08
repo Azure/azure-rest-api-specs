@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2019-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2019-04-01'
 input-file:
-- Microsoft.DevSpaces/stable/2019-04-01/devspaces.json
+- stable/2019-04-01/devspaces.json
 ```
 
 
