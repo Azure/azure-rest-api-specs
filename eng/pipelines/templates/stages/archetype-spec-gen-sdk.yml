@@ -29,8 +29,8 @@ parameters:
     type: string
     default: ''
   - name: ReleasePlanWorkItemId
-    type: string
-    default: ''
+    type: int
+    default: 0
   - name: Language
     type: string
     default: ''
@@ -283,7 +283,7 @@ stages:
           workingDirectory: $(SdkRepoDirectory)
           displayName: "Create SDK PR branch variable"
 
-        - ${{ if ne(parameters.ReleasePlanWorkItemId, '') }}:
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
           - pwsh: |
               . $(SpecRepoDirectory)/eng/common/scripts/common.ps1
               . $(SpecRepoDirectory)/eng/common/scripts/Helpers/DevOps-WorkItem-Helpers.ps1
@@ -303,6 +303,7 @@ stages:
               }
             displayName: "Get Release Plan details"
             condition: succeeded()
+            continueOnError: true
 
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
@@ -338,18 +339,19 @@ stages:
           displayName: 'Set PR generation status'
           condition: Failed()
 
-        - task: PowerShell@2
-          displayName: Link pull request to release plan
-          condition: and(succeededOrFailed(), eq(variables['HasChanges'], 'true'), not(endsWith(variables['SdkRepoName'], '-pr')))
-          inputs:
-            pwsh: true
-            workingDirectory: $(SdkRepoDirectory)
-            filePath: $(SdkRepoDirectory)/eng/common/scripts/Update-PullRequest-In-ReleasePlan.ps1
-            arguments: >
-              -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
-              -PullRequestUrl "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
-              -Status "$(SdkPrStatus)"
-              -LanguageName "${{ parameters.Language }}"
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
+          - task: PowerShell@2
+            displayName: Link pull request to release plan
+            condition: and(succeededOrFailed(), eq(variables['HasChanges'], 'true'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            inputs:
+              pwsh: true
+              workingDirectory: $(SdkRepoDirectory)
+              filePath: $(SdkRepoDirectory)/eng/common/scripts/Update-PullRequest-In-ReleasePlan.ps1
+              arguments: >
+                -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                -PullRequestUrl "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
+                -Status "$(SdkPrStatus)"
+                -LanguageName "${{ parameters.Language }}"
 
       - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - pwsh: |
