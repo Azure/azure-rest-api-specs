@@ -2894,6 +2894,14 @@
         }
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -3134,7 +3142,7 @@
           "readOnly": true
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The location of the original managed HSM.",
           "readOnly": true
         },
@@ -3211,7 +3219,7 @@
           "readOnly": true
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The location of the original vault.",
           "readOnly": true
         },
@@ -3496,7 +3504,7 @@
           "x-ms-client-flatten": true
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The supported Azure location where the managed HSM Pool should be created.",
           "readOnly": true
         },
@@ -3929,7 +3937,7 @@
           "x-ms-client-flatten": true
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The supported Azure location where the managed HSM Pool should be created.",
           "x-ms-mutability": [
             "read",
@@ -3952,7 +3960,7 @@
           "description": "Managed service identity"
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
         }
       },
@@ -3971,7 +3979,7 @@
           "description": "Id of private endpoint connection."
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
         },
         "properties": {
@@ -4569,7 +4577,7 @@
           "readOnly": true
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The supported Azure location where the managed HSM Pool should be created.",
           "x-ms-mutability": [
             "read",
@@ -4957,7 +4965,7 @@
           "x-ms-client-flatten": true
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure location of the key vault resource.",
           "readOnly": true
         },
@@ -4970,7 +4978,7 @@
           "readOnly": true
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
         }
       },
@@ -4989,7 +4997,7 @@
           "description": "Id of private endpoint connection."
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
         },
         "properties": {
@@ -5124,7 +5132,7 @@
           "x-ms-client-flatten": true
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure location of the key vault resource.",
           "readOnly": true
         },
@@ -5330,7 +5338,7 @@
           "description": "Properties of the secret"
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure location of the key vault resource.",
           "readOnly": true
         },
@@ -5702,7 +5710,7 @@
           "description": "Properties of the vault"
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure location of the key vault resource."
         },
         "tags": {
@@ -5742,7 +5750,7 @@
           "readOnly": true
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The resource type of the access policy.",
           "readOnly": true
         },

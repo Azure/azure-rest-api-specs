@@ -28,11 +28,7 @@ interface DeletedManagedHsms {
   /**
    * Gets the specified deleted managed HSM.
    */
-  getDeleted is ArmResourceRead<
-    DeletedManagedHsm,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = ManagedHsmError
-  >;
+  getDeleted is ArmResourceRead<DeletedManagedHsm, Error = ManagedHsmError>;
 
   /**
    * Permanently deletes the specified managed HSM.

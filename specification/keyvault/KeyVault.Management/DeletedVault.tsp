@@ -30,11 +30,7 @@ interface DeletedVaults {
   /**
    * Gets the deleted Azure key vault.
    */
-  getDeleted is ArmResourceRead<
-    DeletedVault,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = CloudError
-  >;
+  getDeleted is ArmResourceRead<DeletedVault, Error = CloudError>;
 
   /**
    * Permanently deletes the specified vault. aka Purges the deleted Azure key vault.

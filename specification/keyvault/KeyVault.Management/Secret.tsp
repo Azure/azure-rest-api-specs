@@ -28,7 +28,7 @@ model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  location?: string;
+  location?: Azure.Core.azureLocation;
 
   /**
    * Tags assigned to the key vault resource.
