@@ -20,7 +20,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-messaging-webpubsub"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-webpubsub"
     package-name: "com.azure.messaging.webpubsub"
     package-version: "1.5.0"
     namespace: "com.azure.messaging.webpubsub"
@@ -38,6 +38,8 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-ts":
+    service-dir: "sdk/web-pubsub"
+    is-modular-library: true
     package-dir: "web-pubsub"
     package-details:
       name: "@azure/web-pubsub"
