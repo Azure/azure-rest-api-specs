@@ -500,48 +500,49 @@ using Microsoft.Web;
 @@clientLocation(Sites.stopWebSiteNetworkTrace, WebApps);
 @@clientLocation(Sites.getNetworkTraces, WebApps);
 @@clientLocation(Sites.getNetworkTraceOperationV2, WebApps);
-// @@clientLocation(Sites.getNetworkTracesV2, WebApps);
-// @@clientLocation(Sites.generateNewSitePublishingPassword, WebApps);
-// @@clientLocation(Sites.listPerfMonCounters, WebApps);
-// @@clientLocation(Sites.getSitePhpErrorLogFlag, WebApps);
-// @@clientLocation(Sites.listPremierAddOns, WebApps);
-// @@clientLocation(Sites.getPrivateLinkResources, WebApps);
-// @@clientLocation(Sites.listPublishingProfileXmlWithSecrets, WebApps);
-// @@clientName(Sites.listPublishingProfileXmlWithSecrets::parameters.body,
-//   "publishingProfileOptions"
-// );
-// @@clientLocation(Sites.resetProductionSlotConfig, WebApps);
-// @@clientLocation(Sites.restart, WebApps);
-// @@clientLocation(Sites.restoreFromBackupBlob, WebApps);
-// @@clientName(Sites.restoreFromBackupBlob::parameters.body, "request");
-// @@clientLocation(Sites.restoreFromDeletedApp, WebApps);
-// @@clientName(Sites.restoreFromDeletedApp::parameters.body, "restoreRequest");
-// @@clientLocation(Sites.restoreSnapshot, WebApps);
-// @@clientName(Sites.restoreSnapshot::parameters.body, "restoreRequest");
-// @@clientLocation(Sites.listSlotDifferencesFromProduction, WebApps);
-// @@clientName(Sites.listSlotDifferencesFromProduction::parameters.body,
-//   "slotSwapEntity"
-// );
-// @@clientLocation(Sites.swapSlotWithProduction, WebApps);
-// @@clientName(Sites.swapSlotWithProduction::parameters.body, "slotSwapEntity");
-// @@clientLocation(Sites.listSnapshots, WebApps);
-// @@clientLocation(Sites.listSnapshotsFromDRSecondary, WebApps);
-// @@clientLocation(Sites.start, WebApps);
-// @@clientLocation(Sites.startNetworkTrace, WebApps);
-// @@clientLocation(Sites.stop, WebApps);
-// @@clientLocation(Sites.stopNetworkTrace, WebApps);
-// @@clientLocation(Sites.syncRepository, WebApps);
-// @@clientLocation(Sites.syncFunctionTriggers, WebApps);
-// @@clientLocation(Sites.listUsages, WebApps);
-// @@clientLocation(Sites.deployWorkflowArtifacts, WebApps);
-// @@clientName(Sites.deployWorkflowArtifacts::parameters.body,
-//   "workflowArtifacts"
-// );
-// @@clientLocation(Sites.listWorkflowsConnections, WebApps);
-// @@clientLocation(Sites.regenerateAccessKey, "Workflows");
-// @@clientName(Sites.regenerateAccessKey::parameters.body, "keyType");
-// @@clientLocation(Sites.validate, "Workflows");
-// @@clientName(Sites.validate::parameters.body, "validate");
+@@clientLocation(Sites.getNetworkTracesV2, WebApps);
+@@clientLocation(Sites.generateNewSitePublishingPassword, WebApps);
+@@clientLocation(Sites.listPerfMonCounters, WebApps);
+@@clientLocation(Sites.getSitePhpErrorLogFlag, WebApps);
+@@clientLocation(Sites.listPremierAddOns, WebApps);
+@@clientLocation(Sites.getPrivateLinkResources, WebApps);
+@@clientLocation(Sites.listPublishingProfileXmlWithSecrets, WebApps);
+@@clientName(Sites.listPublishingProfileXmlWithSecrets::parameters.body,
+  "publishingProfileOptions"
+);
+@@clientLocation(Sites.resetProductionSlotConfig, WebApps);
+@@clientLocation(Sites.restart, WebApps);
+@@clientLocation(Sites.restoreFromBackupBlob, WebApps);
+@@clientName(Sites.restoreFromBackupBlob::parameters.body, "request");
+@@clientLocation(Sites.restoreFromDeletedApp, WebApps);
+@@clientName(Sites.restoreFromDeletedApp::parameters.body, "restoreRequest");
+@@clientLocation(Sites.restoreSnapshot, WebApps);
+@@clientName(Sites.restoreSnapshot::parameters.body, "restoreRequest");
+@@clientLocation(Sites.listSlotDifferencesFromProduction, WebApps);
+@@clientName(Sites.listSlotDifferencesFromProduction::parameters.body,
+  "slotSwapEntity"
+);
+@@clientLocation(Sites.swapSlotWithProduction, WebApps);
+@@clientName(Sites.swapSlotWithProduction::parameters.body, "slotSwapEntity");
+@@clientLocation(Sites.listSnapshots, WebApps);
+@@clientLocation(Sites.listSnapshotsFromDRSecondary, WebApps);
+@@clientLocation(Sites.start, WebApps);
+@@clientLocation(Sites.startNetworkTrace, WebApps);
+@@clientLocation(Sites.stop, WebApps);
+@@clientLocation(Sites.stopNetworkTrace, WebApps);
+@@clientLocation(Sites.syncRepository, WebApps);
+@@clientLocation(Sites.syncFunctionTriggers, WebApps);
+@@clientLocation(Sites.listUsages, WebApps);
+@@clientLocation(Sites.deployWorkflowArtifacts, WebApps);
+@@clientName(Sites.deployWorkflowArtifacts::parameters.body,
+  "workflowArtifacts"
+);
+@@clientLocation(Sites.listWorkflowsConnections, WebApps);
+@@clientLocation(Sites.regenerateAccessKey, "Workflows");
+@@clientName(Sites.regenerateAccessKey::parameters.body, "keyType");
+@@clientLocation(Sites.validate, "Workflows");
+@@clientName(Sites.validate::parameters.body, "validate");
+
 @@clientName(WebApps.createOrUpdateSlot::parameters.resource, "siteEnvelope");
 @@clientName(WebApps.updateSlot::parameters.properties, "siteEnvelope");
 @@clientName(WebApps.applySlotConfigurationSlot::parameters.body,

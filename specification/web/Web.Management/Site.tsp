@@ -100,6 +100,48 @@ interface SiteOps
       }
     > {}
 
+@armResourceOperations
+interface WorkflowRegenerateAccessKeyOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: "runtime",
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: "workflow",
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: "management",
+      },
+      {
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: string,
+      }
+    > {}
+
 alias HostSecretParameters = {
   ...ResourceInstanceParameters<Site>;
 
@@ -153,7 +195,11 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_Get")
-  get is SiteOps.Read<Site>;
+  get is SiteOps.Read<
+    Site,
+    Response = ArmResponse<Site> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
@@ -169,7 +215,8 @@ interface Sites {
       _: Site;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = Site> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -185,7 +232,8 @@ interface Sites {
     Response = ArmResponse<Site> | (AcceptedResponse & {
       @bodyRoot
       _: Site;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -207,7 +255,9 @@ interface Sites {
        */
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
-    }
+    },
+    Response = ArmResponse<Site> | NoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1275,17 +1325,11 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Workflows_RegenerateAccessKey")
-  regenerateAccessKey is SiteOps.ActionSync<
+  regenerateAccessKey is WorkflowRegenerateAccessKeyOps.ActionSync<
     Site,
     RegenerateActionParameter,
     OkResponse,
-    Parameters = {
-      /**
-       * The workflow name.
-       */
-      @path
-      workflowName: string;
-    }
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1293,17 +1337,11 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Workflows_Validate")
-  validate is SiteOps.ActionSync<
+  validate is WorkflowRegenerateAccessKeyOps.ActionSync<
     Site,
     Workflow,
     OkResponse,
-    Parameters = {
-      /**
-       * The workflow name.
-       */
-      @path
-      workflowName: string;
-    }
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
@@ -1400,7 +1438,8 @@ interface WebApps {
       @query("includeSlots")
       includeSlots?: boolean;
     },
-    Response = ArmResponse<WebAppCollection>
+    Response = ArmResponse<WebAppCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -1583,12 +1622,20 @@ interface WebApps {
   /**
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
-  @action("list")
+  @action("config/publishingcredentials/list")
   listPublishingCredentialsSlot is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
     void,
     ArmResponse<User>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>,
+    Parameters = {
+      /**
+       * If true, the password is included in the response. The default is false.
+       */
+      @segment("slots")
+      @path
+      slot: string;
+    }
   >;
 
   /**
@@ -1596,7 +1643,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("pushsettings")
+  @action("config/pushsettings")
   updateSitePushSettingsSlot is WebAppOps.ActionSync<
     Site,
     PushSettings,

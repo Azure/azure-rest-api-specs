@@ -51,7 +51,7 @@ interface RequestHistoryOps
         @path
         @segment("webhooks")
         @key
-        workflow: string,
+        workflow: "workflow",
 
         /** undefined */
         @path
@@ -63,7 +63,7 @@ interface RequestHistoryOps
         @path
         @segment("workflows")
         @key
-        workflowName: "workflowName",
+        workflowName: string,
 
         /** The workflow run name. */
         @path
