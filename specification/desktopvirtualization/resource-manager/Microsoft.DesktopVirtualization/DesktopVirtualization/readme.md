@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-preview-2025-08-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-08-01-preview'
 input-file:
-  - Microsoft.DesktopVirtualization/preview/2025-08-01-preview/desktopvirtualization.json
+  - preview/2025-08-01-preview/desktopvirtualization.json
 suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
