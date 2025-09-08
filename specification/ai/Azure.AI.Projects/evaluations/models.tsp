@@ -252,7 +252,6 @@ model modelResponseGenerationTarget extends EvaluationTarget {
   modelParams: Record<unknown>;
 }
 
-
 @doc("Human Evaluation Template for defining the structure of human evaluation feedback questions.")
 @added(Versions.v2025_05_15_preview)
 model HumanEvaluationTemplate {
@@ -381,4 +380,8 @@ model RequestError {
 }
 
 @doc("Identifier of a saved asset.")
+<<<<<<< HEAD
 scalar AssetId extends string;
+=======
+scalar AssetId extends string;
+>>>>>>> 726c9748b5 (Adding proposal for HET APIs)

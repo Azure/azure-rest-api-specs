@@ -64,7 +64,6 @@ interface Evaluations {
   delete is EvaluationsOperations.ResourceDelete<Evaluation>;
 }
 
-
 @route("agents/{agentId}/humanEvaluations")
 @added(Versions.v2025_05_15_preview)
 @doc("Manage human evaluations for a specific agent.")
