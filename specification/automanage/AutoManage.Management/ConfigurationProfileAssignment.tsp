@@ -113,8 +113,6 @@ interface ConfigurationProfileAssignments {
   /**
    * Get list of configuration profile assignments under a given subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConfigurationProfileAssignments_ListBySubscription")
   listBySubscription is ConfigurationProfileAssignmentBySubscriptionOps.List<
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
@@ -176,8 +174,6 @@ interface ConfigurationProfileHCRPAssignments {
   /**
    * Get list of configuration profile assignments
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConfigurationProfileAssignments_ListByMachineName")
   listByMachineName is ConfigurationProfileHCRPAssignmentOps.List<
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
@@ -239,8 +235,6 @@ interface ConfigurationProfileHCIAssignments {
   /**
    * Get list of configuration profile assignments
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConfigurationProfileAssignments_ListByClusterName")
   listByClusterName is ConfigurationProfileHCIAssignmentOps.List<
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>

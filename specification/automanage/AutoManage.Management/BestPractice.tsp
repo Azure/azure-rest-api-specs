@@ -56,8 +56,6 @@ interface BestPractices {
   /**
    * Retrieve a list of Automanage best practices
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BestPractices_ListByTenant")
   listByTenant is BestPracticeOps.List<
     BestPractice,
     Response = ArmResponse<BestPracticeList>
@@ -101,3 +99,4 @@ interface BestPracticesVersions {
 
 @@doc(BestPractice.name, "The Automanage best practice name.");
 @@doc(BestPractice.properties, "Properties of the best practice.");
+@@summary(BestPractice.properties, "Properties");

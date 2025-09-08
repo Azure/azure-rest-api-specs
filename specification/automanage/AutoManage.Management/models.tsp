@@ -58,6 +58,7 @@ model ConfigurationProfileProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @example(#{ `Antimalware/Enable`: true })
+  @summary("configuration")
   configuration?: unknown;
 }
 
