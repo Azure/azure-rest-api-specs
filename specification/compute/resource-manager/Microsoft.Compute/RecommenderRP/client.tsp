@@ -10,13 +10,11 @@ using Azure.ClientGenerator.Core;
   "ComputeRecommenderManagementClient",
   "javascript"
 );
-@@alternateType(
-  Microsoft.Compute.SpotPlacementScoresInput.desiredLocations,
+@@alternateType(Microsoft.Compute.SpotPlacementScoresInput.desiredLocations,
   azureLocation[],
   "csharp"
 );
-@@alternateType(
-  Microsoft.Compute.SpotPlacementScoresResponse.desiredLocations,
+@@alternateType(Microsoft.Compute.SpotPlacementScoresResponse.desiredLocations,
   azureLocation[],
   "csharp"
 );
