@@ -5334,7 +5334,6 @@
           "description": "The version of Kubernetes running on the Agent Pool. If orchestratorVersion was a fully specified version <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was <major.minor>, this field will contain the full <major.minor.patch> version being used."
         },
         "nodeImageVersion": {
-          "readOnly": true,
           "type": "string",
           "description": "The version of node image"
         },
@@ -8528,6 +8527,15 @@
           "x-ms-identifiers": [],
           "description": "List of components grouped by kubernetes major.minor version."
         },
+        "recentlyUsedVersions": {
+          "description": "List of historical good versions for rollback operations.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentPoolRecentlyUsedVersion"
+          },
+          "x-ms-identifiers": []
+        },
         "latestNodeImageVersion": {
           "type": "string",
           "description": "The latest AKS supported node image version."
@@ -8595,6 +8603,25 @@
         }
       },
       "description": "The list of available agent pool versions."
+    },
+    "AgentPoolRecentlyUsedVersion": {
+      "type": "object",
+      "properties": {
+        "orchestratorVersion": {
+          "type": "string",
+          "description": "The Kubernetes version (major.minor.patch) available for rollback."
+        },
+        "nodeImageVersion": {
+          "type": "string",
+          "description": "The node image version available for rollback."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when this version was last used."
+        }
+      },
+      "description": "A historical version that can be used for rollback operations."
     },
     "PodIPAllocationMode": {
       "type": "string",
