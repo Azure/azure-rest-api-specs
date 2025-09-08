@@ -79,11 +79,14 @@ interface ConnectedRegistries {
   /**
    * Deactivates the connected registry instance.
    */
-  deactivate is ArmResourceActionAsyncBase<
+  deactivate is ArmResourceActionAsync<
     ConnectedRegistry,
     void,
-    ArmAcceptedLroResponse | OkResponse,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

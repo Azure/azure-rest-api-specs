@@ -90,11 +90,14 @@ interface Registries {
   /**
    * Copies an image to this container registry from the specified container registry.
    */
-  importImage is ArmResourceActionAsyncBase<
+  importImage is ArmResourceActionAsync<
     Registry,
     ImportImageParameters,
-    ArmAcceptedLroResponse | OkResponse,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
