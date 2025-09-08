@@ -33,6 +33,16 @@ parameters:
     type: number
     default: 0
     displayName: 'Release plan work item id'
+  - name: Language
+    type: string
+    default: ''
+    values:
+      - ''
+      - 'net'
+      - 'java'
+      - 'js'
+      - 'python'
+      - 'go'
 
 trigger: none
 
@@ -48,4 +58,4 @@ extends:
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
     ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}
-    Language: $(Language)
+    Language: ${{ parameters.Language }}
