@@ -3,9 +3,10 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./AzureMonitorWorkspace.tsp";
 
+using TypeSpec.Rest;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Microsoft.Monitor {
   /**
@@ -159,5 +160,35 @@ namespace Microsoft.Monitor {
      * Geneva Metrics limits.
      */
     limits?: MacMetricsLimits;
+  }
+
+  /**
+   * An Azure Monitor Workspace definition
+   */
+  model AzureMonitorWorkspaceResource
+    is Azure.ResourceManager.TrackedResource<AzureMonitorWorkspace> {
+    ...ResourceNameParameter<
+      Resource = AzureMonitorWorkspaceResource,
+      KeyName = "azureMonitorWorkspaceName",
+      SegmentName = "accounts",
+      NamePattern = "^(?!-)[a-zA-Z0-9-]+[^-]$"
+    >;
+  }
+
+  /**
+   * Metrics container resource for an Azure Monitor Workspace.
+   */
+  @parentResource(AzureMonitorWorkspaceResource)
+  model MacMetricsContainerResource
+    is Azure.ResourceManager.ProxyResource<MacMetricsContainer> {
+    ...ResourceNameParameter<
+      Resource = MacMetricsContainer,
+      KeyName = "metricsContainerName",
+      SegmentName = "metricsContainers",
+      /**
+       * The name of the metrics container. Always 'default'.
+       */
+      NamePattern = "^default$"
+    >;
   }
 }
