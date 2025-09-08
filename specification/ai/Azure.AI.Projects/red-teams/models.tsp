@@ -14,6 +14,7 @@ namespace Azure.AI.Projects;
 @doc("Strategies for attacks.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
+@removed(Versions.v2025_05_01)
 union AttackStrategy {
   string,
 
@@ -93,6 +94,7 @@ union AttackStrategy {
 @doc("Risk category for the attack objective.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
+@removed(Versions.v2025_05_01)
 union RiskCategory {
   string,
 
@@ -112,6 +114,7 @@ union RiskCategory {
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
+@removed(Versions.v2025_05_01)
 model AzureOpenAIModelConfiguration extends TargetConfig {
   type: "AzureOpenAIModel";
 
@@ -122,6 +125,7 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
 @doc("Abstract class for target configuration.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
+@removed(Versions.v2025_05_01)
 @discriminator("type")
 model TargetConfig {
   @doc("Type of the model configuration.")
@@ -132,6 +136,7 @@ model TargetConfig {
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
+@removed(Versions.v2025_05_01)
 model RedTeam {
   @doc("Identifier of the red team run.")
   @key("name")

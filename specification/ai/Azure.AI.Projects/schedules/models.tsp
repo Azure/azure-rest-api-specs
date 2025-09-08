@@ -1,0 +1,290 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
+import "../common/models.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+
+namespace Azure.AI.Projects;
+
+@doc("Schedule provisioning status.")
+@added(Versions.v2025_07_31_preview)
+union ScheduleProvisioningStatus {
+  string,
+
+  @doc("Represents the creation status of the schedule.")
+  Creating: "Creating",
+
+  @doc("Represents the updating status of the schedule.")
+  Updating: "Updating",
+
+  @doc("Represents the deleting status of the schedule.")
+  Deleting: "Deleting",
+
+  @doc("Represents the succeeded status of the schedule.")
+  Succeeded: "Succeeded",
+
+  @doc("Represents the failed status of the schedule.")
+  Failed: "Failed",
+}
+
+@doc("Type of the trigger.")
+@added(Versions.v2025_07_31_preview)
+union TriggerType {
+  string,
+
+  @doc("Cron based trigger.")
+  Cron: "Cron",
+
+  @doc("Recurrence based trigger.")
+  Recurrence: "Recurrence",
+
+  @doc("One-time trigger.")
+  OneTime: "OneTime",
+}
+
+@doc("Base model for Trigger of the schedule.")
+@discriminator("type")
+@added(Versions.v2025_07_31_preview)
+model Trigger {
+  @doc("Type of the trigger.")
+  type: TriggerType;
+}
+
+@doc("Cron based trigger.")
+@added(Versions.v2025_07_31_preview)
+model CronTrigger extends Trigger {
+  type: TriggerType.Cron;
+
+  @doc("Cron expression that defines the schedule frequency.")
+  expression: string;
+
+  @doc("Time zone for the cron schedule.")
+  timeZone?: string = "UTC";
+
+  @doc("Start time for the cron schedule in ISO 8601 format.")
+  startTime: string;
+
+  @doc("End time for the cron schedule in ISO 8601 format.")
+  endTime: string;
+}
+
+@doc("Recurrence type.")
+@added(Versions.v2025_07_31_preview)
+union RecurrenceType {
+  string,
+
+  @doc("Hourly recurrence pattern.")
+  Hourly: "Hourly",
+
+  @doc("Daily recurrence pattern.")
+  Daily: "Daily",
+
+  @doc("Weekly recurrence pattern.")
+  Weekly: "Weekly",
+
+  @doc("Monthly recurrence pattern.")
+  Monthly: "Monthly",
+}
+
+@doc("Days of the week for recurrence schedule.")
+@added(Versions.v2025_07_31_preview)
+union DayOfWeek {
+  string,
+
+  @doc("Sunday.")
+  Sunday: "Sunday",
+
+  @doc("Monday.")
+  Monday: "Monday",
+
+  @doc("Tuesday.")
+  Tuesday: "Tuesday",
+
+  @doc("Wednesday.")
+  Wednesday: "Wednesday",
+
+  @doc("Thursday.")
+  Thursday: "Thursday",
+
+  @doc("Friday.")
+  Friday: "Friday",
+
+  @doc("Saturday.")
+  Saturday: "Saturday",
+}
+
+@doc("Recurrence schedule model.")
+@added(Versions.v2025_07_31_preview)
+model RecurrenceSchedule {
+  @doc("Recurrence type for the recurrence schedule.")
+  type: RecurrenceType;
+
+  @doc("Hours for the recurrence schedule.")
+  hours?: int32[];
+
+  @doc("Minutes for the recurrence schedule.")
+  minutes?: int32[];
+
+  @doc("Days of the week for the recurrence schedule.")
+  dayOfWeek?: DayOfWeek[];
+
+  @doc("Days of the month for the recurrence schedule.")
+  dayOfMonth?: int32[];
+}
+
+@doc("Recurrence based trigger.")
+@added(Versions.v2025_07_31_preview)
+model RecurrenceTrigger extends Trigger {
+  @doc("Type of the trigger.")
+  type: TriggerType.Recurrence;
+
+  @doc("Start time for the recurrence schedule in ISO 8601 format.")
+  startTime: string;
+
+  @doc("End time for the recurrence schedule in ISO 8601 format.")
+  endTime: string;
+
+  @doc("Time zone for the recurrence schedule.")
+  timeZone?: string = "UTC";
+
+  @doc("Interval for the recurrence schedule.")
+  interval: int32;
+
+  @doc("Recurrence schedule for the recurrence trigger.")
+  schedule: RecurrenceSchedule;
+}
+
+@doc("One-time trigger.")
+@added(Versions.v2025_07_31_preview)
+model OneTimeTrigger extends Trigger {
+  type: TriggerType.OneTime;
+
+  @doc("Date and time for the one-time trigger.")
+  triggerAt: string;
+
+  @doc("Time zone for the one-time trigger.")
+  timeZone?: string = "UTC";
+}
+
+@doc("Type of the task.")
+@added(Versions.v2025_07_31_preview)
+union ScheduleTaskType {
+  string,
+
+  @doc("Evaluation task.")
+  Evaluation: "Evaluation",
+
+  @doc("Insight task.")
+  Insight: "Insight",
+}
+
+@doc("Insight placeholder model.")
+model Insight {
+  @doc("Identifier of the insight.")
+  id: string;
+}
+
+@doc("Schedule task model.")
+@added(Versions.v2025_07_31_preview)
+model ScheduleTask {
+  @doc("Type of the task.")
+  type: ScheduleTaskType;
+
+  @doc("Configuration for the task.")
+  configuration: Record<string>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported"
+  @doc("Definition of the task.")
+  definition: Evaluation | Insight;
+}
+
+@doc("Status of the schedule.")
+@added(Versions.v2025_07_31_preview)
+union ScheduleStatus {
+  string,
+
+  @doc("Enabled status of the schedule.")
+  Enabled: "Enabled",
+
+  @doc("Disabled status of the schedule.")
+  Disabled: "Disabled",
+}
+
+@resource("schedules")
+@doc("Schedule model.")
+@added(Versions.v2025_07_31_preview)
+model Schedule {
+  @doc("Identifier of the schedule.")
+  @key("id")
+  @encodedName("application/json", "id")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Name of the schedule.")
+  displayName?: string;
+
+  @doc("Status of the schedule.")
+  status: ScheduleStatus;
+
+  @doc("Provisioning status of the schedule.")
+  @visibility(Lifecycle.Read)
+  provisioningStatus?: ScheduleProvisioningStatus;
+
+  @doc("Trigger for the schedule.")
+  trigger: Trigger;
+
+  @doc("Task for the schedule.")
+  task: ScheduleTask;
+
+  @doc("Schedule's tags. Unlike properties, tags are fully mutable.")
+  tags?: Record<string>;
+
+  @doc("Schedule's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
+
+  @visibility(Lifecycle.Read)
+  @doc("System metadata for the resource.")
+  systemData: Record<string>;
+}
+
+@doc("Trigger status of the schedule run.")
+@added(Versions.v2025_07_31_preview)
+union ScheduleRunTriggerStatus {
+  string,
+
+  @doc("Succeeded status of the schedule run.")
+  Succeeded: "Succeeded",
+
+  @doc("Failed status of the schedule run.")
+  Failed: "Failed",
+}
+
+@doc("Schedule run model.")
+@resource("schedules/{scheduleId}/runs")
+@added(Versions.v2025_07_31_preview)
+model ScheduleRun {
+  @doc("Identifier of the schedule run.")
+  @key("id")
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "id")
+  id: string;
+
+  @doc("Identifier of the schedule.")
+  scheduleId: string;
+
+  @doc("Trigger status of the schedule run.")
+  @visibility(Lifecycle.Read)
+  triggerStatus: ScheduleRunTriggerStatus;
+
+  @doc("Trigger time of the schedule run.")
+  triggerTime?: string;
+
+  @doc("Error information for the schedule run.")
+  error?: string;
+}
