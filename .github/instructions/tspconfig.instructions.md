@@ -39,5 +39,5 @@ Example (Go, dataplane):
 	fix-const-stuttering: true
 	rawjson-as-bytes: true
 	generate-samples: true
-    flavor: azure
+	flavor: azure
 ```
