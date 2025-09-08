@@ -1662,7 +1662,7 @@ model ClientDiscoveryResponse
 /**
  * Properties of the DeletedVault.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-properties-provisioning-state" "DeletedVaultProperties omits provisioningState because the resource is already in a terminal deleted state."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "DeletedVaultProperties omits provisioningState because the resource is already in a terminal deleted state."
 @added(Versions.v2025_08_01)
 // Soft-deleted projection of a vault does not surface provisioningState.
 model DeletedVaultProperties {
