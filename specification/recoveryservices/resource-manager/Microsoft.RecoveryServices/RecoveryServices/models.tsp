@@ -1698,7 +1698,7 @@ model DeletedVault
     Resource = DeletedVault,
     KeyName = "deletedVaultName",
     SegmentName = "deletedVaults",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z][A-Za-z0-9-]*$"
   >;
 }
 

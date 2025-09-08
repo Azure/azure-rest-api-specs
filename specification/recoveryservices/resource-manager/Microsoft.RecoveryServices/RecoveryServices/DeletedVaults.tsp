@@ -49,6 +49,7 @@ interface DeletedVaultsOperationStatus
          */
         @segment("deletedVaults")
         @path
+        @pattern("^[A-Za-z][A-Za-z0-9-]*$")
         deletedVaultName: string,
 
         #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
