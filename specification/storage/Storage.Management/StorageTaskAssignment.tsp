@@ -24,7 +24,7 @@ model StorageTaskAssignment
     Resource = StorageTaskAssignment,
     KeyName = "storageTaskAssignmentName",
     SegmentName = "storageTaskAssignments",
-    NamePattern = "^[a-z0-9]{3,24}$"
+    NamePattern = "^[a-z][a-z0-9]{2,23}$"
   >;
 }
 
@@ -96,8 +96,8 @@ interface StorageTaskAssignments {
       /**
        * Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.
        */
-      @query("$maxpagesize")
-      $maxpagesize?: int32;
+      @query("$top")
+      $top?: int32;
     },
     Response = ArmResponse<StorageTaskAssignmentsList>,
     Error = ErrorResponse
