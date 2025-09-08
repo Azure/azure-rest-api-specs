@@ -58,45 +58,6 @@
     }
   ],
   "paths": {
-    "/": {
-      "delete": {
-        "operationId": "ResourceDetails_DeleteResources",
-        "tags": [
-          "ResourceDetails"
-        ],
-        "description": "Deletes a list of resources by their IDs.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "content",
-            "in": "body",
-            "description": "List of resource IDs to delete.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeleteResourcesDetails"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ResourceDetails_DeleteResources": {
-            "$ref": "./examples/ResourceDetails_DeleteResources.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.DevOpsInfrastructure/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -696,6 +657,54 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "delete": {
+        "operationId": "DeleteResources",
+        "description": "Deletes multiple resources in a pool by their resource IDs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contents",
+            "in": "body",
+            "description": "List of resource IDs to delete.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteResourcesDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -760,6 +769,66 @@
             "description": "The name is unavailable"
           }
         ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
       }
     },
     "Azure.Core.azureLocation": {
@@ -2302,5 +2371,16 @@
       "x-ms-discriminator-value": "Vmss"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
 }
