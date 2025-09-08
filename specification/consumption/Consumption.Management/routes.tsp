@@ -346,7 +346,7 @@ interface ReservationsSummariesOperationGroup {
       /**
        * The scope associated with reservations summaries operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
        */
-      @path
+      @path(#{allowReserved: true})
       @segment("")
       resourceScope: string;
 
@@ -471,7 +471,7 @@ interface ReservationsDetailsOperationGroup {
       /**
        * The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
        */
-      @path
+      @path(#{allowReserved: true})
       @segment("")
       resourceScope: string;
 
@@ -533,7 +533,7 @@ interface ReservationRecommendationsOperationGroup {
       /**
        * The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope
        */
-      @path
+      @path(#{allowReserved: true})
       @segment("")
       resourceScope: string;
     },
@@ -558,7 +558,7 @@ interface ReservationRecommendationDetailsOperationGroup {
       /**
        * The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope
        */
-      @path
+      @path(#{allowReserved: true})
       @segment("")
       resourceScope: string;
 
