@@ -1,0 +1,43 @@
+parameters:
+  "service-dir":
+    default: "sdk/developer"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}"
+    omit-unreachable-types: true
+    output-file: "{version-status}/{version}/azure.developer.trustedsigning.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-developer-trustedsigning"
+    namespace: "azure.developer.trustedsigning"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.Developer.TrustedSigning"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Developer.TrustedSigning
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "developer-trustedsigning-rest"
+    generate-metadata: true
+    is-modular-library: false
+    package-details:
+      name: "@azure-rest/developer-trustedsigning"
+      description: "Azure trusted signing service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-trustedsigning"
+    namespace: "com.azure.developer.trustedsigning"
+    flavor: azure
