@@ -10114,6 +10114,9 @@
           },
           "Create or update a VM with capacity reservation": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithCapacityReservation.json"
+          },
+          "Create or update a VM with capacity reservation disabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithCapacityReservationDisabled.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13062,6 +13065,10 @@
         "capacityReservationGroup": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies the capacity reservation group resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details."
+        },
+        "disableCapacityReservationAssignment": {
+          "type": "boolean",
+          "description": "If set to true, the capacity reservation feature will be disabled."
         }
       }
     },
