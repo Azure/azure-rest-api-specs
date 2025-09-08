@@ -20702,8 +20702,10 @@
         },
         "properties": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "scoringUri": {
@@ -20921,6 +20923,7 @@
       "properties": {
         "type": {
           "type": "string",
+          "title": "Type of Environment Variable",
           "default": "local",
           "enum": [
             "local"
@@ -20957,6 +20960,7 @@
       "properties": {
         "autoRebuild": {
           "type": "string",
+          "default": "Disabled",
           "enum": [
             "Disabled",
             "OnBaseImageUpdate"
@@ -21015,6 +21019,7 @@
         },
         "osType": {
           "type": "string",
+          "default": "Linux",
           "enum": [
             "Linux",
             "Windows"
@@ -21045,7 +21050,8 @@
           "readOnly": true
         },
         "stage": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -21080,10 +21086,12 @@
       "properties": {
         "retailPrice": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "title": "Retail price"
         },
         "osType": {
           "type": "string",
+          "title": "OS type",
           "enum": [
             "Linux",
             "Windows"
@@ -21095,6 +21103,7 @@
         },
         "vmTier": {
           "type": "string",
+          "title": "VM tier",
           "enum": [
             "Standard",
             "LowPriority",
@@ -21117,6 +21126,7 @@
       "properties": {
         "billingCurrency": {
           "type": "string",
+          "title": "Billing currency",
           "enum": [
             "USD"
           ],
@@ -21127,6 +21137,7 @@
         },
         "unitOfMeasure": {
           "type": "string",
+          "title": "Unit of time measure",
           "enum": [
             "OneHour"
           ],
@@ -21137,6 +21148,7 @@
         },
         "values": {
           "type": "array",
+          "title": "List of estimated VM prices.",
           "items": {
             "$ref": "#/definitions/EstimatedVMPrice"
           }
@@ -21154,11 +21166,62 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FqdnEndpointsPropertyBag"
+            "$ref": "#/definitions/FQDNEndpointsPropertyBag"
           },
           "x-ms-identifiers": [
             "/properties/category"
           ]
+        }
+      }
+    },
+    "FQDNEndpoint": {
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string"
+        },
+        "endpointDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpointDetail"
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
+        }
+      }
+    },
+    "FQDNEndpointDetail": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "FQDNEndpoints": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpoint"
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
+        }
+      }
+    },
+    "FQDNEndpointsPropertyBag": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FQDNEndpoints"
         }
       }
     },
@@ -21183,6 +21246,7 @@
       "properties": {
         "featureDataTypeOverride": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
@@ -21255,6 +21319,7 @@
         },
         "threshold": {
           "$ref": "#/definitions/MonitoringThreshold",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -21270,6 +21335,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "Disabled",
           "enum": [
             "Disabled",
             "Enabled"
@@ -21280,7 +21346,8 @@
           }
         },
         "targetColumn": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -21289,6 +21356,7 @@
       "properties": {
         "dataType": {
           "type": "string",
+          "default": "String",
           "enum": [
             "String",
             "Integer",
@@ -21305,7 +21373,8 @@
           }
         },
         "featureName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -22134,57 +22203,6 @@
           "$ref": "#/definitions/TrainingSettings"
         }
       ]
-    },
-    "FqdnEndpoint": {
-      "type": "object",
-      "properties": {
-        "domainName": {
-          "type": "string"
-        },
-        "endpointDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FqdnEndpointDetail"
-          },
-          "x-ms-identifiers": [
-            "port"
-          ]
-        }
-      }
-    },
-    "FqdnEndpointDetail": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "FqdnEndpoints": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string"
-        },
-        "endpoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FqdnEndpoint"
-          },
-          "x-ms-identifiers": [
-            "domainName"
-          ]
-        }
-      }
-    },
-    "FqdnEndpointsPropertyBag": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FqdnEndpoints"
-        }
-      }
     },
     "FqdnOutboundRule": {
       "type": "object",

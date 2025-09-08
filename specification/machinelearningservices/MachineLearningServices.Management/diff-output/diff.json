@@ -9423,57 +9423,6 @@
       ],
       "x-ms-client-name": "EnvironmentVersion"
     },
-    "FQDNEndpoint__deleted": {
-      "type": "object",
-      "properties": {
-        "domainName": {
-          "type": "string"
-        },
-        "endpointDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FQDNEndpointDetail"
-          },
-          "x-ms-identifiers": [
-            "port"
-          ]
-        }
-      }
-    },
-    "FQDNEndpointDetail__deleted": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "FQDNEndpoints__deleted": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string"
-        },
-        "endpoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FQDNEndpoint"
-          },
-          "x-ms-identifiers": [
-            "domainName"
-          ]
-        }
-      }
-    },
-    "FQDNEndpointsPropertyBag__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FQDNEndpoints"
-        }
-      }
-    },
     "FeatureResource__deleted": {
       "type": "object",
       "properties": {
@@ -10657,6 +10606,7 @@
       "properties": {
         "autoRebuild": {
           "type": "string",
+          "default": "Disabled",
           "enum": [
             "Disabled",
             "OnBaseImageUpdate"
@@ -10715,6 +10665,7 @@
         },
         "osType": {
           "type": "string",
+          "default": "Linux",
           "enum": [
             "Linux",
             "Windows"
@@ -10745,7 +10696,8 @@
           "readOnly": true
         },
         "stage": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -10759,6 +10711,7 @@
       "properties": {
         "dataType": {
           "type": "string",
+          "default": "String",
           "enum": [
             "String",
             "Integer",
@@ -10775,7 +10728,8 @@
           }
         },
         "featureName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -10911,57 +10865,6 @@
           "$ref": "#/definitions/AssetBase"
         }
       ]
-    },
-    "FqdnEndpoint__added": {
-      "type": "object",
-      "properties": {
-        "domainName": {
-          "type": "string"
-        },
-        "endpointDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FqdnEndpointDetail"
-          },
-          "x-ms-identifiers": [
-            "port"
-          ]
-        }
-      }
-    },
-    "FqdnEndpointDetail__added": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "FqdnEndpoints__added": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string"
-        },
-        "endpoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FqdnEndpoint"
-          },
-          "x-ms-identifiers": [
-            "domainName"
-          ]
-        }
-      }
-    },
-    "FqdnEndpointsPropertyBag__added": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FqdnEndpoints"
-        }
-      }
     },
     "InferenceEndpointProperties__added": {
       "type": "object",
@@ -13375,12 +13278,6 @@
         "keys": {
           "x-ms-secret__deleted": true
         },
-        "properties": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        },
         "scoringUri": {
           "x-ms-mutability__deleted": [
             "read"
@@ -13492,11 +13389,6 @@
       }
     },
     "EnvironmentVariable": {
-      "properties": {
-        "type": {
-          "title__deleted": "Type of Environment Variable"
-        }
-      },
       "additionalProperties": {
         "__old": true,
         "__new": {}
@@ -13641,44 +13533,6 @@
         }
       }
     },
-    "EstimatedVMPrice": {
-      "properties": {
-        "retailPrice": {
-          "title__deleted": "Retail price"
-        },
-        "osType": {
-          "title__deleted": "OS type"
-        },
-        "vmTier": {
-          "title__deleted": "VM tier"
-        }
-      }
-    },
-    "EstimatedVMPrices": {
-      "properties": {
-        "billingCurrency": {
-          "title__deleted": "Billing currency"
-        },
-        "unitOfMeasure": {
-          "title__deleted": "Unit of time measure"
-        },
-        "values": {
-          "title__deleted": "List of estimated VM prices."
-        }
-      }
-    },
-    "ExternalFQDNResponse": {
-      "properties": {
-        "value": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/FQDNEndpointsPropertyBag",
-              "__new": "#/definitions/FqdnEndpointsPropertyBag"
-            }
-          }
-        }
-      }
-    },
     "Feature": {
       "x-ms-client-name__deleted": "FeatureProperties",
       "required__added": [
@@ -13722,30 +13576,6 @@
           }
         ]
       ]
-    },
-    "FeatureAttributionDriftMonitoringSignal": {
-      "properties": {
-        "featureDataTypeOverride": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "FeatureAttributionMetricThreshold": {
-      "properties": {
-        "threshold": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "FeatureImportanceSettings": {
-      "properties": {
-        "mode": {
-          "default__deleted": "Disabled"
-        },
-        "targetColumn": {
-          "x-nullable__deleted": true
-        }
-      }
     },
     "FeatureResourceArmPaginatedResult": {
       "required__added": [

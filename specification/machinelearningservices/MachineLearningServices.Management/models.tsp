@@ -3872,17 +3872,20 @@ model EstimatedVMPrices {
   /**
    * Three lettered code specifying the currency of the VM price. Example: USD
    */
+  @summary("Billing currency")
   billingCurrency: BillingCurrency;
 
   /**
    * The unit of time measurement for the specified VM price. Example: OneHour
    */
+  @summary("Unit of time measure")
   unitOfMeasure: UnitOfMeasure;
 
   /**
    * The list of estimated prices for using a VM of a particular OS type, tier, etc.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @summary("List of estimated VM prices.")
   values: EstimatedVMPrice[];
 }
 
@@ -3893,16 +3896,19 @@ model EstimatedVMPrice {
   /**
    * The price charged for using the VM.
    */
+  @summary("Retail price")
   retailPrice: float64;
 
   /**
    * Operating system type used by the VM.
    */
+  @summary("OS type")
   osType: VMPriceOSType;
 
   /**
    * The type of the VM.
    */
+  @summary("VM tier")
   vmTier: VMTier;
 }
 
@@ -4262,6 +4268,7 @@ model EnvironmentVariable {
   /**
    * Type of the Environment Variable. Possible values are: local - For local variable
    */
+  @summary("Type of Environment Variable")
   type?: EnvironmentVariableType = EnvironmentVariableType.local;
 
   /**
@@ -4966,7 +4973,7 @@ model EnvironmentVersionProperties extends AssetBase {
    * Defines if image needs to be rebuilt based on base image changes.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  autoRebuild?: AutoRebuildSetting;
+  autoRebuild?: AutoRebuildSetting = AutoRebuildSetting.Disabled;
 
   /**
    * Configuration settings for Docker build context.
@@ -5010,7 +5017,7 @@ model EnvironmentVersionProperties extends AssetBase {
    * The OS type of the environment.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  osType?: OperatingSystemType;
+  osType?: OperatingSystemType = OperatingSystemType.Linux;
 
   /**
    * Provisioning state for the environment version.
@@ -5021,7 +5028,7 @@ model EnvironmentVersionProperties extends AssetBase {
   /**
    * Stage in the environment lifecycle assigned to this environment
    */
-  stage?: string;
+  stage?: string | null;
 }
 
 /**
@@ -5418,7 +5425,7 @@ model EndpointPropertiesBase {
    * Property dictionary. Properties can be added, but not removed or altered.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<string>;
+  properties?: Record<string | null> | null;
 
   /**
    * Endpoint URI.
@@ -5868,12 +5875,12 @@ model FeatureProperties extends ResourceBase {
   /**
    * Specifies type
    */
-  dataType?: FeatureDataType;
+  dataType?: FeatureDataType = FeatureDataType.String;
 
   /**
    * Specifies name
    */
-  featureName?: string;
+  featureName?: string | null;
 }
 
 /**
@@ -12540,12 +12547,12 @@ model FeatureImportanceSettings {
   /**
    * The mode of operation for computing feature importance.
    */
-  mode?: FeatureImportanceMode;
+  mode?: FeatureImportanceMode = FeatureImportanceMode.Disabled;
 
   /**
    * The name of the target column within the input data asset.
    */
-  targetColumn?: string;
+  targetColumn?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12794,7 +12801,7 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
+  featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
   /**
    * [Required] The settings for computing feature importance.
@@ -12839,7 +12846,7 @@ model FeatureAttributionMetricThreshold {
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  threshold?: MonitoringThreshold;
+  threshold?: MonitoringThreshold | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"

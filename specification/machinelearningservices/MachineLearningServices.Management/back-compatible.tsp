@@ -458,3 +458,7 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(PTUQuotaOperationGroup.list, "PTUQuota");
 
 @@clientName(QuotasOperationGroup.update::parameters.body, "parameters");
+@@clientName(FqdnEndpointsPropertyBag, "FQDNEndpointsPropertyBag");
+@@clientName(FqdnEndpoint, "FQDNEndpoint");
+@@clientName(FqdnEndpointDetail, "FQDNEndpointDetail");
+@@clientName(FqdnEndpoints, "FQDNEndpoints");

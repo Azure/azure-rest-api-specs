@@ -22506,28 +22506,6 @@
         }
       }
     },
-    "AutoRebuildSetting": {
-      "type": "string",
-      "description": "AutoRebuild setting for the derived image",
-      "enum": [
-        "Disabled",
-        "OnBaseImageUpdate"
-      ],
-      "x-ms-enum": {
-        "name": "AutoRebuildSetting",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled"
-          },
-          {
-            "name": "OnBaseImageUpdate",
-            "value": "OnBaseImageUpdate"
-          }
-        ]
-      }
-    },
     "AutoScaleProperties": {
       "type": "object",
       "description": "Auto scale properties",
@@ -29411,8 +29389,10 @@
         "properties": {
           "type": "object",
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "scoringUri": {
@@ -29750,6 +29730,7 @@
       "properties": {
         "type": {
           "type": "string",
+          "title": "Type of Environment Variable",
           "description": "Type of the Environment Variable. Possible values are: local - For local variable",
           "default": "local",
           "enum": [
@@ -29796,8 +29777,27 @@
       "description": "Environment version details.",
       "properties": {
         "autoRebuild": {
-          "$ref": "#/definitions/AutoRebuildSetting",
+          "type": "string",
           "description": "Defines if image needs to be rebuilt based on base image changes.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "OnBaseImageUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "AutoRebuildSetting",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "OnBaseImageUpdate",
+                "value": "OnBaseImageUpdate"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -29845,8 +29845,27 @@
           ]
         },
         "osType": {
-          "$ref": "#/definitions/OperatingSystemType",
+          "type": "string",
           "description": "The OS type of the environment.",
+          "default": "Linux",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Linux",
+                "value": "Linux"
+              },
+              {
+                "name": "Windows",
+                "value": "Windows"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -29859,7 +29878,8 @@
         },
         "stage": {
           "type": "string",
-          "description": "Stage in the environment lifecycle assigned to this environment"
+          "description": "Stage in the environment lifecycle assigned to this environment",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -29896,14 +29916,17 @@
         "retailPrice": {
           "type": "number",
           "format": "double",
+          "title": "Retail price",
           "description": "The price charged for using the VM."
         },
         "osType": {
           "$ref": "#/definitions/VMPriceOSType",
+          "title": "OS type",
           "description": "Operating system type used by the VM."
         },
         "vmTier": {
           "$ref": "#/definitions/VMTier",
+          "title": "VM tier",
           "description": "The type of the VM."
         }
       },
@@ -29919,14 +29942,17 @@
       "properties": {
         "billingCurrency": {
           "$ref": "#/definitions/BillingCurrency",
+          "title": "Billing currency",
           "description": "Three lettered code specifying the currency of the VM price. Example: USD"
         },
         "unitOfMeasure": {
           "$ref": "#/definitions/UnitOfMeasure",
+          "title": "Unit of time measure",
           "description": "The unit of time measurement for the specified VM price. Example: OneHour"
         },
         "values": {
           "type": "array",
+          "title": "List of estimated VM prices.",
           "description": "The list of estimated prices for using a VM of a particular OS type, tier, etc.",
           "items": {
             "$ref": "#/definitions/EstimatedVMPrice"
@@ -29946,11 +29972,63 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FqdnEndpointsPropertyBag"
+            "$ref": "#/definitions/FQDNEndpointsPropertyBag"
           },
           "x-ms-identifiers": [
             "/properties/category"
           ]
+        }
+      }
+    },
+    "FQDNEndpoint": {
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string"
+        },
+        "endpointDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpointDetail"
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
+        }
+      }
+    },
+    "FQDNEndpointDetail": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "FQDNEndpoints": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpoint"
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
+        }
+      }
+    },
+    "FQDNEndpointsPropertyBag": {
+      "type": "object",
+      "description": "Property bag for FQDN endpoints result",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FQDNEndpoints"
         }
       }
     },
@@ -29978,6 +30056,7 @@
         "featureDataTypeOverride": {
           "type": "object",
           "description": "A dictionary that maps feature names to their respective data types.",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
@@ -30067,6 +30146,7 @@
         "threshold": {
           "$ref": "#/definitions/MonitoringThreshold",
           "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -30128,40 +30208,38 @@
         ]
       }
     },
-    "FeatureImportanceMode": {
-      "type": "string",
-      "description": "The mode of operation for computing feature importance.",
-      "enum": [
-        "Disabled",
-        "Enabled"
-      ],
-      "x-ms-enum": {
-        "name": "FeatureImportanceMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disables computing feature importance within a signal."
-          },
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enables computing feature importance within a signal."
-          }
-        ]
-      }
-    },
     "FeatureImportanceSettings": {
       "type": "object",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/FeatureImportanceMode",
-          "description": "The mode of operation for computing feature importance."
+          "type": "string",
+          "description": "The mode of operation for computing feature importance.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureImportanceMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables computing feature importance within a signal."
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables computing feature importance within a signal."
+              }
+            ]
+          }
         },
         "targetColumn": {
           "type": "string",
-          "description": "The name of the target column within the input data asset."
+          "description": "The name of the target column within the input data asset.",
+          "x-nullable": true
         }
       }
     },
@@ -30194,12 +30272,62 @@
       "description": "DTO object representing feature",
       "properties": {
         "dataType": {
-          "$ref": "#/definitions/FeatureDataType",
-          "description": "Specifies type"
+          "type": "string",
+          "description": "Specifies type",
+          "default": "String",
+          "enum": [
+            "String",
+            "Integer",
+            "Long",
+            "Float",
+            "Double",
+            "Binary",
+            "Datetime",
+            "Boolean"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureDataType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "String",
+                "value": "String"
+              },
+              {
+                "name": "Integer",
+                "value": "Integer"
+              },
+              {
+                "name": "Long",
+                "value": "Long"
+              },
+              {
+                "name": "Float",
+                "value": "Float"
+              },
+              {
+                "name": "Double",
+                "value": "Double"
+              },
+              {
+                "name": "Binary",
+                "value": "Binary"
+              },
+              {
+                "name": "Datetime",
+                "value": "Datetime"
+              },
+              {
+                "name": "Boolean",
+                "value": "Boolean"
+              }
+            ]
+          }
         },
         "featureName": {
           "type": "string",
-          "description": "Specifies name"
+          "description": "Specifies name",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -31232,58 +31360,6 @@
           "$ref": "#/definitions/TrainingSettings"
         }
       ]
-    },
-    "FqdnEndpoint": {
-      "type": "object",
-      "properties": {
-        "domainName": {
-          "type": "string"
-        },
-        "endpointDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FqdnEndpointDetail"
-          },
-          "x-ms-identifiers": [
-            "port"
-          ]
-        }
-      }
-    },
-    "FqdnEndpointDetail": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "FqdnEndpoints": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string"
-        },
-        "endpoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FqdnEndpoint"
-          },
-          "x-ms-identifiers": [
-            "domainName"
-          ]
-        }
-      }
-    },
-    "FqdnEndpointsPropertyBag": {
-      "type": "object",
-      "description": "Property bag for FQDN endpoints result",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FqdnEndpoints"
-        }
-      }
     },
     "FqdnOutboundRule": {
       "type": "object",
@@ -36499,28 +36575,6 @@
         }
       ],
       "x-ms-discriminator-value": "Azure.OpenAI"
-    },
-    "OperatingSystemType": {
-      "type": "string",
-      "description": "The type of operating system.",
-      "enum": [
-        "Linux",
-        "Windows"
-      ],
-      "x-ms-enum": {
-        "name": "OperatingSystemType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Linux",
-            "value": "Linux"
-          },
-          {
-            "name": "Windows",
-            "value": "Windows"
-          }
-        ]
-      }
     },
     "OperationName": {
       "type": "string",

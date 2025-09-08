@@ -535,30 +535,6 @@
 |------|------------|-------|
 | `definitions.EnvironmentVersionResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/EnvironmentVersion"}},"required":...` |
 
-### Changes for `FQDNEndpoint`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FQDNEndpoint__deleted` | deleted | `{"type":"object","properties":{"domainName":{"type":"string"},"endpointDetails":{"type":"array","ite...` |
-
-### Changes for `FQDNEndpointDetail`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FQDNEndpointDetail__deleted` | deleted | `{"type":"object","properties":{"port":{"type":"integer","format":"int32"}}}` |
-
-### Changes for `FQDNEndpoints`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FQDNEndpoints__deleted` | deleted | `{"type":"object","properties":{"category":{"type":"string"},"endpoints":{"type":"array","items":{"$r...` |
-
-### Changes for `FQDNEndpointsPropertyBag`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FQDNEndpointsPropertyBag__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/FQDNEndpoints"}}}` |
-
 ### Changes for `FeatureResource`
 
 | Path | Change Type | Value |
@@ -833,13 +809,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersionProperties__added` | added | `{"type":"object","properties":{"autoRebuild":{"type":"string","enum":["Disabled","OnBaseImageUpdate"...` |
+| `definitions.EnvironmentVersionProperties__added` | added | `{"type":"object","properties":{"autoRebuild":{"type":"string","default":"Disabled","enum":["Disabled...` |
 
 ### Changes for `FeatureProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeatureProperties__added` | added | `{"type":"object","properties":{"dataType":{"type":"string","enum":["String","Integer","Long","Float"...` |
+| `definitions.FeatureProperties__added` | added | `{"type":"object","properties":{"dataType":{"type":"string","default":"String","enum":["String","Inte...` |
 
 ### Changes for `FeaturesetContainerProperties`
 
@@ -864,30 +840,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.FeaturestoreEntityVersionProperties__added` | added | `{"type":"object","properties":{"indexColumns":{"type":"array","items":{"$ref":"#/definitions/IndexCo...` |
-
-### Changes for `FqdnEndpoint`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FqdnEndpoint__added` | added | `{"type":"object","properties":{"domainName":{"type":"string"},"endpointDetails":{"type":"array","ite...` |
-
-### Changes for `FqdnEndpointDetail`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FqdnEndpointDetail__added` | added | `{"type":"object","properties":{"port":{"type":"integer","format":"int32"}}}` |
-
-### Changes for `FqdnEndpoints`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FqdnEndpoints__added` | added | `{"type":"object","properties":{"category":{"type":"string"},"endpoints":{"type":"array","items":{"$r...` |
-
-### Changes for `FqdnEndpointsPropertyBag`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FqdnEndpointsPropertyBag__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/FqdnEndpoints"}}}` |
 
 ### Changes for `InferenceEndpointProperties`
 
@@ -1170,7 +1122,6 @@
 | `definitions.BatchRetrySettings.properties.timeout.default__deleted` | deleted | `PT30S` |
 | `definitions.CommandJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.DistillationJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.FeatureImportanceSettings.properties.mode.default__deleted` | deleted | `Disabled` |
 | `definitions.FineTuningJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.Forecasting.properties.primaryMetric.default__deleted` | deleted | `NormalizedRootMeanSquaredError` |
 | `definitions.ForecastingSettings.properties.featureLags.default__deleted` | deleted | `None` |
@@ -1673,11 +1624,6 @@
 | `definitions.ComputeInstanceProperties.properties.enableSSO['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceProperties.properties.releaseQuotaOnStop['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointPropertiesBase.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.EndpointPropertiesBase.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeatureAttributionDriftMonitoringSignal.properties.featureDataTypeOverride['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeatureAttributionMetricThreshold.properties.threshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeatureImportanceSettings.properties.targetColumn['x-nullable__deleted']` | deleted | `true` |
 | `definitions.FeaturesetSpecification.properties.path['x-nullable__deleted']` | deleted | `true` |
 | `definitions.FeaturesetVersionBackfillRequest.properties.featureWindow['x-nullable__deleted']` | deleted | `true` |
 | `definitions.FeaturesetVersionBackfillRequest.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
@@ -2106,46 +2052,6 @@
 | `definitions.DeltaModelModifyRequest.properties.addDeltaModels.uniqueItems__deleted` | deleted | `true` |
 | `definitions.DeltaModelModifyRequest.properties.removeDeltaModels.uniqueItems__deleted` | deleted | `true` |
 
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EnvironmentVariable.properties.type.title__deleted` | deleted | `Type of Environment Variable` |
-| `definitions.EstimatedVMPrice.properties.osType.title__deleted` | deleted | `OS type` |
-| `definitions.EstimatedVMPrice.properties.retailPrice.title__deleted` | deleted | `Retail price` |
-| `definitions.EstimatedVMPrice.properties.vmTier.title__deleted` | deleted | `VM tier` |
-| `definitions.EstimatedVMPrices.properties.billingCurrency.title__deleted` | deleted | `Billing currency` |
-| `definitions.EstimatedVMPrices.properties.unitOfMeasure.title__deleted` | deleted | `Unit of time measure` |
-| `definitions.EstimatedVMPrices.properties.values.title__deleted` | deleted | `List of estimated VM prices.` |
-| `definitions.Image.properties.type.title__deleted` | deleted | `Type of the image` |
-| `definitions.NodeStateCounts.properties.idleNodeCount.title__deleted` | deleted | `Idle node count.` |
-| `definitions.NodeStateCounts.properties.leavingNodeCount.title__deleted` | deleted | `Leaving node count.` |
-| `definitions.NodeStateCounts.properties.preemptedNodeCount.title__deleted` | deleted | `Preempted node count.` |
-| `definitions.NodeStateCounts.properties.preparingNodeCount.title__deleted` | deleted | `Preparing node count.` |
-| `definitions.NodeStateCounts.properties.runningNodeCount.title__deleted` | deleted | `Running node count.` |
-| `definitions.NodeStateCounts.properties.unusableNodeCount.title__deleted` | deleted | `Unusable node count.` |
-| `definitions.PersonalComputeInstanceSettings.properties.assignedUser.title__deleted` | deleted | `Assigned User.` |
-| `definitions.QuotaBaseProperties.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
-| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
-| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
-| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
-| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
-| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
-| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
-| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
-| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
-| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
-| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
-| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
-| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
-| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
-| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
-| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
-| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
-
 ### Changes for `autoRebuild`
 
 | Path | Change Type | Value |
@@ -2232,6 +2138,39 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.FeaturestoreEntityVersion.properties.indexColumns__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/IndexColumn"}}` |
+
+### Changes for `title`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Image.properties.type.title__deleted` | deleted | `Type of the image` |
+| `definitions.NodeStateCounts.properties.idleNodeCount.title__deleted` | deleted | `Idle node count.` |
+| `definitions.NodeStateCounts.properties.leavingNodeCount.title__deleted` | deleted | `Leaving node count.` |
+| `definitions.NodeStateCounts.properties.preemptedNodeCount.title__deleted` | deleted | `Preempted node count.` |
+| `definitions.NodeStateCounts.properties.preparingNodeCount.title__deleted` | deleted | `Preparing node count.` |
+| `definitions.NodeStateCounts.properties.runningNodeCount.title__deleted` | deleted | `Running node count.` |
+| `definitions.NodeStateCounts.properties.unusableNodeCount.title__deleted` | deleted | `Unusable node count.` |
+| `definitions.PersonalComputeInstanceSettings.properties.assignedUser.title__deleted` | deleted | `Assigned User.` |
+| `definitions.QuotaBaseProperties.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
+| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
+| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
+| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
+| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
+| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
+| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
+| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
+| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
+| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
+| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
+| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
+| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
+| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
+| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
+| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
+| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
 
 ### Changes for `modelSettings`
 
@@ -2662,7 +2601,6 @@
 | `definitions.EnvironmentVariable.additionalProperties` | `true` | `{}` |
 | `definitions.EnvironmentVersion.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.EnvironmentVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/EnvironmentVersionResource` | `#/definitions/EnvironmentVersion` |
-| `definitions.ExternalFQDNResponse.properties.value.items.$ref` | `#/definitions/FQDNEndpointsPropertyBag` | `#/definitions/FqdnEndpointsPropertyBag` |
 | `definitions.Feature.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.FeatureResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/FeatureResource` | `#/definitions/Feature` |
 | `definitions.FeaturesetContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
