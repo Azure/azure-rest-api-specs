@@ -672,17 +672,24 @@
             "description": "The name of the indexer to resync for."
           },
           {
-            "name": "indexerResyncOptions",
+            "name": "indexerResync",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "x-nullable": true,
-              "items": {
-                "$ref": "#/definitions/IndexerResyncOption",
-                "x-nullable": false
-              },
-              "description": "Re-sync options that have been pre-defined from data source."
+              "type": "object",
+              "x-ms-client-name": "IndexerResyncBody",
+              "properties": {
+                "options": {
+                  "type": "array",
+                  "x-ms-client-name": "options",
+                  "x-nullable": true,
+                  "items": {
+                    "$ref": "#/definitions/IndexerResyncOption",
+                    "x-nullable": false
+                  },
+                  "description": "Re-sync options that have been pre-defined from data source."
+                }
+              }
             }
           },
           {
@@ -7157,7 +7164,10 @@
         "text-embedding-3-large",
         "text-embedding-3-small",
         "gpt-4o",
-        "gpt-4o-mini"
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano"
       ],
       "x-ms-enum": {
         "name": "AzureOpenAIModelName",
@@ -7174,6 +7184,26 @@
           {
             "value": "text-embedding-3-small",
             "name": "TextEmbedding3Small"
+          },
+          {
+            "value": "gpt-4o",
+            "name": "Gpt4o"
+          },
+          {
+            "value": "gpt-4o-mini",
+            "name": "Gpt4oMini"
+          },
+          {
+            "value": "gpt-4.1",
+            "name": "Gpt41"
+          },
+          {
+            "value": "gpt-4.1-mini",
+            "name": "Gpt41Mini"
+          },
+          {
+            "value": "gpt-4.1-nano",
+            "name": "Gpt41Nano"
           }
         ]
       },

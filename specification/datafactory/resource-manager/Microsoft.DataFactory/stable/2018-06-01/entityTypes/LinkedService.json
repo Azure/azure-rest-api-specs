@@ -1352,6 +1352,19 @@
           "x-ms-format": "dfe-string",
           "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
         },
+        "clusterAuthType": {
+          "description": "HDInsight cluster authentication type.",
+          "type": "string",
+          "enum": [
+            "BasicAuth",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "HDInsightClusterAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "userName": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -1382,6 +1395,10 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "Specify the FileSystem if the main storage for the HDInsight is ADLS Gen2. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing MI authentication information for the HDInsight cluster."
         }
       },
       "required": [
@@ -5851,6 +5868,11 @@
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
+        "enableServerCertificateValidation": {
+          "description": "Specifies whether the connections to the server will validate server certificate, the default value is True. Only used for Version 2.0",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
           "type": "object",
@@ -6002,8 +6024,24 @@
           "description": "The password corresponding to the user name when using UsernameAndPassword.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "thriftTransportProtocol": {
+          "description": "The transport protocol to use in the Thrift layer (for V2 only). Default value is Binary.",
+          "type": "string",
+          "enum": [
+            "Binary",
+            "HTTP"
+          ],
+          "x-ms-enum": {
+            "name": "ImpalaThriftTransportProtocol"
+          }
+        },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "enableServerCertificateValidation": {
+          "description": "Specify whether to enable server SSL certificate validation when you connect.Always use System Trust Store (for V2 only). The default value is true.",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
@@ -6610,7 +6648,7 @@
     },
     "QuickBooksLinkedService": {
       "x-ms-discriminator-value": "QuickBooks",
-      "description": "QuickBooks server linked service.",
+      "description": "QuickBooks server linked service. This linked service has supported version property. The Version 1.0 is scheduled for deprecation while your pipeline will continue to run after EOL but without any bug fix or new features.",
       "type": "object",
       "allOf": [
         {
@@ -6647,24 +6685,28 @@
           "x-ms-format": "dfe-string"
         },
         "consumerKey": {
-          "description": "The consumer key for OAuth 1.0 authentication.",
+          "description": "The consumer key for OAuth 2.0 authentication.",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
         "consumerSecret": {
-          "description": "The consumer secret for OAuth 1.0 authentication.",
+          "description": "The consumer secret for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessToken": {
-          "description": "The access token for OAuth 1.0 authentication.",
+          "description": "The access token for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessTokenSecret": {
-          "description": "The access token secret for OAuth 1.0 authentication.",
+          "description": "The access token secret is deprecated for OAuth 1.0 authentication. Only used for version 1.0.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "refreshToken": {
+          "description": "The refresh token for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
-          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
+          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Only used for version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
@@ -6905,6 +6947,11 @@
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "enableServerCertificateValidation": {
+          "description": "Specifies whether the connections to the server will validate server certificate, the default value is True. Only used for Version 2.0",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
@@ -8601,6 +8648,19 @@
           "x-ms-format": "dfe-string",
           "description": "The ID of Microsoft Fabric Lakehouse artifact. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "LakehouseAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "servicePrincipalId": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -8627,6 +8687,10 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -8777,6 +8841,19 @@
           "x-ms-format": "dfe-string",
           "description": "The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "WarehouseAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "servicePrincipalId": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -8803,6 +8880,10 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [

@@ -316,37 +316,6 @@
     }
   },
   "definitions": {
-    "AIConversation": {
-      "type": "object",
-      "description": "The Conversations for ai conversation analysis",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the conversation."
-        },
-        "modality": {
-          "$ref": "#/definitions/InputModality",
-          "description": "Default modality for all conversation items."
-        },
-        "language": {
-          "type": "string",
-          "description": "Default language for all conversation items in BCP 47 language representation."
-        },
-        "conversationItems": {
-          "type": "array",
-          "description": "List of conversation items.",
-          "items": {
-            "$ref": "#/definitions/ConversationalAIItem"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "modality",
-        "language",
-        "conversationItems"
-      ]
-    },
     "AgeResolution": {
       "type": "object",
       "description": "Represents the Age entity resolution model.",
@@ -517,8 +486,7 @@
           "description": "errors",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -562,8 +530,7 @@
           "description": "Set of tasks to execute on the input conversation.",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationLROTask"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "cancelAfter": {
           "type": "number",
@@ -1405,16 +1372,14 @@
           "description": "The collection of entity resolution objects.",
           "items": {
             "$ref": "#/definitions/BaseResolution"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "extraInformation": {
           "type": "array",
           "description": "The collection of entity extra information objects.",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1635,8 +1600,7 @@
           "description": "Array of Entities",
           "items": {
             "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1826,16 +1790,14 @@
           "description": "The intent classification results.",
           "items": {
             "$ref": "#/definitions/ConversationIntent"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "entities": {
           "type": "array",
           "description": "The entity extraction results.",
           "items": {
             "$ref": "#/definitions/ConversationEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2101,16 +2063,14 @@
           "description": "The intent classification results for this conversation.",
           "items": {
             "$ref": "#/definitions/ConversationalAIIntent"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "entities": {
           "type": "array",
           "description": "Global entities that are matched but not associated with any specific intent.",
           "items": {
             "$ref": "#/definitions/ConversationalAIEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2126,7 +2086,7 @@
           "type": "array",
           "description": "List of multiple conversations",
           "items": {
-            "$ref": "#/definitions/AIConversation"
+            "$ref": "#/definitions/TextConversation"
           }
         }
       },
@@ -2175,16 +2135,14 @@
           "description": "Entity resolution details, if available.",
           "items": {
             "$ref": "#/definitions/BaseResolution"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "extraInformation": {
           "type": "array",
           "description": "Additional entity metadata.",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2262,16 +2220,14 @@
           "description": "The ranges of conversation items where this intent was identified.",
           "items": {
             "$ref": "#/definitions/ConversationItemRange"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "entities": {
           "type": "array",
           "description": "The entities associated with this intent.",
           "items": {
             "$ref": "#/definitions/ConversationalAIEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2279,29 +2235,6 @@
         "type",
         "conversationItemRanges",
         "entities"
-      ]
-    },
-    "ConversationalAIItem": {
-      "type": "object",
-      "description": "List of conversation items.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of a conversation item."
-        },
-        "participantId": {
-          "type": "string",
-          "description": "The participant ID of a conversation item."
-        },
-        "text": {
-          "type": "string",
-          "description": "The text input"
-        }
-      },
-      "required": [
-        "id",
-        "participantId",
-        "text"
       ]
     },
     "ConversationalAIResult": {
@@ -2383,8 +2316,7 @@
           "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/InputWarning"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "statistics": {
           "$ref": "#/definitions/ConversationStatistics",
@@ -2460,8 +2392,7 @@
           "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/InputWarning"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "statistics": {
           "$ref": "#/definitions/ConversationStatistics",
@@ -2472,8 +2403,7 @@
           "description": "array of summaries",
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2791,8 +2721,7 @@
           "description": "List of entity tags. Tags express similarities between entity categories for the extracted entity type.",
           "items": {
             "$ref": "#/definitions/EntityTag"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
@@ -2841,8 +2770,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
@@ -3412,8 +3340,7 @@
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -3675,8 +3602,7 @@
           "description": "List of metadata.",
           "items": {
             "$ref": "#/definitions/MetadataRecord"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "logicalOperation": {
           "type": "string",
@@ -4112,8 +4038,7 @@
           "description": "List of redacted audio segments.",
           "items": {
             "$ref": "#/definitions/AudioTiming"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -4636,8 +4561,7 @@
           "description": "Context list of the summary.",
           "items": {
             "$ref": "#/definitions/ItemizedSummaryContext"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -4700,8 +4624,7 @@
           "description": "List of results from tasks (if available).",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationJobResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -5090,8 +5013,7 @@
           "description": "List of word-level audio timing information.",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "conversationItemLevelTiming": {
           "$ref": "#/definitions/ConversationItemLevelTiming",

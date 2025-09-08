@@ -1,0 +1,33 @@
+{
+  "name": "@azure-tools/oav-runner",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/main.js",
+  "bin": {
+    "oav-runner": "cmd/oav-runner.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "dependencies": {
+    "@azure-tools/specs-shared": "file:../../../.github/shared",
+    "js-yaml": "^4.1.0",
+    "oav": "^4.0.0",
+    "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "prettier": "~3.6.2",
+    "prettier-plugin-organize-imports": "^4.2.0",
+    "typescript": "~5.8.2",
+    "vitest": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

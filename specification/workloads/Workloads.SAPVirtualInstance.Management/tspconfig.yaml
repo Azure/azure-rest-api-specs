@@ -14,18 +14,15 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/SAPVirtualInstance/{version-status}/{version}/SAPVirtualInstance.json"
   "@azure-tools/typespec-csharp":
-    service-dir: "sdk/workloadssapvirtualinstance"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.SapVirtualInstances"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.WorkloadsSapVirtualInstance"
   "@azure-tools/typespec-ts":
-    is-modular-library: true
     experimental-extensible-enums: true
-    generate-sample: true
     package-dir: "arm-workloadssapvirtualinstance"
-    flavor: "azure"
+    flavor: azure
     package-details:
       name: "@azure/arm-workloadssapvirtualinstance"
   "@azure-tools/typespec-python":
@@ -35,8 +32,8 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-workloadssapvirtualinstance"
     service-dir: "sdk/workloadssapvirtualinstance"
-    package-dir: "azure-resourcemanager-workloadssapvirtualinstance"
     namespace: "com.azure.resourcemanager.workloadssapvirtualinstance"
     service-name: "Workloads Sap Virtual Instance"
     flavor: "azure"

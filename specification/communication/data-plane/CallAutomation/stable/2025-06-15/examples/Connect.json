@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2025-06-15",
+    "connectRequest": {
+      "callbackUri": "https://contoso.communications.azure.com/callback",
+      "callLocator": {
+        "roomId": "99434917639286209",
+        "kind": "roomCallLocator"
+      },
+      "callIntelligenceOptions": {
+        "cognitiveServicesEndpoint": "https://cognitiveservice.com"
+      },
+      "mediaStreamingOptions": {
+        "audioChannelType": "mixed",
+        "transportUrl": "string",
+        "transportType": "websocket",
+        "contentType": "audio",
+        "startMediaStreaming": true,
+        "enableBidirectional": true,
+        "audioFormat": "pcm16KMono",
+        "enableDtmfTones": true
+      },
+      "transcriptionOptions": {
+        "locale": "en-US",
+        "transportUrl": "string",
+        "transportType": "websocket",
+        "speechModelEndpointId": "string",
+        "startTranscription": true,
+        "enableIntermediateResults": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+        "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb251cmwvdGVzdA",
+        "targets": [],
+        "callConnectionState": "connecting",
+        "callbackUri": "https://contoso.communications.azure.com/callback",
+        "mediaStreamingSubscription": {
+          "id": "23dea47f-b081-4107-9a5c-4300819d2caa",
+          "state": "active",
+          "subscribedContentTypes": [
+            "audio"
+          ]
+        },
+        "transcriptionSubscription": {
+          "id": "45dea47f-b081-4107-9a5c-4300819d2caa",
+          "state": "active",
+          "subscribedResultTypes": [
+            "final"
+          ]
+        },
+        "answeredFor": {
+          "value": "+11234567890"
+        }
+      }
+    }
+  }
+}

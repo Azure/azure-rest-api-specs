@@ -5,6 +5,7 @@
  * @property {(message:string) => void} debug
  * @property {(message:string) => void} error
  * @property {(message:string) => void} info
+ * @property {(message:string) => void} warning
  * @property {() => boolean} isDebug
  */
 
@@ -51,7 +52,15 @@ export class ConsoleLogger {
   isDebug() {
     return this.#isDebug;
   }
+
+  /**
+   * @param {string} message
+   */
+  warning(message) {
+    console.warn(message);
+  }
 }
 
-// Singleton logger with isDebug=false
-export const consoleLogger = new ConsoleLogger();
+// Singleton loggers
+export const defaultLogger = new ConsoleLogger();
+export const debugLogger = new ConsoleLogger(/*isDebug*/ true);

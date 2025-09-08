@@ -21,24 +21,29 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Vision.Face"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.AI.Vision.Face"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.AI.Vision.Face
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "ai-vision-face-rest"
     generate-metadata: true
-    generate-test: true
+    is-modular-library: false
     flavor: azure
     package-details:
       name: "@azure-rest/ai-vision-face"
       description: "Face API REST Client"
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-vision-face"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-vision-face"
     namespace: com.azure.ai.vision.face
     partial-update: true
-    customization-class: customization/src/main/java/FaceCustomizations.java
+    use-eclipse-language-server: false
+    enable-subclient: true
     generate-samples: false
     generate-tests: false
     flavor: azure

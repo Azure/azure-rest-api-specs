@@ -20,25 +20,29 @@ options:
   "@azure-tools/typespec-python":
     flavor: azure
     "basic-setup-py": true
-    "package-version": "4.5.0b1"
+    "package-name": "azure-keyvault-administration"
+    "package-pprint-name": "Key Vault Administration"
+    "package-version": "4.5.0"
+    "namespace": "azure.keyvault.administration._generated"
     "package-dir": "azure-keyvault-administration"
-    "namespace": "azure.keyvault.administration"
-    "output-path": "./azure/keyvault/administration/_generated"
   "@azure-tools/typespec-java":
     flavor: azure
-    "package-dir": "azure-security-keyvault-administration"
-    "namespace": "com.azure.security.keyvault.administration"
-    "models-subpackage": "implementation.models"
-    "custom-types": "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
-    "custom-types-subpackage": "models"
-    "customization-class": "swagger/src/main/java/AdministrationCustomizations.java"
-    "partial-update": true
-    "generate-tests": false
-    "generate-samples": false
-    "include-api-view-properties": false
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-administration"
+    namespace: "com.azure.security.keyvault.administration"
+    models-subpackage: "implementation.models"
+    custom-types: "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
+    custom-types-subpackage: "models"
+    customization-class: "customizations/src/main/java/AdministrationCustomizations.java"
+    use-eclipse-language-server: false
+    generate-tests: false
+    generate-samples: false
+    include-api-view-properties: false
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Security.KeyVault.Administration
+    model-namespace: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Security.KeyVault.Administration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Security.KeyVault.Administration"
     "output-path": "./src/Generated"
     flavor: azure
@@ -46,7 +50,6 @@ options:
   "@azure-tools/typespec-ts":
     package-dir: "keyvault-admin"
     generate-metadata: true
-    generate-test: false
     src-folder: "src/generated"
     experimental-extensible-enums: true
     is-modular-library: true

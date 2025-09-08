@@ -1,23 +1,28 @@
+// @ts-check
+
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { consoleLogger, ConsoleLogger } from "../src/logger";
+import { ConsoleLogger, debugLogger, defaultLogger } from "../src/logger";
 
 describe("logger", () => {
-  let debugSpy, errorSpy, logSpy;
+  let debugSpy, errorSpy, logSpy, warnSpy;
 
   beforeEach(() => {
     debugSpy = vi.spyOn(console, "debug");
     errorSpy = vi.spyOn(console, "error");
     logSpy = vi.spyOn(console, "log");
+    warnSpy = vi.spyOn(console, "warn");
   });
 
   afterEach(() => {
     debugSpy.mockRestore();
     errorSpy.mockRestore();
     logSpy.mockRestore();
+    warnSpy.mockRestore();
   });
 
   it.each([
-    ["consoleLogger", consoleLogger, false],
+    ["defaultLogger", defaultLogger, false],
+    ["debugLogger", debugLogger, true],
     ["new ConsoleLogger(isDebug: false)", new ConsoleLogger(false), false],
     ["new ConsoleLogger(isDebug: true)", new ConsoleLogger(true), true],
   ])("%s", (_name, logger, isDebug) => {
@@ -25,6 +30,9 @@ describe("logger", () => {
 
     logger.info("test info");
     expect(logSpy).toBeCalledWith("test info");
+
+    logger.warning("test warning");
+    expect(warnSpy).toBeCalledWith("test warning");
 
     logger.error("test error");
     expect(errorSpy).toBeCalledWith("test error");
