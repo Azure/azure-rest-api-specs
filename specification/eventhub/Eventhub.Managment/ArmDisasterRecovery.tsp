@@ -1,0 +1,82 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./EHNamespace.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.EventHub;
+/**
+ * Single item in List or Get Alias(Disaster Recovery configuration) operation
+ */
+@parentResource(EHNamespace)
+model ArmDisasterRecovery
+  is Azure.ResourceManager.ProxyResource<ArmDisasterRecoveryProperties> {
+  ...ResourceNameParameter<
+    Resource = ArmDisasterRecovery,
+    KeyName = "alias",
+    SegmentName = "disasterRecoveryConfigs",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface ArmDisasterRecoveries {
+  /**
+   * Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DisasterRecoveryConfigs_Get")
+  get is ArmResourceRead<ArmDisasterRecovery>;
+
+  /**
+   * Creates or updates a new Alias(Disaster Recovery configuration)
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DisasterRecoveryConfigs_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ArmDisasterRecovery>;
+
+  /**
+   * Deletes an Alias(Disaster Recovery configuration)
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DisasterRecoveryConfigs_Delete")
+  delete is ArmResourceDeleteSync<ArmDisasterRecovery>;
+
+  /**
+   * Gets all Alias(Disaster Recovery configurations)
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DisasterRecoveryConfigs_List")
+  list is ArmResourceListByParent<ArmDisasterRecovery>;
+
+  /**
+   * This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DisasterRecoveryConfigs_BreakPairing")
+  breakPairing is ArmResourceActionSync<ArmDisasterRecovery, void, OkResponse>;
+
+  /**
+   * Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DisasterRecoveryConfigs_FailOver")
+  @action("failover")
+  failOver is ArmResourceActionSync<ArmDisasterRecovery, void, OkResponse>;
+}
+
+@@maxLength(ArmDisasterRecovery.name, 50);
+@@minLength(ArmDisasterRecovery.name, 1);
+@@doc(ArmDisasterRecovery.name, "The Disaster Recovery configuration name");
+@@doc(ArmDisasterRecovery.properties,
+  "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
+);
+@@doc(ArmDisasterRecoveries.createOrUpdate::parameters.resource,
+  "Parameters required to create an Alias(Disaster Recovery configuration)"
+);

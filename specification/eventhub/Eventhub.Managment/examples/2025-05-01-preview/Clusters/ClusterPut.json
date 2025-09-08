@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "clusterName": "testCluster",
+    "parameters": {
+      "location": "South Central US",
+      "sku": {
+        "name": "Dedicated",
+        "capacity": 1
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testCluster",
+        "type": "Microsoft.EventHub/Clusters",
+        "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/myResourceGroup/providers/Microsoft.EventHub/clusters/testCluster",
+        "location": "South Central US",
+        "properties": {
+          "createdAt": "2017-05-24T23:23:27.877Z",
+          "metricId": "SN6-008",
+          "provisioningState": "Succeeded",
+          "updatedAt": "2017-05-24T23:23:27.877Z"
+        },
+        "sku": {
+          "name": "Dedicated",
+          "capacity": 1
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testCluster",
+        "type": "Microsoft.EventHub/Clusters",
+        "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/myResourceGroup/providers/Microsoft.EventHub/clusters/testCluster",
+        "location": "South Central US",
+        "properties": {
+          "createdAt": "2017-05-24T23:23:27.877Z",
+          "metricId": "SN6-008",
+          "platformCapabilities": {
+            "confidentialCompute": {
+              "mode": "Disabled"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "updatedAt": "2017-05-24T23:23:27.877Z"
+        },
+        "sku": {
+          "name": "Dedicated",
+          "capacity": 1
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "ClusterPut"
+}

@@ -1,0 +1,63 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./EHNamespace.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.EventHub;
+/**
+ * Network Security Perimeter related configurations of a given namespace
+ */
+@parentResource(EHNamespace)
+model NetworkSecurityPerimeterConfiguration
+  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
+  ...ResourceNameParameter<
+    Resource = NetworkSecurityPerimeterConfiguration,
+    KeyName = "resourceAssociationName",
+    SegmentName = "networkSecurityPerimeterConfigurations",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface NetworkSecurityPerimeterConfigurations {
+  /**
+   * Return a NetworkSecurityPerimeterConfigurations resourceAssociationName
+   */
+  getResourceAssociationName is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
+
+  /**
+   * Gets list of current NetworkSecurityPerimeterConfiguration for Namespace
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkSecurityPerimeterConfiguration_List")
+  list is ArmResourceListByParent<
+    NetworkSecurityPerimeterConfiguration,
+    Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>
+  >;
+
+  /**
+   * Refreshes any information about the association.
+   */
+  @action("reconcile")
+  createOrUpdate is ArmResourceActionAsync<
+    NetworkSecurityPerimeterConfiguration,
+    void,
+    OkResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+}
+
+@@doc(NetworkSecurityPerimeterConfiguration.name,
+  "The ResourceAssociation Name"
+);
+@@doc(NetworkSecurityPerimeterConfiguration.properties,
+  "Properties of the Network Security Perimeter Configuration"
+);
