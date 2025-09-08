@@ -464,6 +464,275 @@
         }
       }
     },
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationDetails": {
+      "get": {
+        "operationId": "ReservationsDetails_List",
+        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceScope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date. Only applicable when querying with billing profile",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End date. Only applicable when querying with billing profile",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "reservationId",
+            "in": "query",
+            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "reservationOrderId",
+            "in": "query",
+            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationDetailListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationDetailsByBillingAccountId": {
+            "$ref": "./examples/ReservationDetailsByBillingAccountId.json"
+          },
+          "ReservationDetailsByBillingProfileId": {
+            "$ref": "./examples/ReservationDetailsByBillingProfileId.json"
+          },
+          "ReservationDetailsByBillingProfileIdReservationId": {
+            "$ref": "./examples/ReservationDetailsByBillingProfileIdReservationId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendations": {
+      "get": {
+        "operationId": "ReservationRecommendations_List",
+        "description": "List of recommendations for purchasing reserved instances.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceScope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationRecommendationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationRecommendationsByBillingAccount-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsByBillingAccount.json"
+          },
+          "ReservationRecommendationsByBillingAccountFilterForScope": {
+            "$ref": "./examples/ReservationRecommendationsByBillingAccountFilterByScope.json"
+          },
+          "ReservationRecommendationsByBillingProfile-Modern": {
+            "$ref": "./examples/ReservationRecommendationsByBillingProfile.json"
+          },
+          "ReservationRecommendationsByResourceGroup-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsByResourceGroup.json"
+          },
+          "ReservationRecommendationsBySubscription-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsBySubscription.json"
+          },
+          "ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Consumption/reservationSummaries": {
+      "get": {
+        "operationId": "ReservationsSummaries_List",
+        "description": "Lists the reservations summaries for the defined scope daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceScope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "grain",
+            "in": "query",
+            "description": "Can be daily or monthly",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "daily",
+              "monthly"
+            ],
+            "x-ms-enum": {
+              "name": "Datagrain",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "DailyGrain",
+                  "value": "daily",
+                  "description": "Daily grain of data"
+                },
+                {
+                  "name": "MonthlyGrain",
+                  "value": "monthly",
+                  "description": "Monthly grain of data"
+                }
+              ]
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date. Only applicable when querying with billing profile",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End date. Only applicable when querying with billing profile",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "reservationId",
+            "in": "query",
+            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "reservationOrderId",
+            "in": "query",
+            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationSummariesDailyWithBillingAccountId": {
+            "$ref": "./examples/ReservationSummariesDailyWithBillingAccountId.json"
+          },
+          "ReservationSummariesDailyWithBillingProfileId": {
+            "$ref": "./examples/ReservationSummariesDailyWithBillingProfileId.json"
+          },
+          "ReservationSummariesMonthlyWithBillingAccountId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithBillingAccountId.json"
+          },
+          "ReservationSummariesMonthlyWithBillingProfileId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileId.json"
+          },
+          "ReservationSummariesMonthlyWithBillingProfileIdReservationId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileIdReservationId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Consumption/tags": {
       "get": {
         "operationId": "Tags_Get",
@@ -667,91 +936,6 @@
         }
       }
     },
-    "/providers/Microsoft.Consumption/{resourceScope}/reservationDetails": {
-      "get": {
-        "operationId": "ReservationsDetails_List",
-        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "resourceScope",
-            "in": "path",
-            "description": "The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Start date. Only applicable when querying with billing profile",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "End date. Only applicable when querying with billing profile",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "reservationId",
-            "in": "query",
-            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "reservationOrderId",
-            "in": "query",
-            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReservationDetailListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ReservationDetailsByBillingAccountId": {
-            "$ref": "./examples/ReservationDetailsByBillingAccountId.json"
-          },
-          "ReservationDetailsByBillingProfileId": {
-            "$ref": "./examples/ReservationDetailsByBillingProfileId.json"
-          },
-          "ReservationDetailsByBillingProfileIdReservationId": {
-            "$ref": "./examples/ReservationDetailsByBillingProfileIdReservationId.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Consumption/{resourceScope}/reservationRecommendationDetails": {
       "get": {
         "operationId": "ReservationRecommendationDetails_Get",
@@ -911,190 +1095,6 @@
           "ReservationRecommendationsBySubscription-Legacy": {
             "$ref": "./examples/ReservationRecommendationDetailsBySubscription.json"
           }
-        }
-      }
-    },
-    "/providers/Microsoft.Consumption/{resourceScope}/reservationRecommendations": {
-      "get": {
-        "operationId": "ReservationRecommendations_List",
-        "description": "List of recommendations for purchasing reserved instances.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "resourceScope",
-            "in": "path",
-            "description": "The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReservationRecommendationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ReservationRecommendationsByBillingAccount-Legacy": {
-            "$ref": "./examples/ReservationRecommendationsByBillingAccount.json"
-          },
-          "ReservationRecommendationsByBillingAccountFilterForScope": {
-            "$ref": "./examples/ReservationRecommendationsByBillingAccountFilterByScope.json"
-          },
-          "ReservationRecommendationsByBillingProfile-Modern": {
-            "$ref": "./examples/ReservationRecommendationsByBillingProfile.json"
-          },
-          "ReservationRecommendationsByResourceGroup-Legacy": {
-            "$ref": "./examples/ReservationRecommendationsByResourceGroup.json"
-          },
-          "ReservationRecommendationsBySubscription-Legacy": {
-            "$ref": "./examples/ReservationRecommendationsBySubscription.json"
-          },
-          "ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod-Legacy": {
-            "$ref": "./examples/ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Consumption/{resourceScope}/reservationSummaries": {
-      "get": {
-        "operationId": "ReservationsSummaries_List",
-        "description": "Lists the reservations summaries for the defined scope daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "resourceScope",
-            "in": "path",
-            "description": "The scope associated with reservations summaries operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "grain",
-            "in": "query",
-            "description": "Can be daily or monthly",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "daily",
-              "monthly"
-            ],
-            "x-ms-enum": {
-              "name": "Datagrain",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "DailyGrain",
-                  "value": "daily",
-                  "description": "Daily grain of data"
-                },
-                {
-                  "name": "MonthlyGrain",
-                  "value": "monthly",
-                  "description": "Monthly grain of data"
-                }
-              ]
-            }
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Start date. Only applicable when querying with billing profile",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "End date. Only applicable when querying with billing profile",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "reservationId",
-            "in": "query",
-            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "reservationOrderId",
-            "in": "query",
-            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReservationSummaryListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ReservationSummariesDailyWithBillingAccountId": {
-            "$ref": "./examples/ReservationSummariesDailyWithBillingAccountId.json"
-          },
-          "ReservationSummariesDailyWithBillingProfileId": {
-            "$ref": "./examples/ReservationSummariesDailyWithBillingProfileId.json"
-          },
-          "ReservationSummariesMonthlyWithBillingAccountId": {
-            "$ref": "./examples/ReservationSummariesMonthlyWithBillingAccountId.json"
-          },
-          "ReservationSummariesMonthlyWithBillingProfileId": {
-            "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileId.json"
-          },
-          "ReservationSummariesMonthlyWithBillingProfileIdReservationId": {
-            "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileIdReservationId.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },

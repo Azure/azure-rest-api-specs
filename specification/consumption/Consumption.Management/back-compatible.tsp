@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Consumption;
+using TypeSpec.Http;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(OperationStatus.properties);
@@ -134,3 +135,8 @@ using Microsoft.Consumption;
 @@clientLocation(LotsOperationGroup.listByBillingProfile, "Lots");
 @@clientLocation(LotsOperationGroup.listByBillingAccount, "Lots");
 @@clientLocation(LotsOperationGroup.listByCustomer, "Lots");
+
+@@path(ResourceScopeActionScope.scope,
+  #{ allowReserved: true, name: "resourceScope" }
+);
+@@clientName(ResourceScopeActionScope.scope, "resourceScope");

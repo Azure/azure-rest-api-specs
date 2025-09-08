@@ -342,14 +342,8 @@ interface ReservationsSummariesOperationGroup {
   @action("reservationSummaries")
   list is ArmProviderActionSync<
     Response = ResourceListResult<ReservationSummary>,
+    Scope = ResourceScopeActionScope,
     Parameters = {
-      /**
-       * The scope associated with reservations summaries operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
-       */
-      @path(#{allowReserved: true})
-      @segment("")
-      resourceScope: string;
-
       /**
        * Can be daily or monthly
        */
@@ -467,14 +461,8 @@ interface ReservationsDetailsOperationGroup {
   @action("reservationDetails")
   list is ArmProviderActionSync<
     Response = ResourceListResult<ReservationDetail>,
+    Scope = ResourceScopeActionScope,
     Parameters = {
-      /**
-       * The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
-       */
-      @path(#{allowReserved: true})
-      @segment("")
-      resourceScope: string;
-
       /**
        * Start date. Only applicable when querying with billing profile
        */
@@ -523,19 +511,13 @@ interface ReservationRecommendationsOperationGroup {
   @action("reservationRecommendations")
   list is ArmProviderActionSync<
     Response = ResourceListResult<ReservationRecommendation>,
+    Scope = ResourceScopeActionScope,
     Parameters = {
       /**
        * May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.
        */
       @query("$filter")
       $filter?: string;
-
-      /**
-       * The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope
-       */
-      @path(#{allowReserved: true})
-      @segment("")
-      resourceScope: string;
     },
     Error = ErrorResponse
   >;
@@ -558,7 +540,7 @@ interface ReservationRecommendationDetailsOperationGroup {
       /**
        * The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope
        */
-      @path(#{allowReserved: true})
+      @path(#{ allowReserved: true })
       @segment("")
       resourceScope: string;
 

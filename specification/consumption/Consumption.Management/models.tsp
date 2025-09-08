@@ -11,6 +11,11 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Consumption;
 
 /**
+ * The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
+ */
+model ResourceScopeActionScope is Extension.ScopeParameter;
+
+/**
  * The status of the long running operation.
  */
 union OperationStatusType {
