@@ -35,8 +35,11 @@ interface PrivateEndpointConnections {
   create is PrivateEndpointOperations.CreateOrUpdateAsync<
     StorageSyncService,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
-      ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("Location")
+      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+      location?: string;
+
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
@@ -45,8 +48,6 @@ interface PrivateEndpointConnections {
       @doc("Request id")
       requestId?: string;
     }),
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
     Error = StorageSyncError
   >;
 
@@ -58,8 +59,11 @@ interface PrivateEndpointConnections {
   delete is PrivateEndpointOperations.DeleteAsync<
     StorageSyncService,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
-      ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("Location")
+      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+      location?: string;
+
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;

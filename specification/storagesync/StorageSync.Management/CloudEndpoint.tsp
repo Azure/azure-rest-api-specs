@@ -65,8 +65,11 @@ interface CloudEndpoints {
       @doc("request id.")
       requestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudEndpoint> &
-      ArmLroLocationHeader<FinalResult = CloudEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("Location")
+      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+      location?: string;
+
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
@@ -94,8 +97,11 @@ interface CloudEndpoints {
       @doc("request id.")
       requestId?: string;
     }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudEndpoint> &
-      ArmLroLocationHeader<FinalResult = CloudEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("Location")
+      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+      location?: string;
+
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
