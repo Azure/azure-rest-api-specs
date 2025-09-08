@@ -10,12 +10,12 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 @@alternateType(
-  Microsoft.Compute.SpotPlacementScoresInput::properties.desiredLocations,
+  Microsoft.Compute.SpotPlacementScoresInput.desiredLocations,
   Azure.Core.AzureLocation,
   "csharp"
 );
 @@alternateType(
-  Microsoft.Compute.SpotPlacementScoresResponse::properties.desiredLocations,
+  Microsoft.Compute.SpotPlacementScoresResponse.desiredLocations,
   Azure.Core.AzureLocation,
   "csharp"
 );
