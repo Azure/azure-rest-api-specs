@@ -17,16 +17,19 @@ union ScheduleProvisioningStatus {
   string,
 
   @doc("Represents the creation status of the schedule.")
-  Created: "Created",
+  Creating: "Creating",
 
-  @doc("Represents the running status of the schedule.")
-  Running: "Running",
+  @doc("Represents the updating status of the schedule.")
+  Updating: "Updating",
 
-  @doc("Represents the paused status of the schedule.")
-  Paused: "Paused",
+  @doc("Represents the deleting status of the schedule.")
+  Deleting: "Deleting",
 
-  @doc("Represents the completed status of the schedule.")
-  Completed: "Completed",
+  @doc("Represents the succeeded status of the schedule.")
+  Succeeded: "Succeeded",
+
+  @doc("Represents the failed status of the schedule.")
+  Failed: "Failed",
 }
 
 @doc("Type of the trigger.")
@@ -58,7 +61,7 @@ model CronTrigger extends Trigger {
   type: TriggerType.Cron;
 
   @doc("Cron expression that defines the schedule frequency.")
-  cronExpression: string;
+  expression: string;
 
   @doc("Time zone for the cron schedule.")
   timeZone?: string = "UTC";
@@ -70,9 +73,9 @@ model CronTrigger extends Trigger {
   endTime: string;
 }
 
-@doc("Recurrence pattern type.")
+@doc("Recurrence type.")
 @added(Versions.v2025_07_31_preview)
-union RecurrencePatternType {
+union RecurrenceType {
   string,
 
   @doc("Hourly recurrence pattern.")
@@ -88,73 +91,50 @@ union RecurrencePatternType {
   Monthly: "Monthly",
 }
 
-@doc("Base model for the recurrence pattern.")
-@discriminator("type")
+@doc("Days of the week for recurrence schedule.")
 @added(Versions.v2025_07_31_preview)
-model RecurrencePattern {
-  @doc("Type of the recurrence pattern.")
-  type: RecurrencePatternType;
+union DayOfWeek {
+  string,
 
-  @doc("Start time for the recurrence pattern in ISO 8601 format.")
-  startTime: string;
+  @doc("Sunday.")
+  Sunday: "Sunday",
 
-  @doc("End time for the recurrence pattern in ISO 8601 format.")
-  endTime: string;
+  @doc("Monday.")
+  Monday: "Monday",
+
+  @doc("Tuesday.")
+  Tuesday: "Tuesday",
+
+  @doc("Wednesday.")
+  Wednesday: "Wednesday",
+
+  @doc("Thursday.")
+  Thursday: "Thursday",
+
+  @doc("Friday.")
+  Friday: "Friday",
+
+  @doc("Saturday.")
+  Saturday: "Saturday",
 }
 
-@doc("Recurrence pattern for the schedule.")
+@doc("Recurrence schedule model.")
 @added(Versions.v2025_07_31_preview)
-model HourlyRecurrencePattern extends RecurrencePattern {
-  @doc("Type of the recurrence pattern.")
-  type: RecurrencePatternType.Hourly;
+model RecurrenceSchedule {
+  @doc("Recurrence type for the recurrence schedule.")
+  type: RecurrenceType;
 
-  @doc("Interval in hours for the hourly recurrence.")
-  interval: int32;
-}
+  @doc("Hours for the recurrence schedule.")
+  hours?: int32[];
 
-@doc("Recurrence pattern for the schedule.")
-@added(Versions.v2025_07_31_preview)
-model DailyRecurrencePattern extends RecurrencePattern {
-  @doc("Type of the recurrence pattern.")
-  type: RecurrencePatternType.Daily;
+  @doc("Minutes for the recurrence schedule.")
+  minutes?: int32[];
 
-  @doc("Interval in days for the daily recurrence.")
-  interval: int32;
+  @doc("Days of the week for the recurrence schedule.")
+  dayOfWeek?: DayOfWeek[];
 
-  @doc("Hour of the day for the daily recurrence.")
-  hour: int32;
-}
-
-@doc("Recurrence pattern for the schedule.")
-@added(Versions.v2025_07_31_preview)
-model WeeklyRecurrencePattern extends RecurrencePattern {
-  @doc("Type of the recurrence pattern.")
-  type: RecurrencePatternType.Weekly;
-
-  @doc("Interval in weeks for the weekly recurrence. Possible values: 1-3")
-  interval: int32;
-
-  @doc("Day of the week for the weekly recurrence. Possible values: 0-6, 0 - Mon, 1 - Tue, 2 - Wed, 3 - Thu, 4 - Fri, 5 - Sat, 6 - Sun")
-  dayOfWeek: int32 = 0;
-
-  @doc("Hour of the day for the weekly recurrence. Possible values: 0-23")
-  hourOfDay: int32 = 0;
-}
-
-@doc("Recurrence pattern for the schedule.")
-@added(Versions.v2025_07_31_preview)
-model MonthlyRecurrencePattern extends RecurrencePattern {
-  @doc("Type of the recurrence pattern.")
-  type: RecurrencePatternType.Monthly;
-
-  @doc("Interval in months for the monthly recurrence. Possible values: 1-12")
-  interval: int32;
-
-  @doc("Day of the month for the monthly recurrence. Possible values: 1-31. Values outside of the month's days will be adjusted with the nearest valid day.")
-  dayOfMonth: int32 = 1;
-
-  @doc("Hour of the day for the monthly recurrence. Possible values: 0-23")
-  hourOfDay: int32 = 0;
+  @doc("Days of the month for the recurrence schedule.")
+  dayOfMonth?: int32[];
 }
 
 @doc("Recurrence based trigger.")
@@ -163,11 +143,20 @@ model RecurrenceTrigger extends Trigger {
   @doc("Type of the trigger.")
   type: TriggerType.Recurrence;
 
-  @doc("Recurrence pattern for the schedule.")
-  recurrencePattern: RecurrencePattern;
+  @doc("Start time for the recurrence schedule in ISO 8601 format.")
+  startTime: string;
+
+  @doc("End time for the recurrence schedule in ISO 8601 format.")
+  endTime: string;
 
   @doc("Time zone for the recurrence schedule.")
   timeZone?: string = "UTC";
+
+  @doc("Interval for the recurrence schedule.")
+  interval: int32;
+
+  @doc("Recurrence schedule for the recurrence trigger.")
+  schedule: RecurrenceSchedule;
 }
 
 @doc("One-time trigger.")
@@ -190,20 +179,19 @@ union ScheduleTaskType {
   @doc("Evaluation task.")
   Evaluation: "Evaluation",
 
-  @doc("Agent run analysis task.")
-  AgentRunAnalysis: "AgentAnalysis",
+  @doc("Insight task.")
+  Insight: "Insight",
+}
+
+@doc("Insight placeholder model.")
+model Insight {
+  @doc("Identifier of the insight.")
+  id: string;
 }
 
 @doc("Schedule task model.")
 @added(Versions.v2025_07_31_preview)
 model ScheduleTask {
-  @doc("Identifier of the task.")
-  @encodedName("application/json", "id")
-  id: string;
-
-  @doc("Name of the task.")
-  displayName?: string;
-
   @doc("Type of the task.")
   type: ScheduleTaskType;
 
@@ -211,14 +199,27 @@ model ScheduleTask {
   configuration: Record<string>;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown"
-  @doc("Definition of the task. JSON payload that will be used by task execution provider.")
-  definition: unknown;
+  #suppress "@azure-tools/typespec-autorest/union-unsupported"
+  @doc("Definition of the task.")
+  definition: Evaluation | Insight;
 }
 
-@resource("evaluation_schedules")
+@doc("Status of the schedule.")
+@added(Versions.v2025_07_31_preview)
+union ScheduleStatus {
+  string,
+
+  @doc("Enabled status of the schedule.")
+  Enabled: "Enabled",
+
+  @doc("Disabled status of the schedule.")
+  Disabled: "Disabled",
+}
+
+@resource("schedules")
 @doc("Schedule model.")
 @added(Versions.v2025_07_31_preview)
-model EvaluationSchedule {
+model Schedule {
   @doc("Identifier of the schedule.")
   @key("id")
   @encodedName("application/json", "id")
@@ -227,6 +228,9 @@ model EvaluationSchedule {
 
   @doc("Name of the schedule.")
   displayName?: string;
+
+  @doc("Status of the schedule.")
+  status: ScheduleStatus;
 
   @doc("Provisioning status of the schedule.")
   @visibility(Lifecycle.Read)
@@ -254,21 +258,15 @@ model EvaluationSchedule {
 union ScheduleRunTriggerStatus {
   string,
 
-  @doc("NotTriggered status of the schedule run.")
-  NotTriggered: "NotTriggered",
-
-  @doc("Triggered status of the schedule run.")
-  Triggered: "Triggered",
-
-  @doc("Skipped status of the schedule run.")
-  Skipped: "Skipped",
+  @doc("Succeeded status of the schedule run.")
+  Succeeded: "Succeeded",
 
   @doc("Failed status of the schedule run.")
   Failed: "Failed",
 }
 
 @doc("Schedule run model.")
-@resource("evaluation_schedules/{scheduleId}/runs")
+@resource("schedules/{scheduleId}/runs")
 @added(Versions.v2025_07_31_preview)
 model ScheduleRun {
   @doc("Identifier of the schedule run.")
@@ -289,23 +287,4 @@ model ScheduleRun {
 
   @doc("Error information for the schedule run.")
   error?: string;
-}
-
-@doc("Type of action for schedule run event.")
-@added(Versions.v2025_07_31_preview)
-union ScheduleRunEventAction {
-  string,
-
-  @doc("Skip action for schedule run event.")
-  Skip: "Skip",
-}
-
-@doc("Event model for schedule run actions.")
-@added(Versions.v2025_07_31_preview)
-model EvaluationScheduleRunEvent {
-  @doc("Index of the schedule run to be acted upon from the last triggered run. Possible values 1-5.")
-  scheduleRunIndex: int32;
-
-  @doc("Action to be taken on the schedule run.")
-  action: ScheduleRunEventAction;
 }
