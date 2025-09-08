@@ -637,10 +637,6 @@ model DiscoveryRuleProperties {
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 
   @visibility(Lifecycle.Read)
-  @doc("Number of discovered entities in the last discovery operation.")
-  numberOfDiscoveredEntities?: int32;
-
-  @visibility(Lifecycle.Read)
   @doc("Name of the entity which represents the discovery rule. Note: It might take a few minutes after creating the discovery rule until the entity is created.")
   entityName: string;
 }
