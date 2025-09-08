@@ -79,7 +79,12 @@ interface ConnectedRegistries {
   /**
    * Deactivates the connected registry instance.
    */
-  deactivate is ArmResourceActionAsync<ConnectedRegistry, void, OkResponse>;
+  deactivate is ArmResourceActionAsyncBase<
+    ConnectedRegistry,
+    void,
+    ArmAcceptedLroResponse | OkResponse,
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+  >;
 }
 
 @@maxLength(ConnectedRegistry.name, 50);
