@@ -9,7 +9,12 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 @@alternateType(
-  SpotPlacementScoresContent::properties.desiredLocations,
+  SpotPlacementScoresInput::properties.desiredLocations,
+  Azure.Core.AzureLocation,
+  "csharp"
+);
+@@alternateType(
+  SpotPlacementScoresResponse::properties.desiredLocations,
   Azure.Core.AzureLocation,
   "csharp"
 );
