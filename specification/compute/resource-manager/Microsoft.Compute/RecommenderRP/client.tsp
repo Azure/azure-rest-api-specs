@@ -1,4 +1,5 @@
 import "./main.tsp";
+import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -9,12 +10,12 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 @@alternateType(
-  SpotPlacementScoresInput::properties.desiredLocations,
+  Microsoft.Compute.SpotPlacementScoresInput::properties.desiredLocations,
   Azure.Core.AzureLocation,
   "csharp"
 );
 @@alternateType(
-  SpotPlacementScoresResponse::properties.desiredLocations,
+  Microsoft.Compute.SpotPlacementScoresResponse::properties.desiredLocations,
   Azure.Core.AzureLocation,
   "csharp"
 );
