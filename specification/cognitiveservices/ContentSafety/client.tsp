@@ -3,7 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2024_09_01)
 namespace Customizations;
 
