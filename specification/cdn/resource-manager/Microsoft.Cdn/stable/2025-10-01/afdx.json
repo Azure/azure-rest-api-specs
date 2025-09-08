@@ -2585,6 +2585,13 @@
             "type": "string"
           },
           {
+            "name": "inBatch",
+            "type": "boolean",
+            "in": "query",
+            "description": "Indicates whether this rule is in batch or not. Default as parameter not provided which means returning all the rules.",
+            "required": false
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -5720,6 +5727,12 @@
             "modelAsString": true
           },
           "default": "Continue"
+        },
+        "inBatch": {
+          "description": "Indicates whether this rule is in batch or not. Default value is false which means the rule is not in batch.",
+          "type": "boolean",
+          "default": false,
+          "readOnly": true
         }
       }
     },
