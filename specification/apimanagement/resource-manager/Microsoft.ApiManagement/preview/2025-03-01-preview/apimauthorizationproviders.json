@@ -272,6 +272,34 @@
         }
       }
     },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderName}/refreshSecret": {
+      "post": {
+        "tags": [
+          "AuthorizationProvider"
+        ],
+        "operationId": "AuthorizationProvider_RefreshSecret",
+        "description": "Refreshes the Key Vault reference secret for the specified authorization provider.",
+        "x-ms-examples": {
+          "ApiManagementAuthorizationProviderRefreshSecret": {
+            "$ref": "./examples/ApiManagementRefreshAuthorizationProviderSecret.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The existing Authorization provider was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/authorizations": {
       "get": {
         "tags": [

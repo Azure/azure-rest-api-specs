@@ -1544,14 +1544,37 @@
       },
       "description": "OAuth2 settings details"
     },
+    "OAuth2AuthorizationCodeParameters": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client identifier of the authorization server."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client secret of the authorization server."
+        },
+        "scopes": {
+          "type": "string",
+          "description": "OAuth token scope."
+        },
+        "resourceUri": {
+          "type": "string",
+          "description": "OAuth resource URI."
+        },
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultContractCreateProperties",
+          "description": "KeyVault location details for storing OAuth2 client secret."
+        }
+      },
+      "description": "OAuth2 authorization code grant parameters with KeyVault support."
+    },
     "AuthorizationProviderOAuth2GrantTypes": {
       "type": "object",
       "properties": {
         "authorizationCode": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "$ref": "#/definitions/OAuth2AuthorizationCodeParameters",
           "description": "OAuth2 authorization code grant parameters"
         },
         "clientCredentials": {
