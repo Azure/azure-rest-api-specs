@@ -55,12 +55,8 @@ interface StorageSyncServices {
       DefaultBaseParameters<StorageSyncService>
     >,
     StorageSyncServiceCreateParameters,
-    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> &
+    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("Location")
-      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-      location?: string;
-
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
@@ -88,12 +84,8 @@ interface StorageSyncServices {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> &
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("Location")
-      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-      location?: string;
-
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
@@ -121,12 +113,8 @@ interface StorageSyncServices {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageSyncService> &
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("Location")
-      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-      location?: string;
-
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       correlationRequestId?: string;
