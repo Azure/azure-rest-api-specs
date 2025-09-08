@@ -44,7 +44,6 @@
             "maxPods": 110
           },
           "localDNSProfile": {
-            "mode": "Preferred",
             "kubeDNSOverrides": {
               ".": {
                 "cacheDurationInSeconds": 3600,
@@ -53,7 +52,7 @@
                 "maxConcurrent": 1000,
                 "protocol": "PreferUDP",
                 "queryLogging": "Error",
-                "serveStale": "Verify",
+                "serveStale": "Immediate",
                 "serveStaleDurationInSeconds": 3600
               },
               "cluster.local": {
@@ -63,10 +62,12 @@
                 "maxConcurrent": 1000,
                 "protocol": "ForceTCP",
                 "queryLogging": "Error",
-                "serveStale": "Verify",
+                "serveStale": "Immediate",
                 "serveStaleDurationInSeconds": 3600
               }
             },
+            "mode": "Preferred",
+            "state": "Disabled",
             "vnetDNSOverrides": {
               ".": {
                 "cacheDurationInSeconds": 3600,
@@ -75,7 +76,7 @@
                 "maxConcurrent": 1000,
                 "protocol": "PreferUDP",
                 "queryLogging": "Error",
-                "serveStale": "Verify",
+                "serveStale": "Immediate",
                 "serveStaleDurationInSeconds": 3600
               },
               "cluster.local": {
@@ -85,7 +86,7 @@
                 "maxConcurrent": 1000,
                 "protocol": "ForceTCP",
                 "queryLogging": "Error",
-                "serveStale": "Verify",
+                "serveStale": "Immediate",
                 "serveStaleDurationInSeconds": 3600
               }
             }
