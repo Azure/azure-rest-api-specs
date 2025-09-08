@@ -61,7 +61,8 @@ op validate(
 op getSubscriptionDeploymentLocations is ArmProviderActionSync<
   Response = DeploymentLocations,
   Scope = SubscriptionActionScope,
-  Parameters = {}
+  Parameters = {},
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -76,7 +77,8 @@ op getSubscriptionDeploymentLocations is ArmProviderActionSync<
 op listAseRegions is ArmProviderActionSync<
   Response = AseRegionCollection,
   Scope = SubscriptionActionScope,
-  Parameters = {}
+  Parameters = {},
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -104,7 +106,8 @@ op listBillingMeters is ArmProviderActionSync<
      */
     @query("osType")
     osType?: string;
-  }
+  },
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -118,7 +121,8 @@ op checkNameAvailability is ArmProviderActionSync<
   Request = ResourceNameAvailabilityRequest,
   Response = ResourceNameAvailability,
   Scope = SubscriptionActionScope,
-  Parameters = {}
+  Parameters = {},
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -139,7 +143,8 @@ op listCustomHostNameSites is ArmProviderActionSync<
      */
     @query("hostname")
     hostname?: string;
-  }
+  },
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -178,7 +183,8 @@ op listGeoRegions is ArmProviderActionSync<
      */
     @query("linuxDynamicWorkersEnabled")
     linuxDynamicWorkersEnabled?: boolean;
-  }
+  },
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -193,7 +199,8 @@ op listSiteIdentifiersAssignedToHostName is ArmProviderActionSync<
   Request = NameIdentifier,
   Response = IdentifierCollection,
   Scope = SubscriptionActionScope,
-  Parameters = {}
+  Parameters = {},
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -207,7 +214,8 @@ op regionalCheckNameAvailability is ArmProviderActionSync<
   Request = DnlResourceNameAvailabilityRequest,
   Response = DnlResourceNameAvailability,
   Scope = SubscriptionActionScope,
-  Parameters = LocationParameter
+  Parameters = LocationParameter,
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -222,7 +230,8 @@ op regionalCheckNameAvailability is ArmProviderActionSync<
 op listPremierAddOnOffers is ArmProviderActionSync<
   Response = PremierAddOnOfferCollection,
   Scope = SubscriptionActionScope,
-  Parameters = {}
+  Parameters = {},
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -236,7 +245,8 @@ op listPremierAddOnOffers is ArmProviderActionSync<
 op listSkus is ArmProviderActionSync<
   Response = SkuInfos,
   Scope = SubscriptionActionScope,
-  Parameters = {}
+  Parameters = {},
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -249,7 +259,8 @@ op verifyHostingEnvironmentVnet is ArmProviderActionSync<
   Request = VnetParameters,
   Response = VnetValidationFailureDetails,
   Scope = SubscriptionActionScope,
-  Parameters = {}
+  Parameters = {},
+  Error = DefaultErrorResponse
 >;
 
 /**
@@ -269,7 +280,7 @@ op move(
    */
   @bodyRoot
   moveResourceEnvelope: CsmMoveResourceEnvelope,
-): NoContentResponse | ErrorResponse;
+): NoContentResponse | DefaultErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface GlobalOperationGroup {
@@ -293,7 +304,7 @@ interface GlobalOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): NoContentResponse | ErrorResponse;
+  ): NoContentResponse | DefaultErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -314,7 +325,8 @@ interface ProviderOperationGroup {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Get available Function app frameworks and their versions
@@ -334,7 +346,8 @@ interface ProviderOperationGroup {
        */
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Get available Function app frameworks and their versions for location
@@ -356,7 +369,8 @@ interface ProviderOperationGroup {
        */
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Get available Web app frameworks and their versions for location
@@ -378,7 +392,8 @@ interface ProviderOperationGroup {
        */
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Get available Web app frameworks and their versions
@@ -398,7 +413,8 @@ interface ProviderOperationGroup {
        */
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Get available application frameworks and their versions
@@ -417,7 +433,8 @@ interface ProviderOperationGroup {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 }
 
@@ -448,7 +465,8 @@ interface RecommendationsOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Reset all recommendation opt-out settings for a subscription.
@@ -460,7 +478,8 @@ interface RecommendationsOperationGroup {
   @action("recommendations/reset")
   resetAllFilters is ArmProviderActionSync<
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for Disables the specified rule so it will not apply to a subscription in the future.
@@ -482,7 +501,8 @@ interface RecommendationsOperationGroup {
       @path
       @segment("recommendations")
       name: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 }
 
@@ -501,7 +521,8 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
   list is ArmProviderActionSync<
     Response = ResourceHealthMetadataCollection,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = DefaultErrorResponse
   >;
   /**
    * Description for List all ResourceHealthMetadata for all sites in the resource group in the subscription.
@@ -535,7 +556,8 @@ interface GetUsagesInLocationOperationGroup {
   list is ArmProviderActionSync<
     Response = CsmUsageQuotaCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = DefaultErrorResponse
   >;
 }
 
@@ -553,6 +575,7 @@ interface StaticSitesOperationGroup {
     Request = StaticSitesWorkflowPreviewRequest,
     Response = StaticSitesWorkflowPreview,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = DefaultErrorResponse
   >;
 }

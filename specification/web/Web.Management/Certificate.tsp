@@ -46,7 +46,10 @@ interface Certificates {
   /**
    * Description for Get a certificate.
    */
-  get is CertificateOps.Read<Certificate>;
+  get is CertificateOps.Read<
+    Certificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Create or update a certificate.
@@ -54,7 +57,8 @@ interface Certificates {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is CertificateOps.CreateOrUpdateSync<
     Certificate,
-    Response = ArmResourceUpdatedResponse<Certificate>
+    Response = ArmResourceUpdatedResponse<Certificate>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -63,20 +67,25 @@ interface Certificates {
   @patch(#{ implicitOptionality: false })
   update is CertificateOps.CustomPatchSync<
     Certificate,
-    PatchModel = CertificatePatchResource
+    PatchModel = CertificatePatchResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
    * Description for Delete a certificate.
    */
-  delete is CertificateOps.DeleteSync<Certificate>;
+  delete is CertificateOps.DeleteSync<
+    Certificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get all certificates in a resource group.
    */
   listByResourceGroup is CertificateOps.List<
     Certificate,
-    Response = ArmResponse<CertificateCollection>
+    Response = ArmResponse<CertificateCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -92,7 +101,8 @@ interface Certificates {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<CertificateCollection>
+    Response = ArmResponse<CertificateCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 @armResourceOperations

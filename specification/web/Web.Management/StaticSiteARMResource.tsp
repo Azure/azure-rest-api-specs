@@ -107,7 +107,8 @@ interface StaticSiteARMResources {
   @operationId("StaticSites_List")
   list is ArmListBySubscription<
     StaticSiteARMResource,
-    Response = ArmResponse<StaticSiteCollection>
+    Response = ArmResponse<StaticSiteCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**

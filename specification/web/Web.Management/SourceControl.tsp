@@ -34,7 +34,8 @@ interface SourceControls {
   @operationId("GetSourceControl")
   getSourceControl is ArmResourceRead<
     SourceControl,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -46,7 +47,8 @@ interface SourceControls {
   updateSourceControl is ArmResourceCreateOrReplaceSync<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResourceUpdatedResponse<SourceControl>
+    Response = ArmResourceUpdatedResponse<SourceControl>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -57,7 +59,8 @@ interface SourceControls {
   listSourceControls is ArmResourceListByParent<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResponse<SourceControlCollection>
+    Response = ArmResponse<SourceControlCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 

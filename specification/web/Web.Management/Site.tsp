@@ -218,7 +218,8 @@ interface Sites {
   list is Azure.ResourceManager.Extension.ListByTarget<
     Extension.Subscription,
     Site,
-    Response = ArmResponse<WebAppCollection>
+    Response = ArmResponse<WebAppCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**

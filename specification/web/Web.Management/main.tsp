@@ -109,4 +109,8 @@ enum Versions {
   v2024_11_01: "2024-11-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<CsmOperationCollection>,
+      ErrorResponse
+    > {}

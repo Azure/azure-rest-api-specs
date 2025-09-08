@@ -160,7 +160,8 @@ interface AppServiceEnvironmentResources {
   @operationId("AppServiceEnvironments_List")
   list is ArmListBySubscription<
     AppServiceEnvironmentResource,
-    Response = ArmResponse<AppServiceEnvironmentCollection>
+    Response = ArmResponse<AppServiceEnvironmentCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**

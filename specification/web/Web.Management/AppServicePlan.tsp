@@ -101,7 +101,8 @@ interface AppServicePlans {
       @query("detailed")
       detailed?: boolean;
     },
-    Response = ArmResponse<AppServicePlanCollection>
+    Response = ArmResponse<AppServicePlanCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**

@@ -77,7 +77,8 @@ interface KubeEnvironments {
    */
   listBySubscription is ArmListBySubscription<
     KubeEnvironment,
-    Response = ArmResponse<KubeEnvironmentCollection>
+    Response = ArmResponse<KubeEnvironmentCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 

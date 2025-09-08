@@ -34,7 +34,8 @@ interface Users {
   @operationId("GetPublishingUser")
   getPublishingUser is ArmResourceRead<
     User,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -46,7 +47,8 @@ interface Users {
   updatePublishingUser is ArmResourceCreateOrReplaceSync<
     User,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResourceUpdatedResponse<User>
+    Response = ArmResourceUpdatedResponse<User>,
+    Error = DefaultErrorResponse
   >;
 }
 
