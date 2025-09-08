@@ -21,11 +21,10 @@ options:
     package-details:
       name: "@azure/arm-qumulo"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.Qumulo"
-    service-dir: "sdk/qumulo"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Qumulo"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-qumulo"
     package-name: "azure-mgmt-qumulo"
@@ -45,7 +44,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-qumulo"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-qumulo"
     namespace: "com.azure.resourcemanager.qumulo"
     service-name: "Qumulo"
     flavor: azure
