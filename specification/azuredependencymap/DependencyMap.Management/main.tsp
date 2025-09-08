@@ -29,6 +29,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_05_01_preview: "2025-05-01-preview",
+
+  /** 2025-06-31-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_06_31_preview: "2025-06-31-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -116,6 +121,17 @@ interface Maps {
       ArmLroLocationHeader<FinalResult = ExportDependenciesOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
+  @doc("Get dependencies for all machines")
+  @action("GetDependenciesForAllMachines")
+  @added(Versions.v2025_06_31_preview)
+  getDependenciesForAllMachines is ArmResourceActionAsync<
+    MapsResource,
+    GetDependenciesForAllMachinesRequest,
+    GetDependenciesForAllMachinesOperationResult,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = GetDependenciesForAllMachinesOperationResult> &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = GetDependenciesForAllMachinesOperationResult>
+  >;
 }
 
 @doc("Filters for dependency map visualization apis")
@@ -200,6 +216,45 @@ model ExportDependenciesRequest {
   @added(Versions.v2025_05_01_preview)
   @doc("List of Appliance Names")
   applianceNameList?: string[];
+}
+
+@added(Versions.v2025_06_31_preview)
+@doc("GetDependenciesForAllMachines request model")
+model GetDependenciesForAllMachinesRequest {
+  @doc("Filters for ExportDependencies")
+  filters?: ProcessNameFilter;
+}
+
+@doc("Model representing the result of the export dependencies asynchronous operation.")
+@added(Versions.v2025_06_31_preview)
+model GetDependenciesForAllMachinesOperationResult {
+  @doc("The status URL of the asynchronous operation.")
+  id?: string;
+
+  @doc("The resource name of the operation status. It must match the last segment of 'id' field.")
+  name?: string;
+
+  @doc("The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled.")
+  status: string;
+
+  @doc("Contains error details if status is Failed/Canceled.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("The start time of the operation.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  endTime?: utcDateTime;
+
+  @doc("Properties for export dependencies. These should only be set if the status is Succeeded.")
+  properties?: GetDependenciesForAllMachinesResultProperties;
+}
+
+@doc("Model representing properties returned upon successful completion of the export dependencies asynchronous operation.")
+@added(Versions.v2025_06_31_preview)
+model GetDependenciesForAllMachinesResultProperties {
+  @doc("The SAS URI of the blob containing the layout file for the multi-server view.")
+  layoutFileSasUrl: string;
 }
 
 @doc("A Discovery Source resource")
