@@ -68,7 +68,8 @@ interface RecommendationRules {
        */
       @query("recommendationId")
       recommendationId?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -87,7 +88,8 @@ interface RecommendationRules {
        */
       @query("environmentName")
       environmentName: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

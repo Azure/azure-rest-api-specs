@@ -34,7 +34,10 @@ interface AseV3NetworkingConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_GetAseV3NetworkingConfiguration")
-  getAseV3NetworkingConfiguration is ArmResourceRead<AseV3NetworkingConfiguration>;
+  getAseV3NetworkingConfiguration is ArmResourceRead<
+    AseV3NetworkingConfiguration,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Update networking configuration of an App Service Environment
@@ -44,7 +47,8 @@ interface AseV3NetworkingConfigurations {
   @operationId("AppServiceEnvironments_UpdateAseNetworkingConfiguration")
   updateAseNetworkingConfiguration is ArmResourceCreateOrReplaceSync<
     AseV3NetworkingConfiguration,
-    Response = ArmResourceUpdatedResponse<AseV3NetworkingConfiguration>
+    Response = ArmResourceUpdatedResponse<AseV3NetworkingConfiguration>,
+    Error = DefaultErrorResponse
   >;
 }
 

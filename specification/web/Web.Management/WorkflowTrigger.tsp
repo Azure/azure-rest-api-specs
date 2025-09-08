@@ -78,7 +78,10 @@ interface WorkflowTriggers {
   /**
    * Gets a workflow trigger.
    */
-  get is WorkflowTriggersOps.Read<WorkflowTrigger>;
+  get is WorkflowTriggersOps.Read<
+    WorkflowTrigger,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets a list of workflow triggers.
@@ -97,7 +100,8 @@ interface WorkflowTriggers {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -106,23 +110,30 @@ interface WorkflowTriggers {
   listCallbackUrl is WorkflowTriggersOps.ActionSync<
     WorkflowTrigger,
     void,
-    ArmResponse<WorkflowTriggerCallbackUrl>
+    ArmResponse<WorkflowTriggerCallbackUrl>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
    * Runs a workflow trigger.
    */
-  run is WorkflowTriggersOps.ActionAsync<WorkflowTrigger, void, OkResponse>;
+  run is WorkflowTriggersOps.ActionAsync<
+    WorkflowTrigger,
+    void,
+    OkResponse,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Get the trigger schema as JSON.
    */
   @get
-  @action("json")
+  @action("schemas/json")
   getSchemaJson is WorkflowTriggersOps.ActionSync<
     WorkflowTrigger,
     void,
-    ArmResponse<JsonSchema>
+    ArmResponse<JsonSchema>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 

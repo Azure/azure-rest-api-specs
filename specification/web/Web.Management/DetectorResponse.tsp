@@ -77,7 +77,8 @@ interface DetectorResponses {
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -87,7 +88,8 @@ interface DetectorResponses {
   @operationId("Diagnostics_ListHostingEnvironmentDetectorResponses")
   listHostingEnvironmentDetectorResponses is DetectorResponseOps.List<
     DetectorResponse,
-    Response = ArmResponse<DetectorResponseCollection>
+    Response = ArmResponse<DetectorResponseCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

@@ -33,7 +33,7 @@ interface AddressResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_GetVipInfo")
-  getVipInfo is ArmResourceRead<AddressResponse>;
+  getVipInfo is ArmResourceRead<AddressResponse, Error = DefaultErrorResponse>;
 }
 
 @@doc(AddressResponse.name, "");

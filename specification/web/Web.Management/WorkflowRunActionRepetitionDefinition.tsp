@@ -96,7 +96,10 @@ interface WorkflowRunActionRepetitionDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkflowRunActionRepetitions_Get")
-  get is WorkflowRunActionRepetitionDefinitionOps.Read<WorkflowRunActionRepetitionDefinition>;
+  get is WorkflowRunActionRepetitionDefinitionOps.Read<
+    WorkflowRunActionRepetitionDefinition,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Get all of a workflow run action repetitions.
@@ -105,7 +108,8 @@ interface WorkflowRunActionRepetitionDefinitions {
   @operationId("WorkflowRunActionRepetitions_List")
   list is WorkflowRunActionRepetitionDefinitionOps.List<
     WorkflowRunActionRepetitionDefinition,
-    Response = ArmResponse<WorkflowRunActionRepetitionDefinitionCollection>
+    Response = ArmResponse<WorkflowRunActionRepetitionDefinitionCollection>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -117,7 +121,8 @@ interface WorkflowRunActionRepetitionDefinitions {
   listExpressionTraces is WorkflowRunActionRepetitionDefinitionOps.ActionSync<
     WorkflowRunActionRepetitionDefinition,
     void,
-    ArmResponse<ExpressionTraces>
+    ArmResponse<ExpressionTraces>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 @armResourceOperations
@@ -185,14 +190,18 @@ interface WorkflowRunActionScopeRepetitions {
   /**
    * Get a workflow run action scoped repetition.
    */
-  get is WorkflowRunActionScopeRepetitionOps.Read<WorkflowRunActionRepetitionDefinition>;
+  get is WorkflowRunActionScopeRepetitionOps.Read<
+    WorkflowRunActionRepetitionDefinition,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * List the workflow run action scoped repetitions.
    */
   list is WorkflowRunActionScopeRepetitionOps.List<
     WorkflowRunActionRepetitionDefinition,
-    Response = ArmResponse<WorkflowRunActionRepetitionDefinitionCollection>
+    Response = ArmResponse<WorkflowRunActionRepetitionDefinitionCollection>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 

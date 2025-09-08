@@ -34,7 +34,7 @@ interface KubeEnvironments {
   /**
    * Description for Get the properties of a Kubernetes Environment.
    */
-  get is ArmResourceRead<KubeEnvironment>;
+  get is ArmResourceRead<KubeEnvironment, Error = DefaultErrorResponse>;
 
   /**
    * Description for Creates or updates a Kubernetes Environment.
@@ -42,7 +42,8 @@ interface KubeEnvironments {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     KubeEnvironment,
     LroHeaders = ArmLroLocationHeader<FinalResult = KubeEnvironment> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -52,7 +53,8 @@ interface KubeEnvironments {
   update is ArmCustomPatchSync<
     KubeEnvironment,
     PatchModel = KubeEnvironmentPatchResource,
-    Response = ArmResponse<KubeEnvironment> | ArmResourceCreatedSyncResponse<KubeEnvironment>
+    Response = ArmResponse<KubeEnvironment> | ArmResourceCreatedSyncResponse<KubeEnvironment>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -61,7 +63,8 @@ interface KubeEnvironments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     KubeEnvironment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -69,7 +72,8 @@ interface KubeEnvironments {
    */
   listByResourceGroup is ArmResourceListByParent<
     KubeEnvironment,
-    Response = ArmResponse<KubeEnvironmentCollection>
+    Response = ArmResponse<KubeEnvironmentCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**

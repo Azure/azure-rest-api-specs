@@ -62,7 +62,10 @@ interface VnetGateways {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServicePlans_GetVnetGateway")
-  getVnetGateway is VnetGatewayOps.Read<VnetGateway>;
+  getVnetGateway is VnetGatewayOps.Read<
+    VnetGateway,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Update a Virtual Network gateway.
@@ -72,7 +75,8 @@ interface VnetGateways {
   @operationId("AppServicePlans_UpdateVnetGateway")
   updateVnetGateway is VnetGatewayOps.CreateOrUpdateSync<
     VnetGateway,
-    Response = ArmResourceUpdatedResponse<VnetGateway>
+    Response = ArmResourceUpdatedResponse<VnetGateway>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -120,7 +124,8 @@ interface VnetGatewayOperationGroup {
   @operationId("WebApps_GetVnetConnectionGatewaySlot")
   getVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.Read<
     VnetGateway,
-    Response = ArmResponse<VnetGateway> | ArmNotFoundResponse
+    Response = ArmResponse<VnetGateway> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -131,7 +136,8 @@ interface VnetGatewayOperationGroup {
   @operationId("WebApps_CreateOrUpdateVnetConnectionGatewaySlot")
   createOrUpdateVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.CreateOrUpdateSync<
     VnetGateway,
-    Response = ArmResourceUpdatedResponse<VnetGateway>
+    Response = ArmResourceUpdatedResponse<VnetGateway>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -142,7 +148,8 @@ interface VnetGatewayOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.CustomPatchSync<
     VnetGateway,
-    PatchModel = VnetGateway
+    PatchModel = VnetGateway,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -185,7 +192,8 @@ interface VnetConnectionGatewayOperationGroup {
   @operationId("WebApps_GetVnetConnectionGateway")
   getVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.Read<
     VnetGateway,
-    Response = ArmResponse<VnetGateway> | ArmNotFoundResponse
+    Response = ArmResponse<VnetGateway> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -196,7 +204,8 @@ interface VnetConnectionGatewayOperationGroup {
   @operationId("WebApps_CreateOrUpdateVnetConnectionGateway")
   createOrUpdateVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.CreateOrUpdateSync<
     VnetGateway,
-    Response = ArmResourceUpdatedResponse<VnetGateway>
+    Response = ArmResourceUpdatedResponse<VnetGateway>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -208,7 +217,8 @@ interface VnetConnectionGatewayOperationGroup {
   updateVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.CustomPatchSync<
     VnetGateway,
     PatchModel = VnetGateway,
-    Response = ArmResponse<VnetGateway>
+    Response = ArmResponse<VnetGateway>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

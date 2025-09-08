@@ -33,7 +33,10 @@ interface HybridConnectionLimitsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServicePlans_GetHybridConnectionPlanLimit")
-  getHybridConnectionPlanLimit is ArmResourceRead<HybridConnectionLimits>;
+  getHybridConnectionPlanLimit is ArmResourceRead<
+    HybridConnectionLimits,
+    Error = DefaultErrorResponse
+  >;
 }
 
 @@doc(HybridConnectionLimits.name, "");

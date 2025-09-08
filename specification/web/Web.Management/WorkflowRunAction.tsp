@@ -84,7 +84,10 @@ interface WorkflowRunActions {
   /**
    * Gets a workflow run action.
    */
-  get is WorkflowRunActionsOps.Read<WorkflowRunAction>;
+  get is WorkflowRunActionsOps.Read<
+    WorkflowRunAction,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Gets a list of workflow run actions.
@@ -103,7 +106,8 @@ interface WorkflowRunActions {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -113,7 +117,8 @@ interface WorkflowRunActions {
   listExpressionTraces is WorkflowRunActionsOps.ActionSync<
     WorkflowRunAction,
     void,
-    ArmResponse<ExpressionTraces>
+    ArmResponse<ExpressionTraces>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

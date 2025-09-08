@@ -62,14 +62,20 @@ interface HybridConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServicePlans_GetHybridConnection")
-  getHybridConnection is HybridConnectionOps.Read<HybridConnection>;
+  getHybridConnection is HybridConnectionOps.Read<
+    HybridConnection,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Delete a Hybrid Connection in use in an App Service plan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServicePlans_DeleteHybridConnection")
-  deleteHybridConnection is HybridConnectionOps.DeleteSync<HybridConnection>;
+  deleteHybridConnection is HybridConnectionOps.DeleteSync<
+    HybridConnection,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get the send key name and value of a Hybrid Connection.
@@ -80,7 +86,8 @@ interface HybridConnections {
   listHybridConnectionKeys is HybridConnectionOps.ActionSync<
     HybridConnection,
     void,
-    ArmResponse<HybridConnectionKey>
+    ArmResponse<HybridConnectionKey>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -94,7 +101,8 @@ interface HybridConnections {
   listWebAppsByHybridConnection is HybridConnectionOps.ActionSync<
     HybridConnection,
     void,
-    ArmResponse<ResourceCollection>
+    ArmResponse<ResourceCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -134,7 +142,10 @@ interface HybridConnectionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetHybridConnection")
-  getHybridConnection is HybridConnectionOperationGroupOps.Read<HybridConnection>;
+  getHybridConnection is HybridConnectionOperationGroupOps.Read<
+    HybridConnection,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a new Hybrid Connection using a Service Bus relay.
@@ -144,7 +155,8 @@ interface HybridConnectionOperationGroup {
   @operationId("WebApps_CreateOrUpdateHybridConnection")
   createOrUpdateHybridConnection is HybridConnectionOperationGroupOps.CreateOrUpdateSync<
     HybridConnection,
-    Response = ArmResourceUpdatedResponse<HybridConnection>
+    Response = ArmResourceUpdatedResponse<HybridConnection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -155,7 +167,8 @@ interface HybridConnectionOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateHybridConnection is HybridConnectionOperationGroupOps.CustomPatchSync<
     HybridConnection,
-    PatchModel = HybridConnection
+    PatchModel = HybridConnection,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -166,7 +179,8 @@ interface HybridConnectionOperationGroup {
   @operationId("WebApps_DeleteHybridConnection")
   deleteHybridConnection is HybridConnectionOperationGroupOps.DeleteSync<
     HybridConnection,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -212,7 +226,10 @@ interface HybridConnectionSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetHybridConnectionSlot")
-  getHybridConnectionSlot is HybridConnectionSlotOps.Read<HybridConnection>;
+  getHybridConnectionSlot is HybridConnectionSlotOps.Read<
+    HybridConnection,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a new Hybrid Connection using a Service Bus relay.
@@ -222,7 +239,8 @@ interface HybridConnectionSlotOperationGroup {
   @operationId("WebApps_CreateOrUpdateHybridConnectionSlot")
   createOrUpdateHybridConnectionSlot is HybridConnectionSlotOps.CreateOrUpdateSync<
     HybridConnection,
-    Response = ArmResourceUpdatedResponse<HybridConnection>
+    Response = ArmResourceUpdatedResponse<HybridConnection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -233,7 +251,8 @@ interface HybridConnectionSlotOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateHybridConnectionSlot is HybridConnectionSlotOps.CustomPatchSync<
     HybridConnection,
-    PatchModel = HybridConnection
+    PatchModel = HybridConnection,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -244,7 +263,8 @@ interface HybridConnectionSlotOperationGroup {
   @operationId("WebApps_DeleteHybridConnectionSlot")
   deleteHybridConnectionSlot is HybridConnectionSlotOps.DeleteSync<
     HybridConnection,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

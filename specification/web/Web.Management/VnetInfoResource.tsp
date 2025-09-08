@@ -57,7 +57,8 @@ interface VnetInfoResources {
   @operationId("AppServicePlans_GetVnetFromServerFarm")
   getVnetFromServerFarm is VnetInfoResourceOps.Read<
     VnetInfoResource,
-    Response = ArmResponse<VnetInfoResource> | ArmNotFoundResponse
+    Response = ArmResponse<VnetInfoResource> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -67,7 +68,8 @@ interface VnetInfoResources {
   @operationId("AppServicePlans_ListVnets")
   listVnets is VnetInfoResourceOps.ListSinglePage<
     VnetInfoResource,
-    Response = ArmResponse<VnetInfoResource[]>
+    Response = ArmResponse<VnetInfoResource[]>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -107,7 +109,10 @@ interface VnetInfoResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetVnetConnectionSlot")
-  getVnetConnectionSlot is VnetInfoResourceOperationGroupOps.Read<VnetInfoResource>;
+  getVnetConnectionSlot is VnetInfoResourceOperationGroupOps.Read<
+    VnetInfoResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Adds a Virtual Network connection to an app or slot (PUT) or updates the connection properties (PATCH).
@@ -117,7 +122,8 @@ interface VnetInfoResourceOperationGroup {
   @operationId("WebApps_CreateOrUpdateVnetConnectionSlot")
   createOrUpdateVnetConnectionSlot is VnetInfoResourceOperationGroupOps.CreateOrUpdateSync<
     VnetInfoResource,
-    Response = ArmResourceUpdatedResponse<VnetInfoResource>
+    Response = ArmResourceUpdatedResponse<VnetInfoResource>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -128,7 +134,8 @@ interface VnetInfoResourceOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateVnetConnectionSlot is VnetInfoResourceOperationGroupOps.CustomPatchSync<
     VnetInfoResource,
-    PatchModel = VnetInfoResource
+    PatchModel = VnetInfoResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -139,7 +146,8 @@ interface VnetInfoResourceOperationGroup {
   @operationId("WebApps_DeleteVnetConnectionSlot")
   deleteVnetConnectionSlot is VnetInfoResourceOperationGroupOps.DeleteSync<
     VnetInfoResource,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -149,7 +157,8 @@ interface VnetInfoResourceOperationGroup {
   @operationId("WebApps_ListVnetConnectionsSlot")
   listVnetConnectionsSlot is VnetInfoResourceOperationGroupOps.ListSinglePage<
     VnetInfoResource,
-    Response = ArmResponse<VnetInfoResource[]>
+    Response = ArmResponse<VnetInfoResource[]>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -183,7 +192,10 @@ interface VnetConnectionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetVnetConnection")
-  getVnetConnection is VnetConnectionOperationGroupOps.Read<VnetInfoResource>;
+  getVnetConnection is VnetConnectionOperationGroupOps.Read<
+    VnetInfoResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Adds a Virtual Network connection to an app or slot (PUT) or updates the connection properties (PATCH).
@@ -204,7 +216,8 @@ interface VnetConnectionOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateVnetConnection is VnetConnectionOperationGroupOps.CustomPatchSync<
     VnetInfoResource,
-    PatchModel = VnetInfoResource
+    PatchModel = VnetInfoResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -215,7 +228,8 @@ interface VnetConnectionOperationGroup {
   @operationId("WebApps_DeleteVnetConnection")
   deleteVnetConnection is VnetConnectionOperationGroupOps.DeleteSync<
     VnetInfoResource,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -226,7 +240,8 @@ interface VnetConnectionOperationGroup {
   @segment("virtualNetworkConnections")
   listVnetConnections is VnetConnectionOperationGroupOps.ListSinglePage<
     VnetInfoResource,
-    Response = ArmResponse<VnetInfoResource[]>
+    Response = ArmResponse<VnetInfoResource[]>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

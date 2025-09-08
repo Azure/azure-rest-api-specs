@@ -59,7 +59,10 @@ interface RemotePrivateEndpointConnectionARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_GetPrivateEndpointConnection")
-  getPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.Read<RemotePrivateEndpointConnectionARMResource>;
+  getPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.Read<
+    RemotePrivateEndpointConnectionARMResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Approves or rejects a private endpoint connection
@@ -75,7 +78,8 @@ interface RemotePrivateEndpointConnectionARMResources {
       _: RemotePrivateEndpointConnectionARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -94,7 +98,8 @@ interface RemotePrivateEndpointConnectionARMResources {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
       @body
       _: unknown;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -104,7 +109,8 @@ interface RemotePrivateEndpointConnectionARMResources {
   @operationId("AppServiceEnvironments_GetPrivateEndpointConnectionList")
   getPrivateEndpointConnectionList is RemotePrivateEndpointConnectionARMResourceOps.List<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<PrivateEndpointConnectionCollection>
+    Response = ArmResponse<PrivateEndpointConnectionCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

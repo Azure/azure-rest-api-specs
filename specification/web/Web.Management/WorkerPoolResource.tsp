@@ -63,7 +63,10 @@ interface WorkerPoolResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_GetMultiRolePool")
-  getMultiRolePool is WorkerPoolResourceOps.Read<WorkerPoolResource>;
+  getMultiRolePool is WorkerPoolResourceOps.Read<
+    WorkerPoolResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Create or update a multi-role pool.
@@ -79,7 +82,8 @@ interface WorkerPoolResources {
       _: WorkerPoolResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -96,7 +100,8 @@ interface WorkerPoolResources {
     Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
       @bodyRoot
       _: WorkerPoolResource;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -107,7 +112,8 @@ interface WorkerPoolResources {
   @segment("multiRolePools")
   listMultiRolePools is WorkerPoolResourceOps.List<
     WorkerPoolResource,
-    Response = ArmResponse<WorkerPoolCollection>
+    Response = ArmResponse<WorkerPoolCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -129,7 +135,8 @@ interface WorkerPoolResources {
       @path
       @segment("instances")
       instance: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -143,7 +150,8 @@ interface WorkerPoolResources {
   listMultiRoleMetricDefinitions is WorkerPoolResourceOps.ActionSync<
     WorkerPoolResource,
     void,
-    ArmResponse<ResourceMetricDefinitionCollection>
+    ArmResponse<ResourceMetricDefinitionCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -157,7 +165,8 @@ interface WorkerPoolResources {
   listMultiRolePoolSkus is WorkerPoolResourceOps.ActionSync<
     WorkerPoolResource,
     void,
-    ArmResponse<SkuInfoCollection>
+    ArmResponse<SkuInfoCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -171,7 +180,8 @@ interface WorkerPoolResources {
   listMultiRoleUsages is WorkerPoolResourceOps.ActionSync<
     WorkerPoolResource,
     void,
-    ArmResponse<UsageCollection>
+    ArmResponse<UsageCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -203,7 +213,10 @@ interface AppServiceEnvironments {
   /**
    * Description for Get properties of a worker pool.
    */
-  getWorkerPool is AppServiceEnvironmentOps.Read<WorkerPoolResource>;
+  getWorkerPool is AppServiceEnvironmentOps.Read<
+    WorkerPoolResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Create or update a worker pool.
@@ -217,7 +230,8 @@ interface AppServiceEnvironments {
       _: WorkerPoolResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -232,7 +246,8 @@ interface AppServiceEnvironments {
     Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
       @bodyRoot
       _: WorkerPoolResource;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -241,7 +256,8 @@ interface AppServiceEnvironments {
   @segment("workerPools")
   listWorkerPools is AppServiceEnvironmentOps.List<
     WorkerPoolResource,
-    Response = ArmResponse<WorkerPoolCollection>
+    Response = ArmResponse<WorkerPoolCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -261,7 +277,8 @@ interface AppServiceEnvironments {
       @path
       @segment("instances")
       instance: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -273,7 +290,8 @@ interface AppServiceEnvironments {
   listWebWorkerMetricDefinitions is AppServiceEnvironmentOps.ActionSync<
     WorkerPoolResource,
     void,
-    ArmResponse<ResourceMetricDefinitionCollection>
+    ArmResponse<ResourceMetricDefinitionCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -285,7 +303,8 @@ interface AppServiceEnvironments {
   listWorkerPoolSkus is AppServiceEnvironmentOps.ActionSync<
     WorkerPoolResource,
     void,
-    ArmResponse<SkuInfoCollection>
+    ArmResponse<SkuInfoCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -297,7 +316,8 @@ interface AppServiceEnvironments {
   listWebWorkerUsages is AppServiceEnvironmentOps.ActionSync<
     WorkerPoolResource,
     void,
-    ArmResponse<UsageCollection>
+    ArmResponse<UsageCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

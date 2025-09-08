@@ -78,7 +78,7 @@ interface WorkflowRuns {
   /**
    * Gets a workflow run.
    */
-  get is WorkflowRunsOps.Read<WorkflowRun>;
+  get is WorkflowRunsOps.Read<WorkflowRun, OverrideErrorType = ErrorResponse>;
 
   /**
    * Gets a list of workflow runs.
@@ -97,13 +97,19 @@ interface WorkflowRuns {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
    * Cancels a workflow run.
    */
-  cancel is WorkflowRunsOps.ActionSync<WorkflowRun, void, OkResponse>;
+  cancel is WorkflowRunsOps.ActionSync<
+    WorkflowRun,
+    void,
+    OkResponse,
+    OverrideErrorType = ErrorResponse
+  >;
 }
 
 @@doc(WorkflowRun.name, "The workflow run name.");

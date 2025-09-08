@@ -33,7 +33,10 @@ interface CustomDnsSuffixConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_GetAseCustomDnsSuffixConfiguration")
-  getAseCustomDnsSuffixConfiguration is ArmResourceRead<CustomDnsSuffixConfiguration>;
+  getAseCustomDnsSuffixConfiguration is ArmResourceRead<
+    CustomDnsSuffixConfiguration,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Update Custom Dns Suffix configuration of an App Service Environment
@@ -43,7 +46,8 @@ interface CustomDnsSuffixConfigurations {
   @operationId("AppServiceEnvironments_UpdateAseCustomDnsSuffixConfiguration")
   updateAseCustomDnsSuffixConfiguration is ArmResourceCreateOrReplaceSync<
     CustomDnsSuffixConfiguration,
-    Response = ArmResourceUpdatedResponse<CustomDnsSuffixConfiguration>
+    Response = ArmResourceUpdatedResponse<CustomDnsSuffixConfiguration>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -57,7 +61,8 @@ interface CustomDnsSuffixConfigurations {
     CustomDnsSuffixConfiguration,
     Response = ArmResponse<unknown> | (ArmDeletedNoContentResponse & {
       @body _: unknown;
-    })
+    }),
+    Error = DefaultErrorResponse
   >;
 }
 

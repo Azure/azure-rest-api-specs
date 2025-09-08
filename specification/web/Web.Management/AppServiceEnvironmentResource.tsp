@@ -88,7 +88,10 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_Get")
-  get is ArmResourceRead<AppServiceEnvironmentResource>;
+  get is ArmResourceRead<
+    AppServiceEnvironmentResource,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Create or update an App Service Environment.
@@ -107,7 +110,8 @@ interface AppServiceEnvironmentResources {
       Azure.Core.Foundations.RetryAfterHeader & {
         @bodyRoot
         _: AppServiceEnvironmentResource;
-      })
+      }),
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -124,7 +128,8 @@ interface AppServiceEnvironmentResources {
     Response = ArmResponse<AppServiceEnvironmentResource> | ArmResourceCreatedSyncResponse<AppServiceEnvironmentResource> | (AcceptedResponse & {
       @bodyRoot
       _: AppServiceEnvironmentResource;
-    })
+    }),
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -140,7 +145,8 @@ interface AppServiceEnvironmentResources {
        */
       @query("forceDelete")
       forceDelete?: boolean;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -150,7 +156,8 @@ interface AppServiceEnvironmentResources {
   @operationId("AppServiceEnvironments_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AppServiceEnvironmentResource,
-    Response = ArmResponse<AppServiceEnvironmentCollection>
+    Response = ArmResponse<AppServiceEnvironmentCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -180,7 +187,7 @@ interface AppServiceEnvironmentResources {
     @key
     @segment("capacities")
     compute: "compute",
-  ): ArmResponse<StampCapacityCollection>;
+  ): DefaultErrorResponse | ArmResponse<StampCapacityCollection>;
 
   /**
    * Description for Move an App Service Environment to a different VNET.
@@ -197,7 +204,8 @@ interface AppServiceEnvironmentResources {
       @bodyRoot
       _: WebAppCollection;
     }),
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WebAppCollection>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WebAppCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -210,7 +218,8 @@ interface AppServiceEnvironmentResources {
   listDiagnostics is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<HostingEnvironmentDiagnostics[]>
+    ArmResponse<HostingEnvironmentDiagnostics[]>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -222,7 +231,7 @@ interface AppServiceEnvironmentResources {
   @get
   getDiagnosticsItem(
     ...DiagnosticsParameters,
-  ): ArmResponse<HostingEnvironmentDiagnostics> | ErrorResponse;
+  ): ArmResponse<HostingEnvironmentDiagnostics> | DefaultErrorResponse;
 
   /**
    * Description for Get the network endpoints of all inbound dependencies of an App Service Environment.
@@ -235,7 +244,8 @@ interface AppServiceEnvironmentResources {
   getInboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<InboundEnvironmentEndpointCollection>
+    ArmResponse<InboundEnvironmentEndpointCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -246,7 +256,8 @@ interface AppServiceEnvironmentResources {
   testUpgradeAvailableNotification is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    OkResponse
+    OkResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -258,7 +269,8 @@ interface AppServiceEnvironmentResources {
     AppServiceEnvironmentResource,
     void,
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -271,7 +283,8 @@ interface AppServiceEnvironmentResources {
   listOperations is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<Operation[]>
+    ArmResponse<Operation[]>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -285,7 +298,8 @@ interface AppServiceEnvironmentResources {
   getOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<OutboundEnvironmentEndpointCollection>
+    ArmResponse<OutboundEnvironmentEndpointCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -298,7 +312,8 @@ interface AppServiceEnvironmentResources {
   getPrivateLinkResources is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<PrivateLinkResourcesWrapper>
+    ArmResponse<PrivateLinkResourcesWrapper>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -311,7 +326,8 @@ interface AppServiceEnvironmentResources {
   reboot is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    AcceptedResponse
+    AcceptedResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -328,7 +344,8 @@ interface AppServiceEnvironmentResources {
       @bodyRoot
       _: WebAppCollection;
     }),
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -342,7 +359,8 @@ interface AppServiceEnvironmentResources {
   listAppServicePlans is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<AppServicePlanCollection>
+    ArmResponse<AppServicePlanCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -363,7 +381,8 @@ interface AppServiceEnvironmentResources {
        */
       @query("propertiesToInclude")
       propertiesToInclude?: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -380,7 +399,8 @@ interface AppServiceEnvironmentResources {
       @bodyRoot
       _: WebAppCollection;
     }),
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -401,7 +421,8 @@ interface AppServiceEnvironmentResources {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -426,7 +447,8 @@ interface AppServiceEnvironmentResources {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -451,7 +473,8 @@ interface AppServiceEnvironmentResources {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -459,6 +482,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_DisableAllForHostingEnvironment")
+  @post
   disableAllForHostingEnvironment(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -482,7 +506,7 @@ interface AppServiceEnvironmentResources {
     @key
     @segment("recommendations")
     disable: "disable",
-  ): NoContentResponse;
+  ): NoContentResponse | DefaultErrorResponse;
 
   /**
    * Description for Reset all recommendation opt-out settings for an app.
@@ -514,7 +538,7 @@ interface AppServiceEnvironmentResources {
     @key
     @segment("recommendations")
     reset: "reset",
-  ): NoContentResponse;
+  ): NoContentResponse | DefaultErrorResponse;
 }
 
 @@doc(AppServiceEnvironmentResource.name,

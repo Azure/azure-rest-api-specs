@@ -42,7 +42,8 @@ interface AppServicePlans {
    */
   get is ArmResourceRead<
     AppServicePlan,
-    Response = ArmResponse<AppServicePlan> | ArmNotFoundResponse
+    Response = ArmResponse<AppServicePlan> | ArmNotFoundResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -57,7 +58,8 @@ interface AppServicePlans {
       _: AppServicePlan;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -72,20 +74,22 @@ interface AppServicePlans {
     Response = ArmResponse<AppServicePlan> | (AcceptedResponse & {
       @bodyRoot
       _: AppServicePlan;
-    })
+    }),
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Description for Delete an App Service plan.
    */
-  delete is ArmResourceDeleteSync<AppServicePlan>;
+  delete is ArmResourceDeleteSync<AppServicePlan, Error = DefaultErrorResponse>;
 
   /**
    * Description for Get all App Service plans in a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     AppServicePlan,
-    Response = ArmResponse<AppServicePlanCollection>
+    Response = ArmResponse<AppServicePlanCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -113,7 +117,8 @@ interface AppServicePlans {
   listCapabilities is ArmResourceActionSync<
     AppServicePlan,
     void,
-    ArmResponse<Capability[]>
+    ArmResponse<Capability[]>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -125,7 +130,8 @@ interface AppServicePlans {
   listHybridConnections is ArmResourceActionSync<
     AppServicePlan,
     void,
-    ArmResponse<HybridConnectionCollection>
+    ArmResponse<HybridConnectionCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -142,7 +148,8 @@ interface AppServicePlans {
        */
       @query("softRestart")
       softRestart?: boolean;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -173,7 +180,8 @@ interface AppServicePlans {
        */
       @query("$top")
       $top?: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -184,7 +192,8 @@ interface AppServicePlans {
   getServerFarmSkus is ArmResourceActionSync<
     AppServicePlan,
     void,
-    ArmResponse<unknown>
+    ArmResponse<unknown>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -203,7 +212,8 @@ interface AppServicePlans {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -221,7 +231,8 @@ interface AppServicePlans {
       @path
       @segment("workers")
       workerName: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 }
 

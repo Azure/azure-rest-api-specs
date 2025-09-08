@@ -62,7 +62,8 @@ interface VnetRoutes {
   @operationId("AppServicePlans_GetRouteForVnet")
   getRouteForVnet is ArmResourceRead<
     VnetRoute,
-    Response = ArmResponse<VnetRoute[]> | ArmNotFoundResponse
+    Response = ArmResponse<VnetRoute[]> | ArmNotFoundResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -73,7 +74,8 @@ interface VnetRoutes {
   @operationId("AppServicePlans_CreateOrUpdateVnetRoute")
   createOrUpdateVnetRoute is ArmResourceCreateOrReplaceSync<
     VnetRoute,
-    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse
+    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -85,7 +87,8 @@ interface VnetRoutes {
   updateVnetRoute is ArmCustomPatchSync<
     VnetRoute,
     PatchModel = VnetRoute,
-    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse
+    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -96,7 +99,8 @@ interface VnetRoutes {
   @operationId("AppServicePlans_DeleteVnetRoute")
   deleteVnetRoute is ArmResourceDeleteSync<
     VnetRoute,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -106,7 +110,8 @@ interface VnetRoutes {
   @operationId("AppServicePlans_ListRoutesForVnet")
   listRoutesForVnet is VnetRoutesOps.ListSinglePage<
     VnetRoute,
-    Response = ArmResponse<VnetRoute[]>
+    Response = ArmResponse<VnetRoute[]>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
