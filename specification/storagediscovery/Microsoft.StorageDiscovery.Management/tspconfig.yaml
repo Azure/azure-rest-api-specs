@@ -13,12 +13,12 @@ options:
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.StorageDiscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.StorageDiscovery"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storagediscovery"
     namespace: "com.azure.resourcemanager.storagediscovery"
     flavor: "azure"
     service-name: "Storage Discovery"
@@ -76,11 +76,11 @@ options:
       - where:
           verb: Set
         remove: true
-      # Add model
+        # Add model
       - model-cmdlet:
           - model-name: StorageDiscoveryScope
             cmdlet-name: New-AzStorageDiscoveryScopeObject
-      # hide report APIs
+        # hide report APIs
       - where:
           subject: ^Report$|^ReportStorageDiscoveryWorkspace$
         remove: true
