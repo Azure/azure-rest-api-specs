@@ -19,7 +19,6 @@ namespace Microsoft.ContainerStorage;
 /** Api versions */
 enum Versions {
   /** 2023-07-01-preview preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-07-01-preview`,
 }
 
