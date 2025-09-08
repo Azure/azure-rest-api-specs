@@ -31,9 +31,6 @@ parameters:
   - name: ReleasePlanWorkItemId
     type: number
     default: 0
-  - name: Language
-    type: string
-    default: ''
 
 stages:
 - stage: Build
@@ -284,26 +281,17 @@ stages:
           displayName: "Create SDK PR branch variable"
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
-          - pwsh: |
-              . $(SpecRepoDirectory)/eng/common/scripts/common.ps1
-              . $(SpecRepoDirectory)/eng/common/scripts/Helpers/DevOps-WorkItem-Helpers.ps1
-              $releasePlan = Get-ReleasePlan-Link ${{ parameters.ReleasePlanWorkItemId }}
-              if ($null -eq $releasePlan)
-              {
-                echo "Failed to retrieve the Release Plan work item or the work item is not a Release Plan."
-              }
-              else
-              {
-                $releasePlanLink = $releasePlan["Custom.ReleasePlanLink"]
-                $title = $releasePlan["System.Title"]
-                $submittedBy = $releasePlan["Custom.ReleasePlanSubmittedby"]
-                $releasePlanInfo = "`n`n## Release plan details`nTitle: $title`nLink: [$releasePlanLink]($releasePlanLink)`nSubmitted by: $submittedBy"
-                echo "Release plan info: $releasePlanInfo"
-                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
-              }
+          - task: AzureCLI@2
             displayName: "Get Release Plan details"
             condition: succeeded()
             continueOnError: true
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $releasePlanInfo = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" ${{ parameters.ReleasePlanWorkItemId }}
+                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"              
 
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
@@ -340,13 +328,15 @@ stages:
           condition: Failed()
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
-          - task: PowerShell@2
+          - task: AzureCLI@2
             displayName: Link pull request to release plan
             condition: and(succeededOrFailed(), eq(variables['HasChanges'], 'true'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            continueOnError: true
             inputs:
-              pwsh: true
-              workingDirectory: $(SdkRepoDirectory)
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Update-PullRequest-In-ReleasePlan.ps1
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: scriptPath
+              scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
               arguments: >
                 -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
                 -PullRequestUrl "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
