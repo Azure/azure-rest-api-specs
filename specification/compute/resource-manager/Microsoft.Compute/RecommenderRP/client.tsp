@@ -11,11 +11,11 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(
   Microsoft.Compute.SpotPlacementScoresInput.desiredLocations,
-  Azure.Core.AzureLocation,
+  azureLocation[],
   "csharp"
 );
 @@alternateType(
   Microsoft.Compute.SpotPlacementScoresResponse.desiredLocations,
-  Azure.Core.AzureLocation,
+  azureLocation[],
   "csharp"
 );
