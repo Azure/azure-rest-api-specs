@@ -176,13 +176,7 @@ interface ImmutabilityPolicies {
   @action("extend")
   extendImmutabilityPolicy is ArmResourceActionSync<
     ImmutabilityPolicy,
-    {
-      /**
-       * The ImmutabilityPolicy Properties that will be extended for a blob container.
-       */
-      @bodyRoot
-      parameters?: ImmutabilityPolicy;
-    },
+    ImmutabilityPolicy,
     Parameters = {
       /**
        * The entity state (ETag) version of the immutability policy to update must be returned to the server for all update operations. The ETag value must include the leading and trailing double quotes as returned by the service.
@@ -198,7 +192,8 @@ interface ImmutabilityPolicies {
       @header("ETag")
       eTag: string;
     },
-    Error = ErrorResponse
+    Error = ErrorResponse,
+    OptionalRequestBody = true
   >;
 }
 
