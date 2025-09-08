@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-10'
 input-file:
-  - Microsoft.ManagedServices/stable/2022-10-01/managedservices.json
+  - stable/2022-10-01/managedservices.json
 ```
 ### Tag: package-preview-2022-01
 
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
-  - Microsoft.ManagedServices/preview/2022-01-01-preview/managedservices.json
+  - preview/2022-01-01-preview/managedservices.json
 ```
 
 ### Tag: package-2020-02-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2020-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-02-preview'
 input-file:
-  - Microsoft.ManagedServices/preview/2020-02-01-preview/managedservices.json
+  - preview/2020-02-01-preview/managedservices.json
 ```
 
 ### Tag: package-2019-09
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2019-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-09'
 input-file:
-  - Microsoft.ManagedServices/stable/2019-09-01/managedservices.json
+  - stable/2019-09-01/managedservices.json
 ```
 
 ### Tag: package-2019-06
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-06'
 input-file:
-  - Microsoft.ManagedServices/stable/2019-06-01/managedservices.json
+  - stable/2019-06-01/managedservices.json
 ```
 
 ### Tag: package-2019-04-preview
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2019-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-04-preview'
 input-file:
-- Microsoft.ManagedServices/preview/2019-04-01-preview/managedservices.json
+- preview/2019-04-01-preview/managedservices.json
 ```
 
 ### Tag: package-2018-06-preview
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- Microsoft.ManagedServices/preview/2018-06-01-preview/managedservices.json
+- preview/2018-06-01-preview/managedservices.json
 ```
 
 ---
