@@ -10,7 +10,9 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Advisor;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The list of scenarios applicable to this metadata entity.
+ */
 union Scenario {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -51,7 +53,9 @@ union Duration {
   `90`: "90",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The category of the recommendation.
+ */
 union Category {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -67,7 +71,7 @@ union Category {
 }
 
 /**
- * Control type for recommendation.
+ * The sub-category of the recommendation.
  */
 union Control {
   string,
@@ -215,7 +219,7 @@ union Aggregated {
 }
 
 /**
- * Review status string, returns the Reviews by the given status (e.g. 'New', 'Triaged', 'Completed').
+ * Review status.
  */
 union ReviewStatus {
   string,
@@ -504,7 +508,7 @@ model RecommendationProperties {
   category?: Category;
 
   /**
-   * The control type for the recommendation.
+   * The sub-category of the recommendation.
    */
   control?: Control;
 
@@ -941,7 +945,7 @@ model ScoreEntity {
   /**
    * The number of impacted resources.
    */
-  impactedResourceCount?: float32;
+  impactedResourceCount?: int32;
 
   /**
    * The potential percentage increase in overall score at subscription level once all recommendations in this scope are implemented.
@@ -952,11 +956,11 @@ model ScoreEntity {
    * The count of impacted categories.
    */
   @visibility(Lifecycle.Read)
-  categoryCount?: float32;
+  categoryCount?: int32;
 }
 
 /**
- * The data from different aggregation levels.
+ * The historic data at different aggregation levels.
  */
 model TimeSeriesEntity {
   /**
@@ -1310,9 +1314,7 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 @@doc(WorkloadListResult.nextLink,
   "[Placeholder] Discription for nextLink property"
 );
-@@doc(TriageRecommendationCollection.value,
-  "[Placeholder] Discription for value property"
-);
+@@doc(TriageRecommendationCollection.value, "List of triage recommendations.");
 @@doc(TriageRecommendationCollection.nextLink,
-  "[Placeholder] Discription for nextLink property"
+  "The URL to get the next set of triage recommendations, if there are any."
 );
