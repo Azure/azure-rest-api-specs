@@ -89,11 +89,7 @@ model ItemDetails {
   usage?: Usage;
 }
 
-/**
- * Resource usage metrics represented as key-value pairs.
- * Keys are provider-defined metric names (e.g. "standardMinutes", "shots") and values are the corresponding consumption amounts.
- * The specific metrics available depend on the quantum provider and target used.
- */
+/** Resource usage metrics represented as key-value pairs. Keys are provider-defined metric names (e.g. "standardMinutes", "shots") and values are the corresponding consumption amounts. The specific metrics available depend on the quantum provider and target used. */
 @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 model Usage is Record<float64>;
 
