@@ -87,7 +87,7 @@ model RecoveryGroupProperties {
 
   @doc("A description of the recovery orchestration group.")
   @minLength(5)
-  @maxLength(20)
+  @maxLength(50)
   description: string;
 
   @doc("Pre-actions for the recovery orchestration group.")
