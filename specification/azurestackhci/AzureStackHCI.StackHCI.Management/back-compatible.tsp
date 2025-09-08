@@ -34,9 +34,6 @@ using Microsoft.AzureStackHCI;
 @@flattenProperty(HCIExtensionPatch.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UpdateRunProperties.progress);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(UpdateProperties.componentVersions);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(UpdateProperties.rebootRequired);
