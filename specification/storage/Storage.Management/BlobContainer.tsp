@@ -87,15 +87,10 @@ interface BlobContainers {
    */
   lease is ArmResourceActionSync<
     BlobContainer,
-    {
-      /**
-       * Lease Container request body.
-       */
-      @bodyRoot
-      parameters?: LeaseContainerRequest;
-    },
+    LeaseContainerRequest,
     ArmResponse<LeaseContainerResponse>,
-    Error = ErrorResponse
+    Error = ErrorResponse,
+    OptionalRequestBody = true
   >;
 
   /**
