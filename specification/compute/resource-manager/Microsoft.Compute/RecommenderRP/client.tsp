@@ -8,3 +8,8 @@ using Azure.ClientGenerator.Core;
   "ComputeRecommenderManagementClient",
   "javascript"
 );
+@@alternateType(
+  SpotPlacementScoresContent::properties.desiredLocations,
+  Azure.Core.AzureLocation,
+  "csharp"
+);
