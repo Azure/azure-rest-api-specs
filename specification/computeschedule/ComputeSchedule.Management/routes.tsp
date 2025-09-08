@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./scheduledactionmodels.tsp";
@@ -9,6 +10,7 @@ import "./scheduledactionmodels.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.ComputeSchedule;
@@ -24,16 +26,35 @@ alias LocationParameter = {
   locationparameter: Azure.Core.azureLocation;
 };
 
+@@clientName(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesSubmitStart::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesSubmitStart::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesExecuteStart::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesExecuteStart::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesExecuteCreate::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesExecuteCreate::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesExecuteDelete::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesExecuteDelete::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesCancelOperations::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesCancelOperations::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body, "requestBody");
+@@doc(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body, "The request body");
+
 @armResourceOperations(#{ omitTags: true })
 interface ScheduledActions {
   // -------------- Routes -------------
   /** VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future. */
   virtualMachinesSubmitDeallocate is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: SubmitDeallocateRequest;
-    },
+    Request = SubmitDeallocateRequest,
     Response = ArmResponse<DeallocateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -41,11 +62,7 @@ interface ScheduledActions {
 
   /** VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future. */
   virtualMachinesSubmitHibernate is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: SubmitHibernateRequest;
-    },
+    Request = SubmitHibernateRequest,
     Response = ArmResponse<HibernateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -53,11 +70,7 @@ interface ScheduledActions {
 
   /** VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future. */
   virtualMachinesSubmitStart is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: SubmitStartRequest;
-    },
+    Request = SubmitStartRequest,
     Response = ArmResponse<StartResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -65,11 +78,7 @@ interface ScheduledActions {
 
   /** VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   virtualMachinesExecuteDeallocate is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: ExecuteDeallocateRequest;
-    },
+    Request = ExecuteDeallocateRequest,
     Response = ArmResponse<DeallocateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -77,11 +86,7 @@ interface ScheduledActions {
 
   /** VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   virtualMachinesExecuteHibernate is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: ExecuteHibernateRequest;
-    },
+    Request = ExecuteHibernateRequest,
     Response = ArmResponse<HibernateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -89,11 +94,7 @@ interface ScheduledActions {
 
   /** VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   virtualMachinesExecuteStart is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: ExecuteStartRequest;
-    },
+    Request = ExecuteStartRequest,
     Response = ArmResponse<StartResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -102,12 +103,7 @@ interface ScheduledActions {
   /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   virtualMachinesExecuteCreate is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-      requestBody: ExecuteCreateRequest;
-    },
+    Request = ExecuteCreateRequest,
     Response = ArmResponse<CreateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -116,12 +112,7 @@ interface ScheduledActions {
   /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   virtualMachinesExecuteDelete is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-      requestBody: ExecuteDeleteRequest;
-    },
+    Request = ExecuteDeleteRequest,
     Response = ArmResponse<DeleteResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -129,11 +120,7 @@ interface ScheduledActions {
 
   /** VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines */
   virtualMachinesGetOperationStatus is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: GetOperationStatusRequest;
-    },
+    Request = GetOperationStatusRequest,
     Response = ArmResponse<GetOperationStatusResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -141,11 +128,7 @@ interface ScheduledActions {
 
   /** VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
   virtualMachinesCancelOperations is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: CancelOperationsRequest;
-    },
+    Request = CancelOperationsRequest,
     Response = ArmResponse<CancelOperationsResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
@@ -153,11 +136,7 @@ interface ScheduledActions {
 
   /** VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. */
   virtualMachinesGetOperationErrors is ArmProviderActionSync<
-    Request = {
-      /** The request body */
-      @bodyRoot
-      requestBody: GetOperationErrorsRequest;
-    },
+    Request = GetOperationErrorsRequest,
     Response = ArmResponse<GetOperationErrorsResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
