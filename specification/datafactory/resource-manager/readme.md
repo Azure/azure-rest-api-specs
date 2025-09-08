@@ -64,11 +64,11 @@ suppressions:
     reason: ADF feature is widely adopted and requires XmsEnumValidation for most of the swagger properties.
   - code: NestedResourcesMustHaveListOperation
     reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
+
+input-file:
+- Microsoft.DataFactory/stable/2018-06-01/examples/ChangeDataCapture_Create.json
+suppressions:
   - code: OBJECT_ADDITIONAL_PROPERTIES
-    reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
-  - code: INVALID_TYPE
-    reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
-  - code: LRO_RESPONSE_HEADER
     reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
 ```
 
