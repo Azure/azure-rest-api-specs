@@ -18,8 +18,6 @@ interface ConfigurationProfileAssignmentsOperationGroup {
   /**
    * Get list of configuration profile assignments
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConfigurationProfileAssignments_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments")
   @list
   list(
@@ -34,8 +32,6 @@ interface BestPracticesVersionsOperationGroup {
   /**
    * Retrieve a list of Automanage best practices under a given tenant
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BestPracticesVersions_ListByTenant")
   @route("/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}/versions")
   @list
   listByTenant(
