@@ -2357,7 +2357,6 @@
       },
       "required": [
         "expression",
-        "startTime",
         "endTime"
       ],
       "allOf": [
@@ -2389,6 +2388,29 @@
         }
       ],
       "x-ms-discriminator-value": "CustomKeys"
+    },
+    "DailyRecurrenceSchedule": {
+      "type": "object",
+      "description": "Daily recurrence schedule.",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "description": "Hours for the recurrence schedule.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "hours"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Daily"
     },
     "DatasetType": {
       "type": "string",
@@ -2828,6 +2850,16 @@
       ],
       "x-ms-discriminator-value": "uri_folder"
     },
+    "HourlyRecurrenceSchedule": {
+      "type": "object",
+      "description": "Hourly recurrencce schedule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Hourly"
+    },
     "Index": {
       "type": "object",
       "description": "Index resource Definition",
@@ -3049,6 +3081,29 @@
         }
       ],
       "x-ms-discriminator-value": "ModelDeployment"
+    },
+    "MonthlyRecurrenceSchedule": {
+      "type": "object",
+      "description": "Monthly recurrence schedule.",
+      "properties": {
+        "daysOfMonth": {
+          "type": "array",
+          "description": "Days of the month for the recurrence schedule.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "daysOfMonth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Monthly"
     },
     "NoAuthenticationCredentials": {
       "type": "object",
@@ -3361,39 +3416,9 @@
         "type": {
           "$ref": "#/definitions/RecurrenceType",
           "description": "Recurrence type for the recurrence schedule."
-        },
-        "hours": {
-          "type": "array",
-          "description": "Hours for the recurrence schedule.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "minutes": {
-          "type": "array",
-          "description": "Minutes for the recurrence schedule.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "dayOfWeek": {
-          "type": "array",
-          "description": "Days of the week for the recurrence schedule.",
-          "items": {
-            "$ref": "#/definitions/DayOfWeek"
-          }
-        },
-        "dayOfMonth": {
-          "type": "array",
-          "description": "Days of the month for the recurrence schedule.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
         }
       },
+      "discriminator": "type",
       "required": [
         "type"
       ]
@@ -3426,8 +3451,6 @@
         }
       },
       "required": [
-        "startTime",
-        "endTime",
         "interval",
         "schedule"
       ],
@@ -3987,6 +4010,28 @@
         }
       ],
       "x-ms-discriminator-value": "user"
+    },
+    "WeeklyRecurrenceSchedule": {
+      "type": "object",
+      "description": "Weekly recurrence schedule.",
+      "properties": {
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Days of the week for the recurrence schedule.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
+        }
+      },
+      "required": [
+        "daysOfWeek"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Weekly"
     },
     "modelResponseGenerationTarget": {
       "type": "object",

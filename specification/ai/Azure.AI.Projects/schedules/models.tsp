@@ -67,7 +67,7 @@ model CronTrigger extends Trigger {
   timeZone?: string = "UTC";
 
   @doc("Start time for the cron schedule in ISO 8601 format.")
-  startTime: string;
+  startTime?: string;
 
   @doc("End time for the cron schedule in ISO 8601 format.")
   endTime: string;
@@ -120,21 +120,46 @@ union DayOfWeek {
 
 @doc("Recurrence schedule model.")
 @added(Versions.v2025_07_31_preview)
+@discriminator("type")
 model RecurrenceSchedule {
   @doc("Recurrence type for the recurrence schedule.")
   type: RecurrenceType;
+}
+
+@doc("Hourly recurrencce schedule.")
+@added(Versions.v2025_07_31_preview)
+model HourlyRecurrenceSchedule extends RecurrenceSchedule {
+  type: RecurrenceType.Hourly
+}
+
+@doc("Daily recurrence schedule.")
+@added(Versions.v2025_07_31_preview)
+model DailyRecurrenceSchedule extends RecurrenceSchedule {
+  @doc("Daily recurrence type.")
+  type: RecurrenceType.Daily;
 
   @doc("Hours for the recurrence schedule.")
-  hours?: int32[];
+  hours: int32[];
+}
 
-  @doc("Minutes for the recurrence schedule.")
-  minutes?: int32[];
+@doc("Weekly recurrence schedule.")
+@added(Versions.v2025_07_31_preview)
+model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
+  @doc("Weekly recurrence type.")
+  type: RecurrenceType.Weekly;
 
   @doc("Days of the week for the recurrence schedule.")
-  dayOfWeek?: DayOfWeek[];
+  daysOfWeek: DayOfWeek[];
+}
+
+@doc("Monthly recurrence schedule.")
+@added(Versions.v2025_07_31_preview)
+model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
+  @doc("Monthly recurrence type.")
+  type: RecurrenceType.Monthly;
 
   @doc("Days of the month for the recurrence schedule.")
-  dayOfMonth?: int32[];
+  daysOfMonth: int32[];
 }
 
 @doc("Recurrence based trigger.")
@@ -144,10 +169,10 @@ model RecurrenceTrigger extends Trigger {
   type: TriggerType.Recurrence;
 
   @doc("Start time for the recurrence schedule in ISO 8601 format.")
-  startTime: string;
+  startTime?: string;
 
   @doc("End time for the recurrence schedule in ISO 8601 format.")
-  endTime: string;
+  endTime?: string;
 
   @doc("Time zone for the recurrence schedule.")
   timeZone?: string = "UTC";
