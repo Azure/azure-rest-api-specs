@@ -1842,7 +1842,17 @@
           "type": "string",
           "x-ms-enum": {
             "name": "Ingestion",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "All",
+                "description": "Ingest all available reference data values, including the FIXED, OPEN, and LOCAL data sets. Use this option when you want a complete set of reference data values ingested to each data partition"
+              },
+              {
+                "value": "NonLocal",
+                "description": "Ingest reference data values, excluding the LOCAL data set. Use this option when you want only the FIXED and OPEN reference data values ingested to each data partition."
+              }
+            ]
           }
         }
       }
