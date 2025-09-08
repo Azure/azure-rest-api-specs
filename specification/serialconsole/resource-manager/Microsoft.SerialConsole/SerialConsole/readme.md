@@ -31,8 +31,8 @@ These settings apply only when `--tag=package-2024-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-07'
 input-file:
-- Microsoft.SerialConsole/stable/2024-07-01/serialconsole.json
-- Microsoft.SerialConsole/stable/2024-07-01/serialport.json
+- stable/2024-07-01/serialconsole.json
+- stable/2024-07-01/serialport.json
 ```
 
 ### Tag: package-2023-01
@@ -41,8 +41,8 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-01'
 input-file:
-- Microsoft.SerialConsole/stable/2023-01-01/serialconsole.json
-- Microsoft.SerialConsole/stable/2023-01-01/serialport.json
+- stable/2023-01-01/serialconsole.json
+- stable/2023-01-01/serialport.json
 ```
 
 ### Tag: package-2018-05
@@ -51,8 +51,8 @@ These settings apply only when `--tag=package-2018-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-05'
 input-file:
-- Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
-- Microsoft.SerialConsole/stable/2018-05-01/serialport.json
+- stable/2018-05-01/serialconsole.json
+- stable/2018-05-01/serialport.json
 ```
 
 ---
