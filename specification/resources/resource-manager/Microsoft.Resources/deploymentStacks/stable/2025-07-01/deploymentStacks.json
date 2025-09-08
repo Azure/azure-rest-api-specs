@@ -2544,7 +2544,11 @@
           "description": "List of resource changes predicted by What-If operation.",
           "items": {
             "$ref": "#/definitions/DeploymentStackWhatIfResourceChange"
-          }
+          },
+          "x-ms-identifiers": [
+            "identifiers",
+            "resourceId"
+          ]
         },
         "denySettingsChange": {
           "type": "object",
@@ -2774,7 +2778,9 @@
           "description": "The symbolic name of the resource being changed."
         },
         "identifiers": {
-          "description": "The extensible resource identifiers."
+          "type": "object",
+          "description": "The extensible resource identifiers.",
+          "additionalProperties": {}
         },
         "changeType": {
           "$ref": "#/definitions/DeploymentStackWhatIfChangeType",

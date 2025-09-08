@@ -213,7 +213,7 @@ model ActionOnUnmanageDeleteParameters {
 /**
  * Deployment stack shared properties.
  */
-model DeploymentStackSharedProperties is DeploymentStacksError {
+model DeploymentStackSharedProperties {
 /**
    * The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
@@ -297,8 +297,8 @@ model DeploymentStackSharedProperties is DeploymentStacksError {
  * Deployment stack properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compat. TSP doc instructs this for 'allOf' for OpenAPI"
-model DeploymentStackProperties is DeploymentStackSharedProperties {
-
+model DeploymentStackProperties is DeploymentStacksError {
+  ...DeploymentStackSharedProperties;
   /**
    * Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.
    */

@@ -41,8 +41,8 @@ alias DeploymentStackWhatIfNameParameter = ResourceNameParameter<
  * DeploymentStack WhatIfResult Properties
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfResultProperties is DeploymentStackSharedProperties {
-    
+model DeploymentStackWhatIfResultProperties is DeploymentStacksError {
+    ... DeploymentStackSharedProperties;
     /**
      * The deployment stack id to use as the basis for comparison.
      */
@@ -53,10 +53,6 @@ model DeploymentStackWhatIfResultProperties is DeploymentStackSharedProperties {
      */
     retentionInterval: duration;
 
-/*
-    // TODO (R) - This only captures result format (for now), which is implicitly possible by get vs. POST on the whatif resource - so I'm thinking we skip this.
-    whatIfSettings?: DeploymentStackWhatIfSettings;
-*/
     /**
      * All of the changes predicted by the deployment stack what-if operation.
      */
@@ -80,6 +76,7 @@ model DeploymentStackWhatIfChange {
     /**
      * List of resource changes predicted by What-If operation.
      */
+    @OpenAPI.extension("x-ms-identifiers", #["identifiers","resourceId"])
     resourceChanges: DeploymentStackWhatIfResourceChange[];
 
     /**
@@ -117,7 +114,8 @@ model DeploymentStackWhatIfResourceChange {
     /** 
      * The extensible resource identifiers.
      */
-    identifiers: unknown;    
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Extensible resources will have type-specific properties to help with unique identification"
+    identifiers: Record<unknown>;
 
     /**
      * Type of change that will be made to the resource when the deployment is executed.
@@ -171,11 +169,13 @@ model DeploymentStackChangeBase<T> {
     /**
      * The predicted value before the deployment is executed.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Azure resources are too complex to model"
     before?: T;
 
     /**
      * The predicted value after the deployment is executed.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Azure resources are too complex to model"
     after?: T;
 }
 
@@ -259,14 +259,6 @@ model DeploymentStackDiagnostics {
     @OpenAPI.extension("x-ms-identifiers", #[])
     additionalInfo?: ErrorAdditionalInfo[];
 }
-
-
-// TODO (R) - lean towards remove
-/*model DeploymentStackWhatIfSettings {
-    
-    resultFormat: DeploymentStackWhatIfResultFormat;
-}
-*/
 
 /**
  * The management status of the deployment stack resource.
@@ -376,10 +368,3 @@ union DeploymentStackDiagnosticLevel {
      */
     Error: "error";
 }
-
-/* TODO (R) - lean towards remove
-union DeploymentStackWhatIfResultFormat {
-    FullResourcePayloads;
-    ResourceIdOnly;
-}
-*/
