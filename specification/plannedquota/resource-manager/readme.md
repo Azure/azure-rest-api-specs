@@ -10,6 +10,7 @@ This is the AutoRest configuration file for the Microsoft.PlannedQuota resource 
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: 2025-10-01-preview
 ```
 
