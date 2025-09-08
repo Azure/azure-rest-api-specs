@@ -17,6 +17,7 @@ import "./PrivateLinkResource.tsp";
 import "./Vault.tsp";
 import "./VaultExtendedInfoResource.tsp";
 import "./routes.tsp";
+import "./DeletedVaults.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -43,6 +44,13 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_02_01: "2025-02-01",
+
+  /**
+   * The 2025-08-01 API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_08_01: "2025-08-01",
 }
 
 interface Operations

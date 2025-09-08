@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -1656,6 +1658,77 @@ model ResourceCertificateAndAcsDetails extends ResourceCertificateDetails {
 
 model ClientDiscoveryResponse
   is Azure.Core.Page<ClientDiscoveryValueForSingleApi>;
+
+/**
+ * Properties of the DeletedVault.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "DeletedVaultProperties omits provisioningState because the resource is already in a terminal deleted state."
+@added(Versions.v2025_08_01)
+// Soft-deleted projection of a vault does not surface provisioningState.
+model DeletedVaultProperties {
+  /**
+   * ARM Id of the Vault which was deleted.
+   */
+  @visibility(Lifecycle.Read)
+  vaultId?: string;
+
+  /**
+   * Time in UTC at which the Vault was deleted.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  vaultDeletionTime?: utcDateTime;
+
+  /**
+   * Time in UTC at which the DeletedVault will be purged.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  purgeAt?: utcDateTime;
+}
+
+/**
+ * DeletedVault information as returned by the resource provider.
+ */
+@added(Versions.v2025_08_01)
+@parentResource(ArmLocationResource<"Subscription">)
+model DeletedVault
+  is Azure.ResourceManager.ProxyResource<DeletedVaultProperties> {
+  ...ResourceNameParameter<
+    Resource = DeletedVault,
+    KeyName = "deletedVaultName",
+    SegmentName = "deletedVaults",
+    NamePattern = ""
+  >;
+}
+
+/**
+ * The response model for a list of DeletedVaults.
+ */
+@added(Versions.v2025_08_01)
+model DeletedVaultList is Azure.Core.Page<DeletedVault>;
+
+/**
+ * Input definition for DeletedVault undelete properties.
+ */
+@added(Versions.v2025_08_01)
+model DeletedVaultUndeleteInputProperties {
+  /**
+   * Recovery resource group Id.
+   */
+  recoveryResourceGroupId: string;
+}
+
+/**
+ * Input definition for DeletedVault undelete.
+ */
+@added(Versions.v2025_08_01)
+model DeletedVaultUndeleteInput {
+  /**
+   * Undelete input properties.
+   */
+  properties: DeletedVaultUndeleteInputProperties;
+}
 
 @@doc(VaultPropertiesEncryption.infrastructureEncryption,
   "Enabling/Disabling the Double Encryption state"
