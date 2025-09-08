@@ -26,28 +26,72 @@ alias LocationParameter = {
   locationparameter: Azure.Core.azureLocation;
 };
 
-@@clientName(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesSubmitStart::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesSubmitStart::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesExecuteStart::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesExecuteStart::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesExecuteCreate::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesExecuteCreate::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesExecuteDelete::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesExecuteDelete::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesCancelOperations::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesCancelOperations::parameters.body, "The request body");
-@@clientName(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body, "requestBody");
-@@doc(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body, "The request body");
+@@clientName(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesSubmitStart::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitStart::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteStart::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteStart::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteCreate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteCreate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDelete::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteDelete::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesCancelOperations::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesCancelOperations::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body,
+  "The request body"
+);
 
 @armResourceOperations(#{ omitTags: true })
 interface ScheduledActions {
