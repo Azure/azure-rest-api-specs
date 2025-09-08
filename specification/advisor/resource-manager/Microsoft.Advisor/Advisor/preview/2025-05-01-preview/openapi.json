@@ -427,8 +427,7 @@
         "tags": [
           "MetadataEntities"
         ],
-        "summary": "Gets the list of metadata entities.",
-        "description": "Get a MetadataEntity",
+        "description": "Gets the metadata entity.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -627,7 +626,7 @@
         "tags": [
           "AssessmentResults"
         ],
-        "description": "Get list of Azure Advisor assessment.",
+        "description": "Get list of Azure Advisor assessments.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -680,7 +679,7 @@
         "tags": [
           "AssessmentResults"
         ],
-        "description": "Get a existing Azure Advisor assessment.",
+        "description": "Get an existing Azure Advisor assessment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -722,7 +721,7 @@
         "tags": [
           "AssessmentResults"
         ],
-        "description": "Create or Overwrite Azure Advisor assessment resource.",
+        "description": "Create or Overwrite Azure Advisor assessment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -779,7 +778,7 @@
         "tags": [
           "AssessmentResults"
         ],
-        "description": "Delete a existing Azure Advisor assessment.",
+        "description": "Delete an existing Azure Advisor assessment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -857,7 +856,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}": {
       "put": {
         "operationId": "Configurations_CreateInSubscription",
-        "summary": "Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.",
+        "summary": "Create/Overwrite Azure Advisor configuration.",
         "description": "Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.",
         "parameters": [
           {
@@ -920,8 +919,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations": {
       "post": {
         "operationId": "Recommendations_Generate",
-        "summary": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a database so they can be retrieved later.",
-        "description": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a database so they can be retrieved later.",
+        "summary": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.",
+        "description": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -962,7 +961,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
       "get": {
         "operationId": "Recommendations_GetGenerateStatus",
-        "summary": "Retrieves the status of the recommendation computation or generation process. Invoke it after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
+        "summary": "Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
         "description": "Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
         "parameters": [
           {
@@ -1011,7 +1010,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/predict": {
       "post": {
         "operationId": "Predict",
-        "summary": "Predicts Microsoft.Advisor services.",
         "description": "Predicts a recommendation.",
         "parameters": [
           {
@@ -1118,6 +1116,7 @@
         "tags": [
           "ResiliencyReviews"
         ],
+        "summary": "Get list of resiliency reviews.",
         "description": "Get list of Azure Advisor resiliency reviews.",
         "parameters": [
           {
@@ -1180,6 +1179,7 @@
         "tags": [
           "ResiliencyReviews"
         ],
+        "summary": "Get existing resiliency review.",
         "description": "Get existing Azure Advisor resiliency review by id.",
         "parameters": [
           {
@@ -1220,6 +1220,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations": {
       "get": {
         "operationId": "triageRecommendations_List",
+        "summary": "Get list of recommendations for an existing Resiliency Review Id.",
         "description": "Get list of recommendations for an existing Azure Advisor Resiliency Review Id.",
         "parameters": [
           {
@@ -1279,6 +1280,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}": {
       "get": {
         "operationId": "triageRecommendations_Get",
+        "summary": "Get an existing recommendation by id for an existing Resiliency Review Id.",
         "description": "Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.",
         "parameters": [
           {
@@ -1326,6 +1328,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve": {
       "post": {
         "operationId": "triageRecommendations_ApproveTriageRecommendation",
+        "summary": "Approve triage recommendation by id.",
         "description": "Approve a triage recommendation for a given id.",
         "parameters": [
           {
@@ -1370,6 +1373,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources": {
       "get": {
         "operationId": "triageResources_List",
+        "summary": "List triage resources based on a review and recommendation.",
         "description": "List all triage resources that belong to a review and recommendation.",
         "parameters": [
           {
@@ -1419,6 +1423,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}": {
       "get": {
         "operationId": "triageResources_Get",
+        "summary": "Get existing triage resource.",
         "description": "Get a triage resource for a given review and recommendation.",
         "parameters": [
           {
@@ -1472,6 +1477,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject": {
       "post": {
         "operationId": "triageRecommendations_RejectTriageRecommendation",
+        "summary": "Reject existing triage recommendation by id.",
         "description": "Reject an existing triage recommendation for a given id.",
         "parameters": [
           {
@@ -1525,6 +1531,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset": {
       "post": {
         "operationId": "triageRecommendations_ResetTriageRecommendation",
+        "summary": "Reset existing triage recommendation by id.",
         "description": "Reset an existing triage recommendation for a given id.",
         "parameters": [
           {
@@ -1657,7 +1664,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations": {
       "get": {
         "operationId": "Configurations_ListByResourceGroup",
-        "summary": "Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.",
+        "summary": "Retrieve Azure Advisor configurations.",
         "description": "Retrieve Azure Advisor configurations.",
         "parameters": [
           {
@@ -1995,6 +2002,7 @@
     },
     "Category": {
       "type": "string",
+      "description": "The category of the recommendation.",
       "enum": [
         "HighAvailability",
         "Security",
@@ -2096,7 +2104,7 @@
     },
     "Control": {
       "type": "string",
-      "description": "Control type for recommendation.",
+      "description": "The sub-category of the recommendation.",
       "enum": [
         "HighAvailability",
         "BusinessContinuity",
@@ -2679,7 +2687,7 @@
         },
         "control": {
           "$ref": "#/definitions/Control",
-          "description": "The control type for the recommendation."
+          "description": "The sub-category of the recommendation."
         },
         "impact": {
           "$ref": "#/definitions/Impact",
@@ -2965,7 +2973,7 @@
     },
     "ReviewStatus": {
       "type": "string",
-      "description": "Review status string, returns the Reviews by the given status (e.g. 'New', 'Triaged', 'Completed').",
+      "description": "Review status.",
       "enum": [
         "New",
         "InProgress",
@@ -3028,6 +3036,7 @@
     },
     "Scenario": {
       "type": "string",
+      "description": "The list of scenarios applicable to this metadata entity.",
       "enum": [
         "Alerts"
       ],
@@ -3061,8 +3070,8 @@
           "description": "The consumption units for the score."
         },
         "impactedResourceCount": {
-          "type": "number",
-          "format": "float",
+          "type": "integer",
+          "format": "int32",
           "description": "The number of impacted resources."
         },
         "potentialScoreIncrease": {
@@ -3071,8 +3080,8 @@
           "description": "The potential percentage increase in overall score at subscription level once all recommendations in this scope are implemented."
         },
         "categoryCount": {
-          "type": "number",
-          "format": "float",
+          "type": "integer",
+          "format": "int32",
           "description": "The count of impacted categories.",
           "readOnly": true
         }
@@ -3198,7 +3207,7 @@
     },
     "TimeSeriesEntity": {
       "type": "object",
-      "description": "The data from different aggregation levels.",
+      "description": "The historic data at different aggregation levels.",
       "properties": {
         "aggregationLevel": {
           "$ref": "#/definitions/Aggregated",
@@ -3473,7 +3482,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "[Placeholder] Discription for value property",
+          "description": "List of triage recommendations.",
           "items": {
             "$ref": "#/definitions/triageRecommendation"
           }
@@ -3481,7 +3490,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
+          "description": "The URL to get the next set of triage recommendations, if there are any."
         }
       },
       "required": [
