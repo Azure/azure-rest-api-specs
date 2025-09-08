@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2015-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-06-preview'
 input-file:
-- Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
+- preview/2015-06-01-preview/commerce.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -45,7 +45,7 @@ These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
+- preview/2015-06-01-preview/commerce.json
 ```
 
 ---
