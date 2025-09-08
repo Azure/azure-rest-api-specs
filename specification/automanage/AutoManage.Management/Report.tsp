@@ -76,15 +76,11 @@ interface Reports {
   /**
    * Get information about a report associated with a configuration profile assignment run
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("reports_Get")
   get is ReportOps.Read<Report>;
 
   /**
    * Retrieve a list of reports within a given configuration profile assignment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("reports_ListByConfigurationProfileAssignments")
   listByConfigurationProfileAssignments is ReportOps.List<
     Report,
     Response = ArmResponse<ReportList>
@@ -219,3 +215,4 @@ interface HCIReports {
 
 @@doc(Report.name, "The report name.");
 @@doc(Report.properties, "The properties for the report.");
+@@summary(Report.properties, "Properties");

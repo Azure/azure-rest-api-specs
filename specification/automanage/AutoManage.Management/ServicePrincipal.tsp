@@ -49,3 +49,4 @@ interface ServicePrincipals {
 @@doc(ServicePrincipal.properties,
   "The Service Principal properties for the subscription"
 );
+@@summary(ServicePrincipal.properties, "Properties");
