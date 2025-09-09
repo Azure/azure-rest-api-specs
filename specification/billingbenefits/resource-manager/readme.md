@@ -101,6 +101,10 @@ directive:
   - suppress: PatchIdentityProperty
     from: billingbenefits.json
     reason: False-positive. Identity property is never defined on the model.
+  - suppress: ConsistentPatchProperties
+    from: billingbenefits.json
+    reason: False-positive. Milestones is always present in resource model. There are two types of conditionalCredit models - primary and contributor. The resource model is split on this discriminator value, and milesstones is only present for primary. The patch operation is only available for primary, so milestones will always be available.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}"].patch.parameters[4]["schema"]
 ```
 
 ### Tag: package-preview-2025-05-01-preview

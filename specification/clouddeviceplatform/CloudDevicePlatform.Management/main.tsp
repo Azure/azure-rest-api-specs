@@ -12,7 +12,9 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-/** Microsoft.CloudDevicePlatform Resource Provider management API. */
+/**
+ * Microsoft.CloudDevicePlatform Resource Provider management API.
+ */
 @armProviderNamespace
 @service(#{ title: "Microsoft.CloudDevicePlatform management service" })
 @versioned(Versions)
