@@ -22,3 +22,9 @@ using Azure.ClientGenerator.Core;
   azureLocation,
   "csharp"
 );
+@@clientName(Microsoft.Compute.PlacementScore,
+  "ComputeRecommenderPlacementScore"
+);
+@@clientName(Microsoft.Compute.ResourceSize,
+  "AzureResourceSize"
+);
