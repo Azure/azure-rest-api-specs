@@ -8,6 +8,10 @@ using TypeSpec.Versioning;
 using Microsoft.PlanetaryComputer;
 
 @useDependency(Versions.v2025_04_30_Preview)
+@client({
+  name: "PlanetaryComputerClient",
+  service: Microsoft.PlanetaryComputer,
+})
 namespace Customizations;
 
 // Client name conflicts
