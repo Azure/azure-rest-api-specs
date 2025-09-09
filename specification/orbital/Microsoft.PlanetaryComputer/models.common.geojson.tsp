@@ -43,7 +43,8 @@ model FeatureBase {
   /**
    * Bounding box coordinates for the feature
    */
-  bbox: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox: float64[];
 }
 /**
  * GeoJSON Feature object representing a geographic entity
