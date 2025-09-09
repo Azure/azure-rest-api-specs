@@ -1544,6 +1544,79 @@
       },
       "description": "OAuth2 settings details"
     },
+    "AuthorizationProviderKeyVaultCreateProperties": {
+      "type": "object",
+      "properties": {
+        "secretIdentifier": {
+          "type": "string",
+          "description": "Key vault secret identifier for client secret. When provided, client secret will be retrieved from the provided key vault secret."
+        }
+      },
+      "description": "Authorization Provider KeyVault create contract properties."
+    },
+    "AuthorizationProviderKeyVaultContract": {
+      "type": "object",
+      "properties": {
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the secret was last updated in key vault.",
+          "readOnly": true
+        },
+        "lastStatus": {
+          "$ref": "#/definitions/AuthorizationProviderKeyVaultLastStatusContract",
+          "description": "Last time sync and refresh of secret from key vault.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthorizationProviderKeyVaultCreateProperties"
+        }
+      ],
+      "description": "Authorization Provider KeyVault contract properties."
+    },
+    "AuthorizationProviderKeyVaultLastStatusContract": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Last status code for sync and refresh of secret from key vault.",
+          "enum": [
+            "Success",
+            "Failure"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorizationProviderKeyVaultLastStatusCode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Success",
+                "description": "The Secret access is successful."
+              },
+              {
+                "value": "Failure",
+                "description": "The Secret access is failed."
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Representation of the error."
+        },
+        "timeStampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last accessed date and time."
+        }
+      },
+      "required": [
+        "code",
+        "timeStampUtc"
+      ],
+      "description": "Authorization Provider KeyVault last status contract properties."
+    },
     "OAuth2AuthorizationCodeParameters": {
       "type": "object",
       "properties": {
@@ -1563,8 +1636,28 @@
           "type": "string",
           "description": "OAuth resource URI."
         },
+        "loginUri": {
+          "type": "string",
+          "description": "OAuth login URI."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "OAuth tenant identifier."
+        },
+        "authorizationUrl": {
+          "type": "string",
+          "description": "OAuth authorization endpoint URL."
+        },
+        "refreshUrl": {
+          "type": "string",
+          "description": "OAuth refresh token endpoint URL."
+        },
+        "tokenUrl": {
+          "type": "string",
+          "description": "OAuth token endpoint URL."
+        },
         "keyVault": {
-          "$ref": "#/definitions/KeyVaultContractCreateProperties",
+          "$ref": "#/definitions/AuthorizationProviderKeyVaultCreateProperties",
           "description": "KeyVault location details for storing OAuth2 client secret."
         }
       },
