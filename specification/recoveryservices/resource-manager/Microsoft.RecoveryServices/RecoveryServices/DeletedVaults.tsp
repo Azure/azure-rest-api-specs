@@ -79,8 +79,7 @@ interface DeletedVaults {
     DeletedVault,
     DeletedVaultUndeleteInput,
     DeletedVault,
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader,
-    OverrideErrorType = CloudError
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
   >;
 
   /**
