@@ -41,9 +41,86 @@
   "tags": [
     {
       "name": "Operations"
+    },
+    {
+      "name": "ScheduledActionExtension"
+    },
+    {
+      "name": "Occurrences"
+    },
+    {
+      "name": "OccurrenceExtension"
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.ComputeSchedule/associatedOccurrences": {
+      "get": {
+        "operationId": "OccurrenceExtension_ListOccurrenceByVms",
+        "tags": [
+          "OccurrenceExtension"
+        ],
+        "description": "List OccurrenceExtensionResource resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OccurrenceExtensionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ComputeSchedule/associatedScheduledActions": {
+      "get": {
+        "operationId": "ScheduledActionExtension_ListByVms",
+        "tags": [
+          "ScheduledActionExtension"
+        ],
+        "description": "List ScheduledActionResources resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.ComputeSchedule/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -629,9 +706,937 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/scheduledActions": {
+      "get": {
+        "operationId": "ScheduledActions_ListBySubscription",
+        "description": "List ScheduledAction resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions": {
+      "get": {
+        "operationId": "ScheduledActions_ListByResourceGroup",
+        "description": "List ScheduledAction resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}": {
+      "get": {
+        "operationId": "ScheduledActions_Get",
+        "description": "Get a ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ScheduledActions_CreateOrUpdate",
+        "description": "Create a ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ScheduledAction' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "201": {
+            "description": "Resource 'ScheduledAction' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ScheduledActions_Update",
+        "description": "Update a ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ScheduledActions_Delete",
+        "description": "Delete a ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/attachResources": {
+      "post": {
+        "operationId": "ScheduledActions_AttachResources",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceAttachRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/cancelNextOccurrence": {
+      "post": {
+        "operationId": "ScheduledActions_CancelNextOccurrence",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelOccurrenceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/detachResources": {
+      "post": {
+        "operationId": "ScheduledActions_DetachResources",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceDetachRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/disable": {
+      "post": {
+        "operationId": "ScheduledActions_Disable",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/enable": {
+      "post": {
+        "operationId": "ScheduledActions_Enable",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences": {
+      "get": {
+        "operationId": "Occurrences_ListByScheduledAction",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "List Occurrence resources by ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OccurrenceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}": {
+      "get": {
+        "operationId": "Occurrences_Get",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "Get a Occurrence",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "occurrenceId",
+            "in": "path",
+            "description": "The name of the Occurrence",
+            "required": true,
+            "type": "string",
+            "pattern": "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}/cancel": {
+      "post": {
+        "operationId": "Occurrences_Cancel",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "occurrenceId",
+            "in": "path",
+            "description": "The name of the Occurrence",
+            "required": true,
+            "type": "string",
+            "pattern": "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelOccurrenceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}/delay": {
+      "post": {
+        "operationId": "Occurrences_Delay",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "occurrenceId",
+            "in": "path",
+            "description": "The name of the Occurrence",
+            "required": true,
+            "type": "string",
+            "pattern": "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DelayRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}/resources": {
+      "get": {
+        "operationId": "Occurrences_ListResources",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "List resources attached to Scheduled Actions for the given occurrence",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "occurrenceId",
+            "in": "path",
+            "description": "The name of the Occurrence",
+            "required": true,
+            "type": "string",
+            "pattern": "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OccurrenceResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/patchResources": {
+      "post": {
+        "operationId": "ScheduledActions_PatchResources",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcePatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/resources": {
+      "get": {
+        "operationId": "ScheduledActions_ListResources",
+        "description": "List resources attached to Scheduled Actions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/triggerManualOccurrence": {
+      "post": {
+        "operationId": "ScheduledActions_TriggerManualOccurrence",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "ActionType": {
+      "type": "string",
+      "description": "Specify which action user wants to be performed on the resources",
+      "enum": [
+        "Start",
+        "Deallocate",
+        "Hibernate"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Perform a start action on the specified resources"
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "Perform a deallocate action on the specified resources"
+          },
+          {
+            "name": "Hibernate",
+            "value": "Hibernate",
+            "description": "Perform hibernate and deallocate on the specified resources"
+          }
+        ]
+      }
+    },
     "AllocationStrategyType": {
       "type": "string",
       "description": "These types determines how and where the virtual machines are deployed to optimize for cost, performance, or availability",
@@ -668,9 +1673,103 @@
         ]
       }
     },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CancelOccurrenceRequest": {
+      "type": "object",
+      "description": "The request to cancel an occurrence.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "The resources the cancellation should act on. If no resource is passed in the list, Scheduled Action will cancel the occurrence for all resources.",
+          "items": {
+            "$ref": "#/definitions/ValidScheduledActionResourceId"
+          }
+        }
+      },
+      "required": [
+        "resourceIds"
+      ]
     },
     "CancelOperationsRequest": {
       "type": "object",
@@ -749,6 +1848,13 @@
         "location"
       ]
     },
+    "DayOfTheMonth": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Represents the possible days in a month",
+      "minimum": 1,
+      "maximum": 31
+    },
     "DeadlineType": {
       "type": "string",
       "description": "The types of deadlines supported by ScheduledActions",
@@ -814,6 +1920,28 @@
         "description",
         "type",
         "location"
+      ]
+    },
+    "DelayRequest": {
+      "type": "object",
+      "description": "Request to ask for a delay in an occurrence, delay should be set to client local time eg (ACST) 2025-05-30T22:03:00+09:30, (PST) 2025-05-30T06:35:00-07:00",
+      "properties": {
+        "delay": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exact time to delay the operations to"
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence.",
+          "items": {
+            "$ref": "#/definitions/ValidScheduledActionResourceId"
+          }
+        }
+      },
+      "required": [
+        "delay",
+        "resourceIds"
       ]
     },
     "DeleteResourceOperationResponse": {
@@ -1127,6 +2255,463 @@
         "location"
       ]
     },
+    "Language": {
+      "type": "string",
+      "description": "The notification languages currently supported",
+      "enum": [
+        "en-us"
+      ],
+      "x-ms-enum": {
+        "name": "Language",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EnUs",
+            "value": "en-us",
+            "description": "American english language"
+          }
+        ]
+      }
+    },
+    "Month": {
+      "type": "string",
+      "description": "Representation of the months available selection in a gregorian calendar",
+      "enum": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "Month",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "January",
+            "value": "January",
+            "description": "The January month."
+          },
+          {
+            "name": "February",
+            "value": "February",
+            "description": "The February month."
+          },
+          {
+            "name": "March",
+            "value": "March",
+            "description": "The March month."
+          },
+          {
+            "name": "April",
+            "value": "April",
+            "description": "The April month."
+          },
+          {
+            "name": "May",
+            "value": "May",
+            "description": "The May month."
+          },
+          {
+            "name": "June",
+            "value": "June",
+            "description": "The June month."
+          },
+          {
+            "name": "July",
+            "value": "July",
+            "description": "The July month."
+          },
+          {
+            "name": "August",
+            "value": "August",
+            "description": "The August month."
+          },
+          {
+            "name": "September",
+            "value": "September",
+            "description": "The September month."
+          },
+          {
+            "name": "October",
+            "value": "October",
+            "description": "The October month."
+          },
+          {
+            "name": "November",
+            "value": "November",
+            "description": "The November month."
+          },
+          {
+            "name": "December",
+            "value": "December",
+            "description": "The December month."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All months"
+          }
+        ]
+      }
+    },
+    "NotificationProperties": {
+      "type": "object",
+      "description": "The information about notifications to be send to about upcoming operations.",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Where the notification should be sent. For email, it should follow email format."
+        },
+        "type": {
+          "$ref": "#/definitions/NotificationType",
+          "description": "Type of notification to be sent."
+        },
+        "language": {
+          "$ref": "#/definitions/Language",
+          "description": "The language the notification should be sent on."
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tells if the notification is enabled or not.",
+          "default": false
+        }
+      },
+      "required": [
+        "destination",
+        "type",
+        "language"
+      ]
+    },
+    "NotificationType": {
+      "type": "string",
+      "description": "The type of notification supported",
+      "enum": [
+        "Email"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Email",
+            "value": "Email",
+            "description": "Notify through e-mail"
+          }
+        ]
+      }
+    },
+    "Occurrence": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OccurrenceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OccurrenceExtensionProperties": {
+      "type": "object",
+      "description": "The properties of the occurrence extension",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The ARM Id of the resource.\n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}\""
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The desired notification settings for the specified resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the occurrence is scheduled for the resource. Specified in UTC.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The current state of the resource",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details for the resource. Only populated if resource is in failed state.",
+          "readOnly": true
+        },
+        "scheduledActionId": {
+          "$ref": "#/definitions/ScheduledActionsId",
+          "description": "The arm identifier of the scheduled action the occurrence belongs to"
+        }
+      },
+      "required": [
+        "resourceId",
+        "scheduledTime",
+        "scheduledActionId"
+      ]
+    },
+    "OccurrenceExtensionResource": {
+      "type": "object",
+      "description": "The scheduled action extension",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OccurrenceExtensionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OccurrenceExtensionResourceListResult": {
+      "type": "object",
+      "description": "The response of a OccurrenceExtensionResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OccurrenceExtensionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/OccurrenceExtensionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OccurrenceListResult": {
+      "type": "object",
+      "description": "The response of a Occurrence list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Occurrence items on this page",
+          "items": {
+            "$ref": "#/definitions/Occurrence"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OccurrenceProperties": {
+      "type": "object",
+      "description": "Properties for an occurrence",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the occurrence is scheduled for. This value can be changed by calling the delay API",
+          "readOnly": true
+        },
+        "resultSummary": {
+          "$ref": "#/definitions/OccurrenceResultSummary",
+          "description": "The result for occurrences that achieved a terminal state",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OccurrenceState",
+          "description": "The aggregated provisioning state of the occurrence",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "scheduledTime",
+        "resultSummary"
+      ]
+    },
+    "OccurrenceResource": {
+      "type": "object",
+      "description": "Represents an scheduled action resource metadata.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The compute RP resource id of the resource in the scheduled actions scope. ",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resource",
+          "readOnly": true
+        },
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The ARM Id of the resource.\n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}\""
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The desired notification settings for the specified resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the occurrence is scheduled for the resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The current state of the resource",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details for the resource. Only populated if resource is in failed state.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "resourceId",
+        "scheduledTime"
+      ]
+    },
+    "OccurrenceResourceListResponse": {
+      "type": "object",
+      "description": "Paged collection of OccurrenceResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OccurrenceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/OccurrenceResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OccurrenceResultSummary": {
+      "type": "object",
+      "description": "The summarized provisioning result of an occurrence",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of resources that the occurrence was supposed to act on."
+        },
+        "statuses": {
+          "type": "array",
+          "description": "The summarized status of the resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceResultSummary"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "total",
+        "statuses"
+      ]
+    },
+    "OccurrenceState": {
+      "type": "string",
+      "description": "The state the occurrence is at a given time",
+      "enum": [
+        "Created",
+        "Rescheduling",
+        "Scheduled",
+        "Succeeded",
+        "Failed",
+        "Cancelling",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OccurrenceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The occurrence was created"
+          },
+          {
+            "name": "Rescheduling",
+            "value": "Rescheduling",
+            "description": "The occurrence is being rescheduled"
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The occurrence has been scheduled"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The occurrence has successfully ran"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The occurrence has failed during its scheduling"
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "The occurrence is going through cancellation"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The occurrence has been canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "OperatingSystemType": {
       "type": "string",
       "description": "The type of operating stystem supported by Azure",
@@ -1404,6 +2989,63 @@
       },
       "readOnly": true
     },
+    "ResourceAttachRequest": {
+      "type": "object",
+      "description": "Request model to attach a list of scheduled action resources.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "List of resources to be attached/patched",
+          "items": {
+            "$ref": "#/definitions/ScheduledActionResource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
+    "ResourceDetachRequest": {
+      "type": "object",
+      "description": "Request model to detach a list of scheduled action resources.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "List of resources to be detached",
+          "items": {
+            "$ref": "#/definitions/ValidScheduledActionResourceId"
+          }
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
+    "ResourceListResponse": {
+      "type": "object",
+      "description": "Paged collection of ScheduledActionResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScheduledActionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ScheduledActionResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ResourceOperation": {
       "type": "object",
       "description": "High level response from an operation on a resource",
@@ -1629,6 +3271,56 @@
         "errorDetails"
       ]
     },
+    "ResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from scheduled action resource requests, which contains the status of each resource",
+      "properties": {
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of resources operated on"
+        },
+        "resourcesStatuses": {
+          "type": "array",
+          "description": "The resource status of for each resource",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "totalResources",
+        "resourcesStatuses"
+      ]
+    },
+    "ResourceOperationStatus": {
+      "type": "string",
+      "description": "The state the resource is on after the resource operation is applied",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource operation was successful"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource operation has failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ResourceOperationType": {
       "type": "string",
       "description": "The kind of operation types that can be performed on resources using ScheduledActions",
@@ -1665,6 +3357,25 @@
         ]
       }
     },
+    "ResourcePatchRequest": {
+      "type": "object",
+      "description": "Request model perform a resource operation in a list of resources",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "The list of resources we watch to patch",
+          "items": {
+            "$ref": "#/definitions/ScheduledActionResource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
     "ResourceProvisionPayload": {
       "type": "object",
       "description": "Resource creation data model",
@@ -1699,6 +3410,75 @@
       "required": [
         "resourceCount"
       ]
+    },
+    "ResourceResultSummary": {
+      "type": "object",
+      "description": "The status of the resources",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code for those resources. In case of success, code is populated with Success."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of resources that the code applies to."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error details for the resources. Not populated on success cases."
+        }
+      },
+      "required": [
+        "code",
+        "count"
+      ]
+    },
+    "ResourceStatus": {
+      "type": "object",
+      "description": "The status of a resource after a resource level operation was performed",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The arm identifier of the resource"
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceOperationStatus",
+          "description": "The state the resource is currently on"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Errors encountered while trying to perform"
+        }
+      },
+      "required": [
+        "resourceId",
+        "status"
+      ]
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "The type of resource being targeted",
+      "enum": [
+        "VirtualMachine",
+        "VirtualMachineScaleSet"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VirtualMachine",
+            "value": "VirtualMachine",
+            "description": "Resources defined are Virtual Machines"
+          },
+          {
+            "name": "VirtualMachineScaleSet",
+            "value": "VirtualMachineScaleSet",
+            "description": "Resources defined are Virtual Machines Scale Sets"
+          }
+        ]
+      }
     },
     "Resources": {
       "type": "object",
@@ -1791,6 +3571,432 @@
       "required": [
         "deadlineType"
       ]
+    },
+    "ScheduledAction": {
+      "type": "object",
+      "description": "The scheduled action resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledActionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ScheduledActionListResult": {
+      "type": "object",
+      "description": "The response of a ScheduledAction list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScheduledAction items on this page",
+          "items": {
+            "$ref": "#/definitions/ScheduledAction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScheduledActionProperties": {
+      "type": "object",
+      "description": "Scheduled action properties",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the scheduled action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the scheduled action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the scheduled action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the scheduled action is supposed to stop scheduling"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduledActionsSchedule",
+          "description": "The schedule the scheduled action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the scheduled action is disabled or not",
+          "default": false
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceType",
+        "actionType",
+        "startTime",
+        "schedule",
+        "notificationSettings"
+      ]
+    },
+    "ScheduledActionResource": {
+      "type": "object",
+      "description": "Represents an scheduled action resource metadata.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The compute RP resource id of the resource in the scheduled actions scope. ",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resource",
+          "readOnly": true
+        },
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The ARM Id of the resource.\n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}\""
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The desired notification settings for the specified resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "resourceId"
+      ]
+    },
+    "ScheduledActionResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from scheduled action resource requests, which contains the status of each resource",
+      "properties": {
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of resources operated on"
+        },
+        "resourcesStatuses": {
+          "type": "array",
+          "description": "The resource status of for each resource",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "totalResources",
+        "resourcesStatuses"
+      ]
+    },
+    "ScheduledActionResources": {
+      "type": "object",
+      "description": "The scheduled action extension",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledActionsExtensionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ScheduledActionResourcesListResult": {
+      "type": "object",
+      "description": "The response of a ScheduledActionResources list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScheduledActionResources items on this page",
+          "items": {
+            "$ref": "#/definitions/ScheduledActionResources"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScheduledActionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the ScheduledAction.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduledActionUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ScheduledActionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ScheduledAction.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the scheduled action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the scheduled action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the scheduled action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the scheduled action is supposed to stop scheduling"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduledActionsScheduleUpdate",
+          "description": "The schedule the scheduled action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the scheduled action is disabled or not",
+          "default": false
+        }
+      }
+    },
+    "ScheduledActionsExtensionProperties": {
+      "type": "object",
+      "description": "Scheduled action extension properties",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the scheduled action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the scheduled action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the scheduled action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the scheduled action is supposed to stop scheduling"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduledActionsSchedule",
+          "description": "The schedule the scheduled action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the scheduled action is disabled or not",
+          "default": false
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        },
+        "resourceNotificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action at a resource level. Resource level notification settings are scope to specific resources only and submitted through attach requests.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "resourceType",
+        "actionType",
+        "startTime",
+        "schedule",
+        "notificationSettings"
+      ]
+    },
+    "ScheduledActionsId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ComputeSchedule/scheduledActions"
+          }
+        ]
+      }
+    },
+    "ScheduledActionsSchedule": {
+      "type": "object",
+      "description": "Specify the schedule in which the scheduled action is supposed to follow",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "time",
+          "description": "The time the scheduled action is supposed to run on"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone the scheduled time is specified on"
+        },
+        "requestedWeekDays": {
+          "type": "array",
+          "description": "The week days the scheduled action is supposed to run on",
+          "items": {
+            "$ref": "#/definitions/WeekDay"
+          }
+        },
+        "requestedMonths": {
+          "type": "array",
+          "description": "The months the scheduled action is supposed to run on",
+          "items": {
+            "$ref": "#/definitions/Month"
+          }
+        },
+        "requestedDaysOfTheMonth": {
+          "type": "array",
+          "description": "The days of the month the scheduled action is supposed to run on. If empty, it means it will run on every day of the month.",
+          "items": {
+            "$ref": "#/definitions/DayOfTheMonth"
+          }
+        },
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters the scheduled action is supposed to follow"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt."
+        }
+      },
+      "required": [
+        "scheduledTime",
+        "timeZone",
+        "requestedWeekDays",
+        "requestedMonths",
+        "requestedDaysOfTheMonth"
+      ]
+    },
+    "ScheduledActionsScheduleUpdate": {
+      "type": "object",
+      "description": "Specify the schedule in which the scheduled action is supposed to follow",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "time",
+          "description": "The time the scheduled action is supposed to run on"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone the scheduled time is specified on"
+        },
+        "requestedWeekDays": {
+          "type": "array",
+          "description": "The week days the scheduled action is supposed to run on",
+          "items": {
+            "$ref": "#/definitions/WeekDay"
+          }
+        },
+        "requestedMonths": {
+          "type": "array",
+          "description": "The months the scheduled action is supposed to run on",
+          "items": {
+            "$ref": "#/definitions/Month"
+          }
+        },
+        "requestedDaysOfTheMonth": {
+          "type": "array",
+          "description": "The days of the month the scheduled action is supposed to run on. If empty, it means it will run on every day of the month.",
+          "items": {
+            "$ref": "#/definitions/DayOfTheMonth"
+          }
+        },
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters the scheduled action is supposed to follow"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt."
+        }
+      }
     },
     "StartResourceOperationResponse": {
       "type": "object",
@@ -1913,6 +4119,21 @@
         "correlationid"
       ]
     },
+    "ValidScheduledActionResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "type": "Microsoft.Compute/virtualMachineScaleSets"
+          }
+        ]
+      }
+    },
     "VmSizePreferenceRank": {
       "type": "string",
       "description": "The ranking values for VM size preferences, this is applied when AllocationStrategyType is set to Prioritized",
@@ -1978,7 +4199,77 @@
         "name",
         "rank"
       ]
+    },
+    "WeekDay": {
+      "type": "string",
+      "description": "Representation of the possible selection of days in a week in a gregorian calendar",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "WeekDay",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday",
+            "description": "Monday weekday."
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday",
+            "description": "Tuesday weekday."
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday",
+            "description": "Wednesday weekday."
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday",
+            "description": "Thursday weekday."
+          },
+          {
+            "name": "Friday",
+            "value": "Friday",
+            "description": "Friday weekday."
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday",
+            "description": "Saturday weekday."
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday",
+            "description": "Sunday weekday."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All week days"
+          }
+        ]
+      }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }

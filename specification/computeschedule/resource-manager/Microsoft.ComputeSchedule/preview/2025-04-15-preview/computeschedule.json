@@ -1787,42 +1787,6 @@
         ]
       }
     },
-    "AllocationStrategyType": {
-      "type": "string",
-      "description": "These types determines how and where the virtual machines are deployed to optimize for cost, performance, or availability",
-      "enum": [
-        "LowestPrice",
-        "CapacityOptimized",
-        "PriceCapacityOptimized",
-        "Prioritized"
-      ],
-      "x-ms-enum": {
-        "name": "AllocationStrategyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LowestPrice",
-            "value": "LowestPrice",
-            "description": "Allocation of virtual machines by lowest price, this is available for both Regular and Spot virtual machine PriorityProfileType"
-          },
-          {
-            "name": "CapacityOptimized",
-            "value": "CapacityOptimized",
-            "description": "Allocation of virtual machines by highest available capacity, this is available for Spot virtual machine PriorityProfileType"
-          },
-          {
-            "name": "PriceCapacityOptimized",
-            "value": "PriceCapacityOptimized",
-            "description": "Allocation of virtual machines by highest available capacity at the lowest price on virtual machines in the selected region, this is available for Spot virtual machine PriorityProfileType"
-          },
-          {
-            "name": "Prioritized",
-            "value": "Prioritized",
-            "description": "Allocation of virtual machines by customer selected priority, it seeks to create virtual machines based on the ranking provided in VmSizePreferenceRank, this is available for Regular virtual machine PriorityProfileType"
-          }
-        ]
-      }
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2261,37 +2225,6 @@
           "description": "Retry policy the user can pass"
         }
       }
-    },
-    "FungibileProperties": {
-      "type": "object",
-      "description": "The properties that support fungible create operaions",
-      "properties": {
-        "zones": {
-          "type": "array",
-          "description": "A list of Azure zones to possibly create the virtual machines in",
-          "items": {
-            "type": "string"
-          }
-        },
-        "vmSizesProfile": {
-          "type": "array",
-          "description": "A list of preferred vm sizes to create and the rank of their preferences",
-          "items": {
-            "$ref": "#/definitions/VmSizesProfileProperties"
-          }
-        },
-        "osType": {
-          "$ref": "#/definitions/OperatingSystemType",
-          "description": "The OS type for the vms"
-        },
-        "priorityProfile": {
-          "$ref": "#/definitions/PriorityProfile",
-          "description": "The priority profile"
-        }
-      },
-      "required": [
-        "osType"
-      ]
     },
     "GetOperationErrorsRequest": {
       "type": "object",
@@ -2862,30 +2795,6 @@
       },
       "readOnly": true
     },
-    "OperatingSystemType": {
-      "type": "string",
-      "description": "The type of operating stystem supported by Azure",
-      "enum": [
-        "Windows",
-        "Linux"
-      ],
-      "x-ms-enum": {
-        "name": "OperatingSystemType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Windows",
-            "value": "Windows",
-            "description": "Windows operating system"
-          },
-          {
-            "name": "Linux",
-            "value": "Linux",
-            "description": "Linux operating system"
-          }
-        ]
-      }
-    },
     "OperationErrorDetails": {
       "type": "object",
       "description": "This defines a list of operation errors associated with a unique operationId",
@@ -3056,48 +2965,6 @@
             "name": "CostAvailabilityBalanced",
             "value": "CostAvailabilityBalanced",
             "description": "Optimize while considering a balance of cost and availability"
-          }
-        ]
-      }
-    },
-    "PriorityProfile": {
-      "type": "object",
-      "description": "The strategy for virtual machine creation in terms of highly available or flexible availability.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/PriorityProfileType",
-          "description": "The type of priority profile, this could be Regular or Spot"
-        },
-        "allocationStrategy": {
-          "$ref": "#/definitions/AllocationStrategyType",
-          "description": "The type of allocation strategy for the selected PriorityProfileType."
-        }
-      },
-      "required": [
-        "type",
-        "allocationStrategy"
-      ]
-    },
-    "PriorityProfileType": {
-      "type": "string",
-      "description": "The type of profile to use for prioritizing virtual machine availability. This defines how the virtual machine is billed and managed in the Azure.",
-      "enum": [
-        "Regular",
-        "Spot"
-      ],
-      "x-ms-enum": {
-        "name": "PriorityProfileType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Regular",
-            "value": "Regular",
-            "description": "Offers guaranteed availability."
-          },
-          {
-            "name": "Spot",
-            "value": "Spot",
-            "description": "Offers flexible availability and is a cheaper option."
           }
         ]
       }
@@ -3551,10 +3418,6 @@
         "resourcePrefix": {
           "type": "string",
           "description": "if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1.."
-        },
-        "fungibleProperties": {
-          "$ref": "#/definitions/FungibileProperties",
-          "description": "Properties that support fungible create, when this value is null, Create will proceed with the default non-fungible route."
         }
       },
       "required": [
@@ -4283,72 +4146,6 @@
           }
         ]
       }
-    },
-    "VmSizePreferenceRank": {
-      "type": "string",
-      "description": "The ranking values for VM size preferences, this is applied when AllocationStrategyType is set to Prioritized",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
-      "x-ms-enum": {
-        "name": "VmSizePreferenceRank",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Rank0",
-            "value": "0",
-            "description": "Rank0: Most preferred"
-          },
-          {
-            "name": "Rank1",
-            "value": "1",
-            "description": "Rank0: Most preferred"
-          },
-          {
-            "name": "Rank2",
-            "value": "2",
-            "description": "Rank0: Most preferred"
-          },
-          {
-            "name": "Rank3",
-            "value": "3",
-            "description": "Rank0: Most preferred"
-          },
-          {
-            "name": "Rank4",
-            "value": "4",
-            "description": "Rank0: Most preferred"
-          },
-          {
-            "name": "Rank5",
-            "value": "5",
-            "description": "Rank0: Most preferred"
-          }
-        ]
-      }
-    },
-    "VmSizesProfileProperties": {
-      "type": "object",
-      "description": "Virtual machine sizes and their respective ranks for fungible create operations.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The size of the virtual machine"
-        },
-        "rank": {
-          "$ref": "#/definitions/VmSizePreferenceRank",
-          "description": "Priority order for the virtual machine size selected, the values go from Rank0-Rank5 in ascending order of preference."
-        }
-      },
-      "required": [
-        "name",
-        "rank"
-      ]
     },
     "WeekDay": {
       "type": "string",
