@@ -388,7 +388,8 @@ interface Sites {
        */
       @query("hostName")
       hostName?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -400,7 +401,8 @@ interface Sites {
   applySlotConfigToProduction is SiteOps.ActionSync<
     Site,
     CsmSlotEntity,
-    OkResponse
+    OkResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1406,7 +1408,8 @@ interface WebApps {
    */
   getSlot is WebAppOps.Read<
     Site,
-    Response = ArmResponse<Site> | ArmNotFoundResponse
+    Response = ArmResponse<Site> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1421,7 +1424,8 @@ interface WebApps {
       _: Site;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = Site> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1436,7 +1440,8 @@ interface WebApps {
     Response = ArmResponse<Site> | (AcceptedResponse & {
       @bodyRoot
       _: Site;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1456,7 +1461,8 @@ interface WebApps {
        */
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1490,7 +1496,8 @@ interface WebApps {
        */
       @query("hostName")
       hostName?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1500,7 +1507,8 @@ interface WebApps {
   applySlotConfigurationSlot is WebAppOps.ActionSync<
     Site,
     CsmSlotEntity,
-    OkResponse
+    OkResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1510,7 +1518,8 @@ interface WebApps {
   backupSlot is WebAppOps.ActionSync<
     Site,
     BackupRequest,
-    ArmResponse<BackupItem>
+    ArmResponse<BackupItem>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1522,7 +1531,8 @@ interface WebApps {
   updateApplicationSettingsSlot is WebAppOps.ActionSync<
     Site,
     StringDictionary,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1532,7 +1542,8 @@ interface WebApps {
   listApplicationSettingsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1544,7 +1555,8 @@ interface WebApps {
   updateAuthSettingsSlot is WebAppOps.ActionSync<
     Site,
     SiteAuthSettings,
-    ArmResponse<SiteAuthSettings>
+    ArmResponse<SiteAuthSettings>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1554,7 +1566,8 @@ interface WebApps {
   getAuthSettingsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<SiteAuthSettings>
+    ArmResponse<SiteAuthSettings>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1566,7 +1579,8 @@ interface WebApps {
   updateAzureStorageAccountsSlot is WebAppOps.ActionSync<
     Site,
     AzureStoragePropertyDictionaryResource,
-    ArmResponse<AzureStoragePropertyDictionaryResource>
+    ArmResponse<AzureStoragePropertyDictionaryResource>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1576,7 +1590,8 @@ interface WebApps {
   listAzureStorageAccountsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<AzureStoragePropertyDictionaryResource>
+    ArmResponse<AzureStoragePropertyDictionaryResource>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1588,7 +1603,8 @@ interface WebApps {
   updateBackupConfigurationSlot is WebAppOps.ActionSync<
     Site,
     BackupRequest,
-    ArmResponse<BackupRequest>
+    ArmResponse<BackupRequest>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1596,7 +1612,12 @@ interface WebApps {
    */
   @delete
   @action("backup")
-  deleteBackupConfigurationSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
+  deleteBackupConfigurationSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    OkResponse,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Gets the backup configuration of an app.
@@ -1605,7 +1626,8 @@ interface WebApps {
   getBackupConfigurationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<BackupRequest>
+    ArmResponse<BackupRequest>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1617,7 +1639,8 @@ interface WebApps {
   updateConnectionStringsSlot is WebAppOps.ActionSync<
     Site,
     ConnectionStringDictionary,
-    ArmResponse<ConnectionStringDictionary>
+    ArmResponse<ConnectionStringDictionary>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1627,7 +1650,8 @@ interface WebApps {
   listConnectionStringsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<ConnectionStringDictionary>
+    ArmResponse<ConnectionStringDictionary>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1639,7 +1663,8 @@ interface WebApps {
   updateMetadataSlot is WebAppOps.ActionSync<
     Site,
     StringDictionary,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1649,7 +1674,8 @@ interface WebApps {
   listMetadataSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1668,7 +1694,8 @@ interface WebApps {
       @segment("slots")
       @path
       slot: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -1691,7 +1718,8 @@ interface WebApps {
   listSitePushSettingsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<PushSettings>
+    ArmResponse<PushSettings>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1703,7 +1731,8 @@ interface WebApps {
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse
+    OkResponse | NoContentResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1715,7 +1744,8 @@ interface WebApps {
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
-    File | NoContentResponse
+    File | NoContentResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1725,7 +1755,8 @@ interface WebApps {
   discoverBackupSlot is WebAppOps.ActionSync<
     Site,
     RestoreRequest,
-    ArmResponse<RestoreRequest>
+    ArmResponse<RestoreRequest>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1766,7 +1797,12 @@ interface WebApps {
    * Description for Syncs function trigger metadata to the management database
    */
   @action("host/default/sync")
-  syncFunctionsSlot is WebAppOps.ActionSync<Site, void, NoContentResponse>;
+  syncFunctionsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    NoContentResponse,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Add or update a host level secret.
@@ -1802,7 +1838,8 @@ interface WebApps {
        */
       @path
       keyName: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1813,7 +1850,8 @@ interface WebApps {
   listHybridConnectionsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<HybridConnection>
+    ArmResponse<HybridConnection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1824,7 +1862,8 @@ interface WebApps {
   listRelayServiceConnectionsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<RelayServiceConnectionEntity>
+    ArmResponse<RelayServiceConnectionEntity>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -2330,7 +2369,8 @@ interface WebApps {
     Site,
     WorkflowArtifacts,
     OkResponse,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**

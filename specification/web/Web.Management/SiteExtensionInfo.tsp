@@ -90,7 +90,8 @@ interface SiteExtensionInfos {
   @operationId("WebApps_DeleteSiteExtension")
   deleteSiteExtension is SiteExtensionInfoOps.DeleteSync<
     SiteExtensionInfo,
-    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
