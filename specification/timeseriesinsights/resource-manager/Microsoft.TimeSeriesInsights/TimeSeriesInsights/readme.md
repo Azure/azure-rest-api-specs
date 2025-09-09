@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2021-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-03'
 input-file:
-  - Microsoft.TimeSeriesInsights/preview/2021-03-31-preview/timeseriesinsights.json
+  - preview/2021-03-31-preview/timeseriesinsights.json
 ```
 ### Tag: package-preview-2021-06
 
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2021-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
-  - Microsoft.TimeSeriesInsights/preview/2021-06-30-preview/timeseriesinsights.json
+  - preview/2021-06-30-preview/timeseriesinsights.json
 ```
 
 ### Tag: package-2020-05-15
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2020-05-15` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-05-15'
 input-file:
-- Microsoft.TimeSeriesInsights/stable/2020-05-15/timeseriesinsights.json
+- stable/2020-05-15/timeseriesinsights.json
 ```
 
 ### Tag: package-2018-08-preview
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2018-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
-- Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
+- preview/2018-08-15-preview/timeseriesinsights.json
 ```
 
 ### Tag: package-2017-11-15
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2017-11-15` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-11-15'
 input-file:
-- Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
+- stable/2017-11-15/timeseriesinsights.json
 ```
 
 ### Tag: package-2017-02-preview
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2017-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
-- Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
+- preview/2017-02-28-preview/timeseriesinsights.json
 ```
 
 ## Suppression

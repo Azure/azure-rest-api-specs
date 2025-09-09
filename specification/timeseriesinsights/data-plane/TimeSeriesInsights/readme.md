@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2020-07-31` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-07-31'
 input-file:
-- Microsoft.TimeSeriesInsights/stable/2020-07-31/timeseriesinsights.json
+- stable/2020-07-31/timeseriesinsights.json
 ```
 
 ## Suppression
@@ -83,7 +83,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2020-07-31/timeseriesinsights.json
+  - $(this-folder)/stable/2020-07-31/timeseriesinsights.json
 
 ```
 
