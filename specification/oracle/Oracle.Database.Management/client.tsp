@@ -337,22 +337,22 @@ using Oracle.Database;
   utcDateTime,
   "csharp"
 );
-@@clientName(ScheduledOperationsTypeUpdate.scheduledStartTime,
-  "AutoStartOn",
-  "csharp"
-);
-@@alternateType(ScheduledOperationsTypeUpdate.scheduledStartTime,
-  utcDateTime,
-  "csharp"
-);
-@@clientName(ScheduledOperationsTypeUpdate.scheduledStopTime,
-  "AutoStopOn",
-  "csharp"
-);
-@@alternateType(ScheduledOperationsTypeUpdate.scheduledStopTime,
-  utcDateTime,
-  "csharp"
-);
+//@@clientName(ScheduledOperationsTypeUpdate.scheduledStartTime,
+  //"AutoStartOn",
+  //"csharp"
+//);
+//@@alternateType(ScheduledOperationsTypeUpdate.scheduledStartTime,
+  //utcDateTime,
+  //"csharp"
+//);
+//@@clientName(ScheduledOperationsTypeUpdate.scheduledStopTime,
+  //"AutoStopOn",
+  //"csharp"
+//);
+//@@alternateType(ScheduledOperationsTypeUpdate.scheduledStopTime,
+  //utcDateTime,
+  //"csharp"
+//);
 @@clientName(SessionModeType, "ConnectionSessionModeType", "csharp");
 @@clientName(SourceType, "AutonomousDatabaseSourceType", "csharp");
 @@clientName(SyntaxFormatType.Ezconnectplus, "EzconnectPlus", "csharp");
@@ -428,7 +428,7 @@ using Oracle.Database;
 @@clientName(MaintenanceWindow, "OracleDatabaseMaintenanceWindow", "csharp");
 @@clientName(DayOfWeek, "OracleDatabaseDayOfWeek", "csharp");
 @@clientName(DayOfWeekName, "OracleDatabaseDayOfWeekName", "csharp");
-@@clientName(DayOfWeekUpdate, "OracleDatabaseDayOfWeekUpdate", "csharp");
+//@@clientName(DayOfWeekUpdate, "OracleDatabaseDayOfWeekUpdate", "csharp");
 @@clientName(DbIormConfig, "DBIormConfig", "csharp");
 @@clientName(DbIormConfig.dbName, "DBName", "csharp");
 @@clientName(DbNodeAction, "DBNodeAction", "csharp");
@@ -460,16 +460,16 @@ using Oracle.Database;
   "ExascaleDBStorageInputDetails",
   "csharp"
 );
-@@clientName(AutonomousDatabaseUpdateProperties.peerDbId, "peerDBId", "csharp");
+//@@clientName(AutonomousDatabaseUpdateProperties.peerDbId, "peerDBId", "csharp");
 
 @@usage(AutonomousDatabaseCharacterSetProperties,
   Usage.input | Usage.output,
   "csharp"
 );
-@@usage(AutonomousDatabaseUpdateProperties,
-  Usage.input | Usage.output,
-  "csharp"
-);
+//@@usage(AutonomousDatabaseUpdateProperties,
+  //Usage.input | Usage.output,
+  //"csharp"
+//);
 @@usage(AutonomousDatabaseNationalCharacterSetProperties,
   Usage.input | Usage.output,
   "csharp"
