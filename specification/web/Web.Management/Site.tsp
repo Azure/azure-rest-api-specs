@@ -844,11 +844,9 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetNetworkTraceOperation")
   @get
-  @action("networkTrace/operationresults/{operationId}")
-  getNetworkTraceOperation is SiteOps.ActionSync<
+  getNetworkTraceOperation is SiteOps.Read<
     Site,
-    void,
-    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
       @bodyRoot
       _: NetworkTrace[];
@@ -858,6 +856,7 @@ interface Sites {
        * GUID of the operation.
        */
       @path
+      @segment("networkTrace/operationresults")
       operationId: string;
     }
   >;
@@ -898,7 +897,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_StartWebSiteNetworkTraceOperation")
-  @action("startOperation")
+  @action("networkTrace/startOperation")
   startWebSiteNetworkTraceOperation is SiteOps.ActionAsync<
     Site,
     void,
@@ -941,21 +940,16 @@ interface Sites {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WebApps_GetNetworkTraces")
   @get
-  @action("networkTrace/{operationId}")
-  getNetworkTraces is SiteOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<NetworkTrace[]>,
-    Parameters = {
-      /**
-       * GUID of the operation.
-       */
-      @path
-      operationId: string;
-    }
-  >;
+  getNetworkTraces(
+    ...ResourceInstanceParameters<Site>,
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+    @path
+    @key
+    @segment("networkTrace")
+    operationId: string,
+  ): ArmResponse<NetworkTrace[]> | DefaultErrorResponse;
 
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
@@ -989,19 +983,14 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetNetworkTracesV2")
   @get
-  @action("networkTraces/{operationId}")
-  getNetworkTracesV2 is SiteOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<NetworkTrace[]>,
-    Parameters = {
-      /**
-       * GUID of the operation.
-       */
-      @path
-      operationId: string;
-    }
-  >;
+  getNetworkTracesV2(
+    ...ResourceInstanceParameters<Site>,
+
+    @key
+    @path
+    @segment("networkTraces")
+    operationId: string,
+  ): ArmResponse<NetworkTrace[]> | DefaultErrorResponse;
 
   /**
    * Description for Generates a new publishing password for an app (or deployment slot, if specified).
@@ -1374,7 +1363,10 @@ interface WebApps {
   /**
    * Description for Gets the details of a web, mobile, or API app.
    */
-  getSlot is WebAppOps.Read<Site>;
+  getSlot is WebAppOps.Read<
+    Site,
+    Response = ArmResponse<Site> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
@@ -1980,6 +1972,7 @@ interface WebApps {
    */
   @get
   @action("perfcounters")
+  @list
   listPerfMonCountersSlot is WebAppOps.ActionSync<
     Site,
     void,
