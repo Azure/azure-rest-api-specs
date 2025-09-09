@@ -10,10 +10,8 @@ Here's an example C# entry:
 
 ```yaml
 "@azure-tools/typespec-csharp":
-	package-dir: "Azure.AI.DocumentIntelligence"
 	namespace: "Azure.AI.DocumentIntelligence"
-	model-namespace: false
-	flavor: azure
+	# other settings not needed for this example.
 ```
 
 To generate Go, just do the following translation:
