@@ -128,6 +128,7 @@ directive:
     from: sqlmigration.json
     reason: Minimal payload is returned for delete confirmation per current backend behavior.
 ```
+
 ### Tag: package-2025-06
 
 These settings apply only when `--tag=package-2025-06` is specified on the command line.
