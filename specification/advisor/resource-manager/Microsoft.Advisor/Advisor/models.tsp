@@ -945,7 +945,7 @@ model ScoreEntity {
   /**
    * The number of impacted resources.
    */
-  impactedResourceCount?: int32;
+  impactedResourceCount?: float32;
 
   /**
    * The potential percentage increase in overall score at subscription level once all recommendations in this scope are implemented.
@@ -956,7 +956,7 @@ model ScoreEntity {
    * The count of impacted categories.
    */
   @visibility(Lifecycle.Read)
-  categoryCount?: int32;
+  categoryCount?: float32;
 }
 
 /**
