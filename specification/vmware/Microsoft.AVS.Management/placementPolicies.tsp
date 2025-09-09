@@ -143,7 +143,7 @@ model PlacementPolicyProperties {
 model PlacementPolicyUpdate {
   #suppress "deprecated" "Legacy flatten"
   @doc("The properties of a placement policy resource that may be updated")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PlacementPolicyUpdateProperties;
 }
 

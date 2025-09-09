@@ -24,15 +24,25 @@ using Microsoft.ServiceNetworking;
 
 // csharp
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Frontend.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Frontend.properties,
+  "csharp"
+);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Association.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Association.properties,
+  "csharp"
+);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(AssociationUpdate.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AssociationUpdate.properties,
+  "csharp"
+);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(TrafficController.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TrafficController.properties,
+  "csharp"
+);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(SecurityPolicy.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SecurityPolicy.properties,
+  "csharp"
+);
 @@clientName(SecurityPolicy,
   "ApplicationGatewayForContainersSecurityPolicy",
   "csharp"

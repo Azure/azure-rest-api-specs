@@ -44,7 +44,7 @@ op updateCertificate is KeyVaultOperation<
      */
     #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: CertificateUpdateParameters;
   },
   CertificateBundle

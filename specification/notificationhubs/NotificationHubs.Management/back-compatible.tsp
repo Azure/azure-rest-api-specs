@@ -4,40 +4,45 @@ using Azure.ClientGenerator.Core;
 using Microsoft.NotificationHubs;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ApnsCredential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApnsCredential.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(WnsCredential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WnsCredential.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(GcmCredential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GcmCredential.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(MpnsCredential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MpnsCredential.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AdmCredential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdmCredential.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(BaiduCredential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BaiduCredential.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(BrowserCredential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BrowserCredential.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(XiaomiCredential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(XiaomiCredential.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(FcmV1Credential.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FcmV1Credential.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NotificationHubPatchParameters.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubPatchParameters.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DebugSendResponse.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DebugSendResponse.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PnsCredentialsResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PnsCredentialsResource.properties
+);
 
 @@clientName(NotificationHubResources.createOrUpdate::parameters.resource,
   "parameters"
@@ -46,7 +51,8 @@ using Microsoft.NotificationHubs;
   "parameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NotificationHubResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubResource.properties
+);
 
 @@clientName(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
@@ -59,7 +65,8 @@ using Microsoft.NotificationHubs;
 );
 @@clientName(Namespaces.regenerateKeys::parameters.body, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SharedAccessAuthorizationRuleResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedAccessAuthorizationRuleResource.properties
+);
 
 @@clientName(NamespaceResources.createOrUpdate::parameters.resource,
   "parameters"
@@ -69,7 +76,8 @@ using Microsoft.NotificationHubs;
   "parameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NamespaceResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamespaceResource.properties
+);
 
 @@clientName(PrivateEndpointConnectionResources.update::parameters.resource,
   "parameters"

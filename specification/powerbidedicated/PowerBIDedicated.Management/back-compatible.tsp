@@ -4,24 +4,27 @@ using Azure.ClientGenerator.Core;
 using Microsoft.PowerBIDedicated;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DedicatedCapacityUpdateParameters.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedCapacityUpdateParameters.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AutoScaleVCoreUpdateParameters.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AutoScaleVCoreUpdateParameters.properties
+);
 
 @@clientName(Capacities.create::parameters.resource, "capacityParameters");
 @@clientName(Capacities.update::parameters.properties,
   "capacityUpdateParameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DedicatedCapacity.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedCapacity.properties
+);
 
 @@clientName(AutoScaleVCores.create::parameters.resource, "vCoreParameters");
 @@clientName(AutoScaleVCores.update::parameters.properties,
   "vCoreUpdateParameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AutoScaleVCore.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AutoScaleVCore.properties);
 
 @@clientName(CapacitiesOperationGroup.checkNameAvailability::parameters.body,
   "capacityParameters"

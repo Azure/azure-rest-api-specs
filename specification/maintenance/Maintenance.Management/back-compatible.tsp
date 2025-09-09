@@ -4,9 +4,10 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Maintenance;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(MaintenanceConfigurationProperties.maintenanceWindow);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceConfigurationProperties.maintenanceWindow
+);
 
-//@@flattenProperty(Update.properties);
+//@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Update.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
@@ -16,13 +17,14 @@ using Microsoft.Maintenance;
   "configuration"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(MaintenanceConfiguration.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceConfiguration.properties
+);
 
 @@clientName(ApplyUpdateOperationGroup.createOrUpdateOrCancel::parameters.resource,
   "applyUpdate"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ApplyUpdate.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplyUpdate.properties);
 
 @@clientName(ConfigurationAssignments.createOrUpdateParent::parameters.resource,
   "configurationAssignment"
@@ -43,9 +45,11 @@ using Microsoft.Maintenance;
   "configurationAssignment"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ConfigurationAssignment.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationAssignment.properties
+);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Microsoft.Maintenance.Update.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.Maintenance.Update.properties
+);
 
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(MaintenanceConfigurations.get,

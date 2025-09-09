@@ -37,7 +37,7 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
    * Report property.
    */
   #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: ReportProperties;
 }
 

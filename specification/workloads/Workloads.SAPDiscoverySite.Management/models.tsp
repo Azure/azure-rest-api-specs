@@ -202,7 +202,7 @@ model SAPMigrateError {
    * The SAP Discovery site resource error body.
    */
   #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ErrorDefinition;
 }
 

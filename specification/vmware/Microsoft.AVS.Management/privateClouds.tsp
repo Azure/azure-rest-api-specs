@@ -189,7 +189,7 @@ model PrivateCloudUpdate {
 
   #suppress "deprecated" "Legacy flatten"
   @doc("The updatable properties of a private cloud resource")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateCloudUpdateProperties;
 }
 

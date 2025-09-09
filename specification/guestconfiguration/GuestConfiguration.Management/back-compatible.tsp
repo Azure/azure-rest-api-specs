@@ -17,7 +17,7 @@ using Microsoft.GuestConfiguration;
 );
 @@clientName(VmssvmInfo, "VMSSVMInfo");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Operation.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 @@clientName(AssignmentReport, "CommonAssignmentReport", "go");
 
 // @@clientLocation decorators for operations with custom @operationId

@@ -51,16 +51,18 @@ using Microsoft.Chaos;
 );
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Experiment.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Experiment.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ExperimentExecution.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecution.properties
+);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(TargetType.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TargetType.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Capability.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Capability.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(CapabilityType.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapabilityType.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ExperimentExecutionDetails.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecutionDetails.properties
+);
 
 @@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript,python");

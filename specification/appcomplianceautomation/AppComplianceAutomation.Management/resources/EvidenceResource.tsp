@@ -37,7 +37,7 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
    * Evidence property.
    */
   #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: EvidenceProperties;
 }
 

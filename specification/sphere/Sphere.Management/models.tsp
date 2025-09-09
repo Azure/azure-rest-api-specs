@@ -707,7 +707,7 @@ model ProductUpdate {
    * The updatable properties of the Product.
    */
   #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProductUpdateProperties;
 }
 
@@ -729,7 +729,7 @@ model DeviceGroupUpdate {
    * The updatable properties of the DeviceGroup.
    */
   #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DeviceGroupUpdateProperties;
 }
 
@@ -781,7 +781,7 @@ model DeviceUpdate {
    * The updatable properties of the Device.
    */
   #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DeviceUpdateProperties;
 }
 

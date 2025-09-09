@@ -4,7 +4,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "vault");
 @@clientName(Vaults.update::parameters.properties, "vault");
@@ -27,7 +28,8 @@ using Microsoft.RecoveryServices;
   "python"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(VaultExtendedInfoResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VaultExtendedInfoResource.properties
+);
 @@clientName(RecoveryServicesOperationGroup.capabilities::parameters.body,
   "input"
 );

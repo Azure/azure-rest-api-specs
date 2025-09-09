@@ -44,7 +44,9 @@ namespace LiftrBase;
 );
 
 #suppress "deprecated" "for backward compatibility purpose"
-@@flattenProperty(LiftrBase.Storage.FileSystemResource.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LiftrBase.Storage.FileSystemResource.properties,
+  "csharp"
+);
 
 /**
  * For backward compatibility purpose, this enum is added back.

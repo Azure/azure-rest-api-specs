@@ -103,7 +103,7 @@ model ClusterUpdate {
 
   #suppress "deprecated" "Legacy flatten"
   @doc("The properties of a cluster resource that may be updated")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ClusterUpdateProperties;
 }
 

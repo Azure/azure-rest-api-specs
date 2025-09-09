@@ -4,10 +4,12 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ElasticSan;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ElasticSanUpdate.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSanUpdate.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(EncryptionProperties.identity, "EncryptionIdentity");
 
@@ -18,37 +20,39 @@ using Microsoft.ElasticSan;
 @@clientName(VirtualNetworkRule.id, "VirtualNetworkResourceId");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(VolumeGroupUpdate.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroupUpdate.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(VolumeUpdate.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeUpdate.properties);
 
 @@clientName(ElasticSans.create::parameters.resource, "parameters");
 @@clientName(ElasticSans.update::parameters.properties, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ElasticSan.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSan.properties);
 
 @@clientName(PrivateEndpointConnections.create::parameters.resource,
   "parameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientName(VolumeGroups.create::parameters.resource, "parameters");
 @@clientName(VolumeGroups.update::parameters.properties, "parameters");
 @@clientName(VolumeGroups.preBackup::parameters.body, "parameters");
 @@clientName(VolumeGroups.preRestore::parameters.body, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(VolumeGroup.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroup.properties);
 
 @@clientName(Snapshots.create::parameters.resource, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Snapshot.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
 
 @@clientName(Volumes.create::parameters.resource, "parameters");
 @@clientName(Volumes.update::parameters.properties, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Volume.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Volume.properties);
 
 @@clientName(AutoScaleProperties.scaleUpProperties, "ScaleUpProperties");
 @@clientName(EncryptionProperties.keyVaultProperties, "KeyVaultProperties");

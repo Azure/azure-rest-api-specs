@@ -4,7 +4,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.BotService;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(Bots.create::parameters.resource, "parameters");
 @@clientName(Bots.update::parameters.properties, "parameters");
@@ -13,7 +14,8 @@ using Microsoft.BotService;
   "properties"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientName(BotChannels.create::parameters.resource, "parameters");
 @@clientName(BotChannels.update::parameters.properties, "parameters");

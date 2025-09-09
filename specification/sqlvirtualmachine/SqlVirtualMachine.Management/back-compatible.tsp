@@ -14,7 +14,8 @@ using Microsoft.SqlVirtualMachine;
   "parameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AvailabilityGroupListener.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AvailabilityGroupListener.properties
+);
 
 @@clientName(SqlVirtualMachineGroups.createOrUpdate::parameters.resource,
   "parameters"
@@ -23,7 +24,8 @@ using Microsoft.SqlVirtualMachine;
   "parameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SqlVirtualMachineGroup.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SqlVirtualMachineGroup.properties
+);
 
 @@clientName(SqlVirtualMachines.createOrUpdate::parameters.resource,
   "parameters"
@@ -35,4 +37,5 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(SqlVirtualMachines.troubleshoot::parameters.body, "parameters");
 @@clientName(Operation, "Info", "csharp");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SqlVirtualMachine.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SqlVirtualMachine.properties
+);
