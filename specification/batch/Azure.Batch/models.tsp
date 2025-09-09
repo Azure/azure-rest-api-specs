@@ -1178,7 +1178,7 @@ model FileProperties {
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("The display name for the schedule.")
   @visibility(Lifecycle.Read)
@@ -1187,27 +1187,27 @@ model BatchJobSchedule {
   @doc("The URL of the Job Schedule.")
   @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
-  url?: url;
+  url: url;
 
   @doc("The ETag of the Job Schedule. This is an opaque string. You can use it to detect whether the Job Schedule has changed between requests. In particular, you can be pass the ETag with an Update Job Schedule request to specify that your changes should take effect only if nobody else has modified the schedule in the meantime.")
   @visibility(Lifecycle.Read)
-  eTag?: eTag;
+  eTag: eTag;
 
   @doc("The last modified time of the Job Schedule. This is the last time at which the schedule level data, such as the Job specification or recurrence information, changed. It does not factor in job-level changes such as new Jobs being created or Jobs changing state.")
   @visibility(Lifecycle.Read)
-  lastModified?: utcDateTime;
+  lastModified: utcDateTime;
 
   @doc("The creation time of the Job Schedule.")
   @visibility(Lifecycle.Read)
-  creationTime?: utcDateTime;
+  creationTime: utcDateTime;
 
   @doc("The current state of the Job Schedule.")
   @visibility(Lifecycle.Read)
-  state?: BatchJobScheduleState;
+  state: BatchJobScheduleState;
 
   @doc("The time at which the Job Schedule entered the current state.")
   @visibility(Lifecycle.Read)
-  stateTransitionTime?: utcDateTime;
+  stateTransitionTime: utcDateTime;
 
   @doc("The previous state of the Job Schedule. This property is not present if the Job Schedule is in its initial active state.")
   @visibility(Lifecycle.Read)
@@ -1225,7 +1225,7 @@ model BatchJobSchedule {
 
   @doc("Information about Jobs that have been and will be run under this schedule.")
   @visibility(Lifecycle.Read)
-  executionInfo?: BatchJobScheduleExecutionInfo;
+  executionInfo: BatchJobScheduleExecutionInfo;
 
   @doc("A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
   metadata?: BatchMetadataItem[];
@@ -2481,7 +2481,7 @@ model BatchJobScheduleListResult {
 model BatchJob {
   @doc("A string that uniquely identifies the Job within the Account. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("The display name for the Job.")
   @visibility(Lifecycle.Read)
@@ -2494,27 +2494,27 @@ model BatchJob {
   @doc("The URL of the Job.")
   @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
-  url?: url;
+  url: url;
 
   @doc("The ETag of the Job. This is an opaque string. You can use it to detect whether the Job has changed between requests. In particular, you can be pass the ETag when updating a Job to specify that your changes should take effect only if nobody else has modified the Job in the meantime.")
   @visibility(Lifecycle.Read)
-  eTag?: eTag;
+  eTag: eTag;
 
   @doc("The last modified time of the Job. This is the last time at which the Job level data, such as the Job state or priority, changed. It does not factor in task-level changes such as adding new Tasks or Tasks changing state.")
   @visibility(Lifecycle.Read)
-  lastModified?: utcDateTime;
+  lastModified: utcDateTime;
 
   @doc("The creation time of the Job.")
   @visibility(Lifecycle.Read)
-  creationTime?: utcDateTime;
+  creationTime: utcDateTime;
 
   @doc("The current state of the Job.")
   @visibility(Lifecycle.Read)
-  state?: BatchJobState;
+  state: BatchJobState;
 
   @doc("The time at which the Job entered its current state.")
   @visibility(Lifecycle.Read)
-  stateTransitionTime?: utcDateTime;
+  stateTransitionTime: utcDateTime;
 
   @doc("The previous state of the Job. This property is not set if the Job is in its initial Active state.")
   @visibility(Lifecycle.Read)
@@ -2905,7 +2905,7 @@ model BatchTaskSlotCounts {
 model BatchPool {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   @visibility(Lifecycle.Read)
@@ -2914,27 +2914,27 @@ model BatchPool {
   @doc("The URL of the Pool.")
   @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
-  url?: url;
+  url: url;
 
   @doc("The ETag of the Pool. This is an opaque string. You can use it to detect whether the Pool has changed between requests. In particular, you can be pass the ETag when updating a Pool to specify that your changes should take effect only if nobody else has modified the Pool in the meantime.")
   @visibility(Lifecycle.Read)
-  eTag?: eTag;
+  eTag: eTag;
 
   @doc("The last modified time of the Pool. This is the last time at which the Pool level data, such as the targetDedicatedNodes or enableAutoscale settings, changed. It does not factor in node-level changes such as a Compute Node changing state.")
   @visibility(Lifecycle.Read)
-  lastModified?: utcDateTime;
+  lastModified: utcDateTime;
 
   @doc("The creation time of the Pool.")
   @visibility(Lifecycle.Read)
-  creationTime?: utcDateTime;
+  creationTime: utcDateTime;
 
   @doc("The current state of the Pool.")
   @visibility(Lifecycle.Read)
-  state?: BatchPoolState;
+  state: BatchPoolState;
 
   @doc("The time at which the Pool entered its current state.")
   @visibility(Lifecycle.Read)
-  stateTransitionTime?: utcDateTime;
+  stateTransitionTime: utcDateTime;
 
   @doc("Whether the Pool is resizing.")
   @visibility(Lifecycle.Read)
@@ -2946,7 +2946,7 @@ model BatchPool {
 
   @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).")
   @visibility(Lifecycle.Read)
-  vmSize?: string;
+  vmSize: string;
 
   @doc("The virtual machine configuration for the Pool. This property must be specified.")
   @visibility(Lifecycle.Read)
@@ -2962,11 +2962,11 @@ model BatchPool {
 
   @doc("The number of dedicated Compute Nodes currently in the Pool.")
   @visibility(Lifecycle.Read)
-  currentDedicatedNodes?: int32;
+  currentDedicatedNodes: int32;
 
   @doc("The number of Spot/Low-priority Compute Nodes currently in the Pool. Spot/Low-priority Compute Nodes which have been preempted are included in this count.")
   @visibility(Lifecycle.Read)
-  currentLowPriorityNodes?: int32;
+  currentLowPriorityNodes: int32;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
   @visibility(Lifecycle.Read)
@@ -3291,7 +3291,7 @@ model BatchNodeDeallocateOptions {
 model BatchTask {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("A display name for the Task. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   @visibility(Lifecycle.Read)
@@ -3300,19 +3300,19 @@ model BatchTask {
   @doc("The URL of the Task.")
   @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
-  url?: url;
+  url: url;
 
   @doc("The ETag of the Task. This is an opaque string. You can use it to detect whether the Task has changed between requests. In particular, you can be pass the ETag when updating a Task to specify that your changes should take effect only if nobody else has modified the Task in the meantime.")
   @visibility(Lifecycle.Read)
-  eTag?: eTag;
+  eTag: eTag;
 
   @doc("The last modified time of the Task.")
   @visibility(Lifecycle.Read)
-  lastModified?: utcDateTime;
+  lastModified: utcDateTime;
 
   @doc("The creation time of the Task.")
   @visibility(Lifecycle.Read)
-  creationTime?: utcDateTime;
+  creationTime: utcDateTime;
 
   @doc("How the Batch service should respond when the Task completes.")
   @visibility(Lifecycle.Read)
@@ -3320,11 +3320,11 @@ model BatchTask {
 
   @doc("The current state of the Task.")
   @visibility(Lifecycle.Read)
-  state?: BatchTaskState;
+  state: BatchTaskState;
 
   @doc("The time at which the Task entered its current state.")
   @visibility(Lifecycle.Read)
-  stateTransitionTime?: utcDateTime;
+  stateTransitionTime: utcDateTime;
 
   @doc("The previous state of the Task. This property is not set if the Task is in its initial Active state.")
   @visibility(Lifecycle.Read)
@@ -3336,7 +3336,7 @@ model BatchTask {
 
   @doc("The command line of the Task. For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables).")
   @visibility(Lifecycle.Read)
-  commandLine?: string;
+  commandLine: string;
 
   @doc("The settings for the container under which the Task runs. If the Pool that will run this Task has containerConfiguration set, this must be set as well. If the Pool that will run this Task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files.")
   @visibility(Lifecycle.Read)
@@ -3854,74 +3854,97 @@ model BatchNodeUserUpdateOptions {
 @doc("A Compute Node in the Batch service.")
 model BatchNode {
   @doc("The ID of the Compute Node. Every Compute Node that is added to a Pool is assigned a unique ID. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the ID is reclaimed and could be reused for new Compute Nodes.")
-  id?: string;
+  @visibility(Lifecycle.Read)
+  id: string;
 
   @doc("The URL of the Compute Node.")
+  @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
-  url?: url;
+  url: url;
 
   @doc("The current state of the Compute Node. The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.")
-  state?: BatchNodeState;
+  @visibility(Lifecycle.Read)
+  state: BatchNodeState;
 
   @doc("Whether the Compute Node is available for Task scheduling.")
+  @visibility(Lifecycle.Read)
   schedulingState?: SchedulingState;
 
   @doc("The time at which the Compute Node entered its current state.")
-  stateTransitionTime?: utcDateTime;
+  @visibility(Lifecycle.Read)
+  stateTransitionTime: utcDateTime;
 
   @doc("The last time at which the Compute Node was started. This property may not be present if the Compute Node state is unusable.")
-  lastBootTime?: utcDateTime;
+  @visibility(Lifecycle.Read)
+  lastBootTime: utcDateTime;
 
   @doc("The time at which this Compute Node was allocated to the Pool. This is the time when the Compute Node was initially allocated and doesn't change once set. It is not updated when the Compute Node is service healed or preempted.")
-  allocationTime?: utcDateTime;
+  @visibility(Lifecycle.Read)
+  allocationTime: utcDateTime;
 
   @doc("The IP address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes.")
-  ipAddress?: ipV4Address;
+  @visibility(Lifecycle.Read)
+  ipAddress: ipV4Address;
 
   @doc("The IPv6 address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes. This property will not be present if the Pool is not configured for IPv6.")
-  ipv6Address?: ipV6Address;
+  @visibility(Lifecycle.Read)
+  ipv6Address: ipV6Address;
 
   @doc("An identifier which can be passed when adding a Task to request that the Task be scheduled on this Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
-  affinityId?: string;
+  @visibility(Lifecycle.Read)
+  affinityId: string;
 
   @doc("The size of the virtual machine hosting the Compute Node. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).")
-  vmSize?: string;
+  @visibility(Lifecycle.Read)
+  vmSize: string;
 
   @doc("The total number of Job Tasks completed on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks.")
-  totalTasksRun?: int32;
+  @visibility(Lifecycle.Read)
+  totalTasksRun: int32;
 
   @doc("The total number of currently running Job Tasks on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks.")
+  @visibility(Lifecycle.Read)
   runningTasksCount?: int32;
 
   @doc("The total number of scheduling slots used by currently running Job Tasks on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks.")
+  @visibility(Lifecycle.Read)
   runningTaskSlotsCount?: int32;
 
   @doc("The total number of Job Tasks which completed successfully (with exitCode 0) on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks.")
+  @visibility(Lifecycle.Read)
   totalTasksSucceeded?: int32;
 
   @doc("A list of Tasks whose state has recently changed. This property is present only if at least one Task has run on this Compute Node since it was assigned to the Pool.")
+  @visibility(Lifecycle.Read)
   recentTasks?: BatchTaskInfo[];
 
   @doc("The Task specified to run on the Compute Node as it joins the Pool.")
+  @visibility(Lifecycle.Read)
   startTask?: BatchStartTask;
 
   @doc("Runtime information about the execution of the StartTask on the Compute Node.")
+  @visibility(Lifecycle.Read)
   startTaskInfo?: BatchStartTaskInfo;
 
   @doc("The list of errors that are currently being encountered by the Compute Node.")
+  @visibility(Lifecycle.Read)
   errors?: BatchNodeError[];
 
   @doc("Whether this Compute Node is a dedicated Compute Node. If false, the Compute Node is a Spot/Low-priority Compute Node.")
+  @visibility(Lifecycle.Read)
   isDedicated?: boolean;
 
   @doc("The endpoint configuration for the Compute Node.")
+  @visibility(Lifecycle.Read)
   endpointConfiguration?: BatchNodeEndpointConfiguration;
 
   @doc("Information about the Compute Node agent version and the time the Compute Node upgraded to a new version.")
-  nodeAgentInfo?: BatchNodeAgentInfo;
+  @visibility(Lifecycle.Read)
+  nodeAgentInfo: BatchNodeAgentInfo;
 
   @doc("Info about the current state of the virtual machine.")
-  virtualMachineInfo?: VirtualMachineInfo;
+  @visibility(Lifecycle.Read)
+  virtualMachineInfo: VirtualMachineInfo;
 }
 
 @doc("Information about a Task running on a Compute Node.")
