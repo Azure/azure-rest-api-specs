@@ -120,7 +120,6 @@ Examples of common errors and warnings that should be addressed after running th
 /** Service api versions **/
 enum Versions {
   /** The 2023-11-01 api version **/
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_11_01: "2023-11-01",
 }
 
