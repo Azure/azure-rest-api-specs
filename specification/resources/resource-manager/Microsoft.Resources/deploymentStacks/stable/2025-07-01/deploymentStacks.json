@@ -241,6 +241,9 @@
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionManagementGroups"
           },
           {
+            "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionResourcesWithoutDeleteSupport"
+          },
+          {
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.bypassStackOutOfSyncError"
           }
         ],
@@ -597,6 +600,9 @@
           },
           {
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionManagementGroups"
+          },
+          {
+            "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionResourcesWithoutDeleteSupport"
           },
           {
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.bypassStackOutOfSyncError"
@@ -969,6 +975,9 @@
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionManagementGroups"
           },
           {
+            "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionResourcesWithoutDeleteSupport"
+          },
+          {
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.bypassStackOutOfSyncError"
           }
         ],
@@ -1159,6 +1168,10 @@
         "managementGroups": {
           "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum",
           "description": "Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state."
+        },
+        "resourcesWithoutDeleteSupport": {
+          "$ref": "#/definitions/DeploymentStacksResourcesWithoutDeleteSupportEnum",
+          "description": "Some resources do not support deletion.  This flag will denote how the stack should handle those resources."
         }
       },
       "required": [
@@ -1512,7 +1525,8 @@
         "succeeded",
         "failed",
         "canceled",
-        "deleting"
+        "deleting",
+        "initializing"
       ],
       "x-ms-enum": {
         "name": "DeploymentStackProvisioningState",
@@ -1572,6 +1586,11 @@
             "name": "Deleting",
             "value": "deleting",
             "description": "The deployment stack is being deleted"
+          },
+          {
+            "name": "Initializing",
+            "value": "initializing",
+            "description": "The deployment stack is currently being initialized"
           }
         ]
       },
@@ -1737,6 +1756,30 @@
       "required": [
         "uri"
       ]
+    },
+    "DeploymentStacksResourcesWithoutDeleteSupportEnum": {
+      "type": "string",
+      "description": "Specifies an action for resources that do not support deletion.",
+      "enum": [
+        "detach",
+        "fail"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStacksResourcesWithoutDeleteSupportEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Detach",
+            "value": "detach",
+            "description": "Detach the specified resources from the deployment stack and continue"
+          },
+          {
+            "name": "Fail",
+            "value": "fail",
+            "description": "Fail the deployment stack if resources cannot be deleted"
+          }
+        ]
+      }
     },
     "DeploymentStacksTemplateLink": {
       "type": "object",
@@ -2057,6 +2100,35 @@
       },
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "unmanageActionResources"
+    },
+    "ActionOnUnmanageDeleteParameters.unmanageActionResourcesWithoutDeleteSupport": {
+      "name": "unmanageAction.ResourcesWithoutDeleteSupport",
+      "in": "query",
+      "description": "Some resources do not support deletion.  This flag will denote how the stack should handle those resources.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "detach",
+        "fail"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStacksResourcesWithoutDeleteSupportEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Detach",
+            "value": "detach",
+            "description": "Detach the specified resources from the deployment stack and continue"
+          },
+          {
+            "name": "Fail",
+            "value": "fail",
+            "description": "Fail the deployment stack if resources cannot be deleted"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "unmanageActionResourcesWithoutDeleteSupport"
     },
     "ManagementGroupIdParameter": {
       "name": "managementGroupId",
