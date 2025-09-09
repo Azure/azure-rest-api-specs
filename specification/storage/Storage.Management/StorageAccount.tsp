@@ -279,6 +279,7 @@ interface StorageAccounts {
    * Fetch the report summary of all the storage task assignments and instances in an account
    */
   @get
+  @list
   @action("reports")
   storageTaskAssignmentsInstancesReportList is ArmResourceActionSync<
     StorageAccount,

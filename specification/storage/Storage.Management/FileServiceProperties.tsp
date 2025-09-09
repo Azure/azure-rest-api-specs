@@ -68,6 +68,7 @@ interface FileServices {
    * Lists all shares.
    */
   @get
+  @list
   @action("shares")
   fileSharesList is ArmResourceActionSync<
     FileServiceProperties,

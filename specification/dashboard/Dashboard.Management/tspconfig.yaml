@@ -12,11 +12,10 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Grafana"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
-    service-dir: "sdk/grafana"
+    namespace: "Azure.ResourceManager.Grafana"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dashboard"
     namespace: "azure.mgmt.dashboard"
@@ -24,7 +23,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dashboard"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dashboard"
     namespace: "com.azure.resourcemanager.dashboard"
     service-name: "Dashboard" # human-readable service name, whitespace allowed
     flavor: azure

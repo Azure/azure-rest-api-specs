@@ -117,13 +117,7 @@ interface FileShares {
    */
   lease is ArmResourceActionSync<
     FileShare,
-    {
-      /**
-       * Lease Share request body.
-       */
-      @bodyRoot
-      parameters?: LeaseShareRequest;
-    },
+    LeaseShareRequest,
     Parameters = {
       /**
        * Optional. Specify the snapshot time to lease a snapshot.
@@ -139,7 +133,8 @@ interface FileShares {
        */
       @header("ETag")
       eTag: string;
-    }
+    },
+    OptionalRequestBody = true
   >;
 }
 

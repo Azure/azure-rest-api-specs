@@ -1740,7 +1740,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The ImmutabilityPolicy Properties that will be extended for a blob container.",
+            "description": "The content of the action request",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ImmutabilityPolicy"
@@ -1884,7 +1884,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Lease Container request body.",
+            "description": "The content of the action request",
             "required": false,
             "schema": {
               "$ref": "#/definitions/LeaseContainerRequest"
@@ -3050,7 +3050,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Lease Share request body.",
+            "description": "The content of the action request",
             "required": false,
             "schema": {
               "$ref": "#/definitions/LeaseShareRequest"
@@ -5923,7 +5923,7 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "$maxpagesize",
+            "name": "$top",
             "in": "query",
             "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.",
             "required": false,
@@ -5990,7 +5990,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24,
-            "pattern": "^[a-z0-9]{3,24}$"
+            "pattern": "^[a-z][a-z0-9]{2,23}$"
           }
         ],
         "responses": {
@@ -6047,7 +6047,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24,
-            "pattern": "^[a-z0-9]{3,24}$"
+            "pattern": "^[a-z][a-z0-9]{2,23}$"
           },
           {
             "name": "parameters",
@@ -6151,7 +6151,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24,
-            "pattern": "^[a-z0-9]{3,24}$"
+            "pattern": "^[a-z][a-z0-9]{2,23}$"
           },
           {
             "name": "parameters",
@@ -6239,7 +6239,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24,
-            "pattern": "^[a-z0-9]{3,24}$"
+            "pattern": "^[a-z][a-z0-9]{2,23}$"
           }
         ],
         "responses": {
@@ -6317,7 +6317,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24,
-            "pattern": "^[a-z0-9]{3,24}$"
+            "pattern": "^[a-z][a-z0-9]{2,23}$"
           },
           {
             "name": "$maxpagesize",
@@ -7674,7 +7674,8 @@
           "$ref": "#/definitions/CloudErrorBody",
           "description": "An error response from the Storage service."
         }
-      }
+      },
+      "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
@@ -7700,7 +7701,8 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "x-ms-external": true
     },
     "ContainerProperties": {
       "type": "object",

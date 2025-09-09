@@ -15,6 +15,10 @@ export const CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME =
  */
 export default async function getLabelActions({ github, context, core }) {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+
+  core.setOutput("head_sha", head_sha);
+  core.setOutput("issue_number", issue_number);
+
   const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
     owner,
     repo,
@@ -73,8 +77,6 @@ export default async function getLabelActions({ github, context, core }) {
       per_page: PER_PAGE_MAX,
     })
   ).map((a) => a.name);
-
-  core.setOutput("issue_number", issue_number);
 
   if (
     breakingChangesArtifactNames.length === 0 &&
