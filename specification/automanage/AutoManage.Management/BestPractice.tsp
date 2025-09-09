@@ -24,27 +24,25 @@ model BestPractice
   >;
 }
 
-@armResourceOperations
-interface BestPracticeOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
+alias BestPracticeOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.Automanage",
-      },
-      {},
-      {
-        /** The Automanage best practice name. */
-        @path
-        @segment("bestPractices")
-        @key
-        bestPracticeName: string,
-      }
-    > {}
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Automanage";
+  },
+  {},
+  {
+    /** The Automanage best practice name. */
+    @path
+    @segment("bestPractices")
+    @key
+    bestPracticeName: string;
+  }
+>;
 
 @armResourceOperations
 interface BestPractices {
@@ -61,33 +59,31 @@ interface BestPractices {
     Response = ArmResponse<BestPracticeList>
   >;
 }
-@armResourceOperations
-interface BestPracticesVersionOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
+alias BestPracticesVersionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.Automanage",
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Automanage";
 
-        /** The Automanage best practice name. */
-        @path
-        @segment("bestPractices")
-        @key
-        bestPracticeName: string,
-      },
-      {},
-      {
-        /** The Automanage best practice version name. */
-        @path
-        @segment("versions")
-        @key
-        versionName: string,
-      }
-    > {}
+    /** The Automanage best practice name. */
+    @path
+    @segment("bestPractices")
+    @key
+    bestPracticeName: string;
+  },
+  {},
+  {
+    /** The Automanage best practice version name. */
+    @path
+    @segment("versions")
+    @key
+    versionName: string;
+  }
+>;
 
 @armResourceOperations
 interface BestPracticesVersions {

@@ -30,60 +30,56 @@ model ConfigurationProfileAssignment
   managedBy?: string;
 }
 
-@armResourceOperations
-interface ConfigurationProfileAssignmentBySubscriptionOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
+alias ConfigurationProfileAssignmentBySubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
-      }
-    > {}
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  }
+>;
 
-@armResourceOperations
-interface ConfigurationProfileAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
+alias ConfigurationProfileAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.Compute",
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Compute";
 
-        /** The name of the virtual machine. */
-        @path
-        @segment("virtualMachines")
-        @key
-        vmName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
+    /** The name of the virtual machine. */
+    @path
+    @segment("virtualMachines")
+    @key
+    vmName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
-      }
-    > {}
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  }
+>;
 
 @armResourceOperations
 interface ConfigurationProfileAssignments {
@@ -118,40 +114,38 @@ interface ConfigurationProfileAssignments {
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
-interface ConfigurationProfileHCRPAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.HybridCompute",
+alias ConfigurationProfileHCRPAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** The name of the Arc machine. */
-        @path
-        @segment("machines")
-        @key
-        machineName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.HybridCompute";
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
-      }
-    > {}
+    /** The name of the Arc machine. */
+    @path
+    @segment("machines")
+    @key
+    machineName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  }
+>;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
@@ -179,40 +173,38 @@ interface ConfigurationProfileHCRPAssignments {
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
-interface ConfigurationProfileHCIAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.AzureStackHci",
+alias ConfigurationProfileHCIAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** The name of the Arc machine. */
-        @path
-        @segment("clusters")
-        @key
-        clusterName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.AzureStackHci";
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
-      }
-    > {}
+    /** The name of the Arc machine. */
+    @path
+    @segment("clusters")
+    @key
+    clusterName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  }
+>;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations

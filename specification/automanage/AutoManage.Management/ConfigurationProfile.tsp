@@ -23,40 +23,36 @@ model ConfigurationProfile
   >;
 }
 
-@armResourceOperations
-interface ConfigurationProfileBySubScriptionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        /** The configuration profile name. */
-        @path
-        @segment("configurationProfiles")
-        @key
-        configurationProfileName: string,
-      }
-    > {}
+alias ConfigurationProfileBySubScriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The configuration profile name. */
+    @path
+    @segment("configurationProfiles")
+    @key
+    configurationProfileName: string;
+  }
+>;
 
-@armResourceOperations
-interface ConfigurationProfileOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        /** The configuration profile name. */
-        @path
-        @segment("configurationProfiles")
-        @key
-        configurationProfileName: string,
-      }
-    > {}
+alias ConfigurationProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The configuration profile name. */
+    @path
+    @segment("configurationProfiles")
+    @key
+    configurationProfileName: string;
+  }
+>;
 
 @armResourceOperations
 interface ConfigurationProfiles {
@@ -100,29 +96,28 @@ interface ConfigurationProfiles {
     Response = ArmResponse<ConfigurationProfileList>
   >;
 }
-@armResourceOperations
-interface ConfigurationProfilesVersionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The configuration profile name. */
-        @path
-        @segment("configurationProfiles")
-        @key
-        configurationProfileName: string,
-      },
-      {
-        /** The configuration profile version name. */
-        @path
-        @segment("versions")
-        @key
-        versionName: string,
-      }
-    > {}
+alias ConfigurationProfilesVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The configuration profile name. */
+    @path
+    @segment("configurationProfiles")
+    @key
+    configurationProfileName: string;
+  },
+  {
+    /** The configuration profile version name. */
+    @path
+    @segment("versions")
+    @key
+    versionName: string;
+  }
+>;
 
 @armResourceOperations
 interface ConfigurationProfilesVersions {

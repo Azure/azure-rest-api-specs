@@ -25,51 +25,49 @@ model Report
   >;
 }
 
-@armResourceOperations
-interface ReportOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
+alias ReportOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.Compute",
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Compute";
 
-        /** The name of the virtual machine. */
-        @path
-        @segment("virtualMachines")
-        @key
-        vmName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<Report>,
+    /** The name of the virtual machine. */
+    @path
+    @segment("virtualMachines")
+    @key
+    vmName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Report>;
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<Report>,
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Report>;
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
 
-        /** The report name. */
-        @path
-        @segment("reports")
-        @key
-        reportName: string,
-      }
-    > {}
+    /** The report name. */
+    @path
+    @segment("reports")
+    @key
+    reportName: string;
+  }
+>;
 
 @armResourceOperations
 interface Reports {
@@ -90,52 +88,50 @@ interface Reports {
     Response = ArmResponse<ReportList>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
-interface HCRPReportOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.HybridCompute",
+alias HCRPReportOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** The name of the Arc machine. */
-        @path
-        @segment("machines")
-        @key
-        machineName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<Report>,
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.HybridCompute";
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<Report>,
+    /** The name of the Arc machine. */
+    @path
+    @segment("machines")
+    @key
+    machineName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Report>;
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Report>;
 
-        /** The report name. */
-        @path
-        @segment("reports")
-        @key
-        reportName: string,
-      }
-    > {}
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+
+    /** The report name. */
+    @path
+    @segment("reports")
+    @key
+    reportName: string;
+  }
+>;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
@@ -153,52 +149,50 @@ interface HCRPReports {
     Response = ArmResponse<ReportList>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
-interface HCIReportOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.AzureStackHci",
+alias HCIReportOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** The name of the Arc machine. */
-        @path
-        @segment("clusters")
-        @key
-        clusterName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<Report>,
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.AzureStackHci";
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<Report>,
+    /** The name of the Arc machine. */
+    @path
+    @segment("clusters")
+    @key
+    clusterName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Report>;
 
-        /** The configuration profile assignment name. */
-        @path
-        @segment("configurationProfileAssignments")
-        @key
-        configurationProfileAssignmentName: string,
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Report>;
 
-        /** The report name. */
-        @path
-        @segment("reports")
-        @key
-        reportName: string,
-      }
-    > {}
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+
+    /** The report name. */
+    @path
+    @segment("reports")
+    @key
+    reportName: string;
+  }
+>;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations

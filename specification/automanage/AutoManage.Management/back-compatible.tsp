@@ -73,8 +73,7 @@ using Microsoft.Automanage;
   "ListBySubscription"
 );
 
-@@clientLocation(ConfigurationProfileAssignmentsOperationGroup.list, ConfigurationProfileAssignments);
+@@clientLocation(ConfigurationProfileAssignmentsOperationGroup.list,
+  ConfigurationProfileAssignments
+);
 @@clientName(ConfigurationProfileAssignmentsOperationGroup.list, "List");
-
-@@clientLocation(BestPracticesVersionsOperationGroup.listByTenant, BestPracticesVersions);
-@@clientName(BestPracticesVersionsOperationGroup.listByTenant, "ListByTenant");
