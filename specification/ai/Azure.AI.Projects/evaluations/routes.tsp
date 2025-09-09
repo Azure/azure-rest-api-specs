@@ -63,3 +63,33 @@ interface Evaluations {
   @doc("Delete an evaluation run by name")
   delete is EvaluationsOperations.ResourceDelete<Evaluation>;
 }
+
+
+@route("agents/{agentId}/humanEvaluations")
+@added(Versions.v2025_05_15_preview)
+@doc("Manage human evaluations for a specific agent.")
+interface HumanEvaluations {
+  @doc("Get all evaluation template associated with this agent.")
+  @get
+  getAssociatedTemplates(
+    @path agentId: string,
+    @query active?: boolean,
+  ): AssociatedTemplates | RequestError;
+
+  @doc("Get a specific evaluation template associated with this agent.")
+  @get
+  @route("/{hetId}")
+  getAssociatedTemplate(
+    @path agentId: string,
+    @path hetId: AssetId,
+  ): AssociatedTemplate | RequestError;
+
+  @doc("Create or update an association between an evaluation template and this agent.")
+  @put
+  @route("/{hetId}")
+  updateAssociatedTemplate(
+    @path agentId: string,
+    @path hetId: AssetId,
+    @body body: UpdateAssociatedTemplate,
+  ): AssociatedTemplate | RequestError;
+}
