@@ -291,8 +291,8 @@ stages:
               scriptLocation: inlineScript
               inlineScript: |
                 $releasePlanInfo = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" ${{ parameters.ReleasePlanWorkItemId }}
-                Write-Host "Release Plan Info: $releasePlanInfo"
                 Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+                Write-Host "Release Plan Info: $releasePlanInfo"
 
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
@@ -303,10 +303,6 @@ stages:
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
-
-        - pwsh: |
-            Write-Host "Release plan info: $(ReleasePlanInfo)"
-          displayName: 'Show release plan info'
 
         - task: PowerShell@2
           displayName: Create pull request

@@ -31,4 +31,4 @@ else
     $submittedBy = $releasePlan["Custom.ReleasePlanSubmittedby"]
     $releasePlanInfo = "`n`n## Release plan details`nTitle: $title`nLink: [$releasePlanLink]($releasePlanLink)`nSubmitted by: $submittedBy"
 }
-return $releasePlanInfo
+Write-Output $releasePlanInfo
