@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
 
-@useDependency(APIVersions.v2024_07_01_preview)
+@useDependency(APIVersions.v2025_03_01_preview)
 namespace Customizations;
 
 // Client customizations should be kept in this file only and not in other files
@@ -165,6 +165,21 @@ interface AdministrationOperations {
   deleteTestProfile is TestProfileAdministration.deleteTestProfile;
   getTestProfile is TestProfileAdministration.getTestProfile;
   listTestProfiles is TestProfileAdministration.listTestProfiles;
+
+  createOrUpdateTrigger is TriggerAdministration.createOrUpdateTrigger;
+  deleteTrigger is TriggerAdministration.deleteTrigger;
+  getTrigger is TriggerAdministration.getTrigger;
+  listTriggers is TriggerAdministration.listTrigger;
+
+  createOrUpdateNotificationRule is NotificationRuleAdministration.createOrUpdateNotificationRule;
+  deleteNotificationRule is NotificationRuleAdministration.deleteNotificationRule;
+  getNotificationRule is NotificationRuleAdministration.getNotificationRule;
+  listNotificationRules is NotificationRuleAdministration.listNotificationRule;
+
+  @action("clone")
+  cloneTest is LoadTestAdministration.cloneTest;
+
+  getOperationStatus is Operations.getStatus;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -207,4 +222,7 @@ interface TestRunOperations {
   @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
   @action("stop")
   stopTestProfileRun is TestProfileRunAdministration.stop;
+
+  getLatestTestRunInsights is LoadTestRun.getLatestInsights;
+  generateTestRunInsights is LoadTestRun.generateInsights;
 }
