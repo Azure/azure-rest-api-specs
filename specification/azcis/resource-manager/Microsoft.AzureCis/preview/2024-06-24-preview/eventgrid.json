@@ -820,7 +820,7 @@
           "description": "SchemaUrl of the EventType. Required."
         },
         "isInDefaultSet": {
-          "type": "boolean",
+          "$ref": "#/definitions/IsInDefaultSet",
           "description": "If True, the eventType is pre-selected as part of Event Subscription creation process. Optional."
         },
         "azureLocation": {
@@ -977,6 +977,30 @@
         "topicTypeName",
         "supportedLocations"
       ]
+    },
+    "IsInDefaultSet": {
+      "type": "string",
+      "description": "IsInDefaultSet enum.",
+      "enum": [
+        "False",
+        "True"
+      ],
+      "x-ms-enum": {
+        "name": "IsInDefaultSet",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "False",
+            "value": "False",
+            "description": "False State"
+          },
+          {
+            "name": "True",
+            "value": "True",
+            "description": "True State"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
