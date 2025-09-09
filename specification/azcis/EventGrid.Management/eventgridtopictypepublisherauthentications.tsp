@@ -17,8 +17,8 @@ model EventGridTopicTypePublisherAuthenticationsResourceProperties {
   @doc("Name of the Topic Type. Required.")
   topicTypeName: string;
 
-  @doc("Gets the Authentication type, e.g. \"Certificate\". Required.")
-  authenticationType: string;
+  @doc("Gets the Authentication Type. Required.")
+  authenticationType: AuthenticationType;
 
   @doc("List of certificate subject names that's used while publishing events to EventGrid. e.g., [\"CN=test.domain.com\", \"CN=test2.domain.net\"]. Required.")
   certificateSubjectNames: Array<string>;
@@ -29,6 +29,14 @@ model EventGridTopicTypePublisherAuthenticationsResourceProperties {
   @doc("Provisioning status of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: EventGridProvisioningState;
+}
+
+@doc("Authentication Type enum.")
+union AuthenticationType {
+  string,
+
+  @doc("Certificate Authentication Type")
+  Certificate: "Certificate",
 }
 
 @doc("EventGridTopicTypePublisherAuthentications Resource")

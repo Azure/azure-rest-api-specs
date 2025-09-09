@@ -718,6 +718,24 @@
     }
   },
   "definitions": {
+    "AuthenticationType": {
+      "type": "string",
+      "description": "Authentication Type enum.",
+      "enum": [
+        "Certificate"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Certificate",
+            "value": "Certificate",
+            "description": "Certificate Authentication Type"
+          }
+        ]
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -886,8 +904,8 @@
           "description": "Name of the Topic Type. Required."
         },
         "authenticationType": {
-          "type": "string",
-          "description": "Gets the Authentication type, e.g. \"Certificate\". Required."
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "Gets the Authentication Type. Required."
         },
         "certificateSubjectNames": {
           "type": "array",
