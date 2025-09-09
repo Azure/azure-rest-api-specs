@@ -61,8 +61,11 @@ jobs:
         working-directory: aov/packages
 
       - name: Install azure-openapi-validator packages to temp
-        run: npm install --no-save $(find $GITHUB_WORKSPACE/aov/packages -name *.tgz)
-        working-directory: ${{ runner.temp }}/aov
+        run: |
+          mkdir aov
+          cd aov
+          npm install --no-save $(find $GITHUB_WORKSPACE/aov/packages -name *.tgz)
+        working-directory: ${{ runner.temp }}
 
       - name: Install specs deps
         uses: ./.github/actions/setup-node-install-deps
