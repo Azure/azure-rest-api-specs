@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
   "{certificateEndpoint}",
   "The Confidential Ledger Certificate endpoint is used to retrieve the TLS certificate required for connecting to a Confidential Ledger.",
   {
+    /** The certificate endpoint (or "Identity Service Endpoint" in the Azure portal), for example https://identity.confidential-ledger.core.azure.com. */
     #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Default value for certificate endpoint"
     certificateEndpoint?: url = "https://identity.confidential-ledger.core.azure.com",
   }

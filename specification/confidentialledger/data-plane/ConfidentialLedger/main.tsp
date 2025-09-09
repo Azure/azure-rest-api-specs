@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
   "{ledgerEndpoint}",
   "Write and retrieve ledger entries against the Confidential Ledger service.",
   {
+    /** The Confidential Ledger URL, for example https://contoso.confidentialledger.azure.com. */
     ledgerEndpoint: url,
   }
 )
