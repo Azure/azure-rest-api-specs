@@ -1900,7 +1900,7 @@ interface WebApps {
   createOrUpdateHostSecretSlot(
     ...HostSecretSlotParameters,
     @body body: KeyInfo,
-  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
+  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse;
 
   /**
    * Description for Delete a host level secret.

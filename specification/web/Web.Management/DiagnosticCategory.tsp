@@ -54,7 +54,7 @@ interface DiagnosticCategories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Diagnostics_GetSiteDiagnosticCategory")
-  getSiteDiagnosticCategory is DiagnosticCategoryOps.Read<DiagnosticCategory>;
+  getSiteDiagnosticCategory is DiagnosticCategoryOps.Read<DiagnosticCategory, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Get Diagnostics Categories
@@ -64,7 +64,7 @@ interface DiagnosticCategories {
   listSiteDiagnosticCategories is DiagnosticCategoryOps.List<
     DiagnosticCategory,
     Response = ArmResponse<DiagnosticCategoryCollection>,
-    
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

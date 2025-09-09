@@ -222,7 +222,7 @@ interface FunctionEnvelopes {
     FunctionEnvelope,
     void,
     ArmResponse<FunctionSecrets>,
-    
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

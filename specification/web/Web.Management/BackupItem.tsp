@@ -101,7 +101,7 @@ interface BackupItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_Restore")
-  restore is BackupItemOps.ActionAsync<BackupItem, RestoreRequest, OkResponse>;
+  restore is BackupItemOps.ActionAsync<BackupItem, RestoreRequest, OkResponse, OverrideErrorType = DefaultErrorResponse>;
 }
 @armResourceOperations
 interface BackupItemOperationGroupOps
