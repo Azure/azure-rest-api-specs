@@ -18,3 +18,7 @@ using Azure.ClientGenerator.Core;
   azureLocation[],
   "csharp"
 );
+@@alternateType(Microsoft.Compute.PlacementScore.region,
+  azureLocation,
+  "csharp"
+);
