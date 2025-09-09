@@ -613,7 +613,7 @@ model GalleryImageVersion {
   @doc("This is the version of the gallery image.")
   name?: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Describes the properties of a gallery image version.")
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryImageVersionProperties;
@@ -730,7 +730,7 @@ model LogicalNetworkPropertiesDhcpOptions {
 
 @doc("Properties of the subnet.")
 model Subnet {
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the subnet.")
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SubnetProperties;
@@ -783,7 +783,7 @@ model RouteTable {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "deprecated" "LEGACY flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "LEGACY flattening"
   @doc("Properties of the route table.")
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteTableProperties;
@@ -798,7 +798,7 @@ model RouteTableProperties {
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattened property"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattened property"
   @doc("Properties of the route.")
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteProperties;

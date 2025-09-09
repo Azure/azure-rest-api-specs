@@ -13,7 +13,7 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(AvailabilityGroupListeners.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AvailabilityGroupListener.properties
 );
 
@@ -23,7 +23,7 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(SqlVirtualMachineGroups.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SqlVirtualMachineGroup.properties
 );
 
@@ -36,6 +36,6 @@ using Microsoft.SqlVirtualMachine;
 );
 @@clientName(SqlVirtualMachines.troubleshoot::parameters.body, "parameters");
 @@clientName(Operation, "Info", "csharp");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SqlVirtualMachine.properties
 );

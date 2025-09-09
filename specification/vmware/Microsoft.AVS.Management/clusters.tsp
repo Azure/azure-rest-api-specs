@@ -101,7 +101,7 @@ model ClusterProperties {
 model ClusterUpdate {
   ...ResourceSkuProperty;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("The properties of a cluster resource that may be updated")
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ClusterUpdateProperties;

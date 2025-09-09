@@ -5,20 +5,20 @@ using Microsoft.Network;
 
 @@clientName(PrivateZones.createOrUpdate::parameters.resource, "parameters");
 @@clientName(PrivateZones.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateZone.properties);
 
 @@clientName(VirtualNetworkLinks.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(VirtualNetworkLinks.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualNetworkLink.properties
 );
 
 @@clientName(RecordSets.createOrUpdate::parameters.resource, "parameters");
 @@clientName(RecordSets.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(RecordSet.properties);
 
 // @@clientLocation decorators for operations with @operationId

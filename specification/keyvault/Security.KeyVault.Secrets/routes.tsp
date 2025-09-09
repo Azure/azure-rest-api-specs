@@ -30,7 +30,7 @@ op setSecret is KeyVaultOperation<
     /**
      * The parameters for setting the secret.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretSetParameters;
@@ -84,7 +84,7 @@ op updateSecret is KeyVaultOperation<
     /**
      * The parameters for update secret operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretUpdateParameters;
@@ -288,7 +288,7 @@ op restoreSecret is KeyVaultOperation<
     /**
      * The parameters to restore the secret.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretRestoreParameters;

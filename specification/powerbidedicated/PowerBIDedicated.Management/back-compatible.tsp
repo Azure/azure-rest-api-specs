@@ -3,11 +3,11 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.PowerBIDedicated;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedCapacityUpdateParameters.properties
 );
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AutoScaleVCoreUpdateParameters.properties
 );
 
@@ -15,7 +15,7 @@ using Microsoft.PowerBIDedicated;
 @@clientName(Capacities.update::parameters.properties,
   "capacityUpdateParameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedCapacity.properties
 );
 
@@ -23,7 +23,7 @@ using Microsoft.PowerBIDedicated;
 @@clientName(AutoScaleVCores.update::parameters.properties,
   "vCoreUpdateParameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AutoScaleVCore.properties);
 
 @@clientName(CapacitiesOperationGroup.checkNameAvailability::parameters.body,

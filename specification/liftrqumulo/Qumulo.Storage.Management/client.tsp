@@ -43,7 +43,7 @@ namespace LiftrBase;
   "csharp"
 );
 
-#suppress "deprecated" "for backward compatibility purpose"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "for backward compatibility purpose"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LiftrBase.Storage.FileSystemResource.properties,
   "csharp"
 );

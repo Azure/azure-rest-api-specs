@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
@@ -27,7 +27,7 @@ using Microsoft.RecoveryServices;
   "resourceExtendedInfoDetails",
   "python"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VaultExtendedInfoResource.properties
 );
 @@clientName(RecoveryServicesOperationGroup.capabilities::parameters.body,

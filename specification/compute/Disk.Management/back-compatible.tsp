@@ -4,18 +4,18 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskUpdate.properties);
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskEncryptionSetUpdate.properties
 );
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SnapshotUpdate.properties);
 
 @@clientName(Disks.update, "Disks.update::parameters.properties", "disk");
@@ -23,17 +23,17 @@ using Microsoft.Compute;
   "Disks.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Disk.properties);
 
 @@clientName(DiskAccesses.update,
   "DiskAccesses.update::parameters.properties",
   "diskAccess"
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskAccess.properties);
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
@@ -41,7 +41,7 @@ using Microsoft.Compute;
   "DiskEncryptionSets.update::parameters.properties",
   "diskEncryptionSet"
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskEncryptionSet.properties
 );
 
@@ -49,7 +49,7 @@ using Microsoft.Compute;
   "DiskRestorePoints.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskRestorePoint.properties
 );
 
@@ -61,7 +61,7 @@ using Microsoft.Compute;
   "Snapshots.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
 
 @@clientName(DiskAccesses.createOrUpdate::parameters.resource, "diskAccess");

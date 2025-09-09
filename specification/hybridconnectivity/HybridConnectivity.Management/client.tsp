@@ -5,22 +5,22 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 namespace Microsoft.HybridConnectivity;
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResourcePatch.properties
 );
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EndpointAccessResource.relay
 );
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.relay
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.ingress
 );
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressProfileProperties.aadProfile
 );
 
@@ -39,7 +39,7 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(ServiceConfigurationResources.createOrupdate::parameters.resource,
   "ServiceConfigurationResource"
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResource.properties
 );
 

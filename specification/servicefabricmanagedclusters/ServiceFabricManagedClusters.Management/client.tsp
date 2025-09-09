@@ -20,14 +20,14 @@ using Microsoft.ServiceFabric;
   "javascript"
 );
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VMSSExtension.properties);
 
 @@clientName(ApplicationTypes.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ApplicationTypes.update::parameters.properties, "parameters");
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationTypeResource.properties
 );
 
@@ -37,14 +37,14 @@ using Microsoft.ServiceFabric;
 @@clientName(ApplicationTypeVersions.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationTypeVersionResource.properties
 );
 
 @@clientName(Applications.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientName(Applications.resumeUpgrade::parameters.body, "parameters");
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationResource.properties
 );
 
@@ -60,10 +60,10 @@ using Microsoft.ServiceFabric;
 @@clientName(ManagedClusters.stopFaultSimulation::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedCluster.properties);
 
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedClusterCodeVersionResult.properties
 );
 
@@ -78,7 +78,7 @@ using Microsoft.ServiceFabric;
 @@clientName(NodeTypes.start::parameters.body, "parameters");
 @@clientName(NodeTypes.startFaultSimulation::parameters.body, "parameters");
 @@clientName(NodeTypes.stopFaultSimulation::parameters.body, "parameters");
-#suppress "deprecated" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NodeType.properties);
 
 @@Azure.ResourceManager.identifiers(FaultSimulationListResult.value,

@@ -43,7 +43,7 @@ op updateKey is KeyVaultOperation<
     /**
      * The parameters of the key to update.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyUpdateParameters;
@@ -105,7 +105,7 @@ op encrypt is KeyVaultOperation<
     /**
      * The parameters for the encryption operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
@@ -141,7 +141,7 @@ op decrypt is KeyVaultOperation<
     /**
      * The parameters for the decryption operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
@@ -177,7 +177,7 @@ op sign is KeyVaultOperation<
     /**
      * The parameters for the signing operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeySignParameters;
@@ -213,7 +213,7 @@ op verify is KeyVaultOperation<
     /**
      * The parameters for verify operations.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyVerifyParameters;
@@ -249,7 +249,7 @@ op wrapKey is KeyVaultOperation<
     /**
      * The parameters for wrap operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
@@ -285,7 +285,7 @@ op unwrapKey is KeyVaultOperation<
     /**
      * The parameters for the key operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
@@ -321,7 +321,7 @@ op release is KeyVaultOperation<
     /**
      * The parameters for the key release operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyReleaseParameters;

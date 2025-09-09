@@ -270,7 +270,7 @@ model CheckQuotaAvailabilityResponse {
   @visibility(Lifecycle.Read)
   name?: string;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("Check quota availability response properties.")
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CheckQuotaAvailabilityResponseProperties;
@@ -287,7 +287,7 @@ model CheckQuotaAvailabilityResponseProperties {
 
 @doc("Request object of new quota for a quota bucket.")
 model QuotaBucketRequest {
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;

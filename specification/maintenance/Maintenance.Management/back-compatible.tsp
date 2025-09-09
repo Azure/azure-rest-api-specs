@@ -3,27 +3,27 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Maintenance;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceConfigurationProperties.maintenanceWindow
 );
 
 //@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Update.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
   "configuration"
 );
 @@clientName(MaintenanceConfigurationOperationGroup.update::parameters.properties,
   "configuration"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceConfiguration.properties
 );
 
 @@clientName(ApplyUpdateOperationGroup.createOrUpdateOrCancel::parameters.resource,
   "applyUpdate"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplyUpdate.properties);
 
 @@clientName(ConfigurationAssignments.createOrUpdateParent::parameters.resource,
@@ -44,10 +44,10 @@ using Microsoft.Maintenance;
 @@clientName(ConfigurationAssignmentsForResourceGroup.update::parameters.properties,
   "configurationAssignment"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationAssignment.properties
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.Maintenance.Update.properties
 );
 
