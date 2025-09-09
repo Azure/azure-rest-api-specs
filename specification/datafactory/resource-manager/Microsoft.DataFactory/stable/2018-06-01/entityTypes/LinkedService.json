@@ -1352,6 +1352,19 @@
           "x-ms-format": "dfe-string",
           "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
         },
+        "clusterAuthType": {
+          "description": "HDInsight cluster authentication type.",
+          "type": "string",
+          "enum": [
+            "BasicAuth",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "HDInsightClusterAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "userName": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -1382,6 +1395,10 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "Specify the FileSystem if the main storage for the HDInsight is ADLS Gen2. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing MI authentication information for the HDInsight cluster."
         }
       },
       "required": [

@@ -12,13 +12,14 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Azure.Batch/preview/{version}/BatchService.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Compute.Batch"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     head-as-boolean: false
     namespace: Azure.Compute.Batch
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Compute.Batch
     model-namespace: false
   "@azure-tools/typespec-go":
@@ -32,8 +33,8 @@ options:
     single-client: true
     slice-elements-byval: true
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-compute-batch"
     namespace: "com.azure.compute.batch"
-    package-dir: "azure-compute-batch"
     partial-update: true
     skip-special-headers:
       - "ocp-date"

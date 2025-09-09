@@ -5,8 +5,6 @@ parameters:
     default: "{project-root}/azure-sdk-for-java/"
   "js-sdk-folder":
     default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-net/"
   "service-directory-name":
     default: "communication"
   "service-dir":
@@ -30,11 +28,11 @@ options:
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
     model-namespace: false
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Communication.JobRouter
-    package-dir: "Azure.Communication.JobRouter"
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Communication.JobRouter
     model-namespace: false
   "@azure-tools/typespec-python":
@@ -46,7 +44,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-communication-jobrouter"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-jobrouter"
     namespace: com.azure.communication.jobrouter
     partial-update: true
     service-name: JobRouter

@@ -11,11 +11,11 @@ options:
     output-file: "{azure-resource-provider-folder}/Microsoft.Resources/bicep/{version-status}/{version}/bicepClient.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Resources.Bicep"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Resources.Bicep"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-resource-bicep"
     namespace: "azure.mgmt.resource.bicep"
@@ -23,7 +23,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-resources-bicep"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources-bicep"
     namespace: "com.azure.resourcemanager.resources.bicep"
     service-name: "Bicep Provider"
     flavor: azure
