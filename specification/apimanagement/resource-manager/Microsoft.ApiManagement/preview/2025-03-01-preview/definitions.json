@@ -1980,6 +1980,10 @@
           "$ref": "#/definitions/BackendCircuitBreaker",
           "description": "Backend Circuit Breaker Configuration"
         },
+        "azureRegion": {
+          "type": "string",
+          "description": "Azure region in which the backend is deployed. Can be optionally specified to use features such as carbon-optimized load balancer."
+        },
         "pool": {
           "allOf": [
             {
@@ -2058,7 +2062,7 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Runtime Url of the Backend.",
+          "description": "Runtime Url of the Backend. Required when backend type is 'Single'.",
           "minLength": 1,
           "maxLength": 2000
         },
@@ -2082,17 +2086,13 @@
               }
             ]
           },
-          "description": "Backend communication protocol."
+          "description": "Backend communication protocol. Required when backend type is 'Single'."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/BackendBaseParameters"
         }
-      ],
-      "required": [
-        "url",
-        "protocol"
       ],
       "description": "Parameters supplied to the Create Backend operation."
     },
@@ -2676,6 +2676,21 @@
           "maximum": 100,
           "example": {
             "priority": 1
+          }
+        },
+        "preferredCarbonEmission": {
+          "type": "string",
+          "description": "Scope 2 carbon emission preference for the backend. When specified, the load balancer will optimize traffic flow by routing to regions that have carbon emission less than or equal to the specified category. However, when all other backends are not available it will route traffic to these regions anyway. This requires the backend to be attributed with 'azureRegion' information.",
+          "enum": [
+            "VeryLow",
+            "Low",
+            "Medium",
+            "High",
+            "VeryHigh"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "CarbonEmissionCategory"
           }
         }
       },
@@ -8377,6 +8392,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GatewayContractProperties",
           "description": "Gateway details."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
