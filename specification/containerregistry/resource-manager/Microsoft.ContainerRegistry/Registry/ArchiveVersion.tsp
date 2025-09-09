@@ -11,6 +11,108 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface ArchiveVersionOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the container registry.
+         */
+        @path
+        @segment("registries")
+        @pattern("^[a-zA-Z0-9]*$")
+        @minLength(5)
+        @maxLength(50)
+        @doc("The name of the container registry.")
+        registryName: string,
+
+        /**
+         * The package type.
+         */
+        @path
+        @segment("packages")
+        @minLength(3)
+        @maxLength(50)
+        @pattern("^[a-zA-Z]*$")
+        @doc("The package type.")
+        packageType: string,
+
+        /**
+         * The name of the archive resource.
+         */
+        @path
+        @segment("archives")
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(5)
+        @maxLength(200)
+        @doc("The name of the archive resource.")
+        archiveName: string,
+
+      },
+      {
+         /**
+         * The name of the archive version resource.
+         */
+        @path
+        @segment("versions")
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(5)
+        @maxLength(200)
+        @doc("The name of the archive version resource.")
+        archiveVersionName: string,
+      }
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface ArchiveVersionListOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the container registry.
+         */
+        @path
+        @segment("registries")
+        @pattern("^[a-zA-Z0-9]*$")
+        @minLength(5)
+        @maxLength(50)
+        @doc("The name of the container registry.")
+        registryName: string,
+
+        /**
+         * The package type.
+         */
+        @path
+        @segment("packages")
+        @minLength(3)
+        @maxLength(50)
+        @pattern("^[a-zA-Z]*$")
+        @doc("The package type.")
+        packageType: string,
+
+        /**
+         * The name of the archive resource.
+         */
+        @path
+        @segment("archives")
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(5)
+        @maxLength(200)
+        @doc("The name of the archive resource.")
+        archiveName: string,
+      },
+      {}
+    > {}
 /**
  * An object that represents an export pipeline for a container registry.
  */
@@ -30,12 +132,12 @@ interface ArchiveVersions {
   /**
    * Gets the properties of the archive version.
    */
-  get is ArmResourceRead<ArchiveVersion>;
+  get is ArchiveVersionOperationOps.Read<ArchiveVersion>;
 
   /**
-   * Creates a archive for a container registry with the specified parameters.
+   * Creates a archive version for a container registry with the specified parameters.
    */
-  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+  create is ArchiveVersionOperationOps.CreateOrUpdateAsync<
     ArchiveVersion,
     Request = void
   >;
@@ -43,13 +145,14 @@ interface ArchiveVersions {
   /**
    * Deletes a archive version from a container registry.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ArchiveVersion>;
+  delete is ArchiveVersionOperationOps.DeleteWithoutOkAsync<ArchiveVersion>;
 
   /**
    * Lists all archive versions for the specified container registry, repository type and archive name.
    */
+  @action("versions")
   @list
-  list is ArmResourceListByParent<
+  list is ArchiveVersionListOps.Read<
     ArchiveVersion,
     Response = ArmResponse<ArchiveVersionListResult>
   >;
