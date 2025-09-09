@@ -631,12 +631,11 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetContainerLogsZip")
-  @action("zip/download")
+  @action("containerlogs/zip/download")
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse | NoContentResponse
   >;
 
   /**
@@ -667,7 +666,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("extensions/WebApps_CreateOneDeployOperation")
   @put
-  @action("onedeploy")
+  @action("extensions/onedeploy")
   createOneDeployOperation is SiteOps.ActionSync<
     Site,
     void,
@@ -800,12 +799,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateMachineKey")
   @action("updatemachinekey")
-  updateMachineKey is SiteOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<unknown>,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  updateMachineKey is SiteOps.ActionSync<Site, void, ArmResponse<unknown>>;
 
   /**
    * Description for Restores a web app.
@@ -926,8 +920,7 @@ interface Sites {
        */
       @query("sasUrl")
       sasUrl?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -966,20 +959,23 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetNetworkTraceOperationV2")
   @get
-  @action("networkTraces/current/operationresults/{operationId}")
-  getNetworkTraceOperationV2 is SiteOps.ActionSync<
+  getNetworkTraceOperationV2 is SiteOps.Read<
     Site,
-    void,
-    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
       @bodyRoot
       _: NetworkTrace[];
     }),
     Parameters = {
+      @path
+      @segment("networkTraces")
+      current: "current";
+
       /**
        * GUID of the operation.
        */
       @path
+      @segment("operationresults")
       operationId: string;
     }
   >;
@@ -1157,8 +1153,7 @@ interface Sites {
   listSlotDifferencesFromProduction is SiteOps.ActionSync<
     Site,
     CsmSlotEntity,
-    ArmResponse<SlotDifferenceCollection>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<SlotDifferenceCollection>
   >;
 
   /**
@@ -1170,8 +1165,7 @@ interface Sites {
   swapSlotWithProduction is SiteOps.ActionAsync<
     Site,
     CsmSlotEntity,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse
   >;
 
   /**
@@ -1184,8 +1178,7 @@ interface Sites {
   listSnapshots is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<SnapshotCollection>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<SnapshotCollection>
   >;
 
   /**
@@ -1199,8 +1192,7 @@ interface Sites {
   listSnapshotsFromDRSecondary is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<SnapshotCollection>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<SnapshotCollection>
   >;
 
   /**
@@ -1208,13 +1200,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_Start")
-  @action("networkTrace/startOperation")
-  start is WebAppOps.ActionSync<
-    Site,
-    void,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  start is ArmResourceActionSync<Site, void, OkResponse>;
 
   /**
    * Description for Start capturing network packets for the site.
@@ -1243,8 +1229,7 @@ interface Sites {
        */
       @query("sasUrl")
       sasUrl?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -1253,12 +1238,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_Stop")
   @action("stop")
-  stop is SiteOps.ActionSync<
-    Site,
-    void,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  stop is SiteOps.ActionSync<Site, void, OkResponse>;
 
   /**
    * Description for Stop ongoing capturing network packets for the site.
@@ -1269,8 +1249,7 @@ interface Sites {
   stopNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse | NoContentResponse
   >;
 
   /**
@@ -1279,12 +1258,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_SyncRepository")
   @action("sync")
-  syncRepository is SiteOps.ActionSync<
-    Site,
-    void,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  syncRepository is SiteOps.ActionSync<Site, void, OkResponse>;
 
   /**
    * Description for Syncs function trigger metadata to the management database
@@ -1292,12 +1266,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_SyncFunctionTriggers")
   @action("syncfunctiontriggers")
-  syncFunctionTriggers is SiteOps.ActionSync<
-    Site,
-    void,
-    NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  syncFunctionTriggers is SiteOps.ActionSync<Site, void, NoContentResponse>;
 
   /**
    * Description for Gets the quota usage information of an app (or deployment slot, if specified).
@@ -1316,8 +1285,7 @@ interface Sites {
        */
       @query("$filter")
       $filter?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -1394,6 +1362,12 @@ interface WebAppOps
 
 @armResourceOperations
 interface WebApps {
+  ListSlots is WebAppOps.List<
+    Site,
+    Response = ArmResponse<WebAppCollection>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
   /**
    * Description for Gets the details of a web, mobile, or API app.
    */
@@ -1511,7 +1485,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("appsettings")
+  @action("config/appsettings")
   updateApplicationSettingsSlot is WebAppOps.ActionSync<
     Site,
     StringDictionary,
@@ -1533,7 +1507,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("authsettings")
+  @action("config/authsettings")
   updateAuthSettingsSlot is WebAppOps.ActionSync<
     Site,
     SiteAuthSettings,
@@ -1555,7 +1529,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("azurestorageaccounts")
+  @action("config/azurestorageaccounts")
   updateAzureStorageAccountsSlot is WebAppOps.ActionSync<
     Site,
     AzureStoragePropertyDictionaryResource,
@@ -1577,7 +1551,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("backup")
+  @action("config/backup")
   updateBackupConfigurationSlot is WebAppOps.ActionSync<
     Site,
     BackupRequest,
@@ -1606,7 +1580,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("connectionstrings")
+  @action("config/connectionstrings")
   updateConnectionStringsSlot is WebAppOps.ActionSync<
     Site,
     ConnectionStringDictionary,
@@ -1628,12 +1602,11 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("metadata")
+  @action("config/metadata")
   updateMetadataSlot is WebAppOps.ActionSync<
     Site,
     StringDictionary,
-    ArmResponse<StringDictionary>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<StringDictionary>
   >;
 
   /**
@@ -1674,8 +1647,7 @@ interface WebApps {
   updateSitePushSettingsSlot is WebAppOps.ActionSync<
     Site,
     PushSettings,
-    ArmResponse<PushSettings>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<PushSettings>
   >;
 
   /**
@@ -1705,7 +1677,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @action("containerlogs/zipdownload")
+  @action("containerlogs/zip/download")
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
@@ -1726,35 +1698,24 @@ interface WebApps {
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
   @get
-  @action("token")
+  @action("functions/admin/token")
   getFunctionsAdminTokenSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<string>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<string>
   >;
 
   /**
    * Description for Get host secrets for a function app.
    */
-  @action("listkeys")
-  listHostKeysSlot is WebAppOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<HostKeys>,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  @action("host/default/listkeys")
+  listHostKeysSlot is WebAppOps.ActionSync<Site, void, ArmResponse<HostKeys>>;
 
   /**
    * Description for This is to allow calling via powershell and ARM template.
    */
-  @action("listsyncstatus")
-  listSyncStatusSlot is WebAppOps.ActionSync<
-    Site,
-    void,
-    NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  @action("host/default/listsyncstatus")
+  listSyncStatusSlot is WebAppOps.ActionSync<Site, void, NoContentResponse>;
 
   /**
    * Description for Syncs function trigger metadata to the management database
@@ -1777,12 +1738,14 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @delete
-  @action("{keyName}")
-  deleteHostSecretSlot is WebAppOps.ActionSync<
+  deleteHostSecretSlot is WebAppOps.DeleteSync<
     Site,
-    void,
-    NoContentResponse | ArmNotFoundResponse,
+    Response = NoContentResponse | ArmNotFoundResponse,
     Parameters = {
+      @path
+      @segment("host")
+      default: "default";
+
       /**
        * The type of host key.
        */
@@ -1826,8 +1789,7 @@ interface WebApps {
   isCloneableSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<SiteCloneability>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<SiteCloneability>
   >;
 
   /**
@@ -1838,8 +1800,7 @@ interface WebApps {
   listSiteBackupsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<BackupItemCollection>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<BackupItemCollection>
   >;
 
   /**
@@ -1849,8 +1810,7 @@ interface WebApps {
   listSyncFunctionTriggersSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<FunctionSecrets>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<FunctionSecrets>
   >;
 
   /**
@@ -1873,8 +1833,7 @@ interface WebApps {
       @path
       @segment("networkTrace/operationresults")
       operationId: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -1903,14 +1862,13 @@ interface WebApps {
        */
       @query("sasUrl")
       sasUrl?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
    * Description for Start capturing network packets for the site.
    */
-  @action("startOperation")
+  @action("networkTrace/startOperation")
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionAsync<
     Site,
     void,
@@ -1933,8 +1891,7 @@ interface WebApps {
        */
       @query("sasUrl")
       sasUrl?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -1945,8 +1902,7 @@ interface WebApps {
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse | NoContentResponse
   >;
 
   /**
@@ -1963,8 +1919,7 @@ interface WebApps {
       @path
       @segment("networkTrace")
       operationId: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -1987,8 +1942,7 @@ interface WebApps {
       @path
       @segment("networkTraces/current/operationresults")
       operationId: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -2010,7 +1964,7 @@ interface WebApps {
     @key
     @segment("networkTraces")
     operationId: string,
-  ): DefaultErrorResponse | ArmResponse<NetworkTrace[]>;
+  ): ErrorResponse | ArmResponse<NetworkTrace[]>;
 
   /**
    * Description for Generates a new publishing password for an app (or deployment slot, if specified).
@@ -2020,8 +1974,7 @@ interface WebApps {
   generateNewSitePublishingPasswordSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse | NoContentResponse
   >;
 
   /**
@@ -2040,8 +1993,7 @@ interface WebApps {
        */
       @query("$filter")
       $filter?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -2052,8 +2004,7 @@ interface WebApps {
   getSitePhpErrorLogFlagSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<SitePhpErrorLogFlag>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<SitePhpErrorLogFlag>
   >;
 
   /**
@@ -2064,8 +2015,7 @@ interface WebApps {
   listPremierAddOnsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<PremierAddOn>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<PremierAddOn>
   >;
 
   /**
@@ -2076,8 +2026,7 @@ interface WebApps {
   getPrivateLinkResourcesSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<PrivateLinkResourcesWrapper>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<PrivateLinkResourcesWrapper>
   >;
 
   /**
@@ -2087,20 +2036,14 @@ interface WebApps {
   listPublishingProfileXmlWithSecretsSlot is WebAppOps.ActionSync<
     Site,
     CsmPublishingProfileOptions,
-    File,
-    OverrideErrorType = DefaultErrorResponse
+    File
   >;
 
   /**
    * Description for Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.
    */
   @action("resetSlotConfig")
-  resetSlotConfigurationSlot is WebAppOps.ActionSync<
-    Site, 
-    void, 
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  resetSlotConfigurationSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
 
   /**
    * Description for Restarts an app (or deployment slot, if specified).
@@ -2122,8 +2065,7 @@ interface WebApps {
        */
       @query("synchronous")
       synchronous?: boolean;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -2133,8 +2075,7 @@ interface WebApps {
   restoreFromBackupBlobSlot is WebAppOps.ActionAsync<
     Site,
     RestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse
   >;
 
   /**
@@ -2144,8 +2085,7 @@ interface WebApps {
   restoreFromDeletedAppSlot is WebAppOps.ActionAsync<
     Site,
     DeletedAppRestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse
   >;
 
   /**
@@ -2155,8 +2095,7 @@ interface WebApps {
   restoreSnapshotSlot is WebAppOps.ActionAsync<
     Site,
     SnapshotRestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse
   >;
 
   /**
@@ -2167,20 +2106,14 @@ interface WebApps {
   listSlotDifferencesSlot is WebAppOps.ActionSync<
     Site,
     CsmSlotEntity,
-    ArmResponse<SlotDifferenceCollection>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<SlotDifferenceCollection>
   >;
 
   /**
    * Description for Swaps two deployment slots of an app.
    */
   @action("slotsswap")
-  swapSlotSlot is WebAppOps.ActionAsync<
-    Site,
-    CsmSlotEntity,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  swapSlotSlot is WebAppOps.ActionAsync<Site, CsmSlotEntity, OkResponse>;
 
   /**
    * Description for Returns all Snapshots to the user.
@@ -2190,8 +2123,7 @@ interface WebApps {
   listSnapshotsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<SnapshotCollection>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<SnapshotCollection>
   >;
 
   /**
@@ -2204,20 +2136,14 @@ interface WebApps {
   listSnapshotsFromDRSecondarySlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<SnapshotCollection>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<SnapshotCollection>
   >;
 
   /**
    * Description for Starts an app (or deployment slot, if specified).
    */
   @action("start")
-  startSlot is WebAppOps.ActionSync<
-    Site,
-    void,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  startSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
 
   /**
    * Description for Start capturing network packets for the site.
@@ -2245,20 +2171,14 @@ interface WebApps {
        */
       @query("sasUrl")
       sasUrl?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
    * Description for Stops an app (or deployment slot, if specified).
    */
   @action("stop")
-  stopSlot is WebAppOps.ActionSync<
-    Site,
-    void,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  stopSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
 
   /**
    * Description for Stop ongoing capturing network packets for the site.
@@ -2268,20 +2188,14 @@ interface WebApps {
   stopNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OkResponse | NoContentResponse
   >;
 
   /**
    * Description for Sync web app repository.
    */
   @action("sync")
-  syncRepositorySlot is WebAppOps.ActionSync<
-    Site,
-    void,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  syncRepositorySlot is WebAppOps.ActionSync<Site, void, OkResponse>;
 
   /**
    * Description for Syncs function trigger metadata to the management database
@@ -2290,8 +2204,7 @@ interface WebApps {
   syncFunctionTriggersSlot is WebAppOps.ActionSync<
     Site,
     void,
-    NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
+    NoContentResponse
   >;
 
   /**
@@ -2310,8 +2223,7 @@ interface WebApps {
        */
       @query("$filter")
       $filter?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
+    }
   >;
 
   /**
@@ -2332,8 +2244,7 @@ interface WebApps {
   listWorkflowsConnectionsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<WorkflowEnvelope>,
-    OverrideErrorType = DefaultErrorResponse
+    ArmResponse<WorkflowEnvelope>
   >;
 }
 

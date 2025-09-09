@@ -363,7 +363,6 @@ interface ProcessSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListProcessesSlot")
-  @action("processes")
   listProcessesSlot is ProcessSlotOperationGroupOps.List<
     ProcessInfo,
     Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse,

@@ -134,7 +134,7 @@ interface StaticSiteARMResources {
        * The auth provider for the users.
        */
       @path
-      @segment("authprovider")
+      @segment("authproviders")
       authprovider: string;
     },
     Error = DefaultErrorResponse
@@ -146,22 +146,22 @@ interface StaticSiteARMResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_DeleteStaticSiteUser")
   @delete
-  @action("{userid}")
-  deleteStaticSiteUser is ArmResourceActionSync<
+  deleteStaticSiteUser is ArmResourceDeleteSync<
     StaticSiteARMResource,
-    void,
-    OkResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StaticSiteARMResource>,
     Parameters = {
       /**
        * The auth provider for this user.
        */
       @path
+      @segment("authproviders")
       authprovider: string;
 
       /**
        * The user id of the user.
        */
       @path
+      @segment("users")
       userid: string;
     },
     Error = DefaultErrorResponse
@@ -181,7 +181,7 @@ interface StaticSiteARMResources {
      * The auth provider for this user.
      */
     @path
-    @segment("authprovider")
+    @segment("authproviders")
     authprovider: string,
 
     /**
@@ -202,7 +202,7 @@ interface StaticSiteARMResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_CreateOrUpdateStaticSiteAppSettings")
   @put
-  @action("appsettings")
+  @action("config/appsettings")
   createOrUpdateStaticSiteAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
     StringDictionary,
@@ -217,7 +217,7 @@ interface StaticSiteARMResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_CreateOrUpdateStaticSiteFunctionAppSettings")
   @put
-  @action("functionappsettings")
+  @action("config/functionappsettings")
   createOrUpdateStaticSiteFunctionAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
     StringDictionary,

@@ -96,6 +96,35 @@ interface FunctionEnvelopeSlotOperationGroupOps
     > {}
 
 @armResourceOperations
+interface FunctionEnvelopeSlotOperationWithoutKeysGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("slots")
+        @key
+        slot: string,
+      },
+      {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("functions")
+        @key
+        functionName: string,
+      }
+    > {}
+@armResourceOperations
 interface FunctionEnvelopes {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
@@ -301,7 +330,7 @@ interface FunctionEnvelopeOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListFunctionKeysSlot")
   @action("listkeys")
-  listFunctionKeysSlot is FunctionEnvelopeSlotOperationGroupOps.ActionSync<
+  listFunctionKeysSlot is FunctionEnvelopeSlotOperationWithoutKeysGroupOps.ActionSync<
     FunctionEnvelope,
     void,
     ArmResponse<StringDictionary>
