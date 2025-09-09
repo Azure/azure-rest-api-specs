@@ -3318,6 +3318,11 @@ model AdditionalCapabilities {
    * The flag that enables or disables hibernation capability on the VM.
    */
   hibernationEnabled?: boolean;
+
+  /**
+   * The flag enables the usage of FIPS 140-3 compliant cryptography on the protectedSettings of an extension. Learn more at: https://aka.ms/linuxagentfipssupport.
+   */
+  enableFips1403Encryption?: boolean;
 }
 
 /**
