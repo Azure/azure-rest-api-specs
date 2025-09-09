@@ -60,11 +60,8 @@ interface DnssecConfigs {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    Response = ArmResponse<DnssecConfig> | ArmResourceCreatedResponse<
-      DnssecConfig,
-      LroHeaders = ArmLroLocationHeader<FinalResult = DnssecConfig> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    LroHeaders = ArmLroLocationHeader<FinalResult = DnssecConfig> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
