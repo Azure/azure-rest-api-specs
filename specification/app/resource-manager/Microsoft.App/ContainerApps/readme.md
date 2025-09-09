@@ -48,30 +48,30 @@ These settings apply only when `--tag=package-2025-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-07-01'
 input-file:
-  - Microsoft.App/stable/2025-07-01/AuthConfigs.json
-  - Microsoft.App/stable/2025-07-01/AvailableWorkloadProfiles.json
-  - Microsoft.App/stable/2025-07-01/BillingMeters.json
-  - Microsoft.App/stable/2025-07-01/CommonDefinitions.json
-  - Microsoft.App/stable/2025-07-01/ConnectedEnvironments.json
-  - Microsoft.App/stable/2025-07-01/ConnectedEnvironmentsCertificates.json
-  - Microsoft.App/stable/2025-07-01/ConnectedEnvironmentsDaprComponents.json
-  - Microsoft.App/stable/2025-07-01/ConnectedEnvironmentsStorages.json
-  - Microsoft.App/stable/2025-07-01/ContainerApps.json
-  - Microsoft.App/stable/2025-07-01/ContainerAppsRevisions.json
-  - Microsoft.App/stable/2025-07-01/Diagnostics.json
-  - Microsoft.App/stable/2025-07-01/Global.json
-  - Microsoft.App/stable/2025-07-01/JavaComponents.json
-  - Microsoft.App/stable/2025-07-01/Jobs.json
-  - Microsoft.App/stable/2025-07-01/ManagedEnvironments.json
-  - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsDaprComponents.json
-  - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsHttpRouteConfig.json
-  - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsMaintenanceConfigurations.json
-  - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsStorages.json
-  - Microsoft.App/stable/2025-07-01/SessionPools.json
-  - Microsoft.App/stable/2025-07-01/SourceControls.json
-  - Microsoft.App/stable/2025-07-01/Subscriptions.json
-  - Microsoft.App/stable/2025-07-01/Usages.json
-  - Microsoft.App/stable/2025-07-01/LogicAppsExtension.json
+  - stable/2025-07-01/AuthConfigs.json
+  - stable/2025-07-01/AvailableWorkloadProfiles.json
+  - stable/2025-07-01/BillingMeters.json
+  - stable/2025-07-01/CommonDefinitions.json
+  - stable/2025-07-01/ConnectedEnvironments.json
+  - stable/2025-07-01/ConnectedEnvironmentsCertificates.json
+  - stable/2025-07-01/ConnectedEnvironmentsDaprComponents.json
+  - stable/2025-07-01/ConnectedEnvironmentsStorages.json
+  - stable/2025-07-01/ContainerApps.json
+  - stable/2025-07-01/ContainerAppsRevisions.json
+  - stable/2025-07-01/Diagnostics.json
+  - stable/2025-07-01/Global.json
+  - stable/2025-07-01/JavaComponents.json
+  - stable/2025-07-01/Jobs.json
+  - stable/2025-07-01/ManagedEnvironments.json
+  - stable/2025-07-01/ManagedEnvironmentsDaprComponents.json
+  - stable/2025-07-01/ManagedEnvironmentsHttpRouteConfig.json
+  - stable/2025-07-01/ManagedEnvironmentsMaintenanceConfigurations.json
+  - stable/2025-07-01/ManagedEnvironmentsStorages.json
+  - stable/2025-07-01/SessionPools.json
+  - stable/2025-07-01/SourceControls.json
+  - stable/2025-07-01/Subscriptions.json
+  - stable/2025-07-01/Usages.json
+  - stable/2025-07-01/LogicAppsExtension.json
 ```
 
 ### Tag: package-2025-01-01
