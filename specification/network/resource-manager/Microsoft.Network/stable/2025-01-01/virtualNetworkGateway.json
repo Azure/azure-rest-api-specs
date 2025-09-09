@@ -963,6 +963,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getEffectiveRoutes":{
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetEffectiveRoutes",
+        "description": "This operation retrieves a SAS URL to file containing list of effective routes configured on the virtual network gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SAS URL to a file containing list of learned BGP routes.",
+            "schema": {
+              "$ref": "#/definitions/GatewayEffectiveRouteListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayAdvertisedRoutes": {
+            "$ref": "./examples/VirtualNetworkGatewayGetEffectiveRoutes.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation": {
       "post": {
         "tags": [
@@ -4120,6 +4177,36 @@
       },
       "description": "Gateway routing details."
     },
+    "GatewayEffectiveRoute": {
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The gateway's local address."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "List of route's network prefixes."
+        },
+        "nextHopIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's next hop."
+        },
+        "nextHopType": {
+          "enum": [
+            "Tunnel",
+            "VirtualNetwork"
+          ],
+          "description": "The nextHop type."
+        }
+      },
+      "description": "Gateway effective routes"
+    },
     "VirtualNetworkGateway": {
       "properties": {
         "properties": {
@@ -4236,6 +4323,18 @@
             "$ref": "#/definitions/GatewayRoute"
           },
           "description": "List of gateway routes."
+        }
+      },
+      "description": "List of virtual network gateway routes."
+    },
+    "GatewayEffectiveRouteListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayEffectiveRoute"
+          },
+          "description": "List of gateway effective routes."
         }
       },
       "description": "List of virtual network gateway routes."
