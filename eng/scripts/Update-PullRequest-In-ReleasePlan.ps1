@@ -30,7 +30,7 @@ The name of the repository associated with the pull request.
 Set-StrictMode -Version 3
 . $PSScriptRoot/../common/scripts/Helpers/DevOps-WorkItem-Helpers.ps1
 
-
-Write-Host "Updating pull request [$PullRequestUrl] in release plan [$ReleasePlanWorkItemId] for language [$LanguageName]"
-Update-PullRequestInReleasePlan $ReleasePlanWorkItemId $PullRequestUrl $Status $SdkRepoName.replace('azure-sdk-for-', '')
+$languageName = $SdkRepoName.replace('azure-sdk-for-', '')
+Write-Host "Updating pull request [$PullRequestUrl] in release plan [$ReleasePlanWorkItemId] for language [$languageName]"
+Update-PullRequestInReleasePlan $ReleasePlanWorkItemId $PullRequestUrl $Status $languageName
 Write-Host "Updated pull request in release plan"

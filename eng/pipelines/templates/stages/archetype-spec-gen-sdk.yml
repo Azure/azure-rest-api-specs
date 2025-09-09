@@ -291,7 +291,8 @@ stages:
               scriptLocation: inlineScript
               inlineScript: |
                 $releasePlanInfo = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" ${{ parameters.ReleasePlanWorkItemId }}
-                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"              
+                Write-Host "Release Plan Info: $releasePlanInfo"
+                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
 
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
@@ -318,10 +319,11 @@ stages:
               -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-              -PRBody "$(GeneratedSDKInformation)$(ReleasePlanInfo)"
+              -PRBody "$(GeneratedSDKInformation)\n$(ReleasePlanInfo)"
               -OpenAsDraft $true
 
         - pwsh: |
+            Write-Host "Release Info: $(ReleasePlanInfo)"
             $prStatus = 'Failed to generate SDK.'
             Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
           displayName: 'Set PR generation status'
