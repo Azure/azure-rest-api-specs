@@ -192,7 +192,7 @@ interface AnalysisDefinitionOperationGroup {
       @query("timeGrain")
       timeGrain?: string;
     },
-    
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

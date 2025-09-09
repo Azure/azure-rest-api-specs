@@ -228,7 +228,10 @@ interface SiteConnectionStringKeyVaultReferenceSlot {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteConnectionStringKeyVaultReferenceSlot")
-  getSiteConnectionStringKeyVaultReferenceSlot is SiteConnectionStringKeyVaultReferenceSlotOps.Read<ApiKVReference>;
+  getSiteConnectionStringKeyVaultReferenceSlot is SiteConnectionStringKeyVaultReferenceSlotOps.Read<
+    ApiKVReference,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Gets the config reference app settings and status of an app
