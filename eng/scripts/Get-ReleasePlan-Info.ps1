@@ -27,8 +27,7 @@ if ($null -eq $releasePlan)
 else
 {
     $releasePlanLink = $releasePlan["Custom.ReleasePlanLink"]
-    $title = $releasePlan["System.Title"]
     $submittedBy = $releasePlan["Custom.ReleasePlanSubmittedby"]
-    $releasePlanInfo = "## Release plan details\nTitle: $title\nLink: [$releasePlanLink]($releasePlanLink)\nSubmitted by: $submittedBy"
+    $releasePlanInfo = "**Release plan link:** [$releasePlanLink]($releasePlanLink) **Submitted by**: $submittedBy"
 }
 Write-Output $releasePlanInfo

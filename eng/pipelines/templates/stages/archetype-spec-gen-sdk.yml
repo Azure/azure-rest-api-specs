@@ -319,7 +319,7 @@ stages:
               -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-              -PRBody "$(GeneratedSDKInformation) $(ReleasePlanInfo)"
+              -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $true
 
         - pwsh: |
