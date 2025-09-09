@@ -23,8 +23,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(Microsoft.Compute.PlacementScore,
-  "ComputeRecommenderPlacementScore"
+  "ComputeRecommenderPlacementScore",
+  "csharp"
 );
-@@clientName(Microsoft.Compute.ResourceSize,
-  "AzureResourceSize"
-);
+@@clientName(Microsoft.Compute.ResourceSize, "AzureResourceSize", "csharp");
