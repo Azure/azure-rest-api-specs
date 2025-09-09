@@ -281,7 +281,7 @@ interface InstanceProcessSlotOperationGroup {
   listInstanceProcessesSlot is InstanceProcessSlotOps.List<
     ProcessInfo,
     Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse,
-    
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
