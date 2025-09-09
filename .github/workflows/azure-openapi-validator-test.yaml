@@ -31,19 +31,31 @@ jobs:
           ref: ${{ inputs.ref }}
           path: aov
 
+      - name: Get azure-openapi-validator head SHA
+        id: aov-vars
+        run: echo "head-sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+        working-directory: aov
+
+      - name: Cache azure-openapi-validator packages
+        id: cache-aov
+        uses: actions/cache@v4
+        with:
+          path: aov/packages/**/*.tgz
+          key: aov-${{ steps.aov-vars.outputs.head-sha }}
+
       - name: Use Node 22
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: (aov) rush install
-        run: node common/scripts/install-run-rush.js install
+      - name: Build azure-openapi-validator packages
+        if: steps.cache-aov.outputs.cache-hit != 'true'
+        run: |
+          node common/scripts/install-run-rush.js install
+          node common/scripts/install-run-rush.js build --verbose
+          node common/scripts/install-run-rush.js pack
         working-directory: aov
 
-      - name: (aov) rush build
-        run: node common/scripts/install-run-rush.js build --verbose
-        working-directory: aov
-
-      - name: (aov) rush pack
-        run: node common/scripts/install-run-rush.js pack
-        working-directory: aov
+      - name: List azure-openapi-validator packages
+        run: find . -name *.tgz
+        working-directory: aov/packages
