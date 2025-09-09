@@ -1,0 +1,36 @@
+{
+  "title": "Get a copilot plan",
+  "operationId": "CopilotPlans_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-copilot",
+    "copilotPlanName": "my-copilot-plan",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilotPlans/my-copilot-plan",
+        "name": "my-copilot-plan",
+        "type": "Microsoft.PortalServices/copilotPlans",
+        "location": "East US",
+        "properties": {
+          "budgetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.Consumption/budgets/copilot-budget-001",
+          "blockedAgents": [
+            "agent-premium-only",
+            "agent-enterprise-only"
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2024-12-01T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-12-01T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

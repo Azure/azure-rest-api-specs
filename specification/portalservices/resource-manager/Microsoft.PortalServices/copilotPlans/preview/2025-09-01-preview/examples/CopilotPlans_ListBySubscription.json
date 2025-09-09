@@ -1,0 +1,58 @@
+{
+  "title": "List copilot plans by subscription",
+  "operationId": "CopilotPlans_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilotPlans/my-copilot-plan",
+            "name": "my-copilot-plan",
+            "type": "Microsoft.PortalServices/copilotPlans",
+            "location": "East US",
+            "properties": {
+              "budgetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.Consumption/budgets/copilot-budget-001",
+              "blockedAgents": [
+                "agent-malicious",
+                "agent-unauthorized"
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2024-12-01T10:00:00.000Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-12-01T10:00:00.000Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-dev/providers/Microsoft.PortalServices/copilotPlans/dev-copilot-plan",
+            "name": "dev-copilot-plan",
+            "type": "Microsoft.PortalServices/copilotPlans",
+            "location": "West US 2",
+            "properties": {
+              "blockedAgents": [
+                "agent-001"
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "dev@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2024-11-15T14:30:00.000Z",
+              "lastModifiedBy": "dev@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-11-15T14:30:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
