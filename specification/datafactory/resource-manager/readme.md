@@ -64,7 +64,9 @@ suppressions:
     reason: ADF feature is widely adopted and requires XmsEnumValidation for most of the swagger properties.
   - code: NestedResourcesMustHaveListOperation
     reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
+```
 
+``` yaml $(tag) == 'package-2018-06'
 input-file:
 - Microsoft.DataFactory/stable/2018-06-01/examples/ChangeDataCapture_Create.json
 suppressions:
