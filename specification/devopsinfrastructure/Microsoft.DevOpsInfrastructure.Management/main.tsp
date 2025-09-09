@@ -46,7 +46,8 @@ model Pool is TrackedResource<PoolProperties> {
 model PoolProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing SDK"
   @doc("The status of the current operation.")
-  @visibility(Lifecycle.Read)
+  // @visibility(Lifecycle.Read)
+  // @removed(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   provisioningState?: ProvisioningState;
 
   @minValue(1)
