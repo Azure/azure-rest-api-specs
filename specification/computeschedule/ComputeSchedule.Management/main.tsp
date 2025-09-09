@@ -15,6 +15,7 @@ using Azure.ResourceManager;
 namespace Microsoft.ComputeSchedule;
 
 /** ComputeSchedule API versions */
+// Order matters in versioning as the version at the bottom will inherit all properties and routes from the version above it
 enum Versions {
   /** 2024-08-15-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
