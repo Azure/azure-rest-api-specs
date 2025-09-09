@@ -304,6 +304,10 @@ stages:
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
 
+        - pwsh: |
+            Write-Host "Release plan info: $(ReleasePlanInfo)"
+          displayName: 'Show release plan info'
+
         - task: PowerShell@2
           displayName: Create pull request
           condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
@@ -319,7 +323,7 @@ stages:
               -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-              -PRBody "$(GeneratedSDKInformation)\n$(ReleasePlanInfo)"
+              -PRBody "$(GeneratedSDKInformation) $(ReleasePlanInfo)"
               -OpenAsDraft $true
 
         - pwsh: |
