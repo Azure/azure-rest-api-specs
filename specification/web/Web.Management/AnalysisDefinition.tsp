@@ -199,7 +199,8 @@ interface AnalysisDefinitionOperationGroup {
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

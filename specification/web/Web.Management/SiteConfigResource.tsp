@@ -346,7 +346,10 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetConfigurationSnapshotSlot")
-  getConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.Read<SiteConfigResource>;
+  getConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.Read<
+    SiteConfigResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for List the configurations of an app
@@ -368,7 +371,8 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   recoverSiteConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.ActionSync<
     SiteConfigResource,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
