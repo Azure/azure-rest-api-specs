@@ -9989,6 +9989,9 @@
           "Create a VM with HibernationEnabled": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithHibernationEnabled.json"
           },
+          "Create a VM with Fips 140-3 Enabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFips1403Enabled.json"
+          },
           "Create a VM with ProxyAgent Settings of enabled and mode.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithProxyAgentSettings.json"
           },
@@ -12329,6 +12332,10 @@
         "hibernationEnabled": {
           "type": "boolean",
           "description": "The flag that enables or disables hibernation capability on the VM."
+        },
+        "enableFips1403Encryption": {
+          "type": "boolean",
+          "description": "The flag enables the usage of FIPS 140-3 compliant cryptography on the protectedSettings of an extension. Learn more at: https://aka.ms/linuxagentfipssupport"
         }
       }
     },
