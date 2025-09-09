@@ -229,18 +229,6 @@ model ScheduleTask {
   definition: Evaluation | Insight;
 }
 
-@doc("Status of the schedule.")
-@added(Versions.v2025_07_31_preview)
-union ScheduleStatus {
-  string,
-
-  @doc("Enabled status of the schedule.")
-  Enabled: "Enabled",
-
-  @doc("Disabled status of the schedule.")
-  Disabled: "Disabled",
-}
-
 @resource("schedules")
 @doc("Schedule model.")
 @added(Versions.v2025_07_31_preview)
@@ -254,8 +242,12 @@ model Schedule {
   @doc("Name of the schedule.")
   displayName?: string;
 
-  @doc("Status of the schedule.")
-  status: ScheduleStatus;
+  @doc("Description of the schedule.")
+  description?: string;
+
+  #suppress "@azure-tools/typespec-autorest/union-unsupported"
+  @doc("Enabled status of the schedule.")
+  enabled: true | false;
 
   @doc("Provisioning status of the schedule.")
   @visibility(Lifecycle.Read)
@@ -278,18 +270,6 @@ model Schedule {
   systemData: Record<string>;
 }
 
-@doc("Trigger status of the schedule run.")
-@added(Versions.v2025_07_31_preview)
-union ScheduleRunTriggerStatus {
-  string,
-
-  @doc("Succeeded status of the schedule run.")
-  Succeeded: "Succeeded",
-
-  @doc("Failed status of the schedule run.")
-  Failed: "Failed",
-}
-
 @doc("Schedule run model.")
 @resource("schedules/{scheduleId}/runs")
 @added(Versions.v2025_07_31_preview)
@@ -303,13 +283,19 @@ model ScheduleRun {
   @doc("Identifier of the schedule.")
   scheduleId: string;
 
-  @doc("Trigger status of the schedule run.")
+  #suppress "@azure-tools/typespec-autorest/union-unsupported"
+  @doc("Trigger success status of the schedule run.")
   @visibility(Lifecycle.Read)
-  triggerStatus: ScheduleRunTriggerStatus;
+  success: true | false;
 
   @doc("Trigger time of the schedule run.")
   triggerTime?: string;
 
   @doc("Error information for the schedule run.")
+  @visibility(Lifecycle.Read)
   error?: string;
+
+  @doc("Properties of the schedule run.")
+  @visibility(Lifecycle.Read)
+  properties: Record<string>;
 }

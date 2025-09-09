@@ -3661,9 +3661,12 @@
           "type": "string",
           "description": "Name of the schedule."
         },
-        "status": {
-          "$ref": "#/definitions/ScheduleStatus",
-          "description": "Status of the schedule."
+        "description": {
+          "type": "string",
+          "description": "Description of the schedule."
+        },
+        "enabled": {
+          "description": "Enabled status of the schedule."
         },
         "provisioningStatus": {
           "$ref": "#/definitions/ScheduleProvisioningStatus",
@@ -3703,7 +3706,7 @@
       },
       "required": [
         "id",
-        "status",
+        "enabled",
         "trigger",
         "task",
         "systemData"
@@ -3764,9 +3767,8 @@
           "type": "string",
           "description": "Identifier of the schedule."
         },
-        "triggerStatus": {
-          "$ref": "#/definitions/ScheduleRunTriggerStatus",
-          "description": "Trigger status of the schedule run.",
+        "success": {
+          "description": "Trigger success status of the schedule run.",
           "readOnly": true
         },
         "triggerTime": {
@@ -3775,62 +3777,24 @@
         },
         "error": {
           "type": "string",
-          "description": "Error information for the schedule run."
+          "description": "Error information for the schedule run.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of the schedule run.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [
         "id",
         "scheduleId",
-        "triggerStatus"
+        "success",
+        "properties"
       ]
-    },
-    "ScheduleRunTriggerStatus": {
-      "type": "string",
-      "description": "Trigger status of the schedule run.",
-      "enum": [
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "ScheduleRunTriggerStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Succeeded status of the schedule run."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed status of the schedule run."
-          }
-        ]
-      }
-    },
-    "ScheduleStatus": {
-      "type": "string",
-      "description": "Status of the schedule.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "ScheduleStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled status of the schedule."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled status of the schedule."
-          }
-        ]
-      }
     },
     "ScheduleTask": {
       "type": "object",
