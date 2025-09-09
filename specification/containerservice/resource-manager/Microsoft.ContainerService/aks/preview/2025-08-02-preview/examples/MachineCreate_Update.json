@@ -30,6 +30,9 @@
           "kubeletDiskType": "OS",
           "maxPods": 110
         },
+        "localDNSProfile": {
+          "mode": "Preferred"
+        },
         "tags": {
           "name1": "val1"
         },
@@ -69,6 +72,54 @@
             "kubeletDiskType": "OS",
             "maxPods": 110,
             "nodeName": "aks-nodepool1-machine1-25481572-vm0"
+          },
+          "localDNSProfile": {
+            "kubeDNSOverrides": {
+              ".": {
+                "cacheDurationInSeconds": 3600,
+                "forwardDestination": "ClusterCoreDNS",
+                "forwardPolicy": "Sequential",
+                "maxConcurrent": 1000,
+                "protocol": "PreferUDP",
+                "queryLogging": "Error",
+                "serveStale": "Immediate",
+                "serveStaleDurationInSeconds": 3600
+              },
+              "cluster.local": {
+                "cacheDurationInSeconds": 3600,
+                "forwardDestination": "ClusterCoreDNS",
+                "forwardPolicy": "Sequential",
+                "maxConcurrent": 1000,
+                "protocol": "ForceTCP",
+                "queryLogging": "Error",
+                "serveStale": "Immediate",
+                "serveStaleDurationInSeconds": 3600
+              }
+            },
+            "mode": "Preferred",
+            "state": "Enabled",
+            "vnetDNSOverrides": {
+              ".": {
+                "cacheDurationInSeconds": 3600,
+                "forwardDestination": "VnetDNS",
+                "forwardPolicy": "Sequential",
+                "maxConcurrent": 1000,
+                "protocol": "PreferUDP",
+                "queryLogging": "Error",
+                "serveStale": "Immediate",
+                "serveStaleDurationInSeconds": 3600
+              },
+              "cluster.local": {
+                "cacheDurationInSeconds": 3600,
+                "forwardDestination": "ClusterCoreDNS",
+                "forwardPolicy": "Sequential",
+                "maxConcurrent": 1000,
+                "protocol": "ForceTCP",
+                "queryLogging": "Error",
+                "serveStale": "Immediate",
+                "serveStaleDurationInSeconds": 3600
+              }
+            }
           },
           "tags": {
             "name1": "val1"
@@ -114,6 +165,54 @@
             "kubeletDiskType": "OS",
             "maxPods": 110,
             "nodeName": "aks-nodepool1-machine1-25481572-vm0"
+          },
+          "localDNSProfile": {
+            "kubeDNSOverrides": {
+              ".": {
+                "cacheDurationInSeconds": 3600,
+                "forwardDestination": "ClusterCoreDNS",
+                "forwardPolicy": "Sequential",
+                "maxConcurrent": 1000,
+                "protocol": "PreferUDP",
+                "queryLogging": "Error",
+                "serveStale": "Immediate",
+                "serveStaleDurationInSeconds": 3600
+              },
+              "cluster.local": {
+                "cacheDurationInSeconds": 3600,
+                "forwardDestination": "ClusterCoreDNS",
+                "forwardPolicy": "Sequential",
+                "maxConcurrent": 1000,
+                "protocol": "ForceTCP",
+                "queryLogging": "Error",
+                "serveStale": "Immediate",
+                "serveStaleDurationInSeconds": 3600
+              }
+            },
+            "mode": "Preferred",
+            "state": "Enabled",
+            "vnetDNSOverrides": {
+              ".": {
+                "cacheDurationInSeconds": 3600,
+                "forwardDestination": "VnetDNS",
+                "forwardPolicy": "Sequential",
+                "maxConcurrent": 1000,
+                "protocol": "PreferUDP",
+                "queryLogging": "Error",
+                "serveStale": "Immediate",
+                "serveStaleDurationInSeconds": 3600
+              },
+              "cluster.local": {
+                "cacheDurationInSeconds": 3600,
+                "forwardDestination": "ClusterCoreDNS",
+                "forwardPolicy": "Sequential",
+                "maxConcurrent": 1000,
+                "protocol": "ForceTCP",
+                "queryLogging": "Error",
+                "serveStale": "Immediate",
+                "serveStaleDurationInSeconds": 3600
+              }
+            }
           },
           "tags": {
             "name1": "val1"
