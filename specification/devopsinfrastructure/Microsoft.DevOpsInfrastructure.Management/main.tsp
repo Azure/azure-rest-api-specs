@@ -508,7 +508,7 @@ interface Pools {
   deleteResources is ArmResourceActionSync<
     Pool,
     DeleteResourcesDetails,
-    Azure.ResourceManager.ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse
+    ArmDeletedResponse | ErrorResponse
   >;
 }
 

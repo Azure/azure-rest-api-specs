@@ -693,14 +693,19 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Resource does not exist."
+          "200": {
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_DeleteResources": {
+            "$ref": "./examples/Pools_DeleteResources.json"
           }
         }
       }
