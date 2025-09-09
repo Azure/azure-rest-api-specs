@@ -972,11 +972,7 @@
         "description": "This operation retrieves a SAS URL to file containing list of effective routes configured on the virtual network gateway.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -994,13 +990,18 @@
         ],
         "responses": {
           "200": {
-            "description": "SAS URL to a file containing list of learned BGP routes.",
+            "description": "SAS URL to the file containing list of effective routes.",
             "schema": {
-              "$ref": "#/definitions/GatewayEffectiveRouteListResult"
+              "type": "string"
             }
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1010,7 +1011,7 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualNetworkGatewayAdvertisedRoutes": {
+          "GetVirtualNetworkGatewayEffectiveRoutes": {
             "$ref": "./examples/VirtualNetworkGatewayGetEffectiveRoutes.json"
           }
         },
@@ -4178,6 +4179,7 @@
       "description": "Gateway routing details."
     },
     "GatewayEffectiveRoute": {
+      "type": "object",
       "properties": {
         "localAddress": {
           "type": "string",
@@ -4190,7 +4192,8 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "List of route's network prefixes."
+          "description": "List of route's network prefixes.",
+          "x-ms-identifiers": []
         },
         "nextHopIpAddress": {
           "type": "string",
@@ -4202,6 +4205,10 @@
             "Tunnel",
             "VirtualNetwork"
           ],
+          "x-ms-enum": {
+            "name": "EffectiveRouteNextHopType",
+            "modelAsString": true
+          },
           "description": "The nextHop type."
         }
       },
@@ -4328,6 +4335,7 @@
       "description": "List of virtual network gateway routes."
     },
     "GatewayEffectiveRouteListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
