@@ -6,7 +6,6 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.SignalRService;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(
   Microsoft.SignalRService.Versions.v2025_01_01_preview
 )

@@ -31,6 +31,5 @@ namespace MonitorQueryLogs;
 /** Service API versions */
 enum Versions {
   /** The V1 API version. */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   V1: "v1",
 }

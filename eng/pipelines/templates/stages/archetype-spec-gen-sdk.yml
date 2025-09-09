@@ -28,6 +28,9 @@ parameters:
   - name: SpecBatchTypes
     type: string
     default: ''
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
 
 stages:
 - stage: Build
@@ -113,6 +116,10 @@ stages:
           $checkoutCommitish = '${{ parameters.SdkRepoBranch }}'
           Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
           Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
+          $prStatus = 'draft'
+          Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+          $releasePlanInfo = ''
+          Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
         displayName: "Create Run Time Variables"
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
@@ -273,6 +280,20 @@ stages:
           workingDirectory: $(SdkRepoDirectory)
           displayName: "Create SDK PR branch variable"
 
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
+          - task: AzureCLI@2
+            displayName: "Get Release Plan details"
+            condition: succeeded()
+            continueOnError: true
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $releasePlanInfo = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" ${{ parameters.ReleasePlanWorkItemId }}
+                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+                Write-Host "Release Plan Info: $releasePlanInfo"
+
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
             BaseRepoBranch: $(SdkPullRequestSourceBranch)
@@ -298,8 +319,31 @@ stages:
               -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-              -PRBody "$(GeneratedSDKInformation)"
+              -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $true
+
+        - pwsh: |
+            Write-Host "Release Info: $(ReleasePlanInfo)"
+            $prStatus = 'Failed to generate SDK.'
+            Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+          displayName: 'Set PR generation status'
+          condition: Failed()
+
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
+          - task: AzureCLI@2
+            displayName: Link pull request to release plan
+            condition: and(succeededOrFailed(), eq(variables['HasChanges'], 'true'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            continueOnError: true
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: scriptPath
+              scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
+              arguments: >
+                -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                -PullRequestUrl "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
+                -Status "$(SdkPrStatus)"
+                -SdkRepoName "$(SdkRepoName)"
 
       - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - pwsh: |
