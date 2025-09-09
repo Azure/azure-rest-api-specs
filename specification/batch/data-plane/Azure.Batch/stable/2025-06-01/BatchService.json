@@ -9825,6 +9825,9 @@
         }
       },
       "required": [
+        "id",
+        "eTag",
+        "state",
         "poolInfo"
       ]
     },
@@ -10726,6 +10729,9 @@
         }
       },
       "required": [
+        "id",
+        "eTag",
+        "state",
         "jobSpecification"
       ]
     },
@@ -11512,7 +11518,11 @@
           "$ref": "#/definitions/VirtualMachineInfo",
           "description": "Info about the current state of the virtual machine."
         }
-      }
+      },
+      "required": [
+        "id",
+        "state"
+      ]
     },
     "BatchNodeAgentInfo": {
       "type": "object",
@@ -12536,7 +12546,12 @@
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling."
         }
-      }
+      },
+      "required": [
+        "id",
+        "eTag",
+        "state"
+      ]
     },
     "BatchPoolCreateOptions": {
       "type": "object",
@@ -13905,7 +13920,12 @@
           "description": "The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "id",
+        "eTag",
+        "state"
+      ]
     },
     "BatchTaskAddStatus": {
       "type": "string",

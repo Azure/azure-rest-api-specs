@@ -1174,7 +1174,7 @@ model FileProperties {
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("The display name for the schedule.")
   @visibility(Lifecycle.Read)
@@ -1187,7 +1187,7 @@ model BatchJobSchedule {
 
   @doc("The ETag of the Job Schedule. This is an opaque string. You can use it to detect whether the Job Schedule has changed between requests. In particular, you can be pass the ETag with an Update Job Schedule request to specify that your changes should take effect only if nobody else has modified the schedule in the meantime.")
   @visibility(Lifecycle.Read)
-  eTag?: eTag;
+  eTag: eTag;
 
   @doc("The last modified time of the Job Schedule. This is the last time at which the schedule level data, such as the Job specification or recurrence information, changed. It does not factor in job-level changes such as new Jobs being created or Jobs changing state.")
   @visibility(Lifecycle.Read)
@@ -1199,7 +1199,7 @@ model BatchJobSchedule {
 
   @doc("The current state of the Job Schedule.")
   @visibility(Lifecycle.Read)
-  state?: BatchJobScheduleState;
+  state: BatchJobScheduleState;
 
   @doc("The time at which the Job Schedule entered the current state.")
   @visibility(Lifecycle.Read)
@@ -2477,7 +2477,7 @@ model BatchJobScheduleListResult {
 model BatchJob {
   @doc("A string that uniquely identifies the Job within the Account. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("The display name for the Job.")
   @visibility(Lifecycle.Read)
@@ -2494,7 +2494,7 @@ model BatchJob {
 
   @doc("The ETag of the Job. This is an opaque string. You can use it to detect whether the Job has changed between requests. In particular, you can be pass the ETag when updating a Job to specify that your changes should take effect only if nobody else has modified the Job in the meantime.")
   @visibility(Lifecycle.Read)
-  eTag?: eTag;
+  eTag: eTag;
 
   @doc("The last modified time of the Job. This is the last time at which the Job level data, such as the Job state or priority, changed. It does not factor in task-level changes such as adding new Tasks or Tasks changing state.")
   @visibility(Lifecycle.Read)
@@ -2506,7 +2506,7 @@ model BatchJob {
 
   @doc("The current state of the Job.")
   @visibility(Lifecycle.Read)
-  state?: BatchJobState;
+  state: BatchJobState;
 
   @doc("The time at which the Job entered its current state.")
   @visibility(Lifecycle.Read)
@@ -2901,7 +2901,7 @@ model BatchTaskSlotCounts {
 model BatchPool {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   @visibility(Lifecycle.Read)
@@ -2914,7 +2914,7 @@ model BatchPool {
 
   @doc("The ETag of the Pool. This is an opaque string. You can use it to detect whether the Pool has changed between requests. In particular, you can be pass the ETag when updating a Pool to specify that your changes should take effect only if nobody else has modified the Pool in the meantime.")
   @visibility(Lifecycle.Read)
-  eTag?: eTag;
+  eTag: eTag;
 
   @doc("The last modified time of the Pool. This is the last time at which the Pool level data, such as the targetDedicatedNodes or enableAutoscale settings, changed. It does not factor in node-level changes such as a Compute Node changing state.")
   @visibility(Lifecycle.Read)
@@ -2926,7 +2926,7 @@ model BatchPool {
 
   @doc("The current state of the Pool.")
   @visibility(Lifecycle.Read)
-  state?: BatchPoolState;
+  state: BatchPoolState;
 
   @doc("The time at which the Pool entered its current state.")
   @visibility(Lifecycle.Read)
@@ -3287,7 +3287,7 @@ model BatchNodeDeallocateOptions {
 model BatchTask {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("A display name for the Task. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   @visibility(Lifecycle.Read)
@@ -3300,7 +3300,7 @@ model BatchTask {
 
   @doc("The ETag of the Task. This is an opaque string. You can use it to detect whether the Task has changed between requests. In particular, you can be pass the ETag when updating a Task to specify that your changes should take effect only if nobody else has modified the Task in the meantime.")
   @visibility(Lifecycle.Read)
-  eTag?: eTag;
+  eTag: eTag;
 
   @doc("The last modified time of the Task.")
   @visibility(Lifecycle.Read)
@@ -3316,7 +3316,7 @@ model BatchTask {
 
   @doc("The current state of the Task.")
   @visibility(Lifecycle.Read)
-  state?: BatchTaskState;
+  state: BatchTaskState;
 
   @doc("The time at which the Task entered its current state.")
   @visibility(Lifecycle.Read)
@@ -3850,14 +3850,14 @@ model BatchNodeUserUpdateOptions {
 @doc("A Compute Node in the Batch service.")
 model BatchNode {
   @doc("The ID of the Compute Node. Every Compute Node that is added to a Pool is assigned a unique ID. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the ID is reclaimed and could be reused for new Compute Nodes.")
-  id?: string;
+  id: string;
 
   @doc("The URL of the Compute Node.")
   @clientName("uri", "csharp")
   url?: url;
 
   @doc("The current state of the Compute Node. The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.")
-  state?: BatchNodeState;
+  state: BatchNodeState;
 
   @doc("Whether the Compute Node is available for Task scheduling.")
   schedulingState?: SchedulingState;
