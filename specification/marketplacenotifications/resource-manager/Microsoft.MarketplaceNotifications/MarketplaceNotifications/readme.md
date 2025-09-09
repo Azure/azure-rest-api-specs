@@ -42,7 +42,7 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.MarketplaceNotifications/stable/2021-03-03/MarketplaceNotifications.json
+- stable/2021-03-03/MarketplaceNotifications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2021-03-03` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-03-03'
 input-file:
-  - Microsoft.MarketplaceNotifications/stable/2021-03-03/MarketplaceNotifications.json
+  - stable/2021-03-03/MarketplaceNotifications.json
 ```
 
 # Code Generation
