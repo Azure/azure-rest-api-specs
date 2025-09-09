@@ -4201,6 +4201,8 @@
           "description": "The route's next hop."
         },
         "nextHopType": {
+          "type": "string",
+          "description": "The nextHop type.",
           "enum": [
             "Tunnel",
             "VirtualNetwork"
@@ -4208,8 +4210,7 @@
           "x-ms-enum": {
             "name": "EffectiveRouteNextHopType",
             "modelAsString": true
-          },
-          "description": "The nextHop type."
+          }
         }
       },
       "description": "Gateway effective routes"
@@ -4342,7 +4343,8 @@
           "items": {
             "$ref": "#/definitions/GatewayEffectiveRoute"
           },
-          "description": "List of gateway effective routes."
+          "description": "List of gateway effective routes.",
+          "x-ms-identifiers": []
         }
       },
       "description": "List of virtual network gateway routes."
