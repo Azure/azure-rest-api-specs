@@ -1,0 +1,3283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlVirtualMachineManagementClient",
+    "version": "2023-10-01",
+    "description": "The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AvailabilityGroupListeners"
+    },
+    {
+      "name": "SqlVirtualMachines"
+    },
+    {
+      "name": "SqlVirtualMachineGroups"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.SqlVirtualMachine/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available SQL Virtual Machine Rest API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all of the available SQL Virtual Machine Rest API operations.": {
+            "$ref": "./examples/ListOperation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups": {
+      "get": {
+        "operationId": "SqlVirtualMachineGroups_List",
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Gets all SQL virtual machine groups in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all SQL virtual machine groups in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlVirtualMachineGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines": {
+      "get": {
+        "operationId": "SqlVirtualMachines_List",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Gets all SQL virtual machines in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all SQL virtual machines in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlVirtualMachine.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups": {
+      "get": {
+        "operationId": "SqlVirtualMachineGroups_ListByResourceGroup",
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Gets all SQL virtual machine groups in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all SQL virtual machine groups in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlVirtualMachineGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/{sqlVirtualMachineGroupName}": {
+      "get": {
+        "operationId": "SqlVirtualMachineGroups_Get",
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Gets a SQL virtual machine group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SQL virtual machine group.": {
+            "$ref": "./examples/GetSqlVirtualMachineGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlVirtualMachineGroups_CreateOrUpdate",
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Creates or updates a SQL virtual machine group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL virtual machine group.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SqlVirtualMachineGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'SqlVirtualMachineGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a SQL virtual machine group.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineGroup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SqlVirtualMachineGroups_Update",
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Updates SQL virtual machine group tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL virtual machine group.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL virtual machine group tags.": {
+            "$ref": "./examples/UpdateSqlVirtualMachineGroup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SqlVirtualMachineGroups_Delete",
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Deletes a SQL virtual machine group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SQL virtual machine group.": {
+            "$ref": "./examples/DeleteSqlVirtualMachineGroup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/{sqlVirtualMachineGroupName}/availabilityGroupListeners": {
+      "get": {
+        "operationId": "AvailabilityGroupListeners_ListByGroup",
+        "tags": [
+          "AvailabilityGroupListeners"
+        ],
+        "description": "Lists all availability group listeners in a SQL virtual machine group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListenerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all availability group listeners in a SQL virtual machine group.": {
+            "$ref": "./examples/ListByGroupAvailabilityGroupListener.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/{sqlVirtualMachineGroupName}/availabilityGroupListeners/{availabilityGroupListenerName}": {
+      "get": {
+        "operationId": "AvailabilityGroupListeners_Get",
+        "tags": [
+          "AvailabilityGroupListeners"
+        ],
+        "description": "Gets an availability group listener.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilityGroupListenerName",
+            "in": "path",
+            "description": "Name of the availability group listener.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListener"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an availability group listener.": {
+            "$ref": "./examples/GetAvailabilityGroupListener.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AvailabilityGroupListeners_CreateOrUpdate",
+        "tags": [
+          "AvailabilityGroupListeners"
+        ],
+        "description": "Creates or updates an availability group listener.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilityGroupListenerName",
+            "in": "path",
+            "description": "Name of the availability group listener.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The availability group listener.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListener"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AvailabilityGroupListener' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListener"
+            }
+          },
+          "201": {
+            "description": "Resource 'AvailabilityGroupListener' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListener"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates an availability group listener using load balancer. This is used for VMs present in single subnet.": {
+            "$ref": "./examples/CreateOrUpdateAvailabilityGroupListener.json"
+          },
+          "Creates or updates an availability group listener. This is used for VMs present in multi subnet": {
+            "$ref": "./examples/CreateOrUpdateAvailabilityGroupListenerWithMultiSubnet.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AvailabilityGroupListeners_Delete",
+        "tags": [
+          "AvailabilityGroupListeners"
+        ],
+        "description": "Deletes an availability group listener.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilityGroupListenerName",
+            "in": "path",
+            "description": "Name of the availability group listener.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an availability group listener.": {
+            "$ref": "./examples/DeleteAvailabilityGroupListener.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/{sqlVirtualMachineGroupName}/sqlVirtualMachines": {
+      "get": {
+        "operationId": "SqlVirtualMachines_ListBySqlVmGroup",
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Gets the list of sql virtual machines in a SQL virtual machine group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of sql virtual machines in a SQL virtual machine group.": {
+            "$ref": "./examples/ListBySqlVirtualMachineGroupSqlVirtualMachine.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines": {
+      "get": {
+        "operationId": "SqlVirtualMachines_ListByResourceGroup",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Gets all SQL virtual machines in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all SQL virtual machines in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlVirtualMachine.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}": {
+      "get": {
+        "operationId": "SqlVirtualMachines_Get",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Gets a SQL virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SQL virtual machine.": {
+            "$ref": "./examples/GetSqlVirtualMachine.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlVirtualMachines_CreateOrUpdate",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Creates or updates a SQL virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL virtual machine.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SqlVirtualMachine' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            }
+          },
+          "201": {
+            "description": "Resource 'SqlVirtualMachine' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a SQL virtual machine and joins it to a SQL virtual machine group.": {
+            "$ref": "./examples/CreateOrUpdateVirtualMachineWithVMGroup.json"
+          },
+          "Creates or updates a SQL virtual machine for Automated Back up Settings with Weekly and Days of the week to run the back up.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineAutomatedBackupWeekly.json"
+          },
+          "Creates or updates a SQL virtual machine for Storage Configuration Settings to EXTEND Data, Log or TempDB storage pool.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineStorageConfigurationEXTEND.json"
+          },
+          "Creates or updates a SQL virtual machine for Storage Configuration Settings to NEW Data, Log and TempDB storage pool.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineStorageConfigurationNEW.json"
+          },
+          "Creates or updates a SQL virtual machine to enable the usage of Virtual Machine managed identity.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineVmIdentitySettings.json"
+          },
+          "Creates or updates a SQL virtual machine with max parameters.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineMAX.json"
+          },
+          "Creates or updates a SQL virtual machine with min parameters.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineMIN.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SqlVirtualMachines_Update",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Updates SQL virtual machine tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL virtual machine.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL virtual machine tags.": {
+            "$ref": "./examples/UpdateSqlVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SqlVirtualMachines_Delete",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Deletes a SQL virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SQL virtual machine.": {
+            "$ref": "./examples/DeleteSqlVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/fetchDCAssessment": {
+      "post": {
+        "operationId": "SqlVirtualMachines_FetchDCAssessment",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Starts SQL best practices Assessment with Disk Config rules on SQL virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Disk Config Assessment property",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskConfigAssessmentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Starts SQL best practices Assessment with Disk Config rules on SQL virtual machine": {
+            "$ref": "./examples/StartDiskConfigAssessmentOnSqlVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/redeploy": {
+      "post": {
+        "operationId": "SqlVirtualMachines_Redeploy",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Uninstalls and reinstalls the SQL IaaS Extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Uninstalls and reinstalls the SQL IaaS Extension.": {
+            "$ref": "./examples/RedeploySqlVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/startAssessment": {
+      "post": {
+        "operationId": "SqlVirtualMachines_StartAssessment",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Starts SQL best practices Assessment on SQL virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Starts SQL best practices Assessment on SQL virtual machine": {
+            "$ref": "./examples/StartAssessmentOnSqlVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/troubleshoot": {
+      "post": {
+        "operationId": "SqlVirtualMachineTroubleshoot_Troubleshoot",
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Starts SQL virtual machine troubleshooting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "Name of the SQL virtual machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL virtual machine troubleshooting entity.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVmTroubleshooting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVmTroubleshooting"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start SQL virtual machine troubleshooting operation": {
+            "$ref": "./examples/TroubleshootSqlVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AADAuthenticationSettings": {
+      "type": "object",
+      "description": "Enable AAD authentication for SQL VM.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client Id of the Managed Identity to query Microsoft Graph API. An empty string must be used for the system assigned Managed Identity"
+        }
+      }
+    },
+    "AdditionalFeaturesServerConfigurations": {
+      "type": "object",
+      "description": "Additional SQL Server feature settings.",
+      "properties": {
+        "isRServicesEnabled": {
+          "type": "boolean",
+          "description": "Enable or disable R services (SQL 2016 onwards)."
+        }
+      }
+    },
+    "AdditionalOsPatch": {
+      "type": "string",
+      "description": "Additional VM Patching solution enabled on the Virtual Machine",
+      "enum": [
+        "WU",
+        "WUMU",
+        "WSUS"
+      ],
+      "x-ms-enum": {
+        "name": "AdditionalOsPatch",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WU",
+            "value": "WU"
+          },
+          {
+            "name": "WUMU",
+            "value": "WUMU"
+          },
+          {
+            "name": "WSUS",
+            "value": "WSUS"
+          }
+        ]
+      }
+    },
+    "AgConfiguration": {
+      "type": "object",
+      "description": "Availability group configuration.",
+      "properties": {
+        "replicas": {
+          "type": "array",
+          "description": "Replica configurations.",
+          "items": {
+            "$ref": "#/definitions/AgReplica"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AgReplica": {
+      "type": "object",
+      "description": "Availability group replica configuration.",
+      "properties": {
+        "sqlVirtualMachineInstanceId": {
+          "type": "string",
+          "description": "Sql VirtualMachine Instance Id."
+        },
+        "role": {
+          "$ref": "#/definitions/Role",
+          "description": "Replica Role in availability group."
+        },
+        "commit": {
+          "$ref": "#/definitions/Commit",
+          "description": "Replica commit mode in availability group."
+        },
+        "failover": {
+          "$ref": "#/definitions/Failover",
+          "description": "Replica failover mode in availability group."
+        },
+        "readableSecondary": {
+          "$ref": "#/definitions/ReadableSecondary",
+          "description": "Replica readable secondary mode in availability group."
+        }
+      }
+    },
+    "AssessmentDayOfWeek": {
+      "type": "string",
+      "description": "Day of the week to run assessment.",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentDayOfWeek",
+        "modelAsString": false
+      }
+    },
+    "AssessmentSettings": {
+      "type": "object",
+      "description": "Configure SQL best practices Assessment for databases in your SQL virtual machine.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable SQL best practices Assessment feature on SQL virtual machine."
+        },
+        "runImmediately": {
+          "type": "boolean",
+          "description": "Run SQL best practices Assessment immediately on SQL virtual machine."
+        },
+        "schedule": {
+          "$ref": "#/definitions/Schedule",
+          "description": "Schedule for SQL best practices Assessment."
+        }
+      }
+    },
+    "AutoBackupDaysOfWeek": {
+      "type": "string",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "AutoBackupDaysOfWeek",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday"
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday"
+          }
+        ]
+      }
+    },
+    "AutoBackupSettings": {
+      "type": "object",
+      "description": "Configure backups for databases in your SQL virtual machine.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable autobackup on SQL virtual machine."
+        },
+        "enableEncryption": {
+          "type": "boolean",
+          "description": "Enable or disable encryption for backup on SQL virtual machine."
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period of backup: 1-90 days."
+        },
+        "storageAccountUrl": {
+          "type": "string",
+          "description": "Storage account url where backup will be taken to."
+        },
+        "storageContainerName": {
+          "type": "string",
+          "description": "Storage container name where backup will be taken to."
+        },
+        "storageAccessKey": {
+          "type": "string",
+          "description": "Storage account key where backup will be taken to.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "password": {
+          "type": "string",
+          "description": "Password for encryption on backup.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "backupSystemDbs": {
+          "type": "boolean",
+          "description": "Include or exclude system databases from auto backup."
+        },
+        "backupScheduleType": {
+          "$ref": "#/definitions/BackupScheduleType",
+          "description": "Backup schedule type."
+        },
+        "fullBackupFrequency": {
+          "$ref": "#/definitions/FullBackupFrequencyType",
+          "description": "Frequency of full backups. In both cases, full backups begin during the next scheduled time window."
+        },
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Days of the week for the backups when FullBackupFrequency is set to Weekly.",
+          "items": {
+            "$ref": "#/definitions/AutoBackupDaysOfWeek"
+          }
+        },
+        "fullBackupStartTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start time of a given day during which full backups can take place. 0-23 hours."
+        },
+        "fullBackupWindowHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of the time window of a given day during which full backups can take place. 1-23 hours."
+        },
+        "logBackupFrequency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency of log backups. 5-60 minutes."
+        }
+      }
+    },
+    "AutoPatchingSettings": {
+      "type": "object",
+      "description": "Set a patching window during which Windows and SQL patches will be applied.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable autopatching on SQL virtual machine."
+        },
+        "dayOfWeek": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Day of week to apply the patch on."
+        },
+        "maintenanceWindowStartingHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hour of the day when patching is initiated. Local VM time."
+        },
+        "maintenanceWindowDuration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of patching."
+        },
+        "additionalVmPatch": {
+          "type": "string",
+          "description": "Additional Patch to be enable or enabled on the SQL Virtual Machine.",
+          "default": "NotSet",
+          "enum": [
+            "NotSet",
+            "MicrosoftUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "AdditionalVmPatch",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSet",
+                "value": "NotSet"
+              },
+              {
+                "name": "MicrosoftUpdate",
+                "value": "MicrosoftUpdate"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "AvailabilityGroupListener": {
+      "type": "object",
+      "description": "A SQL Server availability group listener.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailabilityGroupListenerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailabilityGroupListenerListResult": {
+      "type": "object",
+      "description": "The response of a AvailabilityGroupListener list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvailabilityGroupListener items on this page",
+          "items": {
+            "$ref": "#/definitions/AvailabilityGroupListener"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AvailabilityGroupListenerProperties": {
+      "type": "object",
+      "description": "The properties of an availability group listener.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state to track the async operation status.",
+          "readOnly": true
+        },
+        "availabilityGroupName": {
+          "type": "string",
+          "description": "Name of the availability group."
+        },
+        "loadBalancerConfigurations": {
+          "type": "array",
+          "description": "List of load balancer configurations for an availability group listener.",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "multiSubnetIpConfigurations": {
+          "type": "array",
+          "description": "List of multi subnet IP configurations for an AG listener.",
+          "items": {
+            "$ref": "#/definitions/MultiSubnetIpConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "createDefaultAvailabilityGroupIfNotExist": {
+          "type": "boolean",
+          "description": "Create a default availability group if it does not exist."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Listener port."
+        },
+        "availabilityGroupConfiguration": {
+          "$ref": "#/definitions/AgConfiguration",
+          "description": "Availability Group configuration."
+        }
+      }
+    },
+    "BackupScheduleType": {
+      "type": "string",
+      "description": "Backup schedule type.",
+      "enum": [
+        "Manual",
+        "Automated"
+      ],
+      "x-ms-enum": {
+        "name": "BackupScheduleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual"
+          },
+          {
+            "name": "Automated",
+            "value": "Automated"
+          }
+        ]
+      }
+    },
+    "ClusterConfiguration": {
+      "type": "string",
+      "description": "Cluster type.",
+      "enum": [
+        "Domainful"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterConfiguration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Domainful",
+            "value": "Domainful"
+          }
+        ]
+      }
+    },
+    "ClusterManagerType": {
+      "type": "string",
+      "description": "Type of cluster manager: Windows Server Failover Cluster (WSFC), implied by the scale type of the group and the OS type.",
+      "enum": [
+        "WSFC"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterManagerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WSFC",
+            "value": "WSFC"
+          }
+        ]
+      }
+    },
+    "ClusterSubnetType": {
+      "type": "string",
+      "description": "Cluster subnet type.",
+      "enum": [
+        "SingleSubnet",
+        "MultiSubnet"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterSubnetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SingleSubnet",
+            "value": "SingleSubnet"
+          },
+          {
+            "name": "MultiSubnet",
+            "value": "MultiSubnet"
+          }
+        ]
+      }
+    },
+    "Commit": {
+      "type": "string",
+      "description": "Replica commit mode in availability group.",
+      "enum": [
+        "Synchronous_Commit",
+        "Asynchronous_Commit"
+      ],
+      "x-ms-enum": {
+        "name": "Commit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Synchronous_Commit",
+            "value": "Synchronous_Commit"
+          },
+          {
+            "name": "Asynchronous_Commit",
+            "value": "Asynchronous_Commit"
+          }
+        ]
+      }
+    },
+    "ConnectivityType": {
+      "type": "string",
+      "description": "SQL Server connectivity option.",
+      "enum": [
+        "LOCAL",
+        "PRIVATE",
+        "PUBLIC"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectivityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LOCAL",
+            "value": "LOCAL"
+          },
+          {
+            "name": "PRIVATE",
+            "value": "PRIVATE"
+          },
+          {
+            "name": "PUBLIC",
+            "value": "PUBLIC"
+          }
+        ]
+      }
+    },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "Day of week to apply the patch on.",
+      "enum": [
+        "Everyday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": false
+      }
+    },
+    "DiskConfigAssessmentRequest": {
+      "type": "object",
+      "description": "Configure disk config assessment for databases in your SQL virtual machine.",
+      "properties": {
+        "runDiskConfigRules": {
+          "type": "boolean",
+          "description": "Boolean to run disk config Assessment. Use false to fetch past Assessment."
+        }
+      }
+    },
+    "DiskConfigurationType": {
+      "type": "string",
+      "description": "Disk configuration to apply to SQL Server.",
+      "enum": [
+        "NEW",
+        "EXTEND",
+        "ADD"
+      ],
+      "x-ms-enum": {
+        "name": "DiskConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NEW",
+            "value": "NEW"
+          },
+          {
+            "name": "EXTEND",
+            "value": "EXTEND"
+          },
+          {
+            "name": "ADD",
+            "value": "ADD"
+          }
+        ]
+      }
+    },
+    "Failover": {
+      "type": "string",
+      "description": "Replica failover mode in availability group.",
+      "enum": [
+        "Automatic",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "Failover",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic"
+          },
+          {
+            "name": "Manual",
+            "value": "Manual"
+          }
+        ]
+      }
+    },
+    "FullBackupFrequencyType": {
+      "type": "string",
+      "description": "Frequency of full backups. In both cases, full backups begin during the next scheduled time window.",
+      "enum": [
+        "Daily",
+        "Weekly"
+      ],
+      "x-ms-enum": {
+        "name": "FullBackupFrequencyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Daily",
+            "value": "Daily"
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly"
+          }
+        ]
+      }
+    },
+    "IdentityType": {
+      "type": "string",
+      "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned,UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          },
+          {
+            "name": "SystemAssigned,UserAssigned",
+            "value": "SystemAssigned,UserAssigned"
+          }
+        ]
+      }
+    },
+    "KeyVaultCredentialSettings": {
+      "type": "object",
+      "description": "Configure your SQL virtual machine to be able to connect to the Azure Key Vault service.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable key vault credential setting."
+        },
+        "credentialName": {
+          "type": "string",
+          "description": "Credential name."
+        },
+        "azureKeyVaultUrl": {
+          "type": "string",
+          "description": "Azure Key Vault url."
+        },
+        "servicePrincipalName": {
+          "type": "string",
+          "description": "Service principal name to access key vault."
+        },
+        "servicePrincipalSecret": {
+          "type": "string",
+          "description": "Service principal name secret to access key vault.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "LoadBalancerConfiguration": {
+      "type": "object",
+      "description": "A load balancer configuration for an availability group listener.",
+      "properties": {
+        "privateIpAddress": {
+          "$ref": "#/definitions/PrivateIPAddress",
+          "description": "Private IP address."
+        },
+        "publicIpAddressResourceId": {
+          "type": "string",
+          "description": "Resource id of the public IP."
+        },
+        "loadBalancerResourceId": {
+          "type": "string",
+          "description": "Resource id of the load balancer."
+        },
+        "probePort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Probe port."
+        },
+        "sqlVirtualMachineInstances": {
+          "type": "array",
+          "description": "List of the SQL virtual machine instance resource id's that are enrolled into the availability group listener.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MultiSubnetIpConfiguration": {
+      "type": "object",
+      "description": "Multi subnet ip configuration for an availability group listener.",
+      "properties": {
+        "privateIpAddress": {
+          "$ref": "#/definitions/PrivateIPAddress",
+          "description": "Private IP address."
+        },
+        "sqlVirtualMachineInstance": {
+          "type": "string",
+          "description": "SQL virtual machine instance resource id that are enrolled into the availability group listener."
+        }
+      },
+      "required": [
+        "privateIpAddress",
+        "sqlVirtualMachineInstance"
+      ]
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Result of the request to list SQL operations.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object.\"",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "he localized display information for this particular operation / action.",
+          "readOnly": true
+        },
+        "origin": {
+          "$ref": "#/definitions/OperationOrigin",
+          "description": "The intended executor of the operation.\"",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional descriptions for the operation.",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Virtual machine resource id for response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationOrigin": {
+      "type": "string",
+      "description": "The intended executor of the operation.",
+      "enum": [
+        "user",
+        "system"
+      ],
+      "x-ms-enum": {
+        "name": "OperationOrigin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user"
+          },
+          {
+            "name": "system",
+            "value": "system"
+          }
+        ]
+      }
+    },
+    "OsType": {
+      "type": "string",
+      "description": "Operating System of the current SQL Virtual Machine.",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OsType",
+        "modelAsString": false
+      }
+    },
+    "PrivateIPAddress": {
+      "type": "object",
+      "description": "A private IP address bound to the availability group listener.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "Private IP address bound to the availability group listener."
+        },
+        "subnetResourceId": {
+          "type": "string",
+          "description": "Subnet used to include private IP."
+        }
+      }
+    },
+    "ReadableSecondary": {
+      "type": "string",
+      "description": "Replica readable secondary mode in availability group.",
+      "enum": [
+        "No",
+        "All",
+        "Read_Only"
+      ],
+      "x-ms-enum": {
+        "name": "ReadableSecondary",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "No",
+            "value": "No"
+          },
+          {
+            "name": "All",
+            "value": "All"
+          },
+          {
+            "name": "Read_Only",
+            "value": "Read_Only"
+          }
+        ]
+      }
+    },
+    "ResourceIdentity": {
+      "type": "object",
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource."
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant id.",
+          "readOnly": true
+        }
+      }
+    },
+    "Role": {
+      "type": "string",
+      "description": "Replica Role in availability group.",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "Role",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary"
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary"
+          }
+        ]
+      }
+    },
+    "SQLInstanceSettings": {
+      "type": "object",
+      "description": "Set the server/instance-level settings for SQL Server.",
+      "properties": {
+        "collation": {
+          "type": "string",
+          "description": "SQL Server Collation."
+        },
+        "maxDop": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server MAXDOP."
+        },
+        "isOptimizeForAdHocWorkloadsEnabled": {
+          "type": "boolean",
+          "description": "SQL Server Optimize for Adhoc workloads."
+        },
+        "minServerMemoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server minimum memory."
+        },
+        "maxServerMemoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server maximum memory."
+        },
+        "isLpimEnabled": {
+          "type": "boolean",
+          "description": "SQL Server LPIM."
+        },
+        "isIfiEnabled": {
+          "type": "boolean",
+          "description": "SQL Server IFI."
+        }
+      }
+    },
+    "SQLStorageSettings": {
+      "type": "object",
+      "description": "Set disk storage settings for SQL Server.",
+      "properties": {
+        "luns": {
+          "type": "array",
+          "description": "Logical Unit Numbers for the disks.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "defaultFilePath": {
+          "type": "string",
+          "description": "SQL Server default file path"
+        },
+        "useStoragePool": {
+          "type": "boolean",
+          "description": "Use storage pool to build a drive if true or not provided"
+        }
+      }
+    },
+    "SQLTempDbSettings": {
+      "type": "object",
+      "description": "Set tempDb storage settings for SQL Server.",
+      "properties": {
+        "dataFileSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server tempdb data file size"
+        },
+        "dataGrowth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server tempdb data file autoGrowth size"
+        },
+        "logFileSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server tempdb log file size"
+        },
+        "logGrowth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server tempdb log file autoGrowth size"
+        },
+        "dataFileCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server tempdb data file count"
+        },
+        "persistFolder": {
+          "type": "boolean",
+          "description": "SQL Server tempdb persist folder choice"
+        },
+        "persistFolderPath": {
+          "type": "string",
+          "description": "SQL Server tempdb persist folder location"
+        },
+        "luns": {
+          "type": "array",
+          "description": "Logical Unit Numbers for the disks.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "defaultFilePath": {
+          "type": "string",
+          "description": "SQL Server default file path"
+        },
+        "useStoragePool": {
+          "type": "boolean",
+          "description": "Use storage pool to build a drive if true or not provided"
+        }
+      }
+    },
+    "ScaleType": {
+      "type": "string",
+      "description": "Scale type.",
+      "enum": [
+        "HA"
+      ],
+      "x-ms-enum": {
+        "name": "ScaleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HA",
+            "value": "HA"
+          }
+        ]
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "Set assessment schedule for SQL Server.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable assessment schedule on SQL virtual machine."
+        },
+        "weeklyInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of weeks to schedule between 2 assessment runs. Takes value from 1-6"
+        },
+        "monthlyOccurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Occurrence of the DayOfWeek day within a month to schedule assessment. Takes values: 1,2,3,4 and -1. Use -1 for last DayOfWeek day of the month"
+        },
+        "dayOfWeek": {
+          "$ref": "#/definitions/AssessmentDayOfWeek",
+          "description": "Day of the week to run assessment."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Time of the day in HH:mm format. Eg. 17:30"
+        }
+      }
+    },
+    "ServerConfigurationsManagementSettings": {
+      "type": "object",
+      "description": "Set the connectivity, storage and workload settings.",
+      "properties": {
+        "sqlConnectivityUpdateSettings": {
+          "$ref": "#/definitions/SqlConnectivityUpdateSettings",
+          "description": "SQL connectivity type settings."
+        },
+        "sqlWorkloadTypeUpdateSettings": {
+          "$ref": "#/definitions/SqlWorkloadTypeUpdateSettings",
+          "description": "SQL workload type settings."
+        },
+        "sqlStorageUpdateSettings": {
+          "$ref": "#/definitions/SqlStorageUpdateSettings",
+          "description": "SQL storage update settings."
+        },
+        "additionalFeaturesServerConfigurations": {
+          "$ref": "#/definitions/AdditionalFeaturesServerConfigurations",
+          "description": "Additional SQL feature settings."
+        },
+        "sqlInstanceSettings": {
+          "$ref": "#/definitions/SQLInstanceSettings",
+          "description": "SQL Instance settings."
+        },
+        "azureAdAuthenticationSettings": {
+          "$ref": "#/definitions/AADAuthenticationSettings",
+          "description": "Azure AD authentication Settings."
+        }
+      }
+    },
+    "SqlConnectivityUpdateSettings": {
+      "type": "object",
+      "description": "Set the access level and network port settings for SQL Server.",
+      "properties": {
+        "connectivityType": {
+          "$ref": "#/definitions/ConnectivityType",
+          "description": "SQL Server connectivity option."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SQL Server port."
+        },
+        "sqlAuthUpdateUserName": {
+          "type": "string",
+          "description": "SQL Server sysadmin login to create.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sqlAuthUpdatePassword": {
+          "type": "string",
+          "description": "SQL Server sysadmin login password.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "SqlImageSku": {
+      "type": "string",
+      "description": "SQL Server edition type.",
+      "enum": [
+        "Developer",
+        "Express",
+        "Standard",
+        "Enterprise",
+        "Web"
+      ],
+      "x-ms-enum": {
+        "name": "SqlImageSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Developer",
+            "value": "Developer"
+          },
+          {
+            "name": "Express",
+            "value": "Express"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard"
+          },
+          {
+            "name": "Enterprise",
+            "value": "Enterprise"
+          },
+          {
+            "name": "Web",
+            "value": "Web"
+          }
+        ]
+      }
+    },
+    "SqlManagementMode": {
+      "type": "string",
+      "description": "SQL Server Management type. NOTE: This parameter is not used anymore. API will automatically detect the Sql Management, refrain from using it.",
+      "enum": [
+        "Full",
+        "LightWeight",
+        "NoAgent"
+      ],
+      "x-ms-enum": {
+        "name": "SqlManagementMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Full",
+            "value": "Full"
+          },
+          {
+            "name": "LightWeight",
+            "value": "LightWeight"
+          },
+          {
+            "name": "NoAgent",
+            "value": "NoAgent"
+          }
+        ]
+      }
+    },
+    "SqlServerLicenseType": {
+      "type": "string",
+      "description": "SQL Server license type.",
+      "enum": [
+        "PAYG",
+        "AHUB",
+        "DR"
+      ],
+      "x-ms-enum": {
+        "name": "SqlServerLicenseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PAYG",
+            "value": "PAYG"
+          },
+          {
+            "name": "AHUB",
+            "value": "AHUB"
+          },
+          {
+            "name": "DR",
+            "value": "DR"
+          }
+        ]
+      }
+    },
+    "SqlStorageUpdateSettings": {
+      "type": "object",
+      "description": "Set disk storage settings for SQL Server.",
+      "properties": {
+        "diskCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Virtual machine disk count."
+        },
+        "startingDeviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Device id of the first disk to be updated."
+        },
+        "diskConfigurationType": {
+          "$ref": "#/definitions/DiskConfigurationType",
+          "description": "Disk configuration to apply to SQL Server."
+        }
+      }
+    },
+    "SqlVirtualMachine": {
+      "type": "object",
+      "description": "A SQL virtual machine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVirtualMachineProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "DO NOT USE. This value will be deprecated. Azure Active Directory identity of the server.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SqlVirtualMachineGroup": {
+      "type": "object",
+      "description": "A SQL virtual machine group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVirtualMachineGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SqlVirtualMachineGroupListResult": {
+      "type": "object",
+      "description": "The response of a SqlVirtualMachineGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SqlVirtualMachineGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/SqlVirtualMachineGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SqlVirtualMachineGroupProperties": {
+      "type": "object",
+      "description": "The properties of a SQL virtual machine group.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state to track the async operation status.",
+          "readOnly": true
+        },
+        "sqlImageOffer": {
+          "type": "string",
+          "description": "SQL image offer. Examples may include SQL2016-WS2016, SQL2017-WS2016.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sqlImageSku": {
+          "$ref": "#/definitions/SqlVmGroupImageSku",
+          "description": "SQL image sku.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "scaleType": {
+          "$ref": "#/definitions/ScaleType",
+          "description": "Scale type.",
+          "readOnly": true
+        },
+        "clusterManagerType": {
+          "$ref": "#/definitions/ClusterManagerType",
+          "description": "Type of cluster manager: Windows Server Failover Cluster (WSFC), implied by the scale type of the group and the OS type.",
+          "readOnly": true
+        },
+        "clusterConfiguration": {
+          "$ref": "#/definitions/ClusterConfiguration",
+          "description": "Cluster type.",
+          "readOnly": true
+        },
+        "wsfcDomainProfile": {
+          "$ref": "#/definitions/WsfcDomainProfile",
+          "description": "Cluster Active Directory domain profile.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "SqlVirtualMachineGroupUpdate": {
+      "type": "object",
+      "description": "An update to a SQL virtual machine group.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlVirtualMachineListResult": {
+      "type": "object",
+      "description": "The response of a SqlVirtualMachine list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SqlVirtualMachine items on this page",
+          "items": {
+            "$ref": "#/definitions/SqlVirtualMachine"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SqlVirtualMachineProperties": {
+      "type": "object",
+      "description": "The SQL virtual machine properties.",
+      "properties": {
+        "virtualMachineResourceId": {
+          "type": "string",
+          "description": "ARM Resource id of underlying virtual machine created from SQL marketplace image.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state to track the async operation status.",
+          "readOnly": true
+        },
+        "sqlImageOffer": {
+          "type": "string",
+          "description": "SQL image offer. Examples include SQL2016-WS2016, SQL2017-WS2016.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sqlServerLicenseType": {
+          "$ref": "#/definitions/SqlServerLicenseType",
+          "description": "SQL Server license type."
+        },
+        "sqlManagement": {
+          "$ref": "#/definitions/SqlManagementMode",
+          "description": "SQL Server Management type. NOTE: This parameter is not used anymore. API will automatically detect the Sql Management, refrain from using it."
+        },
+        "leastPrivilegeMode": {
+          "type": "string",
+          "description": "SQL IaaS Agent least privilege mode.",
+          "default": "NotSet",
+          "enum": [
+            "Enabled",
+            "NotSet"
+          ],
+          "x-ms-enum": {
+            "name": "LeastPrivilegeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "NotSet",
+                "value": "NotSet"
+              }
+            ]
+          }
+        },
+        "sqlImageSku": {
+          "$ref": "#/definitions/SqlImageSku",
+          "description": "SQL Server edition type."
+        },
+        "sqlVirtualMachineGroupResourceId": {
+          "type": "string",
+          "description": "ARM resource id of the SQL virtual machine group this SQL virtual machine is or will be part of.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "wsfcDomainCredentials": {
+          "$ref": "#/definitions/WsfcDomainCredentials",
+          "description": "Domain credentials for setting up Windows Server Failover Cluster for SQL availability group."
+        },
+        "wsfcStaticIp": {
+          "type": "string",
+          "description": "Domain credentials for setting up Windows Server Failover Cluster for SQL availability group."
+        },
+        "autoPatchingSettings": {
+          "$ref": "#/definitions/AutoPatchingSettings",
+          "description": "Auto patching settings for applying critical security updates to SQL virtual machine."
+        },
+        "autoBackupSettings": {
+          "$ref": "#/definitions/AutoBackupSettings",
+          "description": "Auto backup settings for SQL Server."
+        },
+        "keyVaultCredentialSettings": {
+          "$ref": "#/definitions/KeyVaultCredentialSettings",
+          "description": "Key vault credential settings."
+        },
+        "serverConfigurationsManagementSettings": {
+          "$ref": "#/definitions/ServerConfigurationsManagementSettings",
+          "description": "SQL Server configuration management settings."
+        },
+        "storageConfigurationSettings": {
+          "$ref": "#/definitions/StorageConfigurationSettings",
+          "description": "Storage Configuration Settings."
+        },
+        "troubleshootingStatus": {
+          "$ref": "#/definitions/TroubleshootingStatus",
+          "description": "Troubleshooting status",
+          "readOnly": true
+        },
+        "assessmentSettings": {
+          "$ref": "#/definitions/AssessmentSettings",
+          "description": "SQL best practices Assessment Settings."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Enable automatic upgrade of Sql IaaS extension Agent.",
+          "default": false
+        },
+        "additionalVmPatch": {
+          "$ref": "#/definitions/AdditionalOsPatch",
+          "description": "Additional VM Patching solution enabled on the Virtual Machine",
+          "readOnly": true
+        },
+        "virtualMachineIdentitySettings": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "Virtual Machine Identity details used for Sql IaaS extension configurations."
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "Operating System of the current SQL Virtual Machine.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlVirtualMachineUpdate": {
+      "type": "object",
+      "description": "An update to a SQL virtual machine.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlVmGroupImageSku": {
+      "type": "string",
+      "description": "SQL image sku.",
+      "enum": [
+        "Developer",
+        "Enterprise"
+      ],
+      "x-ms-enum": {
+        "name": "SqlVmGroupImageSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Developer",
+            "value": "Developer"
+          },
+          {
+            "name": "Enterprise",
+            "value": "Enterprise"
+          }
+        ]
+      }
+    },
+    "SqlVmTroubleshooting": {
+      "type": "object",
+      "description": "Details required for SQL VM troubleshooting",
+      "properties": {
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time in UTC timezone."
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time in UTC timezone."
+        },
+        "troubleshootingScenario": {
+          "type": "string",
+          "description": "SQL VM troubleshooting scenario.",
+          "default": "UnhealthyReplica",
+          "enum": [
+            "UnhealthyReplica"
+          ],
+          "x-ms-enum": {
+            "name": "TroubleshootingScenario",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "UnhealthyReplica",
+                "value": "UnhealthyReplica"
+              }
+            ]
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/TroubleshootingAdditionalProperties",
+          "description": "Troubleshooting properties"
+        },
+        "virtualMachineResourceId": {
+          "type": "string",
+          "description": "Virtual machine resource id for response.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlWorkloadType": {
+      "type": "string",
+      "description": "SQL Server workload type.",
+      "enum": [
+        "GENERAL",
+        "OLTP",
+        "DW"
+      ],
+      "x-ms-enum": {
+        "name": "SqlWorkloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GENERAL",
+            "value": "GENERAL"
+          },
+          {
+            "name": "OLTP",
+            "value": "OLTP"
+          },
+          {
+            "name": "DW",
+            "value": "DW"
+          }
+        ]
+      }
+    },
+    "SqlWorkloadTypeUpdateSettings": {
+      "type": "object",
+      "description": "Set workload type to optimize storage for SQL Server.",
+      "properties": {
+        "sqlWorkloadType": {
+          "$ref": "#/definitions/SqlWorkloadType",
+          "description": "SQL Server workload type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "StorageConfigurationSettings": {
+      "type": "object",
+      "description": "Storage Configurations for SQL Data, Log and TempDb.",
+      "properties": {
+        "sqlDataSettings": {
+          "$ref": "#/definitions/SQLStorageSettings",
+          "description": "SQL Server Data Storage Settings."
+        },
+        "sqlLogSettings": {
+          "$ref": "#/definitions/SQLStorageSettings",
+          "description": "SQL Server Log Storage Settings."
+        },
+        "sqlTempDbSettings": {
+          "$ref": "#/definitions/SQLTempDbSettings",
+          "description": "SQL Server TempDb Storage Settings."
+        },
+        "sqlSystemDbOnDataDisk": {
+          "type": "boolean",
+          "description": "SQL Server SystemDb Storage on DataPool if true."
+        },
+        "diskConfigurationType": {
+          "$ref": "#/definitions/DiskConfigurationType",
+          "description": "Disk configuration to apply to SQL Server."
+        },
+        "storageWorkloadType": {
+          "$ref": "#/definitions/StorageWorkloadType",
+          "description": "Storage workload type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "enableStorageConfigBlade": {
+          "type": "boolean",
+          "description": "Enable SQL IaaS Agent storage configuration blade in Azure Portal.",
+          "default": false,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "StorageWorkloadType": {
+      "type": "string",
+      "description": "Storage workload type.",
+      "enum": [
+        "GENERAL",
+        "OLTP",
+        "DW"
+      ],
+      "x-ms-enum": {
+        "name": "StorageWorkloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GENERAL",
+            "value": "GENERAL"
+          },
+          {
+            "name": "OLTP",
+            "value": "OLTP"
+          },
+          {
+            "name": "DW",
+            "value": "DW"
+          }
+        ]
+      }
+    },
+    "TroubleshootingAdditionalProperties": {
+      "type": "object",
+      "description": "SQL VM Troubleshooting additional properties.",
+      "properties": {
+        "unhealthyReplicaInfo": {
+          "$ref": "#/definitions/UnhealthyReplicaInfo",
+          "description": "The unhealthy replica information"
+        }
+      }
+    },
+    "TroubleshootingStatus": {
+      "type": "object",
+      "description": "Status of last troubleshooting operation on this SQL VM",
+      "properties": {
+        "rootCause": {
+          "type": "string",
+          "description": "Root cause of the issue",
+          "readOnly": true
+        },
+        "lastTriggerTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last troubleshooting trigger time in UTC timezone",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time in UTC timezone.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time in UTC timezone.",
+          "readOnly": true
+        },
+        "troubleshootingScenario": {
+          "type": "string",
+          "description": "SQL VM troubleshooting scenario.",
+          "default": "UnhealthyReplica",
+          "enum": [
+            "UnhealthyReplica"
+          ],
+          "x-ms-enum": {
+            "name": "TroubleshootingScenario",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "UnhealthyReplica",
+                "value": "UnhealthyReplica"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/TroubleshootingAdditionalProperties",
+          "description": "Troubleshooting properties",
+          "readOnly": true
+        }
+      }
+    },
+    "UnhealthyReplicaInfo": {
+      "type": "object",
+      "description": "SQL VM Troubleshoot UnhealthyReplica scenario information.",
+      "properties": {
+        "availabilityGroupName": {
+          "type": "string",
+          "description": "The name of the availability group"
+        }
+      }
+    },
+    "VirtualMachineIdentity": {
+      "type": "object",
+      "description": "Virtual Machine Identity details used for Sql IaaS extension configurations.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VmIdentityType",
+          "description": "Identity type of the virtual machine. Specify None to opt-out of Managed Identities."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Resource Id of the identity. Only required when UserAssigned identity is selected."
+        }
+      }
+    },
+    "VmIdentityType": {
+      "type": "string",
+      "description": "Identity type of the virtual machine. Specify None to opt-out of Managed Identities.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "VmIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          }
+        ]
+      }
+    },
+    "WsfcDomainCredentials": {
+      "type": "object",
+      "description": "Domain credentials for setting up Windows Server Failover Cluster for SQL availability group.",
+      "properties": {
+        "clusterBootstrapAccountPassword": {
+          "type": "string",
+          "description": "Cluster bootstrap account password."
+        },
+        "clusterOperatorAccountPassword": {
+          "type": "string",
+          "description": "Cluster operator account password."
+        },
+        "sqlServiceAccountPassword": {
+          "type": "string",
+          "description": "SQL service account password."
+        }
+      }
+    },
+    "WsfcDomainProfile": {
+      "type": "object",
+      "description": "Active Directory account details to operate Windows Server Failover Cluster.",
+      "properties": {
+        "domainFqdn": {
+          "type": "string",
+          "description": "Fully qualified name of the domain.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ouPath": {
+          "type": "string",
+          "description": "Organizational Unit path in which the nodes and cluster will be present.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "clusterBootstrapAccount": {
+          "type": "string",
+          "description": "Account name used for creating cluster (at minimum needs permissions to 'Create Computer Objects' in domain).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "clusterOperatorAccount": {
+          "type": "string",
+          "description": "Account name used for operating cluster i.e. will be part of administrators group on all the participating virtual machines in the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "sqlServiceAccount": {
+          "type": "string",
+          "description": "Account name under which SQL service will run on all participating SQL virtual machines in the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "isSqlServiceAccountGmsa": {
+          "type": "boolean",
+          "description": "The flag to check if SQL service account is GMSA.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "fileShareWitnessPath": {
+          "type": "string",
+          "description": "Optional path for fileshare witness.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageAccountUrl": {
+          "type": "string",
+          "description": "Fully qualified ARM resource id of the witness storage account.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageAccountPrimaryKey": {
+          "type": "string",
+          "description": "Primary key of the witness storage account.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "clusterSubnetType": {
+          "$ref": "#/definitions/ClusterSubnetType",
+          "description": "Cluster subnet type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
