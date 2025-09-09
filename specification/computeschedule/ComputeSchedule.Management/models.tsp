@@ -4,14 +4,82 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.ComputeSchedule;
+
+// ------------------ RequestBody ---------------
+
+@@clientName(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesSubmitStart::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitStart::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteStart::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteStart::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteCreate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteCreate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDelete::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteDelete::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesCancelOperations::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesCancelOperations::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body,
+  "The request body"
+);
 
 // ------------------ Enums ---------------
 @doc("The types of deadlines supported by ScheduledActions")
@@ -91,6 +159,72 @@ union OperationState {
   string,
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The type of profile to use for prioritizing virtual machine availability. This defines how the virtual machine is billed and managed in the Azure.")
+union PriorityProfileType {
+  @doc("Offers guaranteed availability.")
+  Regular: "Regular",
+
+  @doc("Offers flexible availability and is a cheaper option.")
+  Spot: "Spot",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The type of operating stystem supported by Azure")
+union OperatingSystemType {
+  @doc("Windows operating system")
+  Windows: "Windows",
+
+  @doc("Linux operating system")
+  Linux: "Linux",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("These types determines how and where the virtual machines are deployed to optimize for cost, performance, or availability")
+union AllocationStrategyType {
+  @doc("Allocation of virtual machines by lowest price, this is available for both Regular and Spot virtual machine PriorityProfileType")
+  LowestPrice: "LowestPrice",
+
+  @doc("Allocation of virtual machines by highest available capacity, this is available for Spot virtual machine PriorityProfileType")
+  CapacityOptimized: "CapacityOptimized",
+
+  @doc("Allocation of virtual machines by highest available capacity at the lowest price on virtual machines in the selected region, this is available for Spot virtual machine PriorityProfileType")
+  PriceCapacityOptimized: "PriceCapacityOptimized",
+
+  @doc("Allocation of virtual machines by customer selected priority, it seeks to create virtual machines based on the ranking provided in VmSizePreferenceRank, this is available for Regular virtual machine PriorityProfileType")
+  Prioritized: "Prioritized",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The ranking values for VM size preferences, this is applied when AllocationStrategyType is set to Prioritized")
+union VmSizePreferenceRank {
+  @doc("Rank0: Most preferred")
+  Rank0: "0",
+
+  @doc("Rank0: Most preferred")
+  Rank1: "1",
+
+  @doc("Rank0: Most preferred")
+  Rank2: "2",
+
+  @doc("Rank0: Most preferred")
+  Rank3: "3",
+
+  @doc("Rank0: Most preferred")
+  Rank4: "4",
+
+  @doc("Rank0: Most preferred")
+  Rank5: "5",
+
+  string,
+}
+
 // ------------------ Models ---------------
 @doc("The schedule details for the user request")
 model Schedule {
@@ -101,6 +235,7 @@ model Schedule {
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
   @doc("The deadline for the operation")
   deadLine?: offsetDateTime;
 
@@ -109,6 +244,7 @@ model Schedule {
   timezone?: string;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
   @doc("The timezone for the operation")
   timeZone?: string;
 
@@ -120,6 +256,42 @@ model Schedule {
 model Resources {
   @doc("The resource ids used for the request")
   ids: Array<armResourceIdentifier>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("Virtual machine sizes and their respective ranks for fungible create operations.")
+model VmSizesProfileProperties {
+  @doc("The size of the virtual machine")
+  name: string;
+
+  @doc("Priority order for the virtual machine size selected, the values go from Rank0-Rank5 in ascending order of preference.")
+  rank: VmSizePreferenceRank;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The strategy for virtual machine creation in terms of highly available or flexible availability.")
+model PriorityProfile {
+  @doc("The type of priority profile, this could be Regular or Spot")
+  type: PriorityProfileType;
+
+  @doc("The type of allocation strategy for the selected PriorityProfileType.")
+  allocationStrategy: AllocationStrategyType;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The properties that support fungible create operaions")
+model FungibileProperties {
+  @doc("A list of Azure zones to possibly create the virtual machines in")
+  zones?: Array<string>;
+
+  @doc("A list of preferred vm sizes to create and the rank of their preferences")
+  vmSizesProfile?: Array<VmSizesProfileProperties>;
+
+  @doc("The OS type for the vms")
+  osType: OperatingSystemType;
+
+  @doc("The priority profile")
+  priorityProfile?: PriorityProfile;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
@@ -138,6 +310,10 @@ model ResourceProvisionPayload {
 
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
   resourcePrefix?: string;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+  @doc("Properties that support fungible create, when this value is null, Create will proceed with the default non-fungible route.")
+  fungibleProperties?: FungibileProperties;
 }
 
 @doc("The retry policy for the user request")
@@ -196,6 +372,7 @@ model ResourceOperationDetails {
   timezone?: string;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
   @doc("Timezone for the operation")
   timeZone?: string;
 
@@ -239,6 +416,7 @@ model OperationErrorDetails {
   timestamp?: offsetDateTime;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
+  @removed(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
   @doc("The timestamp of the error occurence")
   timeStamp?: offsetDateTime;
 
