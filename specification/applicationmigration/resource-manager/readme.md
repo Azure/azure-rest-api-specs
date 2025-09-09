@@ -39,9 +39,6 @@ suppressions:
   - code: PathResourceTypeNameCamelCase
     from: WorkloadsDiscovery.json
     reason: ApplicationMigration is a technical term and cannot follow camel case rule.
-  - code: PathResourceTypeNameCamelCase
-    from: MongoWorkloadsDiscovery.json
-    reason: ApplicationMigration is a technical term and cannot follow camel case rule.
 ```
 
 # Code Generation

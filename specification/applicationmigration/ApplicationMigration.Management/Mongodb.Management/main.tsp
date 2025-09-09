@@ -16,6 +16,7 @@ import "./MongoSite.tsp";
 import "./MongoInstance.tsp";
 import "./MongoDatabase.tsp";
 import "./MongoAgent.tsp";
+import "./MongoCollection.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

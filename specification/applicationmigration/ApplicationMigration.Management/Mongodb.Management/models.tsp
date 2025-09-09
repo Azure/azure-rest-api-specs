@@ -72,7 +72,7 @@ model ProxySiteRefreshBody {
 /**
  * Represents an Enum with boolean values.
  */
-enum BoolValue {
+union BoolValue {
   @doc("Represents an unknown value.")
   Unknown: "Unknown",
 
@@ -98,16 +98,16 @@ union TlsVersion {
 
   /**
    * TLS version 1.0.
-   * @deprecated This version is deprecated
+   * #deprecated This version is deprecated
    */
-  @deprecated("This version is deprecated")
+  #deprecated "This version is deprecated"
   Tls1_0: "Tls1_0",
 
   /**
    * TLS version 1.1.
-   * @deprecated This version is deprecated
+   * #deprecated This version is deprecated
    */
-  @deprecated("This version is deprecated")
+  #deprecated "This version is deprecated"
   Tls1_1: "Tls1_1",
 
   /**
@@ -626,17 +626,17 @@ model MongoDatabaseProperties is AzureResourceProperties {
 /**
  * Mongo Database properties
  */
-model MongoDatabaseResourcePatchProperties {
+model MongoDatabaseResourcePatch {
   /**
    * The database resource patch properties.
    */
-  properties?: MongoDatabaseResourcePatch;
+  properties?: MongoDatabaseResourcePatchProperties;
 }
 
 /**
  * Mongo Database resource patch properties
  */
-model MongoDatabaseResourcePatch {
+model MongoDatabaseResourcePatchProperties {
   /**
    * The database name.
    */
@@ -734,17 +734,17 @@ model MongoCollectionProperties is AzureResourceProperties {
 /**
  * Mongo Collection properties
  */
-model MongoCollectionResourcePatchProperties {
+model MongoCollectionResourcePatch {
   /**
    * The collection resource patch properties.
    */
-  properties?: MongoCollectionResourcePatch;
+  properties?: MongoCollectionResourcePatchProperties;
 }
 
 /**
  * Properties for PATCH operation on MongoCollection resource.
  */
-model MongoCollectionResourcePatch {
+model MongoCollectionResourcePatchProperties {
   /** The collection name. */
   collectionDisplayName?: string;
 
