@@ -3086,6 +3086,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "readOnly": true,
           "description": "The URI to fetch the next page of results."
         }
@@ -3120,7 +3121,7 @@
             ]
           },
           "readOnly": true,
-          "description": "The Azure resource ID of the AMR destination cache to migrate."
+          "description": "The Azure resource ID of the Azure Managed Redis destination cache to migrate."
         },
         "provisioningState": {
           "$ref": "#/definitions/MigrationProvisioningState",
@@ -3166,11 +3167,11 @@
               "x-ms-arm-id-details": {
                 "allowedResources": [
                   {
-                    "type": "Microsoft.Cache/redis/RedisResource"
+                    "type": "Microsoft.Cache/redis"
                   }
                 ]
               },
-              "description": "The source resource Id to migrate from. This is the resource Id of the Azure Cache for Redis."
+              "description": "The source resource ID to migrate from. This is the resource ID of the Azure Cache for Redis."
             },
             "switchDns": {
               "type": "boolean",
