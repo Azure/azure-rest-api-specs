@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerServiceFleetClient",
-    "version": "2025-10-01-preview",
+    "version": "2025-08-01-preview",
     "description": "Azure Kubernetes Fleet Manager api client.",
     "x-typespec-generated": [
       {
@@ -931,6 +931,9 @@
           }
         },
         "x-ms-examples": {
+          "Gates_ListByFleet_MaximumSet": {
+            "$ref": "./examples/Gates_ListByFleet_MaximumSet_Gen.json"
+          },
           "Lists the Gates of a Fleet.": {
             "$ref": "./examples/Gates_ListByFleet.json"
           }
@@ -993,6 +996,9 @@
           }
         },
         "x-ms-examples": {
+          "Gates_Get_MaximumSet": {
+            "$ref": "./examples/Gates_Get_MaximumSet_Gen.json"
+          },
           "Gets a Gate resource.": {
             "$ref": "./examples/Gates_Get.json"
           }
@@ -1089,6 +1095,9 @@
           }
         },
         "x-ms-examples": {
+          "Gates_Update_MaximumSet": {
+            "$ref": "./examples/Gates_Update_MaximumSet_Gen.json"
+          },
           "Updates a Gate resource.": {
             "$ref": "./examples/Gates_Update.json"
           }
@@ -1193,6 +1202,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_ListByFleet": {
+            "$ref": "./examples/FleetManagedNamespaces_ListByFleet.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1248,6 +1262,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Get": {
+            "$ref": "./examples/FleetManagedNamespaces_Get.json"
           }
         }
       },
@@ -1344,6 +1363,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_CreateOrUpdate": {
+            "$ref": "./examples/FleetManagedNamespaces_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1431,6 +1455,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Update": {
+            "$ref": "./examples/FleetManagedNamespaces_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1504,6 +1533,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Delete": {
+            "$ref": "./examples/FleetManagedNamespaces_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4874,11 +4908,6 @@
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         },
-        "maxConcurrency": {
-          "type": "string",
-          "description": "The max number of upgrades that can run concurrently in this specific group.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the group you want to tolerate at a time.\nActual concurrency may be lower depending on stage-level concurrency limits or individual member conditions.\nGroup maxConcurrency has a min value of \"1\". The max value is min(number of clusters in the group, the stage maxConcurrency).\nIf no value is provided, defaults to 1.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the number of clusters in the group. \n      Fractional results are rounded up. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\" --> up to 3 members from this group upgrade at once.\n    • \"100%\" --> “all at once”, up to all members for this group upgrade at the same time.\n    • \"25%\" --> up to 25% of the members in the group will be upgraded at the same time.",
-          "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
-        },
         "beforeGates": {
           "type": "array",
           "description": "A list of Gates that will be created before this Group is executed.",
@@ -4912,12 +4941,6 @@
         "name": {
           "type": "string",
           "description": "The name of the UpdateGroup.",
-          "readOnly": true
-        },
-        "maxConcurrency": {
-          "type": "integer",
-          "format": "int32",
-          "description": "  The max number of upgrades that can run concurrently in this group, resolved from the UpdateStrategy.UpdateGroup.maxConcurrency value. If no value was provided, this value defaults to \"1\".",
           "readOnly": true
         },
         "members": {
@@ -5209,11 +5232,6 @@
           "format": "int32",
           "description": "The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified."
         },
-        "maxConcurrency": {
-          "type": "string",
-          "description": "The max number of upgrades that can run concurrently across all groups in this stage.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the stage you want to tolerate at a time.\nActual concurrency may be lower depending on group-level concurrency limits or individual member conditions.\nStage maxConcurrency has a min value of \"1\".\nAccepts either:\n    • A fixed count, e.g., \"3\"\n    • A percentage, e.g., \"25%\" (range 1–100). Percentage is of the total number of clusters across all groups in the stage.\n      Fractional results are rounded up. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\"     --> up to 3 clusters from this stage upgrade at once (across all groups).\n    • \"100%\"  --> “all at once”; up to all clusters in this stage upgrade at the same time.\n    • \"25%\"   --> up to 25% of the stage’s total clusters upgrade at the same time.",
-          "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
-        },
         "beforeGates": {
           "type": "array",
           "description": "A list of Gates that will be created before this Stage is executed.",
@@ -5247,12 +5265,6 @@
         "name": {
           "type": "string",
           "description": "The name of the UpdateStage.",
-          "readOnly": true
-        },
-        "maxConcurrency": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The max number of upgrades that can run concurrently across all groups in this stage, resolved from the UpdateStrategy.UpdateStage.maxConcurrency value.",
           "readOnly": true
         },
         "groups": {

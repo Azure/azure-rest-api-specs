@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-## This is the AutoRest configuration file for ContainerServiceFleet.
+## This is the AutoRest configuration file for ContainerServiceFleet
 
 The service is hosted under the Microsoft.ContainerService resource provider but exposes a separate set of resources, apis, and SDKs.
 
@@ -25,7 +25,6 @@ To see additional help and options, run:
 
 These are the global settings for the ContainerServices API.
 
-
 ``` yaml
 openapi-type: arm
 tag: package-2025-10-01-preview
@@ -47,6 +46,48 @@ suppressions:
     from: fleets.json
     where: $.definitions.FleetMemberUpdateProperties.properties.labels
     reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.ManagedNamespaceProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.ManagedNamespaceProperties.properties.annotations
+    reason: Annotations are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions['Meta.V1.LabelSelector'].properties.matchLabels
+    reason: MatchLabels are a key/value map that is passed through to the underlying Kubernetes model.
+```
+
+### Tag: package-2025-08-01-preview
+
+These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-01-preview'
+input-file:
+  - preview/2025-08-01-preview/fleets.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.FleetMemberProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.FleetMemberUpdateProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.ManagedNamespaceProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.ManagedNamespaceProperties.properties.annotations
+    reason: Annotations are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions['Meta.V1.LabelSelector'].properties.matchLabels
+    reason: MatchLabels are a key/value map that is passed through to the underlying Kubernetes model.
 ```
 
 ### Tag: package-2025-04-01-preview
@@ -89,7 +130,7 @@ input-file:
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-04'
+```yaml $(tag) == 'package-2024-04'
 input-file:
   - stable/2024-04-01/fleets.json
 ```
@@ -102,11 +143,12 @@ These settings apply only when `--tag=package-2024-02-preview` is specified on t
 input-file:
   - preview/2024-02-02-preview/fleets.json
 ```
+
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-10'
+```yaml $(tag) == 'package-2023-10'
 input-file:
   - stable/2023-10-15/fleets.json
 ```
@@ -115,7 +157,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-08-preview'
+```yaml $(tag) == 'package-2023-08-preview'
 input-file:
   - preview/2023-08-15-preview/fleets.json
 ```
@@ -124,7 +166,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-preview'
+```yaml $(tag) == 'package-2023-06-preview'
 input-file:
   - preview/2023-06-15-preview/fleets.json
 ```
@@ -133,7 +175,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-03-preview'
+```yaml $(tag) == 'package-2023-03-preview'
 input-file:
   - preview/2023-03-15-preview/fleets.json
 ```
@@ -142,7 +184,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-09-preview'
+```yaml $(tag) == 'package-2022-09-preview'
 input-file:
   - preview/2022-09-02-preview/fleets.json
 ```
@@ -151,7 +193,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-07-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-07-preview'
+```yaml $(tag) == 'package-2022-07-preview'
 input-file:
   - preview/2022-07-02-preview/fleets.json
 ```
@@ -160,7 +202,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-06-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-06-preview'
+```yaml $(tag) == 'package-2022-06-preview'
 input-file:
   - preview/2022-06-02-preview/fleets.json
 ```
@@ -174,7 +216,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
