@@ -280,7 +280,7 @@
         "tags": [
           "Authorizations"
         ],
-        "operationId": "Authorization_RefreshAuthorizationProviderSecret",
+        "operationId": "AuthorizationProvider_RefreshSecret",
         "description": "Refreshes the Key Vault reference secret for the specified authorization provider.",
         "x-ms-examples": {
           "ApiManagementAuthorizationProviderRefreshSecret": {
@@ -289,7 +289,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -298,10 +298,10 @@
             "$ref": "./apimanagement.json#/parameters/AuthorizationProviderIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -315,6 +315,12 @@
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         }
