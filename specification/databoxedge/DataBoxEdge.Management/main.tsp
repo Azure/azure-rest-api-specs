@@ -40,9 +40,6 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * // (missing-service-description) Add service description
- */
 @armProviderNamespace
 @service(#{ title: "DataBoxEdgeManagementClient" })
 @versioned(Versions)

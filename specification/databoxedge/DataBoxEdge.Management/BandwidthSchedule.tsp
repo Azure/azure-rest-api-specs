@@ -38,9 +38,8 @@ interface BandwidthSchedules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BandwidthSchedule,
-    Response = ArmResourceUpdatedResponse<BandwidthSchedule> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = BandwidthSchedule> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<BandwidthSchedule> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BandwidthSchedule> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

@@ -24,6 +24,7 @@ interface AvailableSkusOperationGroup {
   @autoRoute
   @get
   @action("availableSkus")
+  @list
   list is ArmProviderActionSync<
     Response = DataBoxEdgeSkuList,
     Scope = SubscriptionActionScope,

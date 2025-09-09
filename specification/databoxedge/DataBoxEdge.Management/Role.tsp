@@ -44,9 +44,8 @@ interface Roles {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Role,
-    Response = ArmResourceUpdatedResponse<Role> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Role> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<Role> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Role> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

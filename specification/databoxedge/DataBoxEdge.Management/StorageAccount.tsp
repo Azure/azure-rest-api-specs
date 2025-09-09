@@ -38,9 +38,8 @@ interface StorageAccounts {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
-    Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

@@ -38,9 +38,8 @@ interface Containers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Container,
-    Response = ArmResourceUpdatedResponse<Container> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Container> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<Container> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Container> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -65,7 +64,9 @@ interface Containers {
     Container,
     void,
     OkResponse,
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

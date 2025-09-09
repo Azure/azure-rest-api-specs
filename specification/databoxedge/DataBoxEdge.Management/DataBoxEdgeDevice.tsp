@@ -138,7 +138,9 @@ interface DataBoxEdgeDevices {
     DataBoxEdgeDevice,
     void,
     OkResponse,
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -174,7 +176,9 @@ interface DataBoxEdgeDevices {
     DataBoxEdgeDevice,
     void,
     OkResponse,
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -186,12 +190,15 @@ interface DataBoxEdgeDevices {
     DataBoxEdgeDevice,
     void,
     OkResponse,
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
    * Updates the security settings on a Data Box Edge/Data Box Gateway device.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Devices_CreateOrUpdateSecuritySettings")
   @action("securitySettings/default/update")
@@ -199,7 +206,9 @@ interface DataBoxEdgeDevices {
     DataBoxEdgeDevice,
     SecuritySettings,
     NoContentResponse,
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -229,6 +238,7 @@ interface DataBoxEdgeDevices {
   /**
    * Posts the device capacity request info to check feasibility.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeviceCapacityCheck_CheckResourceCreationFeasibility")
   @action("deviceCapacityCheck")
@@ -272,7 +282,9 @@ interface DataBoxEdgeDevices {
     DataBoxEdgeDevice,
     TriggerSupportPackageRequest,
     OkResponse,
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

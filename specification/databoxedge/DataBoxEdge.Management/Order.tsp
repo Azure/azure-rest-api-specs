@@ -45,9 +45,8 @@ interface Orders {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Order,
-    Response = ArmResourceUpdatedResponse<Order> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Order> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<Order> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Order> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -73,6 +72,7 @@ interface Orders {
   /**
    * Gets the DCAccess Code
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listDCAccessCode is ArmResourceActionSync<
     Order,
     void,

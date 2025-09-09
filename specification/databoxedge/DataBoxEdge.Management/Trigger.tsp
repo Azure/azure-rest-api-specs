@@ -44,9 +44,8 @@ interface Triggers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Trigger,
-    Response = ArmResourceUpdatedResponse<Trigger> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Trigger> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<Trigger> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Trigger> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

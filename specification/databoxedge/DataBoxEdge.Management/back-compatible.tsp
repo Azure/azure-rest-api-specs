@@ -188,3 +188,10 @@ using Microsoft.DataBoxEdge;
 @@flattenProperty(User.properties);
 
 @@clientLocation(AvailableSkusOperationGroup.list, "AvailableSkus");
+@@visibility(Alert.properties, Lifecycle.Read);
+@@visibility(NetworkSettings.properties, Lifecycle.Read);
+
+@@OpenAPI.extension(DataBoxEdgeSkuList.value,
+  "x-ms-identifiers",
+  #["name", "resourceType"]
+);

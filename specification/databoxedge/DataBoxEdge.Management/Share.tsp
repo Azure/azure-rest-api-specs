@@ -37,9 +37,8 @@ interface Shares {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Share,
-    Response = ArmResourceUpdatedResponse<Share> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Share> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<Share> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Share> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -69,7 +68,9 @@ interface Shares {
     Share,
     void,
     OkResponse,
-    Error = CloudError
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

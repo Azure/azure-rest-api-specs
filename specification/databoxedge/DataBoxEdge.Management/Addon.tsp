@@ -45,9 +45,8 @@ interface Addons {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is AddonsOps.CreateOrUpdateAsync<
     Addon,
-    Response = ArmResourceUpdatedResponse<Addon> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Addon> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<Addon> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Addon> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 

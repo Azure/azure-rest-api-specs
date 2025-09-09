@@ -41,9 +41,8 @@ interface StorageAccountCredentials {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     StorageAccountCredential,
-    Response = ArmResourceUpdatedResponse<StorageAccountCredential> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccountCredential> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<StorageAccountCredential> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccountCredential> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

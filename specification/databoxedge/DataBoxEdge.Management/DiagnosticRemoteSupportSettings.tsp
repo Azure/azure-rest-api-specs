@@ -29,6 +29,7 @@ model DiagnosticRemoteSupportSettings
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface DiagnosticRemoteSupportSettingsOperationGroup {
   /**
@@ -49,9 +50,8 @@ interface DiagnosticRemoteSupportSettingsOperationGroup {
   @operationId("DiagnosticSettings_UpdateDiagnosticRemoteSupportSettings")
   updateDiagnosticRemoteSupportSettings is ArmResourceCreateOrReplaceAsync<
     DiagnosticRemoteSupportSettings,
-    Response = ArmResourceUpdatedResponse<DiagnosticRemoteSupportSettings> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticRemoteSupportSettings> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<DiagnosticRemoteSupportSettings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticRemoteSupportSettings> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 }

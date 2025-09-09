@@ -278,6 +278,7 @@ union DeviceType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+@OpenAPI.extension("x-ms-identifiers", #[])
 union RoleTypes {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -349,6 +350,7 @@ union AlertSeverity {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+@OpenAPI.extension("x-ms-identifiers", #[])
 union DayOfWeek {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -582,7 +584,7 @@ union NetworkAdapterStatus {
 /**
  * Value indicating whether this adapter is RDMA capable.
  */
-union NetworkAdapterRdmaStatus {
+union NetworkAdapterRDMAStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Incapable: "Incapable",
@@ -593,7 +595,7 @@ union NetworkAdapterRdmaStatus {
 /**
  * Value indicating whether this adapter has DHCP enabled.
  */
-union NetworkAdapterDhcpStatus {
+union NetworkAdapterDHCPStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
@@ -1063,7 +1065,6 @@ model Operation {
    * Operation properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationProperties;
 }
 
@@ -1116,6 +1117,7 @@ model ServiceSpecification {
 /**
  * Metric specification version 1.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MetricSpecification_V1 {
   /**
    * Name of the metric.
@@ -1177,6 +1179,7 @@ model MetricSpecification_V1 {
 /**
  * Metric Dimension v1.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MetricDimension_V1 {
   /**
    * Name of the metrics dimension.
@@ -1197,7 +1200,9 @@ model MetricDimension_V1 {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * The error details.
@@ -1208,6 +1213,8 @@ model CloudError {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -1571,6 +1578,7 @@ model ResourceMoveDetails {
    * Denotes the timeout of the operation to finish
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   operationInProgressLockTimeoutInUTC?: utcDateTime;
 }
 
@@ -1604,10 +1612,8 @@ model EdgeProfileSubscription {
   registrationDate?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   subscriptionId?: string;
-
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SubscriptionProperties;
 }
 
@@ -1648,6 +1654,7 @@ model DataResidency {
 /**
  * Represents the base class for all object models.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ARMBaseModel {
   /**
    * The path ID that uniquely identifies the object.
@@ -1687,7 +1694,6 @@ model DataBoxEdgeDevicePatch {
    * The properties associated with the Data Box Edge/Gateway resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DataBoxEdgeDevicePropertiesPatch;
 }
 
@@ -1838,7 +1844,6 @@ model DeviceCapacityRequestInfo {
    * The properties of the Device Capacity Request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: DeviceCapacityRequestInfoProperties;
 }
 
@@ -2082,11 +2087,13 @@ model VmMemory {
   /**
    * The total amount of RAM in the virtual machine, as seen by the guest  operating system. For a virtual machine with dynamic memory enabled, this represents the initial memory available at startup.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startupMemoryMB?: int64;
 
   /**
    * The current memory used by the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   currentMemoryUsageMB?: int64;
 }
 
@@ -2117,6 +2124,7 @@ model NumaNodeData {
   /**
    * The free VCPU indices for the Hpn VMs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   freeVCpuIndexesForHpn?: int32[];
 
   /**
@@ -2171,6 +2179,7 @@ model RemoteSupportSettings {
    * Expiration time stamp
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   expirationTimeStampInUTC?: utcDateTime;
 }
 
@@ -2189,12 +2198,13 @@ model GenerateCertResponse {
    * needed to form the activation key
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "This needs to be a secret"
-  @OpenAPI.extension("x-ms-secret", true)
+  @secret
   privateKey?: string;
 
   /**
    * Gets or sets expiry time in UTC
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   expiryTimeInUTC?: string;
 }
 
@@ -2207,7 +2217,6 @@ model DataBoxEdgeDeviceExtendedInfo extends ARMBaseModel {
    * The extended info properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DataBoxEdgeDeviceExtendedInfoProperties;
 
   /**
@@ -2334,7 +2343,7 @@ model AsymmetricEncryptedSecret {
    * Thumbprint certificate used to encrypt \"Value\". If the value is unencrypted, it will be null.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "This needs to be a secret"
-  @OpenAPI.extension("x-ms-secret", true)
+  @secret
   encryptionCertThumbprint?: string;
 
   /**
@@ -2582,12 +2591,12 @@ model NetworkAdapter {
   /**
    * Value indicating whether this adapter is RDMA capable.
    */
-  rdmaStatus?: NetworkAdapterRdmaStatus;
+  rdmaStatus?: NetworkAdapterRDMAStatus;
 
   /**
    * Value indicating whether this adapter has DHCP enabled.
    */
-  dhcpStatus?: NetworkAdapterDhcpStatus;
+  dhcpStatus?: NetworkAdapterDHCPStatus;
 
   /**
    * The IPv4 configuration of the network adapter.
@@ -2695,7 +2704,6 @@ model Node extends ARMBaseModel {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NodeProperties;
 }
 
@@ -2941,18 +2949,19 @@ model TrackingInfo {
 /**
  * DC Access code in the case of Self Managed Shipping.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DCAccessCode {
   /**
    * DCAccessCode properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DCAccessCodeProperties;
 }
 
 /**
  * DCAccessCode Properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DCAccessCodeProperties {
   /**
    * DCAccess Code for the Self Managed shipment.
@@ -3076,7 +3085,6 @@ model SecuritySettings extends ARMBaseModel {
    * Properties of the security settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: SecuritySettingsProperties;
 }
 
@@ -3218,6 +3226,7 @@ model RefreshDetails {
    * Indicates the completed time for the last refresh job on this particular share or container, if any.This could be a failed job or a successful job.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lastCompletedRefreshJobTimeInUTC?: utcDateTime;
 
   /**
@@ -3408,7 +3417,6 @@ model TriggerSupportPackageRequest extends ARMBaseModel {
    * The TriggerSupportPackageRequest properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: SupportPackageRequestProperties;
 }
 
@@ -3683,7 +3691,6 @@ model UploadCertificateRequest {
    * The Base 64 encoded certificate raw data.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: RawCertificateData;
 }
 
@@ -3805,13 +3812,7 @@ model ArcAddon extends Addon {
    * Properties specific to Arc addon.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: ArcAddonProperties;
-
-  /**
-   * Addon type.
-   */
-  kind: "ArcForKubernetes";
 }
 
 /**
@@ -3893,13 +3894,7 @@ model CloudEdgeManagementRole extends Role {
    * Properties specific to CloudEdgeManagementRole role.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CloudEdgeManagementRoleProperties;
-
-  /**
-   * Role type.
-   */
-  kind: "CloudEdgeManagement";
 }
 
 /**
@@ -3965,6 +3960,7 @@ model ComputeResource {
   /**
    * Memory in GB
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memoryInGB: int64;
 }
 
@@ -4009,13 +4005,7 @@ model FileEventTrigger extends Trigger {
    * File trigger properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: FileTriggerProperties;
-
-  /**
-   * Trigger Kind.
-   */
-  kind: "FileEvent";
 }
 
 /**
@@ -4082,32 +4072,29 @@ model ImageRepositoryCredential {
 /**
  * IoT Addon.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTAddon extends Addon {
   /**
    * Properties specific to IOT addon.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: IoTAddonProperties;
-
-  /**
-   * Addon type.
-   */
-  kind: "IotEdge";
 }
 
 /**
  * IoT addon properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTAddonProperties {
   /**
    * IoT device metadata to which appliance needs to be connected.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ioTDeviceDetails: IoTDeviceInfo;
 
   /**
    * IoT edge device to which the IoT Addon needs to be configured.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ioTEdgeDeviceDetails: IoTDeviceInfo;
 
   /**
@@ -4138,6 +4125,7 @@ model IoTAddonProperties {
 /**
  * Metadata of IoT device/IoT Edge device to be configured.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTDeviceInfo {
   /**
    * ID of the IoT device/edge device.
@@ -4147,11 +4135,13 @@ model IoTDeviceInfo {
   /**
    * Host name for the IoT hub associated to the device.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ioTHostHub: string;
 
   /**
    * Id for the IoT hub associated to the device.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ioTHostHubId?: string;
 
   /**
@@ -4163,6 +4153,7 @@ model IoTDeviceInfo {
 /**
  * IoT edge agent details is optional, this will be used for download system Agent module while bootstrapping IoT Role if specified.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTEdgeAgentInfo {
   /**
    * Name of the IoT edge agent image.
@@ -4183,23 +4174,19 @@ model IoTEdgeAgentInfo {
 /**
  * Compute role.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTRole extends Role {
   /**
    * Properties specific to IoT role.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IoTRoleProperties;
-
-  /**
-   * Role type.
-   */
-  kind: "IOT";
 }
 
 /**
  * IoT role properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTRoleProperties {
   /**
    * Host OS supported by the IoT role.
@@ -4209,11 +4196,13 @@ model IoTRoleProperties {
   /**
    * IoT device metadata to which data box edge device needs to be connected.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ioTDeviceDetails: IoTDeviceInfo;
 
   /**
    * IoT edge device to which the IoT role needs to be configured.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ioTEdgeDeviceDetails: IoTDeviceInfo;
 
   /**
@@ -4225,6 +4214,7 @@ model IoTRoleProperties {
   /**
    * Iot edge agent details to download the agent and bootstrap iot runtime.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ioTEdgeAgentInfo?: IoTEdgeAgentInfo;
 
   /**
@@ -4321,13 +4311,7 @@ model KubernetesRole extends Role {
    * Properties specific to Kubernetes role.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: KubernetesRoleProperties;
-
-  /**
-   * Role type.
-   */
-  kind: "Kubernetes";
 }
 
 /**
@@ -4493,23 +4477,19 @@ model LoadBalancerConfig {
 /**
  * MEC role.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MECRole extends Role {
   /**
    * Properties specific to MEC role.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MECRoleProperties;
-
-  /**
-   * Role type.
-   */
-  kind: "MEC";
 }
 
 /**
  * MEC role properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MECRoleProperties {
   /**
    * Activation key of the MEC.
@@ -4540,13 +4520,7 @@ model PeriodicTimerEventTrigger extends Trigger {
    * Periodic timer trigger properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: PeriodicTimerProperties;
-
-  /**
-   * Trigger Kind.
-   */
-  kind: "PeriodicTimerEvent";
 }
 
 /**
@@ -4610,4 +4584,3 @@ model OperationsList {
 }
 
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
-@@visibility(OperationsList.value, Lifecycle.Read);

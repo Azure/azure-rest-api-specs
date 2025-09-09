@@ -51,9 +51,8 @@ interface MonitoringMetricConfigurations {
   @action("monitoringConfig/default")
   createOrUpdate is MonitoringMetricConfigurationsNonListOps.CreateOrUpdateAsync<
     MonitoringMetricConfiguration,
-    Response = ArmResourceUpdatedResponse<MonitoringMetricConfiguration> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MonitoringMetricConfiguration> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<MonitoringMetricConfiguration> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoringMetricConfiguration> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
