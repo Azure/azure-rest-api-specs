@@ -49,7 +49,6 @@ directive:
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
 ```
 
-
 ### Tag: package-stable-2024-04-01
 
 These settings apply only when `--tag=package-stable-2024-04-01` is specified on the command line.
@@ -58,6 +57,7 @@ These settings apply only when `--tag=package-stable-2024-04-01` is specified on
 input-file:
   - stable/2024-04-01/render.json
 ```
+
 ### Tag: package-stable-2022-08-01
 
 These settings apply only when `--tag=package-stable-2022-08-01` is specified on the command line.
