@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Rest;
+using Http;
 using Azure.ResourceManager;
 
 namespace NGINX.NGINXPLUS;
@@ -94,6 +95,7 @@ interface Certificates {
   /**
    * Updates a certificate with patch semantics.
    */
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Certificate,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

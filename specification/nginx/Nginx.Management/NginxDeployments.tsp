@@ -629,6 +629,7 @@ interface NginxDeployments {
   /**
    * Updates an Nginx deployment with patch semantics.
    */
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     NginxDeployment,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

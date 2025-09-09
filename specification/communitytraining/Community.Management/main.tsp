@@ -142,6 +142,7 @@ interface CommunityTrainings {
     CommunityTraining,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     CommunityTraining,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
