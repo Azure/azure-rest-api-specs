@@ -338,20 +338,20 @@ using Oracle.Database;
   "csharp"
 );
 //@@clientName(ScheduledOperationsTypeUpdate.scheduledStartTime,
-  //"AutoStartOn",
-  //"csharp"
+//"AutoStartOn",
+//"csharp"
 //);
 //@@alternateType(ScheduledOperationsTypeUpdate.scheduledStartTime,
-  //utcDateTime,
-  //"csharp"
+//utcDateTime,
+//"csharp"
 //);
 //@@clientName(ScheduledOperationsTypeUpdate.scheduledStopTime,
-  //"AutoStopOn",
-  //"csharp"
+//"AutoStopOn",
+//"csharp"
 //);
 //@@alternateType(ScheduledOperationsTypeUpdate.scheduledStopTime,
-  //utcDateTime,
-  //"csharp"
+//utcDateTime,
+//"csharp"
 //);
 @@clientName(SessionModeType, "ConnectionSessionModeType", "csharp");
 @@clientName(SourceType, "AutonomousDatabaseSourceType", "csharp");
@@ -467,8 +467,8 @@ using Oracle.Database;
   "csharp"
 );
 //@@usage(AutonomousDatabaseUpdateProperties,
-  //Usage.input | Usage.output,
-  //"csharp"
+//Usage.input | Usage.output,
+//"csharp"
 //);
 @@usage(AutonomousDatabaseNationalCharacterSetProperties,
   Usage.input | Usage.output,
