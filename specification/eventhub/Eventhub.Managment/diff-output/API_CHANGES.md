@@ -1,96 +1,4 @@
-## Changed Paths
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/default
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/checkNameAvailability
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}/listKeys
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability
-Change Type: deleted
-
 ## Swagger Changes
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default__deleted']` | deleted | `{"get":{"operationId":"Configuration_Get","parameters":[{"$ref":"../../../common/v1/definitions.json...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules__deleted']` | deleted | `{"get":{"operationId":"DisasterRecoveryConfigs_ListAuthorizationRules","parameters":[{"$ref":"../../...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}__deleted']` | deleted | `{"get":{"operationId":"DisasterRecoveryConfigs_GetAuthorizationRule","parameters":[{"$ref":"../../.....` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys__deleted']` | deleted | `{"post":{"operationId":"DisasterRecoveryConfigs_ListKeys","parameters":[{"$ref":"../../../common/v1/...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability__deleted']` | deleted | `{"post":{"operationId":"DisasterRecoveryConfigs_CheckNameAvailability","parameters":[{"$ref":"../../...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/default`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/default__added']` | added | `{"get":{"operationId":"Configuration_Get","parameters":[{"name":"clusterName","in":"path","required"...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/checkNameAvailability`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/checkNameAvailability__added']` | added | `{"post":{"operationId":"DisasterRecoveryConfigs_CheckNameAvailability","parameters":[{"name":"namesp...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules__added']` | added | `{"get":{"operationId":"DisasterRecoveryConfigs_ListAuthorizationRules","parameters":[{"name":"namesp...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}__added']` | added | `{"get":{"operationId":"DisasterRecoveryConfigs_GetAuthorizationRule","parameters":[{"name":"namespac...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}/listKeys`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}/listKeys__added']` | added | `{"post":{"operationId":"DisasterRecoveryConfigs_ListKeys","parameters":[{"name":"namespaceName","in"...` |
 
 ### Changes for `$ref`
 
@@ -115,6 +23,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].patch.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/ClusterNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/ClusterNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/namespaces'].get.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/ClusterNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].get.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/ClusterNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/ClusterNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].get.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].patch.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
@@ -142,10 +52,19 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].get.parameters[1].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AliasNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[1].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AliasNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[1].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AliasNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[1].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AliasNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[2].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[1].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AliasNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[2].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[1].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AliasNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[1].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/AliasNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[0].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/NamespaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[1].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/SkipParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[2].$ref__deleted` | deleted | `../../../common/v1/definitions.json#/parameters/TopParameter` |
@@ -217,6 +136,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].patch.parameters[0].name__added` | added | `clusterName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.parameters[0].name__added` | added | `clusterName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/namespaces'].get.parameters[0].name__added` | added | `clusterName` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].get.parameters[0].name__added` | added | `clusterName` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.parameters[0].name__added` | added | `clusterName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.parameters[0].name__added` | added | `namespaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].get.parameters[0].name__added` | added | `namespaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].patch.parameters[0].name__added` | added | `namespaceName` |
@@ -244,10 +165,19 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].get.parameters[1].name__added` | added | `alias` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[0].name__added` | added | `namespaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[1].name__added` | added | `alias` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[0].name__added` | added | `namespaceName` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[1].name__added` | added | `alias` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[0].name__added` | added | `namespaceName` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[1].name__added` | added | `alias` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[2].name__added` | added | `authorizationRuleName` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[0].name__added` | added | `namespaceName` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[1].name__added` | added | `alias` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[2].name__added` | added | `authorizationRuleName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[0].name__added` | added | `namespaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[1].name__added` | added | `alias` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[0].name__added` | added | `namespaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[1].name__added` | added | `alias` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.parameters[0].name__added` | added | `namespaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[0].name__added` | added | `namespaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[1].name__added` | added | `$skip` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[2].name__added` | added | `$top` |
@@ -318,6 +248,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].patch.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/namespaces'].get.parameters[0].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].get.parameters[0].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].get.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].patch.parameters[0].in__added` | added | `path` |
@@ -345,10 +277,19 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].get.parameters[1].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[1].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[0].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[1].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[0].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[1].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[2].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[0].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[1].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[2].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[1].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[1].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[1].in__added` | added | `query` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[2].in__added` | added | `query` |
@@ -431,6 +372,9 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.parameters[1].schema.required__deleted` | deleted | `["location"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/namespaces'].get.parameters[0].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].get.parameters[0].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.parameters[0].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.parameters[1].schema.required__deleted` | deleted | `["settings"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].patch.parameters[0].required__added` | added | `true` |
@@ -459,10 +403,19 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].get.parameters[1].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[1].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[0].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[1].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[0].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[1].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[2].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[0].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[1].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[2].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[1].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[1].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].delete.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].delete.parameters[1].required__added` | added | `true` |
@@ -541,6 +494,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].patch.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/namespaces'].get.parameters[0].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].get.parameters[0].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].patch.parameters[0].type__added` | added | `string` |
@@ -568,10 +523,19 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].get.parameters[1].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[1].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[0].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[1].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[0].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[1].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[2].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[0].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[1].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[2].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[1].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[1].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[1].type__added` | added | `integer` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[2].type__added` | added | `integer` |
@@ -642,6 +606,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].patch.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/namespaces'].get.parameters[0].minLength__added` | added | `6` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].get.parameters[0].minLength__added` | added | `6` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].get.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].patch.parameters[0].minLength__added` | added | `6` |
@@ -664,6 +630,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[1].minLength__added` | added | `1` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[1].minLength__added` | added | `1` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].delete.parameters[0].minLength__added` | added | `6` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].delete.parameters[1].minLength__added` | added | `1` |
@@ -711,6 +678,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].patch.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/namespaces'].get.parameters[0].maxLength__added` | added | `50` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].get.parameters[0].maxLength__added` | added | `50` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].get.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].patch.parameters[0].maxLength__added` | added | `50` |
@@ -733,6 +702,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[1].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[1].maxLength__added` | added | `50` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].delete.parameters[0].maxLength__added` | added | `50` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].delete.parameters[1].maxLength__added` | added | `256` |
@@ -777,7 +747,6 @@ Change Type: deleted
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].patch.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.responses.201.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
@@ -806,8 +775,12 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].delete.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].get.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].delete.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].get.parameters[0].pattern__added` | added | `^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$` |
@@ -1007,6 +980,24 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.EHNamespaceProperties__added` | added | `{"type":"object","properties":{"minimumTlsVersion":{"type":"string","enum":["1.0","1.1","1.2","1.3"]...` |
 
+### Changes for `ErrorAdditionalInfo`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ErrorAdditionalInfo__added` | added | `{"type":"object","properties":{"type":{"type":"string","readOnly":true},"info":{"readOnly":true}}}` |
+
+### Changes for `ErrorDetail`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ErrorDetail__added` | added | `{"type":"object","properties":{"code":{"type":"string","readOnly":true},"message":{"type":"string","...` |
+
+### Changes for `ErrorResponse`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ErrorResponse__added` | added | `{"type":"object","properties":{"error":{"$ref":"#/definitions/ErrorDetail"}}}` |
+
 ### Changes for `EventhubListResult`
 
 | Path | Change Type | Value |
@@ -1162,9 +1153,8 @@ Change Type: deleted
 | `definitions.NetworkSecurityPerimeterConfiguration.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.PrivateEndpointConnection.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.SchemaGroup.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `info.description` | `Azure Event Hubs client` | `Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.` |
 | `paths['/providers/microsoft.EventHub/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult` |
-| `paths['/providers/microsoft.EventHub/operations'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/providers/microsoft.EventHub/operations'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.EventHub/availableClusterRegions'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.EventHub/checkNameAvailability'].post.parameters[0].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.EventHub/checkNameAvailability'].post.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
@@ -1176,6 +1166,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].patch.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].put.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/namespaces'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default'].patch.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].delete.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
@@ -1195,8 +1187,12 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].delete.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}'].put.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys'].post.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing'].post.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover'].post.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability'].post.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.responses.200.schema.$ref` | `#/definitions/EventHubListResult` | `#/definitions/EventhubListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}'].delete.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |

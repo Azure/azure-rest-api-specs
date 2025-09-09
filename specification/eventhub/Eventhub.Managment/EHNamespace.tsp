@@ -126,6 +126,7 @@ interface EHNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DisasterRecoveryConfigs_CheckNameAvailability")
+  @action("disasterRecoveryConfigs/checkNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     EHNamespace,
     CheckNameAvailabilityParameter,

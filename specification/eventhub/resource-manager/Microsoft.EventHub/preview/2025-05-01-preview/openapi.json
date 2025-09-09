@@ -3,7 +3,7 @@
   "info": {
     "title": "EventHubManagementClient",
     "version": "2025-05-01-preview",
-    "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
+    "description": "Azure Event Hubs client",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -105,7 +105,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -409,10 +409,6 @@
               "$ref": "#/definitions/Cluster"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -447,8 +443,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Cluster"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -603,7 +598,55 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces": {
+      "get": {
+        "operationId": "Clusters_ListNamespaces",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Event Hubs Cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespaceIdListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListNamespacesInCluster": {
+            "$ref": "./examples/Clusters/ListNamespacesInClusterGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default": {
       "get": {
         "operationId": "Configuration_Get",
         "tags": [
@@ -711,54 +754,6 @@
         "x-ms-examples": {
           "ClustersQuotasConfigurationPatch": {
             "$ref": "./examples/Clusters/ClusterQuotaConfigurationPatch.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces": {
-      "get": {
-        "operationId": "Clusters_ListNamespaces",
-        "tags": [
-          "Clusters"
-        ],
-        "description": "List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the Event Hubs Cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EHNamespaceIdListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListNamespacesInCluster": {
-            "$ref": "./examples/Clusters/ListNamespacesInClusterGet.json"
           }
         }
       }
@@ -1635,64 +1630,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/checkNameAvailability": {
-      "post": {
-        "operationId": "DisasterRecoveryConfigs_CheckNameAvailability",
-        "tags": [
-          "EHNamespaces"
-        ],
-        "description": "Check the give Namespace name availability.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The Namespace name",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters to check availability of the given Alias name",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NamespacesCheckNameAvailability": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasCheckNameAvailability.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs": {
       "get": {
         "operationId": "DisasterRecoveryConfigs_List",
@@ -1930,7 +1867,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules": {
       "get": {
         "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
         "tags": [
@@ -1956,7 +1893,7 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
-            "name": "aliasName",
+            "name": "alias",
             "in": "path",
             "description": "The Disaster Recovery configuration name",
             "required": true,
@@ -1987,7 +1924,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}": {
       "get": {
         "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
         "tags": [
@@ -2013,7 +1950,7 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
-            "name": "aliasName",
+            "name": "alias",
             "in": "path",
             "description": "The Disaster Recovery configuration name",
             "required": true,
@@ -2048,7 +1985,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys": {
       "post": {
         "operationId": "DisasterRecoveryConfigs_ListKeys",
         "tags": [
@@ -2074,7 +2011,7 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
-            "name": "aliasName",
+            "name": "alias",
             "in": "path",
             "description": "The Disaster Recovery configuration name",
             "required": true,
@@ -2215,6 +2152,64 @@
         "x-ms-examples": {
           "EHAliasFailOver": {
             "$ref": "./examples/disasterRecoveryConfigs/EHAliasFailOver.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability": {
+      "post": {
+        "operationId": "DisasterRecoveryConfigs_CheckNameAvailability",
+        "tags": [
+          "EHNamespaces"
+        ],
+        "description": "Check the give Namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The Namespace name",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters to check availability of the given Alias name",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NamespacesCheckNameAvailability": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasCheckNameAvailability.json"
           }
         }
       }
@@ -5098,6 +5093,68 @@
       "x-ms-enum": {
         "name": "EntityStatus",
         "modelAsString": false
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response indicates Event Hub service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
       }
     },
     "Eventhub": {

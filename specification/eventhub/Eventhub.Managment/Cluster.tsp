@@ -42,11 +42,7 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<
-      Cluster,
-      ArmLroLocationHeader<FinalResult = Cluster> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse
   >;
 
   /**
@@ -96,7 +92,7 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Configuration_Patch")
   @patch
-  @action("default")
+  @action("quotaConfiguration/default")
   patch is ArmResourceActionSync<
     Cluster,
     ClusterQuotaConfigurationProperties,
@@ -109,7 +105,7 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Configuration_Get")
   @get
-  @action("default")
+  @action("quotaConfiguration/default")
   configurationGet is ArmResourceActionSync<
     Cluster,
     void,

@@ -33,7 +33,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.
+ * Azure Event Hubs client
  */
 @armProviderNamespace
 @service(#{ title: "EventHubManagementClient" })
@@ -52,4 +52,8 @@ enum Versions {
   v2025_05_01_preview: "2025-05-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}

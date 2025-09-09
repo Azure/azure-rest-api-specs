@@ -122,7 +122,7 @@ alias DisasterRecoveryConfigOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("disasterRecoveryConfigs")
     @key
-    aliasName: string;
+    `alias`: string;
   },
   {
     /** The authorization rule name. */

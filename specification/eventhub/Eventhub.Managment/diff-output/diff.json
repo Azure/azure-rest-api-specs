@@ -1,487 +1,5 @@
 {
-  "info": {
-    "description": {
-      "__old": "Azure Event Hubs client",
-      "__new": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources."
-    }
-  },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default__deleted": {
-      "get": {
-        "operationId": "Configuration_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ClustersQuotasConfigurationGet": {
-            "$ref": "./examples/Clusters/ClusterQuotaConfigurationGet.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Configuration_Patch",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterQuotaConfigurationProperties",
-              "required": [
-                "settings"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ClustersQuotasConfigurationPatch": {
-            "$ref": "./examples/Clusters/ClusterQuotaConfigurationPatch.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules__deleted": {
-      "get": {
-        "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AuthorizationRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListAuthorizationRules": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleListAll.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}__deleted": {
-      "get": {
-        "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AuthorizationRule"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameSpaceAuthorizationRuleGet": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys__deleted": {
-      "post": {
-        "operationId": "DisasterRecoveryConfigs_ListKeys",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AccessKeys"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameSpaceAuthorizationRuleListKey": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleListKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability__deleted": {
-      "post": {
-        "operationId": "DisasterRecoveryConfigs_CheckNameAvailability",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NamespacesCheckNameAvailability": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasCheckNameAvailability.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/default__added": {
-      "get": {
-        "operationId": "Configuration_Get",
-        "parameters": [
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ClustersQuotasConfigurationGet": {
-            "$ref": "./examples/Clusters/ClusterQuotaConfigurationGet.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Configuration_Patch",
-        "parameters": [
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ClustersQuotasConfigurationPatch": {
-            "$ref": "./examples/Clusters/ClusterQuotaConfigurationPatch.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/checkNameAvailability__added": {
-      "post": {
-        "operationId": "DisasterRecoveryConfigs_CheckNameAvailability",
-        "parameters": [
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NamespacesCheckNameAvailability": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasCheckNameAvailability.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules__added": {
-      "get": {
-        "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
-        "parameters": [
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "aliasName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AuthorizationRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListAuthorizationRules": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleListAll.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}__added": {
-      "get": {
-        "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
-        "parameters": [
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "aliasName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AuthorizationRule"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameSpaceAuthorizationRuleGet": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{aliasName}/authorizationRules/{authorizationRuleName}/listKeys__added": {
-      "post": {
-        "operationId": "DisasterRecoveryConfigs_ListKeys",
-        "parameters": [
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "aliasName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AccessKeys"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameSpaceAuthorizationRuleListKey": {
-            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleListKey.json"
-          }
-        }
-      }
-    },
     "/providers/microsoft.EventHub/operations": {
       "get": {
         "responses": {
@@ -497,7 +15,7 @@
             "schema": {
               "$ref": {
                 "__old": "../../../common/v2/definitions.json#/definitions/ErrorResponse",
-                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/ErrorResponse"
               }
             }
           }
@@ -638,14 +156,6 @@
           ]
         ],
         "responses": {
-          "201": {
-            "headers__added": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "202": {
             "headers__added": {
               "Location": {
@@ -749,6 +259,70 @@
               "type__added": "string",
               "minLength__added": 6,
               "maxLength__added": 50
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../common/v2/definitions.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter",
+              "name__added": "clusterName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 6,
+              "maxLength__added": 50
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../common/v2/definitions.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter",
+              "name__added": "clusterName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 6,
+              "maxLength__added": 50
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "required__deleted": [
+                  "settings"
+                ]
+              }
             }
           ]
         ],
@@ -1448,6 +1022,137 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter",
+              "name__added": "namespaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "pattern__added": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/AliasNameParameter",
+              "name__added": "alias",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../common/v2/definitions.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter",
+              "name__added": "namespaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "pattern__added": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/AliasNameParameter",
+              "name__added": "alias",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string"
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter",
+              "name__added": "authorizationRuleName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../common/v2/definitions.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter",
+              "name__added": "namespaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "pattern__added": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/AliasNameParameter",
+              "name__added": "alias",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string"
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter",
+              "name__added": "authorizationRuleName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../common/v2/definitions.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing": {
       "post": {
         "parameters": [
@@ -1516,6 +1221,38 @@
               "minLength__added": 1,
               "maxLength__added": 50
             }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../common/v2/definitions.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter",
+              "name__added": "namespaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 6,
+              "maxLength__added": 50,
+              "pattern__added": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -3247,6 +2984,57 @@
         },
         "geoDataReplication": {
           "$ref": "#/definitions/GeoDataReplicationProperties"
+        }
+      }
+    },
+    "ErrorAdditionalInfo__added": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "info": {
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail__added": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse__added": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
     },
