@@ -134,7 +134,7 @@ interface BackupItemOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetBackupStatusSlot")
-  getBackupStatusSlot is BackupItemOperationGroupOps.Read<BackupItem>;
+  getBackupStatusSlot is BackupItemOperationGroupOps.Read<BackupItem, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Deletes a backup of an app by its ID.
@@ -144,7 +144,8 @@ interface BackupItemOperationGroup {
   @operationId("WebApps_DeleteBackupSlot")
   deleteBackupSlot is BackupItemOperationGroupOps.DeleteSync<
     BackupItem,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -154,7 +155,8 @@ interface BackupItemOperationGroup {
   @operationId("WebApps_ListBackupsSlot")
   listBackupsSlot is BackupItemOperationGroupOps.List<
     BackupItem,
-    Response = ArmResponse<BackupItemCollection>
+    Response = ArmResponse<BackupItemCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -166,7 +168,8 @@ interface BackupItemOperationGroup {
   listBackupStatusSecretsSlot is BackupItemOperationGroupOps.ActionSync<
     BackupItem,
     BackupRequest,
-    ArmResponse<BackupItem>
+    ArmResponse<BackupItem>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -178,7 +181,8 @@ interface BackupItemOperationGroup {
   restoreSlot is BackupItemOperationGroupOps.ActionAsync<
     BackupItem,
     RestoreRequest,
-    OkResponse
+    OkResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

@@ -56,7 +56,7 @@ interface PremierAddOns {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPremierAddOn")
-  getPremierAddOn is PremierAddOnOps.Read<PremierAddOn>;
+  getPremierAddOn is PremierAddOnOps.Read<PremierAddOn,OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Updates a named add-on of an app.
@@ -66,7 +66,8 @@ interface PremierAddOns {
   @operationId("WebApps_AddPremierAddOn")
   addPremierAddOn is PremierAddOnOps.CreateOrUpdateSync<
     PremierAddOn,
-    Response = ArmResourceUpdatedResponse<PremierAddOn>
+    Response = ArmResourceUpdatedResponse<PremierAddOn>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -77,7 +78,8 @@ interface PremierAddOns {
   @patch(#{ implicitOptionality: false })
   updatePremierAddOn is PremierAddOnOps.CustomPatchSync<
     PremierAddOn,
-    PatchModel = PremierAddOnPatchResource
+    PatchModel = PremierAddOnPatchResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -88,7 +90,8 @@ interface PremierAddOns {
   @operationId("WebApps_DeletePremierAddOn")
   deletePremierAddOn is PremierAddOnOps.DeleteSync<
     PremierAddOn,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

@@ -135,7 +135,10 @@ interface DeploymentOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetDeploymentSlot")
-  getDeploymentSlot is DeploymentOperationGroupOps.Read<Deployment>;
+  getDeploymentSlot is DeploymentOperationGroupOps.Read<
+    Deployment,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Create a deployment for an app, or a deployment slot.
@@ -145,7 +148,8 @@ interface DeploymentOperationGroup {
   @operationId("WebApps_CreateDeploymentSlot")
   createDeploymentSlot is DeploymentOperationGroupOps.CreateOrUpdateSync<
     Deployment,
-    Response = ArmResourceUpdatedResponse<Deployment>
+    Response = ArmResourceUpdatedResponse<Deployment>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -153,7 +157,10 @@ interface DeploymentOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteDeploymentSlot")
-  deleteDeploymentSlot is DeploymentOperationGroupOps.DeleteSync<Deployment>;
+  deleteDeploymentSlot is DeploymentOperationGroupOps.DeleteSync<
+    Deployment,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for List deployments for an app, or a deployment slot.
@@ -162,7 +169,8 @@ interface DeploymentOperationGroup {
   @operationId("WebApps_ListDeploymentsSlot")
   listDeploymentsSlot is DeploymentOperationGroupOps.List<
     Deployment,
-    Response = ArmResponse<DeploymentCollection>
+    Response = ArmResponse<DeploymentCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -175,7 +183,8 @@ interface DeploymentOperationGroup {
   listDeploymentLogSlot is DeploymentOperationGroupOps.ActionSync<
     Deployment,
     void,
-    ArmResponse<Deployment>
+    ArmResponse<Deployment>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

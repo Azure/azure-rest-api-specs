@@ -56,7 +56,10 @@ interface PublicCertificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPublicCertificate")
-  getPublicCertificate is PublicCertificateOps.Read<PublicCertificate>;
+  getPublicCertificate is PublicCertificateOps.Read<
+    PublicCertificate, 
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a hostname binding for an app.
@@ -66,7 +69,8 @@ interface PublicCertificates {
   @operationId("WebApps_CreateOrUpdatePublicCertificate")
   createOrUpdatePublicCertificate is PublicCertificateOps.CreateOrUpdateSync<
     PublicCertificate,
-    Response = ArmResourceUpdatedResponse<PublicCertificate>
+    Response = ArmResourceUpdatedResponse<PublicCertificate>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -74,7 +78,10 @@ interface PublicCertificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeletePublicCertificate")
-  deletePublicCertificate is PublicCertificateOps.DeleteSync<PublicCertificate>;
+  deletePublicCertificate is PublicCertificateOps.DeleteSync<
+    PublicCertificate, 
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get public certificates for an app or a deployment slot.
@@ -83,7 +90,8 @@ interface PublicCertificates {
   @operationId("WebApps_ListPublicCertificates")
   listPublicCertificates is PublicCertificateOps.List<
     PublicCertificate,
-    Response = ArmResponse<PublicCertificateCollection>
+    Response = ArmResponse<PublicCertificateCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

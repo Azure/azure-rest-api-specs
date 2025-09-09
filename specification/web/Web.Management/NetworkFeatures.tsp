@@ -58,7 +58,8 @@ interface NetworkFeaturesOperationGroup {
   @operationId("WebApps_ListNetworkFeatures")
   listNetworkFeatures is NetworkFeaturesOperationGroupOps.Read<
     NetworkFeatures,
-    Response = ArmResponse<NetworkFeatures> | ArmNotFoundResponse
+    Response = ArmResponse<NetworkFeatures> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

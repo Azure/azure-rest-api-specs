@@ -171,7 +171,7 @@ interface AppSettingKeyVaultReferenceSlot {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetAppSettingKeyVaultReferenceSlot")
-  getAppSettingKeyVaultReferenceSlot is AppSettingKeyVaultReferenceSlotOps.Read<ApiKVReference>;
+  getAppSettingKeyVaultReferenceSlot is AppSettingKeyVaultReferenceSlotOps.Read<ApiKVReference, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Gets the config reference app settings and status of an app
@@ -180,7 +180,8 @@ interface AppSettingKeyVaultReferenceSlot {
   @operationId("WebApps_GetAppSettingsKeyVaultReferencesSlot")
   getAppSettingsKeyVaultReferencesSlot is AppSettingKeyVaultReferenceSlotOps.List<
     ApiKVReference,
-    Response = ArmResponse<ApiKVReferenceCollection>
+    Response = ArmResponse<ApiKVReferenceCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -237,7 +238,8 @@ interface SiteConnectionStringKeyVaultReferenceSlot {
   @segment("connectionstrings")
   getSiteConnectionStringKeyVaultReferencesSlot is SiteConnectionStringKeyVaultReferenceSlotOps.List<
     ApiKVReference,
-    Response = ArmResponse<ApiKVReferenceCollection>
+    Response = ArmResponse<ApiKVReferenceCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

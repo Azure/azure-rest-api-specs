@@ -204,14 +204,20 @@ interface CertificateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SiteCertificates_GetSlot")
-  getSlot is CertificateOperationGroupOps.Read<Certificate>;
+  getSlot is CertificateOperationGroupOps.Read<
+    Certificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Create or update a certificate in a given site and deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SiteCertificates_CreateOrUpdateSlot")
-  createOrUpdateSlot is CertificateOperationGroupOps.CreateOrUpdateSync<Certificate>;
+  createOrUpdateSlot is CertificateOperationGroupOps.CreateOrUpdateSync<
+    Certificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Create or update a certificate for a site and deployment slot.
@@ -221,7 +227,8 @@ interface CertificateOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateSlot is CertificateOperationGroupOps.CustomPatchSync<
     Certificate,
-    PatchModel = CertificatePatchResource
+    PatchModel = CertificatePatchResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -229,7 +236,7 @@ interface CertificateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SiteCertificates_DeleteSlot")
-  deleteSlot is CertificateOperationGroupOps.DeleteSync<Certificate>;
+  deleteSlot is CertificateOperationGroupOps.DeleteSync<Certificate, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Get all certificates in a resource group for a given site and a deployment slot.
@@ -238,7 +245,8 @@ interface CertificateOperationGroup {
   @operationId("SiteCertificates_ListSlot")
   listSlot is CertificateOperationGroupOps.List<
     Certificate,
-    Response = ArmResponse<CertificateCollection>
+    Response = ArmResponse<CertificateCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

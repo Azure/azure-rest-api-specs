@@ -211,7 +211,8 @@ interface DetectorResponseOperationGroup {
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -221,7 +222,8 @@ interface DetectorResponseOperationGroup {
   @operationId("Diagnostics_ListSiteDetectorResponsesSlot")
   listSiteDetectorResponsesSlot is DetectorResponseOperationGroupOps.List<
     DetectorResponse,
-    Response = ArmResponse<DetectorResponseCollection>
+    Response = ArmResponse<DetectorResponseCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

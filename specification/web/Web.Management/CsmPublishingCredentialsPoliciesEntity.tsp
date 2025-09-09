@@ -162,7 +162,10 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetFtpAllowedSlot")
-  getFtpAllowedSlot is FtpAllowedSlotOps.Read<CsmPublishingCredentialsPoliciesEntity>;
+  getFtpAllowedSlot is FtpAllowedSlotOps.Read<
+    CsmPublishingCredentialsPoliciesEntity,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates whether FTP is allowed on the site or not.
@@ -172,7 +175,8 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   @operationId("WebApps_UpdateFtpAllowedSlot")
   updateFtpAllowedSlot is FtpAllowedSlotOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
-    Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>
+    Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -183,7 +187,8 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPoliciesSlot is FtpAllowedSlotOps.List<
     CsmPublishingCredentialsPoliciesEntity,
-    Response = ArmResponse<PublishingCredentialsPoliciesCollection>
+    Response = ArmResponse<PublishingCredentialsPoliciesCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -224,7 +229,10 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetScmAllowedSlot")
-  getScmAllowedSlot is ScmAllowedSlotOps.Read<CsmPublishingCredentialsPoliciesEntity>;
+  getScmAllowedSlot is ScmAllowedSlotOps.Read<
+    CsmPublishingCredentialsPoliciesEntity,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates whether user publishing credentials are allowed on the site or not.
@@ -234,7 +242,8 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
   @operationId("WebApps_UpdateScmAllowedSlot")
   updateScmAllowedSlot is ScmAllowedSlotOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
-    Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>
+    Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

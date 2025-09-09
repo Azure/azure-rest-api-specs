@@ -133,7 +133,7 @@ interface IdentifierOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetDomainOwnershipIdentifierSlot")
-  getDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.Read<Identifier>;
+  getDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.Read<Identifier, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
@@ -143,7 +143,8 @@ interface IdentifierOperationGroup {
   @operationId("WebApps_CreateOrUpdateDomainOwnershipIdentifierSlot")
   createOrUpdateDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.CreateOrUpdateSync<
     Identifier,
-    Response = ArmResourceUpdatedResponse<Identifier>
+    Response = ArmResourceUpdatedResponse<Identifier>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -154,7 +155,8 @@ interface IdentifierOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.CustomPatchSync<
     Identifier,
-    PatchModel = Identifier
+    PatchModel = Identifier,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -162,7 +164,7 @@ interface IdentifierOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteDomainOwnershipIdentifierSlot")
-  deleteDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.DeleteSync<Identifier>;
+  deleteDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.DeleteSync<Identifier, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Lists ownership identifiers for domain associated with web app.
@@ -171,7 +173,8 @@ interface IdentifierOperationGroup {
   @operationId("WebApps_ListDomainOwnershipIdentifiersSlot")
   listDomainOwnershipIdentifiersSlot is IdentifierOperationGroupOps.List<
     Identifier,
-    Response = ArmResponse<IdentifierCollection>
+    Response = ArmResponse<IdentifierCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

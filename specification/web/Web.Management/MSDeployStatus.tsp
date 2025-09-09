@@ -134,7 +134,10 @@ interface MSDeployStatusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceMsDeployStatus")
-  getInstanceMsDeployStatus is MSDeployStatusOperationGroupOps.Read<MSDeployStatus>;
+  getInstanceMsDeployStatus is MSDeployStatusOperationGroupOps.Read<
+    MSDeployStatus,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Invoke the MSDeploy web app extension.
@@ -149,7 +152,8 @@ interface MSDeployStatusOperationGroup {
       MSDeployStatus,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
     > | ArmConflictResponse,
-    Request = MSDeploy
+    Request = MSDeploy,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -163,7 +167,8 @@ interface MSDeployStatusOperationGroup {
   getInstanceMSDeployLog is MSDeployStatusOperationGroupOps.ActionSync<
     MSDeployStatus,
     void,
-    ArmResponse<MSDeployLog> | ArmNotFoundResponse
+    ArmResponse<MSDeployLog> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
@@ -206,7 +211,7 @@ interface MSDeployStatusSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetMSDeployStatusSlot")
-  getMSDeployStatusSlot is MSDeployStatusSlotOperationGroupOps.Read<MSDeployStatus>;
+  getMSDeployStatusSlot is MSDeployStatusSlotOperationGroupOps.Read<MSDeployStatus, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Invoke the MSDeploy web app extension.
@@ -220,7 +225,8 @@ interface MSDeployStatusSlotOperationGroup {
       MSDeployStatus,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
     > | ArmConflictResponse,
-    Request = MSDeploy
+    Request = MSDeploy,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -233,7 +239,8 @@ interface MSDeployStatusSlotOperationGroup {
   getMSDeployLogSlot is MSDeployStatusSlotOperationGroupOps.ActionSync<
     MSDeployStatus,
     void,
-    ArmResponse<MSDeployLog> | ArmNotFoundResponse
+    ArmResponse<MSDeployLog> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
@@ -283,7 +290,7 @@ interface InstanceMSDeployStatusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceMsDeployStatusSlot")
-  getInstanceMsDeployStatusSlot is InstanceMSDeployStatusOperationGroupOps.Read<MSDeployStatus>;
+  getInstanceMsDeployStatusSlot is InstanceMSDeployStatusOperationGroupOps.Read<MSDeployStatus, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Invoke the MSDeploy web app extension.
@@ -298,7 +305,8 @@ interface InstanceMSDeployStatusOperationGroup {
       MSDeployStatus,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
     > | ArmConflictResponse,
-    Request = MSDeploy
+    Request = MSDeploy,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -312,7 +320,8 @@ interface InstanceMSDeployStatusOperationGroup {
   getInstanceMSDeployLogSlot is InstanceMSDeployStatusOperationGroupOps.ActionSync<
     MSDeployStatus,
     void,
-    ArmResponse<MSDeployLog> | ArmNotFoundResponse
+    ArmResponse<MSDeployLog> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

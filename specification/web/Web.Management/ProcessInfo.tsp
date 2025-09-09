@@ -64,7 +64,8 @@ interface ProcessInfos {
   @operationId("WebApps_GetInstanceProcess")
   getInstanceProcess is ProcessInfoOps.Read<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -76,7 +77,8 @@ interface ProcessInfos {
   @operationId("WebApps_DeleteInstanceProcess")
   deleteInstanceProcess is ProcessInfoOps.DeleteSync<
     ProcessInfo,
-    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -86,7 +88,8 @@ interface ProcessInfos {
   @operationId("WebApps_ListInstanceProcesses")
   listInstanceProcesses is ProcessInfoOps.List<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -99,7 +102,8 @@ interface ProcessInfos {
   getInstanceProcessDump is ProcessInfoOps.ActionSync<
     ProcessInfo,
     void,
-    File | ArmNotFoundResponse
+    File | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -113,7 +117,8 @@ interface ProcessInfos {
   listInstanceProcessThreads is ProcessInfoOps.ActionSync<
     ProcessInfo,
     void,
-    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse
+    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -149,7 +154,8 @@ interface ProcessInfoOperationGroup {
   @operationId("WebApps_GetProcess")
   getProcess is ProcessInfoOperationGroupOps.Read<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -161,7 +167,8 @@ interface ProcessInfoOperationGroup {
   @operationId("WebApps_DeleteProcess")
   deleteProcess is ProcessInfoOperationGroupOps.DeleteSync<
     ProcessInfo,
-    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -171,7 +178,8 @@ interface ProcessInfoOperationGroup {
   @operationId("WebApps_ListProcesses")
   listProcesses is ProcessInfoOperationGroupOps.List<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -184,7 +192,8 @@ interface ProcessInfoOperationGroup {
   getProcessDump is ProcessInfoOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    File | ArmNotFoundResponse
+    File | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -197,7 +206,8 @@ interface ProcessInfoOperationGroup {
   listProcessThreads is ProcessInfoOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    ArmResponse<ProcessThreadInfoCollection>
+    ArmResponse<ProcessThreadInfoCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -268,7 +278,8 @@ interface InstanceProcessSlotOperationGroup {
   @segment("processes")
   listInstanceProcessesSlot is InstanceProcessSlotOps.List<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse,
+    
   >;
 
   /**

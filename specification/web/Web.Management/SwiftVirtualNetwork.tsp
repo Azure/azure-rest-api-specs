@@ -57,7 +57,7 @@ interface SwiftVirtualNetworks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSwiftVirtualNetworkConnection")
-  getSwiftVirtualNetworkConnection is SwiftVirtualNetworkOps.Read<SwiftVirtualNetwork>;
+  getSwiftVirtualNetworkConnection is SwiftVirtualNetworkOps.Read<SwiftVirtualNetwork,OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Integrates this Web App with a Virtual Network. This requires that 1) "swiftSupported" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not
@@ -68,7 +68,8 @@ interface SwiftVirtualNetworks {
   @operationId("WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionWithCheck")
   createOrUpdateSwiftVirtualNetworkConnectionWithCheck is SwiftVirtualNetworkOps.CreateOrUpdateSync<
     SwiftVirtualNetwork,
-    Response = ArmResourceUpdatedResponse<SwiftVirtualNetwork>
+    Response = ArmResourceUpdatedResponse<SwiftVirtualNetwork>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -80,7 +81,8 @@ interface SwiftVirtualNetworks {
   @patch(#{ implicitOptionality: false })
   updateSwiftVirtualNetworkConnectionWithCheck is SwiftVirtualNetworkOps.CustomPatchSync<
     SwiftVirtualNetwork,
-    PatchModel = SwiftVirtualNetwork
+    PatchModel = SwiftVirtualNetwork,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -91,7 +93,8 @@ interface SwiftVirtualNetworks {
   @operationId("WebApps_DeleteSwiftVirtualNetwork")
   deleteSwiftVirtualNetwork is SwiftVirtualNetworkOps.DeleteSync<
     SwiftVirtualNetwork,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
