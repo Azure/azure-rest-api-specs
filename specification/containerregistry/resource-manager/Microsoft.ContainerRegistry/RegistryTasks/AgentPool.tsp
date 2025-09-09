@@ -14,7 +14,8 @@ namespace Microsoft.ContainerRegistry;
  * The agentpool that has the ARM resource and properties.
  * The agentpool will have all information to create an agent pool.
  */
-model AgentPool is Azure.ResourceManager.TrackedResource<AgentPoolProperties> {
+@parentResource(Registry)
+model AgentPool is Azure.ResourceManager.ProxyResource<AgentPoolProperties> {
   ...ResourceNameParameter<
     Resource = AgentPool,
     KeyName = "agentPoolName",
@@ -42,7 +43,7 @@ interface AgentPools {
   update is ArmCustomPatchAsync<
     AgentPool,
     PatchModel = AgentPoolUpdateParameters,
-    Response = ArmResponse<AgentPool> | ArmResourceCreatedResponse<AgentPool>,
+    Response = AgentPool | ArmResourceCreatedResponse<AgentPool>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = AgentPool> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -55,7 +56,8 @@ interface AgentPools {
   /**
    * Lists all the agent pools for a specified container registry.
    */
-  list is ArmResourceListByParent<AgentPool>;
+  @list
+  list is ArmResourceListByParent<AgentPool, Response = ArmResponse<AgentPoolListResult>>;
 
   /**
    * Gets the count of queued runs for a given agent pool.

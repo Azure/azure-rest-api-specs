@@ -418,6 +418,74 @@ model AgentPoolQueueStatus {
 }
 
 /**
+ * The collection of agent pools.
+ */
+model AgentPoolListResult {
+  /**
+   * The collection value.
+   */
+  @pageItems
+  value?: AgentPool[];
+
+  /**
+   * The URI that can be used to request the next set of paged results.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The collection of runs.
+ */
+model RunListResult {
+  /**
+   * The collection value.
+   */
+  @pageItems
+  value?: Run[];
+
+  /**
+   * The URI that can be used to request the next set of paged results.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The collection of tasks.
+ */
+model TaskListResult {
+  /**
+   * The collection value.
+   */
+  @pageItems
+  value?: Task[];
+
+  /**
+   * The URI that can be used to request the next set of paged results.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The collection of task runs.
+ */
+model TaskRunListResult {
+  /**
+   * The collection value.
+   */
+  @pageItems
+  value?: TaskRun[];
+
+  /**
+   * The URI that can be used to request the next set of paged results.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
  * The request parameters for scheduling a run.
  */
 @discriminator("type")
@@ -430,7 +498,7 @@ model RunRequest {
   /**
    * The value that indicates whether archiving is enabled for the run or not.
    */
-  isArchiveEnabled?: boolean;
+  isArchiveEnabled?: boolean = false;
 
   /**
    * The dedicated agent pool for the run.
@@ -562,7 +630,7 @@ model RunProperties {
   /**
    * The value that indicates whether archiving is enabled or not.
    */
-  isArchiveEnabled?: boolean;
+  isArchiveEnabled?: boolean = false;
 }
 
 /**
@@ -947,7 +1015,7 @@ model TaskProperties {
   /**
    * The value of this property indicates whether the task resource is system task or not.
    */
-  isSystemTask?: boolean;
+  isSystemTask?: boolean = false;
 }
 
 /**
@@ -1045,7 +1113,7 @@ model TimerTrigger {
   /**
    * The current status of trigger.
    */
-  status?: TriggerStatus;
+  status?: TriggerStatus = TriggerStatus.Enabled;
 
   /**
    * The name of the trigger.
@@ -1070,7 +1138,7 @@ model SourceTrigger {
   /**
    * The current status of trigger.
    */
-  status?: TriggerStatus;
+  status?: TriggerStatus = TriggerStatus.Enabled;
 
   /**
    * The name of the trigger.
@@ -1156,7 +1224,7 @@ model BaseImageTrigger {
   /**
    * The current status of trigger.
    */
-  status?: TriggerStatus;
+  status?: TriggerStatus = TriggerStatus.Enabled;
 
   /**
    * The name of the trigger.
@@ -1392,7 +1460,7 @@ model TimerTriggerUpdateParameters {
   /**
    * The current status of trigger.
    */
-  status?: TriggerStatus;
+  status?: TriggerStatus = TriggerStatus.Enabled;
 
   /**
    * The name of the trigger.
@@ -1417,7 +1485,7 @@ model SourceTriggerUpdateParameters {
   /**
    * The current status of trigger.
    */
-  status?: TriggerStatus;
+  status?: TriggerStatus = TriggerStatus.Enabled;
 
   /**
    * The name of the trigger.
@@ -1503,7 +1571,7 @@ model BaseImageTriggerUpdateParameters {
   /**
    * The current status of trigger.
    */
-  status?: TriggerStatus;
+  status?: TriggerStatus = TriggerStatus.Enabled;
 
   /**
    * The name of the trigger.
@@ -1581,7 +1649,7 @@ model DockerBuildRequest extends RunRequest {
   /**
    * The value of this property indicates whether the image cache is enabled or not.
    */
-  noCache?: boolean;
+  noCache?: boolean = false;
 
   /**
    * The Docker file path relative to the source location.
@@ -1650,7 +1718,7 @@ model Argument {
   /**
    * Flag to indicate whether the argument represents a secret and want to be removed from build logs.
    */
-  isSecret?: boolean;
+  isSecret?: boolean = false;
 }
 
 /**
@@ -1724,7 +1792,7 @@ model SetValue {
   /**
    * Flag to indicate whether the value represents a secret or not.
    */
-  isSecret?: boolean;
+  isSecret?: boolean = false;
 }
 
 /**
@@ -1854,7 +1922,7 @@ model DockerBuildStep extends TaskStepProperties {
   /**
    * The value of this property indicates whether the image cache is enabled or not.
    */
-  noCache?: boolean;
+  noCache?: boolean = false;
 
   /**
    * The Docker file path relative to the source context.
@@ -2022,3 +2090,14 @@ model EncodedTaskStepUpdateParameters extends TaskStepUpdateParameters {
    */
   type: "EncodedTask";
 }
+
+model Registry is Azure.ResourceManager.TrackedResource<never> {
+  ...ResourceNameParameter<
+    Resource = Registry,
+    KeyName = "registryName",
+    SegmentName = "registries",
+    NamePattern = "^[a-zA-Z0-9]*$",
+  >;
+}
+@@maxLength(Registry.name, 50);
+@@minLength(Registry.name, 5);

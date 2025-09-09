@@ -13,6 +13,7 @@ namespace Microsoft.ContainerRegistry;
 /**
  * Run resource properties
  */
+@parentResource(Registry)
 model Run is Azure.ResourceManager.ProxyResource<RunProperties> {
   ...ResourceNameParameter<
     Resource = Run,
@@ -38,6 +39,7 @@ interface Runs {
   /**
    * Gets all the runs for a registry.
    */
+  @list
   list is ArmResourceListByParent<
     Run,
     Parameters = {
@@ -52,7 +54,8 @@ interface Runs {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<RunListResult>
   >;
 
   /**

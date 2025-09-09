@@ -35,3 +35,5 @@ using Microsoft.ContainerRegistry;
 @@clientLocation(RegistriesOperationGroup.getBuildSourceUploadUrl,
   "Registries"
 );
+
+@@clientName(RegistriesOperationGroup.scheduleRun::parameters.body, "runRequest");

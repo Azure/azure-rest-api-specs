@@ -26,10 +26,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * // (missing-service-description) Add service description
+ * The Microsoft Azure Container Registry management API provides create, read, update, and delete functionality for Azure Container Registry resources including registries, replications, webhooks, tasks, runs, and other registry components.
  */
 @armProviderNamespace
-@service(#{ title: "ContainerRegistryManagementClient" })
+@service(#{ title: "ContainerRegistryTasksManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.ContainerRegistry;

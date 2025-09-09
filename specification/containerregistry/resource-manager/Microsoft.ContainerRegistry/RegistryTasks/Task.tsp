@@ -14,7 +14,8 @@ namespace Microsoft.ContainerRegistry;
  * The task that has the ARM resource and task properties.
  * The task will have all information to schedule a run against it.
  */
-model Task is Azure.ResourceManager.TrackedResource<TaskProperties> {
+@parentResource(Registry)
+model Task is Azure.ResourceManager.ProxyResource<TaskProperties> {
   ...ResourceNameParameter<
     Resource = Task,
     KeyName = "taskName",
@@ -55,7 +56,8 @@ interface Tasks {
   /**
    * Lists all the tasks for a specified container registry.
    */
-  list is ArmResourceListByParent<Task>;
+  @list
+  list is ArmResourceListByParent<Task, Response = ArmResponse<TaskListResult>>;
 
   /**
    * Returns a task with extended information that includes all secrets.

@@ -14,6 +14,7 @@ namespace Microsoft.ContainerRegistry;
  * The task run that has the ARM resource and properties.
  * The task run will have the information of request and result of a run.
  */
+@parentResource(Registry)
 model TaskRun is Azure.ResourceManager.ProxyResource<TaskRunProperties> {
   ...ResourceNameParameter<
     Resource = TaskRun,
@@ -54,7 +55,7 @@ interface TaskRuns {
   update is ArmCustomPatchAsync<
     TaskRun,
     PatchModel = TaskRunUpdateParameters,
-    Response = ArmResponse<TaskRun> | ArmResourceCreatedResponse<TaskRun>,
+    Response = TaskRun | ArmResourceCreatedResponse<TaskRun>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = TaskRun> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -67,7 +68,8 @@ interface TaskRuns {
   /**
    * Lists all the task runs for a specified container registry.
    */
-  list is ArmResourceListByParent<TaskRun>;
+  @list
+  list is ArmResourceListByParent<TaskRun, Response = ArmResponse<TaskRunListResult>>;
 
   /**
    * Gets the detailed information for a given task run that includes all secrets.
