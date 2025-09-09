@@ -3104,7 +3104,7 @@ model BackupPolicy extends BaseBackupPolicy {
  */
 model BackupSchedule {
   /**
-   * ISO 8601 repeating time interval format
+   * Repeating time interval which only support the following ISO 8601 format [R/startDateTime/Duration]. Example: R/2007-03-01T13:00:00Z/P1Y2M10DT2H30M
    */
   repeatingTimeIntervals: string[];
 
