@@ -229,7 +229,8 @@ interface FunctionEnvelopeOperationGroup {
   @operationId("WebApps_GetInstanceFunctionSlot")
   getInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.Read<
     FunctionEnvelope,
-    Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse
+    Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -243,7 +244,8 @@ interface FunctionEnvelopeOperationGroup {
     Response = ArmResourceCreatedResponse<
       FunctionEnvelope,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -255,7 +257,8 @@ interface FunctionEnvelopeOperationGroup {
   @operationId("WebApps_DeleteInstanceFunctionSlot")
   deleteInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.DeleteSync<
     FunctionEnvelope,
-    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -265,7 +268,8 @@ interface FunctionEnvelopeOperationGroup {
   @operationId("WebApps_ListInstanceFunctionsSlot")
   listInstanceFunctionsSlot is FunctionEnvelopeOperationGroupOps.List<
     FunctionEnvelope,
-    Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse
+    Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -278,7 +282,8 @@ interface FunctionEnvelopeOperationGroup {
   createOrUpdateFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.CreateOrUpdateAsync<
     FunctionEnvelope,
     Request = KeyInfo,
-    Response = ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>
+    Response = ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -292,7 +297,8 @@ interface FunctionEnvelopeOperationGroup {
   @delete
   deleteFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.DeleteSync<
     FunctionEnvelope,
-    Response = NoContentResponse | ArmNotFoundResponse
+    Response = NoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -304,7 +310,8 @@ interface FunctionEnvelopeOperationGroup {
   listFunctionKeysSlot is FunctionEnvelopeSlotOperationGroupOps.ActionSync<
     FunctionEnvelope,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -316,7 +323,8 @@ interface FunctionEnvelopeOperationGroup {
   listFunctionSecretsSlot is FunctionEnvelopeOperationGroupOps.ActionSync<
     FunctionEnvelope,
     void,
-    ArmResponse<FunctionSecrets>
+    ArmResponse<FunctionSecrets>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

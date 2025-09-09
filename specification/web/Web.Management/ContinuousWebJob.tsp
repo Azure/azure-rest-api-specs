@@ -143,7 +143,8 @@ interface ContinuousWebJobOperationGroup {
   @operationId("WebApps_GetContinuousWebJobSlot")
   getContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.Read<
     ContinuousWebJob,
-    Response = ArmResponse<ContinuousWebJob> | ArmNotFoundResponse
+    Response = ArmResponse<ContinuousWebJob> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -151,7 +152,10 @@ interface ContinuousWebJobOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteContinuousWebJobSlot")
-  deleteContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.DeleteSync<ContinuousWebJob>;
+  deleteContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.DeleteSync<
+    ContinuousWebJob,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for List continuous web jobs for an app, or a deployment slot.
@@ -160,7 +164,8 @@ interface ContinuousWebJobOperationGroup {
   @operationId("WebApps_ListContinuousWebJobsSlot")
   listContinuousWebJobsSlot is ContinuousWebJobOperationGroupOps.List<
     ContinuousWebJob,
-    Response = ArmResponse<ContinuousWebJobCollection>
+    Response = ArmResponse<ContinuousWebJobCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -173,7 +178,8 @@ interface ContinuousWebJobOperationGroup {
   startContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
     ContinuousWebJob,
     void,
-    OkResponse | ArmNotFoundResponse
+    OkResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -186,7 +192,8 @@ interface ContinuousWebJobOperationGroup {
   stopContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
     ContinuousWebJob,
     void,
-    OkResponse | ArmNotFoundResponse
+    OkResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

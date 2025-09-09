@@ -56,7 +56,10 @@ interface RelayServiceConnectionEntities {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetRelayServiceConnection")
-  getRelayServiceConnection is RelayServiceConnectionEntityOps.Read<RelayServiceConnectionEntity>;
+  getRelayServiceConnection is RelayServiceConnectionEntityOps.Read<
+    RelayServiceConnectionEntity,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
@@ -66,7 +69,8 @@ interface RelayServiceConnectionEntities {
   @operationId("WebApps_CreateOrUpdateRelayServiceConnection")
   createOrUpdateRelayServiceConnection is RelayServiceConnectionEntityOps.CreateOrUpdateSync<
     RelayServiceConnectionEntity,
-    Response = ArmResourceUpdatedResponse<RelayServiceConnectionEntity>
+    Response = ArmResourceUpdatedResponse<RelayServiceConnectionEntity>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -77,7 +81,8 @@ interface RelayServiceConnectionEntities {
   @patch(#{ implicitOptionality: false })
   updateRelayServiceConnection is RelayServiceConnectionEntityOps.CustomPatchSync<
     RelayServiceConnectionEntity,
-    PatchModel = RelayServiceConnectionEntity
+    PatchModel = RelayServiceConnectionEntity,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -88,7 +93,8 @@ interface RelayServiceConnectionEntities {
   @operationId("WebApps_DeleteRelayServiceConnection")
   deleteRelayServiceConnection is RelayServiceConnectionEntityOps.DeleteSync<
     RelayServiceConnectionEntity,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -128,7 +134,7 @@ interface RelayServiceConnectionEntityOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetRelayServiceConnectionSlot")
-  getRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.Read<RelayServiceConnectionEntity>;
+  getRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.Read<RelayServiceConnectionEntity, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
@@ -138,7 +144,8 @@ interface RelayServiceConnectionEntityOperationGroup {
   @operationId("WebApps_CreateOrUpdateRelayServiceConnectionSlot")
   createOrUpdateRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.CreateOrUpdateSync<
     RelayServiceConnectionEntity,
-    Response = ArmResourceUpdatedResponse<RelayServiceConnectionEntity>
+    Response = ArmResourceUpdatedResponse<RelayServiceConnectionEntity>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -149,7 +156,8 @@ interface RelayServiceConnectionEntityOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.CustomPatchSync<
     RelayServiceConnectionEntity,
-    PatchModel = RelayServiceConnectionEntity
+    PatchModel = RelayServiceConnectionEntity,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -160,7 +168,8 @@ interface RelayServiceConnectionEntityOperationGroup {
   @operationId("WebApps_DeleteRelayServiceConnectionSlot")
   deleteRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.DeleteSync<
     RelayServiceConnectionEntity,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

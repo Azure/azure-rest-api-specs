@@ -103,7 +103,10 @@ interface DiagnosticCategoryOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Diagnostics_GetSiteDiagnosticCategorySlot")
-  getSiteDiagnosticCategorySlot is DiagnosticCategoryOperationGroupOps.Read<DiagnosticCategory>;
+  getSiteDiagnosticCategorySlot is DiagnosticCategoryOperationGroupOps.Read<
+    DiagnosticCategory,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get Diagnostics Categories
@@ -112,7 +115,8 @@ interface DiagnosticCategoryOperationGroup {
   @operationId("Diagnostics_ListSiteDiagnosticCategoriesSlot")
   listSiteDiagnosticCategoriesSlot is DiagnosticCategoryOperationGroupOps.List<
     DiagnosticCategory,
-    Response = ArmResponse<DiagnosticCategoryCollection>
+    Response = ArmResponse<DiagnosticCategoryCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

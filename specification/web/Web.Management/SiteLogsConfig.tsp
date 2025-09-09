@@ -108,7 +108,10 @@ interface SiteLogsConfigOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetDiagnosticLogsConfigurationSlot")
-  getDiagnosticLogsConfigurationSlot is SiteLogsConfigOperationGroupOps.Read<SiteLogsConfig>;
+  getDiagnosticLogsConfigurationSlot is SiteLogsConfigOperationGroupOps.Read<
+    SiteLogsConfig,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates the logging configuration of an app.
@@ -118,7 +121,8 @@ interface SiteLogsConfigOperationGroup {
   @operationId("WebApps_UpdateDiagnosticLogsConfigSlot")
   updateDiagnosticLogsConfigSlot is SiteLogsConfigOperationGroupOps.CreateOrUpdateSync<
     SiteLogsConfig,
-    Response = ArmResourceUpdatedResponse<SiteLogsConfig>
+    Response = ArmResourceUpdatedResponse<SiteLogsConfig>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

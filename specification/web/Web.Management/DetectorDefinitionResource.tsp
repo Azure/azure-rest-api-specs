@@ -149,7 +149,7 @@ interface DetectorDefinitionResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Diagnostics_GetSiteDetectorSlot")
-  getSiteDetectorSlot is DetectorDefinitionResourceOperationGroupOps.Read<DetectorDefinitionResource>;
+  getSiteDetectorSlot is DetectorDefinitionResourceOperationGroupOps.Read<DetectorDefinitionResource, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Get Detectors
@@ -158,7 +158,8 @@ interface DetectorDefinitionResourceOperationGroup {
   @operationId("Diagnostics_ListSiteDetectorsSlot")
   listSiteDetectorsSlot is DetectorDefinitionResourceOperationGroupOps.List<
     DetectorDefinitionResource,
-    Response = ArmResponse<DiagnosticDetectorCollection>
+    Response = ArmResponse<DiagnosticDetectorCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -190,7 +191,8 @@ interface DetectorDefinitionResourceOperationGroup {
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

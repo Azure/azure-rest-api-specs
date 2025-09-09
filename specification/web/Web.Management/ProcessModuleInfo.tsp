@@ -70,7 +70,8 @@ interface ProcessModuleInfos {
   @operationId("WebApps_GetInstanceProcessModule")
   getInstanceProcessModule is ProcessModuleInfoOps.Read<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -80,7 +81,8 @@ interface ProcessModuleInfos {
   @operationId("WebApps_ListInstanceProcessModules")
   listInstanceProcessModules is ProcessModuleInfoOps.List<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -122,7 +124,8 @@ interface ProcessModuleInfoOperationGroup {
   @operationId("WebApps_GetProcessModule")
   getProcessModule is ProcessModuleInfoOperationGroupOps.Read<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -132,7 +135,8 @@ interface ProcessModuleInfoOperationGroup {
   @operationId("WebApps_ListProcessModules")
   listProcessModules is ProcessModuleInfoOperationGroupOps.List<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

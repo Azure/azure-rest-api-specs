@@ -123,7 +123,10 @@ interface HostNameBindingOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetHostNameBindingSlot")
-  getHostNameBindingSlot is HostNameBindingOperationGroupOps.Read<HostNameBinding>;
+  getHostNameBindingSlot is HostNameBindingOperationGroupOps.Read<
+    HostNameBinding,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a hostname binding for an app.
@@ -133,7 +136,8 @@ interface HostNameBindingOperationGroup {
   @operationId("WebApps_CreateOrUpdateHostNameBindingSlot")
   createOrUpdateHostNameBindingSlot is HostNameBindingOperationGroupOps.CreateOrUpdateSync<
     HostNameBinding,
-    Response = ArmResourceUpdatedResponse<HostNameBinding>
+    Response = ArmResourceUpdatedResponse<HostNameBinding>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -141,7 +145,10 @@ interface HostNameBindingOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteHostNameBindingSlot")
-  deleteHostNameBindingSlot is HostNameBindingOperationGroupOps.DeleteSync<HostNameBinding>;
+  deleteHostNameBindingSlot is HostNameBindingOperationGroupOps.DeleteSync<
+    HostNameBinding,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get hostname bindings for an app or a deployment slot.
@@ -150,7 +157,8 @@ interface HostNameBindingOperationGroup {
   @operationId("WebApps_ListHostNameBindingsSlot")
   listHostNameBindingsSlot is HostNameBindingOperationGroupOps.List<
     HostNameBinding,
-    Response = ArmResponse<HostNameBindingCollection>
+    Response = ArmResponse<HostNameBindingCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

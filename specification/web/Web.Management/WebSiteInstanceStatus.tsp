@@ -54,7 +54,10 @@ interface WebSiteInstanceStatuses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceInfo")
-  getInstanceInfo is WebSiteInstanceStatusOps.Read<WebSiteInstanceStatus>;
+  getInstanceInfo is WebSiteInstanceStatusOps.Read<
+    WebSiteInstanceStatus,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Gets all scale-out instances of an app.
@@ -63,7 +66,8 @@ interface WebSiteInstanceStatuses {
   @operationId("WebApps_ListInstanceIdentifiers")
   listInstanceIdentifiers is WebSiteInstanceStatusOps.List<
     WebSiteInstanceStatus,
-    Response = ArmResponse<WebAppInstanceStatusCollection>
+    Response = ArmResponse<WebAppInstanceStatusCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -103,7 +107,7 @@ interface WebSiteInstanceStatusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceInfoSlot")
-  getInstanceInfoSlot is WebSiteInstanceStatusOperationGroupOps.Read<WebSiteInstanceStatus>;
+  getInstanceInfoSlot is WebSiteInstanceStatusOperationGroupOps.Read<WebSiteInstanceStatus, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Gets all scale-out instances of an app.
@@ -112,7 +116,8 @@ interface WebSiteInstanceStatusOperationGroup {
   @operationId("WebApps_ListInstanceIdentifiersSlot")
   listInstanceIdentifiersSlot is WebSiteInstanceStatusOperationGroupOps.List<
     WebSiteInstanceStatus,
-    Response = ArmResponse<WebAppInstanceStatusCollection>
+    Response = ArmResponse<WebAppInstanceStatusCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

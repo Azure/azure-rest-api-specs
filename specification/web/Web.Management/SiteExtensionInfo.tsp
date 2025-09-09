@@ -58,7 +58,8 @@ interface SiteExtensionInfos {
   @operationId("WebApps_GetSiteExtension")
   getSiteExtension is SiteExtensionInfoOps.Read<
     SiteExtensionInfo,
-    Response = ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse
+    Response = ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
@@ -76,7 +77,8 @@ interface SiteExtensionInfos {
       SiteExtensionInfo,
       LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | ArmTooManyRequestsResponse
+    > | ArmTooManyRequestsResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -98,7 +100,8 @@ interface SiteExtensionInfos {
   @operationId("WebApps_ListSiteExtensions")
   listSiteExtensions is SiteExtensionInfoOps.List<
     SiteExtensionInfo,
-    Response = ArmResponse<SiteExtensionInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<SiteExtensionInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

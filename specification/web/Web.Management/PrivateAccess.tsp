@@ -57,7 +57,7 @@ interface PrivateAccesses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPrivateAccess")
-  getPrivateAccess is PrivateAccessOps.Read<PrivateAccess>;
+  getPrivateAccess is PrivateAccessOps.Read<PrivateAccess,OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Sets data around private site access enablement and authorized Virtual Networks that can access the site.
@@ -67,7 +67,8 @@ interface PrivateAccesses {
   @operationId("WebApps_PutPrivateAccessVnet")
   putPrivateAccessVnet is PrivateAccessOps.CreateOrUpdateSync<
     PrivateAccess,
-    Response = ArmResourceUpdatedResponse<PrivateAccess>
+    Response = ArmResourceUpdatedResponse<PrivateAccess>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

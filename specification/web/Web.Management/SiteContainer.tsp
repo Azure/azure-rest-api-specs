@@ -57,21 +57,27 @@ interface SiteContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteContainer")
-  getSiteContainer is SiteContainerOps.Read<SiteContainer>;
+  getSiteContainer is SiteContainerOps.Read<
+    SiteContainer,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Creates or Updates a site container for a site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_CreateOrUpdateSiteContainer")
-  createOrUpdateSiteContainer is SiteContainerOps.CreateOrUpdateSync<SiteContainer>;
+  createOrUpdateSiteContainer is SiteContainerOps.CreateOrUpdateSync<
+    SiteContainer,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Deletes a site container for a site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteSiteContainer")
-  deleteSiteContainer is SiteContainerOps.DeleteSync<SiteContainer>;
+  deleteSiteContainer is SiteContainerOps.DeleteSync<SiteContainer, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Lists all the site containers of a site, or a deployment slot.
@@ -80,7 +86,8 @@ interface SiteContainers {
   @operationId("WebApps_ListSiteContainers")
   listSiteContainers is SiteContainerOps.List<
     SiteContainer,
-    Response = ArmResponse<SiteContainerCollection>
+    Response = ArmResponse<SiteContainerCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

@@ -57,7 +57,7 @@ interface MigrateMySqlStatuses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetMigrateMySqlStatus")
-  getMigrateMySqlStatus is MigrateMySqlStatusOps.Read<MigrateMySqlStatus>;
+  getMigrateMySqlStatus is MigrateMySqlStatusOps.Read<MigrateMySqlStatus,OverrideErrorType = DefaultErrorResponse>;
 }
 @armResourceOperations
 interface MigrateMySqlStatusOperationGroupOps

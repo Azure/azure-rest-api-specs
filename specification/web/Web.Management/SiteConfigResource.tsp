@@ -216,7 +216,10 @@ interface SiteConfigSlotResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetConfigurationSlot")
-  getConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.Read<SiteConfigResource>;
+  getConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.Read<
+    SiteConfigResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates the configuration of an app.
@@ -226,7 +229,8 @@ interface SiteConfigSlotResourceOperationGroup {
   @operationId("WebApps_CreateOrUpdateConfigurationSlot")
   createOrUpdateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CreateOrUpdateSync<
     SiteConfigResource,
-    Response = ArmResourceUpdatedResponse<SiteConfigResource>
+    Response = ArmResourceUpdatedResponse<SiteConfigResource>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -237,7 +241,8 @@ interface SiteConfigSlotResourceOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CustomPatchSync<
     SiteConfigResource,
-    PatchModel = SiteConfigResource
+    PatchModel = SiteConfigResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -251,7 +256,8 @@ interface SiteConfigSlotResourceOperationGroup {
   listConfigurationSnapshotInfoSlot is SiteConfigSlotResourceOperationGroupOps.ActionSync<
     SiteConfigResource,
     void,
-    ArmResponse<SiteConfigurationSnapshotInfoCollection>
+    ArmResponse<SiteConfigurationSnapshotInfoCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
@@ -338,7 +344,8 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   @operationId("WebApps_ListConfigurationsSlot")
   listConfigurationsSlot is ListConfigurationsSlotOps.List<
     SiteConfigResource,
-    Response = ArmResponse<SiteConfigResourceCollection>
+    Response = ArmResponse<SiteConfigResourceCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**

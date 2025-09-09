@@ -135,7 +135,8 @@ interface Recommendations {
        */
       @query("recommendationId")
       recommendationId?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -145,7 +146,8 @@ interface Recommendations {
   disableRecommendationForSite is RecommendationOps.ActionSync<
     RecommendationRule,
     void,
-    OkResponse
+    OkResponse,
+    OverrideErrorType = DefaultErrorResponse,
   >;
 }
 

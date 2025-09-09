@@ -57,7 +57,7 @@ interface ResourceHealthMetadataOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceHealthMetadata_GetBySite")
-  getBySite is ResourceHealthMetadataOperationGroupOps.Read<ResourceHealthMetadata>;
+  getBySite is ResourceHealthMetadataOperationGroupOps.Read<ResourceHealthMetadata, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site as a collection
@@ -66,7 +66,8 @@ interface ResourceHealthMetadataOperationGroup {
   @operationId("ResourceHealthMetadata_ListBySite")
   listBySite is ResourceHealthMetadataOperationGroupOps.List<
     ResourceHealthMetadata,
-    Response = ArmResponse<ResourceHealthMetadataCollection>
+    Response = ArmResponse<ResourceHealthMetadataCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
