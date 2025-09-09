@@ -12,7 +12,13 @@ namespace Playwright;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
-  SupportsClientRequestId;
+  SupportsClientRequestId &
+  RequestHeadersTrait<{
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase."
+    @header
+    @doc("Provides additional client information beyond the standard user-agent header.")
+    `x-ms-useragent`?: string;
+  }>;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
