@@ -631,7 +631,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetContainerLogsZip")
-  @action("zip/download")
+  @action("containerlogs/zip/download")
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
@@ -666,7 +666,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("extensions/WebApps_CreateOneDeployOperation")
   @put
-  @action("onedeploy")
+  @action("extensions/onedeploy")
   createOneDeployOperation is SiteOps.ActionSync<
     Site,
     void,
@@ -959,20 +959,23 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetNetworkTraceOperationV2")
   @get
-  @action("networkTraces/current/operationresults/{operationId}")
-  getNetworkTraceOperationV2 is SiteOps.ActionSync<
+  getNetworkTraceOperationV2 is SiteOps.Read<
     Site,
-    void,
-    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
       @bodyRoot
       _: NetworkTrace[];
     }),
     Parameters = {
+      @path
+      @segment("networkTraces")
+      current: "current";
+
       /**
        * GUID of the operation.
        */
       @path
+      @segment("operationresults")
       operationId: string;
     }
   >;
@@ -1197,8 +1200,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_Start")
-  @action("networkTrace/startOperation")
-  start is WebAppOps.ActionSync<Site, void, OkResponse>;
+  start is ArmResourceActionSync<Site, void, OkResponse>;
 
   /**
    * Description for Start capturing network packets for the site.
@@ -1360,6 +1362,12 @@ interface WebAppOps
 
 @armResourceOperations
 interface WebApps {
+  ListSlots is WebAppOps.List<
+    Site,
+    Response = ArmResponse<WebAppCollection>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
   /**
    * Description for Gets the details of a web, mobile, or API app.
    */
@@ -1477,7 +1485,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("appsettings")
+  @action("config/appsettings")
   updateApplicationSettingsSlot is WebAppOps.ActionSync<
     Site,
     StringDictionary,
@@ -1499,7 +1507,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("authsettings")
+  @action("config/authsettings")
   updateAuthSettingsSlot is WebAppOps.ActionSync<
     Site,
     SiteAuthSettings,
@@ -1521,7 +1529,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("azurestorageaccounts")
+  @action("config/azurestorageaccounts")
   updateAzureStorageAccountsSlot is WebAppOps.ActionSync<
     Site,
     AzureStoragePropertyDictionaryResource,
@@ -1543,7 +1551,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("backup")
+  @action("config/backup")
   updateBackupConfigurationSlot is WebAppOps.ActionSync<
     Site,
     BackupRequest,
@@ -1572,7 +1580,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("connectionstrings")
+  @action("config/connectionstrings")
   updateConnectionStringsSlot is WebAppOps.ActionSync<
     Site,
     ConnectionStringDictionary,
@@ -1594,7 +1602,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
-  @action("metadata")
+  @action("config/metadata")
   updateMetadataSlot is WebAppOps.ActionSync<
     Site,
     StringDictionary,
@@ -1669,7 +1677,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @action("containerlogs/zipdownload")
+  @action("containerlogs/zip/download")
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
@@ -1690,7 +1698,7 @@ interface WebApps {
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
   @get
-  @action("token")
+  @action("functions/admin/token")
   getFunctionsAdminTokenSlot is WebAppOps.ActionSync<
     Site,
     void,
@@ -1700,13 +1708,13 @@ interface WebApps {
   /**
    * Description for Get host secrets for a function app.
    */
-  @action("listkeys")
+  @action("host/default/listkeys")
   listHostKeysSlot is WebAppOps.ActionSync<Site, void, ArmResponse<HostKeys>>;
 
   /**
    * Description for This is to allow calling via powershell and ARM template.
    */
-  @action("listsyncstatus")
+  @action("host/default/listsyncstatus")
   listSyncStatusSlot is WebAppOps.ActionSync<Site, void, NoContentResponse>;
 
   /**
@@ -1730,12 +1738,14 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   @delete
-  @action("{keyName}")
-  deleteHostSecretSlot is WebAppOps.ActionSync<
+  deleteHostSecretSlot is WebAppOps.DeleteSync<
     Site,
-    void,
-    NoContentResponse | ArmNotFoundResponse,
+    Response = NoContentResponse | ArmNotFoundResponse,
     Parameters = {
+      @path
+      @segment("host")
+      default: "default";
+
       /**
        * The type of host key.
        */
@@ -1858,7 +1868,7 @@ interface WebApps {
   /**
    * Description for Start capturing network packets for the site.
    */
-  @action("startOperation")
+  @action("networkTrace/startOperation")
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionAsync<
     Site,
     void,

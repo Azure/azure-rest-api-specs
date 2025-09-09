@@ -46,7 +46,7 @@ interface ApiKVReferenceOps
         @path
         @segment("config")
         @key
-        configreferences: "configreference",
+        configreferences: "configreferences",
       },
       {
         /** App Setting key name. */
