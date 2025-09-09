@@ -86,7 +86,7 @@ interface WorkflowRunActions {
    */
   get is WorkflowRunActionsOps.Read<
     WorkflowRunAction,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -107,7 +107,7 @@ interface WorkflowRunActions {
       @query("$filter")
       $filter?: string;
     },
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -118,7 +118,7 @@ interface WorkflowRunActions {
     WorkflowRunAction,
     void,
     ArmResponse<ExpressionTraces>,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 }
 

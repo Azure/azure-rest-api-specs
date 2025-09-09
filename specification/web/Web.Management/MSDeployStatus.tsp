@@ -62,7 +62,7 @@ interface MSDeployStatuses {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("WebApps_GetMSDeployStatus")
-  getMSDeployStatus is MSDeployStatusOps.Read<MSDeployStatus>;
+  getMSDeployStatus is MSDeployStatusOps.Read<MSDeployStatus, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Invoke the MSDeploy web app extension.
@@ -77,7 +77,8 @@ interface MSDeployStatuses {
       MSDeployStatus,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
     > | ArmConflictResponse,
-    Request = MSDeploy
+    Request = MSDeploy,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -91,7 +92,8 @@ interface MSDeployStatuses {
   getMSDeployLog is MSDeployStatusOps.ActionSync<
     MSDeployStatus,
     void,
-    ArmResponse<MSDeployLog> | ArmNotFoundResponse
+    ArmResponse<MSDeployLog> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

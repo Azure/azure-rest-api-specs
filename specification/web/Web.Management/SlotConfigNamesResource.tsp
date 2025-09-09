@@ -34,7 +34,10 @@ interface SlotConfigNamesResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListSlotConfigurationNames")
-  listSlotConfigurationNames is ArmResourceRead<SlotConfigNamesResource>;
+  listSlotConfigurationNames is ArmResourceRead<
+    SlotConfigNamesResource,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates the names of application settings and connection string that remain with the slot during swap operation.
@@ -44,7 +47,8 @@ interface SlotConfigNamesResources {
   @operationId("WebApps_UpdateSlotConfigurationNames")
   updateSlotConfigurationNames is ArmResourceCreateOrReplaceSync<
     SlotConfigNamesResource,
-    Response = ArmResourceUpdatedResponse<SlotConfigNamesResource>
+    Response = ArmResourceUpdatedResponse<SlotConfigNamesResource>,
+    Error = DefaultErrorResponse
   >;
 }
 

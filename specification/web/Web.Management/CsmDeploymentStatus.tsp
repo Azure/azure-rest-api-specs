@@ -62,7 +62,8 @@ interface CsmDeploymentStatuses {
     Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CsmDeploymentStatus>> & {
       @bodyRoot
       _: CsmDeploymentStatus;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -72,7 +73,8 @@ interface CsmDeploymentStatuses {
   @operationId("WebApps_ListProductionSiteDeploymentStatuses")
   listProductionSiteDeploymentStatuses is CsmDeploymentStatusOps.List<
     CsmDeploymentStatus,
-    Response = ArmResponse<CsmDeploymentStatusCollection>
+    Response = ArmResponse<CsmDeploymentStatusCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

@@ -57,7 +57,10 @@ interface SiteAuthSettingsV2s {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetAuthSettingsV2WithoutSecrets")
-  getAuthSettingsV2WithoutSecrets is SiteAuthSettingsV2Ops.Read<SiteAuthSettingsV2>;
+  getAuthSettingsV2WithoutSecrets is SiteAuthSettingsV2Ops.Read<
+    SiteAuthSettingsV2,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates site's Authentication / Authorization settings for apps via the V2 format
@@ -67,7 +70,8 @@ interface SiteAuthSettingsV2s {
   @operationId("WebApps_UpdateAuthSettingsV2")
   updateAuthSettingsV2 is SiteAuthSettingsV2Ops.CreateOrUpdateSync<
     SiteAuthSettingsV2,
-    Response = ArmResourceUpdatedResponse<SiteAuthSettingsV2>
+    Response = ArmResourceUpdatedResponse<SiteAuthSettingsV2>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -80,7 +84,8 @@ interface SiteAuthSettingsV2s {
   getAuthSettingsV2 is SiteAuthSettingsV2Ops.ActionSync<
     SiteAuthSettingsV2,
     void,
-    ArmResponse<SiteAuthSettingsV2>
+    ArmResponse<SiteAuthSettingsV2>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -121,7 +126,10 @@ interface SiteAuthSettingsV2OperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetAuthSettingsV2WithoutSecretsSlot")
-  getAuthSettingsV2WithoutSecretsSlot is SiteAuthSettingsV2OperationGroupOps.Read<SiteAuthSettingsV2, OverrideErrorType = DefaultErrorResponse>;
+  getAuthSettingsV2WithoutSecretsSlot is SiteAuthSettingsV2OperationGroupOps.Read<
+    SiteAuthSettingsV2,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates site's Authentication / Authorization settings for apps via the V2 format

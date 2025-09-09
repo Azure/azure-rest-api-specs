@@ -99,14 +99,20 @@ interface RequestHistories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkflowRunActionRepetitionsRequestHistories_Get")
-  get is RequestHistoryOps.Read<RequestHistory>;
+  get is RequestHistoryOps.Read<
+    RequestHistory,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * List a workflow run repetition request history.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkflowRunActionRepetitionsRequestHistories_List")
-  list is RequestHistoryOps.List<RequestHistory>;
+  list is RequestHistoryOps.List<
+    RequestHistory,
+    OverrideErrorType = ErrorResponse
+  >;
 }
 
 @@doc(RequestHistory.name, "The request history name.");

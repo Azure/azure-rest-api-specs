@@ -55,7 +55,10 @@ interface Identifiers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetDomainOwnershipIdentifier")
-  getDomainOwnershipIdentifier is IdentifierOps.Read<Identifier>;
+  getDomainOwnershipIdentifier is IdentifierOps.Read<
+    Identifier,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
@@ -65,7 +68,8 @@ interface Identifiers {
   @operationId("WebApps_CreateOrUpdateDomainOwnershipIdentifier")
   createOrUpdateDomainOwnershipIdentifier is IdentifierOps.CreateOrUpdateSync<
     Identifier,
-    Response = ArmResourceUpdatedResponse<Identifier>
+    Response = ArmResourceUpdatedResponse<Identifier>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -76,7 +80,8 @@ interface Identifiers {
   @patch(#{ implicitOptionality: false })
   updateDomainOwnershipIdentifier is IdentifierOps.CustomPatchSync<
     Identifier,
-    PatchModel = Identifier
+    PatchModel = Identifier,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -84,7 +89,7 @@ interface Identifiers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteDomainOwnershipIdentifier")
-  deleteDomainOwnershipIdentifier is IdentifierOps.DeleteSync<Identifier>;
+  deleteDomainOwnershipIdentifier is IdentifierOps.DeleteSync<Identifier, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Lists ownership identifiers for domain associated with web app.
@@ -93,7 +98,8 @@ interface Identifiers {
   @operationId("WebApps_ListDomainOwnershipIdentifiers")
   listDomainOwnershipIdentifiers is IdentifierOps.List<
     Identifier,
-    Response = ArmResponse<IdentifierCollection>
+    Response = ArmResponse<IdentifierCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -133,7 +139,10 @@ interface IdentifierOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetDomainOwnershipIdentifierSlot")
-  getDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.Read<Identifier, OverrideErrorType = DefaultErrorResponse>;
+  getDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.Read<
+    Identifier,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
@@ -164,7 +173,10 @@ interface IdentifierOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteDomainOwnershipIdentifierSlot")
-  deleteDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.DeleteSync<Identifier, OverrideErrorType = DefaultErrorResponse>;
+  deleteDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.DeleteSync<
+    Identifier,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Lists ownership identifiers for domain associated with web app.

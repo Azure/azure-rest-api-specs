@@ -136,12 +136,12 @@ interface SiteCertificates {
   /**
    * Get a certificate belonging to a given site.
    */
-  get is SiteCertificateOps.Read<Certificate>;
+  get is SiteCertificateOps.Read<Certificate, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Create or update a certificate under a given site.
    */
-  createOrUpdate is SiteCertificateOps.CreateOrUpdateSync<Certificate>;
+  createOrUpdate is SiteCertificateOps.CreateOrUpdateSync<Certificate, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Create or update a certificate under a given site.
@@ -149,20 +149,22 @@ interface SiteCertificates {
   @patch(#{ implicitOptionality: false })
   update is SiteCertificateOps.CustomPatchSync<
     Certificate,
-    PatchModel = CertificatePatchResource
+    PatchModel = CertificatePatchResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
    * Delete a certificate from the site.
    */
-  delete is SiteCertificateOps.DeleteSync<Certificate>;
+  delete is SiteCertificateOps.DeleteSync<Certificate, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Get all certificates in a resource group under a site.
    */
   list is SiteCertificateOps.List<
     Certificate,
-    Response = ArmResponse<CertificateCollection>
+    Response = ArmResponse<CertificateCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -236,7 +238,10 @@ interface CertificateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SiteCertificates_DeleteSlot")
-  deleteSlot is CertificateOperationGroupOps.DeleteSync<Certificate, OverrideErrorType = DefaultErrorResponse>;
+  deleteSlot is CertificateOperationGroupOps.DeleteSync<
+    Certificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Get all certificates in a resource group for a given site and a deployment slot.
