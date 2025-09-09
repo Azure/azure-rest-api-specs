@@ -5,3 +5,4 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Storage;
 
 @@clientName(ProvisioningState, "StorageProvisioningState", "csharp");
+@@clientName(Microsoft.Storage, "StorageManagementClient", "javascript");
