@@ -56,7 +56,10 @@ interface HostNameBindings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetHostNameBinding")
-  getHostNameBinding is HostNameBindingOps.Read<HostNameBinding>;
+  getHostNameBinding is HostNameBindingOps.Read<
+    HostNameBinding,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a hostname binding for an app.
@@ -66,7 +69,8 @@ interface HostNameBindings {
   @operationId("WebApps_CreateOrUpdateHostNameBinding")
   createOrUpdateHostNameBinding is HostNameBindingOps.CreateOrUpdateSync<
     HostNameBinding,
-    Response = ArmResourceUpdatedResponse<HostNameBinding>
+    Response = ArmResourceUpdatedResponse<HostNameBinding>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -74,7 +78,10 @@ interface HostNameBindings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteHostNameBinding")
-  deleteHostNameBinding is HostNameBindingOps.DeleteSync<HostNameBinding>;
+  deleteHostNameBinding is HostNameBindingOps.DeleteSync<
+    HostNameBinding,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get hostname bindings for an app or a deployment slot.
@@ -83,7 +90,8 @@ interface HostNameBindings {
   @operationId("WebApps_ListHostNameBindings")
   listHostNameBindings is HostNameBindingOps.List<
     HostNameBinding,
-    Response = ArmResponse<HostNameBindingCollection>
+    Response = ArmResponse<HostNameBindingCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

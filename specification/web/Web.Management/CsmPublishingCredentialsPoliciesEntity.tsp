@@ -57,7 +57,10 @@ interface CsmPublishingCredentialsPoliciesEntities {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetFtpAllowed")
-  getFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.Read<CsmPublishingCredentialsPoliciesEntity>;
+  getFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.Read<
+    CsmPublishingCredentialsPoliciesEntity,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates whether FTP is allowed on the site or not.
@@ -67,7 +70,8 @@ interface CsmPublishingCredentialsPoliciesEntities {
   @operationId("WebApps_UpdateFtpAllowed")
   updateFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
-    Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>
+    Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -78,7 +82,8 @@ interface CsmPublishingCredentialsPoliciesEntities {
   @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPolicies is CsmPublishingCredentialsPoliciesEntityOps.List<
     CsmPublishingCredentialsPoliciesEntity,
-    Response = ArmResponse<PublishingCredentialsPoliciesCollection>
+    Response = ArmResponse<PublishingCredentialsPoliciesCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -112,7 +117,10 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetScmAllowed")
-  getScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.Read<CsmPublishingCredentialsPoliciesEntity>;
+  getScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.Read<
+    CsmPublishingCredentialsPoliciesEntity,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates whether user publishing credentials are allowed on the site or not.
@@ -122,7 +130,8 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   @operationId("WebApps_UpdateScmAllowed")
   updateScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
-    Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>
+    Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

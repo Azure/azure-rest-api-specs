@@ -133,7 +133,8 @@ interface FunctionEnvelopes {
   @operationId("WebApps_GetFunction")
   getFunction is FunctionEnvelopeOps.Read<
     FunctionEnvelope,
-    Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse
+    Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -147,7 +148,8 @@ interface FunctionEnvelopes {
     Response = ArmResourceCreatedResponse<
       FunctionEnvelope,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -159,7 +161,8 @@ interface FunctionEnvelopes {
   @operationId("WebApps_DeleteFunction")
   deleteFunction is FunctionEnvelopeOps.DeleteSync<
     FunctionEnvelope,
-    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -169,7 +172,8 @@ interface FunctionEnvelopes {
   @operationId("WebApps_ListFunctions")
   listFunctions is FunctionEnvelopeOps.List<
     FunctionEnvelope,
-    Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse
+    Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -182,7 +186,7 @@ interface FunctionEnvelopes {
   createOrUpdateFunctionSecret(
     ...FunctionEnvelopesParameters,
     @body key: KeyInfo,
-  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
+  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse;
   /**
    * Description for Delete a function secret.
    */
@@ -193,7 +197,7 @@ interface FunctionEnvelopes {
   @delete
   deleteFunctionSecret(
     ...FunctionEnvelopesParameters,
-  ): NoContentResponse | ArmNotFoundResponse;
+  ): NoContentResponse | ArmNotFoundResponse | DefaultErrorResponse;
 
   /**
    * Description for Get function keys for a function in a web site, or a deployment slot.
@@ -204,7 +208,8 @@ interface FunctionEnvelopes {
   listFunctionKeys is FunctionEnvelopeOps.ActionSync<
     FunctionEnvelope,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -216,7 +221,8 @@ interface FunctionEnvelopes {
   listFunctionSecrets is FunctionEnvelopeOps.ActionSync<
     FunctionEnvelope,
     void,
-    ArmResponse<FunctionSecrets>
+    ArmResponse<FunctionSecrets>,
+    
   >;
 }
 @armResourceOperations

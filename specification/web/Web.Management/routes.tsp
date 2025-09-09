@@ -538,7 +538,7 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
     ...ApiVersionParameter,
     ...ResourceGroupParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceHealthMetadataCollection> | ErrorResponse;
+  ): ArmResponse<ResourceHealthMetadataCollection> | DefaultErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

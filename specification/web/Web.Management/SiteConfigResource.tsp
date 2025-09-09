@@ -56,7 +56,10 @@ interface SiteConfigResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetConfiguration")
-  getConfiguration is SiteConfigResourceOps.Read<SiteConfigResource>;
+  getConfiguration is SiteConfigResourceOps.Read<
+    SiteConfigResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates the configuration of an app.
@@ -66,7 +69,8 @@ interface SiteConfigResources {
   @operationId("WebApps_CreateOrUpdateConfiguration")
   createOrUpdateConfiguration is SiteConfigResourceOps.CreateOrUpdateSync<
     SiteConfigResource,
-    Response = ArmResourceUpdatedResponse<SiteConfigResource>
+    Response = ArmResourceUpdatedResponse<SiteConfigResource>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -77,7 +81,8 @@ interface SiteConfigResources {
   @patch(#{ implicitOptionality: false })
   updateConfiguration is SiteConfigResourceOps.CustomPatchSync<
     SiteConfigResource,
-    PatchModel = SiteConfigResource
+    PatchModel = SiteConfigResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -91,7 +96,8 @@ interface SiteConfigResources {
   listConfigurationSnapshotInfo is ArmResourceActionSync<
     SiteConfigResource,
     void,
-    ArmResponse<SiteConfigurationSnapshotInfoCollection>
+    ArmResponse<SiteConfigurationSnapshotInfoCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -155,7 +161,10 @@ interface SiteConfigResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetConfigurationSnapshot")
-  getConfigurationSnapshot is SiteConfigResourceOperationGroupOps.Read<SiteConfigResource>;
+  getConfigurationSnapshot is SiteConfigResourceOperationGroupOps.Read<
+    SiteConfigResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for List the configurations of an app
@@ -164,7 +173,8 @@ interface SiteConfigResourceOperationGroup {
   @operationId("WebApps_ListConfigurations")
   listConfigurations is ListConfigurationsOps.List<
     SiteConfigResource,
-    Response = ArmResponse<SiteConfigResourceCollection>
+    Response = ArmResponse<SiteConfigResourceCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -176,7 +186,8 @@ interface SiteConfigResourceOperationGroup {
   recoverSiteConfigurationSnapshot is SiteConfigResourceOperationGroupOps.ActionSync<
     SiteConfigResource,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

@@ -62,7 +62,10 @@ interface AnalysisDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Diagnostics_GetSiteAnalysis")
-  getSiteAnalysis is AnalysisDefinitionOps.Read<AnalysisDefinition>;
+  getSiteAnalysis is AnalysisDefinitionOps.Read<
+    AnalysisDefinition,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get Site Analyses
@@ -71,7 +74,8 @@ interface AnalysisDefinitions {
   @operationId("Diagnostics_ListSiteAnalyses")
   listSiteAnalyses is AnalysisDefinitionOps.List<
     AnalysisDefinition,
-    Response = ArmResponse<DiagnosticAnalysisCollection>
+    Response = ArmResponse<DiagnosticAnalysisCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -103,7 +107,8 @@ interface AnalysisDefinitions {
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -149,7 +154,10 @@ interface AnalysisDefinitionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Diagnostics_GetSiteAnalysisSlot")
-  getSiteAnalysisSlot is AnalysisDefinitionOperationGroupOps.Read<AnalysisDefinition, OverrideErrorType = DefaultErrorResponse>;
+  getSiteAnalysisSlot is AnalysisDefinitionOperationGroupOps.Read<
+    AnalysisDefinition,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get Site Analyses
@@ -191,8 +199,7 @@ interface AnalysisDefinitionOperationGroup {
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
-    },
-    
+    }
   >;
 }
 

@@ -63,7 +63,8 @@ interface DiagnosticCategories {
   @operationId("Diagnostics_ListSiteDiagnosticCategories")
   listSiteDiagnosticCategories is DiagnosticCategoryOps.List<
     DiagnosticCategory,
-    Response = ArmResponse<DiagnosticCategoryCollection>
+    Response = ArmResponse<DiagnosticCategoryCollection>,
+    
   >;
 }
 @armResourceOperations

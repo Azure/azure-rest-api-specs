@@ -78,7 +78,10 @@ interface WorkflowVersions {
   /**
    * Gets a workflow version.
    */
-  get is WorkflowVersionsOps.Read<WorkflowVersion>;
+  get is WorkflowVersionsOps.Read<
+    WorkflowVersion,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets a list of workflow versions.
@@ -91,7 +94,8 @@ interface WorkflowVersions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    OverrideErrorType = ErrorResponse
   >;
 }
 

@@ -64,7 +64,7 @@ interface AppSettingKeyVaultReference {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetAppSettingKeyVaultReference")
-  getAppSettingKeyVaultReference is ApiKVReferenceOps.Read<ApiKVReference>;
+  getAppSettingKeyVaultReference is ApiKVReferenceOps.Read<ApiKVReference, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Gets the config reference app settings and status of an app
@@ -73,7 +73,8 @@ interface AppSettingKeyVaultReference {
   @operationId("WebApps_GetAppSettingsKeyVaultReferences")
   getAppSettingsKeyVaultReferences is ApiKVReferenceOps.List<
     ApiKVReference,
-    Response = ArmResponse<ApiKVReferenceCollection>
+    Response = ArmResponse<ApiKVReferenceCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
@@ -115,7 +116,7 @@ interface SiteConnectionStringKeyVaultReference {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteConnectionStringKeyVaultReference")
-  getSiteConnectionStringKeyVaultReference is ApiKVReferenceOperationGroupOps.Read<ApiKVReference>;
+  getSiteConnectionStringKeyVaultReference is ApiKVReferenceOperationGroupOps.Read<ApiKVReference, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Gets the config reference app settings and status of an app
@@ -125,7 +126,8 @@ interface SiteConnectionStringKeyVaultReference {
   @segment("connectionstrings")
   getSiteConnectionStringKeyVaultReferences is ApiKVReferenceOperationGroupOps.List<
     ApiKVReference,
-    Response = ArmResponse<ApiKVReferenceCollection>
+    Response = ArmResponse<ApiKVReferenceCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations

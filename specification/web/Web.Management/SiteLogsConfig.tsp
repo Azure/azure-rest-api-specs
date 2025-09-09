@@ -57,7 +57,7 @@ interface SiteLogsConfigs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetDiagnosticLogsConfiguration")
-  getDiagnosticLogsConfiguration is SiteLogsConfigOps.Read<SiteLogsConfig>;
+  getDiagnosticLogsConfiguration is SiteLogsConfigOps.Read<SiteLogsConfig, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Updates the logging configuration of an app.
@@ -67,7 +67,8 @@ interface SiteLogsConfigs {
   @operationId("WebApps_UpdateDiagnosticLogsConfig")
   updateDiagnosticLogsConfig is SiteLogsConfigOps.CreateOrUpdateSync<
     SiteLogsConfig,
-    Response = ArmResourceUpdatedResponse<SiteLogsConfig>
+    Response = ArmResourceUpdatedResponse<SiteLogsConfig>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
