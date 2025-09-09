@@ -1,8 +1,8 @@
-# Microsoft.AzureGrowth
+# Microsoft.SubscriptionProvisioningOrchestrator
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Microsoft.AzureGrowth.
+This is the AutoRest configuration file for Microsoft.SubscriptionProvisioningOrchestrator.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the Microsoft.AzureGrowth.
+These are the global settings for the Microsoft.SubscriptionProvisioningOrchestrator.
 
 ```yaml
 openapi-type: arm
@@ -36,5 +36,5 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
-  - Microsoft.AzureGrowth/preview/2025-05-01-preview/microsoft-azuregrowth.json
+  - Microsoft.SubscriptionProvisioningOrchestrator/preview/2025-05-01-preview/microsoft-subscriptionprovisioningorchestrator.json
 ```

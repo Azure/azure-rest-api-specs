@@ -10,11 +10,13 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-/** Microsoft.AzureGrowth Resource Provider management API. */
+/** Microsoft.SubscriptionProvisioningOrchestrator Resource Provider management API. */
 @armProviderNamespace
-@service(#{ title: "Microsoft.AzureGrowth management service" })
+@service(#{
+  title: "Microsoft.SubscriptionProvisioningOrchestrator management service",
+})
 @versioned(Versions)
-namespace Microsoft.AzureGrowth;
+namespace Microsoft.SubscriptionProvisioningOrchestrator;
 
 /** The available API versions. */
 enum Versions {
