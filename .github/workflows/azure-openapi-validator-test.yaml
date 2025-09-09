@@ -59,3 +59,29 @@ jobs:
       - name: List azure-openapi-validator packages
         run: find . -name *.tgz -exec du -h {} +
         working-directory: aov/packages
+
+      - name: Install azure-openapi-validator packages to temp
+        run: npm install --no-save $(find $GITHUB_WORKSPACE/aov/packages -name *.tgz)
+        working-directory: $RUNNER_TEMP/aov
+
+      - name: Install specs deps
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          working-directory: specs
+
+      - name: Run autorest
+        run: |
+          npm exec --no -- autorest \
+            --level=warning \
+            --v3 \
+            --spectral \
+            --azure-validator \
+            --semantic-validator=false \
+            --model-validator=false \
+            --use=$RUNNER_TEMP/aov/node_modules/@microsoft.azure/openapi-validator \
+            --openapi-type=arm \
+            --openapi-subtype=arm \
+            --tag=package-2021-11-01 \
+            specification/widget/resource-manager/Microsoft.Widget/Widget/readme.md \
+            --verbose
+        working-directory: specs
