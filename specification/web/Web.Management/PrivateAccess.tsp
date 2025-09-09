@@ -108,7 +108,10 @@ interface PrivateAccessOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPrivateAccessSlot")
-  getPrivateAccessSlot is PrivateAccessOperationGroupOps.Read<PrivateAccess>;
+  getPrivateAccessSlot is PrivateAccessOperationGroupOps.Read<
+    PrivateAccess,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Sets data around private site access enablement and authorized Virtual Networks that can access the site.
@@ -118,7 +121,8 @@ interface PrivateAccessOperationGroup {
   @operationId("WebApps_PutPrivateAccessVnetSlot")
   putPrivateAccessVnetSlot is PrivateAccessOperationGroupOps.CreateOrUpdateSync<
     PrivateAccess,
-    Response = ArmResourceUpdatedResponse<PrivateAccess>
+    Response = ArmResourceUpdatedResponse<PrivateAccess>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

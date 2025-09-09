@@ -30,7 +30,7 @@ op validateMove(
    */
   @bodyRoot
   moveResourceEnvelope: CsmMoveResourceEnvelope,
-): ErrorResponse;
+): DefaultErrorResponse;
 /**
  * Description for Validate if a resource can be created.
  */
@@ -48,7 +48,7 @@ op validate(
    */
   @bodyRoot
   validateRequest: ValidateRequest,
-): ArmResponse<ValidateResponse> | ErrorResponse;
+): ArmResponse<ValidateResponse> | DefaultErrorResponse;
 
 /**
  * Description for Gets list of available geo regions plus ministamps

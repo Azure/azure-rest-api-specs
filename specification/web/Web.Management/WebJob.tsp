@@ -61,7 +61,10 @@ interface WebJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetWebJobSlot")
-  getWebJobSlot is WebJobOps.Read<WebJob>;
+  getWebJobSlot is WebJobOps.Read<
+    WebJob,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for List webjobs for an app, or a deployment slot.
@@ -70,7 +73,8 @@ interface WebJobs {
   @operationId("WebApps_ListWebJobsSlot")
   listWebJobsSlot is WebJobOps.List<
     WebJob,
-    Response = ArmResponse<WebJobCollection>
+    Response = ArmResponse<WebJobCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -104,7 +108,10 @@ interface WebJobOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetWebJob")
-  getWebJob is WebJobOperationGroupOps.Read<WebJob>;
+  getWebJob is WebJobOperationGroupOps.Read<
+    WebJob,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for List webjobs for an app, or a deployment slot.
@@ -113,7 +120,8 @@ interface WebJobOperationGroup {
   @operationId("WebApps_ListWebJobs")
   listWebJobs is WebJobOperationGroupOps.List<
     WebJob,
-    Response = ArmResponse<WebJobCollection>
+    Response = ArmResponse<WebJobCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

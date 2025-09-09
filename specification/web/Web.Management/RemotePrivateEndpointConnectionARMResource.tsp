@@ -142,7 +142,10 @@ interface StaticSites {
   /**
    * Description for Gets a private endpoint connection
    */
-  getPrivateEndpointConnection is StaticSiteOps.Read<RemotePrivateEndpointConnectionARMResource>;
+  getPrivateEndpointConnection is StaticSiteOps.Read<
+    RemotePrivateEndpointConnectionARMResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Approves or rejects a private endpoint connection
@@ -156,7 +159,8 @@ interface StaticSites {
       _: RemotePrivateEndpointConnectionARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -173,7 +177,8 @@ interface StaticSites {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
       @body
       _: unknown;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -181,7 +186,8 @@ interface StaticSites {
    */
   getPrivateEndpointConnectionList is StaticSiteOps.List<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<PrivateEndpointConnectionCollection>
+    Response = ArmResponse<PrivateEndpointConnectionCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -301,7 +307,10 @@ interface PrivateEndpointConnectionSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPrivateEndpointConnectionSlot")
-  getPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.Read<RemotePrivateEndpointConnectionARMResource>;
+  getPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.Read<
+    RemotePrivateEndpointConnectionARMResource,
+    OverrideErrorType = DefaultErrorResponse
+    >;
 
   /**
    * Description for Approves or rejects a private endpoint connection
@@ -317,7 +326,8 @@ interface PrivateEndpointConnectionSlotOperationGroup {
       _: RemotePrivateEndpointConnectionARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -337,7 +347,8 @@ interface PrivateEndpointConnectionSlotOperationGroup {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
       @body
       _: unknown;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -348,7 +359,8 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   @segment("privateEndpointConnections")
   getPrivateEndpointConnectionListSlot is PrivateEndpointConnectionSlotOperationGroupOps.List<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<PrivateEndpointConnectionCollection>
+    Response = ArmResponse<PrivateEndpointConnectionCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

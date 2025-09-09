@@ -36,7 +36,10 @@ interface StaticSiteBasicAuthPropertiesARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetBasicAuth")
-  getBasicAuth is ArmResourceRead<StaticSiteBasicAuthPropertiesARMResource>;
+  getBasicAuth is ArmResourceRead<
+    StaticSiteBasicAuthPropertiesARMResource,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Adds or updates basic auth for a static site.
@@ -46,7 +49,8 @@ interface StaticSiteBasicAuthPropertiesARMResources {
   @operationId("StaticSites_CreateOrUpdateBasicAuth")
   createOrUpdateBasicAuth is ArmResourceCreateOrReplaceSync<
     StaticSiteBasicAuthPropertiesARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteBasicAuthPropertiesARMResource>
+    Response = ArmResourceUpdatedResponse<StaticSiteBasicAuthPropertiesARMResource>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -56,7 +60,8 @@ interface StaticSiteBasicAuthPropertiesARMResources {
   @operationId("StaticSites_ListBasicAuth")
   listBasicAuth is ArmResourceListByParent<
     StaticSiteBasicAuthPropertiesARMResource,
-    Response = ArmResponse<StaticSiteBasicAuthPropertiesCollection>
+    Response = ArmResponse<StaticSiteBasicAuthPropertiesCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 

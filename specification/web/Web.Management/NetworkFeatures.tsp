@@ -97,7 +97,10 @@ interface NetworkFeaturesSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListNetworkFeaturesSlot")
-  listNetworkFeaturesSlot is NetworkFeaturesSlotOperationGroupOps.Read<NetworkFeatures>;
+  listNetworkFeaturesSlot is NetworkFeaturesSlotOperationGroupOps.Read<
+    NetworkFeatures,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 }
 @@doc(NetworkFeatures.properties,
   "NetworkFeatures resource specific properties"

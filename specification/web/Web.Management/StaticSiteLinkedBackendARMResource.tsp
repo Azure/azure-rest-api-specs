@@ -59,7 +59,10 @@ interface StaticSiteLinkedBackendARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetLinkedBackend")
-  getLinkedBackend is StaticSiteLinkedBackendARMResourceOps.Read<StaticSiteLinkedBackendARMResource>;
+  getLinkedBackend is StaticSiteLinkedBackendARMResourceOps.Read<
+    StaticSiteLinkedBackendARMResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Link backend to a static site
@@ -72,7 +75,8 @@ interface StaticSiteLinkedBackendARMResources {
     Response = ArmResourceUpdatedResponse<StaticSiteLinkedBackendARMResource> &
       ArmLroLocationHeader<FinalResult = StaticSiteLinkedBackendARMResource>,
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteLinkedBackendARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -88,7 +92,8 @@ interface StaticSiteLinkedBackendARMResources {
        */
       @query("isCleaningAuthConfig")
       isCleaningAuthConfig?: boolean;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -98,7 +103,8 @@ interface StaticSiteLinkedBackendARMResources {
   @operationId("StaticSites_GetLinkedBackends")
   getLinkedBackends is StaticSiteLinkedBackendARMResourceOps.List<
     StaticSiteLinkedBackendARMResource,
-    Response = ArmResponse<StaticSiteLinkedBackendsCollection>
+    Response = ArmResponse<StaticSiteLinkedBackendsCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -111,7 +117,8 @@ interface StaticSiteLinkedBackendARMResources {
   validateBackend is StaticSiteLinkedBackendARMResourceOps.ActionAsync<
     StaticSiteLinkedBackendARMResource,
     StaticSiteLinkedBackendARMResource,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
@@ -153,7 +160,10 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetLinkedBackendForBuild")
-  getLinkedBackendForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.Read<StaticSiteLinkedBackendARMResource>;
+  getLinkedBackendForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.Read<
+    StaticSiteLinkedBackendARMResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Link backend to a static site build
@@ -166,7 +176,8 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
     Response = ArmResourceUpdatedResponse<StaticSiteLinkedBackendARMResource> &
       ArmLroLocationHeader<FinalResult = StaticSiteLinkedBackendARMResource>,
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteLinkedBackendARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -182,7 +193,8 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
        */
       @query("isCleaningAuthConfig")
       isCleaningAuthConfig?: boolean;
-    }
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -192,7 +204,8 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   @operationId("StaticSites_GetLinkedBackendsForBuild")
   getLinkedBackendsForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.List<
     StaticSiteLinkedBackendARMResource,
-    Response = ArmResponse<StaticSiteLinkedBackendsCollection>
+    Response = ArmResponse<StaticSiteLinkedBackendsCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -205,7 +218,8 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   validateBackendForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.ActionAsync<
     StaticSiteLinkedBackendARMResource,
     StaticSiteLinkedBackendARMResource,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

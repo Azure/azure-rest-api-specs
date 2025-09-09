@@ -34,7 +34,10 @@ interface StaticSiteCustomDomainOverviewARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetStaticSiteCustomDomain")
-  getStaticSiteCustomDomain is ArmResourceRead<StaticSiteCustomDomainOverviewARMResource>;
+  getStaticSiteCustomDomain is ArmResourceRead<
+    StaticSiteCustomDomainOverviewARMResource,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a new static site custom domain in an existing resource group and static site.
@@ -50,7 +53,8 @@ interface StaticSiteCustomDomainOverviewARMResources {
       _: StaticSiteCustomDomainOverviewARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteCustomDomainOverviewARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -61,7 +65,8 @@ interface StaticSiteCustomDomainOverviewARMResources {
   @operationId("StaticSites_DeleteStaticSiteCustomDomain")
   deleteStaticSiteCustomDomain is ArmResourceDeleteWithoutOkAsync<
     StaticSiteCustomDomainOverviewARMResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -71,7 +76,8 @@ interface StaticSiteCustomDomainOverviewARMResources {
   @operationId("StaticSites_ListStaticSiteCustomDomains")
   listStaticSiteCustomDomains is ArmResourceListByParent<
     StaticSiteCustomDomainOverviewARMResource,
-    Response = ArmResponse<StaticSiteCustomDomainOverviewCollection>
+    Response = ArmResponse<StaticSiteCustomDomainOverviewCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -83,7 +89,8 @@ interface StaticSiteCustomDomainOverviewARMResources {
   validateCustomDomainCanBeAddedToStaticSite is ArmResourceActionAsync<
     StaticSiteCustomDomainOverviewARMResource,
     StaticSiteCustomDomainRequestPropertiesARMResource,
-    OkResponse
+    OkResponse,
+    Error = DefaultErrorResponse
   >;
 }
 

@@ -65,7 +65,10 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetUserProvidedFunctionAppForStaticSiteBuild")
-  getUserProvidedFunctionAppForStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.Read<StaticSiteUserProvidedFunctionAppARMResource>;
+  getUserProvidedFunctionAppForStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.Read<
+    StaticSiteUserProvidedFunctionAppARMResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Register a user provided function app with a static site build
@@ -88,7 +91,8 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
       _: StaticSiteUserProvidedFunctionAppARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -96,7 +100,10 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_DetachUserProvidedFunctionAppFromStaticSiteBuild")
-  detachUserProvidedFunctionAppFromStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.DeleteSync<StaticSiteUserProvidedFunctionAppARMResource>;
+  detachUserProvidedFunctionAppFromStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.DeleteSync<
+    StaticSiteUserProvidedFunctionAppARMResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Gets the details of the user provided function apps registered with a static site build
@@ -105,7 +112,8 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
   @operationId("StaticSites_GetUserProvidedFunctionAppsForStaticSiteBuild")
   getUserProvidedFunctionAppsForStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.List<
     StaticSiteUserProvidedFunctionAppARMResource,
-    Response = ArmResponse<StaticSiteUserProvidedFunctionAppsCollection>
+    Response = ArmResponse<StaticSiteUserProvidedFunctionAppsCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
@@ -141,7 +149,10 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetUserProvidedFunctionAppForStaticSite")
-  getUserProvidedFunctionAppForStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.Read<StaticSiteUserProvidedFunctionAppARMResource>;
+  getUserProvidedFunctionAppForStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.Read<
+    StaticSiteUserProvidedFunctionAppARMResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Register a user provided function app with a static site
@@ -164,7 +175,8 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
       _: StaticSiteUserProvidedFunctionAppARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -172,7 +184,10 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_DetachUserProvidedFunctionAppFromStaticSite")
-  detachUserProvidedFunctionAppFromStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.DeleteSync<StaticSiteUserProvidedFunctionAppARMResource>;
+  detachUserProvidedFunctionAppFromStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.DeleteSync<
+    StaticSiteUserProvidedFunctionAppARMResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Gets the details of the user provided function apps registered with a static site
@@ -181,7 +196,8 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
   @operationId("StaticSites_GetUserProvidedFunctionAppsForStaticSite")
   getUserProvidedFunctionAppsForStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.List<
     StaticSiteUserProvidedFunctionAppARMResource,
-    Response = ArmResponse<StaticSiteUserProvidedFunctionAppsCollection>
+    Response = ArmResponse<StaticSiteUserProvidedFunctionAppsCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
