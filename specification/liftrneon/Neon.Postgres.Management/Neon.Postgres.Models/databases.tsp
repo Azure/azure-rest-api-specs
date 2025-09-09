@@ -4,7 +4,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-namespace Neon.Postgres.Models;
+namespace Neon.Postgres;
 
 @doc("The Neon Database resource type.")
 @added(Neon.Postgres.Versions.v2_preview)
@@ -13,7 +13,7 @@ model NeonDatabase is ProxyResource<NeonDatabaseProperties> {
   ...ResourceNameParameter<
     Resource = NeonDatabase,
     KeyName = "neonDatabaseName",
-    SegmentName = "neondatabases",
+    SegmentName = "neonDatabases",
     NamePattern = "^\\S.{0,62}\\S$|^\\S$"
   >;
 }
@@ -28,4 +28,14 @@ model NeonDatabaseProperties {
 
   @doc("The name of the role that owns the database")
   ownerName?: string;
+
+  @doc("Name of the database")
+  @pattern("^\\S.{0,62}\\S$|^\\S$")
+  @added(Neon.Postgres.Versions.v3_preview)
+  databaseName?: string;
+
+  @doc("Timestamp indicating when the database was last updated")
+  @visibility(Lifecycle.Read)
+  @added(Neon.Postgres.Versions.v3_preview)
+  lastUpdated?: string;
 }

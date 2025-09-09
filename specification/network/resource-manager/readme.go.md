@@ -16,4 +16,6 @@ directive:
   rename-property:
     from: explicitProxy
     to: explicitProxySettings
+modelerfour:
+  lenient-model-deduplication: true
 ```

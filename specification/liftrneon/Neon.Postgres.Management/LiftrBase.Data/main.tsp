@@ -31,7 +31,7 @@ model OrganizationProperties is BaseResourceProperties {
 
   @doc("Neon Project Properties")
   @added(Versions.v2_preview)
-  projectProperties?: Neon.Postgres.Models.ProjectProperties;
+  projectProperties?: Neon.Postgres.ProjectProperties;
 }
 
 @doc("Properties specific to Partner's organization")

@@ -29,6 +29,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-11-01-preview",
+
+  @doc("Version 1 stable")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v1_stable)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v1_stable: "2024-11-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -74,7 +80,7 @@ model ReservationBillingUsageReport {
   timestamp: string;
 
   @doc("A list of detailed billing usage properties")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   billingUsageProperties: BillingUsageProperty[];
 
   @doc("Overall status message of the billing usage report")
@@ -103,7 +109,7 @@ model BillingUsageProperty {
   statusMessage?: string;
 
   @doc("Optional list of sub-properties providing additional details")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subProperties?: BillingUsageProperty[];
 }
 
@@ -433,7 +439,7 @@ model HealthResponse {
   health: HealthDetails;
 
   @doc("List of health alerts")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   alerts: Alert[];
 }
 
@@ -614,7 +620,7 @@ model AvsStorageContainerProperties {
   @removed(Versions.v1_preview)
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ResourceProvisioningState; // TODO: the type of this property should be changed to `ProvisioningState`
 }
 
 @armResourceOperations
@@ -686,7 +692,7 @@ model VolumeProperties {
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ResourceProvisioningState; // TODO: the type of this property should be changed to `ProvisioningState`
 }
 
 @doc("Soft-deletion state")
@@ -799,7 +805,7 @@ model AvsVmProperties {
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ResourceProvisioningState; // TODO: the type of this property should be changed to `ProvisioningState`
 }
 
 @doc("Storage space usage")

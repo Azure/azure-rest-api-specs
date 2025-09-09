@@ -22,7 +22,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-edgezones"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-edgezones"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.edgezones"
     service-name: "Edge Zones"
@@ -37,9 +37,8 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-ts":
-    is-modular-library: true
     experimental-extensible-enums: true
     package-dir: "arm-edgezones"
-    flavor: "azure"
+    flavor: azure
     package-details:
       name: "@azure/arm-edgezones"

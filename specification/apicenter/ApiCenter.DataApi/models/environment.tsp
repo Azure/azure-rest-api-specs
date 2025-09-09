@@ -36,6 +36,7 @@ model Environment {
   @doc("Onboarding information for this environment.")
   onboarding?: EnvironmentOnboardingModel;
 
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with existing swagger."
   @doc("The custom metadata defined for environment entities.")
   customProperties?: {};
 }

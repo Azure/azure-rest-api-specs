@@ -113,6 +113,11 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
+@@clientName(StorageTaskCompletedEventData.summaryReportBlobUrl,
+  "summaryReportBlobUri",
+  "csharp"
+);
+
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind",
   "csharp"
@@ -189,7 +194,17 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
-  "recordingChannelKind",
+  "channelType",
+  "csharp"
+);
+
+@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingContentType,
+  "contentType",
+  "csharp"
+);
+
+@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingFormatType,
+  "formatType",
   "csharp"
 );
 
@@ -236,5 +251,6 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
-@@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "csharp");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");
+
+@@clientName(ContainerRegistryEventSource.instanceID, "instanceID", "csharp");

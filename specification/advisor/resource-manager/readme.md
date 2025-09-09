@@ -26,7 +26,29 @@ These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-11-preview
+tag: package-2025-05-preview
+```
+
+### Tag: package-2025-05-preview
+These settings apply only when `--tag=package-2025-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-preview'
+input-file:
+  - Microsoft.Advisor/preview/2025-05-01-preview/openapi.json
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["AssessmentResult"]
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["AssessmentTypeListResult"]
+      - $.definitions["WorkloadListResult"]
 ```
 
 ### Tag: package-2024-11-preview

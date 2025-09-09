@@ -11,10 +11,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.ArizeAIObservabilityEval"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ArizeAIObservabilityEval"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     service-dir: "sdk/arizeaiobservabilityeval"
     package-dir: "azure-mgmt-arizeaiobservabilityeval"
@@ -34,15 +34,14 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-arizeaiobservabilityeval"
     service-dir: "sdk/arizeaiobservabilityeval"
-    package-dir: "azure-resourcemanager-arizeaiobservabilityeval"
     namespace: "com.azure.resourcemanager.arizeaiobservabilityeval"
     service-name: "Arize AI Observability Eval"
     flavor: "azure"
   "@azure-tools/typespec-ts":
-    flavor: "azure"
+    flavor: azure
     experimental-extensible-enums: true
-    generate-sample: true
     package-dir: "arm-arizeaiobservabilityeval"
     package-details:
       name: "@azure/arm-arizeaiobservabilityeval"

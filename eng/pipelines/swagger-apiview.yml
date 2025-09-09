@@ -10,7 +10,7 @@ parameters:
     default: 'swaggerAPIViewArtifacts'
   - name: APIViewAPIUri
     type: string
-    default: 'https://apiview.dev/PullRequest/DetectAPIChanges'
+    default: 'https://apiview.dev/api/PullRequests/CreateAPIRevisionIfAPIHasChanges'
 
 pr:
    branches:
@@ -21,7 +21,7 @@ jobs:
 - job:
   pool:
     name: azsdk-pool
-    demands: ImageOverride -equals ubuntu-22.04
+    demands: ImageOverride -equals ubuntu-24.04
 
   steps:
   - checkout: self
