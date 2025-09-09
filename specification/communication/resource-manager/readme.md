@@ -281,6 +281,7 @@ These settings apply only when `--tag=package-2020-08-20-preview` is specified o
 ```yaml $(tag) == 'package-2020-08-20-preview'
 input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService.json
+  - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService-private.json
 ```
 
 ### Tag: package-2020-08-20-preview-private
