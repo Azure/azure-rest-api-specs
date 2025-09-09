@@ -70,7 +70,8 @@ interface TriggeredJobHistories {
   @operationId("WebApps_GetTriggeredWebJobHistorySlot")
   getTriggeredWebJobHistorySlot is TriggeredJobHistoryOps.Read<
     TriggeredJobHistory,
-    Response = ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse
+    Response = ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -80,7 +81,8 @@ interface TriggeredJobHistories {
   @operationId("WebApps_ListTriggeredWebJobHistorySlot")
   listTriggeredWebJobHistorySlot is TriggeredJobHistoryOps.List<
     TriggeredJobHistory,
-    Response = ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse
+    Response = ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -122,7 +124,8 @@ interface TriggeredJobHistoryOperationGroup {
   @operationId("WebApps_GetTriggeredWebJobHistory")
   getTriggeredWebJobHistory is TriggeredJobHistoryOperationGroupOps.Read<
     TriggeredJobHistory,
-    Response = ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse
+    Response = ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -132,7 +135,8 @@ interface TriggeredJobHistoryOperationGroup {
   @operationId("WebApps_ListTriggeredWebJobHistory")
   listTriggeredWebJobHistory is TriggeredJobHistoryOperationGroupOps.List<
     TriggeredJobHistory,
-    Response = ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse
+    Response = ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

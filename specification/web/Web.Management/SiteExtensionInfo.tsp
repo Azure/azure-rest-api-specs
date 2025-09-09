@@ -143,7 +143,8 @@ interface SiteExtensionInfoOperationGroup {
   @operationId("WebApps_GetSiteExtensionSlot")
   getSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.Read<
     SiteExtensionInfo,
-    Response = ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse
+    Response = ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
@@ -162,7 +163,8 @@ interface SiteExtensionInfoOperationGroup {
       SiteExtensionInfo,
       LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | ArmTooManyRequestsResponse
+    > | ArmTooManyRequestsResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
   /**
    * Description for Remove a site extension from a web site, or a deployment slot.
@@ -173,7 +175,8 @@ interface SiteExtensionInfoOperationGroup {
   @operationId("WebApps_DeleteSiteExtensionSlot")
   deleteSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.DeleteSync<
     SiteExtensionInfo,
-    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -183,7 +186,8 @@ interface SiteExtensionInfoOperationGroup {
   @operationId("WebApps_ListSiteExtensionsSlot")
   listSiteExtensionsSlot is SiteExtensionInfoOperationGroupOps.List<
     SiteExtensionInfo,
-    Response = ArmResponse<SiteExtensionInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<SiteExtensionInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

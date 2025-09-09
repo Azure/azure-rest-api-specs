@@ -205,7 +205,8 @@ interface VnetConnectionOperationGroup {
   @operationId("WebApps_CreateOrUpdateVnetConnection")
   createOrUpdateVnetConnection is VnetConnectionOperationGroupOps.CreateOrUpdateSync<
     VnetInfoResource,
-    Response = ArmResourceUpdatedResponse<VnetInfoResource>
+    Response = ArmResourceUpdatedResponse<VnetInfoResource>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**

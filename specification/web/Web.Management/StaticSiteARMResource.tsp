@@ -43,7 +43,10 @@ interface StaticSiteARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetStaticSite")
-  getStaticSite is ArmResourceRead<StaticSiteARMResource>;
+  getStaticSite is ArmResourceRead<
+    StaticSiteARMResource,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a new static site in an existing resource group, or updates an existing static site.
@@ -59,7 +62,8 @@ interface StaticSiteARMResources {
       _: StaticSiteARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -76,7 +80,8 @@ interface StaticSiteARMResources {
     Response = ArmResponse<StaticSiteARMResource> | (AcceptedResponse & {
       @bodyRoot
       _: StaticSiteARMResource;
-    })
+    }),
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -87,7 +92,8 @@ interface StaticSiteARMResources {
   @operationId("StaticSites_DeleteStaticSite")
   deleteStaticSite is ArmResourceDeleteWithoutOkAsync<
     StaticSiteARMResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -97,7 +103,8 @@ interface StaticSiteARMResources {
   @operationId("StaticSites_GetStaticSitesByResourceGroup")
   getStaticSitesByResourceGroup is ArmResourceListByParent<
     StaticSiteARMResource,
-    Response = ArmResponse<StaticSiteCollection>
+    Response = ArmResponse<StaticSiteCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -129,7 +136,8 @@ interface StaticSiteARMResources {
       @path
       @segment("authproviders")
       authprovider: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -155,7 +163,8 @@ interface StaticSiteARMResources {
       @path
       @segment("users")
       userid: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -184,7 +193,7 @@ interface StaticSiteARMResources {
 
     @body
     staticSiteUserEnvelope: StaticSiteUserARMResource,
-  ): ArmResponse<StaticSiteUserARMResource>;
+  ): ArmResponse<StaticSiteUserARMResource> | DefaultErrorResponse;
 
   /**
    * Description for Creates or updates the app settings of a static site.
@@ -197,7 +206,8 @@ interface StaticSiteARMResources {
   createOrUpdateStaticSiteAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
     StringDictionary,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -211,7 +221,8 @@ interface StaticSiteARMResources {
   createOrUpdateStaticSiteFunctionAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
     StringDictionary,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -223,7 +234,8 @@ interface StaticSiteARMResources {
   createUserRolesInvitationLink is ArmResourceActionSync<
     StaticSiteARMResource,
     StaticSiteUserInvitationRequestResource,
-    ArmResponse<StaticSiteUserInvitationResponseResource>
+    ArmResponse<StaticSiteUserInvitationResponseResource>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -235,7 +247,8 @@ interface StaticSiteARMResources {
   detachStaticSite is ArmResourceActionAsync<
     StaticSiteARMResource,
     void,
-    OkResponse
+    OkResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -248,7 +261,8 @@ interface StaticSiteARMResources {
   listStaticSiteFunctions is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
-    ArmResponse<StaticSiteFunctionOverviewCollection>
+    ArmResponse<StaticSiteFunctionOverviewCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -260,7 +274,8 @@ interface StaticSiteARMResources {
   listStaticSiteAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -272,7 +287,8 @@ interface StaticSiteARMResources {
   listStaticSiteConfiguredRoles is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
-    ArmResponse<StringList>
+    ArmResponse<StringList>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -284,7 +300,8 @@ interface StaticSiteARMResources {
   listStaticSiteFunctionAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -296,7 +313,8 @@ interface StaticSiteARMResources {
   listStaticSiteSecrets is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -309,7 +327,8 @@ interface StaticSiteARMResources {
   getPrivateLinkResources is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
-    ArmResponse<PrivateLinkResourcesWrapper>
+    ArmResponse<PrivateLinkResourcesWrapper>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -321,7 +340,8 @@ interface StaticSiteARMResources {
   resetStaticSiteApiKey is ArmResourceActionSync<
     StaticSiteARMResource,
     StaticSiteResetPropertiesARMResource,
-    OkResponse
+    OkResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -333,7 +353,8 @@ interface StaticSiteARMResources {
   getDatabaseConnectionsWithDetails is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
-    ArmResponse<DatabaseConnectionCollection>
+    ArmResponse<DatabaseConnectionCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -345,7 +366,8 @@ interface StaticSiteARMResources {
   createZipDeploymentForStaticSite is ArmResourceActionAsync<
     StaticSiteARMResource,
     StaticSiteZipDeploymentARMResource,
-    OkResponse
+    OkResponse,
+    Error = DefaultErrorResponse
   >;
 }
 

@@ -131,7 +131,10 @@ interface PublicCertificateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPublicCertificateSlot")
-  getPublicCertificateSlot is PublicCertificateOperationGroupOps.Read<PublicCertificate>;
+  getPublicCertificateSlot is PublicCertificateOperationGroupOps.Read<
+    PublicCertificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a hostname binding for an app.
@@ -141,7 +144,8 @@ interface PublicCertificateOperationGroup {
   @operationId("WebApps_CreateOrUpdatePublicCertificateSlot")
   createOrUpdatePublicCertificateSlot is PublicCertificateOperationGroupOps.CreateOrUpdateSync<
     PublicCertificate,
-    Response = ArmResourceUpdatedResponse<PublicCertificate>
+    Response = ArmResourceUpdatedResponse<PublicCertificate>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -149,7 +153,10 @@ interface PublicCertificateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeletePublicCertificateSlot")
-  deletePublicCertificateSlot is PublicCertificateOperationGroupOps.DeleteSync<PublicCertificate>;
+  deletePublicCertificateSlot is PublicCertificateOperationGroupOps.DeleteSync<
+    PublicCertificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get public certificates for an app or a deployment slot.
@@ -158,7 +165,8 @@ interface PublicCertificateOperationGroup {
   @operationId("WebApps_ListPublicCertificatesSlot")
   listPublicCertificatesSlot is PublicCertificateOperationGroupOps.List<
     PublicCertificate,
-    Response = ArmResponse<PublicCertificateCollection>
+    Response = ArmResponse<PublicCertificateCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

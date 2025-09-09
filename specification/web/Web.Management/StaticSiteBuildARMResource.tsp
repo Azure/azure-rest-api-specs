@@ -34,7 +34,10 @@ interface StaticSiteBuildARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetStaticSiteBuild")
-  getStaticSiteBuild is ArmResourceRead<StaticSiteBuildARMResource>;
+  getStaticSiteBuild is ArmResourceRead<
+    StaticSiteBuildARMResource,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Deletes a static site build.
@@ -44,7 +47,8 @@ interface StaticSiteBuildARMResources {
   @operationId("StaticSites_DeleteStaticSiteBuild")
   deleteStaticSiteBuild is ArmResourceDeleteWithoutOkAsync<
     StaticSiteBuildARMResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -54,7 +58,8 @@ interface StaticSiteBuildARMResources {
   @operationId("StaticSites_GetStaticSiteBuilds")
   getStaticSiteBuilds is ArmResourceListByParent<
     StaticSiteBuildARMResource,
-    Response = ArmResponse<StaticSiteBuildCollection>
+    Response = ArmResponse<StaticSiteBuildCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -68,7 +73,8 @@ interface StaticSiteBuildARMResources {
   createOrUpdateStaticSiteBuildAppSettings is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     StringDictionary,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -82,7 +88,8 @@ interface StaticSiteBuildARMResources {
   createOrUpdateStaticSiteBuildFunctionAppSettings is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     StringDictionary,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -96,7 +103,8 @@ interface StaticSiteBuildARMResources {
   listStaticSiteBuildFunctions is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     void,
-    ArmResponse<StaticSiteFunctionOverviewCollection>
+    ArmResponse<StaticSiteFunctionOverviewCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -108,7 +116,8 @@ interface StaticSiteBuildARMResources {
   listStaticSiteBuildAppSettings is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -120,7 +129,8 @@ interface StaticSiteBuildARMResources {
   listStaticSiteBuildFunctionAppSettings is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     void,
-    ArmResponse<StringDictionary>
+    ArmResponse<StringDictionary>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -132,7 +142,8 @@ interface StaticSiteBuildARMResources {
   getBuildDatabaseConnectionsWithDetails is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     void,
-    ArmResponse<DatabaseConnectionCollection>
+    ArmResponse<DatabaseConnectionCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -144,7 +155,8 @@ interface StaticSiteBuildARMResources {
   createZipDeploymentForStaticSiteBuild is ArmResourceActionAsync<
     StaticSiteBuildARMResource,
     StaticSiteZipDeploymentARMResource,
-    OkResponse
+    OkResponse,
+    Error = DefaultErrorResponse
   >;
 }
 

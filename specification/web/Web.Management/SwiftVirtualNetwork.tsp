@@ -134,7 +134,10 @@ interface SwiftVirtualNetworkOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSwiftVirtualNetworkConnectionSlot")
-  getSwiftVirtualNetworkConnectionSlot is SwiftVirtualNetworkOperationGroupOps.Read<SwiftVirtualNetwork>;
+  getSwiftVirtualNetworkConnectionSlot is SwiftVirtualNetworkOperationGroupOps.Read<
+    SwiftVirtualNetwork,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Integrates this Web App with a Virtual Network. This requires that 1) "swiftSupported" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not
@@ -145,7 +148,8 @@ interface SwiftVirtualNetworkOperationGroup {
   @operationId("WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot")
   createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot is SwiftVirtualNetworkOperationGroupOps.CreateOrUpdateSync<
     SwiftVirtualNetwork,
-    Response = ArmResourceUpdatedResponse<SwiftVirtualNetwork>
+    Response = ArmResourceUpdatedResponse<SwiftVirtualNetwork>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -157,7 +161,8 @@ interface SwiftVirtualNetworkOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateSwiftVirtualNetworkConnectionWithCheckSlot is SwiftVirtualNetworkOperationGroupOps.CustomPatchSync<
     SwiftVirtualNetwork,
-    PatchModel = SwiftVirtualNetwork
+    PatchModel = SwiftVirtualNetwork,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -168,7 +173,8 @@ interface SwiftVirtualNetworkOperationGroup {
   @operationId("WebApps_DeleteSwiftVirtualNetworkSlot")
   deleteSwiftVirtualNetworkSlot is SwiftVirtualNetworkOperationGroupOps.DeleteSync<
     SwiftVirtualNetwork,
-    Response = ArmDeletedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

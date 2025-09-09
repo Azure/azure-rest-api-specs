@@ -131,7 +131,10 @@ interface PremierAddOnOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPremierAddOnSlot")
-  getPremierAddOnSlot is PremierAddOnOperationGroupOps.Read<PremierAddOn>;
+  getPremierAddOnSlot is PremierAddOnOperationGroupOps.Read<
+    PremierAddOn,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates a named add-on of an app.
@@ -141,7 +144,8 @@ interface PremierAddOnOperationGroup {
   @operationId("WebApps_AddPremierAddOnSlot")
   addPremierAddOnSlot is PremierAddOnOperationGroupOps.CreateOrUpdateSync<
     PremierAddOn,
-    Response = ArmResourceUpdatedResponse<PremierAddOn>
+    Response = ArmResourceUpdatedResponse<PremierAddOn>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -152,7 +156,8 @@ interface PremierAddOnOperationGroup {
   @patch(#{ implicitOptionality: false })
   updatePremierAddOnSlot is PremierAddOnOperationGroupOps.CustomPatchSync<
     PremierAddOn,
-    PatchModel = PremierAddOnPatchResource
+    PatchModel = PremierAddOnPatchResource,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -163,7 +168,8 @@ interface PremierAddOnOperationGroup {
   @operationId("WebApps_DeletePremierAddOnSlot")
   deletePremierAddOnSlot is PremierAddOnOperationGroupOps.DeleteSync<
     PremierAddOn,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

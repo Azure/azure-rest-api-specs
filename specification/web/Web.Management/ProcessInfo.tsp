@@ -255,7 +255,8 @@ interface InstanceProcessSlotOperationGroup {
   @operationId("WebApps_GetInstanceProcessSlot")
   getInstanceProcessSlot is InstanceProcessSlotOps.Read<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -267,7 +268,8 @@ interface InstanceProcessSlotOperationGroup {
   @operationId("WebApps_DeleteInstanceProcessSlot")
   deleteInstanceProcessSlot is InstanceProcessSlotOps.DeleteSync<
     ProcessInfo,
-    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -292,7 +294,8 @@ interface InstanceProcessSlotOperationGroup {
   getInstanceProcessDumpSlot is InstanceProcessSlotOps.ActionSync<
     ProcessInfo,
     void,
-    File | ArmNotFoundResponse
+    File | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -306,7 +309,8 @@ interface InstanceProcessSlotOperationGroup {
   listInstanceProcessThreadsSlot is InstanceProcessSlotOps.ActionSync<
     ProcessInfo,
     void,
-    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse
+    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -348,7 +352,8 @@ interface ProcessSlotOperationGroup {
   @operationId("WebApps_GetProcessSlot")
   getProcessSlot is ProcessSlotOperationGroupOps.Read<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -360,7 +365,8 @@ interface ProcessSlotOperationGroup {
   @operationId("WebApps_DeleteProcessSlot")
   deleteProcessSlot is ProcessSlotOperationGroupOps.DeleteSync<
     ProcessInfo,
-    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -370,7 +376,8 @@ interface ProcessSlotOperationGroup {
   @operationId("WebApps_ListProcessesSlot")
   listProcessesSlot is ProcessSlotOperationGroupOps.List<
     ProcessInfo,
-    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -383,7 +390,8 @@ interface ProcessSlotOperationGroup {
   getProcessDumpSlot is ProcessSlotOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    File | ArmNotFoundResponse
+    File | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -397,7 +405,8 @@ interface ProcessSlotOperationGroup {
   listProcessThreadsSlot is ProcessSlotOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse
+    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

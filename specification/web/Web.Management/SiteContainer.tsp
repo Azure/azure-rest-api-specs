@@ -128,21 +128,30 @@ interface SiteContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteContainerSlot")
-  getSiteContainerSlot is SiteContainerOperationGroupOps.Read<SiteContainer>;
+  getSiteContainerSlot is SiteContainerOperationGroupOps.Read<
+    SiteContainer,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Creates or Updates a site container for a site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_CreateOrUpdateSiteContainerSlot")
-  createOrUpdateSiteContainerSlot is SiteContainerOperationGroupOps.CreateOrUpdateSync<SiteContainer>;
+  createOrUpdateSiteContainerSlot is SiteContainerOperationGroupOps.CreateOrUpdateSync<
+    SiteContainer,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Deletes a site container for a site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteSiteContainerSlot")
-  deleteSiteContainerSlot is SiteContainerOperationGroupOps.DeleteSync<SiteContainer>;
+  deleteSiteContainerSlot is SiteContainerOperationGroupOps.DeleteSync<
+    SiteContainer,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Lists all the site containers of a site, or a deployment slot.
@@ -151,7 +160,8 @@ interface SiteContainerOperationGroup {
   @operationId("WebApps_ListSiteContainersSlot")
   listSiteContainersSlot is SiteContainerOperationGroupOps.List<
     SiteContainer,
-    Response = ArmResponse<SiteContainerCollection>
+    Response = ArmResponse<SiteContainerCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

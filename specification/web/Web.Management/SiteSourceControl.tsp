@@ -70,7 +70,8 @@ interface SiteSourceControls {
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
       @bodyRoot
       _: SiteSourceControl;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -89,7 +90,8 @@ interface SiteSourceControls {
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: SiteSourceControl;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -106,7 +108,8 @@ interface SiteSourceControls {
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
       @bodyRoot
       _: SiteSourceControl;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -123,7 +126,8 @@ interface SiteSourceControls {
       @query("additionalFlags")
       additionalFlags?: string;
     },
-    Response = ArmDeletedResponse | AcceptedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | AcceptedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -164,7 +168,8 @@ interface SiteSourceControlOperationGroup {
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
       @bodyRoot
       _: SiteSourceControl;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -183,7 +188,8 @@ interface SiteSourceControlOperationGroup {
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: SiteSourceControl;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -200,7 +206,8 @@ interface SiteSourceControlOperationGroup {
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
       @bodyRoot
       _: SiteSourceControl;
-    })
+    }),
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -217,7 +224,8 @@ interface SiteSourceControlOperationGroup {
       @query("additionalFlags")
       additionalFlags?: string;
     },
-    Response = ArmDeletedResponse | AcceptedResponse | ArmNotFoundResponse
+    Response = ArmDeletedResponse | AcceptedResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

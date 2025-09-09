@@ -190,7 +190,8 @@ interface InstanceProcessModuleSlotOperationGroup {
   @operationId("WebApps_GetInstanceProcessModuleSlot")
   getInstanceProcessModuleSlot is InstanceProcessModuleSlotOperationGroupOps.Read<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -201,7 +202,8 @@ interface InstanceProcessModuleSlotOperationGroup {
   @segment("modules")
   listInstanceProcessModulesSlot is InstanceProcessModuleSlotOperationGroupOps.List<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -249,7 +251,8 @@ interface ProcessModuleSlotOperationGroup {
   @operationId("WebApps_GetProcessModuleSlot")
   getProcessModuleSlot is ProcessModuleSlotOperationGroupOps.Read<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -259,7 +262,8 @@ interface ProcessModuleSlotOperationGroup {
   @operationId("WebApps_ListProcessModulesSlot")
   listProcessModulesSlot is ProcessModuleSlotOperationGroupOps.List<
     ProcessModuleInfo,
-    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse
+    Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

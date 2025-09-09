@@ -80,7 +80,8 @@ interface WorkflowEnvelopes {
   @operationId("WebApps_GetInstanceWorkflowSlot")
   getInstanceWorkflowSlot is WorkflowEnvelopeOps.Read<
     WorkflowEnvelope,
-    Response = ArmResponse<WorkflowEnvelope> | ArmNotFoundResponse
+    Response = ArmResponse<WorkflowEnvelope> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -90,7 +91,8 @@ interface WorkflowEnvelopes {
   @operationId("WebApps_ListInstanceWorkflowsSlot")
   listInstanceWorkflowsSlot is WorkflowEnvelopeOps.List<
     WorkflowEnvelope,
-    Response = ArmResponse<WorkflowEnvelopeCollection>
+    Response = ArmResponse<WorkflowEnvelopeCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -129,7 +131,8 @@ interface WorkflowEnvelopeOperationGroup {
   @operationId("WebApps_GetWorkflow")
   getWorkflow is WorkflowEnvelopeOperationGroupOps.Read<
     WorkflowEnvelope,
-    Response = ArmResponse<WorkflowEnvelope> | ArmNotFoundResponse
+    Response = ArmResponse<WorkflowEnvelope> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -139,7 +142,8 @@ interface WorkflowEnvelopeOperationGroup {
   @operationId("WebApps_ListWorkflows")
   listWorkflows is WorkflowEnvelopeOperationGroupOps.List<
     WorkflowEnvelope,
-    Response = ArmResponse<WorkflowEnvelopeCollection>
+    Response = ArmResponse<WorkflowEnvelopeCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

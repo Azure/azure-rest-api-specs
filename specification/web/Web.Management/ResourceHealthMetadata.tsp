@@ -107,7 +107,10 @@ interface BySiteSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceHealthMetadata_GetBySiteSlot")
-  getBySiteSlot is BySiteSlotOperationGroupOps.Read<ResourceHealthMetadata>;
+  getBySiteSlot is BySiteSlotOperationGroupOps.Read<
+    ResourceHealthMetadata,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site as a collection
@@ -117,7 +120,8 @@ interface BySiteSlotOperationGroup {
   @segment("resourceHealthMetadata")
   listBySiteSlot is BySiteSlotOperationGroupOps.List<
     ResourceHealthMetadata,
-    Response = ArmResponse<ResourceHealthMetadataCollection>
+    Response = ArmResponse<ResourceHealthMetadataCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

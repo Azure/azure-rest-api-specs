@@ -64,7 +64,8 @@ interface TriggeredWebJobs {
   @operationId("WebApps_GetTriggeredWebJobSlot")
   getTriggeredWebJobSlot is TriggeredWebJobOps.Read<
     TriggeredWebJob,
-    Response = ArmResponse<TriggeredWebJob> | ArmNotFoundResponse
+    Response = ArmResponse<TriggeredWebJob> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -72,7 +73,10 @@ interface TriggeredWebJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteTriggeredWebJobSlot")
-  deleteTriggeredWebJobSlot is TriggeredWebJobOps.DeleteSync<TriggeredWebJob>;
+  deleteTriggeredWebJobSlot is TriggeredWebJobOps.DeleteSync<
+    TriggeredWebJob,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for List triggered web jobs for an app, or a deployment slot.
@@ -81,7 +85,8 @@ interface TriggeredWebJobs {
   @operationId("WebApps_ListTriggeredWebJobsSlot")
   listTriggeredWebJobsSlot is TriggeredWebJobOps.List<
     TriggeredWebJob,
-    Response = ArmResponse<TriggeredWebJobCollection>
+    Response = ArmResponse<TriggeredWebJobCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -94,7 +99,8 @@ interface TriggeredWebJobs {
   runTriggeredWebJobSlot is TriggeredWebJobOps.ActionSync<
     TriggeredWebJob,
     void,
-    OkResponse | ArmNotFoundResponse
+    OkResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -130,7 +136,8 @@ interface TriggeredWebJobOperationGroup {
   @operationId("WebApps_GetTriggeredWebJob")
   getTriggeredWebJob is TriggeredWebJobOperationGroupOps.Read<
     TriggeredWebJob,
-    Response = ArmResponse<TriggeredWebJob> | ArmNotFoundResponse
+    Response = ArmResponse<TriggeredWebJob> | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -138,7 +145,10 @@ interface TriggeredWebJobOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteTriggeredWebJob")
-  deleteTriggeredWebJob is TriggeredWebJobOperationGroupOps.DeleteSync<TriggeredWebJob>;
+  deleteTriggeredWebJob is TriggeredWebJobOperationGroupOps.DeleteSync<
+    TriggeredWebJob,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for List triggered web jobs for an app, or a deployment slot.
@@ -147,7 +157,8 @@ interface TriggeredWebJobOperationGroup {
   @operationId("WebApps_ListTriggeredWebJobs")
   listTriggeredWebJobs is TriggeredWebJobOperationGroupOps.List<
     TriggeredWebJob,
-    Response = ArmResponse<TriggeredWebJobCollection>
+    Response = ArmResponse<TriggeredWebJobCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -160,7 +171,8 @@ interface TriggeredWebJobOperationGroup {
   runTriggeredWebJob is TriggeredWebJobOperationGroupOps.ActionSync<
     TriggeredWebJob,
     void,
-    OkResponse | ArmNotFoundResponse
+    OkResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

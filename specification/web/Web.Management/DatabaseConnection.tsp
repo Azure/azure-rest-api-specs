@@ -64,7 +64,10 @@ interface DatabaseConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetBuildDatabaseConnection")
-  getBuildDatabaseConnection is DatabaseConnectionOps.Read<DatabaseConnection>;
+  getBuildDatabaseConnection is DatabaseConnectionOps.Read<
+    DatabaseConnection,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Create or update a database connection for a static site build
@@ -74,7 +77,8 @@ interface DatabaseConnections {
   @operationId("StaticSites_CreateOrUpdateBuildDatabaseConnection")
   createOrUpdateBuildDatabaseConnection is DatabaseConnectionOps.CreateOrUpdateSync<
     DatabaseConnection,
-    Response = ArmResourceUpdatedResponse<DatabaseConnection>
+    Response = ArmResourceUpdatedResponse<DatabaseConnection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -85,7 +89,8 @@ interface DatabaseConnections {
   @patch(#{ implicitOptionality: false })
   updateBuildDatabaseConnection is DatabaseConnectionOps.CustomPatchSync<
     DatabaseConnection,
-    PatchModel = DatabaseConnectionPatchRequest
+    PatchModel = DatabaseConnectionPatchRequest,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -93,7 +98,10 @@ interface DatabaseConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_DeleteBuildDatabaseConnection")
-  deleteBuildDatabaseConnection is DatabaseConnectionOps.DeleteSync<DatabaseConnection>;
+  deleteBuildDatabaseConnection is DatabaseConnectionOps.DeleteSync<
+    DatabaseConnection,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Returns overviews of database connections for a static site build
@@ -102,7 +110,8 @@ interface DatabaseConnections {
   @operationId("StaticSites_GetBuildDatabaseConnections")
   getBuildDatabaseConnections is DatabaseConnectionOps.List<
     DatabaseConnection,
-    Response = ArmResponse<DatabaseConnectionCollection>
+    Response = ArmResponse<DatabaseConnectionCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -114,7 +123,8 @@ interface DatabaseConnections {
   getBuildDatabaseConnectionWithDetails is DatabaseConnectionOps.ActionSync<
     DatabaseConnection,
     void,
-    ArmResponse<DatabaseConnection>
+    ArmResponse<DatabaseConnection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -149,7 +159,10 @@ interface DatabaseConnectionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_GetDatabaseConnection")
-  getDatabaseConnection is DatabaseConnectionOperationGroupOps.Read<DatabaseConnection>;
+  getDatabaseConnection is DatabaseConnectionOperationGroupOps.Read<
+    DatabaseConnection,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Create or update a database connection for a static site
@@ -159,7 +172,8 @@ interface DatabaseConnectionOperationGroup {
   @operationId("StaticSites_CreateOrUpdateDatabaseConnection")
   createOrUpdateDatabaseConnection is DatabaseConnectionOperationGroupOps.CreateOrUpdateSync<
     DatabaseConnection,
-    Response = ArmResourceUpdatedResponse<DatabaseConnection>
+    Response = ArmResourceUpdatedResponse<DatabaseConnection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -170,7 +184,8 @@ interface DatabaseConnectionOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateDatabaseConnection is DatabaseConnectionOperationGroupOps.CustomPatchSync<
     DatabaseConnection,
-    PatchModel = DatabaseConnectionPatchRequest
+    PatchModel = DatabaseConnectionPatchRequest,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -178,7 +193,10 @@ interface DatabaseConnectionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_DeleteDatabaseConnection")
-  deleteDatabaseConnection is DatabaseConnectionOperationGroupOps.DeleteSync<DatabaseConnection>;
+  deleteDatabaseConnection is DatabaseConnectionOperationGroupOps.DeleteSync<
+    DatabaseConnection,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Returns overviews of database connections for a static site
@@ -187,7 +205,8 @@ interface DatabaseConnectionOperationGroup {
   @operationId("StaticSites_GetDatabaseConnections")
   getDatabaseConnections is DatabaseConnectionOperationGroupOps.List<
     DatabaseConnection,
-    Response = ArmResponse<DatabaseConnectionCollection>
+    Response = ArmResponse<DatabaseConnectionCollection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -199,7 +218,8 @@ interface DatabaseConnectionOperationGroup {
   getDatabaseConnectionWithDetails is DatabaseConnectionOperationGroupOps.ActionSync<
     DatabaseConnection,
     void,
-    ArmResponse<DatabaseConnection>
+    ArmResponse<DatabaseConnection>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
