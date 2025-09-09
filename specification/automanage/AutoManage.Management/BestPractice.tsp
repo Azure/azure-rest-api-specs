@@ -59,6 +59,7 @@ interface BestPractices {
     Response = ArmResponse<BestPracticeList>
   >;
 }
+
 alias BestPracticesVersionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
