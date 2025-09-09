@@ -359,7 +359,6 @@ interface Configurations {
   /**
    * Patches an existing configuration.
    */
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Configuration,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
