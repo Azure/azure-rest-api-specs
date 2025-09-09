@@ -14,22 +14,14 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager endpoint.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(EndpointProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(Profile)
-model Endpoint extends Foundations.ProxyResource {
+model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
   ...ResourceNameParameter<
     Resource = Endpoint,
     KeyName = "endpointName",
     SegmentName = "{endpointType}",
     NamePattern = ""
   >;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: EndpointProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

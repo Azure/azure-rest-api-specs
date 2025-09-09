@@ -1505,7 +1505,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1675,32 +1675,6 @@
           }
         }
       }
-    },
-    "TrackedResource": {
-      "type": "object",
-      "description": "A tracked resource with the 'location' property optional",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ]
     },
     "TrafficFlow": {
       "type": "object",
