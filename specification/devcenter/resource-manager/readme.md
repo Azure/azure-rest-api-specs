@@ -53,12 +53,12 @@ directive:
   - where:
     - $.definitions.OperationStatus.properties.properties
     suppress:
-    - AvoidAdditionalProperties
+      - AvoidAdditionalProperties
 
   - where:
     - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment
     suppress:
-    - AvoidAdditionalProperties
+      - AvoidAdditionalProperties
 
   - where:
     - $.definitions.OutboundEnvironmentEndpointCollection
@@ -68,12 +68,12 @@ directive:
   - where:
     - $.definitions.Schedule
     suppress:
-    - ArmResourcePropertiesBag
+      - ArmResourcePropertiesBag
 
   - where:
     - $.definitions.SkuListResult
     suppress:
-    - RequiredPropertiesMissingInResourceModel
+      - RequiredPropertiesMissingInResourceModel
 ```
 
 
