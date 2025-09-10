@@ -47,15 +47,15 @@ union AgentModeState {
   "Enabled",
 }
 
-@doc("The agents configuration properties.")
-model AgentsProperties {
+@doc("The agent mode configuration properties.")
+model AgentModeProperties {
   @doc("The state of the Agent Mode registration for the tenant.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  agentModeRegisterState: AgentModeRegisterState;
+  registration: AgentModeRegisterState;
 
   @doc("The state of the Agent Mode feature for the tenant.")
   @visibility(Lifecycle.Read)
-  agentModeState?: AgentModeState;
+  state?: AgentModeState;
 }
 
 @doc("The Copilot Settings properties.")
@@ -64,8 +64,8 @@ model CopilotSettingsProperties {
   accessControlEnabled: boolean;
 
   @added(Versions.v2025_09_10_preview)
-  @doc("The agents configuration properties.")
-  agents?: AgentsProperties;
+  @doc("The agent mode configuration properties.")
+  agentMode?: AgentModeProperties;
 
   @added(Versions.v2025_08_01_preview)
   @doc("The setting for Bring Your Own Storage (BYOS) for copilot in this tenant. If set, copilot will use specified cosmos DB account for storing copilot chat data.")

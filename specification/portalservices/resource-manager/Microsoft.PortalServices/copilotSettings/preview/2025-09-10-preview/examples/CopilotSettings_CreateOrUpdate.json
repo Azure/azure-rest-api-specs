@@ -1,6 +1,6 @@
 {
   "operationId": "CopilotSettings_CreateOrUpdate",
-  "title": "Create a new Copilot settings or update an existing one with agents configuration",
+  "title": "Create a new Copilot settings or update an existing one with agent mode configuration",
   "parameters": {
     "name": "default",
     "api-version": "2025-09-10-preview",
@@ -11,8 +11,8 @@
     "resource": {
       "properties": {
         "accessControlEnabled": true,
-        "agents": {
-          "agentModeRegisterState": "Registered"
+        "agentMode": {
+          "registration": "Registered"
         },
         "cosmosResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.DocumentDB/databaseAccounts/testCosmosAccount"
       }
@@ -23,9 +23,9 @@
       "body": {
         "properties": {
           "accessControlEnabled": true,
-          "agents": {
-            "agentModeRegisterState": "Registered",
-            "agentModeState": "Enabled"
+          "agentMode": {
+            "registration": "Registered",
+            "state": "Enabled"
           },
           "cosmosResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.DocumentDB/databaseAccounts/testCosmosAccount",
           "provisioningState": "Succeeded"
@@ -45,9 +45,9 @@
       "body": {
         "properties": {
           "accessControlEnabled": true,
-          "agents": {
-            "agentModeRegisterState": "Registered",
-            "agentModeState": "Enabled"
+          "agentMode": {
+            "registration": "Registered",
+            "state": "Enabled"
           },
           "cosmosResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.DocumentDB/databaseAccounts/testCosmosAccount",
           "provisioningState": "Succeeded"

@@ -74,7 +74,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Copilot settings with agents configuration": {
+          "Get Copilot settings with agent mode configuration": {
             "$ref": "./examples/CopilotSettings_Get.json"
           }
         }
@@ -120,7 +120,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a new Copilot settings or update an existing one with agents configuration": {
+          "Create a new Copilot settings or update an existing one with agent mode configuration": {
             "$ref": "./examples/CopilotSettings_CreateOrUpdate.json"
           }
         }
@@ -160,7 +160,7 @@
           }
         },
         "x-ms-examples": {
-          "Update Copilot settings with agents configuration": {
+          "Update Copilot settings with agent mode configuration": {
             "$ref": "./examples/CopilotSettings_Update.json"
           }
         }
@@ -235,6 +235,44 @@
     }
   },
   "definitions": {
+    "AgentModeProperties": {
+      "type": "object",
+      "description": "The agent mode configuration properties.",
+      "properties": {
+        "registration": {
+          "$ref": "#/definitions/AgentModeRegisterState",
+          "description": "The state of the Agent Mode registration for the tenant.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/AgentModeState",
+          "description": "The state of the Agent Mode feature for the tenant.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "registration"
+      ]
+    },
+    "AgentModePropertiesUpdate": {
+      "type": "object",
+      "description": "The agent mode configuration properties.",
+      "properties": {
+        "registration": {
+          "$ref": "#/definitions/AgentModeRegisterState",
+          "description": "The state of the Agent Mode registration for the tenant.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "AgentModeRegisterState": {
       "type": "string",
       "description": "The state of the Agent Mode registration for the tenant.",
@@ -281,44 +319,6 @@
             "description": "Agent Mode is enabled for this tenant."
           }
         ]
-      }
-    },
-    "AgentsProperties": {
-      "type": "object",
-      "description": "The agents configuration properties.",
-      "properties": {
-        "agentModeRegisterState": {
-          "$ref": "#/definitions/AgentModeRegisterState",
-          "description": "The state of the Agent Mode registration for the tenant.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "agentModeState": {
-          "$ref": "#/definitions/AgentModeState",
-          "description": "The state of the Agent Mode feature for the tenant.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "agentModeRegisterState"
-      ]
-    },
-    "AgentsPropertiesUpdate": {
-      "type": "object",
-      "description": "The agents configuration properties.",
-      "properties": {
-        "agentModeRegisterState": {
-          "$ref": "#/definitions/AgentModeRegisterState",
-          "description": "The state of the Agent Mode registration for the tenant.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
       }
     },
     "Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate": {
@@ -370,9 +370,9 @@
           "type": "boolean",
           "description": "Boolean indicating if role-based access control is enabled for copilot in this tenant."
         },
-        "agents": {
-          "$ref": "#/definitions/AgentsProperties",
-          "description": "The agents configuration properties."
+        "agentMode": {
+          "$ref": "#/definitions/AgentModeProperties",
+          "description": "The agent mode configuration properties."
         },
         "cosmosResourceId": {
           "type": "string",
@@ -404,9 +404,9 @@
           "type": "boolean",
           "description": "Boolean indicating if role-based access control is enabled for copilot in this tenant."
         },
-        "agents": {
-          "$ref": "#/definitions/AgentsPropertiesUpdate",
-          "description": "The agents configuration properties."
+        "agentMode": {
+          "$ref": "#/definitions/AgentModePropertiesUpdate",
+          "description": "The agent mode configuration properties."
         },
         "cosmosResourceId": {
           "type": "string",
