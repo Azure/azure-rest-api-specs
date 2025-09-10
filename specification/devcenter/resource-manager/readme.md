@@ -46,7 +46,7 @@ directive:
       - PatchBodyParametersSchema
 
   - where:
-    - $.definitions.DayOfWeek.value.items
+    - $.definitions.DayOfWeek.enum[0]
     suppress:
       - DescriptionMustNotBeNodeName
 
