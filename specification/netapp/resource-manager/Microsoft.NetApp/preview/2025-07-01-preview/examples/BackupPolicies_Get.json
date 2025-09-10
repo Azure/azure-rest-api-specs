@@ -1,33 +1,35 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myRG",
     "accountName": "account1",
+    "api-version": "2025-07-01-preview",
     "backupPolicyName": "backupPolicyName",
-    "api-version": "2025-07-01-preview"
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupPolocies/backupPolicyName",
         "name": "account1/backupPolicyName",
         "type": "Microsoft.NetApp/netAppAccounts/backupPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupPolocies/backupPolicyName",
         "location": "eastus",
         "properties": {
           "dailyBackupsToKeep": 10,
-          "weeklyBackupsToKeep": 10,
-          "monthlyBackupsToKeep": 10,
-          "volumesAssigned": 0,
           "enabled": true,
+          "monthlyBackupsToKeep": 10,
           "volumeBackups": [
             {
-              "volumeName": "volume 1",
               "backupsCount": 5,
-              "policyEnabled": true
+              "policyEnabled": true,
+              "volumeName": "volume 1"
             }
-          ]
+          ],
+          "volumesAssigned": 0,
+          "weeklyBackupsToKeep": 10
         }
       }
     }
-  }
+  },
+  "operationId": "BackupPolicies_Get",
+  "title": "Backups_Get"
 }

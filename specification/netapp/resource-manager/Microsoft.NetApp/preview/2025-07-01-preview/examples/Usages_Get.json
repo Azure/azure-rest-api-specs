@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-07-01-preview",
     "location": "eastus",
-    "usageType": "totalTibsPerSubscription",
-    "api-version": "2025-07-01-preview"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "usageType": "totalTibsPerSubscription"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/usages",
         "name": {
-          "value": "totalTibsPerSubscription",
-          "localizedValue": "Total TiBs per subscription"
+          "localizedValue": "Total TiBs per subscription",
+          "value": "totalTibsPerSubscription"
         },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/usages",
         "properties": {
           "currentValue": 75,
           "limit": 100,
@@ -20,5 +20,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "NetAppResourceUsages_Get",
+  "title": "Usages_Get"
 }

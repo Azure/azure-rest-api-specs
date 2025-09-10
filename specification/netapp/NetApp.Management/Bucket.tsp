@@ -153,6 +153,7 @@ model BucketServerProperties {
    */
   @maxLength(10240)
   @minLength(1)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   certificateObject?: string;
 }
 
@@ -217,6 +218,7 @@ model BucketServerPatchProperties {
    */
   @maxLength(10240)
   @minLength(1)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   certificateObject?: string;
 }
 
@@ -342,7 +344,7 @@ interface Buckets {
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Bucket,
     PatchModel = BucketPatch,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Bucket> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Bucket> &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -350,7 +352,10 @@ interface Buckets {
   /**
    * Delete a volume's bucket.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Bucket>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Bucket,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Describes all buckets belonging to a volume. Buckets allow additional services, such as AI services, connect to the volume data contained in those buckets.

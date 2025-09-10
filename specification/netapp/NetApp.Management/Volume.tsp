@@ -250,6 +250,13 @@ model VolumeProperties {
   ldapEnabled?: boolean = false;
 
   /**
+   * Specifies the type of LDAP server for a given NFS volume.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  ldapServerType?: LdapServerType;
+
+  /**
    * Specifies whether Cool Access(tiering) is enabled for the volume.
    */
   coolAccess?: boolean = false;
@@ -402,6 +409,23 @@ model VolumeProperties {
    */
   @added(Versions.v2025_07_01_preview)
   language?: VolumeLanguage;
+}
+
+/**
+ * The type of the LDAP server
+ */
+union LdapServerType {
+  string,
+
+  /**
+   * The volume should use Active Directory for LDAP connections.
+   */
+  ActiveDirectory: "ActiveDirectory",
+
+  /**
+   * The volume should use OpenLDAP for LDAP connections.
+   */
+  OpenLDAP: "OpenLDAP",
 }
 
 /**
@@ -957,6 +981,7 @@ model ReplicationObject {
   /**
    * The resource ID of the remote volume. Required for cross region and cross zone replication
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   remoteVolumeResourceId?: string;
 
   /**
@@ -976,6 +1001,66 @@ model ReplicationObject {
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
   destinationReplications?: DestinationReplication[];
+
+  /**
+   * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read)
+  externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
+
+  /**
+   * Contains human-readable instructions on what the next step is to finish the external replication setup.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read)
+  externalReplicationSetupInfo?: string;
+
+  /**
+   * The mirror state property describes the current status of data replication for a replication. It provides insight into whether the data is actively being mirrored, if the replication process has been paused, or if it has yet to be initialized.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read)
+  mirrorState?: MirrorState;
+
+  /**
+   * The status of the Volume Replication
+   */
+  @added(Versions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read)
+  relationshipStatus?: VolumeReplicationRelationshipStatus;
+}
+
+/**
+ * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
+ */
+union ExternalReplicationSetupStatus {
+  string,
+
+  /**
+   * Your cluster needs to be peered by using the 'peerExternalCluster' action
+   */
+  ClusterPeerRequired: "ClusterPeerRequired",
+
+  /**
+   * The peering needs to be accepted on your cluster before the setup can proceed
+   */
+  ClusterPeerPending: "ClusterPeerPending",
+
+  /**
+   * Need to call 'authorizeExternalReplication' and accept the returned 'vserver peer accept' command on your cluster to finish setting up the external replication
+   */
+  VServerPeerRequired: "VServerPeerRequired",
+
+  /**
+   * Need to call 'authorizeExternalReplication' to finish setting up the external replication
+   */
+  ReplicationCreateRequired: "ReplicationCreateRequired",
+
+  /**
+   * External Replication setup is complete, you can now monitor the 'mirrorState' in the replication status for the health of the replication
+   */
+  NoActionRequired: "NoActionRequired",
 }
 
 /**
@@ -2187,11 +2272,12 @@ interface Volumes {
   >;
 
   @added(Versions.v2025_07_01_preview)
-  @list
   listQuotaReport is ArmResourceActionAsync<
     Volume,
     void,
-    ArmResponse<ListQuotaReportResponse>
+    ArmResponse<ListQuotaReportResponse>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

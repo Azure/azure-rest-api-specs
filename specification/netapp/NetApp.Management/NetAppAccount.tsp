@@ -112,14 +112,16 @@ model LdapConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @maxLength(10240)
   @minLength(1)
+  @secret
   serverCACertificate?: string;
 
   /**
    * The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(255)
-  certificateCNHost?: string;
+  certificateCNHost?: string | null;
 }
 
 @maxLength(255)

@@ -1,41 +1,43 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myRG",
     "accountName": "account1",
+    "api-version": "2025-07-01-preview",
     "poolName": "pool1",
-    "volumeName": "volume1",
-    "api-version": "2025-07-01-preview"
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "volumeName": "volume1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/buckets/bucket1",
             "name": "account1/pool1/volume1/bucket1",
             "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/buckets",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/buckets/bucket1",
             "properties": {
               "path": "/path",
-              "provisioningState": "Succeeded",
               "fileSystemUser": {
                 "nfsUser": {
-                  "userId": 1001,
-                  "groupId": 1000
+                  "groupId": 1000,
+                  "userId": 1001
                 }
               },
-              "status": "Active",
+              "permissions": "ReadOnly",
+              "provisioningState": "Succeeded",
               "server": {
-                "fqdn": "fullyqualified.domainname.com",
                 "certificateCommonName": "www.example.com",
                 "certificateExpiryDate": "2027-08-15T13:23:32Z",
+                "fqdn": "fullyqualified.domainname.com",
                 "ipAddress": "1.2.3.4"
               },
-              "permissions": "ReadOnly"
+              "status": "Active"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Buckets_List",
+  "title": "Buckets_List"
 }

@@ -39,7 +39,7 @@ using TypeSpec.Versioning;
  * Microsoft NetApp Files Azure Resource Provider specification
  */
 @armProviderNamespace
-@service(#{ title: "NetAppManagementClient" })
+@service(#{ title: "Microsoft NetApp" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.NetApp;

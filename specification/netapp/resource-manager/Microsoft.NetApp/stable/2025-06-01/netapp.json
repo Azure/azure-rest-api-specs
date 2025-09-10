@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NetAppManagementClient",
+    "title": "Microsoft NetApp",
     "version": "2025-06-01",
     "description": "Microsoft NetApp Files Azure Resource Provider specification",
     "x-typespec-generated": [
@@ -10302,7 +10302,11 @@
         },
         "remoteVolumeResourceId": {
           "type": "string",
-          "description": "The resource ID of the remote volume. Required for cross region and cross zone replication"
+          "description": "The resource ID of the remote volume. Required for cross region and cross zone replication",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "remotePath": {
           "$ref": "#/definitions/RemotePath",

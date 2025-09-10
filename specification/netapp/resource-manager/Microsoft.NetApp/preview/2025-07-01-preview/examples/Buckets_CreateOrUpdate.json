@@ -1,83 +1,85 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myRG",
     "accountName": "account1",
-    "poolName": "pool1",
-    "volumeName": "volume1",
-    "bucketName": "bucket1",
     "api-version": "2025-07-01-preview",
     "body": {
       "properties": {
+        "path": "/path",
         "fileSystemUser": {
           "nfsUser": {
-            "userId": 1001,
-            "groupId": 1000
+            "groupId": 1000,
+            "userId": 1001
           }
         },
-        "path": "/path",
+        "permissions": "ReadOnly",
         "server": {
-          "fqdn": "fullyqualified.domainname.com",
-          "certificateObject": "<REDACTED>"
-        },
-        "permissions": "ReadOnly"
+          "certificateObject": "<REDACTED>",
+          "fqdn": "fullyqualified.domainname.com"
+        }
       }
-    }
+    },
+    "bucketName": "bucket1",
+    "poolName": "pool1",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "volumeName": "volume1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/buckets/bucket1",
         "name": "account1/pool1/volume1/bucket1",
         "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/buckets",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/buckets/bucket1",
         "properties": {
           "path": "/path",
-          "provisioningState": "Succeeded",
           "fileSystemUser": {
             "nfsUser": {
-              "userId": 1001,
-              "groupId": 1000
+              "groupId": 1000,
+              "userId": 1001
             }
           },
-          "status": "NoCredentialsSet",
+          "permissions": "ReadOnly",
+          "provisioningState": "Succeeded",
           "server": {
-            "fqdn": "fullyqualified.domainname.com",
             "certificateCommonName": "www.example.com",
             "certificateExpiryDate": "2027-08-15T13:23:32Z",
+            "fqdn": "fullyqualified.domainname.com",
             "ipAddress": "1.2.3.4"
           },
-          "permissions": "ReadOnly"
+          "status": "NoCredentialsSet"
         }
       }
     },
     "201": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-07-01-preview&operationResultResponseType=Location",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-07-01-preview"
-      },
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/buckets/bucket1",
         "name": "account1/pool1/volume1/bucket1",
         "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/buckets",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/buckets/bucket1",
         "properties": {
           "path": "/path",
-          "provisioningState": "Creating",
           "fileSystemUser": {
             "nfsUser": {
-              "userId": 1001,
-              "groupId": 1000
+              "groupId": 1000,
+              "userId": 1001
             }
           },
-          "status": "NoCredentialsSet",
+          "permissions": "ReadOnly",
+          "provisioningState": "Creating",
           "server": {
-            "fqdn": "fullyqualified.domainname.com",
             "certificateCommonName": "www.example.com",
             "certificateExpiryDate": "2027-08-15T13:23:32Z",
+            "fqdn": "fullyqualified.domainname.com",
             "ipAddress": "1.2.3.4"
           },
-          "permissions": "ReadOnly"
+          "status": "NoCredentialsSet"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-07-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-07-01-preview&operationResultResponseType=Location"
       }
     }
-  }
+  },
+  "operationId": "Buckets_CreateOrUpdate",
+  "title": "Buckets_CreateOrUpdate"
 }
