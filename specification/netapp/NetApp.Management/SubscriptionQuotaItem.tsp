@@ -48,6 +48,14 @@ model QuotaItemProperties {
    */
   @visibility(Lifecycle.Read)
   default?: int32;
+
+  /**
+   * The usage quota value.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @added(Versions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read)
+  usage?: int32 | null;
 }
 
 @armResourceOperations
@@ -70,6 +78,47 @@ interface SubscriptionQuotaItems {
   list is ArmResourceListByParent<
     QuotaItem,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmResponse<QuotaItemList>
+  >;
+}
+
+alias NetAppResourceQuotaLimitsAccountOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the NetApp account */
+    @path
+    @segment("netAppAccounts")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$")
+    accountName: string;
+  },
+  {
+    /** The name of the Quota Limit */
+    @path
+    @segment("quotaLimits")
+    @key
+    @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}$")
+    quotaLimitName: string;
+  }
+>;
+
+@added(Versions.v2025_07_01_preview)
+@armResourceOperations
+interface NetAppResourceQuotaLimitsAccount {
+  /**
+   * Get the default, current and usages account quota limit
+   */
+  get is NetAppResourceQuotaLimitsAccountOps.Read<QuotaItem>;
+
+  /**
+   * Gets a list of quota limits for all quotas that are under account. Currently PoolsPerAccount is the only one.
+   */
+  list is NetAppResourceQuotaLimitsAccountOps.List<
+    QuotaItem,
     Response = ArmResponse<QuotaItemList>
   >;
 }

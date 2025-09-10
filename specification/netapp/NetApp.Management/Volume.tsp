@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetApp;
 /**
@@ -395,6 +396,364 @@ model VolumeProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   inheritedSizeInBytes?: int64 | null;
+
+  /**
+   * Language supported for volume.
+   */
+  @added(Versions.v2025_07_01_preview)
+  language?: VolumeLanguage;
+}
+
+/**
+ * Language supported for volume.
+ */
+union VolumeLanguage {
+  string,
+
+  /**
+   * Posix with UTF-8
+   */
+  `c.utf-8`: "c.utf-8",
+
+  /**
+   * UTF-8 with 4 byte character support
+   */
+  utf8mb4: "utf8mb4",
+
+  /**
+   * Arabic - Deprecated
+   */
+  ar: "ar",
+
+  /**
+   * Arabic with UTF-8
+   */
+  `ar.utf-8`: "ar.utf-8",
+
+  /**
+   * Croatian - Deprecated
+   */
+  hr: "hr",
+
+  /**
+   * Croatian with UTF-8
+   */
+  `hr.utf-8`: "hr.utf-8",
+
+  /**
+   * Czech - Deprecated
+   */
+  cs: "cs",
+
+  /**
+   * Czech with UTF-8
+   */
+  `cs.utf-8`: "cs.utf-8",
+
+  /**
+   * Danish - Deprecated
+   */
+  da: "da",
+
+  /**
+   * Danish with UTF-8
+   */
+  `da.utf-8`: "da.utf-8",
+
+  /**
+   * Dutch - Deprecated
+   */
+  nl: "nl",
+
+  /**
+   * Dutch with UTF-8
+   */
+  `nl.utf-8`: "nl.utf-8",
+
+  /**
+   * English - Deprecated
+   */
+  en: "en",
+
+  /**
+   * English with UTF-8
+   */
+  `en.utf-8`: "en.utf-8",
+
+  /**
+   * Finnish - Deprecated
+   */
+  fi: "fi",
+
+  /**
+   * Finnish with UTF-8
+   */
+  `fi.utf-8`: "fi.utf-8",
+
+  /**
+   * French - Deprecated
+   */
+  fr: "fr",
+
+  /**
+   * French with UTF-8
+   */
+  `fr.utf-8`: "fr.utf-8",
+
+  /**
+   * German - Deprecated
+   */
+  de: "de",
+
+  /**
+   * German with UTF-8
+   */
+  `de.utf-8`: "de.utf-8",
+
+  /**
+   * Hebrew - Deprecated
+   */
+  he: "he",
+
+  /**
+   * Hebrew with UTF-8
+   */
+  `he.utf-8`: "he.utf-8",
+
+  /**
+   * Hungarian - Deprecated
+   */
+  hu: "hu",
+
+  /**
+   * Hungarian with UTF-8
+   */
+  `hu.utf-8`: "hu.utf-8",
+
+  /**
+   * Italian - Deprecated
+   */
+  it: "it",
+
+  /**
+   * Italian with UTF-8
+   */
+  `it.utf-8`: "it.utf-8",
+
+  /**
+   * Japanese euc-j - Deprecated
+   */
+  ja: "ja",
+
+  /**
+   * Japanese euc-j with UTF-8
+   */
+  `ja.utf-8`: "ja.utf-8",
+
+  /**
+   * Japanese euc-j - Deprecated
+   */
+  `ja-v1`: "ja-v1",
+
+  /**
+   * Japanese euc-j with UTF-8
+   */
+  `ja-v1.utf-8`: "ja-v1.utf-8",
+
+  /**
+   * Japanese pck
+   */
+  `ja-jp.pck`: "ja-jp.pck",
+
+  /**
+   * Japanese pck with UTF-8 - Deprecated
+   */
+  `ja-jp.pck.utf-8`: "ja-jp.pck.utf-8",
+
+  /**
+   * Japanese cp932
+   */
+  `ja-jp.932`: "ja-jp.932",
+
+  /**
+   * Japanese cp932 with UTF-8 - Deprecated
+   */
+  `ja-jp.932.utf-8`: "ja-jp.932.utf-8",
+
+  /**
+   * Japanese pck - sjis
+   */
+  `ja-jp.pck-v2`: "ja-jp.pck-v2",
+
+  /**
+   * Japanese pck - sjis with UTF-8 - Deprecated
+   */
+  `ja-jp.pck-v2.utf-8`: "ja-jp.pck-v2.utf-8",
+
+  /**
+   * Korean - Deprecated
+   */
+  ko: "ko",
+
+  /**
+   * Korean with UTF-8
+   */
+  `ko.utf-8`: "ko.utf-8",
+
+  /**
+   * Norwegian - Deprecated
+   */
+  no: "no",
+
+  /**
+   * Norwegian with UTF-8
+   */
+  `no.utf-8`: "no.utf-8",
+
+  /**
+   * Polish - Deprecated
+   */
+  pl: "pl",
+
+  /**
+   * Polish with UTF-8
+   */
+  `pl.utf-8`: "pl.utf-8",
+
+  /**
+   * Portuguese - Deprecated
+   */
+  pt: "pt",
+
+  /**
+   * Portuguese with UTF-8
+   */
+  `pt.utf-8`: "pt.utf-8",
+
+  /**
+   * Posix - Deprecated
+   */
+  c: "c",
+
+  /**
+   * Romanian - Deprecated
+   */
+  ro: "ro",
+
+  /**
+   * Romanian with UTF-8
+   */
+  `ro.utf-8`: "ro.utf-8",
+
+  /**
+   * Russian - Deprecated
+   */
+  ru: "ru",
+
+  /**
+   * Russian with UTF-8
+   */
+  `ru.utf-8`: "ru.utf-8",
+
+  /**
+   * Simplified Chinese - Deprecated
+   */
+  zh: "zh",
+
+  /**
+   * Simplified Chinese with UTF-8
+   */
+  `zh.utf-8`: "zh.utf-8",
+
+  /**
+   * Simplified gbk Chinese
+   */
+  `zh.gbk`: "zh.gbk",
+
+  /**
+   * Simplified gbk Chinese with UTF-8 - Deprecated
+   */
+  `zh.gbk.utf-8`: "zh.gbk.utf-8",
+
+  /**
+   * Traditional Chinese BIG 5
+   */
+  `zh-tw.big5`: "zh-tw.big5",
+
+  /**
+   * Traditional Chinese BIG 5 with UTF-8 - Deprecated
+   */
+  `zh-tw.big5.utf-8`: "zh-tw.big5.utf-8",
+
+  /**
+   * Traditional Chinese EUC-TW
+   */
+  `zh-tw`: "zh-tw",
+
+  /**
+   * Traditional Chinese EUC-TW with UTF-8 - Deprecated
+   */
+  `zh-tw.utf-8`: "zh-tw.utf-8",
+
+  /**
+   * Slovak - Deprecated
+   */
+  sk: "sk",
+
+  /**
+   * Slovak with UTF-8
+   */
+  `sk.utf-8`: "sk.utf-8",
+
+  /**
+   * Slovenian - Deprecated
+   */
+  sl: "sl",
+
+  /**
+   * Slovenian with UTF-8
+   */
+  `sl.utf-8`: "sl.utf-8",
+
+  /**
+   * Spanish - Deprecated
+   */
+  es: "es",
+
+  /**
+   * Spanish with UTF-8
+   */
+  `es.utf-8`: "es.utf-8",
+
+  /**
+   * Swedish - Deprecated
+   */
+  sv: "sv",
+
+  /**
+   * Swedish with UTF-8
+   */
+  `sv.utf-8`: "sv.utf-8",
+
+  /**
+   * Turkish - Deprecated
+   */
+  tr: "tr",
+
+  /**
+   * Turkish with UTF-8
+   */
+  `tr.utf-8`: "tr.utf-8",
+
+  /**
+   * US English - Deprecated
+   */
+  `en-us`: "en-us",
+
+  /**
+   * US English with UTF-8
+   */
+  `en-us.utf-8`: "en-us.utf-8",
 }
 
 /**
@@ -1452,6 +1811,47 @@ union MirrorState {
   Broken: "Broken",
 }
 
+/**
+ * Quota Report for volume
+ */
+@added(Versions.v2025_07_01_preview)
+model ListQuotaReportResponse is Azure.Core.Page<QuotaReport>;
+/**
+ * Quota report record properties
+ */
+@added(Versions.v2025_07_01_preview)
+model QuotaReport {
+  /**
+   * Type of quota
+   */
+  quotaType?: Type;
+
+  /**
+   * UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running ‘id’ or ‘getent’ command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>
+   */
+  quotaTarget?: string;
+
+  /**
+   * Specifies the current usage in kibibytes for the user/group quota.
+   */
+  quotaLimitUsedInKiBs?: int64;
+
+  /**
+   * Specifies the total size limit in kibibytes for the user/group quota.
+   */
+  quotaLimitTotalInKiBs?: int64;
+
+  /**
+   * Percentage of used size compared to total size.
+   */
+  percentageUsed?: float32;
+
+  /**
+   * Flag to indicate whether the quota is derived from default quota.
+   */
+  isDerivedQuota?: boolean;
+}
+
 @@visibility(Azure.ResourceManager.AvailabilityZonesProperty.zones,
   Lifecycle.Read,
   Lifecycle.Create
@@ -1784,6 +2184,14 @@ interface Volumes {
     BackupsMigrationRequest,
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Volume>
+  >;
+
+  @added(Versions.v2025_07_01_preview)
+  @list
+  listQuotaReport is ArmResourceActionAsync<
+    Volume,
+    void,
+    ArmResponse<ListQuotaReportResponse>
   >;
 }
 

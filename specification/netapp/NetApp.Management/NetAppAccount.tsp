@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetApp;
 /**
@@ -75,6 +76,47 @@ model AccountProperties {
    */
   @visibility(Lifecycle.Read)
   multiAdStatus?: MultiAdStatus;
+
+  /**
+   * LDAP Configuration for the account.
+   */
+  @added(Versions.v2025_07_01_preview)
+  ldapConfiguration?: LdapConfiguration;
+}
+
+/**
+ * LDAP configuration
+ */
+model LdapConfiguration {
+  /**
+   * Name of the LDAP configuration domain
+   */
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
+  domain?: string;
+
+  /**
+   * List of LDAP server IP addresses (IPv4 only) for the LDAP domain.
+   */
+  ldapServers?: string[];
+
+  /**
+   * Specifies whether or not the LDAP traffic needs to be secured via TLS.
+   */
+  ldapOverTLS?: boolean;
+
+  /**
+   * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.
+   */
+  @maxLength(10240)
+  @minLength(1)
+  serverCACertificate?: string;
+
+  /**
+   * The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.
+   */
+  @maxLength(255)
+  certificateCNHost?: string;
 }
 
 @maxLength(255)
