@@ -33,7 +33,7 @@ interface CloudExadataInfrastructures
     ConfigureExascaleCloudExadataInfrastructureDetails,
     CloudExadataInfrastructure
   >;
-  }
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(CloudExadataInfrastructures.listBySubscription,
