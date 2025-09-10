@@ -98,7 +98,8 @@ interface StorageAccounts {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>
     >,
     StorageAccountCreateParameters,
-    Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     ErrorResponse = ErrorResponse
   >;
 
@@ -142,7 +143,7 @@ interface StorageAccounts {
        * Specifies type of the key to be listed. Possible value is kerb.
        */
       @query("$expand")
-      $expand?: ListKeyExpand;
+      $expand?: "kerb";
     },
     Error = ErrorResponse
   >;
@@ -187,13 +188,15 @@ interface StorageAccounts {
   failover is ArmResourceActionAsync<
     StorageAccount,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Parameters = {
       /**
        * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
        */
       @query("failoverType")
-      failoverType?: FailoverType;
+      failoverType?: "Planned";
     },
     Error = ErrorResponse
   >;
@@ -205,7 +208,9 @@ interface StorageAccounts {
   hierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Parameters = {
       /**
        * Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request 'HnsOnValidationRequest' or a hydration request 'HnsOnHydrationRequest'. The validation request will validate the migration whereas the hydration request will migrate the account.
@@ -223,7 +228,9 @@ interface StorageAccounts {
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Error = ErrorResponse
   >;
 
@@ -234,7 +241,9 @@ interface StorageAccounts {
   customerInitiatedMigration is ArmResourceActionAsync<
     StorageAccount,
     StorageAccountMigration,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Error = ErrorResponse
   >;
 
@@ -246,7 +255,8 @@ interface StorageAccounts {
     StorageAccount,
     BlobRestoreParameters,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>,
-    Response = ArmResponse<BlobRestoreStatus> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<BlobRestoreStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BlobRestoreStatus> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BlobRestoreStatus;
     }),

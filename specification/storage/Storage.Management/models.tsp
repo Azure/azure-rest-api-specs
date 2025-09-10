@@ -2090,27 +2090,27 @@ model FileShareProperties {
   /**
    * Returns the next allowed provisioned storage size downgrade time for the share. This property is only for file shares created under Files Provisioned v1 SSD and Files Provisioned v2 account type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("date-time-rfc1123")
+  @encode("date-time-rfc1123")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextAllowedQuotaDowngradeTime?: string;
 
   /**
    * Returns the next allowed provisioned IOPS downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("date-time-rfc1123")
+  @encode("date-time-rfc1123")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextAllowedProvisionedIopsDowngradeTime?: string;
 
   /**
    * Returns the next allowed provisioned bandwidth downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("date-time-rfc1123")
+  @encode("date-time-rfc1123")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextAllowedProvisionedBandwidthDowngradeTime?: string;
 
@@ -2670,12 +2670,7 @@ model StorageAccountCheckNameAvailabilityParameters {
   /**
    * The type of resource, Microsoft.Storage/storageAccounts
    */
-  type: Type = Type.`Microsoft.Storage/storageAccounts`;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum Type {
-  `Microsoft.Storage/storageAccounts`,
+  type: "Microsoft.Storage/storageAccounts";
 }
 
 /**
@@ -3193,7 +3188,7 @@ model VirtualNetworkRule {
   /**
    * The action of virtual network rule.
    */
-  action?: Action = Action.Allow;
+  action?: "Allow";
 
   /**
    * Gets the state of virtual network rule.
@@ -3213,41 +3208,9 @@ model IPRule {
   /**
    * The action of IP ACL rule.
    */
-  action?: Action = Action.Allow;
+  action?: "Allow";
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum Action {
-  Allow: "Allow",
-}
-
-/**
- * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum FailoverType {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Planned: "Planned",
-}
-
-/**
- * Specifies type of the key to be listed. Possible value is kerb.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ListKeyExpand {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kerb: "kerb",
-}
-
-/**
- * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union IntervalUnit {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  days: "Days",
-}
 /**
  * Settings for Azure Files identity based authentication.
  */
@@ -5737,7 +5700,7 @@ model TriggerParameters {
   /**
    * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
    */
-  intervalUnit?: IntervalUnit;
+  intervalUnit?: "Days";
 
   /**
    * When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
@@ -5964,7 +5927,7 @@ model TriggerParametersUpdate {
   /**
    * Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
    */
-  intervalUnit?: IntervalUnit;
+  intervalUnit?: "Days";
 
   /**
    * When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'

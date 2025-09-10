@@ -80,8 +80,8 @@ interface StorageTaskAssignments {
   @delete
   delete is Azure.ResourceManager.ArmResourceDeleteAsyncBase<
     Resource = StorageTaskAssignment,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
-      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>,
     Error = ErrorResponse

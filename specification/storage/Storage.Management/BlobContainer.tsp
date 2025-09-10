@@ -100,7 +100,9 @@ interface BlobContainers {
   objectLevelWorm is ArmResourceActionAsync<
     BlobContainer,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Error = CloudError
   >;
 }

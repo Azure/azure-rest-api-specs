@@ -618,7 +618,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/StorageAccount"
         },
         "x-ms-long-running-operation": true
       },
@@ -789,7 +790,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -1954,7 +1955,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -2391,20 +2392,13 @@
               "Planned"
             ],
             "x-ms-enum": {
-              "name": "FailoverType",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "Planned",
-                  "value": "Planned"
-                }
-              ]
+              "modelAsString": false
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -3297,7 +3291,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -3696,14 +3690,7 @@
               "kerb"
             ],
             "x-ms-enum": {
-              "name": "ListKeyExpand",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "kerb",
-                  "value": "kerb"
-                }
-              ]
+              "modelAsString": false
             }
           }
         ],
@@ -5771,7 +5758,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BlobRestoreStatus"
         },
         "x-ms-long-running-operation": true
       }
@@ -5861,7 +5849,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -6113,7 +6101,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/StorageTaskAssignment"
         },
         "x-ms-long-running-operation": true
       },
@@ -6201,7 +6190,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/StorageTaskAssignment"
         },
         "x-ms-long-running-operation": true
       },
@@ -6277,7 +6267,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -9118,19 +9108,11 @@
         "action": {
           "type": "string",
           "description": "The action of IP ACL rule.",
-          "default": "Allow",
           "enum": [
             "Allow"
           ],
           "x-ms-enum": {
-            "name": "Action",
-            "modelAsString": false,
-            "values": [
-              {
-                "name": "Allow",
-                "value": "Allow"
-              }
-            ]
+            "modelAsString": false
           }
         }
       },
@@ -9355,23 +9337,6 @@
           "description": "This property denotes the container level immutability to object level immutability migration state.",
           "readOnly": true
         }
-      }
-    },
-    "IntervalUnit": {
-      "type": "string",
-      "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
-      "enum": [
-        "Days"
-      ],
-      "x-ms-enum": {
-        "name": "IntervalUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "days",
-            "value": "Days"
-          }
-        ]
       }
     },
     "InventoryRuleType": {
@@ -12634,12 +12599,10 @@
         "type": {
           "type": "string",
           "description": "The type of resource, Microsoft.Storage/storageAccounts",
-          "default": "Microsoft.Storage/storageAccounts",
           "enum": [
             "Microsoft.Storage/storageAccounts"
           ],
           "x-ms-enum": {
-            "name": "Type",
             "modelAsString": false
           }
         }
@@ -14020,8 +13983,14 @@
           "minimum": 1
         },
         "intervalUnit": {
-          "$ref": "#/definitions/IntervalUnit",
-          "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+          "type": "string",
+          "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
+          "enum": [
+            "Days"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         },
         "endBy": {
           "type": "string",
@@ -14051,8 +14020,14 @@
           "minimum": 1
         },
         "intervalUnit": {
-          "$ref": "#/definitions/IntervalUnit",
-          "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+          "type": "string",
+          "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
+          "enum": [
+            "Days"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         },
         "endBy": {
           "type": "string",
@@ -14087,10 +14062,6 @@
           }
         ]
       }
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UpdateHistoryProperty": {
       "type": "object",
@@ -14242,19 +14213,11 @@
         "action": {
           "type": "string",
           "description": "The action of virtual network rule.",
-          "default": "Allow",
           "enum": [
             "Allow"
           ],
           "x-ms-enum": {
-            "name": "Action",
-            "modelAsString": false,
-            "values": [
-              {
-                "name": "Allow",
-                "value": "Allow"
-              }
-            ]
+            "modelAsString": false
           }
         },
         "state": {
