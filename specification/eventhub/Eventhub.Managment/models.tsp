@@ -1928,3 +1928,7 @@ model ThrottlingPolicy extends ApplicationGroupPolicy {
    */
   type: "ThrottlingPolicy";
 }
+
+model EventHubListResult is Azure.Core.Page<Eventhub>;
+
+model PrivateLinkResourcesListResult is Azure.Core.Page<PrivateLinkResource>;

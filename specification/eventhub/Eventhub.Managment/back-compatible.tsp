@@ -128,3 +128,7 @@ using Microsoft.EventHub;
 @@clientLocation(ClustersOperationGroup.listAvailableClusterRegion, Clusters);
 
 @@clientLocation(NamespacesOperationGroup.checkNameAvailability, "Namespaces");
+
+@@clientName(NamespacesOperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);

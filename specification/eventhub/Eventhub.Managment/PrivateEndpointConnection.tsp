@@ -30,12 +30,14 @@ interface PrivateEndpointConnections {
   /**
    * Gets a description for the specified Private Endpoint Connection name.
    */
+  @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Creates or updates PrivateEndpointConnections of service namespace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmResourceCreatedSyncResponse<PrivateEndpointConnection> | (AcceptedResponse & {
@@ -49,6 +51,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -58,6 +61,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets the available PrivateEndpointConnections within a namespace.
    */
+  @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

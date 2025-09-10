@@ -164,7 +164,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -897,10 +897,9 @@
               "$ref": "#/definitions/EHNamespace"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -932,7 +931,11 @@
           "NamespaceWithGeoDRCreate": {
             "$ref": "./examples/NameSpaces/NamespaceWithGeoDRCreate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Namespaces_Update",
@@ -1319,6 +1322,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           }
         ],
@@ -1369,6 +1374,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -1376,7 +1383,8 @@
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1421,6 +1429,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -1428,7 +1438,8 @@
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "parameters",
@@ -1482,6 +1493,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -1489,7 +1502,8 @@
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1536,6 +1550,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -1543,7 +1559,8 @@
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1590,6 +1607,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -1597,7 +1616,8 @@
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "parameters",
@@ -1890,6 +1910,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -1897,7 +1919,9 @@
             "in": "path",
             "description": "The Disaster Recovery configuration name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
           }
         ],
         "responses": {
@@ -1947,6 +1971,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -1954,14 +1980,17 @@
             "in": "path",
             "description": "The Disaster Recovery configuration name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -2008,6 +2037,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -2015,14 +2046,17 @@
             "in": "path",
             "description": "The Disaster Recovery configuration name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -2248,6 +2282,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 1000
           },
           {
@@ -2263,9 +2298,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EventhubListResult"
+              "$ref": "#/definitions/EventHubListResult"
             }
           },
           "default": {
@@ -2496,6 +2531,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -2503,7 +2540,9 @@
             "in": "path",
             "description": "The Event Hub name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -2553,6 +2592,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -2560,14 +2601,17 @@
             "in": "path",
             "description": "The Event Hub name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -2612,6 +2656,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -2619,14 +2665,17 @@
             "in": "path",
             "description": "The Event Hub name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "parameters",
@@ -2680,6 +2729,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -2687,14 +2738,17 @@
             "in": "path",
             "description": "The Event Hub name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -2741,6 +2795,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -2748,14 +2804,17 @@
             "in": "path",
             "description": "The Event Hub name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -2802,6 +2861,8 @@
             "description": "The Namespace name",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
@@ -2809,14 +2870,17 @@
             "in": "path",
             "description": "The Event Hub name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "description": "The authorization rule name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "parameters",
@@ -2892,6 +2956,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 1000
           },
           {
@@ -3173,18 +3238,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FailOver"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3196,7 +3260,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3552,6 +3616,9 @@
           "PrivateEndpointConnections"
         ],
         "description": "Gets the available PrivateEndpointConnections within a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3604,6 +3671,9 @@
           "PrivateEndpointConnections"
         ],
         "description": "Gets a description for the specified Private Endpoint Connection name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3658,6 +3728,9 @@
           "PrivateEndpointConnections"
         ],
         "description": "Creates or updates PrivateEndpointConnections of service namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3733,6 +3806,9 @@
           "PrivateEndpointConnections"
         ],
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3807,6 +3883,9 @@
           "EHNamespaces"
         ],
         "description": "Gets lists of resources that supports Privatelinks.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3832,7 +3911,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
             }
           },
           "default": {
@@ -3886,6 +3965,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 1000
           },
           {
@@ -4178,8 +4258,27 @@
         "properties": {
           "$ref": "#/definitions/ApplicationGroupProperties",
           "x-ms-client-flatten": true
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Determines if Application Group is allowed to create connection with namespace or not. Once the isEnabled is set to false, all the existing connections of application group gets dropped and no new connections will be allowed"
+        },
+        "clientAppGroupIdentifier": {
+          "type": "string",
+          "description": "The Unique identifier for application group.Supports SAS(SASKeyName=KeyName) or AAD(AADAppID=Guid)"
+        },
+        "policies": {
+          "type": "array",
+          "description": "List of group policies that define the behavior of application group. The policies can support resource governance scenarios such as limiting ingress or egress traffic.",
+          "items": {
+            "$ref": "#/definitions/ApplicationGroupPolicy"
+          },
+          "x-ms-identifiers": []
         }
       },
+      "required": [
+        "clientAppGroupIdentifier"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -5157,25 +5256,9 @@
         }
       }
     },
-    "Eventhub": {
+    "EventHubListResult": {
       "type": "object",
-      "description": "Single item in List or Get Event Hub operation",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EventhubProperties",
-          "description": "Properties supplied to the Create Or Update Event Hub operation.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "EventhubListResult": {
-      "type": "object",
-      "description": "The response of a Eventhub list operation.",
+      "description": "Paged collection of Eventhub items",
       "properties": {
         "value": {
           "type": "array",
@@ -5192,6 +5275,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "Eventhub": {
+      "type": "object",
+      "description": "Single item in List or Get Event Hub operation",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventhubProperties",
+          "description": "Properties supplied to the Create Or Update Event Hub operation.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "EventhubProperties": {
@@ -6060,27 +6159,6 @@
         }
       }
     },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateLinkResource items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PrivateLinkResourceProperties": {
       "type": "object",
       "description": "Properties of PrivateLinkResource",
@@ -6104,6 +6182,27 @@
           }
         }
       }
+    },
+    "PrivateLinkResourcesListResult": {
+      "type": "object",
+      "description": "Paged collection of PrivateLinkResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ProvisioningIssue": {
       "type": "object",

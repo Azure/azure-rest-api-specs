@@ -36,6 +36,8 @@ alias AuthorizationRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("namespaces")
     @key
+    @minLength(6)
+    @maxLength(50)
     @pattern("^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$")
     namespaceName: string;
   },
@@ -44,6 +46,7 @@ alias AuthorizationRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("authorizationRules")
     @key
+    @minLength(1)
     authorizationRuleName: string;
   }
 >;
@@ -115,6 +118,8 @@ alias DisasterRecoveryConfigOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("namespaces")
     @key
+    @minLength(6)
+    @maxLength(50)
     @pattern("^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$")
     namespaceName: string;
 
@@ -122,6 +127,8 @@ alias DisasterRecoveryConfigOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("disasterRecoveryConfigs")
     @key
+    @minLength(1)
+    @maxLength(50)
     `alias`: string;
   },
   {
@@ -129,6 +136,7 @@ alias DisasterRecoveryConfigOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("authorizationRules")
     @key
+    @minLength(1)
     authorizationRuleName: string;
   }
 >;
@@ -165,6 +173,8 @@ alias EventHubOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("namespaces")
     @key
+    @minLength(6)
+    @maxLength(50)
     @pattern("^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$")
     namespaceName: string;
 
@@ -172,6 +182,8 @@ alias EventHubOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("eventhubs")
     @key
+    @minLength(1)
+    @maxLength(256)
     eventHubName: string;
   },
   {
@@ -179,6 +191,7 @@ alias EventHubOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("authorizationRules")
     @key
+    @minLength(1)
     authorizationRuleName: string;
   }
 >;

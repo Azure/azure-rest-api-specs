@@ -70,7 +70,7 @@
         "operationId": "Namespaces_CheckNameAvailability",
         "parameters": [
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -582,6 +582,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "202": {
@@ -607,7 +613,11 @@
           "NamespaceWithGeoDRCreate": {
             "$ref": "./examples/NameSpaces/NamespaceWithGeoDRCreate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Namespaces_Update",
@@ -886,6 +896,8 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           }
         ],
@@ -922,13 +934,16 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -959,13 +974,16 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "parameters",
@@ -1004,13 +1022,16 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1043,13 +1064,16 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1082,13 +1106,16 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "parameters",
@@ -1306,13 +1333,17 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "alias",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
           }
         ],
         "responses": {
@@ -1348,19 +1379,24 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "alias",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1393,19 +1429,24 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "alias",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1570,6 +1611,7 @@
             "in": "query",
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 1000
           },
           {
@@ -1585,7 +1627,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/EventhubListResult"
+              "$ref": "#/definitions/EventHubListResult"
             }
           },
           "default": {
@@ -1756,13 +1798,17 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "eventHubName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -1798,19 +1844,24 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "eventHubName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1841,19 +1892,24 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "eventHubName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "parameters",
@@ -1892,19 +1948,24 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "eventHubName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1937,19 +1998,24 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "eventHubName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -1982,19 +2048,24 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
           },
           {
             "name": "eventHubName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "parameters",
@@ -2052,6 +2123,7 @@
             "in": "query",
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 1000
           },
           {
@@ -2267,25 +2339,24 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/FailOver"
-            }
-          },
           "202": {
             "description": "ignore",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2545,6 +2616,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_List",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
         "parameters": [
           {
             "name": "namespaceName",
@@ -2583,6 +2657,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "PrivateEndpointConnections_Get",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
+        },
         "parameters": [
           {
             "name": "namespaceName",
@@ -2622,6 +2699,9 @@
       },
       "put": {
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
+        },
         "parameters": [
           {
             "name": "namespaceName",
@@ -2681,6 +2761,9 @@
       },
       "delete": {
         "operationId": "PrivateEndpointConnections_Delete",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
+        },
         "parameters": [
           {
             "name": "namespaceName",
@@ -2735,6 +2818,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateLinkResources_Get",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
+        },
         "parameters": [
           {
             "name": "namespaceName",
@@ -2750,7 +2836,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
             }
           },
           "default": {
@@ -2788,6 +2874,7 @@
             "in": "query",
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 1000
           },
           {
@@ -2997,8 +3084,23 @@
         "properties": {
           "$ref": "#/definitions/ApplicationGroupProperties",
           "x-ms-client-flatten": true
+        },
+        "isEnabled": {
+          "type": "boolean"
+        },
+        "clientAppGroupIdentifier": {
+          "type": "string"
+        },
+        "policies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGroupPolicy"
+          }
         }
       },
+      "required": [
+        "clientAppGroupIdentifier"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -3788,21 +3890,7 @@
         }
       }
     },
-    "Eventhub": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EventhubProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "EventhubListResult": {
+    "EventHubListResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
       "properties": {
@@ -3821,6 +3909,20 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "Eventhub": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventhubProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "EventhubProperties": {
@@ -4430,27 +4532,6 @@
         }
       }
     },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PrivateLinkResourceProperties": {
       "type": "object",
       "properties": {
@@ -4470,6 +4551,27 @@
           }
         }
       }
+    },
+    "PrivateLinkResourcesListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ProvisioningIssue": {
       "type": "object",

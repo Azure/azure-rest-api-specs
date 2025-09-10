@@ -56,6 +56,7 @@ interface ConsumerGroups {
        * Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.
        */
       @maxValue(1000)
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 

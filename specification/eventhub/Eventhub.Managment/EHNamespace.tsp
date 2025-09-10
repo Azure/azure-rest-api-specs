@@ -49,10 +49,14 @@ interface EHNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("Namespaces_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EHNamespace,
-    Response = ArmResourceUpdatedResponse<EHNamespace> | ArmResourceCreatedResponse<EHNamespace> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<EHNamespace> | ArmResourceCreatedResponse<
+      EHNamespace,
+      ArmAsyncOperationHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -99,12 +103,14 @@ interface EHNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_Failover")
-  failover is ArmResourceActionAsync<
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  failover is ArmResourceActionAsyncBase<
     EHNamespace,
     FailOver,
-    ArmResponse<FailOver>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = FailOver> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FailOver> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<EHNamespace>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -115,10 +121,11 @@ interface EHNamespaces {
   @list
   @get
   @action("privateLinkResources")
+  @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   privateLinkResourcesGet is ArmResourceActionSync<
     EHNamespace,
     void,
-    ArmResponse<ResourceListResult<PrivateLinkResource>>
+    ArmResponse<PrivateLinkResourcesListResult>
   >;
 
   /**
