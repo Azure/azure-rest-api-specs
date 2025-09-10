@@ -120,6 +120,8 @@ stages:
           Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
           $releasePlanInfo = ''
           Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+          $prUrl = ""
+          Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
         displayName: "Create Run Time Variables"
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
@@ -325,23 +327,21 @@ stages:
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
           - pwsh: |
-              if ('$(Submitted.PullRequest.Number)' -ne '') 
-              {
-                $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
-                Write-Host "Pull request created: $prUrl"
-                Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
-                $prStatus = "draft"
-                Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
-              }
-              else
-              {
-                $prUrl = ""
-                Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
-                $prStatus = "Failed to generate SDK."
-                Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
-              }
-            condition: not(endsWith(variables['SdkRepoName'], '-pr'))
-            displayName: "Set pull request URL variables"
+              $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
+              Write-Host "Pull request created: $prUrl"
+              Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+              $prStatus = "draft"
+              Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            displayName: "Set pull request URL variable"
+
+          - pwsh: |
+              $prUrl = ""
+              Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+              $prStatus = "Failed to generate SDK."
+              Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+            condition: failed()
+            displayName: "Set pull request generation failed status variable"
 
           - task: AzureCLI@2
             displayName: Link pull request to release plan
