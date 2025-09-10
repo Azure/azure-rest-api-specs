@@ -18298,6 +18298,10 @@
           "Sites"
         ],
         "description": "Description for Gets the publishing profile for an app (or deployment slot, if specified).",
+        "produces": [
+          "*/*",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -18327,7 +18331,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "file"
+            }
           },
           "default": {
             "description": "An unexpected error response.",

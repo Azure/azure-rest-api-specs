@@ -1165,7 +1165,7 @@ interface Sites {
   listPublishingProfileXmlWithSecrets is SiteOps.ActionSync<
     Site,
     CsmPublishingProfileOptions,
-    OkResponse,
+    File,
     OverrideErrorType = DefaultErrorResponse
   >;
 
