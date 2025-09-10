@@ -56,12 +56,12 @@ directive:
       - AvoidAdditionalProperties
 
   - where:
-    - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment
+    - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment.properties.roles
     suppress:
       - AvoidAdditionalProperties
 
   - where:
-    - $.definitions.OutboundEnvironmentEndpointCollection.properties.roles
+    - $.definitions.OutboundEnvironmentEndpointCollection
     suppress:
       - RequiredPropertiesMissingInResourceModel
 
