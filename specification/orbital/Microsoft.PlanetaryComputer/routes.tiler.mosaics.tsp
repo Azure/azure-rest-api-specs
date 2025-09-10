@@ -503,7 +503,7 @@ interface MosaicsAssetsForPoints {
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{lon},{lat}/assets")
   @get
-  getLonLatAssets is Azure.Core.Foundations.Operation<
+  getPointAssets is Azure.Core.Foundations.Operation<
     {
       /**
        * Search Id (pgSTAC Search Hash)

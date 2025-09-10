@@ -250,7 +250,7 @@ interface Tiler {
   getPartWithDimensions is TilerParts.getCroppedToBoundingBoxWidthByHeight;
 
   // Points
-  getPoint is TilerPoints.getLonLat;
+  getPoint is TilerPoints.getPoint;
 
   // Previews
   getPreview is TilerPreviews.get;
@@ -282,7 +282,7 @@ interface Tiler {
   getLegend is MapsLegends.get;
 
   // Mosaic Assets
-  getAssetsForPoint is MosaicsAssetsForPoints.getLonLatAssets;
+  getAssetsForPoint is MosaicsAssetsForPoints.getPointAssets;
   getMosaicsAssetsForTileWithMatrixSet is MosaicsAssetsForTileMatrixSets.getZxyAssets;
   getMosaicsAssetsForTile is MosaicsAssetsForTiles.getZxyAssets;
 

@@ -632,7 +632,7 @@ interface TilerPoints {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/point/{lon},{lat}")
   @get
-  getLonLat is Azure.Core.Foundations.Operation<
+  getPoint is Azure.Core.Foundations.Operation<
     {
       /**
        * STAC Collection Identifier
