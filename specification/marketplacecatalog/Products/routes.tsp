@@ -2,13 +2,17 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 
+using Azure.Core;
 using TypeSpec.Http;
-using Azure.Core.Foundations;
 
 namespace Products;
 
+alias MarketplaceDiscoveryTraits = Traits.NoConditionalRequests &
+  Traits.NoRepeatableRequests &
+  Traits.NoClientRequestId;
+
 // Product listing traits
-alias ProductsListingTraits = LanguageParameter &
+alias ProductsListingParams = LanguageParameter &
   LocationsListingParameter &
   ListingMarketParameter &
   HideKeysParameter &
@@ -19,7 +23,8 @@ alias ProductsListingTraits = LanguageParameter &
   SearchParameter;
 
 // Product get traits
-alias ProductsGetTraits = SingleMarketParameter &
+alias ProductsGetParams = UniqueProductIdParameter &
+  SingleMarketParameter &
   LanguageParameter &
   LocationsSingleParameter &
   IncludeStopSoldPlansParameter &
@@ -28,32 +33,34 @@ alias ProductsGetTraits = SingleMarketParameter &
   IncludeFutureAvailabilitiesParameter &
   SkuIdParameter;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Routes for listing and single are almost the same, requires custom operation"
-@doc("Retrieves a single product by ID from the marketplace catalog")
-@get
-@route("/products/{uniqueProductId}")
-op getProduct(
-  @doc("Unique product identifier")
-  @path
-  uniqueProductId: string,
+interface Products {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Products list is a proxy resource that doesn't fit the standard operations path"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "DiscoveryApiPagedProductsResult is the Discovery API standard for returning listing responses"
+  @doc("Retrieves a list of products available in the marketplace catalog")
+  @get
+  @list
+  @route("/products")
+  list is Azure.Core.Foundations.Operation<
+    ProductsListingParams,
+    DiscoveryApiPagedProductsResult,
+    MarketplaceDiscoveryTraits,
+    DiscoveryErrorPayload
+  >;
 
-  ...ApiVersionParameter,
-  ...ProductsGetTraits,
-): ProductDetails | DiscoveryErrorPayload;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Routes for listing and single are almost the same, requires custom operation"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Returning custom paginated object"
-@doc("Retrieves a list of products available in the marketplace catalog")
-@get
-@list
-@route("/products")
-op listProducts(
-  ...ApiVersionParameter,
-  ...ProductsListingTraits,
-): DiscoveryApiPagedProductsResult | DiscoveryErrorPayload;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Products get is a proxy resource that doesn't fit the standard operations path"
+  @doc("Retrieves a single product by ID from the marketplace catalog")
+  @get
+  @route("/products/{uniqueProductId}")
+  get is Azure.Core.Foundations.Operation<
+    ProductsGetParams,
+    ProductDetails,
+    MarketplaceDiscoveryTraits,
+    DiscoveryErrorPayload
+  >;
+}
 
 // Skus listing traits
-alias SkusListingTraits = ServiceParameter &
+alias SkusListingParams = ServiceParameter &
   ServiceFamilyParameter &
   LanguageParameter &
   SkusLocationsListingParameter &
@@ -62,13 +69,17 @@ alias SkusListingTraits = ServiceParameter &
   SkusOdataFilterParameter &
   SkusOdataOrderByParameter;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Retaining custom implementation for operation parity"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Returning custom paginated object"
-@doc("Retrieves a list of SKUs available in the marketplace catalog.")
-@list
-@get
-@route("/skus")
-op listSkus(
-  ...ApiVersionParameter,
-  ...SkusListingTraits,
-): DiscoveryApiPagedSkusResult | DiscoveryErrorPayload;
+interface Skus {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Skus list is a proxy resource that doesn't fit the standard operations path"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "DiscoveryApiPagedSkusResult is the Discovery API standard for returning listing responses"
+  @doc("Retrieves a list of SKUs available in the marketplace catalog")
+  @list
+  @get
+  @route("/skus")
+  list is Azure.Core.Foundations.Operation<
+    SkusListingParams,
+    DiscoveryApiPagedSkusResult,
+    MarketplaceDiscoveryTraits,
+    DiscoveryErrorPayload
+  >;
+}
