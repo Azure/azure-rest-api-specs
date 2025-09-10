@@ -340,7 +340,7 @@ stages:
                 $prStatus = "Failed to generate SDK."
                 Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
               }
-            condition: not(endsWith(variables['SdkRepoName'], '-pr')))
+            condition: not(endsWith(variables['SdkRepoName'], '-pr'))
             displayName: "Set pull request URL variables"
 
           - task: AzureCLI@2
