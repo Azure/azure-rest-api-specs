@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ElasticSan;
 
@@ -53,7 +55,9 @@ union ProvisioningStates {
   Deleted: "Deleted",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Restoring: "Restoring",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2024_07_01_preview)
   SoftDeleting: "SoftDeleting",
 }
 
@@ -86,6 +90,7 @@ union PublicNetworkAccess {
 /**
  * Enable or Disable scale up setting on Elastic San Appliance.
  */
+@added(Versions.v2025_09_01)
 union AutoScalePolicyEnforcement {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -97,6 +102,7 @@ union AutoScalePolicyEnforcement {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2024_07_01_preview)
 union `x-ms-access-soft-deleted-resources` {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -223,6 +229,7 @@ union `x-ms-force-delete` {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2024_07_01_preview)
 union DeleteType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -393,6 +400,7 @@ model ElasticSanProperties {
   /**
    * Auto Scale Properties for Elastic San Appliance.
    */
+  @added(Versions.v2025_09_01)
   autoScaleProperties?: AutoScaleProperties;
 }
 
@@ -471,6 +479,7 @@ model PrivateLinkServiceConnectionState {
 /**
  * The auto scale settings on Elastic San Appliance.
  */
+@added(Versions.v2025_09_01)
 model AutoScaleProperties {
   /**
    * Scale up settings on Elastic San Appliance.
@@ -481,6 +490,7 @@ model AutoScaleProperties {
 /**
  * Scale up properties on Elastic San Appliance.
  */
+@added(Versions.v2025_09_01)
 model ScaleUpProperties {
   /**
    * Unused size on Elastic San appliance in TiB.
@@ -544,6 +554,7 @@ model ElasticSanUpdateProperties {
   /**
    * Auto Scale Properties for Elastic San Appliance.
    */
+  @added(Versions.v2025_09_01)
   autoScaleProperties?: AutoScaleProperties;
 }
 
@@ -654,6 +665,7 @@ model VolumeGroupProperties {
   /**
    * The retention policy for the soft deleted volume group and its associated resources.
    */
+  @added(Versions.v2024_07_01_preview)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -750,6 +762,7 @@ model VirtualNetworkRule {
 /**
  * Response for Delete Retention Policy object
  */
+@added(Versions.v2024_07_01_preview)
 model DeleteRetentionPolicy {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   policyState?: PolicyState;
@@ -810,6 +823,7 @@ model VolumeGroupUpdateProperties {
   /**
    * The retention policy for the soft deleted volume group and its associated resources
    */
+  @added(Versions.v2024_07_01_preview)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -1039,6 +1053,7 @@ model SnapshotCreationData {
 /**
  * object to hold array of volume names
  */
+@added(Versions.v2025_09_01)
 model VolumeNameList {
   /**
    * array of volume names
@@ -1049,6 +1064,7 @@ model VolumeNameList {
 /**
  * response object for pre validation api
  */
+@added(Versions.v2025_09_01)
 model PreValidationResponse {
   /**
    * a status value indicating success or failure of validation
@@ -1059,6 +1075,7 @@ model PreValidationResponse {
 /**
  * object to hold array of Disk Snapshot ARM IDs
  */
+@added(Versions.v2025_09_01)
 model DiskSnapshotList {
   /**
    * array of DiskSnapshot ARM IDs
