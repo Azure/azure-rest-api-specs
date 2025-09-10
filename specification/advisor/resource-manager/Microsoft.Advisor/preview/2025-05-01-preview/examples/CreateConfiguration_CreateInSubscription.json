@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "configContract": {
+      "properties": {
+        "digests": [
+          {
+            "name": "digestConfigName",
+            "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+            "categories": [
+              "HighAvailability",
+              "Security",
+              "Performance",
+              "Cost",
+              "OperationalExcellence"
+            ],
+            "frequency": 30,
+            "state": "Active",
+            "language": "en"
+          }
+        ],
+        "duration": "7",
+        "exclude": true,
+        "lowCpuThreshold": "5"
+      }
+    },
+    "configurationName": "default",
+    "resourceGroup": "resourceGroup",
+    "subscriptionId": "58c3f667-7a62-4bfd-a658-846493e9a493"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Advisor/configurations",
+        "id": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
+        "properties": {
+          "digests": [
+            {
+              "name": "digestConfigName",
+              "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+              "categories": [
+                "HighAvailability",
+                "Security",
+                "Performance",
+                "Cost",
+                "OperationalExcellence"
+              ],
+              "frequency": 30,
+              "state": "Active",
+              "language": "en"
+            }
+          ],
+          "duration": "7",
+          "exclude": true,
+          "lowCpuThreshold": "5"
+        }
+      }
+    }
+  },
+  "operationId": "Configurations_CreateInSubscription",
+  "title": "PutConfigurations"
+}

@@ -214,19 +214,41 @@ export class TspConfigCommonAzServiceDirMatchPatternSubRule extends TspconfigPar
 }
 
 // ----- Java sub rules -----
-export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-java", "package-dir", new RegExp(/^azure(-\w+)+$/));
-  }
-}
-
-export class TspConfigJavaMgmtPackageDirFormatSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigJavaAzEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-java",
-      "package-dir",
-      new RegExp(/^azure-resourcemanager-[^\/]+$/), // Matches "azure-resourcemanager-<service-name>" with no restriction on characters after the hyphen
+      "emitter-output-dir",
+      new RegExp(/^(\{output-dir\}\/)?\{service-dir\}\/azure(-\w+)+$/),
     );
+  }
+
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+    if (option === undefined) {
+      // at present, we don't require service use emitter-output-dir
+      return { success: true };
+    }
+    return super.validate(config);
+  }
+}
+
+export class TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-java",
+      "emitter-output-dir",
+      new RegExp(/^(\{output-dir\}\/)?\{service-dir\}\/azure-resourcemanager(-\w+)+$/),
+    );
+  }
+
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+    if (option === undefined) {
+      // at present, we don't require service use emitter-output-dir
+      return { success: true };
+    }
+    return super.validate(config);
   }
 
   protected skip(_: any, folder: string) {
@@ -355,7 +377,7 @@ export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigE
     super(
       "@azure-tools/typespec-go",
       "emitter-output-dir",
-      new RegExp(/^(\{output-dir\}\/)?(\{service-dir\}\/|sdk\/).*\/az.*/),
+      new RegExp(/^(\{output-dir\}\/)?(\{service-dir\}|sdk\/).*\/az.*/),
     );
   }
   protected skip(_: any, folder: string) {
@@ -393,7 +415,7 @@ export class TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule extends Tspconfi
     super(
       "@azure-tools/typespec-go",
       "emitter-output-dir",
-      new RegExp(/^(\{output-dir\}\/)?(\{service-dir\}\/|sdk\/resourcemanager\/)[^\/]*\/arm.*/),
+      new RegExp(/^(\{output-dir\}\/)?(\{service-dir\}|sdk\/resourcemanager\/)[^\/]*\/arm.*/),
     );
   }
   protected skip(_: any, folder: string) {
@@ -499,8 +521,8 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
 
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
-  new TspConfigJavaAzPackageDirectorySubRule(),
-  new TspConfigJavaMgmtPackageDirFormatSubRule(),
+  new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
+  new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
