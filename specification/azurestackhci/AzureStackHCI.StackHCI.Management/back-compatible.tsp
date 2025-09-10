@@ -34,17 +34,7 @@ using Microsoft.AzureStackHCI;
 @@flattenProperty(HCIExtensionPatch.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UpdateRunProperties.progress);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(UpdateProperties.updateStateProperties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UpdateSummariesProperties.packageVersions);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UpdateSummariesProperties.healthState);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UpdateSummariesProperties.healthCheckResult);
 
 @@clientName(ArcSettings.create::parameters.resource, "arcSetting");
 @@clientName(ArcSettings.update::parameters.properties, "arcSetting");
