@@ -26,6 +26,7 @@ import "./VolumeGroupDetails.tsp";
 import "./SubvolumeInfo.tsp";
 import "./Backup.tsp";
 import "./BackupVault.tsp";
+import "./Bucket.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

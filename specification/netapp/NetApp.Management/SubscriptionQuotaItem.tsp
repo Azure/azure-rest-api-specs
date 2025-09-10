@@ -16,8 +16,7 @@ namespace Microsoft.NetApp;
  */
 @renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItem")
 @parentResource(SubscriptionLocationResource)
-model QuotaItem
-  is Azure.ResourceManager.ProxyResource<QuotaItemProperties> {
+model QuotaItem is Azure.ResourceManager.ProxyResource<QuotaItemProperties> {
   ...ResourceNameParameter<
     Resource = QuotaItem,
     KeyName = "quotaLimitName",
