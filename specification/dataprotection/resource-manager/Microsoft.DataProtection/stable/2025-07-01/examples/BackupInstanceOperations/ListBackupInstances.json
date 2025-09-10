@@ -1,41 +1,39 @@
 {
   "parameters": {
-    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "api-version": "2025-07-01",
     "resourceGroupName": "000pikumar",
-    "vaultName": "PratikPrivatePreviewVault1",
-    "api-version": "2025-07-01"
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "vaultName": "PratikPrivatePreviewVault1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/backupInstances/harshitbi2",
             "name": "harshitbi2",
             "type": "Microsoft.DataProtection/backupVaults/backupInstances",
-            "tags": {
-              "key1": "val1"
-            },
+            "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/backupInstances/harshitbi2",
             "properties": {
-              "friendlyName": "harshitbi2",
               "dataSourceInfo": {
-                "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/testdb",
-                "resourceUri": "",
                 "datasourceType": "OssDB",
+                "objectType": "Datasource",
+                "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/testdb",
+                "resourceLocation": "",
                 "resourceName": "testdb",
                 "resourceType": "OssDB",
-                "resourceLocation": "",
-                "objectType": "Datasource"
+                "resourceUri": ""
               },
               "dataSourceSetInfo": {
-                "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest",
-                "resourceUri": "",
                 "datasourceType": "OssDB",
+                "objectType": "DatasourceSet",
+                "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest",
+                "resourceLocation": "",
                 "resourceName": "viveksipgtest",
                 "resourceType": "OssDB",
-                "resourceLocation": "",
-                "objectType": "DatasourceSet"
+                "resourceUri": ""
               },
+              "friendlyName": "harshitbi2",
+              "objectType": "BackupInstance",
               "policyInfo": {
                 "policyId": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/backupPolicies/PratikPolicy1",
                 "policyVersion": "3.2"
@@ -43,12 +41,13 @@
               "protectionStatus": {
                 "status": "NotProtected"
               },
-              "provisioningState": "Provisioning",
-              "objectType": "BackupInstance"
+              "provisioningState": "Provisioning"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "BackupInstances_List",
+  "title": "List BackupInstances in a Vault"
 }

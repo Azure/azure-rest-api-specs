@@ -1,129 +1,131 @@
 {
   "parameters": {
     "name": "cache1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-11-01",
-    "subscriptionId": "subid",
     "parameters": {
       "properties": {
         "enableNonSslPort": true,
         "replicasPerPrimary": 2
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
-        "location": "East US",
         "name": "cache1",
         "type": "Microsoft.Cache/Redis",
-        "tags": {},
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+        "location": "East US",
         "properties": {
           "accessKeys": {
             "primaryKey": "<primaryKey>",
             "secondaryKey": "<secondaryKey>"
           },
-          "provisioningState": "Succeeded",
-          "redisVersion": "3.0",
-          "sku": {
-            "name": "Premium",
-            "family": "P",
-            "capacity": 1
-          },
           "enableNonSslPort": true,
-          "replicasPerMaster": 2,
-          "replicasPerPrimary": 2,
-          "updateChannel": "Stable",
-          "zonalAllocationPolicy": "Automatic",
-          "redisConfiguration": {
-            "maxclients": "1000",
-            "maxmemory-reserved": "50",
-            "maxmemory-delta": "50"
-          },
           "hostName": "cache1.redis.cache.windows.net",
-          "port": 6379,
-          "sslPort": 6380,
           "instances": [
             {
-              "sslPort": 15000,
-              "nonSslPort": 13000,
               "isMaster": true,
-              "isPrimary": true
+              "isPrimary": true,
+              "nonSslPort": 13000,
+              "sslPort": 15000
             },
             {
-              "sslPort": 15001,
+              "isMaster": false,
+              "isPrimary": false,
               "nonSslPort": 13001,
-              "isMaster": false,
-              "isPrimary": false
+              "sslPort": 15001
             },
             {
-              "sslPort": 15002,
-              "nonSslPort": 13002,
               "isMaster": false,
-              "isPrimary": false
+              "isPrimary": false,
+              "nonSslPort": 13002,
+              "sslPort": 15002
             }
-          ]
-        }
+          ],
+          "port": 6379,
+          "provisioningState": "Succeeded",
+          "redisConfiguration": {
+            "maxclients": "1000",
+            "maxmemory-delta": "50",
+            "maxmemory-reserved": "50"
+          },
+          "redisVersion": "3.0",
+          "replicasPerMaster": 2,
+          "replicasPerPrimary": 2,
+          "sku": {
+            "name": "Premium",
+            "capacity": 1,
+            "family": "P"
+          },
+          "sslPort": 6380,
+          "updateChannel": "Stable",
+          "zonalAllocationPolicy": "Automatic"
+        },
+        "tags": {}
       }
     },
     "202": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
-        "location": "East US",
         "name": "cache1",
         "type": "Microsoft.Cache/Redis",
-        "tags": {},
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+        "location": "East US",
         "properties": {
           "accessKeys": {
             "primaryKey": "<primaryKey>",
             "secondaryKey": "<secondaryKey>"
           },
-          "provisioningState": "Succeeded",
-          "redisVersion": "3.0",
-          "sku": {
-            "name": "Premium",
-            "family": "P",
-            "capacity": 1
-          },
           "enableNonSslPort": true,
-          "replicasPerMaster": 2,
-          "replicasPerPrimary": 2,
-          "updateChannel": "Stable",
-          "zonalAllocationPolicy": "Automatic",
-          "redisConfiguration": {
-            "maxclients": "1000",
-            "maxmemory-reserved": "50",
-            "maxmemory-delta": "50"
-          },
           "hostName": "cache1.redis.cache.windows.net",
-          "port": 6379,
-          "sslPort": 6380,
           "instances": [
             {
-              "sslPort": 15000,
-              "nonSslPort": 13000,
               "isMaster": true,
-              "isPrimary": true
+              "isPrimary": true,
+              "nonSslPort": 13000,
+              "sslPort": 15000
             },
             {
-              "sslPort": 15001,
+              "isMaster": false,
+              "isPrimary": false,
               "nonSslPort": 13001,
-              "isMaster": false,
-              "isPrimary": false
+              "sslPort": 15001
             },
             {
-              "sslPort": 15002,
-              "nonSslPort": 13002,
               "isMaster": false,
-              "isPrimary": false
+              "isPrimary": false,
+              "nonSslPort": 13002,
+              "sslPort": 15002
             }
-          ]
-        }
+          ],
+          "port": 6379,
+          "provisioningState": "Succeeded",
+          "redisConfiguration": {
+            "maxclients": "1000",
+            "maxmemory-delta": "50",
+            "maxmemory-reserved": "50"
+          },
+          "redisVersion": "3.0",
+          "replicasPerMaster": 2,
+          "replicasPerPrimary": 2,
+          "sku": {
+            "name": "Premium",
+            "capacity": 1,
+            "family": "P"
+          },
+          "sslPort": 6380,
+          "updateChannel": "Stable",
+          "zonalAllocationPolicy": "Automatic"
+        },
+        "tags": {}
       },
       "headers": {
-        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Cache/...pathToOperationResult..."
       }
     }
-  }
+  },
+  "operationId": "Redis_Update",
+  "title": "RedisCacheUpdate"
 }
