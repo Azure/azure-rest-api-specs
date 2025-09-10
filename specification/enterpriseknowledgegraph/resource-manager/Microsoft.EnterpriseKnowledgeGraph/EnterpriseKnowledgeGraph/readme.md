@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2018-12-03` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-12-03'
 input-file:
-- Microsoft.EnterpriseKnowledgeGraph/preview/2018-12-03/EnterpriseKnowledgeGraphSwagger.json
+- preview/2018-12-03/EnterpriseKnowledgeGraphSwagger.json
 directive:
   - None at the moment
 ```
