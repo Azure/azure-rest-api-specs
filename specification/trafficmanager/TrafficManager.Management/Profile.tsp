@@ -13,14 +13,24 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager profile.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
-  ...ResourceNameParameter<
-    Resource = Profile,
-    KeyName = "profileName",
-    SegmentName = "trafficmanagerprofiles",
-    NamePattern = ""
-  >;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Profile extends TrackedResource {
+  /**
+   * The name of the Traffic Manager profile.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("trafficmanagerprofiles")
+  @key("profileName")
+  profileName: string;
+
+  properties?: ProfileProperties;
 }
 
 alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -30,15 +40,12 @@ alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  {
-    /**
-     * The name of the Traffic Manager profile.
-     */
-    @path
-    @segment("trafficmanagerprofiles")
-    @key
-    profileName: string;
-  },
+  KeysOf<ResourceNameParameter<
+    Resource = Profile,
+    KeyName = "profileName",
+    SegmentName = "trafficmanagerprofiles",
+    NamePattern = ""
+  >>,
   ErrorType = CloudError
 >;
 

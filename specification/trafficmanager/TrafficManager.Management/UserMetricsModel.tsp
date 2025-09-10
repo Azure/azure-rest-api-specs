@@ -13,48 +13,43 @@ namespace Microsoft.Network;
 /**
  * Class representing Traffic Manager User Metrics.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @subscriptionResource
-model UserMetricsModel
-  is Azure.ResourceManager.ProxyResource<UserMetricsProperties> {
-  ...ResourceNameParameter<
-    Resource = UserMetricsModel,
-    KeyName = "trafficManagerUserMetricsKey",
-    SegmentName = "trafficManagerUserMetricsKeys",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model UserMetricsModel extends ProxyResource {
+  properties?: UserMetricsProperties;
 }
 
-@armResourceOperations
-interface UserMetricsModelOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /**
-         * The user metrics keys. The default value is "default".
-         */
-        @path
-        @segment("trafficManagerUserMetricsKeys")
-        @key("trafficManagerUserMetricsKeys")
-        trafficManagerUserMetricsKeys: "default",
-      },
-      {},
-      ErrorType = CloudError
-    > {}
+    /**
+     * The user metrics keys. The default value is "default".
+     */
+    @path
+    @segment("trafficManagerUserMetricsKeys")
+    @key("trafficManagerUserMetricsKeys")
+    trafficManagerUserMetricsKeys: "default";
+  },
+  {},
+  ErrorType = CloudError
+>;
 
 @armResourceOperations
 interface UserMetricsModels {
   /**
    * Get the subscription-level key used for Real User Metrics collection.
    */
-  get is ArmResourceRead<
-    UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = CloudError
-  >;
+  get is UserMetricsModelOps.Read<UserMetricsModel>;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
@@ -71,11 +66,9 @@ interface UserMetricsModels {
    * Delete a subscription-level key used for Real User Metrics collection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteSync<
+  delete is UserMetricsModelOps.DeleteSync<
     UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<DeleteOperationResult>,
-    Error = CloudError
+    Response = ArmResponse<DeleteOperationResult>
   >;
 }
 

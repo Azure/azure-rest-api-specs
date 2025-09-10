@@ -13,17 +13,33 @@ namespace Microsoft.Network;
 /**
  * Class representing the Geographic hierarchy used with the Geographic traffic routing method.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @tenantResource
-model TrafficManagerGeographicHierarchy
-  is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties> {
-  ...ResourceNameParameter<
-    Resource = TrafficManagerGeographicHierarchy,
-    KeyName = "trafficManagerGeographicHierarchy",
-    SegmentName = "trafficManagerGeographicHierarchies",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model TrafficManagerGeographicHierarchy extends ProxyResource {
+  properties?: GeographicHierarchyProperties;
 }
+
+alias TrafficManagerGeographicHierarchyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...Azure.ResourceManager.Legacy.Provider<TrafficManagerGeographicHierarchy>;
+  },
+  {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @segment("trafficManagerGeographicHierarchies")
+    @key("trafficManagerGeographicHierarchy")
+    trafficManagerGeographicHierarchy: "default";
+  },
+  ErrorType = CloudError
+>;
 
 @armResourceOperations
 interface TrafficManagerGeographicHierarchies {
@@ -32,11 +48,7 @@ interface TrafficManagerGeographicHierarchies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GeographicHierarchies_GetDefault")
-  getDefault is ArmResourceRead<
-    TrafficManagerGeographicHierarchy,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Error = CloudError
-  >;
+  getDefault is TrafficManagerGeographicHierarchyOps.Read<TrafficManagerGeographicHierarchy>;
 }
 
 @@doc(TrafficManagerGeographicHierarchy.name, "");

@@ -272,26 +272,36 @@ model EndpointPropertiesCustomHeadersItem {
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.extension("x-ms-azure-resource", true)
 model ProxyResource extends Resource {}
 
 /**
  * The core properties of ARM resources
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.extension("x-ms-mutability", #["read", "create", "update"])
   id?: string;
 
   /**
    * The name of the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.extension("x-ms-mutability", #["read", "create", "update"])
   name?: string;
 
   /**
    * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.extension("x-ms-mutability", #["read", "create", "update"])
   type?: string;
 }
 
@@ -398,6 +408,7 @@ model ProfileListResult {
    * Gets the list of Traffic manager profiles.
    */
   @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #[])
   value?: Profile[];
 
   /**
@@ -554,6 +565,32 @@ model MonitorConfigExpectedStatusCodeRangesItem {
    * Max status code.
    */
   max?: int32;
+}
+
+/**
+ * The resource model definition for a ARM tracked top level resource
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.extension("x-ms-azure-resource", true)
+model TrackedResource extends Resource {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /**
+   * The Azure Region where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 }
 
 /**
