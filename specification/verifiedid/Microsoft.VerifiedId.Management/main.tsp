@@ -18,7 +18,6 @@ namespace Microsoft.VerifiedId;
 
 enum Versions {
   @doc("2024-01-26-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_01_26: "2024-01-26-preview",
 }

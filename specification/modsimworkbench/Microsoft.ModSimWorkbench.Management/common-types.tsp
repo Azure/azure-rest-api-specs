@@ -20,14 +20,10 @@ namespace Microsoft.ModSimWorkbench;
 @doc("The ModSimWorkbench Control Plane API version.")
 enum Versions {
   @doc("Version 2021-03-01-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2021-03-01-preview`,
 
   @doc("Version 2024-05-01-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-05-01-preview`,
 }

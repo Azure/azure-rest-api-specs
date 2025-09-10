@@ -120,7 +120,6 @@ Examples of common errors and warnings that should be addressed after running th
 /** Service api versions **/
 enum Versions {
   /** The 2023-11-01 api version **/
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_11_01: "2023-11-01",
 }
 
@@ -230,4 +229,6 @@ Coding agent must wait until all SDK generation pipeline are in completed status
     - Keep checking the pipeline status until pipeline is in completed or failed status.
     - Find SDK pull request links from the pipeline run.
   constraints:
-    - Do not invoke other steps
+    - Do not invoke other steps.
+    - Do not modify main.tsp file or any files in TypeSpec project.
+    - Do not add API version to an existing main.tsp if input API version is not present.

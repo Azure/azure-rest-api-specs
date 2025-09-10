@@ -74,6 +74,24 @@ model ProviderAccountProperties {
 @pattern("^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$")
 scalar SubscriptionId extends string;
 
+/**
+ * Quota allocations with each field representing different quota type.
+ */
+@added(Versions.v2025_02_15_preview)
+model SubscriptionQuotaAllocations {
+  /**
+   * Limit for standard priority jobs execution in minutes for a lifetime of the subscription.
+   */
+  @minValue(0)
+  standardMinutesLifetime: int32;
+
+  /**
+   * Limit for high priority jobs execution in minutes for a lifetime of the subscription.
+   */
+  @minValue(0)
+  highMinutesLifetime?: int32;
+}
+
 /** A subscription that is allowed to access resources from a ProviderAccount. */
 model ProviderAccountSubscription {
   /** The Azure subscription ID. */
@@ -82,6 +100,14 @@ model ProviderAccountSubscription {
   /** The display name of the Azure subscription. */
   @maxLength(50)
   name?: string = "";
+
+  /** Indicates whether this subscription is enabled for access to the ProviderAccount resources. */
+  @added(Versions.v2025_02_15_preview)
+  enabled?: boolean = true;
+
+  /** Quota allocations for this subscription. */
+  @added(Versions.v2025_02_15_preview)
+  quotas?: SubscriptionQuotaAllocations;
 }
 
 /** A Target of a ProviderAccount, in which Workspace Jobs can be targeted at for execution. */
