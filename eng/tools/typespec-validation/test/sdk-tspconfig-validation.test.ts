@@ -11,6 +11,7 @@ import {
   TspConfigCsharpAzNamespaceSubRule,
   TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
+  TspConfigGoContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule,
@@ -292,7 +293,17 @@ const goManagementModuleTestCases = createEmitterOptionTestCases(
   "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute",
   "github.com/Azure/azure-sdk-for-java/sdk/compute/arm-compute",
   [new TspConfigGoModuleMatchPatternSubRule()],
-  true,
+  false,
+);
+
+const goManagementContainingModuleTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  managementTspconfigFolder,
+  "containing-module",
+  "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute",
+  "github.com/Azure/azure-sdk-for-java/sdk/compute/arm-compute",
+  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  false,
 );
 
 const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
@@ -347,7 +358,17 @@ const goDpModuleTestCases = createEmitterOptionTestCases(
   "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
   [new TspConfigGoModuleMatchPatternSubRule()],
-  true,
+  false,
+);
+
+const goDpContainingModuleTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "containing-module",
+  "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
+  "github.com/Azure/azure-sdk-for-cpp/bbb",
+  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  false,
 );
 
 const goDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
@@ -617,12 +638,14 @@ describe("tspconfig", function () {
     ...goManagementServiceDirTestCases,
     ...goManagementEmitterOutputDirTestCases,
     ...goManagementModuleTestCases,
+    ...goManagementContainingModuleTestCases,
     ...goManagementGenerateExamplesTestCases,
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
     ...goDpInjectSpansTestCases,
     ...goDpModuleTestCases,
+    ...goDpContainingModuleTestCases,
     ...goDpEmitterOutputDirTestCases,
     ...goDpServiceDirTestCases,
     // java
