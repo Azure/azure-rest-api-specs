@@ -1,0 +1,326 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Communication Services Management API",
+    "version": "2025-08-31-preview",
+    "description": "REST API for Azure Communication Services Recipient Usernames"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/recipientUsernames/{recipientUsername}": {
+      "get": {
+        "tags": [
+          "RecipientUsernames"
+        ],
+        "operationId": "RecipientUsernames_Get",
+        "description": "Get a Recipient Username resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "Domains.json#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/RecipientUsername"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Recipient Username resource.",
+            "schema": {
+              "$ref": "#/definitions/RecipientUsernameResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Recipient Username resource": {
+            "$ref": "./examples/recipientUsernames/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RecipientUsernames"
+        ],
+        "operationId": "RecipientUsernames_CreateOrUpdate",
+        "description": "Create or update a Recipient Username resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "Domains.json#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/RecipientUsername"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecipientUsernameResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/RecipientUsernameResource"
+            }
+          },
+          "201": {
+            "description": "The resource was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/RecipientUsernameResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Recipient Username resource": {
+            "$ref": "./examples/recipientUsernames/createOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RecipientUsernames"
+        ],
+        "operationId": "RecipientUsernames_Delete",
+        "description": "Delete a Recipient Username resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "Domains.json#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/RecipientUsername"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was successfully deleted."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Recipient Username resource": {
+            "$ref": "./examples/recipientUsernames/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/recipientUsernames": {
+      "get": {
+        "tags": [
+          "RecipientUsernames"
+        ],
+        "operationId": "RecipientUsernames_ListByDomains",
+        "description": "List all the Recipient Username resources under the parent Domain resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "Domains.json#/parameters/DomainName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Recipient Username resources under the parent Domain resource.",
+            "schema": {
+              "$ref": "#/definitions/RecipientUsernameResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Recipient Username resources by Domain": {
+            "$ref": "./examples/recipientUsernames/listByDomain.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RecipientUsernameResource": {
+      "type": "object",
+      "description": "A class representing a Recipient Username resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecipientUsernameProperties",
+          "description": "The properties of a Recipient Username resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecipientUsernameProperties": {
+      "type": "object",
+      "description": "A class that describes the properties of a Recipient Username resource.",
+      "required": [
+        "username"
+      ],
+      "properties": {
+        "dataLocation": {
+          "type": "string",
+          "description": "The location where the Recipient Username resource data is stored at rest.",
+          "readOnly": true
+        },
+        "username": {
+          "type": "string",
+          "description": "A username for receiving emails.",
+          "minLength": 1,
+          "maxLength": 253
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the username.",
+          "maxLength": 256
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Running",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EmailServices_ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RecipientUsernameResourceList": {
+      "type": "object",
+      "description": "A class representing a list of Recipient Username resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Recipient Username resources.",
+          "items": {
+            "$ref": "#/definitions/RecipientUsernameResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "RecipientUsername": {
+      "name": "recipientUsername",
+      "in": "path",
+      "description": "The name of the Recipient Username resource.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 253,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
