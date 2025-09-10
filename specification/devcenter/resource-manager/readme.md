@@ -51,7 +51,37 @@ directive:
       - DescriptionMustNotBeNodeName
 
   - where:
-    - $.definitions.UsageUnit["x-ms-enum"].values[?(@.value=="Count")].description
+    - $.definitions.DayOfWeek["x-ms-enum"].values[1].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[2].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[3].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[4].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[5].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[6].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.UsageUnit["x-ms-enum"].values[0].description
     suppress:
       - DescriptionMustNotBeNodeName
 
