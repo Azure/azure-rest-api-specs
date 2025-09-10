@@ -3,7 +3,7 @@
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
     "resourceGroupName": "Default-NotificationRules",
     "actionGroupName": "SampleActionGroup",
-    "api-version": "2024-10-01-preview"
+    "api-version": "2025-09-01-preview"
   },
   "responses": {
     "200": {
@@ -79,10 +79,39 @@
           "azureAppPushReceivers": [],
           "automationRunbookReceivers": [],
           "voiceReceivers": [],
-          "logicAppReceivers": [],
-          "azureFunctionReceivers": [],
+          "logicAppReceivers": [
+            {
+              "name": "Sample logicApp",
+              "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/LogicApp/providers/Microsoft.Logic/workflows/testLogicApp",
+              "callbackUrl": "http://example.callback",
+              "useCommonAlertSchema": false,
+              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+              "triggerName": "manual"
+            }
+          ],
+          "azureFunctionReceivers": [
+            {
+              "name": "Sample azureFunction",
+              "functionAppResourceId": "/subscriptions/5def922a-3ed4-49c1-b9fd-05ec533819a3/resourceGroups/aznsTest/providers/Microsoft.Web/sites/testFunctionApp",
+              "functionName": "HttpTriggerCSharp1",
+              "httpTriggerUrl": "http://test.me",
+              "useCommonAlertSchema": true,
+              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+              "scope": "api://functionapp.default"
+            }
+          ],
           "armRoleReceivers": [],
-          "eventHubReceivers": [],
+          "eventHubReceivers": [
+            {
+              "name": "Sample eventHub",
+              "eventHubNameSpace": "testEventHubNameSpace",
+              "eventHubName": "testEventHub",
+              "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
+              "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84",
+              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+              "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/Microsoft.EventHub/namespaces/testEventHubNameSpace/eventhubs/testEventHub"
+            }
+          ],
           "incidentReceivers": []
         }
       }

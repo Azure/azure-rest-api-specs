@@ -3,7 +3,7 @@
     "subscriptionId": "11111111-1111-1111-1111-111111111111",
     "resourceGroupName": "TestRgName",
     "actionGroupName": "TestAgName",
-    "api-version": "2024-10-01-preview",
+    "api-version": "2025-09-01-preview",
     "notificationRequest": {
       "alertType": "budget",
       "emailReceivers": [
@@ -85,7 +85,8 @@
           "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/LogicApp/providers/Microsoft.Logic/workflows/testLogicApp",
           "callbackUrl": "https://prod-27.northcentralus.logic.azure.com/workflows/68e572e818e5457ba898763b7db90877/triggers/manual/paths/invoke/azns/test?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Abpsb72UYJxPPvmDo937uzofupO5r_vIeWEx7KVHo7w",
           "useCommonAlertSchema": false,
-          "managedIdentity": "f11979a4-36d1-45d0-9097-a0da3c7e855d"
+          "managedIdentity": "f11979a4-36d1-45d0-9097-a0da3c7e855d",
+          "triggerName": "manual"
         }
       ],
       "azureFunctionReceivers": [
@@ -95,7 +96,8 @@
           "functionName": "HttpTriggerCSharp1",
           "httpTriggerUrl": "http://test.me",
           "useCommonAlertSchema": true,
-          "managedIdentity": "f11979a4-36d1-45d0-9097-a0da3c7e855d"
+          "managedIdentity": "f11979a4-36d1-45d0-9097-a0da3c7e855d",
+          "scope": "api://functionapp.default"
         }
       ],
       "eventHubReceivers": [
@@ -104,7 +106,8 @@
           "eventHubNameSpace": "testEventHubNameSpace",
           "eventHubName": "testEventHub",
           "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
-          "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84"
+          "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84",
+          "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/Microsoft.EventHub/namespaces/testEventHubNameSpace/eventhubs/testEventHub"
         }
       ],
       "armRoleReceivers": [
@@ -124,7 +127,7 @@
   "responses": {
     "202": {
       "headers": {
-        "location": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/TestRgName/providers/microsoft.insights/actionGroups/TestAgName/notificationStatus/11111111111111?api-version=2024-10-01-preview"
+        "location": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/TestRgName/providers/microsoft.insights/actionGroups/TestAgName/notificationStatus/11111111111111?api-version=2025-09-01-preview"
       }
     },
     "200": {

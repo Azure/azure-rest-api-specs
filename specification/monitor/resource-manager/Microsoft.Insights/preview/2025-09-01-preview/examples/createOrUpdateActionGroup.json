@@ -3,7 +3,7 @@
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
     "resourceGroupName": "Default-NotificationRules",
     "actionGroupName": "SampleActionGroup",
-    "api-version": "2024-10-01-preview",
+    "api-version": "2025-09-01-preview",
     "actionGroup": {
       "location": "Global",
       "tags": {},
@@ -98,7 +98,8 @@
             "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/LogicApp/providers/Microsoft.Logic/workflows/testLogicApp",
             "callbackUrl": "https://prod-27.northcentralus.logic.azure.com/workflows/68e572e818e5457ba898763b7db90877/triggers/manual/paths/invoke/azns/test?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Abpsb72UYJxPPvmDo937uzofupO5r_vIeWEx7KVHo7w",
             "useCommonAlertSchema": false,
-            "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+            "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+            "triggerName": "manual"
           }
         ],
         "azureFunctionReceivers": [
@@ -108,7 +109,8 @@
             "functionName": "HttpTriggerCSharp1",
             "httpTriggerUrl": "http://test.me",
             "useCommonAlertSchema": true,
-            "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+            "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+            "scope": "api://functionapp.default"
           }
         ],
         "armRoleReceivers": [
@@ -125,7 +127,8 @@
             "eventHubName": "testEventHub",
             "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
             "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84",
-            "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+            "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+            "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/Microsoft.EventHub/namespaces/testEventHubNameSpace/eventhubs/testEventHub"
           }
         ],
         "incidentReceivers": [
@@ -260,7 +263,8 @@
               "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/LogicApp/providers/Microsoft.Logic/workflows/testLogicApp",
               "callbackUrl": "https://prod-27.northcentralus.logic.azure.com/workflows/68e572e818e5457ba898763b7db90877/triggers/manual/paths/invoke/azns/test?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Abpsb72UYJxPPvmDo937uzofupO5r_vIeWEx7KVHo7w",
               "useCommonAlertSchema": false,
-              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+              "triggerName": "manual"
             }
           ],
           "azureFunctionReceivers": [
@@ -268,9 +272,10 @@
               "name": "Sample azureFunction",
               "functionAppResourceId": "/subscriptions/5def922a-3ed4-49c1-b9fd-05ec533819a3/resourceGroups/aznsTest/providers/Microsoft.Web/sites/testFunctionApp",
               "functionName": "HttpTriggerCSharp1",
-              "httpTriggerUrl": "<httpTriggerUrl>",
+              "httpTriggerUrl": "http://test.me",
               "useCommonAlertSchema": true,
-              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+              "scope": "api://functionapp.default"
             }
           ],
           "armRoleReceivers": [
@@ -287,8 +292,8 @@
               "eventHubName": "testEventHub",
               "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
               "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84",
-              "useCommonAlertSchema": false,
-              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+              "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/Microsoft.EventHub/namespaces/testEventHubNameSpace/eventhubs/testEventHub"
             }
           ],
           "incidentReceivers": [
@@ -407,9 +412,7 @@
             {
               "name": "Sample logicApp",
               "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/LogicApp/providers/Microsoft.Logic/workflows/testLogicApp",
-              "callbackUrl": "https://prod-27.northcentralus.logic.azure.com/workflows/68e572e818e5457ba898763b7db90877/triggers/manual/paths/invoke/azns/test?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Abpsb72UYJxPPvmDo937uzofupO5r_vIeWEx7KVHo7w",
-              "useCommonAlertSchema": false,
-              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+              "triggerName": "manual"
             }
           ],
           "azureFunctionReceivers": [
@@ -417,9 +420,10 @@
               "name": "Sample azureFunction",
               "functionAppResourceId": "/subscriptions/5def922a-3ed4-49c1-b9fd-05ec533819a3/resourceGroups/aznsTest/providers/Microsoft.Web/sites/testFunctionApp",
               "functionName": "HttpTriggerCSharp1",
-              "httpTriggerUrl": "<httpTriggerUrl>",
+              "httpTriggerUrl": "http://test.me",
               "useCommonAlertSchema": true,
-              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+              "scope": "api://functionapp.default"
             }
           ],
           "armRoleReceivers": [
@@ -436,7 +440,9 @@
               "eventHubName": "testEventHub",
               "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
               "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84",
-              "useCommonAlertSchema": false
+              "useCommonAlertSchema": false,
+              "managedIdentity": "30fe7a91-cd31-4edf-96ab-52883b3199cd",
+              "resourceId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/Microsoft.EventHub/namespaces/testEventHubNameSpace/eventhubs/testEventHub"
             }
           ],
           "incidentReceivers": [
