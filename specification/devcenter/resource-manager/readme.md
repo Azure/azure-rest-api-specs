@@ -43,7 +43,7 @@ directive:
   suppress:
     - PatchBodyParametersSchema
 - where:
-  - $.definitions.DayOfWeek[0]
+  - $.definitions.DayOfWeek.values
   suppress:
     - DescriptionMustNotBeNodeName
 - where:
