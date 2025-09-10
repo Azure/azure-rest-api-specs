@@ -5,7 +5,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@typespec/openapi";
 import "./models.tsp";
-import "../../Microsoft.Monitor.Accounts.Management/typespec/models.tsp";
+import "../models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -19,11 +19,6 @@ using Azure.Core;
 @versioned(Versions)
 namespace Microsoft.Monitor;
 
-enum Versions {
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @doc("API Version 2025-05-03-preview")
-  v2025_05_03: "2025-05-03-preview",
-}
 
 @doc("The issue properties")
 model IssueProperties {
