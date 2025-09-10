@@ -321,26 +321,31 @@ stages:
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $true
+        
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
-          - task: AzureCLI@2
-            displayName: Link pull request to release plan
-            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), not(endsWith(variables['SdkRepoName'], '-pr')))
-            continueOnError: true
-            inputs:
-              azureSubscription: opensource-api-connection
-              scriptType: pscore
-              scriptLocation: scriptPath
-              scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
-              arguments: >
-                -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
-                -PullRequestUrl "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
-                -Status "draft"
-                -SdkRepoName "$(SdkRepoName)"
+          - pwsh: |
+              if ('$(Submitted.PullRequest.Number)' -ne '') 
+              {
+                $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
+                Write-Host "Pull request created: $prUrl"
+                Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+                $prStatus = "draft"
+                Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+              }
+              else
+              {
+                $prUrl = ""
+                Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+                $prStatus = "Failed to generate SDK."
+                Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+              }
+            condition: not(endsWith(variables['SdkRepoName'], '-pr')))
+            displayName: "Set pull request URL variables"
 
           - task: AzureCLI@2
-            displayName: Update SDK generation status as failed
-            condition: and(Failed(), not(endsWith(variables['SdkRepoName'], '-pr')))
+            displayName: Link pull request to release plan
+            condition: not(endsWith(variables['SdkRepoName'], '-pr'))
             continueOnError: true
             inputs:
               azureSubscription: opensource-api-connection
@@ -349,8 +354,8 @@ stages:
               scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
               arguments: >
                 -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
-                -PullRequestUrl ""
-                -Status "Failed to generate SDK."
+                -PullRequestUrl "$(PullRequestUrl)"
+                -Status "$(SdkPrStatus)"
                 -SdkRepoName "$(SdkRepoName)"
 
       - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
