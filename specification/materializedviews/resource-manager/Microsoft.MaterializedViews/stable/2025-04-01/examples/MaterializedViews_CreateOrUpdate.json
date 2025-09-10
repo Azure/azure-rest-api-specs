@@ -1,0 +1,66 @@
+{
+  "operationId": "MaterializedViews_CreateOrUpdate",
+  "title": "Create or update a MaterializedView",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "testrg",
+    "materializedViewName": "testview",
+    "api-version": "2025-04-01",
+    "resource": {
+      "location": "East US",
+      "properties": {
+        "viewDefinition": "SELECT * FROM source_table WHERE active = 1",
+        "refreshPolicy": {
+          "isAutoRefresh": true,
+          "refreshIntervalMinutes": 60
+        },
+        "dataSource": {
+          "connectionString": "Server=myserver;Database=mydatabase;",
+          "dataSourceType": "SqlServer"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/testrg/providers/Microsoft.MaterializedViews/materializedViews/testview",
+        "name": "testview",
+        "type": "Microsoft.MaterializedViews/materializedViews",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "viewDefinition": "SELECT * FROM source_table WHERE active = 1",
+          "refreshPolicy": {
+            "isAutoRefresh": true,
+            "refreshIntervalMinutes": 60
+          },
+          "dataSource": {
+            "connectionString": "Server=myserver;Database=mydatabase;",
+            "dataSourceType": "SqlServer"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/testrg/providers/Microsoft.MaterializedViews/materializedViews/testview",
+        "name": "testview",
+        "type": "Microsoft.MaterializedViews/materializedViews",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Provisioning",
+          "viewDefinition": "SELECT * FROM source_table WHERE active = 1",
+          "refreshPolicy": {
+            "isAutoRefresh": true,
+            "refreshIntervalMinutes": 60
+          },
+          "dataSource": {
+            "connectionString": "Server=myserver;Database=mydatabase;",
+            "dataSourceType": "SqlServer"
+          }
+        }
+      }
+    }
+  }
+}
