@@ -37,12 +37,12 @@ These settings apply only when `--tag=package-2021-01-11` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-01-11'
 input-file:
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/common-types.json
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForEDMUpload.json
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForM365ComplianceCenter.json
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForM365SecurityCenter.json
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForO365ManagementActivityAPI.json
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForSCCPowershell.json
+- stable/2021-01-11/common-types.json
+- stable/2021-01-11/privateLinkServicesForEDMUpload.json
+- stable/2021-01-11/privateLinkServicesForM365ComplianceCenter.json
+- stable/2021-01-11/privateLinkServicesForM365SecurityCenter.json
+- stable/2021-01-11/privateLinkServicesForO365ManagementActivityAPI.json
+- stable/2021-01-11/privateLinkServicesForSCCPowershell.json
 ```
 
 ### Tag: package-2021-03-08
@@ -51,13 +51,13 @@ These settings apply only when `--tag=package-2021-03-08` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-03-08'
 input-file:
-- Microsoft.SecurityAndCompliance/stable/2021-03-08/common-types.json
-- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForEDMUpload.json
-- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForM365ComplianceCenter.json
-- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForM365SecurityCenter.json
-- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForO365ManagementActivityAPI.json
-- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForSCCPowershell.json
-- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForMIPPolicySync.json
+- stable/2021-03-08/common-types.json
+- stable/2021-03-08/privateLinkServicesForEDMUpload.json
+- stable/2021-03-08/privateLinkServicesForM365ComplianceCenter.json
+- stable/2021-03-08/privateLinkServicesForM365SecurityCenter.json
+- stable/2021-03-08/privateLinkServicesForO365ManagementActivityAPI.json
+- stable/2021-03-08/privateLinkServicesForSCCPowershell.json
+- stable/2021-03-08/privateLinkServicesForMIPPolicySync.json
 ```
 
 ---
