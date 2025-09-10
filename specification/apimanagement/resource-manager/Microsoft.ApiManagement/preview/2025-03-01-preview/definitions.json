@@ -1564,7 +1564,7 @@
           "readOnly": true
         },
         "lastStatus": {
-          "$ref": "#/definitions/AuthorizationProviderKeyVaultLastStatusContract",
+          "type": "object",
           "description": "Last time sync and refresh of secret from key vault.",
           "readOnly": true
         }
@@ -1575,47 +1575,6 @@
         }
       ],
       "description": "Authorization Provider KeyVault contract properties."
-    },
-    "AuthorizationProviderKeyVaultLastStatusContract": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Last status code for sync and refresh of secret from key vault.",
-          "enum": [
-            "Success",
-            "Failure"
-          ],
-          "x-ms-enum": {
-            "name": "AuthorizationProviderKeyVaultLastStatusCode",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Success",
-                "description": "The Secret access is successful."
-              },
-              {
-                "value": "Failure",
-                "description": "The Secret access is failed."
-              }
-            ]
-          }
-        },
-        "message": {
-          "type": "string",
-          "description": "Representation of the error."
-        },
-        "timeStampUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last accessed date and time."
-        }
-      },
-      "required": [
-        "code",
-        "timeStampUtc"
-      ],
-      "description": "Authorization Provider KeyVault last status contract properties."
     },
     "OAuth2AuthorizationCodeParameters": {
       "type": "object",
