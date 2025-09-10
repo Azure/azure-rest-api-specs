@@ -142,6 +142,11 @@ using Microsoft.NetApp;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BackupVault.properties);
 
+@@clientName(Buckets.createOrUpdate::parameters.resource, "body");
+@@clientName(Buckets.update::parameters.properties, "body");
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Bucket.properties);
+
 @@clientLocation(NetAppResourceOperationGroup.checkNameAvailability,
   "NetAppResource"
 );
