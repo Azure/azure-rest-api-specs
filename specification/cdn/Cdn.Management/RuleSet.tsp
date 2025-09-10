@@ -39,9 +39,7 @@ interface RuleSets {
   @put
   create is Azure.ResourceManager.Legacy.CustomPatchAsync<
     RuleSet,
-    PatchModel = {
-      @body body: void;
-    },
+    PatchModel = void,
     Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>
   >;
 
