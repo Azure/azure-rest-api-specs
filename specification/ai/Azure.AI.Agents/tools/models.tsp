@@ -171,6 +171,29 @@ model MCPToolDefinition extends ToolDefinition {
   @doc("List of allowed tools for MCP server")
   @encodedName("application/json", "allowed_tools")
   allowedTools?: string[];
+
+  @doc("Server authentication information")
+  @encodedName("application/json", "server_authentication")
+  serverAuthentication?: MCPServerAuthentication;
+}
+
+@doc("The server authentication details for MCP tool definition")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+model MCPServerAuthentication {
+  @doc("The type of authentication")
+  type: string;
+}
+
+@doc("The MCP server authentication details using a connection")
+@added(Versions.v2025_05_15_preview)
+model MCPServerConnectionAuthentication extends MCPServerAuthentication {
+  @doc("The type of authentication, must be connection")
+  type: "connection";
+
+  @doc("Name of the connection")
+  @encodedName("application/json", "connection_name")
+  connectionName: string;
 }
 
 // Definition details: File Search
@@ -882,6 +905,21 @@ model ToolApproval {
 
   @doc("Headers to be attached to the approval.")
   headers?: Record<string>;
+}
+
+//
+// OAuth consents -- structured data that allows the client to send OAuth consents
+//
+
+@doc("The data provided during an outputs submission to resolve pending OAuth consent actions and allow the model to continue.")
+@added(Versions.v2025_05_15_preview)
+model OAuthConsent {
+  @doc("The ID of the activity being resolved, as provided in the activities of a required action from a run.")
+  @encodedName("application/json", "activity_id")
+  activityId: string;
+
+  @doc("The consented boolean value to be submitted.")
+  consented: boolean;
 }
 
 /**

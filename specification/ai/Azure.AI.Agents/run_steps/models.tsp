@@ -525,7 +525,7 @@ union RunAdditionalFieldList {
 
 /** Represents the list of activities, associated with the given step. */
 @added(Versions.v2025_05_15_preview)
-model RunStepDetailsActivity {
+model BaseRunStepDetailsActivity {
   @doc("The activity type, which is always 'mcp_list_tools'.")
   type: "mcp_list_tools";
 
@@ -535,9 +535,25 @@ model RunStepDetailsActivity {
   @doc("Server label.")
   @encodedName("application/json", "server_label")
   serverLabel: string;
+}
+
+/** Represents the list of activities, associated with the given step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDetailsActivity {
+  ...BaseRunStepDetailsActivity;
 
   @doc("The supported function list.")
   tools: Record<ActivityFunctionDefinition>;
+}
+
+/** Represents the list of activities, associated with the given step. */
+@added(Versions.v2025_05_15_preview)
+model OAuthConsentActivity {
+  ...BaseRunStepDetailsActivity;
+
+  @doc("The consent link to complete authentication.")
+  @encodedName("application/json", "consent_link")
+  consentLink: string;
 }
 
 @doc("The activity definition information for a function.")
