@@ -332,6 +332,12 @@ model CheckNameAvailability {
   name: string;
 }
 
+@doc("The parameters used to check the availability of the trusted signing account name.")
+model CheckNameAvailability {
+  @doc("Trusted signing account name.")
+  nameTets: string;
+}
+
 @doc("The CheckNameAvailability operation response.")
 model CheckNameAvailabilityResult {
   @doc("A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.")
