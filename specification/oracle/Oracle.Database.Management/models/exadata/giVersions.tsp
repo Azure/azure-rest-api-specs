@@ -28,6 +28,11 @@ model GiVersionProperties {
 @added(Versions.v20241201_preview)
 @doc("Provides GiVersion query parameter for list operations.")
 model GiVersionFilter {
+  @added(Versions.v20250801_preview)
+  @query
+  @doc("Filters the result for the given Shape Attribute, such as BLOCK_STORAGE or SMART_STORAGE.")
+  shapeAttribute?: string;
+  
   @query
   @doc("If provided, filters the results for the given shape")
   @minLength(1)

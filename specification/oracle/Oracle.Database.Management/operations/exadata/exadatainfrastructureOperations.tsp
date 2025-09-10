@@ -1,6 +1,7 @@
 import "../commons.tsp";
 import "../../models/exadata/exadatainfra.tsp";
 
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -24,7 +25,15 @@ interface CloudExadataInfrastructures
     void,
     CloudExadataInfrastructure
   >;
-}
+
+  @added(Versions.v20250801_preview)
+  @doc("Configures Exascale on Cloud exadata infrastructure resource")
+  configureExascale is ArmResourceActionAsync<
+    CloudExadataInfrastructure,
+    ConfigureExascaleCloudExadataInfrastructureDetails,
+    CloudExadataInfrastructure
+  >;
+  }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(CloudExadataInfrastructures.listBySubscription,

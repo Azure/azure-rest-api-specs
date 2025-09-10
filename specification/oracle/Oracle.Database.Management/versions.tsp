@@ -43,4 +43,34 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("2025-03-01")
   v20250301: "2025-03-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("2025-04-01-preview")
+  v20250401_preview: "2025-04-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("2025-06-01-preview")
+  v20250601_preview: "2025-06-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("2025-07-01-preview")
+  v20250701_preview: "2025-07-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("2025-08-01-preview")
+  v20250801_preview: "2025-08-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("2025-08-15-preview")
+  v20250815_preview: "2025-08-15-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("2025-09-01")
+  v20250901: "2025-09-01",
 }

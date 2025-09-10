@@ -8,14 +8,10 @@ namespace Oracle.Database;
 
 @armResourceOperations(AutonomousDatabase)
 interface AutonomousDatabases
-  extends ResourceListBySubscription<AutonomousDatabase>,
-    ResourceCreateAsync<AutonomousDatabase>,
-    ResourceRead<AutonomousDatabase>,
-    ResourceDeleteWithoutOkAsync<AutonomousDatabase> {
-  update is ArmCustomPatchAsync<AutonomousDatabase, AutonomousDatabaseUpdate>;
-
-  listByResourceGroup is ArmResourceListByParent<AutonomousDatabase>;
-
+  extends OracleTrackedResource<
+      AutonomousDatabase,
+      AutonomousDatabaseBaseProperties
+    > {
   //OCI switchover API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/SwitchoverAutonomousDatabase
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Perform switchover action on Autonomous Database")
@@ -92,6 +88,15 @@ interface AutonomousDatabases
   changeDisasterRecoveryConfiguration is ArmResourceActionAsync<
     AutonomousDatabase,
     DisasterRecoveryConfigurationDetails,
+    AutonomousDatabase
+  >;
+
+  //OCI Lifecycle Action - Configuration API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/{Start/Stop/Restart}AutonomousDatabase
+  @added(Versions.v20250601_preview)
+  @doc("Perform Lifecycle Management Action on Autonomous Database")
+  action is ArmResourceActionAsync<
+    AutonomousDatabase,
+    AutonomousDatabaseLifecycleAction,
     AutonomousDatabase
   >;
 }
