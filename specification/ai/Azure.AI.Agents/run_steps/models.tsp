@@ -363,8 +363,8 @@ model RunStepDeltaImageGenerationDetailItemObject {
   /** The prompt used for image generation or editing. */
   prompt?: string;
 
-  /** The generated image output. */
-  output?: string;
+  /** The generated image output with comprehensive metadata. */
+  output?: ImageOutput;
 }
 
 /** Represents the function data in a streaming run step MCP call. */

@@ -544,36 +544,40 @@ model RunStepImageGenerationToolCallDetails {
   prompt: string;
 
   @doc("The generated image output.")
-  output?: string;
+  output?: ImageOutput;
 }
 
-/**
- * Options overrides for the image generation tool.
- */
+@doc("The image generation response following OpenAI's contract.")
 @added(Versions.v2025_05_01)
-model ImageGenerationToolDefinitionDetails {
-  /**
-   * The quality of the image that will be generated. 'hd' creates images with finer details and greater consistency.
-   */
-  quality?: ImageQuality;
-
-  /**
-   * The size of the generated image. Must be one of 256x256, 512x512, 1024x1024, 1024x1792, or 1792x1024.
-   */
-  size?: ImageSize;
-
-  /**
-   * The format in which the generated image is returned.
-   */
+model ImageOutput {
+  @doc("The background parameter used for the image generation. Either transparent or opaque.")
+  background?: "transparent" | "opaque";
+  
+  @doc("The Unix timestamp (in seconds) of when the image was created.")
+  created: int64;
+  
+  @doc("The list of generated images.")
+  data: ImageData[];
+  
+  @doc("The output format of the image generation. Either png, webp, or jpeg.")
   @encodedName("application/json", "output_format")
-  outputFormat?: ImageOutputFormat;
+  outputFormat: "png" | "webp" | "jpeg";
+  
+  @doc("The quality of the image generated. Either low, medium, or high.")
+  quality: "low" | "medium" | "high";
+  
+  @doc("The size of the image generated. Either 1024x1024, 1024x1536, or 1536x1024.")
+  size: "1024x1024" | "1024x1536" | "1536x1024";
+}
 
-  /**
-   * The number of images to generate. Must be between 1 and 10.
-   */
-  @minValue(1)
-  @maxValue(10)
-  n?: int32;
+@doc("Individual image data within the image generation response.")
+@added(Versions.v2025_05_01)
+model ImageData {
+  @doc("The base64-encoded image data.")
+  b64_json?: string;
+  
+  @doc("The URL of the generated image (if applicable).")
+  url?: string;
 }
 
 @doc("""
