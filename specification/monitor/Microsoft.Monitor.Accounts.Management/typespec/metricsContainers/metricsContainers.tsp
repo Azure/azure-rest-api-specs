@@ -1,9 +1,3 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@typespec/openapi";
 import "./models.tsp";
 import "../service.tsp";
 
