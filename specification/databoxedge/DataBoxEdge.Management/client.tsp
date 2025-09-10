@@ -3,4 +3,4 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.DataBoxEdge;
 
-@@clientName(DataBoxEdgeSku,"AvailableDataBoxEdgeSku",csharp");
+@@clientName(DataBoxEdgeSku,"AvailableDataBoxEdgeSku","csharp");
