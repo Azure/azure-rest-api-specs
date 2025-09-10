@@ -20,7 +20,8 @@ import {
   TspConfigGoMgmtModuleEqualStringSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigJavaAzPackageDirectorySubRule,
+  TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
+  TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
   TspConfigPythonDpPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
@@ -366,13 +367,24 @@ const goDpServiceDirTestCases = createEmitterOptionTestCases(
   [new TspConfigGoDpServiceDirMatchPatternSubRule()],
 );
 
-const javaManagementPackageDirTestCases = createEmitterOptionTestCases(
+const javaAzEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-java",
   "",
-  "package-dir",
-  "azure-aaa",
+  "emitter-output-dir",
+  "{output-dir}/{service-dir}/azure-aaa",
   "aaa",
-  [new TspConfigJavaAzPackageDirectorySubRule()],
+  [new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule()],
+  true,
+);
+
+const javaMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-java",
+  managementTspconfigFolder,
+  "emitter-output-dir",
+  "{service-dir}/azure-resourcemanager-aaa-bbb",
+  "azure-aaa",
+  [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
+  true,
 );
 
 const javaMgmtNamespaceTestCases = createEmitterOptionTestCases(
@@ -613,7 +625,8 @@ describe("tspconfig", function () {
     ...goDpPackageDirTestCases,
     ...goDpServiceDirTestCases,
     // java
-    ...javaManagementPackageDirTestCases,
+    ...javaAzEmitterOutputDirTestCases,
+    ...javaMgmtEmitterOutputDirTestCases,
     ...javaMgmtNamespaceTestCases,
     ...javaMgmtNamespaceExtendedTestCases,
     // python
