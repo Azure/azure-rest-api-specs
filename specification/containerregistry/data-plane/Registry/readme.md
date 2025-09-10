@@ -26,7 +26,7 @@ These are the global settings for the ContainerRegistry API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2019-08
+tag: package-2021-07
 ```
 
 ### Tag: package-2021-07
