@@ -12,11 +12,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageactions.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.StorageActions"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.StorageActions"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-storageactions"
     namespace: "azure.mgmt.storageactions"
@@ -24,7 +24,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-storageactions"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storageactions"
     namespace: "com.azure.resourcemanager.storageactions"
     service-name: "StorageActions" # human-readable service name, whitespace allowed
     flavor: azure
