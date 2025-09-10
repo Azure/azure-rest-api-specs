@@ -13,10 +13,10 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.ServiceFabricManagedClusters"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ServiceFabricManagedClusters"
     flavor: azure
     suppress-abstract-base-class:
       - "ManagedServiceProperties"
@@ -43,7 +43,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-servicefabricmanagedclusters"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicefabricmanagedclusters"
     namespace: com.azure.resourcemanager.servicefabricmanagedclusters
     flavor: azure
     service-name: Service Fabric Managed Clusters

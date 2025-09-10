@@ -17,8 +17,8 @@ options:
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Storage.Blob"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Storage.Blob"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
@@ -31,7 +31,7 @@ options:
       description: "Azure.Storage.Blob Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-storage-blob"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-blob"
     namespace: com.azure.storage.blob
     flavor: azure
   "@azure-tools/typespec-rust":
