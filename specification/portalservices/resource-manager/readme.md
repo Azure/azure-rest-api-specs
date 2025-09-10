@@ -37,6 +37,11 @@ These settings apply only when `--tag=package-2025-09-10-preview` is specified o
 ```yaml $(tag) == 'package-2025-09-10-preview'
 input-file:
   - Microsoft.PortalServices/copilotSettings/preview/2025-09-10-preview/copilotSettings.json
+  - Microsoft.PortalServices/copilotConnectors/preview/2025-05-15-preview/copilotConnectors.json
+  - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2024-09-01-preview/azurecoreexperiencesassistant.json
+  - Microsoft.PortalServices/dashboards/preview/2024-09-01-preview/dashboards.json
+  - Microsoft.PortalServices/extensions/preview/2024-10-01-preview/extensions.json
+  - Microsoft.PortalServices/settings/preview/2025-04-01-preview/settings.json
 suppressions:
   - code: PathForTrackedResourceTypes
     reason: >
@@ -80,6 +85,33 @@ suppressions:
     from:
       - copilotSettings.json
     where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
+  - code: EvenSegmentedPathForPutOperation
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @singleton
+      (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: XmsPageableForListCalls
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider @singleton
+      (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: TopLevelResourcesListBySubscription
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @tenantResource,
+      so subscription list operation is not valid. This is a false positive.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: TenantLevelAPIsNotAllowed
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @tenantResource.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
 ```
 
 ### Tag: package-2025-08-01-preview
