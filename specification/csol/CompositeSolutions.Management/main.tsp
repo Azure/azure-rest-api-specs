@@ -334,6 +334,7 @@ model BundleProfile {
 interface CompositeSolutions {
   get is ArmResourceRead<CompositeSolution>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CompositeSolution>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<CompositeSolution, CompositeSolutionUpdate1>;
   delete is ArmResourceDeleteWithoutOkAsync<CompositeSolution>;
   listByResourceGroup is ArmResourceListByParent<CompositeSolution>;
@@ -349,6 +350,7 @@ interface CompositeSolutions {
 interface CompositeSolutionDefinitions {
   get is ArmResourceRead<CompositeSolutionDefinition>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<CompositeSolutionDefinition>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     CompositeSolutionDefinition,
     CompositeSolutionDefinitionUpdate

@@ -120,6 +120,7 @@ namespace SplitIO.Experimentation {
   interface ExperimentationWorkspaces {
     get is ArmResourceRead<ExperimentationWorkspace>;
     create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
+    @patch(#{ implicitOptionality: true })
     update is ArmCustomPatchAsync<
       ExperimentationWorkspace,
       Azure.ResourceManager.Foundations.ResourceUpdateModel<

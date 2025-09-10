@@ -32,6 +32,7 @@ model Indexer is TrackedResource<IndexerProperties> {
 interface IndexerOperations {
   get is ArmResourceRead<Indexer>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Indexer>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Indexer,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

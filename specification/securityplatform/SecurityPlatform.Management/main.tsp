@@ -68,6 +68,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface AccountLinks {
   get is ArmResourceRead<AccountLink>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<AccountLink>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     AccountLink,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

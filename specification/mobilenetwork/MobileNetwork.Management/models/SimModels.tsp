@@ -110,9 +110,9 @@ model SimNameAndProperties {
   @doc("The name of the SIM.")
   name: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("SIM Properties.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: SimPropertiesFormat;
 }
 
@@ -149,9 +149,9 @@ model SimNameAndEncryptedProperties {
   @doc("The name of the SIM.")
   name: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Encrypted SIM Properties.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: EncryptedSimPropertiesFormat;
 }
 
