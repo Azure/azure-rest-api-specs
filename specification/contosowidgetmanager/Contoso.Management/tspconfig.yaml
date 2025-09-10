@@ -33,9 +33,9 @@ options:
     package-details:
       name: "@azure/arm-contoso"
   "@azure-tools/typespec-go":
-    service-dir: "{output-dir}/sdk/resourcemanager/contoso"
-    emitter-output-dir: "{service-dir}/armcontoso"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/contoso/armcontoso"
+    service-dir: "sdk/resourcemanager/contoso"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontoso"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontoso"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
