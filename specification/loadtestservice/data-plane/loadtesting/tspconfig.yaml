@@ -5,21 +5,22 @@ parameters:
     default: "loadtesting"
 emit:
   - "@azure-tools/typespec-autorest"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  #- "@azure-tools/typespec-python"
-  #- "@azure-tools/typespec-ts"
-  #- "@azure-tools/typespec-csharp"
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+    # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
+    #- "@azure-tools/typespec-python"
+    #- "@azure-tools/typespec-ts"
+    #- "@azure-tools/typespec-csharp"
+    # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
+    # "@azure-tools/typespec-java": true
+    # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+    # "@azure-tools/typespec-csharp": true
+    # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
+    # "@azure-tools/typespec-ts": true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Developer.LoadTesting
     model-namespace: false
   "@azure-tools/typespec-autorest":
@@ -48,14 +49,14 @@ options:
       version: 1.0.1
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Developer.LoadTesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.Developer.LoadTesting"
     generate-sample-project: false
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-developer-loadtesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-loadtesting"
     namespace: com.azure.developer.loadtesting
     enable-sync-stack: true
     partial-update: true

@@ -12,11 +12,11 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.SelfHelp"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Help"
   "@azure-tools/typespec-python":
     service-dir: "sdk/selfhelp"
     package-dir: "azure-mgmt-selfhelp"
@@ -25,8 +25,8 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-selfhelp"
     service-dir: "sdk/selfhelp"
-    package-dir: "azure-resourcemanager-selfhelp"
     namespace: "com.azure.resourcemanager.selfhelp"
     service-name: "Self Help" # human-readable service name, whitespace allowed
     flavor: azure

@@ -1,0 +1,53 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  service-dir:
+    default: "sdk/devtestlabs"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/DTL.json"
+    azure-resource-provider-folder: "resource-manager"
+    examples-dir: "{project-root}/examples"
+    arm-resource-flattening: true
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.DevTestLabs"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    namespace: "azure.mgmt.devtestlabs"
+    package-dir: "azure-mgmt-devtestlabs"
+    payload-flattening-threshold: 2
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-devtestlabs"
+    namespace: "com.azure.resourcemanager.devtestlabs"
+    service-name: "DevTestLabs"
+    payload-flattening-threshold: 1
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-devtestlabs"
+    flavor: azure
+    experimental-extensible-enums: true
+    generate-metadata: true
+    package-details:
+      name: "@azure/arm-devtestlabs"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/devtestlabs"
+    package-dir: "armdevtestlabs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

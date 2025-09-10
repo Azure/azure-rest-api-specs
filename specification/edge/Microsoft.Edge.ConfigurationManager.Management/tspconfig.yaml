@@ -10,6 +10,13 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/configurationmanager/{version-status}/{version}/configurationmanager.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.WorkloadOrchestration"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+    api-version: "2025-06-01"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/workloadorchestration"
     package-dir: "armworkloadorchestration"
@@ -27,11 +34,12 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-workloadorchestration"
     service-dir: "sdk/workloadorchestration"
     flavor: azure
-    package-dir: azure-resourcemanager-workloadorchestration
     namespace: com.azure.resourcemanager.workloadorchestration
     service-name: Workload Orchestration
+    api-version: "2025-06-01"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-workloadorchestration"
