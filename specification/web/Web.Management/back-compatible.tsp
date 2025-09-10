@@ -129,7 +129,7 @@ using Microsoft.Web;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BackupRequest.properties);
 
-@@clientName(BackupItemProperties.id, "backupId");
+@@clientName(BackupItemProperties.id, "BackupId");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RestoreRequest.properties);

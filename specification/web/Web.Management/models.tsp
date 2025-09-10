@@ -3440,6 +3440,7 @@ model AzureStorageInfoValue {
   /**
    * Access key for the storage account.
    */
+  @secret
   accessKey?: string;
 
   /**

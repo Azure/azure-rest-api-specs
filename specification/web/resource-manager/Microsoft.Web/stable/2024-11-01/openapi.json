@@ -40235,7 +40235,9 @@
         },
         "accessKey": {
           "type": "string",
-          "description": "Access key for the storage account."
+          "format": "password",
+          "description": "Access key for the storage account.",
+          "x-ms-secret": true
         },
         "mountPath": {
           "type": "string",
@@ -40387,7 +40389,7 @@
           "format": "int32",
           "description": "Id of the backup.",
           "readOnly": true,
-          "x-ms-client-name": "backupId"
+          "x-ms-client-name": "BackupId"
         },
         "storageAccountUrl": {
           "type": "string",
