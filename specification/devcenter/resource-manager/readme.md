@@ -47,11 +47,11 @@ directive:
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-    - $.definitions.Schedule.properties
+    - $.definitions.Schedule
     suppress:
     - ArmResourcePropertiesBag
   - where:
-    - $.definitions.SkuListResult.properties
+    - $.definitions.SkuListResult
     suppress:
     - RequiredPropertiesMissingInResourceModel
 ```
