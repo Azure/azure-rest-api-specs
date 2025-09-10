@@ -16,7 +16,6 @@ namespace Microsoft.CompositeSolutions;
 @doc("Supported API versions for the Microsoft.CompositeSolutions resource provider.")
 enum Versions {
   @doc("The 2024-03-01-preview version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_03_01_preview: "2024-03-01-preview",
 }
 

@@ -17,31 +17,24 @@ namespace Microsoft.VoiceServices;
 @doc("API Versions")
 enum Versions {
   @doc("2023-01-31")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_01_31: "2023-01-31",
 
   @doc("2023-04-03")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_04_03: "2023-04-03",
 
   @doc("2023-07-13-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_07_13_preview: "2023-07-13-preview",
 
   @doc("2023-09-01")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_09_01: "2023-09-01",
 
   @doc("2023-09-21")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_09_21: "2023-09-21",
 
   @doc("2024-02-05-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_02_05_preview: "2024-02-05-preview",
 
   @doc("2024-02-16-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_02_16_preview: "2024-02-16-preview",
 }
 

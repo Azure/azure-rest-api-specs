@@ -17,6 +17,5 @@ using Azure.ResourceManager;
 namespace Microsoft.Proposal;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-01-01-preview`,
 }
