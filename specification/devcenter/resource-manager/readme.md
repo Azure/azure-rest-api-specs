@@ -31,13 +31,40 @@ tag: package-preview-2025-07-01-preview
 
 directive:
   - where:
+    - $.definitions.DevBoxDefinitionUpdate.properties.sku.properties
+    suppress: 
+    - PatchBodyParametersSchema
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"]
+    suppress:
+      - PathForNestedResource
+
+  - where:
+    - $.definitions.PoolUpdate.properties.devBoxDefinition.sku
+    suppress:
+      - PatchBodyParametersSchema
+
+  - where:
+    - $.definitions.DayOfWeek
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.OperationStatus.properties
+    suppress:
+    - AvoidAdditionalProperties
+
+  - where:
     - $.definitions.OutboundEnvironmentEndpointCollection
     suppress:
       - RequiredPropertiesMissingInResourceModel
+
   - where:
     - $.definitions.Schedule
     suppress:
     - ArmResourcePropertiesBag
+
   - where:
     - $.definitions.SkuListResult
     suppress:
