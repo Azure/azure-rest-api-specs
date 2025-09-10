@@ -46,12 +46,12 @@ directive:
       - PatchBodyParametersSchema
 
   - where:
-    - $.definitions.DayOfWeek.enum[0]
+    - $.definitions.DayOfWeek["x-ms-enum"].values[0]
     suppress:
       - DescriptionMustNotBeNodeName
 
   - where:
-    - $.definitions.UsageUnit
+    - $.definitions.UsageUnit["x-ms-enum"].values[?(@.value=="Count")]
     suppress:
       - DescriptionMustNotBeNodeName
 
