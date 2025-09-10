@@ -5,10 +5,10 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Monitor {
 
-    /**
-   * Definition of Geneva Metrics limits
+  /**
+   * Definition of Metrics limits
    */
-  model MacMetricsLimits {
+  model MetricsLimits {
     /**
      * Maximum number of active time series allowed on the metrics containers.
      */
@@ -23,7 +23,7 @@ namespace Microsoft.Monitor {
   /**
    * Properties of a metrics container.
    */
-  model MacMetricsContainer {
+  model MetricsContainer {
     /**
      * The provisioning state of the metrics container.
      */
@@ -31,19 +31,19 @@ namespace Microsoft.Monitor {
     provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 
     /**
-     * Geneva Metrics limits.
+     * Metrics limits.
      */
-    limits?: MacMetricsLimits;
+    limits?: MetricsLimits;
   }
 
   /**
    * Metrics container resource for an Azure Monitor Workspace.
    */
   @parentResource(AzureMonitorWorkspaceResource)
-  model MacMetricsContainerResource
-    is Azure.ResourceManager.ProxyResource<MacMetricsContainer> {
+  model MetricsContainerResource
+    is Azure.ResourceManager.ProxyResource<MetricsContainer> {
     ...ResourceNameParameter<
-      Resource = MacMetricsContainer,
+      Resource = MetricsContainer,
       KeyName = "metricsContainerName",
       SegmentName = "metricsContainers",
       /**

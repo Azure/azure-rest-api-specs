@@ -10,16 +10,16 @@ namespace Microsoft.Monitor {
     /**
      * Gets metrics container settings for a monitoring account.
      */
-    get is ArmResourceRead<MacMetricsContainerResource>;
+    get is ArmResourceRead<MetricsContainerResource>;
 
     /**
      * Creates or updates metrics container settings for a monitoring account.
      */
-    createOrUpdate is ArmResourceCreateOrReplaceSync<MacMetricsContainerResource>;
+    createOrUpdate is ArmResourceCreateOrReplaceSync<MetricsContainerResource>;
 
     /**
      * Lists metrics containers for a monitoring account.
      */
-    listByAzureMonitorWorkspace is ArmResourceListByParent<MacMetricsContainerResource>;
+    listByAzureMonitorWorkspace is ArmResourceListByParent<MetricsContainerResource>;
   }
 }

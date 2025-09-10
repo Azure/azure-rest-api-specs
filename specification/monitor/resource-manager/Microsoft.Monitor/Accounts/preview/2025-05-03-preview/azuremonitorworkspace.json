@@ -1068,7 +1068,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MacMetricsContainerResourceListResult"
+              "$ref": "#/definitions/MetricsContainerResourceListResult"
             }
           },
           "default": {
@@ -1116,7 +1116,7 @@
           {
             "name": "metricsContainerName",
             "in": "path",
-            "description": "The name of the MacMetricsContainer",
+            "description": "The name of the MetricsContainer",
             "required": true,
             "type": "string",
             "pattern": "^default$"
@@ -1126,7 +1126,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MacMetricsContainerResource"
+              "$ref": "#/definitions/MetricsContainerResource"
             }
           },
           "default": {
@@ -1169,7 +1169,7 @@
           {
             "name": "metricsContainerName",
             "in": "path",
-            "description": "The name of the MacMetricsContainer",
+            "description": "The name of the MetricsContainer",
             "required": true,
             "type": "string",
             "pattern": "^default$"
@@ -1180,21 +1180,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MacMetricsContainerResource"
+              "$ref": "#/definitions/MetricsContainerResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'MacMetricsContainerResource' update operation succeeded",
+            "description": "Resource 'MetricsContainerResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/MacMetricsContainerResource"
+              "$ref": "#/definitions/MetricsContainerResource"
             }
           },
           "201": {
-            "description": "Resource 'MacMetricsContainerResource' create operation succeeded",
+            "description": "Resource 'MetricsContainerResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/MacMetricsContainerResource"
+              "$ref": "#/definitions/MetricsContainerResource"
             }
           },
           "default": {
@@ -1746,7 +1746,7 @@
         }
       }
     },
-    "MacMetricsContainer": {
+    "MetricsContainer": {
       "type": "object",
       "description": "Properties of a metrics container.",
       "properties": {
@@ -1756,17 +1756,17 @@
           "readOnly": true
         },
         "limits": {
-          "$ref": "#/definitions/MacMetricsLimits",
-          "description": "Geneva Metrics limits."
+          "$ref": "#/definitions/MetricsLimits",
+          "description": "Metrics limits."
         }
       }
     },
-    "MacMetricsContainerResource": {
+    "MetricsContainerResource": {
       "type": "object",
       "description": "Metrics container resource for an Azure Monitor Workspace.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MacMetricsContainer",
+          "$ref": "#/definitions/MetricsContainer",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -1776,15 +1776,15 @@
         }
       ]
     },
-    "MacMetricsContainerResourceListResult": {
+    "MetricsContainerResourceListResult": {
       "type": "object",
-      "description": "The response of a MacMetricsContainerResource list operation.",
+      "description": "The response of a MetricsContainerResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The MacMetricsContainerResource items on this page",
+          "description": "The MetricsContainerResource items on this page",
           "items": {
-            "$ref": "#/definitions/MacMetricsContainerResource"
+            "$ref": "#/definitions/MetricsContainerResource"
           }
         },
         "nextLink": {
@@ -1797,9 +1797,9 @@
         "value"
       ]
     },
-    "MacMetricsLimits": {
+    "MetricsLimits": {
       "type": "object",
-      "description": "Definition of Geneva Metrics limits",
+      "description": "Definition of Metrics limits",
       "properties": {
         "maxActiveTimeSeries": {
           "type": "integer",
