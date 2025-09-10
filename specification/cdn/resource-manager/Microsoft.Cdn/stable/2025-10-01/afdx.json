@@ -2414,16 +2414,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/deleteAndUpsertRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/applyRuleBatch": {
       "post": {
         "tags": [
           "RuleSets"
         ],
-        "description": "Delete or upsert the rules with the specified rule set under the given Azure Front Door profile..",
-        "operationId": "RuleSets_DeleteAndUpsertRules",
+        "description": "Apply a batch of rules with the specified rule set under the given Azure Front Door profile.",
+        "operationId": "RuleSets_ApplyRuleBatch",
         "x-ms-examples": {
           "RuleSets_UpdateRules": {
-            "$ref": "./examples/RuleSets_DeleteAndUpsertRules.json"
+            "$ref": "./examples/RuleSets_ApplyRuleBatch.json"
           }
         },
         "parameters": [
@@ -2449,7 +2449,7 @@
             "description": "The toDelete and toUpsert rules properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RulesDeleteAndUpsertParameters"
+              "$ref": "#/definitions/RuleBatchParameters"
             }
           },
           {
@@ -5620,7 +5620,7 @@
         }
       }
     },
-    "RulesDeleteAndUpsertParameters": {
+    "RuleBatchParameters": {
       "description": "The JSON object that contains the properties of the Rules to delete and upsert.",
       "type": "object",
       "properties": {
@@ -5636,7 +5636,7 @@
           "items": {
             "$ref": "#/definitions/Rule"
           },
-          "description": "List of Rules to create or update (upsert) in the rule set."
+          "description": "Batch of Rule change to be applied in the rule set."
         }
       }
     },
@@ -5731,8 +5731,7 @@
         "inBatch": {
           "description": "Indicates whether this rule is in batch or not. Default value is false which means the rule is not in batch.",
           "type": "boolean",
-          "default": false,
-          "readOnly": true
+          "default": false
         }
       }
     },
