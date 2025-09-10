@@ -332,10 +332,12 @@ model CheckNameAvailability {
   name: string;
 }
 
-@doc("The parameters used to check the availability of the trusted signing account name.")
-model CheckNameAvailability {
-  @doc("Trusted signing account name.")
-  nameTets: string;
+namespace Test {
+  @doc("The parameters used to check the availability of the trusted signing account name.")
+  model CheckNameAvailability {
+    @doc("Trusted signing account name.")
+    nameTets: string;
+  }
 }
 
 @doc("The CheckNameAvailability operation response.")
