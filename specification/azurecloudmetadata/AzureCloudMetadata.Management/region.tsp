@@ -89,6 +89,12 @@ model RegionProperties {
   /** Resource id of region's parent geography. */
   geographyResourceId: string;
 
+  /** Future changes of region. */
+  futureChanges: string;
+
+  /** Zone resilience support state of region. */
+  zoneResilienceSupport: string;
+
   /** The provisioning state of resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
