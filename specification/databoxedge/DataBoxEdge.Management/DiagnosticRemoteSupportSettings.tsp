@@ -35,8 +35,6 @@ interface DiagnosticRemoteSupportSettingsOperationGroup {
   /**
    * Gets the diagnostic remote support settings of the specified Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DiagnosticSettings_GetDiagnosticRemoteSupportSettings")
   getDiagnosticRemoteSupportSettings is ArmResourceRead<
     DiagnosticRemoteSupportSettings,
     Error = CloudError
@@ -45,9 +43,7 @@ interface DiagnosticRemoteSupportSettingsOperationGroup {
   /**
    * Updates the diagnostic remote support settings on a Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("DiagnosticSettings_UpdateDiagnosticRemoteSupportSettings")
   updateDiagnosticRemoteSupportSettings is ArmResourceCreateOrReplaceAsync<
     DiagnosticRemoteSupportSettings,
     Response = ArmResourceUpdatedResponse<DiagnosticRemoteSupportSettings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticRemoteSupportSettings> &

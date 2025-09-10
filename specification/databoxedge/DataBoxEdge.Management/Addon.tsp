@@ -16,6 +16,7 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Role Addon
  */
+@discriminator("kind")
 @parentResource(Role)
 model Addon is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<

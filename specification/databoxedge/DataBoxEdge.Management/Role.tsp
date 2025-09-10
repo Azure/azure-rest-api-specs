@@ -15,6 +15,7 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Compute role.
  */
+@discriminator("kind")
 @parentResource(DataBoxEdgeDevice)
 model Role is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<

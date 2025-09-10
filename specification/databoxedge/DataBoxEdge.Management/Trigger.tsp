@@ -15,6 +15,7 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Trigger details.
  */
+@discriminator("kind")
 @parentResource(DataBoxEdgeDevice)
 model Trigger is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<

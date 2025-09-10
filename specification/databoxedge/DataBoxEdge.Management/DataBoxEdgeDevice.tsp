@@ -53,16 +53,12 @@ interface DataBoxEdgeDevices {
   /**
    * Gets the properties of the Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_Get")
   get is ArmResourceRead<DataBoxEdgeDevice, Error = CloudError>;
 
   /**
    * Creates or updates a Data Box Edge/Data Box Gateway resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Devices_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DataBoxEdgeDevice,
     Response = ArmResourceUpdatedResponse<DataBoxEdgeDevice>,
@@ -72,8 +68,6 @@ interface DataBoxEdgeDevices {
   /**
    * Modifies a Data Box Edge/Data Box Gateway resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     DataBoxEdgeDevice,
@@ -84,9 +78,7 @@ interface DataBoxEdgeDevices {
   /**
    * Deletes the Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Devices_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DataBoxEdgeDevice,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -96,8 +88,6 @@ interface DataBoxEdgeDevices {
   /**
    * Gets all the Data Box Edge/Data Box Gateway devices in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     DataBoxEdgeDevice,
     Parameters = {
@@ -114,8 +104,6 @@ interface DataBoxEdgeDevices {
   /**
    * Gets all the Data Box Edge/Data Box Gateway devices in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     DataBoxEdgeDevice,
     Parameters = {
@@ -132,8 +120,6 @@ interface DataBoxEdgeDevices {
   /**
    * Downloads the updates on a Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_DownloadUpdates")
   downloadUpdates is ArmResourceActionAsync<
     DataBoxEdgeDevice,
     void,
@@ -146,8 +132,6 @@ interface DataBoxEdgeDevices {
   /**
    * Generates certificate for activation key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_GenerateCertificate")
   generateCertificate is ArmResourceActionSync<
     DataBoxEdgeDevice,
     void,
@@ -158,8 +142,6 @@ interface DataBoxEdgeDevices {
   /**
    * Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_GetExtendedInformation")
   getExtendedInformation is ArmResourceActionSync<
     DataBoxEdgeDevice,
     void,
@@ -170,8 +152,6 @@ interface DataBoxEdgeDevices {
   /**
    * Installs the updates on the Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_InstallUpdates")
   installUpdates is ArmResourceActionAsync<
     DataBoxEdgeDevice,
     void,
@@ -184,8 +164,6 @@ interface DataBoxEdgeDevices {
   /**
    * Scans for updates on a Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_ScanForUpdates")
   scanForUpdates is ArmResourceActionAsync<
     DataBoxEdgeDevice,
     void,
@@ -199,8 +177,6 @@ interface DataBoxEdgeDevices {
    * Updates the security settings on a Data Box Edge/Data Box Gateway device.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_CreateOrUpdateSecuritySettings")
   @action("securitySettings/default/update")
   createOrUpdateSecuritySettings is ArmResourceActionAsync<
     DataBoxEdgeDevice,
@@ -214,8 +190,7 @@ interface DataBoxEdgeDevices {
   /**
    * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_UpdateExtendedInformation")
+  @action("updateExtendedInformation")
   updateExtendedInformation is ArmResourceActionSync<
     DataBoxEdgeDevice,
     DataBoxEdgeDeviceExtendedInfoPatch,
@@ -226,8 +201,6 @@ interface DataBoxEdgeDevices {
   /**
    * Uploads registration certificate for the device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_UploadCertificate")
   uploadCertificate is ArmResourceActionSync<
     DataBoxEdgeDevice,
     UploadCertificateRequest,
@@ -239,8 +212,6 @@ interface DataBoxEdgeDevices {
    * Posts the device capacity request info to check feasibility.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeviceCapacityCheck_CheckResourceCreationFeasibility")
   @action("deviceCapacityCheck")
   checkResourceCreationFeasibility is ArmResourceActionAsync<
     DataBoxEdgeDevice,
@@ -261,8 +232,6 @@ interface DataBoxEdgeDevices {
   /**
    * Gets all the nodes currently configured under this Data Box Edge device
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Nodes_ListByDataBoxEdgeDevice")
   @list
   @get
   @action("nodes")
@@ -276,8 +245,6 @@ interface DataBoxEdgeDevices {
   /**
    * Triggers support package on the device
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SupportPackages_TriggerSupportPackage")
   triggerSupportPackage is ArmResourceActionAsync<
     DataBoxEdgeDevice,
     TriggerSupportPackageRequest,

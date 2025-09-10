@@ -31,8 +31,6 @@ interface DeviceCapacityInfos {
   /**
    * Gets the properties of the specified device capacity info.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeviceCapacityInfo_GetDeviceCapacityInfo")
   getDeviceCapacityInfo is ArmResourceRead<
     DeviceCapacityInfo,
     Error = CloudError

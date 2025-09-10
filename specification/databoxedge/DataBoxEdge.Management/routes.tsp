@@ -18,9 +18,7 @@ interface AvailableSkusOperationGroup {
   /**
    * List all the available Skus and information related to them.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all the available Skus and information related to them.")
-  @operationId("AvailableSkus_List")
   @autoRoute
   @get
   @action("availableSkus")

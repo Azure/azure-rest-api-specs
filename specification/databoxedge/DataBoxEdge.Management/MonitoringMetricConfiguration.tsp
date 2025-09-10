@@ -34,8 +34,6 @@ interface MonitoringMetricConfigurations {
   /**
    * Gets a  metric configuration of a role.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MonitoringConfig_Get")
   @action("monitoringConfig/default")
   get is MonitoringMetricConfigurationsNonListOps.Read<
     MonitoringMetricConfiguration,
@@ -45,9 +43,7 @@ interface MonitoringMetricConfigurations {
   /**
    * Creates a new metric configuration or updates an existing one for a role.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("MonitoringConfig_CreateOrUpdate")
   @action("monitoringConfig/default")
   createOrUpdate is MonitoringMetricConfigurationsNonListOps.CreateOrUpdateAsync<
     MonitoringMetricConfiguration,
@@ -59,9 +55,7 @@ interface MonitoringMetricConfigurations {
   /**
    * deletes a new metric configuration for a role.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("MonitoringConfig_Delete")
   @action("monitoringConfig/default")
   delete is MonitoringMetricConfigurationsNonListOps.DeleteWithoutOkAsync<
     MonitoringMetricConfiguration,
@@ -72,8 +66,6 @@ interface MonitoringMetricConfigurations {
   /**
    * Lists metric configurations in a role.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MonitoringConfig_List")
   list is MonitoringMetricConfigurationsListOps.List<
     MonitoringMetricConfiguration,
     Response = ArmResponse<MonitoringMetricConfigurationList>,

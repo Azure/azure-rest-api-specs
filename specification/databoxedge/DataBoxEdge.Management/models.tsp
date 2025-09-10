@@ -1450,6 +1450,7 @@ model ResourceIdentity {
  * The properties of the Data Box Edge/Gateway device.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataBoxEdgeDeviceProperties {
   /**
    * DataBoxEdge Device Properties
@@ -1678,6 +1679,7 @@ model ARMBaseModel {
 /**
  * The Data Box Edge/Gateway device patch.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataBoxEdgeDevicePatch {
   /**
    * The tags attached to the Data Box Edge/Gateway resource.
@@ -3813,6 +3815,11 @@ model ArcAddon extends Addon {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   properties: ArcAddonProperties;
+
+  /**
+   * Addon type.
+   */
+  kind: AddonType.ArcForKubernetes;
 }
 
 /**
@@ -3895,6 +3902,11 @@ model CloudEdgeManagementRole extends Role {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   properties?: CloudEdgeManagementRoleProperties;
+
+  /**
+   * Role type.
+   */
+  kind: RoleTypes.CloudEdgeManagement;
 }
 
 /**
@@ -4006,6 +4018,11 @@ model FileEventTrigger extends Trigger {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   properties: FileTriggerProperties;
+
+  /**
+   * Trigger Kind.
+   */
+  kind: TriggerEventType.FileEvent;
 }
 
 /**
@@ -4078,6 +4095,11 @@ model IoTAddon extends Addon {
    * Properties specific to IOT addon.
    */
   properties: IoTAddonProperties;
+
+  /**
+   * Addon type.
+   */
+  kind: AddonType.IotEdge;
 }
 
 /**
@@ -4181,6 +4203,11 @@ model IoTRole extends Role {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   properties?: IoTRoleProperties;
+
+  /**
+   * Role type.
+   */
+  kind: RoleTypes.IOT;
 }
 
 /**
@@ -4312,6 +4339,11 @@ model KubernetesRole extends Role {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   properties?: KubernetesRoleProperties;
+
+  /**
+   * Role type.
+   */
+  kind: RoleTypes.Kubernetes;
 }
 
 /**
@@ -4484,6 +4516,11 @@ model MECRole extends Role {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   properties?: MECRoleProperties;
+
+  /**
+   * Role type.
+   */
+  kind: RoleTypes.MEC;
 }
 
 /**
@@ -4521,6 +4558,11 @@ model PeriodicTimerEventTrigger extends Trigger {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   properties: PeriodicTimerProperties;
+
+  /**
+   * Trigger Kind.
+   */
+  kind: TriggerEventType.PeriodicTimerEvent;
 }
 
 /**

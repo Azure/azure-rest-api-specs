@@ -31,8 +31,6 @@ interface UpdateSummaries {
   /**
    * Gets information about the availability of updates based on the last scan of the device. It also gets information about any ongoing download or install jobs on the device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Devices_GetUpdateSummary")
   getUpdateSummary is ArmResourceRead<UpdateSummary, Error = CloudError>;
 }
 
