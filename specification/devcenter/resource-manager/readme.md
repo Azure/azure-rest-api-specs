@@ -28,6 +28,52 @@ These are the global settings for devcenter.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-preview-2025-07-01-preview
+
+directive:
+- where:
+  - $.definitions.DevBoxDefinitionUpdate
+  suppress: 
+    - PatchBodyParametersSchema
+- where:
+  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"].get
+  suppress:
+    - PathForNestedResource
+- where:
+  - $.definitions.PoolUpdate
+  suppress:
+    - PatchBodyParametersSchema
+- where:
+  - $.definitions.DayOfWeek
+  suppress:
+    - DescriptionMustNotBeNodeName
+- where:
+  - $.definitions.OperationStatus.properties
+  suppress:
+    - AvoidAdditionalProperties
+- where:
+  - $.definitions.OperationStatus.properties
+  suppress:
+    - AvoidAdditionalProperties
+- where:
+  - $.definitions.OutboundEnvironmentEndpointCollection
+  suppress:
+    - RequiredPropertiesMissingInResourceModel
+- where:
+  - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment.properties
+  suppress:
+    - AvoidAdditionalProperties
+- where:
+  - $.definitions.Schedule.properties.type
+  suppress:
+    - ArmResourcePropertiesBag
+- where:
+  - $.definitions.SkuListResult
+  suppress:
+    - RequiredPropertiesMissingInResourceModel
+- where:
+  - $.definitions.UsageUnit
+  suppress:
+    - DescriptionMustNotBeNodeName
 ```
 
 
