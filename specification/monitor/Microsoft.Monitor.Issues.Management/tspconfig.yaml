@@ -1,0 +1,53 @@
+parameters:
+  service-dir:
+    default: "sdk/monitor"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    output-file: "{azure-resource-provider-folder}/{service-name}/Issues/{version-status}/{version}/issues.json"
+    new-line: lf
+    omit-unreachable-types: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Monitor.Issues"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-monitorissues"
+    namespace: "azure.mgmt.monitorissues"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-monitorissues"
+    namespace: "com.azure.resourcemanager.monitorissues"
+    service-name: "Monitor Issues"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-monitorissues"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-monitorissues"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/monitor"
+    package-dir: "armmonitorissues"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/monitor/Microsoft.Monitor.Accounts.Management/"
