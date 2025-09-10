@@ -95,7 +95,7 @@ interface Accounts
   checkNameAvailability is checkGlobalNameAvailability;
 
   delete is ArmResourceDeleteWithoutOkAsync<Account>;
-
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Account,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

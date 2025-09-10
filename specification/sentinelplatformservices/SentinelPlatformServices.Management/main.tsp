@@ -75,6 +75,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface SentinelPlatformServices {
   get is ArmResourceRead<SentinelPlatformService>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<SentinelPlatformService>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     SentinelPlatformService,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

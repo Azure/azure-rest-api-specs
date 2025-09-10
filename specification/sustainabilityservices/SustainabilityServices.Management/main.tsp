@@ -203,6 +203,7 @@ model DenyAssignmentExclusion {
 interface Calculations {
   get is ArmResourceRead<CalculationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CalculationResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     CalculationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

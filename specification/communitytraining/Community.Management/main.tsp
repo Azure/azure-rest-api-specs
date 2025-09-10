@@ -129,6 +129,7 @@ model CommunityTrainingProperties {
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
   create is ArmResourceCreateOrUpdateAsync<CommunityTraining>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     CommunityTraining,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

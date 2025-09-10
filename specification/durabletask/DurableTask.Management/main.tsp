@@ -244,6 +244,7 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
+  @Http.patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<Scheduler, Scheduler>;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
@@ -279,6 +280,7 @@ interface RetentionPolicies {
   createOrReplace is ArmResourceCreateOrReplaceAsync<RetentionPolicy>;
   @doc("Update a Retention Policy")
   @errorsDoc("Validation error: required parameters are missing")
+  @Http.patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<RetentionPolicy, RetentionPolicy>;
   @doc("Delete a Retention Policy")
   delete is ArmResourceDeleteWithoutOkAsync<RetentionPolicy>;

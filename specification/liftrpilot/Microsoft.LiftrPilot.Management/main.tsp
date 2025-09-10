@@ -90,6 +90,7 @@ model OrganizationResourceUpdate {
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     OrganizationResource,
     OrganizationResourceUpdate
@@ -245,6 +246,7 @@ interface TestTrackedResources {
   get is ArmResourceRead<TestTrackedResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TestTrackedResource>;
   delete is ArmResourceDeleteWithoutOkAsync<TestTrackedResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<TestTrackedResource, TestTrackedResourceUpdate>;
   listByResourceGroup is ArmResourceListByParent<TestTrackedResource>;
   listBySubscription is ArmListBySubscription<TestTrackedResource>;
@@ -490,6 +492,7 @@ interface TestTrackedSyncResources {
   get is ArmResourceRead<TestTrackedSyncResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<TestTrackedSyncResource>;
   delete is ArmResourceDeleteSync<TestTrackedSyncResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     TestTrackedSyncResource,
     TestTrackedSyncResourceUpdate

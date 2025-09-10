@@ -105,6 +105,7 @@ union KustoOfferingType {
 interface Watchers {
   get is ArmResourceRead<Watcher>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Watcher>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Watcher,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
