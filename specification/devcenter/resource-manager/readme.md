@@ -30,50 +30,36 @@ openapi-subtype: rpaas
 tag: package-preview-2025-07-01-preview
 
 directive:
-- where:
-  - $.definitions.DevBoxDefinitionUpdate.properties
-  suppress: 
-    - PatchBodyParametersSchema
-- where:
-  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"]
-  suppress:
-    - PathForNestedResource
-- where:
-  - $.definitions.PoolUpdate.properties
-  suppress:
-    - PatchBodyParametersSchema
-- where:
-  - $.definitions.DayOfWeek.values
-  suppress:
-    - DescriptionMustNotBeNodeName
-- where:
-  - $.definitions.OperationStatus.properties
-  suppress:
-    - AvoidAdditionalProperties
-- where:
-  - $.definitions.OperationStatus.properties
-  suppress:
-    - AvoidAdditionalProperties
+  suppress: PatchBodyParametersSchema
+  from: devcenter.json
+  reason: This is from ARM common types SKU model. We cannot do anything about this.
+
+  suppress: DescriptionMustNotBeNodeName
+  from: devcenter.json
+  reason: Existed prior conversion.
+
+  suppress: PathForNestedResource
+  from: devcenter.json
+  reason: Existed prior conversion.
+
+  suppress: AvoidAdditionalProperties
+  from: devcenter.json
+  reason: Existed prior conversion.
+
 - where:
   - $.definitions.OutboundEnvironmentEndpointCollection
   suppress:`
     - RequiredPropertiesMissingInResourceModel
-- where:
-  - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment
-  suppress:
-    - AvoidAdditionalProperties
+
 - where:
   - $.definitions.Schedule.properties
   suppress:
     - ArmResourcePropertiesBag
+
 - where:
   - $.definitions.SkuListResult.properties
   suppress:
     - RequiredPropertiesMissingInResourceModel
-- where:
-  - $.definitions.UsageUnit.values
-  suppress:
-    - DescriptionMustNotBeNodeName
 ```
 
 
