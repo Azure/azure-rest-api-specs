@@ -30,8 +30,105 @@ These are the global settings for the Database Migration Service API.
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-preview-2025-03
+tag: package-preview-2025-09
 ```
+### Tag: package-preview-2025-09
+
+These settings apply only when `--tag=package-preview-2025-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09'
+input-file:
+  - Microsoft.DataMigration/preview/2025-09-01-preview/sqlmigration.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/datamigration.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/Commands.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/Common.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToSourceMySqlTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToSourceSqlServerTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToSourcePostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToTargetAzureDbForMySqlTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToTargetSqlDbTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToTargetSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToTargetSqlMITask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToTargetSqlSqlDbSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/GetUserTablesMySqlTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/Files.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/GetTdeCertificatesSqlTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/GetUserTablesSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/GetUserTablesSqlTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigrateSqlServerSqlDbTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigrateSqlServerSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigrateSqlServerSqlMITask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigrateSsisTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MigrationValidation.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/MongoDbTasks.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/OracleAzureDbPostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/Projects.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ResourceSkus.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ServiceFeatureOCITask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/Services.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ServiceTasks.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/Tasks.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/TasksCommon.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2025-09-01-preview/definitions/ValidateSyncMigrationInputSqlServerTask.json
+modelerfour:
+  lenient-model-deduplication: true # !!temporary!! to solve the duplicate schema issue of ProxyResource, TrackedResource and Resource in common-types v2 and v3 introduced in this PR
+directive:
+  - suppress: R4009
+  - suppress: R4013
+  - suppress: R4037
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2025-09-01-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlMi
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Managed Instance.
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2025-09-01-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlVm
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Virtual Machine.
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2025-09-01-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlDb
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Database.
+  - suppress: R4016
+    from: Microsoft.DataMigration/preview/2025-09-01-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlMi
+    reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Managed Instance.
+  - suppress: R4016
+    from: Microsoft.DataMigration/preview/2025-09-01-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlVm
+    reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Virtual Machine.
+  - suppress: R4016
+    from: Microsoft.DataMigration/preview/2025-09-01-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlDb
+    reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Database.
+  - suppress: PostResponseCodes
+    code: PostResponseCodes
+    from: sqlmigration.json
+    reason: Service requires returning a schema for POST long-running operations for client SDK generation.
+  - suppress: LroLocationHeader
+    code: LroLocationHeader
+    from: sqlmigration.json
+    reason: Location header not applicable for these long-running operations due to service design.
+  - suppress: DefaultErrorResponseSchema
+    code: DefaultErrorResponseSchema
+    from: sqlmigration.json
+    reason: Service uses a custom error schema for backward compatibility with existing clients.
+  - suppress: DeleteResponseCodes
+    code: DeleteResponseCodes
+    from: sqlmigration.json
+    reason: Service-specific delete response codes are required for compatibility with legacy workflows.
+  - suppress: DeleteResponseBodyEmpty
+    code: DeleteResponseBodyEmpty
+    from: sqlmigration.json
+    reason: Minimal payload is returned for delete confirmation per current backend behavior.
+```
+
 ### Tag: package-2025-06
 
 These settings apply only when `--tag=package-2025-06` is specified on the command line.
