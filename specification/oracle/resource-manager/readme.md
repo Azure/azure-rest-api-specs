@@ -113,7 +113,7 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
-  - Oracle.Database/stable/2025-04-01-preview/openapi.json
+  - Oracle.Database/preview/2025-04-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-06-01-preview
@@ -122,7 +122,7 @@ These settings apply only when `--tag=package-2025-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-06-01-preview'
 input-file:
-  - Oracle.Database/stable/2025-06-01-preview/openapi.json
+  - Oracle.Database/preview/2025-06-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-07-01-preview
@@ -131,7 +131,7 @@ These settings apply only when `--tag=package-2025-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
-  - Oracle.Database/stable/2025-07-01-preview/openapi.json
+  - Oracle.Database/preview/2025-07-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-08-01-preview
@@ -140,7 +140,7 @@ These settings apply only when `--tag=package-2025-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
-  - Oracle.Database/stable/2025-08-01-preview/openapi.json
+  - Oracle.Database/preview/2025-08-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-08-15-preview
@@ -149,7 +149,7 @@ These settings apply only when `--tag=package-2025-08-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-08-15-preview'
 input-file:
-  - Oracle.Database/stable/2025-08-15-preview/openapi.json
+  - Oracle.Database/preview/2025-08-15-preview/openapi.json
 ```
 
 ### Tag: package-2025-09-01
