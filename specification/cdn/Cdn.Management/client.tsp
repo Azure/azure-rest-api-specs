@@ -99,21 +99,29 @@ using Microsoft.Cdn;
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "javascript");
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
   "FourHundredFive",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`406`,
   "FourHundredSix",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`403`,
   "FourHundredThree",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`429`,
   "FourHundredTwentyNine",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
   "TwoHundred",
-  "javascript"
+  "javascript,go"
 );
+
+@@clientLocation(checkEndpointNameAvailability, "ManagementClient", "go");
+@@clientLocation(checkNameAvailability, "ManagementClient", "go");
+@@clientLocation(checkNameAvailabilityWithSubscription,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(validateProbe, "ManagementClient", "go");
