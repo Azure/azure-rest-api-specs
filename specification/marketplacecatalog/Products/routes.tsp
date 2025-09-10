@@ -33,10 +33,6 @@ alias ProductsGetParams = UniqueProductIdParameter &
   IncludeFutureAvailabilitiesParameter &
   SkuIdParameter;
 
-// Operation definitions
-alias ProductsListingOperation = ResourceOperations<ProductsListingParams>;
-alias ProductsGetOperation = ResourceOperations<ProductsGetParams>;
-
 interface Products {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Products list is a proxy resource that doesn't fit the standard operations path"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "DiscoveryApiPagedProductsResult is the Discovery API standard for returning listing responses"
@@ -47,7 +43,7 @@ interface Products {
   list is Azure.Core.Foundations.Operation<
     ProductsListingParams,
     DiscoveryApiPagedProductsResult,
-    {},
+    MarketplaceDiscoveryTraits,
     DiscoveryErrorPayload
   >;
 
@@ -58,7 +54,7 @@ interface Products {
   get is Azure.Core.Foundations.Operation<
     ProductsGetParams,
     ProductDetails,
-    {},
+    MarketplaceDiscoveryTraits,
     DiscoveryErrorPayload
   >;
 }
@@ -73,9 +69,6 @@ alias SkusListingParams = ServiceParameter &
   SkusOdataFilterParameter &
   SkusOdataOrderByParameter;
 
-// Operation definitions for Skus
-alias SkusListingOperation = ResourceOperations<SkusListingParams>;
-
 interface Skus {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Skus list is a proxy resource that doesn't fit the standard operations path"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "DiscoveryApiPagedSkusResult is the Discovery API standard for returning listing responses"
@@ -86,7 +79,7 @@ interface Skus {
   list is Azure.Core.Foundations.Operation<
     SkusListingParams,
     DiscoveryApiPagedSkusResult,
-    {},
+    MarketplaceDiscoveryTraits,
     DiscoveryErrorPayload
   >;
 }
