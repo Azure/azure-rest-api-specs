@@ -103,11 +103,13 @@ model LdapConfiguration {
   /**
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ldapOverTLS?: boolean;
 
   /**
    * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @maxLength(10240)
   @minLength(1)
   serverCACertificate?: string;
@@ -115,6 +117,7 @@ model LdapConfiguration {
   /**
    * The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @maxLength(255)
   certificateCNHost?: string;
 }
