@@ -51,7 +51,7 @@ directive:
       - DescriptionMustNotBeNodeName
 
   - where:
-    - $.definitions.OperationStatus
+    - $.definitions.OperationStatus.properties.properties
     suppress:
       - AvoidAdditionalProperties
 
@@ -61,7 +61,7 @@ directive:
       - AvoidAdditionalProperties
 
   - where:
-    - $.definitions.OutboundEnvironmentEndpointCollection
+    - $.definitions.OutboundEnvironmentEndpointCollection.properties.roles
     suppress:
       - RequiredPropertiesMissingInResourceModel
 
