@@ -50,10 +50,10 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-11'
 input-file:
-  - Microsoft.Media/preview/2021-11-01-preview/EdgeModules.json
-  - Microsoft.Media/preview/2021-11-01-preview/PipelineTopologies.json
-  - Microsoft.Media/preview/2021-11-01-preview/VideoAnalyzers.json
-  - Microsoft.Media/preview/2021-11-01-preview/Videos.json
+  - preview/2021-11-01-preview/EdgeModules.json
+  - preview/2021-11-01-preview/PipelineTopologies.json
+  - preview/2021-11-01-preview/VideoAnalyzers.json
+  - preview/2021-11-01-preview/Videos.json
 ```
 
 ### Tag: package-2021-05-01-preview
@@ -62,9 +62,9 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-  - Microsoft.Media/preview/2021-05-01-preview/VideoAnalyzers.json
-  - Microsoft.Media/preview/2021-05-01-preview/EdgeModules.json
-  - Microsoft.Media/preview/2021-05-01-preview/Videos.json
+  - preview/2021-05-01-preview/VideoAnalyzers.json
+  - preview/2021-05-01-preview/EdgeModules.json
+  - preview/2021-05-01-preview/Videos.json
 ```
 
 ---
