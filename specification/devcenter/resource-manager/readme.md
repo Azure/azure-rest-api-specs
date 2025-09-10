@@ -46,7 +46,12 @@ directive:
       - PatchBodyParametersSchema
 
   - where:
-    - $.definitions.DayOfWeek
+    - $.definitions.DayOfWeek.value.items
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.UsageUnit
     suppress:
       - DescriptionMustNotBeNodeName
 
