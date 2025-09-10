@@ -1,0 +1,31 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@typespec/openapi";
+import "./models.tsp";
+import "../service.tsp";
+
+using Azure.ResourceManager;
+
+namespace Microsoft.Monitor {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Metrics container is always present with the Azure Monitor Workspace and cannot be deleted"
+  @armResourceOperations
+  interface MetricsContainers {
+    /**
+     * Gets metrics container settings for a monitoring account.
+     */
+    get is ArmResourceRead<MacMetricsContainerResource>;
+
+    /**
+     * Creates or updates metrics container settings for a monitoring account.
+     */
+    createOrUpdate is ArmResourceCreateOrReplaceSync<MacMetricsContainerResource>;
+
+    /**
+     * Lists metrics containers for a monitoring account.
+     */
+    listByAzureMonitorWorkspace is ArmResourceListByParent<MacMetricsContainerResource>;
+  }
+}
