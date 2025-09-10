@@ -25,10 +25,47 @@ union MfaEnforcement {
   "Enforce",
 }
 
+@doc("The state of the Agent Mode registration for the tenant.")
+union AgentModeRegisterState {
+  string,
+
+  @doc("This tenant is unregistered for Agent Mode.")
+  "Unregistered",
+
+  @doc("This tenant is registered for Agent Mode.")
+  "Registered",
+}
+
+@doc("The state of the Agent Mode feature for the tenant.")
+union AgentModeState {
+  string,
+
+  @doc("Agent Mode is disabled for this tenant.")
+  "Disabled",
+
+  @doc("Agent Mode is enabled for this tenant.")
+  "Enabled",
+}
+
+@doc("The agents configuration properties.")
+model AgentsProperties {
+  @doc("The state of the Agent Mode registration for the tenant.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  agentModeRegisterState: AgentModeRegisterState;
+
+  @doc("The state of the Agent Mode feature for the tenant.")
+  @visibility(Lifecycle.Read)
+  agentModeState?: AgentModeState;
+}
+
 @doc("The Copilot Settings properties.")
 model CopilotSettingsProperties {
   @doc("Boolean indicating if role-based access control is enabled for copilot in this tenant.")
   accessControlEnabled: boolean;
+
+  @added(Versions.v2025_09_10_preview)
+  @doc("The agents configuration properties.")
+  agents?: AgentsProperties;
 
   @added(Versions.v2025_08_01_preview)
   @doc("The setting for Bring Your Own Storage (BYOS) for copilot in this tenant. If set, copilot will use specified cosmos DB account for storing copilot chat data.")
