@@ -6657,7 +6657,7 @@
           ]
         },
         "scheduledOperations": {
-          "$ref": "#/definitions/ScheduledOperationsTypeUpdate",
+          "$ref": "#/definitions/ScheduledOperationsType",
           "description": "The list of scheduled operations.",
           "x-ms-mutability": [
             "read",
@@ -8339,16 +8339,6 @@
             "description": "Sunday value"
           }
         ]
-      }
-    },
-    "DayOfWeekUpdate": {
-      "type": "object",
-      "description": "DayOfWeek resource properties",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/DayOfWeekName",
-          "description": "Name of the day of the week."
-        }
       }
     },
     "DbActionResponse": {
@@ -11738,28 +11728,6 @@
       "required": [
         "dayOfWeek"
       ]
-    },
-    "ScheduledOperationsTypeUpdate": {
-      "type": "object",
-      "description": "The list of scheduled operations.",
-      "properties": {
-        "dayOfWeek": {
-          "$ref": "#/definitions/DayOfWeekUpdate",
-          "description": "Day of week"
-        },
-        "scheduledStartTime": {
-          "type": "string",
-          "description": "auto start time. value must be of ISO-8601 format HH:mm",
-          "minLength": 1,
-          "maxLength": 50
-        },
-        "scheduledStopTime": {
-          "type": "string",
-          "description": "auto stop time. value must be of ISO-8601 format HH:mm",
-          "minLength": 1,
-          "maxLength": 50
-        }
-      }
     },
     "SessionModeType": {
       "type": "string",
