@@ -5985,7 +5985,7 @@
             "name": "body",
             "description": "The bucket details including user details, and the volume path that should be mounted inside the bucket.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/bucketPatch"
             }
@@ -10005,10 +10005,6 @@
           "items": {
             "$ref": "#/definitions/quotaReport"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
         }
       }
     },
