@@ -1174,12 +1174,24 @@ model GroupPresenceEventFilters {
   /**
    * The concerning event names. Valid values are "joined", "left". If the value is null or empty, no presence events will be sent to the event handler.
    */
-  eventNames?: string[];
+  eventNames: GroupPresenceEventName[];
 
   /**
    * The group filters. Only events from these groups will be sent to the event handler. Each element is a pattern that may match multiple groups. If null or empty, events from all groups will be sent (subject to eventNames).
    */
   groupFilters?: string[];
+}
+
+/** Allowed event names for group presence events. */
+@added(Versions.v2025_08_01_preview)
+union GroupPresenceEventName {
+  /** Event triggered when a connection joins a group. */
+  Joined: "joined",
+
+  /** Event triggered when a connection leaves a group. */
+  Left: "left",
+
+  string,
 }
 
 /**
