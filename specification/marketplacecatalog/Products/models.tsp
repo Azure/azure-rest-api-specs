@@ -872,6 +872,13 @@ model LanguageParameter {
   language?: string = "en";
 }
 
+@doc("Parameters for language selection")
+model UniqueProductIdParameter {
+  @path
+  @doc("Unique product identifier")
+  uniqueProductId: string;
+}
+
 @doc("Parameters for location filtering")
 model LocationsSingleParameter {
   @query
