@@ -31,19 +31,19 @@ tag: package-preview-2025-07-01-preview
 
 directive:
 - where:
-  - $.definitions.DevBoxDefinitionUpdate
+  - $.definitions.DevBoxDefinitionUpdate.properties
   suppress: 
     - PatchBodyParametersSchema
 - where:
-  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"].get
+  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"]
   suppress:
     - PathForNestedResource
 - where:
-  - $.definitions.PoolUpdate
+  - $.definitions.PoolUpdate.properties
   suppress:
     - PatchBodyParametersSchema
 - where:
-  - $.definitions.DayOfWeek
+  - $.definitions.DayOfWeek[0]
   suppress:
     - DescriptionMustNotBeNodeName
 - where:
@@ -56,22 +56,22 @@ directive:
     - AvoidAdditionalProperties
 - where:
   - $.definitions.OutboundEnvironmentEndpointCollection
-  suppress:
+  suppress:`
     - RequiredPropertiesMissingInResourceModel
 - where:
-  - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment.properties
+  - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment
   suppress:
     - AvoidAdditionalProperties
 - where:
-  - $.definitions.Schedule.properties.type
+  - $.definitions.Schedule.properties
   suppress:
     - ArmResourcePropertiesBag
 - where:
-  - $.definitions.SkuListResult
+  - $.definitions.SkuListResult.properties
   suppress:
     - RequiredPropertiesMissingInResourceModel
 - where:
-  - $.definitions.UsageUnit
+  - $.definitions.UsageUnit.values
   suppress:
     - DescriptionMustNotBeNodeName
 ```
