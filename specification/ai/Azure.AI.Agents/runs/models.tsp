@@ -380,6 +380,16 @@ model SubmitToolApprovalDetails {
   toolCalls: RequiredToolCall[];
 }
 
+@doc("The details for required tool call approval that must be submitted for an agent thread run to continue.")
+@added(Versions.v2025_05_15_preview)
+model OAuthConsentAction extends RequiredAction {
+  @doc("The object type, which is always 'oauth_consent'.")
+  type: "oauth_consent";
+
+  @doc("The activities needed to complete OAuth consent.")
+  activities: OAuthConsentActivity[];
+}
+
 @doc("The details used when creating and immediately running a new agent thread.")
 @added(Versions.v2025_05_01)
 model CreateAndRunThreadOptions {
