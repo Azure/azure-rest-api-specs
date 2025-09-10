@@ -76,7 +76,7 @@ model ClaimExpansion {
   serviceAccountGroupServiceTreeId?: string;
 
   @doc("Flag to indicate if the claim is regional enforced or not. Optional.")
-  isRegionalEnforced?: boolean;
+  isRegionalEnforced?: IsRegionalEnforced;
 }
 
 @added(Versions.v2024_06_24_preview)
@@ -110,4 +110,16 @@ union CloudId {
 
   @doc("USSec cloud")
   USSec: "USSec",
+}
+
+@added(Versions.v2024_06_24_preview)
+@doc("IsRegionalEnforced enum.")
+union IsRegionalEnforced {
+  string,
+
+  @doc("False value")
+  False: "False",
+
+  @doc("True value")
+  True: "True",
 }
