@@ -239,6 +239,7 @@ interface Sites {
   /**
    * Description for Deletes a web, mobile, or API app, or one of the deployment slots.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_Delete")
   delete is SiteOps.DeleteSync<
@@ -705,7 +706,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("extensions/WebApps_CreateOneDeployOperation")
+  @operationId("WebApps_CreateOneDeployOperation")
   @put
   @action("extensions/onedeploy")
   createOneDeployOperation is SiteOps.ActionSync<
@@ -1017,6 +1018,7 @@ interface Sites {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   getNetworkTraces(
@@ -1045,6 +1047,7 @@ interface Sites {
       _: NetworkTrace[];
     }),
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
       @segment("networkTraces")
       current: "current";
@@ -1062,12 +1065,14 @@ interface Sites {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetNetworkTracesV2")
   @get
   getNetworkTracesV2(
     ...ResourceInstanceParameters<Site>,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @key
     @path
     @segment("networkTraces")
@@ -1485,7 +1490,7 @@ interface WebAppOps
 
 @armResourceOperations
 interface WebApps {
-  ListSlots is WebAppOps.List<
+  listSlots is WebAppOps.List<
     Site,
     Response = ArmResponse<WebAppCollection>,
     OverrideErrorType = DefaultErrorResponse
@@ -1911,6 +1916,7 @@ interface WebApps {
     Site,
     Response = NoContentResponse | ArmNotFoundResponse,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
       @segment("host")
       default: "default";
