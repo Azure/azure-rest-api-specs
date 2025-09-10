@@ -36,7 +36,7 @@ directive:
   - suppress: DescriptionMustNotBeNodeName
     from: devcenter.json
     reason: Existed prior conversion.
-  -suppress: PathForNestedResource
+  - suppress: PathForNestedResource
     from: devcenter.json
     reason: Existed prior conversion.
   - suppress: AvoidAdditionalProperties
