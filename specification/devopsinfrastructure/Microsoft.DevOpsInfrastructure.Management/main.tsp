@@ -579,29 +579,6 @@ interface ResourceDetails {
   listByPool is ArmResourceListByParent<ResourceDetailsObject>;
 }
 
-// #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All Resource operations must use an api-version parameter."
-// @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
-// @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}/resources")
-// @doc("Deletes multiple resources in a pool by their resource IDs.")
-// @delete
-// op deleteResources is RpcOperation<
-//   {
-//     ...SubscriptionIdParameter;
-//     ...ResourceGroupParameter;
-
-//     @path
-//     @doc("The name of the pool.")
-//     poolName: string;
-
-//     @doc("List of resource IDs to delete.")
-//     @body
-//     contents: DeleteResourcesDetails;
-//   },
-//   {},
-//   {}
-// >;
-
 @doc("Request body for deleting many resources by their IDs.")
 @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
 model DeleteResourcesDetails {
