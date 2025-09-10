@@ -80,9 +80,9 @@ model HistoryContext {
 }
 
 /**
- * Query Generation Response
+ * Query Generation Result
  */
-model QueryGenerationResponse {
+model QueryGenerationResult {
   /**
    * Query generated for a given user prompt text
    */
@@ -91,13 +91,13 @@ model QueryGenerationResponse {
   /**
    * Status for the query generation result
    */
-  status: StatusResponse;
+  status: StatusResult;
 }
 
 /**
  * Status
  */
-model StatusResponse {
+model StatusResult {
   /**
    * Status category for query generation result
    */

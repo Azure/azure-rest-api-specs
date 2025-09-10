@@ -22,6 +22,6 @@ interface QueryOperationGroup {
   @action("generateQuery")
   generate is ArmProviderActionSync<
     Request = QueryGenerationRequest,
-    Response = QueryGenerationResponse
+    Response = QueryGenerationResult
   >;
 }

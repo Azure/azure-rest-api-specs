@@ -72,7 +72,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/QueryGenerationResponse"
+              "$ref": "#/definitions/QueryGenerationResult"
             }
           },
           "default": {
@@ -172,16 +172,16 @@
         "prompt"
       ]
     },
-    "QueryGenerationResponse": {
+    "QueryGenerationResult": {
       "type": "object",
-      "description": "Query Generation Response",
+      "description": "Query Generation Result",
       "properties": {
         "query": {
           "type": "string",
           "description": "Query generated for a given user prompt text"
         },
         "status": {
-          "$ref": "#/definitions/StatusResponse",
+          "$ref": "#/definitions/StatusResult",
           "description": "Status for the query generation result"
         }
       },
@@ -244,7 +244,7 @@
         ]
       }
     },
-    "StatusResponse": {
+    "StatusResult": {
       "type": "object",
       "description": "Status",
       "properties": {
