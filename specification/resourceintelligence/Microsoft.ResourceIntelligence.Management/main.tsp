@@ -34,9 +34,9 @@ namespace Microsoft.ResourceIntelligence;
  */
 enum Versions {
   /**
-   * The 2023-09-01-preview API version.
+   * The 2025-08-01-preview API version.
    */
-  v2023_09_01_preview: "2023-09-01-preview",
+  v2025_08_01_preview: "2025-08-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
