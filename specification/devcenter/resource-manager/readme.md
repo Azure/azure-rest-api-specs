@@ -30,18 +30,6 @@ openapi-subtype: rpaas
 tag: package-preview-2025-07-01-preview
 
 directive:
-  - suppress: PatchBodyParametersSchema
-    from: devcenter.json
-    reason: This is from ARM common types SKU model. We cannot do anything about this.
-  - suppress: DescriptionMustNotBeNodeName
-    from: devcenter.json
-    reason: Existed prior conversion.
-  - suppress: PathForNestedResource
-    from: devcenter.json
-    reason: Existed prior conversion.
-  - suppress: AvoidAdditionalProperties
-    from: devcenter.json
-    reason: Existed prior conversion.
   - where:
     - $.definitions.OutboundEnvironmentEndpointCollection
     suppress:
