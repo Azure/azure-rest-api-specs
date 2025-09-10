@@ -8,16 +8,18 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetApp;
 /**
- * Information regarding Subscription Quota Item.
+ * Information regarding Quota Item.
  */
+@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItem")
 @parentResource(SubscriptionLocationResource)
-model SubscriptionQuotaItem
-  is Azure.ResourceManager.ProxyResource<SubscriptionQuotaItemProperties> {
+model QuotaItem
+  is Azure.ResourceManager.ProxyResource<QuotaItemProperties> {
   ...ResourceNameParameter<
-    Resource = SubscriptionQuotaItem,
+    Resource = QuotaItem,
     KeyName = "quotaLimitName",
     SegmentName = "quotaLimits",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}$"
@@ -25,15 +27,17 @@ model SubscriptionQuotaItem
 }
 
 /**
- * List of Subscription Quota Items
+ * List of Quota Items
  */
-model SubscriptionQuotaItemList is Azure.Core.Page<SubscriptionQuotaItem>;
+@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItemList")
+model QuotaItemList is Azure.Core.Page<QuotaItem>;
 
 /**
- * SubscriptionQuotaItem Properties
+ * QuotaItem Properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-model SubscriptionQuotaItemProperties {
+@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItemProperties")
+model QuotaItemProperties {
   /**
    * The current quota value.
    */
@@ -50,12 +54,12 @@ model SubscriptionQuotaItemProperties {
 @armResourceOperations
 interface SubscriptionQuotaItems {
   /**
-   * Get the default and current subscription quota limit
+   * Get the default and current quota limit
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetAppResourceQuotaLimits_Get")
   get is ArmResourceRead<
-    SubscriptionQuotaItem,
+    QuotaItem,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
@@ -65,11 +69,11 @@ interface SubscriptionQuotaItems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetAppResourceQuotaLimits_List")
   list is ArmResourceListByParent<
-    SubscriptionQuotaItem,
+    QuotaItem,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<SubscriptionQuotaItemList>
+    Response = ArmResponse<QuotaItemList>
   >;
 }
 
-@@doc(SubscriptionQuotaItem.name, "The name of the Quota Limit");
-@@doc(SubscriptionQuotaItem.properties, "SubscriptionQuotaItem properties");
+@@doc(QuotaItem.name, "The name of the Quota Limit");
+@@doc(QuotaItem.properties, "QuotaItem properties");

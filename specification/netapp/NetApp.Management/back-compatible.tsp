@@ -53,7 +53,7 @@ using Microsoft.NetApp;
 @@clientLocation(SubscriptionQuotaItems.get, "NetAppResourceQuotaLimits");
 @@clientLocation(SubscriptionQuotaItems.list, "NetAppResourceQuotaLimits");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SubscriptionQuotaItem.properties);
+@@flattenProperty(QuotaItem.properties);
 
 @@clientLocation(RegionInfoResources.get, "NetAppResourceRegionInfos");
 @@clientLocation(RegionInfoResources.list, "NetAppResourceRegionInfos");
