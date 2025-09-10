@@ -1,65 +1,63 @@
 {
   "parameters": {
-    "api-version": "2024-01-01",
     "namespaceName": "sdk-Namespace-6019",
     "resourceGroupName": "ResourceGroup",
-    "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4"
+    "api-version": "2024-01-01",
+    "subscriptionId": "Subscription"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subscriptionid/resourceGroups/Default-ServiceBus-AustraliaEast/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9659/networkruleset/default",
         "name": "default",
         "type": "Microsoft.ServiceBus/Namespaces/NetworkRuleSet",
-        "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/Default-ServiceBus-AustraliaEast/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9659/networkruleset/default",
         "properties": {
           "defaultAction": "Allow",
-          "ipRules": [
-            {
-              "action": "Allow",
-              "ipMask": "1.1.1.1"
-            },
-            {
-              "action": "Allow",
-              "ipMask": "1.1.1.2"
-            },
-            {
-              "action": "Allow",
-              "ipMask": "1.1.1.3"
-            },
-            {
-              "action": "Allow",
-              "ipMask": "1.1.1.4"
-            },
-            {
-              "action": "Allow",
-              "ipMask": "1.1.1.5"
-            }
-          ],
           "publicNetworkAccess": "Enabled",
           "virtualNetworkRules": [
             {
-              "ignoreMissingVnetServiceEndpoint": true,
               "subnet": {
-                "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2"
-              }
+                "id": "/subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2"
+              },
+              "ignoreMissingVnetServiceEndpoint": true
             },
             {
-              "ignoreMissingVnetServiceEndpoint": false,
               "subnet": {
-                "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3"
-              }
+                "id": "/subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3"
+              },
+              "ignoreMissingVnetServiceEndpoint": false
             },
             {
-              "ignoreMissingVnetServiceEndpoint": false,
               "subnet": {
-                "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6"
-              }
+                "id": "/subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6"
+              },
+              "ignoreMissingVnetServiceEndpoint": false
+            }
+          ],
+          "ipRules": [
+            {
+              "ipMask": "1.1.1.1",
+              "action": "Allow"
+            },
+            {
+              "ipMask": "1.1.1.2",
+              "action": "Allow"
+            },
+            {
+              "ipMask": "1.1.1.3",
+              "action": "Allow"
+            },
+            {
+              "ipMask": "1.1.1.4",
+              "action": "Allow"
+            },
+            {
+              "ipMask": "1.1.1.5",
+              "action": "Allow"
             }
           ]
         }
       }
     }
-  },
-  "operationId": "Namespaces_GetNetworkRuleSet",
-  "title": "NameSpaceNetworkRuleSetGet"
+  }
 }
