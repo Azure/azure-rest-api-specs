@@ -43,7 +43,6 @@ namespace Customizations;
 // Models ending with "Response" - rename to "Result"
 @@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
 @@clientName(BoundsResponse, "BoundsResult", "csharp");
-@@clientName(ClassMapLegendResponse, "ClassMapLegendResult", "csharp");
 @@clientName(GeoJsonStatisticsItemCollectionResponse,
   "GeoJsonStatisticsItemCollectionResult",
   "csharp"

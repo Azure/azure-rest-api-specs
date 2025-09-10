@@ -85,7 +85,7 @@ interface MapsClassMapLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    ClassMapLegendResponse
+    Record<unknown>
   >;
 }
 

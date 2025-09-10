@@ -3696,7 +3696,8 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ClassMapLegendResponse"
+              "type": "object",
+              "additionalProperties": {}
             }
           },
           "default": {
@@ -11312,17 +11313,6 @@
       "required": [
         "bounds"
       ]
-    },
-    "ClassMapLegendResponse": {
-      "type": "object",
-      "description": "ClassMap legend response model.",
-      "additionalProperties": {
-        "items": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "type": "array"
-      }
     },
     "ColorMapNames": {
       "type": "string",
