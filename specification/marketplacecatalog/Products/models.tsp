@@ -872,7 +872,7 @@ model LanguageParameter {
   language?: string = "en";
 }
 
-@doc("Parameters for language selection")
+@doc("The unique Marketplace product identifier")
 model UniqueProductIdParameter {
   @path
   @doc("Unique product identifier")
