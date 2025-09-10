@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.NetApp;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
