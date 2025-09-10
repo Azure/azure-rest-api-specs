@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "zoneName": "zone1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-05-01",
+    "subscriptionId": "subid",
+    "relativeRecordSetName": "record1",
+    "recordType": "CNAME",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key1": "value1"
+        },
+        "TTL": 3600,
+        "CNAMERecord": {
+          "cname": "contoso.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/CNAME/record1",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/CNAME",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "TTL": 3600,
+          "fqdn": "record1.zone1",
+          "CNAMERecord": {
+            "cname": "contoso.com"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/CNAME/record1",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/CNAME",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "TTL": 3600,
+          "fqdn": "record1.zone1",
+          "CNAMERecord": {
+            "cname": "contoso.com"
+          }
+        }
+      }
+    }
+  }
+}

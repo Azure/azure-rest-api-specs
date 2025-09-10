@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "zoneName": "0.0.127.in-addr.arpa",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-10-01",
+    "subscriptionId": "subid",
+    "relativeRecordSetName": "1",
+    "recordType": "PTR",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/0.0.127.in-addr.arpa/PTR/1",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "1",
+        "type": "Microsoft.Network/dnsZones/PTR",
+        "properties": {
+          "metadata": {
+            "key2": "value2"
+          },
+          "TTL": 3600,
+          "fqdn": "1.0.0.127.in-addr.arpa",
+          "PTRRecords": [
+            {
+              "ptrdname": "localhost"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

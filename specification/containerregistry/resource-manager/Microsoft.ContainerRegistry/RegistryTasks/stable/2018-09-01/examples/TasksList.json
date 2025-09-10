@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2018-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "creationDate": "2018-01-25T06:54:23.536Z",
+              "status": "Enabled",
+              "platform": {
+                "os": "Linux",
+                "architecture": "amd64"
+              },
+              "agentConfiguration": {
+                "cpu": 2
+              },
+              "step": {
+                "type": "Docker",
+                "imageNames": [
+                  "azurerest:testtag"
+                ],
+                "dockerFilePath": "subfolder/Dockerfile",
+                "contextPath": "dockerfiles",
+                "isPushEnabled": true,
+                "noCache": false,
+                "arguments": [
+                  {
+                    "name": "mytestargument",
+                    "value": "mytestvalue",
+                    "isSecret": false
+                  }
+                ]
+              },
+              "trigger": {
+                "sourceTriggers": [
+                  {
+                    "name": "mySourceTrigger",
+                    "sourceRepository": {
+                      "sourceControlType": "Github",
+                      "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
+                      "branch": "master"
+                    },
+                    "sourceTriggerEvents": [
+                      "commit"
+                    ],
+                    "status": "Enabled"
+                  }
+                ],
+                "baseImageTrigger": {
+                  "name": "myBaseImageTrigger",
+                  "baseImageTriggerType": "Runtime"
+                }
+              }
+            },
+            "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
+            "name": "myTask",
+            "type": "Microsoft.ContainerRegistry/registries/tasks",
+            "location": "eastus",
+            "tags": {
+              "testkey": "value"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

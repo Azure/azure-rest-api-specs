@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "AAAA",
+    "relativeRecordSetName": "recordAAAA",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/AAAA/recordaaaa",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "recordaaaa",
+        "type": "Microsoft.Network/privateDnsZones/AAAA",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600,
+          "fqdn": "recordaaaa.privatezone1.com.",
+          "isAutoRegistered": false,
+          "aaaaRecords": [
+            {
+              "ipv6Address": "::1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
