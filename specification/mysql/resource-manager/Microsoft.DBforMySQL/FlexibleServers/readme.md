@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-flexibleserver-2024-12-30` is spec
 
 ``` yaml $(tag) == 'package-flexibleserver-2024-12-30'
 input-file:
-- preview/2024-12-30/openapi.json
+- stable/2024-12-30/openapi.json
 ```
 
 ### Tag: package-flexibleserver-2024-12-01-preview
