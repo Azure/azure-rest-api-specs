@@ -62,6 +62,9 @@ union SCType {
 
   @doc("SMB storage class")
   SMB: "SMB",
+
+  @doc("AKS Arc Disk storage class")
+  AksArcDisk: "AksArcDisk",
 }
 
 @doc("Data resilience tier of a storage class")
@@ -241,15 +244,72 @@ model SmbStorageClassTypeProperties extends StorageClassTypeProperties {
   domain?: string;
 }
 
+@doc("The properties for AKS Arc Disk StorageClass")
+@added(Versions.v2024_05_01_preview)
+model AksArcDiskStorageClassTypeProperties extends StorageClassTypeProperties {
+  @doc("AKS Arc Disk StorageClass")
+  type: SCType.AksArcDisk;
+
+  @doc("The id of the storage path")
+  storagePathId: string;
+
+  @doc("fsType parameter for the storage class.")
+  fsType?: string;
+}
+
 @doc("The model for update a storageClass")
 model StorageClassTypePropertiesUpdate {
-  ...OptionalProperties<OmitProperties<RwxStorageClassTypeProperties, "type">>;
-  ...OptionalProperties<OmitProperties<BlobStorageClassTypeProperties, "type">>;
-  ...OptionalProperties<OmitProperties<NfsStorageClassTypeProperties, "type">>;
-  ...OptionalProperties<OmitProperties<
-    SmbStorageClassTypeProperties,
-    "type" | "subDir"
-  >>;
+  // RWX
+  @doc("The backing storageclass used to create new storageclass")
+  backingStorageClassName?: string;
+
+  // Blob
+  @doc("Azure Storage Account Name")
+  azureStorageAccountName?: string;
+
+  @doc("Azure Storage Account Key")
+  @secret
+  azureStorageAccountKey?: string;
+
+  // NFS
+  @doc("NFS Server")
+  server?: string;
+
+  @doc("NFS share")
+  share?: string;
+
+  // SMB also uses this
+  @doc("Sub directory under share. If the sub directory doesn't exist, driver will create it")
+  subDir?: string;
+
+  @doc("Mounted folder permissions. Default is 0. If set as non-zero, driver will perform `chmod` after mount")
+  mountPermissions?: string;
+
+  @doc("The action to take when a NFS volume is deleted. Default is Delete")
+  onDelete?: NfsDirectoryActionOnVolumeDeletion;
+
+  // SMB
+  @doc("SMB Source")
+  source?: string;
+
+  @doc("Server username")
+  username?: string;
+
+  @doc("Server password")
+  @secret
+  password?: string;
+
+  @doc("Server domain")
+  domain?: string;
+
+  // AKS Arc Disk
+  @doc("The id of the storage path")
+  @added(Versions.v2024_05_01_preview)
+  storagePathId?: string;
+
+  @doc("fsType parameter for the storage class.")
+  @added(Versions.v2024_05_01_preview)
+  fsType?: string;
 }
 
 @doc("The model for updating storageClass properties")
@@ -282,16 +342,11 @@ model StorageClassResource is ExtensionResource<StorageClassProperties> {
 @armResourceOperations(StorageClassResource)
 interface StorageClass {
   get is ArmResourceRead<StorageClassResource>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    StorageClassResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<StorageClassResource>;
   update is ArmCustomPatchAsync<
     StorageClassResource,
     StorageClassResourceUpdate
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StorageClassResource>;
-  list is ArmResourceListByParent<StorageClassResource>;
+  listByParent is ArmResourceListByParent<StorageClassResource>;
 }

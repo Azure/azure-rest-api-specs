@@ -27,9 +27,8 @@ namespace Qumulo.Storage;
  */
 enum Versions {
   /**
-   * The 2024-06-19 Stable API version.
+   * The 2024-02-01 Stable API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

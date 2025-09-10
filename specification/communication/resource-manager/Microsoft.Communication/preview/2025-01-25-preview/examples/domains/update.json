@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
+    "resourceGroupName": "MyResourceGroup",
+    "emailServiceName": "MyEmailServiceResource",
+    "domainName": "mydomain.com",
+    "api-version": "2025-01-25-preview",
+    "parameters": {
+      "properties": {
+        "userEngagementTracking": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/EmailServices/MyEmailServiceResource/Domains/mydomain.com",
+        "name": "mydomain.com",
+        "type": "Microsoft.Communication/EmailServices/Domains",
+        "location": "Global",
+        "properties": {
+          "dataLocation": "United States",
+          "provisioningState": "Running",
+          "fromSenderDomain": "mydomain.com",
+          "mailFromSenderDomain": "mydomain.com",
+          "domainManagement": "CustomerManaged",
+          "verificationStates": {
+            "Domain": {
+              "status": "Verified",
+              "errorCode": ""
+            },
+            "SPF": {
+              "status": "NotStarted",
+              "errorCode": ""
+            }
+          },
+          "verificationRecords": {
+            "Domain": {
+              "type": "TXT",
+              "name": "recordName",
+              "value": "recordValue",
+              "ttl": 3600
+            },
+            "SPF": {
+              "type": "TXT",
+              "name": "recordName",
+              "value": "recordValue",
+              "ttl": 3600
+            }
+          },
+          "userEngagementTracking": "Enabled"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Communication/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      },
+      "body": {
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/EmailServices/MyEmailServiceResource/Domains/mydomain.com",
+        "name": "mydomain.com",
+        "type": "Microsoft.Communication/EmailServices/Domains",
+        "location": "Global",
+        "properties": {
+          "dataLocation": "United States",
+          "provisioningState": "Running",
+          "fromSenderDomain": "mydomain.com",
+          "mailFromSenderDomain": "mydomain.com",
+          "domainManagement": "CustomerManaged",
+          "verificationStates": {
+            "Domain": {
+              "status": "Verified",
+              "errorCode": ""
+            },
+            "SPF": {
+              "status": "NotStarted",
+              "errorCode": ""
+            }
+          },
+          "verificationRecords": {
+            "Domain": {
+              "type": "TXT",
+              "name": "recordName",
+              "value": "recordValue",
+              "ttl": 3600
+            },
+            "SPF": {
+              "type": "TXT",
+              "name": "recordName",
+              "value": "recordValue",
+              "ttl": 3600
+            }
+          },
+          "userEngagementTracking": "Enabled"
+        }
+      }
+    }
+  }
+}

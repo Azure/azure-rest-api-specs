@@ -571,25 +571,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -712,8 +693,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExperimentationWorkspaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
@@ -773,9 +753,34 @@
         "accessPolicy"
       ]
     },
-    "ExperimentationWorkspacePropertiesUpdate": {
+    "ExperimentationWorkspaceUpdate": {
       "type": "object",
-      "description": "Properties of the experimentation workspace",
+      "description": "The type used for update operations of the ExperimentationWorkspace.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ExperimentationWorkspaceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ExperimentationWorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ExperimentationWorkspace.",
       "properties": {
         "accessPolicy": {
           "$ref": "#/definitions/AccessPolicyUpdate",
@@ -786,30 +791,6 @@
           "description": "Data source that telemetry data required for experimentation will be retrieved from."
         }
       }
-    },
-    "ExperimentationWorkspaceUpdate": {
-      "type": "object",
-      "description": "A ExperimentationWorkspace Resource by Split.IO",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExperimentationWorkspacePropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "LogAnalytics": {
       "type": "object",

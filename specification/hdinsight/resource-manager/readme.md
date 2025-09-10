@@ -2,13 +2,13 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for HDInsight.
+This is the AutoRest configuration file for HDInsight AKS.
 
 ---
 
 ## Getting Started
 
-To build the SDK for HDInsight, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for HDInsight AKS, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,301 +22,117 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the HDInsight API.
+These are the global settings for the HDInsight AKS API.
 
 ``` yaml
-title: HDInsightManagementClient
-description: HDInsight Management Client
+title: HDInsightAKSManagementClient
+description: HDInsight AKS Management Client
 openapi-type: arm
+openapi-subtype: rpaas
 azure-arm: true
-tag: package-2025-01-preview
+tag: package-2024-05
 ```
 
-### Suppression
 
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: This would require a breaking change, and need to be consistent with the response from RP side.
-    from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
-    where:
-      - $.definitions.CapabilitiesResult.properties.vmsize_filters
-      - $.definitions.RegionalQuotaCapability.properties.cores_available
-      - $.definitions.RegionalQuotaCapability.properties.cores_used
-      - $.definitions.RegionalQuotaCapability.properties.region_name
-      - $.definitions.QuotaCapability.properties.cores_used
-      - $.definitions.QuotaCapability.properties.max_cores_allowed
-      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
-      - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
-      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
-      - $.definitions.VmSizeCompatibilityFilter.properties.Regions
-      - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
-      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
-      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
-      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
-      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
-```
+### Tag: package-2024-05
 
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: This would require a breaking change, and need to be consistent with the response from RP side.
-    from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
-    where:
-      - $.definitions.CapabilitiesResult.properties.vmsize_filters
-      - $.definitions.RegionalQuotaCapability.properties.cores_available
-      - $.definitions.RegionalQuotaCapability.properties.cores_used
-      - $.definitions.RegionalQuotaCapability.properties.region_name
-      - $.definitions.QuotaCapability.properties.cores_used
-      - $.definitions.QuotaCapability.properties.max_cores_allowed
-      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
-      - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
-      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
-      - $.definitions.VmSizeCompatibilityFilter.properties.Regions
-      - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
-      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
-      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
-      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
-      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
-```
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
 
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: This would require a breaking change, and need to be consistent with the response from RP side.
-    from: 
-      - Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
-      - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
-      - Microsoft.HDInsight/stable/2021-06-01/cluster.json
-      - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
-    where:
-      - $.definitions.Role.properties.VMGroupName
-```
-
-``` yaml
-directive:
-  - suppress: R3016 # to suppress (DefinitionsPropertiesNamesCamelCase)
-    from: cluster.json
-    reason: The casing of this property is not incorrect.
-    where:
-      - $..["restAuthCredential.isEnabled"]
-      - $..["restAuthCredential.username"]
-      - $..["restAuthCredential.password"]
-```
-
-``` yaml
-directive:
-  - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
-    reason: Update the default error response to a new format would be a braking change for service.
-```
-### Tag: package-2025-01-preview
-
-These settings apply only when `--tag=package-2025-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-01-preview'
+```yaml $(tag) == 'package-2024-05'
 input-file:
-  - Microsoft.HDInsight/preview/2025-01-15-preview/applications.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/cluster.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/configurations.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/extensions.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/locations.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/operations.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/privateEndpointConnections.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/privateLinkResources.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/scriptActions.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/virtualMachines.json
+  - Microsoft.HDInsight/stable/2024-05-01/hdinsight.json
 
 suppressions:
-  - code: EvenSegmentedPathForPutOperation
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: PathForNestedResource
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: PutGetPatchResponseSchema
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: ResourceNameRestriction
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: PutRequestResponseSchemeArm
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: PutResponseCodes
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code:  ResponseSchemaSpecifiedForSuccessStatusCode
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: DefaultErrorResponseSchema
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: LroErrorContent
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: LroStatusCodesReturnTypeSchema
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: LroLocationHeader
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: XmsPageableForListCalls
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: DeleteResponseCodes
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
+    reason: Keep compatibility with old API version.
+  - code: OperationIdNounVerb
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters"].get.operationId
+    reason: The operation id is valid.
+  - code: EnumInsteadOfBoolean
+  - code: TrackedResourcePatchOperation
+    where:
+      - $.definitions.Cluster
+    reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
+  - code: PatchBodyParametersSchema
+    reason: We refers to the same models in PUT operation, and the errors checked are allowed by our service.
+  - code: EnumInsteadOfBoolean
+    where:
+      - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
+      - $.definitions.ClusterPoolNetworkProfile.properties.enablePrivateApiServer
+      - $.definitions.ClusterRangerPluginProfile.properties.enabled
+      - $.definitions.RangerUsersyncSpec.properties.enabled
+      - $.definitions.KafkaProfile.properties.enableKRaft
+      - $.definitions.KafkaProfile.enablePublicEndpoints
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeClusterPool
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
+    reason: They are used for enabling or disabling a feature. Using a boolean type is more user friendly, and they will be not extended to other values.
+```
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.HDInsight/preview/2023-11-01-preview/hdinsight.json
+  
+suppressions:
+  - code: ResourceNameRestriction
+    reason: Keep compatibility with old API version.
+  - code: OperationIdNounVerb
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters"].get.operationId
+    reason: The operation id is valid.
+  - code: EnumInsteadOfBoolean
+  - code: TrackedResourcePatchOperation
+    where:
+      - $.definitions.Cluster
+    reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
+  - code: EnumInsteadOfBoolean
+    where:
+      - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
+      - $.definitions.ClusterPoolNetworkProfile.properties.enablePrivateApiServer
+      - $.definitions.ClusterRangerPluginProfile.properties.enabled
+      - $.definitions.RangerUsersyncSpec.properties.enabled
+      - $.definitions.KafkaProfile.properties.enableKRaft
+      - $.definitions.KafkaProfile.enablePublicEndpoints
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeClusterPool
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
+    reason: They are used for enabling or disabling a feature. Using a boolean type is more user friendly, and they will be not extended to other values.
 ```
 
-### Tag: package-2024-08-preview
+### Tag: package-2023-06-preview
 
-These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-08-preview'
+``` yaml $(tag) == 'package-2023-06-preview'
 input-file:
-  - Microsoft.HDInsight/preview/2024-08-01-preview/applications.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/cluster.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/configurations.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/locations.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/operations.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/privateEndpointConnections.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/privateLinkResources.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/scriptActions.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/virtualMachines.json
+- Microsoft.HDInsight/preview/2023-06-01-preview/hdinsight.json
 
 suppressions:
-  - code: EvenSegmentedPathForPutOperation
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: PathForNestedResource
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: PutGetPatchResponseSchema
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Remove deprecated APIs in new API version.
   - code: ResourceNameRestriction
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: PutRequestResponseSchemeArm
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: PutResponseCodes
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code:  ResponseSchemaSpecifiedForSuccessStatusCode
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: DefaultErrorResponseSchema
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: LroErrorContent
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: LroStatusCodesReturnTypeSchema
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: LroLocationHeader
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: XmsPageableForListCalls
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
-  - code: DeleteResponseCodes
-    from: extensions.json
-    reason: Keep compatibility with old API version 2023-08-15-preview.
+    reason: Keep compatibility with old API version.
+  - code: PatchBodyParametersSchema
+    reason: The "location" property is a must for a tracked resource.
+  - code: TrackedResourcePatchOperation
+    reason: This is a false positive, the "tags" property is defined in TrackedResource.
 ```
 
-### Tag: package-2023-08-preview
+### Tag: package-2021-09-preview
 
-These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-09-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview'
+``` yaml $(tag) == 'package-2021-09-preview'
 input-file:
-  - Microsoft.HDInsight/preview/2023-08-15-preview/applications.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/cluster.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/configurations.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/extensions.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/locations.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/operations.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/privateEndpointConnections.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/privateLinkResources.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/scriptActions.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/virtualMachines.json
-```
+- Microsoft.HDInsight/preview/2021-09-15-preview/hdinsight.json
 
-### Tag: package-2023-04-preview
-
-These settings apply only when `--tag=package-2023-04-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-04-preview'
-input-file:
-  - Microsoft.HDInsight/preview/2023-04-15-preview/applications.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/configurations.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/extensions.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/locations.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/operations.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/privateEndpointConnections.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/privateLinkResources.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/scriptActions.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/virtualMachines.json
-```
-
-### Tag: package-2021-06
-
-These settings apply only when `--tag=package-2021-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-06'
-input-file:
-- Microsoft.HDInsight/stable/2021-06-01/cluster.json
-- Microsoft.HDInsight/stable/2021-06-01/applications.json
-- Microsoft.HDInsight/stable/2021-06-01/locations.json
-- Microsoft.HDInsight/stable/2021-06-01/configurations.json
-- Microsoft.HDInsight/stable/2021-06-01/extensions.json
-- Microsoft.HDInsight/stable/2021-06-01/scriptActions.json
-- Microsoft.HDInsight/stable/2021-06-01/operations.json
-- Microsoft.HDInsight/stable/2021-06-01/virtualMachines.json
-- Microsoft.HDInsight/stable/2021-06-01/privateEndpointConnections.json
-- Microsoft.HDInsight/stable/2021-06-01/privateLinkResources.json
-```
-
-### Tag: package-2018-06-preview
-
-These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-06-preview'
-input-file:
-- Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/applications.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/configurations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
-```
-
-### Tag: package-2015-03-preview
-
-These settings apply only when `--tag=package-2015-03-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-03-preview'
-input-file:
-- Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/applications.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/configurations.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/virtualMachines.json
+suppressions:
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Remove deprecated APIs in new API version.
+  - code: ResourceNameRestriction
+    reason: Suppress it because the resource name in other existing apis doesn't have restriction.
 ```
 
 ---
@@ -331,9 +147,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
@@ -348,50 +164,27 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Azure.ResourceManager.HDInsightAks
+  output-folder: $(csharp-sdks-folder)/hdinsight/Azure.ResourceManager.HDInsightAks/src/Generated
+  clear-output-folder: true
+```
+
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.hdinsight
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsight
-```
+## Typescript
 
-### Java multi-api
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-06-preview
-  - tag: package-2015-03-preview
-```
+## AzureResourceSchema
 
-### Tag: package-2018-06-preview and java
-
-These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.hdinsight.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/hdinsight/mgmt-v2018_06_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2015-03-preview and java
-
-These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-03-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.hdinsight.v2015_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/hdinsight/mgmt-v2015_03_01_preview
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

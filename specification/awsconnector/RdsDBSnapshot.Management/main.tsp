@@ -29,7 +29,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -137,7 +136,7 @@ model AwsRdsDBSnapshotProperties {
   port?: int32;
 
   @doc("<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   processorFeatures?: ProcessorFeature[];
 
   @doc("<p>Specifies when the snapshot was taken in Coordinated Universal Time (UTC). Changes for the copy when the snapshot is copied.</p>")
@@ -168,7 +167,7 @@ model AwsRdsDBSnapshotProperties {
   storageType?: string;
 
   @doc("Property tagList")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tagList?: Tag[];
 
   @doc("<p>The ARN from the key store with which to associate the instance for TDE encryption.</p>")

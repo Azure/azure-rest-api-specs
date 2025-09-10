@@ -1,15 +1,15 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "environmentId": "env-12132",
+    "clusterId": "clusterId-123",
     "body": {
       "name": "CI kafka access key",
       "description": "This API key provides kafka access to cluster x"
-    },
-    "clusterId": "clusterId-123",
-    "environmentId": "env-12132",
-    "organizationName": "myOrganization",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
@@ -24,8 +24,8 @@
             "updatedTimestamp": "2023-11-15T16:15:44.489498Z"
           },
           "spec": {
-            "name": "CI kafka access key",
             "description": "This API key provides kafka access to cluster x",
+            "name": "CI kafka access key",
             "owner": {
               "id": "sa-wwn7mm",
               "kind": "ServiceAccount",
@@ -43,7 +43,5 @@
         }
       }
     }
-  },
-  "operationId": "Organization_CreateAPIKey",
-  "title": "Organization_CreateClusterAPIKey"
+  }
 }

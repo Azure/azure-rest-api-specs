@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -82,7 +81,7 @@ model AwsIamGroupProperties {
   path?: string;
 
   @doc("Adds or updates an inline policy document that is embedded in the specified IAM group. To view AWS::IAM::Group snippets, see [Declaring an Group Resource](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-iam.html#scenario-iam-group).  The name of each inline policy for a role, user, or group must be unique. If you don't choose unique names, updates to the IAM identity will fail.   For information about limits on the number of inline policies that you can embed in a group, see [Limitations on Entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html) in the *User Guide*.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   policies?: Policy[];
 }
 

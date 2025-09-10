@@ -273,9 +273,7 @@ model CloudCapacity {
 
   /** StorageGB gives the storage in GB present in the cloud. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is distinct from Gb"
-  @added(Versions.v2025_03_13)
-  @visibility(Lifecycle.Read)
-  storageGB?: int64;
+  @visibility(Lifecycle.Read) storageGB?: int64;
 }
 
 /** The StorageQoSPolicy definition. */
@@ -630,7 +628,6 @@ model AvailabilitySetListItem {
 /** Defines the resource properties. */
 model OsProfileForVmInstance {
   /** Gets or sets the admin username. */
-  @added(Versions.v2025_03_13)
   adminUsername?: string;
 
   /** Admin password of the virtual machine. */
@@ -654,35 +651,28 @@ model OsProfileForVmInstance {
   osVersion?: string;
 
   /** Gets or sets the domain name. */
-  @added(Versions.v2024_06_01)
   domainName?: string;
 
   /** Gets or sets the domain username. */
-  @added(Versions.v2024_06_01)
   domainUsername?: string;
 
   /** Password of the domain the VM has to join. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
-  @added(Versions.v2024_06_01)
   domainPassword?: string;
 
   /** Gets or sets the workgroup. */
-  @added(Versions.v2024_06_01)
   workgroup?: string;
 
   /** Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx */
   @visibility(Lifecycle.Create)
   @secret
-  @added(Versions.v2024_06_01)
   productKey?: string;
 
   /** Gets or sets the index value of the timezone. */
-  @added(Versions.v2024_06_01)
   timezone?: int32;
 
   /** Get or sets the commands to be run once at the time of creation separated by semicolons. */
-  @added(Versions.v2024_06_01)
   runOnceCommands?: string;
 }
 
@@ -895,7 +885,6 @@ model GuestAgentProperties {
   provisioningState?: ProvisioningState;
 
   /** The resource id of the private link scope this machine is assigned to, if any. */
-  @added(Versions.v2024_06_01)
   privateLinkScopeResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.HybridCompute/privateLinkScopes";
@@ -978,14 +967,13 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
   @visibility(Lifecycle.Read)
   osVersion?: string;
 
+  /** Gets vm generation. */
+  @visibility(Lifecycle.Read)
+  generation?: int64;
+
   /** Gets the power state of the virtual machine. */
   @visibility(Lifecycle.Read)
   powerState?: string;
-
-  /** Gets vm generation. */
-  @visibility(Lifecycle.Read)
-  @added(Versions.v2025_03_13)
-  generation?: int64;
 
   /** Gets or sets the nic ip addresses. */
   ipAddresses?: string[];

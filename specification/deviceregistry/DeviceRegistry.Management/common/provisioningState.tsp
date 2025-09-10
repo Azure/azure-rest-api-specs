@@ -16,7 +16,7 @@ union ProvisioningState {
   Accepted: "Accepted",
 
   @doc("Resource is deleting.")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_07_01_preview)
   Deleting: "Deleting",
 
   string,

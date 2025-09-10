@@ -1,0 +1,439 @@
+{
+  "operationId": "CommunicationsGateways_ListBySubscription",
+  "title": "ListCommunicationsGatewayResourceSub",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-02-16-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.VoiceService/communicationsGateways/myname",
+            "name": "myname",
+            "location": "useast",
+            "type": "Microsoft.VoiceService/communicationsGateways",
+            "sku": {
+              "name": "standard"
+            },
+            "properties": {
+              "status": "ChangePending",
+              "operatorPeerGroupConfigScheme": "UseOperatorPeerGroupConfig",
+              "connectivity": "PublicAddress",
+              "serviceLocations": [
+                {
+                  "name": "eastus",
+                  "primaryRegionProperties": {
+                    "operatorAddresses": [
+                      "10.1.1.1"
+                    ]
+                  },
+                  "acgAddressRanges": {
+                    "signalingForBackendServices": [
+                      "12.34.12.1/30"
+                    ],
+                    "signalingForOperator": [
+                      "12.34.12.1/30"
+                    ],
+                    "mediaForBackendServices": [
+                      "12.34.12.1/30"
+                    ],
+                    "mediaForOperator": [
+                      "12.34.12.1/30"
+                    ]
+                  },
+                  "acgContactInfo": {
+                    "peerGroups": [
+                      {
+                        "peerGroupName": "PeerGroup1",
+                        "srvRecord": "_sip._tls.PeerGroup1-region1.fqdn.com",
+                        "ipAddresses": [
+                          "192.0.3.1",
+                          "192.0.3.2"
+                        ],
+                        "port": 5061
+                      },
+                      {
+                        "peerGroupName": "PeerGroup2",
+                        "srvRecord": "_sip._tls.PeerGroup2-region1.fqdn.com",
+                        "ipAddresses": [
+                          "192.0.3.3",
+                          "192.0.3.4"
+                        ],
+                        "port": 5063
+                      },
+                      {
+                        "peerGroupName": "PeerGroup3",
+                        "srvRecord": "_sip._tls.PeerGroup3-region1.fqdn.com",
+                        "ipAddresses": [
+                          "192.0.3.3",
+                          "192.0.3.4"
+                        ],
+                        "port": 5065
+                      }
+                    ],
+                    "backendServices": []
+                  }
+                },
+                {
+                  "name": "westus",
+                  "primaryRegionProperties": {
+                    "operatorAddresses": [
+                      "10.1.1.2"
+                    ]
+                  },
+                  "acgAddressRanges": {
+                    "signalingForBackendServices": [
+                      "12.34.12.1/30"
+                    ],
+                    "signalingForOperator": [
+                      "12.34.12.1/30"
+                    ],
+                    "mediaForBackendServices": [
+                      "12.34.12.1/30"
+                    ],
+                    "mediaForOperator": [
+                      "12.34.12.1/30"
+                    ]
+                  },
+                  "acgContactInfo": {
+                    "peerGroups": [
+                      {
+                        "peerGroupName": "PeerGroup1",
+                        "srvRecord": "_sip._tls.PeerGroup1-region2.fqdn.com",
+                        "ipAddresses": [
+                          "192.0.2.1",
+                          "192.0.2.2"
+                        ],
+                        "port": 5061
+                      },
+                      {
+                        "peerGroupName": "PeerGroup2",
+                        "srvRecord": "_sip._tls.PeerGroup2-region2.fqdn.com",
+                        "ipAddresses": [
+                          "192.0.2.3",
+                          "192.0.2.4"
+                        ],
+                        "port": 5063
+                      },
+                      {
+                        "peerGroupName": "PeerGroup3",
+                        "srvRecord": "_sip._tls.PeerGroup3-region2.fqdn.com",
+                        "ipAddresses": [
+                          "192.0.2.3",
+                          "192.0.2.4"
+                        ],
+                        "port": 5065
+                      }
+                    ],
+                    "backendServices": []
+                  }
+                }
+              ],
+              "peerGroups": [
+                {
+                  "peerGroupName": "PeerGroup1",
+                  "peers": [
+                    {
+                      "peerName": "peer1",
+                      "peerType": "IP",
+                      "ipsAndPorts": [
+                        {
+                          "ipAddress": "23.3.56.7",
+                          "port": 5060
+                        }
+                      ],
+                      "allowedSignalingSourceAddressPrefixes": [
+                        "23.3.56.0/29"
+                      ],
+                      "allowedMediaSourceAddressPrefixes": [
+                        "23.3.56.0",
+                        "23.3.57.0"
+                      ]
+                    },
+                    {
+                      "peerName": "peer2",
+                      "peerType": "IP",
+                      "ipsAndPorts": [
+                        {
+                          "ipAddress": "23.3.57.7",
+                          "port": 5060
+                        }
+                      ],
+                      "allowedSignalingSourceAddressPrefixes": [
+                        "24.3.58.0/29"
+                      ],
+                      "allowedMediaSourceAddressPrefixes": [
+                        "23.3.56.0/29"
+                      ]
+                    }
+                  ],
+                  "signalingProtocol": "TLS",
+                  "mediaProtocol": "SRTP",
+                  "codecs": [
+                    "PCMA",
+                    "PCMU",
+                    "G722"
+                  ]
+                },
+                {
+                  "peerGroupName": "PeerGroup2",
+                  "peers": [
+                    {
+                      "peerName": "peer1",
+                      "peerType": "ARecord",
+                      "aRecordsAndPorts": [
+                        {
+                          "aRecord": "peer1-region1.preview.comms.azure.com",
+                          "port": 5060
+                        }
+                      ],
+                      "allowedSignalingSourceAddressPrefixes": [
+                        "23.3.57.0/29"
+                      ],
+                      "allowedMediaSourceAddressPrefixes": [
+                        "23.3.56.0/29"
+                      ]
+                    },
+                    {
+                      "peerName": "peer2",
+                      "peerType": "SRV",
+                      "srvRecord": "_sip._tls.PeerGroup2.fqdn.com",
+                      "allowedSignalingSourceAddressPrefixes": [
+                        "23.3.56.0",
+                        "10.7.99.0"
+                      ],
+                      "allowedMediaSourceAddressPrefixes": [
+                        "23.3.56.0",
+                        "10.7.99.0"
+                      ]
+                    }
+                  ],
+                  "signalingProtocol": "TLS",
+                  "mediaProtocol": "SRTP",
+                  "codecs": [
+                    "PCMA",
+                    "PCMU",
+                    "G722"
+                  ]
+                },
+                {
+                  "peerGroupName": "PeerGroup3",
+                  "peers": [
+                    {
+                      "peerName": "peer1",
+                      "peerType": "IP",
+                      "ipsAndPorts": [
+                        {
+                          "ipAddress": "23.3.56.9",
+                          "port": 5060
+                        }
+                      ],
+                      "allowedSignalingSourceAddressPrefixes": [
+                        "23.3.56.0/29"
+                      ],
+                      "allowedMediaSourceAddressPrefixes": [
+                        "23.3.56.0",
+                        "23.3.57.0"
+                      ]
+                    }
+                  ],
+                  "signalingProtocol": "TLS",
+                  "mediaProtocol": "SRTP",
+                  "codecs": [
+                    "PCMA",
+                    "PCMU",
+                    "G722"
+                  ]
+                }
+              ],
+              "callPolicy": {
+                "defaultMappings": {
+                  "peerGroupToService": [
+                    {
+                      "peerGroup": "PeerGroup1",
+                      "defaultService": "TeamsPhoneMobile"
+                    },
+                    {
+                      "peerGroup": "PeerGroup2",
+                      "defaultService": "OperatorConnect"
+                    },
+                    {
+                      "peerGroup": "PeerGroup3",
+                      "defaultService": "AiVoiceServices"
+                    }
+                  ],
+                  "serviceToPeerGroup": [
+                    {
+                      "service": "TeamsPhoneMobile",
+                      "defaultPeerGroup": "PeerGroup1"
+                    },
+                    {
+                      "service": "OperatorConnect",
+                      "defaultPeerGroup": "PeerGroup2"
+                    },
+                    {
+                      "service": "AiVoiceServices",
+                      "defaultPeerGroup": "PeerGroup3"
+                    }
+                  ]
+                },
+                "peerGroupRoutings": [
+                  {
+                    "peerGroupName": "PeerGroup1",
+                    "routings": [
+                      {
+                        "peerName": "peer1",
+                        "serviceLocation": "westus",
+                        "priority": 0
+                      },
+                      {
+                        "peerName": "peer1",
+                        "serviceLocation": "eastus",
+                        "priority": 1
+                      },
+                      {
+                        "peerName": "peer2",
+                        "serviceLocation": "westus",
+                        "priority": 1
+                      },
+                      {
+                        "peerName": "peer2",
+                        "serviceLocation": "eastus",
+                        "priority": 0
+                      }
+                    ]
+                  },
+                  {
+                    "peerGroupName": "PeerGroup2",
+                    "routings": [
+                      {
+                        "peerName": "peer1",
+                        "serviceLocation": "westus",
+                        "priority": 0
+                      },
+                      {
+                        "peerName": "peer1",
+                        "serviceLocation": "eastus",
+                        "priority": 1
+                      },
+                      {
+                        "peerName": "peer2",
+                        "serviceLocation": "westus",
+                        "priority": 1
+                      },
+                      {
+                        "peerName": "peer2",
+                        "serviceLocation": "eastus",
+                        "priority": 0
+                      }
+                    ]
+                  },
+                  {
+                    "peerGroupName": "PeerGroup3",
+                    "routings": [
+                      {
+                        "peerName": "peer1",
+                        "serviceLocation": "westus",
+                        "priority": 1
+                      },
+                      {
+                        "peerName": "peer1",
+                        "serviceLocation": "eastus",
+                        "priority": 0
+                      }
+                    ]
+                  }
+                ]
+              },
+              "codecs": [
+                "PCMA",
+                "PCMU",
+                "G722",
+                "G722_2",
+                "SILK_8",
+                "SILK_16"
+              ],
+              "customSipHeaders": {
+                "headers": [
+                  {
+                    "name": "custom_header"
+                  }
+                ]
+              },
+              "e911Type": "Standard",
+              "platforms": [
+                "OperatorConnect",
+                "TeamsPhoneMobile",
+                "Zoom",
+                "AiVoiceServices"
+              ],
+              "autoGeneratedDomainNameLabelScope": "NoReuse",
+              "autoGeneratedDomainNameLabel": "somelabel",
+              "onPremMcpEnabled": false,
+              "integratedMcpEnabled": true,
+              "signalingProtocolForMcp": "TLS",
+              "emergencyDialStrings": [
+                "112",
+                "911",
+                "933",
+                "999"
+              ],
+              "teamsVoicemailPilotNumber": "11231231234",
+              "apiBridge": {
+                "configureApiBridge": "enabled",
+                "endpointFqdns": [
+                  "ap2.hash.commsgw.net"
+                ],
+                "allowedAddressPrefixes": [
+                  "198.51.100.192/26"
+                ]
+              },
+              "dnsDelegations": {
+                "delegations": [
+                  {
+                    "domain": "commsgw.contoso.com",
+                    "nameServers": [
+                      "1.2.3.4",
+                      "2.3.4.5"
+                    ]
+                  }
+                ]
+              },
+              "zoomConfig": {
+                "testLines": [
+                  {
+                    "phoneNumber": "+1234567890"
+                  },
+                  {
+                    "phoneNumber": "+1234567891"
+                  },
+                  {
+                    "phoneNumber": "+1234567892"
+                  },
+                  {
+                    "phoneNumber": "+1234567893"
+                  },
+                  {
+                    "phoneNumber": "+1234567894"
+                  },
+                  {
+                    "phoneNumber": "+1234567895"
+                  }
+                ],
+                "region": "NorthAmerica"
+              },
+              "aiVoiceServices": {
+                "callProtection": {
+                  "enabled": true,
+                  "logStorageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/examplerg/providers/Microsoft.Storage/storageAccounts/examplestorageaccount"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

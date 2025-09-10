@@ -1,0 +1,421 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCI",
+    "description": "The Microsoft.AzureStackHCI Rest API spec.",
+    "version": "2021-01-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "AzureStackHCIClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualharddisks/{virtualharddisksName}": {
+      "get": {
+        "operationId": "virtualharddisks_Retrieve",
+        "x-ms-examples": {
+          "GetVirtualHardDisk": {
+            "$ref": "./examples/GetVirtualHardDisk.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualharddisksNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Retrieves the virtualharddisks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualharddisks"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "virtualharddisks_CreateOrUpdate",
+        "x-ms-examples": {
+          "PutVirtualHardDisk": {
+            "$ref": "./examples/PutVirtualHardDisk.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualharddisksNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualharddisks",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/virtualharddisks"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Updates the virtualharddisks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualharddisks"
+            }
+          },
+          "201": {
+            "description": "Creates the virtualharddisks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualharddisks"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "virtualharddisks_Delete",
+        "x-ms-examples": {
+          "DeleteVirtualHardDisk": {
+            "$ref": "./examples/DeleteVirtualHardDisk.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualharddisksNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Deletes the virtualharddisks resource."
+          },
+          "204": {
+            "description": "No content"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "virtualharddisks_Update",
+        "x-ms-examples": {
+          "UpdateVirtualHardDisk": {
+            "$ref": "./examples/UpdateVirtualHardDisk.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualharddisksNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualharddisks",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/virtualharddisksPatch"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Updates the virtualharddisks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualharddisks"
+            }
+          },
+          "201": {
+            "description": "Updates the virtualharddisks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualharddisks"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualharddisks": {
+      "get": {
+        "operationId": "virtualharddisks_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListVirtualHardDiskByResourceGroup": {
+            "$ref": "./examples/ListVirtualHardDiskByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Lists all virtualharddisks under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/virtualharddisksListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/virtualharddisks": {
+      "get": {
+        "operationId": "virtualharddisks_ListBySubscription",
+        "x-ms-examples": {
+          "ListVirtualHardDiskByResourceGroup": {
+            "$ref": "./examples/ListVirtualHardDiskBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Lists all virtualharddisks under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/virtualharddisksListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "virtualharddisksProperties": {
+      "type": "object",
+      "properties": {
+        "blockSizeBytes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "diskSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "diskSizeBytes - size of the disk in GB"
+        },
+        "dynamic": {
+          "type": "boolean",
+          "description": "Boolean for enabling dynamic sizing on the virtual hard disk"
+        },
+        "logicalSectorBytes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "physicalSectorBytes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "provisioningState": {
+          "type": "string"
+        },
+        "status": {
+          "type": "object",
+          "description": "MOCVirtualHardDiskStatus defines the observed state of MOCVirtualHardDisk"
+        }
+      },
+      "description": "MOCVirtualHardDiskSpec defines the desired state of MOCVirtualHardDisk"
+    },
+    "virtualharddisks": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/virtualharddisksProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "The virtualharddisks resource definition."
+    },
+    "virtualharddisksPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The virtualharddisks resource patch definition."
+    },
+    "virtualharddisksListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/virtualharddisks"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "virtualharddisksNameParameter": {
+      "name": "virtualharddisksName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    }
+  }
+}

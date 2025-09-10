@@ -30,13 +30,8 @@ interface SecurityRules {
   @doc("Gets the specified security rule.")
   get is ArmResourceRead<SecurityRule>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Creates or updates a security rule in the specified resource group.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    SecurityRule,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecurityRule>;
 
   @doc("Deletes the specified security rule.")
   delete is ArmResourceDeleteWithoutOkAsync<SecurityRule>;

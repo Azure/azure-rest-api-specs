@@ -1,10 +1,12 @@
 import "./commons.tsp"; // Import common types
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using LiftrBase.Data;
 
-namespace Neon.Postgres;
+namespace Neon.Postgres.Models;
 
 @doc("The Compute resource type.")
 @added(Neon.Postgres.Versions.v2_preview)

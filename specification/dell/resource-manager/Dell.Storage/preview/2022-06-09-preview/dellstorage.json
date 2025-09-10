@@ -1,0 +1,684 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Dell.Storage",
+    "version": "2022-06-09-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "FileSystems"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Dell.Storage/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Dell.Storage/filesystems": {
+      "get": {
+        "tags": [
+          "FileSystems"
+        ],
+        "operationId": "FileSystems_ListBySubscription",
+        "description": "List FileSystemResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FileSystems_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dell.Storage/filesystems": {
+      "get": {
+        "tags": [
+          "FileSystems"
+        ],
+        "operationId": "FileSystems_ListByResourceGroup",
+        "description": "List FileSystemResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FileSystems_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dell.Storage/filesystems/{filesystemName}": {
+      "get": {
+        "tags": [
+          "FileSystems"
+        ],
+        "operationId": "FileSystems_Get",
+        "description": "Get a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FileSystemResource.filesystemName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_Get_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileSystems"
+        ],
+        "operationId": "FileSystems_CreateOrUpdate",
+        "description": "Create a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FileSystemResource.filesystemName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "FileSystems_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FileSystems"
+        ],
+        "operationId": "FileSystems_Update",
+        "description": "Update a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FileSystemResource.filesystemName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "201": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "202": {
+            "description": "ARM create operation Accepted successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_Update_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FileSystems"
+        ],
+        "operationId": "FileSystems_Delete",
+        "description": "Delete a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FileSystemResource.filesystemName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "FileSystems_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_Delete_MaximumSet_Gen.json"
+          },
+          "FileSystems_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FileSystemResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FilesystemResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the filesystem resource",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "A FileSystem Resource by Dell",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FileSystemResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileSystemResource"
+          },
+          "x-cadl-name": "FileSystemResource[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a FileSystemResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "FilesystemResourceProperties": {
+      "type": "object",
+      "properties": {
+        "initialCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Initial capacity for Dell Filesystem in bytes"
+        },
+        "marketplace": {
+          "$ref": "#/definitions/Marketplace",
+          "description": "Marketplace details"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource"
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "delegatedSubnetCidr": {
+          "type": "string",
+          "description": "Domain range for the delegated subnet",
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}/(16|24)$"
+        },
+        "user": {
+          "$ref": "#/definitions/User",
+          "description": "User Details"
+        },
+        "clusterLoginUrl": {
+          "type": "string",
+          "description": "Cluster login url of the resource"
+        },
+        "privateIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Private IPs of the resource"
+        }
+      },
+      "description": "Properties specific to the Dell File System resource",
+      "required": [
+        "marketplace",
+        "provisioningState",
+        "user",
+        "initialCapacity",
+        "delegatedSubnetId",
+        "delegatedSubnetCidr"
+      ]
+    },
+    "FileSystemResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/FileSystemResourceUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the FileSystemResource."
+    },
+    "FileSystemResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "initialCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Initial capacity for Dell Filesystem in bytes"
+        }
+      },
+      "description": "The updatable properties of the FileSystemResource."
+    },
+    "Marketplace": {
+      "type": "object",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "type": "string",
+          "description": "Marketplace Subscription Id"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id"
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
+        }
+      },
+      "description": "MarketplaceDetails of Dell FileSystem resource",
+      "required": [
+        "planId",
+        "offerId",
+        "publisherId"
+      ]
+    },
+    "MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of the storage resource",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Fulfillment has not started"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Marketplace offer is subscribed"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Marketplace offer is suspended because of non payment"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Marketplace offer is unsubscribed"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State of the File system resource",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "File system resource creation request accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "File system resource creation started"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "File system resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "File system resource deletion started"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "File system resource creation successful"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "File system resource creation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "File system resource creation canceled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "File system resource is deleted"
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "File system resource state is unknown"
+          }
+        ]
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User Email"
+        }
+      },
+      "description": "User Details of Dell FileSystem resource",
+      "required": [
+        "email"
+      ]
+    }
+  },
+  "parameters": {
+    "FileSystemResource.filesystemName": {
+      "name": "filesystemName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the filesystem resource",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.IoTOperations;
 

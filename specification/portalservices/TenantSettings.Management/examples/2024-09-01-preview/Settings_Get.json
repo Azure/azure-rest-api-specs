@@ -1,0 +1,35 @@
+{
+  "operationId": "Settings_Get",
+  "title": "Get tenant-level Azure Portal settings",
+  "parameters": {
+    "name": "default",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "feedbackControlPolicy": {
+            "connectedExperiences": "Disabled",
+            "policyAllowFeedback": "Disabled",
+            "policyAllowSurvey": "Disabled",
+            "policyAllowScreenshot": "Enabled",
+            "policyAllowContact": "Disabled",
+            "policyAllowContent": "Disabled",
+            "policyEmailCollectionDefault": "Enabled",
+            "policyScreenshotDefault": "Disabled",
+            "policyContentSamplesDefault": "Enabled"
+          },
+          "multiFactorAuthentication": {
+            "portalEnforcement": "OptOut",
+            "portalJustification": "Justification for opting out of MFA enforcement",
+            "portalEnforcementDate": "2025-03-15T00:00:00Z"
+          }
+        },
+        "id": "/providers/Microsoft.PortalServices/settings/default",
+        "name": "default",
+        "type": "Microsoft.PortalServices/settings"
+      }
+    }
+  }
+}

@@ -2578,14 +2578,14 @@
         "autoUpdateRequestedWeek": {
           "type": "integer",
           "format": "int32",
-          "description": "Customer requested week of month for mcc install of auto update cycle. 0 is default no selection. 1-5 are valid weeks of month, 1 is first week, 2 is second week, etc.",
+          "description": "Customer requested week of month for mcc install of auto update cycle",
           "minimum": 0,
           "maximum": 5
         },
         "autoUpdateRequestedDay": {
           "type": "integer",
           "format": "int32",
-          "description": "Customer requested day of week for mcc install of auto update cycle. 0 is default no selection. 1-7 are days of week, 1 is Sunday, 2 is Monday, etc.",
+          "description": "Customer requested day of week for mcc install of auto update cycle",
           "minimum": 0,
           "maximum": 7
         },
@@ -2641,7 +2641,8 @@
           "description": "Cache node resource drive configurations.",
           "items": {
             "$ref": "#/definitions/CacheNodeDriveConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "proxyUrlConfiguration": {
           "$ref": "#/definitions/ProxyUrlConfiguration",
@@ -3124,7 +3125,8 @@
           "description": "Cache node resource auto update history information.",
           "items": {
             "$ref": "#/definitions/MccCacheNodeAutoUpdateInfo"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3291,7 +3293,8 @@
           "description": "Cache node resource issue details history.",
           "items": {
             "$ref": "#/definitions/MccIssue"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3372,7 +3375,8 @@
           "description": "Cache node resource tls certificate history details.",
           "items": {
             "$ref": "#/definitions/MccCacheNodeTlsCertificate"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

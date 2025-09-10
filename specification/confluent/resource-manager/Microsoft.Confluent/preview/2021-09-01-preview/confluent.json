@@ -660,10 +660,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -697,11 +694,7 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ]
+          }
         }
       }
     },
@@ -796,8 +789,7 @@
         },
         "status": {
           "description": "SaaS Offer Status",
-          "$ref": "#/definitions/SaaSOfferStatus",
-          "readOnly": true
+          "$ref": "#/definitions/SaaSOfferStatus"
         }
       }
     },
@@ -822,6 +814,23 @@
           "description": "Email address",
           "pattern": "^\\S+@\\S+\\.\\S+$",
           "type": "string"
+        }
+      }
+    },
+    "LinkOrganization": {
+      "description": "Link an existing Confluent organization",
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "description": "User auth token",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -861,6 +870,10 @@
         "userDetail": {
           "description": "Subscriber detail",
           "$ref": "#/definitions/UserDetail"
+        },
+        "linkOrganization": {
+          "description": "Link an existing Confluent organization",
+          "$ref": "#/definitions/LinkOrganization"
         }
       }
     },

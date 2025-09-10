@@ -458,6 +458,58 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/usages": {
+      "get": {
+        "description": "Get the email usage quota on the subscription",
+        "operationId": "Domains_GetQuota",
+        "summary": "Get",
+        "tags": [
+          "Domains"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding EmailQuotaResourceCollection.",
+            "schema": {
+              "$ref": "#/definitions/EmailQuotaResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get Quota": {
+            "$ref": "./examples/domains/getQuota.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -712,6 +764,67 @@
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "QuotaPerHour": {
+      "description": "Quota limit per hour on the subscription",
+      "type": "object",
+      "properties": {
+        "limit": {
+          "description": "Current quota limit per hour allowed on the subscription",
+          "type": "integer",
+          "format": "int32"
+        },
+        "usage": {
+          "description": "Current usage on the subscription",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "QuotaPerMinute": {
+      "description": "Quota limit per minute on the subscription",
+      "type": "object",
+      "properties": {
+        "limit": {
+          "description": "Current quota limit per minute allowed on the subscription",
+          "type": "integer",
+          "format": "int32"
+        },
+        "usage": {
+          "description": "Current usage on the subscription",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "EmailQuotaResource": {
+      "description": "Email Quota on the assigned to the subscription",
+      "type": "object",
+      "properties": {
+        "quotaPerHour": {
+          "$ref": "#/definitions/QuotaPerHour"
+        },
+        "quotaPerMinute": {
+          "$ref": "#/definitions/QuotaPerMinute"
+        }
+      }
+    },
+    "EmailQuotaResourceCollection": {
+      "description": "A class representing a collection of EmailQuotaResource.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of EmailQuotaResource",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailQuotaResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
           "type": "string"
         }
       }

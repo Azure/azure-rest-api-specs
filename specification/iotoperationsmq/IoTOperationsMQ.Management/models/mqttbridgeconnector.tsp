@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./base.tsp";
@@ -82,14 +83,12 @@ model MqttBridgeRemoteBrokerConnectionSpec {
 }
 
 @doc("Protocol for remote connection.")
-union MqttBridgeRemoteBrokerProtocol {
-  string,
-
+enum MqttBridgeRemoteBrokerProtocol {
   @doc("MQTT protocol.")
-  mqtt: "mqtt",
+  mqtt,
 
   @doc("MQTT over WebSocket protocol.")
-  webSocket: "webSocket",
+  webSocket,
 }
 
 // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.
@@ -148,7 +147,7 @@ model MqttBridgeTopicMapProperties {
   mqttBridgeConnectorRef: string;
 
   @doc("The route details for MqttBridge connector.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   routes?: MqttBridgeRoutes[];
 
   @visibility(Lifecycle.Read)
@@ -180,9 +179,7 @@ model MqttBridgeRoutes {
 }
 
 @doc("MqttBridgeRoute direction properties")
-union MqttBridgeRouteDirection {
-  string,
-
+enum MqttBridgeRouteDirection {
   @doc("Remote to Local Broker.")
   RemoteToLocal: "remote-to-local",
 

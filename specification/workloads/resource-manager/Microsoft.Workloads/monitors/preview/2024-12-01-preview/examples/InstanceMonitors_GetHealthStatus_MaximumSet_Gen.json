@@ -1,0 +1,62 @@
+{
+  "title": "InstanceMonitors_GetHealthStatus",
+  "operationId": "InstanceMonitors_GetHealthStatus",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "BE81F0B2-B730-4978-96C8-296DA9532473",
+    "resourceGroupName": "rgobservability",
+    "instanceMonitorName": "v95healthmonitor",
+    "body": {
+      "healthStatesIn": [
+        "Healthy",
+        "Degraded",
+        "Unhealthy"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/virtualInstances/V95",
+        "healthSnapshotId": "flpzryqwyvkqcfcfnqbxweawaf",
+        "healthEvaluationTime": "2024-11-26T10:15:49.640Z",
+        "healthState": "Degraded",
+        "componentsHealthState": [
+          {
+            "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/virtualInstances/V95/workloadComponents/webdispatcher",
+            "healthState": "Healthy",
+            "dependentEntitiesStatus": [
+              {
+                "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Compute/virtualMachines/v95-wb-1",
+                "healthState": "Healthy"
+              },
+              {
+                "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Compute/virtualMachines/v95-wb-2",
+                "healthState": "Healthy"
+              }
+            ]
+          },
+          {
+            "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/virtualInstances/V95/workloadComponents/application",
+            "healthState": "Degraded",
+            "dependentEntitiesStatus": [
+              {
+                "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Compute/virtualMachines/v95-app-1",
+                "healthState": "Unhealthy"
+              },
+              {
+                "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Compute/virtualMachines/v95-app-2",
+                "healthState": "Healthy"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

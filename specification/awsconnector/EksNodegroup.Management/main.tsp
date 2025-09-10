@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -121,7 +120,7 @@ model AwsEksNodegroupProperties {
   tags?: Record<string>;
 
   @doc("The Kubernetes taints to be applied to the nodes in the node group when they are created.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   taints?: Taint[];
 
   @doc("The node group update configuration. The node group update configuration.")

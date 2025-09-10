@@ -11,40 +11,32 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.WeightsAndBiases"
     flavor: azure
     clear-output-folder: true
-    namespace: "Azure.ResourceManager.WeightsAndBiases"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-  "@azure-tools/typespec-python":
-    service-dir: "sdk/weightsandbiases"
-    package-dir: "azure-mgmt-weightsandbiases"
-    namespace: "azure.mgmt.weightsandbiases"
-    flavor: "azure"
-    generate-test: true
-    generate-sample: true
+    use-write-core: true
+    namespace: "{package-dir}"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/weightsandbiases"
-    package-dir: "armweightsandbiases"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-examples: true
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
-  "@azure-tools/typespec-ts":
-    flavor: azure
-    experimental-extensible-enums: true
-    package-dir: "arm-weightsandbiases"
-    package-details:
-      name: "@azure/arm-weightsandbiases"
+    service-dir: sdk/resourcemanager/placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    package-dir: armplaceholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir} #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    fix-const-stuttering: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    generate-samples: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    generate-fakes: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    head-as-boolean: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    inject-spans: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+  "@azure-tools/typespec-python":
+    package-dir: azure-mgmt-placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    namespace: azure.mgmt.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    generate-test: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    generate-sample: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-java":
-    service-dir: "sdk/weightsandbiases"
-    package-dir: "azure-resourcemanager-weightsandbiases"
-    namespace: "com.azure.resourcemanager.weightsandbiases"
-    service-name: "Weights And Biases"
-    flavor: "azure"
+    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    package-dir: azure-resourcemanager-placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    namespace: com.azure.resourcemanager.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    service-name: Place Holder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

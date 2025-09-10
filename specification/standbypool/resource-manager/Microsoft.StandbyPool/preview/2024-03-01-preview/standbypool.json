@@ -307,6 +307,10 @@
               "$ref": "#/definitions/StandbyContainerGroupPoolResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -448,7 +452,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyContainerGroupPoolName}/runtimeViews": {
       "get": {
-        "operationId": "StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool",
+        "operationId": "StandbyContainerGroupPoolRuntimeViews_ListByStandbyContainerGroupPoolResource",
         "tags": [
           "StandbyContainerGroupPoolRuntimeViews"
         ],
@@ -487,8 +491,8 @@
           }
         },
         "x-ms-examples": {
-          "StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool": {
-            "$ref": "./examples/StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool.json"
+          "StandbyContainerGroupPoolRuntimeViews_ListByStandbyContainerGroupPoolResource": {
+            "$ref": "./examples/StandbyContainerGroupPoolRuntimeViews_ListByStandbyContainerGroupPoolResource.json"
           }
         },
         "x-ms-pageable": {
@@ -686,6 +690,10 @@
               "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -827,7 +835,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/runtimeViews": {
       "get": {
-        "operationId": "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool",
+        "operationId": "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyVirtualMachinePoolResource",
         "tags": [
           "StandbyVirtualMachinePoolRuntimeViews"
         ],
@@ -866,8 +874,8 @@
           }
         },
         "x-ms-examples": {
-          "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool": {
-            "$ref": "./examples/StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool.json"
+          "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyVirtualMachinePoolResource": {
+            "$ref": "./examples/StandbyVirtualMachinePoolRuntimeViews_ListByStandbyVirtualMachinePoolResource.json"
           }
         },
         "x-ms-pageable": {
@@ -1043,7 +1051,7 @@
       "properties": {
         "instanceCountsByState": {
           "type": "array",
-          "description": "The count of pooled resources in each state.",
+          "description": "The count of pooled container groups in each state.",
           "items": {
             "$ref": "#/definitions/PoolResourceStateCount"
           },
@@ -1082,6 +1090,29 @@
         "id"
       ]
     },
+    "ContainerGroupProfileUpdate": {
+      "type": "object",
+      "description": "Details of the ContainerGroupProfile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies container group profile id of standby container groups.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
+              }
+            ]
+          }
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies revision of container group profile."
+        }
+      }
+    },
     "ContainerGroupProperties": {
       "type": "object",
       "description": "Details of the ContainerGroupProperties.",
@@ -1101,6 +1132,23 @@
       "required": [
         "containerGroupProfile"
       ]
+    },
+    "ContainerGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the ContainerGroupProperties.",
+      "properties": {
+        "containerGroupProfile": {
+          "$ref": "#/definitions/ContainerGroupProfileUpdate",
+          "description": "Specifies container group profile of standby container groups."
+        },
+        "subnetIds": {
+          "type": "array",
+          "description": "Specifies subnet Ids for container group.",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          }
+        }
+      }
     },
     "PoolResourceStateCount": {
       "type": "object",
@@ -1196,14 +1244,30 @@
         "maxReadyCapacity"
       ]
     },
+    "StandbyContainerGroupPoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Specifies the elasticity profile of the standby container group pools.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of standby container groups in the standby pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "refillPolicy": {
+          "$ref": "#/definitions/RefillPolicy",
+          "description": "Specifies refill policy of the pool."
+        }
+      }
+    },
     "StandbyContainerGroupPoolResource": {
       "type": "object",
       "description": "A StandbyContainerGroupPoolResource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyContainerGroupPoolResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1269,8 +1333,7 @@
         },
         "properties": {
           "$ref": "#/definitions/StandbyContainerGroupPoolResourceUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -1279,11 +1342,11 @@
       "description": "The updatable properties of the StandbyContainerGroupPoolResource.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfile",
+          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfileUpdate",
           "description": "Specifies elasticity profile of standby container group pools."
         },
         "containerGroupProperties": {
-          "$ref": "#/definitions/ContainerGroupProperties",
+          "$ref": "#/definitions/ContainerGroupPropertiesUpdate",
           "description": "Specifies container group properties of standby container group pools."
         }
       }
@@ -1294,8 +1357,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyContainerGroupPoolRuntimeViewResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1371,14 +1433,33 @@
         "maxReadyCapacity"
       ]
     },
+    "StandbyVirtualMachinePoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "minReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      }
+    },
     "StandbyVirtualMachinePoolResource": {
       "type": "object",
       "description": "A StandbyVirtualMachinePoolResource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1455,8 +1536,7 @@
         },
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -1465,7 +1545,7 @@
       "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfile",
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfileUpdate",
           "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
@@ -1492,8 +1572,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolRuntimeViewResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1529,7 +1608,7 @@
       "properties": {
         "instanceCountSummary": {
           "type": "array",
-          "description": "A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider. If zones are not enabled on the attached VMSS, the list will contain a single entry without zone values. Note: any resources in the Running state may still be installing extensions / not fully provisioned.",
+          "description": "A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider.\nIf zones are not enabled on the attached VMSS, the list will contain a single entry without zone values.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.",
           "items": {
             "$ref": "#/definitions/VirtualMachineInstanceCountSummary"
           },
@@ -1552,8 +1631,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachineResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1589,11 +1667,7 @@
       "properties": {
         "virtualMachineResourceId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Resource id of the virtual machine.",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "Resource id of the virtual machine."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1628,7 +1702,7 @@
     },
     "VirtualMachineInstanceCountSummary": {
       "type": "object",
-      "description": "Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider. Note: any resources in the Running state may still be installing extensions / not fully provisioned.",
+      "description": "Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.",
       "properties": {
         "zone": {
           "type": "integer",
@@ -1637,7 +1711,7 @@
         },
         "instanceCountsByState": {
           "type": "array",
-          "description": "The count of pooled resources in each state for the given zone.",
+          "description": "The count of pooled virtual machines in each state for the given zone.",
           "items": {
             "$ref": "#/definitions/PoolResourceStateCount"
           },

@@ -26,7 +26,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -80,7 +79,7 @@ model AwsEksClusterProperties {
   createdAt?: utcDateTime;
 
   @doc("<p>The encryption configuration for the cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   encryptionConfig?: EncryptionConfig[];
 
   @doc("<p>The endpoint for your Kubernetes API server.</p>")
@@ -248,7 +247,7 @@ model EncryptionConfig {
 @doc("Definition of ClusterHealth")
 model ClusterHealth {
   @doc("<p>An object representing the health issues of your local Amazon EKS cluster on an Amazon Web Services Outpost.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   issues?: ClusterIssue[];
 }
 
@@ -306,7 +305,7 @@ model IpFamilyEnumValue {
 @doc("Definition of Logging")
 model Logging {
   @doc("<p>The cluster control plane logging configuration for your cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   clusterLogging?: LogSetup[];
 }
 

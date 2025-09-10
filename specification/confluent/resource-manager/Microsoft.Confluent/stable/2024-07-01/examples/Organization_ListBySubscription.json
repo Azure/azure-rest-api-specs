@@ -6,46 +6,44 @@
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Confluent/organizations?api-version=2024-07-01&$count=2&$skipToken=fake-continuation-token-12345",
         "value": [
           {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganizations",
             "name": "myOrganizations",
             "type": "Microsoft.Confluent/organizations",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganizations",
-            "location": "West US",
             "properties": {
               "createdTime": "2020-05-09T14:28:47.284Z",
+              "provisioningState": "Accepted",
+              "organizationId": "string",
+              "ssoUrl": "string",
               "offerDetail": {
+                "publisherId": "string",
                 "id": "string",
                 "planId": "string",
                 "planName": "string",
+                "termUnit": "string",
                 "privateOfferId": "string",
                 "privateOfferIds": [
                   "string"
                 ],
-                "publisherId": "string",
-                "status": "Started",
-                "termUnit": "string"
+                "status": "Started"
               },
-              "organizationId": "string",
-              "provisioningState": "Accepted",
-              "ssoUrl": "string",
               "userDetail": {
-                "aadEmail": "contoso@microsoft.com",
-                "emailAddress": "contoso@microsoft.com",
                 "firstName": "string",
                 "lastName": "string",
-                "userPrincipalName": "contoso@microsoft.com"
+                "emailAddress": "contoso@microsoft.com",
+                "userPrincipalName": "contoso@microsoft.com",
+                "aadEmail": "contoso@microsoft.com"
               }
             },
             "tags": {
               "Environment": "Dev"
-            }
+            },
+            "location": "West US"
           }
-        ]
+        ],
+        "nextLink": "string"
       }
     }
-  },
-  "operationId": "Organization_ListBySubscription",
-  "title": "Organization_ListBySubscription"
+  }
 }

@@ -1,0 +1,448 @@
+{
+  "title": "ChangeStates_CreateOrUpdate_MaximumSet",
+  "operationId": "ChangeStates_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "testChangeState",
+    "resource": {
+      "properties": {
+        "changeType": "AppDeployment",
+        "rolloutType": "Normal",
+        "description": "Deploy new application version 2.1.0 to production environment with enhanced security features and performance improvements",
+        "stageMap": {
+          "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/production-deployment-stages"
+        },
+        "parameters": {
+          "applicationVersion": {
+            "type": "string",
+            "defaultValue": "2.1.0",
+            "allowedValues": [
+              "2.0.0",
+              "2.1.0",
+              "2.2.0"
+            ],
+            "metadata": {
+              "description": "Version of the application to deploy",
+              "category": "deployment"
+            }
+          },
+          "environmentConfig": {
+            "type": "object",
+            "defaultValue": {
+              "tier": "production",
+              "monitoring": true,
+              "scaling": "auto"
+            },
+            "allowedValues": [
+              {
+                "tier": "development",
+                "monitoring": false,
+                "scaling": "manual"
+              },
+              {
+                "tier": "production",
+                "monitoring": true,
+                "scaling": "auto"
+              }
+            ],
+            "metadata": {
+              "description": "Environment configuration settings",
+              "category": "configuration"
+            }
+          },
+          "targetRegions": {
+            "type": "array",
+            "defaultValue": [
+              "eastus",
+              "westus"
+            ],
+            "allowedValues": [
+              [
+                "eastus"
+              ],
+              [
+                "eastus",
+                "westus"
+              ],
+              [
+                "eastus",
+                "westus",
+                "centralus"
+              ]
+            ],
+            "metadata": {
+              "description": "Target regions for deployment",
+              "category": "infrastructure"
+            }
+          }
+        },
+        "state": "Initialized",
+        "comments": "Initial deployment setup for production release",
+        "changeDefinitions": [
+          {
+            "name": "webAppDeployment",
+            "type": "ArmOperation",
+            "details": {
+              "resourceType": "Microsoft.Web/sites",
+              "operation": "PUT",
+              "scope": "resourceGroup"
+            }
+          }
+        ],
+        "releaseLabel": "v2.1.0-production",
+        "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+        "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+        "orchestrationTool": "Azure DevOps",
+        "links": {
+          "workTrackingItem": {
+            "uri": "https://dev.azure.com/contoso/MyProject/_workitems/edit/12345",
+            "description": "Work item for application deployment v2.1.0"
+          },
+          "approvalRequest": {
+            "uri": "https://approval.contoso.com/requests/67890",
+            "description": "Production deployment approval request"
+          },
+          "supportIncident": {
+            "uri": "https://support.contoso.com/incidents/INC001234",
+            "description": "Related support incident for deployment coordination"
+          },
+          "accessElevationRequest": {
+            "uri": "https://access.contoso.com/requests/AER-5678",
+            "description": "Elevated access request for production deployment"
+          },
+          "relatedChangeState": {
+            "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/stagingDeployment",
+            "description": "Related staging environment deployment"
+          },
+          "testResults": {
+            "uri": "https://testresults.contoso.com/runs/TR-9876",
+            "description": "Automated test results for v2.1.0"
+          },
+          "serviceCatalog": {
+            "uri": "https://catalog.contoso.com/services/web-application",
+            "description": "Service catalog entry for web application"
+          }
+        },
+        "additionalData": {
+          "buildId": "20250709.1",
+          "commitSha": "abc123def456",
+          "approver": "john.doe@contoso.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Deploy new application version 2.1.0 to production environment with enhanced security features and performance improvements",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/production-deployment-stages"
+          },
+          "parameters": {
+            "applicationVersion": {
+              "type": "string",
+              "defaultValue": "2.1.0",
+              "allowedValues": [
+                "2.0.0",
+                "2.1.0",
+                "2.2.0"
+              ],
+              "metadata": {
+                "description": "Version of the application to deploy",
+                "category": "deployment"
+              }
+            },
+            "environmentConfig": {
+              "type": "object",
+              "defaultValue": {
+                "tier": "production",
+                "monitoring": true,
+                "scaling": "auto"
+              },
+              "allowedValues": [
+                {
+                  "tier": "development",
+                  "monitoring": false,
+                  "scaling": "manual"
+                },
+                {
+                  "tier": "production",
+                  "monitoring": true,
+                  "scaling": "auto"
+                }
+              ],
+              "metadata": {
+                "description": "Environment configuration settings",
+                "category": "configuration"
+              }
+            },
+            "targetRegions": {
+              "type": "array",
+              "defaultValue": [
+                "eastus",
+                "westus"
+              ],
+              "allowedValues": [
+                [
+                  "eastus"
+                ],
+                [
+                  "eastus",
+                  "westus"
+                ],
+                [
+                  "eastus",
+                  "westus",
+                  "centralus"
+                ]
+              ],
+              "metadata": {
+                "description": "Target regions for deployment",
+                "category": "infrastructure"
+              }
+            }
+          },
+          "state": "Initialized",
+          "comments": "Initial deployment setup for production release",
+          "changeDefinitions": [
+            {
+              "name": "webAppDeployment",
+              "type": "ArmOperation",
+              "details": {
+                "resourceType": "Microsoft.Web/sites",
+                "operation": "PUT",
+                "scope": "resourceGroup"
+              }
+            }
+          ],
+          "releaseLabel": "v2.1.0-production",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/MyProject/_workitems/edit/12345",
+              "description": "Work item for application deployment v2.1.0",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/67890",
+              "description": "Production deployment approval request",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC001234",
+              "description": "Related support incident for deployment coordination",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/requests/AER-5678",
+              "description": "Elevated access request for production deployment",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/stagingDeployment",
+              "description": "Related staging environment deployment",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/TR-9876",
+              "description": "Automated test results for v2.1.0",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/web-application",
+              "description": "Service catalog entry for web application",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "buildId": "20250709.1",
+            "commitSha": "abc123def456",
+            "approver": "john.doe@contoso.com"
+          },
+          "stageMapSnapshot": []
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Deploy new application version 2.1.0 to production environment with enhanced security features and performance improvements",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/production-deployment-stages"
+          },
+          "parameters": {
+            "applicationVersion": {
+              "type": "string",
+              "defaultValue": "2.1.0",
+              "allowedValues": [
+                "2.0.0",
+                "2.1.0",
+                "2.2.0"
+              ],
+              "metadata": {
+                "description": "Version of the application to deploy",
+                "category": "deployment"
+              }
+            },
+            "environmentConfig": {
+              "type": "object",
+              "defaultValue": {
+                "tier": "production",
+                "monitoring": true,
+                "scaling": "auto"
+              },
+              "allowedValues": [
+                {
+                  "tier": "development",
+                  "monitoring": false,
+                  "scaling": "manual"
+                },
+                {
+                  "tier": "production",
+                  "monitoring": true,
+                  "scaling": "auto"
+                }
+              ],
+              "metadata": {
+                "description": "Environment configuration settings",
+                "category": "configuration"
+              }
+            },
+            "targetRegions": {
+              "type": "array",
+              "defaultValue": [
+                "eastus",
+                "westus"
+              ],
+              "allowedValues": [
+                [
+                  "eastus"
+                ],
+                [
+                  "eastus",
+                  "westus"
+                ],
+                [
+                  "eastus",
+                  "westus",
+                  "centralus"
+                ]
+              ],
+              "metadata": {
+                "description": "Target regions for deployment",
+                "category": "infrastructure"
+              }
+            }
+          },
+          "state": "Initialized",
+          "comments": "Initial deployment setup for production release",
+          "changeDefinitions": [
+            {
+              "name": "webAppDeployment",
+              "type": "ArmOperation",
+              "details": {
+                "resourceType": "Microsoft.Web/sites",
+                "operation": "PUT",
+                "scope": "resourceGroup"
+              }
+            }
+          ],
+          "releaseLabel": "v2.1.0-production",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/MyProject/_workitems/edit/12345",
+              "description": "Work item for application deployment v2.1.0",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/67890",
+              "description": "Production deployment approval request",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC001234",
+              "description": "Related support incident for deployment coordination",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/requests/AER-5678",
+              "description": "Elevated access request for production deployment",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/stagingDeployment",
+              "description": "Related staging environment deployment",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/TR-9876",
+              "description": "Automated test results for v2.1.0",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/web-application",
+              "description": "Service catalog entry for web application",
+              "lastModifiedBy": "john.doe@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "buildId": "20250709.1",
+            "commitSha": "abc123def456",
+            "approver": "john.doe@contoso.com"
+          },
+          "stageMapSnapshot": []
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

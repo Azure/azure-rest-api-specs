@@ -1,0 +1,1826 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Open Energy Platform Management Service APIs",
+    "description": "Open Energy Platform Management Service APIs",
+    "version": "2023-10-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "Checks the name availability of the resource with requested resource name.",
+        "operationId": "Locations_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "description": "NameAvailabilityRequest object.",
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Locations_CheckNameAvailability_MaximumSet_Gen": {
+            "$ref": "./examples/Locations_CheckNameAvailability_MaximumSet_Gen.json"
+          },
+          "Locations_CheckNameAvailability_MinimumSet_Gen": {
+            "$ref": "./examples/Locations_CheckNameAvailability_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Returns list of oep resources..",
+        "operationId": "EnergyServices_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnergyServiceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EnergyServices_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/energyServices": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Lists a collection of oep resources under the given Azure Subscription ID.",
+        "operationId": "EnergyServices_ListBySubscription",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/EnergyServiceList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Returns oep resource for a given name.",
+        "operationId": "EnergyServices_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_Get_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Method that gets called if subscribed for ResourceCreationBegin trigger.",
+        "operationId": "EnergyServices_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body.",
+            "schema": {
+              "description": "Request body.",
+              "$ref": "#/definitions/EnergyService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The OEP resource created.",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "201": {
+            "description": "The OEP resource will be created asynchronously",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_Create_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates the oep resource.",
+        "operationId": "EnergyServices_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "description": "Energy Resource Update definition",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EnergyResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the oep resource.",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_Update_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes oep resource",
+        "operationId": "EnergyServices_Delete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "The OEP resource will be deleted asynchronously"
+          },
+          "204": {
+            "description": "Returned when the operation returns no content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_Delete_MaximumSet_Gen.json"
+          },
+          "EnergyServices_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/EnergyServices_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/addPartition": {
+      "post": {
+        "tags": [
+          "OEPResourcePartition"
+        ],
+        "description": "Method that gets called if new partition is to be added in a resource.",
+        "operationId": "EnergyServices_AddPartition",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "add partition action payload",
+            "schema": {
+              "description": "Request body.",
+              "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The data partitions will be created asynchronously",
+            "schema": {
+              "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_AddPartition_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_AddPartition_MaximumSet_Gen.json"
+          },
+          "EnergyServices_AddPartition_MinimumSet_Gen": {
+            "$ref": "./examples/EnergyServices_AddPartition_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/removePartition": {
+      "post": {
+        "tags": [
+          "OEPResourcePartition"
+        ],
+        "description": "Method that gets called if new partition is to be removed from a resource.",
+        "operationId": "EnergyServices_RemovePartition",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "remove partition action payload",
+            "schema": {
+              "description": "Request body.",
+              "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The data partitions will be deleted asynchronously",
+            "schema": {
+              "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_RemovePartition_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_RemovePartition_MaximumSet_Gen.json"
+          },
+          "EnergyServices_RemovePartition_MinimumSet_Gen": {
+            "$ref": "./examples/EnergyServices_RemovePartition_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/listPartitions": {
+      "post": {
+        "tags": [
+          "OEPResourcePartition"
+        ],
+        "description": "Method that gets called when list of partitions is requested.",
+        "operationId": "EnergyServices_ListPartitions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPartitionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_ListPartitions_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_ListPartitions_MaximumSet_Gen.json"
+          },
+          "EnergyServices_ListPartitions_MinimumSet_Gen": {
+            "$ref": "./examples/EnergyServices_ListPartitions_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List all private endpoint connections in a OAK instance.",
+        "operationId": "PrivateEndpointConnections_ListByOAKInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByOAKInstance_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByOAKInstance_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnections_ListByOAKInstance_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByOAKInstance_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get the specified private endpoint connection associated with the OAK Instance.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_Get_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnections_Get_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Update the state of specified private endpoint connection associated with the OAK Instance.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnections_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes the specified private endpoint connection associated with the OAK Instance.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnections_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "List all private link resources in a OAK instance.",
+        "operationId": "PrivateLinkResources_ListByOAKInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByOAKInstance_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResources_ListByOAKInstance_MaximumSet_Gen.json"
+          },
+          "PrivateLinkResources_ListByOAKInstance_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResources_ListByOAKInstance_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/privateLinkResources/{groupId}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get the specified private link resource associated with the OAK instance.",
+        "operationId": "PrivateLinkResources_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/GroupInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResources_Get_MaximumSet_Gen.json"
+          },
+          "PrivateLinkResources_Get_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResources_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/privateEndpointConnectionProxies": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) List all private endpoint connection proxies in a OAK instance.",
+        "operationId": "PrivateEndpointConnectionProxies_ListByOAKInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxies_ListByOAKInstance_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_ListByOAKInstance_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnectionProxies_ListByOAKInstance_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_ListByOAKInstance_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/validate": {
+      "post": {
+        "description": "(INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.",
+        "operationId": "PrivateEndpointConnectionProxies_Validate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointConnectionProxy",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validate private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxies_Validate_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Validate_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnectionProxies_Validate_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Validate_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Get the specified private endpoint connection proxy associated with the OAK Instance.",
+        "operationId": "PrivateEndpointConnectionProxies_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxies_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Get_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnectionProxies_Get_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Creates or updates the specified private endpoint connection proxy resource associated with the OAK instance.",
+        "operationId": "PrivateEndpointConnectionProxies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointConnectionProxy",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxies_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnectionProxies_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Deletes the specified private endpoint connection proxy associated with the OAK Instance.",
+        "operationId": "PrivateEndpointConnectionProxies_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxies_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Delete_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnectionProxies_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.OpenEnergyPlatform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists the available operations of Microsoft.OpenEnergyPlatform resource provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DataPartitionIdParameter": {
+      "name": "dataPartitionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The data partition id.",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The group ID of the private link resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionProxyIdParameter": {
+      "name": "privateEndpointConnectionProxyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the private endpoint connection proxy object.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "CorsRulesList": {
+      "description": "List of cors rules",
+      "type": "object",
+      "properties": {
+        "allowedHeaders": {
+          "description": "List of allowed headers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedMethods": {
+          "description": "List of allowed HTTP methods",
+          "type": "array",
+          "items": {
+            "enum": [
+              "DELETE",
+              "GET",
+              "HEAD",
+              "MERGE",
+              "POST",
+              "OPTIONS",
+              "PUT",
+              "PATCH"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "allowedMethods",
+              "modelAsString": true
+            }
+          }
+        },
+        "allowedOrigins": {
+          "description": "List of allowed origin endpoints",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exposedHeaders": {
+          "description": "List of exposed headers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxAgeInSeconds": {
+          "description": "Max amount of time that a browser than cache the preflight OPTIONS request",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      }
+    },
+    "EnergyServiceList": {
+      "description": "The list of oep resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of oep resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of oep resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnergyService"
+          }
+        }
+      }
+    },
+    "DataPartitionsList": {
+      "type": "object",
+      "description": "List of data partitions",
+      "properties": {
+        "dataPartitionNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataPartitionNames"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataPartitionNames": {
+      "type": "object",
+      "description": "The list of Energy services resource's Data Partition Names.",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "DataPartitionAddOrRemoveRequest": {
+      "description": "Defines the partition add/ delete action properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DataPartitionNames"
+        }
+      }
+    },
+    "DataPartitionProperties": {
+      "description": "Defines the properties of an individual data partition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the data partition",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Name of the data partition",
+          "type": "string"
+        }
+      }
+    },
+    "DataPartitionsListResult": {
+      "type": "object",
+      "description": "List of data partitions.",
+      "properties": {
+        "dataPartitionInfo": {
+          "type": "array",
+          "description": "List of data partitions along with their properties in a given OEP resource.",
+          "items": {
+            "$ref": "#/definitions/DataPartitionProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EnergyServiceProperties": {
+      "description": "The properties of an Energy service resource.",
+      "type": "object",
+      "properties": {
+        "dnsName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "authAppId": {
+          "type": "string",
+          "readOnly": false
+        },
+        "dataPartitionNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataPartitionNames"
+          },
+          "x-ms-identifiers": []
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption"
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the OAK resource.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections associated with the OAK resource.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "corsRules": {
+          "type": "array",
+          "description": "List of cors rules",
+          "items": {
+            "$ref": "#/definitions/CorsRulesList"
+          },
+          "x-ms-identifiers": []
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        }
+      }
+    },
+    "Encryption": {
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "description": "Properties to configure Encryption",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "x-ms-client-name": "KeyVaultProperties"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault",
+          "default": "Microsoft.Keyvault",
+          "enum": [
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "keySource",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Properties of KeyVault",
+      "required": [
+        "keyName",
+        "keyVaultUri"
+      ],
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key vault key.",
+          "x-ms-client-name": "KeyName"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key vault key.",
+          "x-ms-client-name": "KeyVersion"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Uri of the key vault.",
+          "x-ms-client-name": "KeyVaultUri"
+        },
+        "userIdentity": {
+          "type": "string",
+          "description": "The user assigned identity (ARM resource id) that has access to the key.",
+          "x-ms-client-name": "UserIdentity"
+        }
+      }
+    },
+    "EnergyService": {
+      "description": "An Energy service resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnergyServiceProperties"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Geo-location where the resource lives.",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        }
+      }
+    },
+    "EnergyResourceUpdate": {
+      "description": "The resource model definition used for updating a tracked ARM resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "The available private link resources for an Account",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private link resources for an Account",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupInformation"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private link resources.",
+          "type": "string"
+        }
+      }
+    },
+    "GroupInformation": {
+      "description": "The group information for creating a private endpoint on an Account",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties for a group information object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GroupInformationProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GroupInformationProperties": {
+      "description": "The properties for a group information object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of private link group ID.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "GroupIdProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyListResult": {
+      "description": "The available private endpoint connection proxies for an Account (not to be used by anyone, here because of ARM requirements)",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private endpoint connection proxies for an Account",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private endpoint connection proxies.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxy": {
+      "description": "Private endpoint connection proxy details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        },
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Private endpoint connection proxy object property bag.",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
+              "description": "The provisioning state of the private endpoint connection proxy resource."
+            }
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyProperties": {
+      "description": "Private endpoint connection proxy object properties.",
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "eTag": {
+          "description": "ETag from NRP.",
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
+          "description": "Remote private endpoint details.",
+          "$ref": "#/definitions/RemotePrivateEndpoint"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        }
+      }
+    },
+    "RemotePrivateEndpoint": {
+      "description": "Remote private endpoint details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Remote endpoint resource ID.",
+          "type": "string"
+        },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "vnetTrafficTag": {
+          "description": "Virtual network traffic tag.",
+          "type": "string"
+        },
+        "manualPrivateLinkServiceConnections": {
+          "description": "List of private link service connections that need manual approval.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          },
+          "x-ms-identifiers": []
+        },
+        "privateLinkServiceConnections": {
+          "description": "List of automatically approved private link service connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          },
+          "x-ms-identifiers": []
+        },
+        "privateLinkServiceProxies": {
+          "description": "List of private link service proxies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceProxy"
+          }
+        },
+        "connectionDetails": {
+          "description": "List of connection details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetails"
+          }
+        }
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "description": "Private link service connection details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Private link service connection name.",
+          "type": "string"
+        },
+        "groupIds": {
+          "description": "List of group IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestMessage": {
+          "description": "Request message.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceProxy": {
+      "description": "Private link service proxy details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "NRP resource ID.",
+          "type": "string"
+        },
+        "remotePrivateLinkServiceConnectionState": {
+          "description": "Remote private link service connection state",
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "remotePrivateEndpointConnection": {
+          "description": "Remote private endpoint connection details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RemotePrivateEndpointConnection"
+            }
+          ]
+        },
+        "groupConnectivityInformation": {
+          "description": "Group connectivity information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupConnectivityInformation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "Remote private endpoint connection details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Remote private endpoint connection ID.",
+          "type": "string"
+        }
+      }
+    },
+    "GroupConnectivityInformation": {
+      "description": "Group connectivity details.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "Group ID.",
+          "type": "string"
+        },
+        "memberName": {
+          "description": "Member name.",
+          "type": "string"
+        },
+        "customerVisibleFqdns": {
+          "description": "List of customer visible FQDNs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "internalFqdn": {
+          "description": "Internal FQDN.",
+          "type": "string"
+        },
+        "redirectMapId": {
+          "description": "Redirect map ID.",
+          "type": "string"
+        },
+        "privateLinkServiceArmRegion": {
+          "description": "PrivateLinkService ARM region.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionDetails": {
+      "description": "Private endpoint connection proxy object properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Connection details ID.",
+          "type": "string"
+        },
+        "privateIpAddress": {
+          "description": "Private IP address.",
+          "type": "string"
+        },
+        "linkIdentifier": {
+          "description": "Link ID.",
+          "type": "string"
+        },
+        "groupId": {
+          "description": "Group ID.",
+          "type": "string"
+        },
+        "memberName": {
+          "description": "Member name.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProxyProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ]
+}

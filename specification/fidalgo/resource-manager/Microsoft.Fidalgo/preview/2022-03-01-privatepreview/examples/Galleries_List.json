@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/Contoso/galleries/default",
+            "name": "{galleryName}",
+            "type": "Microsoft.Fidalgo/devcenters/galleries",
+            "properties": {
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "Fidalgo",
+              "createdByType": "Application",
+              "createdAt": "2020-11-18T18:24:24.818Z",
+              "lastModifiedBy": "Fidalgo",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+            }
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/Contoso/galleries/ImageGallery",
+            "name": "{galleryName}",
+            "type": "Microsoft.Fidalgo/devcenters/galleries",
+            "properties": {
+              "galleryResourceId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Compute/galleries/SharedGallery",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "User1",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:24:24.818Z",
+              "lastModifiedBy": "User1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

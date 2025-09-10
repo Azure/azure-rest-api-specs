@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
@@ -32,14 +33,14 @@ model Target is TrackedResource<TargetProperties> {
 @doc("The properties of a Target resource.")
 model TargetProperties {
   @doc("A list of components.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   components?: ComponentProperties[];
 
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
   @doc("Defines the device topology for a target or instance.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   topologies?: TopologiesProperties[];
 
   @doc("Reconciliation Policy.")
@@ -56,13 +57,12 @@ model TargetProperties {
 @doc("Defines a desired runtime component.")
 model TopologiesProperties {
   @doc("bindings description.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   bindings?: BindingProperties[];
 }
 
 @doc("Defines a component binding for a provider.")
 model BindingProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
   @doc("Configuration values for the binding.")
   config: Record<unknown>;
 
@@ -76,12 +76,7 @@ model BindingProperties {
 @armResourceOperations
 interface Targets {
   get is ArmResourceRead<Target>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    Target,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Target>;
   update is ArmCustomPatchSync<Target>;
   delete is ArmResourceDeleteWithoutOkAsync<Target>;
   listByResourceGroup is ArmResourceListByParent<Target>;

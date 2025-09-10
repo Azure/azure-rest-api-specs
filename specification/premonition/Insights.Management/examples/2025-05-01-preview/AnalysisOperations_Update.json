@@ -1,0 +1,63 @@
+{
+  "title": "AnalysisOperations_Update",
+  "operationId": "AnalysisOperations_Update",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "default-rg",
+    "libraryName": "fastlib",
+    "analysisName": "metageonic-analysis",
+    "properties": {
+      "tags": {
+        "key1": "value1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "samples": [
+            "fastsample"
+          ],
+          "settings": {
+            "kind": "Metagenomics",
+            "taxonomyVersion": "Latest"
+          },
+          "startedAt": "2025-05-01T21:06:27.404Z",
+          "finishedAt": "2025-05-01T21:45:11.973Z",
+          "provisioningState": "Succeeded",
+          "result": {
+            "kind": "Metagenomics",
+            "totalNumberOfBasePairs": 50000,
+            "totalNumberOfReads": 500,
+            "readsType": "short",
+            "averageReadDuplicationFraction": 0.0123456,
+            "minReadLength": 100,
+            "maxReadLength": 100,
+            "taxonomyVersion": "2025-03-31",
+            "files": [
+              "Microsoft.Premonition/metagenomics/00000000-0000-0000-0000-000000000000/fastsample.mixture.json",
+              "Microsoft.Premonition/metagenomics/00000000-0000-0000-0000-000000000000/fastsample.summary.json"
+            ]
+          }
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "location": "uswest2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/default-rg/providers/Microsoft.Premonition/libraries/fastlib/analyses/metagenomic-analysis",
+        "name": "metagenomic-analysis",
+        "type": "Microsoft.Premonition/analysis",
+        "systemData": {
+          "createdBy": "jane",
+          "createdByType": "User",
+          "createdAt": "2024-08-05T19:37:32.909Z",
+          "lastModifiedBy": "john",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-05T19:37:32.909Z"
+        }
+      }
+    }
+  }
+}

@@ -13,17 +13,15 @@ using Azure.ResourceManager;
 
 @armProviderNamespace(ProviderName)
 @service(#{ title: ProviderName })
-@armCommonTypesVersion(CommonTypes.Versions.v6)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 @versioned(Versions)
 namespace Microsoft.CloudHealth;
 
 @doc("API Versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @doc("2025-05-01-preview")
-  v2025_05_01_preview: "2025-05-01-preview",
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2023-10-01-preview")
+  v2023_10_01_preview: "2023-10-01-preview",
 }
 
 alias ProviderName = "Microsoft.CloudHealth";
@@ -37,6 +35,10 @@ scalar stringModelResourceName extends string;
 
 // Regex for all our proxy resource name validations. Up to 260 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
 alias proxyResourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$";
+
+@pattern(proxyResourceNameRegex)
+@doc("String with regex validation to match the proxy resource name requirements")
+scalar stringResourceName extends string;
 
 @maxLength(4096)
 @doc("String with max length validation of 4096 characters")
@@ -90,10 +92,6 @@ model ModelDiscoverySettings {
   identity?: string4096;
 }
 
-@pattern(proxyResourceNameRegex)
-@doc("Type for signal definition resource name.")
-scalar signalDefinitionName extends string;
-
 @doc("A signal definition in a health model")
 @parentResource(HealthModel)
 model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
@@ -101,7 +99,7 @@ model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
   @key("signalDefinitionName")
   @segment("signaldefinitions")
   @path
-  name: signalDefinitionName;
+  name: stringResourceName;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -339,10 +337,6 @@ union MetricAggregationType {
   Total: "Total",
 }
 
-@pattern(proxyResourceNameRegex)
-@doc("Type for authentication setting resource name.")
-scalar authenticationSettingName extends string;
-
 @doc("An authentication setting in a health model")
 @parentResource(HealthModel)
 model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
@@ -350,7 +344,7 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
   @key("authenticationSettingName")
   @segment("authenticationsettings")
   @path
-  name: authenticationSettingName;
+  name: stringResourceName;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -389,10 +383,6 @@ model ManagedIdentityAuthenticationSettingProperties
   managedIdentityName: string;
 }
 
-@pattern(proxyResourceNameRegex)
-@doc("Type for entity resource name.")
-scalar entityName extends string;
-
 @doc("An entity (aka node) of a health model")
 @parentResource(HealthModel)
 model Entity is ProxyResource<EntityProperties> {
@@ -400,7 +390,7 @@ model Entity is ProxyResource<EntityProperties> {
   @key("entityName")
   @segment("entities")
   @path
-  name: entityName;
+  name: stringResourceName;
 }
 
 @doc("Properties which are common across all kinds of entities")
@@ -442,7 +432,7 @@ model EntityProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
-  discoveredBy?: discoveryRuleName;
+  discoveredBy?: stringResourceName;
 
   @visibility(Lifecycle.Read)
   @doc("Date when the entity was (soft-)deleted")
@@ -564,7 +554,7 @@ model SignalAssignmentGroup {
   signalAssignments?: SignalAssignment[];
 
   @doc("Reference to the name of the authentication setting which is used for querying the data source")
-  authenticationSetting: authenticationSettingName;
+  authenticationSetting: stringResourceName;
 }
 
 @doc("Group of signal definition assignments")
@@ -573,7 +563,7 @@ model SignalAssignment {
   // @maxItems(50) - until the backend supports correlation, we need to limit this to 1
   @maxItems(1)
   @minItems(1)
-  signalDefinitions: signalDefinitionName[];
+  signalDefinitions: stringResourceName[];
 }
 
 @doc("A grouping of signal assignments for an Azure resource")
@@ -651,10 +641,6 @@ scalar AzureMonitorWorkspaceResourceId
     }
   ]>;
 
-@pattern(proxyResourceNameRegex)
-@doc("Type for relationship resource name.")
-scalar relationshipName extends string;
-
 @doc("A relationship (aka edge) between two entities in a health model")
 @parentResource(HealthModel)
 model Relationship is ProxyResource<RelationshipProperties> {
@@ -662,7 +648,7 @@ model Relationship is ProxyResource<RelationshipProperties> {
   @key("relationshipName")
   @segment("relationships")
   @path
-  name: relationshipName;
+  name: stringResourceName;
 }
 
 @doc("Relationship properties")
@@ -678,11 +664,11 @@ model RelationshipProperties {
 
   @doc("Resource name of the parent entity")
   @visibility(Lifecycle.Create, Lifecycle.Read) // this cannot be changed
-  parentEntityName: entityName;
+  parentEntityName: stringResourceName;
 
   @doc("Resource name of the child entity")
   @visibility(Lifecycle.Create, Lifecycle.Read) // this cannot be changed
-  childEntityName: entityName;
+  childEntityName: stringResourceName;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
@@ -690,16 +676,12 @@ model RelationshipProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")
-  discoveredBy?: discoveryRuleName;
+  discoveredBy?: stringResourceName;
 
   @visibility(Lifecycle.Read)
   @doc("Date when the relationship was (soft-)deleted")
   deletionDate?: utcDateTime;
 }
-
-@pattern(proxyResourceNameRegex)
-@doc("Type for discovery rule resource name.")
-scalar discoveryRuleName extends string;
 
 @doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
 @parentResource(HealthModel)
@@ -708,7 +690,7 @@ model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
   @key("discoveryRuleName")
   @segment("discoveryrules")
   @path
-  name: discoveryRuleName;
+  name: stringResourceName;
 }
 
 @doc("Discovery rule properties")
@@ -728,7 +710,7 @@ model DiscoveryRuleProperties {
   resourceGraphQuery: string;
 
   @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
-  authenticationSetting: authenticationSettingName;
+  authenticationSetting: stringResourceName;
 
   @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
   discoverRelationships: DiscoveryRuleRelationshipDiscoveryBehavior;
@@ -785,6 +767,7 @@ alias TimestampQueryParam = {
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     HealthModel,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

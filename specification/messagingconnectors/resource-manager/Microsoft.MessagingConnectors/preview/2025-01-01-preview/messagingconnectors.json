@@ -1,0 +1,2776 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.MessagingConnectors management service",
+    "version": "2025-01-01-preview",
+    "description": "Microsoft.MessagingConnectors Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ConnectorOperations"
+    },
+    {
+      "name": "DataPreviewOperations"
+    },
+    {
+      "name": "SchemaOperations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.MessagingConnectors/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations List": {
+            "$ref": "./examples/Operation_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/connectors": {
+      "get": {
+        "operationId": "ConnectorOperations_ListBySubscription",
+        "tags": [
+          "ConnectorOperations"
+        ],
+        "description": "List Connector By Subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MessagingConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfluentSourceConnector ListBySubscription": {
+            "$ref": "./examples/AzureDataExplorerSourceConnector_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/locations/{location}/dataPreview/default/preview": {
+      "post": {
+        "operationId": "DataPreviewOperations_Preview",
+        "tags": [
+          "DataPreviewOperations"
+        ],
+        "description": "create one dataPreview task",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataPreviewProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataPreviewResults"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataPreview SqlServerSourceConnector": {
+            "$ref": "./examples/DataPreview_SqlServerSourceConnector.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/locations/{location}/schema/default/fetch": {
+      "post": {
+        "operationId": "SchemaOperations_Fetch",
+        "tags": [
+          "SchemaOperations"
+        ],
+        "description": "fetch Schema task",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchemaRequestProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SchemaOperations fetchCdcSchema": {
+            "$ref": "./examples/FetchCdcSchema.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingConnectors/connectors": {
+      "get": {
+        "operationId": "ConnectorOperations_ListByResourceGroup",
+        "tags": [
+          "ConnectorOperations"
+        ],
+        "description": "List Connector By ResourceGroup and Subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MessagingConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfluentSourceConnector ListByResourceGroup": {
+            "$ref": "./examples/AzureDataExplorerSourceConnector_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingConnectors/connectors/{name}": {
+      "get": {
+        "operationId": "ConnectorOperations_Get",
+        "tags": [
+          "ConnectorOperations"
+        ],
+        "description": "Gets an Connector instance for the specified subscription, resource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Connector resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MessagingConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureDataExplorerSourceConnector Get": {
+            "$ref": "./examples/AzureDataExplorerSourceConnector_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectorOperations_CreateOrUpdate",
+        "tags": [
+          "ConnectorOperations"
+        ],
+        "description": "Create an Connector instance for the specified subscription, resource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Connector resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MessagingConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MessagingConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MessagingConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'MessagingConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MessagingConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureDataExplorerSourceConnector CreateOrUpdate": {
+            "$ref": "./examples/AzureDataExplorerSourceConnector_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ConnectorOperations_UpdateTags",
+        "tags": [
+          "ConnectorOperations"
+        ],
+        "description": "Update Tags of Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Connector resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MessagingConnectorTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MessagingConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureDataExplorerSourceConnector UpdateTags": {
+            "$ref": "./examples/AzureDataExplorerSourceConnector_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectorOperations_Delete",
+        "tags": [
+          "ConnectorOperations"
+        ],
+        "description": "Delete an Connector instance for the specified subscription, resource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Connector resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureDataExplorerSourceConnector Delete": {
+            "$ref": "./examples/AzureDataExplorerSourceConnector_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingConnectors/connectors/{name}/pause": {
+      "post": {
+        "operationId": "ConnectorOperations_Pause",
+        "tags": [
+          "ConnectorOperations"
+        ],
+        "description": "Pause one Connector to paused status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Connector resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureDataExplorerSourceConnector Pause": {
+            "$ref": "./examples/AzureDataExplorerSourceConnector_Pause.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingConnectors/connectors/{name}/resume": {
+      "post": {
+        "operationId": "ConnectorOperations_Resume",
+        "tags": [
+          "ConnectorOperations"
+        ],
+        "description": "Resume one Connector to running status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Connector resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureDataExplorerSourceConnector Resume": {
+            "$ref": "./examples/AzureDataExplorerSourceConnector_Resume.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvroConverterConfig": {
+      "type": "object",
+      "description": "AvroConverter config",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConverterConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AvroConverter"
+    },
+    "AzureDataExplorerSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for AzureDataExplorerSourceConnector",
+      "properties": {
+        "clusterUrl": {
+          "type": "string",
+          "description": "Url of AzureDataExplorer cluster."
+        },
+        "database": {
+          "type": "string",
+          "description": "Database name for AzureDataExplorer."
+        },
+        "tableNames": {
+          "type": "string",
+          "description": "AzureDataExplorer table names use commas to separate multiple tables."
+        },
+        "accessToken": {
+          "type": "string",
+          "format": "password",
+          "description": "A secret token used for OAuth.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "clusterUrl",
+        "database",
+        "tableNames",
+        "accessToken"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureDataExplorerSource"
+    },
+    "AzureServiceBusSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for AzureServiceBusSourceConnector",
+      "properties": {
+        "topicOrQueueName": {
+          "type": "string",
+          "description": "Name for topic Or Queue."
+        },
+        "subscriptionName": {
+          "type": "string",
+          "description": "Name for subscription."
+        },
+        "connectionString": {
+          "type": "string",
+          "format": "password",
+          "description": "connectionString for AzureServiceBusSource.",
+          "x-ms-secret": true
+        },
+        "serviceBusType": {
+          "$ref": "#/definitions/AzureServiceBusType",
+          "description": "AzureServiceBusSource type."
+        }
+      },
+      "required": [
+        "topicOrQueueName",
+        "connectionString",
+        "serviceBusType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureServiceBusSource"
+    },
+    "AzureServiceBusType": {
+      "type": "string",
+      "description": "Type of AzureServiceBusType",
+      "enum": [
+        "Topic",
+        "Queue"
+      ],
+      "x-ms-enum": {
+        "name": "AzureServiceBusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Topic",
+            "value": "Topic",
+            "description": "Topic type"
+          },
+          {
+            "name": "Queue",
+            "value": "Queue",
+            "description": "Queue type"
+          }
+        ]
+      }
+    },
+    "ByteArrayConverterConfig": {
+      "type": "object",
+      "description": "ByteArrayConverter config",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConverterConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "ByteArrayConverter"
+    },
+    "CatalogCloudEventsConfig": {
+      "type": "object",
+      "description": "Catalog cloud events transform config.",
+      "properties": {
+        "autoRegisterSchemas": {
+          "type": "boolean",
+          "description": "Whether auto-register new schemas."
+        },
+        "catalogSchemaIds": {
+          "type": "array",
+          "description": "Catalog schemaIds.",
+          "items": {
+            "$ref": "#/definitions/CatalogSchemaId"
+          },
+          "x-ms-identifiers": []
+        },
+        "accessToken": {
+          "type": "string",
+          "format": "password",
+          "description": "access token.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "autoRegisterSchemas",
+        "catalogSchemaIds",
+        "accessToken"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CloudEventsConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "Catalog"
+    },
+    "CatalogSchemaId": {
+      "type": "object",
+      "description": "Catalog schema id config",
+      "properties": {
+        "schemaGroupId": {
+          "type": "string",
+          "description": "The schema group id in the catalog, which can be obtained from the catalog cloud provider."
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "The schema id in schema group."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint for catalog."
+        }
+      },
+      "required": [
+        "schemaGroupId",
+        "schemaId",
+        "endpoint"
+      ]
+    },
+    "CdcEventType": {
+      "type": "string",
+      "description": "change data capture(cdc) event type",
+      "enum": [
+        "DataChange",
+        "SchemaChange"
+      ],
+      "x-ms-enum": {
+        "name": "CdcEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataChange",
+            "value": "DataChange",
+            "description": "DataChange type"
+          },
+          {
+            "name": "SchemaChange",
+            "value": "SchemaChange",
+            "description": "SchemaChange type"
+          }
+        ]
+      }
+    },
+    "CdcSchemaProperties": {
+      "type": "object",
+      "description": "cdc connector SchemaProperties",
+      "properties": {
+        "cdcEventType": {
+          "$ref": "#/definitions/CdcEventType",
+          "description": "cdc event type"
+        },
+        "tableId": {
+          "$ref": "#/definitions/TableId",
+          "description": "table id"
+        }
+      },
+      "required": [
+        "cdcEventType",
+        "tableId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SchemaProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Cdc"
+    },
+    "CloudEventsConfig": {
+      "type": "object",
+      "description": "Cloud events config",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CloudEventsType",
+          "description": "Type of CloudEventsConfig."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "CloudEventsType": {
+      "type": "string",
+      "description": "CloudEvents types",
+      "enum": [
+        "Catalog"
+      ],
+      "x-ms-enum": {
+        "name": "CloudEventsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Catalog",
+            "value": "Catalog",
+            "description": "CatalogCloudEventsConfig"
+          }
+        ]
+      }
+    },
+    "ConfluentAvroSourceDataFormat": {
+      "type": "object",
+      "description": "ConfluentAvro Source data format model",
+      "properties": {
+        "schemaRegistryUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Registry url for Confluent."
+        },
+        "key": {
+          "type": "string",
+          "description": "Access key for Confluent."
+        },
+        "secret": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret for Confluent.",
+          "x-ms-secret": true
+        },
+        "sourceTopic": {
+          "type": "string",
+          "description": "Source Topic name."
+        }
+      },
+      "required": [
+        "schemaRegistryUrl",
+        "key",
+        "secret",
+        "sourceTopic"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDataFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfluentAvro"
+    },
+    "ConfluentSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for ConfluentSourceConnector",
+      "properties": {
+        "bootstrapServers": {
+          "type": "string",
+          "description": "bootstrapServers of the Confluent server."
+        },
+        "topic": {
+          "type": "string",
+          "description": "Topic of the Confluent."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "ConsumerGroup of the Confluent."
+        },
+        "autoOffsetReset": {
+          "type": "string",
+          "description": "AutoOffsetReset policy of the Confluent consume."
+        },
+        "user": {
+          "type": "string",
+          "description": "User of the Confluent."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password of the Confluent.",
+          "x-ms-secret": true
+        },
+        "saslMechanism": {
+          "$ref": "#/definitions/SaslMechanismForConfluent",
+          "description": "Sasl mechanism of the confluent."
+        },
+        "securityProtocol": {
+          "$ref": "#/definitions/SecurityProtocolForConfluent",
+          "description": "Security protocol of the confluent."
+        }
+      },
+      "required": [
+        "bootstrapServers",
+        "topic",
+        "consumerGroup",
+        "autoOffsetReset",
+        "user",
+        "password",
+        "saslMechanism",
+        "securityProtocol"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfluentSource"
+    },
+    "ConnectorProperties": {
+      "type": "object",
+      "description": "Properties of one Azure MessagingConnector resource",
+      "properties": {
+        "direction": {
+          "$ref": "#/definitions/Direction",
+          "description": "Direction of connector"
+        },
+        "maxTasks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max Tasks count of the Connector."
+        },
+        "connectorState": {
+          "$ref": "#/definitions/ConnectorState",
+          "description": "State of the MessagingConnector"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConnectorProvisioningState",
+          "description": "State of provisioning of the MessagingConnector ARM Resource",
+          "readOnly": true
+        }
+      },
+      "discriminator": "direction",
+      "required": [
+        "direction",
+        "maxTasks"
+      ]
+    },
+    "ConnectorProvisioningState": {
+      "type": "string",
+      "description": "Provisioning states of Connector ARM Resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating State"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ConnectorSchemaConfig": {
+      "type": "object",
+      "description": "Connector Schema Config",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/ConnectorType",
+          "description": "connector Type."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "ConnectorState": {
+      "type": "string",
+      "description": "Connector job execution status",
+      "enum": [
+        "Unknown",
+        "Creating",
+        "Initializing",
+        "Running",
+        "Updating",
+        "Degraded",
+        "Stopped",
+        "Paused",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown State"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating State"
+          },
+          {
+            "name": "Initializing",
+            "value": "Initializing",
+            "description": "Initializing State"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running State"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating State"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Degraded State"
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Stopped State"
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Paused State"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting State"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed State"
+          }
+        ]
+      }
+    },
+    "ConnectorType": {
+      "type": "string",
+      "description": "Enum of the type of Connector",
+      "enum": [
+        "GooglePubSubSource",
+        "KinesisSource",
+        "PostgreSqlSource",
+        "SqlServerSource",
+        "CosmosDbSource",
+        "ConfluentSource",
+        "MySqlSource",
+        "AzureServiceBusSource",
+        "HanaDatabaseSource",
+        "AzureDataExplorerSource",
+        "MqttSource",
+        "SolacePubsubSource",
+        "ManagedAzureMapsWeatherSource"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GooglePubSubSource",
+            "value": "GooglePubSubSource",
+            "description": "Google pub sub source connector."
+          },
+          {
+            "name": "KinesisSource",
+            "value": "KinesisSource",
+            "description": "Amazon kinesis source connector."
+          },
+          {
+            "name": "PostgreSqlSource",
+            "value": "PostgreSqlSource",
+            "description": "Postgre sql source connector."
+          },
+          {
+            "name": "SqlServerSource",
+            "value": "SqlServerSource",
+            "description": "Sql server source connector."
+          },
+          {
+            "name": "CosmosDbSource",
+            "value": "CosmosDbSource",
+            "description": "Cosmos db source connector."
+          },
+          {
+            "name": "ConfluentSource",
+            "value": "ConfluentSource",
+            "description": "Confluent source connector."
+          },
+          {
+            "name": "MySqlSource",
+            "value": "MySqlSource",
+            "description": "Mysql source connector."
+          },
+          {
+            "name": "AzureServiceBusSource",
+            "value": "AzureServiceBusSource",
+            "description": "Servicebus source connector."
+          },
+          {
+            "name": "HanaDatabaseSource",
+            "value": "HanaDatabaseSource",
+            "description": "Hana database source connector."
+          },
+          {
+            "name": "AzureDataExplorerSource",
+            "value": "AzureDataExplorerSource",
+            "description": "Azure Data Explorer source connector."
+          },
+          {
+            "name": "MqttSource",
+            "value": "MqttSource",
+            "description": "Mqtt source connector."
+          },
+          {
+            "name": "SolacePubsubSource",
+            "value": "SolacePubsubSource",
+            "description": "SolacePubsub source connector."
+          },
+          {
+            "name": "ManagedAzureMapsWeatherSource",
+            "value": "ManagedAzureMapsWeatherSource",
+            "description": "ManagedAzureMapsWeatherSource source connector."
+          }
+        ]
+      }
+    },
+    "ConverterConfig": {
+      "type": "object",
+      "description": "Base class for Converter config",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ConverterType",
+          "description": "Type of converter."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ConverterType": {
+      "type": "string",
+      "description": "Enum of the type of Converter",
+      "enum": [
+        "ByteArrayConverter",
+        "StringConverter",
+        "JsonConverter",
+        "AvroConverter",
+        "CsvConverter"
+      ],
+      "x-ms-enum": {
+        "name": "ConverterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ByteArrayConverter",
+            "value": "ByteArrayConverter",
+            "description": "This represents a converter for byte arrays format."
+          },
+          {
+            "name": "StringConverter",
+            "value": "StringConverter",
+            "description": "This represents a converter for string format."
+          },
+          {
+            "name": "JsonConverter",
+            "value": "JsonConverter",
+            "description": "This represents a converter for json format."
+          },
+          {
+            "name": "AvroConverter",
+            "value": "AvroConverter",
+            "description": "This represents a converter for Avro format."
+          },
+          {
+            "name": "CsvConverter",
+            "value": "CsvConverter",
+            "description": "This represents a converter for csv format."
+          }
+        ]
+      }
+    },
+    "CosmosDbSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for CosmosDbSourceConnector",
+      "properties": {
+        "pollIntervalInMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "PollIntervalInMs policy."
+        },
+        "cosmosEndpoint": {
+          "type": "string",
+          "description": "Endpoint of CosmosDB."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "DatabaseName for CosmosDB server."
+        },
+        "container": {
+          "type": "string",
+          "description": "Container for CosmosDB server."
+        },
+        "masterKey": {
+          "type": "string",
+          "format": "password",
+          "description": "masterKey for CosmosDB server.",
+          "x-ms-secret": true
+        },
+        "offsetPolicy": {
+          "$ref": "#/definitions/OffsetPolicyForCosmosDB",
+          "description": "useLatestOffset policy"
+        }
+      },
+      "required": [
+        "pollIntervalInMs",
+        "cosmosEndpoint",
+        "databaseName",
+        "container",
+        "masterKey",
+        "offsetPolicy"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CosmosDbSource"
+    },
+    "CsvConverterConfig": {
+      "type": "object",
+      "description": "CsvConverter config",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConverterConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "CsvConverter"
+    },
+    "CsvDelimiter": {
+      "type": "string",
+      "description": "Delimiter for csv",
+      "enum": [
+        "Pipe",
+        "Comma",
+        "SemiColon",
+        "Space",
+        "Tab"
+      ],
+      "x-ms-enum": {
+        "name": "CsvDelimiter",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pipe",
+            "value": "Pipe",
+            "description": "Pipe delimiter"
+          },
+          {
+            "name": "Comma",
+            "value": "Comma",
+            "description": "Comma delimiter"
+          },
+          {
+            "name": "SemiColon",
+            "value": "SemiColon",
+            "description": "SemiColon delimiter"
+          },
+          {
+            "name": "Space",
+            "value": "Space",
+            "description": "Space delimiter"
+          },
+          {
+            "name": "Tab",
+            "value": "Tab",
+            "description": "Tab delimiter"
+          }
+        ]
+      }
+    },
+    "CsvHeaderType": {
+      "type": "string",
+      "description": "CsvHeader types",
+      "enum": [
+        "IncludeHeader",
+        "ExcludeHeader"
+      ],
+      "x-ms-enum": {
+        "name": "CsvHeaderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IncludeHeader",
+            "value": "IncludeHeader",
+            "description": "include CSV header"
+          },
+          {
+            "name": "ExcludeHeader",
+            "value": "ExcludeHeader",
+            "description": "exclude CSV header"
+          }
+        ]
+      }
+    },
+    "CsvSourceDataFormat": {
+      "type": "object",
+      "description": "CSV Source data format model",
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/CsvHeaderType",
+          "description": "CSV header type"
+        },
+        "delimiter": {
+          "$ref": "#/definitions/CsvDelimiter",
+          "description": "CSV Delimiter"
+        },
+        "textCharset": {
+          "type": "string",
+          "description": "Charset supported by Java language"
+        }
+      },
+      "required": [
+        "header",
+        "delimiter",
+        "textCharset"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDataFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "Csv"
+    },
+    "DataPreview": {
+      "type": "object",
+      "description": "A dataPreview resource Azure",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataPreviewProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DataPreviewProperties": {
+      "type": "object",
+      "description": "Properties of one DataPreview",
+      "properties": {
+        "dataSourceProperties": {
+          "$ref": "#/definitions/DataSourceProperties",
+          "description": "Properties for the source"
+        },
+        "dataRange": {
+          "$ref": "#/definitions/DataRangeBaseConfig",
+          "description": "DataRange for DataPreview"
+        },
+        "converterConfig": {
+          "$ref": "#/definitions/ConverterConfig",
+          "description": "Type of the Connector."
+        },
+        "sourceDataFormat": {
+          "$ref": "#/definitions/SourceDataFormat",
+          "description": "Data format of the data source"
+        },
+        "cloudEventsConfig": {
+          "$ref": "#/definitions/CloudEventsConfig",
+          "description": "Cloud events config"
+        }
+      },
+      "required": [
+        "dataSourceProperties",
+        "dataRange",
+        "converterConfig"
+      ]
+    },
+    "DataPreviewResults": {
+      "type": "object",
+      "description": "Properties of DataPreview results",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of DataPreview results"
+        },
+        "results": {
+          "type": "array",
+          "description": "Content of DataPreview results",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "count",
+        "results"
+      ]
+    },
+    "DataRangeBaseConfig": {
+      "type": "object",
+      "description": "Base config for DataRange",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DataRangeType",
+          "description": "type of dataRange"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "DataRangeLimit": {
+      "type": "object",
+      "description": "DataRange by max records limit",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max Limit for DataRange"
+        }
+      },
+      "required": [
+        "limit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataRangeBaseConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "Limit"
+    },
+    "DataRangeType": {
+      "type": "string",
+      "description": "Type of DataRange",
+      "enum": [
+        "Limit"
+      ],
+      "x-ms-enum": {
+        "name": "DataRangeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Limit",
+            "value": "Limit",
+            "description": "Max limit range type"
+          }
+        ]
+      }
+    },
+    "DataSourceProperties": {
+      "type": "object",
+      "description": "Base properties for source.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/ConnectorType",
+          "description": "Type of the Connector."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "Direction": {
+      "type": "string",
+      "description": "Enum of Directions of Connector",
+      "enum": [
+        "Source",
+        "Sink"
+      ],
+      "x-ms-enum": {
+        "name": "Direction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Source",
+            "value": "Source",
+            "description": "Source Connector"
+          },
+          {
+            "name": "Sink",
+            "value": "Sink",
+            "description": "Sink Connector"
+          }
+        ]
+      }
+    },
+    "EventHubConfig": {
+      "type": "object",
+      "description": "Basic info for EventHub",
+      "properties": {
+        "namespaceHostName": {
+          "type": "string",
+          "description": "namespace of the EventHub."
+        },
+        "eventHubName": {
+          "type": "string",
+          "description": "name of the EventHub."
+        },
+        "connectionString": {
+          "type": "string",
+          "format": "password",
+          "description": "connectionString of the EventHub.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "namespaceHostName",
+        "eventHubName",
+        "connectionString"
+      ]
+    },
+    "GooglePubSubSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for GooglePubSubSourceConnector",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Google Cloud project ID where the Pub/Sub instance resides, assigned by GCP."
+        },
+        "subscriptionName": {
+          "type": "string",
+          "description": "Google Cloud subscription name where the Pub/Sub instance resides."
+        },
+        "accountKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Google Cloud account key, assigned by GCP.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "projectId",
+        "subscriptionName",
+        "accountKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "GooglePubSubSource"
+    },
+    "HanaDatabaseSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for HanaDatabaseSourceConnector",
+      "properties": {
+        "connectionUrl": {
+          "type": "string",
+          "description": "Url of HANA database."
+        },
+        "userName": {
+          "type": "string",
+          "description": "User for HANA database."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for HANA database.",
+          "x-ms-secret": true
+        },
+        "queryMode": {
+          "$ref": "#/definitions/HanaQueryMode",
+          "description": "The query mode in which data should be fetched from SAP DB table."
+        },
+        "schema": {
+          "type": "string",
+          "description": "HANA schema to source data from, default as the HANA username.."
+        },
+        "table": {
+          "type": "string",
+          "description": "Table name for HANA database."
+        },
+        "query": {
+          "type": "string",
+          "description": "The query statement when queryMode is set to query."
+        },
+        "batch": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max rows to include in a single batch call. Should be an integer."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The poll interval at which the data should be fetched from SAP DB table, the default value in server end is 60000 with millisecond unit."
+        },
+        "partitions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of topic partitions that the Source connector can use to publish the data."
+        },
+        "numericMapping": {
+          "$ref": "#/definitions/HanaNumericMapping",
+          "description": "Whether the DECIMAL column types are mapped to the default decimal type or one of the primitive types."
+        },
+        "mode": {
+          "$ref": "#/definitions/HanaMode",
+          "description": "The mode in which data should be fetched from SAP DB table."
+        },
+        "incrementingColumn": {
+          "type": "string",
+          "description": "In order to fetch data from a SAP DB table when mode is set to incrementing, an incremental (or auto-incremental) column needs to be provided."
+        }
+      },
+      "required": [
+        "connectionUrl",
+        "userName",
+        "password"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "HanaDatabaseSource"
+    },
+    "HanaMode": {
+      "type": "string",
+      "description": "Type of HanaNumericMapping",
+      "enum": [
+        "Bulk",
+        "Incrementing"
+      ],
+      "x-ms-enum": {
+        "name": "HanaMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bulk",
+            "value": "Bulk",
+            "description": "Bulk mode"
+          },
+          {
+            "name": "Incrementing",
+            "value": "Incrementing",
+            "description": "Incrementing mode"
+          }
+        ]
+      }
+    },
+    "HanaNumericMapping": {
+      "type": "string",
+      "description": "Type of HanaNumericMapping",
+      "enum": [
+        "None",
+        "BestFit",
+        "BestFitEagerDouble"
+      ],
+      "x-ms-enum": {
+        "name": "HanaNumericMapping",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Table type."
+          },
+          {
+            "name": "BestFit",
+            "value": "BestFit",
+            "description": "Query type."
+          },
+          {
+            "name": "BestFitEagerDouble",
+            "value": "BestFitEagerDouble",
+            "description": "BestFitEagerDouble type."
+          }
+        ]
+      }
+    },
+    "HanaQueryMode": {
+      "type": "string",
+      "description": "Type of HanaQueryMode",
+      "enum": [
+        "Table",
+        "Query"
+      ],
+      "x-ms-enum": {
+        "name": "HanaQueryMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Table",
+            "value": "Table",
+            "description": "Table type"
+          },
+          {
+            "name": "Query",
+            "value": "Query",
+            "description": "Query type"
+          }
+        ]
+      }
+    },
+    "JsonConverterConfig": {
+      "type": "object",
+      "description": "JsonConverter config",
+      "properties": {
+        "schemasEnabled": {
+          "type": "boolean",
+          "description": "Whether schemas enabled."
+        },
+        "decimalFormat": {
+          "$ref": "#/definitions/JsonDecimalFormat",
+          "description": "Format for Decimal type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConverterConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "JsonConverter"
+    },
+    "JsonDecimalFormat": {
+      "type": "string",
+      "description": "Json Decimal Format configuration",
+      "enum": [
+        "Base64",
+        "Numeric"
+      ],
+      "x-ms-enum": {
+        "name": "JsonDecimalFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Base64",
+            "value": "Base64",
+            "description": "Type of Base64."
+          },
+          {
+            "name": "Numeric",
+            "value": "Numeric",
+            "description": "Type of Numeric."
+          }
+        ]
+      }
+    },
+    "JsonSourceDataFormat": {
+      "type": "object",
+      "description": "JSON source data format model",
+      "properties": {
+        "textCharset": {
+          "type": "string",
+          "description": "Charset supported by Java language"
+        }
+      },
+      "required": [
+        "textCharset"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDataFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "Json"
+    },
+    "KinesisSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for KinesisSourceConnector",
+      "properties": {
+        "awsAccessKeyId": {
+          "type": "string",
+          "description": "AccessKeyId for AWS Kinesis Server."
+        },
+        "awsSecretAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "SecretAccessKey for AWS Kinesis Server.",
+          "x-ms-secret": true
+        },
+        "awsKinesisRegion": {
+          "type": "string",
+          "description": "Region of AWS Kinesis Server."
+        },
+        "awsKinesisStreamName": {
+          "type": "string",
+          "description": "StreamName in AWS Kinesis Server."
+        },
+        "startPosition": {
+          "$ref": "#/definitions/KinesisStartPositionType",
+          "description": "startPosition supported by Kinesis."
+        },
+        "startSequence": {
+          "type": "string",
+          "description": "startSequence for startPosition."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "startTime for startPosition."
+        }
+      },
+      "required": [
+        "awsAccessKeyId",
+        "awsSecretAccessKey",
+        "awsKinesisRegion",
+        "awsKinesisStreamName",
+        "startPosition"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "KinesisSource"
+    },
+    "KinesisStartPositionType": {
+      "type": "string",
+      "description": "StartPosition types for Kinesis",
+      "enum": [
+        "TrimHorizon",
+        "Latest",
+        "AtSequenceNumber",
+        "AfterSequenceNumber",
+        "AtTimestamp"
+      ],
+      "x-ms-enum": {
+        "name": "KinesisStartPositionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TrimHorizon",
+            "value": "TrimHorizon",
+            "description": "TrimHorizon type"
+          },
+          {
+            "name": "Latest",
+            "value": "Latest",
+            "description": "Latest type"
+          },
+          {
+            "name": "AtSequenceNumber",
+            "value": "AtSequenceNumber",
+            "description": "AtSequenceNumber type"
+          },
+          {
+            "name": "AfterSequenceNumber",
+            "value": "AfterSequenceNumber",
+            "description": "AfterSequenceNumber type"
+          },
+          {
+            "name": "AtTimestamp",
+            "value": "AtTimestamp",
+            "description": "AtTimestamp type"
+          }
+        ]
+      }
+    },
+    "ManagedAzureMapsWeatherSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for ManagedAzureMapsWeatherSourceConnector",
+      "properties": {
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Longitude of the location."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Latitude of the location."
+        },
+        "details": {
+          "type": "boolean",
+          "description": "Whether get the full details for the weather data."
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the weather data."
+        },
+        "unit": {
+          "$ref": "#/definitions/WeatherDataUnit",
+          "description": "The data unit for the weather."
+        },
+        "pollIntervalInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The polling interval in minutes."
+        }
+      },
+      "required": [
+        "longitude",
+        "latitude"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedAzureMapsWeatherSource"
+    },
+    "MessagingConnector": {
+      "type": "object",
+      "description": "A Connector resource Azure",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MessagingConnectorListResult": {
+      "type": "object",
+      "description": "The response of a MessagingConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MessagingConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/MessagingConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MessagingConnectorTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in MessagingConnector resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MqttSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for MqttSourceConnector",
+      "properties": {
+        "serverVersion": {
+          "$ref": "#/definitions/MqttVersion",
+          "description": "Mqtt server version."
+        },
+        "topic": {
+          "type": "string",
+          "description": "Topic to subscribe to."
+        },
+        "brokerUrl": {
+          "type": "string",
+          "description": "URL of the broker where to establish the connection."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username to use when connecting to the Mqtt v5 compliant broker."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password to use when connecting to the Mqtt v5 compliant broker.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "serverVersion",
+        "topic",
+        "brokerUrl"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "MqttSource"
+    },
+    "MqttVersion": {
+      "type": "string",
+      "description": "Version for Mqtt server",
+      "enum": [
+        "V5",
+        "V3AndBelow"
+      ],
+      "x-ms-enum": {
+        "name": "MqttVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V5",
+            "value": "V5",
+            "description": "Mqtt v5"
+          },
+          {
+            "name": "V3AndBelow",
+            "value": "V3AndBelow",
+            "description": "Mqtt v3 and below"
+          }
+        ]
+      }
+    },
+    "MySqlSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for MySqlSourceConnector",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "HostName for MySql."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port for MySql."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "DatabaseName for MySql."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for MySql."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for MySql.",
+          "x-ms-secret": true
+        },
+        "serverId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Server id for MySql."
+        },
+        "tableNames": {
+          "type": "string",
+          "description": "Tables used as source."
+        },
+        "snapshotLockingMode": {
+          "$ref": "#/definitions/SnapshotLockingModeForMysql",
+          "description": "Snapshot Locking Mode."
+        }
+      },
+      "required": [
+        "hostName",
+        "port",
+        "databaseName",
+        "username",
+        "password",
+        "serverId",
+        "tableNames"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "MySqlSource"
+    },
+    "OffsetPolicyForCosmosDB": {
+      "type": "string",
+      "description": "Enum of the OffsetPolicy for CosmosDB connector",
+      "enum": [
+        "UseLatestSourceOffset",
+        "UseEarliestRecordedOffset"
+      ],
+      "x-ms-enum": {
+        "name": "OffsetPolicyForCosmosDB",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UseLatestSourceOffset",
+            "value": "UseLatestSourceOffset",
+            "description": "use the latest (most recent) source offset"
+          },
+          {
+            "name": "UseEarliestRecordedOffset",
+            "value": "UseEarliestRecordedOffset",
+            "description": "use the earliest recorded offset"
+          }
+        ]
+      }
+    },
+    "PostgreSqlSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for PostgreSqlSourceConnector",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "HostName for PostgreSql Server."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port for PostgreSql Server."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "DatabaseName for PostgreSql Server."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for PostgreSql Server."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for PostgreSql Server.",
+          "x-ms-secret": true
+        },
+        "replicationSlotName": {
+          "type": "string",
+          "description": "ReplicationSlotName for PostgreSql Server."
+        },
+        "tableNames": {
+          "type": "string",
+          "description": "Tables used as source."
+        }
+      },
+      "required": [
+        "hostName",
+        "port",
+        "databaseName",
+        "username",
+        "password",
+        "replicationSlotName",
+        "tableNames"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PostgreSqlSource"
+    },
+    "SaslMechanismForConfluent": {
+      "type": "string",
+      "description": "Enum of the SaslMechanism for Confluent connector",
+      "enum": [
+        "PLAIN",
+        "SCRAM-SHA-256",
+        "SCRAM-SHA-512"
+      ],
+      "x-ms-enum": {
+        "name": "SaslMechanismForConfluent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Plain",
+            "value": "PLAIN",
+            "description": "The PLAIN sasl mechanism."
+          },
+          {
+            "name": "ScramSha256",
+            "value": "SCRAM-SHA-256",
+            "description": "The SCRAM-SHA-256 sasl mechanism."
+          },
+          {
+            "name": "ScramSha512",
+            "value": "SCRAM-SHA-512",
+            "description": "The SCRAM-SHA-512 sasl mechanism."
+          }
+        ]
+      }
+    },
+    "Schema": {
+      "type": "object",
+      "description": "Response item of Schema",
+      "properties": {
+        "schemaFormat": {
+          "$ref": "#/definitions/SchemaFormat",
+          "description": "Schema format"
+        },
+        "schemaJson": {
+          "type": "string",
+          "description": "Schema content"
+        },
+        "schemaProperties": {
+          "$ref": "#/definitions/SchemaProperties",
+          "description": "special schema Properties"
+        }
+      },
+      "required": [
+        "schemaFormat",
+        "schemaJson",
+        "schemaProperties"
+      ]
+    },
+    "SchemaFormat": {
+      "type": "object",
+      "description": "Schema format",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SchemaFormatType",
+          "description": "type of schema"
+        },
+        "version": {
+          "type": "string",
+          "description": "version of schema"
+        }
+      },
+      "required": [
+        "type",
+        "version"
+      ]
+    },
+    "SchemaFormatType": {
+      "type": "string",
+      "description": "Schema format Types",
+      "enum": [
+        "Avro",
+        "Json",
+        "Protobuf"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Avro",
+            "value": "Avro",
+            "description": "Avro format"
+          },
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "Json format"
+          },
+          {
+            "name": "Protobuf",
+            "value": "Protobuf",
+            "description": "Protobuf format"
+          }
+        ]
+      }
+    },
+    "SchemaProperties": {
+      "type": "object",
+      "description": "special connector SchemaProperties",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SchemaPropertiesType"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "SchemaPropertiesType": {
+      "type": "string",
+      "description": "Schema Properties Types",
+      "enum": [
+        "Cdc"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaPropertiesType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cdc",
+            "value": "Cdc",
+            "description": "change data capture(CDC) Schema Properties Types"
+          }
+        ]
+      }
+    },
+    "SchemaRequestProperties": {
+      "type": "object",
+      "description": "properties of fetch Schema",
+      "properties": {
+        "connectorSchemaConfig": {
+          "$ref": "#/definitions/ConnectorSchemaConfig",
+          "description": "schema config for connector"
+        },
+        "format": {
+          "$ref": "#/definitions/SchemaFormat",
+          "description": "Schema Format"
+        }
+      },
+      "required": [
+        "connectorSchemaConfig",
+        "format"
+      ]
+    },
+    "SchemaResource": {
+      "type": "object",
+      "description": "A GetSchema resource Azure",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchemaRequestProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SchemaResult": {
+      "type": "object",
+      "description": "Properties of Schema results",
+      "properties": {
+        "schemas": {
+          "type": "array",
+          "description": "Content of DataPreview results",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "schemas"
+      ]
+    },
+    "SecurityProtocolForConfluent": {
+      "type": "string",
+      "description": "Enum of the SecurityProtocol for Confluent connector",
+      "enum": [
+        "SASL_PLAINTEXT",
+        "PLAINTEXT",
+        "SASL_SSL",
+        "SSL"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityProtocolForConfluent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SaslPlainText",
+            "value": "SASL_PLAINTEXT",
+            "description": "The SASL_PLAINTEXT security protocol."
+          },
+          {
+            "name": "PlainText",
+            "value": "PLAINTEXT",
+            "description": "The PLAINTEXT security protocol."
+          },
+          {
+            "name": "SaslSsl",
+            "value": "SASL_SSL",
+            "description": "The SASL_SSL security protocol."
+          },
+          {
+            "name": "Ssl",
+            "value": "SSL",
+            "description": "The SSL security protocol."
+          }
+        ]
+      }
+    },
+    "SnapshotLockingModeForMysql": {
+      "type": "string",
+      "description": "Type of SnapshotLockingMode",
+      "enum": [
+        "Minimal",
+        "Extended",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotLockingModeForMysql",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Minimal",
+            "value": "Minimal",
+            "description": "Minimal type"
+          },
+          {
+            "name": "Extended",
+            "value": "Extended",
+            "description": "Extended type"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None type"
+          }
+        ]
+      }
+    },
+    "SolacePubsubSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for SolacePubsubSource",
+      "properties": {
+        "connectionUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Solace Pubsub+ connection URI, e.g. tcp://127.0.0.1:55555."
+        },
+        "userName": {
+          "type": "string",
+          "description": "Solace Pubsub+ connection username."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Solace Pubsub+ connection password.",
+          "x-ms-secret": true
+        },
+        "messageVpn": {
+          "type": "string",
+          "description": "Solace Pubsub+ message VPN name."
+        },
+        "solaceTopics": {
+          "type": "array",
+          "description": "Comma separated list of PubSub+ topics to subscribe to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "solaceQueue": {
+          "type": "string",
+          "description": "PubSub+ queue name to consume from, must exist on event broker."
+        },
+        "messageProcessor": {
+          "type": "string",
+          "description": "PubSub+ Kafka Source connector message processor."
+        },
+        "mapUserProperties": {
+          "type": "boolean",
+          "description": "If enabled, maps/forwards the user properties Map from Solace message to Kafka record headers."
+        },
+        "mapSolaceProperties": {
+          "type": "boolean",
+          "description": "If enabled, maps/forwards the Solace message standard properties (e.g. correlationId, applicationMessageId, redelivered, dmqEligible, COS etc) to Kafka record headers"
+        },
+        "kafkaMessageKey": {
+          "type": "string",
+          "description": "When using SolaceSampleKeyedMessageProcessor, defines which part of a PubSub+ message shall be converted to a Kafka record key"
+        }
+      },
+      "required": [
+        "connectionUri",
+        "userName",
+        "password",
+        "messageVpn"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SolacePubsubSource"
+    },
+    "SourceConnectorProperties": {
+      "type": "object",
+      "description": "Base properties for Source Connector",
+      "properties": {
+        "converterConfig": {
+          "$ref": "#/definitions/ConverterConfig",
+          "description": "Type of the Connector."
+        },
+        "eventHubConfig": {
+          "$ref": "#/definitions/EventHubConfig",
+          "description": "connectionString of the EventHub."
+        },
+        "sourceDataFormat": {
+          "$ref": "#/definitions/SourceDataFormat",
+          "description": "Data format of the data source"
+        },
+        "cloudEventsConfig": {
+          "$ref": "#/definitions/CloudEventsConfig",
+          "description": "Cloud events config"
+        },
+        "dataSourceProperties": {
+          "$ref": "#/definitions/DataSourceProperties",
+          "description": "Special properties for source."
+        }
+      },
+      "required": [
+        "converterConfig",
+        "eventHubConfig",
+        "dataSourceProperties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Source"
+    },
+    "SourceDataFormat": {
+      "type": "object",
+      "description": "Source data format base model",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SourceDataFormatType",
+          "description": "Type of data format"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "SourceDataFormatType": {
+      "type": "string",
+      "description": "Source data format Types",
+      "enum": [
+        "Json",
+        "Csv",
+        "ConfluentAvro"
+      ],
+      "x-ms-enum": {
+        "name": "SourceDataFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "Json format"
+          },
+          {
+            "name": "Csv",
+            "value": "Csv",
+            "description": "Csv format"
+          },
+          {
+            "name": "ConfluentAvro",
+            "value": "ConfluentAvro",
+            "description": "ConfluentAvro format"
+          }
+        ]
+      }
+    },
+    "SqlServerSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for SqlServerSourceConnector",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "HostName for SqlServer."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port for SqlServer."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "DatabaseName for SqlServer."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for SqlServer."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for SqlServer.",
+          "x-ms-secret": true
+        },
+        "tableNames": {
+          "type": "string",
+          "description": "Tables used as source."
+        }
+      },
+      "required": [
+        "hostName",
+        "port",
+        "databaseName",
+        "username",
+        "password",
+        "tableNames"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SqlServerSource"
+    },
+    "SqlServerSourceConnectorSchemaConfig": {
+      "type": "object",
+      "description": "SqlServerSource Schema Config",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Servername string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port of Server"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "databaseName of Server"
+        },
+        "userName": {
+          "type": "string",
+          "description": "username of Server"
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "password of Server",
+          "x-ms-secret": true
+        },
+        "tables": {
+          "type": "string",
+          "description": "tables of Server"
+        }
+      },
+      "required": [
+        "serverName",
+        "port",
+        "databaseName",
+        "userName",
+        "password",
+        "tables"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorSchemaConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "SqlServerSource"
+    },
+    "StringConverterConfig": {
+      "type": "object",
+      "description": "StringConverter config",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConverterConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "StringConverter"
+    },
+    "TableId": {
+      "type": "object",
+      "description": "cdc table name",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "database name of table"
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "schema name of table"
+        },
+        "tableName": {
+          "type": "string",
+          "description": "table name of table"
+        }
+      },
+      "required": [
+        "databaseName",
+        "schemaName",
+        "tableName"
+      ]
+    },
+    "WeatherDataUnit": {
+      "type": "string",
+      "description": "Type of weather data unit",
+      "enum": [
+        "Metric",
+        "Imperial"
+      ],
+      "x-ms-enum": {
+        "name": "WeatherDataUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Metric",
+            "value": "Metric",
+            "description": "Metric data unit"
+          },
+          {
+            "name": "Imperial",
+            "value": "Imperial",
+            "description": "Imperial data unit"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

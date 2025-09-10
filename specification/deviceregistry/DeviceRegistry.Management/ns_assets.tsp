@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/topic.tsp";
-import "./properties/ns_assetProperties.tsp";
+import "./common/ns_assetProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 @parentResource(Namespace)
 @doc("Asset definition.")
 model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
@@ -35,21 +35,32 @@ model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-@added(Versions.v2025_07_01_preview)
+alias NamespaceAssetPropertiesUpdate = {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    NamespaceAssetProperties,
+    "defaultTopic"
+  >>>;
+
+  @added(Versions.v2024_10_01_preview)
+  @removed(Versions.v2025_07_01_preview)
+  @doc("Object that describes the default topic information for the asset.")
+  defaultTopic?: OptionalProperties<OmitDefaults<Topic>>;
+};
+
+@added(Versions.v2024_10_01_preview)
 @armResourceOperations
 interface NamespaceAssets {
   get is ArmResourceRead<NamespaceAsset>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceAsset>;
-  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
-  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-  // since otherwise it extends the ARM TrackedResource type.
   update is ArmCustomPatchAsync<
     NamespaceAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       NamespaceAsset,
-      NamespaceAssetProperties
+      NamespaceAssetPropertiesUpdate
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceAsset>;
   listByResourceGroup is ArmResourceListByParent<NamespaceAsset>;
+  @removed(Versions.v2025_07_01_preview)
+  listBySubscription is ArmListBySubscription<NamespaceAsset>;
 }

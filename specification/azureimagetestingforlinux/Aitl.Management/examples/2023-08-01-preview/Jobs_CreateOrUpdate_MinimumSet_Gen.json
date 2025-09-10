@@ -1,0 +1,34 @@
+{
+  "title": "Jobs_CreateOrUpdate_MinimumSet",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "03774933-731E-4DF5-9786-A26875E8B9E0",
+    "resourceGroupName": "rgazureimagetestingforlinux",
+    "jobName": "test-job-1",
+    "resource": {
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "eastus",
+        "id": "/subscriptions/03774933-731E-4DF5-9786-A26875E8B9E0/resourceGroups/rgazureimagetestingforlinux/providers/Microsoft.AzureImageTestingForLinux/jobs/test-job-1",
+        "name": "test-job-1",
+        "type": "Microsoft.AzureImageTestingForLinux/jobs"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/03774933-731E-4DF5-9786-A26875E8B9E0/providers/Microsoft.AzureImageTestingForLinux/locations/eastus/operationStatuses/12345"
+      },
+      "body": {
+        "location": "eastus",
+        "id": "/subscriptions/03774933-731E-4DF5-9786-A26875E8B9E0/resourceGroups/rgazureimagetestingforlinux/providers/Microsoft.AzureImageTestingForLinux/jobs/test-job-1",
+        "name": "test-job-1",
+        "type": "Microsoft.AzureImageTestingForLinux/jobs"
+      }
+    }
+  }
+}

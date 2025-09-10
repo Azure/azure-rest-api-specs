@@ -1,0 +1,26 @@
+{
+  "title": "HealthModels_GetNodeHealthStateDistribution",
+  "operationId": "HealthModels_GetNodeHealthStateDistribution",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "healthModelName": "myModel1",
+    "api-version": "2022-11-01-preview",
+    "body": {
+      "nodeId": "0",
+      "timespan": "P7D"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "healthyPercentage": 0.20,
+        "degradedPercentage": 0.15,
+        "unhealthyPercentage": 0.05,
+        "numberOfDataPoints": 74834,
+        "dateGenerated": "2023-03-24T10:02:06.3387924Z",
+        "earliestDataPoint": "2023-02-17T10:02:06.3387924Z"
+      }
+    }
+  }
+}

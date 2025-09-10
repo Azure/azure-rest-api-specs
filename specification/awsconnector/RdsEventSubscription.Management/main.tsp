@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -88,7 +87,7 @@ model AwsRdsEventSubscriptionProperties {
   subscriptionName?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 }
 

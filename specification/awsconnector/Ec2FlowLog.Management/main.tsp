@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -103,7 +102,7 @@ model AwsEc2FlowLogProperties {
   resourceType?: ResourceType;
 
   @doc("The tags to apply to the flow logs.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.")

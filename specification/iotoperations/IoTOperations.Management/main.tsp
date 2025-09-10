@@ -18,6 +18,7 @@ import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
+import "./models/akri/discoveryHandler.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -35,17 +36,14 @@ namespace Microsoft.IoTOperations;
 enum Versions {
   /** 2024-11-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-11-01`,
 
   /** 2025-04-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-04-01`,
 
   /** 2025-07-01-preview */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-07-01-preview`,
 }
 
@@ -166,4 +164,14 @@ interface AkriConnector {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriConnectorResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AkriConnectorResource>;
   listByTemplate is ArmResourceListByParent<AkriConnectorResource>;
+}
+
+// /instance/akriDiscoveryHandlers resource Operations
+@armResourceOperations
+@added(Versions.`2025-07-01-preview`)
+interface AkriDiscoveryHandler {
+  get is ArmResourceRead<AkriDiscoveryHandlerResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriDiscoveryHandlerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<AkriDiscoveryHandlerResource>;
+  listByInstanceResource is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
 }

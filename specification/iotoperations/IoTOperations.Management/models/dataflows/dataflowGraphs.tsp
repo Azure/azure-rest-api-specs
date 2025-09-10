@@ -116,7 +116,7 @@ model DataflowGraphNodeGraphSettings {
   /** Reference to the registry endpoint for pulling the artifact. */
   registryEndpointRef: string;
 
-  /** The artifact name and version to pull. This should be in the format `<artifact-name>:<version>`. */
+  /** The artifact name and version to pull. */
   artifact: string;
 
   /** Configuration key-value pairs. */
@@ -136,7 +136,7 @@ model DataflowGraphGraphNodeConfiguration {
 
 /** DataflowGraph destination node properties. */
 @added(Versions.`2025-07-01-preview`)
-model DataflowGraphDestinationNode extends DataflowGraphNode {
+model DatafloGraphDestinationNode extends DataflowGraphNode {
   /** Type of the destination node. */
   nodeType: Destination;
 

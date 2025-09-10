@@ -1,0 +1,48 @@
+{
+  "title": "PrivateLinkServicesForFabric_ListBySubscription",
+  "operationId": "PrivateLinkServicesForFabric_ListBySubscription",
+  "parameters": {
+    "api-version": "2024-06-01",
+    "subscriptionId": "45d56a15-06a9-4c9c-b8ca-8f7422aecf8c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "tenantId": "84c4a047-7bd1-410d-b822-15effec319a0",
+              "workspaceObjectId": "ba491ce8-fc1c-43d7-83ba-9cd87babce22",
+              "privateEndpointConnections": [
+                {
+                  "properties": {
+                    "privateEndpoint": {
+                      "id": "/subscriptions/a152cb28-fab3-4123-bc20-ab0096d9adf6/resourceGroups/resourceGroup2/providers/Microsoft.Network/privateEndpoints/privateEndpointConnection1"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Pending",
+                      "description": "",
+                      "actionsRequired": "None"
+                    }
+                  },
+                  "name": "privateEndpointConnection1",
+                  "id": "/subscriptions/45d56a15-06a9-4c9c-b8ca-8f7422aecf8c/resourceGroups/resourceGroup1/providers/Microsoft.Fabric/privateLinkServicesForFabric/privateLinkService1/privateEndpointConnections/privateEndpointConnection1",
+                  "type": "Microsoft.Fabric/privateLinkServicesForFabric/privateEndpointConnections"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "name": "privateLinkService1",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "location": "global",
+            "id": "/subscriptions/45d56a15-06a9-4c9c-b8ca-8f7422aecf8c/resourceGroups/{PLS_ResourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/privateLinkService1",
+            "type": "Microsoft.Fabric/privateLinkServicesForFabric"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -67,7 +67,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -106,7 +106,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InstanceListResult"
             }
@@ -148,7 +148,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InstanceListResult"
             }
@@ -198,7 +198,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Instance"
             }
@@ -323,7 +323,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Instance"
             }
@@ -370,19 +370,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -430,7 +430,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DatasetListResult"
             }
@@ -488,7 +488,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Dataset"
             }
@@ -629,7 +629,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Dataset"
             }
@@ -684,19 +684,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -744,7 +744,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineListResult"
             }
@@ -802,7 +802,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Pipeline"
             }
@@ -943,7 +943,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Pipeline"
             }
@@ -998,19 +998,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1039,7 +1039,11 @@
         "properties": {
           "$ref": "#/definitions/DatasetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -1169,7 +1173,11 @@
         "properties": {
           "$ref": "#/definitions/InstanceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -1245,7 +1253,11 @@
         "properties": {
           "$ref": "#/definitions/PipelineProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -1435,6 +1447,30 @@
             "name": "Accepted",
             "value": "Accepted",
             "description": "The resource was accepted by the server."
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The Microsoft.IoTOperationsDataProcessor versions.",
+      "enum": [
+        "2023-10-04-preview",
+        "2024-02-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Preview20230928",
+            "value": "2023-10-04-preview",
+            "description": "Microsoft IoT Operations Data Processor version 2023-10-04-preview."
+          },
+          {
+            "name": "Preview20240201",
+            "value": "2024-02-01-preview",
+            "description": "Microsoft IoT Operations Data Processor version 2024-02-01-preview."
           }
         ]
       }

@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "resourceGroupName": "examplerg",
+    "api-version": "2024-02-01-preview",
+    "resourceId": "id",
+    "orchestrationPreference": {
+      "properties": {
+        "stageByProperty": "testStageByProperty",
+        "stageOrderType": "CustomDefined",
+        "stageMapDefinition": {
+          "orderMap": {
+            "0": {
+              "propertyValues": [
+                "resourceId1"
+              ],
+              "batchSize": 0,
+              "delayStartInMin": 5,
+              "passPercentage": 100,
+              "resourceStatusConsideredAsPassed": [
+                "None"
+              ],
+              "onCompletion": {
+                "actionToTake": "Proceed",
+                "postNotify": true
+              },
+              "onFailure": {
+                "actionToTake": "Terminate",
+                "postNotify": true
+              }
+            },
+            "1": {
+              "propertyValues": [
+                "resourceId1"
+              ],
+              "batchSize": 0,
+              "delayStartInMin": 5,
+              "passPercentage": 100,
+              "resourceStatusConsideredAsPassed": [
+                "None"
+              ],
+              "onCompletion": {
+                "actionToTake": "Proceed",
+                "postNotify": true
+              },
+              "onFailure": {
+                "actionToTake": "Terminate",
+                "postNotify": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/orchestrationPreferences/orchestrationPreference1",
+        "properties": {
+          "stageByProperty": "testStageByProperty",
+          "stageOrderType": "CustomDefined",
+          "stageMapDefinition": {
+            "orderMap": {
+              "0": {
+                "propertyValues": [
+                  "resourceId1"
+                ],
+                "batchSize": 0,
+                "delayStartInMin": 0,
+                "passPercentage": 100,
+                "resourceStatusConsideredAsPassed": [
+                  "None"
+                ],
+                "onCompletion": {
+                  "actionToTake": "Proceed",
+                  "postNotify": true
+                },
+                "onFailure": {
+                  "actionToTake": "Terminate",
+                  "postNotify": true
+                }
+              },
+              "1": {
+                "propertyValues": [
+                  "resourceId1",
+                  "resourceId2"
+                ],
+                "batchSize": 0,
+                "delayStartInMin": 5,
+                "passPercentage": 100,
+                "resourceStatusConsideredAsPassed": [
+                  "None"
+                ],
+                "onCompletion": {
+                  "actionToTake": "Proceed",
+                  "postNotify": true
+                },
+                "onFailure": {
+                  "actionToTake": "Terminate",
+                  "postNotify": true
+                }
+              }
+            }
+          }
+        },
+        "name": "orchestrationPreference1",
+        "type": "OrchestrationPreference"
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "operationId": "StorageAppliances_List",
+  "title": "List Storage Appliance Info",
+  "parameters": {
+    "location": "eastus",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.NetappInternal/locations/eastus/storageAppliances/sample01",
+            "name": "sample01",
+            "type": "Microsoft.NetappInternal/locations/storageAppliances",
+            "properties": {
+              "datacenterId": "/providers/Microsoft.AzureCloudMetadata/clouds/Public/datacenters/AMS08",
+              "rackId": "x",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.NetappInternal/locations/eastus/storageAppliances/sample02",
+            "name": "sample02",
+            "type": "Microsoft.NetappInternal/locations/storageAppliances",
+            "properties": {
+              "datacenterId": "/providers/Microsoft.AzureCloudMetadata/clouds/Public/datacenters/BRU22",
+              "rackId": "x",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

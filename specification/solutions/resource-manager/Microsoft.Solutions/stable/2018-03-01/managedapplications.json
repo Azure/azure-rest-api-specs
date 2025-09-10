@@ -310,13 +310,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatchable"
+              "$ref": "#/definitions/Application"
             }
           },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatchable"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -927,13 +927,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatchable"
+              "$ref": "#/definitions/Application"
             }
           },
           "202": {
             "description": "Accepted - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatchable"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -2199,7 +2199,7 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ApplicationLockLevel",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "ApplicationArtifactType": {
@@ -2671,27 +2671,27 @@
     },
     "UpdateAccessDefinition": {
       "properties": {
-        "approver": {
+        "Approver": {
           "type": "string",
           "description": "The approver name."
         },
-        "metadata": {
+        "Metadata": {
           "$ref": "#/definitions/JitRequestMetadata",
           "description": "The JIT request metadata."
         },
-        "status": {
+        "Status": {
           "$ref": "#/definitions/Status",
           "description": "The JIT status."
         },
-        "subStatus": {
+        "SubStatus": {
           "$ref": "#/definitions/SubStatus",
           "description": "The JIT status."
         }
       },
       "required": [
-        "metadata",
-        "status",
-        "subStatus"
+        "Metadata",
+        "Status",
+        "SubStatus"
       ],
       "description": "Update access request definition."
     },

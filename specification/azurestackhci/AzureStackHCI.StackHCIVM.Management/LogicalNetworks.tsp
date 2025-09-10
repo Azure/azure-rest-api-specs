@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The logical network resource definition.")
 @extension("x-ms-azure-resource", true)
 model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
@@ -33,13 +33,8 @@ interface LogicalNetworks {
   @doc("The operation to get a logical network.")
   get is ArmResourceRead<LogicalNetwork>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    LogicalNetwork,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LogicalNetwork>;
 
   @doc("The operation to update a logical network.")
   @patch(#{ implicitOptionality: false })

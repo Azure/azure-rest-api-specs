@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -73,7 +72,7 @@ model AwsEc2InstanceStatusProperties {
   availabilityZone?: string;
 
   @doc("<p>Any scheduled events associated with the instance.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   events?: InstanceStatusEvent[];
 
   @doc("<p>The ID of the instance.</p>")
@@ -200,7 +199,7 @@ model InstanceStateNameEnumValue {
 @doc("Definition of InstanceStatusSummary")
 model InstanceStatusSummary {
   @doc("<p>The system instance health or application instance health.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   details?: InstanceStatusDetails[];
 
   @doc("<p>The status.</p>")

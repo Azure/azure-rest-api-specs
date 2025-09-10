@@ -1,0 +1,719 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Dev Tunnels",
+    "version": "2023-05-23-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CheckNameAvailability"
+    },
+    {
+      "name": "TunnelPlans"
+    },
+    {
+      "name": "BillingTiers"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DevTunnels/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevTunnels/billingTiers": {
+      "get": {
+        "operationId": "BillingTiers_ListBySubscription",
+        "tags": [
+          "BillingTiers"
+        ],
+        "description": "List BillingTierResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BillingTierResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBillingTiersBySubscription": {
+            "$ref": "./examples/BillingTiers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevTunnels/checkNameAvailability": {
+      "post": {
+        "operationId": "Operations_CheckName",
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "description": "Implements global CheckNameAvailability operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability": {
+            "$ref": "./examples/Operations_CheckName.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevTunnels/tunnelPlans": {
+      "get": {
+        "operationId": "TunnelPlans_ListBySubscription",
+        "tags": [
+          "TunnelPlans"
+        ],
+        "description": "List TunnelPlanResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TunnelPlanResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTunnelPlansBySubscription": {
+            "$ref": "./examples/TunnelPlans_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTunnels/tunnelPlans": {
+      "get": {
+        "operationId": "TunnelPlans_ListByResourceGroup",
+        "tags": [
+          "TunnelPlans"
+        ],
+        "description": "List TunnelPlanResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TunnelPlanResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTunnelPlansByResourceGroup": {
+            "$ref": "./examples/TunnelPlans_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTunnels/tunnelPlans/{planName}": {
+      "get": {
+        "operationId": "TunnelPlans_Get",
+        "tags": [
+          "TunnelPlans"
+        ],
+        "description": "Get a TunnelPlanResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "planName",
+            "in": "path",
+            "description": "The name of the Tunnel Plan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TunnelPlanResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTunnelPlan": {
+            "$ref": "./examples/TunnelPlans_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TunnelPlans_CreateOrUpdate",
+        "tags": [
+          "TunnelPlans"
+        ],
+        "description": "Create a TunnelPlanResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "planName",
+            "in": "path",
+            "description": "The name of the Tunnel Plan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TunnelPlanResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TunnelPlanResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TunnelPlanResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'TunnelPlanResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TunnelPlanResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTunnelPlan": {
+            "$ref": "./examples/TunnelPlans_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TunnelPlans_Update",
+        "tags": [
+          "TunnelPlans"
+        ],
+        "description": "Update a TunnelPlanResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "planName",
+            "in": "path",
+            "description": "The name of the Tunnel Plan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TunnelPlanResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TunnelPlanResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateTunnelPlan": {
+            "$ref": "./examples/TunnelPlans_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TunnelPlans_Delete",
+        "tags": [
+          "TunnelPlans"
+        ],
+        "description": "Delete a TunnelPlanResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "planName",
+            "in": "path",
+            "description": "The name of the Tunnel Plan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTunnelPlan": {
+            "$ref": "./examples/TunnelPlans_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTunnels/tunnelPlans/{planName}/listToken": {
+      "post": {
+        "operationId": "TunnelPlans_ListToken",
+        "tags": [
+          "TunnelPlans"
+        ],
+        "description": "Get a Tunnel Plan token",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "planName",
+            "in": "path",
+            "description": "The name of the Tunnel Plan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTunnelPlanToken": {
+            "$ref": "./examples/TunnelPlans_ListToken.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "BillingTierProperties": {
+      "type": "object",
+      "description": "The properties of a billing tier",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the billing tier"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the plan",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "BillingTierResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingTierProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BillingTierResourceListResult": {
+      "type": "object",
+      "description": "The response of a BillingTierResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BillingTierResource items on this page",
+          "items": {
+            "$ref": "#/definitions/BillingTierResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GetTokenResponse": {
+      "type": "object",
+      "description": "The response to a getToken request",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The TunnelPlan token"
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "TunnelPlanProperties": {
+      "type": "object",
+      "description": "The properties of TunnelPlan",
+      "properties": {
+        "billingTier": {
+          "type": "string",
+          "description": "The billing tier for the plan"
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "Cluster ID where the TunnelPlan resides, used for data-plane operations",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the plan",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "billingTier"
+      ]
+    },
+    "TunnelPlanPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties of TunnelPlan",
+      "properties": {
+        "billingTier": {
+          "type": "string",
+          "description": "The billing tier for the plan"
+        }
+      }
+    },
+    "TunnelPlanResource": {
+      "type": "object",
+      "description": "A Tunnel Plan resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TunnelPlanProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TunnelPlanResourceListResult": {
+      "type": "object",
+      "description": "The response of a TunnelPlanResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TunnelPlanResource items on this page",
+          "items": {
+            "$ref": "#/definitions/TunnelPlanResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TunnelPlanResourceUpdate": {
+      "type": "object",
+      "description": "A Tunnel Plan resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TunnelPlanPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

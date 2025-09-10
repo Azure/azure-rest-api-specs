@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -124,7 +123,7 @@ model AwsEc2SubnetProperties {
   subnetId?: string;
 
   @doc("Any tags assigned to the subnet.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The ID of the VPC the subnet is in. If you update this property, you must also update the ``CidrBlock`` property.")

@@ -1,0 +1,450 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.PortalServices",
+    "version": "2025-04-01-preview",
+    "description": "Azure Portal Services API Reference",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Settings"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PortalServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the Microsoft.PortalServices/settings provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.PortalServices/settings/default": {
+      "get": {
+        "operationId": "Settings_Get",
+        "tags": [
+          "Settings"
+        ],
+        "description": "Get Azure Portal settings for the tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get tenant-level Azure Portal settings": {
+            "$ref": "./examples/Settings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Settings_CreateOrUpdate",
+        "tags": [
+          "Settings"
+        ],
+        "description": "Create or update Azure Portal settings to apply to the entire tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SettingsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SettingsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SettingsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'SettingsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new tenant-level Azure Portal settings resource or update an existing one": {
+            "$ref": "./examples/Settings_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Settings_Update",
+        "tags": [
+          "Settings"
+        ],
+        "description": "Update Azure Portal settings to apply to the entire tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SettingsResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update tenant-level Azure Portal Settings": {
+            "$ref": "./examples/Settings_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Settings_Delete",
+        "tags": [
+          "Settings"
+        ],
+        "description": "Remove tenant-wide Azure Portal settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete tenant-level Azure Portal settings": {
+            "$ref": "./examples/Settings_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "FeedbackControlPolicySettings": {
+      "type": "object",
+      "description": "Settings related to feedback control policies.",
+      "properties": {
+        "connectedExperiences": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "Allow Microsoft feedback data from users in the tenant to be used in connected experiences, such as AI analysis on feedback."
+        },
+        "policyAllowFeedback": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "Allow users to submit feedback to Microsoft."
+        },
+        "policyAllowSurvey": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "Allow Microsoft to issue survey prompts to users."
+        },
+        "policyAllowScreenshot": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "Allow users to include screenshots, screen recordings, and attachments when submitting feedback to Microsoft."
+        },
+        "policyAllowContact": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "Allow Microsoft to follow up with users on submitted feedback."
+        },
+        "policyAllowContent": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "Allow users to include additional log files and content samples with submitted feedback."
+        },
+        "policyEmailCollectionDefault": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "A value indicating whether email collection is selected by default when the user launches feedback experiences. This setting is only applicable when policyAllowContact is not set to Disabled."
+        },
+        "policyScreenshotDefault": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "A value indicating whether the screenshot checkbox is selected by default when the user launches feedback experiences. This setting is only applicable when policyAllowScreenshot is not set to Disabled."
+        },
+        "policyContentSamplesDefault": {
+          "$ref": "#/definitions/FeedbackControlPolicyState",
+          "description": "A value indicating whether the content samples checkbox is selected by default when the user launches feedback experiences. This setting is not applicable when policyAllowContent is set to Disabled."
+        }
+      }
+    },
+    "FeedbackControlPolicyState": {
+      "type": "string",
+      "description": "Available values for a Feedback Control Policy state.",
+      "enum": [
+        "NotConfigured",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "FeedbackControlPolicyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "Enabled state is not explicitly specified. This is the default state."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Control Policy has been explicitly enabled by an admin."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Control Policy has been explicitly disabled by an admin."
+          }
+        ]
+      }
+    },
+    "MfaEnforcement": {
+      "type": "string",
+      "description": "Available values for the Multi-factor authentication enforcement behavior.",
+      "enum": [
+        "Default",
+        "OptOut",
+        "Enforce"
+      ],
+      "x-ms-enum": {
+        "name": "MfaEnforcement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Use the default Multi-factor authentication enforcement behavior."
+          },
+          {
+            "name": "OptOut",
+            "value": "OptOut",
+            "description": "This tenant is opted out of Multi-factor authentication enforcement."
+          },
+          {
+            "name": "Enforce",
+            "value": "Enforce",
+            "description": "Multi-factor authentication is required."
+          }
+        ]
+      }
+    },
+    "MultiFactorAuthenticationSettings": {
+      "type": "object",
+      "description": "Multi-Factor Authentication settings.",
+      "properties": {
+        "portalEnforcement": {
+          "$ref": "#/definitions/MfaEnforcement",
+          "description": "The setting for Multi-Factor Authentication enforcement when signing into this tenant."
+        },
+        "portalJustification": {
+          "type": "string",
+          "description": "Justification for the value set for portalEnforcement. Required when portalEnforcement is set to a value other than 'Default'. Maximum length is 500 characters."
+        },
+        "portalEnforcementDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the enforcement setting in portalEnforcement should be applied."
+        },
+        "armEnforcementDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time in ISO8601 format when multi-factor authentication will be required to use ARM APIs in the tenant."
+        },
+        "armJustification": {
+          "type": "string",
+          "description": "Optional justification for the date and time set in armEnforcementDate. Maximum length is 500 characters."
+        }
+      }
+    },
+    "SettingsProperties": {
+      "type": "object",
+      "description": "The Azure Portal tenant-level settings properties.",
+      "properties": {
+        "multiFactorAuthentication": {
+          "$ref": "#/definitions/MultiFactorAuthenticationSettings",
+          "description": "Multi-factor authentication settings for all Azure Portal users in the tenant."
+        },
+        "feedbackControlPolicy": {
+          "$ref": "#/definitions/FeedbackControlPolicySettings",
+          "description": "Settings related to feedback control policies for all Azure Portal users in the tenant."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SettingsResource": {
+      "type": "object",
+      "description": "The Azure Portal settings tenant resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SettingsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SettingsResourceUpdate": {
+      "type": "object",
+      "description": "The Azure Portal settings tenant resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SettingsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

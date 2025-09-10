@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkFunctionReadyK8sName": "testNetworkFunctionReadyK8s"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testNetworkFunctionReadyK8sName",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/networkFunctionReadyK8s/testNetworkFunctionReadyK8s",
+        "type": "Microsoft.HybridNetwork/networkFunctionReadyK8s",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "westUs2",
+        "properties": {
+          "provisioningState": "Accepted",
+          "clusterType": "HybridAKS",
+          "clusterReference": {
+            "id": "/subscriptions/4a0479c0-b795-4d0f-96fd-c7edd2a2928f/resourceGroups/arc-container-build-testing/providers/Microsoft.Kubernetes/connectedClusters/acbt-aks-0511"
+          },
+          "userAssignedManagedIdentity": {
+            "id": ""
+          },
+          "customLocationReference": {
+            "id": "/subscriptions/56951e4c-2008-4bca-88ba-d2d2eab9fede/resourcegroups/SwatiKaTest/providers/microsoft.extendedlocation/customlocations/testCustomLocation"
+          }
+        }
+      }
+    }
+  }
+}

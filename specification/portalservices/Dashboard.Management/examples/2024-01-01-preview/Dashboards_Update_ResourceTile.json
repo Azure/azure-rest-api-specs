@@ -1,0 +1,68 @@
+{
+  "operationId": "Dashboards_Update",
+  "title": "Update a dashboard with Resource tiles",
+  "parameters": {
+    "dashboardName": "testdashboard",
+    "resourceGroupName": "testRG",
+    "api-version": "2024-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "properties": {
+      "properties": {
+        "title": "testdashboard",
+        "pages": [
+          {
+            "title": "New 1",
+            "tiles": [
+              {
+                "title": "",
+                "layout": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 4,
+                  "height": 4
+                },
+                "type": "ResourceTile",
+                "data": {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Web/sites/testResource"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "type": "ResourceTile",
+                  "data": {
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Web/sites/testResource"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SayeedRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    }
+  }
+}

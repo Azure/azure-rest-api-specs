@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
+    "resourceGroupName": "MyResourceGroup",
+    "communicationServiceName": "MyCommunicationResource",
+    "networkSecurityPerimeterConfigurationName": "8f6b6269-84f2-4d09-9e31-1127efcd1e40.someAssociation",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkSecurityPerimeter": {
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/perimeterrg/providers/Microsoft.Network/networkSecurityPerimeters/somePerimeter",
+            "perimeterGuid": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+            "location": "West US"
+          },
+          "resourceAssociation": {
+            "name": "someAssociation",
+            "accessMode": "Enforced"
+          },
+          "profile": {
+            "name": "someProfile",
+            "accessRulesVersion": 1,
+            "accessRules": [
+              {
+                "name": "ipRule",
+                "properties": {
+                  "direction": "Inbound",
+                  "addressPrefixes": [
+                    "148.0.0.0/8"
+                  ]
+                }
+              }
+            ],
+            "diagnosticSettingsVersion": 1,
+            "enabledLogCategories": [
+              "NspOutbound"
+            ]
+          }
+        },
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/CommunicationServices/MyCommunicationResource/networkSecurityPerimeterConfigurations/8f6b6269-84f2-4d09-9e31-1127efcd1e40.someAssociation",
+        "name": "8f6b6269-84f2-4d09-9e31-1127efcd1e40.someAssociation",
+        "type": "Microsoft.Communication/CommunicationServices/networkSecurityPerimeterConfigurations"
+      }
+    }
+  }
+}

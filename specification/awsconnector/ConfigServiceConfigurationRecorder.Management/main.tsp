@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -1357,7 +1356,7 @@ model RecordingMode {
   recordingFrequency?: RecordingFrequencyEnumValue;
 
   @doc("<p>An array of <code>recordingModeOverride</code> objects for you to specify your overrides for the recording mode. The <code>recordingModeOverride</code> object in the <code>recordingModeOverrides</code> array consists of three fields: a <code>description</code>, the new <code>recordingFrequency</code>, and an array of <code>resourceTypes</code> to override.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   recordingModeOverrides?: RecordingModeOverride[];
 }
 

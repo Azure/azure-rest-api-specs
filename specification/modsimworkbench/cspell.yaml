@@ -1,0 +1,28 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+version: '0.2'
+import:
+  - ../../cspell.yaml
+words:
+  - devmodsimorkbench
+  - ffle
+  - lmhost
+  - mswb
+  - oidc
+  - otds
+  - teh
+
+overrides:
+  - filename: '**/specification/modsimworkbench/Microsoft.ModSimWorkbench.Management/fileRequests.tsp'
+    ignoreWords:
+      - teh
+  - filename: '**/specification/modsimworkbench/resource-manager/Microsoft.ModSimWorkbench/preview/2021-03-01-preview/modsimworkbenches.json'
+    ignoreWords:
+      - teh
+  - filename: '**/specification/modsimworkbench/resource-manager/Microsoft.ModSimWorkbench/preview/2024-05-01-preview/modsimworkbenches.json'
+    ignoreWords:
+      - teh

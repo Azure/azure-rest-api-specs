@@ -1,0 +1,1657 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Throttling (ATS)",
+    "version": "2025-03-01-preview",
+    "description": "Azure Throttling (ATS) Resource Provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ProxyAccounts"
+    },
+    {
+      "name": "ThrottlingAccounts"
+    },
+    {
+      "name": "Rules"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Throttling/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Throttling/checkNameAvailability": {
+      "post": {
+        "operationId": "Operations_CheckNameAvailability",
+        "description": "Implements global CheckNameAvailability operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_CheckNameAvailability": {
+            "$ref": "./examples/Operations_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Throttling/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "Operations_CheckNameAvailabilityLocal",
+        "description": "Implements local CheckNameAvailability operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_CheckNameAvailabilityLocal": {
+            "$ref": "./examples/Operations_CheckNameAvailabilityLocal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Throttling/proxyAccounts": {
+      "get": {
+        "operationId": "ProxyAccounts_ListBySubscription",
+        "tags": [
+          "ProxyAccounts"
+        ],
+        "description": "List ProxyAccount resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProxyAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyAccounts_ListBySubscription": {
+            "$ref": "./examples/ProxyAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Throttling/throttlingAccounts": {
+      "get": {
+        "operationId": "ThrottlingAccounts_ListBySubscription",
+        "tags": [
+          "ThrottlingAccounts"
+        ],
+        "description": "List ThrottlingAccount resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThrottlingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ThrottlingAccounts_ListBySubscription": {
+            "$ref": "./examples/ThrottlingAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Throttling/proxyAccounts": {
+      "get": {
+        "operationId": "ProxyAccounts_ListByResourceGroup",
+        "tags": [
+          "ProxyAccounts"
+        ],
+        "description": "List ProxyAccount resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProxyAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyAccounts_ListByResourceGroup": {
+            "$ref": "./examples/ProxyAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Throttling/proxyAccounts/{proxyAccountName}": {
+      "get": {
+        "operationId": "ProxyAccounts_Get",
+        "tags": [
+          "ProxyAccounts"
+        ],
+        "description": "Get a ProxyAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "proxyAccountName",
+            "in": "path",
+            "description": "Proxy account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProxyAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyAccounts_Get": {
+            "$ref": "./examples/ProxyAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProxyAccounts_Create",
+        "tags": [
+          "ProxyAccounts"
+        ],
+        "description": "Create a ProxyAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "proxyAccountName",
+            "in": "path",
+            "description": "Proxy account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProxyAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ProxyAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProxyAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'ProxyAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProxyAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyAccounts_Create": {
+            "$ref": "./examples/ProxyAccounts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ProxyAccounts_Update",
+        "tags": [
+          "ProxyAccounts"
+        ],
+        "description": "Update a ProxyAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "proxyAccountName",
+            "in": "path",
+            "description": "Proxy account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProxyAccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProxyAccount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyAccounts_Update": {
+            "$ref": "./examples/ProxyAccounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ProxyAccounts_Delete",
+        "tags": [
+          "ProxyAccounts"
+        ],
+        "description": "Delete a ProxyAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "proxyAccountName",
+            "in": "path",
+            "description": "Proxy account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyAccounts_Delete": {
+            "$ref": "./examples/ProxyAccounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Throttling/throttlingAccounts": {
+      "get": {
+        "operationId": "ThrottlingAccounts_ListByResourceGroup",
+        "tags": [
+          "ThrottlingAccounts"
+        ],
+        "description": "List ThrottlingAccount resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThrottlingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ThrottlingAccounts_ListByResourceGroup": {
+            "$ref": "./examples/ThrottlingAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Throttling/throttlingAccounts/{throttlingAccountName}": {
+      "get": {
+        "operationId": "ThrottlingAccounts_Get",
+        "tags": [
+          "ThrottlingAccounts"
+        ],
+        "description": "Get a ThrottlingAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThrottlingAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ThrottlingAccounts_Get": {
+            "$ref": "./examples/ThrottlingAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ThrottlingAccounts_Create",
+        "tags": [
+          "ThrottlingAccounts"
+        ],
+        "description": "Create a ThrottlingAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThrottlingAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ThrottlingAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ThrottlingAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'ThrottlingAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ThrottlingAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ThrottlingAccounts_Create": {
+            "$ref": "./examples/ThrottlingAccounts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ThrottlingAccounts_Update",
+        "tags": [
+          "ThrottlingAccounts"
+        ],
+        "description": "Update a ThrottlingAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThrottlingAccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThrottlingAccount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ThrottlingAccounts_Update": {
+            "$ref": "./examples/ThrottlingAccounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ThrottlingAccounts_Delete",
+        "tags": [
+          "ThrottlingAccounts"
+        ],
+        "description": "Delete a ThrottlingAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ThrottlingAccounts_Delete": {
+            "$ref": "./examples/ThrottlingAccounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Throttling/throttlingAccounts/{throttlingAccountName}/rules": {
+      "get": {
+        "operationId": "Rules_ListByAccount",
+        "tags": [
+          "Rules"
+        ],
+        "description": "List Rule resources by ThrottlingAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_ListByAccount": {
+            "$ref": "./examples/Rules_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Throttling/throttlingAccounts/{throttlingAccountName}/rules/{ruleName}": {
+      "get": {
+        "operationId": "Rules_Get",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Get a Rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "Throttling rule name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Get": {
+            "$ref": "./examples/Rules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Rules_Create",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Create a Rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "Throttling rule name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Rule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "201": {
+            "description": "Resource 'Rule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Create": {
+            "$ref": "./examples/Rules_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Rules_Update",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Update a Rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "Throttling rule name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Update": {
+            "$ref": "./examples/Rules_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Rules_Delete",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Delete a Rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "throttlingAccountName",
+            "in": "path",
+            "description": "Throttling account name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "Throttling rule name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Delete": {
+            "$ref": "./examples/Rules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccountAuthenticationProperties": {
+      "type": "object",
+      "description": "Account authentication properties",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "description": "Certificate-based authentication properties",
+          "items": {
+            "$ref": "#/definitions/CertificateProperties"
+          },
+          "x-ms-identifiers": [
+            "subjectName"
+          ],
+          "x-typespec-name": "CertificateProperties[]"
+        },
+        "entra": {
+          "type": "array",
+          "description": "Microsoft Entra-based authentication properties",
+          "items": {
+            "$ref": "#/definitions/EntraProperties"
+          },
+          "x-ms-identifiers": [
+            "tenantId",
+            "objectId"
+          ],
+          "x-typespec-name": "EntraProperties[]"
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CertificateProperties": {
+      "type": "object",
+      "description": "Certificate-based authentication properties",
+      "properties": {
+        "subjectName": {
+          "type": "string",
+          "description": "Certificate subject name",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]+"
+        }
+      },
+      "required": [
+        "subjectName"
+      ]
+    },
+    "EntraProperties": {
+      "type": "object",
+      "description": "Microsoft Entra-based authentication properties",
+      "properties": {
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Entra Tenant ID"
+        },
+        "objectId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Entra Object ID"
+        }
+      },
+      "required": [
+        "tenantId",
+        "objectId"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource being accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource being created"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource being deleted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProxyAccount": {
+      "type": "object",
+      "description": "Proxy account",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProxyAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProxyAccountAuthenticationProperties": {
+      "type": "object",
+      "description": "Proxy account authentication properties",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "description": "Certificate-based authentication properties",
+          "items": {
+            "$ref": "#/definitions/CertificateProperties"
+          },
+          "x-ms-identifiers": [
+            "subjectName"
+          ],
+          "x-typespec-name": "CertificateProperties[]"
+        }
+      }
+    },
+    "ProxyAccountListResult": {
+      "type": "object",
+      "description": "The response of a ProxyAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProxyAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/ProxyAccount"
+          },
+          "x-typespec-name": "ProxyAccount[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProxyAccountProperties": {
+      "type": "object",
+      "description": "Proxy account properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "authentication": {
+          "$ref": "#/definitions/ProxyAccountAuthenticationProperties",
+          "description": "Proxy account authentication properties"
+        }
+      }
+    },
+    "ProxyAccountUpdate": {
+      "type": "object",
+      "description": "Proxy account",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProxyAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "Rule": {
+      "type": "object",
+      "description": "Throttling rules",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RuleListResult": {
+      "type": "object",
+      "description": "The response of a Rule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Rule items on this page",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "x-typespec-name": "Rule[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RuleProperties": {
+      "type": "object",
+      "description": "Throttling rule properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Threshold value",
+          "minimum": 1
+        },
+        "depthMultiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Bucket's depth multiplier",
+          "minimum": -16,
+          "maximum": -1
+        },
+        "windowDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Window duration"
+        },
+        "minEnforcementDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Minimal enforcement duration"
+        }
+      },
+      "required": [
+        "threshold",
+        "depthMultiplier",
+        "windowDuration"
+      ]
+    },
+    "RulePropertiesUpdate": {
+      "type": "object",
+      "description": "Throttling rule properties",
+      "properties": {
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Threshold value",
+          "minimum": 1
+        },
+        "depthMultiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Bucket's depth multiplier",
+          "minimum": -16,
+          "maximum": -1
+        },
+        "windowDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Window duration"
+        },
+        "minEnforcementDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Minimal enforcement duration"
+        }
+      }
+    },
+    "RuleUpdate": {
+      "type": "object",
+      "description": "Throttling rules",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RulePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ThrottlingAccount": {
+      "type": "object",
+      "description": "Throttling account",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ThrottlingAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Throttling account kind",
+          "pattern": "^direct|indirect,[a-z]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ThrottlingAccountListResult": {
+      "type": "object",
+      "description": "The response of a ThrottlingAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ThrottlingAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/ThrottlingAccount"
+          },
+          "x-typespec-name": "ThrottlingAccount[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ThrottlingAccountProperties": {
+      "type": "object",
+      "description": "Throttling account properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Endpoint address to be used by Throttling client",
+          "readOnly": true
+        },
+        "authentication": {
+          "$ref": "#/definitions/AccountAuthenticationProperties",
+          "description": "Account authentication properties"
+        }
+      }
+    },
+    "ThrottlingAccountUpdate": {
+      "type": "object",
+      "description": "Throttling account",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ThrottlingAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

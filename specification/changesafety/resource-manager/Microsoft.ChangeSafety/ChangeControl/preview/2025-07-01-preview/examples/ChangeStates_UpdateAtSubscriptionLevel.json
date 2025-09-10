@@ -1,0 +1,148 @@
+{
+  "title": "ChangeStates_UpdateAtSubscriptionLevel",
+  "operationId": "ChangeStates_UpdateAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "subscriptionMonitoringChangeState",
+    "properties": {
+      "properties": {
+        "state": "InProgress",
+        "comments": "Subscription monitoring platform deployment progressing with telemetry validation and alerting configuration.",
+        "links": {
+          "workTrackingItem": {
+            "uri": "https://dev.azure.com/contoso/MonitoringProject/_workitems/edit/12375",
+            "description": "Work item for subscription monitoring platform deployment"
+          },
+          "approvalRequest": {
+            "uri": "https://approval.contoso.com/requests/67918",
+            "description": "Subscription monitoring platform deployment approval"
+          }
+        },
+        "additionalData": {
+          "telemetryEnabled": true,
+          "alertingConfigured": true,
+          "dashboardsDeployed": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "InProgress",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Subscription monitoring platform deployment across subscription with telemetry collection and alerting capabilities. This deployment includes monitoring infrastructure, dashboards, alerting rules, and performance analytics for enterprise-scale observability.",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionMonitoringStageMap"
+          },
+          "parameters": {
+            "monitoringVersion": {
+              "type": "string",
+              "metadata": {
+                "description": "Version of the monitoring platform to deploy"
+              }
+            }
+          },
+          "state": "InProgress",
+          "comments": "Subscription monitoring platform deployment progressing with telemetry validation and alerting configuration.",
+          "changeDefinitions": [
+            {
+              "name": "subscriptionMonitoringDeployment",
+              "type": "ArmOperation",
+              "details": {
+                "templateUri": "https://templates.contoso.com/subscription-monitoring.json",
+                "parameters": {
+                  "version": "3.1.5",
+                  "environment": "production",
+                  "enableAlerting": true
+                }
+              }
+            }
+          ],
+          "releaseLabel": "Release-3.1.5-Monitoring",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+          "orchestrationTool": "Azure Monitor",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/MonitoringProject/_workitems/edit/12375",
+              "description": "Work item for subscription monitoring platform deployment",
+              "lastModifiedBy": "monitoring@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/67918",
+              "description": "Subscription monitoring platform deployment approval",
+              "lastModifiedBy": "monitoring@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC001262",
+              "description": "Support incident for subscription monitoring deployment coordination",
+              "lastModifiedBy": "monitoring@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/requests/AER-5706",
+              "description": "Access elevation request for subscription monitoring deployment",
+              "lastModifiedBy": "monitoring@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/alertingSystemState",
+              "description": "Related alerting system change state for monitoring coordination",
+              "lastModifiedBy": "monitoring@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/TR-9904",
+              "description": "Subscription monitoring deployment test results with telemetry validation",
+              "lastModifiedBy": "monitoring@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/subscription-monitoring-platform",
+              "description": "Subscription monitoring platform service catalog entry with observability specifications",
+              "lastModifiedBy": "monitoring@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "telemetryEnabled": true,
+            "alertingConfigured": true,
+            "dashboardsDeployed": true,
+            "performanceAnalytics": "enabled"
+          },
+          "stageMapSnapshot": [
+            {
+              "stageName": "telemetrySetup",
+              "status": "completed"
+            },
+            {
+              "stageName": "dashboardDeployment",
+              "status": "in-progress"
+            },
+            {
+              "stageName": "alertingConfiguration",
+              "status": "pending"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionMonitoringChangeState",
+        "name": "subscriptionMonitoringChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "monitoring@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "monitoring@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

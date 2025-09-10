@@ -1,0 +1,310 @@
+{
+  "operationId": "Dashboards_CreateOrUpdate",
+  "title": "Create a dashboard with Query tiles",
+  "parameters": {
+    "dashboardName": "testdashboard",
+    "resourceGroupName": "testRG",
+    "api-version": "2024-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "properties": {
+        "title": "testdashboard",
+        "pages": [
+          {
+            "title": "New 1",
+            "tiles": [
+              {
+                "title": "ARG: Top 10 resource counts by type",
+                "type": "QueryTile",
+                "layout": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 6,
+                  "height": 4
+                },
+                "data": {
+                  "kind": "arg",
+                  "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10"
+                },
+                "visualization": {
+                  "type": "table",
+                  "options": {
+                    "hideTileTitle": false,
+                    "table__enableRenderLinks": true,
+                    "table__renderLinksForColumns": [],
+                    "colorRules": [],
+                    "colorRulesDisabled": true,
+                    "colorStyle": "light",
+                    "crossFilter": [],
+                    "crossFilterDisabled": false,
+                    "drillthrough": [],
+                    "drillthroughDisabled": false
+                  }
+                }
+              },
+              {
+                "title": "Metrics tile",
+                "type": "QueryTile",
+                "layout": {
+                  "x": 0,
+                  "y": 4,
+                  "width": 6,
+                  "height": 4
+                },
+                "data": {
+                  "kind": "app-insights",
+                  "metrics": [
+                    {
+                      "namespace": "microsoft.web/sites",
+                      "name": "CpuTime",
+                      "aggregationType": "count",
+                      "resourceMetadata": {
+                        "id": "/subscriptions/1896ae80-f3b4-41c9-a53d-afc110fedfba/resourcegroups/k8bridge/providers/microsoft.web/sites/k8bridgetest"
+                      }
+                    }
+                  ]
+                },
+                "visualization": {
+                  "type": "bar",
+                  "options": {
+                    "hideTileTitle": false,
+                    "multipleYAxes": {
+                      "base": {
+                        "id": "-1",
+                        "label": "",
+                        "columns": [],
+                        "yAxisMaximumValue": null,
+                        "yAxisMinimumValue": null,
+                        "yAxisScale": "linear",
+                        "horizontalLines": []
+                      },
+                      "additional": [],
+                      "showMultiplePanels": false
+                    },
+                    "hideLegend": false,
+                    "xColumnTitle": "",
+                    "xColumn": null,
+                    "yColumns": null,
+                    "seriesColumns": null,
+                    "xAxisScale": "linear",
+                    "verticalLine": "",
+                    "crossFilter": [],
+                    "crossFilterDisabled": false,
+                    "drillthrough": [],
+                    "drillthroughDisabled": false
+                  }
+                },
+                "subtitle": ""
+              }
+            ]
+          }
+        ]
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "ARG: Top 10 resource counts by type",
+                  "type": "QueryTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "arg",
+                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10"
+                  },
+                  "visualization": {
+                    "type": "table",
+                    "options": {
+                      "hideTileTitle": false,
+                      "table__enableRenderLinks": true,
+                      "table__renderLinksForColumns": [],
+                      "colorRules": [],
+                      "colorRulesDisabled": true,
+                      "colorStyle": "light",
+                      "crossFilter": [],
+                      "crossFilterDisabled": false,
+                      "drillthrough": [],
+                      "drillthroughDisabled": false
+                    }
+                  }
+                },
+                {
+                  "title": "Metrics tile",
+                  "type": "QueryTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 4,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "app-insights",
+                    "metrics": [
+                      {
+                        "namespace": "microsoft.web/sites",
+                        "name": "CpuTime",
+                        "aggregationType": "count",
+                        "resourceMetadata": {
+                          "id": "/subscriptions/1896ae80-f3b4-41c9-a53d-afc110fedfba/resourcegroups/k8bridge/providers/microsoft.web/sites/k8bridgetest"
+                        }
+                      }
+                    ]
+                  },
+                  "visualization": {
+                    "type": "bar",
+                    "options": {
+                      "hideTileTitle": false,
+                      "multipleYAxes": {
+                        "base": {
+                          "id": "-1",
+                          "label": "",
+                          "columns": [],
+                          "yAxisMaximumValue": null,
+                          "yAxisMinimumValue": null,
+                          "yAxisScale": "linear",
+                          "horizontalLines": []
+                        },
+                        "additional": [],
+                        "showMultiplePanels": false
+                      },
+                      "hideLegend": false,
+                      "xColumnTitle": "",
+                      "xColumn": null,
+                      "yColumns": null,
+                      "seriesColumns": null,
+                      "xAxisScale": "linear",
+                      "verticalLine": "",
+                      "crossFilter": [],
+                      "crossFilterDisabled": false,
+                      "drillthrough": [],
+                      "drillthroughDisabled": false
+                    }
+                  },
+                  "subtitle": ""
+                }
+              ]
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "ARG: Top 10 resource counts by type",
+                  "type": "QueryTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "arg",
+                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10"
+                  },
+                  "visualization": {
+                    "type": "table",
+                    "options": {
+                      "hideTileTitle": false,
+                      "table__enableRenderLinks": true,
+                      "table__renderLinksForColumns": [],
+                      "colorRules": [],
+                      "colorRulesDisabled": true,
+                      "colorStyle": "light",
+                      "crossFilter": [],
+                      "crossFilterDisabled": false,
+                      "drillthrough": [],
+                      "drillthroughDisabled": false
+                    }
+                  }
+                },
+                {
+                  "title": "Metrics tile",
+                  "type": "QueryTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 4,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "app-insights",
+                    "metrics": [
+                      {
+                        "namespace": "microsoft.web/sites",
+                        "name": "CpuTime",
+                        "aggregationType": "count",
+                        "resourceMetadata": {
+                          "id": "/subscriptions/1896ae80-f3b4-41c9-a53d-afc110fedfba/resourcegroups/k8bridge/providers/microsoft.web/sites/k8bridgetest"
+                        }
+                      }
+                    ]
+                  },
+                  "visualization": {
+                    "type": "bar",
+                    "options": {
+                      "hideTileTitle": false,
+                      "multipleYAxes": {
+                        "base": {
+                          "id": "-1",
+                          "label": "",
+                          "columns": [],
+                          "yAxisMaximumValue": null,
+                          "yAxisMinimumValue": null,
+                          "yAxisScale": "linear",
+                          "horizontalLines": []
+                        },
+                        "additional": [],
+                        "showMultiplePanels": false
+                      },
+                      "hideLegend": false,
+                      "xColumnTitle": "",
+                      "xColumn": null,
+                      "yColumns": null,
+                      "seriesColumns": null,
+                      "xAxisScale": "linear",
+                      "verticalLine": "",
+                      "crossFilter": [],
+                      "crossFilterDisabled": false,
+                      "drillthrough": [],
+                      "drillthroughDisabled": false
+                    }
+                  },
+                  "subtitle": ""
+                }
+              ]
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    }
+  }
+}

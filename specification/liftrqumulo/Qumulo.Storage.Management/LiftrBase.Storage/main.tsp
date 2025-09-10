@@ -20,8 +20,7 @@ namespace LiftrBase.Storage;
 
 @doc("Supported versions for LiftrBase.Storage resource model")
 enum Versions {
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Dependent on LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2_preview: "2024-02-01-preview",
@@ -71,7 +70,6 @@ model FileSystemResourceProperties {
   /**
    * Initial administrator password of the resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
   @extension("x-ms-secret", true)
   adminPassword: string;
 
@@ -79,6 +77,35 @@ model FileSystemResourceProperties {
    * Availability zone
    */
   availabilityZone?: string;
+}
+
+/**
+ * Common fields that are returned in the response for all Azure Resource Manager resources
+ */
+model Resource {
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
 }
 
 /**
@@ -93,7 +120,6 @@ model FileSystemResourceUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 
   /**
@@ -122,6 +148,10 @@ model FileSystemResourceUpdateProperties {
   delegatedSubnetId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
 model FileSystemResource
   is Azure.ResourceManager.TrackedResource<FileSystemResourceProperties> {
   /**

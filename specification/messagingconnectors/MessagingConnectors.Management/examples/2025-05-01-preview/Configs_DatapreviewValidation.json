@@ -1,0 +1,40 @@
+{
+  "title": "ConfigOperations DataPreviewValidation",
+  "operationId": "ConfigOperations_DataPreviewValidation",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "location": "Central US EUAP",
+    "body": {
+      "dataPreviewProperties": {
+        "dataSourceProperties": {
+          "connectorType": "AzureDataExplorerSource",
+          "clusterUrl": "hostName.AzureDataExplorer.com",
+          "database": "databaseName1",
+          "tableNames": "tableName1,tableName2",
+          "authentication": {
+            "authenticationMode": "OAuth",
+            "accessToken": "accessToken1"
+          }
+        },
+        "dataRange": {
+          "limit": 100,
+          "type": "Limit"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "result": "Success"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.MessagingConnectors/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "retry-after": "15"
+      }
+    }
+  }
+}

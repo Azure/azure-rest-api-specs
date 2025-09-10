@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "api-version": "2024-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/orchestrationPreferences/orchestrationPreference1",
+            "properties": {
+              "stageByProperty": "testStageByProperty",
+              "stageOrderType": "PlatformDefined",
+              "stageMapDefinition": {
+                "orderMap": {
+                  "1": {
+                    "propertyValues": [
+                      "resourceId1"
+                    ],
+                    "batchSize": 0,
+                    "delayStartInMin": 1,
+                    "passPercentage": 1,
+                    "resourceStatusConsideredAsPassed": [
+                      "0"
+                    ],
+                    "onCompletion": {
+                      "actionToTake": "Proceed",
+                      "postNotify": true
+                    },
+                    "onFailure": {
+                      "actionToTake": "Terminate",
+                      "postNotify": true
+                    }
+                  }
+                }
+              }
+            },
+            "name": "orchestrationPreference1",
+            "type": "OrchestrationPreference"
+          }
+        ]
+      }
+    }
+  }
+}

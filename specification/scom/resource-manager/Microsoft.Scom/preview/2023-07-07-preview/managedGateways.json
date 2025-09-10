@@ -116,6 +116,15 @@
           },
           {
             "$ref": "#/parameters/managedGatewayName"
+          },
+          {
+            "name": "ManagedGateway",
+            "description": "SCOM Managed Gateway Resource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedGateway"
+            }
           }
         ],
         "responses": {
@@ -129,21 +138,6 @@
             "description": "Managed gateway update successful.",
             "schema": {
               "$ref": "#/definitions/ManagedGateway"
-            }
-          },
-          "202": {
-            "description": "accepted operation",
-            "schema": {
-              "$ref": "#/definitions/ManagedGateway"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
             }
           },
           "default": {
@@ -285,6 +279,10 @@
           "description": "The domain name associated with the gateway to be monitored.",
           "type": "string"
         },
+        "onboardingStatus": {
+          "description": "The status of the gateway onboarding process that is being installed.",
+          "$ref": "commonTypes.json#/definitions/OnboardingStatusProperties"
+        },
         "managementServerEndpoint": {
           "description": "The management server endpoint to which the gateway is directed.",
           "type": "string",
@@ -308,6 +306,50 @@
         "installType": {
           "description": "Install type of gateway resource.",
           "type": "string",
+          "readOnly": true
+        },
+        "autoUpgrade": {
+          "description": "Update type of monitored resource.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "autoUpgrade",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "totalAlerts": {
+          "description": "total alerts on gateway resource.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "totalAgents": {
+          "description": "total agents on gateway resource.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "description": "operatingSystem of gateway resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineType": {
+          "description": "machineType of gateway resource.",
+          "type": "string",
+          "enum": [
+            "Azure Virtual Machine",
+            "Azure Arc Machine",
+            "On-premise Machine"
+          ],
+          "x-ms-enum": {
+            "name": "machineType",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "provisioningState": {

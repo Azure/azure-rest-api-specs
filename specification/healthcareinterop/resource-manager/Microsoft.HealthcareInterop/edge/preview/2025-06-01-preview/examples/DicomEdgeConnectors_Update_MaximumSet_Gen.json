@@ -1,0 +1,84 @@
+{
+  "title": "DicomEdgeConnectors_Update_MaximumSet",
+  "operationId": "DicomEdgeConnectors_Update",
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "D4C145EE-99EC-4345-84A5-69FA669F0C1B",
+    "resourceGroupName": "rgedge",
+    "dicomEdgeConnectorName": "dicom-edge-connector-01",
+    "properties": {
+      "properties": {
+        "receiver": {
+          "dicomListenerConfiguration": {
+            "port": 32100
+          },
+          "requirements": {
+            "cpu": "100m",
+            "memory": "512Mi",
+            "storage": "10Gi"
+          },
+          "storageEndpointConfiguration": {
+            "endpoint": "https://example.blob.core.windows.net",
+            "container": "dicom-edge-container",
+            "outputFolderFormat": "value"
+          }
+        }
+      },
+      "extendedLocation": {
+        "type": "customLocation",
+        "name": "custom-location-name"
+      },
+      "tags": {
+        "key8963": "value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "receiver": {
+            "dicomListenerConfiguration": {
+              "port": 32100
+            },
+            "requirements": {
+              "cpu": "100m",
+              "memory": "512Mi",
+              "storage": "10Gi"
+            },
+            "storageEndpointConfiguration": {
+              "endpoint": "https://example.blob.core.windows.net",
+              "container": "dicom-edge-container",
+              "outputFolderFormat": "value"
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "custom-location-name"
+        },
+        "tags": {
+          "key7752": "value"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/D4C145EE-99EC-4345-84A5-69FA669F0C1B/resourceGroups/rgedge/providers/Microsoft.HealthcareInterop/dicomEdgeConnectors/dicom-edge-connector-01",
+        "name": "dicom-edge-connector-01",
+        "type": "Microsoft.HealthcareInterop/dicomEdgeConnectors",
+        "systemData": {
+          "createdBy": "ewnaxqdvwtjjurgf",
+          "createdByType": "User",
+          "createdAt": "2025-05-24T00:09:04.260Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-05-24T00:09:04.260Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

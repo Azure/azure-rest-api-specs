@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -97,7 +96,7 @@ model AwsEc2VolumeProperties {
   snapshotId?: string;
 
   @doc("The tags to apply to the volume during creation.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The throughput to provision for a volume, with a maximum of 1,000 MiB/s. This parameter is valid only for ``gp3`` volumes. The default value is 125. Valid Range: Minimum value of 125. Maximum value of 1000.")

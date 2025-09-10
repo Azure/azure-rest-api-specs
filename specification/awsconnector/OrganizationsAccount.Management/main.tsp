@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -97,7 +96,7 @@ model AwsOrganizationsAccountProperties {
   status?: Status;
 
   @doc("A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 }
 
