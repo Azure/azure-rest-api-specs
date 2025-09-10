@@ -274,14 +274,14 @@ model EndpointPropertiesCustomHeadersItem {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@OpenAPI.extension("x-ms-azure-resource", true)
+// @OpenAPI.extension("x-ms-azure-resource", true)
 model ProxyResource extends Resource {}
 
 /**
  * The core properties of ARM resources
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@OpenAPI.extension("x-ms-azure-resource", true)
+// @OpenAPI.extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
@@ -575,7 +575,7 @@ model MonitorConfigExpectedStatusCodeRangesItem {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@OpenAPI.extension("x-ms-azure-resource", true)
+// @OpenAPI.extension("x-ms-azure-resource", true)
 model TrackedResource extends Resource {
   /**
    * Resource tags.
