@@ -281,27 +281,24 @@ model ProxyResource extends Resource {}
  * The core properties of ARM resources
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-// @OpenAPI.extension("x-ms-azure-resource", true)
+@OpenAPI.extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-mutability", #["read", "create", "update"])
   id?: string;
 
   /**
    * The name of the resource
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-mutability", #["read", "create", "update"])
   name?: string;
 
   /**
    * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-mutability", #["read", "create", "update"])
   type?: string;
 }
 

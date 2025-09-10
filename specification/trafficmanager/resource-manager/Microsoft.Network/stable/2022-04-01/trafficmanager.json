@@ -1500,7 +1500,8 @@
         {
           "$ref": "#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "ProfileListResult": {
       "type": "object",
@@ -1685,31 +1686,17 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
         },
         "name": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
+          "type": "string"
         },
         "type": {
           "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "TrackedResource": {
       "type": "object",
@@ -1783,7 +1770,8 @@
         {
           "$ref": "#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "TrafficManagerNameAvailability": {
       "type": "object",
