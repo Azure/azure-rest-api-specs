@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2019-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2019-04-01'
 input-file:
-  - Microsoft.VMwareCloudSimple/stable/2019-04-01/vmwarecloudsimple.json
+  - stable/2019-04-01/vmwarecloudsimple.json
 ```
 
 ---
