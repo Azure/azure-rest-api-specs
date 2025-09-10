@@ -21,9 +21,6 @@ import "./sas.tsp";
 // InMa
 import "./inma.tsp";
 
-// Client customizations
-import "./client.tsp";
-
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
