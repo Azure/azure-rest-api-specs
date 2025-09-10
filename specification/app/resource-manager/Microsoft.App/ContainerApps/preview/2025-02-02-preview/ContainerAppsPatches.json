@@ -1,0 +1,555 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2025-02-02-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/patches": {
+      "get": {
+        "tags": [
+          "ContainerAppsPatches"
+        ],
+        "operationId": "ContainerAppsPatches_ListByContainerApp",
+        "description": "List Container Apps Patch resources by ContainerApp.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. For example, $filter=properties/patchApplyStatus eq 'Succeeded'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContainerAppsPatches_ListByContainerApp_0": {
+            "$ref": "./examples/ContainerAppsPatches_ListByContainerApp.json"
+          }
+        },
+        "x-ms-odata": "#/definitions/ContainerAppsContainerAppsPatchResource"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/patches/{patchName}": {
+      "get": {
+        "tags": [
+          "ContainerAppsPatches"
+        ],
+        "operationId": "ContainerAppsPatches_Get",
+        "description": "Get details for specific Container Apps Patch by patch name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsPatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patch information retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsPatchResource"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsPatches_Get_0": {
+            "$ref": "./examples/ContainerAppsPatches_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ContainerAppsPatches"
+        ],
+        "operationId": "ContainerAppsPatches_Delete",
+        "description": "Delete specific Container Apps Patch by patch name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsPatchNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Patch deletion has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Patch does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerAppsPatches_Delete_0": {
+            "$ref": "./examples/ContainerAppsPatches_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/patches/{patchName}/skipConfig": {
+      "post": {
+        "tags": [
+          "ContainerAppsPatches"
+        ],
+        "operationId": "ContainerAppsPatches_SkipConfigure",
+        "description": "Configure the Container Apps Patch skip option by patch name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsPatchNameParameter"
+          },
+          {
+            "name": "patchSkipConfig",
+            "in": "body",
+            "required": true,
+            "description": "Configure patcher to skip a patch or not.",
+            "schema": {
+              "$ref": "#/definitions/PatchSkipConfig"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Updating patch skipping detail. Updating status tracked by location header.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerAppsPatches_Skip_Configure_0": {
+            "$ref": "./examples/ContainerAppsPatches_Skip_Configure.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/patches/{patchName}/apply": {
+      "post": {
+        "tags": [
+          "ContainerAppsPatches"
+        ],
+        "operationId": "ContainerAppsPatches_Apply",
+        "description": "Apply a Container Apps Patch resource with patch name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerAppsPatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patching operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsPatchResource"
+            }
+          },
+          "202": {
+            "description": "Patching operation has been started.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerAppsPatches_Apply_0": {
+            "$ref": "./examples/ContainerAppsPatches_Apply.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerAppsPatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchProperties",
+          "description": "Properties that describes current states of the patch resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Container App Patch",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PatchApplyStatus": {
+      "type": "string",
+      "description": "The status of the patch once it has been provisioned",
+      "enum": [
+        "NotStarted",
+        "RebaseInProgress",
+        "CreatingRevision",
+        "Succeeded",
+        "Canceled",
+        "RebaseFailed",
+        "RevisionCreationFailed",
+        "ImagePushPullFailed",
+        "ManuallySkipped"
+      ],
+      "x-ms-enum": {
+        "name": "PatchApplyStatus",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "DetectionStatus": {
+      "type": "string",
+      "description": "The status of the patch detection.",
+      "enum": [
+        "Succeeded",
+        "RegistryLoginFailed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DetectionStatus",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PatchDetails": {
+      "description": "The detailed info of patch operation performing when applying a patch.",
+      "type": "object",
+      "required": [
+        "targetContainerName",
+        "targetImage",
+        "lastDetectionTime",
+        "detectionStatus"
+      ],
+      "properties": {
+        "targetContainerName": {
+          "type": "string",
+          "description": "The name of the target container for the patch.",
+          "readOnly": true
+        },
+        "targetImage": {
+          "type": "string",
+          "description": "The name of the target image for the patch.",
+          "readOnly": true
+        },
+        "lastDetectionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp that describes the latest detection was done.",
+          "readOnly": true
+        },
+        "detectionStatus": {
+          "$ref": "#/definitions/DetectionStatus",
+          "description": "The status of the patch detection.",
+          "readOnly": true
+        },
+        "newImageName": {
+          "type": "string",
+          "description": "The name of the new image created by the patch.",
+          "readOnly": true
+        },
+        "newLayer": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The details of the new layer for the target image."
+            },
+            "frameworkAndVersion": {
+              "type": "string",
+              "description": "The framework and its version in the new run image for the target image."
+            },
+            "osAndVersion": {
+              "type": "string",
+              "description": "The OS name and its version in the new run image for the target image."
+            }
+          },
+          "description": "New layer update details in the target image.",
+          "readOnly": true
+        },
+        "oldLayer": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The details of the old layer for the target image."
+            },
+            "frameworkAndVersion": {
+              "type": "string",
+              "description": "The framework and its version in the old run image for the target image."
+            },
+            "osAndVersion": {
+              "type": "string",
+              "description": "The OS name and its version in the old run image for the target image."
+            }
+          },
+          "description": "The old layer details in the target image.",
+          "readOnly": true
+        },
+        "patchType": {
+          "type": "string",
+          "description": "The type for the patch.",
+          "enum": [
+            "FrameworkSecurity",
+            "OSSecurity",
+            "FrameworkAndOSSecurity",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "PatchType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "PatchProperties": {
+      "description": "Top level properties that describes current states of the patch resource",
+      "type": "object",
+      "properties": {
+        "targetEnvironmentId": {
+          "format": "arm-id",
+          "type": "string",
+          "description": "The Azure resource id of the target environment for the patch."
+        },
+        "targetContainerAppId": {
+          "format": "arm-id",
+          "type": "string",
+          "description": "The Azure resource id of the target container app for the patch."
+        },
+        "targetRevisionId": {
+          "format": "arm-id",
+          "type": "string",
+          "description": "The Azure resource id of the target revision for the patch."
+        },
+        "patchApplyStatus": {
+          "$ref": "#/definitions/PatchApplyStatus",
+          "description": "The status of the patch operation.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp that describes when the patch object was created.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp that describes when the patch object was last updated.",
+          "readOnly": true
+        },
+        "patchDetails": {
+          "description": "Detailed info describes the patch operation for the target container app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchDetails"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "PatchCollection": {
+      "description": "Container App patch collection",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of patch resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsPatchResource"
+          }
+        },
+        "nextLink": {
+          "description": "the link to the next page of items",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "PatchSkipConfig": {
+      "description": "The configuration for patcher to skip a patch or not.",
+      "type": "object",
+      "properties": {
+        "skip": {
+          "type": "boolean",
+          "description": "The flag to indicate whether to skip the patch or not."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ContainerAppsPatchNameParameter": {
+      "name": "patchName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the patch",
+      "minLength": 2,
+      "maxLength": 64,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "ContainerAppsNameParameter": {
+      "name": "containerAppName",
+      "in": "path",
+      "description": "Name of the Container App the Patch is associated.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
