@@ -14,6 +14,7 @@ interface Operations {
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")
+  @list
   @segment("operations")
   @armResourceRead(Azure.ResourceManager.Foundations.OperationListResult)
   @OpenAPI.extension(

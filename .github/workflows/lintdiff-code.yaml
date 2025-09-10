@@ -42,7 +42,7 @@ jobs:
             const { join } = await import('path');
 
             // TODO: Logger
-            const changedFiles = await getChangedFiles({ cwd: 'after'});
+            const changedFiles = await getChangedFiles({ cwd: 'after', paths: ['specification'] });
             console.log('Changed files:', changedFiles);
 
             const filePath = join(process.cwd(), 'changed-files.txt');

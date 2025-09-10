@@ -1,9 +1,9 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { applyRules } from "../../src/utils/apply-rules.js";
-import { OadMessage } from "../../src/types/oad-types.js";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { BreakingChangeLabelsToBeAdded } from "../../src/command-helpers.js";
 import { logMessage, logWarning } from "../../src/log.js";
 import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.js";
+import { OadMessage } from "../../src/types/oad-types.js";
+import { applyRules } from "../../src/utils/apply-rules.js";
 
 // Mock the command-helpers module
 vi.mock("../../src/command-helpers.js", () => ({

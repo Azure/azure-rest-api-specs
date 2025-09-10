@@ -53,6 +53,20 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  @doc("Refreshes the goal resources under a goal assignment. This operation scans for new resources under the scope of the assignment.")
+  @route(ServiceGroupRoute)
+  @TypeSpec.Rest.action("refreshGoalResources")
+  @post
+  refreshGoalResources is ArmResourceActionAsync<
+    GoalAssignment,
+    void,
+    RefreshGoalResourcesResponse,
+    ServiceGroupParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
   @route(ServiceGroupRoute)
   delete is ArmResourceDeleteWithoutOkAsync<
     GoalAssignment,
@@ -72,7 +86,7 @@ interface GoalTemplates {
   get is ArmResourceRead<GoalTemplate, ServiceGroupParameters>;
 
   @route(ServiceGroupRoute)
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GoalTemplate,
     ServiceGroupParameters
   >;
@@ -88,7 +102,10 @@ interface GoalTemplates {
   >;
 
   @route(ServiceGroupRoute)
-  delete is ArmResourceDeleteSync<GoalTemplate, ServiceGroupParameters>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    GoalTemplate,
+    ServiceGroupParameters
+  >;
 
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<GoalTemplate, ServiceGroupTenantParameters>;

@@ -34,15 +34,6 @@ union MySqlDecimalHandlingMode {
   string,
 }
 
-@doc("SnapshotSelectStatementOverride Item")
-model MySqlSnapshotSelectStatementOverrideItem {
-  @doc("Table name")
-  tableName: string;
-
-  @doc("select statement")
-  selectStatement: string;
-}
-
 @doc("Enum SkippedOperationsMode for mysql")
 union MySqlSkippedOperationsMode {
   @doc("The InsertOrCreate mode.")
@@ -75,6 +66,15 @@ union MySqlSnapshotMode {
   NoData: "NoData",
 
   string,
+}
+
+@doc("SnapshotSelectStatementOverride Item")
+model MySqlSnapshotSelectStatementOverrideItem {
+  @doc("Table name")
+  tableName: string;
+
+  @doc("select statement")
+  selectStatement: string;
 }
 
 @doc("Configuration for MySqlSourceConnector")

@@ -32,6 +32,19 @@ interface DiscoveryHubs {
 
   @summary("Lists all DiscoveryHub resources in the specified subscription.")
   listBySubscription is ArmListBySubscription<DiscoveryHub>;
+
+  @summary("Returns a SAS uri that can be used to upload the import applications csv.")
+  fetchSasUri is ArmResourceActionSync<DiscoveryHub, void, FetchSasUriResult>;
+
+  @summary("Imports applications from a CSV file into the DiscoveryHub resource.")
+  startImportApplications is ArmResourceActionAsync<
+    DiscoveryHub,
+    ImportApplicationsRequest,
+    ImportApplicationsOperationStatusResult,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ImportApplicationsOperationStatusResult> &
+      ArmLroLocationHeader<FinalResult = ImportApplicationsOperationStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @armResourceOperations

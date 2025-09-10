@@ -46,6 +46,7 @@ interface SapLandscapeMonitor {
   /**
    * Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.
    */
+  @list
   listByMonitor is ArmResourceListByParent<SapLandscapeMonitorResource>;
 }
 

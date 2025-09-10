@@ -40,4 +40,9 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_09_01_preview: "2024-09-01-preview",
+
+  @doc("Azure Portal Services Copilot Settings Management API version 2025-08-01-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_08_01_preview: "2025-08-01-preview",
 }

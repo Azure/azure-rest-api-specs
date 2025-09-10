@@ -277,48 +277,6 @@
     }
   },
   "definitions": {
-    "AggregationType": {
-      "type": "string",
-      "description": "Defines the available aggregation types.",
-      "enum": [
-        "Average",
-        "Min",
-        "Max",
-        "Sum",
-        "Count"
-      ],
-      "x-ms-enum": {
-        "name": "AggregationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Average",
-            "value": "Average",
-            "description": "Average value."
-          },
-          {
-            "name": "Min",
-            "value": "Min",
-            "description": "Minimum value."
-          },
-          {
-            "name": "Max",
-            "value": "Max",
-            "description": "Maximum value."
-          },
-          {
-            "name": "Sum",
-            "value": "Sum",
-            "description": "Summation."
-          },
-          {
-            "name": "Count",
-            "value": "Count",
-            "description": "Count of occurrences."
-          }
-        ]
-      }
-    },
     "AmwAccount": {
       "type": "object",
       "description": "Represents an Azure Monitor Workspace (AMW) account used for emitting metrics.",
@@ -368,6 +326,53 @@
       },
       "readOnly": true
     },
+    "Baseline": {
+      "type": "object",
+      "description": "Defines the target parameters for a Slo baseline.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The user-defined or Azure-defined target value used for comparison against the SLI value.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "evaluationPeriodDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time frame (in days) used for SLI evaluation.",
+          "minimum": 1,
+          "maximum": 90
+        },
+        "evaluationCalculationType": {
+          "$ref": "#/definitions/EvaluationCalculationType",
+          "description": "Specifies how evaluation is calculated, either based on calendar days or a rolling window."
+        },
+        "enableAlert": {
+          "type": "boolean",
+          "description": "A flag to determine whether alert is enabled."
+        }
+      },
+      "required": [
+        "value",
+        "evaluationPeriodDays",
+        "evaluationCalculationType",
+        "enableAlert"
+      ]
+    },
+    "BaselineProperties": {
+      "type": "object",
+      "description": "Defines the properties of a baseline.",
+      "properties": {
+        "baseline": {
+          "$ref": "#/definitions/Baseline",
+          "description": "Defines the baseline target, which is compared against the SLI value to determine compliance."
+        }
+      },
+      "required": [
+        "baseline"
+      ]
+    },
     "Category": {
       "type": "string",
       "description": "Defines the category of an SLI",
@@ -388,30 +393,6 @@
             "name": "Latency",
             "value": "Latency",
             "description": "Indicates latency-related metrics."
-          }
-        ]
-      }
-    },
-    "ComplianceCalculationType": {
-      "type": "string",
-      "description": "Specifies the method for compliance calculation.",
-      "enum": [
-        "CalendarDays",
-        "RollingDays"
-      ],
-      "x-ms-enum": {
-        "name": "ComplianceCalculationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CalendarDays",
-            "value": "CalendarDays",
-            "description": "Calculates compliance based on a fixed calendar period."
-          },
-          {
-            "name": "RollingDays",
-            "value": "RollingDays",
-            "description": "Calculates compliance using a rolling time window."
           }
         ]
       }
@@ -450,82 +431,106 @@
       "type": "string",
       "description": "Defines operators used in filter conditions.",
       "enum": [
-        "eq",
-        "ne",
-        "lt",
-        "lte",
-        "gt",
-        "gte",
+        "==",
+        "!=",
+        "<",
+        "<=",
+        ">",
+        ">=",
         "@in",
-        "notin",
+        "!in",
         "startswith",
-        "notstartswith",
+        "!startswith",
         "contains",
-        "notcontains"
+        "!contains"
       ],
       "x-ms-enum": {
         "name": "ConditionOperator",
         "modelAsString": true,
         "values": [
           {
-            "name": "==",
-            "value": "eq",
+            "name": "Equal",
+            "value": "==",
             "description": "Equal to."
           },
           {
-            "name": "!=",
-            "value": "ne",
+            "name": "NotEqual",
+            "value": "!=",
             "description": "Not equal to."
           },
           {
-            "name": "<",
-            "value": "lt",
+            "name": "LessThan",
+            "value": "<",
             "description": "Less than."
           },
           {
-            "name": "<=",
-            "value": "lte",
+            "name": "LessThanOrEqual",
+            "value": "<=",
             "description": "Less than or equal to."
           },
           {
-            "name": ">",
-            "value": "gt",
+            "name": "GreaterThan",
+            "value": ">",
             "description": "Greater than."
           },
           {
-            "name": ">=",
-            "value": "gte",
+            "name": "GreaterThanOrEqual",
+            "value": ">=",
             "description": "Greater than or equal to."
           },
           {
-            "name": "in",
+            "name": "In",
             "value": "@in",
             "description": "In operator."
           },
           {
-            "name": "!in",
-            "value": "notin",
+            "name": "NotIn",
+            "value": "!in",
             "description": "Not in."
           },
           {
-            "name": "startswith",
+            "name": "StartsWith",
             "value": "startswith",
             "description": "Starts with."
           },
           {
-            "name": "!startswith",
-            "value": "notstartswith",
+            "name": "NotStartsWith",
+            "value": "!startswith",
             "description": "Does not start with."
           },
           {
-            "name": "contains",
+            "name": "Contains",
             "value": "contains",
             "description": "Contains the value."
           },
           {
-            "name": "!contains",
-            "value": "notcontains",
+            "name": "NotContains",
+            "value": "!contains",
             "description": "Does not contain the value."
+          }
+        ]
+      }
+    },
+    "EvaluationCalculationType": {
+      "type": "string",
+      "description": "Specifies the method for evaluation calculation.",
+      "enum": [
+        "CalendarDays",
+        "RollingDays"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationCalculationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CalendarDays",
+            "value": "CalendarDays",
+            "description": "Calculates evaluation based on a fixed calendar period."
+          },
+          {
+            "name": "RollingDays",
+            "value": "RollingDays",
+            "description": "Calculates evaluation using a rolling time window."
           }
         ]
       }
@@ -568,8 +573,7 @@
         }
       },
       "required": [
-        "state",
-        "message"
+        "state"
       ]
     },
     "Metric": {
@@ -878,9 +882,19 @@
             "metricName"
           ]
         },
-        "sloProperties": {
-          "$ref": "#/definitions/SloProperties",
-          "description": "Defines the SLO properties associated with the SLI."
+        "baselineProperties": {
+          "$ref": "#/definitions/BaselineProperties",
+          "description": "Defines the SLO baseline associated with the SLI."
+        },
+        "streamingRuleId": {
+          "type": "string",
+          "description": "The streaming rule Id associated with the Sli resource.",
+          "readOnly": true
+        },
+        "streamingRuleLastUpdatedTimestamp": {
+          "type": "string",
+          "description": "The streaming rule last updated timestamp associated with the Sli resource.",
+          "readOnly": true
         },
         "sliProperties": {
           "$ref": "#/definitions/SliProperties",
@@ -894,55 +908,10 @@
         "executionState",
         "destinationAmwAccounts",
         "destinationMetrics",
-        "sloProperties",
+        "baselineProperties",
+        "streamingRuleId",
+        "streamingRuleLastUpdatedTimestamp",
         "sliProperties"
-      ]
-    },
-    "SloProperties": {
-      "type": "object",
-      "description": "Defines the properties of an SLO.",
-      "properties": {
-        "target": {
-          "$ref": "#/definitions/SloTarget",
-          "description": "Defines the SLO target, which is compared against the SLI value to determine compliance."
-        }
-      },
-      "required": [
-        "target"
-      ]
-    },
-    "SloTarget": {
-      "type": "object",
-      "description": "Defines the target parameters for an SLO.",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "float",
-          "description": "The user-defined or Azure-defined target value used for comparison against the SLI value.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "compliancePeriodDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The time frame (in days) used for SLI evaluation.",
-          "minimum": 1,
-          "maximum": 90
-        },
-        "complianceCalculationType": {
-          "$ref": "#/definitions/ComplianceCalculationType",
-          "description": "Specifies how compliance is calculated, either based on calendar days or a rolling window."
-        },
-        "comparator": {
-          "$ref": "#/definitions/TargetComparator",
-          "description": "Defines the operator used to compare the SLI value against the target."
-        }
-      },
-      "required": [
-        "value",
-        "compliancePeriodDays",
-        "complianceCalculationType",
-        "comparator"
       ]
     },
     "SpatialAggregation": {
@@ -950,7 +919,7 @@
       "description": "Represents the spatial aggregation model.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AggregationType",
+          "$ref": "#/definitions/SpatialAggregationType",
           "description": "Type of spatial aggregation."
         },
         "dimensions": {
@@ -966,38 +935,44 @@
         "dimensions"
       ]
     },
-    "TargetComparator": {
+    "SpatialAggregationType": {
       "type": "string",
-      "description": "Defines comparison operators for evaluating an SLI against an SLO target.",
+      "description": "Defines the available aggregation types.",
       "enum": [
-        "lt",
-        "gt",
-        "lte",
-        "gte"
+        "Average",
+        "Min",
+        "Max",
+        "Sum",
+        "Count"
       ],
       "x-ms-enum": {
-        "name": "TargetComparator",
+        "name": "SpatialAggregationType",
         "modelAsString": true,
         "values": [
           {
-            "name": "<",
-            "value": "lt",
-            "description": "Less than the target value."
+            "name": "Average",
+            "value": "Average",
+            "description": "Average value."
           },
           {
-            "name": ">",
-            "value": "gt",
-            "description": "Greater than the target value."
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
           },
           {
-            "name": "<=",
-            "value": "lte",
-            "description": "Less than or equal to the target value."
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
           },
           {
-            "name": ">=",
-            "value": "gte",
-            "description": "Greater than or equal to the target value."
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Summation."
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count of occurrences."
           }
         ]
       }
@@ -1007,7 +982,7 @@
       "description": "Represents temporal aggregation settings.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AggregationType",
+          "$ref": "#/definitions/TemporalAggregationType",
           "description": "Type of temporal aggregation."
         },
         "windowSizeMinutes": {
@@ -1020,6 +995,72 @@
         "type",
         "windowSizeMinutes"
       ]
+    },
+    "TemporalAggregationType": {
+      "type": "string",
+      "description": "Defines the available aggregation types.",
+      "enum": [
+        "Average",
+        "Min",
+        "Max",
+        "Sum",
+        "Rate",
+        "IRate",
+        "Delta",
+        "IDelta",
+        "Increase"
+      ],
+      "x-ms-enum": {
+        "name": "TemporalAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average value."
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Summation."
+          },
+          {
+            "name": "Rate",
+            "value": "Rate",
+            "description": "Rate over time."
+          },
+          {
+            "name": "IRate",
+            "value": "IRate",
+            "description": "Instance rate."
+          },
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta over time."
+          },
+          {
+            "name": "IDelta",
+            "value": "IDelta",
+            "description": "Instance delta."
+          },
+          {
+            "name": "Increase",
+            "value": "Increase",
+            "description": "Increase over time."
+          }
+        ]
+      }
     },
     "WindowUptimeCriteria": {
       "type": "object",
@@ -1045,33 +1086,33 @@
       "type": "string",
       "description": "Defines comparison operators for window uptime criteria.",
       "enum": [
-        "lt",
-        "gt",
-        "lte",
-        "gte"
+        "<",
+        ">",
+        "<=",
+        ">="
       ],
       "x-ms-enum": {
         "name": "WindowUptimeCriteriaComparator",
         "modelAsString": true,
         "values": [
           {
-            "name": "<",
-            "value": "lt",
+            "name": "LessThan",
+            "value": "<",
             "description": "Less than the target value."
           },
           {
-            "name": ">",
-            "value": "gt",
+            "name": "GreaterThan",
+            "value": ">",
             "description": "Greater than the target value."
           },
           {
-            "name": "<=",
-            "value": "lte",
+            "name": "LessThanOrEqual",
+            "value": "<=",
             "description": "Less than or equal to the target value."
           },
           {
-            "name": ">=",
-            "value": "gte",
+            "name": "GreaterThanOrEqual",
+            "value": ">=",
             "description": "Greater than or equal to the target value."
           }
         ]

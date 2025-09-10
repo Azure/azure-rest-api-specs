@@ -58,10 +58,14 @@ jobs:
           # Convert "add/remove" to "true/false"
           value: "${{ fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' }}"
 
-      - if: |
-          ((fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' ||
-          fromJson(steps.get-label-and-action.outputs.result).labelAction == 'remove') &&
-          fromJson(steps.get-label-and-action.outputs.result).issueNumber > 0)
+      - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).headSha }}
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "head-sha"
+          value: "${{ fromJson(steps.get-label-and-action.outputs.result).headSha }}"
+
+      - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).issueNumber > 0 }}
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:

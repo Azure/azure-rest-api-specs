@@ -27,10 +27,10 @@ model GoalResourceProperties {
   highAvailabilityAttestationStatus: AttestationState;
 
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
-  disasterRecoveryGoalParticipation: ExclusionState;
+  disasterRecoveryGoalParticipation?: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation.")
-  disasterRecoveryAttestationStatus: AttestationState;
+  disasterRecoveryAttestationStatus?: AttestationState;
 
   @doc("Reason for exclusion from high availability goals.")
   @visibility(Lifecycle.Read)
@@ -39,6 +39,11 @@ model GoalResourceProperties {
   @doc("Reason for exclusion from disaster recovery goals.")
   @visibility(Lifecycle.Read)
   exclusionReasonForDisasterRecoveryGoals?: ExclusionReason;
+
+  @doc("List of service groups of which this resource is memberof.")
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["serviceGroupId"])
+  serviceGroupMemberships?: ServiceGroupMembership[];
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
@@ -67,4 +72,13 @@ model GoalResource is ProxyResource<GoalResourceProperties> {
   @segment("goalResources")
   @path
   name: string;
+}
+
+@doc("Response model for refresh goal resources.")
+model RefreshGoalResourcesResponse {
+  @doc("Total count of resources under the goal assignment after refresh.")
+  resourceCount?: int32;
+
+  @doc("Time when the refresh operation was last performed.")
+  lastRefreshTime?: utcDateTime;
 }

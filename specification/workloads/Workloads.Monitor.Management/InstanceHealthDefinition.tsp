@@ -53,8 +53,10 @@ interface InstanceHealthDefinitions {
   delete is ArmResourceDeleteWithoutOkAsync<InstanceHealthDefinition>;
 
   /** List instance health definitions by resource group */
+  @list
   listByResourceGroup is ArmResourceListByParent<InstanceHealthDefinition>;
 
   /** List instance health definitions by subscription */
+  @list
   listBySubscription is ArmListBySubscription<InstanceHealthDefinition>;
 }

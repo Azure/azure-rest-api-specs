@@ -18,6 +18,7 @@ enum Versions {
     Azure.ResourceManager.Versions.v1_0_Preview_1
   )
   @doc("Version 2025-03-01-preview")
+  @previewVersion
   v2025_03_01_preview: "2025-03-01-preview",
 }
 

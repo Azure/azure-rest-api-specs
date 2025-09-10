@@ -1,3 +1,5 @@
+import { addToSummary, logMessage, logWarning } from "./log.js";
+import { ApiVersionLifecycleStage, Context } from "./types/breaking-change.js";
 import {
   BrChMsgRecord,
   getKey,
@@ -5,14 +7,12 @@ import {
   RawMessageRecord,
   ResultMessageRecord,
 } from "./types/message.js";
-import { ApiVersionLifecycleStage, Context } from "./types/breaking-change.js";
 import {
   BreakingChangeMdReport,
   createBreakingChangeMdReport,
   reportToString,
   sortBreakingChangeMdReports,
 } from "./utils/markdown-report.js";
-import { addToSummary, logMessage, logWarning } from "./log.js";
 
 // Per the GitHub documentation [1], the length limit of a check pane is 65535 characters.
 // While not immediately obvious, it looks like the 65535 limit applies to the total length of the text and summary,

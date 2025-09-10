@@ -106,6 +106,8 @@ interface StandbyVirtualMachinePools {
       StandbyVirtualMachinePoolResourceProperties
     >
   >;
+  @list
   listByResourceGroup is ArmResourceListByParent<StandbyVirtualMachinePoolResource>;
+  @list
   listBySubscription is ArmListBySubscription<StandbyVirtualMachinePoolResource>;
 }

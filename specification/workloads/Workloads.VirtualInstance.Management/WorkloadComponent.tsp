@@ -50,6 +50,7 @@ interface WorkloadComponents {
   /**
    * List all the workload components corresponding to the Virtual Instance resource.
    */
+  @list
   list is ArmResourceListByParent<WorkloadComponent>;
 }
 

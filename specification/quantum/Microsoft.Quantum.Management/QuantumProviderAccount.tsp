@@ -57,10 +57,11 @@ model ProviderAccountProperties {
   companyName: string;
 
   /** List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount. */
-  allowedSubscriptions?: SubscriptionId[];
+  subscriptions?: ProviderAccountSubscription[];
 
-  /** List of Targets available in this ProviderAccount. */
-  targets?: ProviderAccountTarget[];
+  /** List of Queues available in this ProviderAccount. */
+  @visibility(Lifecycle.Read)
+  queues?: ProviderAccountQueue[];
 
   /** Managed On Behalf Of configuration. */
   @visibility(Lifecycle.Read)
@@ -72,6 +73,16 @@ model ProviderAccountProperties {
 @maxLength(36)
 @pattern("^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$")
 scalar SubscriptionId extends string;
+
+/** A subscription that is allowed to access resources from a ProviderAccount. */
+model ProviderAccountSubscription {
+  /** The Azure subscription ID. */
+  id: SubscriptionId;
+
+  /** The display name of the Azure subscription. */
+  @maxLength(50)
+  name?: string = "";
+}
 
 /** A Target of a ProviderAccount, in which Workspace Jobs can be targeted at for execution. */
 @added(Versions.v2025_02_15_preview)
@@ -99,6 +110,23 @@ model ProviderAccountTarget {
   /** Description of the Target. */
   @maxLength(240)
   description?: string = "";
+}
+
+/** A Queue associated with a ProviderAccount, in which jobs are queued in for execution. */
+model ProviderAccountQueue {
+  /** The unique ID of the Queue. */
+  @minLength(2)
+  @maxLength(50)
+  @pattern("^([a-z0-9]+(-[a-z0-9]+)*)$")
+  id: string;
+
+  /** The display name of the Queue. */
+  @minLength(2)
+  @maxLength(50)
+  name: string;
+
+  /** The targets associated with the Queue. */
+  targets: ProviderAccountTarget[];
 }
 
 /** The provisioning state of a resource. */
@@ -136,7 +164,7 @@ interface ProviderAccounts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<QuantumProviderAccount>;
 
   /**
-   * Updates an existing ProviderAccount's tags.
+   * Updates an existing ProviderAccount's properties.
    */
   @added(Versions.v2025_02_15_preview)
   update is ArmResourcePatchSync<

@@ -64,11 +64,13 @@ interface SAPDiscoverySites {
   /**
    * Gets all SAP Migration discovery site resources in a Resource Group.
    */
+  @list
   listByResourceGroup is ArmResourceListByParent<SAPDiscoverySite>;
 
   /**
    * Gets all SAP Migration discovery site resources in a Subscription.
    */
+  @list
   listBySubscription is ArmListBySubscription<SAPDiscoverySite>;
 
   /**

@@ -12,20 +12,14 @@
         "displayName": "Contoso Provider Account 1A",
         "description": "Contoso Provider Account 1A description",
         "companyName": "Contoso A",
-        "allowedSubscriptions": [
-          "00000000-1111-2222-3333-444444444444",
-          "00000000-1111-2222-3333-666666666666"
-        ],
-        "targets": [
+        "subscriptions": [
           {
-            "id": "provider1a.target1",
-            "name": "Contoso Provider 1A - Target 1",
-            "description": "Contoso Provider 1A - Target 1 description"
+            "id": "00000000-1111-2222-3333-444444444444",
+            "name": "Fabrikam Subscription 1"
           },
           {
-            "id": "provider1a.target2",
-            "name": "Contoso Provider 1A - Target 2",
-            "description": "Contoso Provider 1A - Target 2 description"
+            "id": "00000000-1111-2222-3333-666666666666",
+            "name": "Fabrikam Subscription 2"
           }
         ]
       },
@@ -47,20 +41,38 @@
           "displayName": "Contoso Provider Account 1A",
           "description": "Contoso Provider Account 1A description",
           "companyName": "Contoso A",
-          "allowedSubscriptions": [
-            "00000000-1111-2222-3333-444444444444",
-            "00000000-1111-2222-3333-666666666666"
-          ],
-          "targets": [
+          "subscriptions": [
             {
-              "id": "provider1a.target1",
-              "name": "Contoso Provider 1A - Target 1",
-              "description": "Contoso Provider 1A - Target 1 description"
+              "id": "00000000-1111-2222-3333-444444444444",
+              "name": "Fabrikam Subscription 1"
             },
             {
-              "id": "provider1a.target2",
-              "name": "Contoso Provider 1A - Target 2",
-              "description": "Contoso Provider 1A - Target 2 description"
+              "id": "00000000-1111-2222-3333-666666666666",
+              "name": "Fabrikam Subscription 2"
+            }
+          ],
+          "queues": [
+            {
+              "id": "contoso-queue-1",
+              "name": "Contoso Queue 1",
+              "targets": [
+                {
+                  "id": "provider1a.target1",
+                  "name": "Contoso Provider 1A - Target 1",
+                  "description": "Contoso Provider 1A - Target 1 description"
+                }
+              ]
+            },
+            {
+              "id": "contoso-queue-2",
+              "name": "Contoso Queue 2",
+              "targets": [
+                {
+                  "id": "provider1a.target2",
+                  "name": "Contoso Provider 1A - Target 2",
+                  "description": "Contoso Provider 1A - Target 2 description"
+                }
+              ]
             }
           ],
           "managedOnBehalfOfConfiguration": {

@@ -1,0 +1,59 @@
+{
+  "title": "ConfigOperations ConnectorValidation",
+  "operationId": "ConfigOperations_ConnectorValidation",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "location": "Central US EUAP",
+    "body": {
+      "connectorProperties": {
+        "direction": "Source",
+        "converterConfig": {
+          "type": "JsonConverter"
+        },
+        "eventHubConfig": {
+          "namespaceHostName": "ns",
+          "eventHubName": "eh",
+          "authentication": {
+            "authenticationMode": "ConnectionString",
+            "connectionString": "connection1"
+          }
+        },
+        "maxTasks": 1,
+        "dataSourceProperties": {
+          "connectorType": "AzureDataExplorerSource",
+          "clusterUrl": "hostName.AzureDataExplorer.com",
+          "database": "databaseName1",
+          "tableNames": "tableName1,tableName2",
+          "authentication": {
+            "authenticationMode": "OAuth",
+            "accessToken": "accessToken1"
+          }
+        },
+        "scalingProperties": {
+          "scalingType": "StaticScaling",
+          "parallelism": 1
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "result": "Failed",
+        "errors": [
+          {
+            "message": "error1",
+            "code": "code1"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.MessagingConnectors/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "retry-after": "15"
+      }
+    }
+  }
+}

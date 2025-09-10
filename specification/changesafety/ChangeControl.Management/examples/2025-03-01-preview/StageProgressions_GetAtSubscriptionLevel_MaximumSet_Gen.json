@@ -1,0 +1,42 @@
+{
+  "title": "StageProgressions_GetAtSubscriptionLevel_MaximumSet",
+  "operationId": "StageProgressions_GetAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "931CE6A1-5E82-43FA-B45F-78A272D41771",
+    "changeStateName": "subscriptionGovernanceChangeState",
+    "stageProgressionName": "policyEnforcementProgression"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stageReference": "subscription-policy-enforcement",
+          "state": "InProgress",
+          "sequence": 1,
+          "parameterValues": {
+            "policyScope": "subscription",
+            "complianceLevel": "enterprise",
+            "auditMode": "false",
+            "enforcementRegions": "all",
+            "exemptionCount": 5,
+            "inheritanceEnabled": "true"
+          },
+          "comments": "Subscription-level policy enforcement stage is in progress with comprehensive governance policies being applied across all resource groups and resources within the subscription scope."
+        },
+        "id": "/subscriptions/931CE6A1-5E82-43FA-B45F-78A272D41771/providers/Microsoft.ChangeSafety/changeStates/subscriptionGovernanceChangeState/stageProgressions/policyEnforcementProgression",
+        "name": "policyEnforcementProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+        "systemData": {
+          "createdBy": "governance.admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-03-28T07:45:18.234Z",
+          "lastModifiedBy": "compliance.officer@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-03-28T09:15:42.567Z"
+        }
+      }
+    }
+  }
+}

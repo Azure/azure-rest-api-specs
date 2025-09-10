@@ -58,5 +58,6 @@ interface ServerInstances {
    * Lists the Server Instance resources for the given SAP Instance resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Supporting existing name."
+  @list
   ListBySapInstance is ArmResourceListByParent<ServerInstance>;
 }

@@ -2199,6 +2199,9 @@
         "x-ms-examples": {
           "GoalAssignments_List_MaximumSet": {
             "$ref": "./examples/GoalAssignments_List_MaximumSet_Gen.json"
+          },
+          "GoalAssignments_List_MinimumSet": {
+            "$ref": "./examples/GoalAssignments_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2318,6 +2321,9 @@
         "x-ms-examples": {
           "GoalAssignments_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/GoalAssignments_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "GoalAssignments_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/GoalAssignments_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2561,8 +2567,77 @@
         "x-ms-examples": {
           "GoalResources_Get_MaximumSet": {
             "$ref": "./examples/GoalResources_Get_MaximumSet_Gen.json"
+          },
+          "GoalResources_Get_MinimumSet": {
+            "$ref": "./examples/GoalResources_Get_MinimumSet_Gen.json"
           }
         }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/refreshGoalResources": {
+      "post": {
+        "operationId": "GoalAssignments_RefreshGoalResources",
+        "tags": [
+          "GoalAssignments"
+        ],
+        "description": "Refreshes the goal resources under a goal assignment. This operation scans for new resources under the scope of the assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "goalAssignmentName",
+            "in": "path",
+            "description": "The name of the GoalAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RefreshGoalResourcesResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GoalAssignments_RefreshGoalResources_MaximumSet": {
+            "$ref": "./examples/GoalAssignments_RefreshGoalResources_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/updateGoalResources": {
@@ -2678,6 +2753,9 @@
         "x-ms-examples": {
           "GoalTemplates_List_MaximumSet": {
             "$ref": "./examples/GoalTemplates_List_MaximumSet_Gen.json"
+          },
+          "GoalTemplates_List_MinimumSet": {
+            "$ref": "./examples/GoalTemplates_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2770,6 +2848,17 @@
             "description": "Resource 'GoalTemplate' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/GoalTemplate"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2782,8 +2871,15 @@
         "x-ms-examples": {
           "GoalTemplates_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/GoalTemplates_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "GoalTemplates_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/GoalTemplates_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "GoalTemplates_Update",
@@ -2881,8 +2977,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -2897,8 +3004,15 @@
         "x-ms-examples": {
           "GoalTemplates_Delete_MaximumSet": {
             "$ref": "./examples/GoalTemplates_Delete_MaximumSet_Gen.json"
+          },
+          "GoalTemplates_Delete_MinimumSet": {
+            "$ref": "./examples/GoalTemplates_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans": {
@@ -3221,6 +3335,24 @@
               "$ref": "#/definitions/RecoveryPlanActionBaseResponse"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3232,7 +3364,11 @@
           "RecoveryPlanActions_CheckReadiness_MaximumSet": {
             "$ref": "./examples/RecoveryPlanActions_CheckReadiness_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/failover": {
@@ -5015,24 +5151,24 @@
             "type": "string"
           }
         },
-        "drillRbacOnRo": {
+        "drillRbacOnRecoveryPlan": {
           "$ref": "#/definitions/RBACState",
-          "description": "Drill object does not have the necessary RBAC to run the RO Plan."
+          "description": "Drill object does not have the necessary RBAC to run the Recovery Plan."
         },
-        "rbacNeededForDrillOnRo": {
+        "rbacNeededForDrillOnRecoveryPlan": {
           "type": "array",
-          "description": "Permissions needed by the Drill MSI to run the RO Plan.",
+          "description": "Permissions needed by the Drill MSI to run the Recovery Plan.",
           "items": {
             "type": "string"
           }
         },
-        "drillRbacOnAmw": {
+        "drillRbacOnAzureMonitoringWorkspace": {
           "$ref": "#/definitions/RBACState",
-          "description": "Drill object does not have the necessary RBAC to read the AMW account."
+          "description": "Drill object does not have the necessary RBAC to read the Azure Monitoring Workspace account."
         },
-        "rbacNeededForDrillOnAmw": {
+        "rbacNeededForDrillOnAzureMonitoringWorkspace": {
           "type": "array",
-          "description": "Permissions needed by the Drill MSI to read AMW account.",
+          "description": "Permissions needed by the Drill MSI to read Azure Monitoring Workspace account.",
           "items": {
             "type": "string"
           }
@@ -5060,11 +5196,11 @@
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "One or more Target or Capability object is deleted."
         },
-        "roAndDrillResourcesState": {
+        "recoveryPlanAndDrillResourcesState": {
           "$ref": "#/definitions/RelativeResourceCompositionState",
-          "description": "Resources associated in RO Plan and Drill are out of sync."
+          "description": "Resources associated in Recovery Plan and Drill are out of sync."
         },
-        "sgAndDrillResourcesState": {
+        "serviceGroupAndDrillResourcesState": {
           "$ref": "#/definitions/RelativeResourceCompositionState",
           "description": "Resources in Service Group and Drill are out of sync."
         },
@@ -5198,7 +5334,7 @@
         }
       }
     },
-    "ChaosExperimentProperties": {
+    "ChaosExperimentPropertiesOfDrill": {
       "type": "object",
       "description": "Chaos Experiment properties.",
       "properties": {
@@ -5239,7 +5375,7 @@
         "chaosExperimentIdentityForFaults"
       ]
     },
-    "ChaosExperimentPropertiesUpdate": {
+    "ChaosExperimentPropertiesOfDrillUpdate": {
       "type": "object",
       "description": "Chaos Experiment properties.",
       "properties": {
@@ -5709,15 +5845,15 @@
       "description": "PATCH properties for Drill.",
       "properties": {
         "metricsProperties": {
-          "$ref": "#/definitions/MetricsProperties",
+          "$ref": "#/definitions/MetricsPropertiesOfDrill",
           "description": "Metric properties."
         },
-        "roPlanProperties": {
-          "$ref": "#/definitions/RoPlanProperties",
-          "description": "ROPlan properties."
+        "recoveryPlanProperties": {
+          "$ref": "#/definitions/RecoveryPlanPropertiesOfDrill",
+          "description": "Recovery Plan properties."
         },
         "chaosExperimentProperties": {
-          "$ref": "#/definitions/ChaosExperimentProperties",
+          "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
         },
         "rbacSetupMode": {
@@ -5735,7 +5871,7 @@
           "description": "Status of the last operation.",
           "readOnly": true
         },
-        "sgId": {
+        "serviceGroupId": {
           "type": "string",
           "format": "arm-id",
           "description": "Parent SG resource.",
@@ -5749,15 +5885,19 @@
           }
         },
         "metricsProperties": {
-          "$ref": "#/definitions/MetricsProperties",
+          "$ref": "#/definitions/MetricsPropertiesOfDrill",
           "description": "Metric properties."
         },
-        "roPlanProperties": {
-          "$ref": "#/definitions/RoPlanProperties",
+        "healthModelProperties": {
+          "$ref": "#/definitions/HealthModelPropertiesOfDrill",
+          "description": "HealthModel properties."
+        },
+        "recoveryPlanProperties": {
+          "$ref": "#/definitions/RecoveryPlanPropertiesOfDrill",
           "description": "ROPlan properties."
         },
         "chaosExperimentProperties": {
-          "$ref": "#/definitions/ChaosExperimentProperties",
+          "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
         },
         "executionState": {
@@ -5765,8 +5905,8 @@
           "description": "Execution state of the Drill. Whether it is currently running or not.",
           "readOnly": true
         },
-        "readinessState": {
-          "$ref": "#/definitions/ReadinessState",
+        "executionReadinessState": {
+          "$ref": "#/definitions/ExecutionReadinessState",
           "description": "Readiness state of the Drill.",
           "readOnly": true
         },
@@ -5810,7 +5950,7 @@
       },
       "discriminator": "drillType",
       "required": [
-        "roPlanProperties",
+        "recoveryPlanProperties",
         "chaosExperimentProperties",
         "drillType"
       ]
@@ -5932,7 +6072,11 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Id of the resource."
+          "format": "arm-id",
+          "description": "ARM Id of the underlying resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "resourceType": {
           "type": "string",
@@ -5942,14 +6086,14 @@
           "$ref": "#/definitions/DrillResourceInclusionState",
           "description": "Inclusion State of the Drill resource in Drill"
         },
-        "roInclusionState": {
+        "recoveryPlanInclusionState": {
           "$ref": "#/definitions/ResourceInclusionState",
-          "description": "Inclusion State of the Drill resource in RO",
+          "description": "Inclusion State of the Drill resource in Recovery Plan",
           "readOnly": true
         },
-        "roExclusionReason": {
-          "$ref": "#/definitions/RoExclusionReason",
-          "description": "Exclusion reason of the Drill resource in RO",
+        "recoveryPlanExclusionReason": {
+          "$ref": "#/definitions/RecoveryPlanExclusionReason",
+          "description": "Exclusion reason of the Drill resource in Recovery Plan",
           "readOnly": true
         },
         "resourceProtectionSolutionType": {
@@ -5995,9 +6139,9 @@
             ]
           }
         },
-        "tAndcAssignmentError": {
+        "targetAndCapabilityAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
-          "description": "Last T&C assignment error, if any.",
+          "description": "Last Target and Capability assignment error, if any.",
           "readOnly": true
         },
         "rbacAssignmentError": {
@@ -6045,10 +6189,10 @@
       "type": "string",
       "description": "Drill Resource State (wrt SG and RO).",
       "enum": [
-        "InSGNotInDrill",
-        "InDrillNotInSG",
-        "InRONotInDrill",
-        "InDrillNotInRO",
+        "InServiceGroupNotInDrill",
+        "InDrillNotInServiceGroup",
+        "InRecoveryPlanNotInDrill",
+        "InDrillNotInRecoveryPlan",
         "ResourceStateIncompatibleWithFault"
       ],
       "x-ms-enum": {
@@ -6056,24 +6200,24 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "InSGNotInDrill",
-            "value": "InSGNotInDrill",
+            "name": "InServiceGroupNotInDrill",
+            "value": "InServiceGroupNotInDrill",
             "description": "Resource is in SG but not part of the Drill"
           },
           {
-            "name": "InDrillNotInSG",
-            "value": "InDrillNotInSG",
+            "name": "InDrillNotInServiceGroup",
+            "value": "InDrillNotInServiceGroup",
             "description": "Resource is in Drill but not part of the SG"
           },
           {
-            "name": "InRONotInDrill",
-            "value": "InRONotInDrill",
-            "description": "Resource is in ROPlan but not part of the Drill"
+            "name": "InRecoveryPlanNotInDrill",
+            "value": "InRecoveryPlanNotInDrill",
+            "description": "Resource is in RecoveryPlan but not part of the Drill"
           },
           {
-            "name": "InDrillNotInRO",
-            "value": "InDrillNotInRO",
-            "description": "Resource is in Drill but not part of the ROPlan"
+            "name": "InDrillNotInRecoveryPlan",
+            "value": "InDrillNotInRecoveryPlan",
+            "description": "Resource is in Drill but not part of the RecoveryPlan"
           },
           {
             "name": "ResourceStateIncompatibleWithFault",
@@ -6259,7 +6403,7 @@
       "type": "object",
       "description": "Properties of the Resiliency DrillRun.",
       "properties": {
-        "drillUrl": {
+        "drillId": {
           "type": "string",
           "format": "arm-id",
           "description": "Parent Drill resource.",
@@ -6274,7 +6418,12 @@
         },
         "metricValue": {
           "type": "string",
-          "description": "Measured aggregated Metric value.",
+          "description": "Measured aggregated Metric value through the drill run.",
+          "readOnly": true
+        },
+        "healthStatus": {
+          "$ref": "#/definitions/HealthStatus",
+          "description": "Measured health status through the drill run.",
           "readOnly": true
         },
         "drillMode": {
@@ -6504,7 +6653,7 @@
           "$ref": "#/definitions/DrillMode",
           "description": "Mode of starting the Drill"
         },
-        "roInputs": {
+        "recoveryPlanInputs": {
           "type": "object",
           "description": "Inputs needed for the Recovery Orchestration Plan",
           "properties": {
@@ -6520,7 +6669,7 @@
       },
       "required": [
         "mode",
-        "roInputs"
+        "recoveryPlanInputs"
       ]
     },
     "DrillType": {
@@ -6566,15 +6715,15 @@
       "description": "The updatable properties of the Drill.",
       "properties": {
         "metricsProperties": {
-          "$ref": "#/definitions/MetricsPropertiesUpdate",
+          "$ref": "#/definitions/MetricsPropertiesOfDrillUpdate",
           "description": "Metric properties."
         },
-        "roPlanProperties": {
-          "$ref": "#/definitions/RoPlanPropertiesUpdate",
-          "description": "ROPlan properties."
+        "recoveryPlanProperties": {
+          "$ref": "#/definitions/RecoveryPlanPropertiesOfDrillUpdate",
+          "description": "Recovery Plan properties."
         },
         "chaosExperimentProperties": {
-          "$ref": "#/definitions/ChaosExperimentPropertiesUpdate",
+          "$ref": "#/definitions/ChaosExperimentPropertiesOfDrillUpdate",
           "description": "Chaos Experiment properties."
         },
         "rbacSetupMode": {
@@ -6655,6 +6804,30 @@
         ]
       }
     },
+    "ExecutionReadinessState": {
+      "type": "string",
+      "description": "Drill Execution Readiness State",
+      "enum": [
+        "Ready",
+        "NeedsAttention"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionReadinessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Drill is ready to run."
+          },
+          {
+            "name": "NeedsAttention",
+            "value": "NeedsAttention",
+            "description": "Drill is not ready to run. Details captured in AttentionReason field."
+          }
+        ]
+      }
+    },
     "ExecutionState": {
       "type": "string",
       "description": "Drill Execution State",
@@ -6713,17 +6886,29 @@
       "type": "object",
       "description": "Failed Include, Exclude or Update resource.",
       "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Id of the failed drill resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "microsoft.azureresiliencemanagement/drills/drillresources"
+              }
+            ]
+          }
+        },
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource Id.",
+          "description": "Resource Id of the underlying resource of the failed Drill resource.",
           "x-ms-arm-id-details": {
             "allowedResources": []
           }
         },
-        "tAndcAssignmentError": {
+        "targetAndCapabilityAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
-          "description": "T and C assignment error.",
+          "description": "Target and Capability assignment error.",
           "readOnly": true
         },
         "rbacAssignmentError": {
@@ -6733,6 +6918,7 @@
         }
       },
       "required": [
+        "id",
         "resourceId"
       ]
     },
@@ -6953,8 +7139,7 @@
       },
       "required": [
         "goalTemplateId",
-        "goalAssignmentType",
-        "serviceLevelResources"
+        "goalAssignmentType"
       ]
     },
     "GoalAssignmentPropertiesUpdate": {
@@ -7088,6 +7273,17 @@
           "description": "Reason for exclusion from disaster recovery goals.",
           "readOnly": true
         },
+        "serviceGroupMemberships": {
+          "type": "array",
+          "description": "List of service groups of which this resource is memberof.",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMembership"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "serviceGroupId"
+          ]
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
@@ -7097,9 +7293,7 @@
       "required": [
         "resourceArmId",
         "highAvailabilityGoalParticipation",
-        "highAvailabilityAttestationStatus",
-        "disasterRecoveryGoalParticipation",
-        "disasterRecoveryAttestationStatus"
+        "highAvailabilityAttestationStatus"
       ]
     },
     "GoalTemplate": {
@@ -7178,11 +7372,6 @@
         }
       },
       "required": [
-        "description",
-        "requireHighAvailability",
-        "requireDisasterRecovery",
-        "regionalRecoveryPointObjective",
-        "regionalRecoveryTimeObjective",
         "goalType"
       ]
     },
@@ -7253,46 +7442,54 @@
       "type": "object",
       "description": "Definition of goals data in unified resilience item.",
       "properties": {
-        "goalTemplateId": {
+        "templateId": {
           "type": "string",
           "format": "arm-id",
           "description": "Arm id of the goal template."
         },
-        "goalAssignmentId": {
+        "assignmentId": {
           "type": "string",
           "format": "arm-id",
           "description": "Arm id of the goal assignment."
         },
-        "regionalRpoInMinutes": {
+        "regionalRecoveryPointObjectiveInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Regional RPO set in resilience goal in minutes."
         },
-        "regionalRpaInMinutes": {
+        "regionalRecoveryPointEstimatedInMinutes": {
           "$ref": "#/definitions/IsoDuration",
-          "description": "Computed RPA for the service group in minutes."
+          "description": "Computed recovery point estimated for the service group in minutes."
         },
-        "regionalRpoStatus": {
+        "regionalRecoveryPointObjectiveStatus": {
           "$ref": "#/definitions/ResilienceHealthStatus",
           "description": "Regional RPO status of the service group."
         },
-        "regionalRtoInMinutes": {
+        "regionalRecoveryTimeObjectiveInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Regional RTO set in resilience goal in minutes."
         },
-        "regionalRtaInMinutes": {
+        "regionalRecoveryTimeActualInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Computed RTA for the service group in minutes."
         },
-        "regionalRtoStatus": {
+        "regionalRecoveryTimeObjectiveStatus": {
           "$ref": "#/definitions/ResilienceHealthStatus",
-          "description": "Regional RPO status of the service group."
+          "description": "Regional RTO status of the service group."
+        },
+        "requireHighAvailability": {
+          "$ref": "#/definitions/UnifiedResilienceItemRequirementSelected",
+          "description": "Whether the resource is required for high availability."
+        },
+        "requireDisasterRecovery": {
+          "$ref": "#/definitions/UnifiedResilienceItemRequirementSelected",
+          "description": "Whether the resource is required for disaster recovery."
         }
       },
       "required": [
-        "goalTemplateId",
-        "goalAssignmentId",
-        "regionalRpoStatus",
-        "regionalRtoStatus"
+        "templateId",
+        "assignmentId",
+        "regionalRecoveryPointObjectiveStatus",
+        "regionalRecoveryTimeObjectiveStatus"
       ]
     },
     "HAStatus": {
@@ -7319,16 +7516,76 @@
         ]
       }
     },
+    "HealthModelPropertiesOfDrill": {
+      "type": "object",
+      "description": "Health Model properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to use for Health Model operations."
+        },
+        "healthModelId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Health Model.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CloudHealth/healthmodels"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identity",
+        "healthModelId"
+      ]
+    },
+    "HealthStatus": {
+      "type": "string",
+      "description": "Enum for Health Status.",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Healthy status."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Degraded status."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Unhealthy Status."
+          }
+        ]
+      }
+    },
     "IncludeOrUpdateResource": {
       "type": "object",
       "description": "Include or Update resource",
       "properties": {
-        "resourceId": {
+        "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource Id.",
+          "description": "Id of the DrillResource to be included (NOT the ARM Id of the underlying resource).",
           "x-ms-arm-id-details": {
-            "allowedResources": []
+            "allowedResources": [
+              {
+                "type": "microsoft.azureresiliencemanagement/drills/drillresources"
+              }
+            ]
           }
         },
         "faultProperties": {
@@ -7337,7 +7594,7 @@
         }
       },
       "required": [
-        "resourceId"
+        "id"
       ]
     },
     "InitialConfig": {
@@ -8042,7 +8299,37 @@
         }
       }
     },
-    "MetricsProperties": {
+    "MembershipType": {
+      "type": "string",
+      "description": "Membership type of the service group to resource.",
+      "enum": [
+        "Direct",
+        "ThroughSubscription",
+        "ThroughResourceGroup"
+      ],
+      "x-ms-enum": {
+        "name": "MembershipType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Direct",
+            "value": "Direct",
+            "description": "Resource is direct member of service group."
+          },
+          {
+            "name": "ThroughSubscription",
+            "value": "ThroughSubscription",
+            "description": "Resource is member of service group through subscription."
+          },
+          {
+            "name": "ThroughResourceGroup",
+            "value": "ThroughResourceGroup",
+            "description": "Resource is member of service group through resource group."
+          }
+        ]
+      }
+    },
+    "MetricsPropertiesOfDrill": {
       "type": "object",
       "description": "Metrics properties.",
       "properties": {
@@ -8064,7 +8351,7 @@
         "metricsToTrack"
       ]
     },
-    "MetricsPropertiesUpdate": {
+    "MetricsPropertiesOfDrillUpdate": {
       "type": "object",
       "description": "Metrics properties.",
       "properties": {
@@ -8335,30 +8622,6 @@
         ]
       }
     },
-    "ReadinessState": {
-      "type": "string",
-      "description": "Drill Readiness State",
-      "enum": [
-        "Ready",
-        "NeedsAttention"
-      ],
-      "x-ms-enum": {
-        "name": "ReadinessState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Drill is ready to run."
-          },
-          {
-            "name": "NeedsAttention",
-            "value": "NeedsAttention",
-            "description": "Drill is not ready to run. Details captured in AttentionReason field."
-          }
-        ]
-      }
-    },
     "RecommendationsData": {
       "type": "object",
       "description": "Definition of recommendations data in unified resilience item.",
@@ -8376,25 +8639,25 @@
       "type": "object",
       "description": "Definition of recommendation data related to high availability in unified resilience item.",
       "properties": {
-        "includedResourceCount": {
+        "enabledResourceCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Included resources count for high availability recommendations."
+          "description": "Count of resources that have high availability enabled."
         },
-        "notIncludedResourceCount": {
+        "notEnabledResourceCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Excluded resources count for high availability recommendations."
+          "description": "Count of resources that do not have high availability enabled."
         },
         "notEvaluatedResourceCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Not evaluated resources count for high availability recommendations."
+          "description": "Count of resources that have not been evaluated for high availability."
         },
         "evaluationDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Last evaluation date time of high availability recommendation."
+          "description": "The date and time when the high availability recommendations were last evaluated."
         }
       }
     },
@@ -8893,6 +9156,30 @@
         "jobId"
       ]
     },
+    "RecoveryPlanExclusionReason": {
+      "type": "string",
+      "description": "Enum for RecoveryPlan Exclusion reason.",
+      "enum": [
+        "ExcludedFromRecoveryPlan",
+        "ProtectionStatus"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryPlanExclusionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ExcludedFromRecoveryPlan",
+            "value": "ExcludedFromRecoveryPlan",
+            "description": "Excluded From RecoveryPlan by user."
+          },
+          {
+            "name": "ProtectionStatus",
+            "value": "ProtectionStatus",
+            "description": "Protection not configured."
+          }
+        ]
+      }
+    },
     "RecoveryPlanFailoverOperationStatus": {
       "type": "object",
       "description": "Details of the recovery orchestration plan failover operation execution.",
@@ -9016,6 +9303,48 @@
         "planDescription",
         "recoveryGroupsSetting"
       ]
+    },
+    "RecoveryPlanPropertiesOfDrill": {
+      "type": "object",
+      "description": "RecoveryPlan properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to use for RecoveryPlan operations."
+        },
+        "recoveryPlanId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Recovery Orchestration plan associated with this Drill.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans"
+              }
+            ]
+          }
+        },
+        "recoveryPlanResourceExcludedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Excluded resource count in RecoveryPlan.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "identity"
+      ]
+    },
+    "RecoveryPlanPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "RecoveryPlan properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for RecoveryPlan operations."
+        }
+      }
     },
     "RecoveryPlanPropertiesUpdate": {
       "type": "object",
@@ -9223,8 +9552,7 @@
         }
       },
       "required": [
-        "recoveryResourceUniqueId",
-        "selectedProtectionSolutionType"
+        "recoveryResourceUniqueId"
       ]
     },
     "RecoveryResourceQualification": {
@@ -9244,6 +9572,22 @@
         "recoveryResource",
         "operationQualificationDetails"
       ]
+    },
+    "RefreshGoalResourcesResponse": {
+      "type": "object",
+      "description": "Response model for refresh goal resources.",
+      "properties": {
+        "resourceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of resources under the goal assignment after refresh."
+        },
+        "lastRefreshTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the refresh operation was last performed."
+        }
+      }
     },
     "RegionalDrill": {
       "type": "object",
@@ -9748,72 +10092,6 @@
         }
       }
     },
-    "RoExclusionReason": {
-      "type": "string",
-      "description": "Enum for RO Exclusion reason.",
-      "enum": [
-        "ExcludedFromRo",
-        "ProtectionStatus"
-      ],
-      "x-ms-enum": {
-        "name": "RoExclusionReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ExcludedFromRo",
-            "value": "ExcludedFromRo",
-            "description": "Excluded From Ro by user."
-          },
-          {
-            "name": "ProtectionStatus",
-            "value": "ProtectionStatus",
-            "description": "Protection not configured."
-          }
-        ]
-      }
-    },
-    "RoPlanProperties": {
-      "type": "object",
-      "description": "Metrics properties.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/AssociatedIdentity",
-          "description": "Identity to use for ROPlan operations."
-        },
-        "roPlanId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Recovery Orchestration plan associated with this Drill.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.AzureResilienceManagement/recoveryPlans"
-              }
-            ]
-          }
-        },
-        "roResourceExcludedCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Identity to use for ROPlan operations.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "identity"
-      ]
-    },
-    "RoPlanPropertiesUpdate": {
-      "type": "object",
-      "description": "Metrics properties.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/AssociatedIdentityUpdate",
-          "description": "Identity to use for ROPlan operations."
-        }
-      }
-    },
     "ServiceGroupAndRequestHeadersParameters": {
       "type": "object",
       "description": "ServiceGroup tenant and request headers as parameter",
@@ -9832,6 +10110,25 @@
       "required": [
         "serviceGroupName",
         "apiVersion"
+      ]
+    },
+    "ServiceGroupMembership": {
+      "type": "object",
+      "description": "Model for service group membership.",
+      "properties": {
+        "serviceGroupId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arm Id of the service group."
+        },
+        "membershipType": {
+          "$ref": "#/definitions/MembershipType",
+          "description": "Membership type of the service group to resource."
+        }
+      },
+      "required": [
+        "serviceGroupId",
+        "membershipType"
       ]
     },
     "ServiceGroupParameters": {
@@ -10027,12 +10324,48 @@
         "recommendations": {
           "$ref": "#/definitions/RecommendationsData",
           "description": "Computed and copied data of Azure recommendations."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time of the unified resilience item."
         }
       },
       "required": [
         "goals",
-        "recommendations"
+        "recommendations",
+        "lastModifiedTime"
       ]
+    },
+    "UnifiedResilienceItemRequirementSelected": {
+      "type": "string",
+      "description": "Enum for the requirement status of the resource in the goal.",
+      "enum": [
+        "NotRequired",
+        "Required",
+        "NotSelected"
+      ],
+      "x-ms-enum": {
+        "name": "UnifiedResilienceItemRequirementSelected",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotRequired",
+            "value": "NotRequired",
+            "description": "The resource is not required for the specified goal."
+          },
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "The resource is required for the specified goal."
+          },
+          {
+            "name": "NotSelected",
+            "value": "NotSelected",
+            "description": "The resource is not selected for the specified goal."
+          }
+        ]
+      }
     },
     "UpdateGoalResourceRequest": {
       "type": "object",

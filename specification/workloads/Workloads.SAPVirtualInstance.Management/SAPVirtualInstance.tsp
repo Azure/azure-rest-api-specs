@@ -50,11 +50,13 @@ interface SAPVirtualInstances {
   /**
    * Gets all Virtual Instances for SAP solutions resources in a Resource Group.
    */
+  @list
   listByResourceGroup is ArmResourceListByParent<SAPVirtualInstance>;
 
   /**
    * Gets all Virtual Instances for SAP solutions resources in a Subscription.
    */
+  @list
   listBySubscription is ArmListBySubscription<SAPVirtualInstance>;
 
   /**

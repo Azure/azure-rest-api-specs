@@ -119,6 +119,8 @@ interface StandbyContainerGroupPools {
       StandbyContainerGroupPoolResourceProperties
     >
   >;
+  @list
   listByResourceGroup is ArmResourceListByParent<StandbyContainerGroupPoolResource>;
+  @list
   listBySubscription is ArmListBySubscription<StandbyContainerGroupPoolResource>;
 }

@@ -82,7 +82,9 @@ namespace Touchcast.CogCache {
       OrganizationResourceUpdate
     >;
     delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
+    @list
     listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
+    @list
     listBySubscription is ArmListBySubscription<OrganizationResource>;
   }
 }

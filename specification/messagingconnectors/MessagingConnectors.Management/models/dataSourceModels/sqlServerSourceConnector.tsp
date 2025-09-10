@@ -20,15 +20,6 @@ union SqlServerDecimalHandlingMode {
   string,
 }
 
-@doc("SnapshotSelectStatementOverride Item")
-model SqlServerSnapshotSelectStatementOverrideItem {
-  @doc("Table name")
-  tableName: string;
-
-  @doc("select statement")
-  selectStatement: string;
-}
-
 @doc("Enum SkippedOperationsMode for SqlServer")
 union SqlServerSkippedOperationsMode {
   @doc("The InsertOrCreate mode.")
@@ -61,6 +52,15 @@ union SqlServerSnapshotMode {
   NoData: "NoData",
 
   string,
+}
+
+@doc("SnapshotSelectStatementOverride Item")
+model SqlServerSnapshotSelectStatementOverrideItem {
+  @doc("Table name")
+  tableName: string;
+
+  @doc("select statement")
+  selectStatement: string;
 }
 
 @doc("Configuration for SqlServerSourceConnector")
