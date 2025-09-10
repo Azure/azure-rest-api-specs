@@ -51,7 +51,7 @@ directive:
       - DescriptionMustNotBeNodeName
 
   - where:
-    - $.definitions.OperationStatus.properties.properties
+    - $.definitions.OperationStatus
     suppress:
       - AvoidAdditionalProperties
 
