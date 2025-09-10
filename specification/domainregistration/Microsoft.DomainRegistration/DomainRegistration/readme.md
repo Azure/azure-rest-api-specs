@@ -46,6 +46,7 @@ input-file:
   - stable/2024-11-01/DomainRegistrationProvider.json
   - stable/2024-11-01/Domains.json
   - stable/2024-11-01/TopLevelDomains.json
+  - stable/2024-11-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2024-04
