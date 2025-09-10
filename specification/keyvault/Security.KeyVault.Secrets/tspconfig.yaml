@@ -49,10 +49,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/security/keyvault"
-    package-dir: "azsecrets"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets"
-    module-version: "0.0.1"
-    emitter-output-dir: "{project-root}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azsecrets"
+    containing-module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azsecrets"
     override-client-name: "Client"
     single-client: true
     inject-spans: true
