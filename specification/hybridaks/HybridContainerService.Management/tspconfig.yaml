@@ -8,8 +8,8 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-go":
-    service-dir: sdk/resourcemanager/hybridaks
-    package-dir: armhybridaks
+    service-dir: sdk/resourcemanager/hybridcontainerservice
+    package-dir: armhybridcontainerservice
     module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
     fix-const-stuttering: true
     generate-samples: true
@@ -18,16 +18,16 @@ options:
     inject-spans: true
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: azure-mgmt-hybridaks
-    namespace: azure.mgmt.hybridaks
+    package-dir: azure-mgmt-hybridcontainerservice
+    namespace: azure.mgmt.hybridcontainerservice
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
     flavor: azure
-    package-dir: azure-resourcemanager-hybridaks
-    namespace: com.azure.resourcemanager.hybridaks
-    service-name: HybridAks
+    package-dir: azure-resourcemanager-hybridcontainerservice
+    namespace: com.azure.resourcemanager.hybridcontainerservice
+    service-name: HybridContainerservice
   "@azure-tools/typespec-ts":
     package-dir: "arm-advisor"
     flavor: azure
@@ -38,7 +38,7 @@ options:
     flavor: azure
     clear-output-folder: true
     model-namespace: false
-    namespace: "Azure.ResourceManager.HybridAks"
+    namespace: "Microsoft.HybridContainerService"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
