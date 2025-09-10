@@ -16,7 +16,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-databasefleetmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-databasefleetmanager"
     namespace: "com.azure.resourcemanager.databasefleetmanager"
     service-name: "databasefleetmanager"
     flavor: azure
@@ -32,11 +32,11 @@ options:
     inject-spans: true
     remove-unreferenced-types: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.DatabaseFleetManager"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DatabaseFleetManager"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-databasefleetmanager"
