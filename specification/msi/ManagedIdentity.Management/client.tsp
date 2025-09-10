@@ -8,5 +8,7 @@ using Microsoft.ManagedIdentity;
   "javascript, java"
 );
 
-#suppress "deprecated" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Identity.properties, "java");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Identity.properties,
+  "java"
+);
