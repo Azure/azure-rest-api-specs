@@ -56,7 +56,8 @@ interface SBNamespaces {
     SBNamespace,
     Response = ArmResourceUpdatedResponse<SBNamespace> | ArmResourceCreatedResponse<
       SBNamespace,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = SBNamespace> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 
@@ -98,16 +99,30 @@ interface SBNamespaces {
   list is ArmListBySubscription<SBNamespace>;
 
   /**
+   * GeoDR Failover
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  failover is ArmResourceActionAsync<
+    SBNamespace,
+    FailOver,
+    ArmResponse<FailOver>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = FailOver> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
    * Gets lists of resources that supports Privatelinks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @list
   @get
   @action("privateLinkResources")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   privateLinkResourcesGet is ArmResourceActionSync<
     SBNamespace,
     void,
-    ArmResponse<PrivateLinkResourcesListResult>
+    ArmResponse<ResourceListResult<PrivateLinkResource>>
   >;
 
   /**
@@ -131,6 +146,9 @@ interface SBNamespaces {
 );
 @@doc(SBNamespaces.update::parameters.properties,
   "Parameters supplied to update a namespace resource."
+);
+@@doc(SBNamespaces.failover::parameters.body,
+  "Parameters for updating a namespace resource."
 );
 @@doc(SBNamespaces.checkNameAvailability::parameters.body,
   "Parameters to check availability of the given namespace name"

@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.2
- * Date: 2025-06-30T06:57:32.372Z
+ * Version: 0.11.9
+ * Date: 2025-09-10T03:54:33.928Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -17,6 +17,7 @@ import "./SBNamespace.tsp";
 import "./NetworkRuleSet.tsp";
 import "./SBAuthorizationRule.tsp";
 import "./PrivateEndpointConnection.tsp";
+import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./ArmDisasterRecovery.tsp";
 import "./MigrationConfigProperties.tsp";
 import "./SBQueue.tsp";
@@ -25,6 +26,10 @@ import "./Rule.tsp";
 import "./SBSubscription.tsp";
 import "./routes.tsp";
 
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -41,11 +46,9 @@ namespace Microsoft.ServiceBus;
  */
 enum Versions {
   /**
-   * The 2024-01-01 API version.
+   * The 2025-05-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_01_01: "2024-01-01",
+  v2025_05_01_preview: "2025-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

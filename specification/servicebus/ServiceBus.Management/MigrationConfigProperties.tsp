@@ -25,11 +25,6 @@ model MigrationConfigProperties
   >;
 }
 
-/**
- * MigrationConfig Resource Collection
- */
-model MigrationConfigListResult is Azure.Core.Page<MigrationConfigProperties>;
-
 @armResourceOperations
 interface MigrationConfigs {
   /**
@@ -42,7 +37,8 @@ interface MigrationConfigs {
    */
   createAndStartMigration is ArmResourceCreateOrReplaceAsync<
     MigrationConfigProperties,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = MigrationConfigProperties> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -53,10 +49,7 @@ interface MigrationConfigs {
   /**
    * Gets all migrationConfigurations
    */
-  list is ArmResourceListByParent<
-    MigrationConfigProperties,
-    Response = ArmResponse<MigrationConfigListResult>
-  >;
+  list is ArmResourceListByParent<MigrationConfigProperties>;
 
   /**
    * This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any entities created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.
@@ -75,7 +68,7 @@ interface MigrationConfigs {
 }
 
 @@doc(MigrationConfigProperties.name,
-  "The configuration name. Should always be the default."
+  "The configuration name. Should always be $default."
 );
 @@doc(MigrationConfigProperties.properties,
   "Properties required to the Create Migration Configuration"

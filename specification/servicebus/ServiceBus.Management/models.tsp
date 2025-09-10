@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Microsoft.ServiceBus;
@@ -77,6 +78,85 @@ union PublicNetworkAccess {
   Disabled: "Disabled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SecuredByPerimeter: "SecuredByPerimeter",
+}
+
+/**
+ * Setting to Enable or Disable Confidential Compute
+ */
+union Mode {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Disabled: "Disabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Enabled: "Enabled",
+}
+
+/**
+ * GeoDR Role Types
+ */
+union GeoDRRoleType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Primary: "Primary",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Secondary: "Secondary",
+}
+
+/**
+ * Provisioning state of NetworkSecurityPerimeter configuration propagation
+ */
+union NetworkSecurityPerimeterConfigurationProvisioningState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Accepted: "Accepted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  InvalidResponse: "InvalidResponse",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SucceededWithIssues: "SucceededWithIssues",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Deleted: "Deleted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Canceled: "Canceled",
+}
+
+/**
+ * Access Mode of the resource association
+ */
+union ResourceAssociationAccessMode {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NoAssociationMode: "NoAssociationMode",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  EnforcedMode: "EnforcedMode",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  LearningMode: "LearningMode",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  AuditMode: "AuditMode",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  UnspecifiedMode: "UnspecifiedMode",
+}
+
+/**
+ * Direction of Access Rule
+ */
+union NspAccessRuleDirection {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Inbound: "Inbound",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Outbound: "Outbound",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -307,6 +387,7 @@ model SystemData {
   /**
    * The timestamp of resource creation (UTC).
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
@@ -322,6 +403,7 @@ model SystemData {
   /**
    * The type of identity that last modified the resource.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 }
 
@@ -352,12 +434,14 @@ model SBNamespaceProperties {
    * The time the namespace was created
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The time the namespace was updated.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
@@ -373,7 +457,7 @@ model SBNamespaceProperties {
   metricId?: string;
 
   /**
-   * This property reflects if zone redundancy has been enabled for namespaces in regions that support availability zones.
+   * Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   zoneRedundant?: boolean;
@@ -407,6 +491,14 @@ model SBNamespaceProperties {
    * The number of partitions of a Service Bus namespace. This property is only applicable to Premium SKU namespaces. The default value is 1 and possible values are 1, 2 and 4
    */
   premiumMessagingPartitions?: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  platformCapabilities?: PlatformCapabilities;
+
+  /**
+   * Geo Data Replication settings for the namespace
+   */
+  geoDataReplication?: GeoDataReplicationProperties;
 }
 
 /**
@@ -508,6 +600,193 @@ model ConnectionState {
 }
 
 /**
+ * Common fields that are returned in the response for all Azure Resource Manager resources
+ */
+model ProxyResource {
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.EventHub/Namespaces" or "Microsoft.EventHub/Namespaces/EventHubs"
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PlatformCapabilities {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  confidentialCompute?: ConfidentialCompute;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ConfidentialCompute {
+  /**
+   * Setting to Enable or Disable Confidential Compute
+   */
+  mode?: Mode;
+}
+
+/**
+ * GeoDR Replication properties
+ */
+model GeoDataReplicationProperties {
+  /**
+   * The maximum acceptable lag for data replication operations from the primary replica to a quorum of secondary replicas.  When the lag exceeds the configured amount, operations on the primary replica will be failed. The allowed values are 0 and 5 minutes to 1 day.
+   */
+  maxReplicationLagDurationInSeconds?: int32;
+
+  /**
+   * A list of regions where replicas of the namespace are maintained.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  locations?: NamespaceReplicaLocation[];
+}
+
+/**
+ * Namespace replication properties
+ */
+model NamespaceReplicaLocation {
+  /**
+   * Azure regions where a replica of the namespace is maintained
+   */
+  locationName?: string;
+
+  /**
+   * GeoDR Role Types
+   */
+  roleType?: GeoDRRoleType;
+
+  /**
+   * Optional property that denotes the ARM ID of the Cluster. This is required, if a namespace replica should be placed in a Dedicated Event Hub Cluster
+   */
+  clusterArmId?: string;
+}
+
+/**
+ * The Resource definition.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model TrackedResource extends Resource {
+  /**
+   * The Geo-location where the resource lives
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+}
+
+/**
+ * The Resource definition for other than namespace.
+ */
+model Resource {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * The resource management error response.
+ */
+@error
+model ErrorResponse {
+  /**
+   * The error object.
+   */
+  error?: ErrorResponseError;
+}
+
+/**
+ * The error object.
+ */
+model ErrorResponseError {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  details?: ErrorResponse[];
+
+  /**
+   * The error additional info.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  info?: unknown;
+}
+
+/**
  * Description of a namespace resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -552,12 +831,14 @@ model SBNamespaceUpdateProperties {
    * The time the namespace was created
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The time the namespace was updated.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
@@ -597,8 +878,7 @@ model SBNamespaceUpdateProperties {
  * The Resource definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceNamespacePatch
-  extends Azure.ResourceManager.Foundations.Resource {
+model ResourceNamespacePatch extends Resource {
   /**
    * Resource location
    */
@@ -609,6 +889,27 @@ model ResourceNamespacePatch
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model FailOver {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: FailOverProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model FailOverProperties {
+  /**
+   * Query parameter for the new primary location after failover.
+   */
+  primaryLocation?: string;
+
+  /**
+   * If Force is false then graceful failover is attempted after ensuring no data loss. If Force flag is set to true, Forced failover is attempted with possible data loss.
+   */
+  force?: boolean;
 }
 
 /**
@@ -639,20 +940,6 @@ model PrivateLinkResource {
 }
 
 /**
- * Result of the List private link resources operation.
- */
-model PrivateLinkResourcesListResult {
-  /**
-   * A collection of private link resources
-   */
-  value?: PrivateLinkResource[];
-
-  /**
-   * A link for the next page of private link resources.
-   */
-  nextLink?: string;
-}
-/**
  * Properties of PrivateLinkResource
  */
 model PrivateLinkResourceProperties {
@@ -668,6 +955,233 @@ model PrivateLinkResourceProperties {
    * Required Zone Names
    */
   requiredZoneNames?: string[];
+}
+
+/**
+ * Result of the List NetworkSecurityPerimeterConfiguration operation.
+ */
+model NetworkSecurityPerimeterConfigurationList
+  is Azure.Core.Page<NetworkSecurityPerimeterConfiguration>;
+
+/**
+ * Properties of NetworkSecurityPerimeterConfiguration
+ */
+model NetworkSecurityPerimeterConfigurationProperties {
+  /**
+   * Provisioning state of NetworkSecurityPerimeter configuration propagation
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NetworkSecurityPerimeterConfigurationProvisioningState;
+
+  /**
+   * List of Provisioning Issues if any
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  provisioningIssues?: ProvisioningIssue[];
+
+  /**
+   * NetworkSecurityPerimeter related information
+   */
+  @visibility(Lifecycle.Read)
+  networkSecurityPerimeter?: NetworkSecurityPerimeter;
+
+  /**
+   * Information about resource association
+   */
+  @visibility(Lifecycle.Read)
+  resourceAssociation?: NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation;
+
+  /**
+   * Information about current network profile
+   */
+  @visibility(Lifecycle.Read)
+  profile?: NetworkSecurityPerimeterConfigurationPropertiesProfile;
+
+  /**
+   * True if the ServiceBus namespace is backed by another Azure resource and not visible to end users.
+   */
+  @visibility(Lifecycle.Read)
+  isBackingResource?: boolean;
+
+  /**
+   * Indicates that the NSP controls related to backing association are only applicable to a specific feature in backing resource's data plane.
+   */
+  @visibility(Lifecycle.Read)
+  applicableFeatures?: string[];
+
+  /**
+   * Source Resource Association name
+   */
+  @visibility(Lifecycle.Read)
+  parentAssociationName?: string;
+
+  /**
+   * ARM Id of source resource
+   */
+  @visibility(Lifecycle.Read)
+  sourceResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration
+ */
+model ProvisioningIssue {
+  /**
+   * Name of the issue
+   */
+  name?: string;
+
+  /**
+   * Properties of Provisioning Issue
+   */
+  @visibility(Lifecycle.Read)
+  properties?: ProvisioningIssueProperties;
+}
+
+/**
+ * Properties of Provisioning Issue
+ */
+model ProvisioningIssueProperties {
+  /**
+   * Type of Issue
+   */
+  issueType?: string;
+
+  /**
+   * Description of the issue
+   */
+  description?: string;
+}
+
+/**
+ * NetworkSecurityPerimeter related information
+ */
+model NetworkSecurityPerimeter {
+  /**
+   * Fully qualified identifier of the resource
+   */
+  id?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/networkSecurityPerimeters";
+    }
+  ]>;
+
+  /**
+   * Guid of the resource
+   */
+  perimeterGuid?: string;
+
+  /**
+   * Location of the resource
+   */
+  location?: string;
+}
+
+/**
+ * Information about resource association
+ */
+model NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation {
+  /**
+   * Name of the resource association
+   */
+  name?: string;
+
+  /**
+   * Access Mode of the resource association
+   */
+  accessMode?: ResourceAssociationAccessMode;
+}
+
+/**
+ * Information about current network profile
+ */
+model NetworkSecurityPerimeterConfigurationPropertiesProfile {
+  /**
+   * Name of the resource
+   */
+  name?: string;
+
+  /**
+   * Current access rules version
+   */
+  accessRulesVersion?: string;
+
+  /**
+   * List of Access Rules
+   */
+  accessRules?: NspAccessRule[];
+}
+
+/**
+ * Information of Access Rule in Network Profile
+ */
+model NspAccessRule {
+  /**
+   * Fully qualified identifier of the resource
+   */
+  id?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules";
+    }
+  ]>;
+
+  /**
+   * Name of the resource
+   */
+  name?: string;
+
+  /**
+   * Type of the resource
+   */
+  type?: string;
+
+  /**
+   * Properties of Access Rule
+   */
+  @visibility(Lifecycle.Read)
+  properties?: NspAccessRuleProperties;
+}
+
+/**
+ * Properties of Access Rule
+ */
+model NspAccessRuleProperties {
+  /**
+   * Direction of Access Rule
+   */
+  direction?: NspAccessRuleDirection;
+
+  /**
+   * Address prefixes in the CIDR format for inbound rules
+   */
+  addressPrefixes?: string[];
+
+  /**
+   * Subscriptions for inbound rules
+   */
+  subscriptions?: NspAccessRulePropertiesSubscriptionsItem[];
+
+  /**
+   * NetworkSecurityPerimeters for inbound rules
+   */
+  @visibility(Lifecycle.Read)
+  networkSecurityPerimeters?: NetworkSecurityPerimeter[];
+
+  /**
+   * FQDN for outbound rules
+   */
+  @visibility(Lifecycle.Read)
+  fullyQualifiedDomainNames?: string[];
+}
+
+/**
+ * Subscription for inbound rule
+ */
+model NspAccessRulePropertiesSubscriptionsItem {
+  /**
+   * Fully qualified identifier of subscription
+   */
+  id?: string;
 }
 
 /**
@@ -699,9 +1213,9 @@ model Operation {
    * Properties of the operation
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: Record<unknown>;
+  properties?: unknown;
 }
 
 /**
@@ -793,6 +1307,9 @@ model FailoverPropertiesProperties {
  * Properties required to the Create Migration Configuration
  */
 model MigrationConfigPropertiesProperties {
+  /**
+   * Provisioning state of Migration Configuration
+   */
   /**
    * Provisioning state of Migration Configuration
    */
@@ -988,18 +1505,21 @@ model SBQueueProperties {
    * The exact time the message was created.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The exact time the message was updated.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
    * Last time a message was sent, or the last time there was a receive request to this queue.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   accessedAt?: utcDateTime;
 
   /**
@@ -1093,6 +1613,11 @@ model SBQueueProperties {
    * Queue/Topic name to forward the Dead Letter message
    */
   forwardDeadLetteredMessagesTo?: string;
+
+  /**
+   * Gets and Sets Metadata of User.
+   */
+  userMetadata?: string;
 }
 
 /**
@@ -1146,18 +1671,21 @@ model SBTopicProperties {
    * Exact time the message was created.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The exact time the message was updated.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
    * Last time the message was sent, or a request was received, for this topic.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   accessedAt?: utcDateTime;
 
   /**
@@ -1226,6 +1754,11 @@ model SBTopicProperties {
    * Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
    */
   enableExpress?: boolean;
+
+  /**
+   * Gets and Sets Metadata of User.
+   */
+  userMetadata?: string;
 }
 
 /**
@@ -1366,18 +1899,21 @@ model SBSubscriptionProperties {
    * Exact time the message was created.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * Last time there was a receive request to this subscription.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   accessedAt?: utcDateTime;
 
   /**
    * The exact time the message was updated.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
@@ -1450,6 +1986,11 @@ model SBSubscriptionProperties {
    * Value that indicates whether the subscription has an affinity to the client id.
    */
   isClientAffine?: boolean;
+
+  /**
+   * Gets and Sets Metadata of User.
+   */
+  userMetadata?: string;
 
   /**
    * Properties specific to client affine subscriptions.
