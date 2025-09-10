@@ -34,7 +34,7 @@ interface Users {
   /**
    * Creates a new user or updates an existing user's information on a Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     User,
     Response = ArmResourceUpdatedResponse<User> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = User> &
@@ -45,7 +45,7 @@ interface Users {
   /**
    * Deletes the user on a databox edge/gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     User,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,

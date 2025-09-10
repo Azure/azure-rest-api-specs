@@ -43,7 +43,7 @@ interface MonitoringMetricConfigurations {
   /**
    * Creates a new metric configuration or updates an existing one for a role.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("monitoringConfig/default")
   createOrUpdate is MonitoringMetricConfigurationsNonListOps.CreateOrUpdateAsync<
     MonitoringMetricConfiguration,
@@ -55,7 +55,7 @@ interface MonitoringMetricConfigurations {
   /**
    * deletes a new metric configuration for a role.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("monitoringConfig/default")
   delete is MonitoringMetricConfigurationsNonListOps.DeleteWithoutOkAsync<
     MonitoringMetricConfiguration,

@@ -3,7 +3,6 @@
   "info": {
     "title": "DataBoxEdgeManagementClient",
     "version": "2023-12-01",
-    "description": "// (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -171,6 +170,9 @@
           "AvailableSkus": {
             "$ref": "./examples/AvailableSkusList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -766,7 +768,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BandwidthSchedule"
         },
         "x-ms-long-running-operation": true
       },
@@ -1075,7 +1078,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DiagnosticProactiveLogCollectionSettings"
         },
         "x-ms-long-running-operation": true
       }
@@ -1192,7 +1196,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DiagnosticRemoteSupportSettings"
         },
         "x-ms-long-running-operation": true
       }
@@ -1253,8 +1258,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1407,8 +1411,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1775,7 +1778,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Order"
         },
         "x-ms-long-running-operation": true
       },
@@ -2063,7 +2067,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Role"
         },
         "x-ms-long-running-operation": true
       },
@@ -2333,7 +2338,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Addon"
         },
         "x-ms-long-running-operation": true
       },
@@ -2596,7 +2602,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MonitoringMetricConfiguration"
         },
         "x-ms-long-running-operation": true
       },
@@ -2726,8 +2733,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2797,8 +2803,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.NoContentResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2978,7 +2983,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Share"
         },
         "x-ms-long-running-operation": true
       },
@@ -3115,8 +3121,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3296,7 +3301,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/StorageAccountCredential"
         },
         "x-ms-long-running-operation": true
       },
@@ -3545,7 +3551,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/StorageAccount"
         },
         "x-ms-long-running-operation": true
       },
@@ -3812,7 +3819,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Container"
         },
         "x-ms-long-running-operation": true
       },
@@ -3960,8 +3968,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4031,8 +4038,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4219,7 +4225,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Trigger"
         },
         "x-ms-long-running-operation": true
       },
@@ -4631,7 +4638,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/User"
         },
         "x-ms-long-running-operation": true
       },
@@ -4796,6 +4804,7 @@
           "description": "Addon type."
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -4940,6 +4949,7 @@
         "properties": {
           "$ref": "#/definitions/AlertProperties",
           "description": "Properties of alert.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -5073,27 +5083,17 @@
           "$ref": "#/definitions/ArcAddonProperties",
           "description": "Properties specific to Arc addon.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Addon type.",
-          "enum": [
-            "ArcForKubernetes"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
       "required": [
-        "properties",
-        "kind"
+        "properties"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Addon"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ArcForKubernetes"
     },
     "ArcAddonProperties": {
       "type": "object",
@@ -5153,6 +5153,7 @@
         },
         "encryptionCertThumbprint": {
           "type": "string",
+          "format": "password",
           "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null.",
           "x-ms-secret": true
         },
@@ -5374,26 +5375,14 @@
           "$ref": "#/definitions/CloudEdgeManagementRoleProperties",
           "description": "Properties specific to CloudEdgeManagementRole role.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Role type.",
-          "enum": [
-            "CloudEdgeManagement"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Role"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "CloudEdgeManagement"
     },
     "CloudEdgeManagementRoleProperties": {
       "type": "object",
@@ -5426,7 +5415,8 @@
           "$ref": "#/definitions/CloudErrorBody",
           "description": "The error details."
         }
-      }
+      },
+      "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
@@ -5448,7 +5438,8 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "x-ms-external": true
     },
     "ClusterCapacityViewData": {
       "type": "object",
@@ -6324,7 +6315,11 @@
           "items": {
             "$ref": "#/definitions/DataBoxEdgeSku"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name",
+            "resourceType"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -6434,7 +6429,8 @@
             "value": "Saturday"
           }
         ]
-      }
+      },
+      "x-ms-identifiers": []
     },
     "DeviceCapacityInfo": {
       "type": "object",
@@ -6731,27 +6727,17 @@
           "$ref": "#/definitions/FileTriggerProperties",
           "description": "File trigger properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Trigger Kind.",
-          "enum": [
-            "FileEvent"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
       "required": [
-        "properties",
-        "kind"
+        "properties"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Trigger"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "FileEvent"
     },
     "FileSourceInfo": {
       "type": "object",
@@ -6799,6 +6785,7 @@
         },
         "privateKey": {
           "type": "string",
+          "format": "password",
           "description": "Gets or sets base64 encoded private part of the certificate,\nneeded to form the activation key",
           "x-ms-secret": true
         },
@@ -6953,27 +6940,17 @@
           "$ref": "#/definitions/IoTAddonProperties",
           "description": "Properties specific to IOT addon.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Addon type.",
-          "enum": [
-            "IotEdge"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
       "required": [
-        "properties",
-        "kind"
+        "properties"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Addon"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "IotEdge"
     },
     "IoTAddonProperties": {
       "type": "object",
@@ -7069,26 +7046,14 @@
           "$ref": "#/definitions/IoTRoleProperties",
           "description": "Properties specific to IoT role.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Role type.",
-          "enum": [
-            "IOT"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Role"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "IOT"
     },
     "IoTRoleProperties": {
       "type": "object",
@@ -7550,26 +7515,14 @@
           "$ref": "#/definitions/KubernetesRoleProperties",
           "description": "Properties specific to Kubernetes role.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Role type.",
-          "enum": [
-            "Kubernetes"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Role"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Kubernetes"
     },
     "KubernetesRoleCompute": {
       "type": "object",
@@ -7799,26 +7752,14 @@
           "$ref": "#/definitions/MECRoleProperties",
           "description": "Properties specific to MEC role.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Role type.",
-          "enum": [
-            "MEC"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Role"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "MEC"
     },
     "MECRoleProperties": {
       "type": "object",
@@ -8364,11 +8305,11 @@
           "readOnly": true
         },
         "rdmaStatus": {
-          "$ref": "#/definitions/NetworkAdapterRdmaStatus",
+          "$ref": "#/definitions/NetworkAdapterRDMAStatus",
           "description": "Value indicating whether this adapter is RDMA capable."
         },
         "dhcpStatus": {
-          "$ref": "#/definitions/NetworkAdapterDhcpStatus",
+          "$ref": "#/definitions/NetworkAdapterDHCPStatus",
           "description": "Value indicating whether this adapter has DHCP enabled."
         },
         "ipv4Configuration": {
@@ -8397,7 +8338,7 @@
         }
       }
     },
-    "NetworkAdapterDhcpStatus": {
+    "NetworkAdapterDHCPStatus": {
       "type": "string",
       "description": "Value indicating whether this adapter has DHCP enabled.",
       "enum": [
@@ -8405,7 +8346,7 @@
         "Enabled"
       ],
       "x-ms-enum": {
-        "name": "NetworkAdapterDhcpStatus",
+        "name": "NetworkAdapterDHCPStatus",
         "modelAsString": true,
         "values": [
           {
@@ -8436,7 +8377,7 @@
         }
       }
     },
-    "NetworkAdapterRdmaStatus": {
+    "NetworkAdapterRDMAStatus": {
       "type": "string",
       "description": "Value indicating whether this adapter is RDMA capable.",
       "enum": [
@@ -8444,7 +8385,7 @@
         "Capable"
       ],
       "x-ms-enum": {
-        "name": "NetworkAdapterRdmaStatus",
+        "name": "NetworkAdapterRDMAStatus",
         "modelAsString": true,
         "values": [
           {
@@ -8514,6 +8455,7 @@
         "properties": {
           "$ref": "#/definitions/NetworkSettingsProperties",
           "description": "The properties of network settings of a device.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -8803,7 +8745,6 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -9071,27 +9012,17 @@
           "$ref": "#/definitions/PeriodicTimerProperties",
           "description": "Periodic timer trigger properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Trigger Kind.",
-          "enum": [
-            "PeriodicTimerEvent"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
       "required": [
-        "properties",
-        "kind"
+        "properties"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Trigger"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "PeriodicTimerEvent"
     },
     "PeriodicTimerProperties": {
       "type": "object",
@@ -9390,6 +9321,7 @@
           "description": "Role type."
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -9500,7 +9432,8 @@
             "value": "Kubernetes"
           }
         ]
-      }
+      },
+      "x-ms-identifiers": []
     },
     "SSLStatus": {
       "type": "string",
@@ -10536,6 +10469,7 @@
           "description": "Trigger Kind."
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -10607,14 +10541,6 @@
           "$ref": "#/definitions/ARMBaseModel"
         }
       ]
-    },
-    "TypeSpec.Http.NoContentResponse": {
-      "type": "object",
-      "description": "There is no content to send for this request, but the headers may be useful."
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UpdateDetails": {
       "type": "object",

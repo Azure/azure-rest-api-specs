@@ -34,7 +34,7 @@ interface Shares {
   /**
    * Creates a new share or updates an existing share on the device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Share,
     Response = ArmResourceUpdatedResponse<Share> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Share> &
@@ -45,7 +45,7 @@ interface Shares {
   /**
    * Deletes the share on the Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Share,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,

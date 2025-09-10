@@ -35,7 +35,7 @@ interface BandwidthSchedules {
   /**
    * Creates or updates a bandwidth schedule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BandwidthSchedule,
     Response = ArmResourceUpdatedResponse<BandwidthSchedule> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BandwidthSchedule> &
@@ -46,7 +46,7 @@ interface BandwidthSchedules {
   /**
    * Deletes the specified bandwidth schedule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     BandwidthSchedule,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,

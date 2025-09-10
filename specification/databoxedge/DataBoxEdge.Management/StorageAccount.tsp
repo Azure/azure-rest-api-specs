@@ -35,7 +35,7 @@ interface StorageAccounts {
   /**
    * Creates a new StorageAccount or updates an existing StorageAccount on the device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
     Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &

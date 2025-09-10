@@ -25,25 +25,25 @@ model DataBoxEdgeDevice
   /**
    * The SKU type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * The etag for the devices.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * Msi identity of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ResourceIdentity;
 
   /**
    * The kind of the device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   kind?: DataBoxEdgeDeviceKind;
 }
@@ -58,7 +58,7 @@ interface DataBoxEdgeDevices {
   /**
    * Creates or updates a Data Box Edge/Data Box Gateway resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DataBoxEdgeDevice,
     Response = ArmResourceUpdatedResponse<DataBoxEdgeDevice>,
@@ -78,7 +78,7 @@ interface DataBoxEdgeDevices {
   /**
    * Deletes the Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DataBoxEdgeDevice,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -176,7 +176,7 @@ interface DataBoxEdgeDevices {
   /**
    * Updates the security settings on a Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("securitySettings/default/update")
   createOrUpdateSecuritySettings is ArmResourceActionAsync<
     DataBoxEdgeDevice,
@@ -211,7 +211,7 @@ interface DataBoxEdgeDevices {
   /**
    * Posts the device capacity request info to check feasibility.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("deviceCapacityCheck")
   checkResourceCreationFeasibility is ArmResourceActionAsync<
     DataBoxEdgeDevice,

@@ -35,7 +35,7 @@ interface Containers {
   /**
    * Creates a new container or updates an existing container on the device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Container,
     Response = ArmResourceUpdatedResponse<Container> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Container> &

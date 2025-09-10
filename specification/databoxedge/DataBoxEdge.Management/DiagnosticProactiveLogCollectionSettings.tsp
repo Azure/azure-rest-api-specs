@@ -43,7 +43,7 @@ interface DiagnosticSettings {
   /**
    * Updates the proactive log collection settings on a Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateDiagnosticProactiveLogCollectionSettings is ArmResourceCreateOrReplaceAsync<
     DiagnosticProactiveLogCollectionSettings,
     Response = ArmResourceUpdatedResponse<DiagnosticProactiveLogCollectionSettings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticProactiveLogCollectionSettings> &

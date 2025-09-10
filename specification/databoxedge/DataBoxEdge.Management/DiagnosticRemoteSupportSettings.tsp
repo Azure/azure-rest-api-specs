@@ -43,7 +43,7 @@ interface DiagnosticRemoteSupportSettingsOperationGroup {
   /**
    * Updates the diagnostic remote support settings on a Data Box Edge/Data Box Gateway device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateDiagnosticRemoteSupportSettings is ArmResourceCreateOrReplaceAsync<
     DiagnosticRemoteSupportSettings,
     Response = ArmResourceUpdatedResponse<DiagnosticRemoteSupportSettings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticRemoteSupportSettings> &

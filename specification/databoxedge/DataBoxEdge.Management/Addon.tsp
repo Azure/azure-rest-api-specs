@@ -29,7 +29,7 @@ model Addon is Azure.ResourceManager.ProxyResource<{}> {
   /**
    * Addon type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind: AddonType;
 }
 
@@ -43,7 +43,7 @@ interface Addons {
   /**
    * Create or update a addon.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is AddonsOps.CreateOrUpdateAsync<
     Addon,
     Response = ArmResourceUpdatedResponse<Addon> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Addon> &
@@ -54,7 +54,7 @@ interface Addons {
   /**
    * Deletes the addon on the device.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is AddonsOps.DeleteWithoutOkAsync<
     Addon,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
