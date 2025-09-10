@@ -6,3 +6,6 @@ using Microsoft.Storage;
 
 @@clientName(ProvisioningState, "StorageProvisioningState", "csharp");
 @@clientName(Microsoft.Storage, "StorageManagementClient", "javascript");
+
+@@clientName(AccountType, "ActiveDirectoryPropertiesAccountType", "go");
+@@clientName(AllowedMethods, "CorsRuleAllowedMethodsItem", "go");
