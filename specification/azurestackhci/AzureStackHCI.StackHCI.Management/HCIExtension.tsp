@@ -116,7 +116,6 @@ model HCIExtensionProperties {
    * Parameters specific to this extension type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   extensionParameters?: HCIExtensionParameters;
 
   /**
@@ -289,7 +288,6 @@ model HCIExtensionPatch {
    * Describes Machine Extension Properties that can be updated.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: HCIExtensionPatchProperties;
 }
 

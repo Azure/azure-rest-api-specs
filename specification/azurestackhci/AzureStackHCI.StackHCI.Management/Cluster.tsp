@@ -850,14 +850,12 @@ model ClusterPatch {
    * Identity of Cluster resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Cluster properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ClusterPatchProperties;
 }
 
@@ -926,7 +924,6 @@ model ClusterIdentityResponse {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ClusterIdentityResponseProperties;
 }
 

@@ -274,7 +274,6 @@ model ArcSettingsPatch {
    * ArcSettings properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ArcSettingsPatchProperties;
 }
 
@@ -330,7 +329,6 @@ model ArcIdentityResponse {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ArcIdentityResponseProperties;
 }
 

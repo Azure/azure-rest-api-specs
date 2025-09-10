@@ -135,7 +135,6 @@ model UpdateSummariesProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["version"])
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   packageVersions?: PackageVersionInfo[];
 
   /**
@@ -164,7 +163,6 @@ model UpdateSummariesProperties {
    * Overall health state for update-specific health checks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   healthState?: HealthState;
 
   /**
@@ -172,7 +170,6 @@ model UpdateSummariesProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   healthCheckResult?: PrecheckResult[];
 
   /**

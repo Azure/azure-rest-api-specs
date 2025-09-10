@@ -143,28 +143,24 @@ model UpdateProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["version"])
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   componentVersions?: PackageVersionInfo[];
 
   /**
    * Whether a reboot is required after applying the update.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   rebootRequired?: RebootRequirement;
 
   /**
    * Overall health state for update-specific health checks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   healthState?: HealthState;
 
   /**
    * An array of PrecheckResult objects.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   healthCheckResult?: PrecheckResult[];
 
   /**
@@ -222,7 +218,6 @@ model UpdateProperties {
    * Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   updateStateProperties?: UpdateStateProperties;
 }
 

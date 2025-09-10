@@ -128,7 +128,6 @@ model UpdateRunProperties {
    * Progress representation of the update run steps.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   progress?: UpdateRunsStep;
 }
 
