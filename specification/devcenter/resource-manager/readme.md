@@ -51,7 +51,12 @@ directive:
       - DescriptionMustNotBeNodeName
 
   - where:
-    - $.definitions.OperationStatus.properties
+    - $.definitions.OperationStatus.properties.properties
+    suppress:
+    - AvoidAdditionalProperties
+
+  - where:
+    - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment
     suppress:
     - AvoidAdditionalProperties
 
