@@ -22,6 +22,19 @@ model CertificateProfile is ProxyResource<CertificateProfileProperties> {
   name: string;
 }
 
+namespace Test {
+  model CertificateProfile {
+    name: string;
+  }
+
+  @route("/checkNameAvailability")
+  @get 
+  @doc("Check the availability of the trusted signing account name.")
+  op nameAvailability(): CertificateProfile;
+
+}
+
+
 @armResourceOperations
 interface CertificateProfiles {
   @doc("Get details of a certificate profile.")
