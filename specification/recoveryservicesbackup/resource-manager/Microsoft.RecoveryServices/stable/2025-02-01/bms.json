@@ -11213,57 +11213,6 @@
         }
       }
     },
-    "NewErrorResponse": {
-      "type": "object",
-      "description": "The resource management error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/NewErrorResponseError",
-          "description": "The error object."
-        }
-      }
-    },
-    "NewErrorResponseError": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message.",
-          "readOnly": true
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target.",
-          "readOnly": true
-        },
-        "details": {
-          "type": "array",
-          "description": "The error details.",
-          "items": {
-            "$ref": "#/definitions/NewErrorResponse"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
-        },
-        "additionalInfo": {
-          "type": "array",
-          "description": "The error additional info.",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "OperationResultInfo": {
       "type": "object",
       "description": "Operation result info.",
