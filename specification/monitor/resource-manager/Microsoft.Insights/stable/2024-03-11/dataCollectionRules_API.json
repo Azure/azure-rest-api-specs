@@ -404,6 +404,7 @@
       "type": "object",
       "properties": {
         "resourceId": {
+          "format": "arm-id",
           "description": "Id of the application insights resource",
           "type": "string",
           "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/amcs/providers/microsoft.insights/components/ai01"
@@ -1224,24 +1225,6 @@
         }
       }
     },
-    "Filter": {
-      "type": "object",
-      "properties": {
-        "field": {
-          "description": "The field to be filtered.",
-          "type": "string"
-        },
-        "operation": {
-          "description": "The operation to be applied to the field.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value to be compared with the field.",
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
     "IdentityType": {
       "enum": [
         "none",
@@ -1596,7 +1579,7 @@
           ]
         },
         "enrichWithReference": {
-          "description": "Specifies the reference to enrich the telemetry signal with.",
+          "description": "Specifies the reference alias to enrich the telemetry signal with.",
           "type": "string",
           "example": "myAI"
         },
@@ -1895,6 +1878,8 @@
           "format": "int32",
           "description": "The number of seconds between consecutive counter measurements (samples).",
           "type": "integer",
+          "minimum": 1,
+          "maximum": 1800,
           "example": 15
         },
         "counterSpecifiers": {
@@ -1945,6 +1930,8 @@
           "format": "int32",
           "description": "The number of seconds between consecutive counter measurements (samples).",
           "type": "integer",
+          "minimum": 1,
+          "maximum": 1800,
           "example": 15
         },
         "counterSpecifiers": {
