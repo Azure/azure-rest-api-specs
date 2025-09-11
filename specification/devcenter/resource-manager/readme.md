@@ -31,7 +31,7 @@ tag: package-preview-2025-07-01-preview
 
 directive:
   - where:
-    - $.definitions.DevBoxDefinitionUpdate.properties.sku.properties
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions/{devBoxDefinitionName}"].patch.parameters[5].schema.properties.sku
     suppress: 
     - PatchBodyParametersSchema
 
@@ -41,7 +41,7 @@ directive:
       - PathForNestedResource
 
   - where:
-    - $.definitions.PoolUpdate.properties.devBoxDefinition.sku
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[5].schema.properties.devBoxDefinition.sku.name
     suppress:
       - PatchBodyParametersSchema
 
