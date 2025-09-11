@@ -138,6 +138,62 @@ describe("sdk-breaking-change-labels", () => {
         issueNumber: 123,
       });
     });
+    it("should correctly set labelAction to none when label name is empty", async () => {
+      // Setup inputs
+      const inputs = {
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
+        head_sha: "abc123",
+      };
+
+      // Setup mock for extractInputs
+      const { extractInputs } = await import("../src/context.js");
+      extractInputs.mockResolvedValue(inputs);
+
+      // Mock artifact responses with 'remove' action
+      const mockArtifactResponse = {
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          resource: {
+            downloadUrl: "https://dev.azure.com/download?format=zip",
+          },
+        }),
+      };
+
+      const language = "azure-sdk-for-java";
+      const mockContentResponse = {
+        ok: true,
+        text: vi.fn().mockResolvedValue(
+          JSON.stringify({
+            labelAction: false,
+            language,
+            prNumber: "123",
+          }),
+        ),
+      };
+
+      // Setup fetch to return different responses for each call
+      global.fetch.mockImplementation((url) => {
+        if (url.includes("artifacts?artifactName=")) {
+          return mockArtifactResponse;
+        } else {
+          return mockContentResponse;
+        }
+      });
+
+      // Call function
+      const result = await getLabelAndAction({
+        github: mockGithub,
+        context: mockContext,
+        core: mockCore,
+      });
+
+      // Verify result has none action
+      expect(result).toEqual({
+        labelName: sdkLabels[language].breakingChange,
+        labelAction: LabelAction.None,
+        issueNumber: 123,
+      });
+    });
     it("should throw error with invalid inputs", async () => {
       // Setup inputs
       const inputs = {
@@ -188,6 +244,7 @@ describe("sdk-breaking-change-labels", () => {
       expect(result).toEqual({
         labelName: "",
         labelAction: LabelAction.None,
+        headSha: "",
         issueNumber: NaN,
       });
 
@@ -258,6 +315,7 @@ describe("sdk-breaking-change-labels", () => {
       expect(result).toEqual({
         labelName: "",
         labelAction: LabelAction.None,
+        headSha: "",
         issueNumber: NaN,
       });
     });

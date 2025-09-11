@@ -8,11 +8,9 @@ See [Use SDK Automation from REST API specifications](https://github.com/Azure/a
 
 `namespace` always starts with `com.azure` for Azure Java data-plane SDK. [Review process](https://azure.github.io/azure-sdk/policies_reviewprocess.html).
 
-`package-dir` should follow the pattern of the `namespace`.
-
 ```yaml
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-openai"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-openai"
     flavor: azure
     namespace: "com.azure.ai.openai"
 ```
@@ -21,13 +19,11 @@ See [Use SDK Automation from REST API specifications](https://github.com/Azure/a
 
 `namespace` always starts with `com.azure.resourcemanager` for Azure Java management-plane SDK. [Review process](https://eng.ms/docs/products/azure-developer-experience/develop/namespace-review).
 
-`package-dir` should follow the pattern of the `namespace`. Remove the "com." and replace the dot with hyphen.
-
 `service-name` is the name of the service. It is used for SDK class name and documentations.
 
 ```yaml
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-standbypool"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-standbypool"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.standbypool"
     service-name: "Standby Pool"

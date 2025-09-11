@@ -4,18 +4,20 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ConsoleLogger, debugLogger, defaultLogger } from "../src/logger";
 
 describe("logger", () => {
-  let debugSpy, errorSpy, logSpy;
+  let debugSpy, errorSpy, logSpy, warnSpy;
 
   beforeEach(() => {
     debugSpy = vi.spyOn(console, "debug");
     errorSpy = vi.spyOn(console, "error");
     logSpy = vi.spyOn(console, "log");
+    warnSpy = vi.spyOn(console, "warn");
   });
 
   afterEach(() => {
     debugSpy.mockRestore();
     errorSpy.mockRestore();
     logSpy.mockRestore();
+    warnSpy.mockRestore();
   });
 
   it.each([
@@ -28,6 +30,9 @@ describe("logger", () => {
 
     logger.info("test info");
     expect(logSpy).toBeCalledWith("test info");
+
+    logger.warning("test warning");
+    expect(warnSpy).toBeCalledWith("test warning");
 
     logger.error("test error");
     expect(errorSpy).toBeCalledWith("test error");
