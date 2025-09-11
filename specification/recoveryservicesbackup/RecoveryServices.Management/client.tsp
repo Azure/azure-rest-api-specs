@@ -259,6 +259,12 @@ using Microsoft.RecoveryServices;
   "java"
 );
 
+// ResourceGuardProxies interface rename
+@@clientName(Microsoft.RecoveryServices.ResourceGuardProxies,
+  "ResourceGuardProxy",
+  "java"
+);
+
 // Key/secret related mappings
 @@clientName(Microsoft.RecoveryServices.KEKDetails, "KekDetails", "java");
 @@clientName(Microsoft.RecoveryServices.BEKDetails, "BekDetails", "java");
