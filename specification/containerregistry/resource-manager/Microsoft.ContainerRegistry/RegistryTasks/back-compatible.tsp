@@ -14,11 +14,4 @@ using Microsoft.ContainerRegistry;
 @@clientName(Tasks.create::parameters.resource, "taskCreateParameters");
 @@clientName(Tasks.update::parameters.properties, "taskUpdateParameters");
 
-@@clientLocation(RegistriesOperationGroup.scheduleRun, "Registries");
-@@clientLocation(RegistriesOperationGroup.getBuildSourceUploadUrl,
-  "Registries"
-);
-
-@@clientName(RegistriesOperationGroup.scheduleRun::parameters.body,
-  "runRequest"
-);
+@@clientName(Registries.scheduleRun::parameters.body, "runRequest");

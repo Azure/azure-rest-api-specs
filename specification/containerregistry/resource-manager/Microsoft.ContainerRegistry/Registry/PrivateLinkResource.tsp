@@ -30,15 +30,11 @@ interface PrivateLinkResources {
   /**
    * Gets a private link resource by a specified group name for a container registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Registries_GetPrivateLinkResource")
   getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
 
   /**
    * Lists the private link resources for a container registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Registries_ListPrivateLinkResources")
   @list
   listPrivateLinkResources is ArmResourceListByParent<
     PrivateLinkResource,

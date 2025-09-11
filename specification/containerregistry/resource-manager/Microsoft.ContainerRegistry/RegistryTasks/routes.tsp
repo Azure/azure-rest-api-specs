@@ -14,12 +14,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ContainerRegistry;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface RegistriesOperationGroup {
+interface Registries {
   /**
    * Schedules a new run based on the request parameters and add it to the run queue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Registries_ScheduleRun")
   @autoRoute
   scheduleRun is ArmProviderActionSync<
     Request = RunRequest,
@@ -40,8 +38,6 @@ interface RegistriesOperationGroup {
   /**
    * Get the upload location for the user to be able to upload the source.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Registries_GetBuildSourceUploadUrl")
   @autoRoute
   @action("listBuildSourceUploadUrl")
   getBuildSourceUploadUrl is ArmProviderActionSync<
