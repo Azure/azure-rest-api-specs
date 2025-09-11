@@ -25,23 +25,6 @@ model GroupQuotaLimitList
   >;
 }
 
-/**
- * Virtual resource representing a resource provider scope within a group quota.
- */
-@parentResource(GroupQuotasEntity)
-@armVirtualResource
-model Virtual {
-  /**
-   * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
-   */
-  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @key
-  @path
-  @segment("resourceProviders")
-  @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
-  resourceProviderName: string;
-}
-
 alias GroupQuotaLimitListsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;

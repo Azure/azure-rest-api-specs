@@ -13,8 +13,6 @@ namespace Microsoft.Quota;
 /**
  * Resource usage.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@extensionResource
 model CurrentUsagesBase
   is Azure.ResourceManager.ExtensionResource<UsagesProperties> {
   ...ResourceNameParameter<
