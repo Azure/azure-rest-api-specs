@@ -1,0 +1,409 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceName": "testsqlServerInstance",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "version": "SQL Server 2012",
+          "edition": "Developer",
+          "containerResourceId": "Resource id of hosting Arc Machine",
+          "vmId": "12345678-1234-1234-1234-123456789123",
+          "createTime": "01/01/2020 01:01:01",
+          "patchLevel": "patchlevel",
+          "collation": "collation",
+          "isMicrosoftPkiCertTrustConfigured": true,
+          "isDigiCertPkiCertTrustConfigured": true,
+          "dbMasterKeyExists": true,
+          "isHadrEnabled": true,
+          "traceFlags": [
+            1800,
+            9567
+          ],
+          "currentVersion": "2012",
+          "instanceName": "name of instance",
+          "tcpDynamicPorts": "1433",
+          "tcpStaticPorts": "1433",
+          "productId": "sql id",
+          "vCore": "4",
+          "cores": "4",
+          "licenseType": "Free",
+          "azureDefenderStatusLastUpdated": "2020-01-02T17:18:19.1234567Z",
+          "azureDefenderStatus": "Protected",
+          "status": "Registered",
+          "hostType": "Physical Server",
+          "lastInventoryUploadTime": "2023-03-29T14:13:12Z",
+          "lastUsageUploadTime": "2023-03-29T14:13:12Z",
+          "alwaysOnRole": "FailoverClusterInstance",
+          "failoverCluster": {
+            "id": "f836af7e-85ed-4ea4-91fb-67709b34e323",
+            "networkName": "networkNameOfSQLFCI",
+            "sqlInstanceIds": [
+              "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer1",
+              "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer2"
+            ],
+            "hostNames": [
+              "DEV-HOSTNAME1",
+              "DEV-HOSTNAME2"
+            ],
+            "hostIPAddresses": [
+              {
+                "ipAddress": "10.20.11.23",
+                "subnetMask": "255.255.255.0"
+              },
+              {
+                "ipAddress": "10.20.11.24",
+                "subnetMask": "255.255.255.0"
+              }
+            ]
+          },
+          "databaseMirroringEndpoint": {
+            "endpointName": "testMirroringEndpoint",
+            "role": "PARTNER",
+            "isEncryptionEnabled": true,
+            "encryptionAlgorithm": "RC4",
+            "connectionAuth": "Certificate",
+            "port": 12345,
+            "isDynamicPort": false,
+            "ipAddress": "123.124.125.126",
+            "certificateName": "testCertificateName",
+            "certificateExpiryDate": "2025-03-30T00:00:00Z"
+          },
+          "backupPolicy": {
+            "retentionPeriodDays": 1,
+            "fullBackupDays": 1,
+            "differentialBackupHours": 12,
+            "transactionLogBackupMinutes": 30
+          },
+          "upgradeLockedUntil": "2022-05-05T16:26:33.883Z",
+          "monitoring": {
+            "enabled": false
+          },
+          "migration": {
+            "assessment": {
+              "enabled": true,
+              "version": "1.2.3.4",
+              "settings": {
+                "targetLocation": "West US",
+                "percentile": 95.0,
+                "lookbackPeriodInDays": 30,
+                "strategy": "MinimizeCost",
+                "currency": "USD",
+                "discountPercentage": 10.0,
+                "costOptions": {
+                  "computeAndStorageCostOption": "With1YearRIAndDevTest",
+                  "sqlLicenseCostOption": "WithSQLAHB",
+                  "windowsLicenseCostOption": "WithWindowsAHB"
+                }
+              },
+              "assessmentUploadTime": "2024-03-15T00:16:11.0000000Z",
+              "serverAssessments": [
+                {
+                  "appliesToMigrationTargetPlatform": "AzureSqlDatabase",
+                  "featureId": "TraceFlags",
+                  "impactedObjects": [
+                    {
+                      "impactDetail": "",
+                      "name": "8017",
+                      "objectType": "TraceFlag"
+                    }
+                  ],
+                  "issueCategory": "Warning",
+                  "moreInformation": "Resolving Transact-SQL differences during migration to SQL Database"
+                },
+                {
+                  "appliesToMigrationTargetPlatform": "AzureSqlManagedInstance",
+                  "featureId": "TraceFlags",
+                  "impactedObjects": [
+                    {
+                      "impactDetail": "",
+                      "name": "8017",
+                      "objectType": "TraceFlag"
+                    }
+                  ],
+                  "issueCategory": "Warning",
+                  "moreInformation": "Trace Flags"
+                }
+              ],
+              "impactedObjectsSummary": {
+                "azureSqlDatabase": [
+                  {
+                    "featureId": "ServerCredential",
+                    "numberImpacted": 1,
+                    "issueCategory": "Warning"
+                  },
+                  {
+                    "featureId": "AgentJobs",
+                    "numberImpacted": 3,
+                    "issueCategory": "Warning"
+                  },
+                  {
+                    "featureId": "PowerShellJob",
+                    "numberImpacted": 1,
+                    "issueCategory": "Warning"
+                  }
+                ],
+                "azureSqlManagedInstance": [
+                  {
+                    "featureId": "ServerCredential",
+                    "numberImpacted": 1,
+                    "issueCategory": "Warning"
+                  },
+                  {
+                    "featureId": "AgentJobs",
+                    "numberImpacted": 3,
+                    "issueCategory": "Warning"
+                  },
+                  {
+                    "featureId": "PowerShellJob",
+                    "numberImpacted": 1,
+                    "issueCategory": "Warning"
+                  }
+                ]
+              },
+              "skuRecommendationResults": {
+                "azureSqlDatabase": {
+                  "recommendationStatus": "Ready",
+                  "numberOfServerBlockerIssues": 0,
+                  "targetSku": {
+                    "category": {
+                      "computeTier": "Provisioned",
+                      "hardwareType": "Gen5",
+                      "sqlPurchasingModel": "vCore",
+                      "sqlServiceTier": "General Purpose",
+                      "zoneRedundancyAvailable": false
+                    },
+                    "computeSize": 2,
+                    "storageMaxSizeInMb": 1024.0,
+                    "predictedDataSizeInMb": 21.94,
+                    "predictedLogSizeInMb": 2.0,
+                    "maxStorageIops": 0.44,
+                    "maxThroughputMBps": 0.0
+                  },
+                  "monthlyCost": {
+                    "computeCost": 245.13,
+                    "storageCost": 0.18,
+                    "sqlLicenseCost": 445.22,
+                    "windowsLicenseCost": 4444.44,
+                    "totalCost": 245.31
+                  },
+                  "monthlyCostOptions": [
+                    {
+                      "keyName": "With1YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 245.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With3YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 24.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With1YearASPAndProd",
+                      "keyValue": {
+                        "computeCost": 242.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    }
+                  ]
+                },
+                "azureSqlManagedInstance": {
+                  "recommendationStatus": "Ready",
+                  "numberOfServerBlockerIssues": 0,
+                  "targetSku": {
+                    "category": {
+                      "computeTier": "Provisioned",
+                      "hardwareType": "Gen5",
+                      "sqlPurchasingModel": "vCore",
+                      "sqlServiceTier": "General Purpose",
+                      "zoneRedundancyAvailable": false
+                    },
+                    "computeSize": 2,
+                    "storageMaxSizeInMb": 1024.0,
+                    "predictedDataSizeInMb": 21.94,
+                    "predictedLogSizeInMb": 2.0,
+                    "maxStorageIops": 0.44,
+                    "maxThroughputMBps": 0.0
+                  },
+                  "monthlyCost": {
+                    "computeCost": 245.13,
+                    "storageCost": 0.18,
+                    "sqlLicenseCost": 445.22,
+                    "windowsLicenseCost": 4444.44,
+                    "totalCost": 245.31
+                  },
+                  "monthlyCostOptions": [
+                    {
+                      "keyName": "With1YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 245.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With3YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 24.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With1YearASPAndProd",
+                      "keyValue": {
+                        "computeCost": 242.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    }
+                  ]
+                },
+                "azureSqlVirtualMachine": {
+                  "recommendationStatus": "Ready",
+                  "numberOfServerBlockerIssues": 0,
+                  "targetSku": {
+                    "category": {
+                      "availableVmSkus": [
+                        "Standard_D16as_v4",
+                        "Standard_D2as_v4",
+                        "Standard_D32as_v4",
+                        "Standard_D48as_v4",
+                        "Standard_D4as_v4",
+                        "Standard_D64as_v4",
+                        "Standard_D8as_v4",
+                        "Standard_D96as_v4"
+                      ],
+                      "virtualMachineFamily": "standardDASv4Family"
+                    },
+                    "predictedDataSizeInMb": 21.94,
+                    "predictedLogSizeInMb": 2.0,
+                    "virtualMachineSize": {
+                      "virtualMachineFamily": "standardEDSv5Family",
+                      "sizeName": "E20ds_v5",
+                      "computeSize": 20,
+                      "azureSkuName": "Standard_E20ds_v5",
+                      "vCPUsAvailable": 20,
+                      "maxNetworkInterfaces": 0
+                    },
+                    "dataDiskSizes": [
+                      {
+                        "diskType": "PremiumSSD",
+                        "redundancy": "LocallyRedundant",
+                        "size": "P2",
+                        "caching": "None",
+                        "maxSizeInGib": 8.0,
+                        "maxThroughputInMbps": 25.0,
+                        "maxIops": 120.0
+                      }
+                    ],
+                    "logDiskSizes": [
+                      {
+                        "diskType": "PremiumSSD",
+                        "redundancy": "LocallyRedundant",
+                        "size": "P2",
+                        "caching": "None",
+                        "maxSizeInGib": 8.0,
+                        "maxThroughputInMbps": 25.0,
+                        "maxIops": 120.0
+                      }
+                    ],
+                    "tempDbDiskSizes": [
+                      {
+                        "diskType": "PremiumSSD",
+                        "redundancy": "LocallyRedundant",
+                        "size": "P2",
+                        "caching": "None",
+                        "maxSizeInGib": 8.0,
+                        "maxThroughputInMbps": 25.0,
+                        "maxIops": 120.0
+                      }
+                    ],
+                    "computeSize": 20
+                  },
+                  "monthlyCost": {
+                    "computeCost": 245.13,
+                    "storageCost": 0.18,
+                    "sqlLicenseCost": 445.22,
+                    "windowsLicenseCost": 4444.44,
+                    "totalCost": 245.31
+                  },
+                  "monthlyCostOptions": [
+                    {
+                      "keyName": "With1YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 245.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With3YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 24.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With1YearASPAndProd",
+                      "keyValue": {
+                        "computeCost": 242.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "clientConnection": {
+            "enabled": false
+          },
+          "serviceType": "Engine",
+          "maxServerMemoryMB": 4096,
+          "authentication": {
+            "mode": "Windows",
+            "sqlServerEntraIdentity": [
+              {
+                "clientId": "00000000-1111-2222-3333-444444444444",
+                "identityType": "UserAssignedManagedIdentity"
+              },
+              {
+                "clientId": "",
+                "identityType": "SystemAssignedManagedIdentity"
+              }
+            ]
+          }
+        },
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/testsqlServerInstance",
+        "name": "testsqlServerInstance",
+        "type": "Microsoft.AzureArcData/SqlServerInstances"
+      }
+    }
+  }
+}

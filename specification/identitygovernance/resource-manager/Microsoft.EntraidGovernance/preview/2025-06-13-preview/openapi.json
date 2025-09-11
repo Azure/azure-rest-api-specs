@@ -1,0 +1,507 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.EntraidGovernance management service",
+    "version": "2025-06-13-preview",
+    "description": "Microsoft Entraid Governance Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "GuestGovernanceUsages"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.EntraidGovernance/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EntraidGovernance/guestGovernanceUsage": {
+      "get": {
+        "operationId": "GuestGovernanceUsages_ListBySubscription",
+        "tags": [
+          "GuestGovernanceUsages"
+        ],
+        "description": "List GuestGovernanceUsage resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestGovernanceUsageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestGovernanceUsages_ListBySubscription": {
+            "$ref": "./examples/GuestGovernanceUsages_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EntraidGovernance/guestGovernanceUsage": {
+      "get": {
+        "operationId": "GuestGovernanceUsages_ListByResourceGroup",
+        "tags": [
+          "GuestGovernanceUsages"
+        ],
+        "description": "List GuestGovernanceUsage resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestGovernanceUsageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestGovernanceUsage_ListByResourceGroup": {
+            "$ref": "./examples/GuestGovernanceUsages_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EntraidGovernance/guestGovernanceUsage/{name}": {
+      "get": {
+        "operationId": "GuestGovernanceUsages_Get",
+        "tags": [
+          "GuestGovernanceUsages"
+        ],
+        "description": "Get a GuestGovernanceUsage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Singleton Guest Governance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestGovernanceUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get GuestGovernanceUsages": {
+            "$ref": "./examples/GuestGovernanceUsages_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GuestGovernanceUsages_Create",
+        "tags": [
+          "GuestGovernanceUsages"
+        ],
+        "description": "Create a GuestGovernanceUsage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Singleton Guest Governance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestGovernanceUsage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GuestGovernanceUsage' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GuestGovernanceUsage"
+            }
+          },
+          "201": {
+            "description": "Resource 'GuestGovernanceUsage' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GuestGovernanceUsage"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create GuestGovernanceUsage": {
+            "$ref": "./examples/GuestGovernanceUsages_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GuestGovernanceUsages_Update",
+        "tags": [
+          "GuestGovernanceUsages"
+        ],
+        "description": "Update a GuestGovernanceUsage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Singleton Guest Governance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestGovernanceUsageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestGovernanceUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update GuestGovernanceUsage": {
+            "$ref": "./examples/GuestGovernanceUsages_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GuestGovernanceUsages_Delete",
+        "tags": [
+          "GuestGovernanceUsages"
+        ],
+        "description": "Delete a GuestGovernanceUsage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Singleton Guest Governance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteGuestGovernanceUsage": {
+            "$ref": "./examples/GuestGovernanceUsages_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GuestGovernanceUsage": {
+      "type": "object",
+      "description": "Entraid Guest Governance Usage resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GuestGovernanceUsageProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GuestGovernanceUsageListResult": {
+      "type": "object",
+      "description": "The response of a GuestGovernanceUsage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GuestGovernanceUsage items on this page",
+          "items": {
+            "$ref": "#/definitions/GuestGovernanceUsage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GuestGovernanceUsageProperties": {
+      "type": "object",
+      "description": "Details of the Entraid Governance Guest Governance Usage resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "GuestGovernanceUsageUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the GuestGovernanceUsage.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

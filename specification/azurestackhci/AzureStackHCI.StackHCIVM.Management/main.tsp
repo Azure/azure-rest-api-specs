@@ -16,6 +16,12 @@ import "./VirtualMachineInstance.tsp";
 import "./HybridIdentityMetadata.tsp";
 import "./AttestationStatus.tsp";
 import "./GuestAgent.tsp";
+import "./VirtualNetworks.tsp";
+import "./VirtualNetworkSubnets.tsp";
+import "./PublicIPAddresses.tsp";
+import "./NatGateways.tsp";
+import "./LoadBalancers.tsp";
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -39,49 +45,51 @@ enum Versions {
   /**
    * The 2024-02-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",
 
   /**
-   * The 2024-05-01-preview API version.
+   * The 2024-05-01-preview API version for internal testing only.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-version-format" "Version name approved by reviewers"
   v2024_05_01_preview: "2024-05-01-preview",
 
   /**
-   * The 2024-08-01-preview API version.
+   * The 2024-07-15-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_07_15_preview: "2024-07-15-preview",
+
+  /**
+   * The 2024-08-01-preview  API version.
+   */
   v2024_08_01_preview: "2024-08-01-preview",
+
+  /**
+   * The 2024-09-01-preview API version.
+   */
+  v2024_09_01_preview: "2024-09-01-preview",
 
   /**
    * The 2024-10-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_10_01_preview: "2024-10-01-preview",
 
   /**
    * The 2025-02-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_02_01_preview: "2025-02-01-preview",
 
   /**
    * The 2025-04-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_04_01_preview: "2025-04-01-preview",
 
   /**
    * The 2025-06-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_06_01_preview: "2025-06-01-preview",
+
+  /**
+   * The 2025-09-01-preview API version.
+   */
+  v2025_09_01_preview: "2025-09-01-preview",
 }

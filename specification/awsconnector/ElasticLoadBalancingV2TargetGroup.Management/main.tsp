@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -121,14 +120,14 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   protocolVersion?: string;
 
   @doc("The tags.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The ARN of the Target Group")
   targetGroupArn?: string;
 
   @doc("The attributes.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   targetGroupAttributes?: TargetGroupAttribute[];
 
   @doc("The full name of the target group.")
@@ -141,7 +140,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   targetType?: string;
 
   @doc("The targets.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   targets?: TargetDescription[];
 
   @doc("The number of consecutive health check failures required before considering a target unhealthy.")

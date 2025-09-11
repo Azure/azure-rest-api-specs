@@ -1,0 +1,4025 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-12-01-privatepreview",
+    "title": "Fidalgo",
+    "description": "Project Fidalgo Management API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fidalgo/devcenters": {
+      "get": {
+        "tags": [
+          "DevCenters"
+        ],
+        "description": "Lists all devcenters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "DevCenters_ListBySubscription",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenters_ListBySubscription": {
+            "$ref": "./examples/DevCenters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters": {
+      "get": {
+        "tags": [
+          "DevCenters"
+        ],
+        "description": "Lists all devcenters in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "DevCenters_ListByResourceGroup",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenters_ListByResourceGroup": {
+            "$ref": "./examples/DevCenters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}": {
+      "get": {
+        "tags": [
+          "DevCenters"
+        ],
+        "description": "Gets a devcenter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          }
+        ],
+        "operationId": "DevCenters_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenters_Get": {
+            "$ref": "./examples/DevCenters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DevCenters"
+        ],
+        "description": "Creates or updates a devcenter resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a devcenter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevCenter"
+            }
+          }
+        ],
+        "operationId": "DevCenters_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenter"
+            }
+          },
+          "201": {
+            "description": "Created. The request will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DevCenter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenters_Create": {
+            "$ref": "./examples/DevCenters_Create.json"
+          },
+          "DevCenters_CreateWithUserIdentity": {
+            "$ref": "./examples/DevCenters_CreateWithUserIdentity.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DevCenters"
+        ],
+        "description": "Partially updates a devcenter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable devcenter properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevCenterUpdate"
+            }
+          }
+        ],
+        "operationId": "DevCenters_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenter"
+            }
+          },
+          "201": {
+            "description": "Created. The request will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DevCenter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenters_Update": {
+            "$ref": "./examples/DevCenters_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DevCenters"
+        ],
+        "description": "Deletes a devcenter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          }
+        ],
+        "operationId": "DevCenters_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenters_Delete": {
+            "$ref": "./examples/DevCenters_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fidalgo/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Lists all projects in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Projects_ListBySubscription",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_ListBySubscription": {
+            "$ref": "./examples/Projects_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Lists all projects in the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Projects_ListByResourceGroup",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_ListByResourceGroup": {
+            "$ref": "./examples/Projects_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/projects/{projectName}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Gets a specific project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          }
+        ],
+        "operationId": "Projects_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Get": {
+            "$ref": "./examples/Projects_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Creates or updates a project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a project.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "operationId": "Projects_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_CreateOrUpdate": {
+            "$ref": "./examples/Projects_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Partially updates a project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable project properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectUpdate"
+            }
+          }
+        ],
+        "operationId": "Projects_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Update": {
+            "$ref": "./examples/Projects_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Deletes a project resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          }
+        ],
+        "operationId": "Projects_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Delete": {
+            "$ref": "./examples/Projects_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/projects/{projectName}/environments": {
+      "get": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Lists the environments for a project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Environments_ListByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListByProject": {
+            "$ref": "./examples/Environments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/projects/{projectName}/environments/{environmentName}": {
+      "get": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Gets an environment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "operationId": "Environments_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Get": {
+            "$ref": "./examples/Environments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Creates or updates an environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          }
+        ],
+        "operationId": "Environments_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_CreateByCatalogItem": {
+            "$ref": "./examples/Environments_CreateByCatalogItem.json"
+          },
+          "Environments_CreateByTemplateUri": {
+            "$ref": "./examples/Environments_CreateByTemplateUri.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Partially updates an environment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable environment properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentUpdate"
+            }
+          }
+        ],
+        "operationId": "Environments_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Update": {
+            "$ref": "./examples/Environments_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Deletes an environment and all it's associated resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "operationId": "Environments_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Environment has been deleted."
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Delete": {
+            "$ref": "./examples/Environments_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/projects/{projectName}/environments/{environmentName}/deploy": {
+      "post": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Deploys an environment's resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "name": "deployment",
+            "in": "body",
+            "description": "Deployment properties overriding the environment's default values.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentDeploy"
+            }
+          }
+        ],
+        "operationId": "Environments_Deploy",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request was completed"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Deploy": {
+            "$ref": "./examples/Environments_Deploy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/projects/{projectName}/environments/{environmentName}/deployments": {
+      "get": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Gets an environment's deployment history",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Deployments_ListByEnvironment",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentHistoryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Deployments_ListByEnvironment": {
+            "$ref": "./examples/Environments_ListDeploymentHistory.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/projects/{projectName}/environmentTypes": {
+      "get": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Lists all environment types configured for this project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "EnvironmentTypes_ListByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentTypeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentTypes_ListByProject": {
+            "$ref": "./examples/EnvironmentTypes_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/projects/{projectName}/catalogItems": {
+      "get": {
+        "tags": [
+          "Catalog Items"
+        ],
+        "description": "Lists all catalog items available for a project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "CatalogItems_ListByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogItemListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CatalogItems_ListByProject": {
+            "$ref": "./examples/CatalogItems_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/galleries": {
+      "get": {
+        "tags": [
+          "Galleries"
+        ],
+        "description": "Lists galleries for a devcenter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Galleries_ListByDevCenter",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GalleryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Galleries_ListByDevCenter": {
+            "$ref": "./examples/Galleries_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/galleries/{galleryName}": {
+      "get": {
+        "tags": [
+          "Galleries"
+        ],
+        "description": "Gets a gallery",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryNameParameter"
+          }
+        ],
+        "operationId": "Galleries_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Gallery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Galleries_Get": {
+            "$ref": "./examples/Galleries_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Galleries"
+        ],
+        "description": "Creates or updates a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a gallery.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gallery"
+            }
+          }
+        ],
+        "operationId": "Galleries_CreateOrUpdate",
+        "responses": {
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Gallery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Galleries_CreateOrUpdate": {
+            "$ref": "./examples/Galleries_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Galleries"
+        ],
+        "description": "Deletes a gallery resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryNameParameter"
+          }
+        ],
+        "operationId": "Galleries_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Galleries_Delete": {
+            "$ref": "./examples/Galleries_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "description": "Lists images for a devcenter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Images_ListByDevCenter",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_ListByDevCenter": {
+            "$ref": "./examples/Images_ListByDevCenter.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/galleries/{galleryName}/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "description": "Lists images for a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Images_ListByGallery",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_ListByGallery": {
+            "$ref": "./examples/Images_ListByGallery.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/galleries/{galleryName}/images/{imageName}": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "description": "Gets a gallery image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageNameParameter"
+          }
+        ],
+        "operationId": "Images_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_Get": {
+            "$ref": "./examples/Images_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/galleries/{galleryName}/images/{imageName}/versions": {
+      "get": {
+        "tags": [
+          "Image Versions"
+        ],
+        "description": "Lists versions for an image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageNameParameter"
+          }
+        ],
+        "operationId": "ImageVersions_ListByImage",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageVersions_ListByImage": {
+            "$ref": "./examples/ImageVersions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/galleries/{galleryName}/images/{imageName}/versions/{versionName}": {
+      "get": {
+        "tags": [
+          "Image Versions"
+        ],
+        "description": "Gets an image version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          }
+        ],
+        "operationId": "ImageVersions_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Versions_Get": {
+            "$ref": "./examples/ImageVersions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/catalogs": {
+      "get": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Lists catalogs for a devcenter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Catalogs_ListByDevCenter",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_ListByDevCenter": {
+            "$ref": "./examples/Catalogs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/catalogs/{catalogName}": {
+      "get": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Gets a catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "Catalogs_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_Get": {
+            "$ref": "./examples/Catalogs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Creates or updates a catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a catalog.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          }
+        ],
+        "operationId": "Catalogs_CreateOrUpdate",
+        "responses": {
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Catalogs_CreateOrUpdateGitHub": {
+            "$ref": "./examples/Catalogs_CreateGitHub.json"
+          },
+          "Catalogs_CreateOrUpdateAdo": {
+            "$ref": "./examples/Catalogs_CreateAdo.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Partially updates a catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable catalog properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogUpdate"
+            }
+          }
+        ],
+        "operationId": "Catalogs_Update",
+        "responses": {
+          "200": {
+            "description": "The resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "201": {
+            "description": "The request will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Catalogs_Update": {
+            "$ref": "./examples/Catalogs_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Deletes a catalog resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "Catalogs_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_Delete": {
+            "$ref": "./examples/Catalogs_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/catalogs/{catalogName}/sync": {
+      "post": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Syncs templates for a template source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "Catalogs_Sync",
+        "responses": {
+          "200": {
+            "description": "OK. The request was completed"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Catalogs_Sync": {
+            "$ref": "./examples/Catalogs_Sync.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/catalogs/{catalogName}/items": {
+      "get": {
+        "tags": [
+          "Catalog Items"
+        ],
+        "description": "Lists items by catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "CatalogItems_ListByCatalog",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogItemListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CatalogItems_ListByCatalog": {
+            "$ref": "./examples/CatalogItems_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/catalogs/{catalogName}/items/{catalogItemName}": {
+      "get": {
+        "tags": [
+          "Catalog Items"
+        ],
+        "description": "Gets a catalog item",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogItemNameParameter"
+          }
+        ],
+        "operationId": "CatalogItems_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CatalogItems_Get": {
+            "$ref": "./examples/CatalogItems_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Catalog Items"
+        ],
+        "description": "Creates a catalog item resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogItemNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a catalog item.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogItem"
+            }
+          }
+        ],
+        "operationId": "CatalogItems_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/CatalogItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CatalogItems_CreateOrUpdate": {
+            "$ref": "./examples/CatalogItems_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Catalog Items"
+        ],
+        "description": "Partially updates a catalog item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogItemNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable catalog item properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogItemUpdate"
+            }
+          }
+        ],
+        "operationId": "CatalogItems_Update",
+        "responses": {
+          "200": {
+            "description": "The resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/CatalogItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CatalogItems_Update": {
+            "$ref": "./examples/CatalogItems_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Catalog Items"
+        ],
+        "description": "Deletes a catalog item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogItemNameParameter"
+          }
+        ],
+        "operationId": "CatalogItems_Delete",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CatalogItems_Delete": {
+            "$ref": "./examples/CatalogItems_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/mappings": {
+      "get": {
+        "tags": [
+          "Mappings"
+        ],
+        "description": "Lists mappings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Mappings_ListByDevCenter",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MappingListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Mappings_ListByDevCenter": {
+            "$ref": "./examples/Mappings_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/mappings/{mappingName}": {
+      "get": {
+        "tags": [
+          "Mappings"
+        ],
+        "description": "Gets a mapping.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MappingNameParameter"
+          }
+        ],
+        "operationId": "Mappings_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Mapping"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Mappings_Get": {
+            "$ref": "./examples/Mappings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Mappings"
+        ],
+        "description": "Creates or updates a mapping.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MappingNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents an Azure mapping.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Mapping"
+            }
+          }
+        ],
+        "operationId": "Mappings_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/Mapping"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Mappings_CreateOrUpdate": {
+            "$ref": "./examples/Mappings_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Mappings"
+        ],
+        "description": "Partially updates a mapping.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MappingNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable Azure mapping properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MappingUpdate"
+            }
+          }
+        ],
+        "operationId": "Mappings_Update",
+        "responses": {
+          "200": {
+            "description": "The resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/Mapping"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Mappings_Update": {
+            "$ref": "./examples/Mappings_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Mappings"
+        ],
+        "description": "Deletes a mapping.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MappingNameParameter"
+          }
+        ],
+        "operationId": "Mappings_Delete",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Mappings_Delete": {
+            "$ref": "./examples/Mappings_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/environmentTypes": {
+      "get": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Lists environment types for the devcenter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "EnvironmentTypes_ListByDevCenter",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentTypeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentTypes_ListByDevCenter": {
+            "$ref": "./examples/EnvironmentTypes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/devcenters/{devCenterName}/environmentTypes/{environmentTypeName}": {
+      "get": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Gets an environment type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentTypeNameParameter"
+          }
+        ],
+        "operationId": "EnvironmentTypes_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentType"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentTypes_Get": {
+            "$ref": "./examples/EnvironmentTypes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Creates or updates an environment type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentTypeNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents an Environment Type.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentType"
+            }
+          }
+        ],
+        "operationId": "EnvironmentTypes_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentType"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentTypes_CreateOrUpdate": {
+            "$ref": "./examples/EnvironmentTypes_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Partially updates an environment type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentTypeNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable environment type properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentTypeUpdate"
+            }
+          }
+        ],
+        "operationId": "EnvironmentTypes_Update",
+        "responses": {
+          "200": {
+            "description": "The resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentType"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentTypes_Update": {
+            "$ref": "./examples/EnvironmentTypes_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Deletes an environment type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentTypeNameParameter"
+          }
+        ],
+        "operationId": "EnvironmentTypes_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentTypes_Delete": {
+            "$ref": "./examples/EnvironmentTypes_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Fidalgo/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available resource provider operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperations"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Fidalgo/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "description": "Gets the current status of an async operation.",
+        "operationId": "OperationStatuses_Get",
+        "summary": "Get Operation Status",
+        "tags": [
+          "OperationStatus"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested operation status",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "The requested operation status",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get OperationStatus": {
+            "$ref": "./examples/OperationStatus_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DevCenter": {
+      "type": "object",
+      "description": "Represents a devcenter resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DevCenter properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DevCenterProperties"
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "identity": {
+          "description": "Managed identity properties",
+          "$ref": "#/definitions/IdentityProperties"
+        }
+      }
+    },
+    "DevCenterProperties": {
+      "description": "Properties of the devcenter.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "DevCenterUpdate": {
+      "description": "The devcenter resource for partial updates. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Managed identity properties",
+          "$ref": "#/definitions/IdentityProperties"
+        }
+      }
+    },
+    "DevCenterListResult": {
+      "description": "Result of the list devcenters operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevCenter"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Project": {
+      "description": "Represents a project resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "Properties of a project."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectUpdateProperties": {
+      "description": "Properties of a project. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "devCenterId": {
+          "type": "string",
+          "description": "Resource Id of an associated DevCenter"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the project."
+        }
+      }
+    },
+    "ProjectProperties": {
+      "description": "Properties of a project.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectUpdate": {
+      "description": "The project properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProjectUpdateProperties",
+          "description": "Properties of a project to be updated."
+        }
+      }
+    },
+    "ProjectListResult": {
+      "description": "Results of the project list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Environment": {
+      "description": "Represents an environment resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentProperties",
+          "description": "Environment properties."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "EnvironmentUpdateProperties": {
+      "description": "Properties of an environment. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the Environment."
+        },
+        "catalogItemName": {
+          "type": "string",
+          "description": "Name of the catalog item."
+        },
+        "templateUri": {
+          "type": "string",
+          "description": "Uri of a template used to deploy resources to the environment."
+        },
+        "deploymentParameters": {
+          "description": "Deployment parameters passed to catalog item.",
+          "type": "object"
+        }
+      }
+    },
+    "EnvironmentProperties": {
+      "description": "Properties of an environment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentUpdateProperties"
+        }
+      ],
+      "properties": {
+        "environmentType": {
+          "type": "string",
+          "description": "Environment type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the environment.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGroupId": {
+          "description": "The identifier of the resource group containing the environment's resources.",
+          "type": "string",
+          "readOnly": true
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Outputs from the deployment.",
+          "readOnly": true
+        }
+      }
+    },
+    "EnvironmentUpdate": {
+      "description": "The environment properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentUpdateProperties",
+          "description": "Environment properties to be updated."
+        }
+      }
+    },
+    "EnvironmentListResult": {
+      "description": "Results of the environment list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Environment"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnvironmentDeploy": {
+      "description": "An environment deployment",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "Deployment parameters passed to catalog item.",
+          "type": "object"
+        }
+      }
+    },
+    "DeploymentHistoryResult": {
+      "description": "Results of the get deployment history operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Recent deployment history.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Deployment": {
+      "description": "Details of a specific deployment of an environment.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "Deployment properties."
+        }
+      }
+    },
+    "DeploymentProperties": {
+      "description": "Properties of a deployment.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state of the deployment.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "logs": {
+          "description": "Deployment logs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "Deployment parameters passed to the catalog item.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "Catalog": {
+      "description": "Represents a catalog.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CatalogProperties",
+          "description": "Catalog properties."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogUpdateProperties": {
+      "description": "Properties of a catalog. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "gitHub": {
+          "description": "Properties for a GitHub catalog type.",
+          "type": "object",
+          "$ref": "#/definitions/GitCatalog"
+        },
+        "adoGit": {
+          "description": "Properties for an Azure DevOps catalog type.",
+          "type": "object",
+          "$ref": "#/definitions/GitCatalog"
+        }
+      }
+    },
+    "CatalogProperties": {
+      "description": "Properties of a catalog.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "ignoredCatalogItems": {
+          "description": "Manifests which have been ignored as duplicates.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "A path within the template source."
+          }
+        },
+        "invalidCatalogItems": {
+          "description": "Manifests which are invalid due to schema or validation errors.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "A path within the template source."
+          }
+        },
+        "lastSyncTime": {
+          "description": "When the catalog was last synced.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GitCatalog": {
+      "description": "Properties for a Git repository catalog.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "Git URI.",
+          "type": "string"
+        },
+        "branch": {
+          "description": "Git branch.",
+          "type": "string"
+        },
+        "secretIdentifier": {
+          "description": "A reference to the Key Vault secret containing a security token to authenticate to a Git repository.",
+          "type": "string"
+        },
+        "path": {
+          "description": "The folder where the catalog items can be found inside the repository.",
+          "type": "string"
+        }
+      }
+    },
+    "CatalogUpdate": {
+      "description": "The catalog's properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CatalogUpdateProperties",
+          "description": "Catalog properties for update."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "CatalogListResult": {
+      "description": "Results of the catalog list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Catalog"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogItemListResult": {
+      "description": "Results of the catalog item list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItem"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogItem": {
+      "description": "A catalog item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CatalogItemProperties",
+          "description": "Properties of a catalog item."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogItemUpdate": {
+      "description": "The catalog item's properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CatalogItemUpdateProperties",
+          "description": "Catalog item source properties for update."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "CatalogItemProperties": {
+      "description": "Properties of a catalog item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemUpdateProperties"
+        }
+      ],
+      "properties": {
+        "engine": {
+          "description": "The catalog item engine.",
+          "$ref": "#/definitions/CatalogItemEngineProperties"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogItemUpdateProperties": {
+      "description": "Properties of a catalog item which can be updated after creation.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the catalog item.",
+          "type": "string"
+        }
+      }
+    },
+    "CatalogItemEngineProperties": {
+      "description": "Properties of a catalog item engine.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "ARM"
+          ],
+          "description": "The type of catalog item used to deploy the environment.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": true
+          }
+        },
+        "templatePath": {
+          "description": "Path to the catalog item entrypoint file.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Parameters that can be provided to the catalog item.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItemParameterProperties"
+          }
+        }
+      }
+    },
+    "CatalogItemParameterProperties": {
+      "description": "Properties of a catalog item parameter.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the parameter.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type accepted for the parameter value.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the parameter.",
+          "type": "string"
+        }
+      }
+    },
+    "Gallery": {
+      "description": "Represents a gallery.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryProperties",
+          "description": "Gallery properties."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "GalleryProperties": {
+      "description": "Properties of a gallery.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "galleryResourceId": {
+          "description": "The resource ID of the backing Azure Compute Gallery.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "Image": {
+      "description": "Represents an image.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageProperties",
+          "description": "Image properties."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageProperties": {
+      "description": "Properties of an image.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisher": {
+          "description": "The publisher of the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offer": {
+          "description": "The name of the image offer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "The SKU name for the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedMachineConfiguration": {
+          "description": "The recommended machine configuration to use with the image.",
+          "$ref": "#/definitions/RecommendedMachineConfiguration",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedMachineConfiguration": {
+      "description": "Properties for a recommended machine configuration.",
+      "type": "object",
+      "properties": {
+        "memory": {
+          "description": "Recommended memory range.",
+          "$ref": "#/definitions/ResourceRange",
+          "readOnly": true
+        },
+        "vCPUs": {
+          "description": "Recommended vCPU range.",
+          "$ref": "#/definitions/ResourceRange",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceRange": {
+      "description": "Properties for a range of values.",
+      "type": "object",
+      "properties": {
+        "min": {
+          "description": "Minimum value.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "max": {
+          "description": "Maximum value.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageVersion": {
+      "description": "Represents an image version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageVersionProperties",
+          "description": "Image version properties."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageVersionProperties": {
+      "description": "Properties of an image version.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The semantic version string.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publishedDate": {
+          "description": "The datetime that the backing image version was published.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "excludeFromLatest": {
+          "description": "If the version should be excluded from being treated as the latest version.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "osDiskImageSizeInGb": {
+          "description": "The size of the OS disk image, in GB.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "GalleryListResult": {
+      "description": "Results of the gallery list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Gallery"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageListResult": {
+      "description": "Results of the image list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageVersionListResult": {
+      "description": "Results of the image version list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageVersion"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Mapping": {
+      "description": "Represents a mapping between a subscription and an environment type, or between a management group and an environment type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MappingProperties",
+          "description": "Properties to configure a mapping between an environment type and a subscription or management group. Resources for environments of this configured type will be deployed to this subscription or management group."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "MappingUpdateProperties": {
+      "description": "Properties of a mapping. These properties can be updated after the resource has been created",
+      "type": "object",
+      "properties": {
+        "mappedSubscriptionId": {
+          "description": "Id of a subscription that the environment type will be mapped to. The environment's resources will be deployed into this subscription.",
+          "type": "string"
+        }
+      }
+    },
+    "MappingProperties": {
+      "description": "Properties of an environment mapping.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MappingUpdateProperties"
+        }
+      ],
+      "properties": {
+        "environmentType": {
+          "description": "Environment type (e.g. Dev/Test)",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "projectId": {
+          "description": "Resource Id of a project that this mapping is associated with.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "MappingUpdate": {
+      "description": "The environment mapping for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MappingUpdateProperties",
+          "description": "Properties to configure a mapping between an environment type and a subscription or management group. Resources for environments of this configured type will be deployed to this subscription or management group."
+        }
+      }
+    },
+    "MappingListResult": {
+      "description": "Result of the mapping list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Mapping"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnvironmentType": {
+      "description": "Represents an environment type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentTypeProperties",
+          "description": "Properties of an environment type."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "tags": {
+          "$ref": "commonDefinitions.json#/definitions/Tags",
+          "description": "Resource tags."
+        }
+      }
+    },
+    "EnvironmentTypeUpdateProperties": {
+      "description": "Properties of an environment type. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the environment type.",
+          "type": "string"
+        }
+      }
+    },
+    "EnvironmentTypeProperties": {
+      "description": "Properties of an environment type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentTypeUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "EnvironmentTypeUpdate": {
+      "description": "The environment type for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentTypeUpdateProperties",
+          "description": "Properties to configure an environment type."
+        },
+        "tags": {
+          "$ref": "commonDefinitions.json#/definitions/Tags",
+          "description": "Resource tags."
+        }
+      }
+    },
+    "EnvironmentTypeListResult": {
+      "description": "Result of the environment type list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentType"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IdentityProperties": {
+      "description": "Managed identity for the resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the resource identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the resource. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a user assigned identity. The type 'None' will remove any identities from the resource.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/UserAssignedIdentity"
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "Additional properties for User-assigned Managed identities",
+      "x-ms-client-name": "userAssignedIdentitiesValue",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of user assigned identity."
+        }
+      }
+    },
+    "AvailableOperations": {
+      "description": "Available operations of the service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The current status of an async operation",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The operation id name",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Provisioning state of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time of the operation",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "description": "Percent of the operation that is complete",
+          "type": "number",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "properties": {
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "type": "object",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Operation Error message",
+          "type": "object",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            }
+          }
+        }
+      }
+    },
+    "EnableStatus": {
+      "description": "Enable or disable status. Indicates whether the property applied to is either enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnableStatus",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "DevCenterNameParameter": {
+      "name": "devCenterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the devcenter.",
+      "x-ms-parameter-location": "method"
+    },
+    "ProjectNameParameter": {
+      "name": "projectName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the project.",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentNameParameter": {
+      "name": "environmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the environment.",
+      "x-ms-parameter-location": "method"
+    },
+    "CatalogNameParameter": {
+      "name": "catalogName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Catalog.",
+      "x-ms-parameter-location": "method"
+    },
+    "CatalogItemNameParameter": {
+      "name": "catalogItemName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the catalog item.",
+      "x-ms-parameter-location": "method"
+    },
+    "GalleryNameParameter": {
+      "name": "galleryName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the gallery.",
+      "x-ms-parameter-location": "method"
+    },
+    "ImageNameParameter": {
+      "name": "imageName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the image.",
+      "x-ms-parameter-location": "method"
+    },
+    "VersionNameParameter": {
+      "name": "versionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The version of the image.",
+      "x-ms-parameter-location": "method"
+    },
+    "DeploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The deployment id.",
+      "x-ms-parameter-location": "method"
+    },
+    "MappingNameParameter": {
+      "name": "mappingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Mapping name.",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentTypeNameParameter": {
+      "name": "environmentTypeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the environment type.",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName').",
+      "type": "string",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The Azure region",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "The ID of an ongoing async operation",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -14,6 +14,8 @@ namespace Microsoft.StorageDiscovery;
 /**
  * Request to get StorageDiscoveryWorkspace data from ADX
  */
+@added(ApiVersion.v2025_04_01_preview)
+@renamedFrom(ApiVersion.v2025_06_01_preview, "GetReportRequest")
 model GetReportContent {
   @doc("""
     The queries to execute against Storage Discovery data.
@@ -27,6 +29,7 @@ model GetReportContent {
 /**
  * The response of the report operation
  */
+@added(ApiVersion.v2025_04_01_preview)
 model GetReportResult {
   @doc("One or more result sets, in the same order as the queries in the request body")
   @identifiers(#[])
@@ -36,6 +39,7 @@ model GetReportResult {
 /**
  * The result set of the report operation
  */
+@added(ApiVersion.v2025_04_01_preview)
 model ReportResultSet {
   @doc("Array of columns object, present only if the query succeeded")
   @identifiers(#[])
@@ -52,6 +56,7 @@ model ReportResultSet {
 /**
  * The column of the response result set
  */
+@added(ApiVersion.v2025_04_01_preview)
 model ReportResultColumn {
   @doc("Name of the column")
   name: string;

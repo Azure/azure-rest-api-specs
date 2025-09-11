@@ -10,10 +10,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/iotoperations.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
+    package-dir: "Azure.ResourceManager.IotOperations"
     clear-output-folder: true
-    namespace: "Azure.ResourceManager.IotOperations"
+    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-iotoperations"
     namespace: "azure.mgmt.iotoperations"
@@ -26,9 +26,11 @@ options:
     service-name: "IoT Operations"
     flavor: "azure"
   "@azure-tools/typespec-ts":
+    is-modular-library: true
     experimental-extensible-enums: true
+    generate-sample: true
     package-dir: "arm-iotoperations"
-    flavor: azure
+    flavor: "azure"
     package-details:
       name: "@azure/arm-iotoperations"
   "@azure-tools/typespec-go":

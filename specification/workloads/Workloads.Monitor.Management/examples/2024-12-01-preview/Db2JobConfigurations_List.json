@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "jobConfigurationName": "mydb2JobConfigurations",
+    "monitorName": "mySapMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mydb2JobConfigurations1",
+            "type": "Microsoft.Workloads/monitors/db2JobConfigurations",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySAPMonitor/db2JobConfigurations/mydb2JobConfigurations1",
+            "properties": {
+              "type": "BuiltIn",
+              "actions": [
+                {
+                  "functionName": "execute_sql",
+                  "parameters": [
+                    {
+                      "name": "sql",
+                      "value": "SELECT * FROM DUMMY.DUMMY"
+                    }
+                  ]
+                }
+              ],
+              "customLogTable": "DB2_SystemInfo",
+              "defaultFrequencyInSecs": 180,
+              "metricDimensions": [
+                "dimension1"
+              ],
+              "metricName": "DB2_SystemInfo",
+              "parameters": [
+                {
+                  "name": "laws_timeout",
+                  "value": "5"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2021-08-19T15:10:46.196Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "mydb2JobConfigurations2",
+            "type": "Microsoft.Workloads/monitors/db2JobConfigurations",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/myMonitor/db2JobConfigurations/mydb2JobConfigurations2",
+            "properties": {
+              "type": "BuiltIn",
+              "actions": [
+                {
+                  "functionName": "execute_sql",
+                  "parameters": [
+                    {
+                      "name": "sql",
+                      "value": "SELECT * FROM DUMMY.DUMMY"
+                    }
+                  ]
+                }
+              ],
+              "customLogTable": "DB2_SystemInfo",
+              "defaultFrequencyInSecs": 180,
+              "metricDimensions": [
+                "dimension1"
+              ],
+              "metricName": "DB2_SystemInfo",
+              "parameters": [
+                {
+                  "name": "laws_timeout",
+                  "value": "5"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2021-08-19T15:10:46.196Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Db2JobConfigurations_List",
+  "title": "List all db2 job configurations"
+}

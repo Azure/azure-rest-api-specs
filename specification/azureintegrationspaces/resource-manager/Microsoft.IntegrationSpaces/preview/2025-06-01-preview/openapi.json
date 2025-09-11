@@ -1,0 +1,1986 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.IntegrationSpaces",
+    "version": "2025-06-01-preview",
+    "description": "The azure integration spaces resource provider.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Spaces"
+    },
+    {
+      "name": "InfrastructureResources"
+    },
+    {
+      "name": "Applications"
+    },
+    {
+      "name": "ApplicationResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.IntegrationSpaces/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IntegrationSpaces/spaces": {
+      "get": {
+        "operationId": "Spaces_ListBySubscription",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "List Space resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListSpacesBySubscription": {
+            "$ref": "./examples/Spaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces": {
+      "get": {
+        "operationId": "Spaces_ListByResourceGroup",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "List Space resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListSpacesByResourceGroup": {
+            "$ref": "./examples/Spaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}": {
+      "get": {
+        "operationId": "Spaces_Get",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Get a Space",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetSpace": {
+            "$ref": "./examples/Spaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Spaces_CreateOrUpdate",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Create a Space",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Space' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "201": {
+            "description": "Resource 'Space' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateSpace": {
+            "$ref": "./examples/Spaces_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Spaces_Update",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Update a Space",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateSpace": {
+            "$ref": "./examples/Spaces_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Spaces_Delete",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Delete a Space",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteSpace": {
+            "$ref": "./examples/Spaces_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications": {
+      "get": {
+        "operationId": "Applications_ListBySpace",
+        "tags": [
+          "Applications"
+        ],
+        "description": "List Application resources by Space",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListApplicationsBySpace": {
+            "$ref": "./examples/Applications_ListBySpace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}": {
+      "get": {
+        "operationId": "Applications_Get",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Get a Application",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetApplication": {
+            "$ref": "./examples/Applications_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Applications_CreateOrUpdate",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Create a Application",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Application' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "201": {
+            "description": "Resource 'Application' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateApplication": {
+            "$ref": "./examples/Applications_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Applications_Update",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Update a Application",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateApplication": {
+            "$ref": "./examples/Applications_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Applications_Delete",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Delete a Application",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteApplication": {
+            "$ref": "./examples/Applications_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources": {
+      "get": {
+        "operationId": "ApplicationResources_ListByApplication",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "List ApplicationResource resources by Application",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListApplicationResourceByApplication": {
+            "$ref": "./examples/ApplicationResources_ListByApplication.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources/{resourceName}": {
+      "get": {
+        "operationId": "ApplicationResources_Get",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Get a ApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetApplicationResource": {
+            "$ref": "./examples/ApplicationResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApplicationResources_CreateOrUpdate",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Create a ApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApplicationResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ApplicationResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateApplicationResource": {
+            "$ref": "./examples/ApplicationResources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ApplicationResources_Update",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Update a ApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateApplicationResource": {
+            "$ref": "./examples/ApplicationResources_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ApplicationResources_Delete",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Delete a ApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteApplicationResource": {
+            "$ref": "./examples/ApplicationResources_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources": {
+      "get": {
+        "operationId": "InfrastructureResources_ListBySpace",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "List InfrastructureResource resources by Space",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListInfrastructureResourcesBySpace": {
+            "$ref": "./examples/InfrastructureResources_ListBySpace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources/{infrastructureResourceName}": {
+      "get": {
+        "operationId": "InfrastructureResources_Get",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "Get a InfrastructureResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "infrastructureResourceName",
+            "in": "path",
+            "description": "The name of the infrastructure resource in the space.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetInfrastructureResource": {
+            "$ref": "./examples/InfrastructureResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InfrastructureResources_CreateOrUpdate",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "Create a InfrastructureResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "infrastructureResourceName",
+            "in": "path",
+            "description": "The name of the infrastructure resource in the space.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InfrastructureResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'InfrastructureResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateInfrastructureResource": {
+            "$ref": "./examples/InfrastructureResources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "InfrastructureResources_Update",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "Update a InfrastructureResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "infrastructureResourceName",
+            "in": "path",
+            "description": "The name of the infrastructure resource in the space.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateInfrastructureResource": {
+            "$ref": "./examples/InfrastructureResources_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "InfrastructureResources_Delete",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "Delete a InfrastructureResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "infrastructureResourceName",
+            "in": "path",
+            "description": "The name of the infrastructure resource in the space.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteInfrastructureResource": {
+            "$ref": "./examples/InfrastructureResources_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertDefaults": {
+      "type": "object",
+      "description": "The default application groups for each alert type.",
+      "properties": {
+        "verbose": {
+          "$ref": "#/definitions/AlertTypeDefaults",
+          "description": "The verbose alert type."
+        },
+        "warning": {
+          "$ref": "#/definitions/AlertTypeDefaults",
+          "description": "The warning alert type."
+        },
+        "informational": {
+          "$ref": "#/definitions/AlertTypeDefaults",
+          "description": "The informational alert type."
+        },
+        "error": {
+          "$ref": "#/definitions/AlertTypeDefaults",
+          "description": "The error alert type."
+        },
+        "critical": {
+          "$ref": "#/definitions/AlertTypeDefaults",
+          "description": "The critical alert type."
+        }
+      }
+    },
+    "AlertRule": {
+      "type": "object",
+      "description": "The alert rule.",
+      "properties": {
+        "alertRuleId": {
+          "type": "string",
+          "description": "The alert rule identifier."
+        }
+      }
+    },
+    "AlertTypeDefaults": {
+      "type": "object",
+      "description": "The defaults for alert type.",
+      "properties": {
+        "actionGroups": {
+          "type": "array",
+          "description": "The action groups.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Application": {
+      "type": "object",
+      "description": "An integration application under space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ApplicationListResult": {
+      "type": "object",
+      "description": "The response of a Application list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Application items on this page",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationPatchProperties": {
+      "type": "object",
+      "description": "The properties of application in patch request.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "The identifier of the log analytics workspace."
+        }
+      }
+    },
+    "ApplicationProperties": {
+      "type": "object",
+      "description": "The properties of application.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "The identifier of the log analytics workspace."
+        }
+      }
+    },
+    "ApplicationResource": {
+      "type": "object",
+      "description": "A resource under application.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplicationResourceAlerts": {
+      "type": "object",
+      "description": "The alerts of the application resource.",
+      "properties": {
+        "defaults": {
+          "$ref": "#/definitions/AlertDefaults",
+          "description": "The application resource default action groups for alert types."
+        },
+        "alertRules": {
+          "type": "array",
+          "description": "The application resource alert rules.",
+          "items": {
+            "$ref": "#/definitions/AlertRule"
+          },
+          "x-ms-identifiers": [
+            "alertRuleId"
+          ]
+        }
+      }
+    },
+    "ApplicationResourceListResult": {
+      "type": "object",
+      "description": "The response of a ApplicationResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationResourcePatchProperties": {
+      "type": "object",
+      "description": "The properties of application resource in patch request.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the application resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The Arm id of the application resource."
+        },
+        "resourceKind": {
+          "type": "string",
+          "description": "The kind of the application resource."
+        },
+        "alerts": {
+          "$ref": "#/definitions/ApplicationResourceAlerts",
+          "description": "The alerts of the application resource."
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceId"
+      ]
+    },
+    "ApplicationResourceProperties": {
+      "type": "object",
+      "description": "The properties of application resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the application resource.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the application resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The Arm id of the application resource."
+        },
+        "resourceKind": {
+          "type": "string",
+          "description": "The kind of the application resource."
+        },
+        "alerts": {
+          "$ref": "#/definitions/ApplicationResourceAlerts",
+          "description": "The alerts of the application resource."
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceId"
+      ]
+    },
+    "ApplicationResourcePropertiesUpdate": {
+      "type": "object",
+      "description": "The properties of application resource.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the application resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The Arm id of the application resource."
+        },
+        "resourceKind": {
+          "type": "string",
+          "description": "The kind of the application resource."
+        },
+        "alerts": {
+          "$ref": "#/definitions/ApplicationResourceAlerts",
+          "description": "The alerts of the application resource."
+        }
+      }
+    },
+    "ApplicationResourceUpdate": {
+      "type": "object",
+      "description": "A resource under application.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationResourcePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplicationUpdate": {
+      "type": "object",
+      "description": "An integration application under space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "InfrastructureResource": {
+      "type": "object",
+      "description": "An infrastructure resource under Space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InfrastructureResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InfrastructureResourceListResult": {
+      "type": "object",
+      "description": "The response of a InfrastructureResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InfrastructureResource items on this page",
+          "items": {
+            "$ref": "#/definitions/InfrastructureResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InfrastructureResourcePatchProperties": {
+      "type": "object",
+      "description": "The properties of infrastructure resource in patch request.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the infrastructure resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The id of the infrastructure resource."
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceId"
+      ]
+    },
+    "InfrastructureResourceProperties": {
+      "type": "object",
+      "description": "The properties of infrastructure resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the infrastructure resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The id of the infrastructure resource."
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceId"
+      ]
+    },
+    "InfrastructureResourcePropertiesUpdate": {
+      "type": "object",
+      "description": "The properties of infrastructure resource.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the infrastructure resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The id of the infrastructure resource."
+        }
+      }
+    },
+    "InfrastructureResourceUpdate": {
+      "type": "object",
+      "description": "An infrastructure resource under Space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InfrastructureResourcePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The Provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning state is Provisioning."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Provisioning state is Updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Provisioning state is Deleting."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Provisioning state is Accepted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Space": {
+      "type": "object",
+      "description": "An integration space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SpaceListResult": {
+      "type": "object",
+      "description": "The response of a Space list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Space items on this page",
+          "items": {
+            "$ref": "#/definitions/Space"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SpaceResourcePatchProperties": {
+      "type": "object",
+      "description": "The properties of space in patch request.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        }
+      }
+    },
+    "SpaceResourceProperties": {
+      "type": "object",
+      "description": "The properties of space.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        }
+      }
+    },
+    "SpaceUpdate": {
+      "type": "object",
+      "description": "An integration space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.ExpandQueryParameter": {
+      "name": "expand",
+      "in": "query",
+      "description": "Expand the indicated resources into the response.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.FilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.OrderByQueryParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "Expressions that specify the order of returned results.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SelectQueryParameter": {
+      "name": "select",
+      "in": "query",
+      "description": "Select the specified fields to be included in the response.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

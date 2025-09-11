@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "testrg",
+    "nodePoolName": "pool1",
+    "nodeName": "node1",
+    "api-version": "2024-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/edgeNodePools/pool1",
+        "name": "pool1",
+        "type": "Microsoft.AzureStackHCI/edgeNodePools",
+        "location": "West US 2",
+        "properties": {
+          "poolType": "Mariner",
+          "poolProperties": [
+            {
+              "edgeNodeCategoryUid": "MarinerNodes",
+              "nodeModels": [
+                {
+                  "manufacturer": "Dell",
+                  "modelName": "Tower8800"
+                }
+              ],
+              "nodeCount": 3,
+              "coreCount": 96
+            }
+          ],
+          "allowedNodeCategoriesUid": [
+            "MarinerNodes"
+          ],
+          "status": "Healthy",
+          "nodeList": [
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ForK8sPool/providers/Microsoft.HybridCompute/machines/mrinnal-ubuntu2004/providers/Microsoft.AzureStackHCI/edgeDevices/default"
+          ],
+          "k8sClusterList": [
+            "/subscriptions/0d44739e-0563-474f-97e7-24a0cdb23b29/resourceGroups/ForK8sPool/providers/Microsoft.Kubernetes/connectedClusters/ase-ase-portal-devic-b4050d272e490bb455a"
+          ]
+        }
+      }
+    }
+  }
+}

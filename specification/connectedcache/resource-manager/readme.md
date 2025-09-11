@@ -30,6 +30,15 @@ openapi-subtype: rpaas
 tag: package-2024-11-30-preview
 ```
 
+### Tag: package-2025-06-15
+
+These settings apply only when `--tag=package-2025-06-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-06-15'
+input-file:
+  - Microsoft.ConnectedCache/stable/2025-06-15/ConnectedCache.json
+```
+
 ### Tag: package-2024-11-30-preview
 
 These settings apply only when `--tag=package-2024-11-30-preview` is specified on the command line.
@@ -39,13 +48,49 @@ input-file:
   - Microsoft.ConnectedCache/preview/2024-11-30-preview/ConnectedCache.json
 ```
 
-### Tag: package-2023-05-01-preview
+### Tag: package-preview-2023-05-01-preview
 
 These settings apply only when `--tag=package-2023-05-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-05-01-preview'
 input-file:
   - Microsoft.ConnectedCache/preview/2023-05-01-preview/ConnectedCache.json
+```
+
+### Tag: package-2023-04-01-preview
+
+These settings apply only when `--tag=package-2023-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04-01-preview'
+input-file:
+  - Microsoft.ConnectedCache/preview/2023-04-01-preview/ConnectedCache.json
+```
+
+### Tag: package-2019-12-04-preview
+
+These settings apply only when `--tag=package-2019-12-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12-04-preview'
+input-file:
+  - Microsoft.ConnectedCache/preview/2019-12-04-preview/ConnectedCache.json
+```
+
+### Tag: package-2021-09-15-preview
+
+These settings apply only when `--tag=package-2021-09-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09-15-preview'
+input-file:
+  - Microsoft.ConnectedCache/preview/2021-09-15-preview/ConnectedCache.json
+```
+
+### Tag: package-2022-03-21-preview
+
+These settings apply only when `--tag=package-2022-03-21-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-21-preview'
+input-file:
+  - Microsoft.ConnectedCache/preview/2022-03-21-preview/ConnectedCache.json
 ```
 
 ## Suppression
@@ -66,6 +111,10 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_connectedcache']
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## CSharp
 

@@ -1,0 +1,118 @@
+{
+  "title": "Chambers_CreateOrUpdate with zone redundancy",
+  "operationId": "Chambers_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "resource": {
+      "location": "Central US",
+      "zones": [
+        "1",
+        "2"
+      ],
+      "sku": {
+        "name": "Standard_ZR"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber-name",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers",
+        "location": "Central US",
+        "sku": {
+          "name": "Standard_ZR",
+          "tier": "Standard"
+        },
+        "zones": [
+          "1",
+          "2"
+        ],
+        "properties": {
+          "licenseServices": {
+            "cadence": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "ansys": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "siemens": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "synopsys": {
+              "enable": true,
+              "vmUuid": [
+                "AA31075F-AFEB-0442-B40A-9AAE5D3C2830"
+              ]
+            }
+          },
+          "provisioningState": "Processing",
+          "dataPipelineInboundPath": "/mount/dataPipeline/datain",
+          "dataPipelineOutboundPath": "/mount/dataPipeline/dataout"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "x-ms-async-operation-timeout": "PT2H30M"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber-name",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers",
+        "location": "Central US",
+        "zones": [
+          "1",
+          "2"
+        ],
+        "sku": {
+          "name": "Standard_ZR",
+          "tier": "Standard"
+        },
+        "properties": {
+          "licenseServices": {
+            "cadence": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "ansys": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "siemens": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "synopsys": {
+              "enable": true,
+              "vmUuid": [
+                "AA31075F-AFEB-0442-B40A-9AAE5D3C2830"
+              ]
+            }
+          },
+          "provisioningState": "Processing",
+          "dataPipelineInboundPath": "/mount/dataPipeline/datain",
+          "dataPipelineOutboundPath": "/mount/dataPipeline/dataout"
+        }
+      }
+    }
+  }
+}

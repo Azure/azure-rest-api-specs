@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -80,7 +79,7 @@ model AwsCloudFrontDistributionProperties {
   id?: string;
 
   @doc("A complex type that contains zero or more ``Tag`` elements.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 }
 
@@ -97,7 +96,7 @@ model DistributionConfig {
   cnamEs?: string[];
 
   @doc("A complex type that contains zero or more ``CacheBehavior`` elements.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   cacheBehaviors?: CacheBehavior[];
 
   @doc("A comment to describe the distribution. The comment cannot be longer than 128 characters.")
@@ -107,7 +106,7 @@ model DistributionConfig {
   continuousDeploymentPolicyId?: string;
 
   @doc("A complex type that controls the following:  +  Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer.  +  How long CloudFront caches HTTP status codes in the 4xx and 5xx range.   For more information about custom error pages, see [Customizing Error Responses](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html) in the *Amazon CloudFront Developer Guide*.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   customErrorResponses?: CustomErrorResponse[];
 
   @doc("Property customOrigin")
@@ -135,7 +134,7 @@ model DistributionConfig {
   originGroups?: OriginGroups;
 
   @doc("A complex type that contains information about origins for this distribution.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   origins?: Origin[];
 
   @doc("The price class that corresponds with the maximum price that you want to pay for CloudFront service. If you specify ``PriceClass_All``, CloudFront responds to requests for your objects from all CloudFront edge locations. If you specify a price class other than ``PriceClass_All``, CloudFront serves your objects from the CloudFront edge location that has the lowest latency among the edge locations in your price class. Viewers who are in or near regions that are excluded from your specified price class may encounter slower performance. For more information about price classes, see [Choosing the Price Class for a CloudFront Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html) in the *Amazon CloudFront Developer Guide*. For information about CloudFront pricing, including how price classes (such as Price Class 100) map to CloudFront regions, see [Amazon CloudFront Pricing](https://docs.aws.amazon.com/cloudfront/pricing/).")
@@ -198,11 +197,11 @@ model CacheBehavior {
   forwardedValues?: ForwardedValues;
 
   @doc("A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the ``LIVE`` stage to associate them with a cache behavior.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   functionAssociations?: FunctionAssociation[];
 
   @doc("A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   lambdaFunctionAssociations?: LambdaFunctionAssociation[];
 
   @doc("This field is deprecated. We recommend that you use the ``MaxTTL`` field in a cache policy instead of this field. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*. The maximum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as ``Cache-Control max-age``, ``Cache-Control s-maxage``, and ``Expires`` to objects. For more information, see [Managing How Long Content Stays in an Edge Cache (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.")
@@ -308,11 +307,11 @@ model DefaultCacheBehavior {
   forwardedValues?: ForwardedValues;
 
   @doc("A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the ``LIVE`` stage to associate them with a cache behavior.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   functionAssociations?: FunctionAssociation[];
 
   @doc("A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   lambdaFunctionAssociations?: LambdaFunctionAssociation[];
 
   @doc("This field is deprecated. We recommend that you use the ``MaxTTL`` field in a cache policy instead of this field. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*. The maximum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as ``Cache-Control max-age``, ``Cache-Control s-maxage``, and ``Expires`` to objects. For more information, see [Managing How Long Content Stays in an Edge Cache (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.")
@@ -369,7 +368,7 @@ model Logging {
 @doc("Definition of OriginGroups")
 model OriginGroups {
   @doc("The items (origin groups) in a distribution.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   items?: OriginGroup[];
 
   @doc("The number of origin groups.")
@@ -401,7 +400,7 @@ model Origin {
   originAccessControlId?: string;
 
   @doc("A list of HTTP header names and values that CloudFront adds to the requests that it sends to the origin. For more information, see [Adding Custom Headers to Origin Requests](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/add-origin-custom-headers.html) in the *Amazon CloudFront Developer Guide*.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   originCustomHeaders?: OriginCustomHeader[];
 
   @doc("An optional path that CloudFront appends to the origin domain name when CloudFront requests content from the origin. For more information, see [Origin Path](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginPath) in the *Amazon CloudFront Developer Guide*.")
@@ -627,7 +626,7 @@ model OriginGroupFailoverCriteria {
 @doc("Definition of OriginGroupMembers")
 model OriginGroupMembers {
   @doc("Items (origins) in an origin group.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   items?: OriginGroupMember[];
 
   @doc("The number of origins in an origin group.")

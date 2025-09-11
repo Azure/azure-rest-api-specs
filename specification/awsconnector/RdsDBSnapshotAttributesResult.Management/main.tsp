@@ -29,7 +29,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -78,7 +77,7 @@ model RdsDBSnapshotAttributesResultProperties {
 @doc("Definition of awsRdsDBSnapshotAttributesResult")
 model AwsRdsDBSnapshotAttributesResultProperties {
   @doc("<p>The list of attributes and values for the manual DB snapshot.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   dbSnapshotAttributes?: DBSnapshotAttribute[];
 
   @doc("<p>The identifier of the manual DB snapshot that the attributes apply to.</p>")

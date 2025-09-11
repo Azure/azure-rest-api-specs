@@ -1,0 +1,17 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+namespace Microsoft.MessagingConnectors.Models.Auth;
+
+@doc("SasToken Model.")
+model SasTokenAuthentication extends Authentication {
+  @doc("Type of the Auth Model.")
+  authenticationMode: AuthenticationMode.SasToken;
+
+  @doc("SasToken secret.")
+  @secret
+  sasToken: string;
+}

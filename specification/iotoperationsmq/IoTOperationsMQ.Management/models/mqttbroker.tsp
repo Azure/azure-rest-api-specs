@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./base.tsp";
@@ -250,6 +251,7 @@ model DiskBackedMessageBufferSettings {
 @doc("VolumeClaimSpec properties")
 model VolumeClaimSpec {
   @doc("AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   accessModes?: string[];
 
   @doc("This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.")
@@ -303,11 +305,9 @@ model VolumeClaimDataSourceRef {
 // Add VolumeClaimResourceRequirements model
 @doc("VolumeClaimResourceRequirements properties")
 model VolumeClaimResourceRequirements {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
   limits?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
   requests?: Record<string>;
 }
@@ -316,10 +316,9 @@ model VolumeClaimResourceRequirements {
 @doc("VolumeClaimSpecSelector properties")
 model VolumeClaimSpecSelector {
   @doc("MatchExpressions is a list of label selector requirements. The requirements are ANDed.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   matchExpressions?: VolumeClaimSpecSelectorMatchExpressions[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("MatchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed.")
   matchLabels?: Record<string>;
 }
@@ -338,31 +337,27 @@ model VolumeClaimSpecSelectorMatchExpressions {
 }
 
 @doc("The enum defining run mode of the broker deployment")
-union RunMode {
-  string,
-
+enum RunMode {
   @doc("Automatically provision Frontend and Backend pods.")
-  "auto",
+  auto,
 
   @doc("Use Cardinality to set Frontend and Backend pods.")
-  "distributed",
+  distributed,
 }
 
 @doc("The memory profile settings of the Broker")
-union BrokerMemoryProfile {
-  string,
-
+enum BrokerMemoryProfile {
   @doc("Tiny memory profile.")
-  tiny: "tiny",
+  tiny,
 
   @doc("Low memory profile.")
-  low: "low",
+  low,
 
   @doc("Medium memory profile.")
-  medium: "medium",
+  medium,
 
   @doc("High memory profile.")
-  high: "high",
+  high,
 }
 
 /** ******************* */
@@ -424,17 +419,15 @@ model BrokerListenerProperties {
 }
 
 @doc("Kubernetes Service Types supported by Listener")
-union ServiceType {
-  string,
-
+enum ServiceType {
   @doc("Cluster IP Service.")
-  clusterIp: "clusterIp",
+  clusterIp,
 
   @doc("Load Balancer Service.")
-  loadBalancer: "loadBalancer",
+  loadBalancer,
 
   @doc("Node Port Service.")
-  nodePort: "nodePort",
+  nodePort,
 }
 
 @doc("Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported")
@@ -508,7 +501,7 @@ model BrokerAuthenticationResource
 model BrokerAuthenticationProperties {
   // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.
   @doc("The list of authentication methods supported by the Authentication Resource. For each array element, NOTE - Enum only authenticator type supported.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   authenticationMethods: BrokerAuthenticatorMethods[];
 
   @doc("The array of listener Resources it supports.")
@@ -548,7 +541,6 @@ model BrokerAuthenticatorMethodCustom {
   @doc("Endpoint to connect to.")
   endpoint: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Configuration Headers to use.")
   headers?: Record<string>;
 }
@@ -659,14 +651,14 @@ model AuthorizationConfig {
   enableCache?: boolean = true;
 
   @doc("Authorization Rules to be used. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   rules?: AuthorizationBasicRule[];
 }
 
 @doc("BasicRules of AuthorizationConfig Polar rules are not supported")
 model AuthorizationBasicRule {
   @doc("This subfield defines the broker resources that the Basic Rule is applied on.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   brokerResources: ResourceInfoDefinition[];
 
   @doc("This subfield defines the identities that represent the clients.")
@@ -675,10 +667,9 @@ model AuthorizationBasicRule {
 
 @doc("PrincipalDefinition properties of Basic Rule")
 model PrincipalDefinition {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
-  @identifiers(#[])
-  attributes?: Record<string>[] = #[];
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  attributes?: Record<string>[] = [];
 
   @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.")
   clientids?: string[];
@@ -697,15 +688,13 @@ model ResourceInfoDefinition {
 }
 
 @doc("ResourceInfoDefinition methods allowed")
-union ResourceInfoDefinitionMethods {
-  string,
-
+enum ResourceInfoDefinitionMethods {
   @doc("Allowed Connecting to Broker")
-  "Connect",
+  Connect,
 
   @doc("Allowed Publishing to Broker")
-  "Publish",
+  Publish,
 
   @doc("Allowed Subscribing to Broker")
-  "Subscribe",
+  Subscribe,
 }

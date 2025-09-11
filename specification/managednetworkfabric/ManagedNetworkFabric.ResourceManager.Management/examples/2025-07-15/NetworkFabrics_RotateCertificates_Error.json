@@ -1,0 +1,64 @@
+{
+  "title": "Total failure to rotate certificates.",
+  "operationId": "NetworkFabrics_RotateCertificates",
+  "parameters": {
+    "api-version": "2025-07-15",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricName": "example-fabric"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/UKSOUTH/operationStatuses/b7c3d8f2-56e4-4a9b-8c7d-123456789ABC*1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF",
+        "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+        "startTime": "2025-09-25T08:06:00.912Z",
+        "endTime": "2025-09-25T09:10:00.743Z",
+        "status": "Failed",
+        "error": {
+          "code": "RotationFailed",
+          "message": "Rotation failed for all devices. Please address any issues and perform resync operations for the affected devices."
+        },
+        "operations": [
+          {
+            "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-1",
+            "status": "Failed",
+            "error": {
+              "code": "CouldNotConnect",
+              "message": "Could not connect to the Network Device to configure new certificates."
+            }
+          },
+          {
+            "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-2",
+            "status": "Failed",
+            "error": {
+              "code": "CouldNotConnect",
+              "message": "Could not connect to the Network Device to configure new certificates."
+            }
+          },
+          {
+            "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-3",
+            "status": "Failed",
+            "error": {
+              "code": "CouldNotConnect",
+              "message": "Could not connect to the Network Device to configure new certificates."
+            }
+          },
+          {
+            "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-4",
+            "status": "Failed",
+            "error": {
+              "code": "CouldNotConnect",
+              "message": "Could not connect to the Network Device to configure new certificates."
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

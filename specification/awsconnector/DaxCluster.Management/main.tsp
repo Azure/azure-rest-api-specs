@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -97,7 +96,7 @@ model AwsDaxClusterProperties {
   nodeType?: string;
 
   @doc("<p>A list of nodes that are currently in the cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   nodes?: Node[];
 
   @doc("<p>Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).</p>")
@@ -113,7 +112,7 @@ model AwsDaxClusterProperties {
   sseDescription?: SSEDescription;
 
   @doc("<p>A list of security groups, and the status of each, for the nodes in the cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   securityGroups?: SecurityGroupMembership[];
 
   @doc("<p>The current status of the cluster.</p>")

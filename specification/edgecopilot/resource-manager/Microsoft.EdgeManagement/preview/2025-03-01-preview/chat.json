@@ -1,0 +1,311 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Edge Copilot",
+    "version": "2025-03-01-preview",
+    "description": "The Azure Edge Copilot API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Edge"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.EdgeManagement/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeCopilot_ListOperations": {
+            "$ref": "./examples/Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeManagement/locations/{location}/chat": {
+      "post": {
+        "operationId": "Edge_Chat",
+        "tags": [
+          "Edge"
+        ],
+        "description": "Post a message to chatbot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeCopilot_PostChat": {
+            "$ref": "./examples/PostChat.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ChatContext": {
+      "type": "object",
+      "description": "Chat context schema. Contains context information of the chat.",
+      "properties": {
+        "bladeId": {
+          "type": "string",
+          "description": "The blade id of the current blade."
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "Resource Ids of the chat is referring to.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the issue that needs troubleshoot."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the issue that needs troubleshoot."
+        }
+      },
+      "required": [
+        "bladeId"
+      ]
+    },
+    "ChatMessage": {
+      "type": "object",
+      "description": "Chat message schema. Contains message content from user or assistant.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of message. Can only be 'text' or 'action'.",
+          "default": "text",
+          "enum": [
+            "text",
+            "action"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "text",
+                "value": "text",
+                "description": "Text message."
+              },
+              {
+                "name": "action",
+                "value": "action",
+                "description": "Action message."
+              }
+            ]
+          },
+          "x-ms-client-name": "messageType"
+        },
+        "subType": {
+          "type": "string",
+          "description": "Sub-type of message.",
+          "default": "default",
+          "enum": [
+            "artifact",
+            "default"
+          ],
+          "x-ms-enum": {
+            "name": "Subtype",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "artifact",
+                "value": "artifact",
+                "description": "Artifact sub-type."
+              },
+              {
+                "name": "default",
+                "value": "default",
+                "description": "Default sub-type."
+              }
+            ]
+          }
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of message. Can be 'system', 'assistant', or 'user'.",
+          "default": "user",
+          "enum": [
+            "system",
+            "assistant",
+            "user"
+          ],
+          "x-ms-enum": {
+            "name": "Role",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "system",
+                "value": "system",
+                "description": "System message."
+              },
+              {
+                "name": "assistant",
+                "value": "assistant",
+                "description": "Assistant message."
+              },
+              {
+                "name": "user",
+                "value": "user",
+                "description": "User message."
+              }
+            ]
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "Message content from user or assistant."
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "ChatRequest": {
+      "type": "object",
+      "description": "Chat request schema. Contains input message from user",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/ChatContext",
+          "description": "Chat context schema. Contains context information of the chat."
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "Session Id of current chat."
+        },
+        "userMessage": {
+          "$ref": "#/definitions/ChatMessage",
+          "description": "User message schema. Contains input message from user."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the portal user setting."
+        }
+      },
+      "required": [
+        "userMessage"
+      ]
+    },
+    "ChatResult": {
+      "type": "object",
+      "description": "Chat response schema. Contains reply messages from chatbot.",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Session Id of current chat."
+        },
+        "replyMessages": {
+          "type": "array",
+          "description": "Reply message schema. Contains reply messages from chatbot",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "replyMessages"
+      ]
+    }
+  },
+  "parameters": {}
+}

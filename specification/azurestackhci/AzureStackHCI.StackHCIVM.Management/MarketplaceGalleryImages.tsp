@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The marketplace gallery image resource definition.")
 @extension("x-ms-azure-resource", true)
 model MarketplaceGalleryImage
@@ -34,13 +34,8 @@ interface MarketplaceGalleryImages {
   @doc("Gets a marketplace gallery image")
   get is ArmResourceRead<MarketplaceGalleryImage>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a marketplace gallery image. Please note some properties can be set only during marketplace gallery image creation.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    MarketplaceGalleryImage,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to update a marketplace gallery image.")
   @patch(#{ implicitOptionality: false })

@@ -1,0 +1,2494 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.VoiceServices",
+    "version": "2024-02-16-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "TestLines"
+    },
+    {
+      "name": "CommunicationsGateways"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.VoiceServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VoiceServices/communicationsGateways": {
+      "get": {
+        "operationId": "CommunicationsGateways_ListBySubscription",
+        "tags": [
+          "CommunicationsGateways"
+        ],
+        "description": "List CommunicationsGateway resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationsGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListCommunicationsGatewayResourceSub": {
+            "$ref": "./examples/CommunicationsGateways_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VoiceServices/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "NameAvailability_CheckLocal",
+        "description": "Check whether the resource name is available in the given region.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location in which uniqueness will be verified.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The check availability request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckLocalNameAvailability": {
+            "$ref": "./examples/NameAvailability_CheckLocal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VoiceServices/communicationsGateways": {
+      "get": {
+        "operationId": "CommunicationsGateways_ListByResourceGroup",
+        "tags": [
+          "CommunicationsGateways"
+        ],
+        "description": "List CommunicationsGateway resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationsGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListCommunicationsGatewayResource": {
+            "$ref": "./examples/CommunicationsGateways_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VoiceServices/communicationsGateways/{communicationsGatewayName}": {
+      "get": {
+        "operationId": "CommunicationsGateways_Get",
+        "tags": [
+          "CommunicationsGateways"
+        ],
+        "description": "Get a CommunicationsGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationsGateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCommunicationsGatewayResource": {
+            "$ref": "./examples/CommunicationsGateways_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CommunicationsGateways_CreateOrUpdate",
+        "tags": [
+          "CommunicationsGateways"
+        ],
+        "description": "Create a CommunicationsGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunicationsGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CommunicationsGateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommunicationsGateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'CommunicationsGateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommunicationsGateway"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateCommunicationsGatewayResource": {
+            "$ref": "./examples/CommunicationsGateways_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CommunicationsGateways_Update",
+        "tags": [
+          "CommunicationsGateways"
+        ],
+        "description": "Update a CommunicationsGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunicationsGatewayUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationsGateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateCommunicationsGatewayResource": {
+            "$ref": "./examples/CommunicationsGateways_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CommunicationsGateways_Delete",
+        "tags": [
+          "CommunicationsGateways"
+        ],
+        "description": "Delete a CommunicationsGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCommunicationsGatewayResource": {
+            "$ref": "./examples/CommunicationsGateways_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VoiceServices/communicationsGateways/{communicationsGatewayName}/testLines": {
+      "get": {
+        "operationId": "TestLines_ListByCommunicationsGateway",
+        "tags": [
+          "TestLines"
+        ],
+        "description": "List TestLine resources by CommunicationsGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestLineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestLineResource": {
+            "$ref": "./examples/TestLines_ListByCommunicationsGateway.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VoiceServices/communicationsGateways/{communicationsGatewayName}/testLines/{testLineName}": {
+      "get": {
+        "operationId": "TestLines_Get",
+        "tags": [
+          "TestLines"
+        ],
+        "description": "Get a TestLine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "testLineName",
+            "in": "path",
+            "description": "Unique identifier for this test line",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestLine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestLineResource": {
+            "$ref": "./examples/TestLines_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TestLines_CreateOrUpdate",
+        "tags": [
+          "TestLines"
+        ],
+        "description": "Create a TestLine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "testLineName",
+            "in": "path",
+            "description": "Unique identifier for this test line",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestLine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TestLine' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestLine"
+            }
+          },
+          "201": {
+            "description": "Resource 'TestLine' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestLine"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateTestLineResource": {
+            "$ref": "./examples/TestLines_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "TestLines_Update",
+        "tags": [
+          "TestLines"
+        ],
+        "description": "Update a TestLine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "testLineName",
+            "in": "path",
+            "description": "Unique identifier for this test line",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestLineUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestLine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateTestLineResource": {
+            "$ref": "./examples/TestLines_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TestLines_Delete",
+        "tags": [
+          "TestLines"
+        ],
+        "description": "Delete a TestLine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "testLineName",
+            "in": "path",
+            "description": "Unique identifier for this test line",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTestLineResource": {
+            "$ref": "./examples/TestLines_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AcgAddressRanges": {
+      "type": "object",
+      "description": "Azure Communication Gateway IP addresses or address ranges for sending traffic to Operator Network/ Communication Services which would be used for ACL firewall rules",
+      "properties": {
+        "signalingForBackendServices": {
+          "type": "array",
+          "description": "Azure Communication Gateway IP addresses or address ranges for sending signalling traffic to Communication Services",
+          "items": {
+            "type": "string"
+          }
+        },
+        "signalingForOperator": {
+          "type": "array",
+          "description": "Azure Communication Gateway IP addresses or address ranges for sending signalling traffic to Operator Network",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "mediaForBackendServices": {
+          "type": "array",
+          "description": "Azure Communication Gateway IP address/FQDN for receiving signalling traffic from communications services",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "mediaForOperator": {
+          "type": "array",
+          "description": "Azure Communication Gateway IP addresses or address ranges for media traffic between Operator Network and Azure Communication Gateway ",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "AcgContactBackendServiceDetails": {
+      "type": "object",
+      "description": "Allocated Azure Communication Gateway details used by communication services",
+      "properties": {
+        "serviceName": {
+          "$ref": "#/definitions/CommunicationsPlatform",
+          "description": "Operator's chosen communication service/platform",
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "Allocated IP addresses used by communication services",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "srvRecord": {
+          "type": "string",
+          "description": "SRV record (created on basis of the backend service's serviceName and DNS hash)",
+          "readOnly": true
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Port number to be used by communication services to connect with Azure Communication Gateway",
+          "minimum": 1,
+          "maximum": 65535,
+          "readOnly": true
+        }
+      }
+    },
+    "AcgContactInfo": {
+      "type": "object",
+      "description": "Azure Communication Gateway Contact information allocated at runtime and used by operator/BackendServices to connect to Azure Communication Gateway",
+      "properties": {
+        "peerGroups": {
+          "type": "array",
+          "description": "Azure Communication Gateway contact Peer details",
+          "items": {
+            "$ref": "#/definitions/AcgContactPeerGroupDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "peerGroupName"
+          ]
+        },
+        "backendServices": {
+          "type": "array",
+          "description": "Azure Communication Gateway contact BackendServices details",
+          "items": {
+            "$ref": "#/definitions/AcgContactBackendServiceDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AcgContactPeerGroupDetails": {
+      "type": "object",
+      "description": "Allocated Azure Communication Gateway Contact information to be used by peer",
+      "properties": {
+        "peerGroupName": {
+          "type": "string",
+          "description": "Name of the peer group defined in the peer groups property",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[a-zA-Z0-9-]+$",
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "IP addresses allocated for peer group",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "srvRecord": {
+          "type": "string",
+          "description": "SRV record (created on basis of the peer group's peerGroupName and DNS hash)",
+          "readOnly": true
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Port number to be used by customer to connect with Azure Communication Gateway",
+          "minimum": 1,
+          "maximum": 65535,
+          "readOnly": true
+        }
+      }
+    },
+    "AiVoiceServices": {
+      "type": "object",
+      "description": "Configuration for voice services which use AI",
+      "properties": {
+        "callProtection": {
+          "$ref": "#/definitions/CallProtectionDetails",
+          "description": "Azure Operator Call Protection details",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ApiBridgeProperties": {
+      "type": "object",
+      "description": "Configuration of the API Bridge.",
+      "properties": {
+        "configureApiBridge": {
+          "type": "string",
+          "description": "The activation state of the API Bridge for this Communications Gateway",
+          "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApiBridgeActivationState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "enabled",
+                "value": "enabled",
+                "description": "API Bridge is enabled"
+              },
+              {
+                "name": "disabled",
+                "value": "disabled",
+                "description": "API Bridge is disabled"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "endpointFqdns": {
+          "type": "array",
+          "description": "FQDNs for sending requests to the API Bridge endpoint",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "allowedAddressPrefixes": {
+          "type": "array",
+          "description": "The allowed source IP addresses or CIDR ranges for accessing the API Bridge",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ArecordAndPortDetails": {
+      "type": "object",
+      "description": "Connection details containing the combination of A records and port number to uniquely identify the peer of Operator Network",
+      "properties": {
+        "aRecord": {
+          "type": "string",
+          "description": "Address record identifying the peer of Operator Network",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Port identifying the peer of Operator Network",
+          "minimum": 1,
+          "maximum": 65535,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "CallPolicy": {
+      "type": "object",
+      "description": "Provides service and peer group mapping, and peer group routing for all required combinations of service, location and peer.",
+      "properties": {
+        "defaultMappings": {
+          "$ref": "#/definitions/DefaultMappings",
+          "description": "The default mapping between Services and peer groups",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "peerGroupRoutings": {
+          "type": "array",
+          "description": "Routing priorities on a per-peer group and per-serviceLocation basis",
+          "items": {
+            "$ref": "#/definitions/PeerGroupRouting"
+          },
+          "x-ms-identifiers": [
+            "peerGroupName"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "CallProtectionDetails": {
+      "type": "object",
+      "description": "Configuration for Azure Operator Call Protection",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether Azure Operator Call Protection is enabled or not. Defaults to false.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "logStorageAccountId": {
+          "type": "string",
+          "description": "Resource ID of the storage account to write Azure Operator Call Protection logs to.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "CheckNameAvailabilityReason": {
+      "type": "string",
+      "description": "Possible reasons for a name not being available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "CheckNameAvailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Name not available if the name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Name not available if the name is already in use."
+          }
+        ]
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "The check availability request body.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource for which availability needs to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "The check availability result.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates if the resource name is available."
+        },
+        "reason": {
+          "$ref": "#/definitions/CheckNameAvailabilityReason",
+          "description": "The reason why the given name is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed reason why the given name is not available."
+        }
+      }
+    },
+    "CommunicationsGateway": {
+      "type": "object",
+      "description": "A CommunicationsGateway resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CommunicationsGatewayProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CommunicationsGatewayListResult": {
+      "type": "object",
+      "description": "The response of a CommunicationsGateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CommunicationsGateway items on this page",
+          "items": {
+            "$ref": "#/definitions/CommunicationsGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CommunicationsGatewayProperties": {
+      "type": "object",
+      "description": "Details of the CommunicationsGateway resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The current status of the deployment.",
+          "readOnly": true
+        },
+        "serviceLocations": {
+          "type": "array",
+          "description": "The regions in which to deploy the resources needed for Teams Calling",
+          "items": {
+            "$ref": "#/definitions/ServiceRegionProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "peerGroups": {
+          "type": "array",
+          "description": "Logical SIP connection with specific properties connecting Azure Communication Gateway to an Operator’s Network, used to connect sessions for a specified service ",
+          "items": {
+            "$ref": "#/definitions/PeerGroupProperties"
+          },
+          "x-ms-identifiers": [
+            "peerGroupName"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "callPolicy": {
+          "$ref": "#/definitions/CallPolicy",
+          "description": "Define the mapping between backend services and Peer as well as routing priorities",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "connectivity": {
+          "$ref": "#/definitions/Connectivity",
+          "description": "How to connect back to the Operator Network, e.g. MAPS",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatorPeerGroupConfigScheme": {
+          "type": "string",
+          "description": "Indicate whether peer group and routing configuration would be used or not",
+          "default": "UseStaticDefaultConfig",
+          "enum": [
+            "UseOperatorPeerGroupConfig",
+            "UseStaticDefaultConfig"
+          ],
+          "x-ms-enum": {
+            "name": "OperatorPeerGroupConfigSchemeValue",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "UseOperatorPeerGroupConfig",
+                "value": "UseOperatorPeerGroupConfig",
+                "description": "If the operator peer group and routing properties would not be used"
+              },
+              {
+                "name": "UseStaticDefaultConfig",
+                "value": "UseStaticDefaultConfig",
+                "description": "If the operator peer group and routing properties would be used"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "codecs": {
+          "type": "array",
+          "description": "Voice codecs to support",
+          "items": {
+            "$ref": "#/definitions/TeamsCodecs"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "e911Type": {
+          "$ref": "#/definitions/E911Type",
+          "description": "How to handle 911 calls",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "platforms": {
+          "type": "array",
+          "description": "What platforms to support",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/CommunicationsPlatform"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "apiBridge": {
+          "$ref": "#/definitions/ApiBridgeProperties",
+          "description": "Details of API bridge functionality, if required",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "type": "string",
+          "description": "The scope at which the auto-generated domain name can be re-used",
+          "default": "TenantReuse",
+          "enum": [
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "NoReuse"
+          ],
+          "x-ms-enum": {
+            "name": "AutoGeneratedDomainNameLabelScope",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TenantReuse",
+                "value": "TenantReuse",
+                "description": "Generated domain name label depends on resource name and tenant ID."
+              },
+              {
+                "name": "SubscriptionReuse",
+                "value": "SubscriptionReuse",
+                "description": "Generated domain name label depends on resource name, tenant ID and subscription ID."
+              },
+              {
+                "name": "ResourceGroupReuse",
+                "value": "ResourceGroupReuse",
+                "description": "Generated domain name label depends on resource name, tenant ID, subscription ID and resource group name."
+              },
+              {
+                "name": "NoReuse",
+                "value": "NoReuse",
+                "description": "Generated domain name label is always unique."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "autoGeneratedDomainNameLabel": {
+          "type": "string",
+          "description": "The autogenerated label used as part of the FQDNs for accessing the Communications Gateway",
+          "readOnly": true
+        },
+        "teamsVoicemailPilotNumber": {
+          "type": "string",
+          "description": "This number is used in Teams Phone Mobile scenarios for access to the voicemail IVR from the native dialer.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "onPremMcpEnabled": {
+          "type": "boolean",
+          "description": "Whether an on-premises Mobile Control Point is in use.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "integratedMcpEnabled": {
+          "type": "boolean",
+          "description": "Whether an integrated Mobile Control Point is in use.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "signalingProtocolForMcp": {
+          "type": "string",
+          "description": "Signaling protocol for MCP, if integrated MCP is enabled.",
+          "default": "TLS",
+          "enum": [
+            "TLS",
+            "TCP"
+          ],
+          "x-ms-enum": {
+            "name": "MCPProtocols",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TLS",
+                "value": "TLS",
+                "description": "Transport Layer Security protocol to provide secure communication"
+              },
+              {
+                "name": "TCP",
+                "value": "TCP",
+                "description": "Transmission Control Protocol for maintaining reliable connection"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "emergencyDialStrings": {
+          "type": "array",
+          "description": "A list of dial strings used for emergency calling.",
+          "default": [
+            "911",
+            "933"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dnsDelegations": {
+          "$ref": "#/definitions/DnsDelegationsProperties",
+          "description": "Details of DNS Domains to delegate to the Communications Gateway.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "customSipHeaders": {
+          "$ref": "#/definitions/CustomSipHeadersProperties",
+          "description": "Custom SIP Header to add to any subscriber with a custom_header value, if required.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allocatedSignalingAddressPrefixes": {
+          "type": "array",
+          "description": "A list of IP allocated prefixes which may be used to receive signaling data from this Communications Gateway.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "allocatedMediaAddressPrefixes": {
+          "type": "array",
+          "description": "A list of allocated IP prefixes which may be used to receive media data from this Communications Gateway.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "zoomConfig": {
+          "$ref": "#/definitions/ZoomConfig",
+          "description": "Configuration for Zoom platform",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "aiVoiceServices": {
+          "$ref": "#/definitions/AiVoiceServices",
+          "description": "Configuration for AI Voice services",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "serviceLocations",
+        "connectivity",
+        "codecs",
+        "e911Type",
+        "platforms"
+      ]
+    },
+    "CommunicationsGatewayUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the CommunicationsGateway.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CommunicationsPlatform": {
+      "type": "string",
+      "description": "Available platform types.",
+      "enum": [
+        "OperatorConnect",
+        "TeamsPhoneMobile",
+        "TeamsDirectRouting",
+        "Zoom",
+        "AiVoiceServices"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationsPlatform",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OperatorConnect",
+            "value": "OperatorConnect",
+            "description": "Operator Connect"
+          },
+          {
+            "name": "TeamsPhoneMobile",
+            "value": "TeamsPhoneMobile",
+            "description": "Teams Phone Mobile"
+          },
+          {
+            "name": "TeamsDirectRouting",
+            "value": "TeamsDirectRouting",
+            "description": "Teams Direct Routing"
+          },
+          {
+            "name": "Zoom",
+            "value": "Zoom",
+            "description": "Zoom Platform"
+          },
+          {
+            "name": "AiVoiceServices",
+            "value": "AiVoiceServices",
+            "description": "AI Voice Services"
+          }
+        ]
+      }
+    },
+    "Connectivity": {
+      "type": "string",
+      "description": "How this deployment connects back to the Operator Network",
+      "enum": [
+        "PublicAddress"
+      ],
+      "x-ms-enum": {
+        "name": "Connectivity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PublicAddress",
+            "value": "PublicAddress",
+            "description": "This deployment connects to the Operator Network using a Public IP address, e.g. when using MAPS"
+          }
+        ]
+      }
+    },
+    "CustomSipHeader": {
+      "type": "object",
+      "description": "Details of a Custom SIP Header.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Custom SIP Header",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "CustomSipHeadersProperties": {
+      "type": "object",
+      "description": "Properties of Custom SIP Headers.",
+      "properties": {
+        "headers": {
+          "type": "array",
+          "description": "The Custom SIP Headers to apply to the calls which traverse the Communications Gateway",
+          "items": {
+            "$ref": "#/definitions/CustomSipHeader"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "DefaultMappings": {
+      "type": "object",
+      "description": "Details of the default mappings between services and peer group",
+      "properties": {
+        "serviceToPeerGroup": {
+          "type": "array",
+          "description": "Service to peer group mappings which tells what would be the default peer group for particular service",
+          "items": {
+            "$ref": "#/definitions/ServiceToPeerGroup"
+          },
+          "x-ms-identifiers": [
+            "service"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "peerGroupToService": {
+          "type": "array",
+          "description": "peer group to Service mappings which tells what would be the default service for particular peer group",
+          "items": {
+            "$ref": "#/definitions/PeerGroupToService"
+          },
+          "x-ms-identifiers": [
+            "peerGroup"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "DnsDelegationProperties": {
+      "type": "object",
+      "description": "Details of a DNS Domain delegated to the Communications Gateway.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Domain name to delegate",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "nameServers": {
+          "type": "array",
+          "description": "The Azure-hosted DNS Name Servers for the delegated DNS Zones",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DnsDelegationsProperties": {
+      "type": "object",
+      "description": "Details of DNS Domains delegated to the Communications Gateway.",
+      "properties": {
+        "delegations": {
+          "type": "array",
+          "description": "DNS Domains to delegate for the creation of DNS Zones by the Azure Communications Gateway",
+          "items": {
+            "$ref": "#/definitions/DnsDelegationProperties"
+          },
+          "x-ms-identifiers": [
+            "domain"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "E911Type": {
+      "type": "string",
+      "description": "The method for terminating emergency calls to the PSTN.",
+      "enum": [
+        "Standard",
+        "DirectToEsrp"
+      ],
+      "x-ms-enum": {
+        "name": "E911Type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Emergency calls are not handled different from other calls"
+          },
+          {
+            "name": "DirectToEsrp",
+            "value": "DirectToEsrp",
+            "description": "Emergency calls are routed directly to the ESRP"
+          }
+        ]
+      }
+    },
+    "IpAndPortDetails": {
+      "type": "object",
+      "description": "Connection details containing the combination of IP address and port number",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address identifying the peer of Operator Network",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Port identifying the peer of Operator Network",
+          "minimum": 1,
+          "maximum": 65535,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "Peer": {
+      "type": "object",
+      "description": "Details of Peer - the point at the edge of an Operator Network, where Azure Communication Gateway will connect SIP Peers",
+      "properties": {
+        "peerName": {
+          "type": "string",
+          "description": "Unique name of peer",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[a-zA-Z0-9-]+$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "peerType": {
+          "$ref": "#/definitions/PeerType",
+          "description": "Type of the Peer",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "ipsAndPorts": {
+          "type": "array",
+          "description": "Connection details containing the IP address and port number",
+          "items": {
+            "$ref": "#/definitions/IpAndPortDetails"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "aRecordsAndPorts": {
+          "type": "array",
+          "description": "Connection details containing the address records and port number",
+          "items": {
+            "$ref": "#/definitions/ArecordAndPortDetails"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "srvRecord": {
+          "type": "string",
+          "description": "The DNS SRV record of Operator Network, where Azure Communication Gateway will connect SIP Peers",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedSignalingSourceAddressPrefixes": {
+          "type": "array",
+          "description": "The allowed source IP addresses or CIDR ranges for signaling",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedMediaSourceAddressPrefixes": {
+          "type": "array",
+          "description": "The allowed source IP addresses or CIDR ranges for media",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "PeerGroupProperties": {
+      "type": "object",
+      "description": "The Peer Group Properties used to connect to operator",
+      "properties": {
+        "peerGroupName": {
+          "type": "string",
+          "description": "The name of the Peer Group",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[a-zA-Z0-9-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "peers": {
+          "type": "array",
+          "description": "The point at the edge of an Operator Network, where Azure Communication Gateway will connect SIP Peers",
+          "items": {
+            "$ref": "#/definitions/Peer"
+          },
+          "x-ms-identifiers": [
+            "peerName"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "signalingProtocol": {
+          "type": "string",
+          "description": "Supported signaling protocol",
+          "default": "TLS",
+          "enum": [
+            "TLS",
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "name": "SignalingProtocols",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TLS",
+                "value": "TLS",
+                "description": "Transport Layer Security protocol to provide secure communication"
+              },
+              {
+                "name": "TCP",
+                "value": "TCP",
+                "description": "Transmission Control Protocol"
+              },
+              {
+                "name": "UDP",
+                "value": "UDP",
+                "description": "User Datagram Protocol"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "mediaProtocol": {
+          "type": "string",
+          "description": "Supported media protocol",
+          "default": "SRTP",
+          "enum": [
+            "SRTP",
+            "RTP"
+          ],
+          "x-ms-enum": {
+            "name": "MediaProtocols",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SRTP",
+                "value": "SRTP",
+                "description": "Secure Real-time Transport Protocol"
+              },
+              {
+                "name": "RTP",
+                "value": "RTP",
+                "description": "Real-time Transport Protocol"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "codecs": {
+          "type": "array",
+          "description": "Voice codecs to support per Communication Services",
+          "items": {
+            "$ref": "#/definitions/TeamsCodecs"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "PeerGroupRouting": {
+      "type": "object",
+      "description": "Mappings for routing, provides the ability to route calls based on service and location to a set of peers belonging to a peer group",
+      "properties": {
+        "peerGroupName": {
+          "type": "string",
+          "description": "The name of the peer group used for mapping",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[a-zA-Z0-9-]+$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "routings": {
+          "type": "array",
+          "description": "Routing Details about which service location would use which peer and at what priority",
+          "items": {
+            "$ref": "#/definitions/RoutingDetails"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "PeerGroupToService": {
+      "type": "object",
+      "description": "Details of the default mapping for peer group to Service",
+      "properties": {
+        "peerGroup": {
+          "type": "string",
+          "description": "Name of the peer group",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[a-zA-Z0-9-]+$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "defaultService": {
+          "$ref": "#/definitions/CommunicationsPlatform",
+          "description": "Name of the default Communication Platform for peer group",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "PeerType": {
+      "type": "string",
+      "description": "Type of DNS amongst SRV record/A records/IP addresses and ports to connect to peer",
+      "enum": [
+        "IP",
+        "ARecord",
+        "SRV"
+      ],
+      "x-ms-enum": {
+        "name": "PeerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IP",
+            "value": "IP",
+            "description": "IP address and port combination"
+          },
+          {
+            "name": "ARecord",
+            "value": "ARecord",
+            "description": "Address record and port combination"
+          },
+          {
+            "name": "SRV",
+            "value": "SRV",
+            "description": "SRV record"
+          }
+        ]
+      }
+    },
+    "PrimaryRegionProperties": {
+      "type": "object",
+      "description": "The configuration used in this region as primary, and other regions as backup.",
+      "properties": {
+        "operatorAddresses": {
+          "type": "array",
+          "description": "IP address to use to contact the Operator Network from this region",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "esrpAddresses": {
+          "type": "array",
+          "description": "IP address to use to contact the ESRP from this region",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedSignalingSourceAddressPrefixes": {
+          "type": "array",
+          "description": "The allowed source IP addresses or CIDR ranges for signaling",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedMediaSourceAddressPrefixes": {
+          "type": "array",
+          "description": "The allowed source IP addresses or CIDR ranges for media",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "operatorAddresses"
+      ]
+    },
+    "ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "RoutingDetails": {
+      "type": "object",
+      "description": "Details of the properties required for routing",
+      "properties": {
+        "peerName": {
+          "type": "string",
+          "description": "The name of peer defined earlier in peer group-->peers properties",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[a-zA-Z0-9-]+$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "serviceLocation": {
+          "type": "string",
+          "description": "The service location name where resources are deployed for communication services",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Priority defined, where 0 being the highest priority",
+          "minimum": 0,
+          "maximum": 100,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ServiceRegionProperties": {
+      "type": "object",
+      "description": "The service region configuration needed for Teams Callings.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the region in which the resources needed for Teams Calling will be deployed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "primaryRegionProperties": {
+          "$ref": "#/definitions/PrimaryRegionProperties",
+          "description": "The configuration used in this region as primary, and other regions as backup.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "acgAddressRanges": {
+          "$ref": "#/definitions/AcgAddressRanges",
+          "description": "Azure Communication Gateway IP addresses or address ranges for sending signalling traffic to communication services/Operator",
+          "readOnly": true
+        },
+        "acgContactInfo": {
+          "$ref": "#/definitions/AcgContactInfo",
+          "description": "Azure Communication Gateway contact information used by operator/communication services to connect to Azure Communication Gateway",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "primaryRegionProperties"
+      ]
+    },
+    "ServiceToPeerGroup": {
+      "type": "object",
+      "description": "Details of the default mapping for Communications Services to peer group",
+      "properties": {
+        "service": {
+          "$ref": "#/definitions/CommunicationsPlatform",
+          "description": "Name of the backend service",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "defaultPeerGroup": {
+          "type": "string",
+          "description": "Name of the default peer group for service",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the current CommunicationsGateway resource.",
+      "enum": [
+        "ChangePending",
+        "Complete"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ChangePending",
+            "value": "ChangePending",
+            "description": "The resource has been created or updated, but the CommunicationsGateway service has not yet been updated to reflect the changes."
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "The CommunicationsGateway service is up and running with the parameters specified in the resource."
+          }
+        ]
+      }
+    },
+    "TeamsCodecs": {
+      "type": "string",
+      "description": "The voice codecs expected for communication with Teams.",
+      "enum": [
+        "PCMA",
+        "PCMU",
+        "G722",
+        "G722_2",
+        "SILK_8",
+        "SILK_16"
+      ],
+      "x-ms-enum": {
+        "name": "TeamsCodecs",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PCMA",
+            "value": "PCMA",
+            "description": "Pulse code modulation(PCM) U-law narrowband audio codec(G.711u)"
+          },
+          {
+            "name": "PCMU",
+            "value": "PCMU",
+            "description": "Pulse code modulation(PCM) U-law narrowband audio codec(G.711u)"
+          },
+          {
+            "name": "G722",
+            "value": "G722",
+            "description": "G.722 wideband audio codec"
+          },
+          {
+            "name": "G722_2",
+            "value": "G722_2",
+            "description": "G.722.2 wideband audio codec"
+          },
+          {
+            "name": "SILK_8",
+            "value": "SILK_8",
+            "description": "SILK/8000 narrowband audio codec"
+          },
+          {
+            "name": "SILK_16",
+            "value": "SILK_16",
+            "description": "SILK/16000 wideband audio codec"
+          }
+        ]
+      }
+    },
+    "TestLine": {
+      "type": "object",
+      "description": "A TestLine resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestLineProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TestLineListResult": {
+      "type": "object",
+      "description": "The response of a TestLine list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestLine items on this page",
+          "items": {
+            "$ref": "#/definitions/TestLine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TestLineProperties": {
+      "type": "object",
+      "description": "Details of the TestLine resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "purpose": {
+          "$ref": "#/definitions/TestLinePurpose",
+          "description": "Purpose of this test line, e.g. automated or manual testing",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "phoneNumber",
+        "purpose"
+      ]
+    },
+    "TestLinePurpose": {
+      "type": "string",
+      "description": "The purpose of the TestLine resource.",
+      "enum": [
+        "Manual",
+        "Automated"
+      ],
+      "x-ms-enum": {
+        "name": "TestLinePurpose",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The test line is used for manual testing"
+          },
+          {
+            "name": "Automated",
+            "value": "Automated",
+            "description": "The test line is used for automated testing"
+          }
+        ]
+      }
+    },
+    "TestLineUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the TestLine.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ZoomConfig": {
+      "type": "object",
+      "description": "Configuration for the Zoom platform.",
+      "properties": {
+        "testLines": {
+          "type": "array",
+          "description": "Zoom platform test lines.",
+          "items": {
+            "$ref": "#/definitions/ZoomTestLine"
+          },
+          "x-ms-identifiers": [
+            "phoneNumber"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "region": {
+          "$ref": "#/definitions/ZoomRegion",
+          "description": "The Zoom region to which this Communications Gateway is connected.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "testLines",
+        "region"
+      ]
+    },
+    "ZoomRegion": {
+      "type": "string",
+      "description": "Zoom regions.",
+      "enum": [
+        "NorthAmerica",
+        "EMEA",
+        "APAC",
+        "Japan",
+        "AustraliaNewZealand",
+        "LatinAmerica"
+      ],
+      "x-ms-enum": {
+        "name": "ZoomRegion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NorthAmerica",
+            "value": "NorthAmerica",
+            "description": "North America Region"
+          },
+          {
+            "name": "EMEA",
+            "value": "EMEA",
+            "description": "EMEA Region"
+          },
+          {
+            "name": "APAC",
+            "value": "APAC",
+            "description": "APAC Region"
+          },
+          {
+            "name": "Japan",
+            "value": "Japan",
+            "description": "Japan Region"
+          },
+          {
+            "name": "AustraliaNewZealand",
+            "value": "AustraliaNewZealand",
+            "description": "Australia and New Zealand Region"
+          },
+          {
+            "name": "LatinAmerica",
+            "value": "LatinAmerica",
+            "description": "Latin America Region"
+          }
+        ]
+      }
+    },
+    "ZoomTestLine": {
+      "type": "object",
+      "description": "Zoom test line.",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number for the test line.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "phoneNumber"
+      ]
+    }
+  },
+  "parameters": {}
+}

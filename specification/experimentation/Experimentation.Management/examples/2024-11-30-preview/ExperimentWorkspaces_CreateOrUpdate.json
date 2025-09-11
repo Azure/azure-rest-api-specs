@@ -1,0 +1,125 @@
+{
+  "operationId": "ExperimentWorkspaces_CreateOrUpdate",
+  "title": "Create or update an ExperimentWorkspace with Standard sku and Advanced kind.",
+  "parameters": {
+    "subscriptionId": "fa5fc227-a624-475e-b696-cdd604c735bc",
+    "resourceGroupName": "res9871",
+    "experimentWorkspaceName": "expworkspace6",
+    "api-version": "2024-11-30-preview",
+    "resource": {
+      "location": "eastus2euap",
+      "tags": {
+        "newKey": "newVal"
+      },
+      "properties": {
+        "variantAssignmentConfigPublishing": {
+          "enabled": true,
+          "storageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871",
+          "userAssignedIdentityResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+        },
+        "remoteVariantAssignment": {
+          "enabled": true
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {},
+          "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {}
+        }
+      },
+      "sku": {
+        "name": "S0"
+      },
+      "kind": "Advanced"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expworkspace6",
+        "name": "expworkspace6",
+        "type": "Microsoft.Experimentation/experimentWorkspaces",
+        "location": "eastus2euap",
+        "tags": {
+          "newKey": "newVal"
+        },
+        "properties": {
+          "expWorkspaceId": "02270d43-f68a-401b-b526-86942525c351",
+          "provisioningState": "Succeeded",
+          "variantAssignmentConfigPublishing": {
+            "enabled": true,
+            "storageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871",
+            "userAssignedIdentityResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+          },
+          "remoteVariantAssignment": {
+            "enabled": true,
+            "provisioningState": "Succeeded",
+            "endpoint": "https://test-exp-s2s.msedge.net/exptas194/02270d43-f68a-401b-b526-86942525c350-testanvyas6/api/v1/tas"
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
+              "principalId": "075a0ca6-43f6-4434-9abf-c9b1b79f9219"
+            },
+            "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": "47429305-c0d3-40bc-8595-61946c4df3dc",
+              "principalId": "bf9ebbc8-b92d-4752-8e66-c999000326e0"
+            }
+          }
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard"
+        },
+        "kind": "Advanced"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expworkspace6",
+        "name": "expworkspace6",
+        "type": "Microsoft.Experimentation/experimentWorkspaces",
+        "location": "eastus2euap",
+        "tags": {
+          "newKey": "newVal"
+        },
+        "properties": {
+          "expWorkspaceId": "02270d43-f68a-401b-b526-86942525c352",
+          "provisioningState": "Succeeded",
+          "variantAssignmentConfigPublishing": {
+            "enabled": true,
+            "storageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871",
+            "userAssignedIdentityResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+          },
+          "remoteVariantAssignment": {
+            "enabled": true,
+            "provisioningState": "Accepted",
+            "endpoint": "https://test-exp-s2s.msedge.net/exptas194/02270d43-f68a-401b-b526-86942525c350-testanvyas6/api/v1/tas"
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
+              "principalId": "075a0ca6-43f6-4434-9abf-c9b1b79f9219"
+            },
+            "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": "47429305-c0d3-40bc-8595-61946c4df3dc",
+              "principalId": "bf9ebbc8-b92d-4752-8e66-c999000326e0"
+            }
+          }
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard"
+        },
+        "kind": "Advanced"
+      }
+    }
+  }
+}

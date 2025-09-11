@@ -1,0 +1,148 @@
+{
+  "title": "Creates or updates an investigation",
+  "operationId": "Investigations_CreateOrUpdateAtResource",
+  "parameters": {
+    "resourceUri": "subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster",
+    "investigationId": "investigation-ContosoSH360ClusterRG-b789d6502100",
+    "api-version": "2024-01-01-preview",
+    "investigation": {
+      "properties": {
+        "targets": [
+          "/subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster"
+        ],
+        "displayName": "My AKS investigation",
+        "alertId": "/subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
+        "impactTime": "2023-05-14T15:35:05.5985937+03:00",
+        "runConfiguration": {
+          "hints": [
+            {
+              "name": "region",
+              "operator": "include",
+              "values": [
+                "eastus"
+              ]
+            },
+            {
+              "name": "cluster",
+              "operator": "exclude",
+              "values": [
+                "cluster1",
+                "cluster2"
+              ]
+            }
+          ],
+          "tagScopeFilters": [
+            {
+              "name": "serviceName",
+              "operator": "include",
+              "values": [
+                "MyService"
+              ]
+            }
+          ],
+          "lookBackWindow": "02:00:00",
+          "onlyInvestigateTargetResource": false,
+          "sensitivity": "medium"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster/providers/Microsoft.Monitor/investigations/investigation-ContosoSH360ClusterRG-b789d6502100",
+        "type": "Microsoft.Monitor/investigations",
+        "name": "investigation-ContosoSH360ClusterRG-b789d6502100",
+        "properties": {
+          "targets": [
+            "/subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster"
+          ],
+          "displayName": "My AKS investigation",
+          "alertId": "/subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
+          "impactTime": "2023-05-14T15:35:05.5985937+03:00",
+          "provisioningState": "Running",
+          "runConfiguration": {
+            "hints": [
+              {
+                "name": "region",
+                "operator": "include",
+                "values": [
+                  "eastus"
+                ]
+              },
+              {
+                "name": "cluster",
+                "operator": "exclude",
+                "values": [
+                  "cluster1",
+                  "cluster2"
+                ]
+              }
+            ],
+            "tagScopeFilters": [
+              {
+                "name": "serviceName",
+                "operator": "include",
+                "values": [
+                  "MyService"
+                ]
+              }
+            ],
+            "lookBackWindow": "02:00:00",
+            "onlyInvestigateTargetResource": false,
+            "sensitivity": "medium"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster/providers/Microsoft.Monitor/investigations/investigation-ContosoSH360ClusterRG-b789d6502100",
+        "type": "Microsoft.Monitor/investigations",
+        "name": "investigation-ContosoSH360ClusterRG-b789d6502100",
+        "properties": {
+          "targets": [
+            "/subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster"
+          ],
+          "displayName": "My AKS investigation",
+          "alertId": "/subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
+          "impactTime": "2023-05-14T15:35:05.5985937+03:00",
+          "provisioningState": "Running",
+          "runConfiguration": {
+            "hints": [
+              {
+                "name": "region",
+                "operator": "include",
+                "values": [
+                  "eastus"
+                ]
+              },
+              {
+                "name": "cluster",
+                "operator": "exclude",
+                "values": [
+                  "cluster1",
+                  "cluster2"
+                ]
+              }
+            ],
+            "tagScopeFilters": [
+              {
+                "name": "serviceName",
+                "operator": "include",
+                "values": [
+                  "MyService"
+                ]
+              }
+            ],
+            "lookBackWindow": "02:00:00",
+            "onlyInvestigateTargetResource": false,
+            "sensitivity": "medium"
+          }
+        }
+      }
+    }
+  }
+}

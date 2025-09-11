@@ -10,6 +10,8 @@ import "./receivers/TcpReceivers.tsp";
 import "./receivers/OtlpReceiver.tsp";
 import "./receivers/SyslogReceiver.tsp";
 import "./processors/BatchProcessor.tsp";
+import "./processors/TransformLanguageProcessor.tsp";
+import "./actions/executeTransform.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -39,22 +41,22 @@ model PipelineGroupProperties {
   replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   receivers: Receiver[];
 
   @doc("The processors specified for a pipeline group instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   processors: Processor[];
 
   @doc("The exporters specified for a pipeline group instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   exporters: Exporter[];
 
   @doc("The service section for a given pipeline group instance.")
   service: Service;
 
   @doc("Networking configurations for the pipeline group instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   networkingConfigurations?: NetworkingConfiguration[];
 
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
@@ -112,6 +114,10 @@ model Processor {
 
   @doc("Batch processor configurations.")
   batch?: BatchProcessor;
+
+  @doc("Transform language processor configurations.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  transformLanguage?: TransformLanguageProcessor;
 }
 
 @doc("The processor type.")
@@ -120,6 +126,18 @@ union ProcessorType {
 
   @doc("Batch processor.")
   Batch: "Batch",
+
+  @doc("Transform language processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  TransformLanguage: "TransformLanguage",
+
+  @doc("Microsoft Syslog processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  MicrosoftSyslog: "MicrosoftSyslog",
+
+  @doc("Microsoft CEF/Common Security Log processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  MicrosoftCommonSecurityLog: "MicrosoftCommonSecurityLog",
 }
 
 @doc("Exporter Info.")
@@ -152,7 +170,7 @@ union ExporterType {
 @doc("Service Info.")
 model Service {
   @doc("Pipelines belonging to a given pipeline group.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   pipelines: Pipeline[];
 
   @doc("Persistence options to all pipelines in the instance.")
@@ -196,7 +214,7 @@ model NetworkingConfiguration {
   host?: string;
 
   @doc("Networking routes configuration.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   routes: NetworkingRoute[];
 }
 
@@ -253,4 +271,12 @@ interface PipelineGroups {
 
   @doc("Lists all workspaces in the specified subscription")
   listBySubscription is ArmListBySubscription<PipelineGroup>;
+
+  @doc("This method is used to execute a transform configuration to be used in a pipeline group.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  executeTransform is ArmResourceActionSync<
+    PipelineGroup,
+    ExecuteTransformRequest,
+    ExecuteTransformResponse
+  >;
 }

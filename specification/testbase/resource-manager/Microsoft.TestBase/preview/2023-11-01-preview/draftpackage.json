@@ -120,13 +120,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Test Base Draft Package was successfully updated.",
-            "schema": {
-              "$ref": "#/definitions/DraftPackageResource"
-            }
-          },
-          "201": {
-            "description": "The Test Base Draft Package was successfully created.",
+            "description": "The Test Base Draft Package was successfully created or updated.",
             "schema": {
               "$ref": "#/definitions/DraftPackageResource"
             }
@@ -379,6 +373,9 @@
               }
             }
           },
+          "200": {
+            "description": "The files and metadata are copied from the package successfully."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -444,6 +441,9 @@
               }
             }
           },
+          "200": {
+            "description": "The 'ExtractFile' operation of Draft Package is completed."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -508,6 +508,9 @@
                 "type": "string"
               }
             }
+          },
+          "200": {
+            "description": "The folder and package files are generated successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1120,8 +1123,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base Draft Package.",
-      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
+      "description": "The resource name of the Test Base Draft Package."
     },
     "PackageNameQueryParameter": {
       "name": "packageName",

@@ -608,12 +608,12 @@ model CacheNodeEntity {
   @doc("Auto Update Ring Type which is slow or fast etc.")
   autoUpdateRingType?: autoUpdateRingType;
 
-  @doc("Customer requested week of month for mcc install of auto update cycle. 0 is default no selection. 1-5 are valid weeks of month, 1 is first week, 2 is second week, etc.")
+  @doc("Customer requested week of month for mcc install of auto update cycle")
   @minValue(0)
   @maxValue(5)
   autoUpdateRequestedWeek?: int32;
 
-  @doc("Customer requested day of week for mcc install of auto update cycle. 0 is default no selection. 1-7 are days of week, 1 is Sunday, 2 is Monday, etc.")
+  @doc("Customer requested day of week for mcc install of auto update cycle")
   @minValue(0)
   @maxValue(7)
   autoUpdateRequestedDay?: int32;
@@ -854,6 +854,7 @@ model CacheNodeInstallProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @added(Versions.v2024_11_30_preview)
   @doc("Cache node resource drive configurations.")
+  @Azure.ResourceManager.identifiers(#[])
   driveConfiguration?: CacheNodeDriveConfiguration[];
 
   @added(Versions.v2024_11_30_preview)
@@ -883,6 +884,7 @@ model MccCacheNodeAutoUpdateHistoryProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource auto update history information.")
+  @Azure.ResourceManager.identifiers(#[])
   autoUpdateHistory?: MccCacheNodeAutoUpdateInfo[];
 }
 
@@ -980,6 +982,7 @@ model MccCacheNodeIssueHistoryProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource issue details history.")
+  @Azure.ResourceManager.identifiers(#[])
   mccIssueHistory?: MccIssue[];
 }
 
@@ -1033,6 +1036,7 @@ model MccCacheNodeTlsCertificateProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource tls certificate history details.")
+  @Azure.ResourceManager.identifiers(#[])
   tlsCertificateHistory?: MccCacheNodeTlsCertificate[];
 }
 

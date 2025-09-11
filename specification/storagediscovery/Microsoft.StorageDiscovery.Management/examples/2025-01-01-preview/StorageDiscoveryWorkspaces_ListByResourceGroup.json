@@ -1,0 +1,81 @@
+{
+  "operationId": "StorageDiscoveryWorkspaces_ListByResourceGroup",
+  "title": "List StorageDiscoveryWorkspaces by Resource Group",
+  "parameters": {
+    "resourceGroupName": "sample-rg",
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/sampleworkspace1",
+            "name": "sampleworkspace1",
+            "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
+            "location": "westeurope",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "exportState": "Running",
+              "tier": "Standard",
+              "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
+              "description": "Sample Storage Discovery Workspace",
+              "storageCollections": [
+                {
+                  "displayName": "Sample Collection 1",
+                  "resourceTypes": [
+                    "Microsoft.Storage/storageAccounts"
+                  ],
+                  "tagKeysOnly": [
+                    "filterTag1",
+                    "filterTag2"
+                  ],
+                  "tags": {
+                    "filterTag3": "value3",
+                    "filterTag4": "value4"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/sampleworkspace2",
+            "name": "sampleworkspace2",
+            "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
+            "location": "westeurope",
+            "tags": {
+              "tag3": "value1",
+              "tag4": "value2"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "exportState": "Running",
+              "tier": "Premium",
+              "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
+              "description": "Sample Storage Discovery Workspace",
+              "storageCollections": [
+                {
+                  "displayName": "Sample Collection 2",
+                  "resourceTypes": [
+                    "Microsoft.Storage/storageAccounts"
+                  ],
+                  "tagKeysOnly": [
+                    "filterTag5"
+                  ],
+                  "tags": {
+                    "filterTag6": "value6"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

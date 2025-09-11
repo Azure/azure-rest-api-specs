@@ -2,15 +2,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/versioning";
-import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
 
@@ -22,24 +19,11 @@ model SiteProperties {
   @doc("Description of Site resource")
   description?: string;
 
-  @removed(Versions.v2025_03_01_preview)
-  @removed(Versions.v2025_06_01)
-  @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.EdgeOrder/addresses";
-    }
-  ]>;
-
-  @added(Versions.v2025_03_01_preview)
-  @added(Versions.v2025_06_01)
   @doc("Physical address of the site")
   siteAddress?: SiteAddressProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Key-value pairs for labeling the site resource.")
-  @added(Versions.v2025_03_01_preview)
-  @added(Versions.v2025_06_01)
   labels?: Record<string>;
 
   @doc("Provisioning state of last operation")
@@ -47,8 +31,6 @@ model SiteProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@added(Versions.v2025_03_01_preview)
-@added(Versions.v2025_06_01)
 @doc("Site address properties")
 model SiteAddressProperties {
   @doc("First line of the street address")
@@ -78,23 +60,10 @@ model SiteUpdateProperties {
   @doc("Description of Site resource")
   description?: string;
 
-  @removed(Versions.v2025_03_01_preview)
-  @removed(Versions.v2025_06_01)
-  @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.EdgeOrder/addresses";
-    }
-  ]>;
-
-  @added(Versions.v2025_03_01_preview)
-  @added(Versions.v2025_06_01)
   @doc("Physical address of the site")
   siteAddress?: SiteAddressProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
-  @added(Versions.v2025_03_01_preview)
-  @added(Versions.v2025_06_01)
   @doc("Key-value pairs for labeling the site resource.")
   labels?: Record<string>;
 }
@@ -103,6 +72,36 @@ model SiteUpdateProperties {
 model SiteUpdate {
   @doc("The updatable properties of the Site.")
   properties?: SiteUpdateProperties;
+}
+
+@doc("Properties of the SiteAwareResourceType resource type.")
+model SiteAwareResourceTypeProperties {
+  @doc("Details for each SiteAwareResourceType")
+  @Azure.ResourceManager.identifiers(#[])
+  supportedResourceTypes?: SiteAwareResourceTypeDetails[];
+
+  @doc("Provisioning state of last operation")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("The properties and availability status of each resource type on which aggregations will be performed over Site.")
+model SiteAwareResourceTypeDetails {
+  @doc("Name of the resource-type")
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  @doc("fully qualified name of the resource-type")
+  @visibility(Lifecycle.Read)
+  resourceType?: string;
+
+  @doc("Distinguishes whether RP is already Supported or ComingSoon")
+  @visibility(Lifecycle.Read)
+  availabilityStatus?: AvailabilityStatus;
+
+  @doc("Aggregation properties for the resource-type")
+  @visibility(Lifecycle.Read)
+  supportedCapabilities?: string[];
 }
 
 @doc("ResourceType availability status")

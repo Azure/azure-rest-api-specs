@@ -1,0 +1,34 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+      - SdkTspConfigValidation
+  sub-rules:
+    # C#
+    - options.@azure-tools/typespec-csharp.clear-output-folder
+    - options.@azure-tools/typespec-csharp.namespace
+    - options.@azure-tools/typespec-csharp.package-dir
+    - options.@azure-tools/typespec-csharp.package-dir
+    # Go
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    # Java
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.package-dir
+    # Python
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.namespace
+    - options.@azure-tools/typespec-python.package-dir
+    # TypeScript
+    - options.@azure-tools/typespec-ts.experimental-extensible-enums
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  reason: "TRP doesn't generate any SDKs yet"

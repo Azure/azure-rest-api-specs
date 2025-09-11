@@ -1,0 +1,64 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-12-31-preview",
+    "title": "Azure Clean Room API",
+    "description": "Azure Clean Room API"
+  },
+  "paths": {},
+  "definitions": {
+    "ResourceTags": {
+      "description": "Object containing resource tags for patch operations.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+    "NetworkAddressType": {
+      "type": "string",
+      "description": "Type of network address.",
+      "enum": [
+        "Private",
+        "Public"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IPAddressType"
+      }
+    },
+    "NetworkPort": {
+      "description": "Describes a network port to be opened.",
+      "type": "object",
+      "properties": {
+        "port": {
+          "description": "Gets or sets the port.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocol": {
+          "description": "Gets or sets the protocol.",
+          "$ref": "#/definitions/NetworkProtocol"
+        }
+      }
+    },
+    "NetworkProtocol": {
+      "type": "string",
+      "description": "Network protocol.",
+      "enum": [
+        "TCP",
+        "UDP"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "NetworkProtocol"
+      }
+    }
+  },
+  "parameters": {}
+}

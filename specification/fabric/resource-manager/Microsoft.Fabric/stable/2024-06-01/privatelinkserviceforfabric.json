@@ -1,0 +1,1206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Fabric Management Service",
+    "version": "2024-06-01",
+    "description": "Microsoft.Fabric Management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinkResources"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PrivateLinkServicesForFabric"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Fabric/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/privateLinkServicesForFabric": {
+      "get": {
+        "operationId": "PrivateLinkServicesForFabric_ListBySubscription",
+        "tags": [
+          "PrivateLinkServicesForFabric"
+        ],
+        "description": "List private link services for Fabric by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServiceForFabricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkServicesForFabric_ListBySubscription": {
+            "$ref": "./examples/PrivateLinkServicesForFabric_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric": {
+      "get": {
+        "operationId": "PrivateLinkServicesForFabric_ListByResourceGroup",
+        "tags": [
+          "PrivateLinkServicesForFabric"
+        ],
+        "description": "List private link services for Fabric by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServiceForFabricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkServicesForFabric_ListByResourceGroup": {
+            "$ref": "./examples/PrivateLinkServicesForFabric_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/{privateLinkServiceName}": {
+      "get": {
+        "operationId": "PrivateLinkServicesForFabric_Get",
+        "tags": [
+          "PrivateLinkServicesForFabric"
+        ],
+        "description": "Get private link service for Fabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServiceForFabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkServicesForFabric_Get": {
+            "$ref": "./examples/PrivateLinkServicesForFabric_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateLinkServicesForFabric_CreateOrUpdate",
+        "tags": [
+          "PrivateLinkServicesForFabric"
+        ],
+        "description": "Create or update private link service for Fabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServiceForFabric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateLinkServiceForFabric' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServiceForFabric"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateLinkServiceForFabric' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServiceForFabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkServicesForFabric_CreateOrUpdate": {
+            "$ref": "./examples/PrivateLinkServicesForFabric_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PrivateLinkServicesForFabric_UpdateTags",
+        "tags": [
+          "PrivateLinkServicesForFabric"
+        ],
+        "description": "update private link service for fabric tags",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServiceForFabricTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServiceForFabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkServicesForFabric_UpdateTags": {
+            "$ref": "./examples/PrivateLinkServicesForFabric_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateLinkServicesForFabric_Delete",
+        "tags": [
+          "PrivateLinkServicesForFabric"
+        ],
+        "description": "Delete private link service for Fabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkServicesForFabric_Delete": {
+            "$ref": "./examples/PrivateLinkServicesForFabric_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/{privateLinkServiceName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "PrivateLinkServicesForFabric_GetOperationResult",
+        "tags": [
+          "PrivateLinkServicesForFabric"
+        ],
+        "description": "Get private link service for Fabric operation result",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ArmOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkServicesForFabric_GetOperationResult": {
+            "$ref": "./examples/PrivateLinkServicesForFabric_GetOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/{privateLinkServiceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_List",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List private endpoint connections",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/PrivateEndpointConnections_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/{privateLinkServiceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Update",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Update private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Update": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/{privateLinkServiceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_List",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "List private link resources of private link service for Fabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/PrivateLinkResources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/{privateLinkServiceName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get private link resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkServiceName",
+            "in": "path",
+            "description": "PrivateLinkServiceForFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmOperationStatus": {
+      "type": "object",
+      "description": "Arm Operation Status",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Operation Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation Name",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation Start Time in UTC and ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation End Time in UTC and ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Status Value"
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Operation Error Detail",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ConnectionActions": {
+      "type": "string",
+      "description": "Connection Actions",
+      "enum": [
+        "None",
+        "Recreate"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionActions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No Action Required"
+          },
+          {
+            "name": "Recreate",
+            "value": "Recreate",
+            "description": "Recreate Required"
+          }
+        ]
+      }
+    },
+    "ConnectionStatus": {
+      "type": "string",
+      "description": "Connection Status",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending Status"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "Approved Status"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "Rejected Status"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Disconnected Status"
+          }
+        ]
+      }
+    },
+    "OperationIdParameter": {
+      "type": "object",
+      "description": "Operation Id Parameter",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The ID of an ongoing async operation.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "Private Endpoint",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource Id"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "PrivateEndpointConnection Object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "PrivateEndpointConnection Properties",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "Private Endpoint",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Private Link Service Connection State"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning State",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "privateEndpoint",
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "PrivateLinkResource Object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "PrivateLinkResource Properties",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "Group Id",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "Required Members",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "Required Zone Names",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "groupId",
+        "requiredMembers",
+        "requiredZoneNames"
+      ]
+    },
+    "PrivateLinkServiceConnection": {
+      "type": "object",
+      "description": "Private Link Service Connection",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Private Link Service Connection Name"
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "Group Ids",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "Request Message"
+        }
+      },
+      "required": [
+        "name",
+        "groupIds",
+        "requestMessage"
+      ]
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "Private Link Service Connection State",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ConnectionStatus",
+          "description": "Connection Status"
+        },
+        "description": {
+          "type": "string",
+          "description": "Connection Status Description"
+        },
+        "actionsRequired": {
+          "$ref": "#/definitions/ConnectionActions",
+          "description": "Required Actions"
+        }
+      },
+      "required": [
+        "status",
+        "actionsRequired"
+      ]
+    },
+    "PrivateLinkServiceForFabric": {
+      "type": "object",
+      "description": "PrivateLinkServiceForFabric Object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkServiceForFabricProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PrivateLinkServiceForFabricListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkServiceForFabric list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkServiceForFabric items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceForFabric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkServiceForFabricProperties": {
+      "type": "object",
+      "description": "PrivateLinkServiceForFabric Properties",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id"
+        },
+        "workspaceObjectId": {
+          "type": "string",
+          "description": "Workspace Object Id"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Private Endpoint Connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning State",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "tenantId",
+        "workspaceObjectId",
+        "privateEndpointConnections"
+      ]
+    },
+    "PrivateLinkServiceForFabricTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in PrivateLinkServiceForFabric resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

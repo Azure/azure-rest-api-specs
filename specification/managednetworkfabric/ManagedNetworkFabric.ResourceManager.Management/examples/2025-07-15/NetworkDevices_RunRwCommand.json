@@ -1,0 +1,50 @@
+{
+  "title": "NetworkDevices_RunRwCommand_MaximumSet_Gen",
+  "operationId": "NetworkDevices_RunRwCommand",
+  "parameters": {
+    "api-version": "2025-07-15",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkDeviceName": "example-device",
+    "body": {
+      "command": "show running-config",
+      "commandUrl": "https://example.blob.core.windows.net/commands/config.txt"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Failed",
+        "error": {
+          "code": "CommandExecutionPending",
+          "message": "Command execution requires administrative approval",
+          "target": "NetworkDevice",
+          "details": [
+            {
+              "code": "PendingAdministrativeUpdate",
+              "message": "Command execution discovered configuration changes requiring administrative update",
+              "target": "ConfigurationState"
+            }
+          ],
+          "additionalInfo": [
+            {
+              "type": "CommandExecutionDetails",
+              "info": {
+                "requiredAction": "ApplyAdministrativeUpdate",
+                "impactedConfiguration": "running-config"
+              }
+            }
+          ]
+        },
+        "properties": {
+          "outputUrl": "https://example.blob.core.windows.net/outputs/command-output.txt"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

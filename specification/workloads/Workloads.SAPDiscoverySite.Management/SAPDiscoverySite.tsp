@@ -1,6 +1,7 @@
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Workloads;
 /**
@@ -36,12 +37,7 @@ interface SAPDiscoverySites {
   /**
    * Creates a discovery site resource for SAP Migration. This resource will be used to run system discovery and assessment with Azure Migrate.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrReplaceAsync<
-    SAPDiscoverySite,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<SAPDiscoverySite>;
 
   /**
    * Updates a SAP Migration discovery site resource.
@@ -52,26 +48,52 @@ interface SAPDiscoverySites {
   /**
    * Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.
    */
-  #suppress "deprecated" "Existing API"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  delete is ArmResourceDeleteAsync<SAPDiscoverySite>;
+  #suppress "deprecated" ""
+  @removed(Versions.v2024_06_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2024_06_01_preview, "delete")
+  deleteOld is ArmResourceDeleteAsync<SAPDiscoverySite>;
+
+  /**
+   * Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.
+   */
+  @added(Versions.v2024_06_01_preview)
+  @sharedRoute
+  delete is ArmResourceDeleteWithoutOkAsync<SAPDiscoverySite>;
 
   /**
    * Gets all SAP Migration discovery site resources in a Resource Group.
    */
+  @list
   listByResourceGroup is ArmResourceListByParent<SAPDiscoverySite>;
 
   /**
    * Gets all SAP Migration discovery site resources in a Subscription.
    */
+  @list
   listBySubscription is ArmListBySubscription<SAPDiscoverySite>;
 
   /**
    * Import your SAP systems' inventory using the [Discovery template](https://go.microsoft.com/fwlink/?linkid=2249111) into your SAP Migration discovery site resource and it's child resources, the SAP instances and Server instances.
    */
-  importEntities is ArmResourceActionAsync<
+  @removed(Versions.v2024_06_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2024_06_01_preview, "importEntities")
+  @action("importEntities")
+  importEntitiesOld is ArmResourceActionAsync<
     SAPDiscoverySite,
     void,
     Foundations.OperationStatusResult
+  >;
+
+  /**
+   * Import your SAP systems' inventory using the [Discovery template](https://go.microsoft.com/fwlink/?linkid=2249111) into your SAP Migration discovery site resource and it's child resources, the SAP instances and Server instances.
+   */
+  @added(Versions.v2024_06_01_preview)
+  @sharedRoute
+  importEntities is ArmResourceActionAsync<
+    SAPDiscoverySite,
+    void,
+    ImportOperationStatusResult
   >;
 }

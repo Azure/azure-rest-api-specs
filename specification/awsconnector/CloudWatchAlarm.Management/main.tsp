@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -91,7 +90,7 @@ model AwsCloudWatchAlarmProperties {
   datapointsToAlarm?: int32;
 
   @doc("The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify ``Dimensions``. Instead, you use ``Metrics``.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   dimensions?: Dimension[];
 
   @doc("Used only for alarms based on percentiles. If ``ignore``, the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.")
@@ -110,7 +109,7 @@ model AwsCloudWatchAlarmProperties {
   metricName?: string;
 
   @doc("An array that enables you to create an alarm based on the result of a metric math expression. Each item in the array either retrieves a metric or performs a math expression. If you specify the ``Metrics`` parameter, you cannot specify ``MetricName``, ``Dimensions``, ``Period``, ``Namespace``, ``Statistic``, ``ExtendedStatistic``, or ``Unit``.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metrics?: MetricDataQuery[];
 
   @doc("The namespace of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you can't specify ``Namespace`` and you use ``Metrics`` instead. For a list of namespaces for metrics from AWS services, see [Services That Publish Metrics.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)")
@@ -126,7 +125,7 @@ model AwsCloudWatchAlarmProperties {
   statistic?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The value to compare with the specified statistic.")
@@ -222,7 +221,7 @@ model MetricStat {
 @doc("Definition of Metric")
 model Metric {
   @doc("The metric dimensions that you want to be used for the metric that the alarm will watch.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   dimensions?: Dimension[];
 
   @doc("The name of the metric that you want the alarm to watch. This is a required field.")

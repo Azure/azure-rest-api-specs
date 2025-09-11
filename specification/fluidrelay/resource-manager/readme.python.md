@@ -16,4 +16,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/fluidrelay/azure-mgmt-fluidrelay/azure/mgmt/fluidrelay
 ```
-

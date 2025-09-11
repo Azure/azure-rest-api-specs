@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AgriculturePlatform")
@@ -17,7 +18,6 @@ namespace Microsoft.AgriculturePlatform;
 @doc("Supported API versions for the Microsoft.AgriculturePlatform resource provider.")
 enum Versions {
   @doc("The 2024-06-01-preview version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01_preview: "2024-06-01-preview",
 }
@@ -82,12 +82,12 @@ model AgriServiceResourceProperties {
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("Data connector credentials of AgriService instance.")
-  @identifiers(#["key"])
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   dataConnectorCredentials?: DataConnectorCredentialMap[];
 
   @doc("AgriService installed solutions.")
-  @identifiers(#["key"])
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   installedSolutions?: InstalledSolutionMap[];
 }
@@ -242,6 +242,7 @@ model MoboBrokerResource {
 interface AgriService {
   get is ArmResourceRead<AgriServiceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AgriServiceResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AgriServiceResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -276,7 +277,7 @@ op ArmResourceListActionSync<
 @doc("The list of available agri solutions.")
 model AvailableAgriSolutionListResult {
   @doc("Agri solutions list.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   solutions: DataManagerForAgricultureSolution[];
 }
 

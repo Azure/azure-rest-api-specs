@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -71,7 +70,7 @@ model S3AccessControlPolicyProperties {
 @doc("Definition of awsS3AccessControlPolicy")
 model AwsS3AccessControlPolicyProperties {
   @doc("<p>A list of grants.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   grants?: Grant[];
 
   @doc("<p>Container for the bucket owner's display name and ID.</p>")

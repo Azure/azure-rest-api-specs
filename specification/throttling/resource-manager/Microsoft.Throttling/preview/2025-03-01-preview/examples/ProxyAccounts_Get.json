@@ -1,0 +1,37 @@
+{
+  "operationId": "ProxyAccounts_Get",
+  "title": "ProxyAccounts_Get",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgthrottling",
+    "proxyAccountName": "fabrikam"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgthrottling/providers/Microsoft.Throttling/proxyAccounts/fabrikam",
+        "type": "Microsoft.Throttling/proxyAccounts",
+        "name": "fabrikam",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "authentication": {
+            "certificates": [
+              {
+                "subjectName": "fabrikam.throttling.azure.com"
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "example@fabrikam.com",
+          "createdByType": "User",
+          "createdAt": "2022-05-05T19:48:34.573Z",
+          "lastModifiedBy": "example@fabrikam.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-05-05T19:48:34.573Z"
+        }
+      }
+    }
+  }
+}

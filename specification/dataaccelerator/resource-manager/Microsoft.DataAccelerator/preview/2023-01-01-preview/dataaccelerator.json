@@ -1,0 +1,471 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataAccelerator",
+    "description": "DataAccelerator resource provider",
+    "version": "2023-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataAccelerator/indexClusters": {
+      "get": {
+        "description": "Returns list of IndexClusters.",
+        "operationId": "IndexClusters_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of IndexClusters in a Subscription",
+            "schema": {
+              "$ref": "#/definitions/IndexClusterList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IndexClusters_ListSub": {
+            "$ref": "./examples/ListClusters.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataAccelerator/indexClusters": {
+      "get": {
+        "description": "Returns list of IndexCluster from a given Resource Group",
+        "operationId": "IndexClusters_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of IndexClusters in a Resource Group.",
+            "schema": {
+              "$ref": "#/definitions/IndexClusterList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IndexClusters_List": {
+            "$ref": "./examples/ListClustersByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataAccelerator/indexClusters/{Name}": {
+      "get": {
+        "description": "Returns IndexCluster resource for a given name.",
+        "operationId": "IndexClusters_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IndexClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IndexCluster details.",
+            "schema": {
+              "$ref": "#/definitions/IndexCluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndexClusters_Get": {
+            "$ref": "./examples/GetCluster.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update IndexCluster resource.",
+        "operationId": "IndexClusters_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IndexClusterNameParameter"
+          },
+          {
+            "name": "Properties",
+            "description": "IndexCluster specifications such as sku, HA, tags and the ManagementPortAppId",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/IndexCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IndexCluster"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IndexCluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndexClusters_CreateAndUpdate": {
+            "$ref": "./examples/CreateCluster.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Update IndexCluster details.",
+        "operationId": "IndexClusters_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IndexClusterNameParameter"
+          },
+          {
+            "name": "indexClusterPatchResource",
+            "description": "IndexCluster patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IndexClusterPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/IndexCluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndexClusters_Update": {
+            "$ref": "./examples/UpdateCluster.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a given Index Cluster",
+        "operationId": "IndexClusters_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IndexClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful"
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "The index cluster does not exist in the subscription"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndexClusters_Delete": {
+            "$ref": "./examples/DeleteCluster.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/providers/Microsoft.DataAccelerator/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IndexCluster": {
+      "type": "object",
+      "description": "IndexCluster details",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Properties of an Index Cluster",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "IndexClusterPatchResource": {
+      "type": "object",
+      "description": "IndexCluster patch properties",
+      "properties": {
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IndexClusterList": {
+      "description": "The list of IndexClusters.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IndexCluster list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of IndexClusters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexCluster"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "description": "The tags and their values",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name (also known as the key) of the tag.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the tag.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "description": "SKU for the Index cluster",
+      "properties": {
+        "name": {
+          "description": "Name of the SKU.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterProperties": {
+      "description": "Definition of the properties for a TagRules resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the cluster resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "NotSpecified",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "Deleted",
+            "PartiallySucceeded",
+            "InProgress",
+            "DisableInProgress",
+            "Connected",
+            "PartiallyConnected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "Sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "ManagementPortalAppId": {
+          "description": "App Id of the management portal",
+          "type": "string"
+        },
+        "Availability": {
+          "description": "String indicating availability of the node pool, HA for high availability and empty or anything else for regular",
+          "type": "string",
+          "enum": [
+            "HA",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "Availability",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "IndexClusterNameParameter": {
+      "name": "Name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name IndexCluster resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

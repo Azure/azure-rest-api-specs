@@ -1,0 +1,1713 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.CloudMine management service",
+    "version": "2025-02-01-preview",
+    "description": "Microsoft.CloudMine Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Organizations"
+    },
+    {
+      "name": "Projects"
+    },
+    {
+      "name": "BuildDefinitions"
+    },
+    {
+      "name": "BuildDefinitionRevisions"
+    },
+    {
+      "name": "Releases"
+    },
+    {
+      "name": "ReleaseDefinitions"
+    },
+    {
+      "name": "ReleaseDefinitionRevisions"
+    },
+    {
+      "name": "Repositories"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.CloudMine/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations": {
+      "get": {
+        "operationId": "Organizations_List",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "List Organization resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_List": {
+            "$ref": "./examples/Organizations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}": {
+      "get": {
+        "operationId": "Organizations_Get",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Get a Organization",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Get": {
+            "$ref": "./examples/Organizations_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects": {
+      "get": {
+        "operationId": "Projects_List",
+        "tags": [
+          "Projects"
+        ],
+        "description": "List Project resources by Organization",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/Projects_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}": {
+      "get": {
+        "operationId": "Projects_Get",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Get a Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Get": {
+            "$ref": "./examples/Projects_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/buildDefinitions": {
+      "get": {
+        "operationId": "BuildDefinitions_List",
+        "tags": [
+          "BuildDefinitions"
+        ],
+        "description": "List BuildDefinition resources by Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BuildDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildDefinitions_List": {
+            "$ref": "./examples/BuildDefinitions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/buildDefinitions/{buildDefinitionId}": {
+      "get": {
+        "operationId": "BuildDefinitions_Get",
+        "tags": [
+          "BuildDefinitions"
+        ],
+        "description": "Get a BuildDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "buildDefinitionId",
+            "in": "path",
+            "description": "Build definition id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BuildDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildDefinitions_Get": {
+            "$ref": "./examples/BuildDefinitions_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/buildDefinitions/{buildDefinitionId}/revisions": {
+      "get": {
+        "operationId": "BuildDefinitionRevisions_List",
+        "tags": [
+          "BuildDefinitionRevisions"
+        ],
+        "description": "List BuildDefinitionRevision resources by BuildDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "buildDefinitionId",
+            "in": "path",
+            "description": "Build definition id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BuildDefinitionRevisionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildDefinitionRevisions_List": {
+            "$ref": "./examples/BuildDefinitionRevisions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/buildDefinitions/{buildDefinitionId}/revisions/{revision}": {
+      "get": {
+        "operationId": "BuildDefinitionRevisions_Get",
+        "tags": [
+          "BuildDefinitionRevisions"
+        ],
+        "description": "Get a BuildDefinitionRevision",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "buildDefinitionId",
+            "in": "path",
+            "description": "Build definition id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          {
+            "name": "revision",
+            "in": "path",
+            "description": "Revision of the build definition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BuildDefinitionRevision"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildDefinitionRevisions_Get": {
+            "$ref": "./examples/BuildDefinitionRevisions_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/releaseDefinitions": {
+      "get": {
+        "operationId": "ReleaseDefinitions_List",
+        "tags": [
+          "ReleaseDefinitions"
+        ],
+        "description": "List ReleaseDefinition resources by Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReleaseDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReleaseDefinitions_List": {
+            "$ref": "./examples/ReleaseDefinitions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/releaseDefinitions/{releaseDefinitionId}": {
+      "get": {
+        "operationId": "ReleaseDefinitions_Get",
+        "tags": [
+          "ReleaseDefinitions"
+        ],
+        "description": "Get a ReleaseDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "releaseDefinitionId",
+            "in": "path",
+            "description": "Release definition id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReleaseDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReleaseDefinitions_Get": {
+            "$ref": "./examples/ReleaseDefinitions_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/releaseDefinitions/{releaseDefinitionId}/revisions": {
+      "get": {
+        "operationId": "ReleaseDefinitionRevisions_List",
+        "tags": [
+          "ReleaseDefinitionRevisions"
+        ],
+        "description": "List ReleaseDefinitionRevision resources by ReleaseDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "releaseDefinitionId",
+            "in": "path",
+            "description": "Release definition id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReleaseDefinitionRevisionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReleaseDefinitionRevisions_List": {
+            "$ref": "./examples/ReleaseDefinitionRevisions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/releaseDefinitions/{releaseDefinitionId}/revisions/{revision}": {
+      "get": {
+        "operationId": "ReleaseDefinitionRevisions_Get",
+        "tags": [
+          "ReleaseDefinitionRevisions"
+        ],
+        "description": "Get a ReleaseDefinitionRevision",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "releaseDefinitionId",
+            "in": "path",
+            "description": "Release definition id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          {
+            "name": "revision",
+            "in": "path",
+            "description": "Revision of the release definition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReleaseDefinitionRevision"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReleaseDefinitionRevisions_Get": {
+            "$ref": "./examples/ReleaseDefinitionRevisions_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/releases": {
+      "get": {
+        "operationId": "Releases_List",
+        "tags": [
+          "Releases"
+        ],
+        "description": "List Release resources by Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReleaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Releases_List": {
+            "$ref": "./examples/Releases_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/releases/{releaseId}": {
+      "get": {
+        "operationId": "Releases_Get",
+        "tags": [
+          "Releases"
+        ],
+        "description": "Get a Release",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "releaseId",
+            "in": "path",
+            "description": "The name of the Release",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Release"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Releases_Get": {
+            "$ref": "./examples/Releases_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/repositories": {
+      "get": {
+        "operationId": "Repositories_List",
+        "tags": [
+          "Repositories"
+        ],
+        "description": "List Repository resources by Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RepositoryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Repositories_List": {
+            "$ref": "./examples/Repositories_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CloudMine/organizations/{organizationName}/projects/{projectId}/repositories/{repositoryId}": {
+      "get": {
+        "operationId": "Repositories_Get",
+        "tags": [
+          "Repositories"
+        ],
+        "description": "Get a Repository",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "The name of the Organization",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "description": "Repository id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Repository"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Repositories_Get": {
+            "$ref": "./examples/Repositories_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BuildDefinition": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildDefinitionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BuildDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a BuildDefinition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BuildDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/BuildDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BuildDefinitionProperties": {
+      "type": "object",
+      "description": "Properties for the build definition resource.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "The name of the organization."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The project ID of the build definition."
+        },
+        "repositoryId": {
+          "type": "string",
+          "description": "The repository ID of the build definition."
+        },
+        "buildDefinitionId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ID of the build definition."
+        },
+        "buildDefinitionRevisions": {
+          "type": "array",
+          "description": "The revisions of the build definition.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "repositoryType": {
+          "$ref": "#/definitions/RepositoryType",
+          "description": "Type of the reference repository."
+        },
+        "repositoryUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Url of the reference repository."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName",
+        "projectId",
+        "repositoryId",
+        "buildDefinitionId",
+        "buildDefinitionRevisions",
+        "repositoryType",
+        "repositoryUrl"
+      ]
+    },
+    "BuildDefinitionRevision": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildDefinitionRevisionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BuildDefinitionRevisionListResult": {
+      "type": "object",
+      "description": "The response of a BuildDefinitionRevision list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BuildDefinitionRevision items on this page",
+          "items": {
+            "$ref": "#/definitions/BuildDefinitionRevision"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BuildDefinitionRevisionProperties": {
+      "type": "object",
+      "description": "Properties for the build definition revision resource.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "The name of the organization."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The project ID of the build definition."
+        },
+        "repositoryId": {
+          "type": "string",
+          "description": "The repository ID of the build definition."
+        },
+        "buildDefinitionId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ID of the build definition."
+        },
+        "buildDefinitionRevision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The revision of the build definition."
+        },
+        "queueStatus": {
+          "$ref": "#/definitions/QueueStatus",
+          "description": "A value that indicates whether builds can be queued against this definition."
+        },
+        "repositoryType": {
+          "$ref": "#/definitions/RepositoryType",
+          "description": "Type of the reference repository."
+        },
+        "repositoryUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Url of the reference repository."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName",
+        "projectId",
+        "repositoryId",
+        "buildDefinitionId",
+        "buildDefinitionRevision",
+        "repositoryType",
+        "repositoryUrl"
+      ]
+    },
+    "Organization": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OrganizationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OrganizationListResult": {
+      "type": "object",
+      "description": "The response of a Organization list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Organization items on this page",
+          "items": {
+            "$ref": "#/definitions/Organization"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OrganizationProperties": {
+      "type": "object",
+      "description": "Properties for the organization resource.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "The name of the organization."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName"
+      ]
+    },
+    "Project": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProjectListResult": {
+      "type": "object",
+      "description": "The response of a Project list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Project items on this page",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProjectProperties": {
+      "type": "object",
+      "description": "Properties for the project resource.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "The organization name for the project."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The project ID for the project."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName",
+        "projectId"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state enum",
+      "enum": [
+        "Provisioning",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource action is successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource action has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource action has been cancelled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The resource has been deleted."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource status is unspecified."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "QueueStatus": {
+      "type": "string",
+      "description": "Queue status enum",
+      "enum": [
+        "disabled",
+        "enabled",
+        "paused"
+      ],
+      "x-ms-enum": {
+        "name": "QueueStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "When disabled the definition queue will not allow builds to be queued by users and the system will not queue scheduled, gated or continuous integration builds. Builds already in the queue will not be started by the system."
+          },
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "When enabled the definition queue allows builds to be queued by users, the system will queue scheduled, gated and continuous integration builds, and the queued builds will be started by the system."
+          },
+          {
+            "name": "Paused",
+            "value": "paused",
+            "description": "When paused the definition queue allows builds to be queued by users and the system will queue scheduled, gated and continuous integration builds. Builds in the queue will not be started by the system."
+          }
+        ]
+      }
+    },
+    "Release": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReleaseProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReleaseDefinition": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReleaseDefinitionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReleaseDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a ReleaseDefinition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ReleaseDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/ReleaseDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReleaseDefinitionProperties": {
+      "type": "object",
+      "description": "Properties for the release definition resource.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "The name of the organization."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The project ID of the release definition."
+        },
+        "releaseDefinitionId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The release definition ID of the release."
+        },
+        "releaseDefinitionRevisions": {
+          "type": "array",
+          "description": "The revisions of the release definition.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName",
+        "projectId",
+        "releaseDefinitionId",
+        "releaseDefinitionRevisions"
+      ]
+    },
+    "ReleaseDefinitionRevision": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReleaseDefinitionRevisionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReleaseDefinitionRevisionListResult": {
+      "type": "object",
+      "description": "The response of a ReleaseDefinitionRevision list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ReleaseDefinitionRevision items on this page",
+          "items": {
+            "$ref": "#/definitions/ReleaseDefinitionRevision"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReleaseDefinitionRevisionProperties": {
+      "type": "object",
+      "description": "Properties for the release definition revision resource.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "The name of the organization."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The project ID of the release definition."
+        },
+        "releaseDefinitionId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The release definition ID of the release."
+        },
+        "releaseDefinitionRevision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The revision of the release definition."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName",
+        "projectId",
+        "releaseDefinitionId",
+        "releaseDefinitionRevision"
+      ]
+    },
+    "ReleaseListResult": {
+      "type": "object",
+      "description": "The response of a Release list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Release items on this page",
+          "items": {
+            "$ref": "#/definitions/Release"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReleaseProperties": {
+      "type": "object",
+      "description": "Properties for the release resource.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "The name of the organization."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The project ID of the release."
+        },
+        "releaseDefinitionId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The release definition ID of the release."
+        },
+        "releaseId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ID of the release."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName",
+        "projectId",
+        "releaseDefinitionId",
+        "releaseId"
+      ]
+    },
+    "Repository": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RepositoryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RepositoryListResult": {
+      "type": "object",
+      "description": "The response of a Repository list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Repository items on this page",
+          "items": {
+            "$ref": "#/definitions/Repository"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RepositoryProperties": {
+      "type": "object",
+      "description": "Properties for the repository resource.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "The name of the organization."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The project ID of the repository."
+        },
+        "repositoryId": {
+          "type": "string",
+          "description": "The repository ID of the repository."
+        },
+        "repositoryUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Url of the reference repository."
+        },
+        "defaultBranch": {
+          "type": "string",
+          "description": "Name of the default branch."
+        },
+        "isDisabled": {
+          "type": "boolean",
+          "description": "True if the repository is disabled. False otherwise."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName",
+        "projectId",
+        "repositoryId",
+        "repositoryUrl",
+        "isDisabled"
+      ]
+    },
+    "RepositoryType": {
+      "type": "string",
+      "description": "Repository type enum",
+      "enum": [
+        "TfsGit",
+        "GitHub",
+        "Git",
+        "GitHubEnterprise",
+        "Svn",
+        "Bitbucket",
+        "TfsVersionControl"
+      ],
+      "x-ms-enum": {
+        "name": "RepositoryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TfsGit",
+            "value": "TfsGit",
+            "description": "TfsGit repository type"
+          },
+          {
+            "name": "GitHub",
+            "value": "GitHub",
+            "description": "GitHub repository type"
+          },
+          {
+            "name": "Git",
+            "value": "Git",
+            "description": "Git repository type"
+          },
+          {
+            "name": "GitHubEnterprise",
+            "value": "GitHubEnterprise",
+            "description": "GitHubEnterprise repository type"
+          },
+          {
+            "name": "Svn",
+            "value": "Svn",
+            "description": "Svn repository type"
+          },
+          {
+            "name": "Bitbucket",
+            "value": "Bitbucket",
+            "description": "Bitbucket repository type"
+          },
+          {
+            "name": "TfsVersionControl",
+            "value": "TfsVersionControl",
+            "description": "TfsVersionControl repository type"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

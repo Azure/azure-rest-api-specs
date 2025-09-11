@@ -1,0 +1,47 @@
+{
+  "title": "EdgeCopilot_PostChat",
+  "operationId": "Edge_Chat",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "location": "eastus",
+    "api-version": "2025-03-01-preview",
+    "body": {
+      "userMessage": {
+        "type": "text",
+        "role": "user",
+        "subType": "",
+        "content": "What is azure stack HCI"
+      },
+      "context": {
+        "resourceIds": [
+          "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/rg0/providers/Microsoft.CustomerInsights/hubs/{hub-name}"
+        ],
+        "bladeId": "Microsoft_Azure_Customer_Insights::OverviewBlade",
+        "startTime": "2025-01-01T08:00:00Z",
+        "endTime": "2025-01-01T10:00:00Z"
+      },
+      "sessionId": "1234567890",
+      "language": "en-us"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "replyMessages": [
+          {
+            "content": "Octopus sees the user wants to know what Azure Stack HCI is and also wants to know the data schema when loading or pulling data from any source.",
+            "role": "assistant",
+            "subType": "thought",
+            "type": "agent"
+          },
+          {
+            "content": "Azure Stack HCI is a portfolio of products that enables you to build and run hybrid applications across on-premises, edge locations, and cloud. It includes Azure Stack Hyperconverged Infrastructure (HCI), Azure Stack Hub, and Azure Stack Edge. Azure Stack HCI is a hyper-converged Windows Server 2019 cluster that uses validated hardware to run virtualized workloads on-premises. It is designed to help you modernize your datacenter and run virtualized workloads on-premises while taking advantage of cloud-based services.",
+            "role": "assistant",
+            "subType": "",
+            "type": "text"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "operationId": "StorageDiscoveryWorkspaces_Update",
+  "title": "Update a StorageDiscoveryWorkspace",
+  "parameters": {
+    "storageDiscoveryWorkspaceName": "sampleworkspace",
+    "resourceGroupName": "sample-rg",
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09",
+    "properties": {
+      "properties": {
+        "exportState": "Stopped",
+        "tier": "Premium",
+        "scopes": [
+          {
+            "displayName": "Updated Sample Scope",
+            "resourceTypes": [
+              "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/updated-sample-storageAccount"
+            ],
+            "armScopes": [
+              "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg"
+            ],
+            "storageAccountFilters": {
+              "tags": {
+                "updated-filtertag1": "",
+                "updated-filtertag2": ""
+              },
+              "locations": [
+                "eastus"
+              ]
+            }
+          }
+        ],
+        "destinations": {
+          "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/sampleworkspace",
+        "name": "sampleworkspace",
+        "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
+        "location": "westeurope",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "exportState": "Stopped",
+          "tier": "Premium",
+          "scopes": [
+            {
+              "displayName": "Updated Sample Scope",
+              "resourceTypes": [
+                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/updated-sample-storageAccount"
+              ],
+              "armScopes": [
+                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg"
+              ],
+              "storageAccountFilters": {
+                "tags": {
+                  "updated-filtertag1": "",
+                  "updated-filtertag2": ""
+                },
+                "locations": [
+                  "eastus"
+                ]
+              }
+            }
+          ],
+          "destinations": {
+            "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+          }
+        }
+      }
+    }
+  }
+}

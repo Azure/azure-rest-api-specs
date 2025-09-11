@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "name": "myResourceName",
+      "type": "Microsoft.SaaSHub/SaasResources",
+      "properties": {
+        "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+        "quantity": 20
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "FailedToSatisfyPromotionConstraints",
+        "reason": "Failed to satisfy promotion constraints",
+        "additionalInfo": {
+          "addOn": null,
+          "promotion": [
+            {
+              "promotionId": "39NFJQT1Z4T3/0001/39NFJQT1Q5KM",
+              "isEligible": "Ineligible",
+              "ineligibilityReasons": [
+                "skuPurchasedPreviously"
+              ],
+              "eligibilityConstraints": [
+                {
+                  "constraintType": "termDuration",
+                  "isEligible": "Eligible"
+                },
+                {
+                  "constraintType": "firstPurchase",
+                  "isEligible": "Ineligible"
+                },
+                {
+                  "constraintType": "seatQuantity",
+                  "isEligible": "Eligible"
+                },
+                {
+                  "constraintType": "productOwnership",
+                  "isEligible": "Eligible"
+                },
+                {
+                  "constraintType": "redemptionLimit",
+                  "isEligible": "Eligible"
+                }
+              ]
+            }
+          ],
+          "futurePrice": null,
+          "coTermDates": null
+        }
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_TenantLevelCanCreate",
+  "title": "Purchase Promotion - Failed"
+}

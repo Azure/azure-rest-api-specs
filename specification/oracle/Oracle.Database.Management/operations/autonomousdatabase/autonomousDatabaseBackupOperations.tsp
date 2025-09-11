@@ -18,12 +18,9 @@ interface AutonomousDatabaseBackups
     "./examples/autonomousDatabaseBackup_patch.json",
     "Patch Autonomous Database Backup."
   )
-  update is ArmCustomPatchAsync<
+  update is ArmResourcePatchAsync<
     AutonomousDatabaseBackup,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      AutonomousDatabaseBackup,
-      AutonomousDatabaseBackupProperties
-    >
+    AutonomousDatabaseBackupProperties
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"

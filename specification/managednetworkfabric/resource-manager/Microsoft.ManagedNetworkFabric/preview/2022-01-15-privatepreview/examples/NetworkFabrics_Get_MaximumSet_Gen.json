@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2022-01-15-privatepreview",
+    "networkFabricName": "FabricName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkFabricSku": "fab3",
+          "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
+          "networkToNetworkInterconnect": {
+            "layer2Configuration": null,
+            "layer3Configuration": {
+              "vlanId": 20,
+              "fabricAsn": 65046,
+              "routerId": null,
+              "peerAsn": 5,
+              "primaryIpv4Prefix": "10.18.0.124/31",
+              "secondaryIpv4Prefix": "10.18.0.128/31"
+            }
+          },
+          "terminalServerConfiguration": {
+            "username": "root",
+            "primaryIpv4Prefix": "20.0.0.12/30"
+          },
+          "managementNetworkConfiguration": {
+            "ipv4Prefix": "10.18.0.0/19",
+            "ipv6Prefix": null,
+            "managementVpnConfiguration": {
+              "state": "Enabled",
+              "peeringOption": "OptionA",
+              "optionAProperties": null,
+              "optionBProperties": {
+                "importRouteTargets": [
+                  "65046:10039"
+                ],
+                "exportRouteTargets": [
+                  "65046:10039"
+                ]
+              }
+            },
+            "workloadVpnConfiguration": {
+              "state": "Enabled",
+              "peeringOption": "OptionA",
+              "optionAProperties": null,
+              "optionBProperties": {
+                "importRouteTargets": [
+                  "q65046:10050"
+                ],
+                "exportRouteTargets": [
+                  "65046:10050"
+                ]
+              }
+            }
+          },
+          "operationalState": "Provisioned",
+          "provisioningState": "Succeeded",
+          "racks": [
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3AggRack",
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3CompRack1",
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3CompRack2"
+          ],
+          "l2IsolationDomains": [
+            "/subscriptions/xxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/l2IsolationDomainName"
+          ],
+          "l3IsolationDomains": [
+            "/subscriptions/xxxxx/resourceGroups/resourecegroupname/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
+          ]
+        },
+        "location": "eastuseuap",
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName",
+        "name": "FabricName",
+        "type": "microsoft.managednetworkfabric/networkfabrics",
+        "systemData": {
+          "createdBy": "User@email.com",
+          "createdByType": "User",
+          "createdAt": "2022-11-08T14:45:30.6933268Z",
+          "lastModifiedBy": "Userid",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-08T14:45:30.6933268Z"
+        }
+      }
+    }
+  }
+}

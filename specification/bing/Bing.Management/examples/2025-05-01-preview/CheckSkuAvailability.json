@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "location": "global",
+    "parameters": {
+      "type": "Microsoft.Bing/accounts",
+      "kind": "Bing.Search.v7",
+      "skus": [
+        "F1",
+        "S0",
+        "S1"
+      ]
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.Bing/accounts",
+            "kind": "Bing.Search.v7",
+            "skuAvailable": true,
+            "skuName": "F1"
+          },
+          {
+            "type": "Microsoft.Bing/accounts",
+            "kind": "Bing.Search.v7",
+            "message": "SKU is invalid in selected region for the subscription",
+            "reason": "Invalid",
+            "skuAvailable": false,
+            "skuName": "S0"
+          },
+          {
+            "type": "Microsoft.Bing/accounts",
+            "kind": "Bing.Search.v7",
+            "skuAvailable": true,
+            "skuName": "S1"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CheckSkuAvailability",
+  "title": "Check SKU Availability"
+}

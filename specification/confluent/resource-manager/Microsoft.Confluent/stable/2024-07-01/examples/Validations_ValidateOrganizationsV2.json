@@ -1,35 +1,35 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
     "body": {
-      "location": "West US",
       "properties": {
         "offerDetail": {
+          "publisherId": "string",
           "id": "string",
           "planId": "string",
           "planName": "string",
+          "termUnit": "string",
           "privateOfferId": "string",
           "privateOfferIds": [
             "string"
-          ],
-          "publisherId": "string",
-          "termUnit": "string"
+          ]
         },
         "userDetail": {
-          "aadEmail": "abc@microsoft.com",
-          "emailAddress": "abc@microsoft.com",
           "firstName": "string",
           "lastName": "string",
-          "userPrincipalName": "abc@microsoft.com"
+          "emailAddress": "abc@microsoft.com",
+          "userPrincipalName": "abc@microsoft.com",
+          "aadEmail": "abc@microsoft.com"
         }
       },
       "tags": {
         "Environment": "Dev"
-      }
-    },
-    "organizationName": "myOrganization",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "location": "West US"
+    }
   },
   "responses": {
     "200": {
@@ -39,7 +39,5 @@
         }
       }
     }
-  },
-  "operationId": "Validations_ValidateOrganizationV2",
-  "title": "Validations_ValidateOrganizations"
+  }
 }
