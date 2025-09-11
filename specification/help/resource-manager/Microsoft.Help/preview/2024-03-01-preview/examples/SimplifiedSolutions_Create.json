@@ -2,42 +2,44 @@
   "parameters": {
     "api-version": "2024-03-01-preview",
     "scope": "subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp",
-    "simplifiedSolutionsResourceName": "simplifiedSolutionsResourceName1",
     "simplifiedSolutionsRequestBody": {
       "properties": {
-        "solutionId": "sampleSolutionId",
         "parameters": {
           "resourceUri": "subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp"
+        },
+        "solutionId": "sampleSolutionId"
+      }
+    },
+    "simplifiedSolutionsResourceName": "simplifiedSolutionsResourceName1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "simplifiedSolutionsResourceName1",
+        "type": "Microsoft.Help/simplifiedSolutions",
+        "id": "/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/solutions/SolutionResourceName1",
+        "properties": {
+          "content": "<p>sample content</p>",
+          "provisioningState": "Succeeded",
+          "solutionId": "sampleSolutionId",
+          "title": "RBAC Authentication Common Solutions"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "simplifiedSolutionsResourceName1",
+        "type": "Microsoft.Help/simplifiedSolutions",
+        "id": "/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/solutions/SolutionResourceName1",
+        "properties": {
+          "content": "<p>sample content</p>",
+          "provisioningState": "Succeeded",
+          "solutionId": "sampleSolutionId",
+          "title": "RBAC Authentication Common Solutions"
         }
       }
     }
   },
-  "responses": {
-    "201": {
-      "body": {
-        "id": "/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/solutions/SolutionResourceName1",
-        "name": "simplifiedSolutionsResourceName1",
-        "type": "Microsoft.Help/simplifiedSolutions",
-        "properties": {
-          "solutionId": "sampleSolutionId",
-          "provisioningState": "Succeeded",
-          "title": "RBAC Authentication Common Solutions",
-          "content": "<p>sample content</p>"
-        }
-      }
-    },
-    "200": {
-      "body": {
-        "id": "/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/solutions/SolutionResourceName1",
-        "name": "simplifiedSolutionsResourceName1",
-        "type": "Microsoft.Help/simplifiedSolutions",
-        "properties": {
-          "solutionId": "sampleSolutionId",
-          "provisioningState": "Succeeded",
-          "title": "RBAC Authentication Common Solutions",
-          "content": "<p>sample content</p>"
-        }
-      }
-    }
-  }
+  "operationId": "SimplifiedSolutions_Create",
+  "title": "Solution_Create"
 }

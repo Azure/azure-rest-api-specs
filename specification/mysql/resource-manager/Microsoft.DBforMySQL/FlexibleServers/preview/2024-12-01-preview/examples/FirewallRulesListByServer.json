@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "serverName": "testserver",
-    "resourceGroupName": "TestGroup",
     "api-version": "2024-12-01-preview",
+    "resourceGroupName": "TestGroup",
+    "serverName": "testserver",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
@@ -10,25 +10,27 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/firewallRules/rule1",
             "name": "rule1",
             "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/firewallRules/rule1",
             "properties": {
-              "startIpAddress": "0.0.0.0",
-              "endIpAddress": "255.255.255.255"
+              "endIpAddress": "255.255.255.255",
+              "startIpAddress": "0.0.0.0"
             }
           },
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/firewallRules/rule2",
             "name": "rule2",
             "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/firewallRules/rule2",
             "properties": {
-              "startIpAddress": "1.0.0.0",
-              "endIpAddress": "255.0.0.0"
+              "endIpAddress": "255.0.0.0",
+              "startIpAddress": "1.0.0.0"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "FirewallRules_ListByServer",
+  "title": "List all firewall rules in a server"
 }

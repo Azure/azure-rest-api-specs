@@ -1,17 +1,17 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2024-12-01-preview",
+    "groupName": "plr",
     "resourceGroupName": "Default",
     "serverName": "test-svr",
-    "groupName": "plr",
-    "api-version": "2024-12-01-preview"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.DBforMySQL/servers/test-svr/privateLinkResources/plr",
         "name": "plr",
         "type": "Microsoft.DBforMySQL/servers/privateLinkResources",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.DBforMySQL/servers/test-svr/privateLinkResources/plr",
         "properties": {
           "groupId": "mysqlServer",
           "requiredMembers": [
@@ -20,5 +20,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "Gets a private link resource for MySQL."
 }

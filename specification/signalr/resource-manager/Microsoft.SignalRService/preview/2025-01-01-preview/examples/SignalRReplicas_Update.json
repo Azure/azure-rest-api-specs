@@ -1,89 +1,91 @@
 {
   "parameters": {
+    "api-version": "2025-01-01-preview",
     "parameters": {
-      "sku": {
-        "name": "Premium_P1",
-        "tier": "Premium",
-        "capacity": 1
-      },
+      "location": "eastus",
       "properties": {
         "resourceStopped": "false"
       },
-      "location": "eastus",
+      "sku": {
+        "name": "Premium_P1",
+        "capacity": 1,
+        "tier": "Premium"
+      },
       "tags": {
         "key1": "value1"
       }
     },
-    "api-version": "2025-01-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "replicaName": "mySignalRService-eastus",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "mySignalRService",
-    "replicaName": "mySignalRService-eastus"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "sku": {
-          "name": "Premium_P1",
-          "tier": "Premium",
-          "size": "P1",
-          "capacity": 1
-        },
+        "name": "mySignalRService-eastus",
+        "type": "Microsoft.SignalRService/SignalR",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/replicas/mySignalRService-eastus",
+        "location": "eastus",
         "properties": {
           "provisioningState": "Succeeded",
           "regionEndpointEnabled": "Enabled",
           "resourceStopped": "false"
         },
-        "location": "eastus",
-        "tags": {
-          "key1": "value1"
+        "sku": {
+          "name": "Premium_P1",
+          "capacity": 1,
+          "size": "P1",
+          "tier": "Premium"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/replicas/mySignalRService-eastus",
-        "name": "mySignalRService-eastus",
-        "type": "Microsoft.SignalRService/SignalR",
         "systemData": {
+          "createdAt": "2015-02-03T04:05:06Z",
           "createdBy": "string",
           "createdByType": "User",
-          "createdAt": "2015-02-03T04:05:06Z",
+          "lastModifiedAt": "2015-02-03T04:05:06Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2015-02-03T04:05:06Z"
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1"
         }
       }
     },
     "202": {
       "body": {
-        "sku": {
-          "name": "Premium_P1",
-          "tier": "Premium",
-          "size": "P1",
-          "capacity": 1
-        },
+        "name": "mySignalRService-eastus",
+        "type": "Microsoft.SignalRService/SignalR",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/replicas/mySignalRService-eastus",
+        "location": "eastus",
         "properties": {
           "provisioningState": "Succeeded",
           "regionEndpointEnabled": "Enabled",
           "resourceStopped": "false"
         },
-        "location": "eastus",
-        "tags": {
-          "key1": "value1"
+        "sku": {
+          "name": "Premium_P1",
+          "capacity": 1,
+          "size": "P1",
+          "tier": "Premium"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/replicas/mySignalRService-eastus",
-        "name": "mySignalRService-eastus",
-        "type": "Microsoft.SignalRService/SignalR",
         "systemData": {
+          "createdAt": "2015-02-03T04:05:06Z",
           "createdBy": "string",
           "createdByType": "User",
-          "createdAt": "2015-02-03T04:05:06Z",
+          "lastModifiedAt": "2015-02-03T04:05:06Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2015-02-03T04:05:06Z"
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1"
         }
       },
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
       }
     }
-  }
+  },
+  "operationId": "SignalRReplicas_Update",
+  "title": "SignalRReplicas_Update"
 }

@@ -1,59 +1,56 @@
 {
+  "operationId": "Clusters_Update",
   "parameters": {
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "TestGroup",
-    "clusterName": "testcluster",
     "api-version": "2023-03-02-preview",
+    "clusterName": "testcluster",
     "parameters": {
       "properties": {
         "nodeStorageQuotaInMb": 2097152
       }
-    }
+    },
+    "resourceGroupName": "TestGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
+  "title": "Scale up storage",
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster",
         "name": "testcluster",
         "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster",
+        "location": "westus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "state": "Ready",
-          "postgresqlVersion": "14",
-          "citusVersion": "11.1",
-          "maintenanceWindow": {
-            "dayOfWeek": 0,
-            "startHour": 0,
-            "startMinute": 0,
-            "customWindow": "Disabled"
-          },
           "aadAuthEnabled": "disabled",
           "administratorLogin": "citus",
-          "dataEncryption": {
-            "type": "SystemManaged"
-          },
-          "passwordEnabled": "enabled",
-          "preferredPrimaryZone": "1",
-          "enableHa": false,
-          "enableShardsOnCoordinator": false,
+          "citusVersion": "11.1",
+          "coordinatorEnablePublicIpAccess": true,
           "coordinatorServerEdition": "GeneralPurpose",
           "coordinatorStorageQuotaInMb": 2097152,
           "coordinatorVCores": 16,
-          "coordinatorEnablePublicIpAccess": true,
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
           "databaseName": "citus",
-          "nodeServerEdition": "MemoryOptimized",
+          "earliestRestoreTime": "2020-09-14T00:00:37.467Z",
+          "enableHa": false,
+          "enableShardsOnCoordinator": false,
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
           "nodeCount": 3,
+          "nodeEnablePublicIpAccess": false,
+          "nodeServerEdition": "MemoryOptimized",
           "nodeStorageQuotaInMb": 2097152,
           "nodeVCores": 16,
-          "nodeEnablePublicIpAccess": false,
+          "passwordEnabled": "enabled",
+          "postgresqlVersion": "14",
+          "preferredPrimaryZone": "1",
+          "privateEndpointConnections": [],
+          "provisioningState": "Succeeded",
+          "readReplicas": [],
           "serverNames": [
             {
               "name": "testcluster1-c",
@@ -73,60 +70,56 @@
             }
           ],
           "sourceResourceId": null,
-          "readReplicas": [],
-          "earliestRestoreTime": "2020-09-14T00:00:37.467Z",
-          "privateEndpointConnections": []
+          "state": "Ready"
         },
-        "location": "westus"
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
       }
     },
     "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview",
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview"
-      },
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster",
         "name": "testcluster",
         "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster",
+        "location": "westus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "state": "Ready",
-          "postgresqlVersion": "14",
-          "citusVersion": "11.1",
-          "maintenanceWindow": {
-            "dayOfWeek": 0,
-            "startHour": 0,
-            "startMinute": 0,
-            "customWindow": "Disabled"
-          },
           "aadAuthEnabled": "disabled",
           "administratorLogin": "citus",
-          "dataEncryption": {
-            "type": "SystemManaged"
-          },
-          "passwordEnabled": "enabled",
-          "preferredPrimaryZone": "1",
-          "enableHa": false,
-          "enableShardsOnCoordinator": false,
+          "citusVersion": "11.1",
+          "coordinatorEnablePublicIpAccess": true,
           "coordinatorServerEdition": "GeneralPurpose",
           "coordinatorStorageQuotaInMb": 2097152,
           "coordinatorVCores": 16,
-          "coordinatorEnablePublicIpAccess": true,
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
           "databaseName": "citus",
-          "nodeServerEdition": "MemoryOptimized",
+          "earliestRestoreTime": "2020-09-14T00:00:37.467Z",
+          "enableHa": false,
+          "enableShardsOnCoordinator": false,
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
           "nodeCount": 3,
+          "nodeEnablePublicIpAccess": false,
+          "nodeServerEdition": "MemoryOptimized",
           "nodeStorageQuotaInMb": 2097152,
           "nodeVCores": 16,
-          "nodeEnablePublicIpAccess": false,
+          "passwordEnabled": "enabled",
+          "postgresqlVersion": "14",
+          "preferredPrimaryZone": "1",
+          "privateEndpointConnections": [],
+          "provisioningState": "Succeeded",
+          "readReplicas": [],
           "serverNames": [
             {
               "name": "testcluster1-c",
@@ -146,11 +139,20 @@
             }
           ],
           "sourceResourceId": null,
-          "readReplicas": [],
-          "earliestRestoreTime": "2020-09-14T00:00:37.467Z",
-          "privateEndpointConnections": []
+          "state": "Ready"
         },
-        "location": "westus"
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview"
       }
     }
   }

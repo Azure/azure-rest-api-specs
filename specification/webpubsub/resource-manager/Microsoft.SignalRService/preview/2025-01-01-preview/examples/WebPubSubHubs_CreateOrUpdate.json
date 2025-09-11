@@ -1,25 +1,33 @@
 {
   "parameters": {
+    "api-version": "2025-01-01-preview",
+    "hubName": "exampleHub",
     "parameters": {
       "properties": {
+        "anonymousConnectPolicy": "allow",
         "eventHandlers": [
           {
-            "urlTemplate": "http://host.com",
-            "userEventPattern": "*",
-            "systemEvents": [
-              "connect",
-              "connected"
-            ],
             "auth": {
               "type": "ManagedIdentity",
               "managedIdentity": {
                 "resource": "abc"
               }
-            }
+            },
+            "systemEvents": [
+              "connect",
+              "connected"
+            ],
+            "urlTemplate": "http://host.com",
+            "userEventPattern": "*"
           }
         ],
         "eventListeners": [
           {
+            "endpoint": {
+              "type": "EventHub",
+              "eventHubName": "eventHubName1",
+              "fullyQualifiedNamespace": "example.servicebus.windows.net"
+            },
             "filter": {
               "type": "EventName",
               "systemEvents": [
@@ -27,46 +35,47 @@
                 "disconnected"
               ],
               "userEventPattern": "*"
-            },
-            "endpoint": {
-              "type": "EventHub",
-              "fullyQualifiedNamespace": "example.servicebus.windows.net",
-              "eventHubName": "eventHubName1"
             }
           }
         ],
-        "anonymousConnectPolicy": "allow",
         "webSocketKeepAliveIntervalInSeconds": 50
       }
     },
-    "api-version": "2025-01-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "myWebPubSubService",
-    "hubName": "exampleHub"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "exampleHub",
+        "type": "Microsoft.SignalRService/WebPubSub/hubs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
         "properties": {
+          "anonymousConnectPolicy": "allow",
           "eventHandlers": [
             {
-              "urlTemplate": "http://host.com",
-              "userEventPattern": "*",
-              "systemEvents": [
-                "connect",
-                "connected"
-              ],
               "auth": {
                 "type": "ManagedIdentity",
                 "managedIdentity": {
                   "resource": "abc"
                 }
-              }
+              },
+              "systemEvents": [
+                "connect",
+                "connected"
+              ],
+              "urlTemplate": "http://host.com",
+              "userEventPattern": "*"
             }
           ],
           "eventListeners": [
             {
+              "endpoint": {
+                "type": "EventHub",
+                "eventHubName": "eventHubName1",
+                "fullyQualifiedNamespace": "example.servicebus.windows.net"
+              },
               "filter": {
                 "type": "EventName",
                 "systemEvents": [
@@ -74,43 +83,43 @@
                   "disconnected"
                 ],
                 "userEventPattern": "*"
-              },
-              "endpoint": {
-                "type": "EventHub",
-                "fullyQualifiedNamespace": "example.servicebus.windows.net",
-                "eventHubName": "eventHubName1"
               }
             }
           ],
-          "anonymousConnectPolicy": "allow",
           "webSocketKeepAliveIntervalInSeconds": 50
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
-        "name": "exampleHub",
-        "type": "Microsoft.SignalRService/WebPubSub/hubs"
+        }
       }
     },
     "201": {
       "body": {
+        "name": "exampleHub",
+        "type": "Microsoft.SignalRService/WebPubSub/hubs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
         "properties": {
+          "anonymousConnectPolicy": "allow",
           "eventHandlers": [
             {
-              "urlTemplate": "http://host.com",
-              "userEventPattern": "*",
-              "systemEvents": [
-                "connect",
-                "connected"
-              ],
               "auth": {
                 "type": "ManagedIdentity",
                 "managedIdentity": {
                   "resource": "abc"
                 }
-              }
+              },
+              "systemEvents": [
+                "connect",
+                "connected"
+              ],
+              "urlTemplate": "http://host.com",
+              "userEventPattern": "*"
             }
           ],
           "eventListeners": [
             {
+              "endpoint": {
+                "type": "EventHub",
+                "eventHubName": "eventHubName1",
+                "fullyQualifiedNamespace": "example.servicebus.windows.net"
+              },
               "filter": {
                 "type": "EventName",
                 "systemEvents": [
@@ -118,25 +127,18 @@
                   "disconnected"
                 ],
                 "userEventPattern": "*"
-              },
-              "endpoint": {
-                "type": "EventHub",
-                "fullyQualifiedNamespace": "example.servicebus.windows.net",
-                "eventHubName": "eventHubName1"
               }
             }
           ],
-          "anonymousConnectPolicy": "allow",
           "webSocketKeepAliveIntervalInSeconds": 50
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
-        "name": "exampleHub",
-        "type": "Microsoft.SignalRService/WebPubSub/hubs"
+        }
       },
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
       }
     }
-  }
+  },
+  "operationId": "WebPubSubHubs_CreateOrUpdate",
+  "title": "WebPubSubHubs_CreateOrUpdate"
 }

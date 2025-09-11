@@ -1,17 +1,17 @@
 {
   "parameters": {
     "name": "cache1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-11-01",
-    "subscriptionId": "subid",
     "parameters": {
-      "shardId": 0,
-      "rebootType": "AllNodes",
       "ports": [
         13000,
         15001
-      ]
-    }
+      ],
+      "rebootType": "AllNodes",
+      "shardId": 0
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -19,5 +19,7 @@
         "message": "reboot operation enqueued"
       }
     }
-  }
+  },
+  "operationId": "Redis_ForceReboot",
+  "title": "RedisCacheForceReboot"
 }

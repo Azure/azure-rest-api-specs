@@ -1,42 +1,34 @@
 {
   "parameters": {
     "api-version": "2024-12-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "capabilityName": "default",
     "locationName": "WestUS",
-    "capabilityName": "default"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/WestUS/capabilitySets/default",
             "name": "default",
             "type": "Microsoft.DBforMySQL/capacitysets",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/WestUS/capabilitySets/default",
             "properties": {
-              "supportedGeoBackupRegions": [
-                "southcentralus"
+              "supportedFeatures": [
+                {
+                  "featureName": "SupportAcceleratedLogs",
+                  "featureValue": "Enabled"
+                }
               ],
               "supportedFlexibleServerEditions": [
                 {
                   "name": "Burstable",
                   "defaultSku": "Standard_B1s",
                   "defaultStorageSize": 20480,
-                  "supportedStorageEditions": [
-                    {
-                      "name": "Premium",
-                      "minStorageSize": 20480,
-                      "maxStorageSize": 16777216,
-                      "minBackupRetentionDays": 7,
-                      "maxBackupRetentionDays": 35,
-                      "minBackupIntervalHours": 1,
-                      "maxBackupIntervalHours": 24
-                    }
-                  ],
                   "supportedSkus": [
                     {
                       "name": "Standard_B1s",
-                      "vCores": 1,
+                      "supportedHAMode": [],
                       "supportedIops": 400,
                       "supportedMemoryPerVCoreMB": 1024,
                       "supportedZones": [
@@ -44,11 +36,11 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 1
                     },
                     {
                       "name": "Standard_B1ms",
-                      "vCores": 1,
+                      "supportedHAMode": [],
                       "supportedIops": 640,
                       "supportedMemoryPerVCoreMB": 2048,
                       "supportedZones": [
@@ -56,11 +48,11 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 1
                     },
                     {
                       "name": "Standard_B2s",
-                      "vCores": 2,
+                      "supportedHAMode": [],
                       "supportedIops": 1280,
                       "supportedMemoryPerVCoreMB": 2048,
                       "supportedZones": [
@@ -68,11 +60,11 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_B2ms",
-                      "vCores": 2,
+                      "supportedHAMode": [],
                       "supportedIops": 1700,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -80,11 +72,11 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_B4ms",
-                      "vCores": 4,
+                      "supportedHAMode": [],
                       "supportedIops": 2400,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -92,11 +84,11 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_B8ms",
-                      "vCores": 8,
+                      "supportedHAMode": [],
                       "supportedIops": 3100,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -104,11 +96,11 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_B12ms",
-                      "vCores": 12,
+                      "supportedHAMode": [],
                       "supportedIops": 3800,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -116,11 +108,11 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 12
                     },
                     {
                       "name": "Standard_B16ms",
-                      "vCores": 16,
+                      "supportedHAMode": [],
                       "supportedIops": 4300,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -128,11 +120,11 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_B20ms",
-                      "vCores": 20,
+                      "supportedHAMode": [],
                       "supportedIops": 5000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -140,7 +132,18 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": []
+                      "vCores": 20
+                    }
+                  ],
+                  "supportedStorageEditions": [
+                    {
+                      "name": "Premium",
+                      "maxBackupIntervalHours": 24,
+                      "maxBackupRetentionDays": 35,
+                      "maxStorageSize": 16777216,
+                      "minBackupIntervalHours": 1,
+                      "minBackupRetentionDays": 7,
+                      "minStorageSize": 20480
                     }
                   ]
                 },
@@ -148,21 +151,13 @@
                   "name": "GeneralPurpose",
                   "defaultSku": "Standard_D2ds_v4",
                   "defaultStorageSize": 65536,
-                  "supportedStorageEditions": [
-                    {
-                      "name": "Premium",
-                      "minStorageSize": 20480,
-                      "maxStorageSize": 16777216,
-                      "minBackupRetentionDays": 7,
-                      "maxBackupRetentionDays": 35,
-                      "minBackupIntervalHours": 1,
-                      "maxBackupIntervalHours": 24
-                    }
-                  ],
                   "supportedSkus": [
                     {
                       "name": "Standard_D2ds_v4",
-                      "vCores": 2,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 3200,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -170,14 +165,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_D4ds_v4",
-                      "vCores": 4,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 6400,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -185,14 +180,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_D8ds_v4",
-                      "vCores": 8,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 12800,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -200,14 +195,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_D16ds_v4",
-                      "vCores": 16,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -215,14 +210,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_D32ds_v4",
-                      "vCores": 32,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -230,14 +225,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 32
                     },
                     {
                       "name": "Standard_D48ds_v4",
-                      "vCores": 48,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -245,14 +240,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 48
                     },
                     {
                       "name": "Standard_D64ds_v4",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -260,14 +255,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
                     },
                     {
                       "name": "Standard_D2ds_v5",
-                      "vCores": 2,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 3200,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -275,14 +270,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_D4ds_v5",
-                      "vCores": 4,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 6400,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -290,14 +285,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_D8ds_v5",
-                      "vCores": 8,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 12800,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -305,14 +300,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_D16ds_v5",
-                      "vCores": 16,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -320,14 +315,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_D32ds_v5",
-                      "vCores": 32,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -335,14 +330,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 32
                     },
                     {
                       "name": "Standard_D48ds_v5",
-                      "vCores": 48,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -350,14 +345,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 48
                     },
                     {
                       "name": "Standard_D64ds_v5",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -365,14 +360,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
                     },
                     {
                       "name": "Standard_D96ds_v5",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -380,14 +375,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
                     },
                     {
                       "name": "Standard_D2ads_v5",
-                      "vCores": 2,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 3200,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -395,14 +390,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_D4ads_v5",
-                      "vCores": 4,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 6400,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -410,14 +405,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_D8ads_v5",
-                      "vCores": 8,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 12800,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -425,14 +420,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_D16ads_v5",
-                      "vCores": 16,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -440,14 +435,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_D32ads_v5",
-                      "vCores": 32,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -455,14 +450,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 32
                     },
                     {
                       "name": "Standard_D48ads_v5",
-                      "vCores": 48,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -470,14 +465,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 48
                     },
                     {
                       "name": "Standard_D64ads_v5",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -485,14 +480,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
                     },
                     {
                       "name": "Standard_D96ads_v5",
-                      "vCores": 96,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -500,14 +495,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 96
                     },
                     {
                       "name": "Standard_D2s_v3",
-                      "vCores": 2,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 3200,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -515,14 +510,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_D4s_v3",
-                      "vCores": 4,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 6400,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -530,14 +525,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_D8s_v3",
-                      "vCores": 8,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 12800,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -545,14 +540,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_D16s_v3",
-                      "vCores": 16,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -560,14 +555,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_D32s_v3",
-                      "vCores": 32,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -575,14 +570,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 32
                     },
                     {
                       "name": "Standard_D48s_v3",
-                      "vCores": 48,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -590,14 +585,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 48
                     },
                     {
                       "name": "Standard_D64s_v3",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 4096,
                       "supportedZones": [
@@ -605,10 +600,18 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
+                    }
+                  ],
+                  "supportedStorageEditions": [
+                    {
+                      "name": "Premium",
+                      "maxBackupIntervalHours": 24,
+                      "maxBackupRetentionDays": 35,
+                      "maxStorageSize": 16777216,
+                      "minBackupIntervalHours": 1,
+                      "minBackupRetentionDays": 7,
+                      "minStorageSize": 20480
                     }
                   ]
                 },
@@ -616,21 +619,13 @@
                   "name": "MemoryOptimized",
                   "defaultSku": "Standard_E2ds_v4",
                   "defaultStorageSize": 131072,
-                  "supportedStorageEditions": [
-                    {
-                      "name": "Premium",
-                      "minStorageSize": 20480,
-                      "maxStorageSize": 16777216,
-                      "minBackupRetentionDays": 7,
-                      "maxBackupRetentionDays": 35,
-                      "minBackupIntervalHours": 1,
-                      "maxBackupIntervalHours": 24
-                    }
-                  ],
                   "supportedSkus": [
                     {
                       "name": "Standard_E2ds_v4",
-                      "vCores": 2,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 5000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -638,14 +633,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_E4ds_v4",
-                      "vCores": 4,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 10000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -653,14 +648,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_E8ds_v4",
-                      "vCores": 8,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 18000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -668,14 +663,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_E16ds_v4",
-                      "vCores": 16,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 28000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -683,14 +678,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_E32ds_v4",
-                      "vCores": 32,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 38000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -698,14 +693,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 32
                     },
                     {
                       "name": "Standard_E48ds_v4",
-                      "vCores": 48,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 48000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -713,14 +708,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 48
                     },
                     {
                       "name": "Standard_E64ds_v4",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 64000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -728,14 +723,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
                     },
                     {
                       "name": "Standard_E80ids_v4",
-                      "vCores": 80,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 72000,
                       "supportedMemoryPerVCoreMB": 6451,
                       "supportedZones": [
@@ -743,14 +738,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 80
                     },
                     {
                       "name": "Standard_E2ds_v5",
-                      "vCores": 2,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 5000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -758,14 +753,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_E4ds_v5",
-                      "vCores": 4,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 10000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -773,14 +768,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_E8ds_v5",
-                      "vCores": 8,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 18000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -788,14 +783,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_E16ds_v5",
-                      "vCores": 16,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 28000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -803,14 +798,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_E32ds_v5",
-                      "vCores": 32,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 38000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -818,14 +813,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 32
                     },
                     {
                       "name": "Standard_E48ds_v5",
-                      "vCores": 48,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 48000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -833,14 +828,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 48
                     },
                     {
                       "name": "Standard_E64ds_v5",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 64000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -848,14 +843,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
                     },
                     {
                       "name": "Standard_E96ds_v5",
-                      "vCores": 96,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 80000,
                       "supportedMemoryPerVCoreMB": 7168,
                       "supportedZones": [
@@ -863,14 +858,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 96
                     },
                     {
                       "name": "Standard_E2ads_v5",
-                      "vCores": 2,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 5000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -878,14 +873,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_E4ads_v5",
-                      "vCores": 4,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 10000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -893,14 +888,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_E8ads_v5",
-                      "vCores": 8,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 18000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -908,14 +903,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_E16ads_v5",
-                      "vCores": 16,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 28000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -923,14 +918,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_E32ads_v5",
-                      "vCores": 32,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 38000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -938,14 +933,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 32
                     },
                     {
                       "name": "Standard_E48ads_v5",
-                      "vCores": 48,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 48000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -953,14 +948,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 48
                     },
                     {
                       "name": "Standard_E64ads_v5",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 64000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -968,14 +963,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
                     },
                     {
                       "name": "Standard_E96ads_v5",
-                      "vCores": 96,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 80000,
                       "supportedMemoryPerVCoreMB": 7168,
                       "supportedZones": [
@@ -983,14 +978,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 96
                     },
                     {
                       "name": "Standard_E2s_v3",
-                      "vCores": 2,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 5000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -998,14 +993,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 2
                     },
                     {
                       "name": "Standard_E4s_v3",
-                      "vCores": 4,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 10000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -1013,14 +1008,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 4
                     },
                     {
                       "name": "Standard_E8s_v3",
-                      "vCores": 8,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 18000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -1028,14 +1023,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 8
                     },
                     {
                       "name": "Standard_E16s_v3",
-                      "vCores": 16,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 28000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -1043,14 +1038,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 16
                     },
                     {
                       "name": "Standard_E32s_v3",
-                      "vCores": 32,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 38000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -1058,14 +1053,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 32
                     },
                     {
                       "name": "Standard_E48s_v3",
-                      "vCores": 48,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 20000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -1073,14 +1068,14 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 48
                     },
                     {
                       "name": "Standard_E64s_v3",
-                      "vCores": 64,
+                      "supportedHAMode": [
+                        "SameZone",
+                        "ZoneRedundant"
+                      ],
                       "supportedIops": 64000,
                       "supportedMemoryPerVCoreMB": 8192,
                       "supportedZones": [
@@ -1088,13 +1083,24 @@
                         "2",
                         "3"
                       ],
-                      "supportedHAMode": [
-                        "SameZone",
-                        "ZoneRedundant"
-                      ]
+                      "vCores": 64
+                    }
+                  ],
+                  "supportedStorageEditions": [
+                    {
+                      "name": "Premium",
+                      "maxBackupIntervalHours": 24,
+                      "maxBackupRetentionDays": 35,
+                      "maxStorageSize": 16777216,
+                      "minBackupIntervalHours": 1,
+                      "minBackupRetentionDays": 7,
+                      "minStorageSize": 20480
                     }
                   ]
                 }
+              ],
+              "supportedGeoBackupRegions": [
+                "southcentralus"
               ],
               "supportedServerVersions": [
                 {
@@ -1103,17 +1109,13 @@
                 {
                   "name": "8.0.21"
                 }
-              ],
-              "supportedFeatures": [
-                {
-                  "featureName": "SupportAcceleratedLogs",
-                  "featureValue": "Enabled"
-                }
               ]
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "LocationBasedCapabilitySet_List",
+  "title": "CapabilitySetsResult"
 }

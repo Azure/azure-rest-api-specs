@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -449,6 +451,7 @@ model Gateway {
   /**
    * The resource ID of the gateway used for the Arc router feature.
    */
+  @removed(Versions.v2025_08_01_preview)
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.HybridCompute/gateways";
@@ -636,12 +639,11 @@ model ConnectedClusterList is Azure.Core.Page<ConnectedCluster>;
 /**
  * The paginated list of connected cluster API operations.
  */
-@Azure.Core.pagedResult
 model OperationList {
   /**
    * The list of connected cluster API operations.
    */
-  @Azure.Core.items
+  @pageItems
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: Operation[];

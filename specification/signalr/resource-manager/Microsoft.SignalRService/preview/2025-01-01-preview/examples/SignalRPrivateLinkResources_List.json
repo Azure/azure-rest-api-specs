@@ -1,15 +1,19 @@
 {
   "parameters": {
     "api-version": "2025-01-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "resourceName": "mySignalRService"
+    "resourceName": "mySignalRService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToMoreResults...",
         "value": [
           {
+            "name": "myPrivateLink",
+            "type": "privateLinkResources",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateLinkResources/myPrivateLink",
             "properties": {
               "groupId": "signalr",
               "requiredMembers": [
@@ -22,36 +26,34 @@
                 {
                   "name": "site",
                   "properties": {
+                    "type": "Microsoft.Web/sites",
                     "description": "Azure App Service can be used as an upstream",
-                    "groupId": "sites",
-                    "type": "Microsoft.Web/sites"
+                    "groupId": "sites"
                   }
                 },
                 {
                   "name": "vault",
                   "properties": {
+                    "type": "Microsoft.KeyVault/vaults",
                     "description": "Azure Key Vault can be used as credentials store",
-                    "groupId": "vault",
-                    "type": "Microsoft.KeyVault/vaults"
+                    "groupId": "vault"
                   }
                 },
                 {
                   "name": "table",
                   "properties": {
+                    "type": "Microsoft.Storage/storageAccounts",
                     "description": "Azure Storage Table can be used as message store",
-                    "groupId": "table",
-                    "type": "Microsoft.Storage/storageAccounts"
+                    "groupId": "table"
                   }
                 }
               ]
-            },
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateLinkResources/myPrivateLink",
-            "name": "myPrivateLink",
-            "type": "privateLinkResources"
+            }
           }
-        ],
-        "nextLink": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToMoreResults..."
+        ]
       }
     }
-  }
+  },
+  "operationId": "SignalRPrivateLinkResources_List",
+  "title": "SignalRPrivateLinkResources_List"
 }

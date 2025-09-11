@@ -1,20 +1,22 @@
 {
   "parameters": {
-    "serverName": "testserver",
-    "resourceGroupName": "TestGroup",
     "api-version": "2024-12-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "expectedStandbyAvailabilityZone": "1"
-    }
+    },
+    "resourceGroupName": "TestGroup",
+    "serverName": "testserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
         "estimatedDowntime": 0,
-        "scheduledStandbyAvailabilityZone": "1",
-        "expectedStandbyAvailabilityZone": "1"
+        "expectedStandbyAvailabilityZone": "1",
+        "scheduledStandbyAvailabilityZone": "1"
       }
     }
-  }
+  },
+  "operationId": "Servers_ValidateEstimateHighAvailability",
+  "title": "Validate a validation and estimation of high availability."
 }

@@ -1,28 +1,30 @@
 {
   "parameters": {
+    "name": "myDomain",
     "api-version": "2025-01-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "myWebPubSubService",
-    "name": "myDomain"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "name": "myDomain",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/customDomains/myDomain",
             "properties": {
-              "provisioningState": "Succeeded",
-              "domainName": "example.com",
               "customCertificate": {
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/customCertificates/myCert"
-              }
-            },
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/customDomains/myDomain",
-            "name": "myDomain"
+              },
+              "domainName": "example.com",
+              "provisioningState": "Succeeded"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "WebPubSubCustomDomains_List",
+  "title": "WebPubSubCustomDomains_List"
 }

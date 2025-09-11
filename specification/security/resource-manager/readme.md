@@ -106,6 +106,15 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2025-09-01-preview
+
+These settings apply only when `--tag=package-preview-2025-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-01-preview'
+input-file:
+  - Microsoft.Security/preview/2025-09-01-preview/privateLinks.json
+```
+
 ### Tag: package-preview-2025-05-04-preview
 
 These settings apply only when `--tag=package-preview-2025-05-04-preview` is specified on the command line.
@@ -136,6 +145,16 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
+```
+
+### Tag: package-preview-2025-07
+
+These settings apply only when `--tag=package-preview-2025-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07'
+input-file:
+  - Microsoft.Security/preview/2025-07-01-preview/defenderForStorageSettings.json
+  - Microsoft.Security/preview/2025-07-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2025-02
@@ -598,10 +617,11 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
-- Microsoft.Security/preview/2025-02-01-preview/defenderForStorageSettings.json
-- Microsoft.Security/preview/2025-05-04-preview/operations.json
+- Microsoft.Security/preview/2025-07-01-preview/defenderForStorageSettings.json
+- Microsoft.Security/preview/2025-07-01-preview/operations.json
 - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2025-05-04-preview/assessments.json
+- Microsoft.Security/preview/2025-09-01-preview/privateLinks.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json

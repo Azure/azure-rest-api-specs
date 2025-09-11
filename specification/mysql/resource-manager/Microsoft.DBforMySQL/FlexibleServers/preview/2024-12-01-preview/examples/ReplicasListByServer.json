@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "serverName": "mysqltestserver",
-    "resourceGroupName": "TestGroup",
     "api-version": "2024-12-01-preview",
+    "resourceGroupName": "TestGroup",
+    "serverName": "mysqltestserver",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
@@ -10,25 +10,24 @@
       "body": {
         "value": [
           {
-            "sku": {
-              "name": "Standard_D2ds_v4",
-              "tier": "GeneralPurpose"
-            },
+            "name": "mysqltestserver-repl",
+            "type": "Microsoft.DBforMySQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver-repl",
+            "location": "Southeast Asia",
             "properties": {
               "administratorLogin": "cloudsa",
-              "storage": {
-                "storageSizeGB": 20,
-                "iops": 360,
-                "autoGrow": "Enabled",
-                "storageSku": "Premium_LRS",
-                "storageRedundancy": "LocalRedundancy"
-              },
-              "version": "5.7",
-              "fullVersion": "5.7.44",
-              "state": "Ready",
-              "fullyQualifiedDomainName": "mysqltestserver-repl.orcabrci-seas1-a.mscds.com",
-              "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
               "availabilityZone": "1",
+              "backup": {
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2021-06-24T08:19:18.00+00:00",
+                "geoRedundantBackup": "Disabled"
+              },
+              "fullVersion": "5.7.44",
+              "fullyQualifiedDomainName": "mysqltestserver-repl.orcabrci-seas1-a.mscds.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled"
+              },
               "maintenancePolicy": {
                 "patchStrategy": "Regular"
               },
@@ -38,84 +37,87 @@
                 "startHour": 0,
                 "startMinute": 0
               },
-              "replicationRole": "Replica",
-              "replicaCapacity": 0,
               "network": {
                 "publicNetworkAccess": "Enabled"
               },
-              "backup": {
-                "backupRetentionDays": 7,
-                "geoRedundantBackup": "Disabled",
-                "earliestRestoreDate": "2021-06-24T08:19:18.00+00:00"
+              "replicaCapacity": 0,
+              "replicationRole": "Replica",
+              "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
+              "state": "Ready",
+              "storage": {
+                "autoGrow": "Enabled",
+                "iops": 360,
+                "storageRedundancy": "LocalRedundancy",
+                "storageSizeGB": 20,
+                "storageSku": "Premium_LRS"
               },
-              "highAvailability": {
-                "mode": "Disabled",
-                "state": "NotEnabled"
-              }
+              "version": "5.7"
             },
-            "location": "Southeast Asia",
-            "tags": {
-              "num": "1"
-            },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver-repl",
-            "name": "mysqltestserver-repl",
-            "type": "Microsoft.DBforMySQL/flexibleServers"
-          },
-          {
             "sku": {
               "name": "Standard_D2ds_v4",
               "tier": "GeneralPurpose"
             },
+            "tags": {
+              "num": "1"
+            }
+          },
+          {
+            "name": "mysqltestserver-repl",
+            "type": "Microsoft.DBforMySQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver-repl2",
+            "location": "Southeast Asia",
             "properties": {
               "administratorLogin": "cloudsa",
-              "storage": {
-                "storageSizeGB": 20,
-                "iops": 360,
-                "autoGrow": "Enabled",
-                "storageSku": "Premium_ZRS",
-                "storageRedundancy": "ZoneRedundancy"
-              },
-              "version": "5.7",
-              "fullVersion": "5.7.44",
-              "state": "Ready",
-              "fullyQualifiedDomainName": "mysqltestserver-repl2.orcabrci-seas1-a.mscds.com",
-              "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
               "availabilityZone": "1",
+              "backup": {
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2021-06-23T08:19:18.00+00:00",
+                "geoRedundantBackup": "Disabled"
+              },
+              "fullVersion": "5.7.44",
+              "fullyQualifiedDomainName": "mysqltestserver-repl2.orcabrci-seas1-a.mscds.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled"
+              },
               "maintenancePolicy": {
                 "patchStrategy": "Default"
               },
               "maintenanceWindow": {
-                "customWindow": "Disabled",
                 "batchOfMaintenance": "Default",
+                "customWindow": "Disabled",
                 "dayOfWeek": 0,
                 "startHour": 0,
                 "startMinute": 0
               },
-              "replicationRole": "Replica",
-              "replicaCapacity": 0,
               "network": {
                 "publicNetworkAccess": "Enabled"
               },
-              "backup": {
-                "backupRetentionDays": 7,
-                "geoRedundantBackup": "Disabled",
-                "earliestRestoreDate": "2021-06-23T08:19:18.00+00:00"
+              "replicaCapacity": 0,
+              "replicationRole": "Replica",
+              "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
+              "state": "Ready",
+              "storage": {
+                "autoGrow": "Enabled",
+                "iops": 360,
+                "storageRedundancy": "ZoneRedundancy",
+                "storageSizeGB": 20,
+                "storageSku": "Premium_ZRS"
               },
-              "highAvailability": {
-                "mode": "Disabled",
-                "state": "NotEnabled"
-              }
+              "version": "5.7"
             },
-            "location": "Southeast Asia",
+            "sku": {
+              "name": "Standard_D2ds_v4",
+              "tier": "GeneralPurpose"
+            },
             "tags": {
               "num": "1"
-            },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver-repl2",
-            "name": "mysqltestserver-repl",
-            "type": "Microsoft.DBforMySQL/flexibleServers"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Replicas_ListByServer",
+  "title": "List replicas for a server"
 }

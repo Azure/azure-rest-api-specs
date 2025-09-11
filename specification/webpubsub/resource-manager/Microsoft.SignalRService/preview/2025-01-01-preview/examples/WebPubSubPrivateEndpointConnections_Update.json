@@ -1,52 +1,54 @@
 {
   "parameters": {
+    "api-version": "2025-01-01-preview",
     "parameters": {
       "properties": {
         "privateEndpoint": {},
         "privateLinkServiceConnectionState": {
-          "status": "Approved",
-          "actionsRequired": "None"
+          "actionsRequired": "None",
+          "status": "Approved"
         }
       }
     },
-    "api-version": "2025-01-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "privateEndpointConnectionName": "mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "myWebPubSubService",
-    "privateEndpointConnectionName": "mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+        "type": "Microsoft.SignalRService/WebPubSub/privateEndpointConnections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/privateEndpointConnections/mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
         "properties": {
-          "provisioningState": "Succeeded",
-          "privateEndpoint": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
-          },
           "groupIds": [
             "webpubsub"
           ],
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
           "privateLinkServiceConnectionState": {
-            "status": "Approved",
-            "actionsRequired": "None"
-          }
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/privateEndpointConnections/mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
-        "name": "mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
-        "type": "Microsoft.SignalRService/WebPubSub/privateEndpointConnections",
         "systemData": {
+          "createdAt": "2015-02-03T04:05:06Z",
           "createdBy": "string",
           "createdByType": "User",
-          "createdAt": "2015-02-03T04:05:06Z",
+          "lastModifiedAt": "2015-02-03T04:05:06Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2015-02-03T04:05:06Z"
+          "lastModifiedByType": "User"
         }
       },
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
       }
     }
-  }
+  },
+  "operationId": "WebPubSubPrivateEndpointConnections_Update",
+  "title": "WebPubSubPrivateEndpointConnections_Update"
 }

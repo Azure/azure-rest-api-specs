@@ -1,77 +1,71 @@
 {
+  "operationId": "Clusters_Create",
   "parameters": {
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "TestGroup",
-    "clusterName": "testcluster-custom-db-name",
     "api-version": "2023-03-02-preview",
+    "clusterName": "testcluster-custom-db-name",
     "parameters": {
       "location": "westus",
       "properties": {
         "administratorLoginPassword": "password",
-        "postgresqlVersion": "15",
         "citusVersion": "11.3",
-        "enableHa": true,
-        "enableShardsOnCoordinator": true,
+        "coordinatorEnablePublicIpAccess": true,
         "coordinatorServerEdition": "GeneralPurpose",
         "coordinatorStorageQuotaInMb": 131072,
         "coordinatorVCores": 8,
-        "coordinatorEnablePublicIpAccess": true,
+        "databaseName": "testdbname",
+        "enableHa": true,
+        "enableShardsOnCoordinator": true,
         "nodeCount": 0,
-        "preferredPrimaryZone": "1",
-        "databaseName": "testdbname"
+        "postgresqlVersion": "15",
+        "preferredPrimaryZone": "1"
       },
       "tags": {
         "owner": "JohnDoe"
       }
-    }
+    },
+    "resourceGroupName": "TestGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
+  "title": "Create a new cluster with custom database name",
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-custom-db-name",
         "name": "testcluster-custom-db-name",
         "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
-        "tags": {
-          "owner": "JohnDoe"
-        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-custom-db-name",
         "location": "westus",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2022-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
-        },
         "properties": {
-          "provisioningState": "Provisioning",
-          "state": "Provisioning",
-          "postgresqlVersion": "15",
           "aadAuthEnabled": "disabled",
+          "administratorLogin": "citus",
           "citusVersion": "11.3",
+          "coordinatorEnablePublicIpAccess": true,
+          "coordinatorServerEdition": "GeneralPurpose",
+          "coordinatorStorageQuotaInMb": 131072,
+          "coordinatorVCores": 8,
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "databaseName": "testdbname",
+          "earliestRestoreTime": null,
+          "enableHa": true,
+          "enableShardsOnCoordinator": true,
           "maintenanceWindow": {
             "customWindow": "Disabled",
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
           },
-          "administratorLogin": "citus",
-          "dataEncryption": {
-            "type": "SystemManaged"
-          },
-          "passwordEnabled": "enabled",
-          "preferredPrimaryZone": "1",
           "nodeCount": 0,
-          "enableShardsOnCoordinator": true,
-          "coordinatorServerEdition": "GeneralPurpose",
-          "coordinatorStorageQuotaInMb": 131072,
-          "coordinatorVCores": 8,
-          "coordinatorEnablePublicIpAccess": true,
-          "databaseName": "testdbname",
           "nodeEnablePublicIpAccess": false,
           "nodeServerEdition": "MemoryOptimized",
           "nodeStorageQuotaInMb": 131072,
           "nodeVCores": 8,
+          "passwordEnabled": "enabled",
+          "postgresqlVersion": "15",
+          "preferredPrimaryZone": "1",
+          "privateEndpointConnections": [],
+          "provisioningState": "Provisioning",
+          "readReplicas": [],
           "serverNames": [
             {
               "name": "testcluster-singlenode-c",
@@ -79,63 +73,59 @@
             }
           ],
           "sourceResourceId": null,
-          "enableHa": true,
-          "readReplicas": [],
-          "earliestRestoreTime": null,
-          "privateEndpointConnections": []
+          "state": "Provisioning"
+        },
+        "systemData": {
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "owner": "JohnDoe"
         }
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview",
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview"
-      },
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-singlenode",
         "name": "testcluster-singlenode",
         "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
-        "tags": {
-          "owner": "JohnDoe"
-        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-singlenode",
         "location": "westus",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2022-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
-        },
         "properties": {
-          "provisioningState": "Provisioning",
-          "state": "Provisioning",
-          "postgresqlVersion": "15",
           "aadAuthEnabled": "disabled",
+          "administratorLogin": "citus",
           "citusVersion": "11.3",
+          "coordinatorEnablePublicIpAccess": true,
+          "coordinatorServerEdition": "GeneralPurpose",
+          "coordinatorStorageQuotaInMb": 131072,
+          "coordinatorVCores": 8,
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "databaseName": "testdbname",
+          "earliestRestoreTime": null,
+          "enableHa": true,
+          "enableShardsOnCoordinator": true,
           "maintenanceWindow": {
             "customWindow": "Disabled",
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
           },
-          "administratorLogin": "citus",
-          "dataEncryption": {
-            "type": "SystemManaged"
-          },
-          "preferredPrimaryZone": "1",
           "nodeCount": 0,
-          "enableShardsOnCoordinator": true,
-          "coordinatorServerEdition": "GeneralPurpose",
-          "coordinatorStorageQuotaInMb": 131072,
-          "coordinatorVCores": 8,
-          "coordinatorEnablePublicIpAccess": true,
-          "databaseName": "testdbname",
           "nodeEnablePublicIpAccess": false,
           "nodeServerEdition": "MemoryOptimized",
           "nodeStorageQuotaInMb": 131072,
           "nodeVCores": 8,
           "passwordEnabled": "enabled",
+          "postgresqlVersion": "15",
+          "preferredPrimaryZone": "1",
+          "privateEndpointConnections": [],
+          "provisioningState": "Provisioning",
+          "readReplicas": [],
           "serverNames": [
             {
               "name": "testcluster-singlenode-c",
@@ -143,11 +133,23 @@
             }
           ],
           "sourceResourceId": null,
-          "enableHa": true,
-          "readReplicas": [],
-          "earliestRestoreTime": null,
-          "privateEndpointConnections": []
+          "state": "Provisioning"
+        },
+        "systemData": {
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "owner": "JohnDoe"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview"
       }
     }
   }

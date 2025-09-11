@@ -1,24 +1,26 @@
 {
   "parameters": {
-    "supportTicketName": "testticket",
+    "api-version": "2024-04-01",
     "communicationName": "testmessage",
-    "api-version": "2024-04-01"
+    "supportTicketName": "testticket"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Support/supportTickets/testticket/communications/testmessage",
         "name": "testmessage",
         "type": "Microsoft.Support/communications",
+        "id": "/providers/Microsoft.Support/supportTickets/testticket/communications/testmessage",
         "properties": {
-          "subject": "this is a test message",
           "body": "this is a test message",
-          "communicationType": "web",
           "communicationDirection": "outbound",
+          "communicationType": "web",
+          "createdDate": "2016-08-24T20:18:19Z",
           "sender": "user@contoso.com",
-          "createdDate": "2016-08-24T20:18:19Z"
+          "subject": "this is a test message"
         }
       }
     }
-  }
+  },
+  "operationId": "CommunicationsNoSubscription_Get",
+  "title": "Get communication details for a no-subscription support ticket"
 }
