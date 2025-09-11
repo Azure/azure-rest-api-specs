@@ -55,7 +55,7 @@ interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetFtpAllowed")
   getFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
@@ -65,8 +65,8 @@ interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Updates whether FTP is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateFtpAllowed")
   updateFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
@@ -77,7 +77,7 @@ interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListBasicPublishingCredentialsPolicies")
   @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPolicies is CsmPublishingCredentialsPoliciesEntityOps.List<
@@ -115,7 +115,7 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetScmAllowed")
   getScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
@@ -125,8 +125,8 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   /**
    * Description for Updates whether user publishing credentials are allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateScmAllowed")
   updateScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
@@ -149,14 +149,14 @@ interface FtpAllowedSlotOps
         @key
         name: string,
 
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("slots")
         @key
         slot: string,
       },
       {
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("basicPublishingCredentialsPolicies")
         @key
@@ -169,7 +169,7 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetFtpAllowedSlot")
   getFtpAllowedSlot is FtpAllowedSlotOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
@@ -179,8 +179,8 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Updates whether FTP is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateFtpAllowedSlot")
   updateFtpAllowedSlot is FtpAllowedSlotOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
@@ -191,7 +191,7 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListBasicPublishingCredentialsPoliciesSlot")
   @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPoliciesSlot is FtpAllowedSlotOps.List<
@@ -215,7 +215,7 @@ interface ScmAllowedSlotOps
         @key
         name: string,
 
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("slots")
         @key
@@ -230,13 +230,13 @@ interface ScmAllowedSlotOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetScmAllowedSlot")
   getScmAllowedSlot is ScmAllowedSlotOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
@@ -246,8 +246,8 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
   /**
    * Description for Updates whether user publishing credentials are allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateScmAllowedSlot")
   updateScmAllowedSlot is ScmAllowedSlotOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,

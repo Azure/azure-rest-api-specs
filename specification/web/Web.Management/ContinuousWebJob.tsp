@@ -54,7 +54,7 @@ interface ContinuousWebJobs {
   /**
    * Description for Gets a continuous web job by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetContinuousWebJob")
   getContinuousWebJob is ContinuousWebJobOps.Read<
     ContinuousWebJob,
@@ -65,7 +65,7 @@ interface ContinuousWebJobs {
   /**
    * Description for Delete a continuous web job by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteContinuousWebJob")
   deleteContinuousWebJob is ContinuousWebJobOps.DeleteSync<
     ContinuousWebJob,
@@ -75,7 +75,7 @@ interface ContinuousWebJobs {
   /**
    * Description for List continuous web jobs for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListContinuousWebJobs")
   listContinuousWebJobs is ContinuousWebJobOps.List<
     ContinuousWebJob,
@@ -87,7 +87,7 @@ interface ContinuousWebJobs {
    * Description for Start a continuous web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StartContinuousWebJob")
   @action("start")
   startContinuousWebJob is ContinuousWebJobOps.ActionSync<
@@ -100,7 +100,7 @@ interface ContinuousWebJobs {
   /**
    * Description for Stop a continuous web job for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StopContinuousWebJob")
   @action("stop")
@@ -146,7 +146,7 @@ interface ContinuousWebJobOperationGroup {
   /**
    * Description for Gets a continuous web job by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetContinuousWebJobSlot")
   getContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.Read<
     ContinuousWebJob,
@@ -157,7 +157,7 @@ interface ContinuousWebJobOperationGroup {
   /**
    * Description for Delete a continuous web job by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteContinuousWebJobSlot")
   deleteContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.DeleteSync<
     ContinuousWebJob,
@@ -167,7 +167,7 @@ interface ContinuousWebJobOperationGroup {
   /**
    * Description for List continuous web jobs for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListContinuousWebJobsSlot")
   listContinuousWebJobsSlot is ContinuousWebJobOperationGroupOps.List<
     ContinuousWebJob,
@@ -178,7 +178,7 @@ interface ContinuousWebJobOperationGroup {
   /**
    * Description for Start a continuous web job for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StartContinuousWebJobSlot")
   @action("start")
@@ -192,7 +192,7 @@ interface ContinuousWebJobOperationGroup {
   /**
    * Description for Stop a continuous web job for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StopContinuousWebJobSlot")
   @action("stop")

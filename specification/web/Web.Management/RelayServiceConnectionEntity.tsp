@@ -54,7 +54,7 @@ interface RelayServiceConnectionEntities {
   /**
    * Description for Gets a hybrid connection configuration by its name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetRelayServiceConnection")
   getRelayServiceConnection is RelayServiceConnectionEntityOps.Read<
     RelayServiceConnectionEntity,
@@ -64,8 +64,8 @@ interface RelayServiceConnectionEntities {
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOrUpdateRelayServiceConnection")
   createOrUpdateRelayServiceConnection is RelayServiceConnectionEntityOps.CreateOrUpdateSync<
     RelayServiceConnectionEntity,
@@ -76,7 +76,7 @@ interface RelayServiceConnectionEntities {
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateRelayServiceConnection")
   @patch(#{ implicitOptionality: false })
   updateRelayServiceConnection is RelayServiceConnectionEntityOps.CustomPatchSync<
@@ -88,8 +88,8 @@ interface RelayServiceConnectionEntities {
   /**
    * Description for Deletes a relay service connection by its name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteRelayServiceConnection")
   deleteRelayServiceConnection is RelayServiceConnectionEntityOps.DeleteSync<
     RelayServiceConnectionEntity,
@@ -132,15 +132,15 @@ interface RelayServiceConnectionEntityOperationGroup {
   /**
    * Description for Gets a hybrid connection configuration by its name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetRelayServiceConnectionSlot")
   getRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.Read<RelayServiceConnectionEntity, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOrUpdateRelayServiceConnectionSlot")
   createOrUpdateRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.CreateOrUpdateSync<
     RelayServiceConnectionEntity,
@@ -151,7 +151,7 @@ interface RelayServiceConnectionEntityOperationGroup {
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateRelayServiceConnectionSlot")
   @patch(#{ implicitOptionality: false })
   updateRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.CustomPatchSync<
@@ -163,8 +163,8 @@ interface RelayServiceConnectionEntityOperationGroup {
   /**
    * Description for Deletes a relay service connection by its name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteRelayServiceConnectionSlot")
   deleteRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.DeleteSync<
     RelayServiceConnectionEntity,

@@ -14,7 +14,7 @@ namespace Microsoft.Web;
 /**
  * Remote Private Endpoint Connection ARM resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(AppServiceEnvironmentResource)
 model RemotePrivateEndpointConnectionARMResource
   is Azure.ResourceManager.ProxyResource<RemotePrivateEndpointConnectionARMResourceProperties> {
@@ -26,7 +26,7 @@ model RemotePrivateEndpointConnectionARMResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface RemotePrivateEndpointConnectionARMResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -51,13 +51,13 @@ interface RemotePrivateEndpointConnectionARMResourceOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Gets a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_GetPrivateEndpointConnection")
   getPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.Read<
     RemotePrivateEndpointConnectionARMResource,
@@ -67,9 +67,9 @@ interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Approves or rejects a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ApproveOrRejectPrivateEndpointConnection")
   approveOrRejectPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
@@ -85,17 +85,17 @@ interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Deletes a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_DeletePrivateEndpointConnection")
   deletePrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
     }) | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
     }),
@@ -105,7 +105,7 @@ interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Gets the list of private endpoints associated with a hosting environment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_GetPrivateEndpointConnectionList")
   getPrivateEndpointConnectionList is RemotePrivateEndpointConnectionARMResourceOps.List<
     RemotePrivateEndpointConnectionARMResource,
@@ -150,8 +150,8 @@ interface StaticSites {
   /**
    * Description for Approves or rejects a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   approveOrRejectPrivateEndpointConnection is StaticSiteOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
@@ -166,15 +166,15 @@ interface StaticSites {
   /**
    * Description for Deletes a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deletePrivateEndpointConnection is StaticSiteOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
     }) | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
     }),
@@ -214,13 +214,13 @@ interface PrivateEndpointConnectionOperationGroupOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Gets a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPrivateEndpointConnection")
   getPrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.Read<
     RemotePrivateEndpointConnectionARMResource,
@@ -230,9 +230,9 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Approves or rejects a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ApproveOrRejectPrivateEndpointConnection")
   approveOrRejectPrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
@@ -248,17 +248,17 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Deletes a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeletePrivateEndpointConnection")
   deletePrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
     }) | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
     }),
@@ -268,7 +268,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Gets the list of private endpoint connections associated with a site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPrivateEndpointConnectionList")
   getPrivateEndpointConnectionList is PrivateEndpointConnectionOperationGroupOps.List<
     RemotePrivateEndpointConnectionARMResource,
@@ -311,7 +311,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Gets a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPrivateEndpointConnectionSlot")
   getPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.Read<
     RemotePrivateEndpointConnectionARMResource,
@@ -321,9 +321,9 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Approves or rejects a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ApproveOrRejectPrivateEndpointConnectionSlot")
   approveOrRejectPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
@@ -339,18 +339,18 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Deletes a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeletePrivateEndpointConnectionSlot")
   deletePrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
     }) | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
     }),
@@ -360,7 +360,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Gets the list of private endpoint connections associated with a site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPrivateEndpointConnectionListSlot")
   @segment("privateEndpointConnections")
   getPrivateEndpointConnectionListSlot is PrivateEndpointConnectionSlotOperationGroupOps.List<

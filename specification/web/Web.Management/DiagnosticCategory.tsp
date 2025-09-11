@@ -52,14 +52,14 @@ interface DiagnosticCategories {
   /**
    * Description for Get Diagnostics Category
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_GetSiteDiagnosticCategory")
   getSiteDiagnosticCategory is DiagnosticCategoryOps.Read<DiagnosticCategory, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Get Diagnostics Categories
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_ListSiteDiagnosticCategories")
   listSiteDiagnosticCategories is DiagnosticCategoryOps.List<
     DiagnosticCategory,
@@ -102,7 +102,7 @@ interface DiagnosticCategoryOperationGroup {
   /**
    * Description for Get Diagnostics Category
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_GetSiteDiagnosticCategorySlot")
   getSiteDiagnosticCategorySlot is DiagnosticCategoryOperationGroupOps.Read<
     DiagnosticCategory,
@@ -112,7 +112,7 @@ interface DiagnosticCategoryOperationGroup {
   /**
    * Description for Get Diagnostics Categories
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_ListSiteDiagnosticCategoriesSlot")
   listSiteDiagnosticCategoriesSlot is DiagnosticCategoryOperationGroupOps.List<
     DiagnosticCategory,

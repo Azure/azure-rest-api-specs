@@ -74,7 +74,7 @@ interface AppServiceEnvironmentOps2Temporary
 alias DiagnosticsParameters = {
   ...ResourceInstanceParameters<AppServiceEnvironmentResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   @key
   @segment("diagnostics")
@@ -86,7 +86,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the properties of an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_Get")
   get is ArmResourceRead<
     AppServiceEnvironmentResource,
@@ -96,9 +96,9 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Create or update an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServiceEnvironmentResource,
@@ -117,9 +117,9 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Create or update an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -135,7 +135,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Delete an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AppServiceEnvironmentResource,
@@ -152,7 +152,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all App Service Environments in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AppServiceEnvironmentResource,
@@ -163,7 +163,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all App Service Environments for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_List")
   list is ArmListBySubscription<
     AppServiceEnvironmentResource,
@@ -174,15 +174,15 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the used, available, and total worker capacity an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ListCapacities")
   @get
   @list
   listCapacities(
     ...ResourceInstanceParameters<AppServiceEnvironmentResource>,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @key
     @segment("capacities")
@@ -192,8 +192,8 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Move an App Service Environment to a different VNET.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ChangeVnet")
   @action("changeVirtualNetwork")
   @list
@@ -211,7 +211,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get diagnostic information for an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ListDiagnostics")
   @get
   @action("diagnostics")
@@ -225,8 +225,8 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get a diagnostics item for an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_GetDiagnosticsItem")
   @get
   getDiagnosticsItem(
@@ -236,7 +236,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the network endpoints of all inbound dependencies of an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints")
   @get
   @action("inboundNetworkDependenciesEndpoints")
@@ -251,7 +251,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Send a test notification that an upgrade is available for this App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_TestUpgradeAvailableNotification")
   testUpgradeAvailableNotification is ArmResourceActionSync<
     AppServiceEnvironmentResource,
@@ -263,7 +263,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Initiate an upgrade of an App Service Environment if one is available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_Upgrade")
   upgrade is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
@@ -276,7 +276,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for List all currently running operations on the App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ListOperations")
   @get
   @action("operations")
@@ -290,7 +290,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the network endpoints of all outbound dependencies of an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_GetOutboundNetworkDependenciesEndpoints")
   @get
   @action("outboundNetworkDependenciesEndpoints")
@@ -305,7 +305,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Gets the private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_GetPrivateLinkResources")
   @get
   @action("privateLinkResources")
@@ -319,9 +319,9 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Reboot all machines in an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_Reboot")
   reboot is ArmResourceActionSync<
     AppServiceEnvironmentResource,
@@ -333,8 +333,8 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Resume an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_Resume")
   @list
   resume is ArmResourceActionAsyncBase<
@@ -351,7 +351,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all App Service plans in an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ListAppServicePlans")
   @get
   @action("serverfarms")
@@ -366,7 +366,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all apps in an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ListWebApps")
   @get
   @action("sites")
@@ -388,8 +388,8 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Suspend an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_Suspend")
   @list
   suspend is ArmResourceActionAsyncBase<
@@ -406,7 +406,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get global usage metrics of an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_ListUsages")
   @get
   @action("usages")
@@ -428,7 +428,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_ListHistoryForHostingEnvironment")
   @get
   @list
@@ -454,7 +454,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all recommendations for a hosting environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_ListRecommendedRulesForHostingEnvironment")
   @get
   @list
@@ -481,7 +481,7 @@ interface AppServiceEnvironmentResources {
    * Description for Disable all recommendations for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_DisableAllForHostingEnvironment")
   @post
   disableAllForHostingEnvironment(
@@ -513,7 +513,7 @@ interface AppServiceEnvironmentResources {
    * Description for Reset all recommendation opt-out settings for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_ResetAllFiltersForHostingEnvironment")
   @post
   resetAllFiltersForHostingEnvironment(

@@ -66,7 +66,7 @@ interface ProcessModuleInfos {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetInstanceProcessModule")
   getInstanceProcessModule is ProcessModuleInfoOps.Read<
     ProcessModuleInfo,
@@ -77,7 +77,7 @@ interface ProcessModuleInfos {
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListInstanceProcessModules")
   listInstanceProcessModules is ProcessModuleInfoOps.List<
     ProcessModuleInfo,
@@ -120,7 +120,7 @@ interface ProcessModuleInfoOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetProcessModule")
   getProcessModule is ProcessModuleInfoOperationGroupOps.Read<
     ProcessModuleInfo,
@@ -131,7 +131,7 @@ interface ProcessModuleInfoOperationGroup {
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListProcessModules")
   listProcessModules is ProcessModuleInfoOperationGroupOps.List<
     ProcessModuleInfo,
@@ -186,7 +186,7 @@ interface InstanceProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetInstanceProcessModuleSlot")
   getInstanceProcessModuleSlot is InstanceProcessModuleSlotOperationGroupOps.Read<
     ProcessModuleInfo,
@@ -197,7 +197,7 @@ interface InstanceProcessModuleSlotOperationGroup {
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListInstanceProcessModulesSlot")
   @segment("modules")
   listInstanceProcessModulesSlot is InstanceProcessModuleSlotOperationGroupOps.List<
@@ -247,7 +247,7 @@ interface ProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetProcessModuleSlot")
   getProcessModuleSlot is ProcessModuleSlotOperationGroupOps.Read<
     ProcessModuleInfo,
@@ -258,7 +258,7 @@ interface ProcessModuleSlotOperationGroup {
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListProcessModulesSlot")
   listProcessModulesSlot is ProcessModuleSlotOperationGroupOps.List<
     ProcessModuleInfo,

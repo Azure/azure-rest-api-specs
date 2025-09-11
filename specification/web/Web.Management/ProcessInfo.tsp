@@ -60,7 +60,7 @@ interface ProcessInfos {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetInstanceProcess")
   getInstanceProcess is ProcessInfoOps.Read<
     ProcessInfo,
@@ -71,9 +71,9 @@ interface ProcessInfos {
   /**
    * Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteInstanceProcess")
   deleteInstanceProcess is ProcessInfoOps.DeleteSync<
     ProcessInfo,
@@ -84,7 +84,7 @@ interface ProcessInfos {
   /**
    * Description for Get list of processes for a web site, or a deployment slot, or for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListInstanceProcesses")
   listInstanceProcesses is ProcessInfoOps.List<
     ProcessInfo,
@@ -95,7 +95,7 @@ interface ProcessInfos {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetInstanceProcessDump")
   @get
   @action("dump")
@@ -109,7 +109,7 @@ interface ProcessInfos {
   /**
    * Description for List the threads in a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListInstanceProcessThreads")
   @get
   @list
@@ -150,7 +150,7 @@ interface ProcessInfoOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetProcess")
   getProcess is ProcessInfoOperationGroupOps.Read<
     ProcessInfo,
@@ -161,9 +161,9 @@ interface ProcessInfoOperationGroup {
   /**
    * Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteProcess")
   deleteProcess is ProcessInfoOperationGroupOps.DeleteSync<
     ProcessInfo,
@@ -174,7 +174,7 @@ interface ProcessInfoOperationGroup {
   /**
    * Description for Get list of processes for a web site, or a deployment slot, or for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListProcesses")
   listProcesses is ProcessInfoOperationGroupOps.List<
     ProcessInfo,
@@ -185,7 +185,7 @@ interface ProcessInfoOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetProcessDump")
   @get
   @action("dump")
@@ -199,7 +199,7 @@ interface ProcessInfoOperationGroup {
   /**
    * Description for List the threads in a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListProcessThreads")
   @get
   @action("threads")
@@ -251,7 +251,7 @@ interface InstanceProcessSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetInstanceProcessSlot")
   getInstanceProcessSlot is InstanceProcessSlotOps.Read<
     ProcessInfo,
@@ -262,9 +262,9 @@ interface InstanceProcessSlotOperationGroup {
   /**
    * Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteInstanceProcessSlot")
   deleteInstanceProcessSlot is InstanceProcessSlotOps.DeleteSync<
     ProcessInfo,
@@ -275,7 +275,7 @@ interface InstanceProcessSlotOperationGroup {
   /**
    * Description for Get list of processes for a web site, or a deployment slot, or for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListInstanceProcessesSlot")
   @segment("processes")
   listInstanceProcessesSlot is InstanceProcessSlotOps.List<
@@ -287,7 +287,7 @@ interface InstanceProcessSlotOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetInstanceProcessDumpSlot")
   @get
   @action("dump")
@@ -301,7 +301,7 @@ interface InstanceProcessSlotOperationGroup {
   /**
    * Description for List the threads in a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListInstanceProcessThreadsSlot")
   @get
   @list
@@ -348,7 +348,7 @@ interface ProcessSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetProcessSlot")
   getProcessSlot is ProcessSlotOperationGroupOps.Read<
     ProcessInfo,
@@ -359,9 +359,9 @@ interface ProcessSlotOperationGroup {
   /**
    * Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteProcessSlot")
   deleteProcessSlot is ProcessSlotOperationGroupOps.DeleteSync<
     ProcessInfo,
@@ -372,7 +372,7 @@ interface ProcessSlotOperationGroup {
   /**
    * Description for Get list of processes for a web site, or a deployment slot, or for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListProcessesSlot")
   listProcessesSlot is ProcessSlotOperationGroupOps.List<
     ProcessInfo,
@@ -383,7 +383,7 @@ interface ProcessSlotOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetProcessDumpSlot")
   @get
   @action("dump")
@@ -397,7 +397,7 @@ interface ProcessSlotOperationGroup {
   /**
    * Description for List the threads in a process by its ID for a specific scaled-out instance in a web site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListProcessThreadsSlot")
   @get
   @list

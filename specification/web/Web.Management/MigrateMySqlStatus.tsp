@@ -55,7 +55,7 @@ interface MigrateMySqlStatuses {
   /**
    * Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetMigrateMySqlStatus")
   getMigrateMySqlStatus is MigrateMySqlStatusOps.Read<MigrateMySqlStatus,OverrideErrorType = DefaultErrorResponse>;
 }
@@ -94,7 +94,7 @@ interface MigrateMySqlStatusOperationGroup {
   /**
    * Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetMigrateMySqlStatusSlot")
   getMigrateMySqlStatusSlot is MigrateMySqlStatusOperationGroupOps.Read<
     MigrateMySqlStatus,
