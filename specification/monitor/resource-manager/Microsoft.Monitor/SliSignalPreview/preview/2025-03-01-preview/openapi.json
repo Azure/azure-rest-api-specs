@@ -39,243 +39,95 @@
   },
   "tags": [
     {
-      "name": "Slis"
+      "name": "SignalPreview"
     }
   ],
   "paths": {
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis": {
-      "get": {
-        "operationId": "Slis_ListByParent",
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/sliSignalPreview": {
+      "post": {
+        "operationId": "SignalPreview_SignalPreview",
         "tags": [
-          "Slis"
+          "SignalPreview"
         ],
-        "description": "Lists all SLI resources under a parent resource.",
+        "description": "Returns preview data for the signal.",
         "parameters": [
           {
-            "$ref": "#/parameters/ServiceGroupBaseParameters"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SliListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SlisListByParent": {
-            "$ref": "./examples/Slis_ListByParent.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis/{sliName}": {
-      "get": {
-        "operationId": "Slis_Get",
-        "tags": [
-          "Slis"
-        ],
-        "description": "Gets an SLI resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ServiceGroupBaseParameters"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "sliName",
+            "name": "serviceGroupName",
             "in": "path",
-            "description": "Name of the SLI that is given by the user.",
+            "description": "The name of the service group.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Sli"
-            }
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetSli": {
-            "$ref": "./examples/Slis_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Slis_CreateOrUpdate",
-        "tags": [
-          "Slis"
-        ],
-        "description": "Creates or updates an SLI resource.",
-        "parameters": [
           {
-            "$ref": "#/parameters/ServiceGroupBaseParameters"
+            "name": "previewType",
+            "in": "query",
+            "description": "The preview type for the signal preview operation.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "goodsignal",
+              "totalsignal",
+              "signal",
+              "slo"
+            ],
+            "x-ms-enum": {
+              "name": "PreviewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "GoodSignal",
+                  "value": "goodsignal",
+                  "description": "Preview for good signal."
+                },
+                {
+                  "name": "TotalSignal",
+                  "value": "totalsignal",
+                  "description": "Preview for total signal."
+                },
+                {
+                  "name": "Signal",
+                  "value": "signal",
+                  "description": "Preview for signal."
+                },
+                {
+                  "name": "Slo",
+                  "value": "slo",
+                  "description": "Preview for SLO evaluation."
+                }
+              ]
+            }
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "sliName",
-            "in": "path",
-            "description": "Name of the SLI that is given by the user.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
-          },
-          {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The signal preview properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Sli"
+              "$ref": "#/definitions/SignalPreviewSliProperties"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Sli' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Sli"
-            }
-          },
-          "201": {
-            "description": "Resource 'Sli' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Sli"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/KqlmQueryResult"
             }
           }
         },
         "x-ms-examples": {
-          "CreateSli": {
-            "$ref": "./examples/Slis_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Slis_Delete",
-        "tags": [
-          "Slis"
-        ],
-        "description": "Deletes an SLI resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ServiceGroupBaseParameters"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "sliName",
-            "in": "path",
-            "description": "Name of the SLI that is given by the user.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteSli": {
-            "$ref": "./examples/Slis_Delete.json"
+          "SignalPreview": {
+            "$ref": "./examples/SignalPreview_SignalPreview.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AmwAccount": {
-      "type": "object",
-      "description": "Represents an Azure Monitor Workspace (AMW) account used for emitting metrics.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The ARM resource ID of the account where metrics are emitted."
-        },
-        "identity": {
-          "type": "string",
-          "description": "The ARM resource ID of the managed identity with access to the source account."
-        }
-      },
-      "required": [
-        "resourceId",
-        "identity"
-      ]
-    },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "Baseline": {
       "type": "object",
       "description": "Defines the target parameters for a Slo baseline.",
@@ -317,30 +169,6 @@
       "required": [
         "baseline"
       ]
-    },
-    "Category": {
-      "type": "string",
-      "description": "Defines the category of an SLI",
-      "enum": [
-        "Availability",
-        "Latency"
-      ],
-      "x-ms-enum": {
-        "name": "Category",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Availability",
-            "value": "Availability",
-            "description": "Indicates availability-related metrics."
-          },
-          {
-            "name": "Latency",
-            "value": "Latency",
-            "description": "Indicates latency-related metrics."
-          }
-        ]
-      }
     },
     "Condition": {
       "type": "object",
@@ -456,6 +284,13 @@
         ]
       }
     },
+    "DimensionValuesDictionary": {
+      "type": "object",
+      "description": "Dictionary of dimension names to dimension values.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "EvaluationCalculationType": {
       "type": "string",
       "description": "Specifies the method for evaluation calculation.",
@@ -504,44 +339,210 @@
         ]
       }
     },
-    "ExecutionState": {
+    "ExecutionMessage": {
       "type": "object",
-      "description": "Represents the current execution state of an SLI.",
+      "description": "Represents a KQL-M query execution message.",
       "properties": {
+        "severity": {
+          "$ref": "#/definitions/MessageSeverity",
+          "description": "The message severity."
+        },
+        "text": {
+          "type": "string",
+          "description": "The message text."
+        },
+        "documentationLink": {
+          "type": "string",
+          "description": "The message documentation link."
+        },
+        "statementContext": {
+          "$ref": "#/definitions/StatementContextInformation",
+          "description": "The message statement context."
+        }
+      },
+      "required": [
+        "severity",
+        "text",
+        "documentationLink",
+        "statementContext"
+      ]
+    },
+    "HmsDuration": {
+      "type": "string",
+      "description": "Duration in HH:MM:SS format (e.g. 00:01:00) to match service response.",
+      "pattern": "^[0-9]{2}:[0-9]{2}:[0-9]{2}$"
+    },
+    "KqlmQueryResult": {
+      "type": "object",
+      "description": "Represents the result of a KQL-M query.",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "The request ID."
+        },
         "state": {
-          "type": "string",
-          "description": "The execution state value."
+          "$ref": "#/definitions/QueryState",
+          "description": "The query state."
         },
-        "message": {
-          "type": "string",
-          "description": "A descriptive message related to the execution state."
+        "timeSeriesSets": {
+          "type": "array",
+          "description": "The list of time series sets, where each set represents results for a query statement.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesSet"
+          },
+          "x-ms-identifiers": []
+        },
+        "executionMessages": {
+          "type": "array",
+          "description": "The list of KQL-M query execution messages.",
+          "items": {
+            "$ref": "#/definitions/ExecutionMessage"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "state"
+        "state",
+        "timeSeriesSets",
+        "executionMessages"
       ]
     },
-    "Metric": {
+    "MessageSeverity": {
+      "type": "string",
+      "description": "Represents the severity of a message.",
+      "enum": [
+        "Error",
+        "Warning",
+        "Info"
+      ],
+      "x-ms-enum": {
+        "name": "MessageSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error message."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning message."
+          },
+          {
+            "name": "Info",
+            "value": "Info",
+            "description": "Informational message."
+          }
+        ]
+      }
+    },
+    "PreviewType": {
+      "type": "string",
+      "description": "Defines the available preview types for signal preview.",
+      "enum": [
+        "goodsignal",
+        "totalsignal",
+        "signal",
+        "slo"
+      ],
+      "x-ms-enum": {
+        "name": "PreviewType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GoodSignal",
+            "value": "goodsignal",
+            "description": "Preview for good signal."
+          },
+          {
+            "name": "TotalSignal",
+            "value": "totalsignal",
+            "description": "Preview for total signal."
+          },
+          {
+            "name": "Signal",
+            "value": "signal",
+            "description": "Preview for signal."
+          },
+          {
+            "name": "Slo",
+            "value": "slo",
+            "description": "Preview for SLO evaluation."
+          }
+        ]
+      }
+    },
+    "QueryState": {
+      "type": "string",
+      "description": "Represents the state of a KQL-M query.",
+      "enum": [
+        "Success",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "QueryState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "Query succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Query failed."
+          }
+        ]
+      }
+    },
+    "ResultsMetadata": {
       "type": "object",
-      "description": "Defines a metric in the destination AMW account.",
+      "description": "Represents metadata for a KQL-M query result.",
       "properties": {
-        "metricNamespace": {
+        "startTimeUtc": {
           "type": "string",
-          "description": "The namespace of the metric."
+          "format": "date-time",
+          "description": "The start time for the KQL-M query result."
         },
-        "metricName": {
+        "endTimeUtc": {
           "type": "string",
-          "description": "The name of the metric."
+          "format": "date-time",
+          "description": "The end time for the KQL-M query result."
+        },
+        "dataResolution": {
+          "$ref": "#/definitions/HmsDuration",
+          "description": "The data resolution of the KQL-M query result in HH:MM:SS format."
+        },
+        "resultantDimensions": {
+          "type": "array",
+          "description": "The list of output dimensions of the KQL-M query result.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resultantSamplingTypes": {
+          "type": "array",
+          "description": "The list of output sampling types of the KQL-M query result.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "datapointsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of datapoints in the KQL-M query result."
         }
       },
       "required": [
-        "metricNamespace",
-        "metricName"
+        "startTimeUtc",
+        "endTimeUtc",
+        "dataResolution",
+        "resultantDimensions",
+        "resultantSamplingTypes",
+        "datapointsCount"
       ]
-    },
-    "ProvisioningState": {
-      "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-      "x-nullable": false
     },
     "SamplingType": {
       "type": "string",
@@ -577,6 +578,17 @@
             "description": "Summation."
           }
         ]
+      }
+    },
+    "SamplingTypesDataDictionary": {
+      "type": "object",
+      "description": "Dictionary of sampling types to metric values.",
+      "additionalProperties": {
+        "items": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": "array"
       }
     },
     "ScalarFunction": {
@@ -615,6 +627,20 @@
         ]
       }
     },
+    "ServiceGroupBaseParameters": {
+      "type": "object",
+      "description": "ServiceGroup as parameter",
+      "properties": {
+        "serviceGroupName": {
+          "type": "string",
+          "description": "The name of the service group.",
+          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+        }
+      },
+      "required": [
+        "serviceGroupName"
+      ]
+    },
     "ServiceGroupParameters": {
       "type": "object",
       "description": "ServiceGroup as parameter",
@@ -633,6 +659,31 @@
       "required": [
         "serviceGroupName",
         "apiVersion"
+      ]
+    },
+    "ServiceGroupParametersWithSignalPreview": {
+      "type": "object",
+      "description": "ServiceGroup parameters with signal preview query parameters",
+      "properties": {
+        "serviceGroupName": {
+          "type": "string",
+          "description": "The name of the service group.",
+          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "previewType": {
+          "$ref": "#/definitions/PreviewType",
+          "description": "The preview type for the signal preview operation."
+        }
+      },
+      "required": [
+        "serviceGroupName",
+        "apiVersion",
+        "previewType"
       ]
     },
     "Signal": {
@@ -657,6 +708,52 @@
       "required": [
         "signalSources",
         "signalFormula"
+      ]
+    },
+    "SignalPreviewParameters": {
+      "type": "object",
+      "description": "Parameters for the signal preview endpoint.",
+      "properties": {
+        "previewType": {
+          "$ref": "#/definitions/PreviewType",
+          "description": "The preview type for the signal preview operation."
+        }
+      },
+      "required": [
+        "previewType"
+      ]
+    },
+    "SignalPreviewSliProperties": {
+      "type": "object",
+      "description": "Defines the properties for signal preview SLI.",
+      "properties": {
+        "evaluationType": {
+          "$ref": "#/definitions/EvaluationType",
+          "description": "Determines how the SLI is evaluated—either based on request counts or time windows."
+        },
+        "baselineProperties": {
+          "$ref": "#/definitions/BaselineProperties",
+          "description": "Defines the SLO baseline associated with the SLI."
+        },
+        "windowUptimeCriteria": {
+          "$ref": "#/definitions/WindowUptimeCriteria",
+          "description": "Defines the uptime criteria for window-based SLIs."
+        },
+        "signals": {
+          "$ref": "#/definitions/Signal",
+          "description": "Signals used for window-based SLI calculations."
+        },
+        "goodSignals": {
+          "$ref": "#/definitions/Signal",
+          "description": "Represents good signals used in request-based SLI calculations."
+        },
+        "totalSignals": {
+          "$ref": "#/definitions/Signal",
+          "description": "Represents total signals used in request-based SLI calculations."
+        }
+      },
+      "required": [
+        "evaluationType"
       ]
     },
     "SignalSource": {
@@ -714,154 +811,6 @@
         "metricName",
         "filters",
         "spatialAggregation"
-      ]
-    },
-    "Sli": {
-      "type": "object",
-      "description": "Represents an SLI resource within the ProviderHub.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SliResource",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SliListResult": {
-      "type": "object",
-      "description": "The response of a Sli list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Sli items on this page",
-          "items": {
-            "$ref": "#/definitions/Sli"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SliProperties": {
-      "type": "object",
-      "description": "Defines the properties of an SLI.",
-      "properties": {
-        "goodSignals": {
-          "$ref": "#/definitions/Signal",
-          "description": "Represents good signals used in request-based SLI calculations."
-        },
-        "totalSignals": {
-          "$ref": "#/definitions/Signal",
-          "description": "Represents total signals used in request-based SLI calculations."
-        },
-        "signals": {
-          "$ref": "#/definitions/Signal",
-          "description": "Signals used for window-based SLI calculations."
-        },
-        "windowUptimeCriteria": {
-          "$ref": "#/definitions/WindowUptimeCriteria",
-          "description": "Defines the uptime criteria for window-based SLIs."
-        }
-      }
-    },
-    "SliResource": {
-      "type": "object",
-      "description": "Defines the root level properties of an SLI resource.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Indicates the provisioning status of the last operation.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "A user-provided description of the SLI, with a maximum length of 1000 characters.",
-          "pattern": "^.{3,1000}$"
-        },
-        "category": {
-          "$ref": "#/definitions/Category",
-          "description": "Specifies the category of the SLI, used to classify signals such as Availability and Latency."
-        },
-        "evaluationType": {
-          "$ref": "#/definitions/EvaluationType",
-          "description": "Determines how the SLI is evaluated—either based on request counts or time windows."
-        },
-        "executionState": {
-          "$ref": "#/definitions/ExecutionState",
-          "description": "Indicates the current execution status of the SLI resource in ARM responses.",
-          "readOnly": true
-        },
-        "destinationAmwAccounts": {
-          "type": "array",
-          "description": "Destination AMW accounts.",
-          "items": {
-            "$ref": "#/definitions/AmwAccount"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        },
-        "destinationMetrics": {
-          "type": "array",
-          "description": "The destination Azure Monitor Workspace (AMW) accounts where the SLI emits metrics.",
-          "items": {
-            "$ref": "#/definitions/Metric"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "metricNamespace",
-            "metricName"
-          ]
-        },
-        "baselineProperties": {
-          "$ref": "#/definitions/BaselineProperties",
-          "description": "Defines the SLO baseline associated with the SLI."
-        },
-        "streamingRuleId": {
-          "type": "string",
-          "description": "The streaming rule Id associated with the Sli resource.",
-          "readOnly": true
-        },
-        "streamingRuleLastUpdatedTimestamp": {
-          "type": "string",
-          "description": "The streaming rule last updated timestamp associated with the Sli resource.",
-          "readOnly": true
-        },
-        "enableAlert": {
-          "type": "boolean",
-          "description": "A flag to determine whether alert is enabled."
-        },
-        "sliProperties": {
-          "$ref": "#/definitions/SliProperties",
-          "description": "Defines the SLI properties associated with the SLI."
-        }
-      },
-      "required": [
-        "description",
-        "category",
-        "evaluationType",
-        "executionState",
-        "destinationAmwAccounts",
-        "destinationMetrics",
-        "baselineProperties",
-        "streamingRuleId",
-        "streamingRuleLastUpdatedTimestamp",
-        "enableAlert",
-        "sliProperties"
       ]
     },
     "SpatialAggregation": {
@@ -926,6 +875,38 @@
           }
         ]
       }
+    },
+    "StatementContextInformation": {
+      "type": "object",
+      "description": "Represents statement context information for a message.",
+      "properties": {
+        "lineNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The line number in the input where the error occurred."
+        },
+        "charPositionInLine": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The character position within that line where the error occurred."
+        },
+        "charPositionAbsolute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The character position within the entire statement text where the error occurred."
+        },
+        "errorSectionLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length of text section which caused an error."
+        }
+      },
+      "required": [
+        "lineNumber",
+        "charPositionInLine",
+        "charPositionAbsolute",
+        "errorSectionLength"
+      ]
     },
     "TemporalAggregation": {
       "type": "object",
@@ -1012,6 +993,48 @@
         ]
       }
     },
+    "TimeSeriesData": {
+      "type": "object",
+      "description": "Represents a time series data entry.",
+      "properties": {
+        "dimensionValues": {
+          "$ref": "#/definitions/DimensionValuesDictionary",
+          "description": "The dictionary of dimension names to dimension values.",
+          "x-ms-identifiers": []
+        },
+        "samplingTypesData": {
+          "$ref": "#/definitions/SamplingTypesDataDictionary",
+          "description": "The dictionary of sampling types to metric values (as list of doubles).",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "dimensionValues",
+        "samplingTypesData"
+      ]
+    },
+    "TimeSeriesSet": {
+      "type": "object",
+      "description": "Represents a set of time series results for a query statement.",
+      "properties": {
+        "resultsMetadata": {
+          "$ref": "#/definitions/ResultsMetadata",
+          "description": "The KQL-M query result metadata."
+        },
+        "timeSeriesData": {
+          "type": "array",
+          "description": "The list of time series data.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesData"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resultsMetadata",
+        "timeSeriesData"
+      ]
+    },
     "WindowUptimeCriteria": {
       "type": "object",
       "description": "Represents criteria for determining uptime in window-based SLIs.",
@@ -1069,15 +1092,5 @@
       }
     }
   },
-  "parameters": {
-    "ServiceGroupBaseParameters": {
-      "name": "serviceGroupName",
-      "in": "path",
-      "description": "The name of the service group.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
