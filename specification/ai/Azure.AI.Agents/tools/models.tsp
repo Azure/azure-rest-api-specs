@@ -210,6 +210,40 @@ model FileSearchToolDefinitionDetails {
   rankingOptions?: FileSearchRankingOptions;
 }
 
+/**
+ * Options overrides for the image generation tool.
+ */
+@added(Versions.v2025_05_01)
+model ImageGenerationToolDefinitionDetails {
+  /**
+   * The default size for generated images. Either 1024x1024, 1024x1536, or 1536x1024.
+   */
+  size?: "1024x1024" | "1024x1536" | "1536x1024";
+
+  /**
+   * The default quality setting for generated images. Either low, medium, or high.
+   */
+  quality?: "low" | "medium" | "high";
+
+  /**
+   * The default output format for generated images. Either png, webp, or jpeg.
+   */
+  @encodedName("application/json", "output_format")
+  outputFormat?: "png" | "webp" | "jpeg";
+
+  /**
+   * The default background setting for generated images. Either transparent or opaque.
+   */
+  background?: "transparent" | "opaque";
+
+  /**
+   * The default number of images to generate. Must be between 1 and 10.
+   */
+  @minValue(1)
+  @maxValue(10)
+  n?: int32;
+}
+
 @doc("The input definition information for a azure function tool as used to configure an agent.")
 @added(Versions.v2025_05_01)
 model AzureFunctionToolDefinition extends ToolDefinition {
