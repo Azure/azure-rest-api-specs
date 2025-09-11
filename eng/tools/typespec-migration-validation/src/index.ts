@@ -9,7 +9,7 @@ import { generatePrompts } from "./fix/troubleshooting.js";
 import { mergeFiles, readFileContent } from "./helper.js";
 import { addIgnorePath, processIgnoreList } from "./ignore.js";
 import { jsonOutput } from "./jsonOutput.js";
-import { logHeader, logWarning } from "./log.js";
+import { logError, logHeader, logWarning } from "./log.js";
 import {
   findChangedPaths,
   findDifferences,
@@ -18,6 +18,8 @@ import {
   formatDifferenceReport,
   formatModifiedValuesReport,
 } from "./summary.js";
+import { compareDocuments, printDiff } from "./compare.js";
+import { writeFile } from "fs/promises";
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -50,6 +52,18 @@ function parseArguments() {
     )
     .example("$0 oldSpecPath newSpecPath", "Compare using positional arguments")
     .example(
+      "$0 --oldPath ./old-spec --newPath ./new-spec --reportFile ./custom-report.md",
+      "Compare specs with custom report file",
+    )
+    .example(
+      "$0 --oldPath ./old-spec --newPath ./new-spec --outputFolder ./validation-results",
+      "Compare specs with custom output folder",
+    )
+    .example(
+      "$0 --oldPath ./old-spec --newPath ./new-spec --ignoreDefinitionCase",
+      "Compare specs with case-insensitive definition sorting",
+    )
+    .example(
       "$0 add-ignore --path \"paths['/api/resource'].put.parameters[0].required__added\" --outputFolder ./results",
       "Add a path to ignore file",
     )
@@ -67,6 +81,11 @@ function parseArguments() {
       alias: "out",
       describe: "Output folder for analysis results",
       type: "string",
+    })    
+    .option("reportFile", {
+      alias: "r",
+      describe: "Path to the report file",
+      type: "string",
     })
     .option("ignoreDescription", {
       description: "Ignore description differences",
@@ -75,6 +94,10 @@ function parseArguments() {
     })
     .option("ignorePathCase", {
       description: "Set case insensitive for the segments before provider, e.g. resourceGroups",
+      type: "boolean",
+    })
+    .option("ignoreDefinitionCase", {
+      description: "Sort definitions case-insensitively. Use this when definitions in Swagger specification is not in PascalCase.",
       type: "boolean",
     })
     .option("jsonOutput", {
@@ -93,9 +116,6 @@ function parseArguments() {
       }
       if (!argv.newPath && positional.length > 1) {
         argv.newPath = positional[1]!.toString();
-      }
-      if (!argv.outputFolder && positional.length > 2) {
-        argv.outputFolder = positional[2]!.toString();
       }
 
       if (!argv.oldPath || !argv.newPath) {
@@ -149,26 +169,64 @@ function handleAddIgnore(path: string, outputFolder: string) {
   process.exit(0);
 }
 
+/**
+ * Sorts the definitions object case-insensitively
+ * @param document OpenAPI document to sort definitions for
+ * @returns Document with case-insensitively sorted definitions
+ */
+function sortDefinitionsCaseInsensitive(document: any): any {
+  if (!document.definitions) {
+    return document;
+  }
+
+  const sortedDefinitions: any = {};
+  const definitionKeys = Object.keys(document.definitions);
+  
+  // Sort keys case-insensitively
+  const sortedKeys = definitionKeys.sort((a, b) => 
+    a.toLowerCase().localeCompare(b.toLowerCase())
+  );
+  
+  // Rebuild definitions object with sorted keys
+  for (const key of sortedKeys) {
+    sortedDefinitions[key] = document.definitions[key];
+  }
+  
+  return {
+    ...document,
+    definitions: sortedDefinitions
+  };
+}
+
 export async function main() {
   const args = parseArguments();
 
   // If using add-ignore command, the command handler will exit the process
 
-  const { oldPath, newPath, outputFolder, ignoreDescription, ignorePathCase } = args;
+  const { oldPath, newPath, reportFile, outputFolder, ignoreDescription, ignorePathCase, ignoreDefinitionCase } = args;
   configuration.ignoreDescription = ignoreDescription;
   if (ignorePathCase !== undefined) {
     configuration.ignorePathCase = ignorePathCase;
+  }
+  if (ignoreDefinitionCase !== undefined) {
+    configuration.ignoreDefinitionCase = ignoreDefinitionCase;
   }
 
   logHeader(`Processing old swagger from: ${oldPath}...`);
   const mergedOldfile = mergeFiles(oldPath!);
   const processedOldFile = processDocument(mergedOldfile);
-  const sortedOldFile = sortOpenAPIDocument(processedOldFile);
+  let sortedOldFile = sortOpenAPIDocument(processedOldFile);
+  if (configuration.ignoreDefinitionCase) {
+    sortedOldFile = sortDefinitionsCaseInsensitive(sortedOldFile);
+  }
 
   logHeader(`Processing new swagger from: ${newPath}...`);
-  const newFile = readFileContent(newPath!);
-  const processedNewFile = processDocument(JSON.parse(newFile.toString()));
-  const sortedNewFile = sortOpenAPIDocument(processedNewFile);
+  const newFile = JSON.parse(readFileContent(newPath!).toString());
+  const processedNewFile = processDocument(newFile);
+  let sortedNewFile = sortOpenAPIDocument(processedNewFile);
+  if (configuration.ignoreDefinitionCase) {
+    sortedNewFile = sortDefinitionsCaseInsensitive(sortedNewFile);
+  }
 
   logHeader("Comparing old and new Swagger files...");
   if (outputFolder) {
@@ -192,45 +250,66 @@ export async function main() {
       JSON.stringify(sortedNewFile, null, 2),
     );
   }
+  logHeader("Comparing finished.");
 
-  let report: string = "";
-  const diffForFile = diff(sortedOldFile, sortedNewFile);
-
-  // // TO-DELETE: Read the diff file from disk
-  // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
-
-  const changedPaths = findChangedPaths(diffForFile);
-  if (changedPaths.length > 0) {
-    logWarning(
-      `Found ${changedPaths.length} changed paths in the diff. If it is just case change and you confirm it is expected, run tsmv with --ignorePathCase option to ignore case changes.`,
-    );
-    const changedPathsReport = formatChangedPathsReport(changedPaths);
-    console.log(changedPathsReport);
-    report += changedPathsReport;
+  let outputMarkdown = "";
+  const compareResult = compareDocuments(
+    mergedOldfile,
+    newFile,
+  );
+  if (compareResult.length === 0) {
+    logHeader("No differences found.");
   }
-
-  const differences = findDifferences(diffForFile);
-  const differencesReport = formatDifferenceReport(differences);
-  console.log(differencesReport);
-  report += differencesReport;
-
-  const modifiedValues = findModifiedValues(diffForFile);
-  const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
-  console.log(modifiedValuesReport);
-  report += modifiedValuesReport;
+  else {
+    outputMarkdown += "| Type | Level | Message |\n";
+    outputMarkdown += "| ---- | ----- | ------- |\n";
+    for (const diff of compareResult) {
+      outputMarkdown += printDiff(diff);
+    }
+    console.log(outputMarkdown);
+  }  
 
   if (outputFolder) {
-    fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
-    fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
-    logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
+    let report: string = "";
+    const diffForFile = diff(sortedOldFile, sortedNewFile);
+    if (diffForFile === undefined || Object.keys(diffForFile).length === 0) {
+      return;
+    }      
 
-    const suggestedPrompt = generatePrompts(diffForFile);
-    if (suggestedPrompt.length > 0) {
-      logWarning(`Considering these suggested prompts for the diff:`);
-      suggestedPrompt.forEach((prompt) => {
-        console.log(prompt);
-      });
+    // // TO-DELETE: Read the diff file from disk
+    // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
+
+    const changedPaths = findChangedPaths(diffForFile);
+    if (changedPaths.length > 0) {
+      logWarning(
+        `Found ${changedPaths.length} changed paths in the diff.`,
+      );
+      const changedPathsReport = formatChangedPathsReport(changedPaths);
+      report += changedPathsReport;
     }
+
+    const differences = findDifferences(diffForFile);
+    const differencesReport = formatDifferenceReport(differences);
+    report += differencesReport;
+
+    const modifiedValues = findModifiedValues(diffForFile);
+    const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
+    report += modifiedValuesReport;
+
+    if (diffForFile) {
+      fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
+      fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
+      logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
+
+      const suggestedPrompt = generatePrompts(diffForFile);
+      if (suggestedPrompt.length > 0) {
+        logWarning(`Considering these suggested prompts for the diff:`);
+        suggestedPrompt.forEach((prompt) => {
+          console.log(prompt);
+        });
+      }
+    }
+    
     if (args.jsonOutput) {
       fs.writeFileSync(`${outputFolder}/tsmv_output.json`, JSON.stringify(jsonOutput, null, 2));
       logHeader(`JSON output written to ${outputFolder}/tsmv_output.json`);
@@ -238,7 +317,14 @@ export async function main() {
         `---- Start of Json Output ----\n${JSON.stringify(jsonOutput, null, 2)}\n---- End of Json Output ----`,
       );
     }
-  } else {
-    console.log(report);
+  }
+  else if (reportFile) {
+    if (compareResult.length > 0) {
+      await writeFile(reportFile, outputMarkdown);
+    }
+    if (compareResult.filter((x) => x.level === "error").length > 0) {
+      logError("Differences found. Please fix the issues before proceeding.");
+      process.exit(1);
+    }
   }
 }
