@@ -62,7 +62,10 @@ interface DetectorDefinitionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_GetSiteDetector")
-  getSiteDetector is DetectorDefinitionResourceOps.Read<DetectorDefinitionResource, OverrideErrorType = DefaultErrorResponse>;
+  getSiteDetector is DetectorDefinitionResourceOps.Read<
+    DetectorDefinitionResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get Detectors
@@ -151,7 +154,10 @@ interface DetectorDefinitionResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_GetSiteDetectorSlot")
-  getSiteDetectorSlot is DetectorDefinitionResourceOperationGroupOps.Read<DetectorDefinitionResource, OverrideErrorType = DefaultErrorResponse>;
+  getSiteDetectorSlot is DetectorDefinitionResourceOperationGroupOps.Read<
+    DetectorDefinitionResource,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get Detectors

@@ -32,7 +32,7 @@ interface SlotConfigNamesResources {
   /**
    * Description for Gets the names of app settings and connection strings that stick to the slot (not swapped).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSlotConfigurationNames")
   listSlotConfigurationNames is ArmResourceRead<
     SlotConfigNamesResource,
@@ -42,8 +42,8 @@ interface SlotConfigNamesResources {
   /**
    * Description for Updates the names of application settings and connection string that remain with the slot during swap operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateSlotConfigurationNames")
   updateSlotConfigurationNames is ArmResourceCreateOrReplaceSync<
     SlotConfigNamesResource,

@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Web;
 /**
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StaticSiteARMResource
   is Azure.ResourceManager.TrackedResource<StaticSite> {
   ...ResourceNameParameter<
@@ -25,23 +25,23 @@ model StaticSiteARMResource
   /**
    * Description of a SKU for a scalable resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: SkuDescription;
 
   /**
    * Managed service identity.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteARMResources {
   /**
    * Description for Gets the details of a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetStaticSite")
   getStaticSite is ArmResourceRead<
     StaticSiteARMResource,
@@ -51,9 +51,9 @@ interface StaticSiteARMResources {
   /**
    * Description for Creates a new static site in an existing resource group, or updates an existing static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_CreateOrUpdateStaticSite")
   createOrUpdateStaticSite is ArmResourceCreateOrReplaceAsync<
     StaticSiteARMResource,
@@ -69,9 +69,9 @@ interface StaticSiteARMResources {
   /**
    * Description for Creates a new static site in an existing resource group, or updates an existing static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_UpdateStaticSite")
   @patch(#{ implicitOptionality: false })
   updateStaticSite is ArmCustomPatchSync<
@@ -87,8 +87,8 @@ interface StaticSiteARMResources {
   /**
    * Description for Deletes a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_DeleteStaticSite")
   deleteStaticSite is ArmResourceDeleteWithoutOkAsync<
     StaticSiteARMResource,
@@ -99,7 +99,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets all static sites in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetStaticSitesByResourceGroup")
   getStaticSitesByResourceGroup is ArmResourceListByParent<
     StaticSiteARMResource,
@@ -110,7 +110,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Get all Static Sites for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_List")
   list is ArmListBySubscription<
     StaticSiteARMResource,
@@ -121,7 +121,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the list of users of a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ListStaticSiteUsers")
   @action("listUsers")
   @list
@@ -143,7 +143,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Deletes the user entry from the static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_DeleteStaticSiteUser")
   @delete
   deleteStaticSiteUser is ArmResourceDeleteSync<
@@ -170,8 +170,8 @@ interface StaticSiteARMResources {
   /**
    * Description for Updates a user entry with the listed roles
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_UpdateStaticSiteUser")
   @patch(#{ implicitOptionality: true })
   updateStaticSiteUser(
@@ -199,7 +199,7 @@ interface StaticSiteARMResources {
    * Description for Creates or updates the app settings of a static site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_CreateOrUpdateStaticSiteAppSettings")
   @put
   @action("config/appsettings")
@@ -214,7 +214,7 @@ interface StaticSiteARMResources {
    * Description for Creates or updates the function app settings of a static site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_CreateOrUpdateStaticSiteFunctionAppSettings")
   @put
   @action("config/functionappsettings")
@@ -228,7 +228,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Creates an invitation link for a user with the role
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_CreateUserRolesInvitationLink")
   @action("createUserInvitation")
   createUserRolesInvitationLink is ArmResourceActionSync<
@@ -241,7 +241,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Detaches a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_DetachStaticSite")
   @action("detach")
   detachStaticSite is ArmResourceActionAsync<
@@ -254,7 +254,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the functions of a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ListStaticSiteFunctions")
   @get
   @action("functions")
@@ -268,7 +268,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the application settings of a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ListStaticSiteAppSettings")
   @action("listAppSettings")
   listStaticSiteAppSettings is ArmResourceActionSync<
@@ -281,7 +281,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Lists the roles configured for the static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ListStaticSiteConfiguredRoles")
   @action("listConfiguredRoles")
   listStaticSiteConfiguredRoles is ArmResourceActionSync<
@@ -294,7 +294,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the application settings of a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ListStaticSiteFunctionAppSettings")
   @action("listFunctionAppSettings")
   listStaticSiteFunctionAppSettings is ArmResourceActionSync<
@@ -307,7 +307,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Lists the secrets for an existing static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ListStaticSiteSecrets")
   @action("listSecrets")
   listStaticSiteSecrets is ArmResourceActionSync<
@@ -320,7 +320,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetPrivateLinkResources")
   @get
   @action("privateLinkResources")
@@ -334,7 +334,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Resets the api key for an existing static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ResetStaticSiteApiKey")
   @action("resetapikey")
   resetStaticSiteApiKey is ArmResourceActionSync<
@@ -347,7 +347,7 @@ interface StaticSiteARMResources {
   /**
    * Returns details of database connections for a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetDatabaseConnectionsWithDetails")
   @action("showDatabaseConnections")
   getDatabaseConnectionsWithDetails is ArmResourceActionSync<
@@ -360,7 +360,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Deploys zipped content to a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_CreateZipDeploymentForStaticSite")
   @action("zipdeploy")
   createZipDeploymentForStaticSite is ArmResourceActionAsync<

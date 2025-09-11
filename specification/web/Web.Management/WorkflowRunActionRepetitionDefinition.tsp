@@ -94,7 +94,7 @@ interface WorkflowRunActionRepetitionDefinitions {
   /**
    * Get a workflow run action repetition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkflowRunActionRepetitions_Get")
   get is WorkflowRunActionRepetitionDefinitionOps.Read<
     WorkflowRunActionRepetitionDefinition,
@@ -104,7 +104,7 @@ interface WorkflowRunActionRepetitionDefinitions {
   /**
    * Get all of a workflow run action repetitions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkflowRunActionRepetitions_List")
   list is WorkflowRunActionRepetitionDefinitionOps.List<
     WorkflowRunActionRepetitionDefinition,
@@ -115,7 +115,7 @@ interface WorkflowRunActionRepetitionDefinitions {
   /**
    * Lists a workflow run expression trace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkflowRunActionRepetitions_ListExpressionTraces")
   @list
   listExpressionTraces is WorkflowRunActionRepetitionDefinitionOps.ActionSync<

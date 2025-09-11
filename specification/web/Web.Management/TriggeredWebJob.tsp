@@ -60,7 +60,7 @@ interface TriggeredWebJobs {
   /**
    * Description for Gets a triggered web job by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetTriggeredWebJobSlot")
   getTriggeredWebJobSlot is TriggeredWebJobOps.Read<
     TriggeredWebJob,
@@ -71,7 +71,7 @@ interface TriggeredWebJobs {
   /**
    * Description for Delete a triggered web job by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteTriggeredWebJobSlot")
   deleteTriggeredWebJobSlot is TriggeredWebJobOps.DeleteSync<
     TriggeredWebJob,
@@ -81,7 +81,7 @@ interface TriggeredWebJobs {
   /**
    * Description for List triggered web jobs for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListTriggeredWebJobsSlot")
   listTriggeredWebJobsSlot is TriggeredWebJobOps.List<
     TriggeredWebJob,
@@ -92,7 +92,7 @@ interface TriggeredWebJobs {
   /**
    * Description for Run a triggered web job for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RunTriggeredWebJobSlot")
   @action("run")
@@ -132,7 +132,7 @@ interface TriggeredWebJobOperationGroup {
   /**
    * Description for Gets a triggered web job by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetTriggeredWebJob")
   getTriggeredWebJob is TriggeredWebJobOperationGroupOps.Read<
     TriggeredWebJob,
@@ -143,7 +143,7 @@ interface TriggeredWebJobOperationGroup {
   /**
    * Description for Delete a triggered web job by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteTriggeredWebJob")
   deleteTriggeredWebJob is TriggeredWebJobOperationGroupOps.DeleteSync<
     TriggeredWebJob,
@@ -153,7 +153,7 @@ interface TriggeredWebJobOperationGroup {
   /**
    * Description for List triggered web jobs for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListTriggeredWebJobs")
   listTriggeredWebJobs is TriggeredWebJobOperationGroupOps.List<
     TriggeredWebJob,
@@ -164,7 +164,7 @@ interface TriggeredWebJobOperationGroup {
   /**
    * Description for Run a triggered web job for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RunTriggeredWebJob")
   @action("run")

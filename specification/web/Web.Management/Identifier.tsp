@@ -89,7 +89,10 @@ interface Identifiers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteDomainOwnershipIdentifier")
-  deleteDomainOwnershipIdentifier is IdentifierOps.DeleteSync<Identifier, OverrideErrorType = DefaultErrorResponse>;
+  deleteDomainOwnershipIdentifier is IdentifierOps.DeleteSync<
+    Identifier,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Lists ownership identifiers for domain associated with web app.

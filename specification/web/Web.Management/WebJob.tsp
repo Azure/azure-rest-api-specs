@@ -59,7 +59,7 @@ interface WebJobs {
   /**
    * Description for Get webjob information for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetWebJobSlot")
   getWebJobSlot is WebJobOps.Read<
     WebJob,
@@ -69,7 +69,7 @@ interface WebJobs {
   /**
    * Description for List webjobs for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListWebJobsSlot")
   listWebJobsSlot is WebJobOps.List<
     WebJob,
@@ -106,7 +106,7 @@ interface WebJobOperationGroup {
   /**
    * Description for Get webjob information for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetWebJob")
   getWebJob is WebJobOperationGroupOps.Read<
     WebJob,
@@ -116,7 +116,7 @@ interface WebJobOperationGroup {
   /**
    * Description for List webjobs for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListWebJobs")
   listWebJobs is WebJobOperationGroupOps.List<
     WebJob,

@@ -30,7 +30,7 @@ interface Users {
   /**
    * Description for Gets publishing user
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GetPublishingUser")
   getPublishingUser is ArmResourceRead<
     User,
@@ -41,8 +41,8 @@ interface Users {
   /**
    * Description for Updates publishing user
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("UpdatePublishingUser")
   updatePublishingUser is ArmResourceCreateOrReplaceSync<
     User,

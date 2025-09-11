@@ -147,7 +147,7 @@ interface Recommendations {
     RecommendationRule,
     void,
     OkResponse,
-    OverrideErrorType = DefaultErrorResponse,
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

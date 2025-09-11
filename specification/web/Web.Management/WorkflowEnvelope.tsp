@@ -27,13 +27,13 @@ model WorkflowEnvelope
   /**
    * The resource kind.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * The resource location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 }
@@ -76,7 +76,7 @@ interface WorkflowEnvelopes {
   /**
    * Get workflow information by its ID for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetInstanceWorkflowSlot")
   getInstanceWorkflowSlot is WorkflowEnvelopeOps.Read<
     WorkflowEnvelope,
@@ -87,7 +87,7 @@ interface WorkflowEnvelopes {
   /**
    * List the workflows for a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListInstanceWorkflowsSlot")
   listInstanceWorkflowsSlot is WorkflowEnvelopeOps.List<
     WorkflowEnvelope,
@@ -127,7 +127,7 @@ interface WorkflowEnvelopeOperationGroup {
   /**
    * Get workflow information by its ID for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetWorkflow")
   getWorkflow is WorkflowEnvelopeOperationGroupOps.Read<
     WorkflowEnvelope,
@@ -138,7 +138,7 @@ interface WorkflowEnvelopeOperationGroup {
   /**
    * List the workflows for a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListWorkflows")
   listWorkflows is WorkflowEnvelopeOperationGroupOps.List<
     WorkflowEnvelope,

@@ -24,13 +24,13 @@ model Site is Azure.ResourceManager.TrackedResource<SiteProperties> {
   /**
    * Managed service identity.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 
   /**
    * Extended Location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -145,18 +145,18 @@ interface WorkflowRegenerateAccessKeyOps
 alias HostSecretParameters = {
   ...ResourceInstanceParameters<Site>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   @key
   @segment("host")
   host: "default";
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   @key
   keyType: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   @key
   keyName: string;
@@ -165,24 +165,24 @@ alias HostSecretParameters = {
 alias HostSecretSlotParameters = {
   ...ResourceInstanceParameters<Site>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   @key
   @segment("slots")
   slot: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   @key
   @segment("host")
   host: "default";
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   @key
   keyType: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   @key
   keyName: string;
@@ -193,7 +193,7 @@ interface Sites {
   /**
    * Description for Gets the details of a web, mobile, or API app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_Get")
   get is SiteOps.Read<
     Site,
@@ -204,9 +204,9 @@ interface Sites {
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOrUpdate")
   createOrUpdate is SiteOps.CreateOrUpdateAsync<
     Site,
@@ -222,9 +222,9 @@ interface Sites {
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_Update")
   update is SiteOps.CustomPatchSync<
     Site,
@@ -240,7 +240,7 @@ interface Sites {
    * Description for Deletes a web, mobile, or API app, or one of the deployment slots.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_Delete")
   delete is SiteOps.DeleteSync<
     Site,
@@ -264,7 +264,7 @@ interface Sites {
   /**
    * Description for Get all apps for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_List")
   list is Azure.ResourceManager.Extension.ListByTarget<
     Extension.Subscription,
@@ -276,7 +276,7 @@ interface Sites {
   /**
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_ListHistoryForWebApp")
   @get
   listHistoryForWebApp is SiteOpsTemporary.List<
@@ -301,7 +301,7 @@ interface Sites {
   /**
    * Description for Get all recommendations for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_ListRecommendedRulesForWebApp")
   @get
   listRecommendedRulesForWebApp is SiteOps2Temporary.List<
@@ -327,7 +327,7 @@ interface Sites {
    * Description for Disable all recommendations for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_DisableAllForWebApp")
   @post
   disableAllForWebApp(
@@ -353,7 +353,7 @@ interface Sites {
    * Description for Reset all recommendation opt-out settings for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_ResetAllFiltersForWebApp")
   @post
   resetAllFiltersForWebApp(
@@ -378,7 +378,7 @@ interface Sites {
   /**
    * Description for Analyze a custom hostname.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_AnalyzeCustomHostname")
   @get
   analyzeCustomHostname is SiteOps.ActionSync<
@@ -398,7 +398,7 @@ interface Sites {
   /**
    * Description for Applies the configuration settings from the target slot onto the current slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ApplySlotConfigToProduction")
   @action("applySlotConfig")
   applySlotConfigToProduction is SiteOps.ActionSync<
@@ -411,7 +411,7 @@ interface Sites {
   /**
    * Description for Creates a backup of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_Backup")
   backup is SiteOps.ActionSync<
     Site,
@@ -423,8 +423,8 @@ interface Sites {
   /**
    * Description for Replaces the application settings of an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateApplicationSettings")
   @put
   @action("config/appsettings")
@@ -438,7 +438,7 @@ interface Sites {
   /**
    * Description for Gets the application settings of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListApplicationSettings")
   @action("config/appsettings/list")
   listApplicationSettings is SiteOps.ActionSync<
@@ -452,7 +452,7 @@ interface Sites {
    * Description for Updates the Authentication / Authorization settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateAuthSettings")
   @put
   @action("config/authsettings")
@@ -466,7 +466,7 @@ interface Sites {
   /**
    * Description for Gets the Authentication/Authorization settings of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetAuthSettings")
   @action("config/authsettings/list")
   getAuthSettings is SiteOps.ActionSync<
@@ -479,8 +479,8 @@ interface Sites {
   /**
    * Description for Updates the Azure storage account configurations of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateAzureStorageAccounts")
   @put
   @action("config/azurestorageaccounts")
@@ -494,7 +494,7 @@ interface Sites {
   /**
    * Description for Gets the Azure storage account configurations of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListAzureStorageAccounts")
   @action("config/azurestorageaccounts/list")
   listAzureStorageAccounts is SiteOps.ActionSync<
@@ -508,7 +508,7 @@ interface Sites {
    * Description for Updates the backup configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateBackupConfiguration")
   @put
   @action("config/backup")
@@ -522,7 +522,7 @@ interface Sites {
   /**
    * Description for Deletes the backup configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteBackupConfiguration")
   @delete
   @action("config/backup")
@@ -536,7 +536,7 @@ interface Sites {
   /**
    * Description for Gets the backup configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetBackupConfiguration")
   @action("config/backup/list")
   getBackupConfiguration is SiteOps.ActionSync<
@@ -550,7 +550,7 @@ interface Sites {
    * Description for Replaces the connection strings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateConnectionStrings")
   @put
   @action("config/connectionstrings")
@@ -564,7 +564,7 @@ interface Sites {
   /**
    * Description for Gets the connection strings of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListConnectionStrings")
   @action("config/connectionstrings/list")
   listConnectionStrings is SiteOps.ActionSync<
@@ -578,7 +578,7 @@ interface Sites {
    * Description for Replaces the metadata of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateMetadata")
   @put
   @action("config/metadata")
@@ -592,7 +592,7 @@ interface Sites {
   /**
    * Description for Gets the metadata of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListMetadata")
   @action("config/metadata/list")
   listMetadata is SiteOps.ActionSync<
@@ -607,7 +607,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListPublishingCredentials")
   @action("config/publishingcredentials/list")
   listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -622,7 +622,7 @@ interface Sites {
    * Description for Updates the Push settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateSitePushSettings")
   @put
   @action("config/pushsettings")
@@ -636,7 +636,7 @@ interface Sites {
   /**
    * Description for Gets the Push settings associated with web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSitePushSettings")
   @action("config/pushsettings/list")
   listSitePushSettings is SiteOps.ActionSync<
@@ -649,7 +649,7 @@ interface Sites {
   /**
    * Description for Gets the last lines of docker logs for the given site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetWebSiteContainerLogs")
   @action("containerlogs")
@@ -663,7 +663,7 @@ interface Sites {
   /**
    * Description for Gets the ZIP archived docker log files for the given site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetContainerLogsZip")
   @action("containerlogs/zip/download")
@@ -677,7 +677,7 @@ interface Sites {
   /**
    * Description for Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DiscoverBackup")
   @action("discoverbackup")
   discoverBackup is SiteOps.ActionSync<
@@ -690,7 +690,7 @@ interface Sites {
   /**
    * Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetOneDeployStatus")
   @get
   @action("extensions/onedeploy")
@@ -705,7 +705,7 @@ interface Sites {
    * Description for Invoke the OneDeploy publish web app extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOneDeployOperation")
   @put
   @action("extensions/onedeploy")
@@ -719,7 +719,7 @@ interface Sites {
   /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetFunctionsAdminToken")
   @get
   @action("functions/admin/token")
@@ -733,7 +733,7 @@ interface Sites {
   /**
    * Description for Get host secrets for a function app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListHostKeys")
   @action("host/default/listkeys")
   listHostKeys is SiteOps.ActionSync<
@@ -746,7 +746,7 @@ interface Sites {
   /**
    * Description for This is to allow calling via powershell and ARM template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSyncStatus")
   @action("host/default/listsyncstatus")
   listSyncStatus is SiteOps.ActionSync<
@@ -759,7 +759,7 @@ interface Sites {
   /**
    * Description for Syncs function trigger metadata to the management database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_SyncFunctions")
   @action("host/default/sync")
   syncFunctions is SiteOps.ActionSync<
@@ -772,8 +772,8 @@ interface Sites {
   /**
    * Description for Add or update a host level secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOrUpdateHostSecret")
   @put
   createOrUpdateHostSecret(
@@ -784,9 +784,9 @@ interface Sites {
   /**
    * Description for Delete a host level secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteHostSecret")
   @delete
   deleteHostSecret(
@@ -796,7 +796,7 @@ interface Sites {
   /**
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListHybridConnections")
   @get
   @action("hybridConnectionRelays")
@@ -810,7 +810,7 @@ interface Sites {
   /**
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListRelayServiceConnections")
   @get
   @action("hybridconnection")
@@ -824,7 +824,7 @@ interface Sites {
   /**
    * Description for Shows whether an app can be cloned to another resource group or subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_IsCloneable")
   @action("iscloneable")
   isCloneable is SiteOps.ActionSync<
@@ -837,7 +837,7 @@ interface Sites {
   /**
    * Description for Gets existing backups of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSiteBackups")
   @action("listbackups")
   @list
@@ -851,7 +851,7 @@ interface Sites {
   /**
    * Description for This is to allow calling via powershell and ARM template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSyncFunctionTriggers")
   @action("listsyncfunctiontriggerstatus")
   listSyncFunctionTriggers is SiteOps.ActionSync<
@@ -864,7 +864,7 @@ interface Sites {
   /**
    * Updates the machine key of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateMachineKey")
   @action("updatemachinekey")
   updateMachineKey is SiteOps.ActionSync<
@@ -878,7 +878,7 @@ interface Sites {
    * Description for Restores a web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_MigrateStorage")
   @put
   @action("migrate")
@@ -900,7 +900,7 @@ interface Sites {
   /**
    * Description for Migrates a local (in-app) MySql database to a remote MySql database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_MigrateMySql")
   @action("migratemysql")
   migrateMySql is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -914,9 +914,9 @@ interface Sites {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetNetworkTraceOperation")
   @get
   getNetworkTraceOperation is SiteOps.Read<
@@ -940,7 +940,7 @@ interface Sites {
   /**
    * Description for Start capturing network packets for the site (To be deprecated).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StartWebSiteNetworkTrace")
   @action("networkTrace/start")
   startWebSiteNetworkTrace is SiteOps.ActionSync<
@@ -972,7 +972,7 @@ interface Sites {
   /**
    * Description for Start capturing network packets for the site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StartWebSiteNetworkTraceOperation")
   @action("networkTrace/startOperation")
   startWebSiteNetworkTraceOperation is SiteOps.ActionAsync<
@@ -1004,7 +1004,7 @@ interface Sites {
   /**
    * Description for Stop ongoing capturing network packets for the site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StopWebSiteNetworkTrace")
   @action("networkTrace/stop")
@@ -1019,12 +1019,12 @@ interface Sites {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   getNetworkTraces(
     ...ResourceInstanceParameters<Site>,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @key
     @segment("networkTrace")
@@ -1034,9 +1034,9 @@ interface Sites {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetNetworkTraceOperationV2")
   @get
   getNetworkTraceOperationV2 is SiteOps.Read<
@@ -1066,7 +1066,7 @@ interface Sites {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetNetworkTracesV2")
   @get
   getNetworkTracesV2(
@@ -1082,7 +1082,7 @@ interface Sites {
   /**
    * Description for Generates a new publishing password for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GenerateNewSitePublishingPassword")
   @action("newpassword")
@@ -1096,7 +1096,7 @@ interface Sites {
   /**
    * Description for Gets perfmon counters for web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListPerfMonCounters")
   @get
   @action("perfcounters")
@@ -1117,7 +1117,7 @@ interface Sites {
   /**
    * Description for Gets web app's event logs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetSitePhpErrorLogFlag")
   @get
   @action("phplogging")
@@ -1131,7 +1131,7 @@ interface Sites {
   /**
    * Description for Gets the premier add-ons of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListPremierAddOns")
   @get
   @action("premieraddons")
@@ -1145,7 +1145,7 @@ interface Sites {
   /**
    * Description for Gets the private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPrivateLinkResources")
   @get
   @action("privateLinkResources")
@@ -1159,7 +1159,7 @@ interface Sites {
   /**
    * Description for Gets the publishing profile for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListPublishingProfileXmlWithSecrets")
   @action("publishxml")
   listPublishingProfileXmlWithSecrets is SiteOps.ActionSync<
@@ -1172,7 +1172,7 @@ interface Sites {
   /**
    * Description for Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ResetProductionSlotConfig")
   @action("resetSlotConfig")
   resetProductionSlotConfig is SiteOps.ActionSync<
@@ -1185,7 +1185,7 @@ interface Sites {
   /**
    * Description for Restarts an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_Restart")
   restart is SiteOps.ActionSync<
     Site,
@@ -1210,7 +1210,7 @@ interface Sites {
   /**
    * Description for Restores an app from a backup blob in Azure Storage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RestoreFromBackupBlob")
   restoreFromBackupBlob is SiteOps.ActionAsync<
     Site,
@@ -1222,7 +1222,7 @@ interface Sites {
   /**
    * Description for Restores a deleted web app to this web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RestoreFromDeletedApp")
   restoreFromDeletedApp is SiteOps.ActionAsync<
     Site,
@@ -1234,7 +1234,7 @@ interface Sites {
   /**
    * Description for Restores a web app from a snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RestoreSnapshot")
   restoreSnapshot is SiteOps.ActionAsync<
     Site,
@@ -1246,7 +1246,7 @@ interface Sites {
   /**
    * Description for Get the difference in configuration settings between two web app slots.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSlotDifferencesFromProduction")
   @action("slotsdiffs")
   listSlotDifferencesFromProduction is SiteOps.ActionSync<
@@ -1259,7 +1259,7 @@ interface Sites {
   /**
    * Description for Swaps two deployment slots of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_SwapSlotWithProduction")
   @action("slotsswap")
   swapSlotWithProduction is SiteOps.ActionAsync<
@@ -1272,7 +1272,7 @@ interface Sites {
   /**
    * Description for Returns all Snapshots to the user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSnapshots")
   @get
   @action("snapshots")
@@ -1286,8 +1286,8 @@ interface Sites {
   /**
    * Description for Returns all Snapshots to the user from DRSecondary endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSnapshotsFromDRSecondary")
   @get
   @action("snapshotsdr")
@@ -1301,7 +1301,7 @@ interface Sites {
   /**
    * Description for Starts an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_Start")
   start is ArmResourceActionSync<
     Site,
@@ -1313,7 +1313,7 @@ interface Sites {
   /**
    * Description for Start capturing network packets for the site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StartNetworkTrace")
   startNetworkTrace is SiteOps.ActionAsync<
     Site,
@@ -1344,7 +1344,7 @@ interface Sites {
   /**
    * Description for Stops an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_Stop")
   @action("stop")
   stop is SiteOps.ActionSync<
@@ -1358,7 +1358,7 @@ interface Sites {
    * Description for Stop ongoing capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_StopNetworkTrace")
   stopNetworkTrace is SiteOps.ActionSync<
     Site,
@@ -1370,7 +1370,7 @@ interface Sites {
   /**
    * Description for Sync web app repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_SyncRepository")
   @action("sync")
   syncRepository is SiteOps.ActionSync<
@@ -1383,7 +1383,7 @@ interface Sites {
   /**
    * Description for Syncs function trigger metadata to the management database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_SyncFunctionTriggers")
   @action("syncfunctiontriggers")
   syncFunctionTriggers is SiteOps.ActionSync<
@@ -1396,7 +1396,7 @@ interface Sites {
   /**
    * Description for Gets the quota usage information of an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListUsages")
   @get
   @action("usages")
@@ -1417,7 +1417,7 @@ interface Sites {
   /**
    * Description for Creates the artifacts for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeployWorkflowArtifacts")
   deployWorkflowArtifacts is SiteOps.ActionSync<
     Site,
@@ -1430,7 +1430,7 @@ interface Sites {
   /**
    * Lists logic app's connections for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListWorkflowsConnections")
   listWorkflowsConnections is SiteOps.ActionSync<
     Site,
@@ -1442,7 +1442,7 @@ interface Sites {
   /**
    * Regenerates the callback URL access key for request triggers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Workflows_RegenerateAccessKey")
   regenerateAccessKey is WorkflowRegenerateAccessKeyOps.ActionSync<
     Site,
@@ -1454,7 +1454,7 @@ interface Sites {
   /**
    * Validates the workflow definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Workflows_Validate")
   validate is WorkflowRegenerateAccessKeyOps.ActionSync<
     Site,
@@ -1508,8 +1508,8 @@ interface WebApps {
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateSlot is WebAppOps.CreateOrUpdateAsync<
     Site,
     Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
@@ -1524,8 +1524,8 @@ interface WebApps {
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   updateSlot is WebAppOps.CustomPatchSync<
     Site,
@@ -1618,7 +1618,7 @@ interface WebApps {
   /**
    * Description for Replaces the application settings of an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("config/appsettings")
   updateApplicationSettingsSlot is WebAppOps.ActionSync<
@@ -1642,7 +1642,7 @@ interface WebApps {
   /**
    * Description for Updates the Authentication / Authorization settings associated with web app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("config/authsettings")
   updateAuthSettingsSlot is WebAppOps.ActionSync<
@@ -1666,7 +1666,7 @@ interface WebApps {
   /**
    * Description for Updates the Azure storage account configurations of an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("config/azurestorageaccounts")
   updateAzureStorageAccountsSlot is WebAppOps.ActionSync<
@@ -1690,7 +1690,7 @@ interface WebApps {
   /**
    * Description for Updates the backup configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("config/backup")
   updateBackupConfigurationSlot is WebAppOps.ActionSync<
@@ -1726,7 +1726,7 @@ interface WebApps {
   /**
    * Description for Replaces the connection strings of an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("config/connectionstrings")
   updateConnectionStringsSlot is WebAppOps.ActionSync<
@@ -1750,7 +1750,7 @@ interface WebApps {
   /**
    * Description for Replaces the metadata of an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("config/metadata")
   updateMetadataSlot is WebAppOps.ActionSync<
@@ -1794,7 +1794,7 @@ interface WebApps {
   /**
    * Description for Updates the Push settings associated with web app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("config/pushsettings")
   updateSitePushSettingsSlot is WebAppOps.ActionSync<
@@ -1819,7 +1819,7 @@ interface WebApps {
    * Description for Gets the last lines of docker logs for the given site
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("containerlogs")
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
@@ -1831,7 +1831,7 @@ interface WebApps {
   /**
    * Description for Gets the ZIP archived docker log files for the given site
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("containerlogs/zip/download")
   getContainerLogsZipSlot is WebAppOps.ActionSync<
@@ -1900,7 +1900,7 @@ interface WebApps {
   /**
    * Description for Add or update a host level secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   createOrUpdateHostSecretSlot(
     ...HostSecretSlotParameters,
@@ -1910,7 +1910,7 @@ interface WebApps {
   /**
    * Description for Delete a host level secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   deleteHostSecretSlot is WebAppOps.DeleteSync<
     Site,
@@ -1997,8 +1997,8 @@ interface WebApps {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   getNetworkTraceOperationSlot is WebAppOps.Read<
     Site,
@@ -2081,7 +2081,7 @@ interface WebApps {
   /**
    * Description for Stop ongoing capturing network packets for the site.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("networkTrace/stop")
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
@@ -2111,8 +2111,8 @@ interface WebApps {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   getNetworkTraceOperationSlotV2 is WebAppOps.Read<
     Site,
@@ -2135,7 +2135,7 @@ interface WebApps {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   getNetworkTracesSlotV2(
     ...ResourceInstanceParameters<Site>,
@@ -2338,7 +2338,7 @@ interface WebApps {
   /**
    * Description for Returns all Snapshots to the user from DRSecondary endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @list
   @action("snapshotsdr")

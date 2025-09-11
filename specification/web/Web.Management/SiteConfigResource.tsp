@@ -54,7 +54,7 @@ interface SiteConfigResources {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetConfiguration")
   getConfiguration is SiteConfigResourceOps.Read<
     SiteConfigResource,
@@ -64,8 +64,8 @@ interface SiteConfigResources {
   /**
    * Description for Updates the configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOrUpdateConfiguration")
   createOrUpdateConfiguration is SiteConfigResourceOps.CreateOrUpdateSync<
     SiteConfigResource,
@@ -76,7 +76,7 @@ interface SiteConfigResources {
   /**
    * Description for Updates the configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateConfiguration")
   @patch(#{ implicitOptionality: false })
   updateConfiguration is SiteConfigResourceOps.CustomPatchSync<
@@ -88,7 +88,7 @@ interface SiteConfigResources {
   /**
    * Description for Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListConfigurationSnapshotInfo")
   @get
   @action("snapshots")
@@ -159,7 +159,7 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetConfigurationSnapshot")
   getConfigurationSnapshot is SiteConfigResourceOperationGroupOps.Read<
     SiteConfigResource,
@@ -169,7 +169,7 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for List the configurations of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListConfigurations")
   listConfigurations is ListConfigurationsOps.List<
     SiteConfigResource,
@@ -180,7 +180,7 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for Reverts the configuration of an app to a previous snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RecoverSiteConfigurationSnapshot")
   @action("recover")
   recoverSiteConfigurationSnapshot is SiteConfigResourceOperationGroupOps.ActionSync<
@@ -225,7 +225,7 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetConfigurationSlot")
   getConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.Read<
     SiteConfigResource,
@@ -235,8 +235,8 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Updates the configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOrUpdateConfigurationSlot")
   createOrUpdateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CreateOrUpdateSync<
     SiteConfigResource,
@@ -247,7 +247,7 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Updates the configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateConfigurationSlot")
   @patch(#{ implicitOptionality: false })
   updateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CustomPatchSync<
@@ -259,7 +259,7 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListConfigurationSnapshotInfoSlot")
   @get
   @action("snapshots")
@@ -344,7 +344,7 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetConfigurationSnapshotSlot")
   getConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.Read<
     SiteConfigResource,
@@ -354,7 +354,7 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for List the configurations of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListConfigurationsSlot")
   listConfigurationsSlot is ListConfigurationsSlotOps.List<
     SiteConfigResource,
@@ -365,7 +365,7 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Reverts the configuration of an app to a previous snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_RecoverSiteConfigurationSnapshotSlot")
   @action("recover")
   recoverSiteConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.ActionSync<

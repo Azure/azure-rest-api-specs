@@ -14,7 +14,7 @@ namespace Microsoft.Web;
 /**
  * Static Site Linked Backend ARM resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(StaticSiteARMResource)
 model StaticSiteLinkedBackendARMResource
   is Azure.ResourceManager.ProxyResource<StaticSiteLinkedBackendARMResourceProperties> {
@@ -26,7 +26,7 @@ model StaticSiteLinkedBackendARMResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteLinkedBackendARMResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -51,13 +51,13 @@ interface StaticSiteLinkedBackendARMResourceOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteLinkedBackendARMResources {
   /**
    * Returns the details of a linked backend linked to a static site by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetLinkedBackend")
   getLinkedBackend is StaticSiteLinkedBackendARMResourceOps.Read<
     StaticSiteLinkedBackendARMResource,
@@ -67,8 +67,8 @@ interface StaticSiteLinkedBackendARMResources {
   /**
    * Link backend to a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_LinkBackend")
   linkBackend is StaticSiteLinkedBackendARMResourceOps.CreateOrUpdateAsync<
     StaticSiteLinkedBackendARMResource,
@@ -82,7 +82,7 @@ interface StaticSiteLinkedBackendARMResources {
   /**
    * Unlink a backend from a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_UnlinkBackend")
   unlinkBackend is StaticSiteLinkedBackendARMResourceOps.DeleteSync<
     StaticSiteLinkedBackendARMResource,
@@ -99,7 +99,7 @@ interface StaticSiteLinkedBackendARMResources {
   /**
    * Returns details of all backends linked to a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetLinkedBackends")
   getLinkedBackends is StaticSiteLinkedBackendARMResourceOps.List<
     StaticSiteLinkedBackendARMResource,
@@ -111,7 +111,7 @@ interface StaticSiteLinkedBackendARMResources {
    * Validates that a backend can be linked to a static site
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ValidateBackend")
   @action("validate")
   validateBackend is StaticSiteLinkedBackendARMResourceOps.ActionAsync<
@@ -121,7 +121,7 @@ interface StaticSiteLinkedBackendARMResources {
     OverrideErrorType = DefaultErrorResponse
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteLinkedBackendARMResourceOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -152,13 +152,13 @@ interface StaticSiteLinkedBackendARMResourceOperationGroupOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Returns the details of a linked backend linked to a static site build by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetLinkedBackendForBuild")
   getLinkedBackendForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.Read<
     StaticSiteLinkedBackendARMResource,
@@ -168,8 +168,8 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Link backend to a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_LinkBackendToBuild")
   linkBackendToBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.CreateOrUpdateAsync<
     StaticSiteLinkedBackendARMResource,
@@ -183,7 +183,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Unlink a backend from a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_UnlinkBackendFromBuild")
   unlinkBackendFromBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.DeleteSync<
     StaticSiteLinkedBackendARMResource,
@@ -200,7 +200,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Returns details of all backends linked to a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetLinkedBackendsForBuild")
   getLinkedBackendsForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.List<
     StaticSiteLinkedBackendARMResource,
@@ -212,7 +212,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
    * Validates that a backend can be linked to a static site build
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_ValidateBackendForBuild")
   @action("validate")
   validateBackendForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.ActionAsync<

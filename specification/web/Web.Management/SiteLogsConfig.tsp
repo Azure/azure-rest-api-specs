@@ -55,15 +55,18 @@ interface SiteLogsConfigs {
   /**
    * Description for Gets the logging configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetDiagnosticLogsConfiguration")
-  getDiagnosticLogsConfiguration is SiteLogsConfigOps.Read<SiteLogsConfig, OverrideErrorType = DefaultErrorResponse>;
+  getDiagnosticLogsConfiguration is SiteLogsConfigOps.Read<
+    SiteLogsConfig,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates the logging configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateDiagnosticLogsConfig")
   updateDiagnosticLogsConfig is SiteLogsConfigOps.CreateOrUpdateSync<
     SiteLogsConfig,
@@ -107,7 +110,7 @@ interface SiteLogsConfigOperationGroup {
   /**
    * Description for Gets the logging configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetDiagnosticLogsConfigurationSlot")
   getDiagnosticLogsConfigurationSlot is SiteLogsConfigOperationGroupOps.Read<
     SiteLogsConfig,
@@ -117,8 +120,8 @@ interface SiteLogsConfigOperationGroup {
   /**
    * Description for Updates the logging configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateDiagnosticLogsConfigSlot")
   updateDiagnosticLogsConfigSlot is SiteLogsConfigOperationGroupOps.CreateOrUpdateSync<
     SiteLogsConfig,

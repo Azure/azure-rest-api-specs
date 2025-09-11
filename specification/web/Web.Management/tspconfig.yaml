@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/appservice"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,41 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    service-dir: sdk/websites
+    flavor: azure
+    package-dir: "Azure.ResourceManager.AppService"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-web"
+    namespace: "azure.mgmt.web"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-appservice"
+    namespace: "com.azure.resourcemanager.appservice"
+    service-name: "AppService" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-appservice"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-appservice"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/appservice"
+    package-dir: "armappservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

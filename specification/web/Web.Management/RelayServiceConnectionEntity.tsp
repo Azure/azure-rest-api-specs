@@ -134,7 +134,10 @@ interface RelayServiceConnectionEntityOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetRelayServiceConnectionSlot")
-  getRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.Read<RelayServiceConnectionEntity, OverrideErrorType = DefaultErrorResponse>;
+  getRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.Read<
+    RelayServiceConnectionEntity,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).

@@ -14,7 +14,7 @@ namespace Microsoft.Web;
 /**
  * Static Site User Provided Function App ARM resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(StaticSiteBuildARMResource)
 model StaticSiteUserProvidedFunctionAppARMResource
   is Azure.ResourceManager.ProxyResource<StaticSiteUserProvidedFunctionAppARMResourceProperties> {
@@ -26,7 +26,7 @@ model StaticSiteUserProvidedFunctionAppARMResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -57,13 +57,13 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResources {
   /**
    * Description for Gets the details of the user provided function app registered with a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetUserProvidedFunctionAppForStaticSiteBuild")
   getUserProvidedFunctionAppForStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.Read<
     StaticSiteUserProvidedFunctionAppARMResource,
@@ -73,9 +73,9 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
   /**
    * Description for Register a user provided function app with a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_RegisterUserProvidedFunctionAppWithStaticSiteBuild")
   registerUserProvidedFunctionAppWithStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.CreateOrUpdateAsync<
     StaticSiteUserProvidedFunctionAppARMResource,
@@ -98,7 +98,7 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
   /**
    * Description for Detach the user provided function app from the static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_DetachUserProvidedFunctionAppFromStaticSiteBuild")
   detachUserProvidedFunctionAppFromStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.DeleteSync<
     StaticSiteUserProvidedFunctionAppARMResource,
@@ -108,7 +108,7 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
   /**
    * Description for Gets the details of the user provided function apps registered with a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetUserProvidedFunctionAppsForStaticSiteBuild")
   getUserProvidedFunctionAppsForStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.List<
     StaticSiteUserProvidedFunctionAppARMResource,
@@ -116,7 +116,7 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
     OverrideErrorType = DefaultErrorResponse
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -141,13 +141,13 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
   /**
    * Description for Gets the details of the user provided function app registered with a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetUserProvidedFunctionAppForStaticSite")
   getUserProvidedFunctionAppForStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.Read<
     StaticSiteUserProvidedFunctionAppARMResource,
@@ -157,9 +157,9 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
   /**
    * Description for Register a user provided function app with a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_RegisterUserProvidedFunctionAppWithStaticSite")
   registerUserProvidedFunctionAppWithStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.CreateOrUpdateAsync<
     StaticSiteUserProvidedFunctionAppARMResource,
@@ -182,7 +182,7 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
   /**
    * Description for Detach the user provided function app from the static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_DetachUserProvidedFunctionAppFromStaticSite")
   detachUserProvidedFunctionAppFromStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.DeleteSync<
     StaticSiteUserProvidedFunctionAppARMResource,
@@ -192,7 +192,7 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
   /**
    * Description for Gets the details of the user provided function apps registered with a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StaticSites_GetUserProvidedFunctionAppsForStaticSite")
   getUserProvidedFunctionAppsForStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.List<
     StaticSiteUserProvidedFunctionAppARMResource,
