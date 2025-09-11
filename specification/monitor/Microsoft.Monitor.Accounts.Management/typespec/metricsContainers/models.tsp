@@ -4,7 +4,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 
 namespace Microsoft.Monitor {
-
   /**
    * Definition of Metrics limits
    */

@@ -19,7 +19,6 @@ using Azure.Core;
 @versioned(Versions)
 namespace Microsoft.Monitor;
 
-
 @doc("The issue properties")
 model IssueProperties {
   ...IssuePayload;

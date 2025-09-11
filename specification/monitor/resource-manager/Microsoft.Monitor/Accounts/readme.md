@@ -85,7 +85,7 @@ suppressions:
     from: azuremonitorworkspace.json
   - code: GuidUsage
     reason: The IDs of investigation entities are GUIDs.
-    from: issues.json
+    from: azuremonitorworkspace.json
     where:
      - $.definitions["Azure.Core.uuid"].format
 ```
