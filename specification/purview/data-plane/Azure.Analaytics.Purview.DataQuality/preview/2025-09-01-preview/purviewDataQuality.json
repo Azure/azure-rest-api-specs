@@ -1,2777 +1,21 @@
 {
   "swagger": "2.0",
-    "info": {
-        "title": "Data Quality",
-        "description": "Purview Data Quality Service is a fully managed cloud service whose users can run Data Quality Job to get some score. This spec defines REST API of Purview Data Quality Service.",
-        "version": "2025-09-01"
-    },
+  "info": {
+    "title": "Data Quality",
+    "description": "Purview Data Quality Service is a fully managed cloud service whose users can run Data Quality Job to get some score. This spec defines REST API of Purview Data Quality Service.",
+    "version": "2025-09-01-preview"
+  },
   "paths": {
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations": {
-      "post": {
-        "tags": [
-          "Assessment"
-        ],
-        "description": "Do an observation",
-        "operationId": "observe",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "Get Business Domain Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "Get Data Product Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "Get Asset Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobConfigDTO"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}": {
-      "delete": {
-        "tags": [
-          "Assessment"
-        ],
-        "description": "Deletes a specific observation.",
-        "operationId": "Delete Observation",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "observationId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "ObservationHistory"
-        ],
-        "description": "Get job information",
-        "operationId": "GetJobInformation",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "observationId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RunDetailsEntity"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}": {
-      "delete": {
-        "tags": [
-          "Assessment"
-        ],
-        "description": "Deletes all observations for a data asset.",
-        "operationId": "Delete all Observations",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/report/snapshots/dataquality/latest": {
-      "get": {
-        "tags": [
-          "DataQualitySnapshot"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/datasource-connectivity": {
-      "post": {
-        "tags": [
-          "DatasourceConnectivity"
-        ],
-        "description": "Validate DataSource Connectivity",
-        "operationId": "DatasourceConnectivity",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/TestConnectionRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/datasource-connectivity/{datasourceID}": {
-      "post": {
-        "tags": [
-          "DatasourceConnectivity"
-        ],
-        "description": "Validate DIR DataSource Connectivity",
-        "operationId": "DIRDatasourceConnectivity",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "datasourceid",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/datasource-credentials/data-integration-runtimes/{dirId}/business-domains/{businessDomainId}/data-sources/{dataSourceId}": {
-      "get": {
-        "tags": [
-          "Dir"
-        ],
-        "description": "Get DataSource Connection Password",
-        "operationId": "DataSourceConnectionPassword",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataSourceId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dirId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/data-integration-runtimes/{dataIntegrationRuntimeId}/health": {
-      "put": {
-        "tags": [
-          "Dir"
-        ],
-        "description": "Update Heart Beat.",
-        "operationId": "health",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataIntegrationRuntimeId",
-            "description": "Get Data Integration Runtime Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/DIRHealthUpdateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/report": {
-      "get": {
-        "tags": [
-          "Health"
-        ],
-        "description": "Pass Business Domain ID as businessDomainId to get report of scores under this business domain.",
-        "operationId": "DQ Health Report",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "Get Business Domain Id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DqReportEntity"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/runs/{runId}": {
-      "get": {
-        "tags": [
-          "Monitoring"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/JobMetadataEntity"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/runs": {
-      "get": {
-        "tags": [
-          "Monitoring"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "runType",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JobHistoryEntity"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/runs": {
-      "post": {
-        "tags": [
-          "Monitoring"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryFilter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/JobMonitoringDTO"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/scans": {
-      "post": {
-        "tags": [
-          "Monitoring"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryFilter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ScheduleScanEntityDTO"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/runs/{runId}/cancel": {
-      "post": {
-        "tags": [
-          "Monitoring"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}/observer-definition": {
-      "get": {
-        "tags": [
-          "ObservationHistory"
-        ],
-        "description": "Get observer definition",
-        "operationId": "GetObserverDefinition",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "observationId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/outcomes/{outcomeId}": {
-      "get": {
-        "tags": [
-          "ObservationHistory"
-        ],
-        "description": "Get outcome",
-        "operationId": "GetOutcome",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "outcomeId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Outcome"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles": {
-      "post": {
-        "tags": [
-          "Profile"
-        ],
-        "description": "submit profile",
-        "operationId": "profile",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProfileObserverPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileRunId}": {
-      "delete": {
-        "tags": [
-          "Profile"
-        ],
-        "operationId": "Delete Profile",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "profileRunId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Profile"
-        ],
-        "description": "Get asset profiles",
-        "operationId": "assetProfile",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "profileRunId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/config/suggestions": {
-      "get": {
-        "tags": [
-          "Profile"
-        ],
-        "description": "Get profile Column Suggestion",
-        "operationId": "profile-config-suggestion",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "dataSourceId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/columns/{columnName}/profiles/{profileRunId}": {
-      "get": {
-        "tags": [
-          "Profile"
-        ],
-        "description": "Get Column profiles",
-        "operationId": "columnProfile",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "Unique identifier of Business Domain Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "columnName",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "profileRunId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-suggestions": {
-      "post": {
-        "tags": [
-          "RuleSuggestion"
-        ],
-        "description": "submit rule suggestion",
-        "operationId": "create-rule-suggestions",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ProfileObserverPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "RuleSuggestion"
-        ],
-        "description": "Get rule suggestion output",
-        "operationId": "Get Rule Suggestions",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "dataSourceId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-suggestion/config": {
-      "get": {
-        "tags": [
-          "RuleSuggestion"
-        ],
-        "description": "Get rule suggestion",
-        "operationId": "Get Rule Config",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "dataSourceId",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "RuleSuggestion"
-        ],
-        "operationId": "save Rule Config",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "dataSourceId",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/RuleFeedbackConfiguration"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/data-source/{dataSourceId}/custom-sql-rule-validation": {
-      "post": {
-        "tags": [
-          "RuleValidation"
-        ],
-        "description": "Job to validate CustomeSQL rule",
-        "operationId": "RuleValidator",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataSourceId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans": {
-      "post": {
-        "tags": [
-          "Scan"
-        ],
-        "description": "Create Scan",
-        "operationId": "CreateScan",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/ScanDTO"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/cancel": {
-      "post": {
-        "tags": [
-          "Scan"
-        ],
-        "description": "Cancel Scan",
-        "operationId": "CancelScan",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scanId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}": {
-      "get": {
-        "tags": [
-          "Scan"
-        ],
-        "description": "Get Scan by ScanId",
-        "operationId": "ScanByScanId",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scanId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ScheduleScanMonitoringEntity"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/runs": {
-      "get": {
-        "tags": [
-          "Scan"
-        ],
-        "description": "Get runs",
-        "operationId": "GetRuns",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "offset",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scanId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/JobMetadataDTO"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-sources/{dataSourceId}/fetch-schema": {
-      "post": {
-        "tags": [
-          "Schema"
-        ],
-        "description": "Fetch schema for a observer and return it",
-        "operationId": "FetchSchema",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataSourceId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/GetSchemaRequestPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/fetch-fileformat": {
-      "post": {
-        "tags": [
-          "Schema"
-        ],
-        "description": "Fetch file format for a observer and return it",
-        "operationId": "FetchFileFormat",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/FetchFileFormatPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-sources/{dataSourceId}/data-products/{dataProductId}/data-assets/{dataAssetId}/schema": {
-      "post": {
-        "tags": [
-          "Schema"
-        ],
-        "description": "Fetch schema for a observer with vnet",
-        "operationId": "SyncDataAssetSchemaVnet",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataSourceId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/GetSchemaRequestPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-opinions/{ruleId}": {
-      "get": {
-        "tags": [
-          "Trends"
-        ],
-        "description": "Pass __globalScore as calculationId to get the Global Score Trend.\r\nPass {ruleId} as calculationId to get the Rule Score Trend.\r\nAPI returns maximum 100 records in the provided time window.",
-        "operationId": "OpinionTrend",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "ruleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "startTime",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "endTime",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "maxRecordsToReturn",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Opinion"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/alerts": {
-      "get": {
-        "tags": [
-          "Alert"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Alert"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/alerts/{alertId}": {
-      "get": {
-        "tags": [
-          "Alert"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "alertId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Alert"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "alertId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Alert"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "alertId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Alert"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "alertId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata": {
-      "post": {
-        "tags": [
-          "AssetMetadataObserver"
-        ],
-        "operationId": "CreateAssetMetaData",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Create Asset Metadata Observer"
-      },
-      "get": {
-        "tags": [
-          "AssetMetadataObserver"
-        ],
-        "operationId": "GetObserver",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Get Observer"
-      },
-      "put": {
-        "tags": [
-          "AssetMetadataObserver"
-        ],
-        "operationId": "UpdateObserver",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Update Observer"
-      }
-    },
-    "/business-domains/{businessDomainId}/runtime-config": {
-      "get": {
-        "tags": [
-          "BusinessDomainDQRuntime"
-        ],
-        "operationId": "GetBusinessDomain",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Get business domain DQ Runtime."
-      },
-      "put": {
-        "tags": [
-          "BusinessDomainDQRuntime"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Update business domain DQ Runtime."
-      },
-      "post": {
-        "tags": [
-          "BusinessDomainDQRuntime"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Create business domain DQ Runtime."
-      },
-      "delete": {
-        "tags": [
-          "BusinessDomainDQRuntime"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Delete business domain DQ Runtime."
-      }
-    },
-    "/data-integration-runtimes": {
-      "get": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "businessDomainId",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/data-integration-runtimes/{dataIntegrationRuntimeId}": {
-      "get": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataIntegrationRuntimeId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "businessDomainId",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataIntegrationRuntimeId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/DIRUpdateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataIntegrationRuntimeId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/data-integration-runtimes/{dataIntegrationRuntimeId}/registration-key": {
-      "post": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataIntegrationRuntimeId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/data-integration-runtimes/{dataIntegrationRuntimeId}/revoke-registration-key": {
-      "post": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataIntegrationRuntimeId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/data-integration-runtimes/{dataIntegrationRuntimeId}/registration": {
-      "post": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataIntegrationRuntimeId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/RegistrationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/data-integration-runtimes/{dataIntegrationRuntimeId}/de-registration": {
-      "post": {
-        "tags": [
-          "DataIntegrationRuntime"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataIntegrationRuntimeId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-sources": {
-      "get": {
-        "tags": [
-          "DataSource"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "DataSource"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-sources/{dataSourceId}": {
-      "get": {
-        "tags": [
-          "DataSource"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataSourceId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "DataSource"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataSourceId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "DataSource"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataSourceId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}": {
-      "get": {
-        "tags": [
-          "Observer"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}": {
-      "get": {
-        "tags": [
-          "Observer"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/disable": {
-      "post": {
-        "tags": [
-          "Observer"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/update-favourite-column-paths": {
-      "post": {
-        "tags": [
-          "Observer"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata": {
-      "post": {
-        "tags": [
-          "Observer"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Observer"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Observer"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Observer"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataProductId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "dataAssetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/parse-projection": {
-      "post": {
-        "tags": [
-          "Parser"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/utilities/parse-projection": {
-      "post": {
-        "tags": [
-          "Parser"
-        ],
-        "operationId": "Parse Projection",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Parse the projection."
-      }
-    },
-    "/business-domains/{businessDomainId}/utilities/validate-regex": {
-      "post": {
-        "tags": [
-          "Parser"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "description": "Validate regex"
-      }
-    },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules": {
       "post": {
         "tags": [
           "Rule"
         ],
+        "operationId": "CreateRules",
+        "description": "Create Rules for Assets",
+        "produces": [
+          "application/json"
+        ],
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -2781,18 +25,21 @@
         "parameters": [
           {
             "in": "path",
+            "description": "Unique Identifier for Business Domain",
             "name": "businessDomainId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Business Domain",
             "name": "dataProductId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Business Domain",
             "name": "dataAssetId",
             "required": true,
             "type": "string"
@@ -2800,12 +47,25 @@
           {
             "in": "body",
             "name": "body",
-            "schema": {}
+            "schema": {
+                "$ref": "#/definitions/RuleEntity"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+              "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateRules_DataAsset": {
+            "$ref": "./examples/Rules_Create.json"
           }
         }
       },
@@ -2813,21 +73,29 @@
         "tags": [
           "Rule"
         ],
+        "operationId": "GetRules",
+        "description": "Get Rules for Assets",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
+            "description": "Unique Identifier for Business Domain",
             "name": "businessDomainId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Product",
             "name": "dataProductId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Asset",
             "name": "dataAssetId",
             "required": true,
             "type": "string"
@@ -2835,7 +103,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "The request has succeeded.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/RuleEntity"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateRules_DataAsset": {
+            "$ref": "./examples/Rules_Get.json"
           }
         }
       }
@@ -2845,6 +124,11 @@
         "tags": [
           "Rule"
         ],
+        "operationId": "UpdateRule",
+        "description": "Update a rule",
+        "produces": [
+          "application/json"
+        ],
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -2854,24 +138,28 @@
         "parameters": [
           {
             "in": "path",
+            "description": "Unique Identifier for Business Domain",
             "name": "businessDomainId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Product",
             "name": "dataProductId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Asset",
             "name": "dataAssetId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Rule",
             "name": "ruleId",
             "required": true,
             "type": "string"
@@ -2879,12 +167,22 @@
           {
             "in": "body",
             "name": "body",
-            "schema": {}
+            "schema": {
+                "$ref": "#/definitions/RuleEntity"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Update": {
+            "$ref": "./examples/Rules_Update.json"
           }
         }
       },
@@ -2892,35 +190,46 @@
         "tags": [
           "Rule"
         ],
+        "operationId": "DeleteRule",
+        "description": "Delete a rule",
         "parameters": [
           {
             "in": "path",
+            "description": "Unique Identifier for Business Domain",
             "name": "businessDomainId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Product",
             "name": "dataProductId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Asset",
             "name": "dataAssetId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Rule",
             "name": "ruleId",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "204": {
+            "description": "There is no content in response."
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Delete": {
+            "$ref": "./examples/Rules_Delete.json"
           }
         }
       },
@@ -2928,27 +237,36 @@
         "tags": [
           "Rule"
         ],
+        "operationId": "GetRule",
+        "description": "Get a Rule",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
+            "description": "Unique Identifier for Business Domain",
             "name": "businessDomainId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Product",
             "name": "dataProductId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Asset",
             "name": "dataAssetId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Rule",
             "name": "ruleId",
             "required": true,
             "type": "string"
@@ -2956,7 +274,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Get": {
+            "$ref": "./examples/Rule_Get.json"
           }
         }
       }
@@ -2966,6 +292,11 @@
         "tags": [
           "Rule"
         ],
+        "operationId": "CreateBulkRules",
+        "description": "Create Bulk Rules for Assets",
+        "produces": [
+          "application/json"
+        ],
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -2975,18 +306,21 @@
         "parameters": [
           {
             "in": "path",
+            "description": "Unique Identifier for Busienss Domain",
             "name": "businessDomainId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Product",
             "name": "dataProductId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
+            "description": "Unique Identifier for Data Asset",
             "name": "dataAssetId",
             "required": true,
             "type": "string"
@@ -2994,1000 +328,125 @@
           {
             "in": "body",
             "name": "body",
-            "schema": {}
+            "schema": {
+                "$ref": "#/definitions/RuleEntity"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "201": {
+            "description": "The request has succeeded and new resource has been created.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/RuleEntity"
+              }
+            }
           }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/schedules": {
-      "get": {
-        "tags": [
-          "Schedule"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Schedule"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/schedules/{scheduleId}": {
-      "get": {
-        "tags": [
-          "Schedule"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Schedule"
-        ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Schedule"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessDomainId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
+        },
+        "x-ms-examples": {
+          "Rules_Create": {
+            "$ref": "./examples/Rules_Create.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "BusinessDomain": {
+    "RuleEntity": {
+      "description": "Represents a business/data quality rule entity.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference"
+        },
+        "score": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": ["id", "name", "type", "status"]
+    },
+    "TypeProperties": {
+      "description": "Holds additional properties related to rule type.",
+      "type": "object",
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/Column"
+        }
+      }
+    },
+    "Column": {
+      "description": "Represents a column in a dataset.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "Reference": {
+      "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset).",
       "type": "object",
       "properties": {
         "type": {
           "type": "string"
         },
         "referenceId": {
-          "format": "uuid",
-          "type": "string"
-        }
-      }
-    },
-    "ControlType": {
-      "format": "int32",
-      "enum": [
-        0,
-        1,
-        2
-      ],
-      "type": "integer"
-    },
-    "Credential": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "typeProperties": {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "DIRHealthUpdateRequest": {
-      "type": "object",
-      "properties": {
-        "healthStatus": {
-          "type": "string"
-        },
-        "dirVersion": {
-          "type": "string"
-        }
-      }
-    },
-    "DatasetToDatasourceMapping": {
-      "type": "object",
-      "properties": {
-        "datasetAliasName": {
-          "type": "string"
-        },
-        "datasourceId": {
-          "type": "string"
-        }
-      }
-    },
-    "Datasource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "typeProperties": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "credential": {
-          "$ref": "#/definitions/Credential"
-        },
-        "createdAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/BusinessDomain"
-        }
-      }
-    },
-    "DqReportEntity": {
-      "type": "object",
-      "properties": {
-        "businessDomainId": {
-          "type": "string"
-        },
-        "dataProductId": {
-          "type": "string"
-        },
-        "dataAssetId": {
-          "type": "string"
-        },
-        "score": {
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        }
-      }
-    },
-    "FetchFileFormatPayload": {
-      "type": "object",
-      "properties": {
-        "datasourceId": {
-          "type": "string"
-        },
-        "typeProperties": {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "FilterPayloadModel": {
-      "type": "object",
-      "properties": {
-        "operand": {
-          "type": "string"
-        },
-        "operator": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "GetSchemaRequestPayload": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "typeProperties": {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "ImpColumn": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "JobConfigDTO": {
-      "type": "object",
-      "properties": {
-        "redundancyCheck": {
-          "type": "boolean"
-        },
-        "datasetToDatasourceMappings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatasetToDatasourceMapping"
-          }
-        }
-      }
-    },
-    "JobHistoryEntity": {
-      "required": [
-        "businessDomainId",
-        "dataAssetId",
-        "dataProductId",
-        "runId"
-      ],
-      "type": "object",
-      "properties": {
-        "dataAssetId": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "runId": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "dataProductId": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "businessDomainId": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "submissionTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "jobType": {
-          "type": "string"
-        },
-        "accountId": {
-          "type": "string"
-        }
-      }
-    },
-    "JobMetadataDTO": {
-      "type": "object",
-      "properties": {
-        "runs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobMetadataEntity"
-          }
-        },
-        "count": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "JobMetadataEntity": {
-      "type": "object",
-      "properties": {
-        "runId": {
-          "type": "string"
-        },
-        "dataProductId": {
-          "type": "string"
-        },
-        "redundancyCheck": {
-          "type": "boolean"
-        },
-        "accountId": {
-          "type": "string"
-        },
-        "businessDomainId": {
-          "type": "string"
-        },
-        "submissionTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "cancelRequestTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "pfsJobId": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "duration": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "startedBy": {
-          "type": "string"
-        },
-        "cancelledBy": {
-          "type": "string"
-        },
-        "jobType": {
-          "type": "string"
-        },
-        "jobExecutionRegion": {
-          "type": "string"
-        },
-        "dataAssetId": {
-          "type": "string"
-        },
-        "dataAssetName": {
-          "type": "string"
-        },
-        "scheduleId": {
-          "type": "string"
-        },
-        "scheduleName": {
-          "type": "string"
-        },
-        "qualifiedPath": {
-          "type": "string"
-        },
-        "scanId": {
-          "type": "string"
-        },
-        "scheduleScanType": {
-          "type": "string"
-        },
-        "jobBillingSparkSku": {
-          "type": "string"
-        },
-        "dataSourceType": {
-          "type": "string"
-        },
-        "primaryDataSourceID": {
-          "type": "string"
-        },
-        "puDetail": {
-          "type": "string"
-        }
-      }
-    },
-    "JobMonitoringDTO": {
-      "type": "object",
-      "properties": {
-        "runs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobMonitoringEntity"
-          }
-        }
-      }
-    },
-    "JobMonitoringEntity": {
-      "type": "object",
-      "properties": {
-        "runId": {
-          "type": "string"
-        },
-        "jobType": {
-          "type": "string"
-        },
-        "triggerType": {
-          "type": "string"
-        },
-        "dataAssetId": {
-          "type": "string"
-        },
-        "dataProductId": {
-          "type": "string"
-        },
-        "dataProductName": {
-          "type": "string"
-        },
-        "dataAssetName": {
-          "type": "string"
-        },
-        "businessDomainId": {
-          "type": "string"
-        },
-        "scheduleId": {
-          "type": "string"
-        },
-        "scheduleName": {
-          "type": "string"
-        },
-        "scanId": {
-          "type": "string"
-        },
-        "submissionTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "qualifiedPath": {
-          "type": "string"
-        }
-      }
-    },
-    "Observation": {
-      "type": "object",
-      "properties": {
-        "observationId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "observerId": {
-          "type": "string"
-        },
-        "observerName": {
-          "type": "string"
-        },
-        "observerSnapshotLocation": {
-          "type": "string"
-        },
-        "factsLocation": {
-          "type": "string"
-        },
-        "sampleErrorFilePath": {
-          "type": "string"
-        },
-        "fullErrorLocation": {
-          "type": "string"
-        },
-        "observedAt": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "observerdBy": {
-          "type": "string"
-        },
-        "region": {
-          "type": "string"
-        }
-      }
-    },
-    "Opinion": {
-      "type": "object",
-      "properties": {
-        "businessDomainId": {
-          "type": "string"
-        },
-        "dataProductId": {
-          "type": "string"
-        },
-        "dataAssetId": {
-          "type": "string"
-        },
-        "controlId": {
-          "type": "string"
-        },
-        "opinionId": {
-          "type": "string"
-        },
-        "value": {},
-        "resultedAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "outcomeId": {
-          "type": "string"
-        },
-        "queryExecuted": {
-          "type": "string"
-        }
-      }
-    },
-    "Outcome": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        },
-        "businessDomainId": {
-          "type": "string"
-        },
-        "dataProductId": {
-          "type": "string"
-        },
-        "dataAssetId": {
-          "type": "string"
-        },
-        "controlRefId": {
-          "type": "string"
-        },
-        "observations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Observation"
-          }
-        },
-        "ruleDimensionMappings": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "controlType": {
-          "$ref": "#/definitions/ControlType"
-        },
-        "opinions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Opinion"
-          }
-        },
-        "resultedAt": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "ProfileObserverPayload": {
-      "description": "Profile Payload for Observer",
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "typeProperties": {},
-        "dataSourceId": {
-          "type": "string"
-        },
-        "configuration": {
-          "$ref": "#/definitions/ProfileRequestConfiguration"
-        }
-      }
-    },
-    "ProfileRequestConfiguration": {
-      "type": "object",
-      "properties": {
-        "recordCountThreshold": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sizeThreshold": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "keyColumns": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImpColumn"
-          }
-        }
-      }
-    },
-    "QueryFilter": {
-      "required": [
-        "endTime",
-        "startTime"
-      ],
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "endTime": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "filters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FilterPayloadModel"
-          }
-        }
-      }
-    },
-    "RuleFeedbackConfiguration": {
-      "type": "object",
-      "properties": {
-        "notImportantColumns": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "importantColumns": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "notImportantRuleIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "importantRuleIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "threshold": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
-    "RunDetailsEntity": {
-      "type": "object",
-      "properties": {
-        "redundancyCheck": {
-          "type": "boolean"
-        },
-        "businessDomainId": {
-          "type": "string"
-        },
-        "dataProductId": {
-          "type": "string"
-        },
-        "runId": {
-          "type": "string"
-        },
-        "accountId": {
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "duration": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "startedBy": {
-          "type": "string"
-        },
-        "cancelledBy": {
-          "type": "string"
-        },
-        "jobType": {
-          "type": "string"
-        },
-        "region": {
-          "type": "string"
-        },
-        "observerSnapshotFilePath": {
-          "type": "string"
-        },
-        "factsLocation": {
-          "type": "string"
-        },
-        "sampleErrorFilePath": {
-          "type": "string"
-        },
-        "fullErrorLocation": {
-          "type": "string"
-        },
-        "profileOutputLocation": {
-          "type": "string"
-        },
-        "ruleSuggestionsOutputLocation": {
-          "type": "string"
-        },
-        "schemaOutputLocation": {
-          "type": "string"
-        },
-        "dataAssetId": {
-          "type": "string"
-        },
-        "dataAssetName": {
-          "type": "string"
-        },
-        "errorRowsLocation": {
-          "type": "string"
-        },
-        "isErrorRowsPublished": {
-          "type": "boolean"
-        },
-        "outcomeId": {
-          "type": "string"
-        },
-        "fetchSchemaOutputLocation": {
-          "type": "string"
-        },
-        "dataSourceType": {
-          "type": "string"
-        }
-      }
-    },
-    "ScanDTO": {
-      "type": "object",
-      "properties": {
-        "scanType": {
-          "type": "string"
-        }
-      }
-    },
-    "ScheduleScanEntityDTO": {
-      "type": "object",
-      "properties": {
-        "scans": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScheduleScanMonitoringEntity"
-          }
-        }
-      }
-    },
-    "ScheduleScanMonitoringEntity": {
-      "type": "object",
-      "properties": {
-        "succeeded": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "failed": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "skipped": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "scheduleStatus": {
-          "type": "string"
-        },
-        "scheduleName": {
-          "type": "string"
-        },
-        "scheduleId": {
-          "type": "string"
-        },
-        "scanId": {
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "accountId": {
-          "type": "string"
-        },
-        "businessDomainId": {
-          "type": "string"
-        },
-        "totalJobCount": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "status": {
-          "type": "string"
-        },
-        "scheduleRunType": {
-          "type": "string"
-        },
-        "scanType": {
-          "type": "string"
-        },
-        "startedBy": {
-          "type": "string"
-        },
-        "cancelledBy": {
-          "type": "string"
-        },
-        "cancelRequestTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "partitionKey": {
-          "type": "string"
-        },
-        "rowKey": {
-          "type": "string"
-        },
-        "timestamp": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "eTag": {
-          "type": "string"
-        }
-      }
-    },
-    "TestConnectionRequest": {
-      "type": "object",
-      "properties": {
-        "datasource": {
-          "$ref": "#/definitions/Datasource"
+          "type": "string",
+          "format": "uuid"
         }
       }
     }
   },
   "tags": [
     {
-      "name": "RuleValidation",
-      "description": "Controller to create Job to validate CustomeSQL rule"
-    },
-    {
-      "name": "RuleSuggestion",
-      "description": "Controller for the RuleSuggestion Jobs"
-    },
-    {
-      "name": "Dir",
-      "description": "Controller for the Assessment Jobs"
-    },
-    {
-      "name": "DatasourceConnectivity",
-      "description": "Controller for the Assessment Jobs"
-    },
-    {
-      "name": "Schema",
-      "description": "Controller for the Assessment Jobs"
-    },
-    {
-      "name": "Assessment",
-      "description": "Controller for the Assessment Jobs"
-    },
-    {
-      "name": "Profile",
-      "description": "Controller for the Profile"
-    },
-    {
-      "name": "Health",
-      "description": "Controller for the getting trends of Controls"
-    },
-    {
-      "name": "ObservationHistory",
-      "description": "Controller for the getting job history"
-    },
-    {
-      "name": "Trends",
-      "description": "Controller for the getting trends of Controls"
+      "name": "Rule",
+      "description": "Controller to create rules"
     }
-  ],
-  "components": {
-    "schemas": {}
-  }
+  ]
 }
