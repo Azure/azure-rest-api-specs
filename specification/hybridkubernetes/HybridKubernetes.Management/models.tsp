@@ -21,6 +21,10 @@ union ConnectedClusterKind {
   ProvisionedCluster: "ProvisionedCluster",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AWS: "AWS",
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("Represents a connected cluster hosted on Google Cloud Platform (GCP)")
+  GCP: "GCP",
 }
 
 /**
