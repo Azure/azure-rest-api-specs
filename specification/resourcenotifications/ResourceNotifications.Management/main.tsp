@@ -14,381 +14,132 @@ using OpenAPI;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.ResourceNotifications Management Service" })
-@doc("Microsoft.ResourceNotifications Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.ResourceNotifications;
 
-/** ResourceNotifications RP API Versions */
 enum Versions {
-  /** 2025-08-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_08_01_preview: "2025-08-01-preview",
 }
 
-/** The Azure Resource Manager Operations interface. */
 interface Operations extends Azure.ResourceManager.Operations {}
 
-/*
- * Common enums and unions
- */
-
-/** The status of a notification session. */
 union NotificationSessionStatus {
   string,
-
-  /** The session is active and processing notifications */
   Active: "Active",
-
-  /** The session is paused and not processing notifications */
   Paused: "Paused",
-
-  /** The session has completed */
   Completed: "Completed",
-
-  /** The session has failed */
   Failed: "Failed",
 }
 
-/** The provisioning state of the resource. */
 @lroStatus
 union ProvisioningState {
-  ResourceProvisioningState,
-
-  /** The resource is being provisioned. */
   Provisioning: "Provisioning",
-
-  /** The resource is being updated. */
   Updating: "Updating",
-
-  /** The resource is being deleted. */
   Deleting: "Deleting",
-
-  /** The resource provisioning request has been accepted. */
   Accepted: "Accepted",
-
-  /** The operation completed successfully. */
   Succeeded: "Succeeded",
-
-  /** The operation failed. */
   Failed: "Failed",
-
-  /** The operation was canceled. */
   Canceled: "Canceled",
-
   string,
 }
 
-/*
- * Tenant Location Resource definition
- */
-
-/** Properties for a tenant location resource. */
 model TenantLocationProperties {
-  /** The display name of the location. */
-  @visibility(Lifecycle.Read)
-  displayName?: string;
-
-  /** The regional display name of the location. */
-  @visibility(Lifecycle.Read)
-  regionalDisplayName?: string;
-
-  /** Additional metadata for the location. */
-  @visibility(Lifecycle.Read)
-  additionalProperties?: string;
-
-  /** The provisioning state of the location. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-/** Tenant location resource that represents an Azure location at tenant scope. */
-model TenantLocationResource
-  is Azure.ResourceManager.ProxyResource<TenantLocationProperties> {
-  /** The name of the location. */
-  @key
-  @path
-  @segment("locations")
-  @pattern("^[a-z0-9]+$")
-  @visibility(Lifecycle.Read)
+model TenantLocationResource is Azure.ResourceManager.ProxyResource<TenantLocationProperties> {
+  @key @path @segment("locations") @pattern("^[a-z0-9]+$") @visibility(Lifecycle.Read)
   locationName: string;
 }
 
-/*
- * Notification Sessions resource definition (Location-scoped within tenant)
- */
-
-/** Properties for a notification session. */
 model NotificationSessionProperties {
-  /** Description of the notification session. */
-  description?: string;
-
-  /** The status of the notification session. */
+  /** Arbitrary configuration payload (string encoded). */
+  configuration?: string;
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   status?: NotificationSessionStatus;
-
-  /** The maximum duration for the session in minutes. */
-  maxDurationMinutes?: int32;
-
-  /** The start time of the session. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  startTime?: utcDateTime;
-
-  /** The end time of the session. */
-  @visibility(Lifecycle.Read)
-  endTime?: utcDateTime;
-
-  /** Configuration settings as key-value pairs. */
-  configuration?: string;
-
-  /** Statistics about notifications processed in this session. */
-  @visibility(Lifecycle.Read)
-  statistics?: NotificationSessionStatistics;
-
-  /** The provisioning state of the notification session. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  /** The date and time when the session was created. */
+  /** Creation timestamp. */
   @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
-
-  /** The date and time when the session was last updated. */
+  /** Last update timestamp. */
   @visibility(Lifecycle.Read)
   updatedAt?: utcDateTime;
+  /** Resource location */
+  @visibility(Lifecycle.Read) location?: string;
 }
 
-/** Statistics for a notification session. */
-model NotificationSessionStatistics {
-  /** Total number of notifications processed. */
-  @visibility(Lifecycle.Read)
-  totalNotificationsProcessed?: int32;
-
-  /** Number of notifications that were successfully delivered. */
-  @visibility(Lifecycle.Read)
-  successfulDeliveries?: int32;
-
-  /** Number of notifications that failed to be delivered. */
-  @visibility(Lifecycle.Read)
-  failedDeliveries?: int32;
-
-  /** Average processing time per notification in milliseconds. */
-  @visibility(Lifecycle.Read)
-  averageProcessingTimeMs?: int32;
-}
-
-/** A notification session resource that operates within a specific location at tenant scope. */
 @parentResource(TenantLocationResource)
-model NotificationSessionResource
-  is Azure.ResourceManager.ProxyResource<NotificationSessionProperties> {
-  /** Name of the notification session. */
-  @key
-  @path
-  @segment("notificationSessions")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-  @visibility(Lifecycle.Read)
+model NotificationSessionResource is Azure.ResourceManager.ProxyResource<NotificationSessionProperties> {
+  @key @path @segment("notificationSessions") @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$") @visibility(Lifecycle.Read)
   notificationSessionName: string;
 }
 
-/*
- * Request/Response Models for Operations
- */
+model GetSessionDetailsRequest { @minValue(1) @maxValue(240) durationInMinutes?: int32; }
 
-/** Request model for get session details operation. */
-model GetSessionDetailsRequest {
-  /** Duration in minutes for which the session details are valid. */
-  durationInMinutes: int32;
-}
-
-/** Request model for create notification session operation. */
 model CreateNotificationSessionRequest {
-  /** Description of the notification session. */
   description?: string;
-
-  /** The maximum duration for the session in minutes. */
-  maxDurationMinutes?: int32;
-
-  /** Configuration settings as key-value pairs. */
+  @minValue(1) @maxValue(1440) maxDurationMinutes?: int32;
   configuration?: string;
 }
 
-/** Connection details for a notification session. */
-model NotificationSessionConnectionDetails {
-  /** Connection string for the session. */
-  connectionString?: string;
+model NotificationSessionConnectionDetails { connectionString?: string; endpoint?: string; }
 
-  /** Endpoint to connect to. */
-  endpoint?: string;
-}
-
-/** Response model for get session details operation. */
 model GetSessionDetailsResponse {
-  /** The resource ID. */
   id?: string;
-
-  /** Encoded notification session containing signed session id with content. */
   encodedNotificationSession?: string;
-
-  /** Connection details for the session. */
   connectionDetails?: NotificationSessionConnectionDetails;
-
-  /** Timestamp until which the session is valid. */
   validUntil?: utcDateTime;
 }
 
-/** Response model for close session operation. */
-model CloseSessionResponse {
-  /** Success message for the close session operation. */
-  message?: string;
-}
+model CloseSessionResponse { status: string; message?: string; }
 
-/** Response model for create notification session operation. */
-model CreateNotificationSessionResponse {
-  @doc("The resource ID.")
-  id?: string;
+alias CreateNotificationSessionResponse = NotificationSessionResource;
 
-  @doc("The resource name.")
-  name?: string;
-
-  @doc("The resource type.")
-  type?: string;
-
-  @doc("The location of the resource.")
-  location?: string;
-
-  @doc("The properties of the notification session.")
-  properties?: NotificationSessionProperties;
-
-  @doc("The system metadata related to this resource.")
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
-}
-
-/** Operation Status. */
 @lroStatus
-union OperationStatus {
-  string,
+union OperationStatus { string, InProgress: "InProgress", Succeeded: "Succeeded", Failed: "Failed", Canceled: "Canceled" }
 
-  /** The operation is in progress. */
-  InProgress: "InProgress",
-
-  /** The operation completed successfully. */
-  Succeeded: "Succeeded",
-
-  /** The operation failed. */
-  Failed: "Failed",
-
-  /** The operation was canceled. */
-  Canceled: "Canceled",
-}
-
-/** Status response model for notification session operations. */
-model NotificationSessionStatusResponse {
-  @doc("The resource ID.")
-  id?: string;
-
-  @doc("The current status of the operation.")
-  status: OperationStatus;
-
-  @doc("The properties of the notification session.")
-  properties?: NotificationSessionProperties;
-
-  @doc("Error information if the operation failed.")
-  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
-}
-
-/*
- * Operations Interface - Custom Operations
- */
-
-/** Operations for notification sessions. */
-
+interface NotificationsSessions {
   /** Create a notification session. */
   @put
-  @pollingOperation(NotificationsSessions.createNotificationSessionStatus)
-  @finalOperation(NotificationsSessions.createNotificationSessionStatus)
-  @useFinalStateVia("azure-async-operation")
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
   createNotificationSession(
-    @doc("The location name.")
-    @path
-    @pattern("^[a-z0-9]+$")
-    location: string,
-
-    @doc("Name of the notification session.")
-    @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionName: string,
-
-    @doc("Request body containing notification session parameters.")
-    @body
-    body: CreateNotificationSessionRequest,
-
+    @path @pattern("^[a-z0-9]+$") location: string,
+    @path @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$") notificationSessionName: string,
+    @body body: CreateNotificationSessionRequest,
     ...ApiVersionParameter,
   ):
-    | {
-        @statusCode _: 200;
-        @body body: CreateNotificationSessionResponse;
-      }
-    | {
-        @statusCode _: 201;
-        @body body: CreateNotificationSessionResponse;
-      }
-    | {
-        @statusCode _: 202;
-
-        @pollingLocation
-        @header("Azure-AsyncOperation")
-        azureAsyncOperation?: string;
-
-        @header("Retry-After")
-        retryAfter?: int32;
-
-        @header location?: string;
-      }
+    | { @statusCode _: 200; @body body: CreateNotificationSessionResponse; }
+    | { @statusCode _: 201; @body body: CreateNotificationSessionResponse; }
+    | { @statusCode _: 202; @header("Retry-After") retryAfter?: int32; }
     | ErrorResponse;
+
 
   /** Get session details. */
   @post
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:getSessionDetails")
   getSessionDetails(
-    @doc("The location name.")
-    @path
-    @pattern("^[a-z0-9]+$")
-    location: string,
-
-    @doc("Name of the notification session.")
-    @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionName: string,
-
-    @doc("Request body containing session details parameters.")
-    @body
-    body: GetSessionDetailsRequest,
-
+    @path @pattern("^[a-z0-9]+$") location: string,
+    @path @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$") notificationSessionName: string,
+    @body body: GetSessionDetailsRequest,
     ...ApiVersionParameter,
-  ): {
-    @statusCode _: 200;
-    @body body: GetSessionDetailsResponse;
-  } | ErrorResponse;
+  ):
+    | { @statusCode _: 200; @body body: GetSessionDetailsResponse; }
+    | ErrorResponse;
+
 
   /** Close the session. */
   @post
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:closeSession")
   closeSession(
-    @doc("The location name.")
-    @path
-    @pattern("^[a-z0-9]+$")
-    location: string,
-
-    @doc("Name of the notification session.")
-    @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionName: string,
-
+    @path @pattern("^[a-z0-9]+$") location: string,
+    @path @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$") notificationSessionName: string,
     ...ApiVersionParameter,
-  ): {
-    @statusCode _: 200;
-    @body body: CloseSessionResponse;
-  } | ErrorResponse;
+  ):
+    | { @statusCode _: 200; @body body: CloseSessionResponse; }
+    | ErrorResponse;
 }

@@ -3,7 +3,6 @@
   "info": {
     "title": "Microsoft.ResourceNotifications Management Service",
     "version": "2025-08-01-preview",
-    "description": "Microsoft.ResourceNotifications Resource Provider management API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -41,66 +40,17 @@
   "tags": [
     {
       "name": "Operations"
-    },
-    {
-      "name": "NotificationsSessions"
     }
   ],
   "paths": {
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}": {
-      "get": {
-        "operationId": "NotificationsSessions_CreateNotificationSessionStatus",
-        "tags": [
-          "NotificationsSessions"
-        ],
-        "description": "Create a notification session status check operation.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "notificationSessionName",
-            "in": "path",
-            "description": "Name of the notification session.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/NotificationSessionStatusResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "put": {
         "operationId": "NotificationsSessions_CreateNotificationSession",
-        "tags": [
-          "NotificationsSessions"
-        ],
         "description": "Create a notification session.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
-            "description": "The location name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9]+$"
@@ -108,7 +58,6 @@
           {
             "name": "notificationSessionName",
             "in": "path",
-            "description": "Name of the notification session.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
@@ -119,7 +68,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Request body containing notification session parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateNotificationSessionRequest"
@@ -130,27 +78,21 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CreateNotificationSessionResponse"
+              "$ref": "#/definitions/NotificationSessionResource"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/CreateNotificationSessionResponse"
+              "$ref": "#/definitions/NotificationSessionResource"
             }
           },
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32"
-              },
-              "location": {
-                "type": "string"
               }
             }
           },
@@ -165,25 +107,17 @@
           "Create a notification session": {
             "$ref": "./examples/NotificationsSessions_CreateNotificationSession.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:getSessionDetails": {
       "post": {
         "operationId": "NotificationsSessions_GetSessionDetails",
-        "tags": [
-          "NotificationsSessions"
-        ],
         "description": "Get session details.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
-            "description": "The location name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9]+$"
@@ -191,7 +125,6 @@
           {
             "name": "notificationSessionName",
             "in": "path",
-            "description": "Name of the notification session.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
@@ -202,7 +135,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Request body containing session details parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/GetSessionDetailsRequest"
@@ -233,15 +165,11 @@
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:closeSession": {
       "post": {
         "operationId": "NotificationsSessions_CloseSession",
-        "tags": [
-          "NotificationsSessions"
-        ],
         "description": "Close the session.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
-            "description": "The location name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9]+$"
@@ -249,7 +177,6 @@
           {
             "name": "notificationSessionName",
             "in": "path",
-            "description": "Name of the notification session.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
@@ -319,182 +246,116 @@
   "definitions": {
     "CloseSessionResponse": {
       "type": "object",
-      "description": "Response model for close session operation.",
       "properties": {
+        "status": {
+          "type": "string"
+        },
         "message": {
-          "type": "string",
-          "description": "Success message for the close session operation."
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "status"
+      ]
     },
     "CreateNotificationSessionRequest": {
       "type": "object",
-      "description": "Request model for create notification session operation.",
       "properties": {
         "description": {
-          "type": "string",
-          "description": "Description of the notification session."
+          "type": "string"
         },
         "maxDurationMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum duration for the session in minutes."
+          "minimum": 1,
+          "maximum": 1440
         },
         "configuration": {
-          "type": "string",
-          "description": "Configuration settings as key-value pairs."
-        }
-      }
-    },
-    "CreateNotificationSessionResponse": {
-      "type": "object",
-      "description": "Response model for create notification session operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource ID."
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name."
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/NotificationSessionProperties",
-          "description": "The properties of the notification session."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "The system metadata related to this resource."
+          "type": "string"
         }
       }
     },
     "GetSessionDetailsRequest": {
       "type": "object",
-      "description": "Request model for get session details operation.",
       "properties": {
         "durationInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Duration in minutes for which the session details are valid."
+          "minimum": 1,
+          "maximum": 240
         }
-      },
-      "required": [
-        "durationInMinutes"
-      ]
+      }
     },
     "GetSessionDetailsResponse": {
       "type": "object",
-      "description": "Response model for get session details operation.",
       "properties": {
         "id": {
-          "type": "string",
-          "description": "The resource ID."
+          "type": "string"
         },
         "encodedNotificationSession": {
-          "type": "string",
-          "description": "Encoded notification session containing signed session id with content."
+          "type": "string"
         },
         "connectionDetails": {
-          "$ref": "#/definitions/NotificationSessionConnectionDetails",
-          "description": "Connection details for the session."
+          "$ref": "#/definitions/NotificationSessionConnectionDetails"
         },
         "validUntil": {
           "type": "string",
-          "format": "date-time",
-          "description": "Timestamp until which the session is valid."
+          "format": "date-time"
         }
       }
     },
     "NotificationSessionConnectionDetails": {
       "type": "object",
-      "description": "Connection details for a notification session.",
       "properties": {
         "connectionString": {
-          "type": "string",
-          "description": "Connection string for the session."
+          "type": "string"
         },
         "endpoint": {
-          "type": "string",
-          "description": "Endpoint to connect to."
+          "type": "string"
         }
       }
     },
     "NotificationSessionProperties": {
       "type": "object",
-      "description": "Properties for a notification session.",
       "properties": {
-        "description": {
+        "configuration": {
           "type": "string",
-          "description": "Description of the notification session."
+          "description": "Arbitrary configuration payload (string encoded)."
         },
         "status": {
           "$ref": "#/definitions/NotificationSessionStatus",
-          "description": "The status of the notification session.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
-        "maxDurationMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum duration for the session in minutes."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the session.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the session.",
-          "readOnly": true
-        },
-        "configuration": {
-          "type": "string",
-          "description": "Configuration settings as key-value pairs."
-        },
-        "statistics": {
-          "$ref": "#/definitions/NotificationSessionStatistics",
-          "description": "Statistics about notifications processed in this session.",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the notification session.",
           "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the session was created.",
+          "description": "Creation timestamp.",
           "readOnly": true
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the session was last updated.",
+          "description": "Last update timestamp.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
           "readOnly": true
         }
       }
     },
     "NotificationSessionResource": {
       "type": "object",
-      "description": "A notification session resource that operates within a specific location at tenant scope.",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NotificationSessionProperties",
@@ -507,39 +368,8 @@
         }
       ]
     },
-    "NotificationSessionStatistics": {
-      "type": "object",
-      "description": "Statistics for a notification session.",
-      "properties": {
-        "totalNotificationsProcessed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of notifications processed.",
-          "readOnly": true
-        },
-        "successfulDeliveries": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of notifications that were successfully delivered.",
-          "readOnly": true
-        },
-        "failedDeliveries": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of notifications that failed to be delivered.",
-          "readOnly": true
-        },
-        "averageProcessingTimeMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Average processing time per notification in milliseconds.",
-          "readOnly": true
-        }
-      }
-    },
     "NotificationSessionStatus": {
       "type": "string",
-      "description": "The status of a notification session.",
       "enum": [
         "Active",
         "Paused",
@@ -552,55 +382,25 @@
         "values": [
           {
             "name": "Active",
-            "value": "Active",
-            "description": "The session is active and processing notifications"
+            "value": "Active"
           },
           {
             "name": "Paused",
-            "value": "Paused",
-            "description": "The session is paused and not processing notifications"
+            "value": "Paused"
           },
           {
             "name": "Completed",
-            "value": "Completed",
-            "description": "The session has completed"
+            "value": "Completed"
           },
           {
             "name": "Failed",
-            "value": "Failed",
-            "description": "The session has failed"
+            "value": "Failed"
           }
         ]
       }
     },
-    "NotificationSessionStatusResponse": {
-      "type": "object",
-      "description": "Status response model for notification session operations.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource ID."
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus",
-          "description": "The current status of the operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/NotificationSessionProperties",
-          "description": "The properties of the notification session."
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error information if the operation failed."
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
     "OperationStatus": {
       "type": "string",
-      "description": "Operation Status.",
       "enum": [
         "InProgress",
         "Succeeded",
@@ -613,23 +413,19 @@
         "values": [
           {
             "name": "InProgress",
-            "value": "InProgress",
-            "description": "The operation is in progress."
+            "value": "InProgress"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation completed successfully."
+            "value": "Succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed",
-            "description": "The operation failed."
+            "value": "Failed"
           },
           {
             "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation was canceled."
+            "value": "Canceled"
           }
         ]
       },
@@ -637,54 +433,46 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "The provisioning state of the resource.",
       "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
         "Provisioning",
         "Updating",
         "Deleting",
-        "Accepted"
+        "Accepted",
+        "Succeeded",
+        "Failed",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation was canceled."
-          },
-          {
             "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned."
+            "value": "Provisioning"
           },
           {
             "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is being updated."
+            "value": "Updating"
           },
           {
             "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted."
+            "value": "Deleting"
           },
           {
             "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource provisioning request has been accepted."
+            "value": "Accepted"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
           }
         ]
       },
@@ -692,33 +480,16 @@
     },
     "TenantLocationProperties": {
       "type": "object",
-      "description": "Properties for a tenant location resource.",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the location.",
-          "readOnly": true
-        },
-        "regionalDisplayName": {
-          "type": "string",
-          "description": "The regional display name of the location.",
-          "readOnly": true
-        },
-        "additionalProperties": {
-          "type": "string",
-          "description": "Additional metadata for the location.",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the location.",
           "readOnly": true
         }
       }
     },
     "TenantLocationResource": {
       "type": "object",
-      "description": "Tenant location resource that represents an Azure location at tenant scope.",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TenantLocationProperties",

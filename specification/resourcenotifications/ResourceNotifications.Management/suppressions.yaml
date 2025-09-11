@@ -13,3 +13,17 @@
   reason: "x-ms-error-response extension is required for proper error response handling. @error decorator alone is insufficient."
   rules:
     - "@azure-tools/typespec-azure-core/no-openapi"
+
+- tool: TypeSpecValidation
+  paths:
+    - "main.tsp"
+  reason: "Minimal documentation approach - operation parameters and union variants are self-explanatory in this context"
+  rules:
+    - "@azure-tools/typespec-azure-core/documentation-required"
+
+- tool: TypeSpecValidation
+  paths:
+    - "main.tsp"
+  reason: "Custom notification session operations do not follow standard ARM resource pattern - interface contains custom action operations"
+  rules:
+    - "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
