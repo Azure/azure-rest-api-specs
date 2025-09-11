@@ -235,6 +235,7 @@ input-file:
   - stable/2025-10-01/arcSettings.json
   - stable/2025-10-01/clusters.json
   - stable/2025-10-01/deploymentSettings.json
+  - stable/2025-10-01/edgeDeviceJobs.json
   - stable/2025-10-01/edgeDevices.json
   - stable/2025-10-01/extensions.json
   - stable/2025-10-01/hciCommon.json
