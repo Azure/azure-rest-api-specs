@@ -3,17 +3,18 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventHub;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(FailOver.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailOver.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Operation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Destination.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Destination.properties);
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Clusters.update::parameters.properties, "parameters");
@@ -21,8 +22,7 @@ using Microsoft.EventHub;
 @@clientName(Clusters.patch::parameters.body, "parameters");
 @@clientLocation(Clusters.configurationGet, "Configuration");
 @@clientName(Clusters.configurationGet, "Get");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Cluster.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Cluster.properties);
 
 @@clientLocation(EHNamespaces.get, "Namespaces");
 @@clientLocation(EHNamespaces.createOrUpdate, "Namespaces");
@@ -38,20 +38,19 @@ using Microsoft.EventHub;
 @@clientName(EHNamespaces.privateLinkResourcesGet, "Get");
 @@clientLocation(EHNamespaces.checkNameAvailability, DisasterRecoveryConfigs);
 @@clientName(EHNamespaces.checkNameAvailability::parameters.body, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(EHNamespace.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EHNamespace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.list,
   "NetworkSecurityPerimeterConfiguration"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NetworkSecurityPerimeterConfiguration.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkSecurityPerimeterConfiguration.properties
+);
 
 @@clientLocation(NetworkRuleSets.getNetworkRuleSet, "Namespaces");
 @@clientLocation(NetworkRuleSets.createOrUpdateNetworkRuleSet, "Namespaces");
@@ -59,8 +58,7 @@ using Microsoft.EventHub;
   "parameters"
 );
 @@clientLocation(NetworkRuleSets.listNetworkRuleSet, "Namespaces");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NetworkRuleSet.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkRuleSet.properties);
 
 @@clientLocation(AuthorizationRules.getAuthorizationRule, "Namespaces");
 @@clientLocation(AuthorizationRules.createOrUpdateAuthorizationRule,
@@ -78,12 +76,11 @@ using Microsoft.EventHub;
   "parameters"
 );
 @@clientName(EventHubs.regenerateKeys::parameters.body, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AuthorizationRule.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationRule.properties
+);
 
 @@clientName(ConsumerGroups.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ConsumerGroup.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConsumerGroup.properties);
 
 @@clientLocation(ArmDisasterRecoveries.get, DisasterRecoveryConfigs);
 @@clientLocation(ArmDisasterRecoveries.createOrUpdate, DisasterRecoveryConfigs);
@@ -94,24 +91,22 @@ using Microsoft.EventHub;
 @@clientLocation(ArmDisasterRecoveries.list, DisasterRecoveryConfigs);
 @@clientLocation(ArmDisasterRecoveries.breakPairing, DisasterRecoveryConfigs);
 @@clientLocation(ArmDisasterRecoveries.failOver, DisasterRecoveryConfigs);
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ArmDisasterRecovery.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArmDisasterRecovery.properties
+);
 
 @@clientLocation(Eventhubs.get, EventHubs);
 @@clientLocation(Eventhubs.createOrUpdate, EventHubs);
 @@clientName(Eventhubs.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(Eventhubs.delete, EventHubs);
 @@clientLocation(Eventhubs.listByNamespace, EventHubs);
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Eventhub.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Eventhub.properties);
 
 @@clientLocation(SchemaGroups.get, "SchemaRegistry");
 @@clientLocation(SchemaGroups.createOrUpdate, "SchemaRegistry");
 @@clientName(SchemaGroups.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(SchemaGroups.delete, "SchemaRegistry");
 @@clientLocation(SchemaGroups.listByNamespace, "SchemaRegistry");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SchemaGroup.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SchemaGroup.properties);
 
 @@clientLocation(ApplicationGroups.get, "ApplicationGroup");
 @@clientLocation(ApplicationGroups.createOrUpdateApplicationGroup,
@@ -122,8 +117,8 @@ using Microsoft.EventHub;
 );
 @@clientLocation(ApplicationGroups.delete, "ApplicationGroup");
 @@clientLocation(ApplicationGroups.listByNamespace, "ApplicationGroup");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ApplicationGroup.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationGroup.properties
+);
 
 @@clientLocation(ClustersOperationGroup.listAvailableClusterRegion, Clusters);
 
