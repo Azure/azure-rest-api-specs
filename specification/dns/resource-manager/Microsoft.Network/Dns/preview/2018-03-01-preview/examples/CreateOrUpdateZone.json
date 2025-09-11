@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "zoneName": "zone1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-03-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "location": "Global",
+      "tags": {
+        "key1": "value1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "location": "global",
+        "name": "zone1",
+        "type": "Microsoft.Network/dnsZones",
+        "properties": {
+          "maxNumberOfRecordSets": 5000,
+          "numberOfRecordSets": 2,
+          "nameServers": [
+            "ns1-01.azure-dns.com",
+            "ns2-01.azure-dns.net",
+            "ns3-01.azure-dns.org",
+            "ns4-01.azure-dns.info"
+          ],
+          "zoneType": "Public"
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "location": "global",
+        "name": "zone1",
+        "type": "Microsoft.Network/dnsZones",
+        "properties": {
+          "maxNumberOfRecordSets": 5000,
+          "numberOfRecordSets": 2,
+          "nameServers": [
+            "ns1-01.azure-dns.com",
+            "ns2-01.azure-dns.net",
+            "ns3-01.azure-dns.org",
+            "ns4-01.azure-dns.info"
+          ],
+          "zoneType": "Public"
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    }
+  }
+}
