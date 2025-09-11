@@ -24,9 +24,9 @@ namespace Microsoft.AzureCloudMetadata;
 
 /** The available API versions. */
 enum Versions {
-  /** 2021-10-01-stable version */
+  /** 2021-10-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2021_10_01_preview: "2024-05-01-stable",
+  v2021_10_01_preview: "2024-05-01-preview",
 
   /** 2025-10-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
