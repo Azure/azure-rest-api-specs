@@ -100,6 +100,10 @@ using Microsoft.ComputeSchedule;
   "csharp,javascript"
 );
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
+@@clientName(ExecuteCreateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
 @@clientName(SubmitDeallocateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
