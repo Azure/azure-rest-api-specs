@@ -260,7 +260,7 @@ using Microsoft.RecoveryServices;
 );
 
 // ResourceGuardProxies interface rename
-@@clientName(Microsoft.RecoveryServices.ResourceGuardProxies,
+@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxies.get,
   "ResourceGuardProxy",
   "java"
 );
@@ -318,3 +318,69 @@ using Microsoft.RecoveryServices;
 
 // ETag property mapping to preserve backward compatibility
 @@clientName(Microsoft.RecoveryServices.Resource.eTag, "etag", "java");
+
+// UTC/PIN/VM abbreviation fixes for backward compatibility
+@@clientName(Microsoft.RecoveryServices.TokenInformation.securityPIN,
+  "securityPin",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.SecuredVMDetails.securedVMOsDiskEncryptionSetId,
+  "securedVmosDiskEncryptionSetId",
+  "java"
+);
+
+// UTC property name fixes for backward compatibility
+@@clientName(Microsoft.RecoveryServices.ProtectedItem.deferredDeleteTimeInUTC,
+  "deferredDeleteTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.ProtectedItem.softDeleteRetentionPeriodInDays,
+  "softDeleteRetentionPeriod",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadRecoveryPoint.recoveryPointTimeInUTC,
+  "recoveryPointTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.MabFileFolderProtectedItem.deferredDeleteSyncTimeInUTC,
+  "deferredDeleteSyncTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.IaasVMBackupRequest.recoveryPointExpiryTimeInUTC,
+  "recoveryPointExpiryTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureFileShareBackupRequest.recoveryPointExpiryTimeInUTC,
+  "recoveryPointExpiryTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadBackupRequest.recoveryPointExpiryTimeInUTC,
+  "recoveryPointExpiryTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSqlRecoveryPointExtendedInfo.dataDirectoryTimeInUTC,
+  "dataDirectoryTimeInUtc",
+  "java"
+);
+
+// Service name management operations fixes
+@@clientName(Microsoft.RecoveryServices.ResourceProviders.bMSPrepareDataMove,
+  "bmsPrepareDataMove",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.ResourceProviders.bMSTriggerDataMove,
+  "bmsTriggerDataMove",
+  "java"
+);
+
+// Actions required property name fix
+@@clientName(Microsoft.RecoveryServices.PrivateLinkServiceConnectionState.actionsRequired,
+  "actionRequired",
+  "java"
+);
+
+// IaaS VM protectable item fix (IaasVMProtectableItem -> IaaSvmProtectableItem)
+@@clientName(Microsoft.RecoveryServices.IaasVMProtectableItem,
+  "IaaSvmProtectableItem",
+  "java"
+);
