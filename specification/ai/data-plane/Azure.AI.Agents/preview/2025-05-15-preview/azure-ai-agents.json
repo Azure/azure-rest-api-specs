@@ -3297,7 +3297,8 @@
         "bing_custom_search",
         "connected_agent",
         "deep_research",
-        "mcp"
+        "mcp",
+        "computer_use_preview"
       ],
       "x-ms-enum": {
         "name": "AgentsNamedToolChoiceType",
@@ -3357,6 +3358,11 @@
             "name": "mcp",
             "value": "mcp",
             "description": "Tool type `mcp`"
+          },
+          {
+            "name": "computerUsePreview",
+            "value": "computer_use_preview",
+            "description": "Tool type `computer_use_preview`"
           }
         ]
       }
@@ -3860,6 +3866,37 @@
         "connection"
       ]
     },
+    "ClickAction": {
+      "type": "object",
+      "description": "A click action.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate where the click occurred."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate where the click occurred."
+        },
+        "button": {
+          "$ref": "#/definitions/MouseButton",
+          "description": "Indicates which mouse button was pressed during the click."
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "button"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "click"
+    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an agent.",
@@ -3894,6 +3931,161 @@
           "x-ms-client-name": "dataSources"
         }
       }
+    },
+    "ComputerScreenshot": {
+      "type": "object",
+      "description": "The output from a computer use tool representing a screenshot.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Specifies the event type. For a computer screenshot, this property is always set to computer_screenshot.",
+          "enum": [
+            "computer_screenshot"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "file_id": {
+          "type": "string",
+          "description": "The identifier of an uploaded file that contains the screenshot.",
+          "x-ms-client-name": "fileId"
+        },
+        "image_url": {
+          "type": "string",
+          "description": "The URL of the screenshot image.",
+          "x-ms-client-name": "imageUrl"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ComputerToolOutput": {
+      "type": "object",
+      "description": "The output from a computer use tool to be submitted.",
+      "properties": {
+        "output": {
+          "$ref": "#/definitions/ComputerScreenshot",
+          "description": "The output from the computer use tool."
+        },
+        "acknowledged_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that have been acknowledged by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "acknowledgedSafetyChecks"
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_call_output"
+    },
+    "ComputerUseAction": {
+      "type": "object",
+      "description": "An abstract representation of a computer use action.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of computer use action."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ComputerUseEnvironment": {
+      "type": "string",
+      "description": "The environment types supported by the computer use tool.",
+      "enum": [
+        "windows",
+        "mac",
+        "linux",
+        "browser"
+      ],
+      "x-ms-enum": {
+        "name": "ComputerUseEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "windows",
+            "value": "windows",
+            "description": "Windows environment"
+          },
+          {
+            "name": "mac",
+            "value": "mac",
+            "description": "Mac environment"
+          },
+          {
+            "name": "linux",
+            "value": "linux",
+            "description": "Linux environment"
+          },
+          {
+            "name": "browser",
+            "value": "browser",
+            "description": "Browser environment"
+          }
+        ]
+      }
+    },
+    "ComputerUseToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Computer Use tool as used to configure an agent.",
+      "properties": {
+        "computer_use_preview": {
+          "$ref": "#/definitions/ComputerUseToolParameters",
+          "description": "The computer use tool parameters.",
+          "x-ms-client-name": "computerUsePreview"
+        }
+      },
+      "required": [
+        "computer_use_preview"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_use_preview"
+    },
+    "ComputerUseToolParameters": {
+      "type": "object",
+      "description": "The computer use tool parameters.",
+      "properties": {
+        "display_width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The display width for the computer use tool.",
+          "minimum": 1,
+          "x-ms-client-name": "displayWidth"
+        },
+        "display_height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The display height for the computer use tool.",
+          "minimum": 1,
+          "x-ms-client-name": "displayHeight"
+        },
+        "environment": {
+          "$ref": "#/definitions/ComputerUseEnvironment",
+          "description": "The environment for the computer use tool."
+        }
+      },
+      "required": [
+        "display_width",
+        "display_height",
+        "environment"
+      ]
     },
     "ConnectedAgentDetails": {
       "type": "object",
@@ -3937,6 +4129,26 @@
         }
       ],
       "x-ms-discriminator-value": "connected_agent"
+    },
+    "CoordinatePoint": {
+      "type": "object",
+      "description": "A coordinate point with x and y values.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
     },
     "CreateAgentOptions": {
       "type": "object",
@@ -4305,6 +4517,54 @@
           }
         ]
       }
+    },
+    "DoubleClickAction": {
+      "type": "object",
+      "description": "A double click action.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate where the double click occurred."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate where the double click occurred."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "double_click"
+    },
+    "DragAction": {
+      "type": "object",
+      "description": "A drag action.",
+      "properties": {
+        "path": {
+          "type": "array",
+          "description": "An array of coordinates representing the path of the drag action.",
+          "items": {
+            "$ref": "#/definitions/CoordinatePoint"
+          }
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "drag"
     },
     "ErrorEvent": {
       "type": "string",
@@ -4709,6 +4969,25 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "FunctionToolOutput": {
+      "type": "object",
+      "description": "The output from a function tool to be submitted.",
+      "properties": {
+        "output": {
+          "type": "string",
+          "description": "The output from the function tool to be submitted."
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call_output"
+    },
     "ImageDetailLevel": {
       "type": "string",
       "description": "Specifies an image's detail level. Can be 'auto', 'low', 'high', or an unknown future value.",
@@ -4791,6 +5070,28 @@
           "x-ms-client-name": "indexName"
         }
       }
+    },
+    "KeyPressAction": {
+      "type": "object",
+      "description": "A collection of keypresses the model would like to perform.",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "The combination of keys the model is requesting to be pressed. This is an array of strings, each representing a key.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "keys"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "keypress"
     },
     "ListSortOrder": {
       "type": "string",
@@ -5819,6 +6120,74 @@
       ],
       "x-ms-discriminator-value": "fabric_dataagent"
     },
+    "MouseButton": {
+      "type": "string",
+      "description": "The mouse button types supported by click actions.",
+      "enum": [
+        "left",
+        "right",
+        "wheel",
+        "back",
+        "forward"
+      ],
+      "x-ms-enum": {
+        "name": "MouseButton",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "left",
+            "value": "left",
+            "description": "Left mouse button"
+          },
+          {
+            "name": "right",
+            "value": "right",
+            "description": "Right mouse button"
+          },
+          {
+            "name": "wheel",
+            "value": "wheel",
+            "description": "Mouse wheel button"
+          },
+          {
+            "name": "back",
+            "value": "back",
+            "description": "Back mouse button"
+          },
+          {
+            "name": "forward",
+            "value": "forward",
+            "description": "Forward mouse button"
+          }
+        ]
+      }
+    },
+    "MoveAction": {
+      "type": "object",
+      "description": "A mouse move action.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate to move to."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate to move to."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "move"
+    },
     "OpenApiAnonymousAuthDetails": {
       "type": "object",
       "description": "Security details for OpenApi anonymous authentication",
@@ -6007,6 +6376,48 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "RequiredComputerUseToolCall": {
+      "type": "object",
+      "description": "A representation of a requested call to a Computer Use tool, needed by the model to continue evaluation of a run.",
+      "properties": {
+        "computer_use_preview": {
+          "$ref": "#/definitions/RequiredComputerUseToolCallDetails",
+          "description": "Detailed information about the computer use action to be executed.",
+          "x-ms-client-name": "computerUsePreview"
+        }
+      },
+      "required": [
+        "computer_use_preview"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequiredToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_use_preview"
+    },
+    "RequiredComputerUseToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information for a computer use tool invocation.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/ComputerUseAction",
+          "description": "The action to be performed by the computer use tool."
+        },
+        "pending_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that are pending acknowledgment by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "pendingSafetyChecks"
+        }
+      },
+      "required": [
+        "action",
+        "pending_safety_checks"
       ]
     },
     "RequiredFunctionToolCall": {
@@ -6673,6 +7084,61 @@
         "total_tokens"
       ]
     },
+    "RunStepComputerUseToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Computer Use tool, issued by the model in evaluation of a defined tool, that represents\nexecuted computer automation actions.",
+      "properties": {
+        "computer_use_preview": {
+          "$ref": "#/definitions/RunStepComputerUseToolCallDetails",
+          "description": "The detailed information about the computer use tool call.",
+          "x-ms-client-name": "computerUsePreview"
+        }
+      },
+      "required": [
+        "computer_use_preview"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_use_preview"
+    },
+    "RunStepComputerUseToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information about a computer use tool call.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/ComputerUseAction",
+          "description": "The action to be performed by the computer use tool."
+        },
+        "pending_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that are pending acknowledgment by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "pendingSafetyChecks"
+        },
+        "output": {
+          "$ref": "#/definitions/ComputerScreenshot",
+          "description": "The output from the computer use tool."
+        },
+        "acknowledged_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that have been acknowledged by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "acknowledgedSafetyChecks"
+        }
+      },
+      "required": [
+        "action",
+        "pending_safety_checks",
+        "output"
+      ]
+    },
     "RunStepConnectedAgent": {
       "type": "object",
       "description": "The detailed information about connected agent tool call.",
@@ -6964,6 +7430,53 @@
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
+    },
+    "RunStepDeltaComputerUseDetails": {
+      "type": "object",
+      "description": "Represents the Computer Use tool call details in a streaming run step.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/ComputerUseAction",
+          "description": "The action to be performed by the computer use tool."
+        },
+        "pending_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that are pending acknowledgment by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "pendingSafetyChecks"
+        },
+        "output": {
+          "$ref": "#/definitions/ComputerScreenshot",
+          "description": "The output from the computer use tool, null if outputs have not yet been submitted."
+        },
+        "acknowledged_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that have been acknowledged by the developer, null if outputs have not yet been submitted.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "acknowledgedSafetyChecks"
+        }
+      }
+    },
+    "RunStepDeltaComputerUseToolCall": {
+      "type": "object",
+      "description": "Represents the Computer Use tool call in a streaming run step.",
+      "properties": {
+        "computer_use_preview": {
+          "$ref": "#/definitions/RunStepDeltaComputerUseDetails",
+          "description": "The computer use data for the tool call.",
+          "x-ms-client-name": "computerUsePreview"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_use_preview"
     },
     "RunStepDeltaConnectedAgentToolCall": {
       "type": "object",
@@ -7889,6 +8402,77 @@
         ]
       }
     },
+    "SafetyCheck": {
+      "type": "object",
+      "description": "Safety check that has been acknowledged by the developer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the pending safety check."
+        },
+        "code": {
+          "type": "string",
+          "description": "The type of the pending safety check."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details about the pending safety check."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ScreenshotAction": {
+      "type": "object",
+      "description": "A screenshot action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "screenshot"
+    },
+    "ScrollAction": {
+      "type": "object",
+      "description": "A scroll action.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate where the scroll occurred."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate where the scroll occurred."
+        },
+        "scroll_x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The horizontal scroll distance.",
+          "x-ms-client-name": "scrollX"
+        },
+        "scroll_y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The vertical scroll distance.",
+          "x-ms-client-name": "scrollY"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "scroll_x",
+        "scroll_y"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "scroll"
+    },
     "SharepointGroundingToolParameters": {
       "type": "object",
       "description": "The sharepoint grounding tool parameters.",
@@ -8465,16 +9049,22 @@
       "type": "object",
       "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type for the tool output.",
+          "default": "function_call_output"
+        },
         "tool_call_id": {
           "type": "string",
           "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
           "x-ms-client-name": "toolCallId"
-        },
-        "output": {
-          "type": "string",
-          "description": "The output from the tool to be submitted."
         }
-      }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "tool_call_id"
+      ]
     },
     "ToolResources": {
       "type": "object",
@@ -8568,6 +9158,25 @@
           }
         ]
       }
+    },
+    "TypeAction": {
+      "type": "object",
+      "description": "An action to type in text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to type."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "type"
     },
     "UpdateAgentOptions": {
       "type": "object",
@@ -9472,6 +10081,16 @@
           }
         }
       }
+    },
+    "WaitAction": {
+      "type": "object",
+      "description": "A wait action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "wait"
     }
   },
   "parameters": {
