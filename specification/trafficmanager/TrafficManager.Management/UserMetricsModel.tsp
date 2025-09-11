@@ -71,12 +71,6 @@ interface UserMetricsModels {
     Response = ArmResponse<DeleteOperationResult>,
     OverrideErrorType = CloudError
   >;
-  // delete is ArmResourceDeleteSync<
-  //   UserMetricsModel,
-  //   BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-  //   Response = ArmResponse<DeleteOperationResult>,
-  //   Error = CloudError
-  // >;
 }
 
 @@doc(UserMetricsModel.name, "");

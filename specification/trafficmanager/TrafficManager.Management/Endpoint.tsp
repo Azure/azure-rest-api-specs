@@ -59,112 +59,17 @@ interface Endpoints {
    * Gets a Traffic Manager endpoint.
    */
   get is EndpointOps.Read<Endpoint>;
-  // @get
-  // @armResourceRead(Endpoint)
-  // get(
-  //   ...ApiVersionParameter,
-  //   ...SubscriptionIdParameter,
-  //   ...ResourceGroupParameter,
-
-  //   /**
-  //    * The name of the Traffic Manager profile.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   profileName?: string,
-
-  //   /**
-  //    * The type of the Traffic Manager endpoint.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   endpointType?: EndpointType,
-
-  //   /**
-  //    * The name of the Traffic Manager endpoint.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   endpointName?: string,
-  // ): ArmResponse<Endpoint> | CloudError;
 
   /**
    * Create or update a Traffic Manager endpoint.
    */
   createOrUpdate is EndpointOps.CreateOrUpdateSync<Endpoint>;
-  // @put
-  // @armResourceCreateOrUpdate(Endpoint)
-  // createOrUpdate(
-  //   ...ApiVersionParameter,
-  //   ...SubscriptionIdParameter,
-  //   ...ResourceGroupParameter,
-
-  //   /**
-  //    * The name of the Traffic Manager profile.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   profileName?: string,
-
-  //   /**
-  //    * The type of the Traffic Manager endpoint.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   endpointType?: EndpointType,
-
-  //   /**
-  //    * The name of the Traffic Manager endpoint.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   endpointName?: string,
-
-  //   /**
-  //    * The properties of the Traffic Manager endpoint.
-  //    */
-  //   @bodyRoot
-  //   resource: Endpoint,
-  // ): ArmResponse<Endpoint> | ArmCreatedResponse<Endpoint> | CloudError;
 
   /**
    * Update a Traffic Manager endpoint.
    */
   @patch(#{ implicitOptionality: false })
   update is EndpointOps.CustomPatchSync<Endpoint, PatchModel = Endpoint>;
-  // @armResourceUpdate(Endpoint)
-  // update(
-  //   ...ApiVersionParameter,
-  //   ...SubscriptionIdParameter,
-  //   ...ResourceGroupParameter,
-
-  //   /**
-  //    * The name of the Traffic Manager profile.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   profileName?: string,
-
-  //   /**
-  //    * The type of the Traffic Manager endpoint.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   endpointType?: EndpointType,
-
-  //   /**
-  //    * The name of the Traffic Manager endpoint.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   endpointName?: string,
-
-  //   /**
-  //    * The properties of the Traffic Manager endpoint.
-  //    */
-  //   @bodyRoot
-  //   properties: Endpoint,
-  // ): ArmResponse<Endpoint> | CloudError;
 
   /**
    * Deletes a Traffic Manager endpoint.
@@ -173,37 +78,9 @@ interface Endpoints {
     Endpoint,
     Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse
   >;
-  // @delete
-  // @armResourceDelete(Endpoint)
-  // delete(
-  //   ...ApiVersionParameter,
-  //   ...SubscriptionIdParameter,
-  //   ...ResourceGroupParameter,
-
-  //   /**
-  //    * The name of the Traffic Manager profile.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   profileName?: string,
-
-  //   /**
-  //    * The type of the Traffic Manager endpoint.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   endpointType?: EndpointType,
-
-  //   /**
-  //    * The name of the Traffic Manager endpoint.
-  //    */
-  //   #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  //   @path
-  //   endpointName?: string,
-  // ): ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse | CloudError;
 }
 
-// @@doc(Endpoint.name, "The name of the Traffic Manager endpoint.");
+@@doc(Endpoint.name, "The name of the Traffic Manager endpoint.");
 @@doc(Endpoint.properties, "The properties of the Traffic Manager endpoint.");
 @@doc(Endpoints.createOrUpdate::parameters.resource,
   "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation."

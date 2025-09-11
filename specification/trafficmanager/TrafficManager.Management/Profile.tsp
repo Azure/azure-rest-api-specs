@@ -63,24 +63,17 @@ interface Profiles {
    * Gets a Traffic Manager profile.
    */
   get is ProfileOps.Read<Profile>;
-  // get is ArmResourceRead<Profile, Error = CloudError>;
 
   /**
    * Create or update a Traffic Manager profile.
    */
   createOrUpdate is ProfileOps.CreateOrUpdateSync<Profile>;
-  // createOrUpdate is ArmResourceCreateOrReplaceSync<Profile, Error = CloudError>;
 
   /**
    * Update a Traffic Manager profile.
    */
   @patch(#{ implicitOptionality: false })
   update is ProfileOps.CustomPatchSync<Profile, PatchModel = Profile>;
-  // update is ArmCustomPatchSync<
-  //   Profile,
-  //   PatchModel = Profile,
-  //   Error = CloudError
-  // >;
 
   /**
    * Deletes a Traffic Manager profile.
@@ -89,38 +82,23 @@ interface Profiles {
     Profile,
     Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse
   >;
-  // delete is ArmResourceDeleteSync<
-  //   Profile,
-  //   Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse,
-  //   Error = CloudError
-  // >;
 
   /**
    * Lists all Traffic Manager profiles within a resource group.
    */
   listByResourceGroup is ProfileOps.List<Profile>;
-  // listByResourceGroup is ArmResourceListByParent<
-  //   Profile,
-  //   Response = ArmResponse<ProfileListResult>,
-  //   Error = CloudError
-  // >;
 
   /**
    * Lists all Traffic Manager profiles within a subscription.
    */
   listBySubscription is ProfileSubscriptionOps.List<Profile>;
-  // listBySubscription is ArmListBySubscription<
-  //   Profile,
-  //   Response = ArmResponse<ProfileListResult>,
-  //   Error = CloudError
-  // >;
 }
 
-// @@doc(Profile.name, "The name of the Traffic Manager profile.");
+@@doc(Profile.name, "The name of the Traffic Manager profile.");
 @@doc(Profile.properties, "The properties of the Traffic Manager profile.");
-// @@doc(Profiles.createOrUpdate::parameters.resource,
-//   "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation."
-// );
+@@doc(Profiles.createOrUpdate::parameters.resource,
+  "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation."
+);
 @@doc(Profiles.update::parameters.properties,
   "The Traffic Manager profile parameters supplied to the Update operation."
 );
