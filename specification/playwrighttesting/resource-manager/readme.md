@@ -2,7 +2,7 @@
 
 ## Deprecation Notice
 
-**This API specification has been deprecated and will no longer be maintained after March 8, 2026**. This specification will only receive security fixes until **March 8, 2026**. To receive updates on new features and non-security bug fixes, migrate to the replacement API specification at [LoadTestService/playwright](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/loadtestservice/resource-manager/Microsoft.LoadTestService/playwright). Refer to the [migration guide](https://aka.ms/mpt/migration-guidance) for guidance on upgrading.
+**This API specification has been deprecated and will no longer be maintained after March 8, 2026**. This specification will only receive security fixes until **March 8, 2026**. To receive updates on new features and non-security bug fixes, migrate to the replacement API specification at [loadtestservice/resource-manager/Microsoft.LoadTestService/playwright](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/loadtestservice/resource-manager/Microsoft.LoadTestService/playwright). Refer to the [migration guide](https://aka.ms/mpt/migration-guidance) for guidance on upgrading.
 
 > see https://aka.ms/autorest
 
