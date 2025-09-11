@@ -49,7 +49,6 @@ interface UserMetricsModels {
    * Get the subscription-level key used for Real User Metrics collection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TrafficManagerUserMetricsKeys_Get")
   get is ArmResourceRead<
     UserMetricsModel,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -62,7 +61,6 @@ interface UserMetricsModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("TrafficManagerUserMetricsKeys_CreateOrUpdate")
   createOrUpdate is UserMetricsModelOps.CreateOrUpdateSync<
     Resource = UserMetricsModel,
     Response = ArmResourceCreatedSyncResponse<UserMetricsModel>,
@@ -75,7 +73,6 @@ interface UserMetricsModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("TrafficManagerUserMetricsKeys_Delete")
   delete is ArmResourceDeleteSync<
     UserMetricsModel,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

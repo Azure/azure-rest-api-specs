@@ -12,6 +12,14 @@ using Microsoft.Network;
 
 @@clientName(Profiles.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Profiles.update::parameters.properties, "parameters");
+
+@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
+  "parameters"
+);
+@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2::parameters.body,
+  "parameters"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Profile.properties);
 
@@ -26,26 +34,28 @@ using Microsoft.Network;
 @@flattenProperty(HeatMapModel.properties);
 
 @@clientLocation(UserMetricsModels.get, "TrafficManagerUserMetricsKeys");
+@@clientName(UserMetricsModels.get, "Get");
+
 @@clientLocation(UserMetricsModels.createOrUpdate,
   "TrafficManagerUserMetricsKeys"
 );
+@@clientName(UserMetricsModels.createOrUpdate, "CreateOrUpdate");
+
 @@clientLocation(UserMetricsModels.delete, "TrafficManagerUserMetricsKeys");
+@@clientName(UserMetricsModels.delete, "Delete");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(UserMetricsModel.properties);
 
 @@clientLocation(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   Profiles
 );
-@@clientLocation(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
-  Profiles
-);
-@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
-  "checkTrafficManagerNameAvailabilityV2"
-);
+// @@clientLocation(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
+//   Profiles
+// );
+// @@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
+//   "checkTrafficManagerNameAvailabilityV2"
+// );
 
-@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
-  "parameters"
-);
-@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2::parameters.body,
-  "parameters"
-);
+@@clientLocation(HeatMapModels.get, "HeatMap");
+@@clientName(HeatMapModels.get, "Get");

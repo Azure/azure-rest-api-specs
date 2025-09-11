@@ -33,7 +33,6 @@ interface HeatMapModels {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @armResourceRead(HeatMapModel)
-  @operationId("HeatMap_Get")
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
