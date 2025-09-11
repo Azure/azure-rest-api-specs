@@ -1,6 +1,5 @@
 import "./main.tsp";
 
-
 using Azure.ClientGenerator.Core;
 
 @TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.5`)
