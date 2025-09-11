@@ -1900,7 +1900,14 @@ union MirrorState {
  * Quota Report for volume
  */
 @added(Versions.v2025_07_01_preview)
-model ListQuotaReportResponse is Azure.Core.Page<QuotaReport>;
+model ListQuotaReportResponse {
+  /**
+   * List of quota reports
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value?: QuotaReport[];
+}
+
 /**
  * Quota report record properties
  */
