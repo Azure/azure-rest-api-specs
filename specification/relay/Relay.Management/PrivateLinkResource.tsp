@@ -29,12 +29,14 @@ interface PrivateLinkResources {
   /**
    * Gets a private link resource by a specified group name for a container registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   get is ArmResourceRead<PrivateLinkResource>;
 
   /**
    * Lists the private link resources for a container registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     PrivateLinkResource,
