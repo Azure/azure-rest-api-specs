@@ -21,12 +21,12 @@ options:
     namespace: "Azure.ResourceManager.WorkloadsSapVirtualInstance"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-workloadssapvirtualinstance"
+    emitter-output-dir: "{cwd}/{service-dir}/arm-workloadssapvirtualinstance"
     flavor: azure
     package-details:
       name: "@azure/arm-workloadssapvirtualinstance"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-workloadssapvirtualinstance"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-workloadssapvirtualinstance"
     namespace: "azure.mgmt.workloadssapvirtualinstance"
     flavor: "azure"
     generate-test: true
@@ -39,8 +39,8 @@ options:
     flavor: "azure"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/workloadssapvirtualinstance"
-    package-dir: "armworkloadssapvirtualinstance"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armworkloadssapvirtualinstance"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armworkloadssapvirtualinstance"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
