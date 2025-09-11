@@ -101,28 +101,32 @@ using Azure.Core;
 @@clientName(VaultsOperationGroup.checkNameAvailability::parameters.body,
   "vaultName"
 );
-@@clientName(MhsmPrivateEndpointConnection, "MHSMPrivateEndpointConnection");
-@@clientName(MhsmPrivateLinkResource, "MHSMPrivateLinkResource");
+@@clientName(MhsmPrivateEndpointConnection, "MHSMPrivateEndpointConnection", "!java");
+@@clientName(MhsmPrivateLinkResource, "MHSMPrivateLinkResource", "!java");
 @@clientName(MhsmPrivateLinkResourceListResult,
-  "MHSMPrivateLinkResourceListResult"
+  "MHSMPrivateLinkResourceListResult", "!java"
 );
-@@clientName(MhsmRegionsListResult, "MHSMRegionsListResult");
+@@clientName(MhsmRegionsListResult, "MHSMRegionsListResult", "!java");
 @@clientName(MhsmPrivateEndpointConnectionProperties,
-  "MHSMPrivateEndpointConnectionProperties"
+  "MHSMPrivateEndpointConnectionProperties",
+  "!java"
 );
-@@clientName(MhsmPrivateEndpoint, "MHSMPrivateEndpoint");
+@@clientName(MhsmPrivateEndpoint, "MHSMPrivateEndpoint", "!java");
 @@clientName(MhsmPrivateLinkServiceConnectionState,
-  "MHSMPrivateLinkServiceConnectionState"
+  "MHSMPrivateLinkServiceConnectionState", 
+  "!java"
 );
 @@clientName(MhsmPrivateEndpointConnectionItem,
-  "MHSMPrivateEndpointConnectionItem"
+  "MHSMPrivateEndpointConnectionItem",
+  "!java"
 );
-@@clientName(MhsmNetworkRuleSet, "MHSMNetworkRuleSet");
-@@clientName(MhsmGeoReplicatedRegion, "MHSMGeoReplicatedRegion");
-@@clientName(MhsmVirtualNetworkRule, "MHSMVirtualNetworkRule");
-@@clientName(MhsmipRule, "MHSMIPRule");
+@@clientName(MhsmNetworkRuleSet, "MHSMNetworkRuleSet", "!java");
+@@clientName(MhsmGeoReplicatedRegion, "MHSMGeoReplicatedRegion", "!java");
+@@clientName(MhsmVirtualNetworkRule, "MHSMVirtualNetworkRule", "!java");
+@@clientName(MhsmipRule, "MHSMIPRule", "!java");
 @@clientName(MhsmPrivateLinkResourceProperties,
-  "MHSMPrivateLinkResourceProperties"
+  "MHSMPrivateLinkResourceProperties",
+  "!java"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Operation.properties);
