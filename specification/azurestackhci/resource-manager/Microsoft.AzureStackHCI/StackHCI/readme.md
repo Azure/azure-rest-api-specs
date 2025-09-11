@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-09-15-preview
+tag: package-2025-10-01
 ```
 
 ## Suppression
@@ -224,6 +224,28 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+```
+
+### Tag: package-2025-10
+
+These settings apply only when `--tag=package-2025-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10'
+input-file:
+  - stable/2025-10-01/arcSettings.json
+  - stable/2025-10-01/clusters.json
+  - stable/2025-10-01/deploymentSettings.json
+  - stable/2025-10-01/edgeDevices.json
+  - stable/2025-10-01/extensions.json
+  - stable/2025-10-01/hciCommon.json
+  - stable/2025-10-01/offers.json
+  - ../operations/stable/2025-10-01/operations.json
+  - stable/2025-10-01/publishers.json
+  - stable/2025-10-01/securitySettings.json
+  - stable/2025-10-01/skus.json
+  - stable/2025-10-01/updateRuns.json
+  - stable/2025-10-01/updateSummaries.json
+  - stable/2025-10-01/updates.json
 ```
 
 ### Tag: package-preview-2025-09-15-preview
