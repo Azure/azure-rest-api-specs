@@ -259,12 +259,6 @@ using Microsoft.RecoveryServices;
   "java"
 );
 
-// ResourceGuardProxies interface rename
-@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxies.get,
-  "ResourceGuardProxy",
-  "java"
-);
-
 // Key/secret related mappings
 @@clientName(Microsoft.RecoveryServices.KEKDetails, "KekDetails", "java");
 @@clientName(Microsoft.RecoveryServices.BEKDetails, "BekDetails", "java");
@@ -334,10 +328,6 @@ using Microsoft.RecoveryServices;
   "deferredDeleteTimeInUtc",
   "java"
 );
-@@clientName(Microsoft.RecoveryServices.ProtectedItem.softDeleteRetentionPeriodInDays,
-  "softDeleteRetentionPeriod",
-  "java"
-);
 @@clientName(Microsoft.RecoveryServices.AzureWorkloadRecoveryPoint.recoveryPointTimeInUTC,
   "recoveryPointTimeInUtc",
   "java"
@@ -358,17 +348,17 @@ using Microsoft.RecoveryServices;
   "recoveryPointExpiryTimeInUtc",
   "java"
 );
-@@clientName(Microsoft.RecoveryServices.AzureWorkloadSqlRecoveryPointExtendedInfo.dataDirectoryTimeInUTC,
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLRecoveryPointExtendedInfo.dataDirectoryTimeInUTC,
   "dataDirectoryTimeInUtc",
   "java"
 );
 
 // Service name management operations fixes
-@@clientName(Microsoft.RecoveryServices.ResourceProviders.bMSPrepareDataMove,
+@@clientName(Microsoft.RecoveryServices.BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove,
   "bmsPrepareDataMove",
   "java"
 );
-@@clientName(Microsoft.RecoveryServices.ResourceProviders.bMSTriggerDataMove,
+@@clientName(Microsoft.RecoveryServices.BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove,
   "bmsTriggerDataMove",
   "java"
 );
@@ -379,8 +369,56 @@ using Microsoft.RecoveryServices;
   "java"
 );
 
-// IaaS VM protectable item fix (IaasVMProtectableItem -> IaaSvmProtectableItem)
-@@clientName(Microsoft.RecoveryServices.IaasVMProtectableItem,
-  "IaaSvmProtectableItem",
+// IaaS VM protectable item fix
+@@clientName(Microsoft.RecoveryServices.IaaSVMProtectableItem,
+  "IaasVmProtectableItem",
+  "java"
+);
+
+// Additional UTC property fixes for specific recovery point types
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLPointInTimeRecoveryPoint.recoveryPointTimeInUTC,
+  "recoveryPointTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadPointInTimeRecoveryPoint.recoveryPointTimeInUTC,
+  "recoveryPointTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSQLRecoveryPoint.recoveryPointTimeInUTC,
+  "recoveryPointTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaPointInTimeRecoveryPoint.recoveryPointTimeInUTC,
+  "recoveryPointTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPAsePointInTimeRecoveryPoint.recoveryPointTimeInUTC,
+  "recoveryPointTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPHanaRecoveryPoint.recoveryPointTimeInUTC,
+  "recoveryPointTimeInUtc",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureWorkloadSAPAseRecoveryPoint.recoveryPointTimeInUTC,
+  "recoveryPointTimeInUtc",
+  "java"
+);
+
+// Fix ResourceGuardProxies interface operations breaking change
+@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxy.get,
+  "ResourceGuardProxyOperation",
+  "java"
+);
+@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxy.delete,
+  "ResourceGuardProxyOperation",
+  "java"
+);
+@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxy.put,
+  "ResourceGuardProxyOperation",
+  "java"
+);
+@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxy.unlockDelete,
+  "ResourceGuardProxyOperation",
   "java"
 );
