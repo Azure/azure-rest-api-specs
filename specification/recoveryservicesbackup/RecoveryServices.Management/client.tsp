@@ -251,11 +251,11 @@ using Microsoft.RecoveryServices;
 
 // Storage and BMS related mappings
 @@clientName(Microsoft.RecoveryServices.BMSPrepareDataMoveOperationResult,
-  "BmsPrepareDataMoveOperationResults",
+  "BmsPrepareDataMoveOperationResult",
   "java"
 );
 @@clientName(Microsoft.RecoveryServices.BackupResourceStorageConfigsNonCRR,
-  "BackupResourceStorageConfigsNonCrrs",
+  "BackupResourceStorageConfigsNonCrr",
   "java"
 );
 
