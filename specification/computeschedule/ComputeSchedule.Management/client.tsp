@@ -87,7 +87,11 @@ using Microsoft.ComputeSchedule;
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
-
+@@clientName(ExecuteDeleteRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
 @@clientName(SubmitDeallocateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
