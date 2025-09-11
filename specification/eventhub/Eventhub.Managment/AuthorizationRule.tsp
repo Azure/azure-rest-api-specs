@@ -27,8 +27,8 @@ model AuthorizationRule
   /**
    * The geo-location where the resource lives
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   location?: string;
 }
 
@@ -63,8 +63,6 @@ interface AuthorizationRules {
   /**
    * Gets an AuthorizationRule for a Namespace by rule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_GetAuthorizationRule")
   getAuthorizationRule is AuthorizationRuleOps.Read<
     AuthorizationRule,
     OverrideErrorType = ErrorResponse
@@ -73,9 +71,7 @@ interface AuthorizationRules {
   /**
    * Creates or updates an AuthorizationRule for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_CreateOrUpdateAuthorizationRule")
   createOrUpdateAuthorizationRule is AuthorizationRuleOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>,
@@ -85,8 +81,6 @@ interface AuthorizationRules {
   /**
    * Deletes an AuthorizationRule for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_DeleteAuthorizationRule")
   deleteAuthorizationRule is AuthorizationRuleOps.DeleteSync<
     AuthorizationRule,
     OverrideErrorType = ErrorResponse
@@ -95,8 +89,6 @@ interface AuthorizationRules {
   /**
    * Gets a list of authorization rules for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_ListAuthorizationRules")
   listAuthorizationRules is AuthorizationRuleOps.List<
     AuthorizationRule,
     OverrideErrorType = ErrorResponse
@@ -105,8 +97,6 @@ interface AuthorizationRules {
   /**
    * Gets the primary and secondary connection strings for the Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_ListKeys")
   listKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
     void,
@@ -117,8 +107,6 @@ interface AuthorizationRules {
   /**
    * Regenerates the primary or secondary connection strings for the specified Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_RegenerateKeys")
   regenerateKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
     RegenerateAccessKeyParameters,

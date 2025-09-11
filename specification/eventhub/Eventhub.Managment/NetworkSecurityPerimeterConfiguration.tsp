@@ -45,8 +45,6 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets list of current NetworkSecurityPerimeterConfiguration for Namespace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NetworkSecurityPerimeterConfiguration_List")
   list is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,
     Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>,
@@ -56,8 +54,8 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Refreshes any information about the association.
    */
-  @action("reconcile")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @action("reconcile")
   createOrUpdate is ArmResourceActionAsync<
     NetworkSecurityPerimeterConfiguration,
     void,

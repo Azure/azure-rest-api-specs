@@ -28,8 +28,8 @@ model NetworkRuleSet
   /**
    * The geo-location where the resource lives
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   location?: string;
 }
 
@@ -59,22 +59,18 @@ alias NetworkRuleSetsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface NetworkRuleSets {
   /**
    * Gets NetworkRuleSet for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_GetNetworkRuleSet")
   getNetworkRuleSet is ArmResourceRead<NetworkRuleSet, Error = ErrorResponse>;
 
   /**
    * Create or update NetworkRuleSet for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_CreateOrUpdateNetworkRuleSet")
   createOrUpdateNetworkRuleSet is ArmResourceCreateOrReplaceSync<
     NetworkRuleSet,
     Response = ArmResourceUpdatedResponse<NetworkRuleSet>,
@@ -84,8 +80,6 @@ interface NetworkRuleSets {
   /**
    * Gets NetworkRuleSet for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_ListNetworkRuleSet")
   listNetworkRuleSet is NetworkRuleSetsOps.ListSinglePage<
     NetworkRuleSet,
     Response = NetworkRuleSetListResult,

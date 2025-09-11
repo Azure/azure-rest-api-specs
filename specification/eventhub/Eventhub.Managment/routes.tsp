@@ -18,8 +18,6 @@ interface ClustersOperationGroup {
   /**
    * List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Clusters_ListAvailableClusterRegion")
   @autoRoute
   @get
   @action("availableClusterRegions")
@@ -35,8 +33,6 @@ interface NamespacesOperationGroup {
   /**
    * Check the give Namespace name availability.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityParameter,

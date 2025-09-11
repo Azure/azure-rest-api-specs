@@ -27,8 +27,8 @@ model ApplicationGroup
   /**
    * The geo-location where the resource lives
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   location?: string;
 }
 
@@ -37,16 +37,12 @@ interface ApplicationGroups {
   /**
    * Gets an ApplicationGroup for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ApplicationGroup_Get")
   get is ArmResourceRead<ApplicationGroup, Error = ErrorResponse>;
 
   /**
    * Creates or updates an ApplicationGroup for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ApplicationGroup_CreateOrUpdateApplicationGroup")
   createOrUpdateApplicationGroup is ArmResourceCreateOrReplaceSync<
     ApplicationGroup,
     Response = ArmResourceUpdatedResponse<ApplicationGroup>,
@@ -56,15 +52,11 @@ interface ApplicationGroups {
   /**
    * Deletes an ApplicationGroup for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ApplicationGroup_Delete")
   delete is ArmResourceDeleteSync<ApplicationGroup, Error = ErrorResponse>;
 
   /**
    * Gets a list of application groups for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ApplicationGroup_ListByNamespace")
   listByNamespace is ArmResourceListByParent<
     ApplicationGroup,
     Error = ErrorResponse
