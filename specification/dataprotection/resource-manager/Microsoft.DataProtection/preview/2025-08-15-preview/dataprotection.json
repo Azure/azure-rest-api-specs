@@ -111,6 +111,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List BackupInstances associated with an azure resource": {
+            "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -140,6 +145,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the list of supported REST operations.": {
+            "$ref": "./examples/Operations/List.json"
           }
         },
         "x-ms-pageable": {
@@ -174,6 +184,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get BackupVaults in Subscription": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultsInSubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -218,6 +233,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Check Azure Vm Backup Feature Support": {
+            "$ref": "./examples/CheckfeatureSupport.json"
           }
         }
       }
@@ -272,6 +292,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get OperationResult": {
+            "$ref": "./examples/GetOperationResult.json"
+          }
         }
       }
     },
@@ -310,6 +335,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get OperationStatus": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
         }
       }
     },
@@ -340,6 +370,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuards in Subscription": {
+            "$ref": "./examples/ResourceGuardCRUD/GetResourceGuardsInSubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -377,6 +412,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get BackupVaults in ResourceGroup": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultsInResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -421,6 +461,17 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get BackupVault": {
+            "$ref": "./examples/VaultCRUD/GetBackupVault.json"
+          },
+          "Get BackupVault With CMK": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultWithCMK.json"
+          },
+          "Get BackupVault With MSI": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultWithMSI.json"
           }
         }
       },
@@ -492,6 +543,17 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create BackupVault": {
+            "$ref": "./examples/VaultCRUD/PutBackupVault.json"
+          },
+          "Create BackupVault With CMK": {
+            "$ref": "./examples/VaultCRUD/PutBackupVaultWithCMK.json"
+          },
+          "Create BackupVault With MSI": {
+            "$ref": "./examples/VaultCRUD/PutBackupVaultWithMSI.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -567,6 +629,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Patch BackupVault": {
+            "$ref": "./examples/VaultCRUD/PatchBackupVault.json"
+          },
+          "Patch BackupVault with CMK": {
+            "$ref": "./examples/VaultCRUD/PatchBackupVaultWithCMK.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/BackupVaultResource"
@@ -625,6 +695,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete BackupVault": {
+            "$ref": "./examples/VaultCRUD/DeleteBackupVault.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -668,6 +743,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List BackupInstances in a Vault": {
+            "$ref": "./examples/BackupInstanceOperations/ListBackupInstances.json"
           }
         },
         "x-ms-pageable": {
@@ -722,6 +802,14 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get BackupInstance": {
+            "$ref": "./examples/BackupInstanceOperations/GetBackupInstance.json"
+          },
+          "Get BackupInstance for ADLS Blob": {
+            "$ref": "./examples/BackupInstanceOperations/GetBackupInstance_ADLSBlobBackupDatasourceParameters.json"
           }
         }
       },
@@ -819,6 +907,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create BackupInstance": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstance.json"
+          },
+          "Create BackupInstance With ADLSBlobBackupDatasourceParameters": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_ADLSBlobBackupDatasourceParameters.json"
+          },
+          "Create BackupInstance With KubernetesClusterBackupDatasourceParameters": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_KubernetesClusterBackupDatasourceParameters.json"
+          },
+          "Create BackupInstance to perform critical operation With MUA": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_ResourceGuardEnabled.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/BackupInstanceResource"
@@ -891,6 +993,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete BackupInstance": {
+            "$ref": "./examples/BackupInstanceOperations/DeleteBackupInstance.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -971,6 +1078,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Trigger Adhoc Backup": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerBackup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/OperationJobExtendedInfo"
@@ -1035,6 +1147,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Find Restorable Time Ranges": {
+            "$ref": "./examples/BackupInstanceOperations/FindRestorableTimeRanges.json"
+          }
         }
       }
     },
@@ -1092,6 +1209,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get BackupInstanceOperationResult": {
+            "$ref": "./examples/BackupInstanceOperations/GetBackupInstanceOperationResult.json"
           }
         }
       }
@@ -1156,6 +1278,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Recovery Points in a Vault": {
+            "$ref": "./examples/BackupInstanceOperations/ListRecoveryPoints.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1212,6 +1339,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Recovery Point": {
+            "$ref": "./examples/BackupInstanceOperations/GetRecoveryPoint.json"
           }
         }
       }
@@ -1283,6 +1415,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger Rehydrate": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerRehydrate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1369,6 +1506,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Trigger Restore": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerRestore.json"
+          },
+          "Trigger Restore As Files": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerRestoreAsFiles.json"
+          },
+          "Trigger Restore With Rehydration": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithRehydration.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/OperationJobExtendedInfo"
@@ -1436,6 +1584,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ResumeBackups": {
+            "$ref": "./examples/BackupInstanceOperations/ResumeBackups.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1500,6 +1653,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ResumeProtection": {
+            "$ref": "./examples/BackupInstanceOperations/ResumeProtection.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1583,6 +1741,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StopProtection": {
+            "$ref": "./examples/BackupInstanceOperations/StopProtection.json"
+          },
+          "StopProtection with MUA": {
+            "$ref": "./examples/BackupInstanceOperations/StopProtection_ResourceGuardEnabled.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1664,6 +1830,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuspendBackups": {
+            "$ref": "./examples/BackupInstanceOperations/SuspendBackups.json"
+          },
+          "SuspendBackups with MUA": {
+            "$ref": "./examples/BackupInstanceOperations/SuspendBackup_ResourceGuardEnabled.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1739,6 +1913,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Sync BackupInstance": {
+            "$ref": "./examples/BackupInstanceOperations/SyncBackupInstance.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1809,6 +1988,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Validate For Modify Backup": {
+            "$ref": "./examples/BackupInstanceOperations/ValidateForModifyBackup.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1889,6 +2073,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validate Restore": {
+            "$ref": "./examples/BackupInstanceOperations/ValidateRestore.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/OperationJobExtendedInfo"
@@ -1933,6 +2122,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Jobs": {
+            "$ref": "./examples/JobCRUD/ListJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -1985,6 +2179,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Job": {
+            "$ref": "./examples/JobCRUD/GetJob.json"
+          }
         }
       }
     },
@@ -2036,6 +2235,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Export Jobs Operation Result": {
+            "$ref": "./examples/JobCRUD/GetExportJobsOperationResult.json"
+          }
         }
       }
     },
@@ -2076,6 +2280,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List BackupPolicy": {
+            "$ref": "./examples/PolicyCRUD/ListBackupPolicy.json"
           }
         },
         "x-ms-pageable": {
@@ -2127,6 +2336,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get BackupPolicy": {
+            "$ref": "./examples/PolicyCRUD/GetBackupPolicy.json"
           }
         }
       },
@@ -2183,6 +2397,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate BackupPolicy": {
+            "$ref": "./examples/PolicyCRUD/CreateOrUpdateBackupPolicy.json"
+          }
         }
       },
       "delete": {
@@ -2229,6 +2448,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete BackupPolicy": {
+            "$ref": "./examples/PolicyCRUD/DeleteBackupPolicy.json"
+          }
         }
       }
     },
@@ -2269,6 +2493,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxies": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/ListResourceGuardProxy.json"
           }
         },
         "x-ms-pageable": {
@@ -2321,6 +2550,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/GetResourceGuardProxy.json"
           }
         }
       },
@@ -2378,6 +2612,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/PutResourceGuardProxy.json"
+          }
         }
       },
       "delete": {
@@ -2424,6 +2663,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/DeleteResourceGuardProxy.json"
           }
         }
       }
@@ -2489,6 +2733,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "UnlockDelete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/UnlockDeleteResourceGuardProxy.json"
+          }
         }
       }
     },
@@ -2529,6 +2778,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List DeletedBackupInstances in a Vault": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/ListDeletedBackupInstances.json"
           }
         },
         "x-ms-pageable": {
@@ -2580,6 +2834,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get DeletedBackupInstance": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/GetDeletedBackupInstance.json"
           }
         }
       }
@@ -2641,6 +2900,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Undelete Deleted BackupInstance": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/UndeleteDeletedBackupInstance.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2690,6 +2954,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger Export Jobs": {
+            "$ref": "./examples/JobCRUD/TriggerExportJobs.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2758,6 +3027,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetOperationResult Patch": {
+            "$ref": "./examples/VaultCRUD/GetOperationResultPatch.json"
+          }
         }
       }
     },
@@ -2804,6 +3078,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get OperationStatus": {
+            "$ref": "./examples/GetOperationStatusVaultContext.json"
           }
         }
       }
@@ -2870,6 +3149,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validate For Backup": {
+            "$ref": "./examples/BackupInstanceOperations/ValidateForBackup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/OperationJobExtendedInfo"
@@ -2917,6 +3201,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Check BackupVaults name availability": {
+            "$ref": "./examples/VaultCRUD/CheckBackupVaultsNameAvailability.json"
           }
         }
       }
@@ -2976,6 +3265,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Trigger Cross Region Restore": {
+            "$ref": "./examples/CrossRegionRestore/TriggerCrossRegionRestore.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/OperationJobExtendedInfo"
@@ -3022,6 +3316,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross Region Restore Job": {
+            "$ref": "./examples/CrossRegionRestore/FetchCrossRegionRestoreJob.json"
           }
         }
       }
@@ -3072,6 +3371,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Cross Region Restore Jobs": {
+            "$ref": "./examples/CrossRegionRestore/FetchCrossRegionRestoreJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -3134,6 +3438,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Fetch SecondaryRPs": {
+            "$ref": "./examples/CrossRegionRestore/FetchSecondaryRPs.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3194,6 +3503,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validate Cross Region Restore": {
+            "$ref": "./examples/CrossRegionRestore/ValidateCrossRegionRestore.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/OperationJobExtendedInfo"
@@ -3236,6 +3550,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get OperationStatus": {
+            "$ref": "./examples/GetOperationStatusRGContext.json"
+          }
         }
       }
     },
@@ -3269,6 +3588,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuards in ResourceGroup": {
+            "$ref": "./examples/ResourceGuardCRUD/GetResourceGuardsInResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -3313,6 +3637,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuard": {
+            "$ref": "./examples/ResourceGuardCRUD/GetResourceGuard.json"
           }
         }
       },
@@ -3368,6 +3697,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create ResourceGuard": {
+            "$ref": "./examples/ResourceGuardCRUD/PutResourceGuard.json"
+          }
         }
       },
       "patch": {
@@ -3416,6 +3750,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch ResourceGuard": {
+            "$ref": "./examples/ResourceGuardCRUD/PatchResourceGuard.json"
+          }
         }
       },
       "delete": {
@@ -3454,6 +3793,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ResourceGuard": {
+            "$ref": "./examples/ResourceGuardCRUD/DeleteResourceGuard.json"
           }
         }
       }
@@ -3495,6 +3839,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListDeleteProtectedItemRequests.json"
           }
         },
         "x-ms-pageable": {
@@ -3547,6 +3896,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get DefaultOperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/GetDefaultDeleteProtectedItemRequests.json"
+          }
         }
       }
     },
@@ -3587,6 +3941,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListDeleteResourceGuardProxyRequests.json"
           }
         },
         "x-ms-pageable": {
@@ -3639,6 +3998,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get DefaultOperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/GetDefaultDeleteResourceGuardProxyRequests.json"
+          }
         }
       }
     },
@@ -3679,6 +4043,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListDisableSoftDeleteRequests.json"
           }
         },
         "x-ms-pageable": {
@@ -3731,6 +4100,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get DefaultOperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/GetDefaultDisableSoftDeleteRequests.json"
+          }
         }
       }
     },
@@ -3771,6 +4145,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListBackupSecurityPINRequests.json"
           }
         },
         "x-ms-pageable": {
@@ -3823,6 +4202,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get DefaultOperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/GetDefaultBackupSecurityPINRequests.json"
+          }
         }
       }
     },
@@ -3863,6 +4247,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListUpdateProtectedItemRequests.json"
           }
         },
         "x-ms-pageable": {
@@ -3915,6 +4304,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get DefaultOperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/GetDefaultUpdateProtectedItemRequests.json"
+          }
         }
       }
     },
@@ -3955,6 +4349,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListUpdateProtectionPolicyRequests.json"
           }
         },
         "x-ms-pageable": {
@@ -4006,6 +4405,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get DefaultOperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/GetDefaultUpdateProtectionPolicyRequests.json"
           }
         }
       }
