@@ -37,8 +37,7 @@ interface MigrationConfigs {
    */
   createAndStartMigration is ArmResourceCreateOrReplaceAsync<
     MigrationConfigProperties,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MigrationConfigProperties> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<MigrationConfigProperties> | ArmResourceCreatedSyncResponse<MigrationConfigProperties>
   >;
 
   /**
