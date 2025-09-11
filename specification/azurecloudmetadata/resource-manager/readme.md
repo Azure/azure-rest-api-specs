@@ -27,8 +27,9 @@ These are the global settings for the CloudDevicePlatform.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-05-01-preview
-tag: package-2025-10-01-preview
+tag:
+  - package-2024-05-01-preview
+  - package-2025-10-01-preview
 ```
 
 ### Tag: package-2024-05-01-preview
