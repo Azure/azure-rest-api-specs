@@ -140,3 +140,5 @@ using TypeSpec.Http;
   #{ allowReserved: true, name: "resourceScope" }
 );
 @@clientName(ResourceScopeActionScope.scope, "resourceScope");
+
+@@clientName(Amount, "amount");
