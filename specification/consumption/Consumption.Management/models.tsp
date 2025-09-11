@@ -527,6 +527,7 @@ model MarketplaceProperties {
   /**
    * The marketplace resource rate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   resourceRate?: decimal;
 
@@ -575,6 +576,7 @@ model MarketplaceProperties {
   /**
    * The quantity of usage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   consumedQuantity?: decimal;
 
@@ -587,6 +589,7 @@ model MarketplaceProperties {
   /**
    * The amount of cost before tax.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   pretaxCost?: decimal;
 
@@ -680,6 +683,7 @@ model BudgetProperties {
   /**
    * The total amount of cost to track with the budget
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   amount: decimal;
 
   /**
@@ -798,6 +802,7 @@ model CurrentSpend {
   /**
    * The total amount of cost which is being tracked by the budget.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   amount?: decimal;
 
@@ -825,6 +830,7 @@ model Notification {
   /**
    * Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   threshold: decimal;
 
   contactEmails: {
@@ -870,6 +876,7 @@ model ForecastSpend {
   /**
    * The forecasted cost for the total time period which is being tracked by the budget. This value is only provided if the budget contains a forecast alert type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   amount?: decimal;
 
@@ -1008,60 +1015,70 @@ model BalanceProperties {
   /**
    * The beginning balance for the billing period.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   beginningBalance?: decimal;
 
   /**
    * The ending balance for the billing period (for open periods this will be updated daily).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   endingBalance?: decimal;
 
   /**
    * Total new purchase amount.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   newPurchases?: decimal;
 
   /**
    * Total adjustment amount.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   adjustments?: decimal;
 
   /**
    * Total Commitment usage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   utilized?: decimal;
 
   /**
    * Overage for Azure services.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   serviceOverage?: decimal;
 
   /**
    * Charges Billed separately.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   chargesBilledSeparately?: decimal;
 
   /**
    * serviceOverage + chargesBilledSeparately.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalOverage?: decimal;
 
   /**
    * Azure service commitment + total Overage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalUsage?: decimal;
 
   /**
    * Total charges for Azure Marketplace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   azureMarketplaceServiceCharges?: decimal;
 
@@ -1079,6 +1096,7 @@ model BalanceProperties {
   /**
    * Overage Refunds
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   overageRefund?: decimal;
 
@@ -1108,6 +1126,7 @@ model BalancePropertiesNewPurchasesDetailsItem {
   /**
    * the value of new purchase.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   value?: decimal;
 }
@@ -1123,6 +1142,7 @@ model BalancePropertiesAdjustmentDetailsItem {
   /**
    * the value of new adjustment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   value?: decimal;
 }
@@ -1165,6 +1185,7 @@ model ReservationSummaryProperties {
   /**
    * This is the total hours reserved. E.g. if reservation for 1 instance was made on 1 PM, this will be 11 hours for that day and 24 hours from subsequent days
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   reservedHours?: decimal;
 
@@ -1178,24 +1199,28 @@ model ReservationSummaryProperties {
   /**
    * Total used hours by the reservation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   usedHours?: decimal;
 
   /**
    * This is the minimum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4 and 5, utilization was 10%, this field will return 10% for that day
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   minUtilizationPercentage?: decimal;
 
   /**
    * This is average utilization for the entire time range. (day or month depending on the grain)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   avgUtilizationPercentage?: decimal;
 
   /**
    * This is the maximum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4 and 5, utilization was 100%, this field will return 100% for that day.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   maxUtilizationPercentage?: decimal;
 
@@ -1208,30 +1233,35 @@ model ReservationSummaryProperties {
   /**
    * This is the purchased quantity for the reservationId.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   purchasedQuantity?: decimal;
 
   /**
    * This is the remaining quantity for the reservationId.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   remainingQuantity?: decimal;
 
   /**
    * This is the total count of instances that are reserved for the reservationId.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalReservedQuantity?: decimal;
 
   /**
    * This is the used quantity for the reservationId.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   usedQuantity?: decimal;
 
   /**
    * This is the utilized percentage for the reservation Id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   utilizedPercentage?: decimal;
 }
@@ -1286,6 +1316,7 @@ model ReservationDetailProperties {
   /**
    * This is the total hours reserved for the day. E.g. if reservation for 1 instance was made on 1 PM, this will be 11 hours for that day and 24 hours from subsequent days.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   reservedHours?: decimal;
 
@@ -1299,6 +1330,7 @@ model ReservationDetailProperties {
   /**
    * This is the total hours used by the instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   usedHours?: decimal;
 
@@ -1311,6 +1343,7 @@ model ReservationDetailProperties {
   /**
    * This is the total count of instances that are reserved for the reservationId.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalReservedQuantity?: decimal;
 
@@ -1658,12 +1691,14 @@ model LegacyReservationTransactionProperties {
   /**
    * The quantity of the transaction.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   quantity?: decimal;
 
   /**
    * The charge of the transaction.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   amount?: decimal;
 
@@ -1762,12 +1797,14 @@ model LegacyReservationTransactionProperties {
   /**
    * The monetary commitment amount at the enrollment scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   monetaryCommitment?: decimal;
 
   /**
    * The overage amount at the enrollment scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   overage?: decimal;
 }
@@ -1821,6 +1858,7 @@ model ModernReservationTransactionProperties {
   /**
    * The charge of the transaction.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   amount?: decimal;
 
@@ -1914,6 +1952,7 @@ model ModernReservationTransactionProperties {
   /**
    * The quantity of the transaction.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   quantity?: decimal;
 
@@ -2000,6 +2039,7 @@ model PriceSheetProperties {
   /**
    * Included quality for an offer
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   includedQuantity?: decimal;
 
@@ -2012,6 +2052,7 @@ model PriceSheetProperties {
   /**
    * Unit Price
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   unitPrice?: decimal;
 
@@ -2071,12 +2112,14 @@ model MeterDetails {
   /**
    * The total included quantity associated with the offer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalIncludedQuantity?: decimal;
 
   /**
    * The pretax listing price.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   pretaxStandardRate?: decimal;
 
@@ -2106,12 +2149,14 @@ model SavingsPlan {
   /**
    * SavingsPlan Market Price
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   marketPrice?: decimal;
 
   /**
    * SavingsPlan Effective Price
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   effectivePrice?: decimal;
 }
@@ -2207,18 +2252,21 @@ model ManagementGroupAggregatedCostProperties {
   /**
    * Azure Charges.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   azureCharges?: decimal;
 
   /**
    * Marketplace Charges.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   marketplaceCharges?: decimal;
 
   /**
    * Charges Billed Separately.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   chargesBilledSeparately?: decimal;
 
@@ -2436,6 +2484,7 @@ model Amount {
   /**
    * Amount.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   value?: decimal;
 }
@@ -2465,6 +2514,7 @@ model AmountWithExchangeRate extends Amount {
   /**
    * The exchange rate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   exchangeRate?: decimal;
 
@@ -2805,24 +2855,28 @@ model LegacyUsageDetailProperties {
   /**
    * The usage quantity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   quantity?: decimal;
 
   /**
    * Effective Price that's charged for the usage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   effectivePrice?: decimal;
 
   /**
    * The amount of cost before tax.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cost?: decimal;
 
   /**
    * Unit Price is the price applicable to you. (your EA or other contract price).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   unitPrice?: decimal;
 
@@ -2967,6 +3021,7 @@ model LegacyUsageDetailProperties {
   /**
    * Retail price for the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   payGPrice?: decimal;
 
@@ -3054,6 +3109,7 @@ model ModernUsageDetailProperties {
   /**
    * Effective Price that's charged for the usage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   effectivePrice?: decimal;
 
@@ -3161,6 +3217,7 @@ model ModernUsageDetailProperties {
   /**
    * Measure the quantity purchased or consumed.The amount of the meter used during the billing period.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   quantity?: decimal;
 
@@ -3179,12 +3236,14 @@ model ModernUsageDetailProperties {
   /**
    * Estimated extendedCost or blended cost before tax in USD.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   costInUSD?: decimal;
 
   /**
    * Unit Price is the price applicable to you. (your EA or other contract price).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   unitPrice?: decimal;
 
@@ -3311,12 +3370,14 @@ model ModernUsageDetailProperties {
   /**
    * ExtendedCost or blended cost before tax in billed currency.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   costInBillingCurrency?: decimal;
 
   /**
    * ExtendedCost or blended cost before tax in pricing currency to correlate with prices.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   costInPricingCurrency?: decimal;
 
@@ -3422,30 +3483,35 @@ model ModernUsageDetailProperties {
   /**
    * Market Price that's charged for the usage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   marketPrice?: decimal;
 
   /**
    * Exchange Rate from pricing currency to billing currency.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   exchangeRatePricingToBilling?: decimal;
 
   /**
    * The amount of PayG cost before tax in billing currency.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   paygCostInBillingCurrency?: decimal;
 
   /**
    * The amount of PayG cost before tax in US Dollar currency.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   paygCostInUSD?: decimal;
 
   /**
    * Rate of discount applied if there is a partner earned credit (PEC) based on partner admin link access.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   partnerEarnedCreditRate?: decimal;
 
@@ -3458,6 +3524,7 @@ model ModernUsageDetailProperties {
   /**
    * Retail price for the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   payGPrice?: decimal;
 
@@ -3561,24 +3628,28 @@ model LegacyReservationRecommendationProperties {
   /**
    * The total amount of cost without reserved instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   costWithNoReservedInstances?: decimal;
 
   /**
    * Recommended quality for reserved instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   recommendedQuantity?: decimal;
 
   /**
    * The total amount of cost with reserved instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalCostWithReservedInstances?: decimal;
 
   /**
    * Total estimated savings with reserved instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   netSavings?: decimal;
 
@@ -3743,6 +3814,7 @@ model ModernReservationRecommendationProperties {
   /**
    * Recommended quality for reserved instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   recommendedQuantity?: decimal;
 
@@ -3898,18 +3970,21 @@ model LegacyChargeSummaryProperties {
   /**
    * Azure Charges.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   azureCharges?: decimal;
 
   /**
    * Charges Billed separately.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   chargesBilledSeparately?: decimal;
 
   /**
    * Marketplace Charges.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   azureMarketplaceCharges?: decimal;
 
