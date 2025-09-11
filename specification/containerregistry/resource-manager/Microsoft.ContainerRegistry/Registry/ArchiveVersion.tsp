@@ -53,10 +53,9 @@ interface ArchiveVersionOperationOps
         @maxLength(200)
         @doc("The name of the archive resource.")
         archiveName: string,
-
       },
       {
-         /**
+        /**
          * The name of the archive version resource.
          */
         @path
