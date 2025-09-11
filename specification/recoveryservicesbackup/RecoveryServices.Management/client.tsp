@@ -18,3 +18,17 @@ using Microsoft.RecoveryServices;
 );
 
 @@clientLocation(RecoveryPoints.moveRecoveryPoint, "Client", "go");
+
+// Migration mappings added to mitigate Java SDK breaking changes after TypeSpec migration
+@@clientName(Microsoft.RecoveryServices.IaaSVMContainer,
+  "IaaSvmContainer",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.AzureIaaSVMProtectedItem,
+  "AzureIaaSvmProtectedItem",
+  "java"
+);
+@@alternateType(Microsoft.RecoveryServices.InquiryValidation.protectableItemCount,
+  unknown,
+  "java"
+);
