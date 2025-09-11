@@ -221,7 +221,7 @@
           "$ref": "#/definitions/EmailRecipients"
         },
         "attachments": {
-          "description": "List of attachments. Please note that we limit the total size of an email request (which includes attachments) to 10MB.",
+          "description": "List of attachments. Please note that we limit the total size of an email request (which includes both regular and inline attachments) to 10MB.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EmailAttachment"
@@ -307,6 +307,11 @@
           "type": "string",
           "format": "byte",
           "example": "TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQ="
+        },
+        "contentId": {
+          "description": "Unique identifier (CID) to reference an inline attachment.",
+          "type": "string",
+          "example": "inline_image_id"
         }
       }
     },
