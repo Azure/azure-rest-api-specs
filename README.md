@@ -22,6 +22,13 @@ External Contributors can read [Getting Started with OpenAPI Specifications](htt
 
 See [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs).
 
+## Examples
+
+These examples provide a starting point for how a library should be structured, as well as the expected options that libraries should use:
+
+* Data plane: [https://github.com/Azure/azure-rest-api-specs/tree/main/specification/widget/data-plane/WidgetAnalytics](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/widget/data-plane/WidgetAnalytics)
+* Management plane (ARM): [https://github.com/Azure/azure-rest-api-specs/tree/main/specification/widget/resource-manager/Microsoft.Widget/Widget](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/widget/resource-manager/Microsoft.Widget/Widget)
+
 ## Next steps
 
 The next step in the process after a spec is completed is to generate SDKs and API reference documentation. If you're a Microsoft employee, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk) for more information.
