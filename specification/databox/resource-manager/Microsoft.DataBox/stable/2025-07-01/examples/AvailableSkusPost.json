@@ -1,84 +1,41 @@
 {
   "parameters": {
-    "subscriptionId": "YourSubscriptionId",
-    "resourceGroupName": "YourResourceGroupName",
-    "location": "westus",
-    "api-version": "2025-07-01",
     "Accept-Language": [
       "en-US"
-    ],
-    "User-Agent": [
-      "vscode-restclient"
-    ],
-    "Content-Type": [
-      "application/json; charset=utf-8"
     ],
     "Content-Length": [
       "84"
     ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2025-07-01",
     "availableSkuRequest": {
-      "transferType": "ImportToAzure",
       "country": "XX",
-      "location": "westus"
-    }
+      "location": "westus",
+      "transferType": "ImportToAzure"
+    },
+    "location": "westus",
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "YourSubscriptionId"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "sku": {
-              "name": "DataBox",
-              "model": "DataBox"
-            },
             "enabled": true,
             "properties": {
-              "dataLocationToServiceLocationMap": [
-                {
-                  "dataLocation": "westus",
-                  "serviceLocation": "westus"
-                },
-                {
-                  "dataLocation": "centralus",
-                  "serviceLocation": "westus"
-                },
-                {
-                  "dataLocation": "eastus",
-                  "serviceLocation": "westus"
-                },
-                {
-                  "dataLocation": "eastus2",
-                  "serviceLocation": "westus"
-                },
-                {
-                  "dataLocation": "northcentralus",
-                  "serviceLocation": "westus"
-                },
-                {
-                  "dataLocation": "southcentralus",
-                  "serviceLocation": "westus"
-                },
-                {
-                  "dataLocation": "westcentralus",
-                  "serviceLocation": "westus"
-                },
-                {
-                  "dataLocation": "westus2",
-                  "serviceLocation": "westus"
-                },
-                {
-                  "dataLocation": "centraluseuap",
-                  "serviceLocation": "centraluseuap"
-                },
-                {
-                  "dataLocation": "eastus2euap",
-                  "serviceLocation": "eastus2euap"
-                }
+              "apiVersions": [
+                "2018-01-01"
               ],
               "capacity": {
-                "usable": "80",
+                "individualSkuUsable": "80",
                 "maximum": "100",
-                "individualSkuUsable": "80"
+                "usable": "80"
               },
               "costs": [
                 {
@@ -102,22 +59,9 @@
                   "multiplier": 1
                 }
               ],
-              "apiVersions": [
-                "2018-01-01"
-              ],
-              "disabledReason": "None",
               "countriesWithinCommerceBoundary": [
                 "XX"
-              ]
-            }
-          },
-          {
-            "sku": {
-              "name": "DataBoxDisk",
-              "model": "DataBoxDisk"
-            },
-            "enabled": true,
-            "properties": {
+              ],
               "dataLocationToServiceLocationMap": [
                 {
                   "dataLocation": "westus",
@@ -160,10 +104,23 @@
                   "serviceLocation": "eastus2euap"
                 }
               ],
+              "disabledReason": "None"
+            },
+            "sku": {
+              "name": "DataBox",
+              "model": "DataBox"
+            }
+          },
+          {
+            "enabled": true,
+            "properties": {
+              "apiVersions": [
+                "2018-01-01"
+              ],
               "capacity": {
-                "usable": "35",
+                "individualSkuUsable": "7",
                 "maximum": "40",
-                "individualSkuUsable": "7"
+                "usable": "35"
               },
               "costs": [
                 {
@@ -187,22 +144,9 @@
                   "multiplier": 1
                 }
               ],
-              "apiVersions": [
-                "2018-01-01"
-              ],
-              "disabledReason": "None",
               "countriesWithinCommerceBoundary": [
                 "XX"
-              ]
-            }
-          },
-          {
-            "sku": {
-              "name": "DataBoxHeavy",
-              "model": "DataBoxHeavy"
-            },
-            "enabled": true,
-            "properties": {
+              ],
               "dataLocationToServiceLocationMap": [
                 {
                   "dataLocation": "westus",
@@ -245,10 +189,23 @@
                   "serviceLocation": "eastus2euap"
                 }
               ],
+              "disabledReason": "None"
+            },
+            "sku": {
+              "name": "DataBoxDisk",
+              "model": "DataBoxDisk"
+            }
+          },
+          {
+            "enabled": true,
+            "properties": {
+              "apiVersions": [
+                "2018-01-01"
+              ],
               "capacity": {
-                "usable": "800",
+                "individualSkuUsable": "800",
                 "maximum": "1000",
-                "individualSkuUsable": "800"
+                "usable": "800"
               },
               "costs": [
                 {
@@ -272,18 +229,63 @@
                   "multiplier": 1
                 }
               ],
-              "apiVersions": [
-                "2018-01-01"
-              ],
-              "disabledReason": "None",
-              "requiredFeature": "HeavyCreateAccess",
               "countriesWithinCommerceBoundary": [
                 "XX"
-              ]
+              ],
+              "dataLocationToServiceLocationMap": [
+                {
+                  "dataLocation": "westus",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "dataLocation": "centralus",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "dataLocation": "eastus",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "dataLocation": "eastus2",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "dataLocation": "northcentralus",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "dataLocation": "southcentralus",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "dataLocation": "westcentralus",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "dataLocation": "westus2",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "dataLocation": "centraluseuap",
+                  "serviceLocation": "centraluseuap"
+                },
+                {
+                  "dataLocation": "eastus2euap",
+                  "serviceLocation": "eastus2euap"
+                }
+              ],
+              "disabledReason": "None",
+              "requiredFeature": "HeavyCreateAccess"
+            },
+            "sku": {
+              "name": "DataBoxHeavy",
+              "model": "DataBoxHeavy"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Service_ListAvailableSkusByResourceGroup",
+  "title": "AvailableSkusPost"
 }

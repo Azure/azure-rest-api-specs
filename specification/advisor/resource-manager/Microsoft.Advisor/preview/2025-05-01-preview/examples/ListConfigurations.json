@@ -1,26 +1,23 @@
 {
   "parameters": {
-    "subscriptionId": "subscriptionId",
+    "api-version": "2025-05-01-preview",
     "resourceGroup": "resourceGroup",
-    "api-version": "2025-05-01-preview"
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations?api-version=2025-05-01-preview&$skipToken=abc123",
         "value": [
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
-            "type": "Microsoft.Advisor/configurations",
             "name": "default",
+            "type": "Microsoft.Advisor/configurations",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
             "properties": {
-              "lowCpuThreshold": "5",
-              "duration": "7",
-              "exclude": false,
               "digests": [
                 {
                   "name": "digestConfigName",
                   "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
-                  "frequency": 30,
                   "categories": [
                     "HighAvailability",
                     "Security",
@@ -28,15 +25,20 @@
                     "Cost",
                     "OperationalExcellence"
                   ],
-                  "language": "en",
-                  "state": "Active"
+                  "frequency": 30,
+                  "state": "Active",
+                  "language": "en"
                 }
-              ]
+              ],
+              "duration": "7",
+              "exclude": false,
+              "lowCpuThreshold": "5"
             }
           }
-        ],
-        "nextLink": "string"
+        ]
       }
     }
-  }
+  },
+  "operationId": "Configurations_ListByResourceGroup",
+  "title": "GetConfigurations"
 }

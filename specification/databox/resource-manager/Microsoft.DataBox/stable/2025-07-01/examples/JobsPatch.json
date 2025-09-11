@@ -1,72 +1,74 @@
 {
   "parameters": {
-    "subscriptionId": "YourSubscriptionId",
-    "resourceGroupName": "YourResourceGroupName",
-    "jobName": "TestJobName1",
-    "api-version": "2025-07-01",
     "$expand": "details",
     "Accept-Language": [
       "en-US"
     ],
-    "User-Agent": [
-      "vscode-restclient"
+    "Content-Length": [
+      "584"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
     ],
-    "Content-Length": [
-      "584"
+    "User-Agent": [
+      "vscode-restclient"
     ],
+    "api-version": "2025-07-01",
+    "jobName": "TestJobName1",
     "jobResourceUpdateParameter": {
       "properties": {
         "details": {
           "contactDetails": {
             "contactName": "XXXX XXXX",
-            "phone": "0000000000",
-            "phoneExtension": "",
             "emailList": [
               "xxxx@xxxx.xxx"
-            ]
+            ],
+            "phone": "0000000000",
+            "phoneExtension": ""
           },
           "shippingAddress": {
-            "streetAddress1": "XXXX XXXX",
-            "streetAddress2": "XXXX XXXX",
+            "addressType": "Commercial",
             "city": "XXXX XXXX",
-            "stateOrProvince": "XX",
+            "companyName": "XXXX XXXX",
             "country": "XX",
             "postalCode": "00000",
-            "companyName": "XXXX XXXX",
-            "addressType": "Commercial"
+            "stateOrProvince": "XX",
+            "streetAddress1": "XXXX XXXX",
+            "streetAddress2": "XXXX XXXX"
           }
         }
       }
-    }
+    },
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "YourSubscriptionId"
   },
   "responses": {
-    "202": {
-      "headers": {
-        "location": "https://xxx.xxx.xx"
-      }
-    },
     "200": {
       "body": {
+        "name": "TestJobName1",
+        "type": "Microsoft.DataBox/jobs",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
+        "location": "westus",
         "properties": {
-          "transferType": "ImportToAzure",
           "isCancellable": true,
           "isShippingAddressEditable": true,
+          "startTime": "2018-04-13T16:28:38.9999793+05:30",
           "status": "DeviceOrdered",
-          "startTime": "2018-04-13T16:28:38.9999793+05:30"
+          "transferType": "ImportToAzure"
         },
-        "location": "westus",
-        "tags": {},
         "sku": {
           "name": "DataBox",
           "model": "DataBox"
         },
-        "name": "TestJobName1",
-        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
-        "type": "Microsoft.DataBox/jobs"
+        "tags": {}
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://xxx.xxx.xx"
       }
     }
-  }
+  },
+  "operationId": "Jobs_Update",
+  "title": "JobsPatch"
 }

@@ -1,26 +1,24 @@
 {
   "parameters": {
-    "subscriptionId": "YourSubscriptionId",
-    "resourceGroupName": "YourResourceGroupName",
-    "location": "westus",
-    "api-version": "2025-07-01",
     "Accept-Language": [
       "en-US"
-    ],
-    "User-Agent": [
-      "vscode-restclient"
-    ],
-    "Content-Type": [
-      "application/json; charset=utf-8"
     ],
     "Content-Length": [
       "1675"
     ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2025-07-01",
+    "location": "westus",
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "YourSubscriptionId",
     "validationRequest": {
-      "validationCategory": "JobCreationValidation",
       "individualRequestDetails": [
         {
-          "validationType": "ValidateDataTransferDetails",
           "dataImportDetails": [
             {
               "accountDetails": {
@@ -30,137 +28,141 @@
             }
           ],
           "deviceType": "DataBox",
+          "model": "DataBox",
           "transferType": "ImportToAzure",
-          "model": "DataBox"
+          "validationType": "ValidateDataTransferDetails"
         },
         {
-          "validationType": "ValidateAddress",
+          "deviceType": "DataBox",
+          "model": "DataBox",
           "shippingAddress": {
-            "streetAddress1": "XXXX XXXX",
-            "streetAddress2": "XXXX XXXX",
+            "addressType": "Commercial",
             "city": "XXXX XXXX",
-            "stateOrProvince": "XX",
+            "companyName": "XXXX XXXX",
             "country": "XX",
             "postalCode": "00000",
-            "companyName": "XXXX XXXX",
-            "addressType": "Commercial"
+            "stateOrProvince": "XX",
+            "streetAddress1": "XXXX XXXX",
+            "streetAddress2": "XXXX XXXX"
           },
-          "deviceType": "DataBox",
           "transportPreferences": {
             "preferredShipmentType": "MicrosoftManaged"
           },
-          "model": "DataBox"
+          "validationType": "ValidateAddress"
         },
         {
           "validationType": "ValidateSubscriptionIsAllowedToCreateJob"
         },
         {
-          "validationType": "ValidateSkuAvailability",
-          "deviceType": "DataBox",
-          "transferType": "ImportToAzure",
           "country": "XX",
-          "location": "westus",
-          "model": "DataBox"
-        },
-        {
-          "validationType": "ValidateCreateOrderLimit",
           "deviceType": "DataBox",
-          "model": "DataBox"
+          "location": "westus",
+          "model": "DataBox",
+          "transferType": "ImportToAzure",
+          "validationType": "ValidateSkuAvailability"
         },
         {
-          "validationType": "ValidatePreferences",
+          "deviceType": "DataBox",
+          "model": "DataBox",
+          "validationType": "ValidateCreateOrderLimit"
+        },
+        {
+          "deviceType": "DataBox",
+          "model": "DataBox",
           "preference": {
             "transportPreferences": {
               "preferredShipmentType": "MicrosoftManaged"
             }
           },
-          "deviceType": "DataBox",
-          "model": "DataBox"
+          "validationType": "ValidatePreferences"
         }
-      ]
+      ],
+      "validationCategory": "JobCreationValidation"
     }
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "status": "AllValidToProceed",
           "individualResponseDetails": [
             {
-              "status": "Valid",
-              "validationType": "ValidateDataTransferDetails",
               "error": {
+                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": [],
-                "additionalInfo": []
-              }
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidateDataTransferDetails"
             },
             {
-              "validationStatus": "Valid",
               "alternateAddresses": [
                 {
-                  "streetAddress1": "XXXX XXXX",
-                  "streetAddress2": "XXXX XXXX",
-                  "streetAddress3": "",
+                  "addressType": "None",
                   "city": "XXXX XXXX",
-                  "stateOrProvince": "XX",
                   "country": "XX",
                   "postalCode": "00000",
-                  "addressType": "None"
+                  "stateOrProvince": "XX",
+                  "streetAddress1": "XXXX XXXX",
+                  "streetAddress2": "XXXX XXXX",
+                  "streetAddress3": ""
                 }
               ],
-              "validationType": "ValidateAddress",
               "error": {
+                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": [],
-                "additionalInfo": []
-              }
+                "details": []
+              },
+              "validationStatus": "Valid",
+              "validationType": "ValidateAddress"
             },
             {
-              "status": "Valid",
-              "validationType": "ValidateSubscriptionIsAllowedToCreateJob",
               "error": {
+                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": [],
-                "additionalInfo": []
-              }
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidateSubscriptionIsAllowedToCreateJob"
             },
             {
-              "status": "Valid",
-              "validationType": "ValidateSkuAvailability",
               "error": {
+                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": [],
-                "additionalInfo": []
-              }
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidateSkuAvailability"
             },
             {
-              "status": "Valid",
-              "validationType": "ValidateCreateOrderLimit",
               "error": {
+                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": [],
-                "additionalInfo": []
-              }
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidateCreateOrderLimit"
             },
             {
-              "status": "Valid",
-              "validationType": "ValidatePreferences",
               "error": {
+                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": [],
-                "additionalInfo": []
-              }
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidatePreferences"
             }
-          ]
+          ],
+          "status": "AllValidToProceed"
         }
       }
     }
-  }
+  },
+  "operationId": "Service_ValidateInputsByResourceGroup",
+  "title": "ValidateInputsByResourceGroup"
 }

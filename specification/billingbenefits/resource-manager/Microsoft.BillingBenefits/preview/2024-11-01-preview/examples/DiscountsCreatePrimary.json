@@ -1,21 +1,16 @@
 {
   "parameters": {
-    "subscriptionId": "30000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "testrg",
-    "discountName": "testprimarydiscount",
     "api-version": "2024-11-01-preview",
     "body": {
       "location": "global",
       "properties": {
-        "entityType": "Primary",
         "appliedScopeType": "BillingAccount",
         "discountTypeProperties": {
-          "discountType": "Sku",
           "applyDiscountOn": "Purchase",
           "conditions": [
             {
-              "conditionName": "Cloud",
               "type": "equalAny",
+              "conditionName": "Cloud",
               "value": [
                 "US-Sec"
               ]
@@ -23,12 +18,14 @@
           ],
           "discountCombinationRule": "BestOf",
           "discountPercentage": 14,
+          "discountType": "Sku",
           "productFamilyName": "Azure",
           "productId": "DZH318Z0BQ35",
           "skuId": "0001"
         },
         "displayName": "Virtual Machines D Series",
         "endAt": "2024-07-01T23:59:59Z",
+        "entityType": "Primary",
         "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
         "startAt": "2023-07-01T00:00:00Z"
       },
@@ -36,34 +33,25 @@
         "key1": "value1",
         "key2": "value2"
       }
-    }
+    },
+    "discountName": "testprimarydiscount",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "30000000-0000-0000-0000-000000000000"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
         "name": "testprimarydiscount",
         "type": "Microsoft.BillingBenefits/discounts",
+        "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
+        "location": "global",
         "properties": {
-          "displayName": "Virtual Machines D Series",
-          "entityType": "Primary",
-          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
-          "startAt": "2023-07-01T00:00:00Z",
-          "endAt": "2024-07-01T23:59:59Z",
-          "systemId": "13810867107109237",
-          "provisioningState": "Pending",
-          "status": "Pending",
-          "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
-          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
-          "customerResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/customers/40000000-0000-0000-0000-000000000000",
           "appliedScopeType": "BillingAccount",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
+          "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
+          "customerResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/customers/40000000-0000-0000-0000-000000000000",
           "discountTypeProperties": {
-            "discountType": "Sku",
             "applyDiscountOn": "Purchase",
-            "productFamilyName": "Azure",
-            "productId": "DZH318Z0BQ35",
-            "skuId": "0001",
-            "discountPercentage": 14,
             "conditions": [
               {
                 "type": "equalAny",
@@ -72,41 +60,41 @@
                   "US-Sec"
                 ]
               }
-            ]
-          }
+            ],
+            "discountPercentage": 14,
+            "discountType": "Sku",
+            "productFamilyName": "Azure",
+            "productId": "DZH318Z0BQ35",
+            "skuId": "0001"
+          },
+          "displayName": "Virtual Machines D Series",
+          "endAt": "2024-07-01T23:59:59Z",
+          "entityType": "Primary",
+          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+          "provisioningState": "Succeeded",
+          "startAt": "2023-07-01T00:00:00Z",
+          "status": "Active",
+          "systemId": "13810867107109237"
         },
-        "location": "global",
         "tags": {
           "key1": "value1",
           "key2": "value2"
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
         "name": "testprimarydiscount",
         "type": "Microsoft.BillingBenefits/discounts",
+        "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
+        "location": "global",
         "properties": {
-          "displayName": "Virtual Machines D Series",
-          "entityType": "Primary",
-          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
-          "startAt": "2023-07-01T00:00:00Z",
-          "endAt": "2024-07-01T23:59:59Z",
-          "systemId": "13810867107109237",
-          "provisioningState": "Succeeded",
-          "status": "Active",
+          "appliedScopeType": "BillingAccount",
           "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
           "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
           "customerResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/customers/40000000-0000-0000-0000-000000000000",
-          "appliedScopeType": "BillingAccount",
           "discountTypeProperties": {
-            "discountType": "Sku",
             "applyDiscountOn": "Purchase",
-            "productFamilyName": "Azure",
-            "productId": "DZH318Z0BQ35",
-            "skuId": "0001",
-            "discountPercentage": 14,
             "conditions": [
               {
                 "type": "equalAny",
@@ -115,15 +103,29 @@
                   "US-Sec"
                 ]
               }
-            ]
-          }
+            ],
+            "discountPercentage": 14,
+            "discountType": "Sku",
+            "productFamilyName": "Azure",
+            "productId": "DZH318Z0BQ35",
+            "skuId": "0001"
+          },
+          "displayName": "Virtual Machines D Series",
+          "endAt": "2024-07-01T23:59:59Z",
+          "entityType": "Primary",
+          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+          "provisioningState": "Pending",
+          "startAt": "2023-07-01T00:00:00Z",
+          "status": "Pending",
+          "systemId": "13810867107109237"
         },
-        "location": "global",
         "tags": {
           "key1": "value1",
           "key2": "value2"
         }
       }
     }
-  }
+  },
+  "operationId": "Discounts_Create",
+  "title": "DiscountsCreatePrimary"
 }

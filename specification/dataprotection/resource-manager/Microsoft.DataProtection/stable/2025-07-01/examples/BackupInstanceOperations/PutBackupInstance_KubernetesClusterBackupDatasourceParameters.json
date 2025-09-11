@@ -1,133 +1,124 @@
 {
   "parameters": {
-    "subscriptionId": "62b829ee-7936-40c9-a1c9-47a93f9f3965",
-    "resourceGroupName": "aksrg",
-    "vaultName": "aksvault",
     "api-version": "2025-07-01",
     "backupInstanceName": "aksbi",
     "parameters": {
-      "tags": {
-        "key1": "val1"
-      },
       "properties": {
-        "friendlyName": "aksbi",
         "dataSourceInfo": {
-          "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
-          "resourceUri": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
           "datasourceType": "Microsoft.ContainerService/managedclusters",
+          "objectType": "Datasource",
+          "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
+          "resourceLocation": "eastus2euap",
           "resourceName": "akscluster",
           "resourceType": "Microsoft.ContainerService/managedclusters",
-          "resourceLocation": "eastus2euap",
-          "objectType": "Datasource"
+          "resourceUri": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster"
         },
         "dataSourceSetInfo": {
-          "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
-          "resourceUri": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
           "datasourceType": "Microsoft.ContainerService/managedclusters",
+          "objectType": "DatasourceSet",
+          "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
+          "resourceLocation": "eastus2euap",
           "resourceName": "akscluster",
           "resourceType": "Microsoft.ContainerService/managedclusters",
-          "resourceLocation": "eastus2euap",
-          "objectType": "DatasourceSet"
+          "resourceUri": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster"
         },
+        "friendlyName": "aksbi",
+        "objectType": "BackupInstance",
         "policyInfo": {
           "policyId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourcegroups/aksrg/providers/Microsoft.DataProtection/BackupVaults/aksvault/backupPolicies/akspolicy",
           "policyParameters": {
-            "dataStoreParametersList": [
-              {
-                "resourceGroupId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg",
-                "objectType": "AzureOperationalStoreParameters",
-                "dataStoreType": "OperationalStore"
-              }
-            ],
             "backupDatasourceParametersList": [
               {
-                "objectType": "KubernetesClusterBackupDatasourceParameters",
-                "includedNamespaces": [
-                  "test"
-                ],
                 "excludedNamespaces": [
                   "kube-system"
                 ],
-                "includedResourceTypes": [],
                 "excludedResourceTypes": [
                   "v1/Secret"
                 ],
+                "includeClusterScopeResources": true,
+                "includedNamespaces": [
+                  "test"
+                ],
+                "includedResourceTypes": [],
                 "includedVolumeTypes": [
                   "AzureDisk",
                   "AzureFileShareSMB"
                 ],
                 "labelSelectors": [],
-                "snapshotVolumes": true,
-                "includeClusterScopeResources": true
+                "objectType": "KubernetesClusterBackupDatasourceParameters",
+                "snapshotVolumes": true
+              }
+            ],
+            "dataStoreParametersList": [
+              {
+                "dataStoreType": "OperationalStore",
+                "objectType": "AzureOperationalStoreParameters",
+                "resourceGroupId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg"
               }
             ]
           }
-        },
-        "objectType": "BackupInstance"
+        }
       }
-    }
+    },
+    "resourceGroupName": "aksrg",
+    "subscriptionId": "62b829ee-7936-40c9-a1c9-47a93f9f3965",
+    "vaultName": "aksvault"
   },
   "responses": {
-    "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/operationStatus/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2025-07-01",
-        "Retry-After": "60"
-      },
+    "200": {
       "body": {
-        "id": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/backupInstances/aksbi",
         "name": "aksbi",
         "type": "Microsoft.DataProtection/backupVaults/backupInstances",
-        "tags": {
-          "key1": "val1"
-        },
+        "id": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/backupInstances/aksbi",
         "properties": {
-          "friendlyName": "aksbi",
           "dataSourceInfo": {
-            "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
-            "resourceUri": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
             "datasourceType": "Microsoft.ContainerService/managedclusters",
+            "objectType": "Datasource",
+            "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
+            "resourceLocation": "eastus2euap",
             "resourceName": "akscluster",
             "resourceType": "Microsoft.ContainerService/managedclusters",
-            "resourceLocation": "eastus2euap",
-            "objectType": "Datasource"
+            "resourceUri": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster"
           },
           "dataSourceSetInfo": {
-            "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
             "datasourceType": "Microsoft.ContainerService/managedclusters",
-            "resourceType": "Microsoft.ContainerService/managedclusters",
+            "objectType": "DatasourceSet",
+            "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
             "resourceLocation": "eastus2euap",
-            "objectType": "DatasourceSet"
+            "resourceType": "Microsoft.ContainerService/managedclusters"
           },
+          "friendlyName": "aksbi",
+          "objectType": "BackupInstance",
           "policyInfo": {
             "policyId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/backupPolicies/akspolicy",
             "policyParameters": {
-              "dataStoreParametersList": [
-                {
-                  "resourceGroupId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg",
-                  "objectType": "AzureOperationalStoreParameters",
-                  "dataStoreType": "OperationalStore"
-                }
-              ],
               "backupDatasourceParametersList": [
                 {
-                  "objectType": "KubernetesClusterBackupDatasourceParameters",
-                  "includedNamespaces": [
-                    "test"
-                  ],
                   "excludedNamespaces": [
                     "kube-system"
                   ],
-                  "includedResourceTypes": [],
                   "excludedResourceTypes": [
                     "v1/Secret"
                   ],
+                  "includeClusterScopeResources": true,
+                  "includedNamespaces": [
+                    "test"
+                  ],
+                  "includedResourceTypes": [],
                   "includedVolumeTypes": [
                     "AzureDisk",
                     "AzureFileShareSMB"
                   ],
                   "labelSelectors": [],
-                  "snapshotVolumes": true,
-                  "includeClusterScopeResources": true
+                  "objectType": "KubernetesClusterBackupDatasourceParameters",
+                  "snapshotVolumes": true
+                }
+              ],
+              "dataStoreParametersList": [
+                {
+                  "dataStoreType": "OperationalStore",
+                  "objectType": "AzureOperationalStoreParameters",
+                  "resourceGroupId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg"
                 }
               ]
             }
@@ -135,9 +126,77 @@
           "protectionStatus": {
             "status": "NotProtected"
           },
-          "provisioningState": "Provisioning",
-          "objectType": "BackupInstance"
+          "provisioningState": "Provisioned"
         }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "aksbi",
+        "type": "Microsoft.DataProtection/backupVaults/backupInstances",
+        "id": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/backupInstances/aksbi",
+        "properties": {
+          "dataSourceInfo": {
+            "datasourceType": "Microsoft.ContainerService/managedclusters",
+            "objectType": "Datasource",
+            "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
+            "resourceLocation": "eastus2euap",
+            "resourceName": "akscluster",
+            "resourceType": "Microsoft.ContainerService/managedclusters",
+            "resourceUri": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster"
+          },
+          "dataSourceSetInfo": {
+            "datasourceType": "Microsoft.ContainerService/managedclusters",
+            "objectType": "DatasourceSet",
+            "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
+            "resourceLocation": "eastus2euap",
+            "resourceType": "Microsoft.ContainerService/managedclusters"
+          },
+          "friendlyName": "aksbi",
+          "objectType": "BackupInstance",
+          "policyInfo": {
+            "policyId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/backupPolicies/akspolicy",
+            "policyParameters": {
+              "backupDatasourceParametersList": [
+                {
+                  "excludedNamespaces": [
+                    "kube-system"
+                  ],
+                  "excludedResourceTypes": [
+                    "v1/Secret"
+                  ],
+                  "includeClusterScopeResources": true,
+                  "includedNamespaces": [
+                    "test"
+                  ],
+                  "includedResourceTypes": [],
+                  "includedVolumeTypes": [
+                    "AzureDisk",
+                    "AzureFileShareSMB"
+                  ],
+                  "labelSelectors": [],
+                  "objectType": "KubernetesClusterBackupDatasourceParameters",
+                  "snapshotVolumes": true
+                }
+              ],
+              "dataStoreParametersList": [
+                {
+                  "dataStoreType": "OperationalStore",
+                  "objectType": "AzureOperationalStoreParameters",
+                  "resourceGroupId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg"
+                }
+              ]
+            }
+          },
+          "protectionStatus": {
+            "status": "NotProtected"
+          },
+          "provisioningState": "Provisioning"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/operationStatus/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2025-07-01",
+        "Retry-After": "60"
       }
     },
     "202": {
@@ -146,74 +205,8 @@
         "Location": "https://management.windowsazure.com/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/backupInstances/aksbi/operationResults/YWUzNDFkMzQtZmM5OS00MmUyLWEzNDMtZGJkMDIxZjlmZjgzOzdmYzBiMzhmLTc2NmItNDM5NS05OWQ1LTVmOGEzNzg4MWQzNA==?api-version=2025-07-01",
         "Retry-After": "60"
       }
-    },
-    "200": {
-      "body": {
-        "id": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/backupInstances/aksbi",
-        "name": "aksbi",
-        "type": "Microsoft.DataProtection/backupVaults/backupInstances",
-        "tags": {
-          "key1": "val1"
-        },
-        "properties": {
-          "friendlyName": "aksbi",
-          "dataSourceInfo": {
-            "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
-            "resourceUri": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
-            "datasourceType": "Microsoft.ContainerService/managedclusters",
-            "resourceName": "akscluster",
-            "resourceType": "Microsoft.ContainerService/managedclusters",
-            "resourceLocation": "eastus2euap",
-            "objectType": "Datasource"
-          },
-          "dataSourceSetInfo": {
-            "resourceID": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.ContainerService/managedClusters/akscluster",
-            "datasourceType": "Microsoft.ContainerService/managedclusters",
-            "resourceType": "Microsoft.ContainerService/managedclusters",
-            "resourceLocation": "eastus2euap",
-            "objectType": "DatasourceSet"
-          },
-          "policyInfo": {
-            "policyId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg/providers/Microsoft.DataProtection/backupVaults/aksvault/backupPolicies/akspolicy",
-            "policyParameters": {
-              "dataStoreParametersList": [
-                {
-                  "resourceGroupId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/aksrg",
-                  "objectType": "AzureOperationalStoreParameters",
-                  "dataStoreType": "OperationalStore"
-                }
-              ],
-              "backupDatasourceParametersList": [
-                {
-                  "objectType": "KubernetesClusterBackupDatasourceParameters",
-                  "includedNamespaces": [
-                    "test"
-                  ],
-                  "excludedNamespaces": [
-                    "kube-system"
-                  ],
-                  "includedResourceTypes": [],
-                  "excludedResourceTypes": [
-                    "v1/Secret"
-                  ],
-                  "includedVolumeTypes": [
-                    "AzureDisk",
-                    "AzureFileShareSMB"
-                  ],
-                  "labelSelectors": [],
-                  "snapshotVolumes": true,
-                  "includeClusterScopeResources": true
-                }
-              ]
-            }
-          },
-          "protectionStatus": {
-            "status": "NotProtected"
-          },
-          "provisioningState": "Provisioned",
-          "objectType": "BackupInstance"
-        }
-      }
     }
-  }
+  },
+  "operationId": "BackupInstances_CreateOrUpdate",
+  "title": "Create BackupInstance With KubernetesClusterBackupDatasourceParameters"
 }

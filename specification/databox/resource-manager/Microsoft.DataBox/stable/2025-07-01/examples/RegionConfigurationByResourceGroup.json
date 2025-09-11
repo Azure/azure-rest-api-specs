@@ -1,24 +1,31 @@
 {
   "parameters": {
-    "subscriptionId": "YourSubscriptionId",
-    "resourceGroupName": "YourResourceGroupName",
-    "location": "westus",
     "api-version": "2025-07-01",
+    "location": "westus",
     "regionConfigurationRequest": {
-      "scheduleAvailabilityRequest": {
-        "storageLocation": "westus",
-        "skuName": "DataBox",
-        "model": "DataBox"
-      },
       "deviceCapabilityRequest": {
-        "skuName": "DataBoxDisk",
-        "model": "DataBoxDisk"
+        "model": "DataBoxDisk",
+        "skuName": "DataBoxDisk"
+      },
+      "scheduleAvailabilityRequest": {
+        "model": "DataBox",
+        "skuName": "DataBox",
+        "storageLocation": "westus"
       }
-    }
+    },
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "YourSubscriptionId"
   },
   "responses": {
     "200": {
       "body": {
+        "deviceCapabilityResponse": {
+          "deviceCapabilityDetails": [
+            {
+              "hardwareEncryption": "Enabled"
+            }
+          ]
+        },
         "scheduleAvailabilityResponse": {
           "availableDates": [
             "2019-07-11T00:00:00+00:00",
@@ -43,15 +50,10 @@
             "2019-07-30T00:00:00+00:00",
             "2019-07-31T00:00:00+00:00"
           ]
-        },
-        "deviceCapabilityResponse": {
-          "deviceCapabilityDetails": [
-            {
-              "hardwareEncryption": "Enabled"
-            }
-          ]
         }
       }
     }
-  }
+  },
+  "operationId": "Service_RegionConfigurationByResourceGroup",
+  "title": "RegionConfigurationByResourceGroup"
 }

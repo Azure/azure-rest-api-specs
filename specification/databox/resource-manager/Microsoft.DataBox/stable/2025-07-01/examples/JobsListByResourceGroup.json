@@ -1,80 +1,82 @@
 {
   "parameters": {
-    "subscriptionId": "YourSubscriptionId",
-    "resourceGroupName": "YourResourceGroupName",
-    "api-version": "2025-07-01",
     "$expand": "details",
     "Accept-Language": [
       "en-US"
     ],
     "User-Agent": [
       "vscode-restclient"
-    ]
+    ],
+    "api-version": "2025-07-01",
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "YourSubscriptionId"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "properties": {
-              "transferType": "ImportToAzure",
-              "isCancellable": true,
-              "isDeletable": false,
-              "isShippingAddressEditable": true,
-              "isPrepareToShipEnabled": true,
-              "status": "DeviceOrdered",
-              "startTime": "2020-07-03T11:55:54.463792+05:30",
-              "deliveryType": "NonScheduled",
-              "deliveryInfo": {
-                "scheduledDateTime": "0001-01-01T05:30:00+05:30"
-              },
-              "isCancellableWithoutFee": true
-            },
-            "location": "westus",
-            "tags": {},
-            "sku": {
-              "name": "DataBox",
-              "model": "DataBox"
-            },
+            "name": "TestJobName1",
+            "type": "Microsoft.DataBox/jobs",
+            "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
             "identity": {
               "type": "SystemAssigned",
               "principalId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
               "tenantId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
             },
-            "name": "TestJobName1",
-            "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
-            "type": "Microsoft.DataBox/jobs"
-          },
-          {
+            "location": "westus",
             "properties": {
-              "transferType": "ImportToAzure",
-              "isCancellable": true,
-              "isDeletable": false,
-              "isShippingAddressEditable": true,
-              "isPrepareToShipEnabled": true,
-              "status": "DeviceOrdered",
-              "startTime": "2020-08-07T10:50:36.3341513+05:30",
-              "deliveryType": "NonScheduled",
               "deliveryInfo": {
                 "scheduledDateTime": "0001-01-01T05:30:00+05:30"
               },
-              "isCancellableWithoutFee": true
+              "deliveryType": "NonScheduled",
+              "isCancellable": true,
+              "isCancellableWithoutFee": true,
+              "isDeletable": false,
+              "isPrepareToShipEnabled": true,
+              "isShippingAddressEditable": true,
+              "startTime": "2020-07-03T11:55:54.463792+05:30",
+              "status": "DeviceOrdered",
+              "transferType": "ImportToAzure"
             },
-            "location": "westus",
-            "tags": {},
             "sku": {
               "name": "DataBox",
               "model": "DataBox"
             },
+            "tags": {}
+          },
+          {
+            "name": "TestJobName2",
+            "type": "Microsoft.DataBox/jobs",
+            "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName2",
             "identity": {
               "type": "None"
             },
-            "name": "TestJobName2",
-            "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName2",
-            "type": "Microsoft.DataBox/jobs"
+            "location": "westus",
+            "properties": {
+              "deliveryInfo": {
+                "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+              },
+              "deliveryType": "NonScheduled",
+              "isCancellable": true,
+              "isCancellableWithoutFee": true,
+              "isDeletable": false,
+              "isPrepareToShipEnabled": true,
+              "isShippingAddressEditable": true,
+              "startTime": "2020-08-07T10:50:36.3341513+05:30",
+              "status": "DeviceOrdered",
+              "transferType": "ImportToAzure"
+            },
+            "sku": {
+              "name": "DataBox",
+              "model": "DataBox"
+            },
+            "tags": {}
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Jobs_ListByResourceGroup",
+  "title": "JobsListByResourceGroup"
 }

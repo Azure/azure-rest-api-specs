@@ -1,56 +1,58 @@
 {
   "parameters": {
-    "subscriptionId": "YourSubscriptionId",
-    "location": "westus",
-    "api-version": "2025-07-01",
     "Accept-Language": [
       "en-US"
-    ],
-    "User-Agent": [
-      "vscode-restclient"
-    ],
-    "Content-Type": [
-      "application/json; charset=utf-8"
     ],
     "Content-Length": [
       "351"
     ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2025-07-01",
+    "location": "westus",
+    "subscriptionId": "YourSubscriptionId",
     "validateAddress": {
-      "validationType": "ValidateAddress",
+      "deviceType": "DataBox",
+      "model": "DataBox",
       "shippingAddress": {
-        "streetAddress1": "XXXX XXXX",
-        "streetAddress2": "XXXX XXXX",
+        "addressType": "Commercial",
         "city": "XXXX XXXX",
-        "stateOrProvince": "XX",
+        "companyName": "XXXX XXXX",
         "country": "XX",
         "postalCode": "00000",
-        "companyName": "XXXX XXXX",
-        "addressType": "Commercial"
+        "stateOrProvince": "XX",
+        "streetAddress1": "XXXX XXXX",
+        "streetAddress2": "XXXX XXXX"
       },
-      "deviceType": "DataBox",
-      "model": "DataBox"
+      "validationType": "ValidateAddress"
     }
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "validationStatus": "Valid",
           "alternateAddresses": [
             {
-              "streetAddress1": "XXXX XXXX",
-              "streetAddress2": "XXXX XXXX",
-              "streetAddress3": "",
+              "addressType": "None",
               "city": "XXXX XXXX",
-              "stateOrProvince": "XX",
               "country": "XX",
               "postalCode": "00000",
-              "addressType": "None"
+              "stateOrProvince": "XX",
+              "streetAddress1": "XXXX XXXX",
+              "streetAddress2": "XXXX XXXX",
+              "streetAddress3": ""
             }
           ],
+          "validationStatus": "Valid",
           "validationType": "ValidateAddress"
         }
       }
     }
-  }
+  },
+  "operationId": "Service_ValidateAddress",
+  "title": "ValidateAddressPost"
 }
