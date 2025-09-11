@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/web"
+    default: "sdk/appservice"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -12,8 +12,9 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    service-dir: sdk/websites
     flavor: azure
-    package-dir: "Azure.ResourceManager.Web"
+    package-dir: "Azure.ResourceManager.AppService"
     clear-output-folder: true
     model-namespace: true
     namespace: "{package-dir}"
@@ -24,21 +25,20 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-web"
-    namespace: "com.azure.resourcemanager.web"
-    service-name: "Web" # human-readable service name, whitespace allowed
+    package-dir: "azure-resourcemanager-appservice"
+    namespace: "com.azure.resourcemanager.appservice"
+    service-name: "AppService" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    service-dir: sdk/web
-    package-dir: "arm-web"
+    package-dir: "arm-appservice"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-web"
+      name: "@azure/arm-appservice"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/web"
-    package-dir: "armweb"
+    service-dir: "sdk/resourcemanager/appservice"
+    package-dir: "armappservice"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
