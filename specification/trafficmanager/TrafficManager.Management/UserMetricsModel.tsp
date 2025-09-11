@@ -13,16 +13,13 @@ namespace Microsoft.Network;
 /**
  * Class representing Traffic Manager User Metrics.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @singleton("default")
 @subscriptionResource
-model UserMetricsModel
-  is Azure.ResourceManager.ProxyResource<UserMetricsProperties> {
-  ...ResourceNameParameter<
-    Resource = UserMetricsModel,
-    KeyName = "trafficManagerUserMetricsKey",
-    SegmentName = "trafficManagerUserMetricsKeys",
-    NamePattern = ""
-  >;
+model UserMetricsModel extends ProxyResource {
+  properties: UserMetricsProperties;
 }
 
 alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -30,7 +27,8 @@ alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...Azure.ResourceManager.Legacy.Provider;
-
+  },
+  {
     /**
      * The user metrics keys. The default value is "default".
      */
@@ -39,7 +37,6 @@ alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key("trafficManagerUserMetricsKeys")
     trafficManagerUserMetricsKeys: "default";
   },
-  {},
   ErrorType = CloudError
 >;
 
@@ -49,11 +46,7 @@ interface UserMetricsModels {
    * Get the subscription-level key used for Real User Metrics collection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is ArmResourceRead<
-    UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = CloudError
-  >;
+  get is UserMetricsModelOps.Read<UserMetricsModel>;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
@@ -73,12 +66,17 @@ interface UserMetricsModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteSync<
-    UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+  delete is UserMetricsModelOps.DeleteSync<
+    Resource = UserMetricsModel,
     Response = ArmResponse<DeleteOperationResult>,
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
+  // delete is ArmResourceDeleteSync<
+  //   UserMetricsModel,
+  //   BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+  //   Response = ArmResponse<DeleteOperationResult>,
+  //   Error = CloudError
+  // >;
 }
 
 @@doc(UserMetricsModel.name, "");

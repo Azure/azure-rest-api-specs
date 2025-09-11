@@ -13,16 +13,13 @@ namespace Microsoft.Network;
 /**
  * Class representing the Geographic hierarchy used with the Geographic traffic routing method.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @singleton("default")
 @tenantResource
-model TrafficManagerGeographicHierarchy
-  is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties> {
-  ...ResourceNameParameter<
-    Resource = TrafficManagerGeographicHierarchy,
-    KeyName = "trafficManagerGeographicHierarchy",
-    SegmentName = "trafficManagerGeographicHierarchies",
-    NamePattern = ""
-  >;
+model TrafficManagerGeographicHierarchy extends ProxyResource {
+  properties: GeographicHierarchyProperties;
 }
 
 @armResourceOperations
@@ -34,6 +31,12 @@ interface TrafficManagerGeographicHierarchies {
   getDefault is ArmResourceRead<
     TrafficManagerGeographicHierarchy,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @path
+      @segment("trafficManagerGeographicHierarchies")
+      trafficManagerGeographicHierarchy: "default";
+    },
     Error = CloudError
   >;
 }

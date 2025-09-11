@@ -271,13 +271,21 @@ model EndpointPropertiesCustomHeadersItem {
 /**
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
 model ProxyResource extends Resource {}
 
 /**
  * The core properties of ARM resources
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
@@ -287,6 +295,7 @@ model Resource {
   /**
    * The name of the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
 
   /**
@@ -556,7 +565,11 @@ model MonitorConfigExpectedStatusCodeRangesItem {
 /**
  * The resource model definition for a ARM tracked top level resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
 model TrackedResource extends Resource {
   /**
    * Resource tags.

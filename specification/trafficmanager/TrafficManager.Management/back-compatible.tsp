@@ -59,3 +59,6 @@ using Microsoft.Network;
 
 @@clientLocation(HeatMapModels.get, "HeatMap");
 @@clientName(HeatMapModels.get, "Get");
+
+@@clientLocation(Profiles.get, "Profiles");
+@@clientLocation(Profiles.listByResourceGroup, "Profiles");

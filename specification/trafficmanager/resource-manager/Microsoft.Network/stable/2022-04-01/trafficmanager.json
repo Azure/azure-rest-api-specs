@@ -374,7 +374,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile.",
             "required": true,
             "type": "string"
           }
@@ -424,14 +424,14 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Profile"
@@ -498,7 +498,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile.",
             "required": true,
             "type": "string"
           },
@@ -551,7 +551,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile.",
             "required": true,
             "type": "string"
           }
@@ -597,7 +597,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile.",
             "required": true,
             "type": "string"
           },
@@ -667,7 +667,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile.",
             "required": true,
             "type": "string"
           },
@@ -706,22 +706,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'Endpoint' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'Endpoint' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Endpoint"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -765,7 +758,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile.",
             "required": true,
             "type": "string"
           },
@@ -838,7 +831,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile.",
             "required": true,
             "type": "string"
           },
@@ -1128,9 +1121,12 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -1347,9 +1343,12 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -1502,6 +1501,9 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
@@ -1510,20 +1512,24 @@
     },
     "ProfileListResult": {
       "type": "object",
-      "description": "The list Traffic Manager profiles operation response.",
+      "description": "The response of a Profile list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Gets the list of Traffic manager profiles.",
+          "description": "The Profile items on this page",
           "items": {
             "$ref": "#/definitions/Profile"
           }
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ProfileMonitorStatus": {
       "type": "string",
@@ -1629,6 +1635,15 @@
         ]
       }
     },
+    "ProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "QueryExperience": {
       "type": "object",
       "description": "Class representing a Traffic Manager HeatMap query experience properties.",
@@ -1675,20 +1690,42 @@
         }
       }
     },
+    "Resource": {
+      "type": "object",
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
+        }
+      }
+    },
     "TrackedResource": {
       "type": "object",
-      "description": "A tracked resource with the 'location' property optional",
+      "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "The Azure Region where the resource lives",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1697,7 +1734,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -1738,9 +1775,12 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -1844,9 +1884,12 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
