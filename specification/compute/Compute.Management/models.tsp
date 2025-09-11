@@ -3322,6 +3322,7 @@ model AdditionalCapabilities {
   /**
    * The flag enables the usage of FIPS 140-3 compliant cryptography on the protectedSettings of an extension. Learn more at: https://aka.ms/linuxagentfipssupport.
    */
+  @added(Versions.v2025_04_01)
   enableFips1403Encryption?: boolean;
 }
 
