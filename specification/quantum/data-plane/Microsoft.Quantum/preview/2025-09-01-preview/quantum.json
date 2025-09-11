@@ -411,15 +411,6 @@
                     "create"
                   ]
                 },
-                "priority": {
-                  "$ref": "#/definitions/Priority",
-                  "description": "Priority of job.",
-                  "x-ms-mutability": [
-                    "read",
-                    "update",
-                    "create"
-                  ]
-                },
                 "name": {
                   "type": "string",
                   "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes.",
@@ -472,6 +463,15 @@
                   "$ref": "#/definitions/Errors.WorkspaceItemError",
                   "description": "Error information.",
                   "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
                 }
               },
               "required": [
@@ -676,15 +676,6 @@
                     "create"
                   ]
                 },
-                "priority": {
-                  "$ref": "#/definitions/Priority",
-                  "description": "Priority of job.",
-                  "x-ms-mutability": [
-                    "read",
-                    "update",
-                    "create"
-                  ]
-                },
                 "name": {
                   "type": "string",
                   "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes.",
@@ -737,6 +728,15 @@
                   "$ref": "#/definitions/Errors.WorkspaceItemError",
                   "description": "Error information.",
                   "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
                 }
               },
               "required": [
@@ -862,15 +862,6 @@
                     "create"
                   ]
                 },
-                "priority": {
-                  "$ref": "#/definitions/Priority",
-                  "description": "Priority of job.",
-                  "x-ms-mutability": [
-                    "read",
-                    "update",
-                    "create"
-                  ]
-                },
                 "name": {
                   "type": "string",
                   "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes.",
@@ -923,6 +914,15 @@
                   "$ref": "#/definitions/Errors.WorkspaceItemError",
                   "description": "Error information.",
                   "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
                 }
               },
               "required": [
@@ -1976,7 +1976,7 @@
         },
         "priority": {
           "$ref": "#/definitions/Priority",
-          "description": "List of user-supplied tags associated with the job.",
+          "description": "Priority of job or session.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1985,6 +1985,7 @@
         },
         "tags": {
           "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
           "items": {
             "type": "string"
           },
@@ -2123,15 +2124,6 @@
           "description": "The format of the output data.",
           "x-ms-mutability": [
             "read",
-            "create"
-          ]
-        },
-        "priority": {
-          "$ref": "#/definitions/Priority",
-          "description": "Priority of job.",
-          "x-ms-mutability": [
-            "read",
-            "update",
             "create"
           ]
         }
@@ -2426,7 +2418,7 @@
       "type": "string",
       "description": "Job priority levels.",
       "enum": [
-        "Basic",
+        "Standard",
         "High"
       ],
       "x-ms-enum": {
@@ -2434,8 +2426,8 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Basic",
-            "value": "Basic",
+            "name": "Standard",
+            "value": "Standard",
             "description": "The job's base priority."
           },
           {
