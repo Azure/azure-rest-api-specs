@@ -4,11 +4,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ClientGenerator.Core;
 using Microsoft.Relay;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RelayUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RelayUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Operation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
 @@clientName(AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
@@ -25,38 +26,42 @@ using Microsoft.Relay;
 @@clientName(NamespacesOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AuthorizationRule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationRule.properties
+);
 
 @@clientName(HybridConnectionOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(HybridConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HybridConnection.properties
+);
 
 @@clientName(RelayNamespaces.createOrUpdate::parameters.resource, "parameters");
 @@clientName(RelayNamespaces.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RelayNamespace.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RelayNamespace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(NetworkRuleSets.createOrUpdateNetworkRuleSet::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NetworkRuleSet.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkRuleSet.properties);
 
 @@clientName(WcfRelaysOps.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(WcfRelay.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WcfRelay.properties);
 
 // AuthorizationRules operations
 @@clientLocation(AuthorizationRules.getAuthorizationRule, "Namespaces");

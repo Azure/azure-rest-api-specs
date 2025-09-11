@@ -20,7 +20,7 @@ model RelayNamespace
   /**
    * SKU of the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 }
 
@@ -40,13 +40,11 @@ interface RelayNamespaces {
   /**
    * Returns the description for the specified namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<RelayNamespace>;
 
   /**
    * Create Azure Relay namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RelayNamespace,
     LroHeaders = ArmLroLocationHeader<FinalResult = RelayNamespace> &
@@ -56,7 +54,6 @@ interface RelayNamespaces {
   /**
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     RelayNamespace,
@@ -67,8 +64,7 @@ interface RelayNamespaces {
   /**
    * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     RelayNamespace,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -77,13 +73,11 @@ interface RelayNamespaces {
   /**
    * Lists all the available namespaces within the ResourceGroup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByResourceGroup is ArmResourceListByParent<RelayNamespace>;
 
   /**
    * Lists all the available namespaces within the subscription regardless of the resourceGroups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   list is ArmListBySubscription<RelayNamespace>;
 }
 

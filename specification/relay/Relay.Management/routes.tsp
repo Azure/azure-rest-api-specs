@@ -13,12 +13,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Relay;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NamespacesOperationGroup {
   /**
    * Check the specified namespace name availability.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailability,

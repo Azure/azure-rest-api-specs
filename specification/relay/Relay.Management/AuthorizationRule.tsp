@@ -20,7 +20,7 @@ model AuthorizationRule
   ...AuthorizationRuleNameParameter;
 
   /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -53,14 +53,12 @@ interface AuthorizationRules {
   /**
    * Authorization rule for a namespace by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   getAuthorizationRule is AuthorizationRuleOps.Read<AuthorizationRule>;
 
   /**
    * Creates or updates an authorization rule for a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateAuthorizationRule is AuthorizationRuleOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>
@@ -69,19 +67,16 @@ interface AuthorizationRules {
   /**
    * Deletes a namespace authorization rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   deleteAuthorizationRule is AuthorizationRuleOps.DeleteSync<AuthorizationRule>;
 
   /**
    * Authorization rules for a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listAuthorizationRules is AuthorizationRuleOps.List<AuthorizationRule>;
 
   /**
    * Primary and secondary connection strings to the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
     void,
@@ -91,7 +86,6 @@ interface AuthorizationRules {
   /**
    * Regenerates the primary or secondary connection strings to the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   regenerateKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
     RegenerateAccessKeyParameters,
@@ -122,7 +116,7 @@ interface HybridConnections {
   /**
    * Creates or updates an authorization rule for a hybrid connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateAuthorizationRule is HybridConnectionOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>
@@ -156,7 +150,7 @@ interface HybridConnections {
     ArmResponse<AccessKeys>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface WCFRelayOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -170,20 +164,18 @@ interface WCFRelayOps
       },
       KeysOf<AuthorizationRuleNameParameter>
     > {}
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface WCFRelays {
   /**
    * Get authorizationRule for a WCF relay by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   getAuthorizationRule is WCFRelayOps.Read<AuthorizationRule>;
 
   /**
    * Creates or updates an authorization rule for a WCF relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateAuthorizationRule is WCFRelayOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>
@@ -192,19 +184,16 @@ interface WCFRelays {
   /**
    * Deletes a WCF relay authorization rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   deleteAuthorizationRule is WCFRelayOps.DeleteSync<AuthorizationRule>;
 
   /**
    * Authorization rules for a WCF relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listAuthorizationRules is WCFRelayOps.List<AuthorizationRule>;
 
   /**
    * Primary and secondary connection strings to the WCF relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listKeys is WCFRelayOps.ActionSync<
     AuthorizationRule,
     void,
@@ -214,7 +203,6 @@ interface WCFRelays {
   /**
    * Regenerates the primary or secondary connection strings to the WCF relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   regenerateKeys is WCFRelayOps.ActionSync<
     AuthorizationRule,
     RegenerateAccessKeyParameters,

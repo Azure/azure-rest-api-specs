@@ -25,7 +25,7 @@ model HybridConnection
   >;
 
   /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -45,14 +45,12 @@ interface HybridConnectionOperationGroup {
   /**
    * Returns the description for the specified hybrid connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<HybridConnection>;
 
   /**
    * Creates or updates a service hybrid connection. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     HybridConnection,
     Response = ArmResourceUpdatedResponse<HybridConnection>
@@ -61,13 +59,11 @@ interface HybridConnectionOperationGroup {
   /**
    * Deletes a hybrid connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteSync<HybridConnection>;
 
   /**
    * Lists the hybrid connection within the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByNamespace is ArmResourceListByParent<HybridConnection>;
 }
 

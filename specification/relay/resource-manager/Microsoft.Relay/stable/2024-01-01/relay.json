@@ -65,6 +65,9 @@
     },
     {
       "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinkResources"
     }
   ],
   "paths": {
@@ -1807,7 +1810,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateLinkResources_List",
-        "description": "Gets lists of resources that supports Privatelinks.",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Lists the private link resources for a container registry.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
         },
@@ -1855,7 +1861,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "operationId": "PrivateLinkResources_Get",
-        "description": "Gets a description for the specified Private Endpoint Connection name.",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets a private link resource by a specified group name for a container registry.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
         },
@@ -1881,7 +1890,7 @@
           {
             "name": "privateLinkResourceName",
             "in": "path",
-            "description": "The name of the PrivateLinkResource",
+            "description": "The name of the private link resource.",
             "required": true,
             "type": "string"
           }
@@ -3023,29 +3032,19 @@
     },
     "PrivateLinkResource": {
       "type": "object",
-      "description": "Information of the private link resource.",
+      "description": "A resource that supports private link capabilities.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The PrivateLinkResource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of the private link resource.",
+          "description": "A resource that supports private link capabilities.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "PrivateLinkResourceProperties": {
       "type": "object",

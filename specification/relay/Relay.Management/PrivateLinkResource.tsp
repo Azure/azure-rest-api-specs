@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./RelayNamespace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -12,71 +11,38 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Relay;
 /**
- * Information of the private link resource.
+ * A resource that supports private link capabilities.
  */
-model PrivateLinkResource {
-  /**
-   * Resource ID.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  properties?: PrivateLinkResourceProperties;
+@parentResource(RelayNamespace)
+model PrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = PrivateLinkResource,
+    KeyName = "privateLinkResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = ""
+  >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+@armResourceOperations
 interface PrivateLinkResources {
   /**
-   * Gets a description for the specified Private Endpoint Connection name.
+   * Gets a private link resource by a specified group name for a container registry.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from legacy"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources/{privateLinkResourceName}")
-  @get
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...KeysOf<RelayNamespaceNameParameter>,
-    ...KeysOf<ResourceNameParameter<
-      Resource = PrivateLinkResource,
-      KeyName = "privateLinkResourceName",
-      SegmentName = "privateLinkResources",
-      NamePattern = ""
-    >>,
-  ): ArmResponse<PrivateLinkResource> | ErrorResponse;
+  get is ArmResourceRead<PrivateLinkResource>;
 
   /**
-   * Gets lists of resources that supports Privatelinks.
+   * Lists the private link resources for a container registry.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from legacy"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...KeysOf<RelayNamespaceNameParameter>,
-  ): ArmResponse<PrivateLinkResourcesListResult> | ErrorResponse;
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
+    PrivateLinkResource,
+    Response = ArmResponse<PrivateLinkResourcesListResult>
+  >;
 }
 
-@@doc(PrivateLinkResource.name, "The PrivateLinkResource name");
+@@doc(PrivateLinkResource.name, "The name of the private link resource.");
 @@doc(PrivateLinkResource.properties,
-  "Properties of the private link resource."
+  "A resource that supports private link capabilities."
 );

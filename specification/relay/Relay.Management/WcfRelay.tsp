@@ -24,7 +24,7 @@ model WcfRelay is Azure.ResourceManager.ProxyResource<WcfRelayProperties> {
   >;
 
   /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -44,7 +44,6 @@ interface WcfRelaysOps {
   /**
    * Returns the description for the specified WCF relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<
     WcfRelay,
     Response = ArmResponse<WcfRelay> | ArmNoContentResponse
@@ -53,8 +52,7 @@ interface WcfRelaysOps {
   /**
    * Creates or updates a WCF relay. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     WcfRelay,
     Response = ArmResourceUpdatedResponse<WcfRelay>
@@ -63,13 +61,11 @@ interface WcfRelaysOps {
   /**
    * Deletes a WCF relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteSync<WcfRelay>;
 
   /**
    * Lists the WCF relays within the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByNamespace is ArmResourceListByParent<
     WcfRelay,
     Response = WcfRelaysListResult

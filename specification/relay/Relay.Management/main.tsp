@@ -31,7 +31,7 @@ using TypeSpec.Versioning;
 /**
  * Use these API to manage Azure Relay resources through Azure Resource Manager.
  */
-#suppress "@azure-tools/typespec-client-generator-core/client-location-duplicate" ""
+#suppress "@azure-tools/typespec-client-generator-core/client-location-duplicate" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Relay API" })
 @versioned(Versions)
