@@ -1349,54 +1349,6 @@ model Resource {
 }
 
 /**
- * The resource management error response.
- */
-@error
-model NewErrorResponse {
-  /**
-   * The error object.
-   */
-  error?: NewErrorResponseError;
-}
-
-/**
- * The error object.
- */
-model NewErrorResponseError {
-  /**
-   * The error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-
-  /**
-   * The error target.
-   */
-  @visibility(Lifecycle.Read)
-  target?: string;
-
-  /**
-   * The error details.
-   */
-  @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
-  details?: NewErrorResponse[];
-
-  /**
-   * The error additional info.
-   */
-  @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  additionalInfo?: ErrorAdditionalInfo[];
-}
-
-/**
  * Contract to validate if backup can be enabled on the given resource in a given vault and given configuration.
  * It will validate followings
  * 1. Vault capacity

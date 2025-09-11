@@ -344,4 +344,7 @@ using Microsoft.RecoveryServices;
   ValidateRestoreOperationRequest
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail, "ArmErrorDetail", "python");
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "ArmErrorDetail",
+  "python"
+);
