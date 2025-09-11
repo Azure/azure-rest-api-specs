@@ -32,8 +32,6 @@ using Microsoft.RecoveryServices;
   unknown,
   "java"
 );
-
-// Additional migration mappings for model name consistency
 @@clientName(Microsoft.RecoveryServices.AzureIaaSVMJob,
   "AzureIaaSvmJob",
   "java"
@@ -311,3 +309,6 @@ using Microsoft.RecoveryServices;
   "KpiResourceHealthDetails",
   "java"
 );
+
+// ETag property mapping to preserve backward compatibility
+@@clientName(Microsoft.RecoveryServices.Resource.eTag, "etag", "java");
