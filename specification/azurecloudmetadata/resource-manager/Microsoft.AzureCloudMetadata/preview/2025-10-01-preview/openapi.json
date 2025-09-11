@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureCloudMetadata management service",
-    "version": "2024-05-01-preview",
+    "version": "2025-10-01-preview",
     "description": "Microsoft.AzureCloudMetadata Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -644,6 +644,10 @@
           "type": "string",
           "description": "Resource Id of parent"
         },
+        "futureChanges": {
+          "type": "string",
+          "description": "Future changes of region."
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The provisioning state of resource.",
@@ -656,7 +660,8 @@
         "state",
         "pfClusters",
         "artifactDatacenters",
-        "regionResourceId"
+        "regionResourceId",
+        "futureChanges"
       ]
     },
     "AvailabilityZone": {
@@ -1479,6 +1484,14 @@
           "type": "string",
           "description": "Resource id of region's parent geography."
         },
+        "futureChanges": {
+          "type": "string",
+          "description": "Future changes of region."
+        },
+        "zoneResilienceSupport": {
+          "type": "string",
+          "description": "Zone resilience support state of region."
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The provisioning state of resource.",
@@ -1495,7 +1508,9 @@
         "availabilityZoneSupport",
         "supportedCustomerWorkloads",
         "billingRegionName",
-        "geographyResourceId"
+        "geographyResourceId",
+        "futureChanges",
+        "zoneResilienceSupport"
       ]
     },
     "RegionState": {
