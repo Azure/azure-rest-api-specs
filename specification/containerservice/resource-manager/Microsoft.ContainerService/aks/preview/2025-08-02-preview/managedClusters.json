@@ -5019,6 +5019,197 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/meshMemberships": {
+      "get": {
+        "tags": [
+          "MeshMemberships"
+        ],
+        "operationId": "MeshMemberships_ListByManagedCluster",
+        "summary": "Lists mesh memberships in a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MeshMembershipsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Mesh Memberships by Managed Cluster": {
+            "$ref": "./examples/MeshMemberships_ListByManagedCluster.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/meshMemberships/{meshMembershipName}": {
+      "get": {
+        "tags": [
+          "MeshMemberships"
+        ],
+        "operationId": "MeshMemberships_Get",
+        "summary": "Gets the mesh membership of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeshMembershipNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MeshMembership"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Mesh Membership": {
+            "$ref": "./examples/MeshMemberships_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MeshMemberships"
+        ],
+        "operationId": "MeshMemberships_CreateOrUpdate",
+        "summary": "Creates or updates the mesh membership of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeshMembershipNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeshMembership"
+            },
+            "description": "The mesh membership to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing mesh membership was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/MeshMembership"
+            }
+          },
+          "201": {
+            "description": "The new mesh membership was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/MeshMembership"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Mesh Membership": {
+            "$ref": "./examples/MeshMemberships_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MeshMemberships"
+        ],
+        "operationId": "MeshMemberships_Delete",
+        "summary": "Deletes the mesh membership of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeshMembershipNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Mesh Membership": {
+            "$ref": "./examples/MeshMemberships_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -12581,6 +12772,73 @@
         "key",
         "valueExpression"
       ]
+    },
+    "MeshMembership": {
+      "type": "object",
+      "description": "Mesh membership of a managed cluster.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "eTag": {
+          "description": "Unique read-only string used to implement optimistic concurrency. The eTag value will change when the resource is updated. Specify an if-match or if-none-match header with the eTag value for a subsequent request to enable optimistic concurrency per the normal etag convention.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/MeshMembershipProperties"
+        }
+      }
+    },
+    "MeshMembershipProperties": {
+      "type": "object",
+      "description": "Mesh membership properties of a managed cluster.",
+      "properties": {
+        "managedMeshID": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppLink/applinks"
+              }
+            ]
+          },
+          "description": "The ARM resource id for the managed mesh member. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/applinks/{appLinkName}/appLinkMembers/{appLinkMemberName}'. Visit https://aka.ms/applink for more information."
+        }
+      },
+      "required": [
+        "managedMeshID"
+      ]
+    },
+    "MeshMembershipsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MeshMembership"
+          },
+          "description": "The list of mesh memberships."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of mesh membership results.",
+          "readOnly": true
+        }
+      },
+      "description": "The result of a request to list mesh memberships in a managed cluster."
     }
   },
   "parameters": {
@@ -12739,6 +12997,17 @@
       "pattern": "^[a-z][a-z0-9]{0,23}$",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MeshMembershipNameParameter": {
+      "name": "meshMembershipName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,62}$",
+      "minLength": 1,
+      "maxLength": 63,
+      "description": "The name of the mesh membership.",
       "x-ms-parameter-location": "method"
     }
   }
