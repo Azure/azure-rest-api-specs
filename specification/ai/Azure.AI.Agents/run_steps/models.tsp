@@ -363,6 +363,12 @@ model RunStepDeltaImageGenerationDetailItemObject {
   /** The prompt used for image generation or editing. */
   prompt?: string;
 
+  /** The base image to edit (base64-encoded PNG or JPEG). Required for image editing operations. */
+  image?: string;
+
+  /** An additional image whose fully transparent areas indicate where the base image should be edited (base64-encoded PNG). Required for image inpainting. */
+  mask?: string;
+
   /** The generated image output with comprehensive metadata. */
   output?: ImageOutput;
 }
