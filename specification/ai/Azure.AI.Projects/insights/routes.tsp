@@ -33,6 +33,10 @@ alias FilterQueryParamsTraits = {
   @query("agentName")
   @doc("Filter by the agent name.")
   agentName?: string;
+
+  @query("includeCoordinates")
+  @doc("Whether to include coordinates for visualization in the response. Defaults to false.")
+  includeCoordinates?: boolean;
 };
 
 @added(Versions.v2025_10_15_preview)

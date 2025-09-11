@@ -1410,6 +1410,13 @@
             "type": "string"
           },
           {
+            "name": "includeCoordinates",
+            "in": "query",
+            "description": "Whether to include coordinates for visualization in the response. Defaults to false.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -1727,24 +1734,23 @@
           "$ref": "#/definitions/InsightSummary",
           "description": "Summary of the insights report."
         },
-        "samples": {
-          "type": "array",
-          "description": "List of samples and their associated clusters.",
-          "items": {
-            "$ref": "#/definitions/AnalysisSample"
-          }
-        },
         "clusters": {
           "type": "array",
           "description": "List of clusters identified in the analysis.",
           "items": {
             "$ref": "#/definitions/AnalysisCluster"
           }
+        },
+        "coordinates": {
+          "type": "object",
+          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical analysis results.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalysisChartCoordinate"
+          }
         }
       },
       "required": [
         "summary",
-        "samples",
         "clusters"
       ],
       "allOf": [
@@ -1926,20 +1932,26 @@
           "type": "integer",
           "format": "int32",
           "description": "Y-axis coordinate."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the chart element."
         }
       },
       "required": [
         "x",
-        "y"
+        "y",
+        "size"
       ]
     },
     "AnalysisCluster": {
       "type": "object",
       "description": "A cluster of analysis samples.",
       "properties": {
-        "label": {
+        "id": {
           "type": "string",
-          "description": "The label of the analysis cluster."
+          "description": "The id of the analysis cluster."
         },
         "description": {
           "type": "string",
@@ -1950,20 +1962,25 @@
           "format": "int32",
           "description": "The weight of the analysis cluster. This indicate number of samples in the cluster."
         },
-        "parentClusterLabel": {
-          "type": "string",
-          "description": "The parent cluster label of the analysis cluster in case of a hierarchical structure. This is null if the cluster is at the top level."
+        "subClusters": {
+          "type": "array",
+          "description": "List of subclusters within this cluster. Empty if no subclusters exist.",
+          "items": {
+            "$ref": "#/definitions/AnalysisCluster"
+          }
         },
-        "coordinates": {
-          "$ref": "#/definitions/AnalysisChartCoordinate",
-          "description": "Coordinates for the analysis chart."
+        "samples": {
+          "type": "array",
+          "description": "List of samples that belong to this cluster. Empty if samples are part of subclusters.",
+          "items": {
+            "$ref": "#/definitions/AnalysisSample"
+          }
         }
       },
       "required": [
-        "label",
+        "id",
         "description",
-        "weight",
-        "coordinates"
+        "weight"
       ]
     },
     "AnalysisMetadata": {
@@ -2016,26 +2033,17 @@
           "description": "Info about the correlation for the analysis sample.",
           "additionalProperties": {}
         },
-        "parameters": {
+        "features": {
           "type": "object",
-          "description": "Parameters to help with additional filtering of data in UX.",
+          "description": "Features to help with additional filtering of data in UX.",
           "additionalProperties": {}
-        },
-        "clusterLabel": {
-          "type": "string",
-          "description": "The label of the analysis cluster in which this sample belongs."
-        },
-        "coordinates": {
-          "$ref": "#/definitions/AnalysisChartCoordinate",
-          "description": "Coordinates for the analysis chart."
         }
       },
       "required": [
         "id",
         "evaluationResult",
         "correlationInfo",
-        "parameters",
-        "coordinates"
+        "features"
       ]
     },
     "AnalysisType": {
@@ -2472,24 +2480,23 @@
           "$ref": "#/definitions/InsightSummary",
           "description": "Summary of the insights report."
         },
-        "samples": {
-          "type": "array",
-          "description": "List of samples and their associated clusters.",
-          "items": {
-            "$ref": "#/definitions/AnalysisSample"
-          }
-        },
         "clusters": {
           "type": "array",
           "description": "List of clusters identified in the analysis.",
           "items": {
             "$ref": "#/definitions/AnalysisCluster"
           }
+        },
+        "coordinates": {
+          "type": "object",
+          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical analysis results.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalysisChartCoordinate"
+          }
         }
       },
       "required": [
         "summary",
-        "samples",
         "clusters"
       ]
     },
@@ -3042,24 +3049,23 @@
           "$ref": "#/definitions/InsightSummary",
           "description": "Summary of the insights report."
         },
-        "samples": {
-          "type": "array",
-          "description": "List of samples and their associated clusters.",
-          "items": {
-            "$ref": "#/definitions/AnalysisSample"
-          }
-        },
         "clusters": {
           "type": "array",
           "description": "List of clusters identified in the analysis.",
           "items": {
             "$ref": "#/definitions/AnalysisCluster"
           }
+        },
+        "coordinates": {
+          "type": "object",
+          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical analysis results.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalysisChartCoordinate"
+          }
         }
       },
       "required": [
         "summary",
-        "samples",
         "clusters"
       ],
       "allOf": [

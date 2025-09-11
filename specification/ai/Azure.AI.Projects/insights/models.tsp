@@ -121,11 +121,28 @@ model ClusterAnalysisInsights {
   @doc("Summary of the insights report.")
   summary: InsightSummary;
 
-  @doc("List of samples and their associated clusters.")
-  samples: AnalysisSample[];
-
   @doc("List of clusters identified in the analysis.")
   clusters: AnalysisCluster[];
+
+  @doc("""
+      Optional mapping of IDs to 2D coordinates used by the UX for visualization.
+
+      The map keys are string identifiers (for example, a cluster id or a sample id)
+      and the values are the coordinates and visual size for rendering on a 2D chart.
+
+      This property is omitted unless the client requests coordinates (for example,
+      by passing `includeCoordinates=true` as a query parameter).
+
+      Example:
+      {
+        "cluster-1": { "x": 12, "y": 34, "size": 8 },
+        "sample-123": { "x": 18, "y": 22, "size": 4 }
+      }
+
+      Coordinates are intended only for client-side visualization and do not
+      modify the canonical analysis results.
+    """)
+  coordinates?: Record<AnalysisChartCoordinate>;
 }
 
 @doc("Insights from the evaluation run cluster analysis.")
@@ -179,6 +196,9 @@ model AnalysisChartCoordinate {
 
   @doc("Y-axis coordinate.")
   y: int32;
+
+  @doc("Size of the chart element.")
+  size: int32;
 }
 
 @doc("A sample from the analysis.")
@@ -193,14 +213,8 @@ model AnalysisSample {
   @doc("Info about the correlation for the analysis sample.")
   correlationInfo: Record<unknown>;
 
-  @doc("Parameters to help with additional filtering of data in UX.")
-  parameters: Record<unknown>;
-
-  @doc("The label of the analysis cluster in which this sample belongs.")
-  clusterLabel?: string;
-
-  @doc("Coordinates for the analysis chart.")
-  coordinates: AnalysisChartCoordinate;
+  @doc("Features to help with additional filtering of data in UX.")
+  features: Record<unknown>;
 }
 
 @doc("Result of the evaluation.")
@@ -222,8 +236,8 @@ model EvalResult {
 @doc("A cluster of analysis samples.")
 @added(Versions.v2025_10_15_preview)
 model AnalysisCluster {
-  @doc("The label of the analysis cluster.")
-  label: string;
+  @doc("The id of the analysis cluster.")
+  id: string;
 
   @doc("Description of the analysis cluster.")
   description: string;
@@ -231,9 +245,9 @@ model AnalysisCluster {
   @doc("The weight of the analysis cluster. This indicate number of samples in the cluster.")
   weight: int32;
 
-  @doc("The parent cluster label of the analysis cluster in case of a hierarchical structure. This is null if the cluster is at the top level.")
-  parentClusterLabel?: string;
+  @doc("List of subclusters within this cluster. Empty if no subclusters exist.")
+  subClusters?: AnalysisCluster[];
 
-  @doc("Coordinates for the analysis chart.")
-  coordinates: AnalysisChartCoordinate;
+  @doc("List of samples that belong to this cluster. Empty if samples are part of subclusters.")
+  samples?: AnalysisSample[];
 }
