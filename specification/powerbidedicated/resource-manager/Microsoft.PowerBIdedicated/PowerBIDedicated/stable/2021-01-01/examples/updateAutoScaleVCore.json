@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01",
+    "resourceGroupName": "TestRG",
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60",
+    "vCoreUpdateParameters": {
+      "properties": {
+        "capacityLimit": 20
+      },
+      "sku": {
+        "name": "AutoScale",
+        "capacity": 0,
+        "tier": "AutoScale"
+      },
+      "tags": {
+        "testKey": "testValue"
+      }
+    },
+    "vcoreName": "testvcore"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvcore",
+        "type": "Microsoft.PowerBIDedicated/autoScaleVCores",
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.PowerBIDedicated/autoScaleVCores/testvcore",
+        "location": "West US",
+        "properties": {
+          "capacityLimit": 20,
+          "capacityObjectId": "a28f00bd-5330-4572-88f1-fa883e074785",
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "AutoScale",
+          "capacity": 0,
+          "tier": "AutoScale"
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T00:00:19.1234567Z",
+          "createdBy": "app1",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-01T00:00:19.1234567Z",
+          "lastModifiedBy": "app1",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "testKey": "testValue"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AutoScaleVCores_Update",
+  "title": "Update auto scale v-core parameters"
+}

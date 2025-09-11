@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "A",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/A?api-version=2018-09-01&$skipToken=skipToken",
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda1",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "name": "recorda1",
+            "type": "Microsoft.Network/privateDnsZones/A",
+            "properties": {
+              "metadata": {
+                "key1": "value1"
+              },
+              "ttl": 3600,
+              "fqdn": "recorda1.privatezone1.com.",
+              "isAutoRegistered": false,
+              "aRecords": [
+                {
+                  "ipv4Address": "1.2.3.4"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda2",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "name": "recorda2",
+            "type": "Microsoft.Network/privateDnsZones/A",
+            "properties": {
+              "ttl": 3600,
+              "fqdn": "recorda2.privatezone1.com.",
+              "isAutoRegistered": false,
+              "aRecords": [
+                {
+                  "ipv4Address": "5.6.7.8"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

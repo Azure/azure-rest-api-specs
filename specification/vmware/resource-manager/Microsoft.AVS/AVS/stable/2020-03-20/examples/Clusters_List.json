@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2020-03-20",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1",
+            "name": "cluster1",
+            "sku": {
+              "name": "AV20"
+            },
+            "properties": {
+              "clusterSize": 3,
+              "hosts": [
+                "fakehost22.nyc1.kubernetes.center",
+                "fakehost23.nyc1.kubernetes.center",
+                "fakehost24.nyc1.kubernetes.center"
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "type": "Microsoft.AVS/privateClouds/clusters"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "storageConfigurationSettings": {
+          "diskConfigurationType": "EXTEND",
+          "sqlDataSettings": {
+            "luns": [
+              2
+            ]
+          }
+        },
+        "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "additionalVmPatch": "WU",
+          "enableAutomaticUpgrade": true,
+          "leastPrivilegeMode": "Enabled",
+          "osType": "Windows",
+          "provisioningState": "Updating",
+          "sqlImageOffer": "SQL2022-WS2022",
+          "sqlImageSku": "Enterprise",
+          "sqlManagement": "Full",
+          "sqlServerLicenseType": "PAYG",
+          "virtualMachineIdentitySettings": {
+            "type": "SystemAssigned"
+          },
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "enableAutomaticUpgrade": true,
+          "leastPrivilegeMode": "NotSet",
+          "provisioningState": "Provisioning",
+          "sqlImageSku": "Unknown",
+          "sqlServerLicenseType": "PAYG",
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+        }
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachines_CreateOrUpdate",
+  "title": "Creates or updates a SQL virtual machine for Storage Configuration Settings to EXTEND Data, Log or TempDB storage pool."
+}

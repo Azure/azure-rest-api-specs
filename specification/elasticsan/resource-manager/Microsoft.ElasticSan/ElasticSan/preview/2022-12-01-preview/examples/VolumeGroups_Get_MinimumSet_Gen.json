@@ -1,0 +1,71 @@
+{
+  "title": "VolumeGroups_Get",
+  "operationId": "VolumeGroups_Get",
+  "parameters": {
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
+    "volumeGroupName": "volumegroupname",
+    "api-version": "2022-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Invalid",
+          "protocolType": "Iscsi",
+          "encryption": "EncryptionAtRestWithPlatformKey",
+          "networkAcls": {
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+                "action": "Allow",
+                "state": "provisioning"
+              }
+            ]
+          },
+          "privateEndpointConnections": [
+            {
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Pending",
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None"
+                },
+                "groupIds": [
+                  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}"
+                ]
+              },
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateEndpointConnections/{privateEndpointConnectionName}",
+              "name": "{privateEndpointConnectionName}",
+              "type": "Microsoft.ElasticSan/elasticSans/privateEndpointConnections",
+              "systemData": {
+                "createdBy": "otfifnrahdshqombvtg",
+                "createdByType": "User",
+                "createdAt": "2023-07-03T09:59:45.919Z",
+                "lastModifiedBy": "jnaxavnlhrboshtidtib",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2023-07-03T09:59:45.919Z"
+              }
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "zloujisrarsox",
+          "createdByType": "User",
+          "createdAt": "2023-07-04T05:52:15.371Z",
+          "lastModifiedBy": "lmdztjjcmdfzam",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-07-04T05:52:15.371Z"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups"
+      }
+    }
+  }
+}
