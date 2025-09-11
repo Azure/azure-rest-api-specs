@@ -13,11 +13,7 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(ZoneProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model Zone extends Foundations.TrackedResource {
+model Zone is Azure.ResourceManager.TrackedResource<ZoneProperties> {
   ...ResourceNameParameter<
     Resource = Zone,
     KeyName = "zoneName",
@@ -30,12 +26,6 @@ model Zone extends Foundations.TrackedResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
-
-  /*
-   * The properties of the zone.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ZoneProperties;
 }
 
 @armResourceOperations
