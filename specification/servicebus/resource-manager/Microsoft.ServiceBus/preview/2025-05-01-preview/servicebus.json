@@ -2480,18 +2480,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+            "description": "Resource deletion accepted."
           },
           "204": {
             "description": "Resource does not exist."
@@ -2507,11 +2496,7 @@
           "NameSpacePrivateEndPointConnectionDelete": {
             "$ref": "./examples/NameSpaces/PrivateEndPointConnectionDelete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/privateLinkResources": {
