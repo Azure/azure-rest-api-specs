@@ -2081,7 +2081,7 @@ interface WebApps {
   /**
    * Description for Stop ongoing capturing network packets for the site.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("networkTrace/stop")
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
