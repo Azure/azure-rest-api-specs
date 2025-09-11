@@ -467,6 +467,7 @@ op secureWrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientName("version", "rust")
     keyVersion?: string;
 
     /**
@@ -506,6 +507,7 @@ op secureUnwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientName("version", "rust")
     keyVersion?: string;
 
     /**
