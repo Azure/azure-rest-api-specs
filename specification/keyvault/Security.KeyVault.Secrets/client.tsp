@@ -178,7 +178,8 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "rust");
 @@clientName(getSecrets, "ListSecretProperties", "rust");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "rust");
-@@clientName(updateSecret, "UpdateSecretProperties", "rust");
+// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
+@@clientName(KeyVault.updateSecret, "UpdateSecretProperties", "rust");
 
 @@clientName(SecretRestoreParameters.secretBundleBackup,
   "SecretBackup",
