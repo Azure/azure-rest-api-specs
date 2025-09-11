@@ -36,14 +36,14 @@ interface ArmDisasterRecoveries {
   /**
    * Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DisasterRecoveryConfigs_Get")
   get is ArmResourceRead<ArmDisasterRecovery, Error = ErrorResponse>;
 
   /**
    * Creates or updates a new Alias(Disaster Recovery configuration)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DisasterRecoveryConfigs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ArmDisasterRecovery,
@@ -53,21 +53,21 @@ interface ArmDisasterRecoveries {
   /**
    * Deletes an Alias(Disaster Recovery configuration)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DisasterRecoveryConfigs_Delete")
   delete is ArmResourceDeleteSync<ArmDisasterRecovery, Error = ErrorResponse>;
 
   /**
    * Gets all Alias(Disaster Recovery configurations)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DisasterRecoveryConfigs_List")
   list is ArmResourceListByParent<ArmDisasterRecovery, Error = ErrorResponse>;
 
   /**
    * This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DisasterRecoveryConfigs_BreakPairing")
   breakPairing is ArmResourceActionSync<
     ArmDisasterRecovery,
@@ -79,7 +79,7 @@ interface ArmDisasterRecoveries {
   /**
    * Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DisasterRecoveryConfigs_FailOver")
   @action("failover")
   failOver is ArmResourceActionSync<

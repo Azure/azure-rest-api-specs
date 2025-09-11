@@ -42,7 +42,7 @@ interface PrivateEndpointConnections {
   /**
    * Creates or updates PrivateEndpointConnections of service namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
@@ -56,8 +56,8 @@ interface PrivateEndpointConnections {
   /**
    * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
@@ -70,7 +70,10 @@ interface PrivateEndpointConnections {
    * Gets the available PrivateEndpointConnections within a namespace.
    */
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
-  list is ArmResourceListByParent<PrivateEndpointConnection, Error = ErrorResponse>;
+  list is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Error = ErrorResponse
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name, "The PrivateEndpointConnection name");

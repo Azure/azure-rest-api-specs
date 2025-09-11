@@ -62,7 +62,7 @@ interface AuthorizationRules {
   /**
    * Gets an AuthorizationRule for a Namespace by rule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_GetAuthorizationRule")
   getAuthorizationRule is AuthorizationRuleOps.Read<
     AuthorizationRule,
@@ -72,8 +72,8 @@ interface AuthorizationRules {
   /**
    * Creates or updates an AuthorizationRule for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_CreateOrUpdateAuthorizationRule")
   createOrUpdateAuthorizationRule is AuthorizationRuleOps.CreateOrUpdateSync<
     AuthorizationRule,
@@ -84,7 +84,7 @@ interface AuthorizationRules {
   /**
    * Deletes an AuthorizationRule for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_DeleteAuthorizationRule")
   deleteAuthorizationRule is AuthorizationRuleOps.DeleteSync<
     AuthorizationRule,
@@ -94,7 +94,7 @@ interface AuthorizationRules {
   /**
    * Gets a list of authorization rules for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_ListAuthorizationRules")
   listAuthorizationRules is AuthorizationRuleOps.List<
     AuthorizationRule,
@@ -104,7 +104,7 @@ interface AuthorizationRules {
   /**
    * Gets the primary and secondary connection strings for the Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_ListKeys")
   listKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
@@ -116,7 +116,7 @@ interface AuthorizationRules {
   /**
    * Regenerates the primary or secondary connection strings for the specified Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_RegenerateKeys")
   regenerateKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
@@ -234,7 +234,7 @@ interface EventHubs {
   /**
    * Creates or updates an AuthorizationRule for the specified Event Hub. Creation/update of the AuthorizationRule will take a few seconds to take effect.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateAuthorizationRule is EventHubOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>,

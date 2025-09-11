@@ -2594,15 +2594,6 @@
     }
   },
   "definitions": {
-    "userAssignedIdentityProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "userAssignedIdentity": {
-          "type": "string"
-        }
-      },
-      "x-ms-client-flatten": true
-    },
     "ApplicationGroupProperties__added": {
       "type": "object",
       "properties": {
@@ -3204,14 +3195,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "UserAssignedIdentityProperties__added": {
-      "type": "object",
-      "properties": {
-        "userAssignedIdentity": {
-          "type": "string"
-        }
-      }
     },
     "ApplicationGroup": {
       "properties": {
@@ -3816,16 +3799,6 @@
     "Identity": {
       "x-ms-client-flatten__deleted": true
     },
-    "KeyVaultProperties": {
-      "properties": {
-        "identity": {
-          "$ref": {
-            "__old": "#/definitions/userAssignedIdentityProperties",
-            "__new": "#/definitions/UserAssignedIdentityProperties"
-          }
-        }
-      }
-    },
     "NWRuleSetIpRules": {
       "x-ms-client-flatten__deleted": true
     },
@@ -4212,6 +4185,9 @@
           "minimum__deleted": 0
         }
       }
+    },
+    "userAssignedIdentityProperties": {
+      "x-ms-client-flatten__deleted": true
     }
   }
 }

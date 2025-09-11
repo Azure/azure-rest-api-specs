@@ -980,12 +980,6 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/failover'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 
-### Changes for `userAssignedIdentityProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.userAssignedIdentityProperties__deleted` | deleted | `{"type":"object","properties":{"userAssignedIdentity":{"type":"string"}},"x-ms-client-flatten":true}` |
-
 ### Changes for `ApplicationGroupProperties`
 
 | Path | Change Type | Value |
@@ -1100,12 +1094,6 @@
 |------|------------|-------|
 | `definitions.TrackedResource__added` | added | `{"type":"object","properties":{"tags":{"type":"object","additionalProperties":{"type":"string"}},"lo...` |
 
-### Changes for `UserAssignedIdentityProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.UserAssignedIdentityProperties__added` | added | `{"type":"object","properties":{"userAssignedIdentity":{"type":"string"}}}` |
-
 ### Changes for `systemData`
 
 | Path | Change Type | Value |
@@ -1150,6 +1138,7 @@
 | `definitions.NWRuleSetIpRules['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.NWRuleSetVirtualNetworkRules['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.PlatformCapabilities['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.userAssignedIdentityProperties['x-ms-client-flatten__deleted']` | deleted | `true` |
 
 ### Changes for `readOnly`
 
@@ -1174,7 +1163,6 @@
 | `definitions.ConsumerGroup.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.EHNamespace.allOf[0].$ref` | `../../../common/v1/definitions.json#/definitions/TrackedResource` | `#/definitions/TrackedResource` |
 | `definitions.Eventhub.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `definitions.KeyVaultProperties.properties.identity.$ref` | `#/definitions/userAssignedIdentityProperties` | `#/definitions/UserAssignedIdentityProperties` |
 | `definitions.NetworkRuleSet.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkSecurityPerimeterConfiguration.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.PrivateEndpointConnection.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |

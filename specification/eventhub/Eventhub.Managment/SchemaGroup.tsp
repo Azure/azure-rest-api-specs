@@ -36,15 +36,15 @@ interface SchemaGroups {
   /**
    * Gets the details of an EventHub schema group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SchemaRegistry_Get")
   get is ArmResourceRead<SchemaGroup, Error = ErrorResponse>;
 
   /**
    * Creates or Updates an EventHub schema group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SchemaRegistry_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SchemaGroup,
@@ -55,14 +55,14 @@ interface SchemaGroups {
   /**
    * Deletes an EventHub schema group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SchemaRegistry_Delete")
   delete is ArmResourceDeleteSync<SchemaGroup, Error = ErrorResponse>;
 
   /**
    * Gets all the Schema Groups in a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SchemaRegistry_ListByNamespace")
   listByNamespace is ArmResourceListByParent<
     SchemaGroup,

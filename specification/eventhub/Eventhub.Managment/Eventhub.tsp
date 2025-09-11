@@ -35,15 +35,15 @@ interface Eventhubs {
   /**
    * Gets an Event Hubs description for the specified Event Hub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EventHubs_Get")
   get is ArmResourceRead<Eventhub, Error = ErrorResponse>;
 
   /**
    * Creates or updates a new Event Hub as a nested resource within a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EventHubs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Eventhub,
@@ -54,14 +54,14 @@ interface Eventhubs {
   /**
    * Deletes an Event Hub from the specified Namespace and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EventHubs_Delete")
   delete is ArmResourceDeleteSync<Eventhub, Error = ErrorResponse>;
 
   /**
    * Gets all the Event Hubs in a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EventHubs_ListByNamespace")
   listByNamespace is ArmResourceListByParent<
     Eventhub,

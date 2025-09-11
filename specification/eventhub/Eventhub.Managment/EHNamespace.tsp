@@ -25,13 +25,13 @@ model EHNamespace
   /**
    * Properties of sku resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * Properties of BYOK Identity description
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 }
 
@@ -40,15 +40,15 @@ interface EHNamespaces {
   /**
    * Gets the description of the specified namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_Get")
   get is ArmResourceRead<EHNamespace, Error = ErrorResponse>;
 
   /**
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("Namespaces_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -63,7 +63,7 @@ interface EHNamespaces {
   /**
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -76,9 +76,9 @@ interface EHNamespaces {
   /**
    * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     EHNamespace,
@@ -90,7 +90,7 @@ interface EHNamespaces {
   /**
    * Lists the available Namespaces within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     EHNamespace,
@@ -100,14 +100,14 @@ interface EHNamespaces {
   /**
    * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_List")
   list is ArmListBySubscription<EHNamespace, Error = ErrorResponse>;
 
   /**
    * GeoDR Failover
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_Failover")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   failover is ArmResourceActionAsyncBase<
@@ -122,7 +122,7 @@ interface EHNamespaces {
   /**
    * Gets lists of resources that supports Privatelinks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkResources_Get")
   @get
   @action("privateLinkResources")
@@ -137,7 +137,7 @@ interface EHNamespaces {
   /**
    * Check the give Namespace name availability.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DisasterRecoveryConfigs_CheckNameAvailability")
   @action("disasterRecoveryConfigs/checkNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
