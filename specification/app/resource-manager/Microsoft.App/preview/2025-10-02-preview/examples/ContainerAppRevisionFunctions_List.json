@@ -16,9 +16,8 @@
             "type": "Microsoft.App/containerApps/revisions/functions",
             "location": "East US",
             "properties": {
-              "revisionName": "myContainerApp-abc123",
               "name": "HttpExample",
-              "invokeUrl": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
+              "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
               "triggerType": "httpTrigger",
               "language": "dotnet-isolated",
               "isDisabled": false
@@ -30,9 +29,8 @@
             "type": "Microsoft.App/containerApps/revisions/functions",
             "location": "East US",
             "properties": {
-              "revisionName": "myContainerApp-abc123",
               "name": "TimerFunction",
-              "invokeUrl": "https://mycontainerapp.example-region.azurecontainerapps.io/api/TimerFunction",
+              "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/TimerFunction",
               "triggerType": "timerTrigger",
               "language": "dotnet-isolated",
               "isDisabled": false
@@ -41,6 +39,8 @@
         ],
         "nextLink": null
       }
-    }
+    },
+    "400": {},
+    "404": {}
   }
 }

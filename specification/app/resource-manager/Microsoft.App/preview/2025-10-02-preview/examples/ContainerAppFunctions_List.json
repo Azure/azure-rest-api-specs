@@ -10,28 +10,26 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/HttpExample",
-            "name": "myContainerApp/myContainerApp-abc123/HttpExample",
-            "type": "Microsoft.App/containerApps/revisions/functions",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/HttpExample",
+            "name": "myContainerApp/HttpExample",
+            "type": "Microsoft.App/containerApps/functions",
             "location": "East US",
             "properties": {
-              "revisionName": "myContainerApp-abc123",
               "name": "HttpExample",
-              "invokeUrl": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
+              "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
               "triggerType": "httpTrigger",
               "language": "dotnet-isolated",
               "isDisabled": false
             }
           },
           {
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-def456/functions/TimerFunction",
-            "name": "myContainerApp/myContainerApp-def456/TimerFunction",
-            "type": "Microsoft.App/containerApps/revisions/functions",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/TimerFunction",
+            "name": "myContainerApp/TimerFunction",
+            "type": "Microsoft.App/containerApps/functions",
             "location": "East US",
             "properties": {
-              "revisionName": "myContainerApp-def456",
               "name": "TimerFunction",
-              "invokeUrl": "https://mycontainerapp.example-region.azurecontainerapps.io/api/TimerFunction",
+              "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/TimerFunction",
               "triggerType": "timerTrigger",
               "language": "dotnet-isolated",
               "isDisabled": false
@@ -40,6 +38,8 @@
         ],
         "nextLink": null
       }
-    }
+    },
+    "400": {},
+    "404": {}
   }
 }

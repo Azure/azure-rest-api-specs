@@ -35,16 +35,14 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "name": "revisionName",
             "in": "path",
             "description": "Name of the Container App Revision.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -93,24 +91,21 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "name": "revisionName",
             "in": "path",
             "description": "Name of the Container App Revision.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "name": "functionName",
             "in": "path",
             "description": "Name of the Function.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -156,8 +151,7 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -206,16 +200,14 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "name": "functionName",
             "in": "path",
             "description": "Name of the Function.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -262,17 +254,12 @@
           "description": "Function resource specific properties",
           "type": "object",
           "properties": {
-            "revisionName": {
-              "description": "Name of the Container App Revision.",
-              "type": "string",
-              "readOnly": true
-            },
             "name": {
               "description": "Name of the Function.",
               "type": "string",
               "readOnly": true
             },
-            "invokeUrl": {
+            "invokeUrlTemplate": {
               "description": "Invoke URL for the function.",
               "type": "string",
               "readOnly": true

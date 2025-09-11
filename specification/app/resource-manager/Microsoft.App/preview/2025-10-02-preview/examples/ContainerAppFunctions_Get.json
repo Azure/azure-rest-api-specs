@@ -9,27 +9,20 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/HttpExample",
-        "name": "myContainerApp/myContainerApp-abc123/HttpExample",
-        "type": "Microsoft.App/containerApps/revisions/functions",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/HttpExample",
+        "name": "myContainerApp/HttpExample",
+        "type": "Microsoft.App/containerApps/functions",
         "location": "East US",
         "properties": {
-          "revisionName": "myContainerApp-abc123",
           "name": "HttpExample",
-          "invokeUrl": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
+          "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
           "triggerType": "httpTrigger",
           "language": "dotnet-isolated",
           "isDisabled": false
         }
       }
     },
-    "400": {
-      "body": {
-        "error": {
-          "code": "BadRequest",
-          "message": "The function cannot be retrieved when the container app is in multi-revision mode. Please specify a revision to get the function from a specific revision."
-        }
-      }
-    }
+    "400": {},
+    "404": {}
   }
 }
