@@ -16,11 +16,11 @@ options:
     new-line: lf
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.MonitorAccounts"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.MonitorAccounts"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-monitoraccounts"
     namespace: "azure.mgmt.monitoraccounts"
@@ -28,7 +28,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-monitoraccounts"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitoraccounts"
     namespace: "com.azure.resourcemanager.monitoraccounts"
     service-name: "Monitor Accounts"
     flavor: azure

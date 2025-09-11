@@ -36,12 +36,12 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.LoadTesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.LoadTesting"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-loadtesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-loadtesting"
     namespace: "com.azure.resourcemanager.loadtesting"
     flavor: azure
     service-name: Load Test

@@ -14,11 +14,10 @@ options:
     arm-resource-flattening: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.SecretsStoreExtension"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
-    service-dir: "sdk/secretsstoreextension"
+    namespace: "Azure.ResourceManager.SecretsStoreExtension"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-secretsstoreextension"
     service-dir: "sdk/secretsstoreextension"
@@ -27,7 +26,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-secretsstoreextension"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-secretsstoreextension"
     service-dir: "sdk/secretsstoreextension"
     namespace: "com.azure.resourcemanager.secretsstoreextension"
     service-name: "Secrets Store Extension"
