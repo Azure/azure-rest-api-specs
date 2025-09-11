@@ -1310,9 +1310,11 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 
 @@doc(RecommendationPropertiesReview.id, "The ARM Resource Id of the Review");
 @@doc(RecommendationPropertiesReview.name, "The Name of the Review");
-@@doc(WorkloadListResult.value, "[Placeholder] Discription for value property");
+@@doc(WorkloadListResult.value,
+  "List of WorkloadListResult items on this page."
+);
 @@doc(WorkloadListResult.nextLink,
-  "[Placeholder] Discription for nextLink property"
+  "Url to get the next Page of WorkloadListResult items."
 );
 @@doc(TriageRecommendationCollection.value, "List of triage recommendations.");
 @@doc(TriageRecommendationCollection.nextLink,
