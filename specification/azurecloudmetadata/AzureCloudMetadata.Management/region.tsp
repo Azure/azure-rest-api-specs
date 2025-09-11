@@ -90,9 +90,11 @@ model RegionProperties {
   geographyResourceId: string;
 
   /** Future changes of region. */
+  @added(Versions.v2025_10_01_preview)
   futureChanges: string;
 
   /** Zone resilience support state of region. */
+  @added(Versions.v2025_10_01_preview)
   zoneResilienceSupport: string;
 
   /** The provisioning state of resource. */
