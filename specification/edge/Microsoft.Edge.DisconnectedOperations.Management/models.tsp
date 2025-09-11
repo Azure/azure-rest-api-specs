@@ -81,7 +81,7 @@ union RegistrationStatus {
 }
 
 @doc("The disconnected create or update operation properties")
-model DisconnectedCreateOrUpdateOperationProperties {
+model DisconnectedOperationCreateOrUpdateProperties {
   @visibility(Lifecycle.Read)
   @doc("The resource provisioning state")
   provisioningState?: ResourceProvisioningState;
