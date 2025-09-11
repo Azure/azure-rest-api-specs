@@ -109,6 +109,7 @@ interface PriceSheet {
   /**
    * Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available via this API only for May 1, 2014 or later.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   getByBillingPeriod is PriceSheetOps.Read<
     PriceSheetResult,

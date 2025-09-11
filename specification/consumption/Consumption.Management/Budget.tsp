@@ -13,6 +13,7 @@ namespace Microsoft.Consumption;
 /**
  * A budget resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model Budget is Azure.ResourceManager.ExtensionResource<BudgetProperties> {
   ...ResourceNameParameter<

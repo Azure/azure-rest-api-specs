@@ -833,6 +833,7 @@ model Notification {
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   threshold: decimal;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   contactEmails: {
     type: "array";
     minItems: 0;
@@ -2643,6 +2644,7 @@ model LotProperties {
   /**
    * The organization type of the lot.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   OrganizationType?: OrganizationType;
 
@@ -3022,6 +3024,7 @@ model LegacyUsageDetailProperties {
    * Retail price for the resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   payGPrice?: decimal;
 
@@ -3237,6 +3240,7 @@ model ModernUsageDetailProperties {
    * Estimated extendedCost or blended cost before tax in USD.
    */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   costInUSD?: decimal;
 
@@ -3505,6 +3509,7 @@ model ModernUsageDetailProperties {
    * The amount of PayG cost before tax in US Dollar currency.
    */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   paygCostInUSD?: decimal;
 
@@ -3525,6 +3530,7 @@ model ModernUsageDetailProperties {
    * Retail price for the resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   payGPrice?: decimal;
 
@@ -3663,6 +3669,7 @@ model LegacyReservationRecommendationProperties {
   /**
    * Shared or single recommendation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scope: string;
 
   /**
@@ -3846,6 +3853,7 @@ model ModernReservationRecommendationProperties {
   /**
    * Shared or single recommendation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scope: string;
 
   /**
@@ -3909,6 +3917,7 @@ model ModernSharedScopeReservationRecommendationProperties
  * Legacy Reservation transaction resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LegacyReservationTransaction extends ReservationTransaction {}
 
 /**
