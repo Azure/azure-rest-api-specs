@@ -21,7 +21,7 @@ model DisconnectedOperation
 }
 
 @doc("Disconnected create or update operation resource.")
-model DisconnectedCreateOrUpdateOperation
+model DisconnectedCreateOrUpdate
   is TrackedResource<DisconnectedCreateOrUpdateOperationProperties> {
   @doc("Name of the resource")
   @path
