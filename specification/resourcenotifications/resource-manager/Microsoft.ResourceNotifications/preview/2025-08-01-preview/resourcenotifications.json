@@ -113,7 +113,7 @@
         }
       }
     },
-    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:getSessionDetails": {
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:getSessionDetails": {
       "post": {
         "operationId": "NotificationsSessions_GetSessionDetails",
         "description": "Get session details.",
@@ -126,11 +126,11 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "notificationSessionName",
+            "name": "notificationSessionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -165,7 +165,7 @@
         }
       }
     },
-    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:closeSession": {
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:closeSession": {
       "post": {
         "operationId": "NotificationsSessions_CloseSession",
         "description": "Close the session.",
@@ -178,11 +178,11 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "notificationSessionName",
+            "name": "notificationSessionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -265,7 +265,8 @@
       "type": "object",
       "properties": {
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Description of the notification session."
         },
         "maxDurationMinutes": {
           "type": "integer",
@@ -325,6 +326,33 @@
           "type": "string",
           "description": "Arbitrary configuration payload (string encoded)."
         },
+        "description": {
+          "type": "string",
+          "description": "Description of the notification session.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "maxDurationMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum duration in minutes.",
+          "minimum": 1,
+          "maximum": 1440,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the session.",
+          "readOnly": true
+        },
         "status": {
           "$ref": "#/definitions/NotificationSessionStatus",
           "x-ms-mutability": [
@@ -349,9 +377,9 @@
           "description": "Last update timestamp.",
           "readOnly": true
         },
-        "location": {
+        "notificationSessionId": {
           "type": "string",
-          "description": "Resource location",
+          "description": "Unique identifier of the notification session (GUID).",
           "readOnly": true
         }
       }

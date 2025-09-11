@@ -65,6 +65,20 @@ model NotificationSessionProperties {
   /** Arbitrary configuration payload (string encoded). */
   configuration?: string;
 
+  /** Description of the notification session. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  description?: string;
+
+  /** Maximum duration in minutes. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @minValue(1)
+  @maxValue(1440)
+  maxDurationMinutes?: int32;
+
+  /** Start time of the session. */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   status?: NotificationSessionStatus;
 
@@ -79,9 +93,9 @@ model NotificationSessionProperties {
   @visibility(Lifecycle.Read)
   updatedAt?: utcDateTime;
 
-  /** Resource location */
+  /** Unique identifier of the notification session. */
   @visibility(Lifecycle.Read)
-  location?: string;
+  notificationSessionId?: string;
 }
 
 @parentResource(TenantLocationResource)
@@ -172,15 +186,15 @@ interface NotificationsSessions {
 
   /** Get session details. */
   @post
-  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:getSessionDetails")
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:getSessionDetails")
   getSessionDetails(
     @path
     @pattern("^[a-z0-9]+$")
     location: string,
 
     @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionName: string,
+    @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+    notificationSessionId: string,
 
     @body body: GetSessionDetailsRequest,
     ...ApiVersionParameter,
@@ -191,15 +205,15 @@ interface NotificationsSessions {
 
   /** Close the session. */
   @post
-  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:closeSession")
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:closeSession")
   closeSession(
     @path
     @pattern("^[a-z0-9]+$")
     location: string,
 
     @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    notificationSessionName: string,
+    @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+    notificationSessionId: string,
 
     ...ApiVersionParameter,
   ): {
