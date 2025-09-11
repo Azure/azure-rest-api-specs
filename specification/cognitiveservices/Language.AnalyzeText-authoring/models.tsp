@@ -34,19 +34,19 @@ union ProjectKind {
   /**
    * For building an abstractive summarization models which are able to summarize long documents.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
 
   /**
    * For building an text analytics for health model to identify your health domain data.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   CustomHealthcare: "CustomHealthcare",
 
   /**
    * For building a sentiment models which are able to extract sentiment for long documents.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   CustomTextSentiment: "CustomTextSentiment",
 }
 
@@ -263,25 +263,25 @@ model TextAnalysisAuthoringProjectSettings {
   /**
    * The path to the AML connected project.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   amlProjectPath?: string;
 
   /**
    * Indicates whether the labeling experience can be modified or not.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   isLabelingLocked?: boolean;
 
   /**
    * Indicates whether to run GPT predictions or not.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   runGptPredictions?: boolean;
 
   /**
    * The predictive lookahead for GPT predictions that is specified by the user.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   gptPredictiveLookahead?: int32;
 }
 
@@ -561,7 +561,7 @@ model TextAnalysisAuthoringEvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @resource("copy/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringCopyProjectJobState {
@@ -666,7 +666,7 @@ model TextAnalysisAuthoringProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   assignedResources: TextAnalysisAuthoringDeploymentResource[];
 }
 
@@ -703,7 +703,7 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   @removed(Versions.v2025_05_15_preview)
   assignedResourceIds?: string[];
 
@@ -717,7 +717,7 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
 /**
  * Represents the options for deleting a project deployment.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
@@ -857,7 +857,7 @@ model TextAnalysisAuthoringExportedModelJobState {
 /**
  * Represents the properties for the exported model manifest.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringExportedModelManifest {
   /**
    * The model files belonging to this model.
@@ -868,7 +868,7 @@ model TextAnalysisAuthoringExportedModelManifest {
 /**
  * Represents the properties for the model file.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringModelFile {
   /**
    * The name of the file.
@@ -1095,7 +1095,7 @@ model TextAnalysisAuthoringLoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringAssignedDeploymentResources {
   /**
    * The list of projects.
@@ -1111,7 +1111,7 @@ model TextAnalysisAuthoringAssignedDeploymentResources {
 /**
  * Represents the assigned deployment resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @resource("resources")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringAssignedDeploymentResource {
@@ -1161,7 +1161,7 @@ model TextAnalysisAuthoringResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
@@ -1172,7 +1172,7 @@ model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @resource("resources/assign/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringDeploymentResourcesJobState {
@@ -1274,7 +1274,7 @@ model TextAnalysisAuthoringProjectDeletionJobState {
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of projects.
@@ -1291,7 +1291,7 @@ model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
  * Represents the metadata for assigned deployments for a project.
  */
 @resource("authoring/analyze-text/projects/global/deployments/resources")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringAssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
@@ -1362,7 +1362,7 @@ model TextAnalysisAuthoringSupportedLanguage {
 /**
  * Represents a list of the retrieved supported prebuilt entities.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringPrebuiltEntities {
   /**
    * The list of projects.
@@ -1378,7 +1378,7 @@ model TextAnalysisAuthoringPrebuiltEntities {
 /**
  * Represents a supported prebuilt entity.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @resource("authoring/analyze-text/projects/global/prebuilt-entities")
 model TextAnalysisAuthoringPrebuiltEntity {
   /**
@@ -1627,7 +1627,7 @@ model TextAnalysisAuthoringEntityEvaluationSummary {
 /**
  * Represents the document evaluation result for a custom entity recognition project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringCustomHealthcareDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -1654,7 +1654,7 @@ model TextAnalysisAuthoringDocumentHealthcareEvaluationResult {
 /**
  * Represents the evaluation summary for a custom health care project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringCustomHealthcareEvaluationSummary
   extends TextAnalysisAuthoringEvaluationSummary {
   /**
@@ -1930,7 +1930,7 @@ model TextAnalysisAuthoringSingleLabelClassEvaluationSummary {
 /**
  * Represents the document evaluation result for a custom sentiment project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringCustomTextSentimentDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -1982,7 +1982,7 @@ model TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult {
 /**
  * Represents the evaluation summary for a custom text sentiment project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringCustomTextSentimentEvaluationSummary
   extends TextAnalysisAuthoringEvaluationSummary {
   /**
@@ -2234,7 +2234,7 @@ model TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument {
 /**
  * Represents the exported assets for an abstractive summarization project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringExportedCustomAbstractiveSummarizationProjectAssets
   extends TextAnalysisAuthoringExportedProjectAssets {
   /**
@@ -2378,7 +2378,7 @@ model TextAnalysisAuthoringExportedCustomHealthcareDocument {
 /**
  * Represents the exported assets for a CustomHealthcare project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringExportedCustomHealthcareProjectAssets
   extends TextAnalysisAuthoringExportedProjectAssets {
   /**
@@ -2543,7 +2543,7 @@ model TextAnalysisAuthoringExportedDocumentSentimentLabel {
 /**
  * Represents the exported assets for a custom text sentiment project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 model TextAnalysisAuthoringExportedCustomTextSentimentProjectAssets
   extends TextAnalysisAuthoringExportedProjectAssets {
   /**

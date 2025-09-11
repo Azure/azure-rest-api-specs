@@ -1,16 +1,16 @@
-import { describe, test, expect, vi, beforeEach, type Mock } from "vitest";
-import * as utils from "../src/utils.js";
+import fs from "node:fs";
+import path from "node:path";
+import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
+import * as commandHelpers from "../src/command-helpers.js";
 import {
   generateSdkForBatchSpecs,
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
 } from "../src/commands.js";
-import * as commandHelpers from "../src/command-helpers.js";
 import * as log from "../src/log.js";
-import * as changeFiles from "../src/spec-helpers.js";
-import fs from "node:fs";
-import path from "node:path";
 import { LogLevel } from "../src/log.js";
+import * as changeFiles from "../src/spec-helpers.js";
+import * as utils from "../src/utils.js";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
   return mockFn.mock.calls.map((args: unknown[]) => {
@@ -241,6 +241,7 @@ describe("generateSdkForSpecPr", () => {
       "succeeded", // overallExecutionResult
       false, // overallRunHasBreakingChange
       true, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted
@@ -283,6 +284,7 @@ describe("generateSdkForSpecPr", () => {
       "succeeded", // overallExecutionResult should be set to "succeeded"
       false, // overallRunHasBreakingChange
       false, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       false, // sdkGenerationExecuted should be set to false
@@ -321,6 +323,7 @@ describe("generateSdkForSpecPr", () => {
       "", // overallExecutionResult is empty because no spec was actually processed
       false, // overallRunHasBreakingChange
       false, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted is true because there were some changed specs but they had no valid config
