@@ -102,9 +102,6 @@ model AnalysisMetadata {
 model ModelConfiguration {
   @doc("The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.")
   modelDeploymentName: string;
-
-  @doc("Optional parameters passed to the model for analysis and insight generation.")
-  modelParams: Record<unknown>;
 }
 
 @doc("The result of the analysis.")
