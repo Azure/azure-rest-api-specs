@@ -91,7 +91,7 @@ union Priority {
   string,
 
   /** The job's base priority. */
-  Basic: "Basic",
+  Standard: "Standard",
 
   /** The job's priority is elevated. */
   High: "High",
