@@ -120,6 +120,7 @@ using Microsoft.ComputeSchedule;
   "correlationId",
   "csharp,javascript"
 );
+@@clientName(ExecuteCreateRequest.correlationid, "correlationId", "csharp");
 @@clientName(Schedule.deadLine, "userRequestDeadline", "csharp,javascript");
 @@clientName(Schedule.timeZone, "userRequestTimezone", "csharp,javascript");
 @@clientName(ResourceOperationDetails.timeZone,
@@ -140,12 +141,6 @@ using Microsoft.ComputeSchedule;
 );
 @@clientName(CreateResourceOperationResponse,
   "CreateResourceOperationResult",
-  "csharp"
-);
-@@clientName(ScheduledActionResource, "ScheduledActionResourceModel", "csharp");
-@@clientName(OccurrenceResource, "OccurrenceResourceModel", "csharp");
-@@clientName(OccurrenceExtensionResource,
-  "OccurrenceExtensionResourceModel",
   "csharp"
 );
 @@clientName(ResourceOperationResponse,
