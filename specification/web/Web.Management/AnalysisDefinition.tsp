@@ -60,7 +60,7 @@ interface AnalysisDefinitions {
   /**
    * Description for Get Site Analysis
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_GetSiteAnalysis")
   getSiteAnalysis is AnalysisDefinitionOps.Read<
     AnalysisDefinition,
@@ -70,7 +70,7 @@ interface AnalysisDefinitions {
   /**
    * Description for Get Site Analyses
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_ListSiteAnalyses")
   listSiteAnalyses is AnalysisDefinitionOps.List<
     AnalysisDefinition,
@@ -81,7 +81,7 @@ interface AnalysisDefinitions {
   /**
    * Description for Execute Analysis
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_ExecuteSiteAnalysis")
   @action("execute")
   executeSiteAnalysis is AnalysisDefinitionOps.ActionSync<
@@ -152,7 +152,7 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Get Site Analysis
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_GetSiteAnalysisSlot")
   getSiteAnalysisSlot is AnalysisDefinitionOperationGroupOps.Read<
     AnalysisDefinition,
@@ -162,7 +162,7 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Get Site Analyses
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_ListSiteAnalysesSlot")
   listSiteAnalysesSlot is AnalysisDefinitionOperationGroupOps.List<
     AnalysisDefinition,
@@ -173,7 +173,7 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Execute Analysis
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_ExecuteSiteAnalysisSlot")
   @action("execute")
   executeSiteAnalysisSlot is AnalysisDefinitionOperationGroupOps.ActionSync<

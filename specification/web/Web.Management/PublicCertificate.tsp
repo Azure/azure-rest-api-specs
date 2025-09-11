@@ -54,7 +54,7 @@ interface PublicCertificates {
   /**
    * Description for Get the named public certificate for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPublicCertificate")
   getPublicCertificate is PublicCertificateOps.Read<
     PublicCertificate, 
@@ -64,8 +64,8 @@ interface PublicCertificates {
   /**
    * Description for Creates a hostname binding for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOrUpdatePublicCertificate")
   createOrUpdatePublicCertificate is PublicCertificateOps.CreateOrUpdateSync<
     PublicCertificate,
@@ -76,7 +76,7 @@ interface PublicCertificates {
   /**
    * Description for Deletes a hostname binding for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeletePublicCertificate")
   deletePublicCertificate is PublicCertificateOps.DeleteSync<
     PublicCertificate, 
@@ -86,7 +86,7 @@ interface PublicCertificates {
   /**
    * Description for Get public certificates for an app or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListPublicCertificates")
   listPublicCertificates is PublicCertificateOps.List<
     PublicCertificate,
@@ -129,7 +129,7 @@ interface PublicCertificateOperationGroup {
   /**
    * Description for Get the named public certificate for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPublicCertificateSlot")
   getPublicCertificateSlot is PublicCertificateOperationGroupOps.Read<
     PublicCertificate,
@@ -139,8 +139,8 @@ interface PublicCertificateOperationGroup {
   /**
    * Description for Creates a hostname binding for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_CreateOrUpdatePublicCertificateSlot")
   createOrUpdatePublicCertificateSlot is PublicCertificateOperationGroupOps.CreateOrUpdateSync<
     PublicCertificate,
@@ -151,7 +151,7 @@ interface PublicCertificateOperationGroup {
   /**
    * Description for Deletes a hostname binding for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeletePublicCertificateSlot")
   deletePublicCertificateSlot is PublicCertificateOperationGroupOps.DeleteSync<
     PublicCertificate,
@@ -161,7 +161,7 @@ interface PublicCertificateOperationGroup {
   /**
    * Description for Get public certificates for an app or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListPublicCertificatesSlot")
   listPublicCertificatesSlot is PublicCertificateOperationGroupOps.List<
     PublicCertificate,

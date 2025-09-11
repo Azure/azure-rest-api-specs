@@ -32,7 +32,7 @@ interface AseV3NetworkingConfigurations {
   /**
    * Description for Get networking configuration of an App Service Environment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_GetAseV3NetworkingConfiguration")
   getAseV3NetworkingConfiguration is ArmResourceRead<
     AseV3NetworkingConfiguration,
@@ -42,8 +42,8 @@ interface AseV3NetworkingConfigurations {
   /**
    * Description for Update networking configuration of an App Service Environment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_UpdateAseNetworkingConfiguration")
   updateAseNetworkingConfiguration is ArmResourceCreateOrReplaceSync<
     AseV3NetworkingConfiguration,

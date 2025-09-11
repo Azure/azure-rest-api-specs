@@ -54,8 +54,8 @@ interface CsmDeploymentStatuses {
   /**
    * Gets the deployment status for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetProductionSiteDeploymentStatus")
   getProductionSiteDeploymentStatus is CsmDeploymentStatusOps.Read<
     CsmDeploymentStatus,
@@ -69,7 +69,7 @@ interface CsmDeploymentStatuses {
   /**
    * List deployment statuses for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListProductionSiteDeploymentStatuses")
   listProductionSiteDeploymentStatuses is CsmDeploymentStatusOps.List<
     CsmDeploymentStatus,
@@ -112,8 +112,8 @@ interface CsmDeploymentStatusOperationGroup {
   /**
    * Gets the deployment status for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetSlotSiteDeploymentStatusSlot")
   getSlotSiteDeploymentStatusSlot is CsmDeploymentStatusOperationGroupOps.Read<
     CsmDeploymentStatus,
@@ -127,7 +127,7 @@ interface CsmDeploymentStatusOperationGroup {
   /**
    * List deployment statuses for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSlotSiteDeploymentStatusesSlot")
   listSlotSiteDeploymentStatusesSlot is CsmDeploymentStatusOperationGroupOps.List<
     CsmDeploymentStatus,

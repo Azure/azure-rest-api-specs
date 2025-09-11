@@ -54,15 +54,15 @@ interface PremierAddOns {
   /**
    * Description for Gets a named add-on of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPremierAddOn")
   getPremierAddOn is PremierAddOnOps.Read<PremierAddOn,OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Description for Updates a named add-on of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_AddPremierAddOn")
   addPremierAddOn is PremierAddOnOps.CreateOrUpdateSync<
     PremierAddOn,
@@ -73,7 +73,7 @@ interface PremierAddOns {
   /**
    * Description for Updates a named add-on of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdatePremierAddOn")
   @patch(#{ implicitOptionality: false })
   updatePremierAddOn is PremierAddOnOps.CustomPatchSync<
@@ -85,8 +85,8 @@ interface PremierAddOns {
   /**
    * Description for Delete a premier add-on from an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeletePremierAddOn")
   deletePremierAddOn is PremierAddOnOps.DeleteSync<
     PremierAddOn,
@@ -129,7 +129,7 @@ interface PremierAddOnOperationGroup {
   /**
    * Description for Gets a named add-on of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPremierAddOnSlot")
   getPremierAddOnSlot is PremierAddOnOperationGroupOps.Read<
     PremierAddOn,
@@ -139,8 +139,8 @@ interface PremierAddOnOperationGroup {
   /**
    * Description for Updates a named add-on of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_AddPremierAddOnSlot")
   addPremierAddOnSlot is PremierAddOnOperationGroupOps.CreateOrUpdateSync<
     PremierAddOn,
@@ -151,7 +151,7 @@ interface PremierAddOnOperationGroup {
   /**
    * Description for Updates a named add-on of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdatePremierAddOnSlot")
   @patch(#{ implicitOptionality: false })
   updatePremierAddOnSlot is PremierAddOnOperationGroupOps.CustomPatchSync<
@@ -163,8 +163,8 @@ interface PremierAddOnOperationGroup {
   /**
    * Description for Delete a premier add-on from an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeletePremierAddOnSlot")
   deletePremierAddOnSlot is PremierAddOnOperationGroupOps.DeleteSync<
     PremierAddOn,

@@ -3,147 +3,147 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Web;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceEnvironmentPatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PushSettings.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ResourceMetricDefinition.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Microsoft.Web.Usage.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServicePlanPatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HybridConnectionKey.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CertificatePatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DiagnosticAnalysis.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DiagnosticDetectorResponse.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Snapshot.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubeEnvironmentPatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ApplicationStackResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FunctionAppStack.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WebAppStack.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Recommendation.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BillingMeter.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomHostnameSites.properties);
 
 @@clientName(IdentifierProperties.id, "value");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(GeoRegion.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AseRegion.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PremierAddOnOffer.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetValidationFailureDetails.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetValidationTestFailure.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ValidateRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSitesWorkflowPreviewRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSitesWorkflowPreview.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RemotePrivateEndpointConnection.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserProvidedFunctionApp.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSitePatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserARMResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StringDictionary.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DatabaseConnectionPatchRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteFunctionOverviewARMResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteZipDeploymentARMResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserInvitationRequestResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserInvitationResponseResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteCustomDomainRequestPropertiesARMResource.properties
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteResetPropertiesARMResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SitePatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomHostnameAnalysisResult.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BackupRequest.properties);
 
 @@clientName(BackupItemProperties.id, "BackupId");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RestoreRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteAuthSettings.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AzureStoragePropertyDictionaryResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ConnectionStringDictionary.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteConfigurationSnapshotInfo.properties);
 
 @@clientName(ContinuousWebJobProperties.detailed_status, "detailedStatus");
@@ -157,10 +157,10 @@ using Microsoft.Web;
 @@clientName(DeploymentProperties.start_time, "startTime");
 @@clientName(DeploymentProperties.end_time, "endTime");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MSDeploy.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MSDeployLog.properties);
 
 @@clientName(FunctionEnvelopeProperties.function_app_id, "functionAppId");
@@ -215,7 +215,7 @@ using Microsoft.Web;
 @@clientName(ProcessInfoProperties.is_scm_site, "isScmSite");
 @@clientName(ProcessInfoProperties.is_webjob, "isWebjob");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProcessThreadInfo.properties);
 
 @@clientName(ProcessThreadInfoProperties.start_address, "startAddress");
@@ -242,25 +242,25 @@ using Microsoft.Web;
 @@clientName(ProcessModuleInfoProperties.product_version, "productVersion");
 @@clientName(ProcessModuleInfoProperties.is_debug, "isDebug");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageMigrationOptions.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageMigrationResponse.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MigrateMySqlRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SitePhpErrorLogFlag.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PremierAddOnPatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeletedAppRestoreRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SnapshotRestoreRequest.properties);
 
 @@clientName(SiteExtensionInfoProperties.extension_id, "extensionId");
@@ -285,7 +285,7 @@ using Microsoft.Web;
   "installedDateTime"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SlotDifference.properties);
 
 @@clientName(TriggeredWebJobProperties.latest_run, "latestRun");
@@ -311,10 +311,10 @@ using Microsoft.Web;
 
 @@clientName(WorkflowTriggerListCallbackUrlQueries.`api-version`, "apiVersion");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Workflow.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkConnectionApprovalRequestResource.properties);
 
 @@clientLocation(AppServiceEnvironmentResources.get, AppServiceEnvironments);
@@ -392,7 +392,7 @@ using Microsoft.Web;
 @@clientLocation(AppServiceEnvironmentResources.resetAllFiltersForHostingEnvironment,
   Recommendations
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceEnvironmentResource.properties);
 
 @@clientLocation(CustomDnsSuffixConfigurations.getAseCustomDnsSuffixConfiguration,
@@ -407,7 +407,7 @@ using Microsoft.Web;
 @@clientLocation(CustomDnsSuffixConfigurations.deleteAseCustomDnsSuffixConfiguration,
   AppServiceEnvironments
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomDnsSuffixConfiguration.properties);
 
 @@clientLocation(AseV3NetworkingConfigurations.getAseV3NetworkingConfiguration,
@@ -419,11 +419,11 @@ using Microsoft.Web;
 @@clientName(AseV3NetworkingConfigurations.updateAseNetworkingConfiguration::parameters.resource,
   "aseNetworkingConfiguration"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AseV3NetworkingConfiguration.properties);
 
 @@clientLocation(AddressResponses.getVipInfo, AppServiceEnvironments);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AddressResponse.properties);
 
 @@clientLocation(Sites.get, WebApps);
@@ -583,7 +583,7 @@ using Microsoft.Web;
 @@clientName(WebApps.deployWorkflowArtifactsSlot::parameters.body,
   "workflowArtifacts"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Site.properties);
 
 @@clientLocation(WorkerPoolResources.getMultiRolePool, AppServiceEnvironments);
@@ -620,7 +620,7 @@ using Microsoft.Web;
 @@clientName(AppServiceEnvironments.updateWorkerPool::parameters.properties,
   "workerPoolEnvelope"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkerPoolResource.properties);
 
 @@clientLocation(RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnection,
@@ -671,14 +671,14 @@ using Microsoft.Web;
 @@clientLocation(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionListSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RemotePrivateEndpointConnectionARMResource.properties);
 
 @@clientName(AppServicePlans.createOrUpdate::parameters.resource,
   "appServicePlan"
 );
 @@clientName(AppServicePlans.update::parameters.properties, "appServicePlan");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServicePlan.properties);
 
 @@clientLocation(HybridConnections.getHybridConnection, AppServicePlans);
@@ -721,13 +721,13 @@ using Microsoft.Web;
 @@clientLocation(HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HybridConnection.properties);
 
 @@clientLocation(HybridConnectionLimitsOperationGroup.getHybridConnectionPlanLimit,
   AppServicePlans
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HybridConnectionLimits.properties);
 
 @@clientLocation(VnetInfoResources.getVnetFromServerFarm, AppServicePlans);
@@ -764,7 +764,7 @@ using Microsoft.Web;
 );
 @@clientLocation(VnetConnectionOperationGroup.deleteVnetConnection, WebApps);
 @@clientLocation(VnetConnectionOperationGroup.listVnetConnections, WebApps);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetInfoResource.properties);
 
 @@clientLocation(VnetRoutes.getRouteForVnet, AppServicePlans);
@@ -774,7 +774,7 @@ using Microsoft.Web;
 @@clientName(VnetRoutes.updateVnetRoute::parameters.properties, "route");
 @@clientLocation(VnetRoutes.deleteVnetRoute, AppServicePlans);
 @@clientLocation(VnetRoutes.listRoutesForVnet, AppServicePlans);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetRoute.properties);
 
 @@clientLocation(VnetGateways.getVnetGateway, AppServicePlans);
@@ -812,7 +812,7 @@ using Microsoft.Web;
 @@clientName(VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
   "connectionEnvelope"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetGateway.properties);
 
 @@clientName(Certificates.createOrUpdate::parameters.resource,
@@ -838,13 +838,13 @@ using Microsoft.Web;
 );
 @@clientLocation(CertificateOperationGroup.deleteSlot, SiteCertificates);
 @@clientLocation(CertificateOperationGroup.listSlot, SiteCertificates);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Certificate.properties);
 
 @@clientLocation(DeletedSites.getDeletedWebAppByLocation, "DeletedWebApps");
 @@clientLocation(DeletedSites.listByLocation, "DeletedWebApps");
 @@clientLocation(Global.list, "DeletedWebApps");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeletedSite.properties);
 
 @@clientLocation(DetectorResponses.getHostingEnvironmentDetectorResponse,
@@ -859,7 +859,7 @@ using Microsoft.Web;
 @@clientLocation(DetectorResponseOperationGroup.listSiteDetectorResponsesSlot,
   Diagnostics
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
 
 @@clientLocation(DiagnosticCategories.getSiteDiagnosticCategory, Diagnostics);
@@ -872,7 +872,7 @@ using Microsoft.Web;
 @@clientLocation(DiagnosticCategoryOperationGroup.listSiteDiagnosticCategoriesSlot,
   Diagnostics
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DiagnosticCategory.properties);
 
 @@clientLocation(AnalysisDefinitions.getSiteAnalysis, Diagnostics);
@@ -887,7 +887,7 @@ using Microsoft.Web;
 @@clientLocation(AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
   Diagnostics
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AnalysisDefinition.properties);
 
 @@clientLocation(DetectorDefinitionResources.getSiteDetector, Diagnostics);
@@ -902,7 +902,7 @@ using Microsoft.Web;
 @@clientLocation(DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
   Diagnostics
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorDefinitionResource.properties);
 
 @@clientName(KubeEnvironments.createOrUpdate::parameters.resource,
@@ -911,7 +911,7 @@ using Microsoft.Web;
 @@clientName(KubeEnvironments.update::parameters.properties,
   "kubeEnvironmentEnvelope"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubeEnvironment.properties);
 
 @@clientLocation(RecommendationRules.getRuleDetailsByHostingEnvironment,
@@ -920,7 +920,7 @@ using Microsoft.Web;
 @@clientLocation(RecommendationRules.disableRecommendationForHostingEnvironment,
   Recommendations
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RecommendationRule.properties);
 
 @@clientLocation(ResourceHealthMetadataOperationGroup.getBySite,
@@ -935,13 +935,13 @@ using Microsoft.Web;
 @@clientLocation(BySiteSlotOperationGroup.listBySiteSlot,
   "ResourceHealthMetadata"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ResourceHealthMetadata.properties);
 
 @@clientLocation(Users.getPublishingUser, "");
 @@clientLocation(Users.updatePublishingUser, "");
 @@clientName(Users.updatePublishingUser::parameters.resource, "userDetails");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(User.properties);
 
 @@clientLocation(SourceControls.getSourceControl, "");
@@ -950,7 +950,7 @@ using Microsoft.Web;
   "requestMessage"
 );
 @@clientLocation(SourceControls.listSourceControls, "");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SourceControl.properties);
 
 @@clientLocation(Identifiers.getDomainOwnershipIdentifier, WebApps);
@@ -985,7 +985,7 @@ using Microsoft.Web;
 @@clientLocation(IdentifierOperationGroup.listDomainOwnershipIdentifiersSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Identifier.properties);
 
 @@clientLocation(StaticSiteARMResources.getStaticSite, StaticSites);
@@ -1048,7 +1048,7 @@ using Microsoft.Web;
 @@clientName(StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
   "staticSiteZipDeploymentEnvelope"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteARMResource.properties);
 
 @@clientLocation(StaticSiteBuildARMResources.getStaticSiteBuild, StaticSites);
@@ -1086,7 +1086,7 @@ using Microsoft.Web;
 @@clientName(StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild::parameters.body,
   "staticSiteZipDeploymentEnvelope"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteBuildARMResource.properties);
 
 @@clientLocation(DatabaseConnections.getBuildDatabaseConnection, StaticSites);
@@ -1133,7 +1133,7 @@ using Microsoft.Web;
 @@clientLocation(DatabaseConnectionOperationGroup.getDatabaseConnectionWithDetails,
   StaticSites
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DatabaseConnection.properties);
 
 @@clientLocation(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppForStaticSiteBuild,
@@ -1166,7 +1166,7 @@ using Microsoft.Web;
 @@clientLocation(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppsForStaticSite,
   StaticSites
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserProvidedFunctionAppARMResource.properties);
 
 @@clientLocation(StaticSiteBasicAuthPropertiesARMResources.getBasicAuth,
@@ -1181,7 +1181,7 @@ using Microsoft.Web;
 @@clientLocation(StaticSiteBasicAuthPropertiesARMResources.listBasicAuth,
   StaticSites
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteBasicAuthPropertiesARMResource.properties);
 
 @@clientLocation(StaticSiteCustomDomainOverviewARMResources.getStaticSiteCustomDomain,
@@ -1205,7 +1205,7 @@ using Microsoft.Web;
 @@clientName(StaticSiteCustomDomainOverviewARMResources.validateCustomDomainCanBeAddedToStaticSite::parameters.body,
   "staticSiteCustomDomainRequestPropertiesEnvelope"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteCustomDomainOverviewARMResource.properties);
 
 @@clientLocation(StaticSiteLinkedBackendARMResources.getLinkedBackend,
@@ -1248,7 +1248,7 @@ using Microsoft.Web;
 @@clientName(StaticSiteLinkedBackendARMResourceOperationGroup.validateBackendForBuild::parameters.body,
   "staticSiteLinkedBackendEnvelope"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteLinkedBackendARMResource.properties);
 
 @@clientLocation(BackupItems.getBackupStatus, WebApps);
@@ -1267,7 +1267,7 @@ using Microsoft.Web;
 );
 @@clientLocation(BackupItemOperationGroup.restoreSlot, WebApps);
 @@clientName(BackupItemOperationGroup.restoreSlot::parameters.body, "request");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BackupItem.properties);
 
 @@clientLocation(CsmPublishingCredentialsPoliciesEntities.getFtpAllowed,
@@ -1312,7 +1312,7 @@ using Microsoft.Web;
 @@clientName(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot::parameters.resource,
   "csmPublishingAccessPoliciesEntity"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CsmPublishingCredentialsPoliciesEntity.properties);
 
 @@clientLocation(SiteConfigResources.getConfiguration, WebApps);
@@ -1359,7 +1359,7 @@ using Microsoft.Web;
 @@clientLocation(SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteConfigResource.properties);
 
 @@clientLocation(SiteAuthSettingsV2s.getAuthSettingsV2WithoutSecrets, WebApps);
@@ -1380,7 +1380,7 @@ using Microsoft.Web;
 @@clientLocation(SiteAuthSettingsV2OperationGroup.getAuthSettingsV2Slot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteAuthSettingsV2.properties);
 
 @@clientLocation(AppSettingKeyVaultReference.getAppSettingKeyVaultReference,
@@ -1407,7 +1407,7 @@ using Microsoft.Web;
 @@clientLocation(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ApiKVReference.properties);
 
 @@clientLocation(SiteLogsConfigs.getDiagnosticLogsConfiguration, WebApps);
@@ -1424,7 +1424,7 @@ using Microsoft.Web;
 @@clientName(SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot::parameters.resource,
   "siteLogsConfig"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteLogsConfig.properties);
 
 @@clientLocation(SlotConfigNamesResources.listSlotConfigurationNames, WebApps);
@@ -1434,7 +1434,7 @@ using Microsoft.Web;
 @@clientName(SlotConfigNamesResources.updateSlotConfigurationNames::parameters.resource,
   "slotConfigNames"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SlotConfigNamesResource.properties);
 
 @@clientLocation(ContinuousWebJobs.getContinuousWebJob, WebApps);
@@ -1457,7 +1457,7 @@ using Microsoft.Web;
 @@clientLocation(ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ContinuousWebJob.properties);
 
 @@clientLocation(CsmDeploymentStatuses.getProductionSiteDeploymentStatus,
@@ -1472,7 +1472,7 @@ using Microsoft.Web;
 @@clientLocation(CsmDeploymentStatusOperationGroup.listSlotSiteDeploymentStatusesSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CsmDeploymentStatus.properties);
 
 @@clientLocation(Deployments.getDeployment, WebApps);
@@ -1489,7 +1489,7 @@ using Microsoft.Web;
 @@clientLocation(DeploymentOperationGroup.deleteDeploymentSlot, WebApps);
 @@clientLocation(DeploymentOperationGroup.listDeploymentsSlot, WebApps);
 @@clientLocation(DeploymentOperationGroup.listDeploymentLogSlot, WebApps);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Deployment.properties);
 
 @@clientLocation(MSDeployStatuses.getMSDeployStatus, WebApps);
@@ -1530,7 +1530,7 @@ using Microsoft.Web;
 @@clientLocation(InstanceMSDeployStatusOperationGroup.getInstanceMSDeployLogSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MSDeployStatus.properties);
 
 @@clientLocation(FunctionEnvelopes.getFunction, WebApps);
@@ -1573,7 +1573,7 @@ using Microsoft.Web;
 @@clientLocation(FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FunctionEnvelope.properties);
 
 @@clientLocation(HostNameBindings.getHostNameBinding, WebApps);
@@ -1596,7 +1596,7 @@ using Microsoft.Web;
 @@clientLocation(HostNameBindingOperationGroup.listHostNameBindingsSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HostNameBinding.properties);
 
 @@clientLocation(RelayServiceConnectionEntities.getRelayServiceConnection,
@@ -1635,7 +1635,7 @@ using Microsoft.Web;
 @@clientLocation(RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RelayServiceConnectionEntity.properties);
 
 @@clientLocation(WebSiteInstanceStatuses.getInstanceInfo, WebApps);
@@ -1646,7 +1646,7 @@ using Microsoft.Web;
 @@clientLocation(WebSiteInstanceStatusOperationGroup.listInstanceIdentifiersSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WebSiteInstanceStatus.properties);
 
 @@clientLocation(ProcessInfos.getInstanceProcess, WebApps);
@@ -1679,7 +1679,7 @@ using Microsoft.Web;
 @@clientLocation(ProcessSlotOperationGroup.listProcessesSlot, WebApps);
 @@clientLocation(ProcessSlotOperationGroup.getProcessDumpSlot, WebApps);
 @@clientLocation(ProcessSlotOperationGroup.listProcessThreadsSlot, WebApps);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProcessInfo.properties);
 
 @@clientLocation(ProcessModuleInfos.getInstanceProcessModule, WebApps);
@@ -1696,14 +1696,14 @@ using Microsoft.Web;
 @@clientLocation(ProcessModuleSlotOperationGroup.listProcessModulesSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProcessModuleInfo.properties);
 
 @@clientLocation(MigrateMySqlStatuses.getMigrateMySqlStatus, WebApps);
 @@clientLocation(MigrateMySqlStatusOperationGroup.getMigrateMySqlStatusSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MigrateMySqlStatus.properties);
 
 @@clientLocation(SwiftVirtualNetworks.getSwiftVirtualNetworkConnection,
@@ -1740,14 +1740,14 @@ using Microsoft.Web;
 @@clientLocation(SwiftVirtualNetworkOperationGroup.deleteSwiftVirtualNetworkSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SwiftVirtualNetwork.properties);
 
 @@clientLocation(NetworkFeaturesOperationGroup.listNetworkFeatures, WebApps);
 @@clientLocation(NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NetworkFeatures.properties);
 
 @@clientLocation(PremierAddOns.getPremierAddOn, WebApps);
@@ -1770,7 +1770,7 @@ using Microsoft.Web;
   "premierAddOn"
 );
 @@clientLocation(PremierAddOnOperationGroup.deletePremierAddOnSlot, WebApps);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PremierAddOn.properties);
 
 @@clientLocation(PrivateAccesses.getPrivateAccess, WebApps);
@@ -1783,7 +1783,7 @@ using Microsoft.Web;
 @@clientName(PrivateAccessOperationGroup.putPrivateAccessVnetSlot::parameters.resource,
   "access"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateAccess.properties);
 
 @@clientLocation(PublicCertificates.getPublicCertificate, WebApps);
@@ -1808,7 +1808,7 @@ using Microsoft.Web;
 @@clientLocation(PublicCertificateOperationGroup.listPublicCertificatesSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PublicCertificate.properties);
 
 @@clientLocation(SiteContainers.getSiteContainer, WebApps);
@@ -1827,7 +1827,7 @@ using Microsoft.Web;
 );
 @@clientLocation(SiteContainerOperationGroup.deleteSiteContainerSlot, WebApps);
 @@clientLocation(SiteContainerOperationGroup.listSiteContainersSlot, WebApps);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteContainer.properties);
 
 @@clientLocation(SiteExtensionInfos.getSiteExtension, WebApps);
@@ -1844,7 +1844,7 @@ using Microsoft.Web;
 @@clientLocation(SiteExtensionInfoOperationGroup.listSiteExtensionsSlot,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteExtensionInfo.properties);
 
 @@clientLocation(SiteSourceControls.getSourceControlSlot, WebApps);
@@ -1869,7 +1869,7 @@ using Microsoft.Web;
   "siteSourceControl"
 );
 @@clientLocation(SiteSourceControlOperationGroup.deleteSourceControl, WebApps);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteSourceControl.properties);
 
 @@clientLocation(TriggeredWebJobs.getTriggeredWebJobSlot, WebApps);
@@ -1880,7 +1880,7 @@ using Microsoft.Web;
 @@clientLocation(TriggeredWebJobOperationGroup.deleteTriggeredWebJob, WebApps);
 @@clientLocation(TriggeredWebJobOperationGroup.listTriggeredWebJobs, WebApps);
 @@clientLocation(TriggeredWebJobOperationGroup.runTriggeredWebJob, WebApps);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TriggeredWebJob.properties);
 
 @@clientLocation(TriggeredJobHistories.getTriggeredWebJobHistorySlot, WebApps);
@@ -1891,14 +1891,14 @@ using Microsoft.Web;
 @@clientLocation(TriggeredJobHistoryOperationGroup.listTriggeredWebJobHistory,
   WebApps
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TriggeredJobHistory.properties);
 
 @@clientLocation(WebJobs.getWebJobSlot, WebApps);
 @@clientLocation(WebJobs.listWebJobsSlot, WebApps);
 @@clientLocation(WebJobOperationGroup.getWebJob, WebApps);
 @@clientLocation(WebJobOperationGroup.listWebJobs, WebApps);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WebJob.properties);
 
 @@clientLocation(WorkflowEnvelopes.getInstanceWorkflowSlot, WebApps);
@@ -1906,10 +1906,10 @@ using Microsoft.Web;
 @@clientLocation(WorkflowEnvelopeOperationGroup.getWorkflow, WebApps);
 @@clientLocation(WorkflowEnvelopeOperationGroup.listWorkflows, WebApps);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowRun.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowRunAction.properties);
 
 @@clientLocation(WorkflowRunActionRepetitionDefinitions.get,
@@ -1921,7 +1921,7 @@ using Microsoft.Web;
 @@clientLocation(WorkflowRunActionRepetitionDefinitions.listExpressionTraces,
   "WorkflowRunActionRepetitions"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowRunActionRepetitionDefinition.properties);
 
 @@clientLocation(RequestHistories.get,
@@ -1931,13 +1931,13 @@ using Microsoft.Web;
   "WorkflowRunActionRepetitionsRequestHistories"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowTrigger.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowTriggerHistory.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowVersion.properties);
 
 @@clientLocation(GlobalOperationGroup.getSubscriptionOperationWithAsyncResponse,

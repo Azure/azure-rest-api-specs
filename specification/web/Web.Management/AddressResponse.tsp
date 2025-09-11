@@ -31,7 +31,7 @@ interface AddressResponses {
   /**
    * Description for Get IP addresses assigned to an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AppServiceEnvironments_GetVipInfo")
   getVipInfo is ArmResourceRead<AddressResponse, Error = DefaultErrorResponse>;
 }
