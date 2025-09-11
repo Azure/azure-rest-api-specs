@@ -1,3 +1,15 @@
+# New TypeSpec projects
+
+Before creating or initializing a TypeSpec project, you MUST:
+
+1. **READ** the [TypeSpec directory structure guidelines][typespec-structure-guidelines] first.
+2. **UNDERSTAND** the required directory structure.
+3. **FOLLOW** the directory naming conventions.
+
+These guidelines MUST be followed when creating a new TypeSpec specification.
+
+Only after the project directory is created according to the above guidelines may you run the `azsdk_init_typespec_project` tool to initialize the project.
+
 ## Converting a specification from swagger to typespec
 
 Users can convert a specification from swagger to typespec by using `tsp-client` a CLI designed to help developers throughout various stages of typespec development.
@@ -130,6 +142,10 @@ enum Versions {
 - camelCase fixes only apply to the typespec property names, any corresponding string values you should left as is.
 - String values in typespec files should be left untouched.
 
+## Up-to-date TypeSpec documentation
+
+Follow [typespec docs](../eng/common/instructions/azsdk-tools/typespec-docs.instructions.md) to get the most up-to-date documentation for TypeSpec, including best practices for writing TypeSpec for Azure.
+
 <!-- LINKS -->
 
 [contoso-widget-manager]: ../specification/contosowidgetmanager/Contoso.WidgetManager/
@@ -140,6 +156,7 @@ enum Versions {
 [ci-fix]: ../documentation/ci-fix.md
 [url-type]: https://typespec.io/docs/language-basics/built-in-types#string-types
 [no-enum]: https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum
+[typespec-structure-guidelines]: ../documentation/typespec-structure-guidelines.md
 
 
 # SDK generation from TypeSpec
