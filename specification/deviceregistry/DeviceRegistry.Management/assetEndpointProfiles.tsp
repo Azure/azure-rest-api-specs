@@ -118,14 +118,6 @@ model X509Credentials {
   @doc("The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx).")
   @added(Versions.v2024_09_01_preview)
   certificateSecretName: string;
-
-  @doc("A reference to the secret containing the certificate private key in PEM or DER format.")
-  @added(Versions.v2025_10_01)
-  keySecretName?: string;
-
-  @doc("A reference to the secret containing the combined intermediate certificates in PEM format.")
-  @added(Versions.v2025_10_01)
-  intermediateCertificatesSecretName?: string;
 }
 
 @doc("Definition of the authentication mechanism for the southbound connector.")

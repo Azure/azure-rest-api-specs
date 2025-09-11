@@ -5146,7 +5146,7 @@
           "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
         },
         "x509Credentials": {
-          "$ref": "#/definitions/X509Credentials",
+          "$ref": "#/definitions/X509CertificateCredentials",
           "description": "Defines the certificate reference when Certificate user authentication mode is selected."
         }
       },
@@ -5194,7 +5194,7 @@
           "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
         },
         "x509Credentials": {
-          "$ref": "#/definitions/X509CredentialsUpdate",
+          "$ref": "#/definitions/X509CertificateCredentialsUpdate",
           "description": "Defines the certificate reference when Certificate user authentication mode is selected."
         }
       }
@@ -8166,7 +8166,7 @@
         }
       }
     },
-    "X509Credentials": {
+    "X509CertificateCredentials": {
       "type": "object",
       "description": "The x509 certificate for authentication mode Certificate.",
       "properties": {
@@ -8187,7 +8187,7 @@
         "certificateSecretName"
       ]
     },
-    "X509CredentialsUpdate": {
+    "X509CertificateCredentialsUpdate": {
       "type": "object",
       "description": "The x509 certificate for authentication mode Certificate.",
       "properties": {
@@ -8202,6 +8202,29 @@
         "intermediateCertificatesSecretName": {
           "type": "string",
           "description": "A reference to the secret containing the combined intermediate certificates in PEM format."
+        }
+      }
+    },
+    "X509Credentials": {
+      "type": "object",
+      "description": "The x509 certificate for authentication mode Certificate.",
+      "properties": {
+        "certificateSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
+        }
+      },
+      "required": [
+        "certificateSecretName"
+      ]
+    },
+    "X509CredentialsUpdate": {
+      "type": "object",
+      "description": "The x509 certificate for authentication mode Certificate.",
+      "properties": {
+        "certificateSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
         }
       }
     }
