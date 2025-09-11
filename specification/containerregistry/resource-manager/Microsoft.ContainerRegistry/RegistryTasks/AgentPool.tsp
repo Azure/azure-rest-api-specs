@@ -15,7 +15,7 @@ namespace Microsoft.ContainerRegistry;
  * The agentpool will have all information to create an agent pool.
  */
 @parentResource(Registry)
-model AgentPool is Azure.ResourceManager.ProxyResource<AgentPoolProperties> {
+model AgentPool is Azure.ResourceManager.TrackedResource<AgentPoolProperties> {
   ...ResourceNameParameter<
     Resource = AgentPool,
     KeyName = "agentPoolName",

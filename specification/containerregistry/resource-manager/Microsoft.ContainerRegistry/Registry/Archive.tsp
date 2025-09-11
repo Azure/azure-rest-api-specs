@@ -42,10 +42,9 @@ interface AchieveOperationOps
         @pattern("^[a-zA-Z]*$")
         @doc("The package type.")
         packageType: string,
-
       },
       {
-         /**
+        /**
          * The name of the archive resource.
          */
         @path
@@ -120,6 +119,7 @@ interface Archives {
   /**
    * Updates a archive for a container registry with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is AchieveOperationOps.CustomPatchSync<
     Archive,

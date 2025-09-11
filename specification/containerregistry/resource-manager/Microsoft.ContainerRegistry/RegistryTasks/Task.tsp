@@ -15,7 +15,7 @@ namespace Microsoft.ContainerRegistry;
  * The task will have all information to schedule a run against it.
  */
 @parentResource(Registry)
-model Task is Azure.ResourceManager.ProxyResource<TaskProperties> {
+model Task is Azure.ResourceManager.TrackedResource<TaskProperties> {
   ...ResourceNameParameter<
     Resource = Task,
     KeyName = "taskName",
