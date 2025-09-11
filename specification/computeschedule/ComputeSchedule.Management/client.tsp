@@ -51,6 +51,14 @@ using Microsoft.ComputeSchedule;
   "GetVirtualMachineOperationErrors",
   "csharp"
 );
+@@clientName(ScheduledActions.virtualMachinesExecuteCreate,
+  "ExecuteVirtualMachineCreateOperation",
+  "csharp"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDelete,
+  "ExecuteVirtualMachineDeleteOperation",
+  "csharp"
+);
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
