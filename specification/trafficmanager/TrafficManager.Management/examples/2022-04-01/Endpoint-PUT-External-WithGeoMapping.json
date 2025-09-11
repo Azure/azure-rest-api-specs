@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "endpointName": "My%20external%20endpoint",
+    "endpointType": "ExternalEndpoints",
+    "parameters": {
+      "name": "My external endpoint",
+      "type": "Microsoft.network/TrafficManagerProfiles/ExternalEndpoints",
+      "properties": {
+        "endpointStatus": "Enabled",
+        "geoMapping": [
+          "GEO-AS",
+          "GEO-AF"
+        ],
+        "target": "foobar.contoso.com"
+      }
+    },
+    "profileName": "azuresdkfornetautoresttrafficmanager8224",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager2191",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "My external endpoint",
+        "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2191/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager8224/externalEndpoints/My external endpoint",
+        "properties": {
+          "endpointMonitorStatus": "CheckingEndpoint",
+          "endpointStatus": "Enabled",
+          "geoMapping": [
+            "GEO-AS",
+            "GEO-AF"
+          ],
+          "priority": 1,
+          "target": "foobar.contoso.com",
+          "weight": 1
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "My external endpoint",
+        "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2191/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager8224/externalEndpoints/My external endpoint",
+        "properties": {
+          "endpointMonitorStatus": "CheckingEndpoint",
+          "endpointStatus": "Enabled",
+          "geoMapping": [
+            "GEO-AS",
+            "GEO-AF"
+          ],
+          "priority": 1,
+          "target": "foobar.contoso.com",
+          "weight": 1
+        }
+      }
+    }
+  },
+  "operationId": "Endpoints_CreateOrUpdate",
+  "title": "Endpoint-PUT-External-WithGeoMapping"
+}
