@@ -3,11 +3,12 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Support;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Service.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Service.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProblemClassification.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProblemClassification.properties
+);
 
 @@clientName(SupportTickets.create::parameters.resource,
   "createSupportTicketParameters"
@@ -33,8 +34,9 @@ using Microsoft.Support;
 @@clientName(SupportTicketsOperationGroup.checkNameAvailability::parameters.body,
   "checkNameAvailabilityInput"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SupportTicketDetails.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SupportTicketDetails.properties
+);
 
 @@clientName(Communications.create::parameters.resource,
   "createCommunicationParameters"
@@ -42,14 +44,17 @@ using Microsoft.Support;
 @@clientName(CommunicationsNoSubscription.create::parameters.resource,
   "createCommunicationParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommunicationDetails.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunicationDetails.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ChatTranscriptDetails.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ChatTranscriptDetails.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(FileWorkspaceDetails.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FileWorkspaceDetails.properties
+);
 
 @@clientName(Files.create::parameters.resource, "createFileParameters");
 @@clientName(Files.upload::parameters.body, "uploadFile");
@@ -57,8 +62,8 @@ using Microsoft.Support;
   "createFileParameters"
 );
 @@clientName(FilesNoSubscription.upload::parameters.body, "uploadFile");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(FileDetails.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FileDetails.properties);
 
 // @@clientLocation decorators for operations with custom @operationId
 // These ensure consistent operationId generation in the output
