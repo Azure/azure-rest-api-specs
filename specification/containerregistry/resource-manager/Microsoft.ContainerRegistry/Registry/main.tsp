@@ -55,4 +55,21 @@ enum Versions {
   v2025_05_01_preview: "2025-05-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Operations")
+  @autoRoute
+  @Azure.ResourceManager.Private.armUpdateProviderNamespace
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @list
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationListResult> | ErrorResponse;
+}

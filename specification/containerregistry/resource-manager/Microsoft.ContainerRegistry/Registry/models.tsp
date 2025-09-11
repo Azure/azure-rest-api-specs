@@ -1547,6 +1547,23 @@ model OperationLogSpecificationDefinition {
   blobDuration?: string;
 }
 
+/**
+ * The result of a request to list container registry operations.
+ */
+model OperationListResult {
+  /**
+   * The list of container registry operations. Since this list may be incomplete, the nextLink field should be used to request the next list of operations.
+   */
+  @pageItems
+  value?: OperationDefinition[];
+
+  /**
+   * The URI that can be used to request the next list of container registry operations.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
 /** The resource type for Container Registry. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" ""
 enum ContainerRegistryResourceType {

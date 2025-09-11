@@ -105,7 +105,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -7140,6 +7140,156 @@
       "required": [
         "defaultAction"
       ]
+    },
+    "OperationDefinition": {
+      "type": "object",
+      "description": "The definition of a container registry operation.",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "description": "The origin information of the container registry operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayDefinition",
+          "description": "The display information for the container registry operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesDefinition",
+          "description": "The properties information for the container registry operation.",
+          "x-ms-client-flatten": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "This property indicates if the operation is an action or a data action\nref: https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions#management-and-data-operations"
+        }
+      }
+    },
+    "OperationDisplayDefinition": {
+      "type": "object",
+      "description": "The display information for a container registry operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The resource provider name: Microsoft.ContainerRegistry."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that users can perform."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description for the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "The result of a request to list container registry operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of container registry operations. Since this list may be incomplete, the nextLink field should be used to request the next list of operations.",
+          "items": {
+            "$ref": "#/definitions/OperationDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next list of container registry operations."
+        }
+      }
+    },
+    "OperationLogSpecificationDefinition": {
+      "type": "object",
+      "description": "The definition of Azure Monitoring log.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Log name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Log display name."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Log blob duration."
+        }
+      }
+    },
+    "OperationMetricSpecificationDefinition": {
+      "type": "object",
+      "description": "The definition of Azure Monitoring metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Metric name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Metric display name."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Metric description."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Metric unit."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Metric aggregation type."
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "Internal metric name."
+        }
+      }
+    },
+    "OperationPropertiesDefinition": {
+      "type": "object",
+      "description": "The definition of Azure Monitoring properties.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationServiceSpecificationDefinition",
+          "description": "The definition of Azure Monitoring service."
+        }
+      }
+    },
+    "OperationServiceSpecificationDefinition": {
+      "type": "object",
+      "description": "The definition of Azure Monitoring list.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "A list of Azure Monitoring metrics definition.",
+          "items": {
+            "$ref": "#/definitions/OperationMetricSpecificationDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "A list of Azure Monitoring log definitions.",
+          "items": {
+            "$ref": "#/definitions/OperationLogSpecificationDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     },
     "PackageSourceType": {
       "type": "string",
