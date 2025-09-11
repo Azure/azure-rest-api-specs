@@ -741,6 +741,7 @@ model BudgetFilter {
    * The logical "AND" expression. Must have at least 2 items.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @minItems(0)
   and?: BudgetFilterProperties[];
 
   /**
@@ -786,6 +787,7 @@ model BudgetComparisonExpression {
   /**
    * Array of values to use for comparison
    */
+  @minItems(0)
   values: string[];
 }
 
@@ -825,30 +827,40 @@ model Notification {
    */
   threshold: decimal;
 
-  /**
-   * Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.
-   */
-  contactEmails: string[];
+  contactEmails: {
+    type: "array";
+    minItems: 0;
+    maxItems: 50;
 
-  /**
-   * Contact roles to send the budget notification to when the threshold is exceeded.
-   */
-  contactRoles?: string[];
+    /**
+     * Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.
+     */
+    @minItems(0)
+    @maxItems(50)
+    contactEmails: string[];
 
-  /**
-   * Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.
-   */
-  contactGroups?: string[];
+    /**
+     * Contact roles to send the budget notification to when the threshold is exceeded.
+     */
+    @minItems(0)
+    @maxItems(50)
+    contactRoles?: string[];
 
-  /**
-   * The type of threshold
-   */
-  thresholdType?: ThresholdType = ThresholdType.Actual;
+    /**
+     * Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.
+     */
+    contactGroups?: string[];
 
-  /**
-   * Language in which the recipient will receive the notification
-   */
-  locale?: CultureCode;
+    /**
+     * The type of threshold
+     */
+    thresholdType?: ThresholdType = ThresholdType.Actual;
+
+    /**
+     * Language in which the recipient will receive the notification
+     */
+    locale?: CultureCode;
+  };
 }
 
 /**
