@@ -129,8 +129,6 @@ interface FunctionEnvelopes {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetFunction")
   getFunction is FunctionEnvelopeOps.Read<
     FunctionEnvelope,
     Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse,
@@ -140,9 +138,7 @@ interface FunctionEnvelopes {
   /**
    * Description for Create function for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateFunction")
   createFunction is FunctionEnvelopeOps.CreateOrUpdateAsync<
     FunctionEnvelope,
     Response = ArmResourceCreatedResponse<
@@ -155,10 +151,8 @@ interface FunctionEnvelopes {
   /**
    * Description for Delete a function for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteFunction")
   deleteFunction is FunctionEnvelopeOps.DeleteSync<
     FunctionEnvelope,
     Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
@@ -168,8 +162,6 @@ interface FunctionEnvelopes {
   /**
    * Description for List the functions for a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListFunctions")
   listFunctions is FunctionEnvelopeOps.List<
     FunctionEnvelope,
     Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse,
@@ -180,8 +172,6 @@ interface FunctionEnvelopes {
    * Description for Add or update a function secret.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateFunctionSecret")
   @put
   createOrUpdateFunctionSecret(
     ...FunctionEnvelopesParameters,
@@ -192,8 +182,6 @@ interface FunctionEnvelopes {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteFunctionSecret")
   @delete
   deleteFunctionSecret(
     ...FunctionEnvelopesParameters,
@@ -202,8 +190,6 @@ interface FunctionEnvelopes {
   /**
    * Description for Get function keys for a function in a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListFunctionKeys")
   @action("listkeys")
   listFunctionKeys is FunctionEnvelopeOps.ActionSync<
     FunctionEnvelope,
@@ -215,8 +201,6 @@ interface FunctionEnvelopes {
   /**
    * Description for Get function secrets for a function in a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListFunctionSecrets")
   @action("listsecrets")
   listFunctionSecrets is FunctionEnvelopeOps.ActionSync<
     FunctionEnvelope,
@@ -260,8 +244,6 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetInstanceFunctionSlot")
   getInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.Read<
     FunctionEnvelope,
     Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse,
@@ -271,9 +253,7 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Create function for web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateInstanceFunctionSlot")
   createInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.CreateOrUpdateAsync<
     FunctionEnvelope,
     Response = ArmResourceCreatedResponse<
@@ -287,9 +267,7 @@ interface FunctionEnvelopeOperationGroup {
    * Description for Delete a function for web site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteInstanceFunctionSlot")
   deleteInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.DeleteSync<
     FunctionEnvelope,
     Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
@@ -299,8 +277,6 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for List the functions for a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListInstanceFunctionsSlot")
   listInstanceFunctionsSlot is FunctionEnvelopeOperationGroupOps.List<
     FunctionEnvelope,
     Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse,
@@ -311,8 +287,6 @@ interface FunctionEnvelopeOperationGroup {
    * Description for Add or update a function secret.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateFunctionSecretSlot")
   @put
   createOrUpdateFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.CreateOrUpdateAsync<
     FunctionEnvelope,
@@ -327,8 +301,6 @@ interface FunctionEnvelopeOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteFunctionSecretSlot")
   @delete
   deleteFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.DeleteSync<
     FunctionEnvelope,
@@ -339,8 +311,6 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function keys for a function in a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListFunctionKeysSlot")
   @action("listkeys")
   listFunctionKeysSlot is FunctionEnvelopeSlotOperationWithoutKeysGroupOps.ActionSync<
     FunctionEnvelope,
@@ -352,8 +322,6 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function secrets for a function in a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListFunctionSecretsSlot")
   @action("listsecrets")
   listFunctionSecretsSlot is FunctionEnvelopeOperationGroupOps.ActionSync<
     FunctionEnvelope,

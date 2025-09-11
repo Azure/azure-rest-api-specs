@@ -60,8 +60,6 @@ interface AnalysisDefinitions {
   /**
    * Description for Get Site Analysis
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_GetSiteAnalysis")
   getSiteAnalysis is AnalysisDefinitionOps.Read<
     AnalysisDefinition,
     OverrideErrorType = DefaultErrorResponse
@@ -70,8 +68,6 @@ interface AnalysisDefinitions {
   /**
    * Description for Get Site Analyses
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ListSiteAnalyses")
   listSiteAnalyses is AnalysisDefinitionOps.List<
     AnalysisDefinition,
     Response = ArmResponse<DiagnosticAnalysisCollection>,
@@ -81,8 +77,6 @@ interface AnalysisDefinitions {
   /**
    * Description for Execute Analysis
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ExecuteSiteAnalysis")
   @action("execute")
   executeSiteAnalysis is AnalysisDefinitionOps.ActionSync<
     AnalysisDefinition,
@@ -152,8 +146,6 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Get Site Analysis
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_GetSiteAnalysisSlot")
   getSiteAnalysisSlot is AnalysisDefinitionOperationGroupOps.Read<
     AnalysisDefinition,
     OverrideErrorType = DefaultErrorResponse
@@ -162,8 +154,6 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Get Site Analyses
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ListSiteAnalysesSlot")
   listSiteAnalysesSlot is AnalysisDefinitionOperationGroupOps.List<
     AnalysisDefinition,
     Response = ArmResponse<DiagnosticAnalysisCollection>,
@@ -173,8 +163,6 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Execute Analysis
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ExecuteSiteAnalysisSlot")
   @action("execute")
   executeSiteAnalysisSlot is AnalysisDefinitionOperationGroupOps.ActionSync<
     AnalysisDefinition,

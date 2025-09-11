@@ -59,9 +59,7 @@ interface MSDeployStatuses {
    * Description for Get the status of the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetMSDeployStatus")
   getMSDeployStatus is MSDeployStatusOps.Read<
     MSDeployStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -70,10 +68,8 @@ interface MSDeployStatuses {
   /**
    * Description for Invoke the MSDeploy web app extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateMSDeployOperation")
   createMSDeployOperation is MSDeployStatusOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
@@ -87,9 +83,7 @@ interface MSDeployStatuses {
   /**
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetMSDeployLog")
   @get
   @action("log")
   getMSDeployLog is MSDeployStatusOps.ActionSync<
@@ -137,8 +131,6 @@ interface MSDeployStatusOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetInstanceMsDeployStatus")
   getInstanceMsDeployStatus is MSDeployStatusOperationGroupOps.Read<
     MSDeployStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -147,10 +139,8 @@ interface MSDeployStatusOperationGroup {
   /**
    * Description for Invoke the MSDeploy web app extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateInstanceMSDeployOperation")
   createInstanceMSDeployOperation is MSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
@@ -164,9 +154,7 @@ interface MSDeployStatusOperationGroup {
   /**
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetInstanceMSDeployLog")
   @get
   @action("log")
   getInstanceMSDeployLog is MSDeployStatusOperationGroupOps.ActionSync<
@@ -214,8 +202,6 @@ interface MSDeployStatusSlotOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetMSDeployStatusSlot")
   getMSDeployStatusSlot is MSDeployStatusSlotOperationGroupOps.Read<
     MSDeployStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -224,9 +210,7 @@ interface MSDeployStatusSlotOperationGroup {
   /**
    * Description for Invoke the MSDeploy web app extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateMSDeployOperationSlot")
   createMSDeployOperationSlot is MSDeployStatusSlotOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
@@ -240,8 +224,6 @@ interface MSDeployStatusSlotOperationGroup {
   /**
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetMSDeployLogSlot")
   @get
   @action("log")
   getMSDeployLogSlot is MSDeployStatusSlotOperationGroupOps.ActionSync<
@@ -296,8 +278,6 @@ interface InstanceMSDeployStatusOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetInstanceMsDeployStatusSlot")
   getInstanceMsDeployStatusSlot is InstanceMSDeployStatusOperationGroupOps.Read<
     MSDeployStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -306,10 +286,8 @@ interface InstanceMSDeployStatusOperationGroup {
   /**
    * Description for Invoke the MSDeploy web app extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateInstanceMSDeployOperationSlot")
   createInstanceMSDeployOperationSlot is InstanceMSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
@@ -323,9 +301,7 @@ interface InstanceMSDeployStatusOperationGroup {
   /**
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetInstanceMSDeployLogSlot")
   @get
   @action("log")
   getInstanceMSDeployLogSlot is InstanceMSDeployStatusOperationGroupOps.ActionSync<

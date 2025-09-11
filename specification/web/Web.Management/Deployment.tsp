@@ -53,8 +53,6 @@ interface Deployments {
   /**
    * Description for Get a deployment by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetDeployment")
   getDeployment is DeploymentOps.Read<
     Deployment,
     OverrideErrorType = DefaultErrorResponse
@@ -63,9 +61,7 @@ interface Deployments {
   /**
    * Description for Create a deployment for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateDeployment")
   createDeployment is DeploymentOps.CreateOrUpdateSync<
     Deployment,
     Response = ArmResourceUpdatedResponse<Deployment>,
@@ -75,8 +71,6 @@ interface Deployments {
   /**
    * Description for Delete a deployment by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteDeployment")
   deleteDeployment is DeploymentOps.DeleteSync<
     Deployment,
     OverrideErrorType = DefaultErrorResponse
@@ -85,8 +79,6 @@ interface Deployments {
   /**
    * Description for List deployments for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListDeployments")
   listDeployments is DeploymentOps.List<
     Deployment,
     Response = ArmResponse<DeploymentCollection>,
@@ -96,8 +88,6 @@ interface Deployments {
   /**
    * Description for List deployment log for specific deployment for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListDeploymentLog")
   @get
   @action("log")
   listDeploymentLog is DeploymentOps.ActionSync<
@@ -142,8 +132,6 @@ interface DeploymentOperationGroup {
   /**
    * Description for Get a deployment by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetDeploymentSlot")
   getDeploymentSlot is DeploymentOperationGroupOps.Read<
     Deployment,
     OverrideErrorType = DefaultErrorResponse
@@ -152,9 +140,7 @@ interface DeploymentOperationGroup {
   /**
    * Description for Create a deployment for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateDeploymentSlot")
   createDeploymentSlot is DeploymentOperationGroupOps.CreateOrUpdateSync<
     Deployment,
     Response = ArmResourceUpdatedResponse<Deployment>,
@@ -164,8 +150,6 @@ interface DeploymentOperationGroup {
   /**
    * Description for Delete a deployment by its ID for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteDeploymentSlot")
   deleteDeploymentSlot is DeploymentOperationGroupOps.DeleteSync<
     Deployment,
     OverrideErrorType = DefaultErrorResponse
@@ -174,8 +158,6 @@ interface DeploymentOperationGroup {
   /**
    * Description for List deployments for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListDeploymentsSlot")
   listDeploymentsSlot is DeploymentOperationGroupOps.List<
     Deployment,
     Response = ArmResponse<DeploymentCollection>,
@@ -185,8 +167,6 @@ interface DeploymentOperationGroup {
   /**
    * Description for List deployment log for specific deployment for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListDeploymentLogSlot")
   @get
   @action("log")
   listDeploymentLogSlot is DeploymentOperationGroupOps.ActionSync<

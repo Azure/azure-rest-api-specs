@@ -755,7 +755,7 @@
     },
     "/providers/Microsoft.Web/publishingUsers/web": {
       "get": {
-        "operationId": "GetPublishingUser",
+        "operationId": "Users_GetPublishingUser",
         "tags": [
           "Users"
         ],
@@ -781,7 +781,7 @@
         }
       },
       "put": {
-        "operationId": "UpdatePublishingUser",
+        "operationId": "Users_UpdatePublishingUser",
         "tags": [
           "Users"
         ],
@@ -818,7 +818,7 @@
     },
     "/providers/Microsoft.Web/sourcecontrols": {
       "get": {
-        "operationId": "ListSourceControls",
+        "operationId": "SourceControls_ListSourceControls",
         "tags": [
           "SourceControls"
         ],
@@ -849,7 +849,7 @@
     },
     "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}": {
       "get": {
-        "operationId": "GetSourceControl",
+        "operationId": "SourceControls_GetSourceControl",
         "tags": [
           "SourceControls"
         ],
@@ -882,7 +882,7 @@
         }
       },
       "put": {
-        "operationId": "UpdateSourceControl",
+        "operationId": "SourceControls_UpdateSourceControl",
         "tags": [
           "SourceControls"
         ],
@@ -1900,7 +1900,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/usages": {
       "get": {
-        "operationId": "GetUsagesInLocation_list",
+        "operationId": "GetUsagesInLocation_List",
         "summary": "Lists subscription core usages for all skus used in a location, for a given type of quota.",
         "description": "List usages in cores for all skus used by a subscription in a given location, for a specific quota type.",
         "parameters": [
@@ -1926,11 +1926,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get usages in location for subscription": {
-            "$ref": "./examples/GetUsagesInLocation.json"
           }
         },
         "x-ms-pageable": {

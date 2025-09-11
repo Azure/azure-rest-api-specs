@@ -53,8 +53,6 @@ interface BackupItems {
   /**
    * Description for Gets a backup of an app by its ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetBackupStatus")
   getBackupStatus is BackupItemOps.Read<
     BackupItem,
     OverrideErrorType = DefaultErrorResponse
@@ -63,9 +61,7 @@ interface BackupItems {
   /**
    * Description for Deletes a backup of an app by its ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteBackup")
   deleteBackup is BackupItemOps.DeleteSync<
     BackupItem,
     Response = ArmDeletedResponse | ArmNotFoundResponse,
@@ -75,8 +71,6 @@ interface BackupItems {
   /**
    * Description for Gets existing backups of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListBackups")
   listBackups is BackupItemOps.List<
     BackupItem,
     Response = ArmResponse<BackupItemCollection>,
@@ -86,8 +80,6 @@ interface BackupItems {
   /**
    * Description for Gets status of a web app backup that may be in progress, including secrets associated with the backup, such as the Azure Storage SAS URL. Also can be used to update the SAS URL for the backup if a new URL is passed in the request body.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListBackupStatusSecrets")
   @action("list")
   listBackupStatusSecrets is BackupItemOps.ActionSync<
     BackupItem,
@@ -99,8 +91,6 @@ interface BackupItems {
   /**
    * Description for Restores a specific backup to another app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_Restore")
   restore is BackupItemOps.ActionAsync<
     BackupItem,
     RestoreRequest,
@@ -143,8 +133,6 @@ interface BackupItemOperationGroup {
   /**
    * Description for Gets a backup of an app by its ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetBackupStatusSlot")
   getBackupStatusSlot is BackupItemOperationGroupOps.Read<
     BackupItem,
     OverrideErrorType = DefaultErrorResponse
@@ -153,9 +141,7 @@ interface BackupItemOperationGroup {
   /**
    * Description for Deletes a backup of an app by its ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteBackupSlot")
   deleteBackupSlot is BackupItemOperationGroupOps.DeleteSync<
     BackupItem,
     Response = ArmDeletedResponse | ArmNotFoundResponse,
@@ -165,8 +151,6 @@ interface BackupItemOperationGroup {
   /**
    * Description for Gets existing backups of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListBackupsSlot")
   listBackupsSlot is BackupItemOperationGroupOps.List<
     BackupItem,
     Response = ArmResponse<BackupItemCollection>,
@@ -176,8 +160,6 @@ interface BackupItemOperationGroup {
   /**
    * Description for Gets status of a web app backup that may be in progress, including secrets associated with the backup, such as the Azure Storage SAS URL. Also can be used to update the SAS URL for the backup if a new URL is passed in the request body.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListBackupStatusSecretsSlot")
   @action("list")
   listBackupStatusSecretsSlot is BackupItemOperationGroupOps.ActionSync<
     BackupItem,
@@ -189,8 +171,6 @@ interface BackupItemOperationGroup {
   /**
    * Description for Restores a specific backup to another app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_RestoreSlot")
   @action("restore")
   restoreSlot is BackupItemOperationGroupOps.ActionAsync<
     BackupItem,

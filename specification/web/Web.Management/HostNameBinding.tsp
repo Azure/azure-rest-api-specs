@@ -54,8 +54,6 @@ interface HostNameBindings {
   /**
    * Description for Get the named hostname binding for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetHostNameBinding")
   getHostNameBinding is HostNameBindingOps.Read<
     HostNameBinding,
     OverrideErrorType = DefaultErrorResponse
@@ -64,9 +62,7 @@ interface HostNameBindings {
   /**
    * Description for Creates a hostname binding for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateHostNameBinding")
   createOrUpdateHostNameBinding is HostNameBindingOps.CreateOrUpdateSync<
     HostNameBinding,
     Response = ArmResourceUpdatedResponse<HostNameBinding>,
@@ -76,8 +72,6 @@ interface HostNameBindings {
   /**
    * Description for Deletes a hostname binding for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteHostNameBinding")
   deleteHostNameBinding is HostNameBindingOps.DeleteSync<
     HostNameBinding,
     OverrideErrorType = DefaultErrorResponse
@@ -86,8 +80,6 @@ interface HostNameBindings {
   /**
    * Description for Get hostname bindings for an app or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListHostNameBindings")
   listHostNameBindings is HostNameBindingOps.List<
     HostNameBinding,
     Response = ArmResponse<HostNameBindingCollection>,
@@ -129,8 +121,6 @@ interface HostNameBindingOperationGroup {
   /**
    * Description for Get the named hostname binding for an app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetHostNameBindingSlot")
   getHostNameBindingSlot is HostNameBindingOperationGroupOps.Read<
     HostNameBinding,
     OverrideErrorType = DefaultErrorResponse
@@ -139,9 +129,7 @@ interface HostNameBindingOperationGroup {
   /**
    * Description for Creates a hostname binding for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateHostNameBindingSlot")
   createOrUpdateHostNameBindingSlot is HostNameBindingOperationGroupOps.CreateOrUpdateSync<
     HostNameBinding,
     Response = ArmResourceUpdatedResponse<HostNameBinding>,
@@ -151,8 +139,6 @@ interface HostNameBindingOperationGroup {
   /**
    * Description for Deletes a hostname binding for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteHostNameBindingSlot")
   deleteHostNameBindingSlot is HostNameBindingOperationGroupOps.DeleteSync<
     HostNameBinding,
     OverrideErrorType = DefaultErrorResponse
@@ -161,8 +147,6 @@ interface HostNameBindingOperationGroup {
   /**
    * Description for Get hostname bindings for an app or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListHostNameBindingsSlot")
   listHostNameBindingsSlot is HostNameBindingOperationGroupOps.List<
     HostNameBinding,
     Response = ArmResponse<HostNameBindingCollection>,

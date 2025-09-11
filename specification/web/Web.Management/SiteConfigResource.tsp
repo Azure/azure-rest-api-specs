@@ -54,8 +54,6 @@ interface SiteConfigResources {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetConfiguration")
   getConfiguration is SiteConfigResourceOps.Read<
     SiteConfigResource,
     OverrideErrorType = DefaultErrorResponse
@@ -64,9 +62,7 @@ interface SiteConfigResources {
   /**
    * Description for Updates the configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateConfiguration")
   createOrUpdateConfiguration is SiteConfigResourceOps.CreateOrUpdateSync<
     SiteConfigResource,
     Response = ArmResourceUpdatedResponse<SiteConfigResource>,
@@ -76,8 +72,6 @@ interface SiteConfigResources {
   /**
    * Description for Updates the configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateConfiguration")
   @patch(#{ implicitOptionality: false })
   updateConfiguration is SiteConfigResourceOps.CustomPatchSync<
     SiteConfigResource,
@@ -88,8 +82,6 @@ interface SiteConfigResources {
   /**
    * Description for Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListConfigurationSnapshotInfo")
   @get
   @action("snapshots")
   @list
@@ -159,8 +151,6 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetConfigurationSnapshot")
   getConfigurationSnapshot is SiteConfigResourceOperationGroupOps.Read<
     SiteConfigResource,
     OverrideErrorType = DefaultErrorResponse
@@ -169,8 +159,6 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for List the configurations of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListConfigurations")
   listConfigurations is ListConfigurationsOps.List<
     SiteConfigResource,
     Response = ArmResponse<SiteConfigResourceCollection>,
@@ -180,8 +168,6 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for Reverts the configuration of an app to a previous snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_RecoverSiteConfigurationSnapshot")
   @action("recover")
   recoverSiteConfigurationSnapshot is SiteConfigResourceOperationGroupOps.ActionSync<
     SiteConfigResource,
@@ -225,8 +211,6 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetConfigurationSlot")
   getConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.Read<
     SiteConfigResource,
     OverrideErrorType = DefaultErrorResponse
@@ -235,9 +219,7 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Updates the configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateConfigurationSlot")
   createOrUpdateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CreateOrUpdateSync<
     SiteConfigResource,
     Response = ArmResourceUpdatedResponse<SiteConfigResource>,
@@ -247,8 +229,6 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Updates the configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateConfigurationSlot")
   @patch(#{ implicitOptionality: false })
   updateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CustomPatchSync<
     SiteConfigResource,
@@ -259,8 +239,6 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListConfigurationSnapshotInfoSlot")
   @get
   @action("snapshots")
   @list
@@ -344,8 +322,6 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetConfigurationSnapshotSlot")
   getConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.Read<
     SiteConfigResource,
     OverrideErrorType = DefaultErrorResponse
@@ -354,8 +330,6 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for List the configurations of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListConfigurationsSlot")
   listConfigurationsSlot is ListConfigurationsSlotOps.List<
     SiteConfigResource,
     Response = ArmResponse<SiteConfigResourceCollection>,
@@ -365,8 +339,6 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Reverts the configuration of an app to a previous snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_RecoverSiteConfigurationSnapshotSlot")
   @action("recover")
   recoverSiteConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.ActionSync<
     SiteConfigResource,

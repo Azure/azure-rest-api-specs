@@ -287,10 +287,8 @@ interface GlobalOperationGroup {
   /**
    * Description for Gets an operation in a subscription and given region
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets an operation in a subscription and given region")
-  @operationId("Global_GetSubscriptionOperationWithAsyncResponse")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/operations/{operationId}")
   @get
   getSubscriptionOperationWithAsyncResponse(
@@ -312,9 +310,7 @@ interface ProviderOperationGroup {
   /**
    * Description for Get available application frameworks and their versions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get available application frameworks and their versions")
-  @operationId("Provider_GetAvailableStacks")
   @autoRoute
   @get
   @action("availableStacks")
@@ -331,9 +327,7 @@ interface ProviderOperationGroup {
   /**
    * Description for Get available Function app frameworks and their versions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get available Function app frameworks and their versions")
-  @operationId("Provider_GetFunctionAppStacks")
   @autoRoute
   @get
   @action("functionAppStacks")
@@ -352,9 +346,7 @@ interface ProviderOperationGroup {
   /**
    * Description for Get available Function app frameworks and their versions for location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get available Function app frameworks and their versions for location")
-  @operationId("Provider_GetFunctionAppStacksForLocation")
   @autoRoute
   @get
   @action("functionAppStacks")
@@ -375,9 +367,7 @@ interface ProviderOperationGroup {
   /**
    * Description for Get available Web app frameworks and their versions for location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get available Web app frameworks and their versions for location")
-  @operationId("Provider_GetWebAppStacksForLocation")
   @autoRoute
   @get
   @action("webAppStacks")
@@ -398,9 +388,7 @@ interface ProviderOperationGroup {
   /**
    * Description for Get available Web app frameworks and their versions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get available Web app frameworks and their versions")
-  @operationId("Provider_GetWebAppStacks")
   @autoRoute
   @get
   @action("webAppStacks")
@@ -419,9 +407,7 @@ interface ProviderOperationGroup {
   /**
    * Description for Get available application frameworks and their versions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get available application frameworks and their versions")
-  @operationId("Provider_GetAvailableStacksOnPrem")
   @autoRoute
   @get
   @action("availableStacks")
@@ -443,9 +429,7 @@ interface RecommendationsOperationGroup {
   /**
    * Description for List all recommendations for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List all recommendations for a subscription.")
-  @operationId("Recommendations_List")
   @autoRoute
   @get
   @action("recommendations")
@@ -471,9 +455,7 @@ interface RecommendationsOperationGroup {
   /**
    * Description for Reset all recommendation opt-out settings for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Reset all recommendation opt-out settings for a subscription.")
-  @operationId("Recommendations_ResetAllFilters")
   @autoRoute
   @action("recommendations/reset")
   resetAllFilters is ArmProviderActionSync<
@@ -484,9 +466,7 @@ interface RecommendationsOperationGroup {
   /**
    * Description for Disables the specified rule so it will not apply to a subscription in the future.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Disables the specified rule so it will not apply to a subscription in the future.")
-  @operationId("Recommendations_DisableRecommendationForSubscription")
   @autoRoute
   @action("disable")
   disableRecommendationForSubscription is ArmProviderActionSync<
@@ -511,9 +491,7 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
   /**
    * Description for List all ResourceHealthMetadata for all sites in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List all ResourceHealthMetadata for all sites in the subscription.")
-  @operationId("ResourceHealthMetadata_List")
   @autoRoute
   @get
   @action("resourceHealthMetadata")
@@ -527,10 +505,8 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
   /**
    * Description for List all ResourceHealthMetadata for all sites in the resource group in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List all ResourceHealthMetadata for all sites in the resource group in the subscription.")
-  @operationId("ResourceHealthMetadata_ListByResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/resourceHealthMetadata")
   @get
   @list
@@ -546,9 +522,7 @@ interface GetUsagesInLocationOperationGroup {
   /**
    * List usages in cores for all skus used by a subscription in a given location, for a specific quota type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Lists subscription core usages for all skus used in a location, for a given type of quota.")
-  @operationId("GetUsagesInLocation_list")
   @autoRoute
   @get
   @action("usages")
@@ -566,9 +540,7 @@ interface StaticSitesOperationGroup {
   /**
    * Description for Generates a preview workflow file for the static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Generates a preview workflow file for the static site")
-  @operationId("StaticSites_PreviewWorkflow")
   @autoRoute
   @action("previewStaticSiteWorkflowFile")
   previewWorkflow is ArmProviderActionSync<

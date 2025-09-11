@@ -52,8 +52,6 @@ interface WebSiteInstanceStatuses {
   /**
    * Description for Gets all scale-out instances of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetInstanceInfo")
   getInstanceInfo is WebSiteInstanceStatusOps.Read<
     WebSiteInstanceStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -62,8 +60,6 @@ interface WebSiteInstanceStatuses {
   /**
    * Description for Gets all scale-out instances of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListInstanceIdentifiers")
   listInstanceIdentifiers is WebSiteInstanceStatusOps.List<
     WebSiteInstanceStatus,
     Response = ArmResponse<WebAppInstanceStatusCollection>,
@@ -105,8 +101,6 @@ interface WebSiteInstanceStatusOperationGroup {
   /**
    * Description for Gets all scale-out instances of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetInstanceInfoSlot")
   getInstanceInfoSlot is WebSiteInstanceStatusOperationGroupOps.Read<
     WebSiteInstanceStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -115,8 +109,6 @@ interface WebSiteInstanceStatusOperationGroup {
   /**
    * Description for Gets all scale-out instances of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListInstanceIdentifiersSlot")
   listInstanceIdentifiersSlot is WebSiteInstanceStatusOperationGroupOps.List<
     WebSiteInstanceStatus,
     Response = ArmResponse<WebAppInstanceStatusCollection>,

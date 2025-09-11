@@ -60,8 +60,6 @@ interface DetectorDefinitionResources {
   /**
    * Description for Get Detector
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_GetSiteDetector")
   getSiteDetector is DetectorDefinitionResourceOps.Read<
     DetectorDefinitionResource,
     OverrideErrorType = DefaultErrorResponse
@@ -70,8 +68,6 @@ interface DetectorDefinitionResources {
   /**
    * Description for Get Detectors
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ListSiteDetectors")
   listSiteDetectors is DetectorDefinitionResourceOps.List<
     DetectorDefinitionResource,
     Response = ArmResponse<DiagnosticDetectorCollection>,
@@ -81,8 +77,6 @@ interface DetectorDefinitionResources {
   /**
    * Description for Execute Detector
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ExecuteSiteDetector")
   @action("execute")
   executeSiteDetector is DetectorDefinitionResourceOps.ActionSync<
     DetectorDefinitionResource,
@@ -152,8 +146,6 @@ interface DetectorDefinitionResourceOperationGroup {
   /**
    * Description for Get Detector
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_GetSiteDetectorSlot")
   getSiteDetectorSlot is DetectorDefinitionResourceOperationGroupOps.Read<
     DetectorDefinitionResource,
     OverrideErrorType = DefaultErrorResponse
@@ -162,8 +154,6 @@ interface DetectorDefinitionResourceOperationGroup {
   /**
    * Description for Get Detectors
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ListSiteDetectorsSlot")
   listSiteDetectorsSlot is DetectorDefinitionResourceOperationGroupOps.List<
     DetectorDefinitionResource,
     Response = ArmResponse<DiagnosticDetectorCollection>,
@@ -173,8 +163,6 @@ interface DetectorDefinitionResourceOperationGroup {
   /**
    * Description for Execute Detector
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ExecuteSiteDetectorSlot")
   @action("execute")
   executeSiteDetectorSlot is DetectorDefinitionResourceOperationGroupOps.ActionSync<
     DetectorDefinitionResource,

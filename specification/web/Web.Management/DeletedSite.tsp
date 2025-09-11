@@ -55,8 +55,6 @@ interface DeletedSites {
   /**
    * Description for Get deleted app for a subscription at location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DeletedWebApps_GetDeletedWebAppByLocation")
   getDeletedWebAppByLocation is DeletedSiteOps.Read<
     DeletedSite,
     ErrorType = DefaultErrorResponse
@@ -65,8 +63,6 @@ interface DeletedSites {
   /**
    * Description for Get all deleted apps for a subscription at location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DeletedWebApps_ListByLocation")
   listByLocation is DeletedSiteOps.List<
     DeletedSite,
     Response = ArmResponse<DeletedWebAppCollection>,
@@ -109,8 +105,6 @@ interface Global {
   /**
    * Description for Get all deleted apps for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DeletedWebApps_List")
   list is GlobalOps.List<
     DeletedSite,
     Response = ArmResponse<DeletedWebAppCollection>,

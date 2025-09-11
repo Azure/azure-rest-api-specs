@@ -31,8 +31,6 @@ interface CustomDnsSuffixConfigurations {
   /**
    * Get Custom Dns Suffix configuration of an App Service Environment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_GetAseCustomDnsSuffixConfiguration")
   getAseCustomDnsSuffixConfiguration is ArmResourceRead<
     CustomDnsSuffixConfiguration,
     Error = DefaultErrorResponse
@@ -41,9 +39,7 @@ interface CustomDnsSuffixConfigurations {
   /**
    * Update Custom Dns Suffix configuration of an App Service Environment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_UpdateAseCustomDnsSuffixConfiguration")
   updateAseCustomDnsSuffixConfiguration is ArmResourceCreateOrReplaceSync<
     CustomDnsSuffixConfiguration,
     Response = ArmResourceUpdatedResponse<CustomDnsSuffixConfiguration>,
@@ -53,10 +49,8 @@ interface CustomDnsSuffixConfigurations {
   /**
    * Delete Custom Dns Suffix configuration of an App Service Environment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_DeleteAseCustomDnsSuffixConfiguration")
   deleteAseCustomDnsSuffixConfiguration is ArmResourceDeleteSync<
     CustomDnsSuffixConfiguration,
     Response = ArmResponse<unknown> | (ArmDeletedNoContentResponse & {

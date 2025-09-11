@@ -34,8 +34,6 @@ interface StaticSiteBasicAuthPropertiesARMResources {
   /**
    * Description for Gets the basic auth properties for a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_GetBasicAuth")
   getBasicAuth is ArmResourceRead<
     StaticSiteBasicAuthPropertiesARMResource,
     Error = DefaultErrorResponse
@@ -44,9 +42,7 @@ interface StaticSiteBasicAuthPropertiesARMResources {
   /**
    * Description for Adds or updates basic auth for a static site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_CreateOrUpdateBasicAuth")
   createOrUpdateBasicAuth is ArmResourceCreateOrReplaceSync<
     StaticSiteBasicAuthPropertiesARMResource,
     Response = ArmResourceUpdatedResponse<StaticSiteBasicAuthPropertiesARMResource>,
@@ -56,8 +52,6 @@ interface StaticSiteBasicAuthPropertiesARMResources {
   /**
    * Description for Gets the basic auth properties for a static site as a collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_ListBasicAuth")
   listBasicAuth is ArmResourceListByParent<
     StaticSiteBasicAuthPropertiesARMResource,
     Response = ArmResponse<StaticSiteBasicAuthPropertiesCollection>,

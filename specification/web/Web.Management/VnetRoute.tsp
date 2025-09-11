@@ -58,8 +58,6 @@ interface VnetRoutes {
   /**
    * Description for Get a Virtual Network route in an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_GetRouteForVnet")
   getRouteForVnet is ArmResourceRead<
     VnetRoute,
     Response = ArmResponse<VnetRoute[]> | ArmNotFoundResponse,
@@ -69,9 +67,7 @@ interface VnetRoutes {
   /**
    * Description for Create or update a Virtual Network route in an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_CreateOrUpdateVnetRoute")
   createOrUpdateVnetRoute is ArmResourceCreateOrReplaceSync<
     VnetRoute,
     Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse,
@@ -81,8 +77,6 @@ interface VnetRoutes {
   /**
    * Description for Create or update a Virtual Network route in an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_UpdateVnetRoute")
   @patch(#{ implicitOptionality: false })
   updateVnetRoute is ArmCustomPatchSync<
     VnetRoute,
@@ -94,9 +88,7 @@ interface VnetRoutes {
   /**
    * Description for Delete a Virtual Network route in an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_DeleteVnetRoute")
   deleteVnetRoute is ArmResourceDeleteSync<
     VnetRoute,
     Response = ArmDeletedResponse | ArmNotFoundResponse,
@@ -106,8 +98,6 @@ interface VnetRoutes {
   /**
    * Description for Get all routes that are associated with a Virtual Network in an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_ListRoutesForVnet")
   listRoutesForVnet is VnetRoutesOps.ListSinglePage<
     VnetRoute,
     Response = ArmResponse<VnetRoute[]>,
