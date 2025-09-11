@@ -48,6 +48,6 @@ These settings apply only when `--tag=package-2025-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-10-01-preview'
 input-file:
-  - Microsoft.AzureCloudMetadata/preview/2025-10-01-preview/openapi.json
+  - specification/azurecloudmetadata/resource-manager/Microsoft.AzureCloudMetadata/preview/2025-10-01-preview/openapi.json
 
 ```
