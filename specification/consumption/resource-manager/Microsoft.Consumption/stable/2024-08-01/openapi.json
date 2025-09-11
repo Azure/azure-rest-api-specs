@@ -583,6 +583,9 @@
               "$ref": "#/definitions/ReservationRecommendationListResult"
             }
           },
+          "204": {
+            "description": "Operation completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -760,6 +763,9 @@
               "$ref": "#/definitions/TagsResult"
             }
           },
+          "204": {
+            "description": "Operation completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -864,6 +870,9 @@
             "schema": {
               "$ref": "#/definitions/UsageDetailListResult"
             }
+          },
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1075,6 +1084,9 @@
               "$ref": "#/definitions/ReservationRecommendationDetailsModel"
             }
           },
+          "204": {
+            "description": "Operation completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1208,8 +1220,7 @@
             "in": "path",
             "description": "Billing Period Name.",
             "required": true,
-            "type": "string",
-            "pattern": "^[0-9]*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1236,7 +1247,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2085,7 +2096,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/{default}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption": {
       "get": {
         "operationId": "PriceSheet_GetByBillingPeriod",
         "tags": [
@@ -2106,13 +2117,6 @@
             "name": "billingPeriodName",
             "in": "path",
             "description": "Billing Period Name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -2235,7 +2239,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/credits/balanceSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/credits/balanceSummary/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}": {
       "get": {
         "operationId": "Credits_Get",
         "tags": [
@@ -2254,6 +2258,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "billingAccountId",
+            "in": "path",
+            "description": "BillingAccount ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "billingProfileId",
+            "in": "path",
+            "description": "Billing Profile ID.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2269,7 +2287,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2282,23 +2300,6 @@
     }
   },
   "definitions": {
-    "Amount": {
-      "type": "object",
-      "description": "The amount plus currency .",
-      "properties": {
-        "currency": {
-          "type": "string",
-          "description": "Amount currency.",
-          "readOnly": true
-        },
-        "value": {
-          "type": "number",
-          "format": "decimal",
-          "description": "Amount.",
-          "readOnly": true
-        }
-      }
-    },
     "AmountWithExchangeRate": {
       "type": "object",
       "description": "The amount with exchange rate.",
@@ -2318,7 +2319,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Amount"
+          "$ref": "#/definitions/amount"
         }
       ]
     },
@@ -2536,6 +2537,7 @@
         "values": {
           "type": "array",
           "description": "Array of values to use for comparison",
+          "minItems": 0,
           "items": {
             "type": "string"
           }
@@ -2554,6 +2556,7 @@
         "and": {
           "type": "array",
           "description": "The logical \"AND\" expression. Must have at least 2 items.",
+          "minItems": 0,
           "items": {
             "$ref": "#/definitions/BudgetFilterProperties"
           },
@@ -2767,12 +2770,12 @@
       "description": "Summary of credit balances.",
       "properties": {
         "estimatedBalance": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Estimated balance.",
           "readOnly": true
         },
         "currentBalance": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Current balance.",
           "readOnly": true
         },
@@ -2809,17 +2812,17 @@
           "readOnly": true
         },
         "pendingCreditAdjustments": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Pending credit adjustments.",
           "readOnly": true
         },
         "expiredCredit": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Expired credit.",
           "readOnly": true
         },
         "pendingEligibleCharges": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Pending eligible charges.",
           "readOnly": true
         },
@@ -3026,27 +3029,27 @@
           "readOnly": true
         },
         "newCredit": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The amount of new credit or commitment for NewCredit or SettleCharges event.",
           "readOnly": true
         },
         "adjustments": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The amount of balance adjustment. The property is not available for ConsumptionCommitment lots.",
           "readOnly": true
         },
         "creditExpired": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The amount of expired credit or commitment for NewCredit or SettleCharges event.",
           "readOnly": true
         },
         "charges": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The amount of charges for events of type SettleCharges and PendingEligibleCharges.",
           "readOnly": true
         },
         "closedBalance": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The balance after the event, Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true
         },
@@ -3090,7 +3093,7 @@
           "readOnly": true
         },
         "canceledCredit": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Amount of canceled credit.",
           "readOnly": true
         },
@@ -3907,12 +3910,12 @@
       "description": "The lot properties.",
       "properties": {
         "originalAmount": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The original amount of a lot, Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true
         },
         "closedBalance": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The balance as of the last invoice.",
           "readOnly": true
         },
@@ -3991,7 +3994,7 @@
           "x-ms-client-name": "organizationType"
         },
         "usedAmount": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Amount consumed from the commitment.",
           "readOnly": true
         }
@@ -4448,17 +4451,17 @@
           "readOnly": true
         },
         "azureCharges": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Azure Charges.",
           "readOnly": true
         },
         "chargesBilledSeparately": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Charges Billed separately.",
           "readOnly": true
         },
         "marketplaceCharges": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Marketplace Charges.",
           "readOnly": true
         },
@@ -4563,7 +4566,7 @@
           "readOnly": true
         },
         "costWithNoReservedInstances": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The total amount of cost without reserved instances.",
           "readOnly": true
         },
@@ -4579,12 +4582,12 @@
           "readOnly": true
         },
         "totalCostWithReservedInstances": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "The total amount of cost with reserved instances.",
           "readOnly": true
         },
         "netSavings": {
-          "$ref": "#/definitions/Amount",
+          "$ref": "#/definitions/amount",
           "description": "Total estimated savings with reserved instances.",
           "readOnly": true
         },
@@ -5233,54 +5236,90 @@
           "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000."
         },
         "contactEmails": {
-          "type": "array",
-          "description": "Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "contactRoles": {
-          "type": "array",
-          "description": "Contact roles to send the budget notification to when the threshold is exceeded.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "contactGroups": {
-          "type": "array",
-          "description": "Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "thresholdType": {
-          "type": "string",
-          "description": "The type of threshold",
-          "default": "Actual",
-          "enum": [
-            "Actual",
-            "Forecasted"
-          ],
-          "x-ms-enum": {
-            "name": "ThresholdType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Actual",
-                "value": "Actual",
-                "description": "Actual costs budget alerts notify when the actual accrued cost exceeds the allocated budget ."
-              },
-              {
-                "name": "Forecasted",
-                "value": "Forecasted",
-                "description": "Forecasted costs budget alerts provide advanced notification that your spending trends are likely to exceed your allocated budget, as it relies on forecasted cost predictions."
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "array"
+              ],
+              "x-ms-enum": {
+                "modelAsString": false
               }
-            ]
-          }
-        },
-        "locale": {
-          "$ref": "#/definitions/CultureCode",
-          "description": "Language in which the recipient will receive the notification"
+            },
+            "minItems": {
+              "type": "number",
+              "enum": [
+                0
+              ]
+            },
+            "maxItems": {
+              "type": "number",
+              "enum": [
+                50
+              ]
+            },
+            "contactEmails": {
+              "type": "array",
+              "description": "Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.",
+              "minItems": 0,
+              "maxItems": 50,
+              "items": {
+                "type": "string"
+              }
+            },
+            "contactRoles": {
+              "type": "array",
+              "description": "Contact roles to send the budget notification to when the threshold is exceeded.",
+              "minItems": 0,
+              "maxItems": 50,
+              "items": {
+                "type": "string"
+              }
+            },
+            "contactGroups": {
+              "type": "array",
+              "description": "Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "thresholdType": {
+              "type": "string",
+              "description": "The type of threshold",
+              "default": "Actual",
+              "enum": [
+                "Actual",
+                "Forecasted"
+              ],
+              "x-ms-enum": {
+                "name": "ThresholdType",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "Actual",
+                    "value": "Actual",
+                    "description": "Actual costs budget alerts notify when the actual accrued cost exceeds the allocated budget ."
+                  },
+                  {
+                    "name": "Forecasted",
+                    "value": "Forecasted",
+                    "description": "Forecasted costs budget alerts provide advanced notification that your spending trends are likely to exceed your allocated budget, as it relies on forecasted cost predictions."
+                  }
+                ]
+              }
+            },
+            "locale": {
+              "$ref": "#/definitions/CultureCode",
+              "description": "Language in which the recipient will receive the notification"
+            }
+          },
+          "required": [
+            "type",
+            "minItems",
+            "maxItems",
+            "contactEmails"
+          ]
         }
       },
       "required": [
@@ -6465,6 +6504,23 @@
             "value": "modern"
           }
         ]
+      }
+    },
+    "amount": {
+      "type": "object",
+      "description": "The amount plus currency .",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "Amount currency.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Amount.",
+          "readOnly": true
+        }
       }
     }
   },
