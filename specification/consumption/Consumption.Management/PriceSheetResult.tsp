@@ -101,12 +101,6 @@ alias PriceSheetOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   },
   {
     ...Extension.ExtensionProviderNamespace<PriceSheetResult>;
-
-    /** undefined */
-    @path
-    @segment("pricesheets")
-    @key
-    default: string;
   }
 >;
 
