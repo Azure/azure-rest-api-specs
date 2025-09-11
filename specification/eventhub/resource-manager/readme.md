@@ -262,222 +262,222 @@ input-file:
 ``` yaml
 directive:
   - suppress: MissingTypeObject
-    from: openapi.json
+    from: CheckNameAvailability.json
     reason: Not a mandatory check
 
   - suppress: ResourceNameRestriction
-    from: openapi.json
+    from: consumergroups.json
     reason: Not a mandatory check
   - suppress: PutResponseCodes
-    from: openapi.json
+    from: consumergroups.json
     reason: Not a mandatory check
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-    from: openapi.json
+    from: consumergroups.json
     reason: Not a mandatory check
   - suppress: MissingTypeObject
-    from: openapi.json
+    from: consumergroups.json
     reason: Not a mandatory check
   - suppress: TrackedResourcePatchOperation
-    from: openapi.json
+    from: consumergroups.json
     reason: Not a mandatory check.
   - suppress: SystemDataDefinitionsCommonTypes
-    from: openapi.json
+    from: consumergroups.json
     reason: Not a mandatory check
   
   - suppress: PathForResourceAction
-    from: openapi.json
+    from: disasterRecoveryConfigs.json
     reason: Not a mandatory check
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-    from: openapi.json
+    from: disasterRecoveryConfigs.json
     reason: Not a mandatory check
   - suppress: MissingTypeObject
-    from: openapi.json
+    from: disasterRecoveryConfigs.json
     reason: Not a mandatory check
   - suppress: TrackedResourcePatchOperation
-    from: openapi.json
+    from: disasterRecoveryConfigs.json
     reason: Not a mandatory check
   - suppress: ProvisioningStateValidation
-    from: openapi.json
+    from: disasterRecoveryConfigs.json
     reason: Not a mandatory check
   - suppress: SystemDataDefinitionsCommonTypes
-    from: openapi.json
+    from: disasterRecoveryConfigs.json
     reason: Not a mandatory check
 
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-    from: openapi.json
+    from: eventhubs.json
     reason: Not a mandatory check
   - suppress: ResourceNameRestriction
-    from: openapi.json
+    from: eventhubs.json
     reason: Not a mandatory check
   - suppress: PutResponseCodes
-    from: openapi.json
+    from: eventhubs.json
     reason: Not a mandatory check
   - suppress: MissingTypeObject
-    from: openapi.json
+    from: eventhubs.json
     reason: Not a mandatory check
 
   - suppress: PostOperationAsyncResponseValidation
-    from: openapi.json
+    from: namespaces-preview.json
     reason: Not a mandatory check
   - suppress: LroPostReturn
-    from: openapi.json
+    from: namespaces-preview.json
     reason: Not a mandatory check
   - suppress: LroErrorContent
-    from: openapi.json
+    from: namespaces.json
     reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: PutResponseCodes
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: LroErrorContent
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: PatchResponseCodes
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: PatchBodyParametersSchema
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: DeleteResponseCodes
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: XmsPageableForListCalls
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: GetCollectionOnlyHasValueAndNextLink
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: SystemDataDefinitionsCommonTypes
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   - suppress: ResourceNameRestriction
-    from: openapi.json
+    from: Clusters-preview.json
     reason: Not a mandatory check
   
   - suppress: ResourceNameRestriction
-    from: openapi.json
+    from: namespaces.json
     reason: can't add ResourceNameRestriction at this time, as the current API version is old and introducing it could cause breaking changes.
   - suppress: ProvisioningStateMustBeReadOnly
-    from: openapi.json
+    from: namespaces.json
     reason: Breaking change.
   - suppress: AllTrackedResourcesMustHaveDelete
-    from: openapi.json
+    from: namespaces.json
     reason: Breaking Change.
   - suppress: TrackedResourcePatchOperation
-    from: openapi.json
+    from: namespaces.json
     reason: Breaking change.
   - suppress: TrackedResourcesMustHavePut
-    from: openapi.json
+    from: namespaces.json
     reason: Breaking change.
 
   - suppress: LroLocationHeader
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: LroExtension
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: PatchResponseCodes
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: XmsPageableForListCalls
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: BodyTopLevelProperties
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: NestedResourcesMustHaveListOperation
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: AvoidAdditionalProperties
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: ResourceNameRestriction
-    from: openapi.json
+    from: quotaConfiguration-preview.json
     reason: Not a mandatory check
 
   - suppress: OperationIdNounVerb
-    from: openapi.json
+    from: AvailableClusterRegions-preview.json
     reason: Not a mandatory check
   - suppress: XmsPageableForListCalls
-    from: openapi.json
+    from: AvailableClusterRegions-preview.json
     reason: Not a mandatory check
   - suppress: GetCollectionOnlyHasValueAndNextLink
-    from: openapi.json
+    from: AvailableClusterRegions-preview.json
     reason: Not a mandatory check
 
   - suppress: OperationIdNounVerb
-    from: openapi.json
+    from: ApplicationGroups.json
     reason: Not a mandatory check 
   - suppress: ResourceNameRestriction
-    from: openapi.json
+    from: ApplicationGroups.json
     reason: Not a mandatory check
   - suppress: PutResponseCodes
-    from: openapi.json
+    from: ApplicationGroups.json
     reason: Not a mandatory check
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-    from: openapi.json
+    from: ApplicationGroups.json
     reason: Not a mandatory check
   - suppress: OperationIdNounVerb
-    from: openapi.json
+    from: ApplicationGroups.json
     reason: Not a mandatory check
   - suppress: TrackedResourcePatchOperation
-    from: openapi.json
+    from: ApplicationGroups.json
     reason: Not a mandatory check
   - suppress: SystemDataDefinitionsCommonTypes
-    from: openapi.json
+    from: ApplicationGroups.json
     reason: Not a mandatory check
 
   - suppress: TrackedResourcePatchOperation
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   - suppress: EvenSegmentedPathForPutOperation
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   - suppress: PutResponseCodes
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   - suppress: XmsPageableForListCalls
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   - suppress: MissingTypeObject
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   - suppress: AllTrackedResourcesMustHaveDelete
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   - suppress: TrackedResourcePatchOperation
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   - suppress: SystemDataDefinitionsCommonTypes
-   from: openapi.json
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   
   - suppress: ResourceNameRestriction
-    from: openapi.json
+    from: AuthorizationRules.json
     reason: Not a mandatory check
   - suppress: PutResponseCodes
-    from: openapi.json
+    from: AuthorizationRules.json
     reason: Not a mandatory check
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-    from: openapi.json
+    from: AuthorizationRules.json
     reason: Not a mandatory check
   - suppress: MissingTypeObject
-    from: openapi.json
+    from: AuthorizationRules.json
     reason: Not a mandatory check
   - suppress: SystemDataDefinitionsCommonTypes
-    from: openapi.json
+    from: AuthorizationRules.json
     reason: Not a mandatory check
   - suppress: TrackedResourcePatchOperation
-    from: openapi.json
+    from: AuthorizationRules.json
     reason: Not a mandatory check
 ```
 
