@@ -73,16 +73,16 @@ interface Insights {
     ResourceCreatedResponse<Insight>
   >;
 
-  @doc("Get a specific insights report.")
+  @doc("Get a specific insight by Id.")
   @get
-  getInsights is InsightsOperations.ResourceRead<
+  getInsight is InsightsOperations.ResourceRead<
     Insight,
     QueryParametersTrait<IncludeCoordinatesTrait, TraitContext.Read>
   >;
 
-  @doc("List all insights reports in reverse chronological order (newest first).")
+  @doc("List all insights in reverse chronological order (newest first).")
   @get
-  listInsightsReports is InsightsOperations.ResourceList<
+  listInsights is InsightsOperations.ResourceList<
     Insight,
     ListQueryParametersTrait<FilterQueryParamsTraits>
   >;
