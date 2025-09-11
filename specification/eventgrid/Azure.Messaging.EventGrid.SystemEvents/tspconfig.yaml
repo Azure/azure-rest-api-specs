@@ -24,11 +24,12 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Messaging.EventGrid.SystemEvents
     model-namespace: false
     api-version: "2018-01-01"
   "@azure-tools/typespec-csharp":
-    package-dir: Azure.Messaging.EventGrid.SystemEvents
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     model-namespace: false
     namespace: Azure.Messaging.EventGrid.SystemEvents
     flavor: azure
@@ -49,8 +50,8 @@ options:
     slice-elements-byval: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-eventgrid-systemevents"
     namespace: com.azure.messaging.eventgrid.systemevents
-    package-dir: azure-messaging-eventgrid-systemevents
     customization-class: customization/src/main/java/EventGridSystemEventsCustomization.java
     use-eclipse-language-server: false
     custom-types-subpackage: implementation.models

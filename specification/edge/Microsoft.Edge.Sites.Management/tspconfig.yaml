@@ -18,7 +18,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/sites/{version-status}/{version}/sites.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-sitemanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sitemanager"
     namespace: "com.azure.resourcemanager.sitemanager"
     service-name: "Site Manager"
     flavor: azure
@@ -35,8 +35,8 @@ options:
     package-details:
       name: "@azure/arm-sitemanager"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.SiteManager"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.SiteManager"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
