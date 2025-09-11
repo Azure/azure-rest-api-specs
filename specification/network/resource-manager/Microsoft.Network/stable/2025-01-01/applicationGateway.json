@@ -1176,6 +1176,10 @@
           "type": "boolean",
           "description": "Whether the host header should be picked from the backend http settings. Default value is false."
         },
+        "enableProbeProxyProtocolHeader": {
+          "type": "boolean",
+          "description": "Whether to send Proxy Protocol header along with the Health Probe over TCP or TLS protocol. Default value is false."
+        },
         "match": {
           "$ref": "#/definitions/ApplicationGatewayProbeHealthResponseMatch",
           "description": "Criterion for classifying a healthy probe response."
@@ -1970,6 +1974,10 @@
           "type": "boolean",
           "description": "Whether to pick server name indication from the host name of the backend server for Tls protocol. Default value is false."
         },
+        "enableL4ClientIpPreservation": {
+          "type": "boolean",
+          "description": "Whether to send Proxy Protocol header to backend servers over TCP or TLS protocols. Default value is false."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -2330,6 +2338,10 @@
         "match": {
           "$ref": "#/definitions/ApplicationGatewayProbeHealthResponseMatch",
           "description": "Criterion for classifying a healthy probe response."
+        },
+        "enableProbeProxyProtocolHeader": {
+          "type": "boolean",
+          "description": "Whether to send Proxy Protocol header along with the Health Probe over TCP or TLS protocol. Default value is false."
         },
         "provisioningState": {
           "readOnly": true,
