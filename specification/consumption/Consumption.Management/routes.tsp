@@ -36,12 +36,11 @@ interface PriceSheetOperationGroup {
       /**
        * Billing Period Name.
        */
-      @pattern("^[0-9]*$")
       @path
       @segment("billingPeriods")
       billingPeriodName: string;
     },
-    Error = ErrorResponse
+    Error = Azure.ResourceManager.ErrorResponse
   >;
 }
 
@@ -60,7 +59,7 @@ interface UsageDetailsOperationGroup {
   @get
   @action("usageDetails")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<UsageDetail>,
+    Response = ResourceListResult<UsageDetail> | ArmNoContentResponse,
     Scope = ExtensionActionScope,
     Parameters = {
       /**
@@ -151,7 +150,7 @@ interface TagsOperationGroup {
   @get
   @action("tags")
   get is ArmProviderActionSync<
-    Response = TagsResult,
+    Response = TagsResult | ArmNoContentResponse,
     Scope = ExtensionActionScope,
     Error = ErrorResponse
   >;
@@ -510,7 +509,7 @@ interface ReservationRecommendationsOperationGroup {
   @get
   @action("reservationRecommendations")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<ReservationRecommendation>,
+    Response = ResourceListResult<ReservationRecommendation> | ArmNoContentResponse,
     Scope = ResourceScopeActionScope,
     Parameters = {
       /**
@@ -535,7 +534,7 @@ interface ReservationRecommendationDetailsOperationGroup {
   @get
   @action("reservationRecommendationDetails")
   get is ArmProviderActionSync<
-    Response = ReservationRecommendationDetailsModel,
+    Response = ReservationRecommendationDetailsModel | ArmNoContentResponse,
     Parameters = {
       /**
        * The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope
