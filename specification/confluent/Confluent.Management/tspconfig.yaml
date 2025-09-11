@@ -12,10 +12,10 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Confluent"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Confluent"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-confluent"
     namespace: "azure.mgmt.confluent"
@@ -23,7 +23,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-confluent"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-confluent"
     namespace: "com.azure.resourcemanager.confluent"
     service-name: "Confluent" # human-readable service name, whitespace allowed
     flavor: azure
