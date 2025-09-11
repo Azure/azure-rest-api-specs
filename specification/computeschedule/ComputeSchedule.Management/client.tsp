@@ -51,6 +51,14 @@ using Microsoft.ComputeSchedule;
   "GetVirtualMachineOperationErrors",
   "csharp"
 );
+@@clientName(ScheduledActions.virtualMachinesExecuteCreate,
+  "ExecuteVirtualMachineCreateOperation",
+  "csharp"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDelete,
+  "ExecuteVirtualMachineDeleteOperation",
+  "csharp"
+);
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
@@ -87,7 +95,15 @@ using Microsoft.ComputeSchedule;
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
-
+@@clientName(ExecuteDeleteRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
+@@clientName(ExecuteCreateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
 @@clientName(SubmitDeallocateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
@@ -140,6 +156,12 @@ using Microsoft.ComputeSchedule;
 );
 @@clientName(CreateResourceOperationResponse,
   "CreateResourceOperationResult",
+  "csharp"
+);
+@@clientName(ScheduledActionResource, "ScheduledActionResourceModel", "csharp");
+@@clientName(OccurrenceResource, "OccurrenceResourceModel", "csharp");
+@@clientName(OccurrenceExtensionResource,
+  "OccurrenceExtensionResourceModel",
   "csharp"
 );
 @@clientName(ResourceOperationResponse,
