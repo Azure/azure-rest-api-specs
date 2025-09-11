@@ -1,0 +1,323 @@
+{
+  "title": "DataFlowEndpoint_CreateOrUpdate",
+  "operationId": "DataFlowEndpoint_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "subscriptionId": "9265A271-C9EC-4648-9AF8-B575759AB43E",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance",
+    "dataflowEndpointName": "aio-dataflowendpoint",
+    "resource": {
+      "properties": {
+        "endpointType": "DataExplorer",
+        "authentication": {
+          "method": "SystemAssignedManagedIdentity",
+          "systemAssignedManagedIdentitySettings": {
+            "audience": "imuwrt"
+          },
+          "userAssignedManagedIdentitySettings": {
+            "clientId": "qjwbqdunldmwiknaifmjtdzc",
+            "audience": "lwqpynroxkgvk",
+            "tenantId": "xuhbmockgsjanbccm"
+          },
+          "accessTokenSecretRef": "tnwgineiasofrjwmpvrpxrvgxesxge",
+          "saslSettings": {
+            "saslType": "Plain",
+            "tokenSecretRef": "yveihxxdxfczlnsp"
+          },
+          "serviceAccountTokenSettings": {
+            "audience": "jwqprkifp"
+          },
+          "x509CredentialsSettings": {
+            "secretRef": "ginzjdbcaebellwqjwiy"
+          }
+        },
+        "dataExplorerSettings": {
+          "database": "vlzldgzfnjrenepi",
+          "host": "<cluster>.<region>.kusto.windows.net",
+          "batching": {
+            "latencySeconds": 9312,
+            "maxMessages": 9028
+          }
+        },
+        "dataLakeStorageSettings": {
+          "host": "<account>.blob.core.windows.net",
+          "batching": {
+            "latencySeconds": 9312,
+            "maxMessages": 9028
+          }
+        },
+        "fabricOneLakeSettings": {
+          "names": {
+            "lakehouseName": "wlkswgqkputd",
+            "workspaceName": "jpixitkilnnznphuv"
+          },
+          "oneLakePathType": "Files",
+          "host": "https://<host>.fabric.microsoft.com",
+          "batching": {
+            "latencySeconds": 9312,
+            "maxMessages": 9028
+          }
+        },
+        "kafkaSettings": {
+          "consumerGroupId": "bpihkcqsi",
+          "host": "duqkazfangmbwtfnivqmhpxfqigi",
+          "batching": {
+            "mode": "Enabled",
+            "latencyMs": 5560,
+            "maxBytes": 2289,
+            "maxMessages": 7908
+          },
+          "copyMqttProperties": "Enabled",
+          "compression": "None",
+          "kafkaAcks": "Zero",
+          "partitionStrategy": "Default",
+          "tls": {
+            "mode": "Enabled",
+            "trustedCaCertificateConfigMapRef": "p"
+          }
+        },
+        "localStorageSettings": {
+          "persistentVolumeClaimRef": "fnswdfocruvmkzqbtfvzhzremdohtv"
+        },
+        "mqttSettings": {
+          "clientIdPrefix": "vhfupaialczfkrcmo",
+          "host": "lenprkulhttcpqop",
+          "protocol": "Mqtt",
+          "keepAliveSeconds": 0,
+          "retain": "Keep",
+          "maxInflightMessages": 0,
+          "qos": 1,
+          "sessionExpirySeconds": 0,
+          "tls": {
+            "mode": "Enabled",
+            "trustedCaCertificateConfigMapRef": "p"
+          }
+        }
+      },
+      "extendedLocation": {
+        "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "endpointType": "DataExplorer",
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "imuwrt"
+            },
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "qjwbqdunldmwiknaifmjtdzc",
+              "audience": "lwqpynroxkgvk",
+              "tenantId": "xuhbmockgsjanbccm"
+            },
+            "accessTokenSecretRef": "tnwgineiasofrjwmpvrpxrvgxesxge",
+            "saslSettings": {
+              "saslType": "Plain",
+              "tokenSecretRef": "yveihxxdxfczlnsp"
+            },
+            "serviceAccountTokenSettings": {
+              "audience": "jwqprkifp"
+            },
+            "x509CredentialsSettings": {
+              "secretRef": "ginzjdbcaebellwqjwiy"
+            }
+          },
+          "dataExplorerSettings": {
+            "database": "vlzldgzfnjrenepi",
+            "host": "<cluster>.<region>.kusto.windows.net",
+            "batching": {
+              "latencySeconds": 9312,
+              "maxMessages": 9028
+            }
+          },
+          "dataLakeStorageSettings": {
+            "host": "<account>.blob.core.windows.net",
+            "batching": {
+              "latencySeconds": 9312,
+              "maxMessages": 9028
+            }
+          },
+          "fabricOneLakeSettings": {
+            "names": {
+              "lakehouseName": "wlkswgqkputd",
+              "workspaceName": "jpixitkilnnznphuv"
+            },
+            "oneLakePathType": "Files",
+            "host": "https://<host>.fabric.microsoft.com",
+            "batching": {
+              "latencySeconds": 9312,
+              "maxMessages": 9028
+            }
+          },
+          "kafkaSettings": {
+            "consumerGroupId": "bpihkcqsi",
+            "host": "duqkazfangmbwtfnivqmhpxfqigi",
+            "batching": {
+              "mode": "Enabled",
+              "latencyMs": 5560,
+              "maxBytes": 2289,
+              "maxMessages": 7908
+            },
+            "copyMqttProperties": "Enabled",
+            "compression": "None",
+            "kafkaAcks": "Zero",
+            "partitionStrategy": "Default",
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "p"
+            }
+          },
+          "localStorageSettings": {
+            "persistentVolumeClaimRef": "fnswdfocruvmkzqbtfvzhzremdohtv"
+          },
+          "mqttSettings": {
+            "clientIdPrefix": "vhfupaialczfkrcmo",
+            "host": "lenprkulhttcpqop",
+            "protocol": "Mqtt",
+            "keepAliveSeconds": 0,
+            "retain": "Keep",
+            "maxInflightMessages": 0,
+            "qos": 1,
+            "sessionExpirySeconds": 0,
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "p"
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "kvyqxmrwwvxxvrlwyxfkxoebrapxbj",
+        "type": "dzbwcvsomwc",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "endpointType": "DataExplorer",
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "imuwrt"
+            },
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "qjwbqdunldmwiknaifmjtdzc",
+              "audience": "lwqpynroxkgvk",
+              "tenantId": "xuhbmockgsjanbccm"
+            },
+            "accessTokenSecretRef": "tnwgineiasofrjwmpvrpxrvgxesxge",
+            "saslSettings": {
+              "saslType": "Plain",
+              "tokenSecretRef": "yveihxxdxfczlnsp"
+            },
+            "serviceAccountTokenSettings": {
+              "audience": "jwqprkifp"
+            },
+            "x509CredentialsSettings": {
+              "secretRef": "ginzjdbcaebellwqjwiy"
+            }
+          },
+          "dataExplorerSettings": {
+            "database": "vlzldgzfnjrenepi",
+            "host": "<cluster>.<region>.kusto.windows.net",
+            "batching": {
+              "latencySeconds": 9312,
+              "maxMessages": 9028
+            }
+          },
+          "dataLakeStorageSettings": {
+            "host": "<account>.blob.core.windows.net",
+            "batching": {
+              "latencySeconds": 9312,
+              "maxMessages": 9028
+            }
+          },
+          "fabricOneLakeSettings": {
+            "names": {
+              "lakehouseName": "wlkswgqkputd",
+              "workspaceName": "jpixitkilnnznphuv"
+            },
+            "oneLakePathType": "Files",
+            "host": "https://<host>.fabric.microsoft.com",
+            "batching": {
+              "latencySeconds": 9312,
+              "maxMessages": 9028
+            }
+          },
+          "kafkaSettings": {
+            "consumerGroupId": "bpihkcqsi",
+            "host": "duqkazfangmbwtfnivqmhpxfqigi",
+            "batching": {
+              "mode": "Enabled",
+              "latencyMs": 5560,
+              "maxBytes": 2289,
+              "maxMessages": 7908
+            },
+            "copyMqttProperties": "Enabled",
+            "compression": "None",
+            "kafkaAcks": "Zero",
+            "partitionStrategy": "Default",
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "p"
+            }
+          },
+          "localStorageSettings": {
+            "persistentVolumeClaimRef": "fnswdfocruvmkzqbtfvzhzremdohtv"
+          },
+          "mqttSettings": {
+            "clientIdPrefix": "vhfupaialczfkrcmo",
+            "host": "lenprkulhttcpqop",
+            "protocol": "Mqtt",
+            "keepAliveSeconds": 0,
+            "retain": "Keep",
+            "maxInflightMessages": 0,
+            "qos": 1,
+            "sessionExpirySeconds": 0,
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "p"
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "kvyqxmrwwvxxvrlwyxfkxoebrapxbj",
+        "type": "dzbwcvsomwc",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    }
+  }
+}

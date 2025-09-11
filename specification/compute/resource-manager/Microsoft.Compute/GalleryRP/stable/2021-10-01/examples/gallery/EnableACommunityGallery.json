@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-10-01",
+    "galleryName": "myGalleryName",
+    "sharingUpdate": {
+      "operationType": "EnableCommunity"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationType": "EnableCommunity"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/share?api-version=2021-10-01"
+      },
+      "body": {
+        "operationType": "EnableCommunity"
+      }
+    }
+  }
+}

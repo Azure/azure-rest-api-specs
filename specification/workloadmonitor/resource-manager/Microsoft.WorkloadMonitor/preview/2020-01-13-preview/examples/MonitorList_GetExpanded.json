@@ -1,0 +1,308 @@
+{
+  "parameters": {
+    "subscriptionId": "bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21",
+    "resourceGroupName": "tugamidiAlerts",
+    "providerName": "Microsoft.Compute",
+    "resourceCollectionName": "virtualMachines",
+    "resourceName": "linuxEUS",
+    "api-version": "2020-01-13-preview",
+    "$expand": "evidence,configuration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/root",
+            "name": "root",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "properties": {
+              "monitorName": "root",
+              "monitorType": "root",
+              "monitoredObject": "",
+              "parentMonitorName": "",
+              "evaluationTimestamp": "2020-10-20T16:05:12Z",
+              "currentStateFirstObservedTimestamp": "2020-09-15T17:01:46Z",
+              "lastReportedTimestamp": "2020-10-20T16:05:12Z",
+              "previousMonitorState": "Critical",
+              "currentMonitorState": "Critical",
+              "evidence": {
+                "memberMonitors": [
+                  {
+                    "monitorName": "logical-disks",
+                    "timestamp": "2020-10-20T13:24:14.742Z",
+                    "state": "critical"
+                  },
+                  {
+                    "monitorName": "memory",
+                    "timestamp": "2020-10-20T13:24:14.742Z",
+                    "state": "healthy"
+                  },
+                  {
+                    "monitorName": "cpu-utilization",
+                    "timestamp": "2020-10-20T13:24:14.742Z",
+                    "state": "warning"
+                  }
+                ],
+                "reason": {
+                  "Message": "Aggregate monitor state evaluated to the worst state of its member monitors.",
+                  "Code": 1100
+                }
+              },
+              "monitorConfiguration": {
+                "isEnabled": true
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks",
+            "name": "logical-disks",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "properties": {
+              "monitorName": "logical-disks",
+              "monitorType": "logical-disks",
+              "monitoredObject": "",
+              "parentMonitorName": "root",
+              "evaluationTimestamp": "2020-10-20T13:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-09-15T17:01:46Z",
+              "lastReportedTimestamp": "2020-10-20T16:05:12Z",
+              "previousMonitorState": "Critical",
+              "currentMonitorState": "Critical",
+              "evidence": {
+                "memberMonitors": [
+                  {
+                    "monitorName": "logical-disks|C:",
+                    "timestamp": "2020-10-20T13:24:14.742Z",
+                    "state": "critical"
+                  }
+                ],
+                "reason": {
+                  "Message": "Aggregate monitor state evaluated to the worst state of its member monitors.",
+                  "Code": 1100
+                }
+              },
+              "monitorConfiguration": {
+                "isEnabled": true
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A",
+            "name": "logical-disks|C@3A",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "properties": {
+              "monitorName": "logical-disks|C:",
+              "monitorType": "logical-disks|*",
+              "monitoredObject": "C:",
+              "parentMonitorName": "logical-disks",
+              "evaluationTimestamp": "2020-10-20T13:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-09-07T21:28:44Z",
+              "lastReportedTimestamp": "2020-10-20T16:05:12Z",
+              "previousMonitorState": "Critical",
+              "currentMonitorState": "Critical",
+              "evidence": {
+                "memberMonitors": [
+                  {
+                    "monitorName": "logical-disks|C:|free-space",
+                    "timestamp": "2020-10-20T13:24:14.742Z",
+                    "state": "critical"
+                  }
+                ],
+                "reason": {
+                  "Message": "Aggregate monitor state evaluated to the worst state of its member monitors.",
+                  "Code": 1100
+                }
+              },
+              "monitorConfiguration": {
+                "isEnabled": true
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A|free-space",
+            "name": "logical-disks|C@3A|free-space",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "properties": {
+              "monitorName": "logical-disks|C:|free-space",
+              "monitorType": "logical-disks|*|free-space",
+              "monitoredObject": "C:",
+              "parentMonitorName": "logical-disks|C:",
+              "evaluationTimestamp": "2020-10-20T13:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-09-07T21:28:44Z",
+              "lastReportedTimestamp": "2020-10-20T16:05:12Z",
+              "previousMonitorState": "Critical",
+              "currentMonitorState": "Critical",
+              "evidence": {
+                "reason": {
+                  "Message": "Collected samples met critical condition for this monitor.",
+                  "Code": 2100
+                },
+                "samples": [
+                  {
+                    "timestamp": "2020-10-20T13:23:25.823Z",
+                    "value": 4
+                  }
+                ]
+              },
+              "monitorConfiguration": {
+                "isEnabled": true,
+                "monitorConfiguration": {
+                  "criticalCondition": {
+                    "isEnabled": true,
+                    "operator": "<",
+                    "threshold": 5
+                  },
+                  "evaluationType": "Max",
+                  "evaluationFrequencySecs": 60,
+                  "lookbackSecs": 120,
+                  "maxSamples": 1,
+                  "minSamples": 1
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/cpu-utilization",
+            "name": "cpu-utilization",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "properties": {
+              "monitorName": "cpu-utilization",
+              "monitorType": "cpu-utilization",
+              "monitoredObject": "",
+              "parentMonitorName": "root",
+              "evaluationTimestamp": "2020-10-20T13:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-09-07T21:30:28Z",
+              "lastReportedTimestamp": "2020-10-20T16:05:12Z",
+              "previousMonitorState": "Warning",
+              "currentMonitorState": "Warning",
+              "evidence": {
+                "reason": {
+                  "Message": "Collected samples met warning condition for this monitor.",
+                  "Code": 2200
+                },
+                "samples": [
+                  {
+                    "timestamp": "2020-10-20T13:21:25.819Z",
+                    "value": 75
+                  },
+                  {
+                    "timestamp": "2020-10-20T13:22:25.822Z",
+                    "value": 80
+                  },
+                  {
+                    "timestamp": "2020-10-20T13:23:25.82Z",
+                    "value": 83
+                  }
+                ]
+              },
+              "monitorConfiguration": {
+                "isEnabled": true,
+                "monitorConfiguration": {
+                  "criticalCondition": {
+                    "isEnabled": true,
+                    "operator": ">",
+                    "threshold": 90
+                  },
+                  "warningCondition": {
+                    "isEnabled": true,
+                    "operator": ">",
+                    "threshold": 70
+                  },
+                  "evaluationType": "Min",
+                  "evaluationFrequencySecs": 60,
+                  "lookbackSecs": 240,
+                  "maxSamples": 3,
+                  "minSamples": 2
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/memory",
+            "name": "memory",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "properties": {
+              "monitorName": "memory",
+              "monitorType": "memory",
+              "monitoredObject": "",
+              "parentMonitorName": "root",
+              "evaluationTimestamp": "2020-10-20T13:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-09-07T21:29:28Z",
+              "lastReportedTimestamp": "2020-10-20T16:05:12Z",
+              "previousMonitorState": "Healthy",
+              "currentMonitorState": "Healthy",
+              "evidence": {
+                "memberMonitors": [
+                  {
+                    "monitorName": "memory|available",
+                    "timestamp": "2020-10-20T13:24:14.742Z",
+                    "state": "healthy"
+                  }
+                ],
+                "reason": {
+                  "Message": "Aggregate monitor state evaluated to the worst state of its member monitors.",
+                  "Code": 1100
+                }
+              },
+              "monitorConfiguration": {
+                "isEnabled": true
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/memory|available",
+            "name": "memory|available",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "properties": {
+              "monitorName": "memory|available",
+              "monitorType": "memory|available",
+              "monitoredObject": "",
+              "parentMonitorName": "memory",
+              "evaluationTimestamp": "2020-10-20T13:24:14Z",
+              "currentStateFirstObservedTimestamp": "2020-09-07T21:29:28Z",
+              "lastReportedTimestamp": "2020-10-20T16:05:12Z",
+              "previousMonitorState": "Healthy",
+              "currentMonitorState": "Healthy",
+              "evidence": {
+                "reason": {
+                  "Message": "Collected samples met healthy condition for this monitor.",
+                  "Code": 2300
+                },
+                "samples": [
+                  {
+                    "timestamp": "2020-10-20T13:21:25.82Z",
+                    "value": 73.27
+                  },
+                  {
+                    "timestamp": "2020-10-20T13:22:25.822Z",
+                    "value": 77.28
+                  },
+                  {
+                    "timestamp": "2020-10-20T13:23:25.821Z",
+                    "value": 60.95
+                  }
+                ]
+              },
+              "monitorConfiguration": {
+                "isEnabled": true,
+                "monitorConfiguration": {
+                  "criticalCondition": {
+                    "isEnabled": true,
+                    "operator": "<",
+                    "threshold": 100
+                  },
+                  "evaluationType": "Max",
+                  "evaluationFrequencySecs": 60,
+                  "lookbackSecs": 240,
+                  "maxSamples": 3,
+                  "minSamples": 2
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

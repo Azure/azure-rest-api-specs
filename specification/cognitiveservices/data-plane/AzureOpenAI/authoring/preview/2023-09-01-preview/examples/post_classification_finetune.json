@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2023-09-01-preview",
+    "fineTune": {
+      "compute_classification_metrics": true,
+      "classification_n_classes": 4,
+      "model": "curie",
+      "training_file": "file-181a1cbdcdcf4677ada87f63a0928099"
+    },
+    "content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://aoairesource.openai.azure.com/openai/fine-tunes/ft-72a2792ef7d24ba7b82c7fe4a37e379f"
+      },
+      "body": {
+        "hyperparams": {
+          "compute_classification_metrics": true,
+          "classification_n_classes": 4,
+          "batch_size": 32,
+          "learning_rate_multiplier": 1,
+          "n_epochs": 2,
+          "prompt_loss_weight": 0.1
+        },
+        "model": "curie",
+        "training_files": [
+          {
+            "statistics": {
+              "tokens": 42,
+              "examples": 23
+            },
+            "bytes": 140,
+            "purpose": "fine-tune",
+            "filename": "puppy.jsonl",
+            "id": "file-181a1cbdcdcf4677ada87f63a0928099",
+            "status": "succeeded",
+            "created_at": 1646126127,
+            "updated_at": 1646127311,
+            "object": "file"
+          }
+        ],
+        "id": "ft-72a2792ef7d24ba7b82c7fe4a37e379f",
+        "status": "notRunning",
+        "created_at": 1646126127,
+        "updated_at": 1646127311,
+        "object": "fine-tune"
+      }
+    }
+  }
+}

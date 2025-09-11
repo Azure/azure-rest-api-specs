@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2015-11-06",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
+    "keyspaceName": "keyspaceName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "tableName",
+            "name": "tableName",
+            "type": "Microsoft.DocumentDB/databaseAccounts/apis/keyspaces/tables",
+            "properties": {
+              "id": "tableName",
+              "defaultTtl": 100,
+              "schema": {
+                "columns": [
+                  {
+                    "name": "columnA",
+                    "type": "Ascii"
+                  }
+                ],
+                "partitionKeys": [
+                  {
+                    "name": "columnA"
+                  }
+                ],
+                "clusterKeys": [
+                  {
+                    "name": "columnA",
+                    "orderBy": "Asc"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

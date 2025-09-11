@@ -1,0 +1,1691 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2024-04-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}": {
+      "put": {
+        "tags": [
+          "businessApplicationAgents"
+        ],
+        "description": "Creates or updates the Business Application Agent.",
+        "operationId": "BusinessApplicationAgents_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "agentToUpsert",
+            "description": "The Business Application Agent",
+            "schema": {
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessApplicationAgents_CreateOrUpdate": {
+            "$ref": "./examples/businessApplicationAgents/BusinessApplicationAgents_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "businessApplicationAgents"
+        ],
+        "description": "Gets Business Application Agent.",
+        "operationId": "BusinessApplicationAgent_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessApplicationAgent_Get": {
+            "$ref": "./examples/businessApplicationAgents/BusinessApplicationAgent_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "businessApplicationAgents"
+        ],
+        "description": "Delete the Business Application Agent.",
+        "operationId": "BusinessApplicationAgents_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessApplicationAgents_Delete": {
+            "$ref": "./examples/businessApplicationAgents/BusinessApplicationAgents_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents": {
+      "get": {
+        "tags": [
+          "businessApplicationAgents"
+        ],
+        "description": "Gets all Business Application Agents under the workspace.",
+        "operationId": "BusinessApplicationAgents_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/BusinessApplicationAgentsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BusinessApplicationAgents_List": {
+            "$ref": "./examples/businessApplicationAgents/BusinessApplicationAgents_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}": {
+      "put": {
+        "tags": [
+          "systems"
+        ],
+        "description": "Creates or updates the system.",
+        "operationId": "Systems_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "systemToUpsert",
+            "description": "The system to upsert.",
+            "schema": {
+              "$ref": "#/definitions/SystemResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/SystemResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SystemResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Systems_CreateOrUpdate": {
+            "$ref": "./examples/businessApplicationAgents/systems/Systems_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "systems"
+        ],
+        "description": "Gets the system.",
+        "operationId": "Systems_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/SystemResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Systems_Get": {
+            "$ref": "./examples/businessApplicationAgents/systems/Systems_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "systems"
+        ],
+        "description": "Deletes the system.",
+        "operationId": "Systems_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Systems_Delete": {
+            "$ref": "./examples/businessApplicationAgents/systems/Systems_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems": {
+      "get": {
+        "tags": [
+          "systems"
+        ],
+        "description": "ListAll the systems.",
+        "operationId": "Systems_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/SystemsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Systems_List": {
+            "$ref": "./examples/businessApplicationAgents/systems/Systems_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/listActions": {
+      "post": {
+        "tags": [
+          "SystemsActions"
+        ],
+        "operationId": "Systems_ListActions",
+        "description": "List of actions for a business application system.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List actions for a business application system",
+            "schema": {
+              "$ref": "#/definitions/ListActionsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListActions": {
+            "$ref": "./examples/businessApplicationAgents/actions/ListActions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/undoAction": {
+      "post": {
+        "tags": [
+          "SystemsActions"
+        ],
+        "operationId": "Systems_UndoAction",
+        "description": "Undo action, based on the actionId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "body",
+            "description": "Undo action, based on the actionId.",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/UndoActionPayload"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UndoAction": {
+            "$ref": "./examples/businessApplicationAgents/actions/UndoAction.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/reportActionStatus": {
+      "post": {
+        "tags": [
+          "SystemsActions"
+        ],
+        "operationId": "Systems_ReportActionStatus",
+        "description": "Report the status of the action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "Report a status of the action that was performed by the agent",
+            "schema": {
+              "$ref": "#/definitions/ReportActionStatusPayload"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReportActionStatus": {
+            "$ref": "./examples/businessApplicationAgents/actions/ReportActionStatus.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BusinessApplicationAgentResource": {
+      "description": "Describes the configuration of a Business Application Agent.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/AgentProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AgentConfiguration": {
+      "description": "Describes the configuration of a Business Application Agent.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AgentType"
+        }
+      },
+      "discriminator": "type"
+    },
+    "AgentProperties": {
+      "required": [
+        "configuration",
+        "displayName"
+      ],
+      "type": "object",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/AgentConfiguration"
+        },
+        "agentSystems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentSystem"
+          },
+          "readOnly": true
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AgentSystem": {
+      "description": "Describes the configuration of a system inside the agent.",
+      "type": "object",
+      "properties": {
+        "systemResourceName": {
+          "type": "string"
+        },
+        "systemDisplayName": {
+          "type": "string"
+        }
+      }
+    },
+    "AgentType": {
+      "description": "Type of the agent",
+      "enum": [
+        "SAP"
+      ],
+      "type": "string",
+      "example": "SAP",
+      "x-ms-enum": {
+        "name": "AgentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SAP"
+          }
+        ]
+      }
+    },
+    "BusinessApplicationAgentsList": {
+      "description": "List of agents.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BusinessApplicationAgentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "KeyVaultAuthenticationMode": {
+      "description": "Type for authentication identity to key vault",
+      "enum": [
+        "ManagedIdentity",
+        "ServicePrincipal"
+      ],
+      "type": "string",
+      "example": "ManagedIdentity",
+      "x-ms-enum": {
+        "name": "KeyVaultAuthenticationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ManagedIdentity"
+          },
+          {
+            "value": "ServicePrincipal"
+          }
+        ]
+      }
+    },
+    "SapAgentConfiguration": {
+      "description": "Describes the configuration of a SAP Docker agent.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentConfiguration"
+        }
+      ],
+      "properties": {
+        "agentContainerName": {
+          "description": "The name of the docker agent.\r\nonly letters with numbers, underscores and hyphens are allowed\r\nexample: \"my-agent\"",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "type": "string"
+        },
+        "sdkPath": {
+          "description": "The SDK path (a file not a folder) on the agent machine.\r\nexample: \"/path/to/nwrfc750P_8-70002755.zip\"",
+          "pattern": "^/(([^/]+/)*nwrfc75.*\\.zip$)|^((?:[a-zA-Z]:)?(?:\\\\|\\\\\\\\)(?:[^\\\\/:*?\"<>|\\r\\n]+\\\\)*nwrfc75.*\\.zip)$",
+          "type": "string"
+        },
+        "sncPath": {
+          "description": "The SNC path (a folder not a file) on the agent machine.\r\nexample: \"/path/to/snc\"",
+          "pattern": "^\\/(?:[^/]+\\/)*[^/]+$|^(?:[a-zA-Z]:)?(?:\\\\|\\\\\\\\)(?:[^\\\\/:*?\"<>|\\r\\n]+\\\\)*[^\\\\/:*?\"<>|\\r\\n]*$",
+          "type": "string"
+        },
+        "keyVaultResourceId": {
+          "description": "The key vault resource id to access the key vault.\r\nexample: \"/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.KeyVault/vaults/myVault\"",
+          "pattern": "^\\/?subscriptions\\/([^\\/]+)\\/resourceGroups\\/([^\\/]+)\\/providers\\/Microsoft\\.KeyVault\\/vaults\\/([^\\/]+)$",
+          "type": "string"
+        },
+        "keyVaultAuthenticationMode": {
+          "description": "The key mode of the agent.\r\nManagedIdentity|ApplicationIdentity are the options",
+          "$ref": "#/definitions/KeyVaultAuthenticationMode"
+        },
+        "secretSource": {
+          "description": "The secret source of the agent.\r\nAzureKeyVault is the option",
+          "$ref": "#/definitions/SecretSource"
+        },
+        "type": {
+          "$ref": "#/definitions/AgentType"
+        }
+      },
+      "x-ms-discriminator-value": "SAP"
+    },
+    "SecretSource": {
+      "description": "Type for Secret Source - Azure Key Vault",
+      "enum": [
+        "AzureKeyVault"
+      ],
+      "type": "string",
+      "example": "AzureKeyVault",
+      "x-ms-enum": {
+        "name": "SecretSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AzureKeyVault"
+          }
+        ]
+      }
+    },
+    "ListActionsResponse": {
+      "description": "List all actions for a system to perform.",
+      "properties": {
+        "value": {
+          "description": "Array of actions.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of actions.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "Action": {
+      "description": "Represents an action to perform on a specific system.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ListActionKind",
+          "description": "The actions kind"
+        }
+      },
+      "type": "object"
+    },
+    "ListActionKind": {
+      "description": "The kind of the action",
+      "enum": [
+        "LockUser",
+        "UnlockUser"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ListActionKind",
+        "values": [
+          {
+            "value": "LockUser"
+          },
+          {
+            "value": "UnlockUser"
+          }
+        ]
+      }
+    },
+    "LockUserAction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "description": "Represents lock user action.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "The user to lock"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason of the failure of the action. Empty if the action is successful."
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "LockUser"
+    },
+    "UnlockUserAction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "description": "Represents an unlock user action.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "The user to unlock"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason of the failure of the action. Empty if the action is successful."
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "UnlockUser"
+    },
+    "UndoActionPayload": {
+      "description": "Represents the undo action.",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "The action ID of the original action that was performed and now need to undo"
+        }
+      },
+      "type": "object"
+    },
+    "ReportActionStatusPayload": {
+      "description": "Report the status of an action that was performed by the agent",
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "The action ID to perform"
+        },
+        "actionStatus": {
+          "description": "The status of the action that was performed by the agent",
+          "type": "string"
+        },
+        "failureReason": {
+          "description": "The reason of the failure of the action. Empty if the action is successful.",
+          "type": "string"
+        }
+      }
+    },
+    "ActionStatus": {
+      "description": "The status of the action that was performed by the agent",
+      "enum": [
+        "Pending",
+        "Completed",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ActionStatus",
+        "values": [
+          {
+            "value": "Pending",
+            "description": "Actions is pending"
+          },
+          {
+            "value": "Completed",
+            "description": "The action is completed successfully."
+          },
+          {
+            "value": "Failed",
+            "description": "The action failed."
+          }
+        ]
+      }
+    },
+    "SapAuthenticationType": {
+      "description": "Types of authentication to SAP.",
+      "enum": [
+        "UsernamePassword",
+        "Snc",
+        "SncWithUsernamePassword"
+      ],
+      "type": "string",
+      "example": "UsernamePassword",
+      "x-ms-enum": {
+        "name": "SapAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UsernamePassword"
+          },
+          {
+            "value": "Snc"
+          },
+          {
+            "value": "SncWithUsernamePassword"
+          }
+        ]
+      }
+    },
+    "ConfigurationType": {
+      "description": "Represents the types of configuration for a system.",
+      "enum": [
+        "SAP"
+      ],
+      "type": "string",
+      "example": "SAP",
+      "x-ms-enum": {
+        "name": "ConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SAP"
+          }
+        ]
+      }
+    },
+    "HttpsConfigurationType": {
+      "description": "Represents the types of HTTPS configuration to connect to the SapControl service.",
+      "enum": [
+        "HttpOnly",
+        "HttpsWithSslVerification",
+        "HttpsWithoutSslVerification"
+      ],
+      "type": "string",
+      "example": "HttpOnly",
+      "x-ms-enum": {
+        "name": "HttpsConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "HttpOnly"
+          },
+          {
+            "value": "HttpsWithSslVerification"
+          },
+          {
+            "value": "HttpsWithoutSslVerification"
+          }
+        ]
+      }
+    },
+    "IngestionType": {
+      "description": "Types of ingestion.",
+      "enum": [
+        "Full",
+        "Incremental"
+      ],
+      "type": "string",
+      "example": "Full",
+      "x-ms-enum": {
+        "name": "IngestionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Full"
+          },
+          {
+            "value": "Incremental"
+          }
+        ]
+      }
+    },
+    "Log": {
+      "description": "Describes a log.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/LogType"
+        },
+        "ingestionType": {
+          "$ref": "#/definitions/IngestionType"
+        },
+        "status": {
+          "$ref": "#/definitions/LogStatusType"
+        },
+        "scheduleInterval": {
+          "format": "int32",
+          "description": "The schedule interval in seconds.",
+          "type": "integer"
+        },
+        "bulkSize": {
+          "format": "int32",
+          "description": "The bulk size for the log.",
+          "type": "integer"
+        },
+        "filters": {
+          "description": "The filters for the log.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LogStatusType": {
+      "description": "Types of log status.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "example": "Enabled",
+      "x-ms-enum": {
+        "name": "LogStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
+    "LogType": {
+      "description": "Types of logs and tables.",
+      "enum": [
+        "AbapAuditLog",
+        "AbapJobLog",
+        "AbapSpoolLog",
+        "AbapSpoolOutputLog",
+        "AbapChangeDocsLog",
+        "AbapAppLog",
+        "AbapWorkflowLog",
+        "AbapCrLog",
+        "AbapTableDataLog",
+        "AbapFilesLogs",
+        "JavaFilesLogs",
+        "AGRTCODES",
+        "USR01",
+        "USR02",
+        "AGR1251",
+        "AGRUSERS",
+        "AGRPROF",
+        "UST04",
+        "USR21",
+        "ADR6",
+        "ADCP",
+        "USR05",
+        "USGRPUSER",
+        "USERADDR",
+        "DEVACCESS",
+        "AGRDEFINE",
+        "PAHI",
+        "AGRAGRS",
+        "USRSTAMP",
+        "AGRFLAGS",
+        "SNCSYSACL",
+        "USRACL"
+      ],
+      "type": "string",
+      "example": "AbapAuditLog",
+      "x-ms-enum": {
+        "name": "LogType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AbapAuditLog"
+          },
+          {
+            "value": "AbapJobLog"
+          },
+          {
+            "value": "AbapSpoolLog"
+          },
+          {
+            "value": "AbapSpoolOutputLog"
+          },
+          {
+            "value": "AbapChangeDocsLog"
+          },
+          {
+            "value": "AbapAppLog"
+          },
+          {
+            "value": "AbapWorkflowLog"
+          },
+          {
+            "value": "AbapCrLog"
+          },
+          {
+            "value": "AbapTableDataLog"
+          },
+          {
+            "value": "AbapFilesLogs"
+          },
+          {
+            "value": "JavaFilesLogs"
+          },
+          {
+            "value": "AGRTCODES"
+          },
+          {
+            "value": "USR01"
+          },
+          {
+            "value": "USR02"
+          },
+          {
+            "value": "AGR1251"
+          },
+          {
+            "value": "AGRUSERS"
+          },
+          {
+            "value": "AGRPROF"
+          },
+          {
+            "value": "UST04"
+          },
+          {
+            "value": "USR21"
+          },
+          {
+            "value": "ADR6"
+          },
+          {
+            "value": "ADCP"
+          },
+          {
+            "value": "USR05"
+          },
+          {
+            "value": "USGRPUSER"
+          },
+          {
+            "value": "USERADDR"
+          },
+          {
+            "value": "DEVACCESS"
+          },
+          {
+            "value": "AGRDEFINE"
+          },
+          {
+            "value": "PAHI"
+          },
+          {
+            "value": "AGRAGRS"
+          },
+          {
+            "value": "USRSTAMP"
+          },
+          {
+            "value": "AGRFLAGS"
+          },
+          {
+            "value": "SNCSYSACL"
+          },
+          {
+            "value": "USRACL"
+          }
+        ]
+      }
+    },
+    "RfcConnector": {
+      "description": "Describes the Rfc connector.",
+      "required": [
+        "client",
+        "systemId",
+        "systemNumber",
+        "type"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemsConfigurationConnector"
+        }
+      ],
+      "properties": {
+        "abapServerHost": {
+          "description": "FQDN, hostname, or IP address of the ABAP server.",
+          "type": "string"
+        },
+        "messageServerHost": {
+          "description": "FQDN, hostname, or IP address of the Message server.",
+          "type": "string"
+        },
+        "group": {
+          "description": "Logon group of the message server.",
+          "type": "string"
+        },
+        "messageServerService": {
+          "description": "Port number, or service name (from /etc/services) of the message server.",
+          "type": "string"
+        },
+        "sncQop": {
+          "description": "SNC QOP.\r\nOptions are 1, 2, 3, 8, 9.",
+          "pattern": "^[1,2,3,8,9]$",
+          "type": "string"
+        },
+        "codePage": {
+          "description": "The SAP code page used for character encoding.\r\nExample - 1100",
+          "pattern": "^(?:[a-zA-Z0-9]{4}|UTF-8)$",
+          "type": "string"
+        },
+        "systemNumber": {
+          "description": "System number of the ABAP server.",
+          "minLength": 1,
+          "pattern": "^\\d{1,3}$",
+          "type": "string"
+        },
+        "systemId": {
+          "description": "System ID of the ABAP server.\r\nExample - A4H",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9]{3}$",
+          "type": "string"
+        },
+        "client": {
+          "description": "Client number of the ABAP server.\r\nExample - 001",
+          "minLength": 1,
+          "pattern": "^[0-9]{3}$",
+          "type": "string"
+        },
+        "authenticationType": {
+          "description": "The authentication type to SAP.",
+          "$ref": "#/definitions/SapAuthenticationType"
+        },
+        "type": {
+          "$ref": "#/definitions/SystemConfigurationConnectorType"
+        }
+      },
+      "x-ms-discriminator-value": "Rfc"
+    },
+    "SapControlConnector": {
+      "description": "Describes the SapControl connector configuration.",
+      "required": [
+        "instance",
+        "server",
+        "type"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemsConfigurationConnector"
+        }
+      ],
+      "properties": {
+        "server": {
+          "description": "The server name.\r\nFQDN or IP address.",
+          "minLength": 1,
+          "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-zA-Z]{2,}$|^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$",
+          "type": "string"
+        },
+        "instance": {
+          "description": "The instance number. Only 2 digits are allowed.",
+          "minLength": 1,
+          "pattern": "^\\d{2}$",
+          "type": "string"
+        },
+        "timezone": {
+          "description": "The timezone.\r\nexample: \"GMT+0\" or \"GMT-8\"\r\ndefault: \"GMT+0\"",
+          "default": "GMT+0",
+          "pattern": "^GMT[+-]\\d+$",
+          "type": "string"
+        },
+        "port": {
+          "description": "The port of the SOAP connection to SAP Control.",
+          "pattern": "^\\d{1,5}$",
+          "type": "string"
+        },
+        "httpsConfiguration": {
+          "$ref": "#/definitions/HttpsConfigurationType"
+        },
+        "type": {
+          "$ref": "#/definitions/SystemConfigurationConnectorType"
+        }
+      },
+      "x-ms-discriminator-value": "SapControl"
+    },
+    "SapSystemsConfiguration": {
+      "description": "Describes the SAP configuration.",
+      "required": [
+        "connector",
+        "type"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemsConfiguration"
+        }
+      ],
+      "properties": {
+        "azureResourceId": {
+          "description": "azure resource id\r\nexample: \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM\"",
+          "pattern": "^\\/?subscriptions\\/([^\\/]+)\\/resourceGroups\\/([^\\/]+)\\/providers\\/([^\\/]+)\\/([^\\/]+)\\/([^\\/]+)$",
+          "type": "string"
+        },
+        "connector": {
+          "$ref": "#/definitions/SystemsConfigurationConnector"
+        },
+        "logs": {
+          "description": "The logs configuration.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/Log"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/ConfigurationType"
+        }
+      },
+      "x-ms-discriminator-value": "SAP"
+    },
+    "SystemResource": {
+      "description": "Describes the system within the agent.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/SystemProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SystemConfigurationConnectorType": {
+      "description": "Represents the types of SAP systems.",
+      "enum": [
+        "Rfc",
+        "SapControl"
+      ],
+      "type": "string",
+      "example": "Rfc",
+      "x-ms-enum": {
+        "name": "SystemConfigurationConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Rfc"
+          },
+          {
+            "value": "SapControl"
+          }
+        ]
+      }
+    },
+    "SystemProperties": {
+      "description": "The properties of the system.",
+      "required": [
+        "configuration",
+        "displayName"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/SystemStatusType"
+        },
+        "configuration": {
+          "$ref": "#/definitions/SystemsConfiguration"
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SystemStatusType": {
+      "description": "The status of the system.",
+      "enum": [
+        "Running",
+        "Stopped"
+      ],
+      "type": "string",
+      "example": "Running",
+      "x-ms-enum": {
+        "name": "SystemStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Running"
+          },
+          {
+            "value": "Stopped"
+          }
+        ]
+      }
+    },
+    "SystemsConfiguration": {
+      "description": "The configuration of the system.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ConfigurationType"
+        }
+      },
+      "discriminator": "type"
+    },
+    "SystemsConfigurationConnector": {
+      "description": "Base Model for SAP System Connector.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SystemConfigurationConnectorType"
+        }
+      },
+      "discriminator": "type"
+    },
+    "SystemsList": {
+      "description": "List of Agent's Systems.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SystemResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "BusinessApplicationAgentResource": {
+      "name": "businessApplicationAgentResource",
+      "description": "The Business Application Agent Resource",
+      "required": true,
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/BusinessApplicationAgentResource"
+      }
+    },
+    "BusinessApplicationAgentId": {
+      "in": "path",
+      "name": "businessApplicationAgentId",
+      "description": "BusinessApplicationAgent ID",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "SystemResource": {
+      "name": "systemResource",
+      "description": "The system resource",
+      "required": true,
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/SystemResource"
+      }
+    },
+    "SystemId": {
+      "in": "path",
+      "name": "systemId",
+      "description": "System ID",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "BusinessApplicationAgents",
+      "description": "Controller that handles requests forwarded from ASI RP for agents resources CRUD ARM APIs."
+    },
+    {
+      "name": "Systems",
+      "description": "Controller that handles requests forwarded from ASI RP for systems resources CRUD ARM APIs."
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
+}

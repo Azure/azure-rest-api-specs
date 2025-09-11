@@ -1,0 +1,376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Rating And Reviews API",
+    "description": "Microsoft Marketplace Rating And Reviews API",
+    "version": "2023-01-01-preview"
+  },
+  "host": "catalogapi.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/products/{uniqueProductId}/reviews": {
+      "get": {
+        "tags": [
+          "Rating and Reviews Public API"
+        ],
+        "summary": "Get a list of reviews by unique product id",
+        "operationId": "Reviews_Get",
+        "x-ms-examples": {
+          "GetReviews": {
+            "$ref": "./examples/GetProductReviews.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "integer",
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Maximum number of reviews to return",
+            "format": "int32",
+            "default": 50
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of reviews for the given unique product",
+            "schema": {
+              "$ref": "#/definitions/PageResultOfReviewDto"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/products/{uniqueProductId}/reviews/{reviewId}/comments": {
+      "get": {
+        "tags": [
+          "Reviews Public API"
+        ],
+        "summary": "Get the comments of a given review",
+        "operationId": "Comments_Get",
+        "x-ms-examples": {
+          "GetComments": {
+            "$ref": "./examples/GetReviewComments.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "string",
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "description": "Review Id"
+          },
+          {
+            "type": "integer",
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "maximum number of comments to return",
+            "format": "int32",
+            "default": 50
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of comments for the given review",
+            "schema": {
+              "$ref": "#/definitions/PageResultOfReviewCommentDto"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "The Rating and Reviews error response object",
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "description": "The search error response details",
+          "$ref": "#/definitions/ErrorResponseDetails"
+        }
+      }
+    },
+    "ErrorResponseDetails": {
+      "description": "The Rating and Reviews error response details object",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "The error code description. Such as code=InternalError",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message. Such as message=Internal server error",
+          "type": "string"
+        }
+      }
+    },
+    "PageResultOfReviewDto": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of items in the current page",
+          "items": {
+            "$ref": "#/definitions/ReviewDto"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total count of items",
+          "format": "int32"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of items",
+          "format": "uri"
+        }
+      }
+    },
+    "ReviewDto": {
+      "type": "object",
+      "required": [
+        "rating",
+        "createdDateTime",
+        "lastModifiedDateTime",
+        "commentsCount",
+        "helpfulCount"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Review Id"
+        },
+        "uniqueProductId": {
+          "type": "string",
+          "description": "Unique Product Id"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Review Rating"
+        },
+        "title": {
+          "type": "string",
+          "description": "Review Title"
+        },
+        "content": {
+          "type": "string",
+          "description": "Review Content"
+        },
+        "source": {
+          "type": "string",
+          "description": "Review Source (possible values: AppSource, Ibiza, G2, ect.)",
+          "x-ms-enum": {
+            "name": "source",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AppSource",
+                "description": "AppSource"
+              },
+              {
+                "value": "Amp",
+                "description": "Azure MarketPlace"
+              },
+              {
+                "value": "Ibiza",
+                "description": "Azure Portal"
+              }
+            ]
+          }
+        },
+        "reviewerName": {
+          "type": "string",
+          "description": "Reviewer Full Name. Empty if it is an anonymous review"
+        },
+        "externalReviewUrl": {
+          "type": "string",
+          "description": "External Review Url (only for external review, i.e. G2 review)"
+        },
+        "isvReply": {
+          "description": "ISV Reply for this review",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IsvReplyDto"
+            }
+          ]
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "Created Date",
+          "format": "date-time"
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Last Updated Date",
+          "format": "date-time"
+        },
+        "commentsCount": {
+          "type": "integer",
+          "description": "Number of comments for this review",
+          "format": "int32"
+        },
+        "helpfulCount": {
+          "type": "integer",
+          "description": "Number of marked as helpful for this review",
+          "format": "int32"
+        }
+      }
+    },
+    "IsvReplyDto": {
+      "type": "object",
+      "required": [
+        "repliedDateTime"
+      ],
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "ISV Reply Content"
+        },
+        "repliedDateTime": {
+          "type": "string",
+          "description": "Reply Date",
+          "format": "date-time"
+        }
+      }
+    },
+    "PageResultOfReviewCommentDto": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of items in the current page",
+          "items": {
+            "$ref": "#/definitions/ReviewCommentDto"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total count of items",
+          "format": "int32"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of items",
+          "format": "uri"
+        }
+      }
+    },
+    "ReviewCommentDto": {
+      "type": "object",
+      "required": [
+        "createdDateTime",
+        "lastModifiedDateTime",
+        "deleted"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Comment Id"
+        },
+        "content": {
+          "type": "string",
+          "description": "Comment Content"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "Created Date",
+          "format": "date-time"
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Last Updated Date",
+          "format": "date-time"
+        },
+        "commenterName": {
+          "type": "string",
+          "description": "Commenter Full Name"
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Is Deleted. If true all other properties will be empty"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Reviews Public API"
+    }
+  ]
+}

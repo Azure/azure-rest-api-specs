@@ -1,0 +1,86 @@
+{
+  "title": "Creates a new job",
+  "operationId": "JobRouterOperations_UpsertJob",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "jobId": "JobId",
+    "resource": {
+      "channelId": "CustomChatChannel",
+      "channelReference": "1d5896f3-8b54-40be-82d3-910323f5e2af",
+      "queueId": "MainQueue",
+      "priority": 5,
+      "requestedWorkerSelectors": [
+        {
+          "key": "Sales",
+          "labelOperator": "equal",
+          "value": true
+        }
+      ],
+      "labels": {},
+      "matchingMode": {
+        "kind": "queueAndMatch"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "JobId",
+        "channelReference": "1d5896f3-8b54-40be-82d3-910323f5e2af",
+        "status": "queued",
+        "enqueuedAt": "2021-09-30T23:59:04.5311999+00:00",
+        "channelId": "CustomChatChannel",
+        "classificationPolicyId": null,
+        "queueId": "MainQueue",
+        "priority": 5,
+        "dispositionCode": null,
+        "requestedWorkerSelectors": [
+          {
+            "key": "Sales",
+            "labelOperator": "equal",
+            "value": true,
+            "expiresAfterSeconds": null
+          }
+        ],
+        "attachedWorkerSelectors": [],
+        "labels": {},
+        "assignments": {},
+        "notes": [],
+        "matchingMode": {
+          "kind": "queueAndMatch"
+        },
+        "etag": "etag"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "JobId",
+        "channelReference": "1d5896f3-8b54-40be-82d3-910323f5e2af",
+        "status": "queued",
+        "enqueuedAt": "2021-09-30T23:59:04.5311999+00:00",
+        "channelId": "CustomChatChannel",
+        "classificationPolicyId": null,
+        "queueId": "MainQueue",
+        "priority": 5,
+        "dispositionCode": null,
+        "requestedWorkerSelectors": [
+          {
+            "key": "Sales",
+            "labelOperator": "equal",
+            "value": true,
+            "expiresAfterSeconds": null
+          }
+        ],
+        "attachedWorkerSelectors": [],
+        "labels": {},
+        "assignments": {},
+        "notes": [],
+        "matchingMode": {
+          "kind": "queueAndMatch"
+        },
+        "etag": "etag"
+      }
+    }
+  }
+}

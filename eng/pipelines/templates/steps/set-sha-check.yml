@@ -1,0 +1,64 @@
+# Create a "status" check for a SHA (inferred from PR by default) in a GitHub 
+# repository. By default this uses the azure-sdk account. This might not work 
+# for required checks where a source must be configured.
+
+parameters:
+  - name: Sha
+    type: string
+    default: $(System.PullRequest.SourceCommitId)
+
+  - name: RepositoryName
+    type: string
+    default: $(Build.Repository.Name)
+
+  - name: State
+    type: string
+    default: 'pending'
+    # Valid values:
+    # - error
+    # - failure
+    # - pending
+    # - success
+
+  - name: TargetUrl
+    type: string
+    default: ''
+
+  - name: Description
+    type: string
+    default: ''
+
+  - name: Context
+    type: string
+    default: default context
+
+  - name: Condition
+    type: string
+    default: succeeded()
+
+  - name: DisplayName
+    type: string
+    default: 'Set PR status'
+
+  - name: GitHubToken
+    type: string
+    default: $(azuresdk-github-pat)
+
+steps:
+  - bash: |
+      echo "Repository Name: ${{ parameters.RepositoryName }}"
+      echo "Commit ID: ${{ parameters.Sha }}"
+      echo "State: ${{ parameters.State }}"
+      echo "Target URL: ${{ parameters.TargetUrl }}"
+      echo "Description: ${{ parameters.Description }}"
+      echo "Context: ${{ parameters.Context }}"
+
+      gh api repos/${{ parameters.RepositoryName }}/statuses/${{ parameters.Sha }} \
+        -f state='${{ parameters.State }}' \
+        -f target_url='${{ parameters.TargetUrl }}' \
+        -f description='${{ parameters.Description }}' \
+        -f context='${{ parameters.Context }}'
+    displayName: ${{ parameters.DisplayName }}
+    condition: ${{ parameters.Condition }}
+    env:
+      GH_TOKEN: ${{ parameters.GitHubToken }}

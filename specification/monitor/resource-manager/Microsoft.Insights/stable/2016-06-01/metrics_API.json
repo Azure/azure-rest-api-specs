@@ -1,0 +1,216 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorClient",
+    "version": "2016-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Insights/metrics": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "Metrics_List",
+        "description": "Lists the metric values for a resource.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of the resource.",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Specifies the set of data returned.<br>The filter is optional. If present it must contain a list of metric names to retrieve of the form: *(name.value eq 'metricName' [or name.value eq 'metricName' or ...])*. Optionally, the filter can contain conditions for the following attributes *aggregationType*, *startTime*, *endTime*, and *timeGrain* of the form *attributeName operator value*. Where operator is one of *ne*, *eq*, *gt*, *lt*.<br>Several conditions can be combined with parentheses and logical operators, e.g: *and*, *or*.<br>Some example filter expressions are:<br>- $filter=(name.value eq 'RunsSucceeded') and aggregationType eq 'Total' and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1M',<br>- $filter=(name.value eq 'RunsSucceeded') and (aggregationType eq 'Total' or aggregationType eq 'Average') and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1H',<br>- $filter=(name.value eq 'ActionsCompleted' or name.value eq 'RunsSucceeded') and (aggregationType eq 'Total' or aggregationType eq 'Average') and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1M'.<br><br>**NOTE**: When a metrics query comes in with multiple metrics, but with no aggregation types defined, the service will pick the Primary aggregation type of the first metrics to be used as the default aggregation type for all the metrics.",
+            "required": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric values",
+            "schema": {
+              "$ref": "#/definitions/MetricCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/Metric",
+        "x-ms-examples": {
+          "Get Metric with filter": {
+            "$ref": "./examples/GetMetric.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LocalizableString": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "the locale specific value."
+        }
+      },
+      "description": "The localizable string class."
+    },
+    "Unit": {
+      "type": "string",
+      "description": "Number representing the unit of the metric. 0=Count, 1=Bytes, 2=Seconds, 3=CountPerSecond, 4=BytesPerSecond, 5=Percent, 6=MilliSeconds, 7=ByteSeconds"
+    },
+    "MetricValue": {
+      "type": "object",
+      "required": [
+        "timeStamp"
+      ],
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the timestamp for the metric value in ISO 8601 format."
+        },
+        "average": {
+          "type": "number",
+          "format": "double",
+          "description": "the average value in the time range."
+        },
+        "minimum": {
+          "type": "number",
+          "format": "double",
+          "description": "the least value in the time range."
+        },
+        "maximum": {
+          "type": "number",
+          "format": "double",
+          "description": "the greatest value in the time range."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "the sum of all of the values in the time range."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+        }
+      },
+      "description": "Represents a metric value."
+    },
+    "Metric": {
+      "type": "object",
+      "required": [
+        "name",
+        "unit",
+        "data"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "the id, resourceId, of the metric."
+        },
+        "type": {
+          "type": "string",
+          "description": "the resource type of the metric resource."
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "the name and the display name of the metric, i.e. it is localizable string."
+        },
+        "unit": {
+          "$ref": "#/definitions/Unit",
+          "description": "the unit of the metric."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "description": "Array of data points representing the metric values."
+        }
+      },
+      "description": "A set of metric values in a time range."
+    },
+    "MetricCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          },
+          "description": "the value of the collection."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The collection of metric value sets."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

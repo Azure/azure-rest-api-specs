@@ -1,0 +1,44 @@
+{
+  "name": "@azure-tools/lint-diff",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/lint-diff.js",
+  "bin": {
+    "lint-diff": "cmd/lint-diff.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "engines": {
+    "node": ">= 20.0.0"
+  },
+  "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^14.1.1",
+    "@azure-tools/specs-shared": "file:../../../.github/shared",
+    "@microsoft.azure/openapi-validator": "2.2.4",
+    "@microsoft.azure/openapi-validator-core": "1.0.7",
+    "@microsoft.azure/openapi-validator-rulesets": "2.1.10",
+    "autorest": "^3.7.2",
+    "axios": "^1.8.3",
+    "change-case": "^5.4.4",
+    "deep-eql": "^5.0.2",
+    "marked": "^16.1.1"
+  },
+  "devDependencies": {
+    "@types/deep-eql": "^4.0.2",
+    "@types/node": "^18.19.31",
+    "@vitest/coverage-v8": "^3.0.2",
+    "execa": "^9.5.2",
+    "memfs": "^4.17.0",
+    "prettier": "~3.6.2",
+    "prettier-plugin-organize-imports": "^4.2.0",
+    "typescript": "~5.8.2",
+    "vitest": "^3.0.2"
+  }
+}

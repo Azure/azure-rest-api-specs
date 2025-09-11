@@ -1,0 +1,163 @@
+{
+  "parameters": {
+    "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
+    "resourceGroupName": "resourceGroup1",
+    "scalingPlanName": "scalingPlan1",
+    "api-version": "2021-03-09-preview",
+    "scalingPlan": {
+      "location": "centralus",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "properties": {
+        "description": "des1",
+        "friendlyName": "friendly",
+        "timeZone": "",
+        "hostPoolType": "Personal",
+        "exclusionTag": "value",
+        "schedules": [
+          {
+            "name": "schedule1",
+            "daysOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "rampUpStartTime": "2020-11-10T06:00:00.000Z",
+            "rampUpLoadBalancingAlgorithm": "DepthFirst",
+            "rampUpMinimumHostsPct": 20,
+            "rampUpCapacityThresholdPct": 80,
+            "peakStartTime": "2020-11-10T08:00:00.000Z",
+            "peakLoadBalancingAlgorithm": "BreadthFirst",
+            "rampDownStartTime": "2020-11-10T18:00:00.000Z",
+            "rampDownLoadBalancingAlgorithm": "DepthFirst",
+            "rampDownMinimumHostsPct": 20,
+            "rampDownCapacityThresholdPct": 50,
+            "rampDownForceLogoffUsers": true,
+            "rampDownWaitTimeMinutes": 30,
+            "rampDownNotificationMessage": "message",
+            "offPeakStartTime": "2020-11-10T20:00:00.000Z",
+            "offPeakLoadBalancingAlgorithm": "DepthFirst"
+          }
+        ],
+        "hostPoolReferences": [
+          {
+            "hostPoolArmPath": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1",
+            "scalingPlanEnabled": true
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "scalingPlan1",
+        "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/scalingPlan1",
+        "type": "Microsoft.DesktopVirtualization/scalingPlans",
+        "location": "centralus",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "properties": {
+          "objectId": "7877fb31-4bde-49fd-9df3-c046e0ec5325",
+          "description": "des1",
+          "friendlyName": "friendly",
+          "timeZone": "",
+          "hostPoolType": "Personal",
+          "exclusionTag": "value",
+          "schedules": [
+            {
+              "name": "schedule1",
+              "daysOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "rampUpStartTime": "2020-11-10T06:00:00.000+00:00",
+              "rampUpLoadBalancingAlgorithm": "DepthFirst",
+              "rampUpMinimumHostsPct": 20,
+              "rampUpCapacityThresholdPct": 80,
+              "peakStartTime": "2020-11-10T08:00:00.000+00:00",
+              "peakLoadBalancingAlgorithm": "BreadthFirst",
+              "rampDownStartTime": "2020-11-10T18:00:00.000+00:00",
+              "rampDownLoadBalancingAlgorithm": "DepthFirst",
+              "rampDownMinimumHostsPct": 20,
+              "rampDownCapacityThresholdPct": 50,
+              "rampDownForceLogoffUsers": true,
+              "rampDownWaitTimeMinutes": 30,
+              "rampDownNotificationMessage": "message",
+              "offPeakStartTime": "2020-11-10T20:00:00.000+00:00",
+              "offPeakLoadBalancingAlgorithm": "DepthFirst"
+            }
+          ],
+          "hostPoolReferences": [
+            {
+              "hostPoolArmPath": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1",
+              "scalingPlanEnabled": true
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "scalingPlan1",
+        "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/scalingPlan1",
+        "type": "Microsoft.DesktopVirtualization/scalingPlans",
+        "location": "centralus",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "properties": {
+          "objectId": "7877fb31-4bde-49fd-9df3-c046e0ec5325",
+          "description": "des1",
+          "friendlyName": "friendly",
+          "timeZone": "",
+          "hostPoolType": "Personal",
+          "exclusionTag": "value",
+          "schedules": [
+            {
+              "name": "schedule1",
+              "daysOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "rampUpStartTime": "2020-11-10T06:00:00.000+00:00",
+              "rampUpLoadBalancingAlgorithm": "DepthFirst",
+              "rampUpMinimumHostsPct": 20,
+              "rampUpCapacityThresholdPct": 80,
+              "peakStartTime": "2020-11-10T08:00:00.000+00:00",
+              "peakLoadBalancingAlgorithm": "BreadthFirst",
+              "rampDownStartTime": "2020-11-10T18:00:00.000+00:00",
+              "rampDownLoadBalancingAlgorithm": "DepthFirst",
+              "rampDownMinimumHostsPct": 20,
+              "rampDownCapacityThresholdPct": 50,
+              "rampDownForceLogoffUsers": true,
+              "rampDownWaitTimeMinutes": 30,
+              "rampDownNotificationMessage": "message",
+              "offPeakStartTime": "2020-11-10T20:00:00.000+00:00",
+              "offPeakLoadBalancingAlgorithm": "DepthFirst"
+            }
+          ],
+          "hostPoolReferences": [
+            {
+              "hostPoolArmPath": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1",
+              "scalingPlanEnabled": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

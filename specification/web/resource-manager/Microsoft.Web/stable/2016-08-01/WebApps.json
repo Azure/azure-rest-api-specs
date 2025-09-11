@@ -197,7 +197,7 @@
           {
             "name": "deleteEmptyServerFarm",
             "in": "query",
-            "description": "Specify true if the App Service plan will be empty after app deletion and you want to delete the empty App Service plan. By default, the empty App Service plan is not deleted.",
+            "description": "Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.",
             "type": "boolean"
           },
           {
@@ -5829,7 +5829,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot to create or update. By default, this API attempts to create or modify the production slot.",
+            "description": "Name of the deployment slot to create or update. The name 'production' is reserved.",
             "required": true,
             "type": "string"
           },
@@ -5972,7 +5972,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot to create or update. By default, this API attempts to create or modify the production slot.",
+            "description": "Name of the deployment slot to create or update. The name 'production' is reserved.",
             "required": true,
             "type": "string"
           },
@@ -16996,7 +16996,7 @@
               "type": "string"
             },
             "issuer": {
-              "description": "The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.\nWhen using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.\nThis URI is a case-sensitive identifier for the token issuer.\nMore information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html",
+              "description": "The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.\nWhen using Azure Active Directory, this value is the URI of the directory tenant, e.g. `https://sts.windows.net/{tenant-guid}/`.\nThis URI is a case-sensitive identifier for the token issuer.\nMore information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html",
               "type": "string"
             },
             "allowedAudiences": {

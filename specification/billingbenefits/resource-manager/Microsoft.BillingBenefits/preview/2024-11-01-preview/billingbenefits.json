@@ -1,0 +1,3634 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Billing benefits RP",
+    "version": "2024-11-01-preview",
+    "description": "Azure Benefits RP let users create and manage benefits like savings plan.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SavingsPlanOrderAliasModels"
+    },
+    {
+      "name": "SavingsPlanOrderModels"
+    },
+    {
+      "name": "SavingsPlanModels"
+    },
+    {
+      "name": "ReservationOrderAliasResponses"
+    },
+    {
+      "name": "Discounts"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.BillingBenefits/applicableDiscounts": {
+      "get": {
+        "operationId": "Discounts_ScopeList",
+        "description": "List discounts that are applicable for a given scope. Currently supported scopes: billing accounts",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope at which the benefits are listed.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscountList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscountScopeList": {
+            "$ref": "./examples/ApplicableDiscountsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsGet": {
+            "$ref": "./examples/OperationsGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}": {
+      "get": {
+        "operationId": "ReservationOrderAlias_Get",
+        "tags": [
+          "ReservationOrderAliasResponses"
+        ],
+        "description": "Get a reservation order alias.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reservationOrderAliasName",
+            "in": "path",
+            "description": "Name of the reservation order alias",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderAliasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationOrderAliasGet": {
+            "$ref": "./examples/ReservationOrderAliasGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ReservationOrderAlias_Create",
+        "tags": [
+          "ReservationOrderAliasResponses"
+        ],
+        "description": "Create a reservation order alias.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reservationOrderAliasName",
+            "in": "path",
+            "description": "Name of the reservation order alias",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for creating a reservation order alias",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderAliasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderAliasResponse"
+            }
+          },
+          "201": {
+            "description": "Resource 'ReservationOrderAliasResponse' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderAliasResponse"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationOrderAliasCreate": {
+            "$ref": "./examples/ReservationOrderAliasCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ReservationOrderAliasResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}": {
+      "get": {
+        "operationId": "SavingsPlanOrderAlias_Get",
+        "tags": [
+          "SavingsPlanOrderAliasModels"
+        ],
+        "description": "Get a savings plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savingsPlanOrderAliasName",
+            "in": "path",
+            "description": "Name of the savings plan order alias",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanOrderAliasGet": {
+            "$ref": "./examples/SavingsPlanOrderAliasGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SavingsPlanOrderAlias_Create",
+        "tags": [
+          "SavingsPlanOrderAliasModels"
+        ],
+        "description": "Create a savings plan. Learn more about permissions needed at https://go.microsoft.com/fwlink/?linkid=2215851",
+        "externalDocs": {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2215851/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savingsPlanOrderAliasName",
+            "in": "path",
+            "description": "Name of the savings plan order alias",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for creating a savings plan order alias",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SavingsPlanOrderAliasModel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+            }
+          },
+          "201": {
+            "description": "Resource 'SavingsPlanOrderAliasModel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanOrderAliasCreate": {
+            "$ref": "./examples/SavingsPlanOrderAliasCreate.json"
+          },
+          "SavingsPlanOrderAliasCreateSingleScope": {
+            "$ref": "./examples/SavingsPlanOrderAliasCreateSingleScope.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SavingsPlanOrderAliasModel"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders": {
+      "get": {
+        "operationId": "SavingsPlanOrder_List",
+        "tags": [
+          "SavingsPlanOrderModels"
+        ],
+        "description": "List all Savings plan orders.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderModelList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanOrderList": {
+            "$ref": "./examples/SavingsPlanOrderList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}": {
+      "get": {
+        "operationId": "SavingsPlanOrder_Get",
+        "tags": [
+          "SavingsPlanOrderModels"
+        ],
+        "description": "Get a savings plan order.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savingsPlanOrderId",
+            "in": "path",
+            "description": "Order ID of the savings plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "May be used to expand the detail information of some properties.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanOrderGet": {
+            "$ref": "./examples/SavingsPlanOrderGet.json"
+          },
+          "SavingsPlanOrderWithExpandedPaymentsGet": {
+            "$ref": "./examples/SavingsPlanOrderExpandedGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/elevate": {
+      "post": {
+        "operationId": "SavingsPlanOrder_Elevate",
+        "tags": [
+          "SavingsPlanOrderModels"
+        ],
+        "description": "Elevate as owner on savings plan order based on billing permissions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savingsPlanOrderId",
+            "in": "path",
+            "description": "Order ID of the savings plan",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanOrderElevate": {
+            "$ref": "./examples/SavingsPlanOrderElevate.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans": {
+      "get": {
+        "operationId": "SavingsPlan_List",
+        "tags": [
+          "SavingsPlanModels"
+        ],
+        "description": "List savings plans in an order.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savingsPlanOrderId",
+            "in": "path",
+            "description": "Order ID of the savings plan",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanModelList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlansInOrderList": {
+            "$ref": "./examples/SavingsPlansInOrderList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}": {
+      "get": {
+        "operationId": "SavingsPlan_Get",
+        "tags": [
+          "SavingsPlanModels"
+        ],
+        "description": "Get savings plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savingsPlanOrderId",
+            "in": "path",
+            "description": "Order ID of the savings plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "savingsPlanId",
+            "in": "path",
+            "description": "ID of the savings plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "May be used to expand the detail information of some properties.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanItemGet": {
+            "$ref": "./examples/SavingsPlanItemGet.json"
+          },
+          "SavingsPlanItemWithExpandedRenewPropertiesGet": {
+            "$ref": "./examples/SavingsPlanItemExpandedGet.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "SavingsPlan_Update",
+        "tags": [
+          "SavingsPlanModels"
+        ],
+        "description": "Update savings plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savingsPlanOrderId",
+            "in": "path",
+            "description": "Order ID of the savings plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "savingsPlanId",
+            "in": "path",
+            "description": "ID of the savings plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for patching a savings plan order alias",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanModel"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "404": {
+            "description": "The Azure resource is not found"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUpdate": {
+            "$ref": "./examples/SavingsPlanUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SavingsPlanModel"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/validate": {
+      "post": {
+        "operationId": "SavingsPlan_ValidateUpdate",
+        "tags": [
+          "SavingsPlanModels"
+        ],
+        "description": "Validate savings plan patch.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savingsPlanOrderId",
+            "in": "path",
+            "description": "Order ID of the savings plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "savingsPlanId",
+            "in": "path",
+            "description": "ID of the savings plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for validating a savings plan patch request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanUpdateValidateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanValidateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanValidateUpdate": {
+            "$ref": "./examples/SavingsPlanValidateUpdate.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlans": {
+      "get": {
+        "operationId": "SavingsPlan_ListAll",
+        "description": "List savings plans.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisioningState, effectiveDateTime, expiryDate, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "May be used to sort order by reservation properties.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "refreshSummary",
+            "in": "query",
+            "description": "To indicate whether to refresh the roll up counts of the savings plans group by provisioning states",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "The number of savings plans to skip from the list before returning results",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "selectedState",
+            "in": "query",
+            "description": "The selected provisioning state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "To number of savings plans to return",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlansList": {
+            "$ref": "./examples/SavingsPlansList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/validate": {
+      "post": {
+        "operationId": "ValidatePurchase",
+        "description": "Validate savings plan purchase.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanPurchaseValidateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanValidateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanValidatePurchase": {
+            "$ref": "./examples/SavingsPlanValidatePurchase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/discounts": {
+      "get": {
+        "operationId": "Discounts_SubscriptionList",
+        "tags": [
+          "Discounts"
+        ],
+        "description": "List discounts at subscription level",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscountList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscountSubscriptionList": {
+            "$ref": "./examples/DiscountList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/discounts": {
+      "get": {
+        "operationId": "Discounts_ResourceGroupList",
+        "tags": [
+          "Discounts"
+        ],
+        "description": "List discounts at resource group level",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscountList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscountsResourceGroupList": {
+            "$ref": "./examples/DiscountListResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/discounts/{discountName}": {
+      "get": {
+        "operationId": "Discount_Get",
+        "tags": [
+          "Discounts"
+        ],
+        "description": "Get discount at resource group level",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discountName",
+            "in": "path",
+            "description": "Name of the discount",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Discount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscountGet": {
+            "$ref": "./examples/DiscountGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Discounts_Create",
+        "tags": [
+          "Discounts"
+        ],
+        "description": "Create discount.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discountName",
+            "in": "path",
+            "description": "Name of the discount",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for creating a discount.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Discount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Discount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Discount"
+            }
+          },
+          "201": {
+            "description": "Resource 'Discount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Discount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscountsCreateAffiliate": {
+            "$ref": "./examples/DiscountsCreateAffiliate.json"
+          },
+          "DiscountsCreatePrimary": {
+            "$ref": "./examples/DiscountsCreatePrimary.json"
+          },
+          "DiscountsCreatePrimaryBackfill": {
+            "$ref": "./examples/DiscountsCreatePrimaryBackfill.json"
+          },
+          "DiscountsCreatePrimaryWithCustomPrice": {
+            "$ref": "./examples/DiscountsCreatePrimaryWithCustomPrice.json"
+          },
+          "DiscountsCreatePrimaryWithCustomPriceMultiCurrency": {
+            "$ref": "./examples/DiscountsCreatePrimaryWithCustomPriceMultiCurrency.json"
+          },
+          "DiscountsCreatePrimaryWithPriceGuarantee": {
+            "$ref": "./examples/DiscountsCreatePrimaryWithPriceGuarantee.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Discount"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Discount_Update",
+        "tags": [
+          "Discounts"
+        ],
+        "description": "Update discounts",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discountName",
+            "in": "path",
+            "description": "Name of the discount",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for updating discounts",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscountPatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Discount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscountGet": {
+            "$ref": "./examples/DiscountsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Discount"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Discounts_Delete",
+        "tags": [
+          "Discounts"
+        ],
+        "description": "Delete discount. Clears the metadata from the user's view.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discountName",
+            "in": "path",
+            "description": "Name of the discount",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationOrderAliasCreate": {
+            "$ref": "./examples/DiscountsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/discounts/{discountName}/cancel": {
+      "post": {
+        "operationId": "Discounts_Cancel",
+        "tags": [
+          "Discounts"
+        ],
+        "description": "Cancel discount. Stops applying the benefit.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discountName",
+            "in": "path",
+            "description": "Name of the discount",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Discount"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscountCancel": {
+            "$ref": "./examples/DiscountCancel.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Discount"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AppliedScopeProperties": {
+      "type": "object",
+      "description": "Properties specific to applied scope type. Not required if not applicable.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID where the benefit is applied."
+        },
+        "managementGroupId": {
+          "type": "string",
+          "description": "Fully-qualified identifier of the management group where the benefit must be applied."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Fully-qualified identifier of the subscription."
+        },
+        "resourceGroupId": {
+          "type": "string",
+          "description": "Fully-qualified identifier of the resource group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        }
+      }
+    },
+    "AppliedScopeType": {
+      "type": "string",
+      "description": "Type of the Applied Scope.",
+      "enum": [
+        "Single",
+        "Shared",
+        "ManagementGroup"
+      ],
+      "x-ms-enum": {
+        "name": "AppliedScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Single",
+            "value": "Single"
+          },
+          {
+            "name": "Shared",
+            "value": "Shared"
+          },
+          {
+            "name": "ManagementGroup",
+            "value": "ManagementGroup"
+          }
+        ]
+      }
+    },
+    "ApplyDiscountOn": {
+      "type": "string",
+      "description": "The customer action on which the discount is applied. Supported values are Purchase, Consume, and Renew. Validation: Required, one of supported values.",
+      "enum": [
+        "Purchase",
+        "Consume",
+        "Renew"
+      ],
+      "x-ms-enum": {
+        "name": "ApplyDiscountOn",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Purchase",
+            "value": "Purchase"
+          },
+          {
+            "name": "Consume",
+            "value": "Consume"
+          },
+          {
+            "name": "Renew",
+            "value": "Renew"
+          }
+        ]
+      }
+    },
+    "BillingPlan": {
+      "type": "string",
+      "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans.",
+      "enum": [
+        "P1M"
+      ],
+      "x-ms-enum": {
+        "name": "BillingPlan",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "P1M",
+            "value": "P1M"
+          }
+        ]
+      }
+    },
+    "BillingPlanInformation": {
+      "type": "object",
+      "description": "Information describing the type of billing plan for this savings plan.",
+      "properties": {
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount of money to be paid for the Order. Tax is not included."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Date when the billing plan has started."
+        },
+        "nextPaymentDueDate": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off."
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CatalogClaimsItem": {
+      "type": "object",
+      "description": "Catalog claim for a discount.",
+      "properties": {
+        "catalogClaimsItemType": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "Commitment": {
+      "type": "object",
+      "description": "Commitment towards the benefit.",
+      "properties": {
+        "grain": {
+          "$ref": "#/definitions/CommitmentGrain",
+          "description": "Commitment grain."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Price"
+        }
+      ]
+    },
+    "CommitmentGrain": {
+      "type": "string",
+      "description": "Commitment grain.",
+      "enum": [
+        "Hourly",
+        "FullTerm",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "CommitmentGrain",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hourly",
+            "value": "Hourly"
+          },
+          {
+            "name": "FullTerm",
+            "value": "FullTerm"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown"
+          }
+        ]
+      }
+    },
+    "ConditionsItem": {
+      "type": "object",
+      "description": "Condition for a discount.",
+      "properties": {
+        "conditionName": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "description": "These items are open-ended strings.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomPriceProperties": {
+      "type": "object",
+      "description": "Custom price properties for a given discount.",
+      "properties": {
+        "ruleType": {
+          "$ref": "#/definitions/DiscountRuleType",
+          "description": "The type of the priceable node pricing rule. Validation: Required. Supported values are fixedPriceLock, fixedListPrice, and priceCeiling."
+        },
+        "catalogId": {
+          "type": "string",
+          "description": "The catalog instance where the priceable node lives. Validation: Required. No defined format, will vary per team."
+        },
+        "catalogClaims": {
+          "type": "array",
+          "description": "The set of BigCat claims. Validation: Required. Must contain AgreementType, NationalCloud, and PricingAudience claims. Additionally requires AccessPass claim when creating custom price with action == consume on the pricing instructions.",
+          "items": {
+            "$ref": "#/definitions/CatalogClaimsItem"
+          }
+        },
+        "termUnits": {
+          "type": "string",
+          "description": "The term units for the priceable node. Validation: Optional, Maximum length 128 characters. Must be present if and only if the availability derived by market, product, sku, and claims has terms."
+        },
+        "billingPeriod": {
+          "type": "string",
+          "description": "The billing period of the priceable node. Validation: Optional, Maximum length 128 characters. Only allowed if the availability derived by market, product, sku, and claims has terms and at least one of those terms has a billing period. When specified, termUnits must be specified."
+        },
+        "meterType": {
+          "type": "string",
+          "description": "Must be present if the market, product, sku, and claims, and optional term information resolves to multiple availabilities that only differ by meter type. Validation: Maximum length 128 characters."
+        },
+        "marketSetPrices": {
+          "type": "array",
+          "description": "The set of market set prices of the priceable node. Validation: Required. Must contain at least one element.",
+          "items": {
+            "$ref": "#/definitions/MarketSetPricesItems"
+          }
+        }
+      },
+      "required": [
+        "ruleType",
+        "catalogId",
+        "catalogClaims",
+        "marketSetPrices"
+      ]
+    },
+    "Discount": {
+      "type": "object",
+      "description": "Resource definition for Discounts.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscountProperties",
+          "description": "Discount properties"
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. E.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        },
+        "plan": {
+          "$ref": "#/definitions/Plan",
+          "description": "Plan for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DiscountAppliedScopeType": {
+      "type": "string",
+      "description": "List of applied scopes supported for discounts.",
+      "enum": [
+        "BillingAccount",
+        "BillingProfile",
+        "Customer"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountAppliedScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BillingAccount",
+            "value": "BillingAccount"
+          },
+          {
+            "name": "BillingProfile",
+            "value": "BillingProfile"
+          },
+          {
+            "name": "Customer",
+            "value": "Customer"
+          }
+        ]
+      }
+    },
+    "DiscountCombinationRule": {
+      "type": "string",
+      "description": "The discount combination rule when there are multiple applicable custom prices. Validation: Required. Supported values are Stackable and BestOf.",
+      "enum": [
+        "BestOf",
+        "Stackable"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountCombinationRule",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BestOf",
+            "value": "BestOf"
+          },
+          {
+            "name": "Stackable",
+            "value": "Stackable"
+          }
+        ]
+      }
+    },
+    "DiscountEntityType": {
+      "type": "string",
+      "description": "This defines whether the entity being created is primary or affiliate. Supported values: primary, affiliate. Validation: Required, must match one of the 2 values.",
+      "enum": [
+        "Primary",
+        "Affiliate"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountEntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary"
+          },
+          {
+            "name": "Affiliate",
+            "value": "Affiliate"
+          }
+        ]
+      }
+    },
+    "DiscountList": {
+      "type": "object",
+      "description": "Discount list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Discount items on this page",
+          "items": {
+            "$ref": "#/definitions/Discount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DiscountPatchRequest": {
+      "type": "object",
+      "description": "Discounts patch request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscountPatchRequestProperties",
+          "description": "Discounts patch request properties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DiscountPatchRequestProperties": {
+      "type": "object",
+      "description": "Discounts patch request properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        }
+      }
+    },
+    "DiscountProperties": {
+      "type": "object",
+      "description": "Properties belonging to discounts.",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/DiscountEntityType",
+          "description": "This defines whether the entity being created is primary or affiliate. Supported values: primary, affiliate. Validation: Required, must match one of the 2 values."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "This is the catalog UPN for the product."
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date of the discount. Value is the date the discount started or will start in the future."
+        },
+        "systemId": {
+          "type": "string",
+          "description": "This is the globally unique identifier of the Discount which will not change for the lifetime of the Discount."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DiscountProvisioningState",
+          "description": "The state of the resource. Supported values are Pending, Failed, Succeeded, Canceled.",
+          "readOnly": true
+        },
+        "billingAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Billing account resource id where the discount metadata is present.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Billing/billingAccounts",
+                "scopes": [
+                  "Tenant"
+                ]
+              }
+            ]
+          }
+        },
+        "billingProfileResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Billing profile resource id where the discount is scoped to.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Billing/billingAccounts",
+                "scopes": [
+                  "Tenant"
+                ]
+              }
+            ]
+          }
+        },
+        "customerResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Customer resource id where the discount is scoped to.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Billing/billingAccounts/customers",
+                "scopes": [
+                  "Tenant"
+                ]
+              }
+            ]
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "This defines a user friendly display name for the discount."
+        },
+        "status": {
+          "$ref": "#/definitions/DiscountStatus",
+          "description": "Represents the current status of the discount.",
+          "readOnly": true
+        },
+        "benefitResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified identifier of the benefit under applicable benefit list.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.BillingBenefits/discounts",
+                "scopes": [
+                  "ResourceGroup"
+                ]
+              }
+            ]
+          }
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/DiscountAppliedScopeType",
+          "description": "List of applied scopes supported for discounts."
+        }
+      },
+      "discriminator": "entityType",
+      "required": [
+        "entityType",
+        "productCode",
+        "startAt"
+      ]
+    },
+    "DiscountProvisioningState": {
+      "type": "string",
+      "description": "Provisioning states of Discount.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
+      }
+    },
+    "DiscountRuleType": {
+      "type": "string",
+      "description": "The type of the priceable node pricing rule. Validation: Required. Supported values are fixedPriceLock, fixedListPrice, and priceCeiling.",
+      "enum": [
+        "FixedPriceLock",
+        "FixedListPrice",
+        "PriceCeiling"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountRuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FixedPriceLock",
+            "value": "FixedPriceLock"
+          },
+          {
+            "name": "FixedListPrice",
+            "value": "FixedListPrice"
+          },
+          {
+            "name": "PriceCeiling",
+            "value": "PriceCeiling"
+          }
+        ]
+      }
+    },
+    "DiscountStatus": {
+      "type": "string",
+      "description": "Represents the current status of the discount.",
+      "enum": [
+        "Active",
+        "Pending",
+        "Failed",
+        "Canceled",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired"
+          }
+        ]
+      }
+    },
+    "DiscountType": {
+      "type": "string",
+      "description": "Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency.",
+      "enum": [
+        "ProductFamily",
+        "Product",
+        "Sku",
+        "CustomPrice",
+        "CustomPriceMultiCurrency"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ProductFamily",
+            "value": "ProductFamily"
+          },
+          {
+            "name": "Product",
+            "value": "Product"
+          },
+          {
+            "name": "Sku",
+            "value": "Sku"
+          },
+          {
+            "name": "CustomPrice",
+            "value": "CustomPrice"
+          },
+          {
+            "name": "CustomPriceMultiCurrency",
+            "value": "CustomPriceMultiCurrency"
+          }
+        ]
+      }
+    },
+    "DiscountTypeCustomPrice": {
+      "type": "object",
+      "description": "Discount type properties including product family name, product id, sku, and custom price properties. Allows a single entry in marketSetPrices.",
+      "properties": {
+        "productFamilyName": {
+          "type": "string",
+          "description": "Product family for which the discount is given. Validation: Optional"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product ID for which the discount is given. Validation: Optional. No specific format, example: DZH318Z09V6F"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "ResourceSku for the given discount. Validation: Optional."
+        },
+        "customPriceProperties": {
+          "$ref": "#/definitions/CustomPriceProperties",
+          "description": "Custom price properties for a given discount."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscountTypeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomPrice"
+    },
+    "DiscountTypeCustomPriceMultiCurrency": {
+      "type": "object",
+      "description": "Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscountTypeCustomPrice"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomPriceMultiCurrency"
+    },
+    "DiscountTypeProduct": {
+      "type": "object",
+      "description": "Discount type properties including product family name and product id.",
+      "properties": {
+        "productFamilyName": {
+          "type": "string",
+          "description": "Product family for which the discount is given. Validation: Optional"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product ID for which the discount is given. Validation: Optional. No specific format, example: DZH318Z09V6F"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscountTypeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Product"
+    },
+    "DiscountTypeProductFamily": {
+      "type": "object",
+      "description": "Discount type properties including product family name",
+      "properties": {
+        "productFamilyName": {
+          "type": "string",
+          "description": "Product family for which the discount is given. Validation: Optional"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscountTypeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ProductFamily"
+    },
+    "DiscountTypeProductSku": {
+      "type": "object",
+      "description": "Discount type properties including product family name, product id, and sku id.",
+      "properties": {
+        "productFamilyName": {
+          "type": "string",
+          "description": "Product family for which the discount is given. Validation: Optional"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product ID for which the discount is given. Validation: Optional. No specific format, example: DZH318Z09V6F"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "ResourceSku for the given discount. Validation: Optional."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscountTypeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Sku"
+    },
+    "DiscountTypeProperties": {
+      "type": "object",
+      "description": "This defines the conditions for a given discount type.",
+      "properties": {
+        "discountType": {
+          "$ref": "#/definitions/DiscountType",
+          "description": "Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency."
+        },
+        "applyDiscountOn": {
+          "$ref": "#/definitions/ApplyDiscountOn",
+          "description": "The customer action on which the discount is applied. Supported values are Purchase, Consume, and Renew. Validation: Required, one of supported values."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Discount percentage provided for the customer. Validation: Required unless this is a price rule.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "discountCombinationRule": {
+          "$ref": "#/definitions/DiscountCombinationRule",
+          "description": "The discount combination rule when there are multiple applicable custom prices. Validation: Required. Supported values are Stackable and BestOf."
+        },
+        "priceGuaranteeProperties": {
+          "$ref": "#/definitions/PriceGuaranteeProperties",
+          "description": "Set only in price guarantee scenario."
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Array of conditions for the discount. Validation: Optional. Maximum length is 1000.",
+          "items": {
+            "$ref": "#/definitions/ConditionsItem"
+          }
+        }
+      },
+      "discriminator": "discountType",
+      "required": [
+        "discountType",
+        "applyDiscountOn"
+      ]
+    },
+    "EntityTypeAffiliateDiscount": {
+      "type": "object",
+      "description": "Entity type for affiliate discounts",
+      "properties": {
+        "primaryResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "This will be present in the response if the primary has a resource ID",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.BillingBenefits/discounts",
+                "scopes": [
+                  "ResourceGroup"
+                ]
+              }
+            ]
+          }
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date of the discount. No duration will be supported. Allowed value is any date greater than or equal to startDate.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscountProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Affiliate"
+    },
+    "EntityTypePrimaryDiscount": {
+      "type": "object",
+      "description": "Entity type for primary discounts",
+      "properties": {
+        "discountTypeProperties": {
+          "$ref": "#/definitions/DiscountTypeProperties",
+          "description": "This defines the conditions for a given discount type."
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date of the discount. No duration will be supported. Allowed value is any date greater than or equal to startDate."
+        }
+      },
+      "required": [
+        "endAt"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscountProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Primary"
+    },
+    "ExtendedStatusInfo": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "description": "Status code providing additional information."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message giving detailed information about the status code."
+        }
+      }
+    },
+    "InstanceFlexibility": {
+      "type": "string",
+      "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group.",
+      "enum": [
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceFlexibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "On",
+            "value": "On"
+          },
+          {
+            "name": "Off",
+            "value": "Off"
+          }
+        ]
+      }
+    },
+    "ManagedServiceIdentity": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedServiceIdentityType",
+          "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed)."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned,UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          },
+          {
+            "name": "SystemAssigned,UserAssigned",
+            "value": "SystemAssigned,UserAssigned"
+          }
+        ]
+      }
+    },
+    "MarketSetPricesItems": {
+      "type": "object",
+      "description": "Items in the MarketSetPrices array.",
+      "properties": {
+        "markets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The locked price for the priceable node. Validation: Required. Must be greater than or equal to 0. If the case of billing plans. This represents the price for each cycle charge."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the locked price value. Validation: Required. Must be a valid ISO 4217 3-letter currency code."
+        }
+      },
+      "required": [
+        "markets",
+        "value",
+        "currency"
+      ]
+    },
+    "PaymentDetail": {
+      "type": "object",
+      "description": "Information about payment related to a savings plan order.",
+      "properties": {
+        "dueDate": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Date when the payment needs to be done."
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Date when the transaction is completed. Is null when it is scheduled."
+        },
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount in pricing currency. Tax not included."
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount charged in Billing currency. Tax not included. Is null for future payments"
+        },
+        "status": {
+          "$ref": "#/definitions/PaymentStatus",
+          "description": "Describes whether the payment is completed, failed, cancelled or scheduled in the future."
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo",
+          "readOnly": true
+        },
+        "billingAccount": {
+          "type": "string",
+          "description": "Billing account"
+        }
+      }
+    },
+    "PaymentStatus": {
+      "type": "string",
+      "description": "Describes whether the payment is completed, failed, cancelled or scheduled in the future.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Scheduled",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "PaymentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled"
+          }
+        ]
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "description": "Plan for the resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ]
+    },
+    "Price": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The ISO 4217 3-letter currency code for the currency used by this purchase record."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "PriceGuaranteeProperties": {
+      "type": "object",
+      "description": "Set only in price guarantee scenario.",
+      "properties": {
+        "pricingPolicy": {
+          "$ref": "#/definitions/PricingPolicy",
+          "description": "Supported values: Protected, Locked"
+        },
+        "priceGuaranteeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date on which prices are to be used for guarantee calculation. Validation: expected to be 00 hours, Format: 2024-09-30T00:00:00Z. Must be in UTC."
+        }
+      }
+    },
+    "PricingCurrencyDuration": {
+      "type": "string",
+      "description": "Represents either billing plan or savings plan term in ISO 8601 format.",
+      "enum": [
+        "P1M",
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "PricingCurrencyDuration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "P1M",
+            "value": "P1M"
+          },
+          {
+            "name": "P1Y",
+            "value": "P1Y"
+          },
+          {
+            "name": "P3Y",
+            "value": "P3Y"
+          }
+        ]
+      }
+    },
+    "PricingCurrencyTotal": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "$ref": "#/definitions/PricingCurrencyDuration",
+          "description": "Represents either billing plan or savings plan term in ISO 8601 format."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Price"
+        }
+      ]
+    },
+    "PricingPolicy": {
+      "type": "string",
+      "description": "Supported values: Protected, Locked",
+      "enum": [
+        "Protected",
+        "Locked"
+      ],
+      "x-ms-enum": {
+        "name": "PricingPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Protected",
+            "value": "Protected"
+          },
+          {
+            "name": "Locked",
+            "value": "Locked"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "enum": [
+        "Creating",
+        "PendingBilling",
+        "ConfirmedBilling",
+        "Created",
+        "Succeeded",
+        "Cancelled",
+        "Expired",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "PendingBilling",
+            "value": "PendingBilling"
+          },
+          {
+            "name": "ConfirmedBilling",
+            "value": "ConfirmedBilling"
+          },
+          {
+            "name": "Created",
+            "value": "Created"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
+      }
+    },
+    "PurchaseRequest": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU to be applied for this resource"
+        },
+        "properties": {
+          "$ref": "#/definitions/PurchaseRequestProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PurchaseRequestProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the savings plan"
+        },
+        "billingScopeId": {
+          "type": "string",
+          "description": "Subscription that will be charged for purchasing the benefit"
+        },
+        "term": {
+          "$ref": "#/definitions/Term",
+          "description": "Represent benefit term in ISO 8601 format."
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan",
+          "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans."
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType",
+          "description": "Type of the Applied Scope."
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment",
+          "description": "Commitment towards the benefit."
+        },
+        "effectiveDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the savings plan starts providing benefit from.",
+          "readOnly": true
+        },
+        "renew": {
+          "type": "boolean",
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties",
+          "description": "Properties specific to applied scope type. Not required if not applicable."
+        }
+      }
+    },
+    "RenewProperties": {
+      "type": "object",
+      "properties": {
+        "purchaseProperties": {
+          "$ref": "#/definitions/PurchaseRequest"
+        }
+      }
+    },
+    "ReservationOrderAliasRequest": {
+      "type": "object",
+      "description": "Reservation order alias",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Reservation order SKU"
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the reservation benefits are applied to."
+        },
+        "properties": {
+          "$ref": "#/definitions/ReservationOrderAliasRequestProperties",
+          "description": "Reservation order alias request properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ReservationOrderAliasRequestProperties": {
+      "type": "object",
+      "description": "Reservation properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        },
+        "billingScopeId": {
+          "type": "string",
+          "description": "Subscription that will be charged for purchasing the benefit"
+        },
+        "term": {
+          "$ref": "#/definitions/Term",
+          "description": "Represent benefit term in ISO 8601 format."
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan",
+          "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans."
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType",
+          "description": "Type of the Applied Scope."
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties",
+          "description": "Properties specific to applied scope type. Not required if not applicable."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total Quantity of the SKUs purchased in the Reservation.",
+          "minimum": 1
+        },
+        "renew": {
+          "type": "boolean",
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
+        },
+        "reservedResourceType": {
+          "$ref": "#/definitions/ReservedResourceType",
+          "description": "The type of the resource that is being reserved."
+        },
+        "reviewDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the Azure Hybrid Benefit needs to be reviewed."
+        },
+        "reservedResourceProperties": {
+          "$ref": "#/definitions/ReservationOrderAliasRequestPropertiesReservedResourceProperties",
+          "description": "Properties specific to each reserved resource type. Not required if not applicable."
+        }
+      }
+    },
+    "ReservationOrderAliasRequestPropertiesReservedResourceProperties": {
+      "type": "object",
+      "description": "Properties specific to each reserved resource type. Not required if not applicable.",
+      "properties": {
+        "instanceFlexibility": {
+          "$ref": "#/definitions/InstanceFlexibility",
+          "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group."
+        }
+      }
+    },
+    "ReservationOrderAliasResponse": {
+      "type": "object",
+      "description": "Reservation order alias",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Reservation order SKU"
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the reserved resource lives."
+        },
+        "properties": {
+          "$ref": "#/definitions/ReservationOrderAliasResponseProperties",
+          "description": "Reservation order alias response properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReservationOrderAliasResponseProperties": {
+      "type": "object",
+      "description": "Reservation properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        },
+        "reservationOrderId": {
+          "type": "string",
+          "description": "Identifier of the reservation order created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "billingScopeId": {
+          "type": "string",
+          "description": "Subscription that will be charged for purchasing the benefit"
+        },
+        "term": {
+          "$ref": "#/definitions/Term",
+          "description": "Represent benefit term in ISO 8601 format."
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan",
+          "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans."
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType",
+          "description": "Type of the Applied Scope."
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties",
+          "description": "Properties specific to applied scope type. Not required if not applicable."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total Quantity of the SKUs purchased in the Reservation."
+        },
+        "renew": {
+          "type": "boolean",
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
+        },
+        "reservedResourceType": {
+          "$ref": "#/definitions/ReservedResourceType",
+          "description": "The type of the resource that is being reserved."
+        },
+        "reviewDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the Reservation needs to be reviewed."
+        },
+        "reservedResourceProperties": {
+          "$ref": "#/definitions/ReservationOrderAliasResponsePropertiesReservedResourceProperties",
+          "description": "Properties specific to each reserved resource type. Not required if not applicable."
+        }
+      }
+    },
+    "ReservationOrderAliasResponsePropertiesReservedResourceProperties": {
+      "type": "object",
+      "description": "Properties specific to each reserved resource type. Not required if not applicable.",
+      "properties": {
+        "instanceFlexibility": {
+          "$ref": "#/definitions/InstanceFlexibility",
+          "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group."
+        }
+      }
+    },
+    "ReservedResourceType": {
+      "type": "string",
+      "description": "The type of the resource that is being reserved.",
+      "enum": [
+        "VirtualMachines",
+        "SqlDatabases",
+        "SuseLinux",
+        "CosmosDb",
+        "RedHat",
+        "SqlDataWarehouse",
+        "VMwareCloudSimple",
+        "RedHatOsa",
+        "Databricks",
+        "AppService",
+        "ManagedDisk",
+        "BlockBlob",
+        "RedisCache",
+        "AzureDataExplorer",
+        "MySql",
+        "MariaDb",
+        "PostgreSql",
+        "DedicatedHost",
+        "SapHana",
+        "SqlAzureHybridBenefit",
+        "AVS",
+        "DataFactory",
+        "NetAppStorage",
+        "AzureFiles",
+        "SqlEdge",
+        "VirtualMachineSoftware"
+      ],
+      "x-ms-enum": {
+        "name": "ReservedResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VirtualMachines",
+            "value": "VirtualMachines"
+          },
+          {
+            "name": "SqlDatabases",
+            "value": "SqlDatabases"
+          },
+          {
+            "name": "SuseLinux",
+            "value": "SuseLinux"
+          },
+          {
+            "name": "CosmosDb",
+            "value": "CosmosDb"
+          },
+          {
+            "name": "RedHat",
+            "value": "RedHat"
+          },
+          {
+            "name": "SqlDataWarehouse",
+            "value": "SqlDataWarehouse"
+          },
+          {
+            "name": "VMwareCloudSimple",
+            "value": "VMwareCloudSimple"
+          },
+          {
+            "name": "RedHatOsa",
+            "value": "RedHatOsa"
+          },
+          {
+            "name": "Databricks",
+            "value": "Databricks"
+          },
+          {
+            "name": "AppService",
+            "value": "AppService"
+          },
+          {
+            "name": "ManagedDisk",
+            "value": "ManagedDisk"
+          },
+          {
+            "name": "BlockBlob",
+            "value": "BlockBlob"
+          },
+          {
+            "name": "RedisCache",
+            "value": "RedisCache"
+          },
+          {
+            "name": "AzureDataExplorer",
+            "value": "AzureDataExplorer"
+          },
+          {
+            "name": "MySql",
+            "value": "MySql"
+          },
+          {
+            "name": "MariaDb",
+            "value": "MariaDb"
+          },
+          {
+            "name": "PostgreSql",
+            "value": "PostgreSql"
+          },
+          {
+            "name": "DedicatedHost",
+            "value": "DedicatedHost"
+          },
+          {
+            "name": "SapHana",
+            "value": "SapHana"
+          },
+          {
+            "name": "SqlAzureHybridBenefit",
+            "value": "SqlAzureHybridBenefit"
+          },
+          {
+            "name": "AVS",
+            "value": "AVS"
+          },
+          {
+            "name": "DataFactory",
+            "value": "DataFactory"
+          },
+          {
+            "name": "NetAppStorage",
+            "value": "NetAppStorage"
+          },
+          {
+            "name": "AzureFiles",
+            "value": "AzureFiles"
+          },
+          {
+            "name": "SqlEdge",
+            "value": "SqlEdge"
+          },
+          {
+            "name": "VirtualMachineSoftware",
+            "value": "VirtualMachineSoftware"
+          }
+        ]
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "RoleAssignmentEntity": {
+      "type": "object",
+      "description": "Role assignment entity",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Role assignment entity id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Role assignment entity name"
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentEntityProperties",
+          "description": "Role assignment entity properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RoleAssignmentEntityProperties": {
+      "type": "object",
+      "description": "Role assignment entity properties",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal Id"
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Role definition id"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of the role assignment entity"
+        }
+      }
+    },
+    "SavingsPlanModel": {
+      "type": "object",
+      "description": "Savings plan",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Savings plan SKU"
+        },
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanModelProperties",
+          "description": "Savings plan properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SavingsPlanModelList": {
+      "type": "object",
+      "description": "Paged collection of SavingsPlanModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SavingsPlanModel items on this page",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SavingsPlanModelListResult": {
+      "type": "object",
+      "description": "Represents the result of listing savings plan models",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of savings plans.",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanModel"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page.",
+          "readOnly": true
+        },
+        "additionalProperties": {
+          "type": "array",
+          "description": "The roll out count summary of the savings plans",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanSummary"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SavingsPlanModelProperties": {
+      "type": "object",
+      "description": "Savings plan properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "displayProvisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the savings plan for display, e.g. Succeeded",
+          "readOnly": true
+        },
+        "billingScopeId": {
+          "type": "string",
+          "description": "Subscription that will be charged for purchasing the benefit"
+        },
+        "billingProfileId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified identifier of the billing profile where the savings plan is applied. Present only for Field-led or Customer-led customers.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Billing/billingAccounts",
+                "scopes": [
+                  "Tenant"
+                ]
+              }
+            ]
+          }
+        },
+        "customerId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified identifier of the customer where the savings plan is applied. Present only for Partner-led customers.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "Tenant"
+                ],
+                "type": "Microsoft.Billing/billingAccounts/customers"
+              }
+            ]
+          }
+        },
+        "billingAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "Tenant"
+                ],
+                "type": "Microsoft.Billing/billingAccounts"
+              }
+            ]
+          }
+        },
+        "term": {
+          "$ref": "#/definitions/Term",
+          "description": "Represent benefit term in ISO 8601 format."
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan",
+          "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans."
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType",
+          "description": "Type of the Applied Scope."
+        },
+        "userFriendlyAppliedScopeType": {
+          "type": "string",
+          "description": "The applied scope type of the savings plan for display, e.g. Shared",
+          "readOnly": true
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties",
+          "description": "Properties specific to applied scope type. Not required if not applicable."
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment",
+          "description": "Commitment towards the benefit."
+        },
+        "effectiveDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the savings plan starts providing benefit from.",
+          "readOnly": true
+        },
+        "expiryDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry date time",
+          "readOnly": true
+        },
+        "purchaseDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time when the savings plan was purchased",
+          "readOnly": true
+        },
+        "benefitStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the savings plan benefit started."
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo",
+          "readOnly": true
+        },
+        "renew": {
+          "type": "boolean",
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
+        },
+        "utilization": {
+          "$ref": "#/definitions/Utilization",
+          "description": "Savings plan utilization",
+          "readOnly": true
+        },
+        "renewSource": {
+          "type": "string",
+          "description": "SavingsPlan Id of the SavingsPlan from which this SavingsPlan is renewed."
+        },
+        "renewDestination": {
+          "type": "string",
+          "description": "SavingsPlan Id of the SavingsPlan which is purchased because of renew."
+        },
+        "renewProperties": {
+          "$ref": "#/definitions/RenewProperties"
+        }
+      }
+    },
+    "SavingsPlanOrderAliasModel": {
+      "type": "object",
+      "description": "Savings plan order alias",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Savings plan SKU"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Resource provider kind"
+        },
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanOrderAliasProperties",
+          "description": "Savings plan order alias properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SavingsPlanOrderAliasProperties": {
+      "type": "object",
+      "description": "Savings plan properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        },
+        "savingsPlanOrderId": {
+          "type": "string",
+          "description": "Identifier of the savings plan created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "billingScopeId": {
+          "type": "string",
+          "description": "Subscription that will be charged for purchasing the benefit"
+        },
+        "term": {
+          "$ref": "#/definitions/Term",
+          "description": "Represent benefit term in ISO 8601 format."
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan",
+          "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans."
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType",
+          "description": "Type of the Applied Scope."
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties",
+          "description": "Properties specific to applied scope type. Not required if not applicable."
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment",
+          "description": "Commitment towards the benefit."
+        },
+        "renew": {
+          "type": "boolean",
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
+        }
+      }
+    },
+    "SavingsPlanOrderModel": {
+      "type": "object",
+      "description": "Savings plan order",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Savings plan SKU"
+        },
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanOrderModelProperties",
+          "description": "Savings plan order properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SavingsPlanOrderModelList": {
+      "type": "object",
+      "description": "Paged collection of SavingsPlanOrderModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SavingsPlanOrderModel items on this page",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanOrderModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SavingsPlanOrderModelProperties": {
+      "type": "object",
+      "description": "Savings plan order properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "billingScopeId": {
+          "type": "string",
+          "description": "Subscription that will be charged for purchasing the benefit"
+        },
+        "billingProfileId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified identifier of the billing profile where the savings plan is applied. Present only for Field-led or Customer-led customers.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "Tenant"
+                ],
+                "type": "Microsoft.Billing/billingAccounts"
+              }
+            ]
+          }
+        },
+        "customerId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified identifier of the customer where the savings plan is applied. Present only for Partner-led customers.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "Tenant"
+                ],
+                "type": "Microsoft.Billing/billingAccounts/customers"
+              }
+            ]
+          }
+        },
+        "billingAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "Tenant"
+                ],
+                "type": "Microsoft.Billing/billingAccounts"
+              }
+            ]
+          }
+        },
+        "term": {
+          "$ref": "#/definitions/Term",
+          "description": "Represent benefit term in ISO 8601 format."
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan",
+          "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans."
+        },
+        "expiryDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry date time",
+          "readOnly": true
+        },
+        "benefitStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the savings plan benefit started."
+        },
+        "planInformation": {
+          "$ref": "#/definitions/BillingPlanInformation",
+          "description": "Information describing the type of billing plan for this savings plan."
+        },
+        "savingsPlans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo",
+          "readOnly": true
+        }
+      }
+    },
+    "SavingsPlanPurchaseValidateRequest": {
+      "type": "object",
+      "properties": {
+        "benefits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+          }
+        }
+      }
+    },
+    "SavingsPlanSummary": {
+      "type": "object",
+      "description": "Savings plans list summary",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This property has value 'summary'",
+          "readOnly": true
+        },
+        "value": {
+          "$ref": "#/definitions/SavingsPlanSummaryCount",
+          "description": "The roll up count summary of savings plans in each state"
+        }
+      }
+    },
+    "SavingsPlanSummaryCount": {
+      "type": "object",
+      "description": "The roll up count summary of savings plans in each state",
+      "properties": {
+        "succeededCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Succeeded state",
+          "readOnly": true
+        },
+        "failedCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Failed state",
+          "readOnly": true
+        },
+        "expiringCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Expiring state",
+          "readOnly": true
+        },
+        "expiredCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Expired state",
+          "readOnly": true
+        },
+        "pendingCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Pending state",
+          "readOnly": true
+        },
+        "cancelledCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Cancelled state",
+          "readOnly": true
+        },
+        "processingCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Processing state",
+          "readOnly": true
+        },
+        "noBenefitCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in No Benefit state",
+          "readOnly": true
+        },
+        "warningCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of savings plans in Warning state",
+          "readOnly": true
+        }
+      }
+    },
+    "SavingsPlanUpdateRequest": {
+      "type": "object",
+      "description": "Savings plan patch request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanUpdateRequestProperties",
+          "description": "Savings plan patch request"
+        }
+      }
+    },
+    "SavingsPlanUpdateRequestProperties": {
+      "type": "object",
+      "description": "Savings plan patch request",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType",
+          "description": "Type of the Applied Scope."
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties",
+          "description": "Properties specific to applied scope type. Not required if not applicable."
+        },
+        "renew": {
+          "type": "boolean",
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
+        },
+        "renewProperties": {
+          "$ref": "#/definitions/RenewProperties"
+        }
+      }
+    },
+    "SavingsPlanUpdateValidateRequest": {
+      "type": "object",
+      "properties": {
+        "benefits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanUpdateRequestProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SavingsPlanValidResponseProperty": {
+      "type": "object",
+      "description": "Benefit scope response property",
+      "properties": {
+        "valid": {
+          "type": "boolean",
+          "description": "Indicates if the provided input was valid"
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "Failure reason code if the provided input was invalid"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Failure reason if the provided input was invalid"
+        }
+      }
+    },
+    "SavingsPlanValidateResponse": {
+      "type": "object",
+      "properties": {
+        "benefits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanValidResponseProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. E.g. P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Term": {
+      "type": "string",
+      "description": "Represent benefit term in ISO 8601 format.",
+      "enum": [
+        "P1Y",
+        "P3Y",
+        "P5Y"
+      ],
+      "x-ms-enum": {
+        "name": "Term",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "P1Y",
+            "value": "P1Y"
+          },
+          {
+            "name": "P3Y",
+            "value": "P3Y"
+          },
+          {
+            "name": "P5Y",
+            "value": "P5Y"
+          }
+        ]
+      }
+    },
+    "Utilization": {
+      "type": "object",
+      "description": "Savings plan utilization",
+      "properties": {
+        "trend": {
+          "type": "string",
+          "description": "The number of days trend for a savings plan",
+          "readOnly": true
+        },
+        "aggregates": {
+          "type": "array",
+          "description": "The array of aggregates of a savings plan's utilization",
+          "items": {
+            "$ref": "#/definitions/UtilizationAggregates"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "UtilizationAggregates": {
+      "type": "object",
+      "description": "The aggregate values of savings plan utilization",
+      "properties": {
+        "grain": {
+          "type": "number",
+          "format": "float",
+          "description": "The grain of the aggregate",
+          "readOnly": true
+        },
+        "grainUnit": {
+          "type": "string",
+          "description": "The grain unit of the aggregate",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The aggregate value",
+          "readOnly": true
+        },
+        "valueUnit": {
+          "type": "string",
+          "description": "The aggregate value unit",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

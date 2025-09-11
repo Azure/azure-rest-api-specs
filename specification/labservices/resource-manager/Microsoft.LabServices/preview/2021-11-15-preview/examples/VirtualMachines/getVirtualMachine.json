@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-11-15-preview",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "labName": "testlab",
+    "virtualMachineName": "template"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.LabServices/labs/testlab/virtualMachines/template",
+        "name": "default",
+        "type": "Microsoft.LabServices/VirtualMachine",
+        "systemData": {
+          "createdBy": "identity123",
+          "createdByType": "User",
+          "createdAt": "2020-05-01T10:00:00Z",
+          "lastModifiedBy": "identity123",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-06-01T09:12:28Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "state": "Running",
+          "connectionProfile": {
+            "privateIpAddress": "192.168.2.1",
+            "sshAuthority": "vm-42.contoso.com:22",
+            "sshInBrowserUrl": "vm-42.contoso.com",
+            "rdpAuthority": "vm-42.contoso.com:3389",
+            "rdpInBrowserUrl": "vm-42.contoso.com",
+            "adminUsername": "user123"
+          },
+          "claimedByUserId": "testuser567",
+          "vmType": "Template"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+name: "Swagger LintDiff - Analyze Code"
+
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  lintdiff:
+    name: "Swagger LintDiff - Analyze Code"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout eng
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            eng/
+            .github/
+
+      - name: Checkout 'after' state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          path: after
+
+      - name: Checkout 'before' state
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: before
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Get changed files
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
+            const { writeFileSync } = await import('fs');
+            const { join } = await import('path');
+
+            // TODO: Logger
+            const changedFiles = await getChangedFiles({ cwd: 'after', paths: ['specification'] });
+            console.log('Changed files:', changedFiles);
+
+            const filePath = join(process.cwd(), 'changed-files.txt');
+            writeFileSync(filePath, changedFiles.join('\n'), 'utf8');
+            console.log(`Changed files written to ${filePath}`);
+
+      # TODO: Could be github.sha for merge commit
+      - name: Run LintDiff
+        id: run-lintdiff
+        run: |
+          set -x
+
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
+
+          npm exec --no -- lint-diff \
+            --before before \
+            --after after \
+            --changed-files-path changed-files.txt \
+            --base-branch ${{ github.event.pull_request.base.ref }} \
+            --compare-sha ${{ github.event.pull_request.head.sha }} \
+            --out-file "$GITHUB_STEP_SUMMARY"
+        env:
+          # Some LintDiff runs are memory intensive and require more than the
+          # default.
+          NODE_OPTIONS: "--max-old-space-size=8192"
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.run-lintdiff.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.run-lintdiff.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore

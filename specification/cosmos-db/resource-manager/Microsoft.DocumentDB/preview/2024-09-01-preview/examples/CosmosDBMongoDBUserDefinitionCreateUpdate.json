@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "mongoUserDefinitionId": "myMongoUserDefinitionId",
+    "databaseName": "sales",
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2024-09-01-preview",
+    "createUpdateMongoUserDefinitionParameters": {
+      "properties": {
+        "userName": "myUserName",
+        "password": "myPassword",
+        "databaseName": "sales",
+        "customData": "My custom data",
+        "roles": [
+          {
+            "role": "myReadRole",
+            "db": "sales"
+          }
+        ],
+        "mechanisms": "SCRAM-SHA-256"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbUserDefinitions/myUserId",
+        "name": "myUserName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongodbUserDefinitions",
+        "properties": {
+          "userName": "myUserName",
+          "databaseName": "sales",
+          "customData": "My custom data",
+          "roles": [
+            {
+              "db": "sales",
+              "role": "myReadRole"
+            }
+          ],
+          "mechanisms": "SCRAM-SHA-256"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-09-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-09-01-preview"
+      }
+    }
+  }
+}

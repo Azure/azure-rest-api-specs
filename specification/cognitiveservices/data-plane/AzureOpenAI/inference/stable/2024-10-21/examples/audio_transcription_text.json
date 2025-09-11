@@ -1,0 +1,15 @@
+{
+  "title": "Gets transcribed text and associated metadata from provided spoken audio data.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-10-21",
+    "deployment-id": "<deployment-id>",
+    "body": "---multipart-boundary\nContent-Disposition: form-data; name=\"file\"; filename=\"file.wav\"\nContent-Type: application/octet-stream\n\nRIFF..audio.data.omitted\n---multipart-boundary--"
+  },
+  "responses": {
+    "200": {
+      "type": "string",
+      "example": "plain text when requesting text, srt, or vtt"
+    }
+  }
+}

@@ -2,9 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    },
     "version": "2018-01-01"
   },
   "host": "management.azure.com",
@@ -36,13 +33,13 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/metrics": {
+    "/{resourceUri}/providers/Microsoft.Insights/metrics": {
       "get": {
         "tags": [
           "Metrics"
         ],
         "operationId": "Metrics_List",
-        "description": "**Lists the metric values for a resource**.",
+        "description": "**Lists the metric values for a resource**. This API uses the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -69,14 +66,14 @@
             "name": "$filter",
             "in": "query",
             "type": "string",
-            "description": "The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
+            "description": "The **$filter** is used to reduce the set of metric data returned. Example: Metric contains metadata A, B and C. - Return all time series of C where A = a1 and B = b1 or b2 **$filter=A eq 'a1' and B eq 'b1' or B eq 'b2' and C eq '*'** - Invalid variant: **$filter=A eq 'a1' and B eq 'b1' and C eq '*' or B = 'b2'** This is invalid because the logical or operator cannot separate two different metadata names. - Return all time series where A = a1, B = b1 and C = c1: **$filter=A eq 'a1' and B eq 'b1' and C eq 'c1'** - Return all time series where A = a1 **$filter=A eq 'a1' and B eq '*' and C eq '*'**. Special case: When dimension name or dimension value uses round brackets. Eg: When dimension name is **dim (test) 1** Instead of using $filter= \"dim (test) 1 eq '*' \" use **$filter= \"dim %2528test%2529 1 eq '*' \"** When dimension name is **dim (test) 3** and dimension value is **dim3 (test) val** Instead of using $filter= \"dim (test) 3 eq 'dim3 (test) val' \" use **$filter= \"dim %2528test%2529 3 eq 'dim3 %2528test%2529 val' \"**",
             "required": false
           },
           {
             "$ref": "#/parameters/ResultTypeParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/MetricNamespaceParameter"
@@ -96,108 +93,60 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/MetadataValue",
+        "x-ms-odata": "../../../../common-types/v1/commonMonitoringTypes.json#/definitions/MetadataValue",
         "x-ms-examples": {
           "Get Metric for data": {
             "$ref": "./examples/GetMetric.json"
           },
           "Get Metric for metadata": {
             "$ref": "./examples/GetMetricMetadata.json"
+          },
+          "Get Metric with error": {
+            "$ref": "./examples/GetMetricError.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "LocalizableString": {
+    "Response": {
+      "type": "object",
+      "properties": {
+        "cost": {
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The integer value representing the relative cost of the query."
+        },
+        "timespan": {
+          "type": "string",
+          "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+        },
+        "interval": {
+          "type": "string",
+          "description": "The interval (window size) for which the metric data was returned in ISO 8601 duration format with a special case for 'FULL' value that returns single datapoint for entire time span requested (*Examples: PT15M, PT1H, P1D, FULL*). \nThis may be adjusted and different from what was originally requested if AutoAdjustTimegrain=true is specified. This is not present if a metadata request was made."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the metrics being queried"
+        },
+        "resourceregion": {
+          "type": "string",
+          "description": "The region of the resource being queried for metrics."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../common-types/v1/commonMonitoringTypes.json#/definitions/Metric"
+          },
+          "description": "the value of the collection."
+        }
+      },
       "required": [
+        "timespan",
         "value"
       ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "the invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "the locale specific value."
-        }
-      },
-      "description": "The localizable string class."
-    },
-    "Unit": {
-      "type": "string",
-      "description": "the unit of the metric.",
-      "enum": [
-        "Count",
-        "Bytes",
-        "Seconds",
-        "CountPerSecond",
-        "BytesPerSecond",
-        "Percent",
-        "MilliSeconds",
-        "ByteSeconds",
-        "Unspecified",
-        "Cores",
-        "MilliCores",
-        "NanoCores",
-        "BitsPerSecond"
-      ],
-      "x-ms-enum": {
-        "name": "Unit",
-        "modelAsString": false
-      }
-    },
-    "MetricValue": {
-      "required": [
-        "timeStamp"
-      ],
-      "properties": {
-        "timeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "the timestamp for the metric value in ISO 8601 format."
-        },
-        "average": {
-          "type": "number",
-          "format": "double",
-          "description": "the average value in the time range."
-        },
-        "minimum": {
-          "type": "number",
-          "format": "double",
-          "description": "the least value in the time range."
-        },
-        "maximum": {
-          "type": "number",
-          "format": "double",
-          "description": "the greatest value in the time range."
-        },
-        "total": {
-          "type": "number",
-          "format": "double",
-          "description": "the sum of all of the values in the time range."
-        },
-        "count": {
-          "type": "number",
-          "format": "double",
-          "description": "the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
-        }
-      },
-      "description": "Represents a metric value."
-    },
-    "MetadataValue": {
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "the name of the metadata."
-        },
-        "value": {
-          "type": "string",
-          "description": "the value of the metadata."
-        }
-      },
-      "description": "Represents a metric metadata value."
+      "description": "The response to a metrics query."
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
@@ -212,102 +161,6 @@
           "type": "string"
         }
       }
-    },
-    "Response": {
-      "type": "object",
-      "properties": {
-        "cost": {
-          "type": "number",
-          "format": "int32",
-          "minimum": 0,
-          "description": "The integer value representing the cost of the query, for data case."
-        },
-        "timespan": {
-          "type": "string",
-          "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
-        },
-        "interval": {
-          "type": "string",
-          "format": "duration",
-          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
-        },
-        "namespace": {
-          "type": "string",
-          "description": "The namespace of the metrics been queried"
-        },
-        "resourceregion": {
-          "type": "string",
-          "description": "The region of the resource been queried for metrics."
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Metric"
-          },
-          "description": "the value of the collection."
-        }
-      },
-      "required": [
-        "timespan",
-        "value"
-      ],
-      "description": "The response to a metrics query."
-    },
-    "Metric": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "the metric Id."
-        },
-        "type": {
-          "type": "string",
-          "description": "the resource type of the metric resource."
-        },
-        "name": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "the name and the display name of the metric, i.e. it is localizable string."
-        },
-        "unit": {
-          "$ref": "#/definitions/Unit",
-          "description": "the unit of the metric."
-        },
-        "timeseries": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesElement"
-          },
-          "description": "the time series returned when a data query is performed."
-        }
-      },
-      "required": [
-        "id",
-        "type",
-        "name",
-        "unit",
-        "timeseries"
-      ],
-      "description": "The result data of a query."
-    },
-    "TimeSeriesElement": {
-      "type": "object",
-      "properties": {
-        "metadatavalues": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetadataValue"
-          },
-          "description": "the metadata values returned if $filter was specified in the call."
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricValue"
-          },
-          "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
-        }
-      },
-      "description": "A time series result type. The discriminator value is always TimeSeries in this case."
     }
   },
   "parameters": {
@@ -333,8 +186,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "duration",
-      "description": "The interval (i.e. timegrain) of the query.",
+      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D, FULL*",
       "x-ms-parameter-location": "method"
     },
     "MetricNamesParameter": {
@@ -342,7 +194,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The names of the metrics (comma separated) to retrieve.",
+      "description": "The names of the metrics (comma separated) to retrieve. Limit 20 metrics. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**",
       "x-ms-parameter-location": "method"
     },
     "AggregationsParameter": {
@@ -385,13 +237,6 @@
       "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
       "x-ms-parameter-location": "method",
       "required": false
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     },
     "MetricNamespaceParameter": {
       "name": "metricnamespace",

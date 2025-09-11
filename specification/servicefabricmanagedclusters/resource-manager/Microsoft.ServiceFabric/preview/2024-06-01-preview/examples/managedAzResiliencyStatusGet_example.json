@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroup1",
+    "clusterName": "mycluster1",
+    "api-version": "2024-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "baseResourceStatus": [
+          {
+            "resourceName": "mycluster1storage",
+            "resourceType": "Microsoft.Storage/storageaccounts",
+            "isZoneResilient": false
+          },
+          {
+            "resourceName": "PublicIP-mycluster1",
+            "resourceType": "Microsoft.Network/publicIPAddress",
+            "isZoneResilient": true
+          },
+          {
+            "resourceName": "Primary",
+            "resourceType": "Microsoft.Compute/virtualmachinescalesets",
+            "isZoneResilient": false,
+            "details": "Status: InProgress, ZonalNodes: 3, RegionalNodes: 3"
+          }
+        ],
+        "isClusterZoneResilient": false
+      }
+    }
+  }
+}

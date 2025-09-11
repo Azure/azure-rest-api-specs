@@ -1,0 +1,493 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2019-12-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}": {
+      "delete": {
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NetworkVirtualAppliances_Delete",
+        "description": "Deletes the specified Network Virtual Appliance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Network Virtual Appliance."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource with the specified name does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete NetworkVirtualAppliance": {
+            "$ref": "./examples/NetworkVirtualApplianceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NetworkVirtualAppliances_Get",
+        "description": "Gets the specified Network Virtual Appliance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Network Virtual Appliance."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a Network Virtual Appliance resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualAppliance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkVirtualAppliance": {
+            "$ref": "./examples/NetworkVirtualApplianceGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NetworkVirtualAppliances_UpdateTags",
+        "description": "Updates a Network Virtual Appliance.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of Network Virtual Appliance."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Network Virtual Appliance being updated."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to Update Network Virtual Appliance Tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of Network Virtual Appliance updated.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualAppliance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update NetworkVirtualAppliance": {
+            "$ref": "./examples/NetworkVirtualApplianceUpdateTags.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NetworkVirtualAppliances_CreateOrUpdate",
+        "description": "Creates or updates the specified Network Virtual Appliance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Network Virtual Appliance."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualAppliance"
+            },
+            "description": "Parameters supplied to the create or update Network Virtual Appliance."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Network Virtual Appliance resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualAppliance"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. The operation returns the resulting Network Virtual Appliance resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualAppliance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create NetworkVirtualAppliance": {
+            "$ref": "./examples/NetworkVirtualAppliancePut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances": {
+      "get": {
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NetworkVirtualAppliances_ListByResourceGroup",
+        "description": "Lists all Network Virtual Appliances in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of Network Virtual Appliance resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Network Virtual Appliance for a given resource group": {
+            "$ref": "./examples/NetworkVirtualApplianceListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkVirtualAppliances": {
+      "get": {
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NetworkVirtualAppliances_List",
+        "description": "Gets all Network Virtual Appliances in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of Network Virtual Appliance resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Network Virtual Appliances for a given subscription": {
+            "$ref": "./examples/NetworkVirtualApplianceListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkVirtualAppliance": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkVirtualAppliancePropertiesFormat",
+          "description": "Properties of the Network Virtual Appliance."
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The service principal that has read access to cloud-init and config blob."
+        },
+        "sku": {
+          "readOnly": false,
+          "description": "Network Virtual Appliance SKU.",
+          "$ref": "#/definitions/VirtualApplianceSkuProperties"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "NetworkVirtualAppliance Resource."
+    },
+    "NetworkVirtualAppliancePropertiesFormat": {
+      "properties": {
+        "bootStrapConfigurationBlob": {
+          "type": "array",
+          "readOnly": false,
+          "description": "BootStrapConfigurationBlob storage URLs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualHub": {
+          "readOnly": false,
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The Virtual Hub where Network Virtual Appliance is being deployed."
+        },
+        "cloudInitConfigurationBlob": {
+          "type": "array",
+          "readOnly": false,
+          "description": "CloudInitConfigurationBlob storage URLs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualApplianceAsn": {
+          "type": "integer",
+          "readOnly": false,
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "VirtualAppliance ASN."
+        },
+        "virtualApplianceNics": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of Virtual Appliance Network Interfaces.",
+          "items": {
+            "$ref": "#/definitions/VirtualApplianceNicProperties"
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Network Virtual Appliance definition."
+    },
+    "VirtualApplianceSkuProperties": {
+      "properties": {
+        "vendor": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Virtual Appliance Vendor."
+        },
+        "bundledScaleUnit": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Virtual Appliance Scale Unit."
+        },
+        "marketPlaceVersion": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Virtual Appliance Version."
+        }
+      },
+      "description": "Network Virtual Appliance Sku Properties."
+    },
+    "VirtualApplianceNicProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "NIC name."
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Public IP address."
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Private IP address."
+        }
+      },
+      "description": "Network Virtual Appliance NIC properties."
+    },
+    "NetworkVirtualApplianceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkVirtualAppliance"
+          },
+          "description": "List of Network Virtual Appliances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListNetworkVirtualAppliances API service call."
+    }
+  }
+}

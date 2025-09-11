@@ -1,0 +1,75 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure API Center service events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure API Center service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "ApiCenterApiDefinitionAddedEventData": {
+      "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API definition title."
+        },
+        "description": {
+          "type": "string",
+          "description": "API definition description."
+        },
+        "specification": {
+          "$ref": "#/definitions/ApiCenterApiSpecification"
+        }
+      },
+      "x-ms-examples": {
+        "userCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/api_definition_added.json"
+        },
+        "userCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/api_definition_added.json"
+        }
+      }
+    },
+    "ApiCenterApiDefinitionUpdatedEventData": {
+      "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API definition title."
+        },
+        "description": {
+          "type": "string",
+          "description": "API definition description."
+        },
+        "specification": {
+          "$ref": "#/definitions/ApiCenterApiSpecification"
+        }
+      },
+      "x-ms-examples": {
+        "userCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/api_definition_updated.json"
+        },
+        "userCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/api_definition_updated.json"
+        }
+      }
+    },
+    "ApiCenterApiSpecification": {
+      "type": "object",
+      "description": "API specification details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specification name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Specification version."
+        }
+      }
+    }
+  }
+}

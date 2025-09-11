@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "591e76c3-3e97-44db-879c-3e2b12961b62",
+    "resourceGroupName": "testrg",
+    "accountName": "testaccount2",
+    "api-version": "2021-11-01-preview",
+    "$top": "2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "video1",
+            "id": "/subscriptions/591e76c3-3e97-44db-879c-3e2b12961b62/resourceGroups/testrg/providers/Microsoft.Media/videoAnalyzers/testaccount2/videos/video1",
+            "type": "Microsoft.Media/videoAnalyzers/videos",
+            "properties": {
+              "title": "Sample Title 1",
+              "description": "Sample Description 1",
+              "type": "Archive",
+              "flags": {
+                "canStream": true,
+                "hasData": true,
+                "isInUse": false
+              },
+              "contentUrls": {
+                "downloadUrl": "https://591e76c33e9744db879c3e2b12961b62.streaming.westus.videoanalyzer.net/591e76c33e9744db879c3e2b12961b62/content.mp4",
+                "archiveBaseUrl": "https://591e76c33e9744db879c3e2b12961b62.streaming.westus.videoanalyzer.net/591e76c33e9744db879c3e2b12961b62/content.ism",
+                "rtspTunnelUrl": "https://591e76c33e9744db879c3e2b12961b62.streaming.westus.videoanalyzer.net/591e76c33e9744db879c3e2b12961b62",
+                "previewImageUrls": {
+                  "small": "https://591e76c33e9744db879c3e2b12961b62.streaming.westus.videoanalyzer.net/591e76c33e9744db879c3e2b12961b62/images/latest/small.jpg",
+                  "medium": "https://591e76c33e9744db879c3e2b12961b62.streaming.westus.videoanalyzer.net/591e76c33e9744db879c3e2b12961b62/images/latest/medium.jpg",
+                  "large": "https://591e76c33e9744db879c3e2b12961b62.streaming.westus.videoanalyzer.net/591e76c33e9744db879c3e2b12961b62/images/latest/large.jpg"
+                }
+              },
+              "mediaInfo": {
+                "segmentLength": "PT30S"
+              },
+              "archival": {
+                "retentionPeriod": "P2D"
+              }
+            },
+            "systemData": {
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "0001-01-01T00:00:00Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "0001-01-01T00:00:00Z"
+            }
+          },
+          {
+            "name": "video2",
+            "id": "/subscriptions/591e76c3-3e97-44db-879c-3e2b12961b62/resourceGroups/testrg/providers/Microsoft.Media/videoAnalyzers/testaccount2/videos/video2",
+            "type": "Microsoft.Media/videoAnalyzers/videos",
+            "properties": {
+              "title": "Sample Title 2",
+              "description": "Sample Description 2",
+              "type": "File",
+              "flags": {
+                "canStream": false,
+                "hasData": false,
+                "isInUse": false
+              }
+            },
+            "systemData": {
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "0001-01-01T00:00:00Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "0001-01-01T00:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

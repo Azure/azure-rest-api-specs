@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/backends/proxybackend",
+            "type": "Microsoft.ApiManagement/service/workspaces/backends",
+            "name": "proxybackend",
+            "properties": {
+              "description": "description5308",
+              "url": "https://backendname2644/",
+              "protocol": "http",
+              "credentials": {
+                "query": {
+                  "sv": [
+                    "xx",
+                    "bb",
+                    "cc"
+                  ]
+                },
+                "header": {
+                  "x-my-1": [
+                    "val1",
+                    "val2"
+                  ]
+                },
+                "authorization": {
+                  "scheme": "Basic",
+                  "parameter": "opensesma"
+                }
+              },
+              "proxy": {
+                "url": "http://192.168.1.1:8080",
+                "username": "Contoso\\admin",
+                "password": "<password>"
+              },
+              "tls": {
+                "validateCertificateChain": false,
+                "validateCertificateName": false
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/backends/sfbackend",
+            "type": "Microsoft.ApiManagement/service/workspaces/backends",
+            "name": "sfbackend",
+            "properties": {
+              "description": "Service Fabric Test App 1",
+              "url": "fabric:/mytestapp/mytestservice",
+              "protocol": "http",
+              "properties": {
+                "serviceFabricCluster": {
+                  "managementEndpoints": [
+                    "https://somecluster.com"
+                  ],
+                  "clientCertificateId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/certificates/cert1",
+                  "serverX509Names": [
+                    {
+                      "name": "ServerCommonName1",
+                      "issuerCertificateThumbprint": "IssuerCertificateThumbprint1"
+                    }
+                  ],
+                  "maxPartitionResolutionRetries": 5
+                }
+              }
+            }
+          }
+        ],
+        "count": 2,
+        "nextLink": ""
+      }
+    }
+  }
+}

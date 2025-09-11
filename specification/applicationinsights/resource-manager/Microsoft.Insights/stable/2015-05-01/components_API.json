@@ -246,7 +246,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge": {
       "post": {
-        "description": "Purges data in an Application Insights component by a set of user-defined filters.",
+        "description": "Purges data in an Application Insights component by a set of user-defined filters.\n\nIn order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.",
         "operationId": "Components_Purge",
         "parameters": [
           {
@@ -486,11 +486,64 @@
           "externalDocs": {
             "url": "https://aka.ms/sl0yqd"
           }
+        },
+        "ConnectionString": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Application Insights component connection string."
+        },
+        "RetentionInDays": {
+          "type": "integer",
+          "description": "Retention period in days.",
+          "default": 90
+        },
+        "DisableIpMasking": {
+          "type": "boolean",
+          "description": "Disable IP masking."
+        },
+        "ImmediatePurgeDataOn30Days": {
+          "type": "boolean",
+          "description": "Purge data immediately after 30 days."
+        },
+        "PrivateLinkScopedResources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkScopedResource"
+          },
+          "description": "List of linked private link scope resources."
+        },
+        "IngestionMode": {
+          "type": "string",
+          "description": "Indicates the flow of the ingestion.",
+          "default": "ApplicationInsights",
+          "enum": [
+            "ApplicationInsights",
+            "ApplicationInsightsWithDiagnosticSettings",
+            "LogAnalytics"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionMode",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "Application_Type"
       ]
+    },
+    "PrivateLinkScopedResource": {
+      "properties": {
+        "ResourceId": {
+          "type": "string",
+          "description": "The full resource Id of the private link scope resource."
+        },
+        "ScopeId": {
+          "type": "string",
+          "description": "The private link scope unique Identifier."
+        }
+      },
+      "description": "The private link scope resource reference."
     },
     "ApplicationInsightsComponentListResult": {
       "description": "Describes the list of Application Insights Resources.",

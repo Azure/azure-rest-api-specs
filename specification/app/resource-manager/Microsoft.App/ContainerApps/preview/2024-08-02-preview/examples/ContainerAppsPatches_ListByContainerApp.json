@@ -1,0 +1,103 @@
+{
+  "operationId": "ContainerAppsPatches_ListByContainerApp",
+  "title": "ContainerAppsPatches_ListByContainerApp_0",
+  "parameters": {
+    "api-version": "2024-08-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg",
+    "containerAppName": "test-app"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app/patches/testPatch-25fe4b",
+            "name": "testPatch-25fe4b",
+            "type": "Microsoft.App/containerApps/patches",
+            "properties": {
+              "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
+              "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app",
+              "targetRevisionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/apps/test-app/revisions/test-app--jm3vvry",
+              "patchApplyStatus": "NotStarted",
+              "createdAt": "2022-10-10T12:06:20.3421+00:00",
+              "lastModifiedAt": "2022-10-10T12:06:20.3421+00:00",
+              "patchDetails": [
+                {
+                  "targetContainerName": "test-container",
+                  "targetImage": "testregistry.azurecr.io/test-image:release-1-patched-202209101206203421",
+                  "lastDetectionTime": "2022-10-10T12:06:19.5241+00:00",
+                  "detectionStatus": "Succeeded",
+                  "newImageName": "testregistry.azurecr.io/test-image:release-1-patched-202210101206185241",
+                  "newLayer": {
+                    "name": "mcr.microsoft.com/dotnet/aspnet:7.0.9-cbl-mariner2.0",
+                    "frameworkAndVersion": "dotnet:7.0.9",
+                    "osAndVersion": "cbl-mariner2.0"
+                  },
+                  "oldLayer": {
+                    "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
+                    "frameworkAndVersion": "dotnet:7.0.7",
+                    "osAndVersion": "cbl-mariner2.0"
+                  },
+                  "patchType": "FrameworkSecurity"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app/patches/testPatch-27c3d5",
+            "name": "testPatch-27c3d5",
+            "type": "Microsoft.App/containerApps/patches",
+            "properties": {
+              "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
+              "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app",
+              "targetRevisionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app2/revisions/test-app--z79h4oc",
+              "patchApplyStatus": "Succeeded",
+              "createdAt": "2022-09-10T12:06:20.3421+00:00",
+              "lastModifiedAt": "2022-09-20T12:06:20.3421+00:00",
+              "patchDetails": [
+                {
+                  "targetContainerName": "test-container",
+                  "targetImage": "testregistry.azurecr.io/test-image:release-1",
+                  "lastDetectionTime": "2022-09-21T12:06:19.5241+00:00",
+                  "detectionStatus": "Succeeded",
+                  "newImageName": "testregistry.azurecr.io/test-image:release-1-patched-202209101206203421",
+                  "newLayer": {
+                    "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
+                    "frameworkAndVersion": "dotnet:7.0.7",
+                    "osAndVersion": "cbl-mariner2.0"
+                  },
+                  "oldLayer": {
+                    "name": "mcr.microsoft.com/dotnet/aspnet:7.0.5-cbl-mariner2.0",
+                    "frameworkAndVersion": "dotnet:7.0.5",
+                    "osAndVersion": "cbl-mariner2.0"
+                  },
+                  "patchType": "FrameworkSecurity"
+                },
+                {
+                  "targetContainerName": "test-container-2",
+                  "targetImage": "testregistry.azurecr.io/test-image:release-2",
+                  "lastDetectionTime": "2022-09-21T12:06:19.5241+00:00",
+                  "detectionStatus": "Succeeded",
+                  "newImageName": "testregistry.azurecr.io/test-image:release-2-patched-202209101206203421",
+                  "newLayer": {
+                    "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
+                    "frameworkAndVersion": "dotnet:7.0.7",
+                    "osAndVersion": "cbl-mariner2.0"
+                  },
+                  "oldLayer": {
+                    "name": "mcr.microsoft.com/dotnet/aspnet:7.0.0-cbl-mariner2.0",
+                    "frameworkAndVersion": "dotnet:7.0.0",
+                    "osAndVersion": "cbl-mariner2.0"
+                  },
+                  "patchType": "FrameworkSecurity"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

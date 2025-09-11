@@ -1,0 +1,274 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/schema": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "x-ms-examples": {
+          "WorkspacesGetSchema": {
+            "$ref": "./examples/SavedSearchesGetSchema.json"
+          }
+        },
+        "operationId": "Schema_Get",
+        "description": "Gets the schema for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchGetSchemaResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CoreSummary": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of a core summary."
+        },
+        "numberOfDocuments": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of documents of a core summary."
+        }
+      },
+      "required": [
+        "numberOfDocuments"
+      ],
+      "description": "The core summary of a search."
+    },
+    "SearchSort": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field the search query is sorted on."
+        },
+        "order": {
+          "type": "string",
+          "description": "The sort order of the search.",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "x-ms-enum": {
+            "name": "SearchSortEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The sort parameters for search."
+    },
+    "SearchMetadataSchema": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metadata schema."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version of the metadata schema."
+        }
+      },
+      "description": "Schema metadata for search."
+    },
+    "SearchMetadata": {
+      "properties": {
+        "requestId": {
+          "x-ms-client-name": "SearchId",
+          "type": "string",
+          "description": "The request id of the search."
+        },
+        "resultType": {
+          "type": "string",
+          "description": "The search result type."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of search results."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of top search results."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the search results request."
+        },
+        "coreSummaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CoreSummary"
+          },
+          "description": "The core summaries."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the search results."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the search."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of last update."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag of the search results."
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchSort"
+          },
+          "description": "How the results are sorted."
+        },
+        "requestTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The request time."
+        },
+        "aggregatedValueField": {
+          "type": "string",
+          "description": "The aggregated value field."
+        },
+        "aggregatedGroupingFields": {
+          "type": "string",
+          "description": "The aggregated grouping fields."
+        },
+        "sum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The sum of all aggregates returned in the result set."
+        },
+        "max": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The max of all aggregates returned in the result set."
+        },
+        "schema": {
+          "$ref": "#/definitions/SearchMetadataSchema",
+          "description": "The schema."
+        }
+      },
+      "description": "Metadata for search results."
+    },
+    "SearchSchemaValue": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the schema."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the schema."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type."
+        },
+        "indexed": {
+          "type": "boolean",
+          "description": "The boolean that indicates the field is searchable as free text."
+        },
+        "stored": {
+          "type": "boolean",
+          "description": "The boolean that indicates whether or not the field is stored."
+        },
+        "facet": {
+          "type": "boolean",
+          "description": "The boolean that indicates whether or not the field is a facet."
+        },
+        "ownerType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The array of workflows containing the field."
+        }
+      },
+      "required": [
+        "facet",
+        "stored",
+        "indexed"
+      ],
+      "description": "Value object for schema results."
+    },
+    "SearchGetSchemaResponse": {
+      "properties": {
+        "metadata": {
+          "x-ms-client-name": "Metadata",
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "The metadata from search results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchSchemaValue"
+          },
+          "description": "The array of result values."
+        }
+      },
+      "description": "The get schema operation response."
+    }
+  },
+  "parameters": {}
+}
