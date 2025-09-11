@@ -493,6 +493,7 @@ model RunRequest {
   /**
    * The type of the run request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -625,6 +626,7 @@ model RunProperties {
   /**
    * The provisioning state of a run.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 
   /**
@@ -2096,7 +2098,7 @@ model Registry is Azure.ResourceManager.TrackedResource<never> {
     Resource = Registry,
     KeyName = "registryName",
     SegmentName = "registries",
-    NamePattern = "^[a-zA-Z0-9]*$",
+    NamePattern = "^[a-zA-Z0-9]*$"
   >;
 }
 @@maxLength(Registry.name, 50);

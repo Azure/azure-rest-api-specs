@@ -45,6 +45,7 @@ interface Tasks {
   /**
    * Updates a task with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Task, PatchModel = TaskUpdateParameters>;
 

@@ -51,6 +51,7 @@ interface TaskRuns {
   /**
    * Updates a task run with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     TaskRun,
@@ -69,7 +70,10 @@ interface TaskRuns {
    * Lists all the task runs for a specified container registry.
    */
   @list
-  list is ArmResourceListByParent<TaskRun, Response = ArmResponse<TaskRunListResult>>;
+  list is ArmResourceListByParent<
+    TaskRun,
+    Response = ArmResponse<TaskRunListResult>
+  >;
 
   /**
    * Gets the detailed information for a given task run that includes all secrets.

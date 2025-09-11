@@ -39,6 +39,7 @@ interface AgentPools {
   /**
    * Updates an agent pool with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AgentPool,
@@ -57,7 +58,10 @@ interface AgentPools {
    * Lists all the agent pools for a specified container registry.
    */
   @list
-  list is ArmResourceListByParent<AgentPool, Response = ArmResponse<AgentPoolListResult>>;
+  list is ArmResourceListByParent<
+    AgentPool,
+    Response = ArmResponse<AgentPoolListResult>
+  >;
 
   /**
    * Gets the count of queued runs for a given agent pool.
