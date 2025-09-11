@@ -339,7 +339,14 @@ model NamespaceAssetStatus {
   @Azure.ResourceManager.identifiers(#[])
   datasets?: NamespaceAssetStatusDataset[];
 
+  @doc("Array of event group statuses that describe the status of each event group.")
+  @added(Versions.v2025_10_01)
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  eventGroups?: NamespaceAssetStatusEventGroup[];
+
   @doc("Array of event statuses that describe the status of each event.")
+  @removed(Versions.v2025_10_01)
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#[])
   events?: NamespaceAssetStatusEvent[];
@@ -369,6 +376,19 @@ model NamespaceAssetStatusDataset {
   @doc("Object to transfer and persist errors that originate from the edge.")
   @visibility(Lifecycle.Read)
   error?: StatusError;
+}
+
+@doc("Defines the asset status event group properties.")
+@added(Versions.v2025_10_01)
+model NamespaceAssetStatusEventGroup {
+  @doc("The name of the event group. Must be unique within the status.eventGroups array. This name is used to correlate between the spec and status event group information.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Array of event statuses that describe the status of each event in the event group.")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  events?: NamespaceAssetStatusEvent[];
 }
 
 @doc("Defines the asset status event properties.")
