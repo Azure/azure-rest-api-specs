@@ -65,7 +65,7 @@ interface Clusters {
   createClusterIdentity is ArmResourceActionAsync<
     Cluster,
     void,
-    ClusterIdentityResponse
+    StackHciClusterIdentityResponseResult
   >;
 
   @doc("Extends Software Assurance Benefit to a cluster.")
@@ -370,7 +370,7 @@ model RawCertificateData {
 }
 
 @doc("Cluster Identity details.")
-model ClusterIdentityResponse {
+model StackHciClusterIdentityResponseResult {
   @doc("Cluster identity properties.")
   @visibility(Lifecycle.Read)
   properties?: ClusterIdentityResponseProperties;

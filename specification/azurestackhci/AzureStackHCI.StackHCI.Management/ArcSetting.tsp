@@ -89,8 +89,8 @@ interface ArcSettings {
   createIdentity is ArmResourceActionAsync<
     ArcSetting,
     void,
-    ArmResponse<ArcIdentityResponse>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcIdentityResponse> &
+    ArmResponse<StackHciArcIdentityResponseResult>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = StackHciArcIdentityResponseResult> &
       Azure.Core.Foundations.RetryAfterHeader &
       ArmLroLocationHeader
   >;
@@ -323,7 +323,7 @@ model PasswordCredential {
 /**
  * ArcIdentity details.
  */
-model ArcIdentityResponse {
+model StackHciArcIdentityResponseResult {
   /**
    * ArcIdentity properties.
    */

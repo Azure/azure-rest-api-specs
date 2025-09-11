@@ -1568,7 +1568,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArcIdentityResponse"
+              "$ref": "#/definitions/StackHciArcIdentityResponseResult"
             }
           },
           "202": {
@@ -2413,7 +2413,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ClusterIdentityResponse"
+              "$ref": "#/definitions/StackHciClusterIdentityResponseResult"
             }
           },
           "202": {
@@ -4736,17 +4736,6 @@
       },
       "readOnly": true
     },
-    "ArcIdentityResponse": {
-      "type": "object",
-      "description": "ArcIdentity details.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ArcIdentityResponseProperties",
-          "description": "ArcIdentity properties.",
-          "readOnly": true
-        }
-      }
-    },
     "ArcIdentityResponseProperties": {
       "type": "object",
       "description": "Arc identity response properties.",
@@ -5325,17 +5314,6 @@
         "diagnosticLevel": {
           "$ref": "#/definitions/DiagnosticLevel",
           "description": "Desired level of diagnostic data emitted by the cluster."
-        }
-      }
-    },
-    "ClusterIdentityResponse": {
-      "type": "object",
-      "description": "Cluster Identity details.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ClusterIdentityResponseProperties",
-          "description": "Cluster identity properties.",
-          "readOnly": true
         }
       }
     },
@@ -6188,7 +6166,7 @@
         "scaleUnits"
       ]
     },
-    "DeploymentData": {
+    "DeploymentDataContent": {
       "type": "object",
       "description": "The Deployment data of AzureStackHCI Cluster.",
       "properties": {
@@ -10528,7 +10506,7 @@
       "description": "Scale units will contains list of deployment data",
       "properties": {
         "deploymentData": {
-          "$ref": "#/definitions/DeploymentData",
+          "$ref": "#/definitions/DeploymentDataContent",
           "description": "Deployment Data to deploy AzureStackHCI Cluster."
         },
         "sbePartnerInfo": {
@@ -10948,6 +10926,28 @@
             "description": "Software Assurance is disabled."
           }
         ]
+      }
+    },
+    "StackHciArcIdentityResponseResult": {
+      "type": "object",
+      "description": "ArcIdentity details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArcIdentityResponseProperties",
+          "description": "ArcIdentity properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "StackHciClusterIdentityResponseResult": {
+      "type": "object",
+      "description": "Cluster Identity details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterIdentityResponseProperties",
+          "description": "Cluster identity properties.",
+          "readOnly": true
+        }
       }
     },
     "State": {

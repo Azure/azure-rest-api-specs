@@ -120,7 +120,7 @@ model ScaleUnits {
   /**
    * Deployment Data to deploy AzureStackHCI Cluster.
    */
-  deploymentData: DeploymentData;
+  deploymentData: DeploymentDataContent;
 
   /**
    * Solution builder extension (SBE) partner properties
@@ -131,7 +131,7 @@ model ScaleUnits {
 /**
  * The Deployment data of AzureStackHCI Cluster.
  */
-model DeploymentData {
+model DeploymentDataContent {
   /**
    * SecuritySettings to deploy AzureStackHCI Cluster.
    */

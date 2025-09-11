@@ -103,8 +103,8 @@ interface Clusters {
   createIdentity is ArmResourceActionAsync<
     Cluster,
     void,
-    ArmResponse<ClusterIdentityResponse>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ClusterIdentityResponse> &
+    ArmResponse<StackHciClusterIdentityResponseResult>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = StackHciClusterIdentityResponseResult> &
       Azure.Core.Foundations.RetryAfterHeader &
       ArmLroLocationHeader
   >;
@@ -918,7 +918,7 @@ model RawCertificateData {
 /**
  * Cluster Identity details.
  */
-model ClusterIdentityResponse {
+model StackHciClusterIdentityResponseResult {
   /**
    * Cluster identity properties.
    */
