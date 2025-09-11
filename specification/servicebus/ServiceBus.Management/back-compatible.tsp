@@ -3,20 +3,23 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceBus;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SBNamespaceUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBNamespaceUpdateParameters.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(FailOver.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailOver.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Operation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(FailoverProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailoverProperties.properties
+);
 
 @@clientLocation(SBNamespaces.get, "Namespaces");
 @@clientLocation(SBNamespaces.createOrUpdate, "Namespaces");
@@ -32,20 +35,22 @@ using Microsoft.ServiceBus;
 @@clientName(SBNamespaces.privateLinkResourcesGet, "Get");
 @@clientLocation(SBNamespaces.checkNameAvailability, DisasterRecoveryConfigs);
 @@clientName(SBNamespaces.checkNameAvailability::parameters.body, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SBNamespace.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBNamespace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.list,
   "NetworkSecurityPerimeterConfiguration"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NetworkSecurityPerimeterConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkSecurityPerimeterConfiguration.properties
+);
 
 @@clientLocation(ArmDisasterRecoveries.get, DisasterRecoveryConfigs);
 @@clientLocation(ArmDisasterRecoveries.createOrUpdate, DisasterRecoveryConfigs);
@@ -57,14 +62,16 @@ using Microsoft.ServiceBus;
 @@clientLocation(ArmDisasterRecoveries.breakPairing, DisasterRecoveryConfigs);
 @@clientLocation(ArmDisasterRecoveries.failOver, DisasterRecoveryConfigs);
 @@clientName(ArmDisasterRecoveries.failOver::parameters.body, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ArmDisasterRecovery.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArmDisasterRecovery.properties
+);
 
 @@clientName(MigrationConfigs.createAndStartMigration::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(MigrationConfigProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MigrationConfigProperties.properties
+);
 
 @@clientLocation(NetworkRuleSets.getNetworkRuleSet, "Namespaces");
 @@clientLocation(NetworkRuleSets.createOrUpdateNetworkRuleSet, "Namespaces");
@@ -73,8 +80,8 @@ using Microsoft.ServiceBus;
 );
 
 @@clientLocation(NetworkRuleSets.listNetworkRuleSets, "Namespaces");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NetworkRuleSet.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkRuleSet.properties);
 
 @@clientLocation(SBAuthorizationRules.getAuthorizationRule, "Namespaces");
 @@clientLocation(SBAuthorizationRules.createOrUpdateAuthorizationRule,
@@ -98,36 +105,37 @@ using Microsoft.ServiceBus;
   "parameters"
 );
 @@clientName(Topics.regenerateKeys::parameters.body, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SBAuthorizationRule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBAuthorizationRule.properties
+);
 
 @@clientLocation(SBQueues.get, Queues);
 @@clientLocation(SBQueues.createOrUpdate, Queues);
 @@clientName(SBQueues.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(SBQueues.delete, Queues);
 @@clientLocation(SBQueues.listByNamespace, Queues);
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SBQueue.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBQueue.properties);
 
 @@clientLocation(SBTopics.get, Topics);
 @@clientLocation(SBTopics.createOrUpdate, Topics);
 @@clientName(SBTopics.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(SBTopics.delete, Topics);
 @@clientLocation(SBTopics.listByNamespace, Topics);
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SBTopic.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBTopic.properties);
 
 @@clientName(Rules.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Rule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Rule.properties);
 
 @@clientLocation(SBSubscriptions.get, "Subscriptions");
 @@clientLocation(SBSubscriptions.createOrUpdate, "Subscriptions");
 @@clientName(SBSubscriptions.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(SBSubscriptions.delete, "Subscriptions");
 @@clientLocation(SBSubscriptions.listByTopic, "Subscriptions");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SBSubscription.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBSubscription.properties);
 
 @@clientLocation(NamespacesOperationGroup.checkNameAvailability, "Namespaces");
 
