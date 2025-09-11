@@ -440,9 +440,10 @@ model PlanMetadata {
   relatedSkus?: PlanSkuRelation[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
 @doc("Returns a subset of Plan attributes")
-model PlanDetails extends PlanSummary {
+model PlanDetails {
+  ...PlanSummary;
+
   @doc("The id")
   id?: string;
 
