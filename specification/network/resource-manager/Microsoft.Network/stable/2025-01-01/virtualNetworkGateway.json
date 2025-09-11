@@ -990,7 +990,7 @@
         ],
         "responses": {
           "200": {
-            "description": "SAS URL to the file containing list of effective routes. The file contains data structured as [GatewayEffectiveRouteListResult](#/definitions/GatewayEffectiveRouteListResult)",
+            "description": "SAS URL to the file containing list of effective routes.",
             "schema": {
               "type": "string"
             }
@@ -4178,43 +4178,6 @@
       },
       "description": "Gateway routing details."
     },
-    "GatewayEffectiveRoute": {
-      "type": "object",
-      "properties": {
-        "localAddress": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The gateway's local address."
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "List of route's network prefixes.",
-          "x-ms-identifiers": []
-        },
-        "nextHopIpAddress": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The route's next hop."
-        },
-        "nextHopType": {
-          "type": "string",
-          "description": "The nextHop type.",
-          "enum": [
-            "Tunnel",
-            "VirtualNetwork"
-          ],
-          "x-ms-enum": {
-            "name": "EffectiveRouteNextHopType",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Gateway effective routes"
-    },
     "VirtualNetworkGateway": {
       "properties": {
         "properties": {
@@ -4331,20 +4294,6 @@
             "$ref": "#/definitions/GatewayRoute"
           },
           "description": "List of gateway routes."
-        }
-      },
-      "description": "List of virtual network gateway routes."
-    },
-    "GatewayEffectiveRouteListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GatewayEffectiveRoute"
-          },
-          "description": "List of gateway effective routes.",
-          "x-ms-identifiers": []
         }
       },
       "description": "List of virtual network gateway routes."
