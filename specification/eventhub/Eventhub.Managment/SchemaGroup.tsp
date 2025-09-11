@@ -38,7 +38,7 @@ interface SchemaGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SchemaRegistry_Get")
-  get is ArmResourceRead<SchemaGroup>;
+  get is ArmResourceRead<SchemaGroup, Error = ErrorResponse>;
 
   /**
    * Creates or Updates an EventHub schema group.
@@ -48,7 +48,8 @@ interface SchemaGroups {
   @operationId("SchemaRegistry_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SchemaGroup,
-    Response = ArmResourceUpdatedResponse<SchemaGroup>
+    Response = ArmResourceUpdatedResponse<SchemaGroup>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -56,7 +57,7 @@ interface SchemaGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SchemaRegistry_Delete")
-  delete is ArmResourceDeleteSync<SchemaGroup>;
+  delete is ArmResourceDeleteSync<SchemaGroup, Error = ErrorResponse>;
 
   /**
    * Gets all the Schema Groups in a Namespace.
@@ -81,7 +82,8 @@ interface SchemaGroups {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

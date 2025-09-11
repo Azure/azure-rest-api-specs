@@ -42,7 +42,7 @@ interface EHNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_Get")
-  get is ArmResourceRead<EHNamespace>;
+  get is ArmResourceRead<EHNamespace, Error = ErrorResponse>;
 
   /**
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
@@ -56,7 +56,8 @@ interface EHNamespaces {
     Response = ArmResourceUpdatedResponse<EHNamespace> | ArmResourceCreatedResponse<
       EHNamespace,
       ArmAsyncOperationHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -68,7 +69,8 @@ interface EHNamespaces {
   update is ArmCustomPatchSync<
     EHNamespace,
     PatchModel = EHNamespace,
-    Response = ArmResponse<EHNamespace> | ArmResourceCreatedSyncResponse<EHNamespace> | AcceptedResponse
+    Response = ArmResponse<EHNamespace> | ArmResourceCreatedSyncResponse<EHNamespace> | AcceptedResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -81,7 +83,8 @@ interface EHNamespaces {
   delete is ArmResourceDeleteWithoutOkAsync<
     EHNamespace,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -89,14 +92,17 @@ interface EHNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<EHNamespace>;
+  listByResourceGroup is ArmResourceListByParent<
+    EHNamespace,
+    Error = ErrorResponse
+  >;
 
   /**
    * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_List")
-  list is ArmListBySubscription<EHNamespace>;
+  list is ArmListBySubscription<EHNamespace, Error = ErrorResponse>;
 
   /**
    * GeoDR Failover
@@ -124,7 +130,8 @@ interface EHNamespaces {
   privateLinkResourcesGet is ArmResourceActionSync<
     EHNamespace,
     void,
-    ArmResponse<PrivateLinkResourcesListResult>
+    ArmResponse<PrivateLinkResourcesListResult>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -136,7 +143,8 @@ interface EHNamespaces {
   checkNameAvailability is ArmResourceActionSync<
     EHNamespace,
     CheckNameAvailabilityParameter,
-    ArmResponse<CheckNameAvailabilityResult>
+    ArmResponse<CheckNameAvailabilityResult>,
+    Error = ErrorResponse
   >;
 }
 

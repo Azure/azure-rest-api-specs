@@ -38,35 +38,43 @@ interface ArmDisasterRecoveries {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DisasterRecoveryConfigs_Get")
-  get is ArmResourceRead<ArmDisasterRecovery>;
+  get is ArmResourceRead<ArmDisasterRecovery, Error = ErrorResponse>;
 
   /**
    * Creates or updates a new Alias(Disaster Recovery configuration)
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DisasterRecoveryConfigs_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ArmDisasterRecovery>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ArmDisasterRecovery,
+    Error = ErrorResponse
+  >;
 
   /**
    * Deletes an Alias(Disaster Recovery configuration)
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DisasterRecoveryConfigs_Delete")
-  delete is ArmResourceDeleteSync<ArmDisasterRecovery>;
+  delete is ArmResourceDeleteSync<ArmDisasterRecovery, Error = ErrorResponse>;
 
   /**
    * Gets all Alias(Disaster Recovery configurations)
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DisasterRecoveryConfigs_List")
-  list is ArmResourceListByParent<ArmDisasterRecovery>;
+  list is ArmResourceListByParent<ArmDisasterRecovery, Error = ErrorResponse>;
 
   /**
    * This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DisasterRecoveryConfigs_BreakPairing")
-  breakPairing is ArmResourceActionSync<ArmDisasterRecovery, void, OkResponse>;
+  breakPairing is ArmResourceActionSync<
+    ArmDisasterRecovery,
+    void,
+    OkResponse,
+    Error = ErrorResponse
+  >;
 
   /**
    * Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace
@@ -74,7 +82,12 @@ interface ArmDisasterRecoveries {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DisasterRecoveryConfigs_FailOver")
   @action("failover")
-  failOver is ArmResourceActionSync<ArmDisasterRecovery, void, OkResponse>;
+  failOver is ArmResourceActionSync<
+    ArmDisasterRecovery,
+    void,
+    OkResponse,
+    Error = ErrorResponse
+  >;
 }
 
 @@maxLength(ArmDisasterRecovery.name, 50);

@@ -37,7 +37,7 @@ interface Eventhubs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EventHubs_Get")
-  get is ArmResourceRead<Eventhub>;
+  get is ArmResourceRead<Eventhub, Error = ErrorResponse>;
 
   /**
    * Creates or updates a new Event Hub as a nested resource within a Namespace.
@@ -47,7 +47,8 @@ interface Eventhubs {
   @operationId("EventHubs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Eventhub,
-    Response = ArmResourceUpdatedResponse<Eventhub>
+    Response = ArmResourceUpdatedResponse<Eventhub>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -55,7 +56,7 @@ interface Eventhubs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EventHubs_Delete")
-  delete is ArmResourceDeleteSync<Eventhub>;
+  delete is ArmResourceDeleteSync<Eventhub, Error = ErrorResponse>;
 
   /**
    * Gets all the Event Hubs in a Namespace.
@@ -81,7 +82,8 @@ interface Eventhubs {
       @query("$top")
       $top?: int32;
     },
-    Response = EventHubListResult
+    Response = EventHubListResult,
+    Error = ErrorResponse
   >;
 }
 

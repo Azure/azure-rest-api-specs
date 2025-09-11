@@ -36,7 +36,7 @@ interface ConsumerGroups {
   /**
    * Gets a description for the specified consumer group.
    */
-  get is ArmResourceRead<ConsumerGroup>;
+  get is ArmResourceRead<ConsumerGroup, Error = ErrorResponse>;
 
   /**
    * Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.
@@ -44,13 +44,14 @@ interface ConsumerGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ConsumerGroup,
-    Response = ArmResourceUpdatedResponse<ConsumerGroup>
+    Response = ArmResourceUpdatedResponse<ConsumerGroup>,
+    Error = ErrorResponse
   >;
 
   /**
    * Deletes a consumer group from the specified Event Hub and resource group.
    */
-  delete is ArmResourceDeleteSync<ConsumerGroup>;
+  delete is ArmResourceDeleteSync<ConsumerGroup, Error = ErrorResponse>;
 
   /**
    * Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.
@@ -73,7 +74,8 @@ interface ConsumerGroups {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

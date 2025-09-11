@@ -36,7 +36,10 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Return a NetworkSecurityPerimeterConfigurations resourceAssociationName
    */
-  getResourceAssociationName is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
+  getResourceAssociationName is ArmResourceRead<
+    NetworkSecurityPerimeterConfiguration,
+    Error = ErrorResponse
+  >;
 
   /**
    * Gets list of current NetworkSecurityPerimeterConfiguration for Namespace
@@ -45,7 +48,8 @@ interface NetworkSecurityPerimeterConfigurations {
   @operationId("NetworkSecurityPerimeterConfiguration_List")
   list is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,
-    Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>
+    Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -57,7 +61,8 @@ interface NetworkSecurityPerimeterConfigurations {
     void,
     OkResponse,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorResponse
   >;
 }
 

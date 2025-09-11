@@ -38,7 +38,7 @@ interface ApplicationGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplicationGroup_Get")
-  get is ArmResourceRead<ApplicationGroup>;
+  get is ArmResourceRead<ApplicationGroup, Error = ErrorResponse>;
 
   /**
    * Creates or updates an ApplicationGroup for a Namespace.
@@ -48,7 +48,8 @@ interface ApplicationGroups {
   @operationId("ApplicationGroup_CreateOrUpdateApplicationGroup")
   createOrUpdateApplicationGroup is ArmResourceCreateOrReplaceSync<
     ApplicationGroup,
-    Response = ArmResourceUpdatedResponse<ApplicationGroup>
+    Response = ArmResourceUpdatedResponse<ApplicationGroup>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -56,14 +57,17 @@ interface ApplicationGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplicationGroup_Delete")
-  delete is ArmResourceDeleteSync<ApplicationGroup>;
+  delete is ArmResourceDeleteSync<ApplicationGroup, Error = ErrorResponse>;
 
   /**
    * Gets a list of application groups for a Namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplicationGroup_ListByNamespace")
-  listByNamespace is ArmResourceListByParent<ApplicationGroup>;
+  listByNamespace is ArmResourceListByParent<
+    ApplicationGroup,
+    Error = ErrorResponse
+  >;
 }
 
 @@maxLength(ApplicationGroup.name, 256);

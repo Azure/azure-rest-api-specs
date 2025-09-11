@@ -64,7 +64,10 @@ interface AuthorizationRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_GetAuthorizationRule")
-  getAuthorizationRule is AuthorizationRuleOps.Read<AuthorizationRule>;
+  getAuthorizationRule is AuthorizationRuleOps.Read<
+    AuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Creates or updates an AuthorizationRule for a Namespace.
@@ -74,7 +77,8 @@ interface AuthorizationRules {
   @operationId("Namespaces_CreateOrUpdateAuthorizationRule")
   createOrUpdateAuthorizationRule is AuthorizationRuleOps.CreateOrUpdateSync<
     AuthorizationRule,
-    Response = ArmResourceUpdatedResponse<AuthorizationRule>
+    Response = ArmResourceUpdatedResponse<AuthorizationRule>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -82,14 +86,20 @@ interface AuthorizationRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_DeleteAuthorizationRule")
-  deleteAuthorizationRule is AuthorizationRuleOps.DeleteSync<AuthorizationRule>;
+  deleteAuthorizationRule is AuthorizationRuleOps.DeleteSync<
+    AuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets a list of authorization rules for a Namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_ListAuthorizationRules")
-  listAuthorizationRules is AuthorizationRuleOps.List<AuthorizationRule>;
+  listAuthorizationRules is AuthorizationRuleOps.List<
+    AuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the primary and secondary connection strings for the Namespace.
@@ -99,7 +109,8 @@ interface AuthorizationRules {
   listKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
     void,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -110,7 +121,8 @@ interface AuthorizationRules {
   regenerateKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
     RegenerateAccessKeyParameters,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 alias DisasterRecoveryConfigOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -152,12 +164,18 @@ interface DisasterRecoveryConfigs {
   /**
    * Gets an AuthorizationRule for a Namespace by rule name.
    */
-  getAuthorizationRule is DisasterRecoveryConfigOps.Read<AuthorizationRule>;
+  getAuthorizationRule is DisasterRecoveryConfigOps.Read<
+    AuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets a list of authorization rules for a Namespace.
    */
-  listAuthorizationRules is DisasterRecoveryConfigOps.List<AuthorizationRule>;
+  listAuthorizationRules is DisasterRecoveryConfigOps.List<
+    AuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the primary and secondary connection strings for the Namespace.
@@ -165,7 +183,8 @@ interface DisasterRecoveryConfigs {
   listKeys is DisasterRecoveryConfigOps.ActionSync<
     AuthorizationRule,
     void,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 alias EventHubOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -207,7 +226,10 @@ interface EventHubs {
   /**
    * Gets an AuthorizationRule for an Event Hub by rule name.
    */
-  getAuthorizationRule is EventHubOps.Read<AuthorizationRule>;
+  getAuthorizationRule is EventHubOps.Read<
+    AuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Creates or updates an AuthorizationRule for the specified Event Hub. Creation/update of the AuthorizationRule will take a few seconds to take effect.
@@ -215,18 +237,25 @@ interface EventHubs {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdateAuthorizationRule is EventHubOps.CreateOrUpdateSync<
     AuthorizationRule,
-    Response = ArmResourceUpdatedResponse<AuthorizationRule>
+    Response = ArmResourceUpdatedResponse<AuthorizationRule>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
    * Deletes an Event Hub AuthorizationRule.
    */
-  deleteAuthorizationRule is EventHubOps.DeleteSync<AuthorizationRule>;
+  deleteAuthorizationRule is EventHubOps.DeleteSync<
+    AuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the authorization rules for an Event Hub.
    */
-  listAuthorizationRules is EventHubOps.List<AuthorizationRule>;
+  listAuthorizationRules is EventHubOps.List<
+    AuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the ACS and SAS connection strings for the Event Hub.
@@ -234,7 +263,8 @@ interface EventHubs {
   listKeys is EventHubOps.ActionSync<
     AuthorizationRule,
     void,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -243,7 +273,8 @@ interface EventHubs {
   regenerateKeys is EventHubOps.ActionSync<
     AuthorizationRule,
     RegenerateAccessKeyParameters,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 

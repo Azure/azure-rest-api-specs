@@ -37,7 +37,7 @@ interface PrivateEndpointConnections {
    * Gets a description for the specified Private Endpoint Connection name.
    */
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is ArmResourceRead<PrivateEndpointConnection, Error = ErrorResponse>;
 
   /**
    * Creates or updates PrivateEndpointConnections of service namespace.
@@ -49,7 +49,8 @@ interface PrivateEndpointConnections {
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmResourceCreatedSyncResponse<PrivateEndpointConnection> | (AcceptedResponse & {
       @bodyRoot
       _: PrivateEndpointConnection;
-    })
+    }),
+    Error = ErrorResponse
   >;
 
   /**
@@ -61,14 +62,15 @@ interface PrivateEndpointConnections {
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
    * Gets the available PrivateEndpointConnections within a namespace.
    */
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
-  list is ArmResourceListByParent<PrivateEndpointConnection>;
+  list is ArmResourceListByParent<PrivateEndpointConnection, Error = ErrorResponse>;
 }
 
 @@doc(PrivateEndpointConnection.name, "The PrivateEndpointConnection name");

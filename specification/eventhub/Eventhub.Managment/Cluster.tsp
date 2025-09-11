@@ -34,7 +34,7 @@ interface Clusters {
   /**
    * Gets the resource description of the specified Event Hubs Cluster.
    */
-  get is ArmResourceRead<Cluster>;
+  get is ArmResourceRead<Cluster, Error = ErrorResponse>;
 
   /**
    * Creates or updates an instance of an Event Hubs Cluster.
@@ -42,7 +42,8 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -52,7 +53,8 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = Cluster,
-    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse
+    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -61,18 +63,22 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
    * Lists the available Event Hubs Clusters within an ARM resource group
    */
-  listByResourceGroup is ArmResourceListByParent<Cluster>;
+  listByResourceGroup is ArmResourceListByParent<
+    Cluster,
+    Error = ErrorResponse
+  >;
 
   /**
    * Lists the available Event Hubs Clusters within an ARM resource group
    */
-  listBySubscription is ArmListBySubscription<Cluster>;
+  listBySubscription is ArmListBySubscription<Cluster, Error = ErrorResponse>;
 
   /**
    * List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
@@ -83,7 +89,8 @@ interface Clusters {
   listNamespaces is ArmResourceActionSync<
     Cluster,
     void,
-    ArmResponse<EHNamespaceIdListResult>
+    ArmResponse<EHNamespaceIdListResult>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -96,7 +103,8 @@ interface Clusters {
   patch is ArmResourceActionSync<
     Cluster,
     ClusterQuotaConfigurationProperties,
-    ArmResponse<ClusterQuotaConfigurationProperties> | ArmResourceCreatedSyncResponse<ClusterQuotaConfigurationProperties> | AcceptedResponse
+    ArmResponse<ClusterQuotaConfigurationProperties> | ArmResourceCreatedSyncResponse<ClusterQuotaConfigurationProperties> | AcceptedResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -109,7 +117,8 @@ interface Clusters {
   configurationGet is ArmResourceActionSync<
     Cluster,
     void,
-    ArmResponse<ClusterQuotaConfigurationProperties>
+    ArmResponse<ClusterQuotaConfigurationProperties>,
+    Error = ErrorResponse
   >;
 }
 

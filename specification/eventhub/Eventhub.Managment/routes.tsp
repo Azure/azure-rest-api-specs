@@ -25,7 +25,8 @@ interface ClustersOperationGroup {
   @action("availableClusterRegions")
   listAvailableClusterRegion is ArmProviderActionSync<
     Response = AvailableClustersList,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = ErrorResponse
   >;
 }
 
@@ -40,6 +41,7 @@ interface NamespacesOperationGroup {
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityParameter,
     Response = CheckNameAvailabilityResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = ErrorResponse
   >;
 }

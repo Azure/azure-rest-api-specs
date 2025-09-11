@@ -65,7 +65,7 @@ interface NetworkRuleSets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_GetNetworkRuleSet")
-  getNetworkRuleSet is ArmResourceRead<NetworkRuleSet>;
+  getNetworkRuleSet is ArmResourceRead<NetworkRuleSet, Error = ErrorResponse>;
 
   /**
    * Create or update NetworkRuleSet for a Namespace.
@@ -75,7 +75,8 @@ interface NetworkRuleSets {
   @operationId("Namespaces_CreateOrUpdateNetworkRuleSet")
   createOrUpdateNetworkRuleSet is ArmResourceCreateOrReplaceSync<
     NetworkRuleSet,
-    Response = ArmResourceUpdatedResponse<NetworkRuleSet>
+    Response = ArmResourceUpdatedResponse<NetworkRuleSet>,
+    Error = ErrorResponse
   >;
 
   /**
