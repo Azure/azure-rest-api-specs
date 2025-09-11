@@ -4,73 +4,73 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Consumption;
 using TypeSpec.Http;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationStatus.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(OperationStatus.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Marketplace.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(Marketplace.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagsResult.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(TagsResult.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Balance.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(Balance.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ReservationSummary.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(ReservationSummary.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ReservationDetail.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(ReservationDetail.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ReservationRecommendationDetailsModel.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(ReservationRecommendationDetailsModel.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ReservationTransaction.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(ReservationTransaction.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ModernReservationTransaction.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(ModernReservationTransaction.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ManagementGroupAggregatedCostResult.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(ManagementGroupAggregatedCostResult.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(EventSummary.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(EventSummary.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LotSummary.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(LotSummary.properties);
 
 @@clientName(LotProperties.OrganizationType, "organizationType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LegacyUsageDetail.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(LegacyUsageDetail.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ModernUsageDetail.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(ModernUsageDetail.properties);
 
-// #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-// @@flattenProperty(LegacyReservationRecommendation.properties);
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+// @@Legacy.flattenProperty(LegacyReservationRecommendation.properties);
 
-// #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-// @@flattenProperty(ModernReservationRecommendation.properties);
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+// @@Legacy.flattenProperty(ModernReservationRecommendation.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LegacyChargeSummary.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(LegacyChargeSummary.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ModernChargeSummary.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(ModernChargeSummary.properties);
 
 @@clientName(Budgets.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Budget.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(Budget.properties);
 
 @@clientLocation(PriceSheetResults.get, PriceSheet);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PriceSheetResult.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(PriceSheetResult.properties);
 
 @@clientLocation(CreditSummaries.get, "Credits");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CreditSummary.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+@@Legacy.flattenProperty(CreditSummary.properties);
 
 @@clientLocation(PriceSheetOperationGroup.downloadByBillingAccountPeriod,
   PriceSheet
