@@ -74,11 +74,12 @@ model ItemDetails {
   @visibility(Lifecycle.Read)
   errorData?: Errors.WorkspaceItemError;
 
-  /** List of user-supplied tags associated with the job. */
+  /** Priority of job or session. */
   @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   priority?: Priority;
 
+  /** List of user-supplied tags associated with the job. */
   @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
