@@ -80,6 +80,28 @@ union RegistrationStatus {
   string,
 }
 
+@doc("The disconnected create or update operation properties")
+model DisconnectedOperationPropertiesCreateOrUpdate {
+  @visibility(Lifecycle.Read)
+  @doc("The resource provisioning state")
+  provisioningState?: ResourceProvisioningState;
+
+  @doc("The connection intent")
+  connectionIntent: ConnectionIntent;
+
+  @visibility(Lifecycle.Read)
+  @doc("The connection status")
+  connectionStatus?: ConnectionStatus;
+
+  @doc("The registration intent")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  registrationStatus?: RegistrationStatus;
+
+  @doc("The device version")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  deviceVersion?: string;
+}
+
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)
