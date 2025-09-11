@@ -16,7 +16,6 @@ using Azure.ResourceManager;
 namespace Microsoft.Community;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-08-01-preview`,
 }
 
