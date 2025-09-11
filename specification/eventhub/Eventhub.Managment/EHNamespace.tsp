@@ -13,6 +13,8 @@ namespace Microsoft.EventHub;
 /**
  * Single Namespace item in List or Get Operation
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EHNamespace
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<EHNamespaceProperties> {
   ...ResourceNameParameter<
@@ -36,6 +38,7 @@ model EHNamespace
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface EHNamespaces {
   /**
    * Gets the description of the specified namespace.
@@ -64,6 +67,7 @@ interface EHNamespaces {
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<

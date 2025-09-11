@@ -438,6 +438,7 @@ model AvailableClustersList {
   /**
    * The count of readily available and pre-provisioned Event Hubs Clusters per region.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: AvailableCluster[];
 }
 
@@ -487,12 +488,14 @@ model ErrorDetail {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: ErrorDetail[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -510,6 +513,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -668,6 +672,7 @@ model Resource {
 /**
  * The response of the List Namespace IDs operation
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EHNamespaceIdListResult {
   /**
    * Result of the List Namespace IDs operation
@@ -679,6 +684,7 @@ model EHNamespaceIdListResult {
 /**
  * The full ARM ID of an Event Hubs Namespace
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EHNamespaceIdContainer {
   /**
    * id parameter
@@ -754,6 +760,7 @@ model UserAssignedIdentity {
 /**
  * Namespace properties supplied for create namespace operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EHNamespaceProperties {
   /**
    * The minimum TLS version for the cluster to support, e.g. '1.2'
@@ -866,6 +873,7 @@ model Encryption {
   /**
    * Properties of KeyVault
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keyVaultProperties?: KeyVaultProperties[];
 
   /**
@@ -927,6 +935,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the Private Endpoint Connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: EndPointProvisioningState;
 }
 
@@ -1113,6 +1122,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * Provisioning state of NetworkSecurityPerimeter configuration propagation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: NetworkSecurityPerimeterConfigurationProvisioningState;
 
   /**
@@ -1348,11 +1358,13 @@ model NetworkRuleSetProperties {
   /**
    * List VirtualNetwork Rules
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   virtualNetworkRules?: NWRuleSetVirtualNetworkRules[];
 
   /**
    * List of IpRules
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipRules?: NWRuleSetIpRules[];
 
   /**
@@ -1364,6 +1376,7 @@ model NetworkRuleSetProperties {
 /**
  * The response from the List namespace operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NWRuleSetVirtualNetworkRules {
   /**
    * Subnet properties
@@ -1389,6 +1402,7 @@ model Subnet {
 /**
  * The response from the List namespace operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NWRuleSetIpRules {
   /**
    * IP Mask
@@ -1592,6 +1606,7 @@ model Operation {
    * Properties of the operation
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: unknown;
 }

@@ -27,6 +27,7 @@ model NetworkSecurityPerimeterConfiguration
   /**
    * The geo-location where the resource lives
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -56,6 +57,7 @@ interface NetworkSecurityPerimeterConfigurations {
    * Refreshes any information about the association.
    */
   @action("reconcile")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceActionAsync<
     NetworkSecurityPerimeterConfiguration,
     void,

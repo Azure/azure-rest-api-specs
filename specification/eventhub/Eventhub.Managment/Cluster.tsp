@@ -13,6 +13,7 @@ namespace Microsoft.EventHub;
 /**
  * Single Event Hubs Cluster resource in List or Get operations.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Cluster
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ClusterProperties> {
   ...ResourceNameParameter<
@@ -98,6 +99,8 @@ interface Clusters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Configuration_Patch")
+  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch
   @action("quotaConfiguration/default")
   patch is ArmResourceActionSync<
