@@ -40,6 +40,22 @@ interface CreditSummaries {
   @operationId("Credits_Get")
   get is ArmResourceRead<
     CreditSummary,
+    Parameters = {
+      /**
+       * BillingAccount ID
+       */
+      @path
+      @segment("billingAccounts")
+      billingAccountId: string;
+
+      /**
+       * Billing Profile ID.
+       */
+      @path
+      @segment("billingProfiles")
+      billingProfileId: string;
+    },
+    Error = ErrorResponse,
     Response = ArmResponse<CreditSummary> | ArmNoContentResponse
   >;
 }
