@@ -10,13 +10,13 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/Reviews/{version-status}/{version}/reviews.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.Marketplace"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Marketplace"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-marketplace"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-marketplace"
     namespace: "com.azure.resourcemanager.marketplace"
     service-name: "reviews"
     flavor: azure

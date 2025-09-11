@@ -5,20 +5,24 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.Help;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SolutionMetadataResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SolutionMetadataResource.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SolutionPatchRequestBody.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SolutionPatchRequestBody.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SolutionNlpMetadataResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SolutionNlpMetadataResource.properties
+);
 
 @@clientName(DiagnosticResources.create::parameters.resource,
   "diagnosticResourceRequest"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DiagnosticResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticResource.properties
+);
 
 @@clientName(SolutionResources.create::parameters.resource,
   "solutionRequestBody"
@@ -26,20 +30,24 @@ using Microsoft.Help;
 @@clientName(SolutionResources.update::parameters.properties,
   "solutionPatchRequestBody"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SolutionResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SolutionResource.properties
+);
 
 @@clientName(SimplifiedSolutionsResources.create::parameters.resource,
   "simplifiedSolutionsRequestBody"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SimplifiedSolutionsResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SimplifiedSolutionsResource.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(TroubleshooterResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TroubleshooterResource.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SolutionResourceSelfHelp.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SolutionResourceSelfHelp.properties
+);
 
 @@clientName(DiagnosticResources.create::parameters.resource,
   "diagnosticResourceRequest"
@@ -154,7 +162,7 @@ using Microsoft.Help;
 @@clientName(DiscoveryResponse, "SelfHelpDiscoverySolutionResult", "csharp");
 @@clientName(Error, "SelfHelpError", "csharp");
 @@clientName(Filter, "SelfHelpFilter", "csharp");
-@@clientName(CheckNameAvailabilityRequest,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "SelfHelpNameAvailabilityContent",
   "csharp"
 );
@@ -193,9 +201,18 @@ using Microsoft.Help;
   "IsNameAvailable",
   "csharp"
 );
-@@alternateType(CheckNameAvailabilityRequest.type, armResourceType, "csharp");
-@@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityRequest.name, "ResourceName", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+  armResourceType,
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.name,
+  "ResourceName",
+  "csharp"
+);
 @@clientName(ImportanceLevel, "SelfHelpImportanceLevel", "csharp");
 @@clientName(Error.type, "ErrorType ", "csharp");
 @@clientName(Step.type, "StepType", "csharp");

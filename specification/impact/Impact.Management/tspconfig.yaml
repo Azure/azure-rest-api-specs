@@ -13,11 +13,11 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/impact.json"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.ImpactReporting"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ImpactReporting"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-impactreporting"
     namespace: "azure.mgmt.impactreporting"
@@ -25,7 +25,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-impactreporting"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-impactreporting"
     namespace: "com.azure.resourcemanager.impactreporting"
     service-name: "Impact Reporting"
     flavor: azure
