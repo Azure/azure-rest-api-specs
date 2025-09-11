@@ -15,12 +15,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Dell.Storage.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.Dell.Storage"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Dell.Storage"
     flavor: azure
-    service-dir: "sdk/dellstorage"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dellstorage"
     namespace: "azure.mgmt.dellstorage"
@@ -28,7 +27,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dell-storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dell-storage"
     namespace: com.azure.resourcemanager.dell.storage
     service-name: "Dell Storage"
     flavor: "azure"

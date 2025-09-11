@@ -18,23 +18,8 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: false
-  "@azure-tools/typespec-csharp":
-    package-mode: "dataplane"
-    package-dir: "Azure.AI.Projects"
-    namespace: "{package-dir}"
-    package-name: "{package-dir}"
-    api-version: "2025-05-15-preview"
-    model-namespace: false
-    flavor: azure
-    generate-test: false
-    generate-sample: false
-    generate-sample-project: false
-    clear-output-folder: true
-  "@azure-typespec/http-client-csharp":
-    namespace: Azure.AI.Projects
-    model-namespace: false
-    api-version: "2025-05-15-preview"
   "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects
     api-version: "2025-05-15-preview"
   "@azure-tools/typespec-ts":
@@ -48,7 +33,7 @@ options:
       description: "Azure AI Projects Client"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-projects"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
     namespace: com.azure.ai.projects
     partial-update: true
     enable-sync-stack: true

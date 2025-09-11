@@ -16,13 +16,12 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.CarbonOptimization"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.CarbonOptimization"
     flavor: azure
     generate-sample-project: false
-    service-dir: "sdk/carbon"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-carbonoptimization"
@@ -30,7 +29,7 @@ options:
     package-details:
       name: "@azure/arm-carbonoptimization"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-carbonoptimization"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-carbonoptimization"
     namespace: "com.azure.resourcemanager.carbonoptimization"
     flavor: azure
     service-name: "Carbon Optimization"

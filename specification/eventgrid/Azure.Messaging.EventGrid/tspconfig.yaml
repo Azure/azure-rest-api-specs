@@ -24,18 +24,19 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: Azure.Messaging.EventGridV2
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     model-namespace: false
     namespace: Azure.Messaging.EventGrid.Namespaces
     flavor: azure
     generate-sample-project: false
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-name: Azure.Messaging.EventGrid.Namespaces
     namespace: Azure.Messaging.EventGrid.Namespaces
     model-namespace: false
   "@azure-tools/typespec-java":
     namespace: "com.azure.messaging.eventgrid.namespaces"
-    package-dir: azure-messaging-eventgrid-namespaces
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-eventgrid-namespaces"
     partial-update: true
     generate-samples: false
     generate-tests: false
