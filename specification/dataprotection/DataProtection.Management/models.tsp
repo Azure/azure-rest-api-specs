@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -227,6 +228,19 @@ union BCDRSecurityLevel {
   Excellent: "Excellent",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotSupported: "NotSupported",
+}
+
+/**
+ * Feature state
+ */
+union FeatureState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NotApplicable: "NotApplicable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Disabled: "Disabled",
 }
 
 /**
@@ -645,6 +659,12 @@ model BackupVault {
    * List of replicated regions for Backup Vault
    */
   replicatedRegions?: string[];
+
+  /**
+   * Setting to support cross region backup at a vault
+   */
+  @added(Versions.v2025_08_15_preview)
+  crossRegionBackupSettings?: FeatureState;
 }
 
 /**
@@ -1087,6 +1107,12 @@ model PatchBackupVaultInput {
    * ResourceGuardOperationRequests on which LAC check will be performed
    */
   resourceGuardOperationRequests?: string[];
+
+  /**
+   * Setting to support cross region backup at a vault
+   */
+  @added(Versions.v2025_08_15_preview)
+  crossRegionBackupSettings?: FeatureState;
 }
 
 /**
