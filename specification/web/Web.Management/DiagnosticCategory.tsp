@@ -54,7 +54,10 @@ interface DiagnosticCategories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_GetSiteDiagnosticCategory")
-  getSiteDiagnosticCategory is DiagnosticCategoryOps.Read<DiagnosticCategory, OverrideErrorType = DefaultErrorResponse>;
+  getSiteDiagnosticCategory is DiagnosticCategoryOps.Read<
+    DiagnosticCategory,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get Diagnostics Categories

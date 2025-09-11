@@ -101,7 +101,12 @@ interface BackupItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_Restore")
-  restore is BackupItemOps.ActionAsync<BackupItem, RestoreRequest, OkResponse, OverrideErrorType = DefaultErrorResponse>;
+  restore is BackupItemOps.ActionAsync<
+    BackupItem,
+    RestoreRequest,
+    OkResponse,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 }
 @armResourceOperations
 interface BackupItemOperationGroupOps

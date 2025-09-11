@@ -54,7 +54,7 @@ interface Certificates {
   /**
    * Description for Create or update a certificate.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is CertificateOps.CreateOrUpdateSync<
     Certificate,
     Response = ArmResourceUpdatedResponse<Certificate>,
@@ -136,12 +136,18 @@ interface SiteCertificates {
   /**
    * Get a certificate belonging to a given site.
    */
-  get is SiteCertificateOps.Read<Certificate, OverrideErrorType = DefaultErrorResponse>;
+  get is SiteCertificateOps.Read<
+    Certificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Create or update a certificate under a given site.
    */
-  createOrUpdate is SiteCertificateOps.CreateOrUpdateSync<Certificate, OverrideErrorType = DefaultErrorResponse>;
+  createOrUpdate is SiteCertificateOps.CreateOrUpdateSync<
+    Certificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Create or update a certificate under a given site.
@@ -156,7 +162,10 @@ interface SiteCertificates {
   /**
    * Delete a certificate from the site.
    */
-  delete is SiteCertificateOps.DeleteSync<Certificate, OverrideErrorType = DefaultErrorResponse>;
+  delete is SiteCertificateOps.DeleteSync<
+    Certificate,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Get all certificates in a resource group under a site.

@@ -56,7 +56,10 @@ interface PremierAddOns {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPremierAddOn")
-  getPremierAddOn is PremierAddOnOps.Read<PremierAddOn,OverrideErrorType = DefaultErrorResponse>;
+  getPremierAddOn is PremierAddOnOps.Read<
+    PremierAddOn,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Updates a named add-on of an app.

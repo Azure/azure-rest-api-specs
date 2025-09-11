@@ -316,7 +316,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   getPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.Read<
     RemotePrivateEndpointConnectionARMResource,
     OverrideErrorType = DefaultErrorResponse
-    >;
+  >;
 
   /**
    * Description for Approves or rejects a private endpoint connection

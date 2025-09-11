@@ -55,7 +55,7 @@ interface SiteAuthSettingsV2s {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetAuthSettingsV2WithoutSecrets")
   getAuthSettingsV2WithoutSecrets is SiteAuthSettingsV2Ops.Read<
     SiteAuthSettingsV2,
@@ -65,8 +65,8 @@ interface SiteAuthSettingsV2s {
   /**
    * Description for Updates site's Authentication / Authorization settings for apps via the V2 format
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateAuthSettingsV2")
   updateAuthSettingsV2 is SiteAuthSettingsV2Ops.CreateOrUpdateSync<
     SiteAuthSettingsV2,
@@ -77,7 +77,7 @@ interface SiteAuthSettingsV2s {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetAuthSettingsV2")
   @get
   @action("list")
@@ -124,7 +124,7 @@ interface SiteAuthSettingsV2OperationGroup {
   /**
    * Gets site's Authentication / Authorization settings for apps via the V2 format
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetAuthSettingsV2WithoutSecretsSlot")
   getAuthSettingsV2WithoutSecretsSlot is SiteAuthSettingsV2OperationGroupOps.Read<
     SiteAuthSettingsV2,
@@ -134,8 +134,8 @@ interface SiteAuthSettingsV2OperationGroup {
   /**
    * Description for Updates site's Authentication / Authorization settings for apps via the V2 format
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_UpdateAuthSettingsV2Slot")
   updateAuthSettingsV2Slot is SiteAuthSettingsV2OperationGroupOps.CreateOrUpdateSync<
     SiteAuthSettingsV2,
@@ -146,7 +146,7 @@ interface SiteAuthSettingsV2OperationGroup {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetAuthSettingsV2Slot")
   @get
   @action("list")

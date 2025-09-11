@@ -54,7 +54,7 @@ interface SiteExtensionInfos {
   /**
    * Description for Get site extension information by its ID for a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetSiteExtension")
   getSiteExtension is SiteExtensionInfoOps.Read<
     SiteExtensionInfo,
@@ -66,7 +66,7 @@ interface SiteExtensionInfos {
   /**
    * Description for Install site extension on a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_InstallSiteExtension")
   installSiteExtension is SiteExtensionInfoOps.CreateOrUpdateAsync<
     SiteExtensionInfo,
@@ -84,9 +84,9 @@ interface SiteExtensionInfos {
   /**
    * Description for Remove a site extension from a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteSiteExtension")
   deleteSiteExtension is SiteExtensionInfoOps.DeleteSync<
     SiteExtensionInfo,
@@ -97,7 +97,7 @@ interface SiteExtensionInfos {
   /**
    * Description for Get list of siteextensions for a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSiteExtensions")
   listSiteExtensions is SiteExtensionInfoOps.List<
     SiteExtensionInfo,
@@ -140,7 +140,7 @@ interface SiteExtensionInfoOperationGroup {
   /**
    * Description for Get site extension information by its ID for a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetSiteExtensionSlot")
   getSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.Read<
     SiteExtensionInfo,
@@ -152,8 +152,8 @@ interface SiteExtensionInfoOperationGroup {
   /**
    * Description for Install site extension on a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_InstallSiteExtensionSlot")
   installSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.CreateOrUpdateAsync<
     SiteExtensionInfo,
@@ -170,9 +170,9 @@ interface SiteExtensionInfoOperationGroup {
   /**
    * Description for Remove a site extension from a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_DeleteSiteExtensionSlot")
   deleteSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.DeleteSync<
     SiteExtensionInfo,
@@ -183,7 +183,7 @@ interface SiteExtensionInfoOperationGroup {
   /**
    * Description for Get list of siteextensions for a web site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListSiteExtensionsSlot")
   listSiteExtensionsSlot is SiteExtensionInfoOperationGroupOps.List<
     SiteExtensionInfo,

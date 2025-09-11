@@ -57,7 +57,10 @@ interface PrivateAccesses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetPrivateAccess")
-  getPrivateAccess is PrivateAccessOps.Read<PrivateAccess,OverrideErrorType = DefaultErrorResponse>;
+  getPrivateAccess is PrivateAccessOps.Read<
+    PrivateAccess,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Sets data around private site access enablement and authorized Virtual Networks that can access the site.

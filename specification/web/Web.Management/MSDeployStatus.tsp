@@ -62,7 +62,10 @@ interface MSDeployStatuses {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetMSDeployStatus")
-  getMSDeployStatus is MSDeployStatusOps.Read<MSDeployStatus, OverrideErrorType = DefaultErrorResponse>;
+  getMSDeployStatus is MSDeployStatusOps.Read<
+    MSDeployStatus,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Invoke the MSDeploy web app extension.
@@ -213,7 +216,10 @@ interface MSDeployStatusSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetMSDeployStatusSlot")
-  getMSDeployStatusSlot is MSDeployStatusSlotOperationGroupOps.Read<MSDeployStatus, OverrideErrorType = DefaultErrorResponse>;
+  getMSDeployStatusSlot is MSDeployStatusSlotOperationGroupOps.Read<
+    MSDeployStatus,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Invoke the MSDeploy web app extension.
@@ -292,7 +298,10 @@ interface InstanceMSDeployStatusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetInstanceMsDeployStatusSlot")
-  getInstanceMsDeployStatusSlot is InstanceMSDeployStatusOperationGroupOps.Read<MSDeployStatus, OverrideErrorType = DefaultErrorResponse>;
+  getInstanceMsDeployStatusSlot is InstanceMSDeployStatusOperationGroupOps.Read<
+    MSDeployStatus,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Invoke the MSDeploy web app extension.

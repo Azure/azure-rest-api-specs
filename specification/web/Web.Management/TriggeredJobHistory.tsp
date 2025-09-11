@@ -66,7 +66,7 @@ interface TriggeredJobHistories {
   /**
    * Description for Gets a triggered web job's history by its ID for an app, , or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetTriggeredWebJobHistorySlot")
   getTriggeredWebJobHistorySlot is TriggeredJobHistoryOps.Read<
     TriggeredJobHistory,
@@ -77,7 +77,7 @@ interface TriggeredJobHistories {
   /**
    * Description for List a triggered web job's history for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListTriggeredWebJobHistorySlot")
   listTriggeredWebJobHistorySlot is TriggeredJobHistoryOps.List<
     TriggeredJobHistory,
@@ -120,7 +120,7 @@ interface TriggeredJobHistoryOperationGroup {
   /**
    * Description for Gets a triggered web job's history by its ID for an app, , or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_GetTriggeredWebJobHistory")
   getTriggeredWebJobHistory is TriggeredJobHistoryOperationGroupOps.Read<
     TriggeredJobHistory,
@@ -131,7 +131,7 @@ interface TriggeredJobHistoryOperationGroup {
   /**
    * Description for List a triggered web job's history for an app, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebApps_ListTriggeredWebJobHistory")
   listTriggeredWebJobHistory is TriggeredJobHistoryOperationGroupOps.List<
     TriggeredJobHistory,

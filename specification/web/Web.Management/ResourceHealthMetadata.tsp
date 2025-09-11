@@ -55,14 +55,17 @@ interface ResourceHealthMetadataOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ResourceHealthMetadata_GetBySite")
-  getBySite is ResourceHealthMetadataOperationGroupOps.Read<ResourceHealthMetadata, OverrideErrorType = DefaultErrorResponse>;
+  getBySite is ResourceHealthMetadataOperationGroupOps.Read<
+    ResourceHealthMetadata,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site as a collection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ResourceHealthMetadata_ListBySite")
   listBySite is ResourceHealthMetadataOperationGroupOps.List<
     ResourceHealthMetadata,
@@ -105,7 +108,7 @@ interface BySiteSlotOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ResourceHealthMetadata_GetBySiteSlot")
   getBySiteSlot is BySiteSlotOperationGroupOps.Read<
     ResourceHealthMetadata,
@@ -115,7 +118,7 @@ interface BySiteSlotOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site as a collection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ResourceHealthMetadata_ListBySiteSlot")
   @segment("resourceHealthMetadata")
   listBySiteSlot is BySiteSlotOperationGroupOps.List<
