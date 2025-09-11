@@ -51,43 +51,70 @@ model TenantLocationProperties {
   provisioningState?: ProvisioningState;
 }
 
-model TenantLocationResource is Azure.ResourceManager.ProxyResource<TenantLocationProperties> {
-  @key @path @segment("locations") @pattern("^[a-z0-9]+$") @visibility(Lifecycle.Read)
+model TenantLocationResource
+  is Azure.ResourceManager.ProxyResource<TenantLocationProperties> {
+  @key
+  @path
+  @segment("locations")
+  @pattern("^[a-z0-9]+$")
+  @visibility(Lifecycle.Read)
   locationName: string;
 }
 
 model NotificationSessionProperties {
   /** Arbitrary configuration payload (string encoded). */
   configuration?: string;
+
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   status?: NotificationSessionStatus;
+
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
   /** Creation timestamp. */
   @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
+
   /** Last update timestamp. */
   @visibility(Lifecycle.Read)
   updatedAt?: utcDateTime;
+
   /** Resource location */
-  @visibility(Lifecycle.Read) location?: string;
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
 
 @parentResource(TenantLocationResource)
-model NotificationSessionResource is Azure.ResourceManager.ProxyResource<NotificationSessionProperties> {
-  @key @path @segment("notificationSessions") @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$") @visibility(Lifecycle.Read)
+model NotificationSessionResource
+  is Azure.ResourceManager.ProxyResource<NotificationSessionProperties> {
+  @key
+  @path
+  @segment("notificationSessions")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
+  @visibility(Lifecycle.Read)
   notificationSessionName: string;
 }
 
-model GetSessionDetailsRequest { @minValue(1) @maxValue(240) durationInMinutes?: int32; }
+model GetSessionDetailsRequest {
+  @minValue(1)
+  @maxValue(240)
+  durationInMinutes?: int32;
+}
 
 model CreateNotificationSessionRequest {
   description?: string;
-  @minValue(1) @maxValue(1440) maxDurationMinutes?: int32;
+
+  @minValue(1)
+  @maxValue(1440)
+  maxDurationMinutes?: int32;
+
   configuration?: string;
 }
 
-model NotificationSessionConnectionDetails { connectionString?: string; endpoint?: string; }
+model NotificationSessionConnectionDetails {
+  connectionString?: string;
+  endpoint?: string;
+}
 
 model GetSessionDetailsResponse {
   id?: string;
@@ -96,50 +123,87 @@ model GetSessionDetailsResponse {
   validUntil?: utcDateTime;
 }
 
-model CloseSessionResponse { status: string; message?: string; }
+model CloseSessionResponse {
+  status: string;
+  message?: string;
+}
 
 alias CreateNotificationSessionResponse = NotificationSessionResource;
 
 @lroStatus
-union OperationStatus { string, InProgress: "InProgress", Succeeded: "Succeeded", Failed: "Failed", Canceled: "Canceled" }
+union OperationStatus {
+  string,
+  InProgress: "InProgress",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
+}
 
 interface NotificationsSessions {
   /** Create a notification session. */
   @put
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
   createNotificationSession(
-    @path @pattern("^[a-z0-9]+$") location: string,
-    @path @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$") notificationSessionName: string,
+    @path
+    @pattern("^[a-z0-9]+$")
+    location: string,
+
+    @path
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
+    notificationSessionName: string,
+
     @body body: CreateNotificationSessionRequest,
     ...ApiVersionParameter,
   ):
-    | { @statusCode _: 200; @body body: CreateNotificationSessionResponse; }
-    | { @statusCode _: 201; @body body: CreateNotificationSessionResponse; }
-    | { @statusCode _: 202; @header("Retry-After") retryAfter?: int32; }
+    | {
+        @statusCode _: 200;
+        @body body: CreateNotificationSessionResponse;
+      }
+    | {
+        @statusCode _: 201;
+        @body body: CreateNotificationSessionResponse;
+      }
+    | {
+        @statusCode _: 202;
+        @header("Retry-After") retryAfter?: int32;
+        @header("Location") location?: string;
+      }
     | ErrorResponse;
-
 
   /** Get session details. */
   @post
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:getSessionDetails")
   getSessionDetails(
-    @path @pattern("^[a-z0-9]+$") location: string,
-    @path @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$") notificationSessionName: string,
+    @path
+    @pattern("^[a-z0-9]+$")
+    location: string,
+
+    @path
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
+    notificationSessionName: string,
+
     @body body: GetSessionDetailsRequest,
     ...ApiVersionParameter,
-  ):
-    | { @statusCode _: 200; @body body: GetSessionDetailsResponse; }
-    | ErrorResponse;
-
+  ): {
+    @statusCode _: 200;
+    @body body: GetSessionDetailsResponse;
+  } | ErrorResponse;
 
   /** Close the session. */
   @post
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}:closeSession")
   closeSession(
-    @path @pattern("^[a-z0-9]+$") location: string,
-    @path @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$") notificationSessionName: string,
+    @path
+    @pattern("^[a-z0-9]+$")
+    location: string,
+
+    @path
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
+    notificationSessionName: string,
+
     ...ApiVersionParameter,
-  ):
-    | { @statusCode _: 200; @body body: CloseSessionResponse; }
-    | ErrorResponse;
+  ): {
+    @statusCode _: 200;
+    @body body: CloseSessionResponse;
+  } | ErrorResponse;
 }
