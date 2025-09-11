@@ -813,9 +813,16 @@
           "description": "The destination IP address of the private link service."
         },
         "accessMode": {
-          "readOnly": false,
-          "type": "enum",
-          "description": "The access mode of the private link service."
+          "type": "string",
+          "description": "The access mode of the private link service.",
+          "enum": [
+            "Default",
+            "Restricted"
+          ],
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          }
         },
         "networkInterfaces": {
           "type": "array",
