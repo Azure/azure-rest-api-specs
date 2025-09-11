@@ -12,7 +12,6 @@ using Azure.ResourceManager;
 namespace Microsoft.CognitiveSearch;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-05-01-preview`,
 }
 
