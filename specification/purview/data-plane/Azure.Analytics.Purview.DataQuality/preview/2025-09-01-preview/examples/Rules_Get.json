@@ -1,0 +1,75 @@
+{
+  "title": "Rules_Get",
+  "operationId": "GetRules",
+  "parameters": {
+      "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+      "dataProductId": "12345678-abcd-1234-ef00-123456abcdef",
+      "dataAssetId": "abcd1234-5678-abcd-1234-abcd5678ef00"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "name": "GetRules",
+        "description": "Rule to check completeness of data",
+        "type": "CustomSQL",
+        "status": "Active",
+        "score": 95.5,
+        "typeProperties": {
+          "column": {
+            "type": "string",
+            "value": "CustomerName"
+          }
+        },
+        "businessDomain": {
+          "type": "BusinessDomain",
+          "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+        },
+        "dataProduct": {
+          "type": "DataProduct",
+          "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
+        },
+        "dataAsset": {
+          "type": "DataAsset",
+          "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
+        },
+        "createdAt": "2025-09-11T12:00:00Z",
+        "lastModifiedAt": "2025-09-11T12:00:00Z",
+        "createdBy": "11111111-2222-3333-4444-555555555555",
+        "lastModifiedBy": "11111111-2222-3333-4444-555555555555"
+      },
+      {
+          "id": "223e4567-e89b-12d3-a456-426614174111",
+          "name": "CheckNulls",
+          "description": "Rule to check null values",
+          "type": "Validation",
+          "status": "Draft",
+          "score": 88.0,
+          "typeProperties": {
+            "column": {
+              "type": "string",
+              "value": "Email"
+            }
+          },
+          "businessDomain": {
+            "type": "BusinessDomain",
+            "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+          },
+          "dataProduct": {
+            "type": "DataProduct",
+            "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
+          },
+          "dataAsset": {
+            "type": "DataAsset",
+            "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
+          },
+          "createdAt": "2025-09-11T12:05:00Z",
+          "lastModifiedAt": "2025-09-11T12:05:00Z",
+          "createdBy": "22222222-3333-4444-5555-666666666666",
+          "lastModifiedBy": "22222222-3333-4444-5555-666666666666"
+        }
+      ]
+    }
+  }
+}

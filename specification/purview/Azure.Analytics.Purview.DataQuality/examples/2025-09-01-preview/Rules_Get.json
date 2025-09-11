@@ -1,0 +1,75 @@
+{
+  "operationId": "GetRules",
+  "parameters": {
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataAssetId": "abcd1234-5678-abcd-1234-abcd5678ef00",
+    "dataProductId": "12345678-abcd-1234-ef00-123456abcdef"
+  },
+  "title": "CreateRules_DataAsset",
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "GetRules",
+          "type": "CustomSQL",
+          "description": "Rule to check completeness of data",
+          "businessDomain": {
+            "type": "BusinessDomain",
+            "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+          },
+          "createdAt": "2025-09-11T12:00:00Z",
+          "createdBy": "11111111-2222-3333-4444-555555555555",
+          "dataAsset": {
+            "type": "DataAsset",
+            "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
+          },
+          "dataProduct": {
+            "type": "DataProduct",
+            "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
+          },
+          "id": "123e4567-e89b-12d3-a456-426614174000",
+          "lastModifiedAt": "2025-09-11T12:00:00Z",
+          "lastModifiedBy": "11111111-2222-3333-4444-555555555555",
+          "score": 95.5,
+          "status": "Active",
+          "typeProperties": {
+            "column": {
+              "type": "string",
+              "value": "CustomerName"
+            }
+          }
+        },
+        {
+          "name": "CheckNulls",
+          "type": "Validation",
+          "description": "Rule to check null values",
+          "businessDomain": {
+            "type": "BusinessDomain",
+            "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+          },
+          "createdAt": "2025-09-11T12:05:00Z",
+          "createdBy": "22222222-3333-4444-5555-666666666666",
+          "dataAsset": {
+            "type": "DataAsset",
+            "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
+          },
+          "dataProduct": {
+            "type": "DataProduct",
+            "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
+          },
+          "id": "223e4567-e89b-12d3-a456-426614174111",
+          "lastModifiedAt": "2025-09-11T12:05:00Z",
+          "lastModifiedBy": "22222222-3333-4444-5555-666666666666",
+          "score": 88,
+          "status": "Draft",
+          "typeProperties": {
+            "column": {
+              "type": "string",
+              "value": "Email"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
