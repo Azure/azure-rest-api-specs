@@ -405,8 +405,16 @@ using Microsoft.RecoveryServices;
   "java"
 );
 
-// Fix ResourceGuardProxies interface operations breaking change
-@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxy.get,
+// Merge ResourceGuardProxies into ResourceGuardProxyOperation group
+@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxies.get,
+  "ResourceGuardProxyOperation",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.ResourceGuardProxies.get,
+  "list",
+  "java"
+);
+@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxies.get,
   "ResourceGuardProxyOperation",
   "java"
 );
