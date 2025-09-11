@@ -26,10 +26,10 @@ options:
     generate-sample: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.CloudHealth"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.CloudHealth"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/cloudhealth"
     package-dir: "armcloudhealth"
@@ -41,7 +41,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-cloudhealth"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cloudhealth"
     namespace: "com.azure.resourcemanager.cloudhealth"
     service-name: "CloudHealth"
     flavor: "azure"

@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-07-01",
+    "amlFilesystemName": "fs1",
+    "autoExportJobName": "job1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "job1",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoExportJob/job1",
+        "type": "Microsoft.StorageCache/amlFilesystem/autoExportJob",
+        "properties": {
+          "adminStatus": "Enable",
+          "provisioningState": "Succeeded",
+          "autoExportPrefixes": [
+            "/"
+          ],
+          "status": {
+            "state": "InProgress",
+            "statusMessage": "Auto Export is in progress",
+            "totalFilesExported": 1000000,
+            "totalMiBExported": 10000,
+            "totalFilesFailed": 5,
+            "exportIterationCount": 100,
+            "lastSuccessfulIterationCompletionTimeUTC": "2024-04-21T19:28:43.511Z",
+            "currentIterationFilesDiscovered": 10,
+            "currentIterationMiBDiscovered": 4000,
+            "currentIterationFilesExported": 5,
+            "currentIterationMiBExported": 500,
+            "currentIterationFilesFailed": 1,
+            "lastStartedTimeUTC": "2024-04-21T17:25:43.511Z"
+          }
+        }
+      }
+    }
+  }
+}

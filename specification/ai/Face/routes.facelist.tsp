@@ -72,7 +72,8 @@ interface FaceListOperations {
     To get face information inside Face List use \"Get Face List\".
     """)
   @returnsDoc("A successful call returns an array of Face Lists.")
-  getFaceLists is Foundations.ResourceList<
+  @listsResource(FaceList)
+  getFaceLists is Foundations.ResourceCollectionOperation<
     FaceList,
     ReturnRecognitionModelOptions,
     Body<FaceListItem[]>,
