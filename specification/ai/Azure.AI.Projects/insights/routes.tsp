@@ -66,7 +66,7 @@ interface Insights {
   @get
   getInsights is InsightsOperations.ResourceRead<Insight>;
 
-  @doc("List all insights reports.")
+  @doc("List all insights reports in reverse chronological order (newest first).")
   @get
   listInsightsReports is InsightsOperations.ResourceList<
     Insight,
