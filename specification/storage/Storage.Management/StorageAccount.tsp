@@ -198,7 +198,9 @@ interface StorageAccounts {
       @query("failoverType")
       failoverType?: "Planned";
     },
-    Error = ErrorResponse
+    Error = ErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -218,7 +220,9 @@ interface StorageAccounts {
       @query("requestType")
       requestType: string;
     },
-    Error = ErrorResponse
+    Error = ErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -231,7 +235,9 @@ interface StorageAccounts {
     {
       @body body: void;
     },
-    Error = ErrorResponse
+    Error = ErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -244,7 +250,9 @@ interface StorageAccounts {
     {
       @body body: void;
     },
-    Error = ErrorResponse
+    Error = ErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
