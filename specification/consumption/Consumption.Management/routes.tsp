@@ -111,7 +111,7 @@ interface MarketplacesOperationGroup {
   @get
   @action("marketplaces")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<Marketplace>,
+    Response = ResourceListResult<Marketplace> | ArmNoContentResponse,
     Scope = ExtensionActionScope,
     Parameters = {
       /**
