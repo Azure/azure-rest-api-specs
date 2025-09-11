@@ -23,6 +23,12 @@ model SchemaGroup
     SegmentName = "schemagroups",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

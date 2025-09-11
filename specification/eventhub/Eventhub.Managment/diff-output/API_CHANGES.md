@@ -374,7 +374,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ApplicationGroup.properties.properties.required__deleted` | deleted | `["clientAppGroupIdentifier"]` |
-| `definitions.ApplicationGroup.required__added` | added | `["clientAppGroupIdentifier"]` |
 | `definitions.ApplicationGroupListResult.required__added` | added | `["value"]` |
 | `definitions.ArmDisasterRecoveryListResult.required__added` | added | `["value"]` |
 | `definitions.AuthorizationRule.properties.properties.required__deleted` | deleted | `["rights"]` |
@@ -384,6 +383,7 @@
 | `definitions.EHNamespaceListResult.required__added` | added | `["value"]` |
 | `definitions.EventHubListResult.required__added` | added | `["value"]` |
 | `definitions.NetworkRuleSetListResult.required__added` | added | `["value"]` |
+| `definitions.OperationListResult.required__added` | added | `["value"]` |
 | `definitions.PrivateEndpointConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.PrivateLinkResourcesListResult.required__added` | added | `["value"]` |
 | `definitions.SchemaGroupListResult.required__added` | added | `["value"]` |
@@ -514,6 +514,7 @@
 | `definitions.NetworkSecurityPerimeterConfigurationProperties.properties.profile.type__deleted` | deleted | `object` |
 | `definitions.NetworkSecurityPerimeterConfigurationProperties.properties.resourceAssociation.type__deleted` | deleted | `object` |
 | `definitions.NspAccessRule.properties.properties.type__deleted` | deleted | `object` |
+| `definitions.Operation.properties.properties.type__deleted` | deleted | `object` |
 | `definitions.ProvisioningIssue.properties.properties.type__deleted` | deleted | `object` |
 | `definitions.SchemaGroup.properties.properties.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/clusters/{clusterName}'].delete.parameters[0].type__added` | added | `string` |
@@ -956,6 +957,15 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ApplicationGroup.properties.location__added` | added | `{"type":"string","readOnly":true}` |
+| `definitions.ArmDisasterRecovery.properties.location__added` | added | `{"type":"string","readOnly":true}` |
+| `definitions.AuthorizationRule.properties.location__added` | added | `{"type":"string","readOnly":true}` |
+| `definitions.ConsumerGroup.properties.location__added` | added | `{"type":"string","readOnly":true}` |
+| `definitions.Eventhub.properties.location__added` | added | `{"type":"string","readOnly":true}` |
+| `definitions.NetworkRuleSet.properties.location__added` | added | `{"type":"string","readOnly":true}` |
+| `definitions.NetworkSecurityPerimeterConfiguration.properties.location__added` | added | `{"type":"string","readOnly":true}` |
+| `definitions.PrivateEndpointConnection.properties.location__added` | added | `{"type":"string","readOnly":true}` |
+| `definitions.SchemaGroup.properties.location__added` | added | `{"type":"string","readOnly":true}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/failover'].post.responses.202.headers.location__deleted` | deleted | `{"type":"string","description":"URI to poll for completion status."}` |
 
 ### Changes for `Azure-AsyncOperation`
@@ -969,31 +979,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/failover'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/privateLinkResources'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-
-### Changes for `Operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Operation__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","readOnly":true},"isDataAction":{"type":"bool...` |
-
-### Changes for `OperationDisplay`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationDisplay__deleted` | deleted | `{"type":"object","properties":{"provider":{"type":"string","readOnly":true},"resource":{"type":"stri...` |
-
-### Changes for `OperationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `userAssignedIdentityProperties`
 
@@ -1136,24 +1121,6 @@
 | `definitions.PrivateEndpointConnection.properties.systemData__deleted` | deleted | `{"$ref":"../../../common/v1/definitions.json#/definitions/systemData","readOnly":true}` |
 | `definitions.SchemaGroup.properties.systemData__deleted` | deleted | `{"$ref":"../../../common/v1/definitions.json#/definitions/systemData","readOnly":true}` |
 
-### Changes for `isEnabled`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGroup.properties.isEnabled__added` | added | `{"type":"boolean"}` |
-
-### Changes for `clientAppGroupIdentifier`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGroup.properties.clientAppGroupIdentifier__added` | added | `{"type":"string"}` |
-
-### Changes for `policies`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGroup.properties.policies__added` | added | `{"type":"array","items":{"$ref":"#/definitions/ApplicationGroupPolicy"}}` |
-
 ### Changes for `properties`
 
 | Path | Change Type | Value |
@@ -1184,17 +1151,6 @@
 | `definitions.NWRuleSetVirtualNetworkRules['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.PlatformCapabilities['x-ms-client-flatten__deleted']` | deleted | `true` |
 
-### Changes for `x-ms-client-name`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Encryption.properties.keyVaultProperties['x-ms-client-name__deleted']` | deleted | `KeyVaultProperties` |
-| `definitions.KeyVaultProperties.properties.keyName['x-ms-client-name__deleted']` | deleted | `KeyName` |
-| `definitions.KeyVaultProperties.properties.keyVaultUri['x-ms-client-name__deleted']` | deleted | `KeyVaultUri` |
-| `definitions.KeyVaultProperties.properties.keyVersion['x-ms-client-name__deleted']` | deleted | `KeyVersion` |
-| `definitions.UserAssignedIdentity.properties.clientId['x-ms-client-name__deleted']` | deleted | `ClientId` |
-| `definitions.UserAssignedIdentity.properties.principalId['x-ms-client-name__deleted']` | deleted | `PrincipalId` |
-
 ### Changes for `readOnly`
 
 | Path | Change Type | Value |
@@ -1202,6 +1158,7 @@
 | `definitions.NetworkSecurityPerimeter.readOnly__deleted` | deleted | `true` |
 | `definitions.NetworkSecurityPerimeterConfiguration.readOnly__deleted` | deleted | `true` |
 | `definitions.NetworkSecurityPerimeterConfigurationProperties.properties.networkSecurityPerimeter.readOnly__added` | added | `true` |
+| `definitions.NetworkSecurityPerimeterConfigurationProperties.properties.provisioningIssues.readOnly__added` | added | `true` |
 | `definitions.NetworkSecurityPerimeterConfigurationProperties.readOnly__deleted` | deleted | `true` |
 | `definitions.NspAccessRule.readOnly__deleted` | deleted | `true` |
 | `definitions.ProvisioningIssue.readOnly__deleted` | deleted | `true` |
@@ -1222,7 +1179,6 @@
 | `definitions.NetworkSecurityPerimeterConfiguration.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.PrivateEndpointConnection.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.SchemaGroup.allOf[0].$ref` | `../../../common/v2/definitions.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `paths['/providers/microsoft.EventHub/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult` |
 | `paths['/providers/microsoft.EventHub/operations'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.EventHub/availableClusterRegions'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.EventHub/checkNameAvailability'].post.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
@@ -1276,7 +1232,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/consumergroups/{consumerGroupName}'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/consumergroups/{consumerGroupName}'].put.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/failover'].post.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets/default'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets/default'].put.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations'].get.responses.default.schema.$ref` | `../../../common/v2/definitions.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |

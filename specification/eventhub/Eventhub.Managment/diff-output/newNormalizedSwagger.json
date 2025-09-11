@@ -20,7 +20,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -2396,7 +2396,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2404,9 +2404,6 @@
           "NameSpaceNetworkRuleSetList": {
             "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNetworkRuleSetList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2850,9 +2847,6 @@
           "NameSpacePrivateLinkResourcesGet": {
             "$ref": "./examples/NameSpaces/PrivateLinkResourcesGet.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3085,22 +3079,11 @@
           "$ref": "#/definitions/ApplicationGroupProperties",
           "x-ms-client-flatten": true
         },
-        "isEnabled": {
-          "type": "boolean"
-        },
-        "clientAppGroupIdentifier": {
-          "type": "string"
-        },
-        "policies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationGroupPolicy"
-          }
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
-      "required": [
-        "clientAppGroupIdentifier"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -3177,6 +3160,10 @@
         "properties": {
           "$ref": "#/definitions/ArmDisasterRecoveryProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -3254,6 +3241,10 @@
         "properties": {
           "$ref": "#/definitions/AuthorizationRuleProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -3575,6 +3566,10 @@
         "properties": {
           "$ref": "#/definitions/ConsumerGroupProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -3784,7 +3779,8 @@
         },
         "maximumThroughputUnits": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "minimum": 0
         },
         "kafkaEnabled": {
           "type": "boolean"
@@ -3822,7 +3818,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyVaultProperties"
-          }
+          },
+          "x-ms-client-name": "KeyVaultProperties"
         },
         "keySource": {
           "type": "string",
@@ -3917,6 +3914,10 @@
         "properties": {
           "$ref": "#/definitions/EventhubProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -4062,13 +4063,16 @@
       "type": "object",
       "properties": {
         "keyName": {
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "KeyName"
         },
         "keyVaultUri": {
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "KeyVaultUri"
         },
         "keyVersion": {
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "KeyVersion"
         },
         "identity": {
           "$ref": "#/definitions/UserAssignedIdentityProperties"
@@ -4152,6 +4156,10 @@
         "properties": {
           "$ref": "#/definitions/NetworkRuleSetProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -4245,6 +4253,10 @@
         "properties": {
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -4293,6 +4305,7 @@
           "items": {
             "$ref": "#/definitions/ProvisioningIssue"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -4437,6 +4450,70 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PlatformCapabilities": {
       "type": "object",
       "properties": {
@@ -4459,6 +4536,10 @@
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -4653,6 +4734,10 @@
         "properties": {
           "$ref": "#/definitions/SchemaGroupProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -4837,11 +4922,13 @@
       "properties": {
         "principalId": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "PrincipalId"
         },
         "clientId": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "ClientId"
         }
       }
     },

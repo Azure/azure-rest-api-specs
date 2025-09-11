@@ -99,7 +99,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -3306,7 +3306,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NetworkRuleSetListResult"
             }
@@ -3314,7 +3314,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3322,9 +3322,6 @@
           "NameSpaceNetworkRuleSetList": {
             "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNetworkRuleSetList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3925,9 +3922,6 @@
           "NameSpacePrivateLinkResourcesGet": {
             "$ref": "./examples/NameSpaces/PrivateLinkResourcesGet.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4259,26 +4253,12 @@
           "$ref": "#/definitions/ApplicationGroupProperties",
           "x-ms-client-flatten": true
         },
-        "isEnabled": {
-          "type": "boolean",
-          "description": "Determines if Application Group is allowed to create connection with namespace or not. Once the isEnabled is set to false, all the existing connections of application group gets dropped and no new connections will be allowed"
-        },
-        "clientAppGroupIdentifier": {
+        "location": {
           "type": "string",
-          "description": "The Unique identifier for application group.Supports SAS(SASKeyName=KeyName) or AAD(AADAppID=Guid)"
-        },
-        "policies": {
-          "type": "array",
-          "description": "List of group policies that define the behavior of application group. The policies can support resource governance scenarios such as limiting ingress or egress traffic.",
-          "items": {
-            "$ref": "#/definitions/ApplicationGroupPolicy"
-          },
-          "x-ms-identifiers": []
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
-      "required": [
-        "clientAppGroupIdentifier"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -4374,6 +4354,11 @@
           "$ref": "#/definitions/ArmDisasterRecoveryProperties",
           "description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -4441,6 +4426,11 @@
           "$ref": "#/definitions/AuthorizationRuleProperties",
           "description": "Properties supplied to create or update AuthorizationRule",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -4785,6 +4775,11 @@
           "$ref": "#/definitions/ConsumerGroupProperties",
           "description": "Single item in List or Get Consumer group operation",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -5055,7 +5050,8 @@
         "maximumThroughputUnits": {
           "type": "integer",
           "format": "int32",
-          "description": "Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)"
+          "description": "Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)",
+          "minimum": 0
         },
         "kafkaEnabled": {
           "type": "boolean",
@@ -5114,7 +5110,8 @@
           "description": "Properties of KeyVault",
           "items": {
             "$ref": "#/definitions/KeyVaultProperties"
-          }
+          },
+          "x-ms-client-name": "KeyVaultProperties"
         },
         "keySource": {
           "type": "string",
@@ -5285,6 +5282,11 @@
           "$ref": "#/definitions/EventhubProperties",
           "description": "Properties supplied to the Create Or Update Event Hub operation.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -5474,15 +5476,18 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "Name of the Key from KeyVault"
+          "description": "Name of the Key from KeyVault",
+          "x-ms-client-name": "KeyName"
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "Uri of KeyVault"
+          "description": "Uri of KeyVault",
+          "x-ms-client-name": "KeyVaultUri"
         },
         "keyVersion": {
           "type": "string",
-          "description": "Key Version"
+          "description": "Key Version",
+          "x-ms-client-name": "KeyVersion"
         },
         "identity": {
           "$ref": "#/definitions/UserAssignedIdentityProperties"
@@ -5643,6 +5648,11 @@
           "$ref": "#/definitions/NetworkRuleSetProperties",
           "description": "NetworkRuleSet properties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -5653,7 +5663,7 @@
     },
     "NetworkRuleSetListResult": {
       "type": "object",
-      "description": "The response of a NetworkRuleSet list operation.",
+      "description": "Paged collection of NetworkRuleSet items",
       "properties": {
         "value": {
           "type": "array",
@@ -5754,6 +5764,11 @@
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
           "description": "Properties of the Network Security Perimeter Configuration",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -5790,6 +5805,7 @@
           "items": {
             "$ref": "#/definitions/ProvisioningIssue"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -6031,6 +6047,81 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "A Event Hub REST API operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Operation display payload",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Resource provider of the operation",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource of the operation",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized friendly description for the operation",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PlatformCapabilities": {
       "type": "object",
       "properties": {
@@ -6057,6 +6148,11 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Properties of the PrivateEndpointConnection.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -6423,6 +6519,11 @@
         "properties": {
           "$ref": "#/definitions/SchemaGroupProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -6733,12 +6834,14 @@
         "principalId": {
           "type": "string",
           "description": "Principal Id of user assigned identity",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "PrincipalId"
         },
         "clientId": {
           "type": "string",
           "description": "Client Id of user assigned identity",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "ClientId"
         }
       }
     },

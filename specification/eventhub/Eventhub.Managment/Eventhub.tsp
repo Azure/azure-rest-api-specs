@@ -22,6 +22,12 @@ model Eventhub is Azure.ResourceManager.ProxyResource<EventhubProperties> {
     SegmentName = "eventhubs",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

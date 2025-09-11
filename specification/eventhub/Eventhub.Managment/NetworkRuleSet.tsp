@@ -24,7 +24,39 @@ model NetworkRuleSet
     SegmentName = "networkRuleSets",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
+
+alias NetworkRuleSetsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The Namespace name */
+    @path
+    @segment("namespaces")
+    @key
+    @minLength(6)
+    @maxLength(50)
+    @pattern("^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$")
+    namespaceName: string;
+  },
+  {
+    /** The authorization rule name. */
+    @path
+    @segment("networkRuleSets")
+    @key
+    @minLength(1)
+    networkRuleSet: string;
+  }
+>;
 
 @armResourceOperations
 interface NetworkRuleSets {
@@ -51,7 +83,11 @@ interface NetworkRuleSets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_ListNetworkRuleSet")
-  listNetworkRuleSet is ArmResourceListByParent<NetworkRuleSet>;
+  listNetworkRuleSet is NetworkRuleSetsOps.ListSinglePage<
+    NetworkRuleSet,
+    Response = NetworkRuleSetListResult,
+    OverrideErrorType = ErrorResponse
+  >;
 }
 
 @@doc(NetworkRuleSet.name, "");

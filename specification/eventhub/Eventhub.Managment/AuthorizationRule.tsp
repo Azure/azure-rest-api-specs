@@ -23,6 +23,12 @@ model AuthorizationRule
     SegmentName = "authorizationRules",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
 
 alias AuthorizationRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<

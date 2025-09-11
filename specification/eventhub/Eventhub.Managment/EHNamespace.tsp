@@ -118,7 +118,6 @@ interface EHNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkResources_Get")
-  @list
   @get
   @action("privateLinkResources")
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")

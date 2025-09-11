@@ -817,6 +817,7 @@ model EHNamespaceProperties {
   /**
    * Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)
    */
+  @minValue(0)
   maximumThroughputUnits?: int32;
 
   /**
@@ -1117,6 +1118,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * List of Provisioning Issues if any
    */
+  @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   provisioningIssues?: ProvisioningIssue[];
 
@@ -1932,3 +1934,8 @@ model ThrottlingPolicy extends ApplicationGroupPolicy {
 model EventHubListResult is Azure.Core.Page<Eventhub>;
 
 model PrivateLinkResourcesListResult is Azure.Core.Page<PrivateLinkResource>;
+
+model NetworkRuleSetListResult is Azure.Core.Page<NetworkRuleSet>;
+
+model OperationListResult is Azure.Core.Page<Operation>;
+@@visibility(OperationListResult.value, Lifecycle.Read);

@@ -132,3 +132,10 @@ using Microsoft.EventHub;
 @@clientName(NamespacesOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
+@@clientName(Encryption.keyVaultProperties, "KeyVaultProperties");
+@@clientName(KeyVaultProperties.keyName, "KeyName");
+@@clientName(KeyVaultProperties.keyVersion, "KeyVersion");
+@@clientName(KeyVaultProperties.keyVaultUri, "KeyVaultUri");
+@@clientName(UserAssignedIdentityProperties, "UserAssignedIdentityProperties");
+@@clientName(UserAssignedIdentity.principalId, "PrincipalId");
+@@clientName(UserAssignedIdentity.clientId, "ClientId");
