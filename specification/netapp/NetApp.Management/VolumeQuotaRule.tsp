@@ -39,7 +39,7 @@ model VolumeQuotaRulesProperties {
    * Gets the status of the VolumeQuotaRule at the time the operation was called.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetAppProvisioningState;
 
   /**
    * Size of quota

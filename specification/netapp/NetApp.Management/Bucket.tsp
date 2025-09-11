@@ -51,7 +51,7 @@ model BucketProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetAppProvisioningState;
 
   /**
    * The bucket credentials status. There states:
@@ -190,7 +190,7 @@ model BucketPatchProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetAppProvisioningState;
 
   /**
    * Properties of the server managing the lifecycle of volume buckets
@@ -345,8 +345,7 @@ interface Buckets {
     Bucket,
     PatchModel = BucketPatch,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Bucket> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    OptionalRequestBody = true
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
