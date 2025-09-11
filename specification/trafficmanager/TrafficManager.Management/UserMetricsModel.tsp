@@ -25,6 +25,24 @@ model UserMetricsModel
   >;
 }
 
+alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /**
+     * The user metrics keys. The default value is "default".
+     */
+    @path
+    @segment("trafficManagerUserMetricsKeys")
+    @key("trafficManagerUserMetricsKeys")
+    trafficManagerUserMetricsKeys: "default";
+  },
+  {},
+  ErrorType = CloudError
+>;
+
 @armResourceOperations
 interface UserMetricsModels {
   /**
@@ -34,7 +52,8 @@ interface UserMetricsModels {
   @operationId("TrafficManagerUserMetricsKeys_Get")
   get is ArmResourceRead<
     UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
@@ -44,10 +63,11 @@ interface UserMetricsModels {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("TrafficManagerUserMetricsKeys_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceCreatedSyncResponse<UserMetricsModel>
+  createOrUpdate is UserMetricsModelOps.CreateOrUpdateSync<
+    Resource = UserMetricsModel,
+    Response = ArmResourceCreatedSyncResponse<UserMetricsModel>,
+    OverrideErrorType = CloudError,
+    Request = void
   >;
 
   /**
@@ -59,7 +79,8 @@ interface UserMetricsModels {
   delete is ArmResourceDeleteSync<
     UserMetricsModel,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<DeleteOperationResult>
+    Response = ArmResponse<DeleteOperationResult>,
+    Error = CloudError
   >;
 }
 

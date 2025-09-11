@@ -14,7 +14,6 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager HeatMap.
  */
-@singleton("default")
 @parentResource(Profile)
 model HeatMapModel is Azure.ResourceManager.ProxyResource<HeatMapProperties> {
   ...ResourceNameParameter<
@@ -25,29 +24,51 @@ model HeatMapModel is Azure.ResourceManager.ProxyResource<HeatMapProperties> {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}")
 interface HeatMapModels {
   /**
    * Gets latest heatmap for Traffic Manager profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @armResourceRead(HeatMapModel)
   @operationId("HeatMap_Get")
-  get is ArmResourceRead<
-    HeatMapModel,
-    Parameters = {
-      /**
-       * The top left latitude,longitude pair of the rectangular viewport to query for.
-       */
-      @query("topLeft")
-      topLeft?: float64[];
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The bottom right latitude,longitude pair of the rectangular viewport to query for.
-       */
-      @query("botRight")
-      botRight?: float64[];
-    }
-  >;
+    /**
+     * The name of the Traffic Manager profile.
+     */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    profileName?: string,
+
+    /**
+     * The type of the heatmap.
+     */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    heatMapType?: HeatMapType,
+
+    /**
+     * The top left latitude,longitude pair of the rectangular viewport to query for.
+     */
+    @query("topLeft")
+    @minItems(2)
+    @maxItems(2)
+    topLeft?: float64[],
+
+    /**
+     * The bottom right latitude,longitude pair of the rectangular viewport to query for.
+     */
+    @query("botRight")
+    @minItems(2)
+    @maxItems(2)
+    botRight?: float64[],
+  ): ArmResponse<HeatMapModel> | CloudError;
 }
 
 @@doc(HeatMapModel.name, "");

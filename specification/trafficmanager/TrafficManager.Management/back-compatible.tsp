@@ -42,3 +42,10 @@ using Microsoft.Network;
 @@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
   "checkTrafficManagerNameAvailabilityV2"
 );
+
+@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
+  "parameters"
+);
+@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2::parameters.body,
+  "parameters"
+);

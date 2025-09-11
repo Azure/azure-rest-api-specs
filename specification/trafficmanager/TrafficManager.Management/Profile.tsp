@@ -13,6 +13,7 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager profile.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy tracked resource is used for backward compatibility"
 model Profile
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProfileProperties> {
   ...ResourceNameParameter<
@@ -28,25 +29,30 @@ interface Profiles {
   /**
    * Gets a Traffic Manager profile.
    */
-  get is ArmResourceRead<Profile>;
+  get is ArmResourceRead<Profile, Error = CloudError>;
 
   /**
    * Create or update a Traffic Manager profile.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Profile>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Profile, Error = CloudError>;
 
   /**
    * Update a Traffic Manager profile.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Profile, PatchModel = Profile>;
+  update is ArmCustomPatchSync<
+    Profile,
+    PatchModel = Profile,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a Traffic Manager profile.
    */
   delete is ArmResourceDeleteSync<
     Profile,
-    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse
+    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -54,7 +60,8 @@ interface Profiles {
    */
   listByResourceGroup is ArmResourceListByParent<
     Profile,
-    Response = ArmResponse<ProfileListResult>
+    Response = ArmResponse<ProfileListResult>,
+    Error = CloudError
   >;
 
   /**
@@ -62,7 +69,8 @@ interface Profiles {
    */
   listBySubscription is ArmListBySubscription<
     Profile,
-    Response = ArmResponse<ProfileListResult>
+    Response = ArmResponse<ProfileListResult>,
+    Error = CloudError
   >;
 }
 

@@ -40,16 +40,10 @@
   },
   "tags": [
     {
-      "name": "Endpoints"
-    },
-    {
       "name": "Profiles"
     },
     {
       "name": "TrafficManagerGeographicHierarchies"
-    },
-    {
-      "name": "HeatMapModels"
     },
     {
       "name": "UserMetricsModels"
@@ -65,7 +59,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -84,7 +78,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -120,7 +114,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -143,7 +137,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -162,7 +156,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -201,7 +195,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -223,15 +217,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserMetricsModel"
-            }
           }
         ],
         "responses": {
@@ -244,7 +229,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -278,7 +263,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -314,7 +299,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -322,6 +307,9 @@
           "ListBySubscription": {
             "$ref": "./examples/Profile-GET-BySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -353,7 +341,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -361,6 +349,9 @@
           "ListProfilesByResourceGroup": {
             "$ref": "./examples/Profile-GET-ByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -399,7 +390,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -464,7 +455,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -532,7 +523,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -579,7 +570,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -590,12 +581,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}/{endpointType}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}": {
       "get": {
         "operationId": "Endpoints_Get",
-        "tags": [
-          "Endpoints"
-        ],
         "description": "Gets a Traffic Manager endpoint.",
         "parameters": [
           {
@@ -615,13 +603,6 @@
             "type": "string"
           },
           {
-            "name": "endpointName",
-            "in": "path",
-            "description": "The name of the Traffic Manager endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "endpointType",
             "in": "path",
             "description": "The type of the Traffic Manager endpoint.",
@@ -636,6 +617,13 @@
               "name": "EndpointType",
               "modelAsString": false
             }
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -648,7 +636,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -666,9 +654,6 @@
       },
       "put": {
         "operationId": "Endpoints_CreateOrUpdate",
-        "tags": [
-          "Endpoints"
-        ],
         "description": "Create or update a Traffic Manager endpoint.",
         "parameters": [
           {
@@ -688,16 +673,9 @@
             "type": "string"
           },
           {
-            "name": "endpointName",
-            "in": "path",
-            "description": "The name of the Traffic Manager endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "endpointType",
             "in": "path",
-            "description": "The type of the Traffic Manager endpoint to be created or updated.",
+            "description": "The type of the Traffic Manager endpoint.",
             "required": true,
             "type": "string",
             "enum": [
@@ -711,6 +689,13 @@
             }
           },
           {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation.",
@@ -722,21 +707,28 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Endpoint' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
           "201": {
-            "description": "Resource 'Endpoint' create operation succeeded",
+            "description": "Azure create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -760,9 +752,6 @@
       },
       "patch": {
         "operationId": "Endpoints_Update",
-        "tags": [
-          "Endpoints"
-        ],
         "description": "Update a Traffic Manager endpoint.",
         "parameters": [
           {
@@ -782,16 +771,9 @@
             "type": "string"
           },
           {
-            "name": "endpointName",
-            "in": "path",
-            "description": "The name of the Traffic Manager endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "endpointType",
             "in": "path",
-            "description": "The type of the Traffic Manager endpoint to be updated.",
+            "description": "The type of the Traffic Manager endpoint.",
             "required": true,
             "type": "string",
             "enum": [
@@ -803,6 +785,13 @@
               "name": "EndpointType",
               "modelAsString": false
             }
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -824,7 +813,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -836,9 +825,6 @@
       },
       "delete": {
         "operationId": "Endpoints_Delete",
-        "tags": [
-          "Endpoints"
-        ],
         "description": "Deletes a Traffic Manager endpoint.",
         "parameters": [
           {
@@ -858,16 +844,9 @@
             "type": "string"
           },
           {
-            "name": "endpointName",
-            "in": "path",
-            "description": "The name of the Traffic Manager endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "endpointType",
             "in": "path",
-            "description": "The type of the Traffic Manager endpoint to be deleted.",
+            "description": "The type of the Traffic Manager endpoint.",
             "required": true,
             "type": "string",
             "enum": [
@@ -879,6 +858,13 @@
               "name": "EndpointType",
               "modelAsString": false
             }
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -894,7 +880,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -905,12 +891,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}": {
       "get": {
         "operationId": "HeatMap_Get",
-        "tags": [
-          "HeatMapModels"
-        ],
         "description": "Gets latest heatmap for Traffic Manager profile.",
         "parameters": [
           {
@@ -930,6 +913,20 @@
             "type": "string"
           },
           {
+            "name": "heatMapType",
+            "in": "path",
+            "description": "The type of the heatmap.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "HeatMapType",
+              "modelAsString": false
+            }
+          },
+          {
             "name": "topLeft",
             "in": "query",
             "description": "The top left latitude,longitude pair of the rectangular viewport to query for.",
@@ -939,7 +936,9 @@
               "type": "number",
               "format": "double"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2
           },
           {
             "name": "botRight",
@@ -951,7 +950,9 @@
               "type": "number",
               "format": "double"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2
           }
         ],
         "responses": {
@@ -964,7 +965,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1048,6 +1049,41 @@
         "type": {
           "type": "string",
           "description": "The type of the resource."
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error returned by the Azure Resource Manager",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The content of the error."
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The content of an error returned by the Azure Resource Manager",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target"
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
         }
       }
     },
@@ -1483,6 +1519,10 @@
           "items": {
             "$ref": "#/definitions/Profile"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
         }
       }
     },

@@ -148,6 +148,12 @@ enum EndpointType {
   NestedEndpoints,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum HeatMapType {
+  default,
+}
+
 /**
  * Class representing a Traffic Manager endpoint properties.
  */
@@ -196,11 +202,13 @@ model EndpointProperties {
   /**
    * The minimum number of IPv4 (DNS record type A) endpoints that must be available in the child profile in order for the parent profile to be considered available. Only applicable to endpoint of type 'NestedEndpoints'.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   minChildEndpointsIPv4?: int64;
 
   /**
    * The minimum number of IPv6 (DNS record type AAAA) endpoints that must be available in the child profile in order for the parent profile to be considered available. Only applicable to endpoint of type 'NestedEndpoints'.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   minChildEndpointsIPv6?: int64;
 
   /**
@@ -211,6 +219,7 @@ model EndpointProperties {
   /**
    * The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   subnets?: EndpointPropertiesSubnetsItem[];
 
   /**
@@ -263,6 +272,7 @@ model EndpointPropertiesCustomHeadersItem {
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model ProxyResource extends Resource {}
 
 /**
@@ -318,6 +328,7 @@ model CloudErrorBody {
   /**
    * Error details
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   details?: CloudErrorBody[];
 }
 
@@ -386,6 +397,12 @@ model ProfileListResult {
    */
   @pageItems
   value?: Profile[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -502,6 +519,7 @@ model MonitorConfig {
   /**
    * List of expected status code ranges.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   expectedStatusCodeRanges?: MonitorConfigExpectedStatusCodeRangesItem[];
 }
 
@@ -605,11 +623,13 @@ model HeatMapProperties {
   /**
    * The endpoints used in this HeatMap calculation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   endpoints?: HeatMapEndpoint[];
 
   /**
    * The traffic flows produced in this HeatMap calculation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   trafficFlows?: TrafficFlow[];
 }
 
@@ -650,6 +670,7 @@ model TrafficFlow {
   /**
    * The query experiences produced in this HeatMap calculation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   queryExperiences?: QueryExperience[];
 }
 

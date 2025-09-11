@@ -24,7 +24,8 @@ interface ProfilesOperationGroup {
   @action("checkTrafficManagerNameAvailability")
   checkTrafficManagerRelativeDnsNameAvailability is ArmProviderActionSync<
     Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
-    Response = TrafficManagerNameAvailability
+    Response = TrafficManagerNameAvailability,
+    Error = CloudError
   >;
   /**
    * Checks the availability of a Traffic Manager Relative DNS name.
@@ -36,6 +37,7 @@ interface ProfilesOperationGroup {
     Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
     Response = TrafficManagerNameAvailability,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = CloudError
   >;
 }

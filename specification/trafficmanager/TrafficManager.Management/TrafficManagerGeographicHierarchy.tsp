@@ -34,7 +34,8 @@ interface TrafficManagerGeographicHierarchies {
   @operationId("GeographicHierarchies_GetDefault")
   getDefault is ArmResourceRead<
     TrafficManagerGeographicHierarchy,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = CloudError
   >;
 }
 
