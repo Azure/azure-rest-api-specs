@@ -253,20 +253,20 @@ model PrometheusMetricsSignalDefinitionProperties
 union SignalOperator {
   string,
 
-  @doc("Lower than")
-  LowerThan: "LowerThan",
+  @doc("Less than")
+  LessThan: "LessThan",
 
-  @doc("Lower than or equal to")
-  LowerOrEquals: "LowerOrEquals",
+  @doc("Less than or equal to")
+  LessThanOrEqual: "LessThanOrEqual",
 
   @doc("Greater than")
   GreaterThan: "GreaterThan",
 
   @doc("Greater than or equal to")
-  GreaterOrEquals: "GreaterOrEquals",
+  GreaterThanOrEqual: "GreaterThanOrEqual",
 
   @doc("Equal to")
-  Equals: "Equals",
+  Equal: "Equal",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
