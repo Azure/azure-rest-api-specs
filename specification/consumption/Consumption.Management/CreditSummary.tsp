@@ -24,10 +24,35 @@ model CreditSummary
   >;
 }
 
-alias billingAccountExternalResource = Extension.ExternalResource<
-  "Microsoft.Billing",
-  "billingAccounts",
-  "{billingAccountId}"
+alias CreditSummariesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    providerNamespace: "Microsoft.Billing";
+
+    /**
+     * BillingAccount ID
+     */
+    @segment("billingAccounts")
+    @path
+    billingAccountId: string;
+
+    /**
+     * Azure Billing Profile ID.
+     */
+    @segment("billingProfiles")
+    @path
+    billingProfileId: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<CreditSummary>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<CreditSummary>;
+  }
 >;
 
 @armResourceOperations
@@ -38,24 +63,10 @@ interface CreditSummaries {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Credits_Get")
-  get is ArmResourceRead<
+  @action("credits/balanceSummary")
+  get is CreditSummariesOps.Read<
     CreditSummary,
-    Parameters = {
-      /**
-       * BillingAccount ID
-       */
-      @path
-      @segment("billingAccounts")
-      billingAccountId: string;
-
-      /**
-       * Billing Profile ID.
-       */
-      @path
-      @segment("billingProfiles")
-      billingProfileId: string;
-    },
-    Error = ErrorResponse,
+    ErrorType = ErrorResponse,
     Response = ArmResponse<CreditSummary> | ArmNoContentResponse
   >;
 }

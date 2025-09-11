@@ -40,8 +40,6 @@ using TypeSpec.Http;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
 @@Legacy.flattenProperty(LotSummary.properties);
 
-@@clientName(LotProperties.OrganizationType, "organizationType");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
 @@Legacy.flattenProperty(LegacyUsageDetail.properties);
 

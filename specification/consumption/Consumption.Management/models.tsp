@@ -380,8 +380,6 @@ model OperationStatus {
   /**
    * The properties of the resource generated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PricesheetDownloadProperties;
 }
 
@@ -833,41 +831,34 @@ model Notification {
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   threshold: decimal;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  contactEmails: {
-    type: "array";
-    minItems: 0;
-    maxItems: 50;
+  /**
+   * Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.
+   */
+  @minItems(0)
+  @maxItems(50)
+  contactEmails: string[];
 
-    /**
-     * Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.
-     */
-    @minItems(0)
-    @maxItems(50)
-    contactEmails: string[];
+  /**
+   * Contact roles to send the budget notification to when the threshold is exceeded.
+   */
+  contactRoles?: string[];
 
-    /**
-     * Contact roles to send the budget notification to when the threshold is exceeded.
-     */
-    @minItems(0)
-    @maxItems(50)
-    contactRoles?: string[];
+  /**
+   * Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.
+   */
+  @minItems(0)
+  @maxItems(50)
+  contactGroups?: string[];
 
-    /**
-     * Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.
-     */
-    contactGroups?: string[];
+  /**
+   * The type of threshold
+   */
+  thresholdType?: ThresholdType = ThresholdType.Actual;
 
-    /**
-     * The type of threshold
-     */
-    thresholdType?: ThresholdType = ThresholdType.Actual;
-
-    /**
-     * Language in which the recipient will receive the notification
-     */
-    locale?: CultureCode;
-  };
+  /**
+   * Language in which the recipient will receive the notification
+   */
+  locale?: CultureCode;
 }
 
 /**
@@ -2296,7 +2287,21 @@ model ManagementGroupAggregatedCostProperties {
 /**
  * Result of listing event summary.
  */
-model Events is Azure.Core.Page<EventSummary>;
+model Events {
+  /**
+   * The list of event summary.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: EventSummary[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * An event summary resource.
@@ -2529,7 +2534,21 @@ model AmountWithExchangeRate extends Amount {
 /**
  * Result of listing lot summary.
  */
-model Lots is Azure.Core.Page<LotSummary>;
+model Lots {
+  /**
+   * The list of lot summary.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: LotSummary[];
+
+  /**
+   * URL to get the next set of operation list results if there are any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * A lot summary resource.
@@ -4096,4 +4115,181 @@ model ModernChargeSummaryProperties {
    */
   @visibility(Lifecycle.Read)
   subscriptionId?: string;
+}
+
+/**
+ * Result of listing reservation details.
+ */
+model ReservationDetailsListResult {
+  /**
+   * The list of reservation details.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ReservationDetail[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Result of listing reservation recommendations.
+ */
+model ModernReservationTransactionsListResult {
+  /**
+   * The list of reservation recommendations.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ModernReservationTransaction[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Result of listing reservation recommendations.
+ */
+model ReservationTransactionsListResult {
+  /**
+   * The list of reservation recommendations.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ReservationTransaction[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Result of listing reservation summaries.
+ */
+model ReservationSummariesListResult {
+  /**
+   * The list of reservation summaries.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ReservationSummary[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Result of listing budgets. It contains a list of available budgets in the scope provided.
+ */
+model BudgetsListResult {
+  /**
+   * The list of budgets.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Budget[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Result of listing marketplaces. It contains a list of available marketplaces in reverse chronological order by billing period.
+ */
+model MarketplacesListResult {
+  /**
+   * The list of marketplaces.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Marketplace[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Result of listing reservation recommendations.
+ */
+model ReservationRecommendationsListResult {
+  /**
+   * The list of reservation recommendations.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ReservationRecommendation[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+
+  /**
+   * The link (url) to the previous page of results.
+   */
+  @visibility(Lifecycle.Read)
+  previousLink?: string;
+}
+
+/**
+ * Result of listing usage details. It contains a list of available usage details in reverse chronological order by billing period.
+ */
+model UsageDetailsListResult {
+  /**
+   * The list of usage details.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: UsageDetail[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.
+ */
+model OperationListResult {
+  /**
+   * List of consumption operations supported by the Microsoft.Consumption resource provider.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Operation[];
+
+  /**
+   * URL to get the next set of operation list results if there are any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }

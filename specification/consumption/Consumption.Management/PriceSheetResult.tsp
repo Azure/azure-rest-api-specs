@@ -41,7 +41,7 @@ alias PriceSheetResultOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("pricesheets")
     @key
-    default: string;
+    default: "default";
   }
 >;
 
@@ -111,6 +111,7 @@ interface PriceSheet {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
+  @action("pricesheets/default")
   getByBillingPeriod is PriceSheetOps.Read<
     PriceSheetResult,
     Parameters = {
