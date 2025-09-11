@@ -13,9 +13,17 @@ using Azure.ClientGenerator.Core;
   "AzureStackHCIVMManagementClient",
   "csharp"
 );
-@@clientName(Route, "AzureStackHCIVMNetworkingRoute", "csharp");
-@@clientName(Subnet, "AzureStackHCIVMNetworkingSubnet", "csharp");
-@@clientName(Status, "AzureStackHCIVMStatus", "csharp");
-@@clientName(StatusType, "AzureStackHCIVStatusType", "csharp");
-@@clientName(SecurityType, "AzureStackHCIVMSecurityType", "csharp");
-@@clientName(IPPool, "AzureStackHCIVMNeworkingIPPool", "csharp");
+@@clientName(Microsoft.AzureStackHCI.Route, "AzureStackHCIVMNetworkingRoute", "csharp");
+@@clientName(Microsoft.AzureStackHCI.Subnet, "AzureStackHCIVMNetworkingSubnet", "csharp");
+@@clientName(Microsoft.AzureStackHCI.Status, "AzureStackHCIVMStatus", "csharp");
+@@clientName(Microsoft.AzureStackHCI.StatusTypes, "AzureStackHCIVStatusType", "csharp");
+@@clientName(Microsoft.AzureStackHCI.SecurityTypes, "AzureStackHCIVMSecurityType", "csharp");
+@@clientName(Microsoft.AzureStackHCI.IPPool, "AzureStackHCIVMNeworkingIPPool", "csharp");
+@@clientName(Microsoft.AzureStackHCI.ProvisioningStateEnum, "AzureStackHCIVMProvisioningStateEnum", "csharp");
+@@clientName(Microsoft.AzureStackHCI.StatusLevelTypes, "AzureStackHCIVMStatusLevelTypes", "csharp");
+@@clientName(Microsoft.AzureStackHCI.PowerStateEnum, "AzureStackHCIVMPowerStateEnum", "csharp");
+@@clientName(Microsoft.AzureStackHCI.ProvisioningAction, "AzureStackHCIVMProvisioningAction", "csharp");
+@@clientName(Microsoft.AzureStackHCI.Identity, "AzureStackHCIVMIdentity", "csharp");
+@@clientName(Microsoft.AzureStackHCI.TagsObject, "AzureStackHCIVMTags", "csharp");
+@@clientName(Microsoft.AzureStackHCI.SshConfiguration, "AzureStackHCIVMOsProfileSshConfiguration", "csharp");
+@@clientName(Microsoft.AzureStackHCI.SshPublicKey, "AzureStackHCIVMOsProfileSshPublicKey", "csharp");
