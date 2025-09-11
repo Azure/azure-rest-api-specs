@@ -4,33 +4,36 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ServiceLinker;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DryrunPatch.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DryrunPatch.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(LinkerPatch.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LinkerPatch.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ValidateOperationResult.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ValidateOperationResult.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ConfigurationNameItem.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationNameItem.properties
+);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DaprConfigurationResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DaprConfigurationResource.properties
+);
 
 @@clientName(DryrunResources.createDryrun::parameters.resource, "parameters");
 @@clientName(DryrunResources.updateDryrun::parameters.properties, "parameters");
 @@clientName(Linkers.createDryrun::parameters.resource, "parameters");
 @@clientName(Linkers.updateDryrun::parameters.properties, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DryrunResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DryrunResource.properties);
 
 @@clientName(LinkerResources.createOrUpdate::parameters.resource, "parameters");
 @@clientName(LinkerResources.update::parameters.properties, "parameters");
 @@clientName(Linker.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Linker.update::parameters.properties, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(LinkerResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LinkerResource.properties);
 
 // @@clientLocation decorators for operations with custom @operationId
 // These ensure consistent operationId generation in the output

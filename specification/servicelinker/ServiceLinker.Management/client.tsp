@@ -9,6 +9,10 @@ using Microsoft.ServiceLinker;
   "ServiceLinkerManagementClient",
   "javascript"
 );
+@@clientName(Microsoft.ServiceLinker,
+  "ServiceLinkerManagementClient",
+  "python"
+);
 
 // Go SDK Breaking Changes Resolution for TypeSpec conversion
 @@clientName(DatabaseAadAuthInfo, "DatabaseAADAuthInfo", "go");
