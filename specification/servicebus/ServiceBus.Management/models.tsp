@@ -679,25 +679,6 @@ model NamespaceReplicaLocation {
 }
 
 /**
- * The Resource definition.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TrackedResource extends Resource {
-  /**
-   * The Geo-location where the resource lives
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
-}
-
-/**
  * The Resource definition for other than namespace.
  */
 model Resource {
@@ -729,6 +710,23 @@ model ErrorResponse {
    * The error object.
    */
   error?: ErrorResponseError;
+}
+
+/**
+ * The list of available operations.
+ */
+model OperationListResult {
+  /**
+   * The list of operations.
+   */
+  @pageItems
+  value: Operation[];
+
+  /**
+   * The URL to get the next set of results, if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -801,7 +799,6 @@ model SBNamespaceUpdateParameters extends ResourceNamespacePatch {
    * Properties of the namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SBNamespaceUpdateProperties;
 
   /**
@@ -895,7 +892,6 @@ model ResourceNamespacePatch extends Resource {
 model FailOver {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FailOverProperties;
 }
 
@@ -915,12 +911,11 @@ model FailOverProperties {
 /**
  * Information of the private link resource.
  */
-model PrivateLinkResource {
+model PrivateLinkResources {
   /**
    * Properties of the private link resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 
   /**
@@ -982,7 +977,6 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * NetworkSecurityPerimeter related information
    */
-  @visibility(Lifecycle.Read)
   networkSecurityPerimeter?: NetworkSecurityPerimeter;
 
   /**
@@ -1214,7 +1208,6 @@ model Operation {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: unknown;
 }
 
@@ -1288,7 +1281,6 @@ model FailoverProperties {
    * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FailoverPropertiesProperties;
 }
 

@@ -21,6 +21,13 @@ model Rule is Azure.ResourceManager.ProxyResource<Ruleproperties> {
     SegmentName = "rules",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  location: string;
 }
 
 @armResourceOperations
@@ -28,7 +35,7 @@ interface Rules {
   /**
    * Retrieves the description for the specified rule.
    */
-  get is ArmResourceRead<Rule>;
+  get is ArmResourceRead<Rule, Error = ErrorResponse>;
 
   /**
    * Creates a new rule and updates an existing rule
@@ -36,13 +43,14 @@ interface Rules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Rule,
-    Response = ArmResourceUpdatedResponse<Rule>
+    Response = ArmResourceUpdatedResponse<Rule>,
+    Error = ErrorResponse
   >;
 
   /**
    * Deletes an existing rule.
    */
-  delete is ArmResourceDeleteSync<Rule>;
+  delete is ArmResourceDeleteSync<Rule, Error = ErrorResponse>;
 
   /**
    * List all the rules within given topic-subscription
@@ -64,7 +72,8 @@ interface Rules {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

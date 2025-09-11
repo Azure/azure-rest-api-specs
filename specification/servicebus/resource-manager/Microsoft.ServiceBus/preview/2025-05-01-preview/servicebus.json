@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceBusManagementClient",
     "version": "2025-05-01-preview",
-    "description": "Azure Service Bus client for managing Namespace",
+    "description": "Azure Service Bus client",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -102,13 +102,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -153,7 +153,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -192,7 +192,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -237,7 +237,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -291,7 +291,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -352,20 +352,25 @@
               "$ref": "#/definitions/SBNamespace"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "202": {
-            "description": "Resource operation accepted."
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,7 +378,12 @@
           "NameSpaceCreate": {
             "$ref": "./examples/NameSpaces/SBNameSpaceCreate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SBNamespace"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Namespaces_Update",
@@ -429,7 +439,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -473,7 +483,13 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted."
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -481,7 +497,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -489,7 +505,11 @@
           "NameSpaceDelete": {
             "$ref": "./examples/NameSpaces/SBNameSpaceDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
@@ -541,7 +561,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -608,7 +628,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -666,7 +686,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -726,7 +746,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -795,7 +815,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -846,7 +866,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -897,7 +917,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -957,7 +977,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1027,7 +1047,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1082,7 +1102,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1142,7 +1162,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1214,7 +1234,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1283,7 +1303,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1337,7 +1357,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1400,7 +1420,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1457,7 +1477,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1527,7 +1547,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1537,8 +1557,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FailOver"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1580,7 +1599,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1651,7 +1670,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1718,7 +1737,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'MigrationConfigProperties' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/MigrationConfigProperties"
             }
@@ -1727,12 +1746,23 @@
             "description": "Resource 'MigrationConfigProperties' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/MigrationConfigProperties"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1740,7 +1770,12 @@
           "MigrationConfigurationsStartMigration": {
             "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCreateAndStartMigration.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrationConfigProperties"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "MigrationConfigs_Delete",
@@ -1798,7 +1833,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1863,7 +1898,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1928,7 +1963,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1976,7 +2011,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2027,7 +2062,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2082,7 +2117,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2130,7 +2165,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2188,7 +2223,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2240,7 +2275,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2291,7 +2326,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2352,7 +2387,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2429,7 +2464,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2480,7 +2515,18 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted."
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -2488,7 +2534,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2496,7 +2542,11 @@
           "NameSpacePrivateEndPointConnectionDelete": {
             "$ref": "./examples/NameSpaces/PrivateEndPointConnectionDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/privateLinkResources": {
@@ -2533,13 +2583,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2547,9 +2597,6 @@
           "NameSpacePrivateLinkResourcesGet": {
             "$ref": "./examples/NameSpaces/PrivateLinkResourcesGet.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2612,7 +2659,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2674,7 +2721,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2740,7 +2787,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2797,7 +2844,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2856,7 +2903,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2927,7 +2974,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2999,7 +3046,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3065,7 +3112,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3133,7 +3180,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3210,7 +3257,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3280,7 +3327,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3342,7 +3389,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3408,7 +3455,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3465,7 +3512,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3524,7 +3571,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3595,7 +3642,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3670,7 +3717,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3736,7 +3783,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3804,7 +3851,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3881,7 +3928,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3959,7 +4006,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4030,7 +4077,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4105,7 +4152,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4171,7 +4218,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4255,7 +4302,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4332,7 +4379,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4413,7 +4460,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4491,7 +4538,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4585,8 +4632,16 @@
           "$ref": "#/definitions/ArmDisasterRecoveryProperties",
           "description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -4861,6 +4916,68 @@
         "modelAsString": false
       }
     },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "The resource management error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseError",
+          "description": "The error object."
+        }
+      }
+    },
+    "ErrorResponseError": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "FailOver": {
       "type": "object",
       "properties": {
@@ -5075,8 +5192,16 @@
           "$ref": "#/definitions/MigrationConfigPropertiesProperties",
           "description": "Properties required to the Create Migration Configuration",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -5228,8 +5353,16 @@
           "$ref": "#/definitions/NetworkRuleSetProperties",
           "description": "NetworkRuleSet properties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -5397,8 +5530,7 @@
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NetworkSecurityPerimeter",
-          "description": "NetworkSecurityPerimeter related information",
-          "readOnly": true
+          "description": "NetworkSecurityPerimeter related information"
         },
         "resourceAssociation": {
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation",
@@ -5641,6 +5773,79 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "A Service Bus REST API operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Operation display payload",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Resource provider of the operation",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource of the operation",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized friendly description for the operation",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "The list of available operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of operations.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results, if any."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PlatformCapabilities": {
       "type": "object",
       "properties": {
@@ -5667,8 +5872,16 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Properties of the PrivateEndpointConnection.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -5746,50 +5959,6 @@
         ]
       }
     },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "Information of the private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of the private link resource.",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "description": "Fully qualified identifier of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the resource"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the resource"
-        }
-      }
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateLinkResource items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PrivateLinkResourceProperties": {
       "type": "object",
       "description": "Properties of PrivateLinkResource",
@@ -5812,6 +5981,50 @@
           }
         }
       }
+    },
+    "PrivateLinkResources": {
+      "type": "object",
+      "description": "Information of the private link resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of the private link resource.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Fully qualified identifier of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource"
+        }
+      }
+    },
+    "PrivateLinkResourcesListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResources list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResources items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResources"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ProvisioningIssue": {
       "type": "object",
@@ -5973,8 +6186,16 @@
           "$ref": "#/definitions/Ruleproperties",
           "description": "Properties of Rule resource",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -6032,8 +6253,16 @@
           "$ref": "#/definitions/SBAuthorizationRuleProperties",
           "description": "AuthorizationRule properties.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -6338,8 +6567,16 @@
           "$ref": "#/definitions/SBQueueProperties",
           "description": "Queue Properties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -6513,8 +6750,16 @@
           "$ref": "#/definitions/SBSubscriptionProperties",
           "description": "Properties of subscriptions resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -6650,8 +6895,16 @@
           "$ref": "#/definitions/SBTopicProperties",
           "description": "Properties of topic resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -6858,40 +7111,6 @@
           }
         ]
       }
-    },
-    "TrackedResource": {
-      "type": "object",
-      "description": "The Resource definition.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The Geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
     },
     "UnavailableReason": {
       "type": "string",

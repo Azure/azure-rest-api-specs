@@ -23,6 +23,13 @@ model SBTopic is Azure.ResourceManager.ProxyResource<SBTopicProperties> {
     SegmentName = "topics",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  location: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -33,7 +40,7 @@ interface SBTopics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx")
-  get is ArmResourceRead<SBTopic>;
+  get is ArmResourceRead<SBTopic, Error = ErrorResponse>;
 
   /**
    * Creates a topic in the specified namespace.
@@ -43,7 +50,8 @@ interface SBTopics {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SBTopic,
-    Response = ArmResourceUpdatedResponse<SBTopic>
+    Response = ArmResourceUpdatedResponse<SBTopic>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -51,7 +59,7 @@ interface SBTopics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx")
-  delete is ArmResourceDeleteSync<SBTopic>;
+  delete is ArmResourceDeleteSync<SBTopic, Error = ErrorResponse>;
 
   /**
    * Gets all the topics in a namespace.
@@ -75,7 +83,8 @@ interface SBTopics {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

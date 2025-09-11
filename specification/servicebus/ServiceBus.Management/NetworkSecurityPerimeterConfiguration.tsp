@@ -37,7 +37,10 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Return a NetworkSecurityPerimeterConfigurations resourceAssociationName
    */
-  getResourceAssociationName is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
+  getResourceAssociationName is ArmResourceRead<
+    NetworkSecurityPerimeterConfiguration,
+    Error = ErrorResponse
+  >;
 
   /**
    * Gets list of current NetworkSecurityPerimeterConfiguration for Namespace
@@ -46,7 +49,8 @@ interface NetworkSecurityPerimeterConfigurations {
   @operationId("NetworkSecurityPerimeterConfiguration_List")
   list is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,
-    Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>
+    Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -55,7 +59,8 @@ interface NetworkSecurityPerimeterConfigurations {
   reconcile is ArmResourceActionSync<
     NetworkSecurityPerimeterConfiguration,
     void,
-    OkResponse
+    OkResponse,
+    Error = ErrorResponse
   >;
 }
 

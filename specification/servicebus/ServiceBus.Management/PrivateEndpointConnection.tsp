@@ -23,6 +23,13 @@ model PrivateEndpointConnection
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  location: string;
 }
 
 @armResourceOperations
@@ -32,7 +39,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is ArmResourceRead<PrivateEndpointConnection, Error = ErrorResponse>;
 
   /**
    * Creates or updates PrivateEndpointConnections of service namespace.
@@ -47,7 +54,8 @@ interface PrivateEndpointConnections {
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmResourceCreatedSyncResponse<PrivateEndpointConnection> | (AcceptedResponse & {
       @bodyRoot
       _: PrivateEndpointConnection;
-    })
+    }),
+    Error = ErrorResponse
   >;
 
   /**
@@ -59,7 +67,9 @@ interface PrivateEndpointConnections {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = {}> | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -67,7 +77,10 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
-  list is ArmResourceListByParent<PrivateEndpointConnection>;
+  list is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Error = ErrorResponse
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name, "The PrivateEndpointConnection name");

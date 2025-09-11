@@ -24,6 +24,13 @@ model SBAuthorizationRule
     SegmentName = "authorizationRules",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  location: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -65,7 +72,10 @@ interface SBAuthorizationRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx")
-  getAuthorizationRule is SBAuthorizationRuleOps.Read<SBAuthorizationRule>;
+  getAuthorizationRule is SBAuthorizationRuleOps.Read<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Creates or updates an authorization rule for a namespace.
@@ -75,7 +85,8 @@ interface SBAuthorizationRules {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx")
   createOrUpdateAuthorizationRule is SBAuthorizationRuleOps.CreateOrUpdateSync<
     SBAuthorizationRule,
-    Response = ArmResourceUpdatedResponse<SBAuthorizationRule>
+    Response = ArmResourceUpdatedResponse<SBAuthorizationRule>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -83,14 +94,20 @@ interface SBAuthorizationRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx")
-  deleteAuthorizationRule is SBAuthorizationRuleOps.DeleteSync<SBAuthorizationRule>;
+  deleteAuthorizationRule is SBAuthorizationRuleOps.DeleteSync<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the authorization rules for a namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx")
-  listAuthorizationRules is SBAuthorizationRuleOps.List<SBAuthorizationRule>;
+  listAuthorizationRules is SBAuthorizationRuleOps.List<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the primary and secondary connection strings for the namespace.
@@ -100,7 +117,8 @@ interface SBAuthorizationRules {
   listKeys is SBAuthorizationRuleOps.ActionSync<
     SBAuthorizationRule,
     void,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -111,7 +129,8 @@ interface SBAuthorizationRules {
   regenerateKeys is SBAuthorizationRuleOps.ActionSync<
     SBAuthorizationRule,
     RegenerateAccessKeyParameters,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 @armResourceOperations
@@ -160,14 +179,20 @@ interface DisasterRecoveryConfigs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx")
-  getAuthorizationRule is DisasterRecoveryConfigOps.Read<SBAuthorizationRule>;
+  getAuthorizationRule is DisasterRecoveryConfigOps.Read<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the authorization rules for a namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx")
-  listAuthorizationRules is DisasterRecoveryConfigOps.List<SBAuthorizationRule>;
+  listAuthorizationRules is DisasterRecoveryConfigOps.List<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the primary and secondary connection strings for the namespace.
@@ -177,7 +202,8 @@ interface DisasterRecoveryConfigs {
   listKeys is DisasterRecoveryConfigOps.ActionSync<
     SBAuthorizationRule,
     void,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 @armResourceOperations
@@ -225,7 +251,10 @@ interface Queues {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx")
-  getAuthorizationRule is QueueOps.Read<SBAuthorizationRule>;
+  getAuthorizationRule is QueueOps.Read<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Creates an authorization rule for a queue.
@@ -233,7 +262,8 @@ interface Queues {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateAuthorizationRule is QueueOps.CreateOrUpdateSync<
     SBAuthorizationRule,
-    Response = ArmResourceUpdatedResponse<SBAuthorizationRule>
+    Response = ArmResourceUpdatedResponse<SBAuthorizationRule>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -241,14 +271,20 @@ interface Queues {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx")
-  deleteAuthorizationRule is QueueOps.DeleteSync<SBAuthorizationRule>;
+  deleteAuthorizationRule is QueueOps.DeleteSync<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets all authorization rules for a queue.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705607.aspx")
-  listAuthorizationRules is QueueOps.List<SBAuthorizationRule>;
+  listAuthorizationRules is QueueOps.List<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Primary and secondary connection strings to the queue.
@@ -259,7 +295,8 @@ interface Queues {
   listKeys is QueueOps.ActionSync<
     SBAuthorizationRule,
     void,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -270,7 +307,8 @@ interface Queues {
   regenerateKeys is QueueOps.ActionSync<
     SBAuthorizationRule,
     RegenerateAccessKeyParameters,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 @armResourceOperations
@@ -318,7 +356,10 @@ interface Topics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx")
-  getAuthorizationRule is TopicOps.Read<SBAuthorizationRule>;
+  getAuthorizationRule is TopicOps.Read<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Creates an authorization rule for the specified topic.
@@ -328,7 +369,8 @@ interface Topics {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx")
   createOrUpdateAuthorizationRule is TopicOps.CreateOrUpdateSync<
     SBAuthorizationRule,
-    Response = ArmResourceUpdatedResponse<SBAuthorizationRule>
+    Response = ArmResourceUpdatedResponse<SBAuthorizationRule>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -336,14 +378,20 @@ interface Topics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx")
-  deleteAuthorizationRule is TopicOps.DeleteSync<SBAuthorizationRule>;
+  deleteAuthorizationRule is TopicOps.DeleteSync<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets authorization rules for a topic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx")
-  listAuthorizationRules is TopicOps.List<SBAuthorizationRule>;
+  listAuthorizationRules is TopicOps.List<
+    SBAuthorizationRule,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Gets the primary and secondary connection strings for the topic.
@@ -354,7 +402,8 @@ interface Topics {
   listKeys is TopicOps.ActionSync<
     SBAuthorizationRule,
     void,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -365,7 +414,8 @@ interface Topics {
   regenerateKeys is TopicOps.ActionSync<
     SBAuthorizationRule,
     RegenerateAccessKeyParameters,
-    ArmResponse<AccessKeys>
+    ArmResponse<AccessKeys>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 

@@ -24,6 +24,13 @@ model SBSubscription
     SegmentName = "subscriptions",
     NamePattern = ""
   >;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  location: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -34,7 +41,7 @@ interface SBSubscriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx")
-  get is ArmResourceRead<SBSubscription>;
+  get is ArmResourceRead<SBSubscription, Error = ErrorResponse>;
 
   /**
    * Creates a topic subscription.
@@ -44,7 +51,8 @@ interface SBSubscriptions {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SBSubscription,
-    Response = ArmResourceUpdatedResponse<SBSubscription>
+    Response = ArmResourceUpdatedResponse<SBSubscription>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -52,7 +60,7 @@ interface SBSubscriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx")
-  delete is ArmResourceDeleteSync<SBSubscription>;
+  delete is ArmResourceDeleteSync<SBSubscription, Error = ErrorResponse>;
 
   /**
    * List all the subscriptions under a specified topic.
@@ -76,7 +84,8 @@ interface SBSubscriptions {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

@@ -22,6 +22,7 @@ interface NamespacesOperationGroup {
     Request = CheckNameAvailability,
     Response = CheckNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = ErrorResponse
   >;
 }

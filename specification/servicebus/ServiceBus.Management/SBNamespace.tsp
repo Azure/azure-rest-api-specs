@@ -44,7 +44,7 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
-  get is ArmResourceRead<SBNamespace>;
+  get is ArmResourceRead<SBNamespace, Error = ErrorResponse>;
 
   /**
    * Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
@@ -55,7 +55,11 @@ interface SBNamespaces {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SBNamespace,
-    Response = ArmResourceUpdatedResponse<SBNamespace> | ArmResourceCreatedResponse<SBNamespace> | ArmAcceptedLroResponse<LroHeaders = {}>
+    Response = ArmResourceUpdatedResponse<SBNamespace> | ArmResourceCreatedResponse<
+      SBNamespace,
+      LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>
+    > | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -67,7 +71,8 @@ interface SBNamespaces {
   update is ArmCustomPatchSync<
     SBNamespace,
     PatchModel = SBNamespaceUpdateParameters,
-    Response = ArmResponse<SBNamespace> | ArmResourceCreatedSyncResponse<SBNamespace> | AcceptedResponse
+    Response = ArmResponse<SBNamespace> | ArmResourceCreatedSyncResponse<SBNamespace> | AcceptedResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -79,7 +84,8 @@ interface SBNamespaces {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     SBNamespace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = {}> | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -87,14 +93,17 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
-  listByResourceGroup is ArmResourceListByParent<SBNamespace>;
+  listByResourceGroup is ArmResourceListByParent<
+    SBNamespace,
+    Error = ErrorResponse
+  >;
 
   /**
    * Gets all the available namespaces within the subscription, irrespective of the resource groups.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
-  list is ArmListBySubscription<SBNamespace>;
+  list is ArmListBySubscription<SBNamespace, Error = ErrorResponse>;
 
   /**
    * GeoDR Failover
@@ -105,23 +114,24 @@ interface SBNamespaces {
   failover is ArmResourceActionAsyncBase<
     SBNamespace,
     FailOver,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FailOver> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SBNamespace>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SBNamespace>,
+    Error = ErrorResponse
   >;
 
   /**
    * Gets lists of resources that supports Privatelinks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @list
   @get
   @action("privateLinkResources")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   privateLinkResourcesGet is ArmResourceActionSync<
     SBNamespace,
     void,
-    ArmResponse<ResourceListResult<PrivateLinkResource>>
+    ArmResponse<ResourceListResult<PrivateLinkResources>>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -132,7 +142,8 @@ interface SBNamespaces {
   checkNameAvailability is ArmResourceActionSync<
     SBNamespace,
     CheckNameAvailability,
-    ArmResponse<CheckNameAvailabilityResult>
+    ArmResponse<CheckNameAvailabilityResult>,
+    Error = ErrorResponse
   >;
 }
 
