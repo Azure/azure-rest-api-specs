@@ -40,8 +40,8 @@ using Microsoft.Cache;
   "geoReplicatedPrimaryHostname",
   "java"
 );
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "java"
 );
 // Fix Java SDK handwritten code

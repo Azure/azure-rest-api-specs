@@ -51,3 +51,16 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Neon.Postgres.ProjectProperties.attributes, "attribute", "csharp");
+
+@@clientName(Neon.Postgres.Versions.v1_preview,
+  "V20241222Preview",
+  "javascript"
+);
+@@clientName(Neon.Postgres.Versions.v2_preview,
+  "V20250301Preview",
+  "javascript"
+);
+@@clientName(Neon.Postgres.Versions.v3_preview,
+  "V20250623Preview",
+  "javascript"
+);
