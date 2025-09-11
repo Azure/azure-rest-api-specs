@@ -920,23 +920,24 @@ model RunStepConnectedAgent {
 // Tool outputs -- structured data that provides requested information from tools back to the model
 //
 
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Intentional union for request flexibility"
 @doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
+@discriminator("type")
 @added(Versions.v2025_05_01)
-union ToolOutput {
-  FunctionToolOutput,
-  @added(Versions.v2025_05_15_preview) ComputerToolOutput,
+model ToolOutput {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The object type for the tool output.")
+  type: string = "function_call_output";
+
+  @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
+  @encodedName("application/json", "tool_call_id")
+  toolCallId: string;
 }
 
 @doc("The output from a function tool to be submitted.")
 @added(Versions.v2025_05_01)
-model FunctionToolOutput {
-  @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
-  @encodedName("application/json", "tool_call_id")
-  toolCallId: string;
-
-  @doc("Optional discriminator. When omitted the server treats this as 'function_call_output'.")
-  type?: "function_call_output";
+model FunctionToolOutput extends ToolOutput {
+  @doc("The object type, which is always 'function_call_output'.")
+  type: "function_call_output";
 
   @doc("The output from the function tool to be submitted.")
   output: string;
@@ -944,11 +945,7 @@ model FunctionToolOutput {
 
 @doc("The output from a computer use tool to be submitted.")
 @added(Versions.v2025_05_15_preview)
-model ComputerToolOutput {
-  @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
-  @encodedName("application/json", "tool_call_id")
-  toolCallId: string;
-
+model ComputerToolOutput extends ToolOutput {
   @doc("The object type, which is always 'computer_call_output'.")
   type: "computer_call_output";
 

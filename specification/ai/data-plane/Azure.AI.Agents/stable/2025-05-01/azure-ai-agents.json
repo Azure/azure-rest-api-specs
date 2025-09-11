@@ -4334,30 +4334,20 @@
       "type": "object",
       "description": "The output from a function tool to be submitted.",
       "properties": {
-        "tool_call_id": {
-          "type": "string",
-          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
-          "x-ms-client-name": "toolCallId"
-        },
-        "type": {
-          "type": "string",
-          "description": "Optional discriminator. When omitted the server treats this as 'function_call_output'.",
-          "enum": [
-            "function_call_output"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "output": {
           "type": "string",
           "description": "The output from the function tool to be submitted."
         }
       },
       "required": [
-        "tool_call_id",
         "output"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call_output"
     },
     "ImageDetailLevel": {
       "type": "string",
@@ -7286,8 +7276,25 @@
       ]
     },
     "ToolOutput": {
-      "$ref": "#/definitions/FunctionToolOutput",
-      "x-nullable": false
+      "type": "object",
+      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type for the tool output.",
+          "default": "function_call_output"
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "tool_call_id"
+      ]
     },
     "ToolResources": {
       "type": "object",
