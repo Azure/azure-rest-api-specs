@@ -451,6 +451,8 @@ model RunStepDeltaComputerUseDetails {
   /** Safety checks that have been acknowledged by the developer, null if outputs have not yet been submitted. */
   @encodedName("application/json", "acknowledged_safety_checks")
   acknowledgedSafetyChecks?: SafetyCheck[];
+}
+
 @doc("Represents the Microsoft Fabric tool call in a streaming run step.")
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaMicrosoftFabricToolCall extends RunStepDeltaToolCall {
