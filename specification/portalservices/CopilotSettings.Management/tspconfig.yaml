@@ -14,11 +14,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/copilotSettings/{version-status}/{version}/copilotSettings.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.PortalServicesCopilot"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.PortalServicesCopilot"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-portalservicescopilot"
     namespace: "azure.mgmt.portalservicescopilot"
@@ -26,7 +26,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-portalservicescopilot"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-portalservicescopilot"
     namespace: "com.azure.resourcemanager.portalservicescopilot"
     service-name: "Portal Services Copilot"
     flavor: azure
@@ -46,6 +46,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    package-name: "Azure.ResourceManager.PortalServicesCopilot"
+    namespace: "{package-name}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
