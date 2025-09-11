@@ -38,12 +38,7 @@ interface TriageRecommendationOps
         @segment("resiliencyReviews")
         reviewId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = TriageRecommendation,
-        KeyName = "recommendationId",
-        SegmentName = "providers/Microsoft.Advisor/triageRecommendations",
-        NamePattern = ""
-      >>
+      {}
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -54,7 +49,17 @@ interface TriageRecommendations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get an existing recommendation by id for an existing Resiliency Review Id.")
   @operationId("triageRecommendations_Get")
-  get is TriageRecommendationOps.Read<TriageRecommendation>;
+  get is TriageRecommendationOps.Read<
+    TriageRecommendation,
+    Parameters = {
+      /**
+       * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+       */
+      @path
+      @segment("providers/Microsoft.Advisor/triageRecommendations")
+      recommendationId: string;
+    }
+  >;
 
   /**
    * Get list of recommendations for an existing Azure Advisor Resiliency Review Id.
@@ -91,7 +96,15 @@ interface TriageRecommendations {
   approveTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     void,
-    OkResponse
+    OkResponse,
+    Parameters = {
+      /**
+       * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+       */
+      @path
+      @segment("providers/Microsoft.Advisor/triageRecommendations")
+      recommendationId: string;
+    }
   >;
 
   /**
@@ -104,7 +117,15 @@ interface TriageRecommendations {
   rejectTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     RecommendationRejectBody,
-    OkResponse
+    OkResponse,
+    Parameters = {
+      /**
+       * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+       */
+      @path
+      @segment("providers/Microsoft.Advisor/triageRecommendations")
+      recommendationId: string;
+    }
   >;
 
   /**
@@ -118,7 +139,14 @@ interface TriageRecommendations {
     TriageRecommendation,
     void,
     OkResponse,
-    Parameters = {}
+    Parameters = {
+      /**
+       * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+       */
+      @path
+      @segment("providers/Microsoft.Advisor/triageRecommendations")
+      recommendationId: string;
+    }
   >;
 }
 

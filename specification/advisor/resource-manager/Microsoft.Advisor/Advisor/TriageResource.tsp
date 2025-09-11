@@ -53,13 +53,16 @@ interface TriageResources {
     TriageResource,
     Parameters = {
       /**
-       * The triage resource id.
+       * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
        */
       @path
       @segment("providers/Microsoft.Advisor/triageRecommendations")
       recommendationId: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      /**
+       *
+       * Existing recommendation triage resource associated with a triage recommendation. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+       */
       @path
       @segment("providers/Microsoft.Advisor/triageResources")
       recommendationResourceId: string;
@@ -76,7 +79,9 @@ interface TriageResources {
   list is TriageResourceOps.List<
     TriageResource,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      /**
+       * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+       */
       @path
       @segment("providers/Microsoft.Advisor/triageRecommendations")
       recommendationId: string;
