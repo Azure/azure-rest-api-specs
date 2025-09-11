@@ -17,6 +17,12 @@ alias InsightsServiceTraits = SupportsClientRequestId &
 
 alias InsightsOperations = Azure.Core.ResourceOperations<InsightsServiceTraits>;
 
+alias IncludeCoordinatesTrait = {
+  @query("includeCoordinates")
+  @doc("Whether to include coordinates for visualization in the response. Defaults to false.")
+  includeCoordinates?: boolean;
+};
+
 alias FilterQueryParamsTraits = {
   @query("type")
   @doc("Filter by the type of analysis.")
@@ -34,6 +40,11 @@ alias FilterQueryParamsTraits = {
   @doc("Filter by the agent name.")
   agentName?: string;
 
+  ...IncludeCoordinatesTrait;
+};
+
+// Query trait for single-resource GET that exposes only includeCoordinates
+alias IncludeCoordinatesQueryTrait = {
   @query("includeCoordinates")
   @doc("Whether to include coordinates for visualization in the response. Defaults to false.")
   includeCoordinates?: boolean;
@@ -64,7 +75,10 @@ interface Insights {
 
   @doc("Get a specific insights report.")
   @get
-  getInsights is InsightsOperations.ResourceRead<Insight>;
+  getInsights is InsightsOperations.ResourceRead<
+    Insight,
+    QueryParametersTrait<IncludeCoordinatesTrait, TraitContext.Read>
+  >;
 
   @doc("List all insights reports in reverse chronological order (newest first).")
   @get
