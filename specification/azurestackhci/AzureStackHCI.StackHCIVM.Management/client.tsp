@@ -9,3 +9,13 @@ using Azure.ClientGenerator.Core;
   "AzureStackHCIVMManagementClient",
   "javascript"
 );
+@@clientName(Microsoft.AzureStackHCI,
+  "AzureStackHCIVMManagementClient",
+  "csharp"
+);
+@@clientName(Route, "AzureStackHCIVMNetworkingRoute", "csharp");
+@@clientName(Subnet, "AzureStackHCIVMNetworkingSubnet", "csharp");
+@@clientName(Status, "AzureStackHCIVMStatus", "csharp");
+@@clientName(StatusType, "AzureStackHCIVStatusType", "csharp");
+@@clientName(SecurityType, "AzureStackHCIVMSecurityType", "csharp");
+@@clientName(IPPool, "AzureStackHCIVMNeworkingIPPool", "csharp");
