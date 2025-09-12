@@ -8504,9 +8504,13 @@
             "create"
           ]
         },
-        "scheduledOperations": {
-          "$ref": "#/definitions/ScheduledOperationsTypeUpdate",
+        "scheduledOperationsList": {
+          "type": "array",
           "description": "The list of scheduled operations.",
+          "items": {
+            "$ref": "#/definitions/ScheduledOperationsTypeUpdate"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",

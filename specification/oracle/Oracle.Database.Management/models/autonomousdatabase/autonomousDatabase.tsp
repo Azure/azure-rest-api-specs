@@ -691,9 +691,16 @@ model AutonomousDatabaseUpdateProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   licenseModel?: LicenseModel;
 
+  @removed(Versions.v20250601_preview)
   @doc("The list of scheduled operations.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   scheduledOperations?: ScheduledOperationsTypeUpdate;
+
+  @added(Versions.v20250601_preview)
+  @doc("The list of scheduled operations.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  scheduledOperationsList?: ScheduledOperationsTypeUpdate[];
 
   @doc("The Oracle Database Edition that applies to the Autonomous databases.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
