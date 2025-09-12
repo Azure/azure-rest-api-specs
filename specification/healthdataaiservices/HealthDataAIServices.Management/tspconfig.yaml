@@ -22,7 +22,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-healthdataaiservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-healthdataaiservices"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.healthdataaiservices"
     service-name: "Health Data AI Services"
@@ -35,8 +35,8 @@ options:
       name: "@azure/arm-healthdataaiservices"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/healthdataaiservices"
-    package-dir: "armhealthdataaiservices"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhealthdataaiservices"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhealthdataaiservices"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
