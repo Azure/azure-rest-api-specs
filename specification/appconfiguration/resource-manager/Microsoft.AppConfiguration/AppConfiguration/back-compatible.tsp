@@ -3,11 +3,11 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AppConfiguration;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnectionReference.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnectionReference.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ConfigurationStoreUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationStoreUpdateParameters.properties);
 
 @@clientName(ConfigurationStores.create::parameters.resource,
   "configStoreCreationParameters"
@@ -18,36 +18,36 @@ using Microsoft.AppConfiguration;
 @@clientName(ConfigurationStores.regenerateKey::parameters.body,
   "regenerateKeyParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ConfigurationStore.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationStore.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "privateEndpointConnection"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties);
 
 @@clientName(KeyValues.createOrUpdate::parameters.resource,
   "keyValueParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(KeyValue.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(KeyValue.properties);
 
 @@clientLocation(DeletedConfigurationStores.getDeleted, ConfigurationStores);
 @@clientLocation(DeletedConfigurationStores.purgeDeleted, ConfigurationStores);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DeletedConfigurationStore.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeletedConfigurationStore.properties);
 
 @@clientName(Replicas.create::parameters.resource, "replicaCreationParameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Replica.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Replica.properties);
 
 @@clientName(Snapshots.create::parameters.resource, "body");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Snapshot.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
 
 @@clientLocation(ConfigurationStoresOperationGroup.listDeleted,
   ConfigurationStores
