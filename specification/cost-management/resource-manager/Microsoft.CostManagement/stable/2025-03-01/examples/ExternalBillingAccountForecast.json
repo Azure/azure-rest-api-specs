@@ -5,13 +5,7 @@
     "externalCloudProviderType": "externalBillingAccounts",
     "parameters": {
       "type": "Usage",
-      "timeframe": "Custom",
-      "timePeriod": {
-        "from": "2022-08-01T00:00:00+00:00",
-        "to": "2022-08-31T23:59:59+00:00"
-      },
       "dataset": {
-        "granularity": "Daily",
         "aggregation": {
           "totalCost": {
             "name": "Cost",
@@ -54,18 +48,23 @@
               }
             }
           ]
-        }
-      }
+        },
+        "granularity": "Daily"
+      },
+      "timePeriod": {
+        "from": "2022-08-01T00:00:00+00:00",
+        "to": "2022-08-31T23:59:59+00:00"
+      },
+      "timeframe": "Custom"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "providers/Microsoft.CostManagement/externalBillingAccounts/100/query/6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
         "name": "6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
         "type": "Microsoft.CostManagement/query",
+        "id": "providers/Microsoft.CostManagement/externalBillingAccounts/100/query/6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
         "properties": {
-          "nextLink": null,
           "columns": [
             {
               "name": "PreTaxCost",
@@ -80,9 +79,10 @@
               "type": "String"
             }
           ],
+          "nextLink": null,
           "rows": [
             [
-              0.0,
+              0,
               "Forecast",
               "USD"
             ],
@@ -92,12 +92,12 @@
               "USD"
             ],
             [
-              0.076757602000000022,
+              0.07675760200000002,
               "Forecast",
               "USD"
             ],
             [
-              50.430964190400012,
+              50.43096419040001,
               "Forecast",
               "USD"
             ]
@@ -105,5 +105,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "Forecast_ExternalCloudProviderUsage",
+  "title": "ExternalBillingAccountForecast"
 }

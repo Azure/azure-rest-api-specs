@@ -2,16 +2,9 @@
   "parameters": {
     "api-version": "2025-03-01",
     "billingAccountId": "12345:6789",
-    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789",
     "parameters": {
       "type": "Usage",
-      "timeframe": "Custom",
-      "timePeriod": {
-        "from": "2022-08-01T00:00:00+00:00",
-        "to": "2022-08-31T23:59:59+00:00"
-      },
       "dataset": {
-        "granularity": "Daily",
         "aggregation": {
           "totalCost": {
             "name": "Cost",
@@ -54,20 +47,26 @@
               }
             }
           ]
-        }
+        },
+        "granularity": "Daily"
       },
       "includeActualCost": false,
-      "includeFreshPartialCost": false
-    }
+      "includeFreshPartialCost": false,
+      "timePeriod": {
+        "from": "2022-08-01T00:00:00+00:00",
+        "to": "2022-08-31T23:59:59+00:00"
+      },
+      "timeframe": "Custom"
+    },
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/providers/Microsoft.CostManagement/query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "type": "Microsoft.CostManagement/query",
+        "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/providers/Microsoft.CostManagement/query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "properties": {
-          "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/providers/Microsoft.CostManagement/Forecast?api-version=2021-10-01&$skiptoken=AQAAAA%3D%3D",
           "columns": [
             {
               "name": "PreTaxCost",
@@ -86,6 +85,7 @@
               "type": "String"
             }
           ],
+          "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/providers/Microsoft.CostManagement/Forecast?api-version=2021-10-01&$skiptoken=AQAAAA%3D%3D",
           "rows": [
             [
               2.10333307059661,
@@ -116,5 +116,7 @@
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "Forecast_Usage",
+  "title": "BillingAccountForecast"
 }

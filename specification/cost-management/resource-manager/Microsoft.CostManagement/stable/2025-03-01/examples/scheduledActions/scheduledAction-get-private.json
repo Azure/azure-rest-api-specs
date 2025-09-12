@@ -1,51 +1,53 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "name": "monthlyCostByResource"
+    "name": "monthlyCostByResource",
+    "api-version": "2025-03-01"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "providers/Microsoft.CostManagement/scheduledActions/monthlyCostByResource",
         "name": "monthlyCostByResource",
         "type": "Microsoft.CostManagement/ScheduledActions",
-        "kind": "Email",
         "eTag": "\"1d4ff9fe66f1d10\"",
-        "systemData": {
-          "createdBy": "testuser",
-          "createdByType": "User",
-          "createdAt": "2020-06-18T22:21:51.1287144Z",
-          "lastModifiedBy": "testuser",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-06-18T22:21:51.1287144Z"
-        },
+        "id": "providers/Microsoft.CostManagement/scheduledActions/monthlyCostByResource",
+        "kind": "Email",
         "properties": {
           "displayName": "Monthly Cost By Resource",
-          "scope": "",
-          "status": "Enabled",
-          "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample",
-          "schedule": {
-            "frequency": "Monthly",
-            "weeksOfMonth": [
-              "First",
-              "Third"
-            ],
-            "daysOfWeek": [
-              "Monday"
-            ],
-            "hourOfDay": 10,
-            "startDate": "2020-06-19T22:21:51.1287144Z",
-            "endDate": "2021-06-19T22:21:51.1287144Z"
-          },
           "notification": {
+            "subject": "Cost by resource this month",
             "to": [
               "user@gmail.com",
               "team@gmail.com"
+            ]
+          },
+          "schedule": {
+            "daysOfWeek": [
+              "Monday"
             ],
-            "subject": "Cost by resource this month"
-          }
+            "endDate": "2021-06-19T22:21:51.1287144Z",
+            "frequency": "Monthly",
+            "hourOfDay": 10,
+            "startDate": "2020-06-19T22:21:51.1287144Z",
+            "weeksOfMonth": [
+              "First",
+              "Third"
+            ]
+          },
+          "scope": "",
+          "status": "Enabled",
+          "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample"
+        },
+        "systemData": {
+          "createdAt": "2020-06-18T22:21:51.1287144Z",
+          "createdBy": "testuser",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-18T22:21:51.1287144Z",
+          "lastModifiedBy": "testuser",
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "ScheduledActions_Get",
+  "title": "PrivateScheduledAction"
 }

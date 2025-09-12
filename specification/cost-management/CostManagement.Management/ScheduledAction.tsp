@@ -22,6 +22,18 @@ model ScheduledAction
     SegmentName = "scheduledActions",
     NamePattern = ""
   >;
+
+  /**
+   * Resource Etag. For update calls, eTag is optional and can be specified to achieve optimistic concurrency. Fetch the resource's eTag by doing a 'GET' call first and then including the latest eTag as part of the request body or 'If-Match' header while performing the update. For create calls, eTag is not required.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  eTag?: Azure.Core.eTag;
+
+  /**
+   * Kind of the scheduled action.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: ScheduledActionKind;
 }
 
 @armResourceOperations
@@ -51,7 +63,12 @@ interface ScheduledActions {
   /**
    * Get the private scheduled action by name.
    */
-  get is ScheduledActionOps.Read<ScheduledAction>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
+  get is ScheduledActionOps.Read<
+    ScheduledAction,
+    ErrorType = ErrorResponseWithNestedDetails
+  >;
 
   /**
    * Create or update a private scheduled action.
@@ -62,22 +79,50 @@ interface ScheduledActions {
       /**
        * ETag of the Entity. Not required when creating an entity. Optional when updating an entity and can be specified to achieve optimistic concurrency.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    ErrorType = ErrorResponseWithNestedDetails
   >;
 
   /**
    * Delete a private scheduled action.
    */
-  delete is ScheduledActionOps.DeleteSync<ScheduledAction>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
+  delete is ScheduledActionOps.DeleteSync<
+    ScheduledAction,
+    ErrorType = ErrorResponseWithNestedDetails
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
+  list is ScheduledActionOps.List<
+    ScheduledAction,
+    Parameters = {
+      /**
+       * May be used to filter scheduled actions by properties/viewId. Supported operator is 'eq'.
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Response = ScheduledActionListResult,
+    ErrorType = ErrorResponseWithNestedDetails
+  >;
 
   /**
    * Processes a private scheduled action.
    */
   @action("execute")
-  run is ScheduledActionOps.ActionSync<ScheduledAction, void, OkResponse>;
+  run is ScheduledActionOps.ActionSync<
+    ScheduledAction,
+    void,
+    OkResponse,
+    ErrorType = ErrorResponseWithNestedDetails
+  >;
 }
+
 @armResourceOperations
 interface ScheduledActionOperationGroupOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -111,47 +156,53 @@ interface ScheduledActionOperationGroup {
   /**
    * Get the shared scheduled action from the given scope by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledActions_GetByScope")
+  @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   getByScope is ScheduledActionOperationGroupOps.Read<
-    Extension.ScopeParameter,
-    ScheduledAction
+    ScheduledAction,
+    ErrorType = ErrorResponseWithNestedDetails
   >;
 
   /**
    * Create or update a shared scheduled action within the given scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledActions_CreateOrUpdateByScope")
   createOrUpdateByScope is ScheduledActionOperationGroupOps.CreateOrUpdateSync<
-    Extension.ScopeParameter,
     ScheduledAction,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity. Optional when updating an entity and can be specified to achieve optimistic concurrency.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    ErrorType = ErrorResponseWithNestedDetails
   >;
 
   /**
    * Delete a scheduled action within the given scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledActions_DeleteByScope")
+  @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   deleteByScope is ScheduledActionOperationGroupOps.DeleteSync<
-    Extension.ScopeParameter,
-    ScheduledAction
+    ScheduledAction,
+    ErrorType = ErrorResponseWithNestedDetails
   >;
 
   /**
    * List all private scheduled actions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScheduledActions_List")
-  list is ScheduledActionOperationGroupOps.List<
-    Extension.ScopeParameter,
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ScheduledActions_ListByScope")
+  @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
+  listByScope is ScheduledActionOperationGroupOps.List<
     ScheduledAction,
     Parameters = {
       /**
@@ -159,20 +210,22 @@ interface ScheduledActionOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = ScheduledActionListResult,
+    ErrorType = ErrorResponseWithNestedDetails
   >;
 
   /**
    * Runs a shared scheduled action within the given scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledActions_RunByScope")
   @action("execute")
   runByScope is ScheduledActionOperationGroupOps.ActionSync<
-    Extension.ScopeParameter,
     ScheduledAction,
     void,
-    OkResponse
+    OkResponse,
+    ErrorType = ErrorResponseWithNestedDetails
   >;
 }
 

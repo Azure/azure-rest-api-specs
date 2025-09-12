@@ -21,6 +21,12 @@ model View is Azure.ResourceManager.ProxyResource<ViewProperties> {
     SegmentName = "views",
     NamePattern = ""
   >;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  eTag?: Azure.Core.eTag;
 }
 
 @armResourceOperations
@@ -50,17 +56,34 @@ interface Views {
   /**
    * Gets the view by view name.
    */
-  get is ViewOps.Read<View>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
+  get is ViewOps.Read<View, ErrorType = ErrorResponse>;
 
   /**
    * The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.
    */
-  createOrUpdate is ViewOps.CreateOrUpdateSync<View>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
+  createOrUpdate is ViewOps.CreateOrUpdateSync<View, ErrorType = ErrorResponse>;
 
   /**
    * The operation to delete a view.
    */
-  delete is ViewOps.DeleteSync<View>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
+  delete is ViewOps.DeleteSync<View, ErrorType = ErrorResponse>;
+
+  /**
+   * Lists all views by tenant and object.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
+  list is ViewOps.List<
+    View,
+    Response = ViewListResult,
+    ErrorType = ErrorResponse
+  >;
 }
 @armResourceOperations
 interface ViewOperationGroupOps
@@ -95,36 +118,44 @@ interface ViewOperationGroup {
   /**
    * Gets the view for the defined scope by view name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Views_GetByScope")
-  getByScope is ViewOperationGroupOps.Read<Extension.ScopeParameter, View>;
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
+  getByScope is ViewOperationGroupOps.Read<View, ErrorType = ErrorResponse>;
 
   /**
    * The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Views_CreateOrUpdateByScope")
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   createOrUpdateByScope is ViewOperationGroupOps.CreateOrUpdateSync<
-    Extension.ScopeParameter,
-    View
+    View,
+    ErrorType = ErrorResponse
   >;
 
   /**
    * The operation to delete a view.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Views_DeleteByScope")
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   deleteByScope is ViewOperationGroupOps.DeleteSync<
-    Extension.ScopeParameter,
-    View
+    View,
+    ErrorType = ErrorResponse
   >;
 
   /**
    * Lists all views by tenant and object.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Views_List")
-  list is ViewOperationGroupOps.List<Extension.ScopeParameter, View>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Views_ListByScope")
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
+  listByScope is ViewOperationGroupOps.List<
+    View,
+    Response = ViewListResult,
+    ErrorType = ErrorResponse
+  >;
 }
 
 @@doc(View.name, "View name");

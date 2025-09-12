@@ -6,21 +6,22 @@
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule",
             "name": "testRule",
             "type": "Microsoft.CostManagement/costAllocationRules",
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule",
             "properties": {
               "description": "This is a testRule",
               "createdDate": "2020-06-18T22:21:51.1287144Z",
-              "updatedDate": "2020-06-18T22:21:51.1287144Z",
               "status": "NotActive",
+              "updatedDate": "2020-06-18T22:21:51.1287144Z",
               "details": {
                 "sourceResources": [
                   {
-                    "resourceType": "Dimension",
                     "name": "ResourceGroupName",
+                    "resourceType": "Dimension",
                     "values": [
                       "sampleRG"
                     ]
@@ -28,9 +29,9 @@
                 ],
                 "targetResources": [
                   {
-                    "resourceType": "Dimension",
-                    "policyType": "FixedProportion",
                     "name": "ResourceGroupName",
+                    "policyType": "FixedProportion",
+                    "resourceType": "Dimension",
                     "values": [
                       {
                         "name": "destinationRG",
@@ -47,19 +48,19 @@
             }
           },
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule2",
             "name": "testRule2",
             "type": "Microsoft.CostManagement/costAllocationRules",
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule2",
             "properties": {
               "description": "This is a second test Rule",
               "createdDate": "2020-06-18T22:21:51.1287144Z",
-              "updatedDate": "2020-06-18T22:21:51.1287144Z",
               "status": "Active",
+              "updatedDate": "2020-06-18T22:21:51.1287144Z",
               "details": {
                 "sourceResources": [
                   {
-                    "resourceType": "Dimension",
                     "name": "SubscriptionId",
+                    "resourceType": "Dimension",
                     "values": [
                       "2A002F2D-536F-4D7C-90DA-3D0BAE879B0E"
                     ]
@@ -67,9 +68,9 @@
                 ],
                 "targetResources": [
                   {
-                    "resourceType": "Tag",
-                    "policyType": "FixedProportion",
                     "name": "category",
+                    "policyType": "FixedProportion",
+                    "resourceType": "Tag",
                     "values": [
                       {
                         "name": "devops",
@@ -82,19 +83,19 @@
             }
           },
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule3",
             "name": "testRule3",
             "type": "Microsoft.CostManagement/costAllocationRules",
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule3",
             "properties": {
               "description": "This is a third test Rule",
               "createdDate": "2020-06-18T22:21:51.1287144Z",
-              "updatedDate": "2020-06-18T22:21:51.1287144Z",
               "status": "Active",
+              "updatedDate": "2020-06-18T22:21:51.1287144Z",
               "details": {
                 "sourceResources": [
                   {
-                    "resourceType": "Tag",
                     "name": "category",
+                    "resourceType": "Tag",
                     "values": [
                       "devops"
                     ]
@@ -102,9 +103,9 @@
                 ],
                 "targetResources": [
                   {
-                    "resourceType": "Dimension",
-                    "policyType": "FixedProportion",
                     "name": "ResourceGroupName",
+                    "policyType": "FixedProportion",
+                    "resourceType": "Dimension",
                     "values": [
                       {
                         "name": "ResourceGroup",
@@ -120,9 +121,10 @@
               }
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "CostAllocationRules_List",
+  "title": "CostAllocationRulesList"
 }

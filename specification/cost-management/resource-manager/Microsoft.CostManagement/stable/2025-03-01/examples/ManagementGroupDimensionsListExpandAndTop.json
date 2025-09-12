@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "managementGroupId": "MyMgId",
     "$expand": "properties/data",
     "$top": 5,
+    "api-version": "2025-03-01",
+    "managementGroupId": "MyMgId",
     "scope": "providers/Microsoft.Management/managementGroups/MyMgId"
   },
   "responses": {
@@ -11,10 +11,12 @@
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Management/managementGroups/MyMgId/providers/microsoft.CostManagement/dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
             "name": "dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
             "type": "microsoft.CostManagement/dimensions",
+            "id": "providers/Microsoft.Management/managementGroups/MyMgId/providers/microsoft.CostManagement/dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
             "properties": {
+              "description": "Resource group",
+              "category": "ResourceGroup",
               "data": [
                 "thoroetrg01",
                 "default-notificationhubs-westus",
@@ -22,20 +24,20 @@
                 "contosocodeflow8d4a",
                 "noobaa"
               ],
-              "total": 377,
-              "category": "ResourceGroup",
-              "usageStart": "2018-05-01T00:00:00-07:00",
-              "usageEnd": "2018-05-31T00:00:00-07:00",
-              "description": "Resource group",
               "filterEnabled": true,
-              "groupingEnabled": true
+              "groupingEnabled": true,
+              "total": 377,
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "usageStart": "2018-05-01T00:00:00-07:00"
             }
           },
           {
-            "id": "providers/Microsoft.Management/managementGroups/MyMgId/providers/microsoft.CostManagement/dimensions_ResourceType_2018-05-01_2018-05-31_5",
             "name": "dimensions_ResourceType_2018-05-01_2018-05-31_5",
             "type": "microsoft.CostManagement/dimensions",
+            "id": "providers/Microsoft.Management/managementGroups/MyMgId/providers/microsoft.CostManagement/dimensions_ResourceType_2018-05-01_2018-05-31_5",
             "properties": {
+              "description": "Resource type",
+              "category": "ResourceType",
               "data": [
                 "microsoft.automation/automationaccounts",
                 "microsoft.databricks/workspaces",
@@ -43,18 +45,18 @@
                 "microsoft.containerregistry/registries",
                 "microsoft.search/searchservices"
               ],
-              "total": 37,
-              "category": "ResourceType",
-              "usageStart": "2018-05-01T00:00:00-07:00",
-              "usageEnd": "2018-05-31T00:00:00-07:00",
-              "description": "Resource type",
               "filterEnabled": true,
-              "groupingEnabled": true
+              "groupingEnabled": true,
+              "total": 37,
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "usageStart": "2018-05-01T00:00:00-07:00"
             }
           }
         ]
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "Dimensions_List",
+  "title": "ManagementGroupDimensionsListExpandAndTop-Legacy"
 }

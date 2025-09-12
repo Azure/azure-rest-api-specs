@@ -13,7 +13,6 @@ namespace Microsoft.CostManagement;
 /**
  * A budget resource.
  */
-@extensionResource
 model Budget is Azure.ResourceManager.ExtensionResource<BudgetProperties> {
   ...ResourceNameParameter<
     Resource = Budget,
@@ -21,6 +20,12 @@ model Budget is Azure.ResourceManager.ExtensionResource<BudgetProperties> {
     SegmentName = "budgets",
     NamePattern = "^[a-zA-Z0-9_-]+$"
   >;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  eTag?: Azure.Core.eTag;
 }
 
 @armResourceOperations
@@ -28,29 +33,43 @@ interface Budgets {
   /**
    * Gets the budget for the scope by budget name.
    */
-  get is Extension.Read<Extension.ScopeParameter, Budget>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/CostManagement/")
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    Budget,
+    Error = ErrorResponse
+  >;
 
   /**
    * The operation to create or update a budget. You can optionally provide an eTag if desired as a form of concurrency control. To obtain the latest eTag for a given budget, perform a get operation prior to your put operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/CostManagement/")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
-    Budget
+    Budget,
+    Error = ErrorResponse
   >;
 
   /**
    * The operation to delete a budget.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/CostManagement/")
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
     Budget,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse,
+    Error = ErrorResponse
   >;
 
   /**
    * Lists all budgets for the defined scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/rest/api/CostManagement/")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     Budget,
@@ -60,7 +79,9 @@ interface Budgets {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = ArmResponse<BudgetsListResult>,
+    Error = ErrorResponse
   >;
 }
 

@@ -1,14 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "55312978-ba1b-415c-9304-c4b9c43c0481",
-    "resourceGroupName": "ScreenSharingTest-peer",
-    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ScreenSharingTest-peer",
     "parameters": {
       "type": "Usage",
-      "timeframe": "MonthToDate",
       "dataset": {
-        "granularity": "Daily",
         "filter": {
           "and": [
             {
@@ -45,18 +40,22 @@
               }
             }
           ]
-        }
-      }
-    }
+        },
+        "granularity": "Daily"
+      },
+      "timeframe": "MonthToDate"
+    },
+    "resourceGroupName": "ScreenSharingTest-peer",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ScreenSharingTest-peer",
+    "subscriptionId": "55312978-ba1b-415c-9304-c4b9c43c0481"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "subscriptions/55312978-ba1b-415c-9304-c4b9c43c0481/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
         "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
         "type": "microsoft.costmanagement/Query",
+        "id": "subscriptions/55312978-ba1b-415c-9304-c4b9c43c0481/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
         "properties": {
-          "nextLink": null,
           "columns": [
             {
               "name": "PreTaxCost",
@@ -75,6 +74,7 @@
               "type": "String"
             }
           ],
+          "nextLink": null,
           "rows": [
             [
               2.10333307059661,
@@ -93,5 +93,7 @@
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "Query_Usage",
+  "title": "ResourceGroupQuery-Legacy"
 }

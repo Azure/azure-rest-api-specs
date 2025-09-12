@@ -2,12 +2,9 @@
   "parameters": {
     "api-version": "2025-03-01",
     "billingAccountId": "12345:6789",
-    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789",
     "parameters": {
       "type": "Usage",
-      "timeframe": "MonthToDate",
       "dataset": {
-        "granularity": "Daily",
         "filter": {
           "and": [
             {
@@ -44,18 +41,20 @@
               }
             }
           ]
-        }
-      }
-    }
+        },
+        "granularity": "Daily"
+      },
+      "timeframe": "MonthToDate"
+    },
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "type": "microsoft.costmanagement/Query",
+        "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "properties": {
-          "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/providers/Microsoft.CostManagement/Query?api-version=2021-10-01&$skiptoken=AQAAAA%3D%3D",
           "columns": [
             {
               "name": "PreTaxCost",
@@ -74,6 +73,7 @@
               "type": "String"
             }
           ],
+          "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/providers/Microsoft.CostManagement/Query?api-version=2021-10-01&$skiptoken=AQAAAA%3D%3D",
           "rows": [
             [
               19.545363672276512,
@@ -88,7 +88,7 @@
               "USD"
             ],
             [
-              20.359416562625452,
+              20.35941656262545,
               "VSTSHOL-1595322048000",
               20180331,
               "USD"
@@ -104,5 +104,7 @@
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "Query_Usage",
+  "title": "BillingAccountQuery-MCA"
 }

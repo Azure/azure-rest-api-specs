@@ -1,36 +1,35 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
     "parameters": {
       "type": "Usage",
-      "timeframe": "TheLastMonth",
       "dataset": {
-        "granularity": "None",
         "aggregation": {
           "totalCost": {
             "name": "PreTaxCost",
             "function": "Sum"
           }
         },
+        "granularity": "None",
         "grouping": [
           {
-            "type": "Dimension",
-            "name": "ResourceGroup"
+            "name": "ResourceGroup",
+            "type": "Dimension"
           }
         ]
-      }
-    }
+      },
+      "timeframe": "TheLastMonth"
+    },
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Query/00000000-0000-0000-0000-000000000000",
         "name": "55312978-ba1b-415c-9304-cfd9c43c0481",
         "type": "microsoft.costmanagement/Query",
+        "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Query/00000000-0000-0000-0000-000000000000",
         "properties": {
-          "nextLink": null,
           "columns": [
             {
               "name": "PreTaxCost",
@@ -45,6 +44,7 @@
               "type": "String"
             }
           ],
+          "nextLink": null,
           "rows": [
             [
               0.009865586851323632,
@@ -71,5 +71,7 @@
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "Query_Usage",
+  "title": "SubscriptionQueryGrouping-Legacy"
 }

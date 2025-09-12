@@ -13,7 +13,6 @@ namespace Microsoft.CostManagement;
 /**
  * The status of the long running operation for cost detailed report.
  */
-@extensionResource
 model GenerateDetailedCostReportOperationStatuses
   is Azure.ResourceManager.ExtensionResource<DownloadURL> {
   ...ResourceNameParameter<
@@ -26,25 +25,25 @@ model GenerateDetailedCostReportOperationStatuses
   /**
    * The status of the long running operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   status?: Status;
 
   /**
    * The startTime of the operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startTime?: string;
 
   /**
    * The endTime of the operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endTime?: string;
 
   /**
    * The details of the error.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: ErrorDetails;
 }
 
@@ -55,7 +54,8 @@ interface GenerateDetailedCostReportOperationStatus {
    */
   get is Extension.Read<
     Extension.ScopeParameter,
-    GenerateDetailedCostReportOperationStatuses
+    GenerateDetailedCostReportOperationStatuses,
+    Error = ErrorResponse
   >;
 }
 

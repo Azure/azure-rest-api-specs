@@ -13,7 +13,6 @@ namespace Microsoft.CostManagement;
 /**
  * The result of the long running operation for cost detailed report.
  */
-@extensionResource
 model GenerateDetailedCostReportOperationResult
   is Azure.ResourceManager.ExtensionResource<DownloadURL> {
   ...ResourceNameParameter<
@@ -32,7 +31,8 @@ interface GenerateDetailedCostReportOperationResults {
   get is Extension.Read<
     Extension.ScopeParameter,
     GenerateDetailedCostReportOperationResult,
-    Response = ArmResponse<GenerateDetailedCostReportOperationResult> | AcceptedResponse
+    Response = ArmResponse<GenerateDetailedCostReportOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GenerateDetailedCostReportOperationResult>>,
+    Error = ErrorResponse
   >;
 }
 
