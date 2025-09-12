@@ -100,7 +100,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/VideoAnalyzer.Edge/preview/1.0.0/AzureVideoAnalyzer.json
+  - $(this-folder)/preview/1.0.0/AzureVideoAnalyzer.json
 
 ```
 
