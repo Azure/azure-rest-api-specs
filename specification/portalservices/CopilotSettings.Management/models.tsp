@@ -63,26 +63,26 @@ model CopilotSettingsProperties {
   /** Boolean indicating if role-based access control is enabled for copilot in this tenant. */
   accessControlEnabled: boolean;
 
-  @added(Versions.v2025_09_10_preview)
   /** The agent mode configuration properties. */
+  @added(Versions.v2025_09_10_preview)
   agentMode?: AgentModeProperties;
 
-  @added(Versions.v2025_08_01_preview)
   /** The setting for Bring Your Own Storage (BYOS) for copilot in this tenant. If set, copilot will use specified cosmos DB account for storing copilot chat data. */
+  @added(Versions.v2025_08_01_preview)
   cosmosResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.DocumentDB/databaseAccounts";
     }
   ]>;
 
+  /** The setting for Multi-Factor Authentication enforcement when signing into this tenant in the Azure Portal. */
   @added(Versions.v2024_08_01_preview)
   @removed(Versions.v2024_09_01_preview)
-  /** The setting for Multi-Factor Authentication enforcement when signing into this tenant in the Azure Portal. */
   portalMfaEnforcement?: MfaEnforcement;
 
+  /** Justification for the value set for portalMfaEnforcement. Required when portalMfaEnforcement is set to a value other than 'Default'. Maximum length is 500 characters. */
   @added(Versions.v2024_08_01_preview)
   @removed(Versions.v2024_09_01_preview)
-  /** Justification for the value set for portalMfaEnforcement. Required when portalMfaEnforcement is set to a value other than 'Default'. Maximum length is 500 characters. */
   portalMfaEnforcementJustification?: string;
 
   /** The status of the last provisioning operation performed on the resource. */
