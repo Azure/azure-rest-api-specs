@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-01-01",
+    "version": "2023-01-01",
     "title": "AdvisorManagementClient",
     "description": "REST APIs for Azure Advisor"
   },
@@ -73,13 +73,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the recommendation metadata.<br>Filter can be applied to properties ['[recommendationCategory](#category)', '[recommendationSubCategory](#recommendationSubCategory)', 'RetirementDate'] with operators ['eq', 'and', 'le', 'ge']<br>The filter can also be applied to property ['[TrackingIds]']<br><br>⚠ **Note:** `recommendationControl` is a legacy filter property and will be deprecated in the future. Please use `recommendationSubCategory` for filtering recommendation subcategory.<br><br>Valid options for recommendationSubCategory: ['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br><br>Example:<br>- $filter=recommendationCategory eq 'HighAvailability' and recommendationSubCategory eq 'ServiceUpgradeAndRetirement' and retirementDate ge '2024-01-01' and retirementDate le '2028-01-01'. Filter can be applied on trackingIds as well.<br>- $filter=trackingIds/any(t: t eq 'some-guid')<br><br>⚠ **Note:** `trackingIDs` filter can be used for filtering one value at a time. The support to filter multiple values is not currently available. Also the support to add other filters along with `trackingIDs` is not available.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -428,7 +421,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge'].<br><br>⚠ **Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br><br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br><br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'",
             "required": false,
             "type": "string"
           },
@@ -1037,7 +1030,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1195,7 +1188,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1222,25 +1215,6 @@
           "type": "string",
           "x-ms-enum": {
             "name": "category",
-            "modelAsString": true
-          }
-        },
-        "control": {
-          "description": "The sub-category of the recommendation.",
-          "enum": [
-            "HighAvailability",
-            "BusinessContinuity",
-            "DisasterRecovery",
-            "Scalability",
-            "MonitoringAndAlerting",
-            "ServiceUpgradeAndRetirement",
-            "Other",
-            "PrioritizedRecommendations",
-            "Personalized"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "control",
             "modelAsString": true
           }
         },
@@ -1464,7 +1438,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1698,7 +1672,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
