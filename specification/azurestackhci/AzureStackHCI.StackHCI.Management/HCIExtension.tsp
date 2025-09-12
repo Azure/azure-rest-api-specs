@@ -116,7 +116,7 @@ model HCIExtensionProperties {
    * Parameters specific to this extension type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  extensionParameters?: HCIExtensionParameters;
+  extensionParameters?: HCIExtensionParametersContent;
 
   /**
    * Aggregate state of Arc Extensions across the nodes in this HCI cluster.
@@ -141,7 +141,7 @@ model HCIExtensionProperties {
  * Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionParameters {
+model HCIExtensionParametersContent {
   /**
    * How the extension handler should be forced to update even if the extension configuration has not changed.
    */
