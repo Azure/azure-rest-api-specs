@@ -36,7 +36,7 @@ directive:
       PatchBodyParametersSchema
 
   - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[5].schema.properties.devBoxDefinition.properties.properties
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[5].schema.properties.properties
     suppress:
       PatchBodyParametersSchema
 
