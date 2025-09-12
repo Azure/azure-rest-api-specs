@@ -176,12 +176,11 @@ namespace Azure.AI.Agents {
         @path
         runId: string;
 
-        #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of ToolOutput and StructuredToolOutput provides backward compatibility and structured output support"
         @doc("A list of tools for which the outputs are being submitted")
         @encodedName("application/json", "tool_outputs")
         @madeOptional(Versions.v2025_05_15_preview)
         @typeChangedFrom(Versions.v2025_05_15_preview, ToolOutput[])
-        toolOutputs?: (ToolOutput | StructuredToolOutput)[];
+        toolOutputs?: StructuredToolOutput[];
 
         @doc("A list of tool approvals allowing data to be sent to tools.")
         @encodedName("application/json", "tool_approvals")
