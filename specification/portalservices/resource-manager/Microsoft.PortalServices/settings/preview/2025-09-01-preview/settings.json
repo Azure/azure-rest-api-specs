@@ -199,11 +199,11 @@
           "Update tenant-level Azure Portal Settings": {
             "$ref": "./examples/Settings_Update.json"
           },
-          "Update tenant-level Azure Portal Settings with removed ops360Settings configuration": {
-            "$ref": "./examples/Settings_Update_NullStatus.json"
-          },
           "Update tenant-level Azure Portal Settings with cleared ops360Settings status": {
             "$ref": "./examples/Settings_Update_NullStatusField.json"
+          },
+          "Update tenant-level Azure Portal Settings with removed ops360Settings configuration": {
+            "$ref": "./examples/Settings_Update_NullStatus.json"
           }
         }
       },
@@ -408,8 +408,7 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/Ops360Status",
-          "description": "The current status of Operations 360 feature. Can be null when the status has been cleared.",
-          "x-nullable": true
+          "description": "The current status of Operations 360 feature. Can be null when the status has been cleared."
         }
       }
     },
@@ -457,8 +456,7 @@
         },
         "ops360Settings": {
           "$ref": "#/definitions/Ops360Settings",
-          "description": "Operations 360 settings for Azure Portal users in the tenant. Can be null to remove the configuration entirely.",
-          "x-nullable": true
+          "description": "Operations 360 settings for Azure Portal users in the tenant. Can be null to remove the configuration entirely."
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",

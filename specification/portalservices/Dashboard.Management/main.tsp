@@ -34,4 +34,7 @@ enum Versions {
 
   @doc("Azure Portal Services Dashboards Management API version 2024-09-01-preview.")
   v2024_09_01_preview: "2024-09-01-preview",
+
+  @doc("Azure Portal Services Dashboards Management API version 2025-09-01-preview.")
+  v2025_09_01_preview: "2025-09-01-preview",
 }

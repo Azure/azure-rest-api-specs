@@ -50,7 +50,7 @@ union Ops360Status {
   @doc("Operations 360 feature has been approved.")
   Approved: "Approved",
 
-  @doc("Operations 360 feature configuration is pending approval.")
+  @doc("Operations 360 feature is pending approval.")
   Pending: "Pending",
 }
 
@@ -108,7 +108,7 @@ model FeedbackControlPolicySettings {
 @added(Versions.v2025_09_01_preview)
 model Ops360Settings {
   @doc("The current status of Operations 360 feature. Can be null when the status has been cleared.")
-  status?: Ops360Status | null;
+  status?: Ops360Status;
 }
 
 @doc("The Azure Portal tenant-level settings properties.")
@@ -123,7 +123,7 @@ model SettingsProperties {
 
   @added(Versions.v2025_09_01_preview)
   @doc("Operations 360 settings for Azure Portal users in the tenant. Can be null to remove the configuration entirely.")
-  ops360Settings?: Ops360Settings | null;
+  ops360Settings?: Ops360Settings;
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
