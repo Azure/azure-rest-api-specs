@@ -36,8 +36,8 @@ options:
       name: "@azure/arm-relay"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/relay"
-    package-dir: "armrelay"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrelay"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrelay"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
