@@ -374,7 +374,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile.",
+            "description": "The name of the Profile",
             "required": true,
             "type": "string"
           }
@@ -424,7 +424,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile.",
+            "description": "The name of the Profile",
             "required": true,
             "type": "string"
           },
@@ -498,7 +498,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile.",
+            "description": "The name of the Profile",
             "required": true,
             "type": "string"
           },
@@ -551,7 +551,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile.",
+            "description": "The name of the Profile",
             "required": true,
             "type": "string"
           }
@@ -597,7 +597,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile.",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
             "type": "string"
           },
@@ -667,7 +667,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile.",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
             "type": "string"
           },
@@ -706,15 +706,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Endpoint' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
           "201": {
-            "description": "Resource 'Endpoint' create operation succeeded",
+            "description": "Azure create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -758,7 +765,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile.",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
             "type": "string"
           },
@@ -831,7 +838,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile.",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
             "type": "string"
           },
@@ -883,7 +890,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}": {
       "get": {
         "operationId": "HeatMap_Get",
         "description": "Gets latest heatmap for Traffic Manager profile.",
@@ -1775,9 +1782,6 @@
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"

@@ -50,12 +50,9 @@ using Microsoft.Network;
 @@clientLocation(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   Profiles
 );
-// @@clientLocation(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
-//   Profiles
-// );
-// @@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
-//   "checkTrafficManagerNameAvailabilityV2"
-// );
+@@clientLocation(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
+  Profiles
+);
 
 @@clientLocation(HeatMapModels.get, "HeatMap");
 @@clientName(HeatMapModels.get, "Get");

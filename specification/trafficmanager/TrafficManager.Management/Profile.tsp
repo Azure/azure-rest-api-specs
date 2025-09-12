@@ -27,15 +27,12 @@ alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  {
-    /**
-     * The name of the Profile.
-     */
-    @path
-    @segment("trafficmanagerprofiles")
-    @key("profileName")
-    profileName: string;
-  },
+  KeysOf<ResourceNameParameter<
+    Resource = Profile,
+    KeyName = "profileName",
+    SegmentName = "trafficmanagerprofiles",
+    NamePattern = ""
+  >>,
   ErrorType = CloudError
 >;
 
@@ -45,15 +42,12 @@ alias ProfileSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  {
-    /**
-     * The name of the Profile.
-     */
-    @path
-    @segment("trafficmanagerprofiles")
-    @key("profileName")
-    profileName: string;
-  },
+  KeysOf<ResourceNameParameter<
+    Resource = Profile,
+    KeyName = "profileName",
+    SegmentName = "trafficmanagerprofiles",
+    NamePattern = ""
+  >>,
   ErrorType = CloudError
 >;
 

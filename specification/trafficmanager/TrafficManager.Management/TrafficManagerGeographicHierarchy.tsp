@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 @singleton("default")
 @tenantResource
 model TrafficManagerGeographicHierarchy extends ProxyResource {
-  properties: GeographicHierarchyProperties;
+  properties?: GeographicHierarchyProperties;
 }
 
 @armResourceOperations

@@ -28,15 +28,7 @@ alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...Azure.ResourceManager.Legacy.Provider;
   },
-  {
-    /**
-     * The user metrics keys. The default value is "default".
-     */
-    @path
-    @segment("trafficManagerUserMetricsKeys")
-    @key("trafficManagerUserMetricsKeys")
-    trafficManagerUserMetricsKeys: "default";
-  },
+  {},
   ErrorType = CloudError
 >;
 
@@ -46,9 +38,20 @@ interface UserMetricsModels {
    * Get the subscription-level key used for Real User Metrics collection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is UserMetricsModelOps.Read<UserMetricsModel>;
+  get is ArmResourceRead<
+    UserMetricsModel,
+    Parameters = {
+      /**
+       * The user metrics keys. The default value is "default".
+       */
+      @path
+      @segment("trafficManagerUserMetricsKeys")
+      @key("trafficManagerUserMetricsKeys")
+      trafficManagerUserMetricsKeys: "default";
+    },
+    Error = CloudError
+  >;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Create or update a subscription-level key used for Real User Metrics collection.
    */
@@ -56,6 +59,15 @@ interface UserMetricsModels {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is UserMetricsModelOps.CreateOrUpdateSync<
     Resource = UserMetricsModel,
+    Parameters = {
+      /**
+       * The user metrics keys. The default value is "default".
+       */
+      @path
+      @segment("trafficManagerUserMetricsKeys")
+      @key("trafficManagerUserMetricsKeys")
+      trafficManagerUserMetricsKeys: "default";
+    },
     Response = ArmResourceCreatedSyncResponse<UserMetricsModel>,
     OverrideErrorType = CloudError,
     Request = void
@@ -66,10 +78,19 @@ interface UserMetricsModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is UserMetricsModelOps.DeleteSync<
-    Resource = UserMetricsModel,
+  delete is ArmResourceDeleteSync<
+    UserMetricsModel,
+    Parameters = {
+      /**
+       * The user metrics keys. The default value is "default".
+       */
+      @path
+      @segment("trafficManagerUserMetricsKeys")
+      @key("trafficManagerUserMetricsKeys")
+      trafficManagerUserMetricsKeys: "default";
+    },
     Response = ArmResponse<DeleteOperationResult>,
-    OverrideErrorType = CloudError
+    Error = CloudError
   >;
 }
 
