@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Quantum Workspace Services",
-    "version": "2024-03-01-preview",
+    "version": "2025-09-01-preview",
     "description": "Azure Quantum Workspace Services",
     "contact": {
       "email": "azqengg@microsoft.com"
@@ -72,6 +72,96 @@
   },
   "tags": [],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobUpdateOptions/{jobId}": {
+      "patch": {
+        "operationId": "Jobs_Update",
+        "description": "Update job properties.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobUpdateOptionsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobUpdateOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches a job.": {
+            "$ref": "./examples/Jobs_Update.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs": {
       "get": {
         "operationId": "Jobs_List",
@@ -112,6 +202,18 @@
             "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
             "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -199,7 +301,187 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/JobDetails"
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/definitions/WorkspaceItemId",
+                  "description": "Id of the job.",
+                  "readOnly": true
+                },
+                "itemType": {
+                  "type": "string",
+                  "description": "Type of the Quantum Workspace item is Job.",
+                  "enum": [
+                    "Job"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  },
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "jobType": {
+                  "$ref": "#/definitions/JobType",
+                  "description": "The type of job.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "sessionId": {
+                  "type": "string",
+                  "description": "The ID of the session that the job is part of.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "containerUri": {
+                  "type": "string",
+                  "description": "The blob container SAS uri, the container is used to host job data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "inputDataUri": {
+                  "type": "string",
+                  "description": "The input blob URI, if specified, it will override the default input blob in the container.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "inputDataFormat": {
+                  "type": "string",
+                  "description": "The format of the input data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "status": {
+                  "$ref": "#/definitions/JobStatus",
+                  "description": "The status of the job.",
+                  "readOnly": true
+                },
+                "metadata": {
+                  "type": "object",
+                  "description": "The job metadata. Metadata provides client the ability to store client-specific information",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                },
+                "cancellationTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when a job was successfully cancelled.",
+                  "readOnly": true
+                },
+                "quantumComputingData": {
+                  "$ref": "#/definitions/QuantumComputingData",
+                  "description": "Quantum computing data.",
+                  "readOnly": true
+                },
+                "inputParams": {
+                  "type": "object",
+                  "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "outputDataUri": {
+                  "type": "string",
+                  "description": "The output blob uri. When a job finishes successfully, results will be uploaded to this blob.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "outputDataFormat": {
+                  "type": "string",
+                  "description": "The format of the output data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                },
+                "providerId": {
+                  "type": "string",
+                  "description": "The unique identifier for the provider.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "target": {
+                  "type": "string",
+                  "description": "The target identifier to run the job.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "creationTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The creation time of the item.",
+                  "readOnly": true
+                },
+                "beginExecutionTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when the item began execution.",
+                  "readOnly": true
+                },
+                "endExecutionTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when the item finished execution.",
+                  "readOnly": true
+                },
+                "costEstimate": {
+                  "$ref": "#/definitions/CostEstimate",
+                  "description": "Cost estimate.",
+                  "readOnly": true
+                },
+                "errorData": {
+                  "$ref": "#/definitions/Errors.WorkspaceItemError",
+                  "description": "Error information.",
+                  "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "itemType",
+                "containerUri",
+                "name",
+                "providerId",
+                "target"
+              ]
             }
           },
           "default": {
@@ -284,13 +566,373 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/JobDetails"
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/definitions/WorkspaceItemId",
+                  "description": "Id of the job.",
+                  "readOnly": true
+                },
+                "itemType": {
+                  "type": "string",
+                  "description": "Type of the Quantum Workspace item is Job.",
+                  "enum": [
+                    "Job"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  },
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "jobType": {
+                  "$ref": "#/definitions/JobType",
+                  "description": "The type of job.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "sessionId": {
+                  "type": "string",
+                  "description": "The ID of the session that the job is part of.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "containerUri": {
+                  "type": "string",
+                  "description": "The blob container SAS uri, the container is used to host job data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "inputDataUri": {
+                  "type": "string",
+                  "description": "The input blob URI, if specified, it will override the default input blob in the container.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "inputDataFormat": {
+                  "type": "string",
+                  "description": "The format of the input data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "status": {
+                  "$ref": "#/definitions/JobStatus",
+                  "description": "The status of the job.",
+                  "readOnly": true
+                },
+                "metadata": {
+                  "type": "object",
+                  "description": "The job metadata. Metadata provides client the ability to store client-specific information",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                },
+                "cancellationTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when a job was successfully cancelled.",
+                  "readOnly": true
+                },
+                "quantumComputingData": {
+                  "$ref": "#/definitions/QuantumComputingData",
+                  "description": "Quantum computing data.",
+                  "readOnly": true
+                },
+                "inputParams": {
+                  "type": "object",
+                  "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "outputDataUri": {
+                  "type": "string",
+                  "description": "The output blob uri. When a job finishes successfully, results will be uploaded to this blob.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "outputDataFormat": {
+                  "type": "string",
+                  "description": "The format of the output data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                },
+                "providerId": {
+                  "type": "string",
+                  "description": "The unique identifier for the provider.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "target": {
+                  "type": "string",
+                  "description": "The target identifier to run the job.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "creationTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The creation time of the item.",
+                  "readOnly": true
+                },
+                "beginExecutionTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when the item began execution.",
+                  "readOnly": true
+                },
+                "endExecutionTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when the item finished execution.",
+                  "readOnly": true
+                },
+                "costEstimate": {
+                  "$ref": "#/definitions/CostEstimate",
+                  "description": "Cost estimate.",
+                  "readOnly": true
+                },
+                "errorData": {
+                  "$ref": "#/definitions/Errors.WorkspaceItemError",
+                  "description": "Error information.",
+                  "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "itemType",
+                "containerUri",
+                "name",
+                "providerId",
+                "target"
+              ]
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/JobDetails"
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/definitions/WorkspaceItemId",
+                  "description": "Id of the job.",
+                  "readOnly": true
+                },
+                "itemType": {
+                  "type": "string",
+                  "description": "Type of the Quantum Workspace item is Job.",
+                  "enum": [
+                    "Job"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  },
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "jobType": {
+                  "$ref": "#/definitions/JobType",
+                  "description": "The type of job.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "sessionId": {
+                  "type": "string",
+                  "description": "The ID of the session that the job is part of.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "containerUri": {
+                  "type": "string",
+                  "description": "The blob container SAS uri, the container is used to host job data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "inputDataUri": {
+                  "type": "string",
+                  "description": "The input blob URI, if specified, it will override the default input blob in the container.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "inputDataFormat": {
+                  "type": "string",
+                  "description": "The format of the input data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "status": {
+                  "$ref": "#/definitions/JobStatus",
+                  "description": "The status of the job.",
+                  "readOnly": true
+                },
+                "metadata": {
+                  "type": "object",
+                  "description": "The job metadata. Metadata provides client the ability to store client-specific information",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                },
+                "cancellationTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when a job was successfully cancelled.",
+                  "readOnly": true
+                },
+                "quantumComputingData": {
+                  "$ref": "#/definitions/QuantumComputingData",
+                  "description": "Quantum computing data.",
+                  "readOnly": true
+                },
+                "inputParams": {
+                  "type": "object",
+                  "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "outputDataUri": {
+                  "type": "string",
+                  "description": "The output blob uri. When a job finishes successfully, results will be uploaded to this blob.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "outputDataFormat": {
+                  "type": "string",
+                  "description": "The format of the output data.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                },
+                "providerId": {
+                  "type": "string",
+                  "description": "The unique identifier for the provider.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "target": {
+                  "type": "string",
+                  "description": "The target identifier to run the job.",
+                  "x-ms-mutability": [
+                    "read",
+                    "create"
+                  ]
+                },
+                "creationTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The creation time of the item.",
+                  "readOnly": true
+                },
+                "beginExecutionTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when the item began execution.",
+                  "readOnly": true
+                },
+                "endExecutionTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The time when the item finished execution.",
+                  "readOnly": true
+                },
+                "costEstimate": {
+                  "$ref": "#/definitions/CostEstimate",
+                  "description": "Cost estimate.",
+                  "readOnly": true
+                },
+                "errorData": {
+                  "$ref": "#/definitions/Errors.WorkspaceItemError",
+                  "description": "Error information.",
+                  "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "itemType",
+                "containerUri",
+                "name",
+                "providerId",
+                "target"
+              ]
             }
           },
           "default": {
@@ -532,7 +1174,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions": {
       "get": {
-        "operationId": "Sessions_List",
+        "operationId": "Sessions_Listv2",
         "description": "List all Sessions.",
         "parameters": [
           {
@@ -570,6 +1212,18 @@
             "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
             "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -898,6 +1552,18 @@
             "type": "string",
             "maxLength": 36,
             "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -986,7 +1652,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/topLevelItems": {
       "get": {
-        "operationId": "TopLevelItems_List",
+        "operationId": "TopLevelItems_Listv2",
         "description": "List top-level items.",
         "parameters": [
           {
@@ -1024,6 +1690,18 @@
             "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
             "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -1295,6 +1973,27 @@
           "$ref": "#/definitions/Errors.WorkspaceItemError",
           "description": "Error information.",
           "readOnly": true
+        },
+        "priority": {
+          "$ref": "#/definitions/Priority",
+          "description": "Priority of job or session.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "discriminator": "itemType",
@@ -1427,18 +2126,6 @@
             "read",
             "create"
           ]
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of user-supplied tags associated with the job.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       },
       "required": [
@@ -1522,6 +2209,80 @@
             "description": "Optimization job type."
           }
         ]
+      }
+    },
+    "JobUpdateOptions": {
+      "type": "object",
+      "description": "Options for updating a job.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/WorkspaceItemId",
+          "description": "Id of the job.",
+          "readOnly": true
+        },
+        "priority": {
+          "$ref": "#/definitions/Priority",
+          "description": "Priority of job.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the job.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "JobUpdateOptionsUpdate": {
+      "type": "object",
+      "description": "Options for updating a job.",
+      "properties": {
+        "priority": {
+          "$ref": "#/definitions/Priority",
+          "description": "Priority of job.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the job.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
       }
     },
     "MeterPeriod": {
@@ -1652,6 +2413,30 @@
       "required": [
         "value"
       ]
+    },
+    "Priority": {
+      "type": "string",
+      "description": "Job priority levels.",
+      "enum": [
+        "Standard",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "Priority",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The job's base priority."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "The job's priority is elevated."
+          }
+        ]
+      }
     },
     "ProviderAvailability": {
       "type": "string",
@@ -2053,6 +2838,40 @@
       "maxLength": 50,
       "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
       "x-ms-parameter-location": "client"
+    },
+    "CustomFilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomOrderByQueryParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "The order of returned items.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomSkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomTopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of jobs taken.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }
