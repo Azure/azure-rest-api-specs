@@ -33,3 +33,12 @@ options:
     package-dir: "azure-analytics-purview-unifiedcatalog"
     namespace: com.azure.analytics.purview.unifiedcatalog
     flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azpurviewunifiedcatalog"
+    service-dir: "sdk/purview"
+    emitter-output-dir: "{output-dir}/{service-dir}/azpurviewunifiedcatalog"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
