@@ -32,14 +32,14 @@ options:
     flavor: azure
     experimental-extensible-enums: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-support"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-support"
     namespace: com.azure.resourcemanager.support
     flavor: azure
     service-name: Support
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/support"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    package-dir: "armsupport"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsupport"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsupport"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

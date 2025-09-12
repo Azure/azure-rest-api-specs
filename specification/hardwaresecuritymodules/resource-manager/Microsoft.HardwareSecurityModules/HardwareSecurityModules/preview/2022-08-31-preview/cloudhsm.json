@@ -1,0 +1,918 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Cloud HSM Resource Provider",
+    "description": "The Azure management API provides a RESTful set of web services that interact with Azure Cloud HSM RP.",
+    "version": "2022-08-31-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}": {
+      "put": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusters_CreateOrUpdate",
+        "description": "Create or Update a Cloud HSM Cluster in the specified subscription.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CloudHsmCluster"
+            },
+            "description": "Parameters to create Cloud HSM Cluster"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created or Update Cloud HSM Cluster",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmCluster"
+            }
+          },
+          "201": {
+            "description": "Created or Update Cloud HSM Cluster",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmCluster"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusters_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Update a Cloud HSM Cluster in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterPatchParameters"
+            },
+            "description": "Parameters to create Cloud HSM Cluster"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patched Cloud HSM Cluster",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmCluster"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Update_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusters_Get",
+        "description": "Gets the specified Cloud HSM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved Cloud HSM Cluster",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmCluster"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Get_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusters_Delete",
+        "description": "Deletes the specified Cloud HSM Cluster",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK Response."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusters_ListByResourceGroup",
+        "description": "The List operation gets information about the Cloud HSM Clusters associated with the subscription and within the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skiptoken",
+            "type": "string",
+            "required": false,
+            "description": "The page-continuation token to use with a paged version of this API"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all Cloud HSM Clusters in the specified resource group.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusters_ListBySubscription",
+        "description": "The List operation gets information about the Cloud HSM Clusters associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skiptoken",
+            "type": "string",
+            "required": false,
+            "description": "The page-continuation token to use with a paged version of this API"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all Cloud HSM Clusters in the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusterPrivateLinkResources_ListByCloudHsmCluster",
+        "description": "Gets the private link resources supported for the Cloud Hsm Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmClusterPrivateLinkResources_ListByResource_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateLinkResource_ListByCloudHsmCluster_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}": {
+      "put": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusterPrivateEndpointConnections_Create",
+        "description": "Creates or updates the private endpoint connection for the Cloud Hsm Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/peConnectionName"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "Parameters of the PrivateEndpointConnection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Create or Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmClusterPrivateEndpointConnection_Create_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusterPrivateEndpointConnections_Delete",
+        "description": "Deletes the private endpoint connection for the Cloud Hsm Cluster.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/peConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private endpoint connection was successfully deleted."
+          },
+          "202": {
+            "description": "The private endpoint connection is being deleted.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmClusterPrivateEndpointConnection_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_Delete_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmClusterPrivateEndpointConnections_Get",
+        "description": "Gets the private endpoint connection for the Cloud Hsm Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/peConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private endpoint connection successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmClusterPrivateEndpointConnection_Get_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "operationId": "PrivateEndpointConnections_ListByCloudHsmCluster",
+        "description": "The List operation gets information about the private endpoint connections associated with the Cloud HSM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all CloudHsmCluster private endpoint connections associated with the Cloud HSM Cluster.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CloudHsmClusterPrivateEndpointConnection_ListByResource_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_ListByCloudHsmCluster_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudHsmProperties": {
+      "type": "object",
+      "description": "The Cloud HSM Properties",
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "FQDN of the Cloud HSM"
+        },
+        "state": {
+          "type": "string",
+          "description": "The Cloud HSM State"
+        },
+        "stateMessage": {
+          "type": "string",
+          "description": "The Cloud HSM State message"
+        }
+      }
+    },
+    "CloudHsmCluster": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudHsmClusterProperties",
+          "description": "Properties of the Cloud HSM Cluster"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CloudHsmClusterResource"
+        }
+      ],
+      "description": "Resource information with extended details.",
+      "type": "object"
+    },
+    "CloudHsmClusterResource": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/CloudHsmClusterSku",
+          "description": "SKU details"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Cloud HSM Cluster Resource",
+      "type": "object",
+      "x-ms-azure-resource": true
+    },
+    "CloudHsmClusterProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The Cloud HSM Cluster's provisioningState",
+          "enum": [
+            "Provisioning",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "type": "string",
+          "description": "The Cloud HSM Cluster's auto-generated Domain Name Label Scope"
+        },
+        "securityDomain": {
+          "$ref": "#/definitions/CloudHsmClusterSecurityDomainProperties"
+        },
+        "hsms": {
+          "type": "array",
+          "description": "An array of Cloud HSM Cluster's HSMs",
+          "x-ms-identifiers": [
+            "fqdn"
+          ],
+          "items": {
+            "$ref": "#/definitions/CloudHsmProperties"
+          }
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "The Cloud HSM Cluster public network access"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connection resources",
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "Properties of a Cloud HSM Cluster.",
+      "type": "object"
+    },
+    "CloudHsmClusterPatchParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The Cloud HSM Cluster's tags",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The Cloud HSM Cluster's tag's additional properties"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/CloudHsmClusterSku",
+          "description": "SKU details"
+        }
+      },
+      "description": "Patchable properties of the Cloud HSM Cluster",
+      "type": "object"
+    },
+    "CloudHsmClusterSecurityDomainProperties": {
+      "type": "object",
+      "description": "Security domain properties information for Cloud HSM cluster",
+      "properties": {
+        "fipsState": {
+          "format": "int32",
+          "type": "integer",
+          "description": "FIPS state information for security domain"
+        },
+        "activationStatus": {
+          "type": "string",
+          "description": "status of security domain activation"
+        }
+      }
+    },
+    "CloudHsmClusterSku": {
+      "type": "object",
+      "description": "Cloud Hsm Cluster SKU information",
+      "required": [
+        "name",
+        "family"
+      ],
+      "properties": {
+        "family": {
+          "type": "string",
+          "description": "Sku family of the Cloud HSM Cluster",
+          "enum": [
+            "B"
+          ],
+          "x-ms-client-default": "B",
+          "x-ms-enum": {
+            "name": "CloudHsmClusterSkuFamily",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Sku name of the Cloud HSM Cluster",
+          "enum": [
+            "Standard_B1",
+            "Standard B10"
+          ],
+          "x-ms-enum": {
+            "name": "CloudHsmClusterSkuName",
+            "modelAsString": false
+          }
+        },
+        "capacity": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Sku capacity"
+        }
+      }
+    },
+    "CloudHsmClusterError": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CHsmError"
+        }
+      },
+      "description": "The Cloud HSM Cluster error details",
+      "type": "object"
+    },
+    "CHsmError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        }
+      },
+      "type": "object",
+      "description": "Error details"
+    },
+    "CloudHsmClusterListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudHsmCluster"
+          },
+          "description": "The list of Cloud HSM Clusters."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of Cloud HSM Clusters."
+        }
+      },
+      "description": "List of Cloud HSM Clusters",
+      "type": "object"
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The private endpoint connection resource.",
+      "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpoint",
+          "description": "The private endpoint resource."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource."
+        },
+        "groupIds": {
+          "description": "The group ids for the private endpoint resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the private endpoint connection."
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed",
+        "Updating",
+        "InternalError",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of private endpoint connections."
+        }
+      },
+      "description": "List of private endpoint connections associated with the specified resource."
+    }
+  },
+  "parameters": {
+    "cloudHsmClusterName": {
+      "name": "cloudHsmClusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "peConnectionName": {
+      "name": "peConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
