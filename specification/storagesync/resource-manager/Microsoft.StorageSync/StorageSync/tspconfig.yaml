@@ -35,8 +35,8 @@ options:
       name: "@azure/arm-storagesync"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storagesync"
-    package-dir: "armstoragesync"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armstoragesync"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragesync"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
