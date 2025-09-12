@@ -180,7 +180,8 @@ namespace Azure.AI.Agents {
         @doc("A list of tools for which the outputs are being submitted")
         @encodedName("application/json", "tool_outputs")
         @madeOptional(Versions.v2025_05_15_preview)
-        toolOutputs?: ToolOutput[];
+        @typeChangedFrom(Versions.v2025_05_15_preview, ToolOutput[])
+        toolOutputs?: (ToolOutput | StructuredToolOutput)[];
 
         @doc("A list of tool approvals allowing data to be sent to tools.")
         @encodedName("application/json", "tool_approvals")

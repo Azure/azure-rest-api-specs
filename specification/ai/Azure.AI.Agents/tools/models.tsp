@@ -921,21 +921,32 @@ model RunStepConnectedAgent {
 //
 
 @doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
-@discriminator("type")
 @added(Versions.v2025_05_01)
 model ToolOutput {
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @doc("The object type for the tool output.")
-  type: string = "function_call_output";
-
   @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
   @encodedName("application/json", "tool_call_id")
   toolCallId?: string;
+
+  @doc("The output from the tool to be submitted.")
+  output?: string;
+}
+
+@doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+model StructuredToolOutput {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The object type for the tool output.")
+  type: string;
+
+  @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
+  @encodedName("application/json", "tool_call_id")
+  toolCallId: string;
 }
 
 @doc("The output from a function tool to be submitted.")
-@added(Versions.v2025_05_01)
-model FunctionToolOutput extends ToolOutput {
+@added(Versions.v2025_05_15_preview)
+model FunctionToolOutput extends StructuredToolOutput {
   @doc("The object type, which is always 'function_call_output'.")
   type: "function_call_output";
 
@@ -945,7 +956,7 @@ model FunctionToolOutput extends ToolOutput {
 
 @doc("The output from a computer use tool to be submitted.")
 @added(Versions.v2025_05_15_preview)
-model ComputerToolOutput extends ToolOutput {
+model ComputerToolOutput extends StructuredToolOutput {
   @doc("The object type, which is always 'computer_call_output'.")
   type: "computer_call_output";
 
