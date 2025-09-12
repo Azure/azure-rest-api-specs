@@ -4,17 +4,16 @@ parameters:
 
 emit:
   - "@azure-tools/typespec-autorest"
-    # - "@azure-tools/typespec-csharp",
-    # - "@azure-tools/typespec-python",
-    # - "@azure-tools/typespec-ts"
+  # SDK emitters are used only during pipeline generation:
+  # - "@azure-tools/typespec-csharp"
+  # - "@azure-tools/typespec-python"
+  # - "@azure-tools/typespec-ts"
+  # - "@azure-tools/typespec-java"
+  # - "@azure-tools/typespec-go"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
-  "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.AI.DocumentIntelligence
-    model-namespace: false
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
@@ -51,6 +50,7 @@ options:
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.DocumentIntelligence"
+    clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
@@ -62,4 +62,14 @@ options:
       name: "@azure-rest/ai-document-intelligence"
       description: "Document Intelligence Rest Client"
       version: "1.0.0"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azdocumentintelligence"
+    service-dir: "sdk/documentintelligence"
+    package-dir: "azdocumentintelligence"
+    module-version: "1.0.0"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
     flavor: azure
