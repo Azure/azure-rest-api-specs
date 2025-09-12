@@ -13,11 +13,11 @@ namespace Microsoft.RecoveryServices;
 /**
  * The resource storage details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("vaultstorageconfig")
 @parentResource(VaultResource)
 @Azure.ResourceManager.Private.armResourceInternal(BackupResourceConfig)
@@ -34,11 +34,11 @@ model BackupResourceConfigResource extends Resource {
   /**
    * BackupResourceConfigResource properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: BackupResourceConfig;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface BackupResourceStorageConfigsNonCRR {
   /**
@@ -51,7 +51,7 @@ interface BackupResourceStorageConfigsNonCRR {
    * Updates vault storage model type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update is ArmResourceCreateOrReplaceSync<
     BackupResourceConfigResource,
     Response = ArmResourceUpdatedResponse<BackupResourceConfigResource>
@@ -72,7 +72,7 @@ interface BackupResourceStorageConfigsNonCRR {
    * Prepares source vault for Data Move operation
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("prepareDataMove")
   bmsPrepareDataMove is ArmResourceActionAsync<
     BackupResourceConfigResource,
@@ -84,7 +84,7 @@ interface BackupResourceStorageConfigsNonCRR {
    * Triggers Data Move Operation on target vault
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("triggerDataMove")
   bmsTriggerDataMove is ArmResourceActionAsync<
     BackupResourceConfigResource,
@@ -118,14 +118,14 @@ interface BackupResourceConfigOperationResultOps
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface BMSPrepareDataMoveOperationResult {
   /**
    * Fetches operation status for data move operation on vault
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is BackupResourceConfigOperationResultOps.Read<
     BackupResourceConfigResource,
     Response = ArmResponse<VaultStorageConfigOperationResultResponse> | AcceptedResponse
@@ -157,7 +157,7 @@ interface BackupResourceConfigOperationStatusOps
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface BackupResourceConfigOperationStatuses {
   /**

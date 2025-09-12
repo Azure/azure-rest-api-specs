@@ -13,11 +13,11 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for container with backup items. Containers with specific workloads are derived from this class.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BackupFabricResource)
 @Azure.ResourceManager.Private.armResourceInternal(ProtectionContainer)
 @Azure.ResourceManager.Legacy.customAzureResource
@@ -33,7 +33,7 @@ model ProtectionContainerResource extends Resource {
   /**
    * ProtectionContainerResource properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ProtectionContainer;
 }
 
@@ -49,7 +49,7 @@ interface ProtectionContainers {
    * This is an asynchronous operation. To track the operation status, use location header to call get latest status of
    * the operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   register is ArmResourceCreateOrUpdateAsync<
     ProtectionContainerResource,
     Response = ArmResourceUpdatedResponse<ProtectionContainerResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerResource> &
@@ -60,8 +60,8 @@ interface ProtectionContainers {
    * Unregisters the given container from your Recovery Services Vault. This is an asynchronous operation. To determine
    * whether the backend service has finished processing the request, call Get Container Operation Result API.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   unregister is ArmResourceDeleteSync<
     ProtectionContainerResource,
     Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
@@ -70,8 +70,8 @@ interface ProtectionContainers {
   /**
    * This is an async operation and the results should be tracked using location header or Azure-async-url.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inquire is ArmResourceActionSync<
     ProtectionContainerResource,
     void,
@@ -150,7 +150,7 @@ interface ProtectionContainerOperationResults {
   /**
    * Fetches the result of any operation on the container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ProtectionContainerOperationResultOps.Read<
     ProtectionContainerResource,
     Response = ArmResponse<ProtectionContainerResource> | AcceptedResponse | ArmNoContentResponse

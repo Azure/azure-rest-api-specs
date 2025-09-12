@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProtectionIntentOperationGroup {
   /**
    * It will validate followings
@@ -48,7 +48,7 @@ interface ProtectionIntentOperationGroup {
   ): ArmResponse<PreValidateEnableBackupResponse> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupStatus {
   /**
    * Get the container backup status
@@ -75,7 +75,7 @@ interface BackupStatus {
   ): ArmResponse<BackupStatusResponse> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface FeatureSupport {
   /**
    * It will validate if given feature with resource properties is supported in service
@@ -102,7 +102,7 @@ interface FeatureSupport {
   ): ArmResponse<AzureVMResourceFeatureSupportResponse> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupProtectionIntent {
   /**
    * Provides a pageable list of all intents that are present within a vault.
@@ -136,7 +136,7 @@ interface BackupProtectionIntent {
   ): ArmResponse<ProtectionIntentResourceList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupUsageSummaries {
   /**
    * Fetches the backup management usage summaries of the vault.
@@ -170,12 +170,12 @@ interface BackupUsageSummaries {
   ): ArmResponse<BackupManagementUsageList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface Jobs {
   /**
    * Triggers export of jobs specified by filters and returns an OperationID to track.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport")
   @post
   export(
@@ -198,7 +198,7 @@ interface Jobs {
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupProtectedItems {
   /**
    * Provides a pageable list of all items that are backed up within a vault.
@@ -232,7 +232,7 @@ interface BackupProtectedItems {
   ): ArmResponse<ProtectedItemResourceList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationOperationGroup {
   /**
    * Validate operation for specified backed up item. This is a synchronous operation.
@@ -259,7 +259,7 @@ interface OperationOperationGroup {
   ): ArmResponse<ValidateOperationsResponse> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ValidateOperation {
   /**
    * Validate operation for specified backed up item in the form of an asynchronous operation. Returns tracking headers which can be tracked using GetValidateOperationResult API.
@@ -289,12 +289,12 @@ interface ValidateOperation {
   > | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ValidateOperationResults {
   /**
    * Fetches the result of a triggered validate operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationResults/{operationId}")
   @get
   get(
@@ -317,7 +317,7 @@ interface ValidateOperationResults {
   ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ValidateOperationStatuses {
   /**
    * Fetches the status of a triggered validate operation. The status can be in progress, completed
@@ -346,12 +346,12 @@ interface ValidateOperationStatuses {
   ): ArmResponse<OperationStatus> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProtectionContainerRefreshOperationResults {
   /**
    * Provides the result of the refresh operation triggered by the BeginRefresh operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}")
   @get
   get(
@@ -380,7 +380,7 @@ interface ProtectionContainerRefreshOperationResults {
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ArmNoContentResponse | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProtectableContainers {
   /**
    * Lists the containers that can be registered to Recovery Services Vault.
@@ -400,7 +400,7 @@ interface ProtectableContainers {
     ...ResourceGroupParameter,
     ...SubscriptionIdParameter,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     fabricName: string,
 
@@ -412,13 +412,13 @@ interface ProtectableContainers {
   ): ArmResponse<ProtectableContainerResourceList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProtectionContainersOperationGroup {
   /**
    * Discovers all the containers in the subscription that can be backed up to Recovery Services Vault. This is an
    * asynchronous operation. To know the status of the operation, call GetRefreshOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers")
   @post
   refresh(
@@ -447,7 +447,7 @@ interface ProtectionContainersOperationGroup {
   ): ArmAcceptedResponse | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupOperationResults {
   /**
    * Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the
@@ -455,8 +455,8 @@ interface BackupOperationResults {
    * successful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is
    * part of the Location header of the operation response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}")
   @get
   get(
@@ -479,7 +479,7 @@ interface BackupOperationResults {
   ): OkResponse | ArmAcceptedResponse | ArmNoContentResponse | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupOperationStatuses {
   /**
    * Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed
@@ -508,7 +508,7 @@ interface BackupOperationStatuses {
   ): ArmResponse<OperationStatus> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupProtectableItems {
   /**
    * Provides a pageable list of protectable objects within your subscription according to the query filter and the
@@ -543,7 +543,7 @@ interface BackupProtectableItems {
   ): ArmResponse<WorkloadProtectableItemResourceList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BackupProtectionContainers {
   /**
    * Lists the containers registered to Recovery Services Vault.
@@ -571,7 +571,7 @@ interface BackupProtectionContainers {
   ): ArmResponse<ProtectionContainerResourceList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DeletedProtectionContainers {
   /**
    * Lists the soft deleted containers registered to Recovery Services Vault.
@@ -598,8 +598,8 @@ interface DeletedProtectionContainers {
   ): ArmResponse<ProtectionContainerResourceList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SecurityPINs {
   /**
    * Get the security PIN.
@@ -619,8 +619,8 @@ interface SecurityPINs {
     ...ResourceGroupParameter,
     ...SubscriptionIdParameter,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @header
     `x-ms-authorization-auxiliary`?: string,
 
@@ -632,7 +632,7 @@ interface SecurityPINs {
   ): ArmResponse<TokenInformation> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface FetchTieringCost {
   /**
    * Provides the details of the tiering related sizes and cost.
@@ -670,7 +670,7 @@ interface FetchTieringCost {
   > | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface GetTieringCostOperationResult {
   /**
    * Gets the result of async operation for tiering cost
@@ -691,13 +691,13 @@ interface GetTieringCostOperationResult {
     @path
     vaultName: string,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     operationId: string,
   ): ArmResponse<TieringCostInfo> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface TieringCostOperationStatus {
   /**
    * Gets the status of async operations of tiering cost
@@ -718,7 +718,7 @@ interface TieringCostOperationStatus {
     @path
     vaultName: string,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     operationId: string,
   ): ArmResponse<OperationStatus> | ErrorResponse;
