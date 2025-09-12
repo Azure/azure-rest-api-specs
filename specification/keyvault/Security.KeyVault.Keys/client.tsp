@@ -569,7 +569,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(getDeletedKeys, "ListDeletedKeyProperties", "rust");
 @@clientName(getKeys, "ListKeyProperties", "rust");
 @@clientName(getKeyVersions, "ListKeyPropertiesVersions", "rust");
-@@clientName(updateKey, "UpdateKeyProperties", "rust");
+// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
+@@clientName(KeyVault.updateKey, "UpdateKeyProperties", "rust");
 
 @@clientName(KeyReleaseParameters.enc, "algorithm", "rust");
 @@clientName(KeyOperationsParameters.aad,
