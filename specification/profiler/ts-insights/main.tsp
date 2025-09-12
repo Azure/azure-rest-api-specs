@@ -61,7 +61,7 @@ model Insights {
   issueCategory: string;
 
   @doc("A relation descriptor for criteria to value. See the substitute below for an example.")
-  relation: "<" | string = "<";
+  relation: string = "<";
 
   @doc("Value of the performance metric.")
   value: float64;
