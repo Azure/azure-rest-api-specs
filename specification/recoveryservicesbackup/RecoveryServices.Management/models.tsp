@@ -8302,3 +8302,21 @@ model FetchTieringCostSavingsInfoForVaultRequest
    */
   objectType: "FetchTieringCostSavingsInfoForVaultRequest";
 }
+
+/**
+ * Operations List response which contains list of available APIs.
+ */
+model ClientDiscoveryResponse {
+  /**
+   * List of available operations.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value?: ClientDiscoveryValueForSingleApi[];
+
+  /**
+   * Link to the next chunk of Response.
+   */
+  @nextLink
+  nextLink?: string;
+}

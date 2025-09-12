@@ -153,7 +153,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/ClientDiscoveryResponse"
             }
           },
           "default": {
@@ -8251,6 +8251,24 @@
             "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClientDiscoveryResponse": {
+      "type": "object",
+      "description": "Operations List response which contains list of available APIs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of available operations.",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next chunk of Response."
         }
       }
     },
