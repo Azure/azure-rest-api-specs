@@ -997,7 +997,7 @@ model ServerProperties {
 
   /**
    * The mysql parameter lower_case_table_names. Can only be specified when the server is being created. Allowed values 1 or 2.
-  */
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   lowerCaseTableNames?: int32;
 }
