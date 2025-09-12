@@ -156,6 +156,7 @@ union OperationStatus {
 interface NotificationsSessions {
   /** Create a notification session. */
   @put
+  @extension("x-ms-long-running-operation", true)
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
   createNotificationSession(
     @path
@@ -176,11 +177,6 @@ interface NotificationsSessions {
     | {
         @statusCode _: 201;
         @body body: CreateNotificationSessionResponse;
-      }
-    | {
-        @statusCode _: 202;
-        @header("Retry-After") retryAfter?: int32;
-        @header("Location") location?: string;
       }
     | ErrorResponse;
 

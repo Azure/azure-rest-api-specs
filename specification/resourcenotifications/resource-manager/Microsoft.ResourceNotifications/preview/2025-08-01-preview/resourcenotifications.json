@@ -87,18 +87,6 @@
               "$ref": "#/definitions/NotificationSessionResource"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -110,7 +98,8 @@
           "Create a notification session": {
             "$ref": "./examples/NotificationsSessions_CreateNotificationSession.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:getSessionDetails": {
