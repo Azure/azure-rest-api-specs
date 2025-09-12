@@ -36,6 +36,11 @@ directive:
       PatchBodyParametersSchema
 
   - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[5].schema.properties.devBoxDefinition.properties.properties
+    suppress:
+      PatchBodyParametersSchema
+
+  - where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"]
     suppress:
       - PathForNestedResource
