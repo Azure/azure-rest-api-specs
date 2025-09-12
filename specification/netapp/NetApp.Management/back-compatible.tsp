@@ -54,7 +54,7 @@ using Microsoft.NetApp;
 @@clientLocation(SubscriptionQuotaItems.get, "NetAppResourceQuotaLimits");
 @@clientLocation(SubscriptionQuotaItems.list, "NetAppResourceQuotaLimits");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(SubscriptionQuotaItem.properties);
+@@flattenProperty(QuotaItem.properties);
 
 @@clientLocation(RegionInfoResources.get, "NetAppResourceRegionInfos");
 @@clientLocation(RegionInfoResources.list, "NetAppResourceRegionInfos");
@@ -141,6 +141,11 @@ using Microsoft.NetApp;
 @@clientName(BackupVaults.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(BackupVault.properties);
+
+@@clientName(Buckets.createOrUpdate::parameters.resource, "body");
+@@clientName(Buckets.update::parameters.properties, "body");
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Bucket.properties);
 
 @@clientLocation(NetAppResourceOperationGroup.checkNameAvailability,
   "NetAppResource"

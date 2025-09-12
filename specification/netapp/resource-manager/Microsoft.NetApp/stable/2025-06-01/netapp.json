@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NetAppManagementClient",
+    "title": "Microsoft NetApp",
     "version": "2025-06-01",
     "description": "Microsoft NetApp Files Azure Resource Provider specification",
     "x-typespec-generated": [
@@ -351,7 +351,7 @@
         "tags": [
           "SubscriptionQuotaItems"
         ],
-        "description": "Get the default and current subscription quota limit",
+        "description": "Get the default and current quota limit",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -9984,7 +9984,44 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Patching",
+            "value": "Patching",
+            "description": "Patching"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "Moving"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          }
+        ]
       },
       "readOnly": true
     },
@@ -10302,7 +10339,11 @@
         },
         "remoteVolumeResourceId": {
           "type": "string",
-          "description": "The resource ID of the remote volume. Required for cross region and cross zone replication"
+          "description": "The resource ID of the remote volume. Required for cross region and cross zone replication",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "remotePath": {
           "$ref": "#/definitions/RemotePath",
@@ -10767,11 +10808,11 @@
     },
     "SubscriptionQuotaItem": {
       "type": "object",
-      "description": "Information regarding Subscription Quota Item.",
+      "description": "Information regarding Quota Item.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubscriptionQuotaItemProperties",
-          "description": "SubscriptionQuotaItem properties",
+          "description": "QuotaItem properties",
           "x-ms-client-flatten": true
         }
       },
@@ -10783,7 +10824,7 @@
     },
     "SubscriptionQuotaItemList": {
       "type": "object",
-      "description": "List of Subscription Quota Items",
+      "description": "List of Quota Items",
       "properties": {
         "value": {
           "type": "array",
@@ -10804,7 +10845,7 @@
     },
     "SubscriptionQuotaItemProperties": {
       "type": "object",
-      "description": "SubscriptionQuotaItem Properties",
+      "description": "QuotaItem Properties",
       "properties": {
         "current": {
           "type": "integer",

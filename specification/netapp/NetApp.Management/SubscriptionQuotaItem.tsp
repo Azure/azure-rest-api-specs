@@ -8,16 +8,17 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetApp;
 /**
- * Information regarding Subscription Quota Item.
+ * Information regarding Quota Item.
  */
+@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItem")
 @parentResource(SubscriptionLocationResource)
-model SubscriptionQuotaItem
-  is Azure.ResourceManager.ProxyResource<SubscriptionQuotaItemProperties> {
+model QuotaItem is Azure.ResourceManager.ProxyResource<QuotaItemProperties> {
   ...ResourceNameParameter<
-    Resource = SubscriptionQuotaItem,
+    Resource = QuotaItem,
     KeyName = "quotaLimitName",
     SegmentName = "quotaLimits",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}$"
@@ -25,15 +26,17 @@ model SubscriptionQuotaItem
 }
 
 /**
- * List of Subscription Quota Items
+ * List of Quota Items
  */
-model SubscriptionQuotaItemList is Azure.Core.Page<SubscriptionQuotaItem>;
+@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItemList")
+model QuotaItemList is Azure.Core.Page<QuotaItem>;
 
 /**
- * SubscriptionQuotaItem Properties
+ * QuotaItem Properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-model SubscriptionQuotaItemProperties {
+@renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItemProperties")
+model QuotaItemProperties {
   /**
    * The current quota value.
    */
@@ -45,17 +48,25 @@ model SubscriptionQuotaItemProperties {
    */
   @visibility(Lifecycle.Read)
   default?: int32;
+
+  /**
+   * The usage quota value.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @added(Versions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read)
+  usage?: int32 | null;
 }
 
 @armResourceOperations
 interface SubscriptionQuotaItems {
   /**
-   * Get the default and current subscription quota limit
+   * Get the default and current quota limit
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetAppResourceQuotaLimits_Get")
   get is ArmResourceRead<
-    SubscriptionQuotaItem,
+    QuotaItem,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
@@ -65,11 +76,52 @@ interface SubscriptionQuotaItems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetAppResourceQuotaLimits_List")
   list is ArmResourceListByParent<
-    SubscriptionQuotaItem,
+    QuotaItem,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<SubscriptionQuotaItemList>
+    Response = ArmResponse<QuotaItemList>
   >;
 }
 
-@@doc(SubscriptionQuotaItem.name, "The name of the Quota Limit");
-@@doc(SubscriptionQuotaItem.properties, "SubscriptionQuotaItem properties");
+alias NetAppResourceQuotaLimitsAccountOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the NetApp account */
+    @path
+    @segment("netAppAccounts")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$")
+    accountName: string;
+  },
+  {
+    /** The name of the Quota Limit */
+    @path
+    @segment("quotaLimits")
+    @key
+    @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}$")
+    quotaLimitName: string;
+  }
+>;
+
+@added(Versions.v2025_07_01_preview)
+@armResourceOperations
+interface NetAppResourceQuotaLimitsAccount {
+  /**
+   * Get the default, current and usages account quota limit
+   */
+  get is NetAppResourceQuotaLimitsAccountOps.Read<QuotaItem>;
+
+  /**
+   * Gets a list of quota limits for all quotas that are under account. Currently PoolsPerAccount is the only one.
+   */
+  list is NetAppResourceQuotaLimitsAccountOps.List<
+    QuotaItem,
+    Response = ArmResponse<QuotaItemList>
+  >;
+}
+
+@@doc(QuotaItem.name, "The name of the Quota Limit");
+@@doc(QuotaItem.properties, "QuotaItem properties");

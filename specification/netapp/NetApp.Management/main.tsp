@@ -26,6 +26,7 @@ import "./VolumeGroupDetails.tsp";
 import "./SubvolumeInfo.tsp";
 import "./Backup.tsp";
 import "./BackupVault.tsp";
+import "./Bucket.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -38,7 +39,7 @@ using TypeSpec.Versioning;
  * Microsoft NetApp Files Azure Resource Provider specification
  */
 @armProviderNamespace
-@service(#{ title: "NetAppManagementClient" })
+@service(#{ title: "Microsoft NetApp" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.NetApp;
@@ -51,6 +52,11 @@ enum Versions {
    * The 2025-06-01 API version.
    */
   v2025_06_01: "2025-06-01",
+
+  /**
+   * The 2025-07-01-preview API version.
+   */
+  v2025_07_01_preview: "2025-07-01-preview",
 }
 
 interface Operations

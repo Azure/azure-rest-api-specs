@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetApp;
 
@@ -219,16 +220,45 @@ union KeySource {
 /**
  * Gets the status of the VolumeQuotaRule at the time the operation was called.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-enum ProvisioningState {
-  Accepted,
-  Creating,
-  Patching,
-  Deleting,
-  Moving,
-  Failed,
-  Succeeded,
+@renamedFrom(Versions.v2025_07_01_preview, "ProvisioningState")
+union NetAppProvisioningState {
+  string,
+
+  /**
+   * Accepted
+   */
+  Accepted: "Accepted",
+
+  /**
+   * Creating
+   */
+  Creating: "Creating",
+
+  /**
+   * Patching
+   */
+  Patching: "Patching",
+
+  /**
+   * Deleting
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Moving
+   */
+  Moving: "Moving",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
 }
 
 /**
