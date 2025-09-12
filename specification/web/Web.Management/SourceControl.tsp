@@ -30,6 +30,8 @@ interface SourceControls {
   /**
    * Description for Gets source control token
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GetSourceControl")
   getSourceControl is ArmResourceRead<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -39,7 +41,9 @@ interface SourceControls {
   /**
    * Description for Updates source control token
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("UpdateSourceControl")
   updateSourceControl is ArmResourceCreateOrReplaceSync<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -50,6 +54,8 @@ interface SourceControls {
   /**
    * Description for Gets the source controls available for Azure websites.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ListSourceControls")
   listSourceControls is ArmResourceListByParent<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,

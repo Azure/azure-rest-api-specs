@@ -522,7 +522,9 @@ interface GetUsagesInLocationOperationGroup {
   /**
    * List usages in cores for all skus used by a subscription in a given location, for a specific quota type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Lists subscription core usages for all skus used in a location, for a given type of quota.")
+  @operationId("GetUsagesInLocation_list")
   @autoRoute
   @get
   @action("usages")
