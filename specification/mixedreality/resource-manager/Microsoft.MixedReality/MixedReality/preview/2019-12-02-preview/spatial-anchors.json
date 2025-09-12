@@ -3,7 +3,7 @@
   "info": {
     "title": "Mixed Reality",
     "description": "Mixed Reality Resource Provider Spatial Anchors Resource API",
-    "version": "2021-03-01-preview"
+    "version": "2019-12-02-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -65,7 +65,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -107,7 +107,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -152,7 +152,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -192,7 +192,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -235,7 +235,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -284,22 +284,22 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/listKeys": {
-      "post": {
-        "operationId": "SpatialAnchorsAccounts_ListKeys",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/keys": {
+      "get": {
+        "operationId": "SpatialAnchorsAccounts_GetKeys",
         "tags": [
           "Key"
         ],
-        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n List Both of the 2 Keys of a Spatial Anchors Account",
+        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Get Both of the 2 Keys of a Spatial Anchors Account",
         "x-ms-examples": {
-          "List spatial anchor account key": {
-            "$ref": "./examples/spatial-anchors/ListKeys.json"
+          "Get spatial anchor account key": {
+            "$ref": "./examples/spatial-anchors/GetKeys.json"
           }
         },
         "parameters": [
@@ -326,13 +326,11 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/regenerateKeys": {
+      },
       "post": {
         "operationId": "SpatialAnchorsAccounts_RegenerateKeys",
         "tags": [
@@ -371,7 +369,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -382,7 +380,7 @@
     "SpatialAnchorsAccount": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "SpatialAnchorsAccount Response.",
@@ -395,23 +393,7 @@
         },
         "identity": {
           "description": "The identity associated with this account",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
-        },
-        "plan": {
-          "description": "The plan associated with this account",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
-        },
-        "sku": {
-          "description": "The sku associated with this account",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku"
-        },
-        "kind": {
-          "description": "The kind of account, if supported",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku"
-        },
-        "systemData": {
-          "description": "System metadata for this account",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         }
       }
     },
