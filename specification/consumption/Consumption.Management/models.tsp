@@ -493,8 +493,6 @@ model Marketplace extends Resource {
   /**
    * The properties of the marketplace usage detail.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MarketplaceProperties;
 }
 
@@ -915,8 +913,6 @@ model TagsResult extends ProxyResource {
   /**
    * The properties of the tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TagProperties;
 }
 
@@ -989,8 +985,6 @@ model Balance extends Resource {
   /**
    * The properties of the balance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BalanceProperties;
 }
 
@@ -1147,8 +1141,6 @@ model ReservationSummary extends Resource {
   /**
    * The properties of the reservation summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ReservationSummaryProperties;
 }
 
@@ -1266,8 +1258,6 @@ model ReservationDetail extends Resource {
   /**
    * The properties of the reservation detail.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ReservationDetailProperties;
 }
 
@@ -1395,8 +1385,6 @@ model ReservationRecommendationDetailsModel extends Resource {
   /**
    * The properties of the reservation recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ReservationRecommendationDetailsProperties;
 }
 
@@ -1646,8 +1634,6 @@ model ReservationTransaction extends ReservationTransactionResource {
   /**
    * The properties of a legacy reservation transaction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: LegacyReservationTransactionProperties;
 }
 
@@ -1838,8 +1824,6 @@ model ModernReservationTransaction extends ReservationTransactionResource {
   /**
    * The properties of a modern reservation transaction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: ModernReservationTransactionProperties;
 }
 
@@ -2212,8 +2196,6 @@ model ManagementGroupAggregatedCostResult extends Resource {
   /**
    * The properties of the Management Group Aggregated Cost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ManagementGroupAggregatedCostProperties;
 }
 
@@ -2311,8 +2293,6 @@ model EventSummary extends ProxyResource {
   /**
    * The event properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: EventProperties;
 }
 
@@ -2558,8 +2538,6 @@ model LotSummary extends ProxyResource {
   /**
    * The lot properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: LotProperties;
 }
 
@@ -2765,8 +2743,6 @@ model LegacyUsageDetail extends UsageDetail {
   /**
    * Properties for legacy usage details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: LegacyUsageDetailProperties;
 
   /**
@@ -3109,8 +3085,6 @@ model ModernUsageDetail extends UsageDetail {
   /**
    * Properties for modern usage details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: ModernUsageDetailProperties;
 
   /**
@@ -3942,8 +3916,6 @@ model LegacyReservationTransaction extends ReservationTransaction {
   /**
    * The properties of a legacy reservation transaction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: LegacyReservationTransactionProperties;
 }
 
@@ -3971,8 +3943,6 @@ model LegacyChargeSummary extends ChargeSummary {
   /**
    * Properties for legacy charge summary
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: LegacyChargeSummaryProperties;
 
   /**
@@ -4038,8 +4008,6 @@ model ModernChargeSummary extends ChargeSummary {
   /**
    * Properties for modern charge summary
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: ModernChargeSummaryProperties;
 
   /**

@@ -20,7 +20,6 @@ interface PriceSheetOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("PriceSheet_DownloadByBillingAccountPeriod")
   @autoRoute
   @action("pricesheets/download")
   @post
@@ -61,7 +60,6 @@ interface UsageDetailsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("UsageDetails_List")
   @autoRoute
   @list
   @get
@@ -113,7 +111,6 @@ interface MarketplacesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Marketplaces_List")
   @autoRoute
   @list
   @get
@@ -153,7 +150,6 @@ interface TagsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Tags_Get")
   @autoRoute
   @get
   @action("tags")
@@ -171,7 +167,6 @@ interface ChargesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Charges_List")
   @autoRoute
   @get
   @action("charges")
@@ -215,7 +210,6 @@ interface BalancesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Balances_GetByBillingAccount")
   @autoRoute
   @get
   @action("balances")
@@ -243,7 +237,6 @@ interface BalancesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Balances_GetForBillingPeriodByBillingAccount")
   @autoRoute
   @get
   @action("balances")
@@ -282,7 +275,6 @@ interface ReservationsSummariesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationsSummaries_ListByReservationOrder")
   @autoRoute
   @list
   @get
@@ -323,7 +315,6 @@ interface ReservationsSummariesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationsSummaries_ListByReservationOrderAndReservation")
   @autoRoute
   @list
   @get
@@ -371,7 +362,6 @@ interface ReservationsSummariesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationsSummaries_List")
   @autoRoute
   @list
   @get
@@ -428,7 +418,6 @@ interface ReservationsDetailsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationsDetails_ListByReservationOrder")
   @autoRoute
   @list
   @get
@@ -463,7 +452,6 @@ interface ReservationsDetailsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationsDetails_ListByReservationOrderAndReservation")
   @autoRoute
   @list
   @get
@@ -505,7 +493,6 @@ interface ReservationsDetailsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationsDetails_List")
   @autoRoute
   @list
   @get
@@ -555,7 +542,6 @@ interface ReservationRecommendationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationRecommendations_List")
   @autoRoute
   @list
   @get
@@ -581,7 +567,6 @@ interface ReservationRecommendationDetailsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationRecommendationDetails_Get")
   @autoRoute
   @get
   @action("reservationRecommendationDetails")
@@ -643,7 +628,6 @@ interface ReservationTransactionsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationTransactions_List")
   @autoRoute
   @list
   @get
@@ -690,7 +674,6 @@ interface ReservationTransactionsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("ReservationTransactions_ListByBillingProfile")
   @autoRoute
   @list
   @get
@@ -736,7 +719,6 @@ interface AggregatedCostOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("AggregatedCost_GetByManagementGroup")
   @autoRoute
   @get
   @action("aggregatedcost")
@@ -770,7 +752,6 @@ interface AggregatedCostOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("AggregatedCost_GetForBillingPeriodByManagementGroup")
   @autoRoute
   @get
   @action("aggregatedCost")
@@ -813,7 +794,6 @@ interface EventsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Events_ListByBillingProfile")
   @autoRoute
   @list
   @get
@@ -862,7 +842,6 @@ interface EventsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Events_ListByBillingAccount")
   @autoRoute
   @list
   @get
@@ -901,7 +880,6 @@ interface LotsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Lots_ListByBillingProfile")
   @autoRoute
   @list
   @get
@@ -938,7 +916,6 @@ interface LotsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Lots_ListByBillingAccount")
   @autoRoute
   @list
   @get
@@ -973,7 +950,6 @@ interface LotsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @operationId("Lots_ListByCustomer")
   @autoRoute
   @list
   @get
