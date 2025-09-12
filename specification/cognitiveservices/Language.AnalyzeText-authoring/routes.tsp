@@ -27,7 +27,6 @@ alias languageOperations = ResourceOperations<
  * Lists the existing projects.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listProjects", "csharp")
 op textAnalysisAuthoringListProjects is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -37,7 +36,6 @@ op textAnalysisAuthoringListProjects is languageOperations.ResourceList<
  * Lists the deployments belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listDeployments", "csharp")
 op textAnalysisAuthoringListDeployments is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectDeployment,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -47,7 +45,6 @@ op textAnalysisAuthoringListDeployments is languageOperations.ResourceList<
  * Lists the exported models belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listExportedModels", "csharp")
 @added(Versions.v2024_11_15_preview)
 op textAnalysisAuthoringListExportedModels is languageOperations.ResourceList<
   TextAnalysisAuthoringExportedTrainedModel,
@@ -58,7 +55,6 @@ op textAnalysisAuthoringListExportedModels is languageOperations.ResourceList<
  * Lists the trained models belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listTrainedModels", "csharp")
 op textAnalysisAuthoringListTrainedModels is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -68,7 +64,6 @@ op textAnalysisAuthoringListTrainedModels is languageOperations.ResourceList<
  * Lists the deployments resources assigned to the project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listDeploymentResources", "csharp")
 @added(Versions.v2024_11_15_preview)
 op textAnalysisAuthoringListDeploymentResources is languageOperations.ResourceList<
   TextAnalysisAuthoringAssignedDeploymentResource,
@@ -79,7 +74,6 @@ op textAnalysisAuthoringListDeploymentResources is languageOperations.ResourceLi
  * Lists the non-expired training jobs created for a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listTrainingJobs", "csharp")
 op textAnalysisAuthoringListTrainingJobs is languageOperations.ResourceList<
   TextAnalysisAuthoringTrainingJobState,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -89,7 +83,6 @@ op textAnalysisAuthoringListTrainingJobs is languageOperations.ResourceList<
  * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listAssignedResourceDeployments", "csharp")
 @added(Versions.v2024_11_15_preview)
 op textAnalysisAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
@@ -100,7 +93,6 @@ op textAnalysisAuthoringListAssignedResourceDeployments is languageOperations.Re
  * Lists the supported languages.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-@clientName("getSupportedLanguages", "csharp")
 op textAnalysisAuthoringGetSupportedLanguages is languageOperations.ResourceList<
   TextAnalysisAuthoringSupportedLanguage,
   ListQueryParametersTrait<ProjectKindQueryParameter &
@@ -111,7 +103,6 @@ op textAnalysisAuthoringGetSupportedLanguages is languageOperations.ResourceList
  * Lists the supported prebuilt entities that can be used while creating composed entities.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-@clientName("getSupportedPrebuiltEntities", "csharp")
 @added(Versions.v2024_11_15_preview)
 op textAnalysisAuthoringGetSupportedPrebuiltEntities is languageOperations.ResourceList<
   TextAnalysisAuthoringPrebuiltEntity,
@@ -122,7 +113,6 @@ op textAnalysisAuthoringGetSupportedPrebuiltEntities is languageOperations.Resou
  * Lists the support training config version for a given project type.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listTrainingConfigVersions", "csharp")
 op textAnalysisAuthoringListTrainingConfigVersions is languageOperations.ResourceList<
   TextAnalysisAuthoringTrainingConfigVersion,
   ListQueryParametersTrait<ProjectKindQueryParameter &
@@ -133,11 +123,13 @@ interface TextAuthoringProject {
   /**
    * Gets the status for an import.
    */
+  @access(Access.internal, "python")
   getImportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringImportProjectJobState>;
 
   /**
    * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
    */
+  @access(Access.internal, "python")
   getExportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportProjectJobState>;
 
   /**
@@ -190,7 +182,6 @@ interface TextAuthoringProject {
   @added(Versions.v2024_11_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
-  @clientName("AuthorizeProjectCopy", "csharp")
   copyProjectAuthorization is languageOperations.ResourceAction<
     TextAnalysisAuthoringProjectMetadata,
     TextAnalysisAuthoringCopyAuthorizationOptions,
@@ -324,12 +315,14 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing copy project job.
    */
+  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<TextAnalysisAuthoringCopyProjectJobState>;
 
   /**
    * Gets the status for a training job.
    */
+  @access(Access.internal, "python")
   getTrainingStatus is languageOperations.ResourceRead<TextAnalysisAuthoringTrainingJobState>;
 
   /**
@@ -361,6 +354,7 @@ interface TextAuthoringProject {
   /**
    * Gets the status for a project deletion job.
    */
+  @access(Access.internal, "python")
   getProjectDeletionStatus is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeletionJobState>;
 
   /**
@@ -396,6 +390,7 @@ interface TextAuthoringProject {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
+  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
@@ -446,6 +441,7 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
+  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentResourcesJobState>;
 
@@ -478,6 +474,7 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing swap deployment job.
    */
+  @access(Access.internal, "python")
   getSwapDeploymentsStatus is languageOperations.ResourceRead<TextAnalysisAuthoringSwapDeploymentsJobState>;
 }
 
@@ -551,12 +548,14 @@ interface TextAuthoringDeployment {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
+  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
    * Gets the status of an existing deployment job.
    */
+  @access(Access.internal, "python")
   getDeploymentStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentJobState>;
 
   /**
@@ -662,6 +661,7 @@ interface TextAuthoringExportedModel {
   /**
    * Gets the status for an existing job to create or update an exported model.
    */
+  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getExportedModelJobStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportedModelJobState>;
 
@@ -762,6 +762,7 @@ interface TextAuthoringTrainedModel {
   /**
    * Gets the status for an evaluation job.
    */
+  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getEvaluationStatus is languageOperations.ResourceRead<TextAnalysisAuthoringEvaluationJobState>;
 
@@ -803,5 +804,6 @@ interface TextAuthoringTrainedModel {
   /**
    * Gets the status for loading a snapshot.
    */
+  @access(Access.internal, "python")
   getLoadSnapshotStatus is languageOperations.ResourceRead<TextAnalysisAuthoringLoadSnapshotJobState>;
 }
