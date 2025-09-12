@@ -444,7 +444,7 @@ interface ProtectionContainersOperationGroup {
      */
     @query("$filter")
     $filter?: string,
-  ): ArmAcceptedResponse | ErrorResponse;
+  ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -476,7 +476,11 @@ interface BackupOperationResults {
      */
     @path
     operationId: string,
-  ): OkResponse | ArmAcceptedResponse | ArmNoContentResponse | ErrorResponse;
+  ):
+    | OkResponse
+    | ArmAcceptedResponse<ExtraHeaders = {}>
+    | ArmNoContentResponse
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
