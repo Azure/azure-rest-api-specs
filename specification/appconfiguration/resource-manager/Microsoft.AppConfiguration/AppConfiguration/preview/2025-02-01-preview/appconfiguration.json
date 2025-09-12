@@ -40,9 +40,6 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "ConfigurationStores"
     },
     {
@@ -62,6 +59,9 @@
     },
     {
       "name": "Snapshots"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -75,13 +75,20 @@
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationDefinitionListResult"
             }
           },
           "default": {
@@ -2457,6 +2464,86 @@
         }
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Log for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of the log"
+        }
+      }
+    },
+    "MetricDimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension"
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of the dimension."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the metric"
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localized friendly description of the metric"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit that makes sense for the metric"
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count."
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "Internal metric name."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions of the metric",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published."
+        }
+      }
+    },
     "NameAvailabilityStatus": {
       "type": "object",
       "description": "The result of a request to check the availability of a resource name.",
@@ -2475,6 +2562,86 @@
           "type": "string",
           "description": "If any, the reason that the name is not available.",
           "readOnly": true
+        }
+      }
+    },
+    "OperationDefinition": {
+      "type": "object",
+      "description": "The definition of a configuration store operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDefinitionDisplay",
+          "description": "The display information for the configuration store operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationDefinitionDisplay": {
+      "type": "object",
+      "description": "The display information for a configuration store operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The resource provider name: Microsoft App Configuration.\"",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that users can perform."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description for the operation."
+        }
+      }
+    },
+    "OperationDefinitionListResult": {
+      "type": "object",
+      "description": "The result of a request to list configuration store operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/OperationDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Extra Operation properties",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
         }
       }
     },
@@ -2876,6 +3043,32 @@
           "type": "string",
           "description": "The tenant id associated with the resource's identity. This property will only be provided for a system-assigned identity.",
           "readOnly": true
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification payload",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Log for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

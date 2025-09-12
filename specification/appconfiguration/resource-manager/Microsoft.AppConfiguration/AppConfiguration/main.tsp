@@ -21,6 +21,7 @@ import "./KeyValue.tsp";
 import "./Replica.tsp";
 import "./Snapshot.tsp";
 import "./routes.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -46,5 +47,3 @@ enum Versions {
    */
   v2025_02_01_preview: "2025-02-01-preview",
 }
-
-interface Operations extends Azure.ResourceManager.Operations {}

@@ -690,6 +690,25 @@ model OperationProperties {
 }
 
 /**
+ * The result of a request to list configuration store operations.
+ */
+model OperationDefinitionListResult {
+  /**
+   * The collection value.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @pageItems
+  value?: OperationDefinition[];
+
+  /**
+   * The URI that can be used to request the next set of paged results.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
+
+/**
  * Service specification payload
  */
 model ServiceSpecification {
