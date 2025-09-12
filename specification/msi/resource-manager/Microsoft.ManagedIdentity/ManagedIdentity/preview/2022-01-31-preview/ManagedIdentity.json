@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-07-31-preview",
+    "version": "2022-01-31-preview",
     "title": "ManagedServiceIdentityClient",
     "description": "The Managed Service Identity Client."
   },
@@ -161,6 +161,63 @@
             "description": "OK. The list of userAssignedIdentities was retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/UserAssignedIdentitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/listAssociatedResources": {
+      "post": {
+        "operationId": "UserAssignedIdentities_ListAssociatedResources",
+        "description": "Lists the associated resources for this identity.",
+        "x-ms-examples": {
+          "IdentityListAssociatedResources": {
+            "$ref": "./examples/IdentityListAssociatedResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderbyParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of resources associated with this identity.",
+            "schema": {
+              "$ref": "#/definitions/AssociatedResourcesListResult"
             }
           },
           "default": {
@@ -349,42 +406,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{revokeTokenResourceName}/revokeTokens": {
-      "post": {
-        "operationId": "UserAssignedIdentities_RevokeTokens",
-        "description": "Revoke all tokens issued in the past for a specified user assigned identity.",
-        "x-ms-examples": {
-          "TokenRevocation": {
-            "$ref": "./examples/TokenRevocation.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RevokeTokensResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Accepted request to revoke all tokens issued for a specified user assigned identity before the current time."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials": {
       "get": {
         "operationId": "FederatedIdentityCredentials_List",
@@ -396,10 +417,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -411,7 +432,7 @@
             "$ref": "#/parameters/SkipTokenParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -444,10 +465,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -456,7 +477,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -499,10 +520,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -511,7 +532,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -539,10 +560,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -551,7 +572,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -583,7 +604,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an identity resource."
@@ -599,7 +620,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a federated identity credential."
@@ -635,7 +656,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an identity resource."
@@ -674,7 +695,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a system assigned identity resource."
@@ -734,6 +755,67 @@
         }
       }
     },
+    "AzureResource": {
+      "description": "Describes an Azure resource that is attached to an identity.",
+      "type": "object",
+      "title": "Azure Resource properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of this resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of this resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of this resource."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource group this resource belongs to."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of the subscription this resource belongs to."
+        },
+        "subscriptionDisplayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the subscription this resource belongs to."
+        }
+      }
+    },
+    "AssociatedResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Total number of Azure resources assigned to the identity."
+        },
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AzureResource"
+          },
+          "description": "The collection of Azure resources returned by the resource action to get a list of assigned resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The url to get the next page of results, if any."
+        }
+      },
+      "description": "Azure resources returned by the resource action to get a list of assigned resources."
+    },
     "FederatedIdentityCredentialProperties": {
       "description": "The properties associated with a federated identity credential.",
       "type": "object",
@@ -770,9 +852,6 @@
           "items": {
             "$ref": "#/definitions/FederatedIdentityCredential"
           },
-          "x-ms-identifiers": [
-            "id"
-          ],
           "description": "The collection of federated identity credentials returned by the listing operation."
         },
         "nextLink": {
@@ -828,9 +907,6 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
-          "x-ms-identifiers": [
-            "code"
-          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -888,9 +964,6 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "title": "Operations List.",
           "description": "A list of operations supported by Microsoft.ManagedIdentity Resource Provider."
         },
@@ -942,6 +1015,22 @@
       "required": true,
       "type": "string"
     },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "OData filter expression to apply to the query.",
+      "required": false,
+      "type": "string"
+    },
+    "OrderbyParameter": {
+      "name": "$orderby",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "OData orderBy expression to apply to the query.",
+      "required": false,
+      "type": "string"
+    },
     "TopQueryParameter": {
       "name": "$top",
       "in": "query",
@@ -949,6 +1038,16 @@
       "type": "integer",
       "format": "int32",
       "description": "Number of records to return.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "SkipQueryParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to skip.",
       "minimum": 1,
       "x-ms-parameter-location": "method"
     },
@@ -965,16 +1064,6 @@
       "description": "The name of the federated identity credential resource.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$",
-      "x-ms-parameter-location": "method"
-    },
-    "RevokeTokensResourceNameParameter": {
-      "name": "revokeTokenResourceName",
-      "in": "path",
-      "description": "The name of the identity resource for revoking token",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$",
       "x-ms-parameter-location": "method"
     }
   }
