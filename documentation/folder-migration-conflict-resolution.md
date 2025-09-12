@@ -138,9 +138,17 @@ and add suppression one by one like this
       - Copy the file change into the new file location and ask the agent to "help me fix the folder refactor CI"
       - You can also ask the agent to "help me refactor the folder structure" to apply this folder refactor change in your PR branch. 
   
+     > **⚠️ tsp-migration-agent Tool Disclaimer**
+     > 
+     > The `tsp-migration-agent` is an **internal development tool** provided for convenience:
+     > 
+     > - **Platform Support**: Currently optimized for Linux/macOS environments; **not optimized for Windows**
+     > - **No Official Support**: No warranty or official support channels provided
+     > - **Use with Caution**: Always review and validate any changes made by the agent, ensure you have committed your changes before using the agent
 
+  
 
-Please note, the agent has not been optimized in Windows, it's better to understand what's really changed in the folder refactor. And please make sure resolved PR doesn't include any new folder structure change.
+**Important**: The agent has not been optimized for Windows. It's strongly recommended to understand what's really changed in the folder refactor manually. Always ensure the resolved PR doesn't include any unintended non folder structure changes.
 
 
 ### After Resolution
