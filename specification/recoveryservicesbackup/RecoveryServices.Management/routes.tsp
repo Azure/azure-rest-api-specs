@@ -195,7 +195,7 @@ interface Jobs {
      */
     @query("$filter")
     $filter?: string,
-  ): ArmAcceptedResponse | ErrorResponse;
+  ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -314,7 +314,7 @@ interface ValidateOperationResults {
      */
     @path
     operationId: string,
-  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse | ErrorResponse;
+  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -377,7 +377,7 @@ interface ProtectionContainerRefreshOperationResults {
      */
     @path
     operationId: string,
-  ): ArmAcceptedResponse | ArmNoContentResponse | ErrorResponse;
+  ): ArmAcceptedResponse<ExtraHeaders = {}> | ArmNoContentResponse | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -605,7 +605,6 @@ interface SecurityPINs {
    * Get the security PIN.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SecurityPINs_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupSecurityPIN")
   @post
   get(

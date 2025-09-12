@@ -45,7 +45,6 @@ interface BackupResourceStorageConfigsNonCRR {
    * Fetches resource storage config.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupResourceStorageConfigsNonCRR_Get")
   get is ArmResourceRead<BackupResourceConfigResource>;
 
   /**
@@ -53,7 +52,6 @@ interface BackupResourceStorageConfigsNonCRR {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("BackupResourceStorageConfigsNonCRR_Update")
   update is ArmResourceCreateOrReplaceSync<
     BackupResourceConfigResource,
     Response = ArmResourceUpdatedResponse<BackupResourceConfigResource>
@@ -64,7 +62,6 @@ interface BackupResourceStorageConfigsNonCRR {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("BackupResourceStorageConfigsNonCRR_patch")
   patch is ArmCustomPatchSync<
     BackupResourceConfigResource,
     PatchModel = BackupResourceConfigResource,
@@ -77,8 +74,7 @@ interface BackupResourceStorageConfigsNonCRR {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @action("prepareDataMove")
-  @operationId("BMSPrepareDataMove")
-  bMSPrepareDataMove is ArmResourceActionAsync<
+  bmsPrepareDataMove is ArmResourceActionAsync<
     BackupResourceConfigResource,
     PrepareDataMoveRequest,
     OkResponse
@@ -90,8 +86,7 @@ interface BackupResourceStorageConfigsNonCRR {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @action("triggerDataMove")
-  @operationId("BMSTriggerDataMove")
-  bMSTriggerDataMove is ArmResourceActionAsync<
+  bmsTriggerDataMove is ArmResourceActionAsync<
     BackupResourceConfigResource,
     TriggerDataMoveRequest,
     OkResponse
@@ -131,7 +126,6 @@ interface BMSPrepareDataMoveOperationResult {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("BMSPrepareDataMoveOperationResult_Get")
   get is BackupResourceConfigOperationResultOps.Read<
     BackupResourceConfigResource,
     Response = ArmResponse<VaultStorageConfigOperationResultResponse> | AcceptedResponse
@@ -183,9 +177,9 @@ interface BackupResourceConfigOperationStatuses {
 @@doc(BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
   "Vault storage config request"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove::parameters.body,
+@@doc(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
   "Prepare data move request"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove::parameters.body,
+@@doc(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
   "Trigger data move request"
 );

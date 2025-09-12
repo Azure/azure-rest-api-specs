@@ -11,10 +11,10 @@ using Microsoft.RecoveryServices;
 @@clientName(BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
   "parameters"
 );
-@@clientName(BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove::parameters.body,
+@@clientName(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
   "parameters"
 );
-@@clientName(BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove::parameters.body,
+@@clientName(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
   "parameters"
 );
 
@@ -56,10 +56,17 @@ using Microsoft.RecoveryServices;
 @@clientName(ResourceGuardProxy.put::parameters.resource, "parameters");
 @@clientName(ResourceGuardProxy.unlockDelete::parameters.body, "parameters");
 
-@@clientLocation(BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove,
+@@clientName(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
+  "BMSPrepareDataMove"
+);
+@@clientName(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
+  "BMSTriggerDataMove"
+);
+
+@@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   Microsoft.RecoveryServices
 );
-@@clientLocation(BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove,
+@@clientLocation(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
   Microsoft.RecoveryServices
 );
 @@clientLocation(BackupResourceConfigOperationStatuses.getOperationStatus,
