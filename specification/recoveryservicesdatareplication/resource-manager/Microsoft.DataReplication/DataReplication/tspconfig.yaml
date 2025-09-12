@@ -26,8 +26,8 @@ options:
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/recoveryservicesdatareplication"
-    package-dir: "armrecoveryservicesdatareplication"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservicesdatareplication"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservicesdatareplication"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
@@ -35,7 +35,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-recoveryservicesdatareplication"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-recoveryservicesdatareplication"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.recoveryservicesdatareplication"
     service-name: "Recovery Services Data Replication"
