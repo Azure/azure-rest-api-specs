@@ -11,12 +11,6 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.CostManagement"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-costmanagement"
     namespace: "azure.mgmt.costmanagement"
@@ -39,8 +33,8 @@ options:
       name: "@azure/arm-costmanagement"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/costmanagement"
-    package-dir: "armcostmanagement"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcostmanagement"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcostmanagement"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
