@@ -1,11 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
@@ -394,9 +397,16 @@ union MaintenanceProvisioningState {
   Failed: "Failed",
 }
 
+/**
+ * The replication Mode
+ */
 union replicationMode {
   string,
+
+  /** Binary log replication */
   BinaryLog: "BinaryLog",
+
+  /** Redo log replication */
   RedoLog: "RedoLog",
 }
 
@@ -998,6 +1008,7 @@ model ServerProperties {
   /**
    * The mysql parameter lower_case_table_names. Can only be specified when the server is being created. Allowed values 1 or 2.
    */
+  @added(Versions.v2025_06_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   lowerCaseTableNames?: int32;
 }
@@ -1127,7 +1138,7 @@ model HighAvailability {
   /**
    * HA Replication mode for a server.
    */
-  @add(Version.v2025_06_01_preview)
+  @added(Versions.v2025_06_01_preview)
   replicationMode?: replicationMode;
 }
 

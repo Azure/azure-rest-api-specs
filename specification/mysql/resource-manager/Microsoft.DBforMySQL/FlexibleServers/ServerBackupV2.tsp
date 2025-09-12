@@ -1,13 +1,16 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Server.tsp";
+import "./main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforMySQL;
@@ -91,6 +94,10 @@ interface LongRunningBackup {
     OptionalRequestBody = true
   >;
 
+  /**
+   * Delete backup for a given server with specified backup name
+   */
+  @added(Versions.v2025_06_01_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ServerBackupV2>;
 }
 
