@@ -22,6 +22,12 @@ model CreditSummary
     SegmentName = "credits",
     NamePattern = ""
   >;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  eTag?: string;
 }
 
 alias CreditSummariesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -60,7 +66,7 @@ interface CreditSummaries {
   /**
    * The credit summary by billingAccountId and billingProfileId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @operationId("Credits_Get")
   @action("credits/balanceSummary")

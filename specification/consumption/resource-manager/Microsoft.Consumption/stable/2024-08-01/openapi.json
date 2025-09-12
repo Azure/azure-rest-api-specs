@@ -561,6 +561,9 @@
         },
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "resourceScope",
             "in": "path",
             "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
@@ -2496,6 +2499,10 @@
           "$ref": "#/definitions/BudgetProperties",
           "description": "The properties of the budget.",
           "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
         }
       },
       "allOf": [
@@ -2774,6 +2781,10 @@
           "$ref": "#/definitions/CreditSummaryProperties",
           "description": "The properties of the credit summary.",
           "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
         }
       },
       "allOf": [
@@ -3495,6 +3506,16 @@
     "LegacyReservationTransaction": {
       "type": "object",
       "description": "Legacy Reservation transaction resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LegacyReservationTransactionProperties",
+          "description": "The properties of a legacy reservation transaction.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransaction"
@@ -5620,6 +5641,19 @@
           "$ref": "#/definitions/PriceSheetModel",
           "description": "price sheet result. It contains the pricesheet associated with billing period",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [

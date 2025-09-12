@@ -4,70 +4,70 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Consumption;
 using TypeSpec.Http;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(OperationStatus.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Marketplace.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TagsResult.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Balance.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ReservationSummary.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ReservationDetail.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ReservationRecommendationDetailsModel.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ReservationTransaction.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ModernReservationTransaction.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagementGroupAggregatedCostResult.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EventSummary.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LotSummary.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LegacyUsageDetail.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ModernUsageDetail.properties);
 
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 // @@Legacy.flattenProperty(LegacyReservationRecommendation.properties);
 
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 // @@Legacy.flattenProperty(ModernReservationRecommendation.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LegacyChargeSummary.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ModernChargeSummary.properties);
 
 @@clientName(Budgets.createOrUpdate::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Budget.properties);
 
 @@clientLocation(PriceSheetResults.get, PriceSheet);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PriceSheetResult.properties);
 
 @@clientLocation(CreditSummaries.get, "Credits");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Legacy.flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CreditSummary.properties);
 
 @@clientLocation(PriceSheetOperationGroup.downloadByBillingAccountPeriod,
