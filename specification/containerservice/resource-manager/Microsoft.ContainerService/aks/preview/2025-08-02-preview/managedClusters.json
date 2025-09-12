@@ -5161,6 +5161,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update Mesh Membership": {
             "$ref": "./examples/MeshMemberships_CreateOrUpdate.json"
@@ -5191,8 +5192,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -5204,6 +5211,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Mesh Membership": {
             "$ref": "./examples/MeshMemberships_Delete.json"
@@ -12805,6 +12813,11 @@
       "type": "object",
       "description": "Mesh membership properties of a managed cluster.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/MeshMembershipProvisioningState",
+          "readOnly": true,
+          "description": "The current provisioning state of the Mesh Membership."
+        },
         "managedMeshID": {
           "type": "string",
           "format": "arm-id",
@@ -12821,6 +12834,55 @@
       "required": [
         "managedMeshID"
       ]
+    },
+    "MeshMembershipProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the last accepted operation.",
+      "enum": [
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Failed",
+        "Succeeded",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "MeshMembershipProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The Mesh Membership is being created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The Mesh Membership is being deleted."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The Mesh Membership is being updated."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "MeshMembershipsListResult": {
       "type": "object",
