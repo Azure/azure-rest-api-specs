@@ -911,7 +911,7 @@ model FailOverProperties {
 /**
  * Information of the private link resource.
  */
-model PrivateLinkResources {
+model PrivateLinkResource {
   /**
    * Properties of the private link resource.
    */

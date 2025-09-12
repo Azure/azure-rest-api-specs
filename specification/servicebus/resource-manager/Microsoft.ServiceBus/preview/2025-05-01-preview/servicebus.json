@@ -2583,7 +2583,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourcesListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -5947,30 +5947,7 @@
         ]
       }
     },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "Properties of PrivateLinkResource",
-      "properties": {
-        "groupId": {
-          "type": "string"
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "Required Members",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "Required Zone Names",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PrivateLinkResources": {
+    "PrivateLinkResource": {
       "type": "object",
       "description": "Information of the private link resource.",
       "properties": {
@@ -5993,15 +5970,15 @@
         }
       }
     },
-    "PrivateLinkResourcesListResult": {
+    "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "The response of a PrivateLinkResources list operation.",
+      "description": "The response of a PrivateLinkResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateLinkResources items on this page",
+          "description": "The PrivateLinkResource items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResources"
+            "$ref": "#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
@@ -6013,6 +5990,29 @@
       "required": [
         "value"
       ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of PrivateLinkResource",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "Required Members",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "Required Zone Names",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ProvisioningIssue": {
       "type": "object",
