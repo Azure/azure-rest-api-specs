@@ -169,17 +169,14 @@ interface NotificationsSessions {
 
     @body body: CreateNotificationSessionRequest,
     ...ApiVersionParameter,
-  ):
-    | {
-        @statusCode _: 200;
-        @body body: CreateNotificationSessionResponse;
-      }
-    | {
-        @statusCode _: 201;
-        @header("Retry-After") retryAfter?: int32;
-        @body body: CreateNotificationSessionResponse;
-      }
-    | ErrorResponse;
+  ): {
+    @statusCode _: 200;
+    @body body: CreateNotificationSessionResponse;
+  } | {
+    @statusCode _: 201;
+    @header("Retry-After") retryAfter?: int32;
+    @body body: CreateNotificationSessionResponse;
+  } | ErrorResponse;
 
   /** Get session details. */
   @post
