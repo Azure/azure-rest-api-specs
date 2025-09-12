@@ -19,8 +19,8 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cosmosdbforpostgresql"
     service-dir: "sdk/cosmosdbforpostgresql"
-    package-dir: "azure-resourcemanager-cosmosdbforpostgresql"
     namespace: "com.azure.resourcemanager.cosmosdbforpostgresql"
     service-name: "Cosmos DB for PostgreSql" # human-readable service name, whitespace allowed
     flavor: azure
@@ -32,8 +32,8 @@ options:
       name: "@azure/arm-postgresqlhsc"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/postgresqlhsc"
-    package-dir: "armpostgresqlhsc"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpostgresqlhsc"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresqlhsc"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
