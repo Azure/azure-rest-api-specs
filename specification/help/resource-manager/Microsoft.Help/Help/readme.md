@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - Microsoft.Help/preview/2024-03-01-preview/help.json
+  - preview/2024-03-01-preview/help.json
 ```
 ### Tag: package-2023-09-01-preview
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2023-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
-  - Microsoft.Help/preview/2023-09-01-preview/help.json
+  - preview/2023-09-01-preview/help.json
 ```
 
 ### Tag: package-2023-06-01
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2023-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-06-01'
 input-file:
-  - Microsoft.Help/stable/2023-06-01/help.json
+  - stable/2023-06-01/help.json
 ```
 
 ### Tag: package-2023-01-01-preview
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
-  - Microsoft.Help/preview/2023-01-01-preview/help.json
+  - preview/2023-01-01-preview/help.json
 ```
 
 ---
