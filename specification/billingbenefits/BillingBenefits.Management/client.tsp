@@ -158,3 +158,4 @@ using Microsoft.BillingBenefits;
 );
 @@clientName(SavingsPlanUpdateRequestProperties.renew, "IsRenewed", "csharp");
 @@clientName(SavingsPlanOperationGroup.listAll, "GetBillingBenefitsSavingsPlans", "csharp");
+@@clientName(AppliedScopeType, "BillingBenefitsAppliedScopeType", "csharp");
