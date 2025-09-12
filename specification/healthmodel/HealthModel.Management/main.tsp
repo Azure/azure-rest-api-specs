@@ -17,7 +17,7 @@ using Azure.ResourceManager;
   version: "2022-11-01-preview",
 })
 @doc("Microsoft.HealthModel Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+
 namespace Microsoft.HealthModel;
 
 interface Operations extends Azure.ResourceManager.Operations {}

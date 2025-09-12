@@ -24,8 +24,6 @@ namespace Microsoft.AzureResilienceManagement;
 @doc("Microsoft.AzureResilienceManagement Resource Provider supported API versions.")
 enum Versions {
   @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2025-02-01-preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_02_01_preview: "2025-02-01-preview",
 }

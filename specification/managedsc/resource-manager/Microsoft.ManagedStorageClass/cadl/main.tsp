@@ -16,7 +16,6 @@ using Azure.ResourceManager;
   title: "Microsoft.ManagedStorageClass",
   version: "2023-02-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.ManagedStorageClass;
 
 interface Operations extends Azure.ResourceManager.Operations {}
