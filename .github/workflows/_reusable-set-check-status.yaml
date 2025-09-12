@@ -68,6 +68,13 @@ jobs:
               '${{ inputs.overriding_label }}'
             );
 
+      - if: ${{ always() && steps.set-status.outputs.head_sha }}
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.set-status.outputs.head_sha }}
+
       - if: ${{ always() && steps.set-status.outputs.issue_number }}
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
