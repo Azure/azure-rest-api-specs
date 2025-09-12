@@ -48,14 +48,14 @@
             "in": "body",
             "name": "body",
             "schema": {
-                "$ref": "#/definitions/RuleEntity"
+              "$ref": "#/definitions/RuleEntity"
             }
           }
         ],
         "responses": {
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-              "schema": {
+            "schema": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/RuleEntity"
@@ -104,10 +104,10 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/RuleEntity"
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
               }
             }
           }
@@ -168,15 +168,15 @@
             "in": "body",
             "name": "body",
             "schema": {
-                "$ref": "#/definitions/RuleEntity"
+              "$ref": "#/definitions/RuleEntity"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/RuleEntity"
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
             }
           }
         },
@@ -329,17 +329,17 @@
             "in": "body",
             "name": "body",
             "schema": {
-                "$ref": "#/definitions/RuleEntity"
+              "$ref": "#/definitions/RuleEntity"
             }
           }
         ],
         "responses": {
           "201": {
             "description": "The request has succeeded and new resource has been created.",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/RuleEntity"
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
               }
             }
           }
@@ -406,7 +406,12 @@
           "format": "uuid"
         }
       },
-      "required": ["id", "name", "type", "status"]
+      "required": [
+        "id",
+        "name",
+        "type",
+        "status"
+      ]
     },
     "TypeProperties": {
       "description": "Holds additional properties related to rule type.",
