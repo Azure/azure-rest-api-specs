@@ -20,7 +20,5 @@ namespace Microsoft.Edge;
 
 @doc("The available api version")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_08_01_preview: "2025-08-01-preview",
 }

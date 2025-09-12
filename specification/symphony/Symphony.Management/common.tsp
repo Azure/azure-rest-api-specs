@@ -14,11 +14,9 @@ namespace Microsoft.ToolchainOrchestrator;
 @doc("Versions info.")
 enum Versions {
   /** 2024-04-01-preview preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_04_01_preview: "2024-04-01-preview",
 
   /** 2024-08-01-preview preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_08_01_preview: "2024-08-01-preview",
 }
 

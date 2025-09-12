@@ -21,12 +21,10 @@ namespace Microsoft.HealthcareInterop;
 
 /** HealthcareInterop Edge service API versions */
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2025-05-01-preview version.")
   v2025_05_01_preview: "2025-05-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2025-06-01-preview version.")
   v2025_06_01_preview: "2025-06-01-preview",

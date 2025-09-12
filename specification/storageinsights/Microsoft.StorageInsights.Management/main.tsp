@@ -164,6 +164,5 @@ enum NamespaceStructure {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum ApiVersion {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_08_01_preview: "2023-08-01-preview",
 }
