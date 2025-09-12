@@ -1769,7 +1769,9 @@
                 "tool_outputs": {
                   "type": "array",
                   "description": "A list of tools for which the outputs are being submitted",
-                  "items": {},
+                  "items": {
+                    "$ref": "#/definitions/ToolOutput"
+                  },
                   "x-ms-client-name": "toolOutputs"
                 },
                 "tool_approvals": {
@@ -3981,7 +3983,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/StructuredToolOutput"
+          "$ref": "#/definitions/ToolOutput"
         }
       ],
       "x-ms-discriminator-value": "computer_call_output"
@@ -4981,7 +4983,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/StructuredToolOutput"
+          "$ref": "#/definitions/ToolOutput"
         }
       ],
       "x-ms-discriminator-value": "function_call_output"
@@ -8505,26 +8507,6 @@
       ],
       "x-ms-discriminator-value": "sharepoint_grounding"
     },
-    "StructuredToolOutput": {
-      "type": "object",
-      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type for the tool output."
-        },
-        "tool_call_id": {
-          "type": "string",
-          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
-          "x-ms-client-name": "toolCallId"
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type",
-        "tool_call_id"
-      ]
-    },
     "SubmitToolApprovalAction": {
       "type": "object",
       "description": "The details for required tool call approval that must be submitted for an agent thread run to continue.",
@@ -9067,16 +9049,21 @@
       "type": "object",
       "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type for the tool output.",
+          "default": "function_call_output"
+        },
         "tool_call_id": {
           "type": "string",
           "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
           "x-ms-client-name": "toolCallId"
-        },
-        "output": {
-          "type": "string",
-          "description": "The output from the tool to be submitted."
         }
-      }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
     },
     "ToolResources": {
       "type": "object",
