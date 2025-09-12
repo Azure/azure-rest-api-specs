@@ -11,12 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/relay.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.Relay"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
+    emit-lro-options: "all"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-relay"
     namespace: "azure.mgmt.relay"

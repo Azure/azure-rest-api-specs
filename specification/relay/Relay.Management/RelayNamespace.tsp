@@ -47,8 +47,11 @@ interface RelayNamespaces {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RelayNamespace,
-    LroHeaders = ArmLroLocationHeader<FinalResult = RelayNamespace> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<RelayNamespace> | ArmResourceCreatedResponse<
+      RelayNamespace,
+      ArmLroLocationHeader<FinalResult = RelayNamespace> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
