@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "parameters": {
+      "properties": {
+        "network": {
+          "publicNetworkAccess": "Disabled"
+        },
+        "storage": {
+          "autoGrow": "Disabled",
+          "autoIoScaling": "Disabled",
+          "iops": 200,
+          "storageRedundancy": "LocalRedundancy",
+          "storageSizeGB": 30
+        }
+      }
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "mysqltestserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysqltestserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "availabilityZone": "3",
+          "backup": {
+            "backupIntervalHours": 24,
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "mysqltestserver.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled",
+            "replicationMode": "BinaryLog"
+          },
+          "maintenancePolicy": {
+            "patchStrategy": "Regular"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Enabled",
+            "dayOfWeek": 1,
+            "startHour": 1,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled"
+          },
+          "replicaCapacity": 10,
+          "replicationRole": "None",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Disabled",
+            "autoIoScaling": "Disabled",
+            "iops": 200,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 30,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7"
+        },
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "num": "1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-06-01-preview"
+      }
+    }
+  },
+  "operationId": "Servers_Update",
+  "title": "Update a server"
+}
