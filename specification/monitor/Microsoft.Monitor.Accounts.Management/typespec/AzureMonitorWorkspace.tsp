@@ -46,25 +46,6 @@ namespace Microsoft.Monitor {
     listBySubscription is ArmListBySubscription<AzureMonitorWorkspaceResource>;
   }
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Metrics container is always present with the Azure Monitor Workspace and cannot be deleted"
-  @armResourceOperations
-  interface MetricsContainers {
-    /**
-     * Gets metrics container settings for a monitoring account.
-     */
-    get is ArmResourceRead<MacMetricsContainerResource>;
-
-    /**
-     * Creates or updates metrics container settings for a monitoring account.
-     */
-    createOrUpdate is ArmResourceCreateOrReplaceSync<MacMetricsContainerResource>;
-
-    /**
-     * Lists metrics containers for a monitoring account.
-     */
-    listByAzureMonitorWorkspace is ArmResourceListByParent<MacMetricsContainerResource>;
-  }
-
   @@doc(AzureMonitorWorkspaceResource.name,
     "The name of the Azure Monitor Workspace. The name is case insensitive"
   );
