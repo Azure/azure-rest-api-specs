@@ -27,7 +27,8 @@ using Microsoft.Network;
   "GeographicHierarchies"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TrafficManagerGeographicHierarchy.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TrafficManagerGeographicHierarchy.properties
+);
 
 @@clientLocation(HeatMapModels.get, "HeatMap");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
@@ -45,7 +46,8 @@ using Microsoft.Network;
 @@clientName(UserMetricsModels.delete, "Delete");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserMetricsModel.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserMetricsModel.properties
+);
 
 @@clientLocation(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   Profiles
