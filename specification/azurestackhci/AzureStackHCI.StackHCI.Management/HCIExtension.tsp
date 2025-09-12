@@ -299,14 +299,14 @@ model HCIExtensionPatchProperties {
   /**
    * Describes the properties of a Machine Extension that can be updated.
    */
-  extensionParameters?: HCIExtensionPatchParameters;
+  extensionParameters?: StackHCIHciExtensionPatchParametersContent;
 }
 
 /**
  * Describes the properties of a Machine Extension that can be updated.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionPatchParameters {
+model StackHCIHciExtensionPatchParametersContent {
   /**
    * Specifies the version of the script handler. Latest version would be used if not specified.
    */
