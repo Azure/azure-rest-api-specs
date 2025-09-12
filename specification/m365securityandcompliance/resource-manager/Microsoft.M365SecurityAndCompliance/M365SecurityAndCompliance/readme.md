@@ -37,13 +37,13 @@ These settings apply only when `--tag=package-2021-03-25-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-03-25-preview'
 input-file:
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/common-types.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForEDMUpload.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForM365ComplianceCenter.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForM365SecurityCenter.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForO365ManagementActivityAPI.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForSCCPowershell.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForMIPPolicySync.json
+- preview/2021-03-25-preview/common-types.json
+- preview/2021-03-25-preview/privateLinkServicesForEDMUpload.json
+- preview/2021-03-25-preview/privateLinkServicesForM365ComplianceCenter.json
+- preview/2021-03-25-preview/privateLinkServicesForM365SecurityCenter.json
+- preview/2021-03-25-preview/privateLinkServicesForO365ManagementActivityAPI.json
+- preview/2021-03-25-preview/privateLinkServicesForSCCPowershell.json
+- preview/2021-03-25-preview/privateLinkServicesForMIPPolicySync.json
 ```
 
 ---
