@@ -4,11 +4,11 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
-@@clientLocation(BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove,
+@@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
   "go"
 );
-@@clientLocation(BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove,
+@@clientLocation(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
   "Client",
   "go"
 );
@@ -354,11 +354,11 @@ using Microsoft.RecoveryServices;
 );
 
 // Service name management operations fixes
-@@clientName(Microsoft.RecoveryServices.BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove,
+@@clientName(Microsoft.RecoveryServices.BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "bmsPrepareDataMove",
   "java"
 );
-@@clientName(Microsoft.RecoveryServices.BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove,
+@@clientName(Microsoft.RecoveryServices.BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
   "bmsTriggerDataMove",
   "java"
 );
