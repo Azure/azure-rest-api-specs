@@ -3,7 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../../Common/ArmModels/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;

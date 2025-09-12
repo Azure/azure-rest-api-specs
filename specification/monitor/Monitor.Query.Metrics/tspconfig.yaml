@@ -49,9 +49,8 @@ options:
     customization-class: "customization/src/main/java/MetricsQueryCustomization.java"
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/query"
-    package-dir: "azmetrics"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/query/azmetrics"
-    module-version: "0.0.1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azmetrics"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmetrics"
     single-client: true
     generate-fakes: true
     inject-spans: true
