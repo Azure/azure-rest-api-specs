@@ -36,7 +36,7 @@ model ConfigurationStore
 }
 
 alias ConfigurationStoresDeleteLroHeader = {
-  ...ArmCombinedLroHeaders<FinalResult = ConfigurationStore>;
+  ...ArmCombinedLroHeaders;
   ...Azure.Core.Foundations.RetryAfterHeader;
 };
 
