@@ -5161,6 +5161,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update Mesh Membership": {
             "$ref": "./examples/MeshMemberships_CreateOrUpdate.json"
@@ -5191,8 +5192,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -5204,6 +5211,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Mesh Membership": {
             "$ref": "./examples/MeshMemberships_Delete.json"
