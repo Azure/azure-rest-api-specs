@@ -428,47 +428,6 @@ model ConnectionState {
 }
 
 /**
- * Definition of resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TrackedResource extends Resource {
-  /**
-   * Resource location.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
-
-/**
- * The resource definition.
- */
-model Resource {
-  /**
-   * Resource ID.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
-/**
  * Description of a namespace resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -490,7 +449,7 @@ model RelayUpdateParameters extends ResourceNamespacePatch {
  * Definition of resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceNamespacePatch extends Resource {
+model ResourceNamespacePatch extends CommonTypes.Resource {
   /**
    * Resource tags.
    */
