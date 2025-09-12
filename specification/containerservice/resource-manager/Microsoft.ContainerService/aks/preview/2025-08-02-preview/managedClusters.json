@@ -5719,6 +5719,10 @@
         "localDNSProfile": {
           "$ref": "#/definitions/LocalDNSProfile",
           "description": "Configures the per-node local DNS, with VnetDNS and KubeDNS overrides. LocalDNS helps improve performance and reliability of DNS resolution in an AKS cluster. For more details see aka.ms/aks/localdns."
+        },
+        "nodeCustomizationProfile": {
+          "$ref": "#/definitions/NodeCustomizationProfile",
+          "description": "Settings to determine the node customization used to provision nodes in a pool."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -5755,6 +5759,24 @@
         }
       },
       "description": "Network settings of an agent pool."
+    },
+    "NodeCustomizationProfile": {
+      "type": "object",
+      "description": "Settings to determine the node customization used to provision nodes in a pool.",
+      "properties": {
+        "nodeCustomizationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the node customization resource to use. This can be a version. Omitting the version will use the latest version of the node customization.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/nodeCustomizations"
+              }
+            ]
+          }
+        }
+      }
     },
     "NodePublicIPTags": {
       "type": "array",
