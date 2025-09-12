@@ -4,7 +4,6 @@ import "./custom/tools.tsp";
 import "@typespec/http";
 import "@typespec/openapi";
 
-
 using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
@@ -71,11 +70,11 @@ union OAIVoice {
 }
 
 @doc("""
-OpenAI voice configuration with explicit type field.
-
-This provides a unified interface for OpenAI voices, complementing the
-existing string-based OAIVoice for backward compatibility.
-""")
+  OpenAI voice configuration with explicit type field.
+  
+  This provides a unified interface for OpenAI voices, complementing the
+  existing string-based OAIVoice for backward compatibility.
+  """)
 model OpenAIVoice {
   type: "openai";
   name: OAIVoice;
@@ -92,11 +91,11 @@ model AzureVoice {
 @doc("Azure custom voice configuration (preferred).")
 model AzureCustomVoice extends AzureVoice {
   type: "azure-custom";
-
   @minLength(1) @doc("Voice name cannot be empty.") name: string;
   @minLength(1) @doc("Endpoint ID cannot be empty.") endpoint_id: string;
 
-  @minValue(0) @maxValue(1)
+  @minValue(0)
+  @maxValue(1)
   @doc("Temperature must be between 0.0 and 1.0.")
   temperature?: float32;
 
@@ -112,11 +111,12 @@ model AzureCustomVoice extends AzureVoice {
 @doc("Azure standard voice configuration.")
 model AzureStandardVoice extends AzureVoice {
   type: "azure-standard";
-
   @minLength(1) @doc("Voice name cannot be empty.") name: string;
 
-  @minValue(0) @maxValue(1)
-  @doc("Temperature must be between 0.0 and 1.0.") temperature?: float32;
+  @minValue(0)
+  @maxValue(1)
+  @doc("Temperature must be between 0.0 and 1.0.")
+  temperature?: float32;
 
   custom_lexicon_url?: string;
   prefer_locales?: string[];
@@ -130,11 +130,12 @@ model AzureStandardVoice extends AzureVoice {
 @doc("Azure platform voice configuration (variant of standard).")
 model AzurePlatformVoice extends AzureVoice {
   type: "azure-platform";
-
   @minLength(1) @doc("Voice name cannot be empty.") name: string;
 
-  @minValue(0) @maxValue(1)
-  @doc("Temperature must be between 0.0 and 1.0.") temperature?: float32;
+  @minValue(0)
+  @maxValue(1)
+  @doc("Temperature must be between 0.0 and 1.0.")
+  temperature?: float32;
 
   custom_lexicon_url?: string;
   prefer_locales?: string[];
@@ -148,10 +149,10 @@ model AzurePlatformVoice extends AzureVoice {
 @doc("Azure personal voice configuration.")
 model AzurePersonalVoice extends AzureVoice {
   type: "azure-personal";
-
   @minLength(1) @doc("Voice name cannot be empty.") name: string;
 
-  @minValue(0) @maxValue(1)
+  @minValue(0)
+  @maxValue(1)
   @doc("Temperature must be between 0.0 and 1.0.")
   temperature?: float32;
 
@@ -164,12 +165,12 @@ model AzurePersonalVoice extends AzureVoice {
 @doc("Voice identifier for Phi4mm voices.")
 union Phi4mmVoice {
   string,
-  "cosyvoice"
+  "cosyvoice",
 }
 
 @doc("""
-Voice configuration for LLM (Large Language Model) voices.
-""")
+  Voice configuration for LLM (Large Language Model) voices.
+  """)
 model LLMVoice {
   type: "llm";
   name: Phi4mmVoice;
@@ -181,9 +182,9 @@ model LLMVoice {
 union Voice {
   OAIVoice,
   OpenAIVoice,
-  AzureVoice,   // includes AzureCustomVoice, CustomVoice, AzurePersonalVoice
+  AzureVoice, // includes AzureCustomVoice, CustomVoice, AzurePersonalVoice
   Phi4mmVoice,
-  LLMVoice
+  LLMVoice,
 }
 
 union AudioFormat {
@@ -200,17 +201,27 @@ union AudioInputTranscriptionModel {
 
 @doc("Configuration for input audio transcription.")
 model AudioInputTranscriptionSettings {
-  @doc("The model used for transcription. E.g., 'whisper-1', 'azure-fast-transcription', 's2s-ingraph'.")
-  `model`: string | "whisper-1" | "azure-fast-transcription" | "s2s-ingraph" | "azure-speech";
+  @doc("""
+    The transcription model to use. Supported values:
+    'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
+    'azure-fast-transcription', 'azure-speech'.
+    """)
+  `model`:
+    | string
+    | "whisper-1"
+    | "gpt-4o-transcribe"
+    | "gpt-4o-mini-transcribe"
+    | "azure-fast-transcription"
+    | "azure-speech";
 
-  @doc("The language code to use for transcription, if specified.")
+  @doc("Optional BCP-47 language code (e.g., 'en-US').")
   language?: string;
 
-  @doc("Whether transcription is enabled.")
-  enabled: boolean;
+  @doc("Optional configuration for custom speech models.")
+  custom_speech?: Record<string>;
 
-  @doc("Whether a custom model is being used.")
-  custom_model: boolean;
+  @doc("Optional list of phrase hints to bias recognition.")
+  phrase_list?: string[];
 }
 
 union Modality {
@@ -235,8 +246,10 @@ model AzureSemanticDetection extends EOUDetection {
   secondary_threshold?: float32;
   secondary_timeout?: float32;
   disable_rules?: boolean;
+
   // developer options
   sr_boost?: float32;
+
   extra_imend_check?: boolean;
 }
 
@@ -248,8 +261,10 @@ model AzureSemanticDetectionEn extends EOUDetection {
   secondary_threshold?: float32;
   secondary_timeout?: float32;
   disable_rules?: boolean;
+
   // developer options
   sr_boost?: float32;
+
   extra_imend_check?: boolean;
 }
 
@@ -261,8 +276,10 @@ model AzureSemanticDetectionMultilingual extends EOUDetection {
   secondary_threshold?: float32;
   secondary_timeout?: float32;
   disable_rules?: boolean;
+
   // developer options
   sr_boost?: float32;
+
   extra_imend_check?: boolean;
 }
 
@@ -385,6 +402,7 @@ model AudioEchoCancellation {
 @doc("Output timestamp types supported in audio response content.")
 union AudioTimestampType {
   string,
+
   @doc("Timestamps per word in the output audio.")
   word: "word",
 }
