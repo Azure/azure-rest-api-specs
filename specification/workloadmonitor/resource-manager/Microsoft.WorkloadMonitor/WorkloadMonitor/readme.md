@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2018-08-31-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-08-31-preview'
 input-file:
-- Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
+- preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
 ```
 
 ``` yaml
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2020-01-13-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-01-13-preview'
 input-file:
-- Microsoft.WorkloadMonitor/preview/2020-01-13-preview/Microsoft.WorkloadMonitor.json
+- preview/2020-01-13-preview/Microsoft.WorkloadMonitor.json
 ```
 
 ``` yaml
