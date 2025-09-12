@@ -11,23 +11,23 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-python":    
-    package-dir: "azure-profiler"
-    namespace: "azure.azure.profiler"
+    package-dir: "applicationinsights-profiler"
+    namespace: "azure.applicationinsights.profiler"
     package-mode: dataplane
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Profiler"
+    package-dir: "Azure.ApplicationInsights.Profiler"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "azure-profiler-rest"
+    package-dir: "applicationinsights-profiler-rest"
     package-details:
-      name: "@azure-rest/azure-profiler"
-      description: "Azure.Profiler Service"
+      name: "@azure-rest/azure-applicationinsights-profiler"
+      description: "Microsoft.ApplicationInsights.Profiler Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-profiler"
-    namespace: com.azure.profiler
+    package-dir: "applicationinsights-profiler-service"
+    namespace: com.applicationinsights.profiler
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
