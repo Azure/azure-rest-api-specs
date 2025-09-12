@@ -23,7 +23,7 @@ interface MapsIntervalLegends {
   @tag("Map Legends")
   @route("/data/legend/interval/{classmapName}")
   @get
-  getByClassmapName is Azure.Core.Foundations.Operation<
+  getByClassMapName is Azure.Core.Foundations.Operation<
     {
       /**
        * classmap name
@@ -45,11 +45,11 @@ interface MapsIntervalLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    IntervalLegendsResponse | NoContentResponse
+    IntervalLegendsResponse
   >;
 }
 
-interface MapsClassmapLegends {
+interface MapsClassMapLegends {
   /**
    * Generate values and color swatches mapping for a given classmap.
    *
@@ -59,7 +59,7 @@ interface MapsClassmapLegends {
    *     trim_end (int, optional): Number of items to trim from the end of the cmap
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Classmap Legend")
+  @summary("Get ClassMap Legend")
   @tag("Map Legends")
   @route("/data/legend/classmap/{classmapName}")
   @get
@@ -85,7 +85,7 @@ interface MapsClassmapLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    ClassmapLegendResponse | NoContentResponse
+    Record<unknown>
   >;
 }
 
@@ -148,6 +148,6 @@ interface MapsLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    ImagePngResponse | NoContentResponse
+    ImagePngResponse
   >;
 }
