@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(Profile)
 model HeatMapModel extends ProxyResource {
-  properties: HeatMapProperties;
+  properties?: HeatMapProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

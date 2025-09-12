@@ -17,7 +17,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 model Profile extends TrackedResource {
-  properties: ProfileProperties;
+  properties?: ProfileProperties;
 }
 
 alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<

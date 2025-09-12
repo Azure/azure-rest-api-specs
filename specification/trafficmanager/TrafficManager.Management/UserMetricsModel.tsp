@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 @singleton("default")
 @subscriptionResource
 model UserMetricsModel extends ProxyResource {
-  properties: UserMetricsProperties;
+  properties?: UserMetricsProperties;
 }
 
 alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<

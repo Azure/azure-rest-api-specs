@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(Profile)
 model Endpoint extends ProxyResource {
-  properties: EndpointProperties;
+  properties?: EndpointProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

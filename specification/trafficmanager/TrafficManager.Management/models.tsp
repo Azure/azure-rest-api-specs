@@ -307,7 +307,9 @@ model Resource {
 /**
  * An error returned by the Azure Resource Manager
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * The content of the error.
@@ -318,6 +320,8 @@ model CloudError {
 /**
  * The content of an error returned by the Azure Resource Manager
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * Error code
