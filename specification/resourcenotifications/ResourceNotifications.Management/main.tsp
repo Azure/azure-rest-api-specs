@@ -176,6 +176,7 @@ interface NotificationsSessions {
       }
     | {
         @statusCode _: 201;
+        @header("Retry-After") retryAfter?: int32;
         @body body: CreateNotificationSessionResponse;
       }
     | ErrorResponse;
