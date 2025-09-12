@@ -37,8 +37,8 @@ options:
       name: "@azure/arm-resourcesdeploymentstacks"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/resources"
-    package-dir: "armdeploymentstacks"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdeploymentstacks"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdeploymentstacks"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
