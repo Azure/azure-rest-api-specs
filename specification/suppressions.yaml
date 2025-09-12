@@ -65,7 +65,7 @@
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
   paths:
-    - awsconnector/*/tspconfig.yaml
+    - awsconnector/**/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -1170,3 +1170,61 @@
   paths:
     - workloads/Workloads.SAPDiscoverySite.Management/tspconfig.yaml
     - workloads/Workloads.SAPMonitor.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until Go needs to generate SDK
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+  paths:
+    - ai/Azure.AI.Agents/tspconfig.yaml
+    - ai/Azure.AI.Projects/tspconfig.yaml
+    - ai/ContentUnderstanding/tspconfig.yaml
+    - ai/DocumentIntelligence/tspconfig.yaml
+    - ai/Face/tspconfig.yaml
+    - ai/HealthInsights/HealthInsights.OpenAPI/tspconfig.yaml
+    - ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml
+    - ai/ImageAnalysis/tspconfig.yaml
+    - ai/ModelInference/tspconfig.yaml
+    - ai/OpenAI.Assistants/tspconfig.yaml
+    - apicenter/ApiCenter.DataApi/tspconfig.yaml
+    - app/data-plane/DynamicSessions/tspconfig.yaml
+    - appconfiguration/data-plane/AppConfiguration/tspconfig.yaml
+    - applicationinsights/ApplicationInsights.LiveMetrics/tspconfig.yaml
+    - cognitiveservices/AnomalyDetector/tspconfig.yaml
+    - cognitiveservices/ContentSafety/tspconfig.yaml
+    - cognitiveservices/Language.AnalyzeConversations-authoring/tspconfig.yaml
+    - cognitiveservices/Language.AnalyzeDocuments/tspconfig.yaml
+    - cognitiveservices/Language.AnalyzeText/tspconfig.yaml
+    - cognitiveservices/Language.AnalyzeText-authoring/tspconfig.yaml
+    - cognitiveservices/Language.Conversations/tspconfig.yaml
+    - cognitiveservices/Language.QuestionAnswering/tspconfig.yaml
+    - cognitiveservices/Language.QuestionAnswering-authoring/tspconfig.yaml
+    - cognitiveservices/OpenAI.Inference/tspconfig.yaml
+    - cognitiveservices/Speech.VideoTranslation/tspconfig.yaml
+    - communication/Communication.JobRouter/tspconfig.yaml
+    - communication/Communication.Messages/tspconfig.yaml
+    - confidentialledger/Microsoft.CodeTransparency/tspconfig.yaml
+    - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
+    - devcenter/DevCenter/tspconfig.yaml
+    - healthdataaiservices/HealthDataAIServices.DeidServices/tspconfig.yaml
+    - keyvault/Security.KeyVault.Administration/tspconfig.yaml
+    - keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml
+    - loadtestservice/data-plane/loadtesting/tspconfig.yaml
+    - loadtestservice/data-plane/playwright/tspconfig.yaml
+    - machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml
+    - machinelearningservices/AzureAI.Assets/tspconfig.yaml
+    - marketplacecatalog/Products/tspconfig.yaml
+    - orbital/Microsoft.PlanetaryComputer/tspconfig.yaml
+    - playwrighttesting/PlaywrightTesting.AuthManager/tspconfig.yaml
+    - programmableconnectivity/Azure.ProgrammableConnectivity/tspconfig.yaml
+    - purview/Azure.Analytics.Purview.DataMap/tspconfig.yaml
+    - quantum/Quantum.Workspace/tspconfig.yaml
+    - riskiq/Easm/tspconfig.yaml
+    - schemaregistry/data-plane/SchemaRegistry/tspconfig.yaml
+    - storage/Microsoft.BlobStorage/tspconfig.yaml
+    - translation/data-plane/DocumentTranslation/tspconfig.yaml
+    - translation/data-plane/TextTranslation/tspconfig.yaml
+    - trustedsigning/data-plane/TrustedSigning/tspconfig.yaml
+    - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
+    - webpubsub/data-plane/WebPubSub/tspconfig.yaml
