@@ -25,7 +25,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-edgeorder"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-edgeorder"
     namespace: "com.azure.resourcemanager.edgeorder"
     service-name: "edgeorder" # human-readable service name, whitespace allowed
     flavor: azure
@@ -38,8 +38,8 @@ options:
       name: "@azure/arm-edgeorder"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/edgeorder"
-    package-dir: "armedgeorder"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armedgeorder"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armedgeorder"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

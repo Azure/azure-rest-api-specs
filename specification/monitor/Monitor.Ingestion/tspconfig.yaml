@@ -23,7 +23,7 @@ options:
     flavor: azure
     namespace: azure.monitor.ingestion
   "@azure-tools/typespec-java":
-    package-dir: "azure-monitor-ingestion"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-ingestion"
     namespace: com.azure.monitor.ingestion
     flavor: azure
     partial-update: true
@@ -32,9 +32,8 @@ options:
     customization-class: "customization/src/main/java/MonitorIngestionCustomizations.java"
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/ingestion"
-    package-dir: "azlogs"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/ingestion/azlogs"
-    module-version: "0.0.1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azlogs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azlogs"
     single-client: true
     rawjson-as-bytes: true
     inject-spans: true

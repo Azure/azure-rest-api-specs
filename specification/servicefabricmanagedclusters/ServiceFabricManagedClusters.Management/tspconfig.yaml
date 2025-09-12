@@ -34,16 +34,15 @@ options:
     experimental-extensible-enums: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/servicefabricmanagedclusters"
-    package-dir: "armservicefabricmanagedclusters"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    module-version: "0.5.0"
+    emitter-output-dir: "{output-dir}/{service-dir}/armservicefabricmanagedclusters"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armservicefabricmanagedclusters"
     fix-const-stuttering: true
     generate-examples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-servicefabricmanagedclusters"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicefabricmanagedclusters"
     namespace: com.azure.resourcemanager.servicefabricmanagedclusters
     flavor: azure
     service-name: Service Fabric Managed Clusters
