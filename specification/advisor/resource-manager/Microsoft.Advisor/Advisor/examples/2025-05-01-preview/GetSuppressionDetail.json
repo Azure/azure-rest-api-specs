@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "name": "suppressionName1",
+    "api-version": "2025-05-01-preview",
+    "recommendationId": "recommendationId",
+    "resourceUri": "resourceUri"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "suppressionName1",
+        "type": "Microsoft.Advisor/suppressions",
+        "id": "/subscriptions/a5481ee1-95df-47d0-85d4-dd3f0dfa19bc/resourceGroups/resourceGroup/providers/Microsoft.Compute/availabilitysets/armavset/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
+        "properties": {
+          "expirationTimeStamp": "2020-10-25T22:24:43.3216408Z",
+          "suppressionId": "suppressionId1",
+          "ttl": "7.00:00:00"
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "Suppression name is not specified or Suppression Id not found"
+        }
+      }
+    }
+  },
+  "operationId": "Suppressions_Get",
+  "title": "GetSuppressionDetail"
+}

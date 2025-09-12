@@ -23,7 +23,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-onlineexperimentation"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-onlineexperimentation"
     namespace: "com.azure.resourcemanager.onlineexperimentation"
     service-name: "Online Experimentation"
     flavor: azure
@@ -35,8 +35,8 @@ options:
       name: "@azure/arm-onlineexperimentation"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/onlineexperimentation"
-    package-dir: "armonlineexperimentation"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armonlineexperimentation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armonlineexperimentation"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
