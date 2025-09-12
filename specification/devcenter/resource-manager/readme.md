@@ -30,10 +30,11 @@ openapi-subtype: rpaas
 tag: package-preview-2025-07-01-preview
 
 directive:
-  - suppress: PatchBodyParametersSchema
-    from: devcenter.json
-    reason: This is from ARM common types SKU model. We cannot do anything about this.
-    
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions/{devBoxDefinitionName}"].patch.parameters[5].schema.properties.properties
+    suppress:
+      PatchBodyParametersSchema
+
   - where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"]
     suppress:
