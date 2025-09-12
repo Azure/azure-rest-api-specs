@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2020-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2020-06-01'
 input-file:
-  - Microsoft.PowerBI/stable/2020-06-01/powerbiprivatelinks.json
+  - stable/2020-06-01/powerbiprivatelinks.json
 ```
 
 ---
