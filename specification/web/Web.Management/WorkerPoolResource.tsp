@@ -61,8 +61,6 @@ interface WorkerPoolResources {
   /**
    * Description for Get properties of a multi-role pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_GetMultiRolePool")
   getMultiRolePool is WorkerPoolResourceOps.Read<
     WorkerPoolResource,
     OverrideErrorType = DefaultErrorResponse
@@ -71,10 +69,8 @@ interface WorkerPoolResources {
   /**
    * Description for Create or update a multi-role pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_CreateOrUpdateMultiRolePool")
   createOrUpdateMultiRolePool is WorkerPoolResourceOps.CreateOrUpdateAsync<
     WorkerPoolResource,
     Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse & {
@@ -89,10 +85,8 @@ interface WorkerPoolResources {
   /**
    * Description for Create or update a multi-role pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_UpdateMultiRolePool")
   @patch(#{ implicitOptionality: false })
   updateMultiRolePool is WorkerPoolResourceOps.CustomPatchSync<
     WorkerPoolResource,
@@ -107,8 +101,6 @@ interface WorkerPoolResources {
   /**
    * Description for Get all multi-role pools.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_ListMultiRolePools")
   @segment("multiRolePools")
   listMultiRolePools is WorkerPoolResourceOps.List<
     WorkerPoolResource,
@@ -119,8 +111,6 @@ interface WorkerPoolResources {
   /**
    * Description for Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions")
   @get
   @action("metricdefinitions")
   @list
@@ -142,8 +132,6 @@ interface WorkerPoolResources {
   /**
    * Description for Get metric definitions for a multi-role pool of an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_ListMultiRoleMetricDefinitions")
   @get
   @action("metricdefinitions")
   @list
@@ -157,8 +145,6 @@ interface WorkerPoolResources {
   /**
    * Description for Get available SKUs for scaling a multi-role pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_ListMultiRolePoolSkus")
   @get
   @action("skus")
   @list
@@ -172,8 +158,6 @@ interface WorkerPoolResources {
   /**
    * Description for Get usage metrics for a multi-role pool of an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceEnvironments_ListMultiRoleUsages")
   @get
   @action("usages")
   @list

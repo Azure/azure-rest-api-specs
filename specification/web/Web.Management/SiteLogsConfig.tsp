@@ -55,8 +55,6 @@ interface SiteLogsConfigs {
   /**
    * Description for Gets the logging configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetDiagnosticLogsConfiguration")
   getDiagnosticLogsConfiguration is SiteLogsConfigOps.Read<
     SiteLogsConfig,
     OverrideErrorType = DefaultErrorResponse
@@ -65,9 +63,7 @@ interface SiteLogsConfigs {
   /**
    * Description for Updates the logging configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateDiagnosticLogsConfig")
   updateDiagnosticLogsConfig is SiteLogsConfigOps.CreateOrUpdateSync<
     SiteLogsConfig,
     Response = ArmResourceUpdatedResponse<SiteLogsConfig>,
@@ -110,8 +106,6 @@ interface SiteLogsConfigOperationGroup {
   /**
    * Description for Gets the logging configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetDiagnosticLogsConfigurationSlot")
   getDiagnosticLogsConfigurationSlot is SiteLogsConfigOperationGroupOps.Read<
     SiteLogsConfig,
     OverrideErrorType = DefaultErrorResponse
@@ -120,9 +114,7 @@ interface SiteLogsConfigOperationGroup {
   /**
    * Description for Updates the logging configuration of an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateDiagnosticLogsConfigSlot")
   updateDiagnosticLogsConfigSlot is SiteLogsConfigOperationGroupOps.CreateOrUpdateSync<
     SiteLogsConfig,
     Response = ArmResourceUpdatedResponse<SiteLogsConfig>,

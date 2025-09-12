@@ -55,8 +55,6 @@ interface SiteContainers {
   /**
    * Gets a site container of a site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetSiteContainer")
   getSiteContainer is SiteContainerOps.Read<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -65,8 +63,6 @@ interface SiteContainers {
   /**
    * Creates or Updates a site container for a site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateSiteContainer")
   createOrUpdateSiteContainer is SiteContainerOps.CreateOrUpdateSync<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -75,8 +71,6 @@ interface SiteContainers {
   /**
    * Deletes a site container for a site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteSiteContainer")
   deleteSiteContainer is SiteContainerOps.DeleteSync<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -85,8 +79,6 @@ interface SiteContainers {
   /**
    * Lists all the site containers of a site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListSiteContainers")
   listSiteContainers is SiteContainerOps.List<
     SiteContainer,
     Response = ArmResponse<SiteContainerCollection>,
@@ -129,8 +121,6 @@ interface SiteContainerOperationGroup {
   /**
    * Gets a site container of a site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetSiteContainerSlot")
   getSiteContainerSlot is SiteContainerOperationGroupOps.Read<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -139,8 +129,6 @@ interface SiteContainerOperationGroup {
   /**
    * Creates or Updates a site container for a site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateSiteContainerSlot")
   createOrUpdateSiteContainerSlot is SiteContainerOperationGroupOps.CreateOrUpdateSync<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -149,8 +137,6 @@ interface SiteContainerOperationGroup {
   /**
    * Deletes a site container for a site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteSiteContainerSlot")
   deleteSiteContainerSlot is SiteContainerOperationGroupOps.DeleteSync<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -159,8 +145,6 @@ interface SiteContainerOperationGroup {
   /**
    * Lists all the site containers of a site, or a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListSiteContainersSlot")
   listSiteContainersSlot is SiteContainerOperationGroupOps.List<
     SiteContainer,
     Response = ArmResponse<SiteContainerCollection>,

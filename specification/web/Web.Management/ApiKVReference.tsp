@@ -62,8 +62,6 @@ interface AppSettingKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetAppSettingKeyVaultReference")
   getAppSettingKeyVaultReference is ApiKVReferenceOps.Read<
     ApiKVReference,
     OverrideErrorType = DefaultErrorResponse
@@ -72,8 +70,6 @@ interface AppSettingKeyVaultReference {
   /**
    * Description for Gets the config reference app settings and status of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetAppSettingsKeyVaultReferences")
   getAppSettingsKeyVaultReferences is ApiKVReferenceOps.List<
     ApiKVReference,
     Response = ArmResponse<ApiKVReferenceCollection>,
@@ -117,8 +113,6 @@ interface SiteConnectionStringKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetSiteConnectionStringKeyVaultReference")
   getSiteConnectionStringKeyVaultReference is ApiKVReferenceOperationGroupOps.Read<
     ApiKVReference,
     OverrideErrorType = DefaultErrorResponse
@@ -127,8 +121,6 @@ interface SiteConnectionStringKeyVaultReference {
   /**
    * Description for Gets the config reference app settings and status of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetSiteConnectionStringKeyVaultReferences")
   @segment("connectionstrings")
   getSiteConnectionStringKeyVaultReferences is ApiKVReferenceOperationGroupOps.List<
     ApiKVReference,
@@ -177,8 +169,6 @@ interface AppSettingKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference and status of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetAppSettingKeyVaultReferenceSlot")
   getAppSettingKeyVaultReferenceSlot is AppSettingKeyVaultReferenceSlotOps.Read<
     ApiKVReference,
     OverrideErrorType = DefaultErrorResponse
@@ -187,8 +177,6 @@ interface AppSettingKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference app settings and status of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetAppSettingsKeyVaultReferencesSlot")
   getAppSettingsKeyVaultReferencesSlot is AppSettingKeyVaultReferenceSlotOps.List<
     ApiKVReference,
     Response = ArmResponse<ApiKVReferenceCollection>,
@@ -237,8 +225,6 @@ interface SiteConnectionStringKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference and status of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetSiteConnectionStringKeyVaultReferenceSlot")
   getSiteConnectionStringKeyVaultReferenceSlot is SiteConnectionStringKeyVaultReferenceSlotOps.Read<
     ApiKVReference,
     OverrideErrorType = DefaultErrorResponse
@@ -247,8 +233,6 @@ interface SiteConnectionStringKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference app settings and status of an app
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetSiteConnectionStringKeyVaultReferencesSlot")
   @segment("connectionstrings")
   getSiteConnectionStringKeyVaultReferencesSlot is SiteConnectionStringKeyVaultReferenceSlotOps.List<
     ApiKVReference,

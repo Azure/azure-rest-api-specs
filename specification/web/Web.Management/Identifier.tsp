@@ -53,8 +53,6 @@ interface Identifiers {
   /**
    * Description for Get domain ownership identifier for web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetDomainOwnershipIdentifier")
   getDomainOwnershipIdentifier is IdentifierOps.Read<
     Identifier,
     OverrideErrorType = DefaultErrorResponse
@@ -63,9 +61,7 @@ interface Identifiers {
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateDomainOwnershipIdentifier")
   createOrUpdateDomainOwnershipIdentifier is IdentifierOps.CreateOrUpdateSync<
     Identifier,
     Response = ArmResourceUpdatedResponse<Identifier>,
@@ -75,8 +71,6 @@ interface Identifiers {
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateDomainOwnershipIdentifier")
   @patch(#{ implicitOptionality: false })
   updateDomainOwnershipIdentifier is IdentifierOps.CustomPatchSync<
     Identifier,
@@ -87,8 +81,6 @@ interface Identifiers {
   /**
    * Description for Deletes a domain ownership identifier for a web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteDomainOwnershipIdentifier")
   deleteDomainOwnershipIdentifier is IdentifierOps.DeleteSync<
     Identifier,
     OverrideErrorType = DefaultErrorResponse
@@ -97,8 +89,6 @@ interface Identifiers {
   /**
    * Description for Lists ownership identifiers for domain associated with web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListDomainOwnershipIdentifiers")
   listDomainOwnershipIdentifiers is IdentifierOps.List<
     Identifier,
     Response = ArmResponse<IdentifierCollection>,
@@ -140,8 +130,6 @@ interface IdentifierOperationGroup {
   /**
    * Description for Get domain ownership identifier for web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetDomainOwnershipIdentifierSlot")
   getDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.Read<
     Identifier,
     OverrideErrorType = DefaultErrorResponse
@@ -150,9 +138,7 @@ interface IdentifierOperationGroup {
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateDomainOwnershipIdentifierSlot")
   createOrUpdateDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.CreateOrUpdateSync<
     Identifier,
     Response = ArmResourceUpdatedResponse<Identifier>,
@@ -162,8 +148,6 @@ interface IdentifierOperationGroup {
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateDomainOwnershipIdentifierSlot")
   @patch(#{ implicitOptionality: false })
   updateDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.CustomPatchSync<
     Identifier,
@@ -174,8 +158,6 @@ interface IdentifierOperationGroup {
   /**
    * Description for Deletes a domain ownership identifier for a web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteDomainOwnershipIdentifierSlot")
   deleteDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.DeleteSync<
     Identifier,
     OverrideErrorType = DefaultErrorResponse
@@ -184,8 +166,6 @@ interface IdentifierOperationGroup {
   /**
    * Description for Lists ownership identifiers for domain associated with web app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListDomainOwnershipIdentifiersSlot")
   listDomainOwnershipIdentifiersSlot is IdentifierOperationGroupOps.List<
     Identifier,
     Response = ArmResponse<IdentifierCollection>,

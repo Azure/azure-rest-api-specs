@@ -54,8 +54,6 @@ interface DetectorResponses {
   /**
    * Description for Get Hosting Environment Detector Response
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_GetHostingEnvironmentDetectorResponse")
   getHostingEnvironmentDetectorResponse is DetectorResponseOps.Read<
     DetectorResponse,
     Parameters = {
@@ -84,8 +82,6 @@ interface DetectorResponses {
   /**
    * Description for List Hosting Environment Detector Responses
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ListHostingEnvironmentDetectorResponses")
   listHostingEnvironmentDetectorResponses is DetectorResponseOps.List<
     DetectorResponse,
     Response = ArmResponse<DetectorResponseCollection>,
@@ -190,8 +186,6 @@ interface DetectorResponseOperationGroup {
   /**
    * Description for Get site detector response
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_GetSiteDetectorResponseSlot")
   getSiteDetectorResponseSlot is DetectorResponseOperationGroupOps.Read<
     DetectorResponse,
     Parameters = {
@@ -220,8 +214,6 @@ interface DetectorResponseOperationGroup {
   /**
    * Description for List Site Detector Responses
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Diagnostics_ListSiteDetectorResponsesSlot")
   listSiteDetectorResponsesSlot is DetectorResponseOperationGroupOps.List<
     DetectorResponse,
     Response = ArmResponse<DetectorResponseCollection>,

@@ -213,8 +213,6 @@ interface CertificateOperationGroup {
   /**
    * Get a certificate for a given site and deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SiteCertificates_GetSlot")
   getSlot is CertificateOperationGroupOps.Read<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -223,8 +221,6 @@ interface CertificateOperationGroup {
   /**
    * Create or update a certificate in a given site and deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SiteCertificates_CreateOrUpdateSlot")
   createOrUpdateSlot is CertificateOperationGroupOps.CreateOrUpdateSync<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -233,8 +229,6 @@ interface CertificateOperationGroup {
   /**
    * Create or update a certificate for a site and deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SiteCertificates_UpdateSlot")
   @patch(#{ implicitOptionality: false })
   updateSlot is CertificateOperationGroupOps.CustomPatchSync<
     Certificate,
@@ -245,8 +239,6 @@ interface CertificateOperationGroup {
   /**
    * Delete a certificate for a given site and deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SiteCertificates_DeleteSlot")
   deleteSlot is CertificateOperationGroupOps.DeleteSync<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -255,8 +247,6 @@ interface CertificateOperationGroup {
   /**
    * Get all certificates in a resource group for a given site and a deployment slot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SiteCertificates_ListSlot")
   listSlot is CertificateOperationGroupOps.List<
     Certificate,
     Response = ArmResponse<CertificateCollection>,

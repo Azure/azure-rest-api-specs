@@ -54,8 +54,6 @@ interface NetworkFeaturesOperationGroup {
   /**
    * Description for Gets all network features used by the app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListNetworkFeatures")
   listNetworkFeatures is NetworkFeaturesOperationGroupOps.Read<
     NetworkFeatures,
     Response = ArmResponse<NetworkFeatures> | ArmNotFoundResponse,
@@ -96,8 +94,6 @@ interface NetworkFeaturesSlotOperationGroup {
   /**
    * Description for Gets all network features used by the app (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListNetworkFeaturesSlot")
   listNetworkFeaturesSlot is NetworkFeaturesSlotOperationGroupOps.Read<
     NetworkFeatures,
     OverrideErrorType = DefaultErrorResponse

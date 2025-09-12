@@ -53,8 +53,6 @@ interface VnetInfoResources {
   /**
    * Description for Get a Virtual Network associated with an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_GetVnetFromServerFarm")
   getVnetFromServerFarm is VnetInfoResourceOps.Read<
     VnetInfoResource,
     Response = ArmResponse<VnetInfoResource> | ArmNotFoundResponse,
@@ -64,8 +62,6 @@ interface VnetInfoResources {
   /**
    * Description for Get all Virtual Networks associated with an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_ListVnets")
   listVnets is VnetInfoResourceOps.ListSinglePage<
     VnetInfoResource,
     Response = ArmResponse<VnetInfoResource[]>,
@@ -107,8 +103,6 @@ interface VnetInfoResourceOperationGroup {
   /**
    * Description for Gets a virtual network the app (or deployment slot) is connected to by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetVnetConnectionSlot")
   getVnetConnectionSlot is VnetInfoResourceOperationGroupOps.Read<
     VnetInfoResource,
     OverrideErrorType = DefaultErrorResponse
@@ -117,9 +111,7 @@ interface VnetInfoResourceOperationGroup {
   /**
    * Description for Adds a Virtual Network connection to an app or slot (PUT) or updates the connection properties (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateVnetConnectionSlot")
   createOrUpdateVnetConnectionSlot is VnetInfoResourceOperationGroupOps.CreateOrUpdateSync<
     VnetInfoResource,
     Response = ArmResourceUpdatedResponse<VnetInfoResource>,
@@ -129,8 +121,6 @@ interface VnetInfoResourceOperationGroup {
   /**
    * Description for Adds a Virtual Network connection to an app or slot (PUT) or updates the connection properties (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateVnetConnectionSlot")
   @patch(#{ implicitOptionality: false })
   updateVnetConnectionSlot is VnetInfoResourceOperationGroupOps.CustomPatchSync<
     VnetInfoResource,
@@ -141,9 +131,7 @@ interface VnetInfoResourceOperationGroup {
   /**
    * Description for Deletes a connection from an app (or deployment slot to a named virtual network.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteVnetConnectionSlot")
   deleteVnetConnectionSlot is VnetInfoResourceOperationGroupOps.DeleteSync<
     VnetInfoResource,
     Response = ArmDeletedResponse | ArmNotFoundResponse,
@@ -153,8 +141,6 @@ interface VnetInfoResourceOperationGroup {
   /**
    * Description for Gets the virtual networks the app (or deployment slot) is connected to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListVnetConnectionsSlot")
   listVnetConnectionsSlot is VnetInfoResourceOperationGroupOps.ListSinglePage<
     VnetInfoResource,
     Response = ArmResponse<VnetInfoResource[]>,
@@ -190,8 +176,6 @@ interface VnetConnectionOperationGroup {
   /**
    * Description for Gets a virtual network the app (or deployment slot) is connected to by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetVnetConnection")
   getVnetConnection is VnetConnectionOperationGroupOps.Read<
     VnetInfoResource,
     OverrideErrorType = DefaultErrorResponse
@@ -200,9 +184,7 @@ interface VnetConnectionOperationGroup {
   /**
    * Description for Adds a Virtual Network connection to an app or slot (PUT) or updates the connection properties (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateVnetConnection")
   createOrUpdateVnetConnection is VnetConnectionOperationGroupOps.CreateOrUpdateSync<
     VnetInfoResource,
     Response = ArmResourceUpdatedResponse<VnetInfoResource>,
@@ -212,8 +194,6 @@ interface VnetConnectionOperationGroup {
   /**
    * Description for Adds a Virtual Network connection to an app or slot (PUT) or updates the connection properties (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateVnetConnection")
   @patch(#{ implicitOptionality: false })
   updateVnetConnection is VnetConnectionOperationGroupOps.CustomPatchSync<
     VnetInfoResource,
@@ -224,9 +204,7 @@ interface VnetConnectionOperationGroup {
   /**
    * Description for Deletes a connection from an app (or deployment slot to a named virtual network.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteVnetConnection")
   deleteVnetConnection is VnetConnectionOperationGroupOps.DeleteSync<
     VnetInfoResource,
     Response = ArmDeletedResponse | ArmNotFoundResponse,
@@ -236,8 +214,6 @@ interface VnetConnectionOperationGroup {
   /**
    * Description for Gets the virtual networks the app (or deployment slot) is connected to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListVnetConnections")
   @segment("virtualNetworkConnections")
   listVnetConnections is VnetConnectionOperationGroupOps.ListSinglePage<
     VnetInfoResource,

@@ -62,8 +62,6 @@ interface DatabaseConnections {
   /**
    * Returns overview of a database connection for a static site build by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_GetBuildDatabaseConnection")
   getBuildDatabaseConnection is DatabaseConnectionOps.Read<
     DatabaseConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -72,9 +70,7 @@ interface DatabaseConnections {
   /**
    * Description for Create or update a database connection for a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_CreateOrUpdateBuildDatabaseConnection")
   createOrUpdateBuildDatabaseConnection is DatabaseConnectionOps.CreateOrUpdateSync<
     DatabaseConnection,
     Response = ArmResourceUpdatedResponse<DatabaseConnection>,
@@ -84,8 +80,6 @@ interface DatabaseConnections {
   /**
    * Description for Create or update a database connection for a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_UpdateBuildDatabaseConnection")
   @patch(#{ implicitOptionality: false })
   updateBuildDatabaseConnection is DatabaseConnectionOps.CustomPatchSync<
     DatabaseConnection,
@@ -96,8 +90,6 @@ interface DatabaseConnections {
   /**
    * Delete a database connection for a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_DeleteBuildDatabaseConnection")
   deleteBuildDatabaseConnection is DatabaseConnectionOps.DeleteSync<
     DatabaseConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -106,8 +98,6 @@ interface DatabaseConnections {
   /**
    * Returns overviews of database connections for a static site build
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_GetBuildDatabaseConnections")
   getBuildDatabaseConnections is DatabaseConnectionOps.List<
     DatabaseConnection,
     Response = ArmResponse<DatabaseConnectionCollection>,
@@ -117,8 +107,6 @@ interface DatabaseConnections {
   /**
    * Returns details of a database connection for a static site build by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_GetBuildDatabaseConnectionWithDetails")
   @action("show")
   getBuildDatabaseConnectionWithDetails is DatabaseConnectionOps.ActionSync<
     DatabaseConnection,
@@ -157,8 +145,6 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Returns overview of a database connection for a static site by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_GetDatabaseConnection")
   getDatabaseConnection is DatabaseConnectionOperationGroupOps.Read<
     DatabaseConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -167,9 +153,7 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Description for Create or update a database connection for a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_CreateOrUpdateDatabaseConnection")
   createOrUpdateDatabaseConnection is DatabaseConnectionOperationGroupOps.CreateOrUpdateSync<
     DatabaseConnection,
     Response = ArmResourceUpdatedResponse<DatabaseConnection>,
@@ -179,8 +163,6 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Description for Create or update a database connection for a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_UpdateDatabaseConnection")
   @patch(#{ implicitOptionality: false })
   updateDatabaseConnection is DatabaseConnectionOperationGroupOps.CustomPatchSync<
     DatabaseConnection,
@@ -191,8 +173,6 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Delete a database connection for a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_DeleteDatabaseConnection")
   deleteDatabaseConnection is DatabaseConnectionOperationGroupOps.DeleteSync<
     DatabaseConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -201,8 +181,6 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Returns overviews of database connections for a static site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_GetDatabaseConnections")
   getDatabaseConnections is DatabaseConnectionOperationGroupOps.List<
     DatabaseConnection,
     Response = ArmResponse<DatabaseConnectionCollection>,
@@ -212,8 +190,6 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Returns details of a database connection for a static site by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StaticSites_GetDatabaseConnectionWithDetails")
   @action("show")
   getDatabaseConnectionWithDetails is DatabaseConnectionOperationGroupOps.ActionSync<
     DatabaseConnection,

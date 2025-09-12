@@ -52,8 +52,6 @@ interface RecommendationRules {
   /**
    * Description for Get a recommendation rule for an app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Recommendations_GetRuleDetailsByHostingEnvironment")
   getRuleDetailsByHostingEnvironment is RecommendationRuleOps.Read<
     RecommendationRule,
     Parameters = {
@@ -75,8 +73,6 @@ interface RecommendationRules {
   /**
    * Description for Disables the specific rule for a web site permanently.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Recommendations_DisableRecommendationForHostingEnvironment")
   @action("disable")
   disableRecommendationForHostingEnvironment is RecommendationRuleOps.ActionSync<
     RecommendationRule,

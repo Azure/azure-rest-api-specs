@@ -60,8 +60,6 @@ interface HybridConnections {
   /**
    * Description for Retrieve a Hybrid Connection in use in an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_GetHybridConnection")
   getHybridConnection is HybridConnectionOps.Read<
     HybridConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -70,8 +68,6 @@ interface HybridConnections {
   /**
    * Description for Delete a Hybrid Connection in use in an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_DeleteHybridConnection")
   deleteHybridConnection is HybridConnectionOps.DeleteSync<
     HybridConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -80,8 +76,6 @@ interface HybridConnections {
   /**
    * Description for Get the send key name and value of a Hybrid Connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_ListHybridConnectionKeys")
   @action("listKeys")
   listHybridConnectionKeys is HybridConnectionOps.ActionSync<
     HybridConnection,
@@ -93,8 +87,6 @@ interface HybridConnections {
   /**
    * Description for Get all apps that use a Hybrid Connection in an App Service Plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_ListWebAppsByHybridConnection")
   @get
   @action("sites")
   @list
@@ -140,8 +132,6 @@ interface HybridConnectionOperationGroup {
   /**
    * Description for Retrieves a specific Service Bus Hybrid Connection used by this Web App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetHybridConnection")
   getHybridConnection is HybridConnectionOperationGroupOps.Read<
     HybridConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -150,9 +140,7 @@ interface HybridConnectionOperationGroup {
   /**
    * Description for Creates a new Hybrid Connection using a Service Bus relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateHybridConnection")
   createOrUpdateHybridConnection is HybridConnectionOperationGroupOps.CreateOrUpdateSync<
     HybridConnection,
     Response = ArmResourceUpdatedResponse<HybridConnection>,
@@ -162,8 +150,6 @@ interface HybridConnectionOperationGroup {
   /**
    * Description for Creates a new Hybrid Connection using a Service Bus relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateHybridConnection")
   @patch(#{ implicitOptionality: false })
   updateHybridConnection is HybridConnectionOperationGroupOps.CustomPatchSync<
     HybridConnection,
@@ -174,9 +160,7 @@ interface HybridConnectionOperationGroup {
   /**
    * Description for Removes a Hybrid Connection from this site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteHybridConnection")
   deleteHybridConnection is HybridConnectionOperationGroupOps.DeleteSync<
     HybridConnection,
     Response = ArmDeletedResponse | ArmNotFoundResponse,
@@ -224,8 +208,6 @@ interface HybridConnectionSlotOperationGroup {
   /**
    * Description for Retrieves a specific Service Bus Hybrid Connection used by this Web App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetHybridConnectionSlot")
   getHybridConnectionSlot is HybridConnectionSlotOps.Read<
     HybridConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -234,9 +216,7 @@ interface HybridConnectionSlotOperationGroup {
   /**
    * Description for Creates a new Hybrid Connection using a Service Bus relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateHybridConnectionSlot")
   createOrUpdateHybridConnectionSlot is HybridConnectionSlotOps.CreateOrUpdateSync<
     HybridConnection,
     Response = ArmResourceUpdatedResponse<HybridConnection>,
@@ -246,8 +226,6 @@ interface HybridConnectionSlotOperationGroup {
   /**
    * Description for Creates a new Hybrid Connection using a Service Bus relay.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateHybridConnectionSlot")
   @patch(#{ implicitOptionality: false })
   updateHybridConnectionSlot is HybridConnectionSlotOps.CustomPatchSync<
     HybridConnection,
@@ -258,9 +236,7 @@ interface HybridConnectionSlotOperationGroup {
   /**
    * Description for Removes a Hybrid Connection from this site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_DeleteHybridConnectionSlot")
   deleteHybridConnectionSlot is HybridConnectionSlotOps.DeleteSync<
     HybridConnection,
     Response = ArmDeletedResponse | ArmNotFoundResponse,

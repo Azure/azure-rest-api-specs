@@ -60,8 +60,6 @@ interface VnetGateways {
   /**
    * Description for Get a Virtual Network gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_GetVnetGateway")
   getVnetGateway is VnetGatewayOps.Read<
     VnetGateway,
     OverrideErrorType = DefaultErrorResponse
@@ -70,9 +68,7 @@ interface VnetGateways {
   /**
    * Description for Update a Virtual Network gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServicePlans_UpdateVnetGateway")
   updateVnetGateway is VnetGatewayOps.CreateOrUpdateSync<
     VnetGateway,
     Response = ArmResourceUpdatedResponse<VnetGateway>,
@@ -120,8 +116,6 @@ interface VnetGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetVnetConnectionGatewaySlot")
   getVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.Read<
     VnetGateway,
     Response = ArmResponse<VnetGateway> | ArmNotFoundResponse,
@@ -131,9 +125,7 @@ interface VnetGatewayOperationGroup {
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateVnetConnectionGatewaySlot")
   createOrUpdateVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.CreateOrUpdateSync<
     VnetGateway,
     Response = ArmResourceUpdatedResponse<VnetGateway>,
@@ -143,8 +135,6 @@ interface VnetGatewayOperationGroup {
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateVnetConnectionGatewaySlot")
   @patch(#{ implicitOptionality: false })
   updateVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.CustomPatchSync<
     VnetGateway,
@@ -188,8 +178,6 @@ interface VnetConnectionGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetVnetConnectionGateway")
   getVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.Read<
     VnetGateway,
     Response = ArmResponse<VnetGateway> | ArmNotFoundResponse,
@@ -199,9 +187,7 @@ interface VnetConnectionGatewayOperationGroup {
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_CreateOrUpdateVnetConnectionGateway")
   createOrUpdateVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.CreateOrUpdateSync<
     VnetGateway,
     Response = ArmResourceUpdatedResponse<VnetGateway>,
@@ -211,8 +197,6 @@ interface VnetConnectionGatewayOperationGroup {
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateVnetConnectionGateway")
   @patch(#{ implicitOptionality: false })
   updateVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.CustomPatchSync<
     VnetGateway,

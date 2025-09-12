@@ -55,8 +55,6 @@ interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetFtpAllowed")
   getFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -65,9 +63,7 @@ interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Updates whether FTP is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateFtpAllowed")
   updateFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
@@ -77,8 +73,6 @@ interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListBasicPublishingCredentialsPolicies")
   @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPolicies is CsmPublishingCredentialsPoliciesEntityOps.List<
     CsmPublishingCredentialsPoliciesEntity,
@@ -115,8 +109,6 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetScmAllowed")
   getScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -125,9 +117,7 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   /**
    * Description for Updates whether user publishing credentials are allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateScmAllowed")
   updateScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
@@ -169,8 +159,6 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetFtpAllowedSlot")
   getFtpAllowedSlot is FtpAllowedSlotOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -179,9 +167,7 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Updates whether FTP is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateFtpAllowedSlot")
   updateFtpAllowedSlot is FtpAllowedSlotOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
@@ -191,8 +177,6 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_ListBasicPublishingCredentialsPoliciesSlot")
   @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPoliciesSlot is FtpAllowedSlotOps.List<
     CsmPublishingCredentialsPoliciesEntity,
@@ -236,8 +220,6 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_GetScmAllowedSlot")
   getScmAllowedSlot is ScmAllowedSlotOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -246,9 +228,7 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
   /**
    * Description for Updates whether user publishing credentials are allowed on the site or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebApps_UpdateScmAllowedSlot")
   updateScmAllowedSlot is ScmAllowedSlotOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
