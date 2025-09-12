@@ -9,6 +9,14 @@ using Http;
 using Rest;
 using Versioning;
 
+@server(
+  "{endpoint}",
+  "App Insights Profiler and Debugger service endpoint",
+  {
+    /** Fully-qualified base URI of the Profiler & Debugger service (e.g. https://dataplane.diagnosticservices.azure.com). */
+    endpoint: url,
+  }
+)
 @useAuth(
   OAuth2Auth<[
     {
