@@ -25,7 +25,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dnsresolver"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dnsresolver"
     namespace: "com.azure.resourcemanager.dnsresolver"
     service-name: "Dns Resolver" # human-readable service name, whitespace allowed
     flavor: azure
@@ -37,8 +37,8 @@ options:
       name: "@azure/arm-dnsresolver"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dnsresolver"
-    package-dir: "armdnsresolver"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdnsresolver"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdnsresolver"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

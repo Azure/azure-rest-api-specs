@@ -27,14 +27,13 @@ options:
     generate-fakes: false
     inject-spans: true
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azbatch"
-    module-version: "0.1.0"
-    package-dir: "azbatch"
+    emitter-output-dir: "{output-dir}/{service-dir}/azbatch"
     service-dir: "sdk/batch"
     single-client: true
     slice-elements-byval: true
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-compute-batch"
     namespace: "com.azure.compute.batch"
-    package-dir: "azure-compute-batch"
     partial-update: true
     skip-special-headers:
       - "ocp-date"
