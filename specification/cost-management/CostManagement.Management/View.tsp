@@ -119,7 +119,6 @@ interface ViewOperationGroup {
    * Gets the view for the defined scope by view name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Views_GetByScope")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   getByScope is ViewOperationGroupOps.Read<View, ErrorType = ErrorResponse>;
 
@@ -127,7 +126,6 @@ interface ViewOperationGroup {
    * The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Views_CreateOrUpdateByScope")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   createOrUpdateByScope is ViewOperationGroupOps.CreateOrUpdateSync<
     View,
@@ -138,7 +136,6 @@ interface ViewOperationGroup {
    * The operation to delete a view.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Views_DeleteByScope")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   deleteByScope is ViewOperationGroupOps.DeleteSync<
     View,
@@ -149,7 +146,6 @@ interface ViewOperationGroup {
    * Lists all views by tenant and object.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Views_ListByScope")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   listByScope is ViewOperationGroupOps.List<
     View,

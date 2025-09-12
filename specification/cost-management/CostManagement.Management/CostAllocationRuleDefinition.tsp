@@ -62,8 +62,6 @@ interface CostAllocationRuleDefinitions {
   /**
    * Get a cost allocation rule by rule name and billing account or enterprise enrollment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CostAllocationRules_Get")
   get is CostAllocationRuleDefinitionsOps.Read<
     CostAllocationRuleDefinition,
     ErrorType = ErrorResponse
@@ -72,8 +70,6 @@ interface CostAllocationRuleDefinitions {
   /**
    * Create/Update a rule to allocate cost between different resources within a billing account or enterprise enrollment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CostAllocationRules_CreateOrUpdate")
   createOrUpdate is CostAllocationRuleDefinitionsOps.CreateOrUpdateSync<
     CostAllocationRuleDefinition,
     ErrorType = ErrorResponse
@@ -82,8 +78,6 @@ interface CostAllocationRuleDefinitions {
   /**
    * Delete cost allocation rule for billing account or enterprise enrollment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CostAllocationRules_Delete")
   delete is CostAllocationRuleDefinitionsOps.DeleteSync<
     CostAllocationRuleDefinition,
     ErrorType = ErrorResponse
@@ -92,8 +86,6 @@ interface CostAllocationRuleDefinitions {
   /**
    * Get the list of all cost allocation rules for a billing account or enterprise enrollment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CostAllocationRules_List")
   list is CostAllocationRuleDefinitionsOps.List<
     CostAllocationRuleDefinition,
     Response = ArmResponse<CostAllocationRuleList>,

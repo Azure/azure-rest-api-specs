@@ -157,8 +157,6 @@ interface ScheduledActionOperationGroup {
    * Get the shared scheduled action from the given scope by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledActions_GetByScope")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   getByScope is ScheduledActionOperationGroupOps.Read<
     ScheduledAction,
@@ -168,8 +166,6 @@ interface ScheduledActionOperationGroup {
   /**
    * Create or update a shared scheduled action within the given scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledActions_CreateOrUpdateByScope")
   createOrUpdateByScope is ScheduledActionOperationGroupOps.CreateOrUpdateSync<
     ScheduledAction,
     Parameters = {
@@ -187,8 +183,6 @@ interface ScheduledActionOperationGroup {
    * Delete a scheduled action within the given scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledActions_DeleteByScope")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   deleteByScope is ScheduledActionOperationGroupOps.DeleteSync<
     ScheduledAction,
@@ -199,8 +193,6 @@ interface ScheduledActionOperationGroup {
    * List all private scheduled actions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledActions_ListByScope")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   listByScope is ScheduledActionOperationGroupOps.List<
     ScheduledAction,
@@ -218,8 +210,6 @@ interface ScheduledActionOperationGroup {
   /**
    * Runs a shared scheduled action within the given scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledActions_RunByScope")
   @action("execute")
   runByScope is ScheduledActionOperationGroupOps.ActionSync<
     ScheduledAction,
