@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "versionName": "dv1",
+    "compareDeploymentVersionsParameter": {
+      "compareTo": "VersionName2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceType": "Microsoft.Cdn/profiles/afdEndpoints/routes",
+            "resourceId": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
+            "resourceName": "route1",
+            "previousProperties": {
+              "customDomains": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+                }
+              ],
+              "originGroup": {
+                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+              },
+              "originPath": null,
+              "ruleSets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+                }
+              ],
+              "supportedProtocols": [
+                "Https",
+                "Http"
+              ],
+              "patternsToMatch": [
+                "/*"
+              ],
+              "cacheConfiguration": {
+                "compressionSettings": {
+                  "contentTypesToCompress": [
+                    "text/html",
+                    "application/octet-stream"
+                  ],
+                  "isCompressionEnabled": true
+                },
+                "queryStringCachingBehavior": "IgnoreQueryString",
+                "queryParameters": null
+              },
+              "forwardingProtocol": "MatchRequest",
+              "linkToDefaultDomain": "Enabled",
+              "httpsRedirect": "Enabled",
+              "enabledState": "Enabled"
+            },
+            "currentProperties": {
+              "customDomains": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+                }
+              ],
+              "originGroup": {
+                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+              },
+              "originPath": null,
+              "ruleSets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+                }
+              ],
+              "supportedProtocols": [
+                "Https"
+              ],
+              "patternsToMatch": [
+                "/*"
+              ],
+              "cacheConfiguration": {
+                "compressionSettings": {
+                  "contentTypesToCompress": [
+                    "text/html",
+                    "application/octet-stream"
+                  ],
+                  "isCompressionEnabled": true
+                },
+                "queryStringCachingBehavior": "IgnoreQueryString",
+                "queryParameters": null
+              },
+              "forwardingProtocol": "MatchRequest",
+              "linkToDefaultDomain": "Enabled",
+              "httpsRedirect": "Enabled",
+              "enabledState": "Enabled"
+            }
+          },
+          {
+            "resourceType": "Microsoft.Cdn/profiles/originGroups",
+            "resourceId": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+            "resourceName": "origingroup1",
+            "previousProperties": null,
+            "currentProperties": {
+              "loadBalancingSettings": {
+                "sampleSize": 3,
+                "successfulSamplesRequired": 3,
+                "additionalLatencyInMilliseconds": 1000
+              },
+              "healthProbeSettings": {
+                "probePath": "/path1",
+                "probeRequestType": "HEAD",
+                "probeProtocol": "Http",
+                "probeIntervalInSeconds": 10
+              },
+              "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+            }
+          }
+        ]
+      }
+    }
+  }
+}
