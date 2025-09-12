@@ -1250,7 +1250,7 @@ model AuthorizeCopyRequest {
   """)
 model ModelCopyAuthorization {
   @doc("ID of the target Azure resource where the document model should be copied to.")
-  targetResourceId: number;
+  targetResourceId: int32;
 
   @doc("""
     Location of the target Azure resource where the document model should be copied
@@ -1266,7 +1266,7 @@ model ModelCopyAuthorization {
   targetModelLocation: url;
 
   @doc("Token used to authorize the request.")
-  accessToken: number;
+  accessToken: int32;
 
   @doc("Date/time when the access token expires.")
   expirationDateTime: utcDateTime;
