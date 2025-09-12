@@ -43,8 +43,8 @@ These settings apply only when `--tag=package-preview-1.1.0` is specified on the
 
 ```yaml $(tag) == 'package-preview-1.1.0'
 input-file:
-  - VideoAnalyzer.Edge/preview/1.1.0/AzureVideoAnalyzer.json
-  - VideoAnalyzer.Edge/preview/1.1.0/AzureVideoAnalyzerSdkDefinitions.json
+  - preview/1.1.0/AzureVideoAnalyzer.json
+  - preview/1.1.0/AzureVideoAnalyzerSdkDefinitions.json
 ```
 ### Tag: package-ava-edge-1-0-0-preview
 
@@ -52,8 +52,8 @@ These settings apply only when `--tag=package-ava-edge-1-0-0-preview` is specifi
 
 ``` yaml $(tag) == 'package-ava-edge-1-0-0-preview'
 input-file:
-  - VideoAnalyzer.Edge/preview/1.0.0/AzureVideoAnalyzer.json
-  - VideoAnalyzer.Edge/preview/1.0.0/AzureVideoAnalyzerSdkDefinitions.json
+  - preview/1.0.0/AzureVideoAnalyzer.json
+  - preview/1.0.0/AzureVideoAnalyzerSdkDefinitions.json
 ```
 
 ---
@@ -100,7 +100,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/VideoAnalyzer.Edge/preview/1.0.0/AzureVideoAnalyzer.json
+  - $(this-folder)/preview/1.0.0/AzureVideoAnalyzer.json
 
 ```
 

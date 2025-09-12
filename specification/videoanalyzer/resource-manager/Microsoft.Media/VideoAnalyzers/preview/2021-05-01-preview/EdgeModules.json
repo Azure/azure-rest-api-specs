@@ -4,9 +4,9 @@
   ],
   "swagger": "2.0",
   "info": {
-    "title": "Azure Video Analyzer Resource Provider",
+    "title": "Azure Video Analyzer",
     "description": "Azure Video Analyzer resource provider API definition.",
-    "version": "2021-11-01-preview"
+    "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
   "consumes": [
@@ -75,7 +75,7 @@
     "EdgeModuleEntity": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -83,6 +83,11 @@
           "$ref": "#/definitions/EdgeModuleProperties",
           "description": "The resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
         }
       },
       "type": "object",
@@ -109,8 +114,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules": {
       "get": {
-        "summary": "List all existing edge module resources.",
-        "description": "List all existing edge module resources, along with their JSON representations.",
+        "summary": "List edge module resources.",
+        "description": "List all of the existing edge module resources for a given Video Analyzer account.",
         "operationId": "EdgeModules_List",
         "responses": {
           "200": {
@@ -122,22 +127,29 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Restricts the set of items returned."
           },
           {
             "name": "$top",
@@ -146,6 +158,13 @@
             "type": "integer",
             "format": "int32",
             "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Specifies the key by which the result collection should be ordered."
           }
         ],
         "x-ms-pageable": {
@@ -161,7 +180,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules/{edgeModuleName}": {
       "get": {
         "summary": "Retrieves an existing edge module resource.",
-        "description": "Retrieves an existing edge module resource with the given name.",
+        "description": "Retrieves a specific existing edge module resource in the given Video Analyzer account.",
         "operationId": "EdgeModules_Get",
         "responses": {
           "200": {
@@ -173,16 +192,16 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -192,10 +211,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Edge Module name."
+            "description": "The name of the edge module to retrieve."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-examples": {
@@ -224,16 +243,16 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -243,7 +262,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Edge Module name."
+            "description": "The name of the edge module to create or update."
           },
           {
             "name": "parameters",
@@ -255,7 +274,7 @@
             "description": "The request parameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-examples": {
@@ -278,16 +297,16 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -297,10 +316,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Edge Module name."
+            "description": "The name of the edge module to be deleted."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-examples": {
@@ -325,16 +344,16 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -344,7 +363,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Edge Module name."
+            "description": "The name of the edge module used to create a new provisioning token."
           },
           {
             "name": "parameters",
@@ -356,7 +375,7 @@
             "description": "The request parameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-examples": {
