@@ -37,8 +37,8 @@ options:
     namespace: "com.azure.resourcemanager.fabric"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/fabric"
-    package-dir: "armfabric"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armfabric"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfabric"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

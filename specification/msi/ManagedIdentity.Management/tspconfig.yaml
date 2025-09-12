@@ -34,8 +34,8 @@ options:
       name: "@azure/arm-msi"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/msi"
-    package-dir: "armmsi"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmsi"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmsi"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
