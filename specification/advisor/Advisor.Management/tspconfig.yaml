@@ -31,8 +31,8 @@ options:
       name: "@azure/arm-advisor"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/advisor"
-    package-dir: "armadvisor"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armadvisor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armadvisor"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
