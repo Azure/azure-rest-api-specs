@@ -30,20 +30,14 @@ openapi-subtype: rpaas
 tag: package-preview-2025-07-01-preview
 
 directive:
-  - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions/{devBoxDefinitionName}"].patch.parameters[5].schema.properties.sku
-    suppress: 
-    - PatchBodyParametersSchema
-
+  - suppress: PatchBodyParametersSchema
+    from: devcenter.json
+    reason: This is from ARM common types SKU model. We cannot do anything about this.
+    
   - where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"]
     suppress:
       - PathForNestedResource
-
-  - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[5].schema.properties.devBoxDefinition.sku.name
-    suppress:
-      - PatchBodyParametersSchema
 
   - where:
     - $.definitions.DayOfWeek["x-ms-enum"].values[0].description
