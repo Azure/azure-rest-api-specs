@@ -42,8 +42,9 @@ interface DnssecConfigs {
   /**
    * Creates or updates the DNSSEC configuration on a DNS zone.
    */
-  createOrUpdate is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodyAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     DnssecConfig,
+    Request = void,
     Parameters = {
       /**
        * The etag of the DNSSEC configuration. Omit this value to always overwrite the DNSSEC configuration. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
