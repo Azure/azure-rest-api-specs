@@ -90,6 +90,10 @@ interface LongRunningBackup {
       Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;
+
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ServerBackupV2,
+  >;
 }
 
 @@doc(ServerBackupV2.name, "The name of the backup.");

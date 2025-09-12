@@ -394,6 +394,12 @@ union MaintenanceProvisioningState {
   Failed: "Failed",
 }
 
+union replicationMode {
+  string,
+  BinaryLog: "BinaryLog",
+  RedoLog: "RedoLog",
+}
+
 /**
  * The operation status
  */
@@ -988,6 +994,12 @@ model ServerProperties {
    * Source properties for import from storage.
    */
   importSourceProperties?: ImportSourceProperties;
+
+  /**
+   * The mysql parameter lower_case_table_names. Can only be specified when the server is being created. Allowed values 1 or 2.
+  */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  lowerCaseTableNames?: int32;
 }
 
 /**
@@ -1111,6 +1123,12 @@ model HighAvailability {
    * Availability zone of the standby server.
    */
   standbyAvailabilityZone?: string;
+
+  /**
+   * HA Replication mode for a server.
+   */
+  @add(Version.v2025_06_01_preview)
+  replicationMode?: replicationMode;
 }
 
 /**
