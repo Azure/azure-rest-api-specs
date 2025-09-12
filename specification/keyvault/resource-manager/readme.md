@@ -50,13 +50,7 @@ These settings apply only when `--tag=package-2024-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-11-01'
 input-file:
-  - Microsoft.KeyVault/stable/2024-11-01/common.json
-  - Microsoft.KeyVault/stable/2024-11-01/keys.json
-  - Microsoft.KeyVault/stable/2024-11-01/keysManagedHsm.json
-  - Microsoft.KeyVault/stable/2024-11-01/keyvault.json
-  - Microsoft.KeyVault/stable/2024-11-01/managedHsm.json
-  - Microsoft.KeyVault/stable/2024-11-01/providers.json
-  - Microsoft.KeyVault/stable/2024-11-01/secrets.json
+  - Microsoft.KeyVault/stable/2024-11-01/openapi.json   
 ```
 
 ### Tag: package-preview-2024-12
@@ -334,7 +328,12 @@ directive:
     - $.definitions.ManagedHsmKeyProperties.properties.release_policy
   from: keysManagedHsm.json
   reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
-
+- suppress: INVALID_REQUEST_PARAMETER
+  from: openapi.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
+- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+  from: openapi.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
 - suppress: INVALID_REQUEST_PARAMETER
   from: keyvault.json
   reason: The Vaults_List API endpoint only supports version 2015-11-01.
