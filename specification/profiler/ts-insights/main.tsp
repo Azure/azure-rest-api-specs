@@ -25,8 +25,8 @@ namespace Microsoft.DiagnosticServices;
 @doc("The App Insights Profiler and Debugger service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-03-06-preview version of the App Insights Profiler and Debugger service.")
-  `2023-03-06-preview`,
+  @doc("The 2025-01-07-preview version of the App Insights Profiler and Debugger service.")
+  `2025-01-07-preview`,
 }
 
 @doc("The code optimization insights.")
