@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/costmanagement"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,45 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.CostManagement"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-costmanagement"
+    namespace: "azure.mgmt.costmanagement"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-costmanagement"
+    namespace: "com.azure.resourcemanager.costmanagement"
+    service-name: "CostManagement" # human-readable service name, whitespace allowed
+    flavor: azure
+    service-dir: "sdk/costmanagement"
+    premium: true
+    enable-sync-stack: false
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-costmanagement"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-costmanagement"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/costmanagement"
+    package-dir: "armcostmanagement"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
