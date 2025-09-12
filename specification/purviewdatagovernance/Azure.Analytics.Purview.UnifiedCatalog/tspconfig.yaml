@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/purview"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/Azure.Analytics.Purview.UnifiedCatalog/{version-status}/{version}/CatalogApiService.json"
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-purview-unifiedcatalog"
+    namespace: "azure.purview.unifiedcatalog"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Analytics.Purview.UnifiedCatalog
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "purview-unifiedcatalog-rest"
+    package-details:
+      name: "@azure-rest/purview-unifiedcatalog"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-analytics-purview-unifiedcatalog"
+    namespace: com.azure.analytics.purview.unifiedcatalog
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azpurviewunifiedcatalog"
+    service-dir: "sdk/purview"
+    emitter-output-dir: "{output-dir}/{service-dir}/azpurviewunifiedcatalog"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
