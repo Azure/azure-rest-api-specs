@@ -11,6 +11,7 @@ using Microsoft.SignalRService;
 )
 namespace Customization;
 
+@@clientName(Microsoft.SignalRService, "SignalRManagementClient", "python");
 @@clientName(Microsoft.SignalRService, "SignalRManagementClient", "javascript");
 
 // Client name mappings to match the existing Java SDK naming conventions
@@ -117,15 +118,15 @@ op SignalRPrivateEndpointConnectionsDeleteCustomized(
 
 @@override(PrivateEndpointConnections.get,
   SignalRPrivateEndpointConnectionsGetCustomized,
-  "java,go"
+  "java,go,python"
 );
 @@override(PrivateEndpointConnections.update,
   SignalRPrivateEndpointConnectionsUpdateCustomized,
-  "java,go"
+  "java,go,python"
 );
 @@override(PrivateEndpointConnections.delete,
   SignalRPrivateEndpointConnectionsDeleteCustomized,
-  "java,go"
+  "java,go,python"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -221,15 +222,15 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 
 @@override(SignalRSharedPrivateLinkResources.createOrUpdate,
   SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized,
-  "java,go"
+  "java,go,python"
 );
 @@override(SignalRSharedPrivateLinkResources.get,
   SignalRSharedPrivateLinkResourcesGetCustomized,
-  "java,go"
+  "java,go,python"
 );
 @@override(SignalRSharedPrivateLinkResources.delete,
   SignalRSharedPrivateLinkResourcesDeleteCustomized,
-  "java,go"
+  "java,go,python"
 );
 
 // Resolve model naming breaking changes from Swagger directive migration

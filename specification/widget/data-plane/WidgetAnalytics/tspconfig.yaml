@@ -37,10 +37,9 @@ options:
     namespace: com.azure.widget.analytics
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmanager"
     service-dir: "sdk/widget-analytics"
-    package-dir: "azmanager"
-    module-version: "0.0.1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azmanager"
     generate-fakes: true
     inject-spans: true
     single-client: true
