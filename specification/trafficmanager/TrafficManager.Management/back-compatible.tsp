@@ -8,7 +8,7 @@ using Microsoft.Network;
 @@clientName(Endpoints.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Endpoints.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Endpoint.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Endpoint.properties);
 
 @@clientName(Profiles.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Profiles.update::parameters.properties, "parameters");
@@ -21,17 +21,17 @@ using Microsoft.Network;
 );
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Profile.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Profile.properties);
 
 @@clientLocation(TrafficManagerGeographicHierarchies.getDefault,
   "GeographicHierarchies"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TrafficManagerGeographicHierarchy.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TrafficManagerGeographicHierarchy.properties);
 
 @@clientLocation(HeatMapModels.get, "HeatMap");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(HeatMapModel.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HeatMapModel.properties);
 
 @@clientLocation(UserMetricsModels.get, "TrafficManagerUserMetricsKeys");
 @@clientName(UserMetricsModels.get, "Get");
@@ -45,7 +45,7 @@ using Microsoft.Network;
 @@clientName(UserMetricsModels.delete, "Delete");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserMetricsModel.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserMetricsModel.properties);
 
 @@clientLocation(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   Profiles
