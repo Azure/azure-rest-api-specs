@@ -23,16 +23,16 @@ These are the global settings for the ContainerServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-06-02-preview
+tag: package-2025-08-02-preview
 ```
 
-### Tag: package-2025-06-02-preview
+### Tag: package-2025-08-02-preview
 
-These settings apply only when `--tag=package-2025-06-02-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-08-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-06-02-preview'
+```yaml $(tag) == 'package-2025-08-02-preview'
 input-file:
-  - preview/2025-06-02-preview/nodecustomization.json
+  - preview/2025-08-02-preview/nodecustomization.json
 ```
 
 ---

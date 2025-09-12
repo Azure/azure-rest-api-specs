@@ -18,15 +18,15 @@ description: "Azure Kubernetes Node Customization Manager Client"
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2025-06-preview
+  - tag: package-2025-08-preview
 ```
 
-### Tag: package-2025-06-preview and java
+### Tag: package-2025-08-preview and java
 
-These settings apply only when `--tag=package-2025-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-08-preview` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2025-06-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2025-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.nodecustom.v2024_06_02_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2024_06_02_preview

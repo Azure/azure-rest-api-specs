@@ -15,9 +15,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Azure Kubernetes Node Customization api versions.")
 enum Versions {
-  @doc("Azure Kubernetes Node Customization api version 2025-06-02.")
+  @doc("Azure Kubernetes Node Customization api version 2025-08-02-preview.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_06_02_preview: "2025-06-02-preview",
+  v2025_08_02_preview: "2025-08-02-preview",
 }
