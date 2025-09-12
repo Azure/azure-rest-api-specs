@@ -13,6 +13,11 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
     use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.ResourceManager.DevCenter"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    flavor: "azure"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-devcenter"
     namespace: "azure.mgmt.devcenter"
@@ -37,6 +42,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/devcenter"
     package-dir: "armdevcenter"
+    emitter-output-dir: "{project-root}/.."
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
