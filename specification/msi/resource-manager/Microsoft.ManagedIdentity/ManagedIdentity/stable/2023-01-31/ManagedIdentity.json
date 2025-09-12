@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-01-31-preview",
+    "version": "2023-01-31",
     "title": "ManagedServiceIdentityClient",
     "description": "The Managed Service Identity Client."
   },
@@ -360,10 +360,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -375,7 +375,7 @@
             "$ref": "#/parameters/SkipTokenParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -404,17 +404,14 @@
         "x-ms-examples": {
           "FederatedIdentityCredentialCreate": {
             "$ref": "./examples/FederatedIdentityCredentialCreate.json"
-          },
-          "FlexibleFederatedIdentityCredentialCreate": {
-            "$ref": "./examples/FlexibleFederatedIdentityCredentialCreate.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -423,7 +420,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -462,17 +459,14 @@
         "x-ms-examples": {
           "FederatedIdentityCredentialGet": {
             "$ref": "./examples/FederatedIdentityCredentialGet.json"
-          },
-          "FlexibleFederatedIdentityCredentialGet": {
-            "$ref": "./examples/FlexibleFederatedIdentityCredentialGet.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -481,7 +475,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -509,10 +503,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -521,7 +515,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -553,7 +547,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an identity resource."
@@ -569,7 +563,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a federated identity credential."
@@ -605,7 +599,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an identity resource."
@@ -644,7 +638,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a system assigned identity resource."
@@ -701,24 +695,6 @@
           "readOnly": true,
           "format": "uuid",
           "description": "The id of the app associated with the identity. This is a random generated UUID by MSI."
-        },
-        "isolationScope": {
-          "type": "string",
-          "description": "Enum to configure regional restrictions on identity assignment, as necessary.",
-          "enum": [
-            "None",
-            "Regional"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "x-ms-enum": {
-            "name": "isolationScope",
-            "modelAsString": true,
-            "modelAsExtensible": true
-          }
         }
       }
     },
@@ -728,6 +704,7 @@
       "title": "Federated identity credential properties.",
       "required": [
         "issuer",
+        "subject",
         "audiences"
       ],
       "properties": {
@@ -738,7 +715,7 @@
         },
         "subject": {
           "type": "string",
-          "description": "The identifier of the external identity. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both."
+          "description": "The identifier of the external identity."
         },
         "audiences": {
           "type": "array",
@@ -746,25 +723,6 @@
             "type": "string"
           },
           "description": "The list of audiences that can appear in the issued token."
-        },
-        "claimsMatchingExpression": {
-          "type": "object",
-          "description": "Object for defining the allowed identifiers of external identities. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both.",
-          "properties": {
-            "value": {
-              "type": "string",
-              "description": "Wildcard-based expression for matching incoming subject claims."
-            },
-            "languageVersion": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Specifies the version of the flexible fic language used in the expression."
-            }
-          },
-          "required": [
-            "value",
-            "languageVersion"
-          ]
         }
       }
     },
