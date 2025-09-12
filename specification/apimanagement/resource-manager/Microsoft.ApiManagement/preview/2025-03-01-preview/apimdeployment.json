@@ -1843,9 +1843,32 @@
           }
         },
         "zoneRedundant": {
-          "type": "boolean",
           "description": "Zone Redundant Requirement when creating StandardV2 and PremiumV2. If this flag is set to True, will return a APIM service with Zone redundant or fail the request if any undernearth component cannot be zone redundant.",
-          "default": false
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "NotApplicable"
+          ],
+          "type": "string",
+          "default": "Disabled",
+          "x-ms-enum": {
+            "name": "zoneRedundant",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Zone Redundant should be enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Zone Redundant can be disabled for the service."
+              },
+              {
+                "value": "NotApplicable",
+                "description": "Zone Redundant is not applicable for the service who is not StandardV2 or PremiumV2."
+              }
+            ]
+          }
         }
       },
       "description": "Base Properties of an API Management service resource description."
