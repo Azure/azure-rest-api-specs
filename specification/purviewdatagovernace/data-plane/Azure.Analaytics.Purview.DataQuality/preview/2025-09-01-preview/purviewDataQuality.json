@@ -1,0 +1,452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Data Quality",
+    "description": "Purview Data Quality Service is a fully managed cloud service whose users can run Data Quality Job to get some score. This spec defines REST API of Purview Data Quality Service.",
+    "version": "2025-09-01-preview"
+  },
+  "paths": {
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules": {
+      "post": {
+        "tags": [
+          "Rule"
+        ],
+        "operationId": "CreateRules",
+        "description": "Create Rules for Assets",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "dataProductId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "dataAssetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+                "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+              "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateRules_DataAsset": {
+            "$ref": "./examples/Rules_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rule"
+        ],
+        "operationId": "GetRules",
+        "description": "Get Rules for Assets",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "name": "dataProductId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "name": "dataAssetId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/RuleEntity"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateRules_DataAsset": {
+            "$ref": "./examples/Rules_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules/{ruleId}": {
+      "put": {
+        "tags": [
+          "Rule"
+        ],
+        "operationId": "UpdateRule",
+        "description": "Update a rule",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "name": "dataProductId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "name": "dataAssetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "name": "ruleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+                "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Update": {
+            "$ref": "./examples/Rules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rule"
+        ],
+        "operationId": "DeleteRule",
+        "description": "Delete a rule",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "name": "dataProductId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "name": "dataAssetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "name": "ruleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content in response."
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Delete": {
+            "$ref": "./examples/Rules_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rule"
+        ],
+        "operationId": "GetRule",
+        "description": "Get a Rule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "name": "dataProductId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "name": "dataAssetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "name": "ruleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Get": {
+            "$ref": "./examples/Rule_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk/global-rules": {
+      "post": {
+        "tags": [
+          "Rule"
+        ],
+        "operationId": "CreateBulkRules",
+        "description": "Create Bulk Rules for Assets",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Busienss Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "name": "dataProductId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "name": "dataAssetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+                "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and new resource has been created.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/RuleEntity"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Create": {
+            "$ref": "./examples/Rules_Create.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RuleEntity": {
+      "description": "Represents a business/data quality rule entity.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference"
+        },
+        "score": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": ["id", "name", "type", "status"]
+    },
+    "TypeProperties": {
+      "description": "Holds additional properties related to rule type.",
+      "type": "object",
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/Column"
+        }
+      }
+    },
+    "Column": {
+      "description": "Represents a column in a dataset.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "Reference": {
+      "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset).",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "referenceId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Rule",
+      "description": "Controller to create rules"
+    }
+  ]
+}
