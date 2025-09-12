@@ -19,7 +19,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-webpubsub"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-webpubsub"
     namespace: "com.azure.resourcemanager.webpubsub"
     service-name: "WebPubSub" # human-readable service name, whitespace allowed
     flavor: azure
@@ -32,8 +32,8 @@ options:
       name: "@azure/arm-webpubsub"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/webpubsub"
-    package-dir: "armwebpubsub"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armwebpubsub"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armwebpubsub"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
