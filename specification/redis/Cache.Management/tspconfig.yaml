@@ -35,8 +35,8 @@ options:
       name: "@azure/arm-rediscache"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/redis"
-    package-dir: "armredis"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armredis"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armredis"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

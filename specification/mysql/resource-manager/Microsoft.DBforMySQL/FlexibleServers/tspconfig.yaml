@@ -41,8 +41,8 @@ options:
       name: "@azure/arm-mysql-flexible"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/mysql"
-    package-dir: "armmysqlflexibleservers"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmysqlflexibleservers"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmysqlflexibleservers"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

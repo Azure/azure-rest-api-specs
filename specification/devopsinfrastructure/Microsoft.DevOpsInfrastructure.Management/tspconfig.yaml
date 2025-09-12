@@ -46,8 +46,8 @@ options:
       name: "@azure/arm-devopsinfrastructure"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/devopsinfrastructure"
-    package-dir: "armdevopsinfrastructure"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdevopsinfrastructure"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdevopsinfrastructure"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

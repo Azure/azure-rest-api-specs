@@ -34,8 +34,8 @@ options:
     namespace: "Azure.ResourceManager.Chaos"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/chaos"
-    package-dir: "armchaos"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armchaos"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armchaos"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

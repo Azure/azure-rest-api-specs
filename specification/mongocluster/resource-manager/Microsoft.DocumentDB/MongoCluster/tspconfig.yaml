@@ -23,8 +23,8 @@ options:
     service-name: "Mongo Cluster"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/mongocluster"
-    package-dir: "armmongocluster"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmongocluster"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmongocluster"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

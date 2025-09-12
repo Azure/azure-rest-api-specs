@@ -256,6 +256,7 @@ interface StoragePools {
   @doc("Create a storage pool")
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
   @doc("Update a storage pool")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     StoragePool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -738,6 +739,7 @@ model AvsDiskDetails {
 @armResourceOperations
 interface AvsStorageContainerVolumes {
   @doc("Update a volume in an AVS storage container")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsStorageContainerVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -854,6 +856,7 @@ union VolumeContainerType {
 @armResourceOperations
 interface AvsVms {
   @doc("Update an AVS VM")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsVm,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -885,6 +888,7 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
 @armResourceOperations
 interface AvsVmVolumes {
   @doc("Update a volume in an AVS VM")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsVmVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

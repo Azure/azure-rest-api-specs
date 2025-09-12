@@ -51,9 +51,8 @@ options:
     service-name: LogsQuery
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/query"
-    package-dir: "azlogs"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/query/azlogs"
-    module-version: "0.0.1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azlogs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azlogs"
     single-client: true
     generate-fakes: true
     inject-spans: true

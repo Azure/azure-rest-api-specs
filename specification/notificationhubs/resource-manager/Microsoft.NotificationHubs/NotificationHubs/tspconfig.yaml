@@ -31,8 +31,8 @@ options:
       name: "@azure/arm-notificationhubs"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/notificationhubs"
-    package-dir: "armnotificationhubs"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnotificationhubs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnotificationhubs"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
