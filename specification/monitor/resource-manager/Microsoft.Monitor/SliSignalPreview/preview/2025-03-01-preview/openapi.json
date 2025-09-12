@@ -39,15 +39,15 @@
   },
   "tags": [
     {
-      "name": "SignalPreview"
+      "name": "SloView"
     }
   ],
   "paths": {
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/sliSignalPreview": {
       "post": {
-        "operationId": "SignalPreview_SignalPreview",
+        "operationId": "SloView_SliSignalPreview",
         "tags": [
-          "SignalPreview"
+          "SloView"
         ],
         "description": "Returns preview data for the signal.",
         "parameters": [
@@ -58,45 +58,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "previewType",
-            "in": "query",
-            "description": "The preview type for the signal preview operation.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "goodsignal",
-              "totalsignal",
-              "signal",
-              "slo"
-            ],
-            "x-ms-enum": {
-              "name": "PreviewType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "GoodSignal",
-                  "value": "goodsignal",
-                  "description": "Preview for good signal."
-                },
-                {
-                  "name": "TotalSignal",
-                  "value": "totalsignal",
-                  "description": "Preview for total signal."
-                },
-                {
-                  "name": "Signal",
-                  "value": "signal",
-                  "description": "Preview for signal."
-                },
-                {
-                  "name": "Slo",
-                  "value": "slo",
-                  "description": "Preview for SLO evaluation."
-                }
-              ]
-            }
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -117,11 +78,17 @@
             "schema": {
               "$ref": "#/definitions/KqlmQueryResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "SignalPreview": {
-            "$ref": "./examples/SignalPreview_SignalPreview.json"
+          "SliSignalPreview": {
+            "$ref": "./examples/SloView_SliSignalPreview.json"
           }
         }
       }
@@ -641,51 +608,6 @@
         "serviceGroupName"
       ]
     },
-    "ServiceGroupParameters": {
-      "type": "object",
-      "description": "ServiceGroup as parameter",
-      "properties": {
-        "serviceGroupName": {
-          "type": "string",
-          "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$"
-        },
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use for this operation.",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "serviceGroupName",
-        "apiVersion"
-      ]
-    },
-    "ServiceGroupParametersWithSignalPreview": {
-      "type": "object",
-      "description": "ServiceGroup parameters with signal preview query parameters",
-      "properties": {
-        "serviceGroupName": {
-          "type": "string",
-          "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$"
-        },
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use for this operation.",
-          "minLength": 1
-        },
-        "previewType": {
-          "$ref": "#/definitions/PreviewType",
-          "description": "The preview type for the signal preview operation."
-        }
-      },
-      "required": [
-        "serviceGroupName",
-        "apiVersion",
-        "previewType"
-      ]
-    },
     "Signal": {
       "type": "object",
       "description": "Represents a signal model used in SLI calculations.",
@@ -710,23 +632,14 @@
         "signalFormula"
       ]
     },
-    "SignalPreviewParameters": {
-      "type": "object",
-      "description": "Parameters for the signal preview endpoint.",
-      "properties": {
-        "previewType": {
-          "$ref": "#/definitions/PreviewType",
-          "description": "The preview type for the signal preview operation."
-        }
-      },
-      "required": [
-        "previewType"
-      ]
-    },
     "SignalPreviewSliProperties": {
       "type": "object",
       "description": "Defines the properties for signal preview SLI.",
       "properties": {
+        "previewType": {
+          "$ref": "#/definitions/PreviewType",
+          "description": "The preview type for the signal preview operation."
+        },
         "evaluationType": {
           "$ref": "#/definitions/EvaluationType",
           "description": "Determines how the SLI is evaluated—either based on request counts or time windows."
@@ -753,6 +666,7 @@
         }
       },
       "required": [
+        "previewType",
         "evaluationType"
       ]
     },

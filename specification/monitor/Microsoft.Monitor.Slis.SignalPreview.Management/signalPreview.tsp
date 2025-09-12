@@ -1,21 +1,16 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.Monitor;
-
-@doc("Parameters for the signal preview endpoint.")
-model SignalPreviewParameters {
-  @query
-  @doc("The preview type for the signal preview operation.")
-  previewType: PreviewType;
-}
 
 @doc("Defines the available preview types for signal preview.")
 union PreviewType {
@@ -55,22 +50,11 @@ model ServiceGroupBaseParameters {
   serviceGroupName: string;
 }
 
-@doc("ServiceGroup as parameter")
-model ServiceGroupParameters is ServiceGroupBaseParameters {
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter;
-}
-
-@doc("ServiceGroup parameters with signal preview query parameters")
-model ServiceGroupParametersWithSignalPreview is ServiceGroupBaseParameters {
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter;
-
-  @query
-  @doc("The preview type for the signal preview operation.")
-  previewType: PreviewType;
-}
-
 @doc("Defines the properties for signal preview SLI.")
 model SignalPreviewSliProperties {
+  @doc("The preview type for the signal preview operation.")
+  previewType: PreviewType;
+
   @doc("Determines how the SLI is evaluated—either based on request counts or time windows.")
   evaluationType: EvaluationType;
 
@@ -95,7 +79,7 @@ model SignalPreviewSliProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 @armResourceOperations
 @doc("Defines operations for previewing signal.")
-interface SignalPreview {
+interface SloView {
   /**
   POST Actions
   */
@@ -104,20 +88,19 @@ interface SignalPreview {
   @armResourceCollectionAction
   @action("providers/Microsoft.Monitor/sliSignalPreview")
   @doc("Returns preview data for the signal.")
-  signalPreview(
+  sliSignalPreview(
     @path
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     @doc("The name of the service group.")
     serviceGroupName: string,
-
-    @query
-    @doc("The preview type for the signal preview operation.")
-    previewType: PreviewType,
 
     ...Azure.ResourceManager.ApiVersionParameter,
 
     @body
     @doc("The signal preview properties.")
     body: SignalPreviewSliProperties,
-  ): KqlmQueryResult;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: KqlmQueryResult;
+  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
