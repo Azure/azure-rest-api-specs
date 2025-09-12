@@ -3,7 +3,7 @@
   "info": {
     "title": "StorageImportExport",
     "description": "The Storage Import/Export Resource Provider API.",
-    "version": "2016-11-01"
+    "version": "2021-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -135,7 +135,7 @@
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int64"
           },
           {
             "name": "$filter",
@@ -192,7 +192,7 @@
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int64"
           },
           {
             "name": "$filter",
@@ -586,8 +586,7 @@
                     "description": "Provides information about the error message."
                   }
                 }
-              },
-              "x-ms-identifiers": []
+              }
             },
             "innererror": {
               "type": "object",
@@ -643,7 +642,7 @@
         },
         "returnPackage": {
           "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
-          "$ref": "#/definitions/PackageInfomation"
+          "$ref": "#/definitions/PackageInformation"
         },
         "diagnosticsPath": {
           "type": "string",
@@ -670,7 +669,7 @@
         },
         "percentComplete": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Overall percentage completed for the job."
         },
         "incompleteBlobListUri": {
@@ -682,10 +681,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DriveStatus"
-          },
-          "x-ms-identifiers": [
-            "driveId"
-          ]
+          }
         },
         "export": {
           "description": "A property containing information about the blobs to be exported for an export job. This property is included for export jobs only.",
@@ -801,10 +797,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DriveStatus"
-              },
-              "x-ms-identifiers": [
-                "driveId"
-              ]
+              }
             }
           },
           "description": "Specifies the properties of a UpdateJob."
@@ -832,7 +825,7 @@
       "description": "Contains the job information.",
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "SystemData of ImportExport Jobs.",
           "readOnly": true
         },
@@ -1086,7 +1079,7 @@
         }
       }
     },
-    "PackageInfomation": {
+    "PackageInformation": {
       "description": "Contains information about the package being shipped by the customer to the Microsoft data center.",
       "required": [
         "carrierName",
@@ -1105,7 +1098,7 @@
         },
         "driveCount": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The number of drives included in the package."
         },
         "shipDate": {
@@ -1258,10 +1251,7 @@
           "description": "drive status",
           "items": {
             "$ref": "#/definitions/DriveBitLockerKey"
-          },
-          "x-ms-identifiers": [
-            "driveId"
-          ]
+          }
         }
       }
     },
@@ -1286,10 +1276,7 @@
           "description": "operations",
           "items": {
             "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     }

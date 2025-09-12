@@ -43,7 +43,7 @@ These settings apply only when `--tag=package-preview-2021-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-01'
 input-file:
-  - Microsoft.ImportExport/preview/2021-01-01/storageimportexport.json
+  - preview/2021-01-01/storageimportexport.json
 ```
 ### Tag: package-2016-11
 
@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-11'
 input-file:
-- Microsoft.ImportExport/stable/2016-11-01/storageimportexport.json
+- stable/2016-11-01/storageimportexport.json
 ```
 
 ### Tag: package-2020-08
@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-2020-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-08'
 input-file:
-- Microsoft.ImportExport/stable/2020-08-01/storageimportexport.json
+- stable/2020-08-01/storageimportexport.json
 ```
 
 ---
