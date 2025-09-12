@@ -36,8 +36,8 @@ options:
       name: "@azure/arm-hybridkubernetes"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/hybridkubernetes"
-    package-dir: "armhybridkubernetes"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhybridkubernetes"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhybridkubernetes"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

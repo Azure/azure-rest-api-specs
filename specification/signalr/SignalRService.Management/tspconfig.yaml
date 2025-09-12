@@ -42,8 +42,8 @@ options:
       name: "@azure/arm-signalr"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/signalr"
-    package-dir: "armsignalr"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsignalr"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsignalr"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
