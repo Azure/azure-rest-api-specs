@@ -35,8 +35,8 @@ These settings apply only when `--tag=package-preview-2025-06-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-06-01'
 input-file:
-  - Microsoft.AAD/preview/2025-06-01/domainservices.json
-  - Microsoft.AAD/preview/2025-06-01/oucontainer.json
+  - preview/2025-06-01/domainservices.json
+  - preview/2025-06-01/oucontainer.json
 ```
 
 ### Tag: package-preview-2025-05-01
@@ -45,8 +45,8 @@ These settings apply only when `--tag=package-preview-2025-05-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-05-01'
 input-file:
-  - Microsoft.AAD/preview/2025-05-01/domainservices.json
-  - Microsoft.AAD/preview/2025-05-01/oucontainer.json
+  - preview/2025-05-01/domainservices.json
+  - preview/2025-05-01/oucontainer.json
 ```
 
 ### Tag: package-2022-12
@@ -55,8 +55,8 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-12'
 input-file:
-- Microsoft.AAD/stable/2022-12-01/domainservices.json
-- Microsoft.AAD/stable/2022-12-01/oucontainer.json
+- stable/2022-12-01/domainservices.json
+- stable/2022-12-01/oucontainer.json
 ```
 
 ### Tag: package-2022-09
@@ -65,8 +65,8 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-09'
 input-file:
-- Microsoft.AAD/stable/2022-09-01/domainservices.json
-- Microsoft.AAD/stable/2022-09-01/oucontainer.json
+- stable/2022-09-01/domainservices.json
+- stable/2022-09-01/oucontainer.json
 ```
 
 ### Tag: package-2021-05
@@ -75,8 +75,8 @@ These settings apply only when `--tag=package-2021-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-05'
 input-file:
-- Microsoft.AAD/stable/2021-05-01/domainservices.json
-- Microsoft.AAD/stable/2021-05-01/oucontainer.json
+- stable/2021-05-01/domainservices.json
+- stable/2021-05-01/oucontainer.json
 ```
 
 ### Tag: package-2021-03
@@ -85,8 +85,8 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-- Microsoft.AAD/stable/2021-03-01/domainservices.json
-- Microsoft.AAD/stable/2021-03-01/oucontainer.json
+- stable/2021-03-01/domainservices.json
+- stable/2021-03-01/oucontainer.json
 ```
 
 ### Tag: package-2020-01
@@ -95,8 +95,8 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
-- Microsoft.AAD/stable/2020-01-01/domainservices.json
-- Microsoft.AAD/stable/2020-01-01/oucontainer.json
+- stable/2020-01-01/domainservices.json
+- stable/2020-01-01/oucontainer.json
 ```
 
 ### Tag: package-2017-06
@@ -105,8 +105,8 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
-- Microsoft.AAD/stable/2017-06-01/domainservices.json
-- Microsoft.AAD/stable/2017-06-01/oucontainer.json
+- stable/2017-06-01/domainservices.json
+- stable/2017-06-01/oucontainer.json
 ```
 
 ### Tag: package-2017-01
@@ -115,7 +115,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.AAD/stable/2017-01-01/domainservices.json
+- stable/2017-01-01/domainservices.json
 ```
 
 ---

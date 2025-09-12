@@ -3,7 +3,7 @@
   "info": {
     "title": "Domain Services Resource Provider",
     "description": "The AAD Domain Services API.",
-    "version": "2022-09-01"
+    "version": "2021-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -355,7 +355,6 @@
   "definitions": {
     "Resource": {
       "description": "The Resource model definition.",
-      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -394,14 +393,13 @@
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
     },
     "DomainService": {
       "description": "Domain service.",
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -416,7 +414,6 @@
       ]
     },
     "DomainServiceListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -435,7 +432,6 @@
     },
     "DomainServiceProperties": {
       "description": "Properties of the Domain Service.",
-      "type": "object",
       "properties": {
         "version": {
           "readOnly": true,
@@ -502,19 +498,6 @@
             "modelAsString": true
           }
         },
-        "syncScope": {
-          "type": "string",
-          "enum": [
-            "All",
-            "CloudOnly"
-          ],
-          "default": "All",
-          "description": "All or CloudOnly, All users in AAD are synced to AAD DS domain or only users actively syncing in the cloud",
-          "x-ms-enum": {
-            "name": "SyncScope",
-            "modelAsString": true
-          }
-        },
         "notificationSettings": {
           "$ref": "#/definitions/NotificationSettings",
           "description": "Notification Settings"
@@ -537,7 +520,6 @@
     },
     "ReplicaSet": {
       "description": "Replica Set Definition",
-      "type": "object",
       "properties": {
         "replicaSetId": {
           "readOnly": true,
@@ -604,7 +586,6 @@
     },
     "LdapsSettings": {
       "description": "Secure LDAP Settings",
-      "type": "object",
       "properties": {
         "ldaps": {
           "type": "string",
@@ -660,7 +641,6 @@
     },
     "HealthMonitor": {
       "description": "Health Monitor Description",
-      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -681,7 +661,6 @@
     },
     "HealthAlert": {
       "description": "Health Alert Description",
-      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -724,7 +703,6 @@
     },
     "NotificationSettings": {
       "description": "Settings for notification",
-      "type": "object",
       "properties": {
         "notifyGlobalAdmins": {
           "type": "string",
@@ -762,7 +740,6 @@
     },
     "ResourceForestSettings": {
       "description": "Settings for Resource Forest",
-      "type": "object",
       "properties": {
         "settings": {
           "type": "array",
@@ -779,7 +756,6 @@
     },
     "ForestTrust": {
       "description": "Forest Trust Setting",
-      "type": "object",
       "properties": {
         "trustedDomainFqdn": {
           "type": "string",
@@ -806,7 +782,6 @@
     },
     "MigrationProperties": {
       "description": "Migration Properties",
-      "type": "object",
       "properties": {
         "oldSubnetId": {
           "readOnly": true,
@@ -827,7 +802,6 @@
     },
     "MigrationProgress": {
       "description": "Migration Progress",
-      "type": "object",
       "properties": {
         "completionPercentage": {
           "type": "number",
@@ -842,7 +816,6 @@
     },
     "DomainSecuritySettings": {
       "description": "Domain Security Settings",
-      "type": "object",
       "properties": {
         "ntlmV1": {
           "type": "string",
@@ -934,38 +907,11 @@
             "name": "KerberosArmoring",
             "modelAsString": true
           }
-        },
-        "ldapSigning": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "default": "Disabled",
-          "description": "A flag to determine whether or not LdapSigning is enabled or disabled.",
-          "x-ms-enum": {
-            "name": "LdapSigning",
-            "modelAsString": true
-          }
-        },
-        "channelBinding": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "default": "Disabled",
-          "description": "A flag to determine whether or not ChannelBinding is enabled or disabled.",
-          "x-ms-enum": {
-            "name": "ChannelBinding",
-            "modelAsString": true
-          }
         }
       }
     },
     "ConfigDiagnostics": {
       "description": "Configuration Diagnostics",
-      "type": "object",
       "properties": {
         "lastExecuted": {
           "type": "string",
@@ -983,7 +929,6 @@
     },
     "ConfigDiagnosticsValidatorResult": {
       "description": "Config Diagnostics validator result data",
-      "type": "object",
       "properties": {
         "validatorId": {
           "type": "string",
@@ -1021,7 +966,6 @@
     },
     "ConfigDiagnosticsValidatorResultIssue": {
       "description": "Specific issue for a particular config diagnostics validator",
-      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1038,7 +982,6 @@
       }
     },
     "CloudError": {
-      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -1049,7 +992,6 @@
       "description": "An error response from the Domain Services."
     },
     "CloudErrorBody": {
-      "type": "object",
       "x-ms-external": true,
       "properties": {
         "code": {

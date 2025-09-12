@@ -3,7 +3,7 @@
   "info": {
     "title": "Domain Services Resource Provider",
     "description": "The AAD Domain Services API.",
-    "version": "2022-12-01"
+    "version": "2025-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -27,6 +27,49 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend": {
+      "post": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_Unsuspend",
+        "summary": "Unsuspend Domain Service",
+        "description": "Unsuspend a suspended Domain Service resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DomainServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Domain service resumed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnsuspendDomainServiceResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed, including cases where the domain service could not be resumed (not in a suspended state, not eligible, not found, or other errors).",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unsuspend Domain Service": {
+            "$ref": "./examples/UnsuspendDomainService.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AAD/operations": {
       "get": {
         "tags": [
@@ -394,7 +437,7 @@
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
@@ -965,6 +1008,19 @@
             "name": "ChannelBinding",
             "modelAsString": true
           }
+        },
+        "syncOnPremSamAccountName": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "description": "A flag to determine whether the SyncOnPremSamAccountName feature is active. When enabled, the samAccountName attribute in Entra Domain Services is synchronized from the onPremisesSamAccountName attribute in Entra ID",
+          "x-ms-enum": {
+            "name": "SyncOnPremSamAccountName",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1079,6 +1135,16 @@
       },
       "description": "An error response from the Domain Services."
     },
+    "UnsuspendDomainServiceResponse": {
+      "description": "Response for successful unsuspend of a domain service.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Domain service resumed successfully."
+        }
+      }
+    },
     "OperationEntityListResult": {
       "description": "The list of domain service operation response.",
       "type": "object",
@@ -1170,6 +1236,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the domain service.",
+      "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$",
       "x-ms-parameter-location": "method"
     }
   }
