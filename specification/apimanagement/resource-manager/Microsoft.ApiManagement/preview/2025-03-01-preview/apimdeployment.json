@@ -1850,22 +1850,21 @@
             "NotApplicable"
           ],
           "type": "string",
-          "default": "Disabled",
           "x-ms-enum": {
             "name": "zoneRedundant",
             "modelAsString": true,
             "values": [
               {
                 "value": "Enabled",
-                "description": "Zone Redundant should be enabled for the service."
+                "description": "Service should be enabled for availability zone balancing."
               },
               {
                 "value": "Disabled",
-                "description": "Zone Redundant can be disabled for the service."
+                "description": "Service is not enabled for availability zone balancing."
               },
               {
                 "value": "NotApplicable",
-                "description": "Zone Redundant is not applicable for the service who is not StandardV2 or PremiumV2."
+                "description": "Availability zone balancing is not applicable for this service sku."
               }
             ]
           }
