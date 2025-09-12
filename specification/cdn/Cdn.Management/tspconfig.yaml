@@ -36,8 +36,8 @@ options:
       name: "@azure/arm-cdn"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/cdn"
-    package-dir: "armcdn"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcdn"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcdn"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
