@@ -1044,8 +1044,3 @@ model KeyValueFilter {
    */
   label?: string;
 }
-
-/**
- * The result of a request to list key-values.
- */
-model KeyValueListResult is Azure.Core.Page<KeyValue>;
