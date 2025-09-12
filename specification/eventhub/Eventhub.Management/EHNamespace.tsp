@@ -54,7 +54,7 @@ interface EHNamespaces {
     EHNamespace,
     Response = ArmResourceUpdatedResponse<EHNamespace> | ArmResourceCreatedResponse<
       EHNamespace,
-      ArmAsyncOperationHeader
+      ArmAsyncOperationHeader<FinalResult = EHNamespace>
     > | ArmAcceptedLroResponse,
     Error = ErrorResponse
   >;
@@ -103,7 +103,7 @@ interface EHNamespaces {
   failover is ArmResourceActionAsyncBase<
     EHNamespace,
     FailOver,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FailOver> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<EHNamespace>,
     Error = ErrorResponse

@@ -43,7 +43,8 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -54,7 +55,8 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = Cluster,
-    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse,
+    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
