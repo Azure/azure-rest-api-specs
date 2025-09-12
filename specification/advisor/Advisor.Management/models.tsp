@@ -1306,13 +1306,11 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 
 @@doc(RecommendationPropertiesReview.id, "The ARM Resource Id of the Review");
 @@doc(RecommendationPropertiesReview.name, "The Name of the Review");
-@@doc(WorkloadListResult.value, "[Placeholder] Discription for value property");
+@@doc(WorkloadListResult.value, "List of Workload.");
 @@doc(WorkloadListResult.nextLink,
-  "[Placeholder] Discription for nextLink property"
+  "The URL to get the next set of Workloads, if there are any."
 );
-@@doc(TriageRecommendationCollection.value,
-  "[Placeholder] Discription for value property"
-);
+@@doc(TriageRecommendationCollection.value, "List of triage recommendations.");
 @@doc(TriageRecommendationCollection.nextLink,
-  "[Placeholder] Discription for nextLink property"
+  "The URL to get the next set of triage recommendations, if there are any."
 );
