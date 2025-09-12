@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-05'
 input-file:
-  - Microsoft.Network/stable/2025-05-01/openapi.json
+  - stable/2025-05-01/openapi.json
 ```
 
 ### Tag: package-preview-2023-07
@@ -46,8 +46,8 @@ These settings apply only when `--tag=package-preview-2023-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-07'
 input-file:
-  - Microsoft.Network/preview/2023-07-01-preview/dnsresolver.json
-  - Microsoft.Network/preview/2023-07-01-preview/dnsresolverpolicy.json
+  - preview/2023-07-01-preview/dnsresolver.json
+  - preview/2023-07-01-preview/dnsresolverpolicy.json
 ```
 
 ### Tag: package-2022-07
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2022-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-07'
 input-file:
-  - Microsoft.Network/stable/2022-07-01/dnsresolver.json
+  - stable/2022-07-01/dnsresolver.json
 ```
 
 ### Tag: package-2020-04-preview
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2020-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-04-preview'
 input-file:
-  - Microsoft.Network/preview/2020-04-01-preview/dnsresolver.json
+  - preview/2020-04-01-preview/dnsresolver.json
 ```
 
 # Code Generation
@@ -124,7 +124,7 @@ This block is updated by an automatic script. Edits may be lost!
 
 # all the input files across all versions
 # input-file:
-# - $(this-folder)/Microsoft.Network/preview/2020-04-01-preview/dnsresolver.json
+# - $(this-folder)/preview/2020-04-01-preview/dnsresolver.json
 
 ```
 
