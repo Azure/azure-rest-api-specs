@@ -42,9 +42,9 @@ op updateSecret is KeyVaultOperation<
     /**
      * The parameters for update secret operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretUpdateParameters;
   },
   SecretBundle
@@ -178,7 +178,8 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "rust");
 @@clientName(getSecrets, "ListSecretProperties", "rust");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "rust");
-@@clientName(updateSecret, "UpdateSecretProperties", "rust");
+// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
+@@clientName(KeyVault.updateSecret, "UpdateSecretProperties", "rust");
 
 @@clientName(SecretRestoreParameters.secretBundleBackup,
   "SecretBackup",
