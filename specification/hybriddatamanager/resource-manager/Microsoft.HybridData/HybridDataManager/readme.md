@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-06'
 input-file:
-- Microsoft.HybridData/stable/2019-06-01/hybriddata.json
+- stable/2019-06-01/hybriddata.json
 directive:
   - suppress:
     - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2016-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-06'
 input-file:
-- Microsoft.HybridData/stable/2016-06-01/hybriddata.json
+- stable/2016-06-01/hybriddata.json
 directive:
   - suppress:
     - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
