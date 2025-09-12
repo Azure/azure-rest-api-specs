@@ -13,12 +13,6 @@ options:
     arm-resource-flattening: true
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.ContainerRegistry"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerregistry"
     package-dir: "azure-mgmt-containerregistrytasks"
@@ -41,8 +35,8 @@ options:
       name: "@azure/arm-containerregistrytasks"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerregistry"
-    package-dir: "armcontainerregistrytasks"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerregistrytasks"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerregistrytasks"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
