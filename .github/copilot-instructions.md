@@ -29,7 +29,7 @@ specification/
         └── <ServiceName3>/	// Customer-facing service name; contents identical to above structure
 ```
 
-Use the `./specification/widget` directory as a reference for creating your own project directory. For example, if you are creating a new TypeSpec project for a service named "Contoso Widget Manager", you would create the following directory structure:
+Use the `./specification/widget` directory as a reference for creating your own project directory.
 
 Only after the project directory is created according to the above guidelines may you run the `azsdk_init_typespec_project` tool to initialize the project.
 
