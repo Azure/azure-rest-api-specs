@@ -183,10 +183,11 @@ interface ProcessInfoOperationGroup {
    */
   @get
   @action("threads")
+  @list
   listProcessThreads is ProcessInfoOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    ArmResponse<ProcessThreadInfoCollection>,
+    ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }

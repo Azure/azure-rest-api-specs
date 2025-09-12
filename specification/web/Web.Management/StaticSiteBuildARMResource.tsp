@@ -121,6 +121,7 @@ interface StaticSiteBuildARMResources {
    * Returns details of database connections for a static site build
    */
   @action("showDatabaseConnections")
+  @list
   getBuildDatabaseConnectionsWithDetails is ArmResourceActionSync<
     StaticSiteBuildARMResource,
     void,

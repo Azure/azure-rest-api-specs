@@ -1,149 +1,196 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Web;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceEnvironmentPatchResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PushSettings.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ResourceMetricDefinition.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Microsoft.Web.Usage.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServicePlanPatchResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HybridConnectionKey.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CertificatePatchResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DiagnosticAnalysis.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DiagnosticDetectorResponse.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Snapshot.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubeEnvironmentPatchResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ApplicationStackResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FunctionAppStack.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WebAppStack.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Recommendation.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BillingMeter.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomHostnameSites.properties);
 
 @@clientName(IdentifierProperties.id, "value");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(GeoRegion.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AseRegion.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PremierAddOnOffer.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetParameters.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetValidationFailureDetails.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetValidationTestFailure.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ValidateRequest.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSitesWorkflowPreviewRequest.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSitesWorkflowPreview.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RemotePrivateEndpointConnection.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserProvidedFunctionApp.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSitePatchResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserARMResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StringDictionary.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DatabaseConnectionPatchRequest.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteFunctionOverviewARMResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteZipDeploymentARMResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserInvitationRequestResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserInvitationResponseResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteCustomDomainRequestPropertiesARMResource.properties
 );
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteResetPropertiesARMResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SitePatchResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomHostnameAnalysisResult.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BackupRequest.properties);
 
 @@clientName(BackupItemProperties.id, "BackupId");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RestoreRequest.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteAuthSettings.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AzureStoragePropertyDictionaryResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ConnectionStringDictionary.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteConfigurationSnapshotInfo.properties);
 
 @@clientName(ContinuousWebJobProperties.detailed_status, "detailedStatus");
@@ -158,9 +205,11 @@ using Microsoft.Web;
 @@clientName(DeploymentProperties.end_time, "endTime");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MSDeploy.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MSDeployLog.properties);
 
 @@clientName(FunctionEnvelopeProperties.function_app_id, "functionAppId");
@@ -216,6 +265,7 @@ using Microsoft.Web;
 @@clientName(ProcessInfoProperties.is_webjob, "isWebjob");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProcessThreadInfo.properties);
 
 @@clientName(ProcessThreadInfoProperties.start_address, "startAddress");
@@ -243,24 +293,31 @@ using Microsoft.Web;
 @@clientName(ProcessModuleInfoProperties.is_debug, "isDebug");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageMigrationOptions.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageMigrationResponse.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MigrateMySqlRequest.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SitePhpErrorLogFlag.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PremierAddOnPatchResource.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeletedAppRestoreRequest.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SnapshotRestoreRequest.properties);
 
 @@clientName(SiteExtensionInfoProperties.extension_id, "extensionId");
@@ -286,6 +343,7 @@ using Microsoft.Web;
 );
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SlotDifference.properties);
 
 @@clientName(TriggeredWebJobProperties.latest_run, "latestRun");
@@ -312,9 +370,11 @@ using Microsoft.Web;
 @@clientName(WorkflowTriggerListCallbackUrlQueries.`api-version`, "apiVersion");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Workflow.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkConnectionApprovalRequestResource.properties);
 
 @@clientLocation(AppServiceEnvironmentResources.get, AppServiceEnvironments);
@@ -393,6 +453,7 @@ using Microsoft.Web;
   Recommendations
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceEnvironmentResource.properties);
 
 @@clientLocation(CustomDnsSuffixConfigurations.getAseCustomDnsSuffixConfiguration,
@@ -408,6 +469,7 @@ using Microsoft.Web;
   AppServiceEnvironments
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomDnsSuffixConfiguration.properties);
 
 @@clientLocation(AseV3NetworkingConfigurations.getAseV3NetworkingConfiguration,
@@ -420,10 +482,12 @@ using Microsoft.Web;
   "aseNetworkingConfiguration"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AseV3NetworkingConfiguration.properties);
 
 @@clientLocation(AddressResponses.getVipInfo, AppServiceEnvironments);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AddressResponse.properties);
 
 @@clientLocation(Sites.get, WebApps);
@@ -584,6 +648,7 @@ using Microsoft.Web;
   "workflowArtifacts"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Site.properties);
 
 @@clientLocation(WorkerPoolResources.getMultiRolePool, AppServiceEnvironments);
@@ -621,6 +686,7 @@ using Microsoft.Web;
   "workerPoolEnvelope"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkerPoolResource.properties);
 
 @@clientLocation(RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnection,
@@ -672,6 +738,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RemotePrivateEndpointConnectionARMResource.properties);
 
 @@clientName(AppServicePlans.createOrUpdate::parameters.resource,
@@ -679,6 +746,7 @@ using Microsoft.Web;
 );
 @@clientName(AppServicePlans.update::parameters.properties, "appServicePlan");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServicePlan.properties);
 
 @@clientLocation(HybridConnections.getHybridConnection, AppServicePlans);
@@ -722,12 +790,14 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HybridConnection.properties);
 
 @@clientLocation(HybridConnectionLimitsOperationGroup.getHybridConnectionPlanLimit,
   AppServicePlans
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HybridConnectionLimits.properties);
 
 @@clientLocation(VnetInfoResources.getVnetFromServerFarm, AppServicePlans);
@@ -765,6 +835,7 @@ using Microsoft.Web;
 @@clientLocation(VnetConnectionOperationGroup.deleteVnetConnection, WebApps);
 @@clientLocation(VnetConnectionOperationGroup.listVnetConnections, WebApps);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetInfoResource.properties);
 
 @@clientLocation(VnetRoutes.getRouteForVnet, AppServicePlans);
@@ -775,6 +846,7 @@ using Microsoft.Web;
 @@clientLocation(VnetRoutes.deleteVnetRoute, AppServicePlans);
 @@clientLocation(VnetRoutes.listRoutesForVnet, AppServicePlans);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetRoute.properties);
 
 @@clientLocation(VnetGateways.getVnetGateway, AppServicePlans);
@@ -813,6 +885,7 @@ using Microsoft.Web;
   "connectionEnvelope"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetGateway.properties);
 
 @@clientName(Certificates.createOrUpdate::parameters.resource,
@@ -839,12 +912,14 @@ using Microsoft.Web;
 @@clientLocation(CertificateOperationGroup.deleteSlot, SiteCertificates);
 @@clientLocation(CertificateOperationGroup.listSlot, SiteCertificates);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Certificate.properties);
 
 @@clientLocation(DeletedSites.getDeletedWebAppByLocation, "DeletedWebApps");
 @@clientLocation(DeletedSites.listByLocation, "DeletedWebApps");
 @@clientLocation(Global.list, "DeletedWebApps");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeletedSite.properties);
 
 @@clientLocation(DetectorResponses.getHostingEnvironmentDetectorResponse,
@@ -860,6 +935,7 @@ using Microsoft.Web;
   Diagnostics
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
 
 @@clientLocation(DiagnosticCategories.getSiteDiagnosticCategory, Diagnostics);
@@ -873,6 +949,7 @@ using Microsoft.Web;
   Diagnostics
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DiagnosticCategory.properties);
 
 @@clientLocation(AnalysisDefinitions.getSiteAnalysis, Diagnostics);
@@ -888,6 +965,7 @@ using Microsoft.Web;
   Diagnostics
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AnalysisDefinition.properties);
 
 @@clientLocation(DetectorDefinitionResources.getSiteDetector, Diagnostics);
@@ -903,6 +981,7 @@ using Microsoft.Web;
   Diagnostics
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorDefinitionResource.properties);
 
 @@clientName(KubeEnvironments.createOrUpdate::parameters.resource,
@@ -912,6 +991,7 @@ using Microsoft.Web;
   "kubeEnvironmentEnvelope"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubeEnvironment.properties);
 
 @@clientLocation(RecommendationRules.getRuleDetailsByHostingEnvironment,
@@ -921,6 +1001,7 @@ using Microsoft.Web;
   Recommendations
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RecommendationRule.properties);
 
 @@clientLocation(ResourceHealthMetadataOperationGroup.getBySite,
@@ -936,12 +1017,14 @@ using Microsoft.Web;
   "ResourceHealthMetadata"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ResourceHealthMetadata.properties);
 
 @@clientLocation(Users.getPublishingUser, "");
 @@clientLocation(Users.updatePublishingUser, "");
 @@clientName(Users.updatePublishingUser::parameters.resource, "userDetails");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(User.properties);
 
 @@clientLocation(SourceControls.getSourceControl, "");
@@ -951,6 +1034,7 @@ using Microsoft.Web;
 );
 @@clientLocation(SourceControls.listSourceControls, "");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SourceControl.properties);
 
 @@clientLocation(Identifiers.getDomainOwnershipIdentifier, WebApps);
@@ -986,6 +1070,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Identifier.properties);
 
 @@clientLocation(StaticSiteARMResources.getStaticSite, StaticSites);
@@ -1049,6 +1134,7 @@ using Microsoft.Web;
   "staticSiteZipDeploymentEnvelope"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteARMResource.properties);
 
 @@clientLocation(StaticSiteBuildARMResources.getStaticSiteBuild, StaticSites);
@@ -1087,6 +1173,7 @@ using Microsoft.Web;
   "staticSiteZipDeploymentEnvelope"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteBuildARMResource.properties);
 
 @@clientLocation(DatabaseConnections.getBuildDatabaseConnection, StaticSites);
@@ -1134,6 +1221,7 @@ using Microsoft.Web;
   StaticSites
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DatabaseConnection.properties);
 
 @@clientLocation(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppForStaticSiteBuild,
@@ -1167,6 +1255,7 @@ using Microsoft.Web;
   StaticSites
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserProvidedFunctionAppARMResource.properties);
 
 @@clientLocation(StaticSiteBasicAuthPropertiesARMResources.getBasicAuth,
@@ -1182,6 +1271,7 @@ using Microsoft.Web;
   StaticSites
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteBasicAuthPropertiesARMResource.properties);
 
 @@clientLocation(StaticSiteCustomDomainOverviewARMResources.getStaticSiteCustomDomain,
@@ -1206,6 +1296,7 @@ using Microsoft.Web;
   "staticSiteCustomDomainRequestPropertiesEnvelope"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteCustomDomainOverviewARMResource.properties);
 
 @@clientLocation(StaticSiteLinkedBackendARMResources.getLinkedBackend,
@@ -1249,6 +1340,7 @@ using Microsoft.Web;
   "staticSiteLinkedBackendEnvelope"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteLinkedBackendARMResource.properties);
 
 @@clientLocation(BackupItems.getBackupStatus, WebApps);
@@ -1268,6 +1360,7 @@ using Microsoft.Web;
 @@clientLocation(BackupItemOperationGroup.restoreSlot, WebApps);
 @@clientName(BackupItemOperationGroup.restoreSlot::parameters.body, "request");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BackupItem.properties);
 
 @@clientLocation(CsmPublishingCredentialsPoliciesEntities.getFtpAllowed,
@@ -1313,6 +1406,7 @@ using Microsoft.Web;
   "csmPublishingAccessPoliciesEntity"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CsmPublishingCredentialsPoliciesEntity.properties);
 
 @@clientLocation(SiteConfigResources.getConfiguration, WebApps);
@@ -1360,6 +1454,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteConfigResource.properties);
 
 @@clientLocation(SiteAuthSettingsV2s.getAuthSettingsV2WithoutSecrets, WebApps);
@@ -1381,6 +1476,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteAuthSettingsV2.properties);
 
 @@clientLocation(AppSettingKeyVaultReference.getAppSettingKeyVaultReference,
@@ -1408,6 +1504,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ApiKVReference.properties);
 
 @@clientLocation(SiteLogsConfigs.getDiagnosticLogsConfiguration, WebApps);
@@ -1425,6 +1522,7 @@ using Microsoft.Web;
   "siteLogsConfig"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteLogsConfig.properties);
 
 @@clientLocation(SlotConfigNamesResources.listSlotConfigurationNames, WebApps);
@@ -1435,6 +1533,7 @@ using Microsoft.Web;
   "slotConfigNames"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SlotConfigNamesResource.properties);
 
 @@clientLocation(ContinuousWebJobs.getContinuousWebJob, WebApps);
@@ -1458,6 +1557,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ContinuousWebJob.properties);
 
 @@clientLocation(CsmDeploymentStatuses.getProductionSiteDeploymentStatus,
@@ -1473,6 +1573,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CsmDeploymentStatus.properties);
 
 @@clientLocation(Deployments.getDeployment, WebApps);
@@ -1490,6 +1591,7 @@ using Microsoft.Web;
 @@clientLocation(DeploymentOperationGroup.listDeploymentsSlot, WebApps);
 @@clientLocation(DeploymentOperationGroup.listDeploymentLogSlot, WebApps);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Deployment.properties);
 
 @@clientLocation(MSDeployStatuses.getMSDeployStatus, WebApps);
@@ -1531,6 +1633,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MSDeployStatus.properties);
 
 @@clientLocation(FunctionEnvelopes.getFunction, WebApps);
@@ -1574,6 +1677,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FunctionEnvelope.properties);
 
 @@clientLocation(HostNameBindings.getHostNameBinding, WebApps);
@@ -1597,6 +1701,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HostNameBinding.properties);
 
 @@clientLocation(RelayServiceConnectionEntities.getRelayServiceConnection,
@@ -1636,6 +1741,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RelayServiceConnectionEntity.properties);
 
 @@clientLocation(WebSiteInstanceStatuses.getInstanceInfo, WebApps);
@@ -1647,6 +1753,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WebSiteInstanceStatus.properties);
 
 @@clientLocation(ProcessInfos.getInstanceProcess, WebApps);
@@ -1680,6 +1787,7 @@ using Microsoft.Web;
 @@clientLocation(ProcessSlotOperationGroup.getProcessDumpSlot, WebApps);
 @@clientLocation(ProcessSlotOperationGroup.listProcessThreadsSlot, WebApps);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProcessInfo.properties);
 
 @@clientLocation(ProcessModuleInfos.getInstanceProcessModule, WebApps);
@@ -1697,6 +1805,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProcessModuleInfo.properties);
 
 @@clientLocation(MigrateMySqlStatuses.getMigrateMySqlStatus, WebApps);
@@ -1704,6 +1813,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MigrateMySqlStatus.properties);
 
 @@clientLocation(SwiftVirtualNetworks.getSwiftVirtualNetworkConnection,
@@ -1741,6 +1851,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SwiftVirtualNetwork.properties);
 
 @@clientLocation(NetworkFeaturesOperationGroup.listNetworkFeatures, WebApps);
@@ -1748,6 +1859,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NetworkFeatures.properties);
 
 @@clientLocation(PremierAddOns.getPremierAddOn, WebApps);
@@ -1771,6 +1883,7 @@ using Microsoft.Web;
 );
 @@clientLocation(PremierAddOnOperationGroup.deletePremierAddOnSlot, WebApps);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PremierAddOn.properties);
 
 @@clientLocation(PrivateAccesses.getPrivateAccess, WebApps);
@@ -1784,6 +1897,7 @@ using Microsoft.Web;
   "access"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateAccess.properties);
 
 @@clientLocation(PublicCertificates.getPublicCertificate, WebApps);
@@ -1809,6 +1923,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PublicCertificate.properties);
 
 @@clientLocation(SiteContainers.getSiteContainer, WebApps);
@@ -1828,6 +1943,7 @@ using Microsoft.Web;
 @@clientLocation(SiteContainerOperationGroup.deleteSiteContainerSlot, WebApps);
 @@clientLocation(SiteContainerOperationGroup.listSiteContainersSlot, WebApps);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteContainer.properties);
 
 @@clientLocation(SiteExtensionInfos.getSiteExtension, WebApps);
@@ -1845,6 +1961,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteExtensionInfo.properties);
 
 @@clientLocation(SiteSourceControls.getSourceControlSlot, WebApps);
@@ -1870,6 +1987,7 @@ using Microsoft.Web;
 );
 @@clientLocation(SiteSourceControlOperationGroup.deleteSourceControl, WebApps);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteSourceControl.properties);
 
 @@clientLocation(TriggeredWebJobs.getTriggeredWebJobSlot, WebApps);
@@ -1881,6 +1999,7 @@ using Microsoft.Web;
 @@clientLocation(TriggeredWebJobOperationGroup.listTriggeredWebJobs, WebApps);
 @@clientLocation(TriggeredWebJobOperationGroup.runTriggeredWebJob, WebApps);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TriggeredWebJob.properties);
 
 @@clientLocation(TriggeredJobHistories.getTriggeredWebJobHistorySlot, WebApps);
@@ -1892,6 +2011,7 @@ using Microsoft.Web;
   WebApps
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TriggeredJobHistory.properties);
 
 @@clientLocation(WebJobs.getWebJobSlot, WebApps);
@@ -1899,6 +2019,7 @@ using Microsoft.Web;
 @@clientLocation(WebJobOperationGroup.getWebJob, WebApps);
 @@clientLocation(WebJobOperationGroup.listWebJobs, WebApps);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WebJob.properties);
 
 @@clientLocation(WorkflowEnvelopes.getInstanceWorkflowSlot, WebApps);
@@ -1907,9 +2028,11 @@ using Microsoft.Web;
 @@clientLocation(WorkflowEnvelopeOperationGroup.listWorkflows, WebApps);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowRun.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowRunAction.properties);
 
 @@clientLocation(WorkflowRunActionRepetitionDefinitions.get,
@@ -1922,6 +2045,7 @@ using Microsoft.Web;
   "WorkflowRunActionRepetitions"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowRunActionRepetitionDefinition.properties);
 
 @@clientLocation(RequestHistories.get,
@@ -1932,12 +2056,15 @@ using Microsoft.Web;
 );
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowTrigger.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowTriggerHistory.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowVersion.properties);
 
 @@clientLocation(GlobalOperationGroup.getSubscriptionOperationWithAsyncResponse,
@@ -1983,4 +2110,7 @@ using Microsoft.Web;
 @@clientName(verifyHostingEnvironmentVnet::parameters.body, "parameters");
 @@clientName(StaticSitesOperationGroup.previewWorkflow::parameters.body,
   "staticSitesWorkflowPreviewRequest"
+);
+@@clientName(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
+  "key"
 );

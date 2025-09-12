@@ -249,7 +249,9 @@ interface Sites {
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
-    Response = ArmResponse<Site> | NoContentResponse | ArmNotFoundResponse,
+    Response = {
+      @body body: void;
+    } | NoContentResponse | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -793,7 +795,8 @@ interface Sites {
   migrateStorage is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
     StorageMigrationOptions,
-    ArmResponse<StorageMigrationResponse>,
+    ArmResponse<StorageMigrationResponse> &
+      ArmLroLocationHeader<FinalResult = StorageMigrationResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>,
     Parameters = {
       /**
@@ -808,11 +811,12 @@ interface Sites {
   /**
    * Description for Migrates a local (in-app) MySql database to a remote MySql database.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("migratemysql")
   migrateMySql is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
     MigrateMySqlRequest,
-    ArmResponse<Operation>,
+    ArmResponse<Operation> & ArmLroLocationHeader<FinalResult = Operation>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>,
     Error = DefaultErrorResponse
   >;
@@ -874,11 +878,16 @@ interface Sites {
   /**
    * Description for Start capturing network packets for the site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("networkTrace/startOperation")
-  startWebSiteNetworkTraceOperation is SiteOps.ActionAsync<
+  startWebSiteNetworkTraceOperation is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]>,
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+      @bodyRoot
+      @OpenAPI.extension("x-ms-identifiers", #[])
+      _?: NetworkTrace[];
+    }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -990,6 +999,7 @@ interface Sites {
    */
   @get
   @action("perfcounters")
+  @list
   listPerfMonCounters is SiteOps.ActionSync<
     Site,
     void,
@@ -1119,6 +1129,7 @@ interface Sites {
    * Description for Get the difference in configuration settings between two web app slots.
    */
   @action("slotsdiffs")
+  @list
   listSlotDifferencesFromProduction is SiteOps.ActionSync<
     Site,
     CsmSlotEntity,
@@ -1142,6 +1153,7 @@ interface Sites {
    */
   @get
   @action("snapshots")
+  @list
   listSnapshots is SiteOps.ActionSync<
     Site,
     void,
@@ -1175,10 +1187,17 @@ interface Sites {
   /**
    * Description for Start capturing network packets for the site.
    */
-  startNetworkTrace is SiteOps.ActionAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("WebApps_StartNetworkTrace")
+  startNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]>,
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+      @bodyRoot
+      @OpenAPI.extension("x-ms-identifiers", #[])
+      _?: NetworkTrace[];
+    }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -1250,6 +1269,7 @@ interface Sites {
    */
   @get
   @action("usages")
+  @list
   listUsages is SiteOps.ActionSync<
     Site,
     void,
@@ -1397,6 +1417,9 @@ interface WebApps {
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
+    Response = {
+      @body body: void;
+    } | NoContentResponse | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1616,11 +1639,13 @@ interface WebApps {
   /**
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("config/publishingcredentials/list")
   listPublishingCredentialsSlot is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
     void,
-    ArmResponse<User>,
+    ArmResponse<User> & ArmLroLocationHeader<FinalResult = User>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>,
     Parameters = {
       /**
@@ -2170,6 +2195,7 @@ interface WebApps {
    */
   @get
   @action("snapshots")
+  @list
   listSnapshotsSlot is WebAppOps.ActionSync<
     Site,
     void,

@@ -230,6 +230,7 @@ interface StaticSiteARMResources {
    */
   @get
   @action("functions")
+  @list
   listStaticSiteFunctions is ArmResourceActionSync<
     StaticSiteARMResource,
     void,
@@ -308,6 +309,7 @@ interface StaticSiteARMResources {
    * Returns details of database connections for a static site
    */
   @action("showDatabaseConnections")
+  @list
   getDatabaseConnectionsWithDetails is ArmResourceActionSync<
     StaticSiteARMResource,
     void,

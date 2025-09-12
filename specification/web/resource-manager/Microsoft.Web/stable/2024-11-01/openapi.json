@@ -7640,10 +7640,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Site"
-            }
+            "description": "The request has succeeded."
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
@@ -8206,6 +8203,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get FTP Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicy_GetFtpAllowed.json"
           }
         }
       },
@@ -11020,6 +11022,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get App Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponses.json"
+          },
+          "Get App Slot Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponsesSlot.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -11259,6 +11269,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List App Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalyses.json"
+          },
+          "List App Slot Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalysesSlot.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -11323,12 +11341,6 @@
           },
           "Get App Slot Analysis": {
             "$ref": "./examples/Diagnostics_GetSiteAnalysisSlot.json"
-          },
-          "List App Analyses": {
-            "$ref": "./examples/Diagnostics_ListSiteAnalyses.json"
-          },
-          "List App Slot Analyses": {
-            "$ref": "./examples/Diagnostics_ListSiteAnalysesSlot.json"
           }
         }
       }
@@ -16212,9 +16224,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/StorageMigrationResponse"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -16223,7 +16241,12 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/StorageMigrationResponse"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/migratemysql": {
@@ -16262,9 +16285,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Operation"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -16273,7 +16302,12 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/migratemysql/status": {
@@ -16793,16 +16827,17 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            },
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -16813,9 +16848,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CNetworkTrace%5B%5D%3E"
+          "final-state-schema": "#/definitions/Site"
         },
         "x-ms-long-running-operation": true
       }
@@ -16857,6 +16897,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace.json"
           }
         }
       }
@@ -17067,6 +17112,9 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -18089,12 +18137,19 @@
               "$ref": "#/definitions/ProcessThreadInfoCollection"
             }
           },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -19750,10 +19805,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "The request has succeeded."
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -22073,9 +22132,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/User"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -22084,7 +22149,12 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/User"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/pushsettings": {
@@ -23397,10 +23467,10 @@
         },
         "x-ms-examples": {
           "Get App Detector Responses": {
-            "$ref": "./examples/Diagnostics_ListSiteDetectorResponses.json"
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponses_Slot.json"
           },
           "Get App Slot Detector Responses": {
-            "$ref": "./examples/Diagnostics_ListSiteDetectorResponsesSlot.json"
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponsesSlot_Slot.json"
           }
         },
         "x-ms-pageable": {
@@ -24878,7 +24948,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "key",
             "in": "body",
             "description": "The key to create or update",
             "required": true,
@@ -27488,6 +27558,10 @@
               "$ref": "#/definitions/NetworkFeatures"
             }
           },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -27618,6 +27692,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation_Slot.json"
           }
         }
       }
@@ -27783,6 +27862,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation_Slot.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CNetworkTrace%5B%5D%3E"
@@ -27834,6 +27918,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace_Slot.json"
           }
         }
       }
@@ -27892,6 +27981,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces_GetNetworkTracesSlotV2.json"
           }
         }
       }
@@ -30623,6 +30717,9 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -31087,7 +31184,7 @@
         },
         "x-ms-examples": {
           "Start a new network trace operation for a site": {
-            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation_StartNetworkTraceSlot.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -31190,7 +31287,7 @@
         },
         "x-ms-examples": {
           "Stop a currently running network trace operation for a site": {
-            "$ref": "./examples/StopWebSiteNetworkTrace.json"
+            "$ref": "./examples/StopWebSiteNetworkTrace_StopNetworkTraceSlot.json"
           }
         }
       }
@@ -32454,6 +32551,9 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -32561,6 +32661,9 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -32951,16 +33054,17 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            },
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -32973,12 +33077,12 @@
         },
         "x-ms-examples": {
           "Start a new network trace operation for a site": {
-            "$ref": "./examples/StartWebSiteNetworkTraceOperation_Slot.json"
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation_StartNetworkTrace.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CNetworkTrace%5B%5D%3E"
+          "final-state-schema": "#/definitions/Site"
         },
         "x-ms-long-running-operation": true
       }
@@ -33058,6 +33162,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace_StopNetworkTrace.json"
           }
         }
       }
@@ -33532,6 +33641,9 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -36057,6 +36169,9 @@
           "List full details of database connections for the static site build.": {
             "$ref": "./examples/GetStaticSiteBuildDatabaseConnectionsWithDetails.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -37336,6 +37451,9 @@
           "Gets the functions of a static site": {
             "$ref": "./examples/ListStaticSiteFunctions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -38076,6 +38194,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a site.": {
+            "$ref": "./examples/DeleteSitePrivateEndpointConnection_StaticSites.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -38223,6 +38346,9 @@
           "List full details of database connections for the static site.": {
             "$ref": "./examples/GetStaticSiteDatabaseConnectionsWithDetails.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },

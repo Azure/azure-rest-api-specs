@@ -96,6 +96,7 @@ interface NetworkFeaturesSlotOperationGroup {
    */
   listNetworkFeaturesSlot is NetworkFeaturesSlotOperationGroupOps.Read<
     NetworkFeatures,
+    Response = ArmResponse<NetworkFeatures> | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
