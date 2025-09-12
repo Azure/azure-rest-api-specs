@@ -160,9 +160,9 @@ using Microsoft.DevCenter;
 
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
-  "python"
+  "python,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
-  "python"
+  "python,javascript"
 );
