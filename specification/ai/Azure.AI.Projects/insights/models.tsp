@@ -198,20 +198,40 @@ model AnalysisChartCoordinate {
   size: int32;
 }
 
+@doc("The type of sample used in the analysis.")
+@added(Versions.v2025_10_15_preview)
+union SampleType {
+    @doc("A sample from the evaluation result.")
+    EvaluationResultSample: "EvaluationResultSample",
+
+    string
+}
+
 @doc("A sample from the analysis.")
 @added(Versions.v2025_10_15_preview)
+@discriminator("type")
 model AnalysisSample {
   @doc("The unique identifier for the analysis sample.")
   id: string;
 
-  @doc("Evaluation result for the analysis sample.")
-  evaluationResult: EvalResult;
-
-  @doc("Info about the correlation for the analysis sample.")
-  correlationInfo: Record<unknown>;
-
+  @doc("Sample type")
+  type: SampleType;
+  
   @doc("Features to help with additional filtering of data in UX.")
   features: Record<unknown>;
+  
+  @doc("Info about the correlation for the analysis sample.")
+  correlationInfo: Record<unknown>;
+}
+
+@doc("A sample from the evaluation result.")
+@added(Versions.v2025_10_15_preview)
+model EvaluationResultAnalysisSample extends AnalysisSample {
+  @doc("Evaluation Result Sample Type")
+  type: SampleType.EvaluationResultSample;
+
+  @doc("Evaluation result for the analysis sample.")
+  evaluationResult: EvalResult;
 }
 
 @doc("Result of the evaluation.")

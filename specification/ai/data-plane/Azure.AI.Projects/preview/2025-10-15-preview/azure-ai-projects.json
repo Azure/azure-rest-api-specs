@@ -2031,26 +2031,27 @@
           "type": "string",
           "description": "The unique identifier for the analysis sample."
         },
-        "evaluationResult": {
-          "$ref": "#/definitions/EvalResult",
-          "description": "Evaluation result for the analysis sample."
-        },
-        "correlationInfo": {
-          "type": "object",
-          "description": "Info about the correlation for the analysis sample.",
-          "additionalProperties": {}
+        "type": {
+          "$ref": "#/definitions/SampleType",
+          "description": "Sample type"
         },
         "features": {
           "type": "object",
           "description": "Features to help with additional filtering of data in UX.",
           "additionalProperties": {}
+        },
+        "correlationInfo": {
+          "type": "object",
+          "description": "Info about the correlation for the analysis sample.",
+          "additionalProperties": {}
         }
       },
+      "discriminator": "type",
       "required": [
         "id",
-        "evaluationResult",
-        "correlationInfo",
-        "features"
+        "type",
+        "features",
+        "correlationInfo"
       ]
     },
     "AnalysisType": {
@@ -3021,6 +3022,25 @@
         "evaluators"
       ]
     },
+    "EvaluationResultAnalysisSample": {
+      "type": "object",
+      "description": "A sample from the evaluation result.",
+      "properties": {
+        "evaluationResult": {
+          "$ref": "#/definitions/EvalResult",
+          "description": "Evaluation result for the analysis sample."
+        }
+      },
+      "required": [
+        "evaluationResult"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisSample"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationResultSample"
+    },
     "EvaluationRunClusterAnalysis": {
       "type": "object",
       "description": "Analysis on set of Evaluation Results",
@@ -3932,6 +3952,24 @@
         }
       ],
       "x-ms-discriminator-value": "SAS"
+    },
+    "SampleType": {
+      "type": "string",
+      "description": "The type of sample used in the analysis.",
+      "enum": [
+        "EvaluationResultSample"
+      ],
+      "x-ms-enum": {
+        "name": "SampleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EvaluationResultSample",
+            "value": "EvaluationResultSample",
+            "description": "A sample from the evaluation result."
+          }
+        ]
+      }
     },
     "SasCredential": {
       "type": "object",
