@@ -617,4 +617,24 @@ directive:
     from: rbac.json
     where: $..parameters[?(@.name=='scope')]
     reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.CertificateInfoObject
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.TransferKey
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainObject
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainJsonWebKey
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
 ```
