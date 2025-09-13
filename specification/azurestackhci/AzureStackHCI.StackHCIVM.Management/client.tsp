@@ -9,6 +9,22 @@ using Azure.ClientGenerator.Core;
   "AzureStackHCIVMManagementClient",
   "javascript"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImageVersion.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Subnet.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RouteTable.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Route.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImageVersion.properties);
+
 @@clientName(Microsoft.AzureStackHCI,
   "AzureStackHCIVMManagementClient",
   "csharp"
