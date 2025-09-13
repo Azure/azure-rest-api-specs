@@ -135,3 +135,5 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.Phi4mmVoice, "LlmVoiceName", "csharp");
 @@clientName(VoiceLive.EOUDetection, "EouDetection", "csharp");
 @@clientName(VoiceLive.LLMVoice, "LlmVoice", "csharp");
+@@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "csharp");
+@@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "csharp");

@@ -934,8 +934,6 @@ model ServerEventResponseAudioDelta extends ServerEvent {
   /** Base64-encoded audio data delta. */
   @encode("base64")
   delta: bytes;
-
-  event_id?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type

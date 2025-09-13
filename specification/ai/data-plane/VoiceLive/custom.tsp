@@ -30,31 +30,12 @@ model RequestSession {
   tool_choice?: ToolChoice;
   temperature?: float32;
   max_response_output_tokens?: int32 | "inf";
+  agent?: AgentConfig;
 }
 
-model ResponseSession {
+model ResponseSession extends RequestSession{
   ...SessionBase;
   id?: string;
-  `model`?: string;
-  modalities?: Modality[];
-  instructions?: string;
-  animation?: Animation;
-  voice?: Voice;
-  input_audio?: InputAudio;
-  input_audio_format?: AudioFormat;
-  output_audio_format?: AudioFormat;
-  input_audio_sampling_rate?: int32;
-  turn_detection?: TurnDetection;
-  input_audio_noise_reduction?: AudioNoiseReduction;
-  input_audio_echo_cancellation?: AudioEchoCancellation;
-  avatar?: AvatarConfig;
-  input_audio_transcription?: AudioInputTranscriptionSettings | null;
-  output_audio_timestamp_types?: AudioTimestampType[];
-  tools?: Tool[];
-  tool_choice?: ToolChoice;
-  temperature?: float32;
-  max_response_output_tokens?: int32 | "inf" | null;
-  agent?: AgentConfig;
 }
 
 @doc("Supported OpenAI voice names (string enum).")
