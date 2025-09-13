@@ -47,8 +47,8 @@ model TaskProperties is AzureResourceProperties {
   @visibility(Lifecycle.Read)
   taskType: TaskType;
 
-  @doc("Task Name ")
-  taskName: string;
+  @doc("Task Dislay Name ")
+  displayName: string;
 
   @doc("Indicates whether the task is editable.")
   @visibility(Lifecycle.Read)
