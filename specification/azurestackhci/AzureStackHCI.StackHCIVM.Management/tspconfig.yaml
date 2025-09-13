@@ -36,11 +36,11 @@ options:
     service-name: "Azure Stack Hci Vm"
     flavor: azure
   "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.Hci.Vm"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Hci.Vm"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Hci.Vm"
+    flavor: azure
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-azurestackhcivm"
