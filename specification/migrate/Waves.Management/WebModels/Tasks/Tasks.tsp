@@ -28,30 +28,23 @@ model Task is ProxyResource<TaskProperties> {
 @doc("Task Properties class.")
 model TaskProperties is AzureResourceProperties {
   @doc("associated Wave Id")
-  associatedWaveId?: armResourceIdentifier<[
+  scopeId: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/migrateProjects/waves";
-    }
-  ]>;
-
-  @doc("Migration Entity Id")
-  associatedMigrationEntityId?: armResourceIdentifier<[
+    },
     {
       type: "Microsoft.Migrate/migrateProjects/migrationEntities";
-    }
-  ]>;
-
-  @doc("Migration Entity Group Id")
-  associatedMigrationEntityGroupId?: armResourceIdentifier<[
+    },
     {
       type: "Microsoft.Migrate/migrateProjects/migrationEntityGroups";
     }
   ]>;
 
   @doc("Task Stage")
-  stage: string;
+  stage?: string;
 
   @doc("Task Type")
+  @visibility(Lifecycle.Read)
   taskType: TaskType;
 
   @doc("Task Name ")
@@ -68,5 +61,9 @@ model TaskProperties is AzureResourceProperties {
   scope: TaskScope;
 
   @doc("Task Description")
-  description: string;
+  description?: string;
+
+  @doc("Task completion Date")
+  @visibility(Lifecycle.Read)
+  completionDate?: utcDateTime;
 }

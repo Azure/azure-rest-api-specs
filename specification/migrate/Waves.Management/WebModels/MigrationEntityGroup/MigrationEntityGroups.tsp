@@ -39,7 +39,7 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
   applicationDisplayName: string;
 
   @doc("Associated Assessment Id")
-  associatedAssessmentIds?: armResourceIdentifier<[
+  associatedAssessmentId?: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/assessmentProjects";
     }
@@ -53,8 +53,13 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
   ]>>;
 
   @doc("Migration Entity Group Status")
-  executionStatus: MigrationEntityGroupExecutionStatus;
+  @visibility(Lifecycle.Read)
+  executionStatus?: MigrationEntityGroupExecutionStatus;
 
   @doc("Execution Start Date")
-  executionStartDate: string;
+  @visibility(Lifecycle.Read)
+  executionStartDate?: utcDateTime;
+
+  @doc("Migration path")
+  migrationPath?: MigrationPath;
 }

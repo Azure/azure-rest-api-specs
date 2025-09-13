@@ -53,6 +53,9 @@
     },
     {
       "name": "Tasks"
+    },
+    {
+      "name": "TaskSummary"
     }
   ],
   "paths": {
@@ -863,6 +866,57 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/tasks/summary": {
+      "post": {
+        "operationId": "TaskSummary_GetTasksSummary",
+        "tags": [
+          "TaskSummary"
+        ],
+        "description": "Get task summary across all tasks in the project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskSummaryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves": {
       "get": {
         "operationId": "Waves_ListByParent",
@@ -1506,6 +1560,8 @@
         "InProgress",
         "ActionPending",
         "InError",
+        "Paused",
+        "Stopped",
         "Completed"
       ],
       "x-ms-enum": {
@@ -1531,6 +1587,16 @@
             "name": "InError",
             "value": "InError",
             "description": "In error migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Paused migration entity status. This indicates that the migration process for the entity has been temporarily halted and is not currently progressing."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Stopped migration entity status. This indicates that the migration process for the entity has been intentionally halted and will not continue unless restarted."
           },
           {
             "name": "Completed",
@@ -1568,7 +1634,8 @@
         "InProgress",
         "ActionPending",
         "InError",
-        "Completed"
+        "Completed",
+        "None"
       ],
       "x-ms-enum": {
         "name": "MigrationEntityGroupExecutionStatus",
@@ -1598,6 +1665,11 @@
             "name": "Completed",
             "value": "Completed",
             "description": "Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None migration entity status"
           }
         ]
       }
@@ -1648,7 +1720,7 @@
           "type": "string",
           "description": "Display Name of the Workload."
         },
-        "associatedAssessmentIds": {
+        "associatedAssessmentId": {
           "type": "string",
           "format": "arm-id",
           "description": "Associated Assessment Id",
@@ -1678,18 +1750,23 @@
         },
         "executionStatus": {
           "$ref": "#/definitions/MigrationEntityGroupExecutionStatus",
-          "description": "Migration Entity Group Status"
+          "description": "Migration Entity Group Status",
+          "readOnly": true
         },
         "executionStartDate": {
           "type": "string",
-          "description": "Execution Start Date"
+          "format": "date-time",
+          "description": "Execution Start Date",
+          "readOnly": true
+        },
+        "migrationPath": {
+          "$ref": "#/definitions/MigrationPath",
+          "description": "Migration path"
         }
       },
       "required": [
         "applicationId",
-        "applicationDisplayName",
-        "executionStatus",
-        "executionStartDate"
+        "applicationDisplayName"
       ]
     },
     "MigrationEntityListResult": {
@@ -1713,15 +1790,17 @@
         "value"
       ]
     },
-    "MigrationEntityMigrationTools": {
+    "MigrationEntityMigrationTool": {
       "type": "string",
-      "description": "Migration Entity Migration Tools.",
+      "description": "Migration Entity Migration Tool.",
       "enum": [
         "Server Migration Agentless",
-        "Server Migration Agent Based"
+        "Server Migration Agent Based",
+        "IacReDeploy",
+        "Others"
       ],
       "x-ms-enum": {
-        "name": "MigrationEntityMigrationTools",
+        "name": "MigrationEntityMigrationTool",
         "modelAsString": true,
         "values": [
           {
@@ -1733,6 +1812,16 @@
             "name": "ServerMigrationAgentBased",
             "value": "Server Migration Agent Based",
             "description": "Server Migration Agent Based. Indicates that the migration tool is using the server migration agent-based approach."
+          },
+          {
+            "name": "IacReDeploy",
+            "value": "IacReDeploy",
+            "description": "Iac ReDeploy. Indicates that the migration tool is using the Iac ReDeploy approach."
+          },
+          {
+            "name": "Others",
+            "value": "Others",
+            "description": "Other tools. Indicates that the migration tool is using other tools."
           }
         ]
       }
@@ -1779,7 +1868,7 @@
           "type": "string",
           "description": "Display Name of the Workload."
         },
-        "associatedAssessmentIds": {
+        "associatedAssessmentId": {
           "type": "string",
           "format": "arm-id",
           "description": "Associated Assessment Id",
@@ -1791,7 +1880,7 @@
             ]
           }
         },
-        "associatedWaveIds": {
+        "associatedWaveId": {
           "type": "string",
           "format": "arm-id",
           "description": "associated Wave Id",
@@ -1803,7 +1892,7 @@
             ]
           }
         },
-        "migrationEntityGroupIds": {
+        "associatedMigrationEntityGroupIds": {
           "type": "array",
           "description": "associated Migration Entity Group Id",
           "items": {
@@ -1819,10 +1908,11 @@
             }
           }
         },
-        "executionStartDateTime": {
+        "executionStartDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Execution start date for Migration Entity."
+          "description": "Execution start date for Migration Entity.",
+          "readOnly": true
         },
         "target": {
           "$ref": "#/definitions/MigrationEntityTarget",
@@ -1830,47 +1920,55 @@
         },
         "migrationStrategy": {
           "$ref": "#/definitions/Strategy",
-          "description": "Strategy of Migration Entity."
+          "description": "Strategy of Migration Entity.",
+          "readOnly": true
         },
         "executionStage": {
           "$ref": "#/definitions/MigrationEntityExecutionStage",
-          "description": "Execution Stage of Migration Entity."
+          "description": "Execution Stage of Migration Entity.",
+          "readOnly": true
         },
         "executionStatus": {
           "$ref": "#/definitions/MigrationEntityExecutionStatus",
-          "description": "Execution Status of Migration Entity."
+          "description": "Execution Status of Migration Entity.",
+          "readOnly": true
         },
         "executionReadiness": {
           "$ref": "#/definitions/MigrationEntityExecutionReadiness",
-          "description": "Execution Readiness of Migration Entity."
+          "description": "Execution Readiness of Migration Entity.",
+          "readOnly": true
         },
         "migrationSpecificProperties": {
           "$ref": "#/definitions/MigrationSpecificPropertiesBase",
           "description": "Migration specific properties for the entity."
         },
         "migrationTool": {
-          "$ref": "#/definitions/MigrationEntityMigrationTools",
+          "$ref": "#/definitions/MigrationEntityMigrationTool",
           "description": "Migration Tool of the Migration Entity."
+        },
+        "migrationPath": {
+          "$ref": "#/definitions/MigrationPath",
+          "description": "Migration path"
         }
       },
       "required": [
         "associatedInventoryResourceId",
-        "inventoryDisplayName",
-        "target",
-        "migrationStrategy",
-        "executionStage",
-        "executionStatus",
-        "executionReadiness",
-        "migrationTool"
+        "inventoryDisplayName"
       ]
     },
     "MigrationEntityTarget": {
       "type": "string",
       "description": "The target of the Migration Entity.",
       "enum": [
+        "None",
         "AzureVM",
-        "AzureSQLMI",
-        "AzureSQLDB",
+        "SqlMI",
+        "SqlDatabase",
+        "AzureSQLVM",
+        "AKS",
+        "AzureAppService",
+        "AzureAppServiceContainer",
+        "AzureLocal",
         "Others"
       ],
       "x-ms-enum": {
@@ -1878,24 +1976,144 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "None",
+            "value": "None",
+            "description": "None. Indicates the Migration Entity target is not specified."
+          },
+          {
             "name": "AzureVm",
             "value": "AzureVM",
             "description": "AzureVM. Indicates the Migration Entity target is Azure VM."
           },
           {
-            "name": "AzureSqlMi",
-            "value": "AzureSQLMI",
-            "description": "AzureVMSS. Indicates the Migration Entity target is Azure SQL Managed Instance."
+            "name": "SqlMI",
+            "value": "SqlMI",
+            "description": "SqlMI. Indicates the Migration Entity target is Azure SQL Managed Instance."
           },
           {
-            "name": "AzureSqlDb",
-            "value": "AzureSQLDB",
-            "description": "AzureSQLMI. Indicates the Migration Entity target is Azure SQL Database."
+            "name": "SqlDatabase",
+            "value": "SqlDatabase",
+            "description": "SqlDatabase. Indicates the Migration Entity target is Azure SQL Database."
+          },
+          {
+            "name": "AzureSQLVM",
+            "value": "AzureSQLVM",
+            "description": "AzureSQLVM. Indicates the Migration Entity target is Azure SQL Virtual Machine."
+          },
+          {
+            "name": "AKS",
+            "value": "AKS",
+            "description": "AKS. Indicates the Migration Entity target is Azure Kubernetes Service."
+          },
+          {
+            "name": "AzureAppService",
+            "value": "AzureAppService",
+            "description": "AzureAppService. Indicates the Migration Entity target is Azure App Service."
+          },
+          {
+            "name": "AzureAppServiceContainer",
+            "value": "AzureAppServiceContainer",
+            "description": "AzureAppServiceContainer. Indicates the Migration Entity target is Azure App Service Container."
+          },
+          {
+            "name": "AzureLocal",
+            "value": "AzureLocal",
+            "description": "AzureLocal. Indicates the Migration Entity target is Azure Local."
           },
           {
             "name": "Others",
             "value": "Others",
-            "description": "AzureSQLDB. Indicates the Migration Entity target is Others"
+            "description": "Others. Indicates the Migration Entity target is Others."
+          }
+        ]
+      }
+    },
+    "MigrationPath": {
+      "type": "string",
+      "description": "Migration Path Options.",
+      "enum": [
+        "PaaSPreferred",
+        "PaaSCentric",
+        "IaaSCentric",
+        "RecommendedPath",
+        "AzureVM",
+        "Avs",
+        "SqlDatabase",
+        "SqlMI",
+        "AzureSQLVM",
+        "AzureAppService",
+        "AzureAppServiceContainer",
+        "AKS",
+        "Modernize"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationPath",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PaaSPreferred",
+            "value": "PaaSPreferred",
+            "description": "PaaS Preferred"
+          },
+          {
+            "name": "PaaSCentric",
+            "value": "PaaSCentric",
+            "description": "PaaS Centric"
+          },
+          {
+            "name": "IaaSCentric",
+            "value": "IaaSCentric",
+            "description": "IaaS Centric"
+          },
+          {
+            "name": "RecommendedPath",
+            "value": "RecommendedPath",
+            "description": "Recommended Path"
+          },
+          {
+            "name": "AzureVM",
+            "value": "AzureVM",
+            "description": "Azure VM"
+          },
+          {
+            "name": "Avs",
+            "value": "Avs",
+            "description": "AVS"
+          },
+          {
+            "name": "SqlDatabase",
+            "value": "SqlDatabase",
+            "description": "SQL Database"
+          },
+          {
+            "name": "SqlMI",
+            "value": "SqlMI",
+            "description": "SQL MI"
+          },
+          {
+            "name": "AzureSQLVM",
+            "value": "AzureSQLVM",
+            "description": "Azure SQL VM"
+          },
+          {
+            "name": "AzureAppService",
+            "value": "AzureAppService",
+            "description": "Azure App Service"
+          },
+          {
+            "name": "AzureAppServiceContainer",
+            "value": "AzureAppServiceContainer",
+            "description": "Azure App Service Container"
+          },
+          {
+            "name": "AKS",
+            "value": "AKS",
+            "description": "AKS"
+          },
+          {
+            "name": "Modernize",
+            "value": "Modernize",
+            "description": "The Modernize path"
           }
         ]
       }
@@ -2094,6 +2312,9 @@
               }
             ]
           }
+        },
+        "currentJobId": {
+          "type": "string"
         }
       },
       "allOf": [
@@ -2107,18 +2328,25 @@
       "type": "string",
       "description": "Strategy for migration to Azure",
       "enum": [
+        "None",
         "Rehost",
         "Refactor",
         "Rearchitect",
         "Rebuild",
         "Replace",
         "Retire",
-        "Retain"
+        "Retain",
+        "Replatform"
       ],
       "x-ms-enum": {
         "name": "Strategy",
         "modelAsString": true,
         "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No specific strategy defined."
+          },
           {
             "name": "Rehost",
             "value": "Rehost",
@@ -2153,6 +2381,11 @@
             "name": "Retain",
             "value": "Retain",
             "description": "Retain: Keeping certain applications in the current environment when they are not suitable for cloud migration or when the timing is not right."
+          },
+          {
+            "name": "Replatform",
+            "value": "Replatform",
+            "description": "Replatform: This strategy involves making more substantial changes to the application."
           }
         ]
       }
@@ -2207,7 +2440,7 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "associatedWaveId": {
+        "scopeId": {
           "type": "string",
           "format": "arm-id",
           "description": "associated Wave Id",
@@ -2215,28 +2448,10 @@
             "allowedResources": [
               {
                 "type": "Microsoft.Migrate/migrateProjects/waves"
-              }
-            ]
-          }
-        },
-        "associatedMigrationEntityId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Migration Entity Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
+              },
               {
                 "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
-              }
-            ]
-          }
-        },
-        "associatedMigrationEntityGroupId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Migration Entity Group Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
+              },
               {
                 "type": "Microsoft.Migrate/migrateProjects/migrationEntityGroups"
               }
@@ -2249,7 +2464,8 @@
         },
         "taskType": {
           "$ref": "#/definitions/TaskType",
-          "description": "Task Type"
+          "description": "Task Type",
+          "readOnly": true
         },
         "taskName": {
           "type": "string",
@@ -2271,16 +2487,21 @@
         "description": {
           "type": "string",
           "description": "Task Description"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Task completion Date",
+          "readOnly": true
         }
       },
       "required": [
-        "stage",
+        "scopeId",
         "taskType",
         "taskName",
         "isEditable",
         "status",
-        "scope",
-        "description"
+        "scope"
       ]
     },
     "TaskScope": {
@@ -2317,12 +2538,13 @@
       "type": "string",
       "description": "Status represents the current state of the task",
       "enum": [
-        "PENDING",
-        "IN_PROGRESS",
-        "COMPLETED",
-        "FAILED",
-        "BLOCKED",
-        "SKIPPED"
+        "Pending",
+        "InProgress",
+        "Completed",
+        "Failed",
+        "Skipped",
+        "Paused",
+        "Stopped"
       ],
       "x-ms-enum": {
         "name": "TaskStatus",
@@ -2330,57 +2552,176 @@
         "values": [
           {
             "name": "Pending",
-            "value": "PENDING",
+            "value": "Pending",
             "description": "Task is pending"
           },
           {
             "name": "InProgress",
-            "value": "IN_PROGRESS",
+            "value": "InProgress",
             "description": "Task is in progress"
           },
           {
             "name": "Completed",
-            "value": "COMPLETED",
+            "value": "Completed",
             "description": "Task is completed"
           },
           {
             "name": "Failed",
-            "value": "FAILED",
+            "value": "Failed",
             "description": "Task has failed"
           },
           {
-            "name": "Blocked",
-            "value": "BLOCKED",
-            "description": "Task is blocked"
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "Task is skipped"
           },
           {
-            "name": "Skipped",
-            "value": "SKIPPED",
-            "description": "Task is skipped"
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Task is on hold"
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Task is stopped"
           }
         ]
       }
+    },
+    "TaskStatusCountMap": {
+      "type": "object",
+      "description": "Task status count mapping.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/TaskStatus",
+          "description": "The task status."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of tasks with this status."
+        }
+      },
+      "required": [
+        "status",
+        "count"
+      ]
+    },
+    "TaskStatusCounts": {
+      "type": "object",
+      "description": "Task Status Counts model.",
+      "properties": {
+        "statusCounts": {
+          "type": "array",
+          "description": "Status counts dictionary mapping TaskStatus to the count of tasks with that status.",
+          "items": {
+            "$ref": "#/definitions/TaskStatusCountMap"
+          },
+          "x-ms-identifiers": [
+            "status"
+          ]
+        }
+      },
+      "required": [
+        "statusCounts"
+      ]
+    },
+    "TaskSummaryItem": {
+      "type": "object",
+      "description": "Task Summary Item model.",
+      "properties": {
+        "stage": {
+          "type": "string",
+          "description": "stage"
+        },
+        "aggregatedStatus": {
+          "$ref": "#/definitions/TaskStatus",
+          "description": "Aggregated status of tasks in this stage."
+        },
+        "statusCounts": {
+          "$ref": "#/definitions/TaskStatusCounts",
+          "description": "Counts of tasks in this stage by status."
+        },
+        "tasks": {
+          "type": "array",
+          "description": "List of tasks in this stage.",
+          "items": {
+            "$ref": "#/definitions/Task"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "stage",
+        "aggregatedStatus",
+        "statusCounts",
+        "tasks"
+      ]
+    },
+    "TaskSummaryRequest": {
+      "type": "object",
+      "description": "Task Summary Request model.",
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Task Scope ARM Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/MigrateProjects/waves"
+              },
+              {
+                "type": "Microsoft.Migrate/MigrationProjects/migrationEntityGroups"
+              },
+              {
+                "type": "Microsoft.Migrate/MigrateProjects/migrationEntities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "scopeId"
+      ]
+    },
+    "TaskSummaryResponse": {
+      "type": "object",
+      "description": "Task Summary Response model.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of Task Summary Items",
+          "items": {
+            "$ref": "#/definitions/TaskSummaryItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "items"
+      ]
     },
     "TaskType": {
       "type": "string",
       "description": "TaskType can be either 'User' or 'System'",
       "enum": [
-        "User",
-        "System"
+        "UserDefined",
+        "SystemDefined"
       ],
       "x-ms-enum": {
         "name": "TaskType",
         "modelAsString": true,
         "values": [
           {
-            "name": "User",
-            "value": "User",
-            "description": "User task - typically initiated by a user"
+            "name": "UserDefined",
+            "value": "UserDefined",
+            "description": "UserDefined task - typically initiated by a user"
           },
           {
-            "name": "System",
-            "value": "System",
-            "description": "System task - typically initiated by the system"
+            "name": "SystemDefined",
+            "value": "SystemDefined",
+            "description": "SystemDefined task - typically initiated by the system"
           }
         ]
       }
@@ -2530,7 +2871,8 @@
         "OnTrack",
         "OffTrack",
         "AtRisk",
-        "Completed"
+        "Completed",
+        "New"
       ],
       "x-ms-enum": {
         "name": "WaveStatus",
@@ -2560,6 +2902,11 @@
             "name": "Completed",
             "value": "Completed",
             "description": "Completed. Indicates the wave is completed."
+          },
+          {
+            "name": "New",
+            "value": "New",
+            "description": "New. Indicates the wave is newly created."
           }
         ]
       }

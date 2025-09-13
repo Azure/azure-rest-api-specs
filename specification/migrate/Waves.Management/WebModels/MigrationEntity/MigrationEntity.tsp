@@ -54,49 +54,57 @@ model MigrationEntityProperties is AzureResourceProperties {
   inventoryDisplayName: string;
 
   @doc("Associated Assessment Id")
-  associatedAssessmentIds?: armResourceIdentifier<[
+  associatedAssessmentId?: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/assessmentProjects";
     }
   ]>;
 
   @doc("associated Wave Id")
-  associatedWaveIds?: armResourceIdentifier<[
+  associatedWaveId?: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/migrateProjects/waves";
     }
   ]>;
 
   @doc("associated Migration Entity Group Id")
-  migrationEntityGroupIds?: Array<armResourceIdentifier<[
+  associatedMigrationEntityGroupIds?: Array<armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/migrateProjects/migrationEntityGroups";
     }
   ]>>;
 
   @doc("Execution start date for Migration Entity.")
-  executionStartDateTime?: utcDateTime;
+  @visibility(Lifecycle.Read)
+  executionStartDate?: utcDateTime;
 
   @doc("Target of the Migration Entity.")
-  target: MigrationEntityTarget;
+  target?: MigrationEntityTarget;
 
   @doc("Strategy of Migration Entity.")
-  migrationStrategy: Strategy;
+  @visibility(Lifecycle.Read)
+  migrationStrategy?: Strategy;
 
   @doc("Execution Stage of Migration Entity.")
-  executionStage: MigrationEntityExecutionStage;
+  @visibility(Lifecycle.Read)
+  executionStage?: MigrationEntityExecutionStage;
 
   @doc("Execution Status of Migration Entity.")
-  executionStatus: MigrationEntityExecutionStatus;
+  @visibility(Lifecycle.Read)
+  executionStatus?: MigrationEntityExecutionStatus;
 
   @doc("Execution Readiness of Migration Entity.")
-  executionReadiness: MigrationEntityExecutionReadiness;
+  @visibility(Lifecycle.Read)
+  executionReadiness?: MigrationEntityExecutionReadiness;
 
   @doc("Migration specific properties for the entity.")
   migrationSpecificProperties?: MigrationSpecificPropertiesBase;
 
   @doc("Migration Tool of the Migration Entity.")
-  migrationTool: MigrationEntityMigrationTools;
+  migrationTool?: MigrationEntityMigrationTool;
+
+  @doc("Migration path")
+  migrationPath?: MigrationPath;
 }
 
 @doc("The base Migration Specific Properties model.")
@@ -117,4 +125,6 @@ model ServerMigrationSpecificProperties
       type: "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems";
     }
   ]>;
+
+   currentJobId?: string;
 }

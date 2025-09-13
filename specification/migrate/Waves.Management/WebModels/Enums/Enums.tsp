@@ -2,6 +2,10 @@ using Azure.ResourceManager;
 
 @doc("Strategy for migration to Azure")
 union Strategy {
+
+  @doc("No specific strategy defined.")
+  None: "None",
+
   @doc("Rehost: Also known as 'lift and shift', this strategy involves moving existing applications to Azure without modification.")
   Rehost: "Rehost",
 
@@ -22,6 +26,9 @@ union Strategy {
 
   @doc("Retain: Keeping certain applications in the current environment when they are not suitable for cloud migration or when the timing is not right.")
   Retain: "Retain",
+
+  @doc("Replatform: This strategy involves making more substantial changes to the application.")
+  Replatform: "Replatform",
 
   string,
 }
@@ -74,21 +81,43 @@ union WaveStatus {
   @doc("Completed. Indicates the wave is completed.")
   Completed: "Completed",
 
+  @doc("New. Indicates the wave is newly created.")
+  New: "New",
+
   string,
 }
 
 @doc("The target of the Migration Entity.")
 union MigrationEntityTarget {
+
+  @doc("None. Indicates the Migration Entity target is not specified.")
+  None: "None",
+
   @doc("AzureVM. Indicates the Migration Entity target is Azure VM.")
   AzureVm: "AzureVM",
 
-  @doc("AzureVMSS. Indicates the Migration Entity target is Azure SQL Managed Instance.")
-  AzureSqlMi: "AzureSQLMI",
+  @doc("SqlMI. Indicates the Migration Entity target is Azure SQL Managed Instance.")
+  SqlMI: "SqlMI",
 
-  @doc("AzureSQLMI. Indicates the Migration Entity target is Azure SQL Database.")
-  AzureSqlDb: "AzureSQLDB",
+  @doc("SqlDatabase. Indicates the Migration Entity target is Azure SQL Database.")
+  SqlDatabase: "SqlDatabase",
 
-  @doc("AzureSQLDB. Indicates the Migration Entity target is Others")
+  @doc("AzureSQLVM. Indicates the Migration Entity target is Azure SQL Virtual Machine.")
+  AzureSQLVM: "AzureSQLVM",
+
+  @doc("AKS. Indicates the Migration Entity target is Azure Kubernetes Service.")
+  AKS: "AKS",
+
+  @doc("AzureAppService. Indicates the Migration Entity target is Azure App Service.")
+  AzureAppService: "AzureAppService",
+
+  @doc("AzureAppServiceContainer. Indicates the Migration Entity target is Azure App Service Container.") 
+  AzureAppServiceContainer: "AzureAppServiceContainer",
+
+  @doc("AzureLocal. Indicates the Migration Entity target is Azure Local.")
+  AzureLocal: "AzureLocal",
+
+  @doc("Others. Indicates the Migration Entity target is Others.")
   Others: "Others",
 
   string,
@@ -108,13 +137,19 @@ union MigrationEntityExecutionReadiness {
   string,
 }
 
-@doc("Migration Entity Migration Tools.")
-union MigrationEntityMigrationTools {
+@doc("Migration Entity Migration Tool.")
+union MigrationEntityMigrationTool {
   @doc("Server Migration Agentless. Indicates that the migration tool is using the server migration agentless approach.")
   ServerMigrationAgentless: "Server Migration Agentless",
 
   @doc("Server Migration Agent Based. Indicates that the migration tool is using the server migration agent-based approach.")
   ServerMigrationAgentBased: "Server Migration Agent Based",
+
+  @doc("Iac ReDeploy. Indicates that the migration tool is using the Iac ReDeploy approach.")
+  IacReDeploy: "IacReDeploy", 
+
+  @doc("Other tools. Indicates that the migration tool is using other tools.")
+  Others: "Others",
 
   string,
 }
@@ -132,6 +167,12 @@ union MigrationEntityExecutionStatus {
 
   @doc("In error migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully.")
   InError: "InError",
+
+  @doc("Paused migration entity status. This indicates that the migration process for the entity has been temporarily halted and is not currently progressing.")
+  Paused: "Paused",
+
+  @doc("Stopped migration entity status. This indicates that the migration process for the entity has been intentionally halted and will not continue unless restarted.")
+  Stopped: "Stopped",
 
   @doc("Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment.")
   Completed: "Completed",
@@ -170,6 +211,9 @@ union MigrationEntityGroupExecutionStatus {
   @doc("Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment.")
   Completed: "Completed",
 
+  @doc("None migration entity status")
+  None: "None", 
+
   string,
 }
 
@@ -189,11 +233,11 @@ union TaskScope {
 
 @doc("TaskType can be either 'User' or 'System'")
 union TaskType {
-  @doc("User task - typically initiated by a user")
-  User: "User",
+  @doc("UserDefined task - typically initiated by a user")
+  UserDefined: "UserDefined",
 
-  @doc("System task - typically initiated by the system")
-  System: "System",
+  @doc("SystemDefined task - typically initiated by the system")
+  SystemDefined: "SystemDefined",
 
   string,
 }
@@ -201,22 +245,25 @@ union TaskType {
 @doc("Status represents the current state of the task")
 union TaskStatus {
   @doc("Task is pending")
-  Pending: "PENDING",
+  Pending: "Pending",
 
   @doc("Task is in progress")
-  InProgress: "IN_PROGRESS",
+  InProgress: "InProgress",
 
   @doc("Task is completed")
-  Completed: "COMPLETED",
+  Completed: "Completed",
 
   @doc("Task has failed")
-  Failed: "FAILED",
-
-  @doc("Task is blocked")
-  Blocked: "BLOCKED",
+  Failed: "Failed",
 
   @doc("Task is skipped")
-  Skipped: "SKIPPED",
+  Skipped: "Skipped",
+
+  @doc("Task is on hold")
+  Paused: "Paused",
+
+  @doc("Task is stopped")
+  Stopped: "Stopped",
 
   string,
 }
@@ -226,3 +273,49 @@ union MigrationSpecificPropertiesInstanceType {
   ServerMigration: "ServerMigration",
   string,
 }
+
+@doc("Migration Path Options.")
+union MigrationPath {
+
+  @doc("PaaS Preferred")  
+  PaaSPreferred: "PaaSPreferred";
+
+  @doc("PaaS Centric")
+  PaaSCentric: "PaaSCentric";
+
+  @doc("IaaS Centric")
+  IaaSCentric: "IaaSCentric";
+
+  @doc("Recommended Path")
+  RecommendedPath: "RecommendedPath";
+
+  @doc("Azure VM")
+  AzureVM: "AzureVM";
+
+  @doc("AVS")
+  Avs: "Avs";
+
+  @doc("SQL Database")
+  SqlDatabase: "SqlDatabase";
+
+  @doc("SQL MI")
+  SqlMI: "SqlMI";
+
+  @doc("Azure SQL VM")
+  AzureSQLVM: "AzureSQLVM";
+
+  @doc("Azure App Service")
+  AzureAppService: "AzureAppService";
+
+  @doc("Azure App Service Container")
+  AzureAppServiceContainer: "AzureAppServiceContainer";
+
+  @doc("AKS")
+  AKS: "AKS";
+
+  @doc("The Modernize path")
+  Modernize: "Modernize";
+
+  string
+}
+
