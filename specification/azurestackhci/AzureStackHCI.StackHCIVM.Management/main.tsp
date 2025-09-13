@@ -21,6 +21,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 /**
  * Azure Stack HCI management service
  */
