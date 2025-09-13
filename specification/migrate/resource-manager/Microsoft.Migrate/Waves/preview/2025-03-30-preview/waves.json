@@ -1,0 +1,2569 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Migrate Migration Service",
+    "version": "2025-03-30-preview",
+    "description": "Azure Migrate Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Waves"
+    },
+    {
+      "name": "MigrationEntities"
+    },
+    {
+      "name": "MigrationEntityGroups"
+    },
+    {
+      "name": "Tasks"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Migrate/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/migrationEntities": {
+      "get": {
+        "operationId": "MigrationEntities_ListByParent",
+        "tags": [
+          "MigrationEntities"
+        ],
+        "description": "List MigrationEntity resources by MigrateProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntities_ListByParent_MaximumSet": {
+            "$ref": "./examples/MigrationEntities_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/migrationEntities/{migrationEntityName}": {
+      "get": {
+        "operationId": "MigrationEntities_Get",
+        "tags": [
+          "MigrationEntities"
+        ],
+        "description": "Get a MigrationEntity",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "migrationEntityName",
+            "in": "path",
+            "description": "Migration Entity ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntities_Get_MaximumSet": {
+            "$ref": "./examples/MigrationEntities_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MigrationEntities_Create",
+        "tags": [
+          "MigrationEntities"
+        ],
+        "description": "Create a MigrationEntity",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "migrationEntityName",
+            "in": "path",
+            "description": "Migration Entity ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MigrationEntity' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntity"
+            }
+          },
+          "201": {
+            "description": "Resource 'MigrationEntity' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntity"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntities_Create_MaximumSet": {
+            "$ref": "./examples/MigrationEntities_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MigrationEntities_Delete",
+        "tags": [
+          "MigrationEntities"
+        ],
+        "description": "Delete a MigrationEntity",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "migrationEntityName",
+            "in": "path",
+            "description": "Migration Entity ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntities_Delete_MaximumSet": {
+            "$ref": "./examples/MigrationEntities_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/migrationEntityGroups": {
+      "get": {
+        "operationId": "MigrationEntityGroups_ListByParent",
+        "tags": [
+          "MigrationEntityGroups"
+        ],
+        "description": "List MigrationEntityGroup resources by MigrateProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntityGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntityGroups_ListByParent_MaximumSet": {
+            "$ref": "./examples/MigrationEntityGroups_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/migrationEntityGroups/{migrationEntityGroupName}": {
+      "get": {
+        "operationId": "MigrationEntityGroups_Get",
+        "tags": [
+          "MigrationEntityGroups"
+        ],
+        "description": "Get a MigrationEntityGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "migrationEntityGroupName",
+            "in": "path",
+            "description": "Migration Entity Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntityGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntityGroups_Get_MaximumSet": {
+            "$ref": "./examples/MigrationEntityGroups_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MigrationEntityGroups_Create",
+        "tags": [
+          "MigrationEntityGroups"
+        ],
+        "description": "Create a MigrationEntityGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "migrationEntityGroupName",
+            "in": "path",
+            "description": "Migration Entity Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationEntityGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MigrationEntityGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntityGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'MigrationEntityGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntityGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntityGroups_Create_MaximumSet": {
+            "$ref": "./examples/MigrationEntityGroups_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MigrationEntityGroups_Delete",
+        "tags": [
+          "MigrationEntityGroups"
+        ],
+        "description": "Delete a MigrationEntityGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "migrationEntityGroupName",
+            "in": "path",
+            "description": "Migration Entity Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntityGroups_Delete_MaximumSet": {
+            "$ref": "./examples/MigrationEntityGroups_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/tasks": {
+      "get": {
+        "operationId": "Tasks_ListByParent",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "List Task resources by MigrateProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_ListByParent_MaximumSet": {
+            "$ref": "./examples/Tasks_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/tasks/{taskName}": {
+      "get": {
+        "operationId": "Tasks_Get",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Get a Task",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "Task ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_Get_MaximumSet": {
+            "$ref": "./examples/Tasks_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Tasks_Create",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Create a Task",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "Task ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Task' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "201": {
+            "description": "Resource 'Task' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_Create_MaximumSet": {
+            "$ref": "./examples/Tasks_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Tasks_Delete",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Delete a Task",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "Task ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_Delete_MaximumSet": {
+            "$ref": "./examples/Tasks_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves": {
+      "get": {
+        "operationId": "Waves_ListByParent",
+        "tags": [
+          "Waves"
+        ],
+        "description": "List Wave resources by MigrateProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WaveListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_ListByParent_MaximumSet": {
+            "$ref": "./examples/Waves_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}": {
+      "get": {
+        "operationId": "Waves_Get",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Get a Wave",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_Get_MaximumSet": {
+            "$ref": "./examples/Waves_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Waves_Create",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Create a Wave",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Wave' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            }
+          },
+          "201": {
+            "description": "Resource 'Wave' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_Create_MaximumSet": {
+            "$ref": "./examples/Waves_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Waves_Delete",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Delete a Wave",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_Delete_MaximumSet": {
+            "$ref": "./examples/Waves_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Arg": {
+      "type": "object",
+      "description": "ARG query and other details to create workloads within a wave.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query to create workloads within the wave."
+        },
+        "discoverySiteIds": {
+          "type": "array",
+          "description": "The list of discovery site ids which will correspond to the resources returned by the ARG query.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/VMwareSites"
+                },
+                {
+                  "type": "Microsoft.OffAzure/HyperVSites"
+                },
+                {
+                  "type": "Microsoft.OffAzure/serversites"
+                },
+                {
+                  "type": "Microsoft.OffAzure/MasterSites"
+                }
+              ]
+            }
+          }
+        },
+        "applicationIds": {
+          "type": "array",
+          "description": "The list of application ids which will correspond to the resources returned by the ARG query.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/discoveryHubs/applications"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "query",
+        "discoverySiteIds",
+        "applicationIds"
+      ]
+    },
+    "AzureResourceProperties": {
+      "type": "object",
+      "description": "Common properties for all azure tracked and proxy resources.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Items": {
+      "type": "string",
+      "description": "Items Enum",
+      "enum": [
+        "ServerDiscovery",
+        "ServerAssessment",
+        "ServerMigration",
+        "Cloudamize",
+        "Turbonomic",
+        "Zerto",
+        "CorentTech",
+        "ServerAssessmentV1",
+        "ServerMigration_Replication",
+        "Carbonite",
+        "DataMigrationAssistant",
+        "DatabaseMigrationService",
+        "Device42",
+        "JetStream",
+        "RackWare",
+        "UnifyCloud",
+        "Flexera",
+        "ServerDiscovery_Import",
+        "Lakeside",
+        "AppServiceMigrationAssistant",
+        "Movere",
+        "CloudSphere",
+        "Modernization",
+        "ServerMigration_DataReplication",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "Items",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServerDiscovery",
+            "value": "ServerDiscovery",
+            "description": "Server Discovery Item"
+          },
+          {
+            "name": "ServerAssessment",
+            "value": "ServerAssessment",
+            "description": "Server Assessment Item"
+          },
+          {
+            "name": "ServerMigration",
+            "value": "ServerMigration",
+            "description": "Server Migration Item"
+          },
+          {
+            "name": "Cloudamize",
+            "value": "Cloudamize",
+            "description": "Cloudamize Item"
+          },
+          {
+            "name": "Turbonomic",
+            "value": "Turbonomic",
+            "description": "Turbonomic Item"
+          },
+          {
+            "name": "Zerto",
+            "value": "Zerto",
+            "description": "Zerto Item"
+          },
+          {
+            "name": "CorentTech",
+            "value": "CorentTech",
+            "description": "CorentTech Item"
+          },
+          {
+            "name": "ServerAssessmentV1",
+            "value": "ServerAssessmentV1",
+            "description": "ServerAssessmentV1"
+          },
+          {
+            "name": "ServerMigration_Replication",
+            "value": "ServerMigration_Replication",
+            "description": "ServerMigration_Replication"
+          },
+          {
+            "name": "Carbonite",
+            "value": "Carbonite",
+            "description": "Carbonite Item"
+          },
+          {
+            "name": "DataMigrationAssistant",
+            "value": "DataMigrationAssistant",
+            "description": "DataMigrationAssistant Item"
+          },
+          {
+            "name": "DatabaseMigrationService",
+            "value": "DatabaseMigrationService",
+            "description": "DatabaseMigrationService Item"
+          },
+          {
+            "name": "Device42",
+            "value": "Device42",
+            "description": "Device42 Item"
+          },
+          {
+            "name": "JetStream",
+            "value": "JetStream",
+            "description": "JetStream Item"
+          },
+          {
+            "name": "RackWare",
+            "value": "RackWare",
+            "description": "RackWare Item"
+          },
+          {
+            "name": "UnifyCloud",
+            "value": "UnifyCloud",
+            "description": "UnifyCloud Item"
+          },
+          {
+            "name": "Flexera",
+            "value": "Flexera",
+            "description": "Flexera Item"
+          },
+          {
+            "name": "ServerDiscovery_Import",
+            "value": "ServerDiscovery_Import",
+            "description": "ServerDiscovery_Import Item."
+          },
+          {
+            "name": "Lakeside",
+            "value": "Lakeside",
+            "description": "Lakeside Item"
+          },
+          {
+            "name": "AppServiceMigrationAssistant",
+            "value": "AppServiceMigrationAssistant",
+            "description": "AppServiceMigrationAssistant Item"
+          },
+          {
+            "name": "Movere",
+            "value": "Movere",
+            "description": "Movere Item"
+          },
+          {
+            "name": "CloudSphere",
+            "value": "CloudSphere",
+            "description": "CloudSphere Item"
+          },
+          {
+            "name": "Modernization",
+            "value": "Modernization",
+            "description": "Modernization Item"
+          },
+          {
+            "name": "ServerMigration_DataReplication",
+            "value": "ServerMigration_DataReplication",
+            "description": "ServerMigration_DataReplication Item"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown Item"
+          }
+        ]
+      }
+    },
+    "MigrateProject": {
+      "type": "object",
+      "description": "A Migrate project Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrateProjectProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MigrateProjectProperties": {
+      "type": "object",
+      "description": "Properties of a migrate project.",
+      "properties": {
+        "registeredTools": {
+          "type": "array",
+          "description": "Register tools inside project.",
+          "items": {
+            "$ref": "#/definitions/Items"
+          },
+          "readOnly": true
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Service endpoint."
+        },
+        "summary": {
+          "type": "object",
+          "description": "Project summary.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ProjectSummary"
+          },
+          "readOnly": true
+        },
+        "lastSummaryRefreshedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last summary refresh time.",
+          "readOnly": true
+        },
+        "refreshSummaryState": {
+          "$ref": "#/definitions/RefreshSummaryState",
+          "description": "Refresh summary state.",
+          "readOnly": true
+        },
+        "utilityStorageAccountId": {
+          "type": "string",
+          "description": "Utility storage account id."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Gets or sets the state of public network access."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Gets the private endpoint connections.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MigrationEntity": {
+      "type": "object",
+      "description": "Migration Entity resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationEntityProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MigrationEntityExecutionReadiness": {
+      "type": "string",
+      "description": "Wave execution readiness options.",
+      "enum": [
+        "NotAvailable",
+        "Ready",
+        "NotReady"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationEntityExecutionReadiness",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotAvailable",
+            "value": "NotAvailable",
+            "description": "Not Available. Indicates the MigrationEntity execution readiness is not available."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Ready. Indicates that MigrationEntity is ready for execution"
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "Not Ready. Indicates that MigrationEntity is not ready for execution"
+          }
+        ]
+      }
+    },
+    "MigrationEntityExecutionStage": {
+      "type": "string",
+      "description": "Migration Entity Execution Stage.",
+      "enum": [
+        "Preparation",
+        "Testing",
+        "Completion"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationEntityExecutionStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Preparation",
+            "value": "Preparation",
+            "description": "Preparation migration entity execution stage. This indicates that the migration process for the entity is in the preparation phase, where initial tasks are being executed to set up the environment and resources needed for migration."
+          },
+          {
+            "name": "Testing",
+            "value": "Testing",
+            "description": "Testing migration entity execution stage.  This indicates that the migration process for the entity is in the testing phase, where tasks are being executed to validate the migration before it is fully implemented."
+          },
+          {
+            "name": "Completion",
+            "value": "Completion",
+            "description": "Completion migration entity execution stage. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment."
+          }
+        ]
+      }
+    },
+    "MigrationEntityExecutionStatus": {
+      "type": "string",
+      "description": "Migration Entity Execution Status.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "ActionPending",
+        "InError",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationEntityExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Not Started migration entity status. This indicates that the migration process for the entity has not yet begun."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment."
+          },
+          {
+            "name": "ActionPending",
+            "value": "ActionPending",
+            "description": "Action Pending migration entity status. This indicates that the migration process for the entity is waiting for some action to be taken before it can proceed."
+          },
+          {
+            "name": "InError",
+            "value": "InError",
+            "description": "In error migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment."
+          }
+        ]
+      }
+    },
+    "MigrationEntityGroup": {
+      "type": "object",
+      "description": "Migration Entity Group resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationEntityGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MigrationEntityGroupExecutionStatus": {
+      "type": "string",
+      "description": "Migration Entity Group Migration Status.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "ActionPending",
+        "InError",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationEntityGroupExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Not Started migration entity status. This indicates that the migration process for the entity has not yet begun."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment."
+          },
+          {
+            "name": "ActionPending",
+            "value": "ActionPending",
+            "description": "Action Pending migration entity status. This indicates that the migration process for the entity is waiting for some action to be taken before it can proceed."
+          },
+          {
+            "name": "InError",
+            "value": "InError",
+            "description": "In error migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment."
+          }
+        ]
+      }
+    },
+    "MigrationEntityGroupListResult": {
+      "type": "object",
+      "description": "The response of a MigrationEntityGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MigrationEntityGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/MigrationEntityGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MigrationEntityGroupProperties": {
+      "type": "object",
+      "description": "Migration Entity Group Properties class.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "applicationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Application id ",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApplicationMigration/discoveryHubs/applications"
+              }
+            ]
+          }
+        },
+        "applicationDisplayName": {
+          "type": "string",
+          "description": "Display Name of the Workload."
+        },
+        "associatedAssessmentIds": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Associated Assessment Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/assessmentProjects"
+              }
+            ]
+          }
+        },
+        "associatedWaveIds": {
+          "type": "array",
+          "description": "associated Wave Id",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Migrate/migrateProjects/waves"
+                }
+              ]
+            }
+          }
+        },
+        "executionStatus": {
+          "$ref": "#/definitions/MigrationEntityGroupExecutionStatus",
+          "description": "Migration Entity Group Status"
+        },
+        "executionStartDate": {
+          "type": "string",
+          "description": "Execution Start Date"
+        }
+      },
+      "required": [
+        "applicationId",
+        "applicationDisplayName",
+        "executionStatus",
+        "executionStartDate"
+      ]
+    },
+    "MigrationEntityListResult": {
+      "type": "object",
+      "description": "The response of a MigrationEntity list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MigrationEntity items on this page",
+          "items": {
+            "$ref": "#/definitions/MigrationEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MigrationEntityMigrationTools": {
+      "type": "string",
+      "description": "Migration Entity Migration Tools.",
+      "enum": [
+        "Server Migration Agentless",
+        "Server Migration Agent Based"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationEntityMigrationTools",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServerMigrationAgentless",
+            "value": "Server Migration Agentless",
+            "description": "Server Migration Agentless. Indicates that the migration tool is using the server migration agentless approach."
+          },
+          {
+            "name": "ServerMigrationAgentBased",
+            "value": "Server Migration Agent Based",
+            "description": "Server Migration Agent Based. Indicates that the migration tool is using the server migration agent-based approach."
+          }
+        ]
+      }
+    },
+    "MigrationEntityProperties": {
+      "type": "object",
+      "description": "Migration Entity Properties class.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "partnerResourceArmId": {
+          "type": "string",
+          "description": "ARM Resource Identifier for the partner resource."
+        },
+        "targetAzureResourceArmId": {
+          "type": "string",
+          "description": "target Azure Resource ARM Id."
+        },
+        "associatedInventoryResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "inventory resource id ",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/VMwareSites"
+              },
+              {
+                "type": "Microsoft.OffAzure/HyperVSites"
+              },
+              {
+                "type": "Microsoft.OffAzure/serversites"
+              },
+              {
+                "type": "Microsoft.OffAzure/MasterSites"
+              }
+            ]
+          }
+        },
+        "inventoryDisplayName": {
+          "type": "string",
+          "description": "Display Name of the Workload."
+        },
+        "associatedAssessmentIds": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Associated Assessment Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/assessmentProjects"
+              }
+            ]
+          }
+        },
+        "associatedWaveIds": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "associated Wave Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects/waves"
+              }
+            ]
+          }
+        },
+        "migrationEntityGroupIds": {
+          "type": "array",
+          "description": "associated Migration Entity Group Id",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Migrate/migrateProjects/migrationEntityGroups"
+                }
+              ]
+            }
+          }
+        },
+        "executionStartDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Execution start date for Migration Entity."
+        },
+        "target": {
+          "$ref": "#/definitions/MigrationEntityTarget",
+          "description": "Target of the Migration Entity."
+        },
+        "migrationStrategy": {
+          "$ref": "#/definitions/Strategy",
+          "description": "Strategy of Migration Entity."
+        },
+        "executionStage": {
+          "$ref": "#/definitions/MigrationEntityExecutionStage",
+          "description": "Execution Stage of Migration Entity."
+        },
+        "executionStatus": {
+          "$ref": "#/definitions/MigrationEntityExecutionStatus",
+          "description": "Execution Status of Migration Entity."
+        },
+        "executionReadiness": {
+          "$ref": "#/definitions/MigrationEntityExecutionReadiness",
+          "description": "Execution Readiness of Migration Entity."
+        },
+        "migrationSpecificProperties": {
+          "$ref": "#/definitions/MigrationSpecificPropertiesBase",
+          "description": "Migration specific properties for the entity."
+        },
+        "migrationTool": {
+          "$ref": "#/definitions/MigrationEntityMigrationTools",
+          "description": "Migration Tool of the Migration Entity."
+        }
+      },
+      "required": [
+        "associatedInventoryResourceId",
+        "inventoryDisplayName",
+        "target",
+        "migrationStrategy",
+        "executionStage",
+        "executionStatus",
+        "executionReadiness",
+        "migrationTool"
+      ]
+    },
+    "MigrationEntityTarget": {
+      "type": "string",
+      "description": "The target of the Migration Entity.",
+      "enum": [
+        "AzureVM",
+        "AzureSQLMI",
+        "AzureSQLDB",
+        "Others"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationEntityTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureVm",
+            "value": "AzureVM",
+            "description": "AzureVM. Indicates the Migration Entity target is Azure VM."
+          },
+          {
+            "name": "AzureSqlMi",
+            "value": "AzureSQLMI",
+            "description": "AzureVMSS. Indicates the Migration Entity target is Azure SQL Managed Instance."
+          },
+          {
+            "name": "AzureSqlDb",
+            "value": "AzureSQLDB",
+            "description": "AzureSQLMI. Indicates the Migration Entity target is Azure SQL Database."
+          },
+          {
+            "name": "Others",
+            "value": "Others",
+            "description": "AzureSQLDB. Indicates the Migration Entity target is Others"
+          }
+        ]
+      }
+    },
+    "MigrationSpecificPropertiesBase": {
+      "type": "object",
+      "description": "The base Migration Specific Properties model.",
+      "properties": {
+        "instanceType": {
+          "$ref": "#/definitions/MigrationSpecificPropertiesInstanceType",
+          "description": "Discriminator for migration specific properties."
+        }
+      },
+      "discriminator": "instanceType",
+      "required": [
+        "instanceType"
+      ]
+    },
+    "MigrationSpecificPropertiesInstanceType": {
+      "type": "string",
+      "description": "Migration Specific Properties Instance Types.",
+      "enum": [
+        "ServerMigration"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationSpecificPropertiesInstanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServerMigration",
+            "value": "ServerMigration"
+          }
+        ]
+      }
+    },
+    "ProjectSummary": {
+      "type": "object",
+      "description": "Project summary.",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "description": "Instance type.",
+          "readOnly": true
+        },
+        "refreshSummaryState": {
+          "$ref": "#/definitions/RefreshSummaryState",
+          "description": "Refresh summary state."
+        },
+        "lastSummaryRefreshedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last summary refresh time."
+        },
+        "extendedSummary": {
+          "type": "object",
+          "description": "Extended summary.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource provisioning Successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource provisioning Failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource provisioning Canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is being Provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being Updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being Deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource is being Accepted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Gets or sets the state of public network access.",
+      "enum": [
+        "NotSpecified",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "NotSpecified Network Access"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled Network Access"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled Network Access"
+          }
+        ]
+      }
+    },
+    "RefreshSummaryState": {
+      "type": "string",
+      "description": "Refresh summary state.",
+      "enum": [
+        "Started",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RefreshSummaryState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Started",
+            "value": "Started",
+            "description": "Started State"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress State"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed State"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed State"
+          }
+        ]
+      }
+    },
+    "ServerMigrationSpecificProperties": {
+      "type": "object",
+      "description": "Represents a Server Migration Specific properties base model.",
+      "properties": {
+        "drApplianceInventoryId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrationSpecificPropertiesBase"
+        }
+      ],
+      "x-ms-discriminator-value": "ServerMigration"
+    },
+    "Strategy": {
+      "type": "string",
+      "description": "Strategy for migration to Azure",
+      "enum": [
+        "Rehost",
+        "Refactor",
+        "Rearchitect",
+        "Rebuild",
+        "Replace",
+        "Retire",
+        "Retain"
+      ],
+      "x-ms-enum": {
+        "name": "Strategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rehost",
+            "value": "Rehost",
+            "description": "Rehost: Also known as 'lift and shift', this strategy involves moving existing applications to Azure without modification."
+          },
+          {
+            "name": "Refactor",
+            "value": "Refactor",
+            "description": "Refactor: Often referred to as 'lift, tinker, and shift', this involves making minor modifications to the application to take advantage of Azure's cloud capabilities."
+          },
+          {
+            "name": "Rearchitect",
+            "value": "Rearchitect",
+            "description": "Rearchitect: This approach involves significant changes to the application's architecture to fully utilize cloud-native features and scalability of Azure."
+          },
+          {
+            "name": "Rebuild",
+            "value": "Rebuild",
+            "description": "Rebuild: Involves completely redesigning and rewriting the application from scratch to be cloud-native, leveraging Azure's advanced services."
+          },
+          {
+            "name": "Replace",
+            "value": "Replace",
+            "description": "Replace: This strategy involves discarding the existing application and replacing it with a new Azure solution or a SaaS platform."
+          },
+          {
+            "name": "Retire",
+            "value": "Retire",
+            "description": "Retire: This strategy involves discarding the existing application and replacing it with a new Azure solution or a SaaS platform."
+          },
+          {
+            "name": "Retain",
+            "value": "Retain",
+            "description": "Retain: Keeping certain applications in the current environment when they are not suitable for cloud migration or when the timing is not right."
+          }
+        ]
+      }
+    },
+    "Task": {
+      "type": "object",
+      "description": "Tasks resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TaskProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TaskListResult": {
+      "type": "object",
+      "description": "The response of a Task list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Task items on this page",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TaskProperties": {
+      "type": "object",
+      "description": "Task Properties class.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "associatedWaveId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "associated Wave Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects/waves"
+              }
+            ]
+          }
+        },
+        "associatedMigrationEntityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Migration Entity Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
+              }
+            ]
+          }
+        },
+        "associatedMigrationEntityGroupId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Migration Entity Group Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects/migrationEntityGroups"
+              }
+            ]
+          }
+        },
+        "stage": {
+          "type": "string",
+          "description": "Task Stage"
+        },
+        "taskType": {
+          "$ref": "#/definitions/TaskType",
+          "description": "Task Type"
+        },
+        "taskName": {
+          "type": "string",
+          "description": "Task Name "
+        },
+        "isEditable": {
+          "type": "boolean",
+          "description": "Indicates whether the task is editable.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/TaskStatus",
+          "description": "Task Status"
+        },
+        "scope": {
+          "$ref": "#/definitions/TaskScope",
+          "description": "Task Scope"
+        },
+        "description": {
+          "type": "string",
+          "description": "Task Description"
+        }
+      },
+      "required": [
+        "stage",
+        "taskType",
+        "taskName",
+        "isEditable",
+        "status",
+        "scope",
+        "description"
+      ]
+    },
+    "TaskScope": {
+      "type": "string",
+      "description": "TaskScope can be either 'Wave' or 'MigrationEntity' or 'MigrationEntityGroup'",
+      "enum": [
+        "Wave",
+        "MigrationEntity",
+        "MigrationEntityGroup"
+      ],
+      "x-ms-enum": {
+        "name": "TaskScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Wave",
+            "value": "Wave",
+            "description": "Wave task - typically related to a specific wave of migration"
+          },
+          {
+            "name": "MigrationEntity",
+            "value": "MigrationEntity",
+            "description": "Migration Entity task - typically related to a specific migration entity"
+          },
+          {
+            "name": "MigrationEntityGroup",
+            "value": "MigrationEntityGroup",
+            "description": "Migration Entity Group task - typically related to a specific migration entity group"
+          }
+        ]
+      }
+    },
+    "TaskStatus": {
+      "type": "string",
+      "description": "Status represents the current state of the task",
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED",
+        "BLOCKED",
+        "SKIPPED"
+      ],
+      "x-ms-enum": {
+        "name": "TaskStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "PENDING",
+            "description": "Task is pending"
+          },
+          {
+            "name": "InProgress",
+            "value": "IN_PROGRESS",
+            "description": "Task is in progress"
+          },
+          {
+            "name": "Completed",
+            "value": "COMPLETED",
+            "description": "Task is completed"
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED",
+            "description": "Task has failed"
+          },
+          {
+            "name": "Blocked",
+            "value": "BLOCKED",
+            "description": "Task is blocked"
+          },
+          {
+            "name": "Skipped",
+            "value": "SKIPPED",
+            "description": "Task is skipped"
+          }
+        ]
+      }
+    },
+    "TaskType": {
+      "type": "string",
+      "description": "TaskType can be either 'User' or 'System'",
+      "enum": [
+        "User",
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "TaskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User task - typically initiated by a user"
+          },
+          {
+            "name": "System",
+            "value": "System",
+            "description": "System task - typically initiated by the system"
+          }
+        ]
+      }
+    },
+    "Wave": {
+      "type": "object",
+      "description": "Migration Wave resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WaveProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WaveListResult": {
+      "type": "object",
+      "description": "The response of a Wave list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Wave items on this page",
+          "items": {
+            "$ref": "#/definitions/Wave"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WaveProperties": {
+      "type": "object",
+      "description": "Migration Wave Properties class.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the wave."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name of the wave."
+        },
+        "arg": {
+          "$ref": "#/definitions/Arg",
+          "description": "ARG query and other details to create workloads within a wave"
+        },
+        "status": {
+          "$ref": "#/definitions/WaveStatus",
+          "description": "The status of the wave.",
+          "readOnly": true
+        },
+        "plannedStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Planned start date of the wave."
+        },
+        "plannedCompletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Planned completion date of the wave."
+        },
+        "actualStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Actual start date of the wave.",
+          "readOnly": true
+        },
+        "stage": {
+          "$ref": "#/definitions/WaveStage",
+          "description": "The current stage of the wave.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName",
+        "arg",
+        "plannedStartDate"
+      ]
+    },
+    "WaveStage": {
+      "type": "string",
+      "description": "Preset stage of the wave.",
+      "enum": [
+        "Creation",
+        "Configuration",
+        "ReadyForExecution",
+        "ExecutionInProgress",
+        "ExecutionCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "WaveStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creation",
+            "value": "Creation",
+            "description": "Creation. Indicates the wave is being created."
+          },
+          {
+            "name": "Configuration",
+            "value": "Configuration",
+            "description": "Configuration. Indicates the wave is in configuration."
+          },
+          {
+            "name": "ReadyForExecution",
+            "value": "ReadyForExecution",
+            "description": "Ready for Execution. Indicates the wave is ready for execution."
+          },
+          {
+            "name": "ExecutionInProgress",
+            "value": "ExecutionInProgress",
+            "description": "Execution in Progress. Indicates the wave is currently being executed."
+          },
+          {
+            "name": "ExecutionCompleted",
+            "value": "ExecutionCompleted",
+            "description": "Completed. Indicates the wave is completed."
+          }
+        ]
+      }
+    },
+    "WaveStatus": {
+      "type": "string",
+      "description": "The status of the wave.",
+      "enum": [
+        "NotStarted",
+        "OnTrack",
+        "OffTrack",
+        "AtRisk",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "WaveStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Not Started. Indicates the wave is not started."
+          },
+          {
+            "name": "OnTrack",
+            "value": "OnTrack",
+            "description": "On Track. Indicates the wave is on track."
+          },
+          {
+            "name": "OffTrack",
+            "value": "OffTrack",
+            "description": "Off Track. Indicates the wave is off track."
+          },
+          {
+            "name": "AtRisk",
+            "value": "AtRisk",
+            "description": "At Risk. Indicates the wave is at risk."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed. Indicates the wave is completed."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
