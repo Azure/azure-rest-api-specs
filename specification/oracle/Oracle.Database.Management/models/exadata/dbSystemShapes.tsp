@@ -112,12 +112,12 @@ model DbSystemShapeProperties {
 @added(Versions.v20241201_preview)
 @doc("Provides GiMinorVersion query parameter for list operations.")
 model DbSystemShapeFilter {
+  @query
+  @doc("Filters the result for the given Azure Availability Zone")
+  zone?: string;
+
   @added(Versions.v20250801_preview)
   @query
   @doc("Filters the result for the given Shape Attribute, such as BLOCK_STORAGE or SMART_STORAGE.")
   shapeAttribute?: string;
-
-  @query
-  @doc("Filters the result for the given Azure Availability Zone")
-  zone?: string;
 }
