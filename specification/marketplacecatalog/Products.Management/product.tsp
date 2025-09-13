@@ -64,10 +64,6 @@ model ProductSummary {
   @doc("Product summary")
   summary?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("Linked add-in types")
-  linkedAddInsTypes?: Record<string>;
-
   @doc("URI to the small product icon")
   smallIconUri?: string;
 
@@ -142,10 +138,6 @@ model ProductDetails extends ProductSummary {
 
   @doc("List of Links provided for the item")
   links?: LinkProperties[];
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("Dictionary of additional properties provided for the item")
-  additionalProductProperties?: Record<string>;
 
   @doc("The product language")
   language?: string;
@@ -578,10 +570,6 @@ model BillingPlan {
 model BillingComponent {
   @doc("Billing Tag")
   billingTag?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("Custom Meter Ids")
-  customMeterIds?: Record<int32[]>;
 }
 
 @doc("Applicable term")

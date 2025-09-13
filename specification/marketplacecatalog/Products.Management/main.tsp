@@ -78,7 +78,7 @@ interface ProductList {
     @doc(SearchParameterDescription)
     @query
     $search?: string,
-  ): ArmResponse<ResourceListCustomResult<ProductSummary>> | ErrorResponse;
+  ): ArmResponse<ResourceListCustomResult<ProductSummary>> | DiscoveryErrorPayload;
 
   /** Lists products for subscription. */
   listBySubscription is ArmListBySubscriptionCustom<
@@ -196,7 +196,7 @@ interface ProductList {
 
 @armResourceOperations(ProductSingle)
 interface ProductGet {
-  /** Gets a product single by tenant. */
+  /** Gets a single product by tenant. */
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -216,6 +216,10 @@ interface ProductGet {
     @query
     language?: string,
 
+    @doc(PricingAudienceParameterDescription)
+    @query
+    pricingAudience?: string,
+
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
@@ -231,9 +235,9 @@ interface ProductGet {
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
-  ): ArmResponse<ProductDetails> | ErrorResponse;
+  ): ArmResponse<ProductDetails> | DiscoveryErrorPayload;
 
-  /** Gets a product single by subscription. */
+  /** Gets a single product by subscription. */
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -269,9 +273,9 @@ interface ProductGet {
     @doc(LookUpOfferInTenantLevelParameterDescription)
     @query
     lookUpOfferInTenantLevel?: boolean = false,
-  ): ArmResponse<ProductDetails> | ErrorResponse;
+  ): ArmResponse<ProductDetails> | DiscoveryErrorPayload;
 
-  /** Gets a product single by billing account. */
+  /** Gets a single product by billing account. */
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -303,9 +307,9 @@ interface ProductGet {
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
-  ): ArmResponse<ProductDetails> | ErrorResponse;
+  ): ArmResponse<ProductDetails> | DiscoveryErrorPayload;
 
-  /** Gets a product single by billing profile. */
+  /** Gets a single product by billing profile. */
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -338,7 +342,7 @@ interface ProductGet {
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
-  ): ArmResponse<ProductDetails> | ErrorResponse;
+  ): ArmResponse<ProductDetails> | DiscoveryErrorPayload;
 }
 
 /** The operation to list products by subscription. */
@@ -350,7 +354,7 @@ op ArmListBySubscriptionCustom<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Parameters extends {} = {},
   Response extends {} = ArmResponse<ResourceListResult<ProductSummary>>,
-  Error extends {} = ErrorResponse
+  Error extends {} = DiscoveryErrorPayload
 > is Azure.ResourceManager.Foundations.ArmReadOperation<
   Azure.ResourceManager.Foundations.SubscriptionScope<Resource> & Parameters,
   Response,
@@ -366,7 +370,7 @@ op ArmListByBillingAccount<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Parameters extends {} = {},
   Response extends {} = ArmResponse<ResourceListResult<ProductSummary>>,
-  Error extends {} = ErrorResponse
+  Error extends {} = DiscoveryErrorPayload
 > is Azure.ResourceManager.Foundations.ArmReadOperation<
   BillingAccountScope<Resource> & Parameters,
   Response,
@@ -382,7 +386,7 @@ op ArmListByBillingProfile<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Parameters extends {} = {},
   Response extends {} = ArmResponse<ResourceListResult<ProductSummary>>,
-  Error extends {} = ErrorResponse
+  Error extends {} = DiscoveryErrorPayload
 > is Azure.ResourceManager.Foundations.ArmReadOperation<
   BillingProfileScope<Resource> & Parameters,
   Response,
@@ -418,4 +422,21 @@ model BillingProfileBaseParameters
   is Azure.ResourceManager.Foundations.TenantBaseParameters {
   ...BillingAccountIdParameter;
   ...BillingProfileIdParameter;
+}
+
+// Error payload definitions
+@doc("Error payload returned by Marketplace Discovery APIs")
+@error
+model DiscoveryErrorPayload {
+  @doc("The error details object")
+  error: DiscoveryErrorDetails;
+}
+
+@doc("Error details returned in DiscoveryErrorPayload")
+model DiscoveryErrorDetails {
+  @doc("The HTTP error code")
+  code: string;
+
+  @doc("The error message")
+  message: string;
 }

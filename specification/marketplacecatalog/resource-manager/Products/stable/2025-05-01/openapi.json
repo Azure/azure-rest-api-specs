@@ -70,7 +70,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string",
             "default": "en"
@@ -136,7 +136,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
         },
@@ -153,7 +153,7 @@
         "tags": [
           "ProductGet"
         ],
-        "description": "Gets a product single by billing profile.",
+        "description": "Gets a single product by billing profile.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -170,21 +170,21 @@
           {
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
+            "description": "Indicates whether to include plans that are no longer available for purchase in the response. By default, includeStopSoldPlans is set to FALSE.",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string"
           },
           {
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.",
+            "description": "Indicates whether to include hidden plans in the response. By default, includeHiddenPlans is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -192,7 +192,7 @@
           {
             "name": "includeServiceInstructionTemplates",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.",
+            "description": "Indicates whether to include the product's service instruction templates in the response. By default, includeServiceInstructionTemplates is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -222,7 +222,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
         },
@@ -250,7 +250,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string",
             "default": "en"
@@ -316,7 +316,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
         },
@@ -333,7 +333,7 @@
         "tags": [
           "ProductGet"
         ],
-        "description": "Gets a product single by billing account.",
+        "description": "Gets a single product by billing account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -347,21 +347,21 @@
           {
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
+            "description": "Indicates whether to include plans that are no longer available for purchase in the response. By default, includeStopSoldPlans is set to FALSE.",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string"
           },
           {
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.",
+            "description": "Indicates whether to include hidden plans in the response. By default, includeHiddenPlans is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -369,7 +369,7 @@
           {
             "name": "includeServiceInstructionTemplates",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.",
+            "description": "Indicates whether to include the product's service instruction templates in the response. By default, includeServiceInstructionTemplates is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -399,7 +399,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
         },
@@ -467,7 +467,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string",
             "default": "en"
@@ -526,7 +526,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
         },
@@ -543,7 +543,7 @@
         "tags": [
           "ProductGet"
         ],
-        "description": "Gets a product single by tenant.",
+        "description": "Gets a single product by tenant.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -561,7 +561,7 @@
           {
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
+            "description": "Indicates whether to include plans that are no longer available for purchase in the response. By default, includeStopSoldPlans is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -569,14 +569,21 @@
           {
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pricingAudience",
+            "in": "query",
+            "description": "Direct-Commercial or Partner-Commercial, Direct-Commercial is the default. This value is used to determine the pricing audience for the product. If not specified, the default value is DirectCommercial.",
             "required": false,
             "type": "string"
           },
           {
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.",
+            "description": "Indicates whether to include hidden plans in the response. By default, includeHiddenPlans is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -584,7 +591,7 @@
           {
             "name": "includeServiceInstructionTemplates",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.",
+            "description": "Indicates whether to include the product's service instruction templates in the response. By default, includeServiceInstructionTemplates is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -614,7 +621,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
         },
@@ -642,7 +649,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string",
             "default": "en"
@@ -701,7 +708,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
         },
@@ -718,7 +725,7 @@
         "tags": [
           "ProductGet"
         ],
-        "description": "Gets a product single by subscription.",
+        "description": "Gets a single product by subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -732,21 +739,21 @@
           {
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
+            "description": "Indicates whether to include plans that are no longer available for purchase in the response. By default, includeStopSoldPlans is set to FALSE.",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string"
           },
           {
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.",
+            "description": "Indicates whether to include hidden plans in the response. By default, includeHiddenPlans is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -754,7 +761,7 @@
           {
             "name": "includeServiceInstructionTemplates",
             "in": "query",
-            "description": "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.",
+            "description": "Indicates whether to include the product's service instruction templates in the response. By default, includeServiceInstructionTemplates is set to FALSE.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -792,7 +799,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
         },
@@ -918,17 +925,6 @@
         "billingTag": {
           "type": "string",
           "description": "Billing Tag"
-        },
-        "customMeterIds": {
-          "type": "object",
-          "description": "Custom Meter Ids",
-          "additionalProperties": {
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "type": "array"
-          }
         }
       }
     },
@@ -978,6 +974,37 @@
         "apiVersion",
         "billingAccountId",
         "billingProfileId"
+      ]
+    },
+    "DiscoveryErrorDetails": {
+      "type": "object",
+      "description": "Error details returned in DiscoveryErrorPayload",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The HTTP error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "DiscoveryErrorPayload": {
+      "type": "object",
+      "description": "Error payload returned by Marketplace Discovery APIs",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DiscoveryErrorDetails",
+          "description": "The error details object"
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "Image": {
@@ -1489,13 +1516,6 @@
             "$ref": "#/definitions/LinkProperties"
           }
         },
-        "additionalProductProperties": {
-          "type": "object",
-          "description": "Dictionary of additional properties provided for the item",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "language": {
           "type": "string",
           "description": "The product language"
@@ -1725,13 +1745,6 @@
         "summary": {
           "type": "string",
           "description": "Product summary"
-        },
-        "linkedAddInsTypes": {
-          "type": "object",
-          "description": "Linked add-in types",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "smallIconUri": {
           "type": "string",

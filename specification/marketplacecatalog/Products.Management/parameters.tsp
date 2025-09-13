@@ -9,7 +9,7 @@ using Rest;
 
 namespace Microsoft.Marketplace;
 
-const LanguageParameterDescription = "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"";
+const LanguageParameterDescription = "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"";
 const MarketParameterDescription = "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'";
 const ExcludePublicParameterDescription = "Whether to exclude public offers and public plans from the response. Default is false, which means that public offers and public plans are included in the response. If set to true, only private plans will be returned.";
 const PricingAudienceParameterDescription = "Direct-Commercial or Partner-Commercial, Direct-Commercial is the default. This value is used to determine the pricing audience for the product. If not specified, the default value is DirectCommercial.";
@@ -20,13 +20,13 @@ const OrderByOdataParameterDescription = "Ordering expression for the results us
 const SearchParameterDescription = "Optional search by display name, publisher display name, or keywords. Example $search=Microsoft";
 const LocationsarameterDescription = "Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/";
 
-const IncludeStopSoldPlansParameterDescription = "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.";
+const IncludeStopSoldPlansParameterDescription = "Indicates whether to include plans that are no longer available for purchase in the response. By default, includeStopSoldPlans is set to FALSE.";
 const LookUpOfferInTenantLevelParameterDescription = "Indicates whether to use the tenant in context to fetch the product. By default, lookUpOfferInTenantLevel is set to FALSE.";
 const MarketSingleParameterDescription = "Product market value that will be used to fetch the product and affect the returning result.Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'";
-const IncludeHiddenPlansParameterDescription = "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.";
+const IncludeHiddenPlansParameterDescription = "Indicates whether to include hidden plans in the response. By default, includeHiddenPlans is set to FALSE.";
 const PlanIdParameterDescription = "Optional to pass the plan id to filter to a specific plan within the product. If not specified, the response will include all plans of the product.";
 const SkuIdParameterDescription = "Optional to pass the sku id to filter to a specific sku within the product. If not specified, the response will include all skus of the product.";
-const IncludeServiceInstructionTemplatesParameterDescription = "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.";
+const IncludeServiceInstructionTemplatesParameterDescription = "Indicates whether to include the product's service instruction templates in the response. By default, includeServiceInstructionTemplates is set to FALSE.";
 
 /** Product
 /** Product id path parameter */
