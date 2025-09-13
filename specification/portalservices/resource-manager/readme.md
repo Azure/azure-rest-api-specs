@@ -36,11 +36,11 @@ These settings apply only when `--tag=package-2025-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-09-01-preview'
 input-file:
-  - Microsoft.PortalServices/copilotSettings/preview/2025-09-01-preview/copilotSettings.json
-  - Microsoft.PortalServices/copilotConnectors/preview/2025-09-01-preview/copilotConnectors.json
-  - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2025-09-01-preview/azurecoreexperiencesassistant.json
-  - Microsoft.PortalServices/dashboards/preview/2025-09-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2025-09-01-preview/extensions.json
+  - Microsoft.PortalServices/copilotSettings/preview/2025-08-01-preview/copilotSettings.json
+  - Microsoft.PortalServices/copilotConnectors/preview/2025-05-15-preview/copilotConnectors.json
+  - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2024-09-01-preview/azurecoreexperiencesassistant.json
+  - Microsoft.PortalServices/dashboards/preview/2024-09-01-preview/dashboards.json
+  - Microsoft.PortalServices/extensions/preview/2024-10-01-preview/extensions.json
   - Microsoft.PortalServices/settings/preview/2025-09-01-preview/settings.json
 suppressions:
   - code: PathForTrackedResourceTypes
