@@ -397,7 +397,11 @@ model ServerEventError extends ServerEvent {
   type: ServerEventType.error;
 
   /** Details of the error. */
-  error: {
+  error: ServerEventErrorDetails;
+}
+
+/** Details of the error. */
+model ServerEventErrorDetails {
     /** The type of error (e.g., "invalid_request_error", "server_error"). */
     type: string;
 
@@ -413,7 +417,6 @@ model ServerEventError extends ServerEvent {
     /** The event_id of the client event that caused the error, if applicable. */
     event_id?: string | null;
   };
-}
 
 // Tool customization (apply_discriminator): apply discriminated type
 /**
