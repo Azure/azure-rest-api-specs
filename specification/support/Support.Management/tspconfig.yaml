@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/support"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/support.json"
+    examples-dir: "{project-root}/examples"
+    arm-resource-flattening: true
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-support"
+    namespace: "azure.mgmt.support"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-support"
+    typespec-title-map:
+      SupportClient: "MicrosoftSupport"
+    package-details:
+      name: "@azure/arm-support"
+    flavor: azure
+    experimental-extensible-enums: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-support"
+    namespace: com.azure.resourcemanager.support
+    flavor: azure
+    service-name: Support
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/support"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    package-dir: "armsupport"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
