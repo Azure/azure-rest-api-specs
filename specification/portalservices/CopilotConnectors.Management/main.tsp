@@ -22,9 +22,4 @@ enum Versions {
   @doc("Azure Portal Services Copilot Connector Management API version 2025-05-15-preview")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_05_15_preview: "2025-05-15-preview",
-
-  /** 2025-09-01-preview version */
-  @doc("Azure Portal Services Copilot Connector Management API version 2025-09-01-preview")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_09_01_preview: "2025-09-01-preview",
 }
