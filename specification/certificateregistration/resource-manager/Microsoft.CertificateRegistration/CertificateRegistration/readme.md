@@ -139,9 +139,9 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-03' || $(tag) == 'package-2022-03-only'
 input-file:
-    - /stable/2022-03-01/AppServiceCertificateOrders.json
-    - /stable/2022-03-01/CertificateOrdersDiagnostics.json
-    - /stable/2022-03-01/CertificateRegistrationProvider.json
+    - stable/2022-03-01/AppServiceCertificateOrders.json
+    - stable/2022-03-01/CertificateOrdersDiagnostics.json
+    - stable/2022-03-01/CertificateRegistrationProvider.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
