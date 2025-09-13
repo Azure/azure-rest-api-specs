@@ -2,7 +2,6 @@ using Azure.ResourceManager;
 
 @doc("Strategy for migration to Azure")
 union Strategy {
-
   @doc("No specific strategy defined.")
   None: "None",
 
@@ -89,7 +88,6 @@ union WaveStatus {
 
 @doc("The target of the Migration Entity.")
 union MigrationEntityTarget {
-
   @doc("None. Indicates the Migration Entity target is not specified.")
   None: "None",
 
@@ -111,7 +109,7 @@ union MigrationEntityTarget {
   @doc("AzureAppService. Indicates the Migration Entity target is Azure App Service.")
   AzureAppService: "AzureAppService",
 
-  @doc("AzureAppServiceContainer. Indicates the Migration Entity target is Azure App Service Container.") 
+  @doc("AzureAppServiceContainer. Indicates the Migration Entity target is Azure App Service Container.")
   AzureAppServiceContainer: "AzureAppServiceContainer",
 
   @doc("AzureLocal. Indicates the Migration Entity target is Azure Local.")
@@ -146,7 +144,7 @@ union MigrationEntityMigrationTool {
   ServerMigrationAgentBased: "Server Migration Agent Based",
 
   @doc("Iac ReDeploy. Indicates that the migration tool is using the Iac ReDeploy approach.")
-  IacReDeploy: "IacReDeploy", 
+  IacReDeploy: "IacReDeploy",
 
   @doc("Other tools. Indicates that the migration tool is using other tools.")
   Others: "Others",
@@ -212,7 +210,7 @@ union MigrationEntityGroupExecutionStatus {
   Completed: "Completed",
 
   @doc("None migration entity status")
-  None: "None", 
+  None: "None",
 
   string,
 }
@@ -276,46 +274,44 @@ union MigrationSpecificPropertiesInstanceType {
 
 @doc("Migration Path Options.")
 union MigrationPath {
-
-  @doc("PaaS Preferred")  
-  PaaSPreferred: "PaaSPreferred";
+  @doc("PaaS Preferred")
+  PaaSPreferred: "PaaSPreferred",
 
   @doc("PaaS Centric")
-  PaaSCentric: "PaaSCentric";
+  PaaSCentric: "PaaSCentric",
 
   @doc("IaaS Centric")
-  IaaSCentric: "IaaSCentric";
+  IaaSCentric: "IaaSCentric",
 
   @doc("Recommended Path")
-  RecommendedPath: "RecommendedPath";
+  RecommendedPath: "RecommendedPath",
 
   @doc("Azure VM")
-  AzureVM: "AzureVM";
+  AzureVM: "AzureVM",
 
   @doc("AVS")
-  Avs: "Avs";
+  Avs: "Avs",
 
   @doc("SQL Database")
-  SqlDatabase: "SqlDatabase";
+  SqlDatabase: "SqlDatabase",
 
   @doc("SQL MI")
-  SqlMI: "SqlMI";
+  SqlMI: "SqlMI",
 
   @doc("Azure SQL VM")
-  AzureSQLVM: "AzureSQLVM";
+  AzureSQLVM: "AzureSQLVM",
 
   @doc("Azure App Service")
-  AzureAppService: "AzureAppService";
+  AzureAppService: "AzureAppService",
 
   @doc("Azure App Service Container")
-  AzureAppServiceContainer: "AzureAppServiceContainer";
+  AzureAppServiceContainer: "AzureAppServiceContainer",
 
   @doc("AKS")
-  AKS: "AKS";
+  AKS: "AKS",
 
   @doc("The Modernize path")
-  Modernize: "Modernize";
+  Modernize: "Modernize",
 
-  string
+  string,
 }
-

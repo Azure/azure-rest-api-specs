@@ -83,5 +83,9 @@ interface TaskSummary {
   @doc("Get task summary across all tasks in the project.")
   @action("tasks/summary")
   @post
-  getTasksSummary is ArmResourceActionSync<MigrateProject, TaskSummaryRequest, TaskSummaryResponse>;
+  getTasksSummary is ArmResourceActionSync<
+    MigrateProject,
+    TaskSummaryRequest,
+    TaskSummaryResponse
+  >;
 }

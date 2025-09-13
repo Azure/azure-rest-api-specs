@@ -15,7 +15,6 @@ namespace Microsoft.Migrate;
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Summary Request model.")
 model TaskSummaryRequest {
-
   @doc("Task Scope ARM Id")
   scopeId: armResourceIdentifier<[
     {
@@ -30,42 +29,37 @@ model TaskSummaryRequest {
   ]>;
 }
 
-
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Summary Response model.")
 model TaskSummaryResponse {
-
-    @doc("List of Task Summary Items")
-    @OpenAPI.extension("x-ms-identifiers", #[])
-    items: Array<TaskSummaryItem>;
+  @doc("List of Task Summary Items")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  items: Array<TaskSummaryItem>;
 }
 
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Summary Item model.")
 model TaskSummaryItem {
+  @doc("stage")
+  stage: string;
 
-    @doc("stage")
-    stage: string;
+  @doc("Aggregated status of tasks in this stage.")
+  aggregatedStatus: TaskStatus;
 
-    @doc("Aggregated status of tasks in this stage.")
-    aggregatedStatus: TaskStatus;
+  @doc("Counts of tasks in this stage by status.")
+  statusCounts: TaskStatusCounts;
 
-    @doc("Counts of tasks in this stage by status.")
-    statusCounts: TaskStatusCounts;
-
-    @doc("List of tasks in this stage.")
-    @OpenAPI.extension("x-ms-identifiers", #[])
-    tasks: Array<Task>;
+  @doc("List of tasks in this stage.")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  tasks: Array<Task>;
 }
 
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Status Counts model.")
 model TaskStatusCounts {
-
   @doc("Status counts dictionary mapping TaskStatus to the count of tasks with that status.")
   @OpenAPI.extension("x-ms-identifiers", #["status"])
   statusCounts: TaskStatusCountMap[];
-
 }
 
 @added(ApiVersions.v2025_03_30_preview)
@@ -77,4 +71,3 @@ model TaskStatusCountMap {
   @doc("The count of tasks with this status.")
   count: int32;
 }
-

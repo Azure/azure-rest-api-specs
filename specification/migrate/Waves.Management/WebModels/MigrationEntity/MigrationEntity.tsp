@@ -125,6 +125,5 @@ model ServerMigrationSpecificProperties
       type: "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems";
     }
   ]>;
-
-   currentJobId?: string;
+  currentJobId?: string;
 }
