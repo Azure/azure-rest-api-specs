@@ -80,7 +80,7 @@ interface Tasks {
 @armResourceOperations
 interface TaskSummary {
   @added(ApiVersions.v2025_03_30_preview)
-  @doc("Get task summary across all tasks in the project.")
+  @doc("Retrieves task summary across all tasks in the project.")
   @action("taskSummary")
   @post
   getTasksSummary is ArmResourceActionSync<
