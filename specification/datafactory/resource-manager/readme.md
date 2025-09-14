@@ -35,6 +35,7 @@ tag: package-2018-06
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-06'
+
 input-file:
 - Microsoft.DataFactory/stable/2018-06-01/datafactory.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json
@@ -66,6 +67,14 @@ suppressions:
     reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
   - code: OBJECT_ADDITIONAL_PROPERTIES
     reason: ADF feature is widely adopted and requires OBJECT_ADDITIONAL_PROPERTIES for most of the swagger properties.
+```
+
+``` yaml
+directive:
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: ChangeDataCapture.json
+    reason: unnecessary check
+
 ```
 
 ### Tag: package-2017-09-preview
