@@ -1177,9 +1177,6 @@
           "Waves"
         ],
         "description": "Refresh operation to update wave",
-        "consumes": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1205,21 +1202,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                ""
-              ],
-              "x-ms-enum": {
-                "modelAsString": false
-              }
-            }
           }
         ],
         "responses": {

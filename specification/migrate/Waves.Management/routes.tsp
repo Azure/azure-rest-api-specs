@@ -37,7 +37,7 @@ interface Waves {
   @post
   refresh is ArmResourceActionSync<
     Wave,
-    "",
+    void,
     WaveProperties
   >;
 }
