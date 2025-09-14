@@ -64,9 +64,16 @@ suppressions:
     reason: ADF feature is widely adopted and requires XmsEnumValidation for most of the swagger properties.
   - code: NestedResourcesMustHaveListOperation
     reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
-  - code: INVALID_TYPE
-    reason: ADF feature is widely adopted and requires INVALID_TYPE for most of the swagger properties.
 ```
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: INVALID_TYPE
+    reason: false positive from oav is breaking our example validation. See azure/oav#1021.
+```
+
 
 ### Tag: package-2017-09-preview
 
