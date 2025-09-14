@@ -174,7 +174,7 @@ model Response {
   @doc("""
     The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
     """)
-  output_audio_format?: "pcm16" | "g711_ulaw" | "g711_alaw";
+  output_audio_format?: AudioFormat = AudioFormat.pcm16;
 
   /** Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8. */
   temperature?: float32;

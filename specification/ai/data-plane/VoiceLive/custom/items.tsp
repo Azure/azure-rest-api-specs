@@ -177,6 +177,9 @@ model InputTokenDetails {
 
   @doc("Number of audio tokens used in the input.")
   audio_tokens: int32;
+
+  @doc("Details of cached token usage.")
+  cached_tokens_details: CachedTokenDetails;
 }
 
 @doc("Details of output token usage.")
@@ -185,6 +188,15 @@ model OutputTokenDetails {
   text_tokens: int32;
 
   @doc("Number of audio tokens generated in the output.")
+  audio_tokens: int32;
+}
+
+@doc("Details of output token usage.")
+model CachedTokenDetails {
+  @doc("Number of cached text tokens.")
+  text_tokens: int32;
+
+  @doc("Number of cached audio tokens.")
   audio_tokens: int32;
 }
 
