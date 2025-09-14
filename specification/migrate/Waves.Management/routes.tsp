@@ -35,11 +35,7 @@ interface Waves {
   @doc("Refresh operation to update wave")
   @action("refresh")
   @post
-  refresh is ArmResourceActionSync<
-    Wave,
-    void,
-    WaveProperties
-  >;
+  refresh is ArmResourceActionSync<Wave, void, WaveProperties>;
 }
 
 @armResourceOperations

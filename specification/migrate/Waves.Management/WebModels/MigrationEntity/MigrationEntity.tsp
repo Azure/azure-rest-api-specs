@@ -133,4 +133,4 @@ model ServerMigrationSpecificProperties
       type: "Microsoft.RecoveryServices/vaults/replicationJobs";
     }
   ]>;
-  }
+}
