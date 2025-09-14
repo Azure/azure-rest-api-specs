@@ -490,7 +490,7 @@
                 }
               ]
             },
-            "DataMapperMappings": [
+            "dataMapperMappings": [
               {
                 "targetEntityName": "dbo.customer",
                 "sourceEntityName": "source/customer",
@@ -644,7 +644,7 @@
                 }
               }
             ],
-            "Relationships": []
+            "relationships": []
           }
         ],
         "policy": {
@@ -674,9 +674,9 @@
         "type": "Microsoft.DataFactory/factories/adfcdcs",
         "properties": {
           "description": "Sample demo change data capture to transfer data from delimited (csv) to Azure SQL Database. Updating table mappings.",
-          "SourceConnectionsInfo": [
+          "sourceConnectionsInfo": [
             {
-              "SourceEntities": [
+              "sourceEntities": [
                 {
                   "name": "source/customer",
                   "properties": {
@@ -967,7 +967,7 @@
               }
             }
           ],
-          "TargetConnectionsInfo": [
+          "targetConnectionsInfo": [
             {
               "TargetEntities": [
                 {
@@ -1097,7 +1097,7 @@
                   }
                 }
               ],
-              "Connection": {
+              "connection": {
                 "linkedService": {
                   "referenceName": "amjaSql",
                   "type": "LinkedServiceReference"
@@ -1310,10 +1310,10 @@
                   }
                 }
               ],
-              "Relationships": []
+              "relationships": []
             }
           ],
-          "Policy": {
+          "policy": {
             "recurrence": {
               "frequency": "Minute",
               "interval": 15
