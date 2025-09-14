@@ -53,9 +53,6 @@
     },
     {
       "name": "Tasks"
-    },
-    {
-      "name": "TaskSummary"
     }
   ],
   "paths": {
@@ -612,9 +609,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/taskSummary": {
       "post": {
-        "operationId": "TaskSummary_GetTasksSummary",
+        "operationId": "Tasks_Summary",
         "tags": [
-          "TaskSummary"
+          "Tasks"
         ],
         "description": "Retrieves task summary across all tasks in the project.",
         "parameters": [
@@ -1171,6 +1168,74 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/refresh": {
+      "post": {
+        "operationId": "Waves_Refresh",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Refresh operation to update wave",
+        "consumes": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                ""
+              ],
+              "x-ms-enum": {
+                "modelAsString": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WaveProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     }
   },

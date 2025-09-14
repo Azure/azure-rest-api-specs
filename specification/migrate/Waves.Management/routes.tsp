@@ -30,6 +30,16 @@ interface Waves {
 
   @added(ApiVersions.v2025_03_30_preview)
   delete is ArmResourceDeleteWithoutOkAsync<Wave>;
+
+  @added(ApiVersions.v2025_03_30_preview)
+  @doc("Refresh operation to update wave")
+  @action("refresh")
+  @post
+  refresh is ArmResourceActionSync<
+    Wave,
+    "",
+    WaveProperties
+  >;
 }
 
 @armResourceOperations
@@ -75,15 +85,12 @@ interface Tasks {
 
   @added(ApiVersions.v2025_03_30_preview)
   delete is ArmResourceDeleteWithoutOkAsync<Task>;
-}
 
-@armResourceOperations
-interface TaskSummary {
   @added(ApiVersions.v2025_03_30_preview)
   @doc("Retrieves task summary across all tasks in the project.")
   @action("taskSummary")
   @post
-  getTasksSummary is ArmResourceActionSync<
+  summary is ArmResourceActionSync<
     MigrateProject,
     TaskSummaryRequest,
     TaskSummaryResponse
