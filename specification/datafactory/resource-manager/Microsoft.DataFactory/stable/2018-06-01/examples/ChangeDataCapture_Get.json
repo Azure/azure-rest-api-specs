@@ -24,7 +24,7 @@
           "description": "Sample demo change data capture to transfer data from delimited (csv) to Azure SQL Database. Updating table mappings.",
           "sourceConnectionsInfo": [
             {
-              "SourceEntities": [
+              "sourceEntities": [
                 {
                   "name": "source/customer",
                   "properties": {
@@ -201,7 +201,7 @@
                   }
                 }
               ],
-              "Connection": {
+              "connection": {
                 "linkedService": {
                   "referenceName": "amjaAdls03",
                   "type": "LinkedServiceReference"
@@ -317,7 +317,7 @@
           ],
           "targetConnectionsInfo": [
             {
-              "TargetEntities": [
+              "targetEntities": [
                 {
                   "name": "dbo.employee",
                   "properties": {
@@ -445,7 +445,7 @@
                   }
                 }
               ],
-              "Connection": {
+              "connection": {
                 "linkedService": {
                   "referenceName": "amjaSql",
                   "type": "LinkedServiceReference"
@@ -504,7 +504,7 @@
                   }
                 ]
               },
-              "DataMapperMappings": [
+              "dataMapperMappings": [
                 {
                   "targetEntityName": "dbo.customer",
                   "sourceEntityName": "source/customer",
@@ -658,7 +658,7 @@
                   }
                 }
               ],
-              "Relationships": []
+              "relationships": []
             }
           ],
           "policy": {
