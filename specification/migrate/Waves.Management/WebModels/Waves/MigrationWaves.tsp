@@ -10,7 +10,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
-@parentResource(MigrateProject)
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Migration Wave resource.")
 @parentResource(MigrateProject)
