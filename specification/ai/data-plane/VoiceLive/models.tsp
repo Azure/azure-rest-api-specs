@@ -174,7 +174,7 @@ model Response {
   @doc("""
     The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
     """)
-  output_audio_format?: "pcm16" | "g711_ulaw" | "g711_alaw";
+  output_audio_format?: AudioFormat = AudioFormat.pcm16;
 
   /** Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8. */
   temperature?: float32;
@@ -397,7 +397,11 @@ model ServerEventError extends ServerEvent {
   type: ServerEventType.error;
 
   /** Details of the error. */
-  error: {
+  error: ServerEventErrorDetails;
+}
+
+/** Details of the error. */
+model ServerEventErrorDetails {
     /** The type of error (e.g., "invalid_request_error", "server_error"). */
     type: string;
 
@@ -413,7 +417,6 @@ model ServerEventError extends ServerEvent {
     /** The event_id of the client event that caused the error, if applicable. */
     event_id?: string | null;
   };
-}
 
 // Tool customization (apply_discriminator): apply discriminated type
 /**
@@ -934,8 +937,6 @@ model ServerEventResponseAudioDelta extends ServerEvent {
   /** Base64-encoded audio data delta. */
   @encode("base64")
   delta: bytes;
-
-  event_id?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
