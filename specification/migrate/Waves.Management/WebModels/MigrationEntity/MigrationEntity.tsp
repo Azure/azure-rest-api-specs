@@ -105,6 +105,9 @@ model MigrationEntityProperties is AzureResourceProperties {
 
   @doc("Migration path")
   migrationPath?: MigrationPath;
+
+  @doc("Assessed Entity ARM Id")
+  assessedEntityArmId?: string;
 }
 
 @doc("The base Migration Specific Properties model.")
@@ -125,5 +128,9 @@ model ServerMigrationSpecificProperties
       type: "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems";
     }
   ]>;
-  currentJobId?: string;
-}
+  currentJobId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/replicationJobs";
+    }
+  ]>;
+  }

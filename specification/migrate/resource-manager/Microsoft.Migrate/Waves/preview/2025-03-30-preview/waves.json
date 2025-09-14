@@ -609,7 +609,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/taskSummary": {
       "post": {
-        "operationId": "Tasks_Summary",
+        "operationId": "Tasks_GetSummary",
         "tags": [
           "Tasks"
         ],
@@ -2014,6 +2014,10 @@
         "migrationPath": {
           "$ref": "#/definitions/MigrationPath",
           "description": "Migration path"
+        },
+        "assessedEntityArmId": {
+          "type": "string",
+          "description": "Assessed Entity ARM Id"
         }
       },
       "required": [
@@ -2379,7 +2383,16 @@
           }
         },
         "currentJobId": {
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationJobs"
+              }
+            ]
+          }
         }
       },
       "allOf": [
