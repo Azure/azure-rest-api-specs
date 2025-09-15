@@ -126,6 +126,12 @@ model ServerMigrationSpecificProperties
   drApplianceInventoryId?: armResourceIdentifier<[
     {
       type: "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems";
+    },
+    {
+      type: "Microsoft.OffAzure/VMwareSites/machines";
+    },
+    {
+      type: "Microsoft.OffAzure/ServerSites/machines";
     }
   ]>;
   currentJobId?: armResourceIdentifier<[
