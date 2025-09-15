@@ -1053,7 +1053,7 @@ namespace Storage.Blob {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
           ...TimeoutParameter;
-          ...MetadataHeaders;
+          ...MetadataHeadersParameter;
           ...LeaseIdOptionalParameter;
           ...EncryptionKeyParameter;
           ...EncryptionKeySha256Parameter;
