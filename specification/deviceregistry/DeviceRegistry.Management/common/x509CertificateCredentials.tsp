@@ -12,9 +12,9 @@ model X509CertificateCredentials {
   @doc("The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx).")
   certificateSecretName: string;
 
-  @doc("A reference to the secret containing the certificate private key in PEM or DER format.")
+  @doc("The name of the secret containing the certificate private key in PEM or DER format.")
   keySecretName?: string;
 
-  @doc("A reference to the secret containing the combined intermediate certificates in PEM format.")
+  @doc("The name of the secret containing the combined intermediate certificates in PEM format.")
   intermediateCertificatesSecretName?: string;
 }
