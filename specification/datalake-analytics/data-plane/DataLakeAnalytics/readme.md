@@ -40,7 +40,7 @@ These settings apply only when `--tag=package-catalog-2016-11` is specified on t
 
 ``` yaml $(tag) == 'package-catalog-2016-11'
 input-file:
-- Microsoft.DataLakeAnalytics/stable/2016-11-01/catalog.json
+- stable/2016-11-01/catalog.json
 ```
 
 ### Tag: package-catalog-2015-10-preview
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-catalog-2015-10-preview` is specif
 
 ``` yaml $(tag) == 'package-catalog-2015-10-preview'
 input-file:
-- Microsoft.DataLakeAnalytics/preview/2015-10-01-preview/catalog.json
+- preview/2015-10-01-preview/catalog.json
 ```
 
 ### Tag: package-job-2017-09-preview
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-job-2017-09-preview` is specified 
 
 ``` yaml $(tag) == 'package-job-2017-09-preview'
 input-file:
-- Microsoft.DataLakeAnalytics/preview/2017-09-01-preview/job.json
+- preview/2017-09-01-preview/job.json
 ```
 
 ### Tag: package-job-2016-11
@@ -67,7 +67,7 @@ These settings apply only when `--tag=package-job-2016-11` is specified on the c
 
 ``` yaml $(tag) == 'package-job-2016-11'
 input-file:
-- Microsoft.DataLakeAnalytics/stable/2016-11-01/job.json
+- stable/2016-11-01/job.json
 ```
 
 ### Tag: package-job-2016-03-preview
@@ -76,7 +76,7 @@ These settings apply only when `--tag=package-job-2016-03-preview` is specified 
 
 ``` yaml $(tag) == 'package-job-2016-03-preview'
 input-file:
-- Microsoft.DataLakeAnalytics/preview/2016-03-20-preview/job.json
+- preview/2016-03-20-preview/job.json
 ```
 
 ### Tag: package-job-2015-11-preview
@@ -85,7 +85,7 @@ These settings apply only when `--tag=package-job-2015-11-preview` is specified 
 
 ``` yaml $(tag) == 'package-job-2015-11-preview'
 input-file:
-- Microsoft.DataLakeAnalytics/preview/2015-11-01-preview/job.json
+- preview/2015-11-01-preview/job.json
 ```
 
 ---
@@ -182,12 +182,12 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DataLakeAnalytics/stable/2016-11-01/catalog.json
-  - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2015-10-01-preview/catalog.json
-  - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2017-09-01-preview/job.json
-  - $(this-folder)/Microsoft.DataLakeAnalytics/stable/2016-11-01/job.json
-  - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2016-03-20-preview/job.json
-  - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2015-11-01-preview/job.json
+  - $(this-folder)/stable/2016-11-01/catalog.json
+  - $(this-folder)/preview/2015-10-01-preview/catalog.json
+  - $(this-folder)/preview/2017-09-01-preview/job.json
+  - $(this-folder)/stable/2016-11-01/job.json
+  - $(this-folder)/preview/2016-03-20-preview/job.json
+  - $(this-folder)/preview/2015-11-01-preview/job.json
 
 ```
 
@@ -196,6 +196,6 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+#  - $(this-folder)/stable/2010-01-01/somefile.json
 ```
 

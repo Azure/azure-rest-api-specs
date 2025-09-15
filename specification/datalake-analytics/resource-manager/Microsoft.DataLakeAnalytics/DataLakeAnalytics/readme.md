@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2019-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2019-11'
 input-file:
-  - Microsoft.DataLakeAnalytics/preview/2019-11-01-preview/account.json
+  - preview/2019-11-01-preview/account.json
 ```
 ### Tag: package-2016-11
 
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-11'
 input-file:
-- Microsoft.DataLakeAnalytics/stable/2016-11-01/account.json
+- stable/2016-11-01/account.json
 ```
 
 ### Tag: package-2015-10-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2015-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-10-preview'
 input-file:
-- Microsoft.DataLakeAnalytics/preview/2015-10-01-preview/account.json
+- preview/2015-10-01-preview/account.json
 ```
 
 ## Suppression
