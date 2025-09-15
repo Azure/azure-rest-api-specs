@@ -1,6 +1,14 @@
 name: "Swagger LintDiff - Analyze Code"
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
 
 permissions:
   contents: read
@@ -42,7 +50,7 @@ jobs:
             const { join } = await import('path');
 
             // TODO: Logger
-            const changedFiles = await getChangedFiles({ cwd: 'after'});
+            const changedFiles = await getChangedFiles({ cwd: 'after', paths: ['specification'] });
             console.log('Changed files:', changedFiles);
 
             const filePath = join(process.cwd(), 'changed-files.txt');
