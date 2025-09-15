@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-
+import "@azure-tools/typespec-client-generator-core";
 import "./ApiVersions.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
@@ -33,6 +33,8 @@ interface Waves {
 
   @added(ApiVersions.v2025_03_30_preview)
   @doc("Refresh operation to update wave")
+  @Azure.ClientGenerator.Core.clientName("triggerRefresh", "java")
+  @Azure.ClientGenerator.Core.clientName("triggerRefresh", "csharp")
   refresh is ArmResourceActionSync<Wave, void, WaveProperties>;
 }
 
