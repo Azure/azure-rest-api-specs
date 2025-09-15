@@ -12,7 +12,6 @@ using Azure.ResourceManager;
 namespace Microsoft.CognitiveSearch;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-05-01-preview`,
 }
 
@@ -32,6 +31,7 @@ model Indexer is TrackedResource<IndexerProperties> {
 interface IndexerOperations {
   get is ArmResourceRead<Indexer>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Indexer>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Indexer,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

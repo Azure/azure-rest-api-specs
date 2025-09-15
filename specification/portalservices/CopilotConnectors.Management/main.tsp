@@ -20,8 +20,6 @@ namespace Microsoft.PortalServices;
 enum Versions {
   /** 2025-05-15-preview version */
   @doc("Azure Portal Services Copilot Connector Management API version 2025-05-15-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_05_15_preview: "2025-05-15-preview",
 }

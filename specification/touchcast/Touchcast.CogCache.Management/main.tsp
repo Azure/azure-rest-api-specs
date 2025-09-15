@@ -23,8 +23,6 @@ namespace Touchcast.CogCache {
   /** The available API versions. */
   enum Versions {
     /** 2025-05-02-preview version */
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
     @useDependency(LiftrBase.Versions.v2_preview)
     v2025_05_02_preview: "2025-05-02-preview",
@@ -77,6 +75,7 @@ namespace Touchcast.CogCache {
   interface Organizations {
     get is ArmResourceRead<OrganizationResource>;
     createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
+    @patch(#{ implicitOptionality: true })
     update is ArmCustomPatchAsync<
       OrganizationResource,
       OrganizationResourceUpdate

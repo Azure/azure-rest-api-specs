@@ -68,8 +68,8 @@ model QueryParameters {
 @doc("ServiceGroup as parameter")
 model ServiceGroupBaseParameters {
   @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @doc("The name of the service group.")
+  @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
   serviceGroupName: string;
 }
 
