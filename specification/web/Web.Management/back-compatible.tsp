@@ -2114,3 +2114,16 @@ using Microsoft.Web;
 @@clientName(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
   "key"
 );
+
+@@OpenAPI.extension(StampCapacityCollection.value,
+  "x-ms-identifiers",
+  #["name"]
+);
+@@OpenAPI.extension(SkuInfoCollection.value,
+  "x-ms-identifiers",
+  #["/sku/name", "resourceType"]
+);
+@@OpenAPI.extension(OutboundEnvironmentEndpointCollection.value,
+  "x-ms-identifiers",
+  #["category"]
+);

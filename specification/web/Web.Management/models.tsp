@@ -1932,7 +1932,6 @@ model AppServiceEnvironmentPatchResource extends ProxyOnlyResource {
    * Core resource properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AppServiceEnvironment;
 }
 
@@ -2757,7 +2756,7 @@ model SiteConfig {
   /**
    * <code>true</code> to enable local MySQL; otherwise, <code>false</code>.
    */
-  localMySqlEnabled?: boolean;
+  localMySqlEnabled?: boolean = false;
 
   /**
    * Managed Service Identity Id
@@ -2809,7 +2808,7 @@ model SiteConfig {
   /**
    * Http20ProxyFlag: Configures a website to allow http2.0 to pass be proxied all the way to the app. 0 = disabled, 1 = pass through all http2 traffic, 2 = pass through gRPC only.
    */
-  http20ProxyFlag?: int32;
+  http20ProxyFlag?: int32 = 0;
 
   /**
    * MinTlsVersion: configures the minimum version of TLS required for SSL requests
@@ -2836,18 +2835,21 @@ model SiteConfig {
    * This setting only applies to the Consumption and Elastic Plans
    */
   @maxValue(10)
+  @minValue(0)
   preWarmedInstanceCount?: int32;
 
   /**
    * Maximum number of workers that a site can scale out to.
    * This setting only applies to the Consumption and Elastic Premium Plans
    */
+  @minValue(0)
   functionAppScaleLimit?: int32;
 
   /**
    * Maximum number of workers that a site can scale out to.
    * This setting only applies to apps in plans where ElasticScaleEnabled is <code>true</code>
    */
+  @minValue(0)
   elasticWebAppScaleLimit?: int32;
 
   /**
@@ -2872,6 +2874,7 @@ model SiteConfig {
    * This setting only applies to the Elastic Plans
    */
   @maxValue(20)
+  @minValue(0)
   minimumElasticInstanceCount?: int32;
 
   /**
@@ -3287,7 +3290,6 @@ model PushSettings extends ProxyOnlyResource {
    * PushSettings resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PushSettingsProperties;
 }
 
@@ -4025,7 +4027,6 @@ model ResourceMetricDefinition extends ProxyOnlyResource {
    * ResourceMetricDefinition resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ResourceMetricDefinitionProperties;
 }
 
@@ -4122,7 +4123,6 @@ model Usage extends ProxyOnlyResource {
    * Usage resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UsageProperties;
 }
 
@@ -4682,7 +4682,6 @@ model AppServicePlanPatchResource extends ProxyOnlyResource {
    * AppServicePlanPatchResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AppServicePlanPatchResourceProperties;
 }
 
@@ -4880,7 +4879,6 @@ model HybridConnectionKey extends ProxyOnlyResource {
    * HybridConnectionKey resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: HybridConnectionKeyProperties;
 }
 
@@ -5175,7 +5173,6 @@ model CertificatePatchResource extends ProxyOnlyResource {
    * CertificatePatchResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CertificatePatchResourceProperties;
 }
 
@@ -5693,7 +5690,6 @@ model DiagnosticAnalysis extends ProxyOnlyResource {
    * DiagnosticAnalysis resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiagnosticAnalysisProperties;
 }
 
@@ -6028,7 +6024,6 @@ model DiagnosticDetectorResponse extends ProxyOnlyResource {
    * DiagnosticDetectorResponse resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiagnosticDetectorResponseProperties;
 }
 
@@ -6091,7 +6086,6 @@ model Snapshot extends ProxyOnlyResource {
    * Snapshot resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SnapshotProperties;
 }
 
@@ -6281,7 +6275,6 @@ model KubeEnvironmentPatchResource extends ProxyOnlyResource {
    * KubeEnvironmentPatchResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: KubeEnvironmentPatchResourceProperties;
 }
 
@@ -6358,7 +6351,6 @@ model ApplicationStackResource extends ProxyOnlyResource {
    * Core resource properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApplicationStack;
 }
 
@@ -6509,7 +6501,6 @@ model FunctionAppStack extends ProxyOnlyResource {
    * FunctionAppStack resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FunctionAppStackProperties;
 }
 
@@ -6781,7 +6772,6 @@ model WebAppStack extends ProxyOnlyResource {
    * WebAppStack resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: WebAppStackProperties;
 }
 
@@ -7244,7 +7234,6 @@ model Recommendation extends ProxyOnlyResource {
    * Recommendation resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RecommendationProperties;
 }
 
@@ -7554,7 +7543,6 @@ model BillingMeter extends ProxyOnlyResource {
    * BillingMeter resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BillingMeterProperties;
 }
 
@@ -7657,7 +7645,6 @@ model CustomHostnameSites extends ProxyOnlyResource {
    * CustomHostnameSites resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CustomHostnameSitesProperties;
 }
 
@@ -7717,7 +7704,6 @@ model GeoRegion extends ProxyOnlyResource {
    * GeoRegion resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GeoRegionProperties;
 }
 
@@ -7773,7 +7759,6 @@ model AseRegion extends ProxyOnlyResource {
    * ASE region resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AseRegionProperties;
 }
 
@@ -7898,7 +7883,6 @@ model PremierAddOnOffer extends ProxyOnlyResource {
    * PremierAddOnOffer resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PremierAddOnOfferProperties;
 }
 
@@ -8023,7 +8007,6 @@ model VnetParameters extends ProxyOnlyResource {
    * VnetParameters resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VnetParametersProperties;
 }
 
@@ -8061,7 +8044,6 @@ model VnetValidationFailureDetails extends ProxyOnlyResource {
    * VnetValidationFailureDetails resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VnetValidationFailureDetailsProperties;
 }
 
@@ -8099,7 +8081,6 @@ model VnetValidationTestFailure extends ProxyOnlyResource {
    * VnetValidationTestFailure resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VnetValidationTestFailureProperties;
 }
 
@@ -8155,7 +8136,6 @@ model ValidateRequest {
    * Properties of the resource to validate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: ValidateProperties;
 }
 
@@ -8274,7 +8254,6 @@ model StaticSitesWorkflowPreviewRequest extends ProxyOnlyResource {
    * StaticSitesWorkflowPreviewRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSitesWorkflowPreviewRequestProperties;
 }
 
@@ -8352,7 +8331,6 @@ model StaticSitesWorkflowPreview extends ProxyOnlyResource {
    * StaticSitesWorkflowPreview resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSitesWorkflowPreviewProperties;
 }
 
@@ -8591,7 +8569,6 @@ model RemotePrivateEndpointConnection extends ProxyOnlyResource {
    * RemotePrivateEndpointConnection resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RemotePrivateEndpointConnectionProperties;
 }
 
@@ -8658,7 +8635,6 @@ model StaticSiteUserProvidedFunctionApp extends ProxyOnlyResource {
    * StaticSiteUserProvidedFunctionApp resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSiteUserProvidedFunctionAppProperties;
 }
 
@@ -8781,7 +8757,6 @@ model StaticSitePatchResource extends ProxyOnlyResource {
    * Core resource properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSite;
 }
 
@@ -8800,7 +8775,6 @@ model StaticSiteUserARMResource extends ProxyOnlyResource {
    * StaticSiteUserARMResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSiteUserARMResourceProperties;
 }
 
@@ -8919,7 +8893,6 @@ model StringDictionary extends ProxyOnlyResource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<string>;
 }
 
@@ -8969,7 +8942,6 @@ model DatabaseConnectionPatchRequest {
    * DatabaseConnectionPatchRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DatabaseConnectionPatchRequestProperties;
 }
 
@@ -9014,7 +8986,6 @@ model StaticSiteFunctionOverviewARMResource extends ProxyOnlyResource {
    * StaticSiteFunctionOverviewARMResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSiteFunctionOverviewARMResourceProperties;
 }
 
@@ -9076,7 +9047,6 @@ model StaticSiteZipDeploymentARMResource extends ProxyOnlyResource {
    * Core resource properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSiteZipDeployment;
 }
 
@@ -9158,7 +9128,6 @@ model StaticSiteUserInvitationRequestResource extends ProxyOnlyResource {
    * StaticSiteUserInvitationRequestResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSiteUserInvitationRequestResourceProperties;
 }
 
@@ -9201,7 +9170,6 @@ model StaticSiteUserInvitationResponseResource extends ProxyOnlyResource {
    * StaticSiteUserInvitationResponseResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSiteUserInvitationResponseResourceProperties;
 }
 
@@ -9276,7 +9244,6 @@ model StaticSiteCustomDomainRequestPropertiesARMResource
    * StaticSiteCustomDomainRequestPropertiesARMResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSiteCustomDomainRequestPropertiesARMResourceProperties;
 }
 
@@ -9312,7 +9279,6 @@ model StaticSiteResetPropertiesARMResource extends ProxyOnlyResource {
    * StaticSiteResetPropertiesARMResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StaticSiteResetPropertiesARMResourceProperties;
 }
 
@@ -9378,7 +9344,6 @@ model SitePatchResource extends ProxyOnlyResource {
    * SitePatchResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SitePatchResourceProperties;
 
   /**
@@ -9652,7 +9617,6 @@ model CustomHostnameAnalysisResult extends ProxyOnlyResource {
    * CustomHostnameAnalysisResult resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CustomHostnameAnalysisResultProperties;
 }
 
@@ -9747,7 +9711,6 @@ model BackupRequest extends ProxyOnlyResource {
    * BackupRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BackupRequestProperties;
 }
 
@@ -9954,7 +9917,6 @@ model RestoreRequest extends ProxyOnlyResource {
    * RestoreRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RestoreRequestProperties;
 }
 
@@ -10051,7 +10013,6 @@ model SiteAuthSettings extends ProxyOnlyResource {
    * SiteAuthSettings resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SiteAuthSettingsProperties;
 }
 
@@ -11118,7 +11079,6 @@ model AzureStoragePropertyDictionaryResource extends ProxyOnlyResource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<AzureStorageInfoValue>;
 }
 
@@ -11166,7 +11126,6 @@ model ConnectionStringDictionary extends ProxyOnlyResource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<ConnStringValueTypePair>;
 }
 
@@ -11389,7 +11348,6 @@ model SiteConfigurationSnapshotInfo extends ProxyOnlyResource {
    * SiteConfigurationSnapshotInfo resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SiteConfigurationSnapshotInfoProperties;
 }
 
@@ -11635,7 +11593,6 @@ model MSDeploy extends ProxyOnlyResource {
    * Core resource properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MSDeployCore;
 }
 
@@ -11695,7 +11652,6 @@ model MSDeployLog extends ProxyOnlyResource {
    * MSDeployLog resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MSDeployLogProperties;
 }
 
@@ -12328,7 +12284,6 @@ model ProcessThreadInfo extends ProxyOnlyResource {
    * ProcessThreadInfo resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProcessThreadInfoProperties;
 }
 
@@ -12539,7 +12494,6 @@ model StorageMigrationOptions extends ProxyOnlyResource {
    * StorageMigrationOptions resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageMigrationOptionsProperties;
 }
 
@@ -12581,7 +12535,6 @@ model StorageMigrationResponse extends ProxyOnlyResource {
    * StorageMigrationResponse resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageMigrationResponseProperties;
 }
 
@@ -12605,7 +12558,6 @@ model MigrateMySqlRequest extends ProxyOnlyResource {
    * MigrateMySqlRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MigrateMySqlRequestProperties;
 }
 
@@ -12802,7 +12754,6 @@ model SitePhpErrorLogFlag extends ProxyOnlyResource {
    * SitePhpErrorLogFlag resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SitePhpErrorLogFlagProperties;
 }
 
@@ -12872,7 +12823,6 @@ model PremierAddOnPatchResource extends ProxyOnlyResource {
    * PremierAddOnPatchResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PremierAddOnPatchResourceProperties;
 }
 
@@ -13018,7 +12968,6 @@ model DeletedAppRestoreRequest extends ProxyOnlyResource {
    * DeletedAppRestoreRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DeletedAppRestoreRequestProperties;
 }
 
@@ -13059,7 +13008,6 @@ model SnapshotRestoreRequest extends ProxyOnlyResource {
    * SnapshotRestoreRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SnapshotRestoreRequestProperties;
 }
 
@@ -13373,7 +13321,6 @@ model SlotDifference extends ProxyOnlyResource {
    * SlotDifference resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SlotDifferenceProperties;
 }
 
@@ -14925,7 +14872,6 @@ model Workflow extends WorkflowResource {
    * The workflow properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: WorkflowProperties;
 
   /**
@@ -15471,7 +15417,6 @@ model PrivateLinkConnectionApprovalRequestResource extends ProxyOnlyResource {
    * Core resource properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkConnectionApprovalRequest;
 }
 

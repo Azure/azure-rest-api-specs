@@ -299,7 +299,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Resume an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"  
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
   resume is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,

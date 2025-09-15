@@ -47249,7 +47249,10 @@
           "description": "The OutboundEnvironmentEndpoint items on this page",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "category"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -50503,7 +50506,8 @@
         },
         "localMySqlEnabled": {
           "type": "boolean",
-          "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>."
+          "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>.",
+          "default": false
         },
         "managedServiceIdentityId": {
           "type": "integer",
@@ -50559,7 +50563,8 @@
         "http20ProxyFlag": {
           "type": "integer",
           "format": "int32",
-          "description": "Http20ProxyFlag: Configures a website to allow http2.0 to pass be proxied all the way to the app. 0 = disabled, 1 = pass through all http2 traffic, 2 = pass through gRPC only."
+          "description": "Http20ProxyFlag: Configures a website to allow http2.0 to pass be proxied all the way to the app. 0 = disabled, 1 = pass through all http2 traffic, 2 = pass through gRPC only.",
+          "default": 0
         },
         "minTlsVersion": {
           "$ref": "#/definitions/SupportedTlsVersions",
@@ -50581,17 +50586,20 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of preWarmed instances.\nThis setting only applies to the Consumption and Elastic Plans",
+          "minimum": 0,
           "maximum": 10
         },
         "functionAppScaleLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of workers that a site can scale out to.\nThis setting only applies to the Consumption and Elastic Premium Plans"
+          "description": "Maximum number of workers that a site can scale out to.\nThis setting only applies to the Consumption and Elastic Premium Plans",
+          "minimum": 0
         },
         "elasticWebAppScaleLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of workers that a site can scale out to.\nThis setting only applies to apps in plans where ElasticScaleEnabled is <code>true</code>"
+          "description": "Maximum number of workers that a site can scale out to.\nThis setting only applies to apps in plans where ElasticScaleEnabled is <code>true</code>",
+          "minimum": 0
         },
         "healthCheckPath": {
           "type": "string",
@@ -50609,6 +50617,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of minimum instance count for a site\nThis setting only applies to the Elastic Plans",
+          "minimum": 0,
           "maximum": 20
         },
         "azureStorageAccounts": {
@@ -51917,7 +51926,11 @@
           "description": "The SkuInfo items on this page",
           "items": {
             "$ref": "#/definitions/SkuInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "/sku/name",
+            "resourceType"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -52528,7 +52541,10 @@
           "description": "The StampCapacity items on this page",
           "items": {
             "$ref": "#/definitions/StampCapacity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
