@@ -441,7 +441,7 @@ export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitter
 }
 
 export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-   constructor() {
+  constructor() {
     super("@azure-tools/typespec-go", "emitter-output-dir", new RegExp(/^az.*$/));
   }
   protected skip(_: any, folder: string) {
@@ -513,7 +513,11 @@ export class TspConfigGoMgmtGenerateFakesTrueSubRule extends TspconfigEmitterOpt
 // ----- Python management plane sub rules -----
 export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-python", "emitter-output-dir", new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/));
+    super(
+      "@azure-tools/typespec-python",
+      "emitter-output-dir",
+      new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
+    );
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
@@ -550,7 +554,11 @@ export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptions
 // ----- Python data plane sub rules -----
 export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-python", "emitter-output-dir", new RegExp(/^azure(-[a-z]+){1,3}$/));
+    super(
+      "@azure-tools/typespec-python",
+      "emitter-output-dir",
+      new RegExp(/^azure(-[a-z]+){1,3}$/),
+    );
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
