@@ -251,13 +251,6 @@
         ]
       }
     },
-    "DimensionValuesDictionary": {
-      "type": "object",
-      "description": "Dictionary of dimension names to dimension values.",
-      "additionalProperties": {
-        "type": "string"
-      }
-    },
     "EvaluationCalculationType": {
       "type": "string",
       "description": "Specifies the method for evaluation calculation.",
@@ -493,7 +486,7 @@
           "type": "array",
           "description": "The list of output sampling types of the KQL-M query result.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/SamplingTypeProjection"
           }
         },
         "datapointsCount": {
@@ -547,15 +540,106 @@
         ]
       }
     },
+    "SamplingTypeProjection": {
+      "type": "string",
+      "description": "Represents sampling types used in SLI calculations.",
+      "enum": [
+        "Value",
+        "Good",
+        "Total",
+        "Uptime",
+        "Downtime",
+        "Burnrate"
+      ],
+      "x-ms-enum": {
+        "name": "SamplingTypeProjection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Value",
+            "value": "Value",
+            "description": "The calculated SLI value."
+          },
+          {
+            "name": "Good",
+            "value": "Good",
+            "description": "Count of good requests or events."
+          },
+          {
+            "name": "Total",
+            "value": "Total",
+            "description": "Total count of requests or events."
+          },
+          {
+            "name": "Uptime",
+            "value": "Uptime",
+            "description": "Uptime measurement."
+          },
+          {
+            "name": "Downtime",
+            "value": "Downtime",
+            "description": "Downtime measurement."
+          },
+          {
+            "name": "Burnrate",
+            "value": "Burnrate",
+            "description": "Error budget burn rate."
+          }
+        ]
+      }
+    },
     "SamplingTypesDataDictionary": {
       "type": "object",
       "description": "Dictionary of sampling types to metric values.",
-      "additionalProperties": {
-        "items": {
-          "type": "number",
-          "format": "double"
+      "properties": {
+        "Burnrate": {
+          "type": "array",
+          "description": "Error budget burn rate values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
         },
-        "type": "array"
+        "Good": {
+          "type": "array",
+          "description": "Count of good requests or events values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Total": {
+          "type": "array",
+          "description": "Total count of requests or events values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Value": {
+          "type": "array",
+          "description": "The calculated SLI value.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Uptime": {
+          "type": "array",
+          "description": "Uptime measurement values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Downtime": {
+          "type": "array",
+          "description": "Downtime measurement values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
       }
     },
     "ScalarFunction": {
@@ -912,14 +996,15 @@
       "description": "Represents a time series data entry.",
       "properties": {
         "dimensionValues": {
-          "$ref": "#/definitions/DimensionValuesDictionary",
+          "type": "object",
           "description": "The dictionary of dimension names to dimension values.",
-          "x-ms-identifiers": []
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "samplingTypesData": {
           "$ref": "#/definitions/SamplingTypesDataDictionary",
-          "description": "The dictionary of sampling types to metric values (as list of doubles).",
-          "x-ms-identifiers": []
+          "description": "The dictionary of sampling types to metric values (as list of doubles)."
         }
       },
       "required": [

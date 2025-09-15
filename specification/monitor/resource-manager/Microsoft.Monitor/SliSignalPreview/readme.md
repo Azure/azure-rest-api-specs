@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the Slis.
+These are the global settings for the Signal Preview.
 
 ```yaml
 openapi-type: arm
@@ -46,6 +46,6 @@ directive:
     from: openapi.json
 
   - suppress: TenantLevelAPIsNotAllowed
-    reason: SLIs scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
+    reason: Signal preview scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
     from: openapi.json
 ```
