@@ -76,6 +76,9 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
 @@access(VoiceLive.Response.voice, Access.internal, "csharp");
+@@access(VoiceLive.ToolChoiceFunctionObject, Access.internal, "csharp");
+@@access(VoiceLive.ToolChoiceObject, Access.internal, "csharp");
+
 
 @@clientName(VoiceLive.Modality, "InputModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
