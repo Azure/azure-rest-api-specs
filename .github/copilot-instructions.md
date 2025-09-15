@@ -266,5 +266,11 @@ Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-packa
 Run only SDK generation step and Update SDK details back in issue description and release plan. Do not run TypeSpec validation, or service label check. This is applicable only when GitHub copilot coding agent is used to generate SDK and if a Release Plan is available in the context.
 Coding agent must wait until all SDK generation pipeline are in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running Copilot from Visual Studio and VS Code.
 
-steps: - Run SDK generation pipeline for the given TypeSpec path for all languages mentioned in the description. - Keep checking the pipeline status until pipeline is in completed or failed status. - Find SDK pull request links from the pipeline run.
-constraints: - Do not invoke other steps. - Do not modify main.tsp file or any files in TypeSpec project. - Do not add API version to an existing main.tsp if input API version is not present.
+  steps:
+    - Run SDK generation pipeline for the given TypeSpec path for all languages mentioned in the description.
+    - Keep checking the pipeline status until pipeline is in completed or failed status.
+    - Find SDK pull request links from the pipeline run.
+  constraints:
+    - Do not invoke other steps.
+    - Do not modify main.tsp file or any files in TypeSpec project.
+    - Do not add API version to an existing main.tsp if input API version is not present.
