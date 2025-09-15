@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "recommendationId": "c5532a76-8605-4328-ad27-f37ae87c086c",
+    "resourceUri": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz",
+    "trackedProperties": {
+      "properties": {
+        "trackedProperties": {
+          "postponedTime": "2023-10-01T00:00:00Z",
+          "state": "Postponed"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "c5532a76-8605-4328-ad27-f37ae87c086c",
+        "type": "Microsoft.Advisor/recommendations",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz/providers/Microsoft.Advisor/recommendations/c5532a76-8605-4328-ad27-f37ae87c086c",
+        "properties": {
+          "description": "After enabling Soft Delete, deleted data transitions to a soft deleted state instead of being permanently deleted. When data is overwritten, a soft deleted snapshot is generated to save the state of the overwritten data. You can configure the amount of time soft deleted data is recoverable before it permanently expires.",
+          "actions": [
+            {
+              "additionalProperties": {
+                "description": "Enable Soft Delete to protect blob data",
+                "actionType": "Document",
+                "caption": "Enable Soft Delete to protect blob data",
+                "link": "https://link1"
+              },
+              "metadata": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444"
+              }
+            }
+          ],
+          "category": "Security",
+          "impact": "Medium",
+          "impactedField": "Microsoft.Compute/virtualMachines",
+          "impactedValue": "armavset",
+          "label": "Enable Soft Delete",
+          "lastUpdated": "2017-02-24T22:24:43.3216408Z",
+          "learnMoreLink": "https://link2",
+          "notes": "This is a note",
+          "potentialBenefits": "Save and recover your data when blobs or blob snapshots are accidentally overwritten or deleted",
+          "remediation": {
+            "additionalProperties": {
+              "httpMethod": "POST",
+              "uri": "uri",
+              "details": "link to document"
+            }
+          },
+          "resourceMetadata": {
+            "action": {
+              "additionalProperties": {
+                "description": "Enable Soft Delete to protect blob data",
+                "actionType": "Document",
+                "caption": "Enable Soft Delete to protect blob data",
+                "link": "https://link3"
+              },
+              "metadata": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz"
+              }
+            },
+            "plural": "Virtual machines",
+            "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz",
+            "singular": "Virtual machine",
+            "source": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz/providers/Microsoft.Security/assessments/7d5f6ba5-307e-452e-b3c4-7d636f722055"
+          },
+          "resourceWorkload": {
+            "name": "Critical VM Workload",
+            "id": "0560dbdb-f207-4690-b4ba-1fc0c3a0f082"
+          },
+          "review": {
+            "name": "Monthly WAF Review 09/23",
+            "id": "/subscriptions/a5481ee1-95df-47d0-85d4-dd3f0dfa19bc/providers/Microsoft.Advisor/assessments/MCWAR1"
+          },
+          "risk": "Warning",
+          "shortDescription": {
+            "problem": "Monitoring agent should be installed on your machines",
+            "solution": "Monitoring agent should be installed on your machines"
+          },
+          "sourceSystem": "CxObserve",
+          "tracked": true,
+          "trackedProperties": {
+            "postponedTime": "2023-10-01T00:00:00Z",
+            "priority": "High",
+            "state": "Postponed"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Recommendations_Patch",
+  "title": "UpdateTrackedRecommendation"
+}
