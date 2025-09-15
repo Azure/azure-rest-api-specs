@@ -35,8 +35,8 @@ These settings apply only when `--tag=package-2024-02-preview` is specified on t
 
 ```yaml $(tag) == 'package-2024-02-preview'
 input-file:
-  - Microsoft.Management/preview/2024-02-01-preview/management.json
-  - Microsoft.Management/preview/2024-02-01-preview/serviceGroups.json
+  - preview/2024-02-01-preview/management.json
+  - preview/2024-02-01-preview/serviceGroups.json
 ```
 
 ### Tag: package-2023-04
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-04'
 input-file:
-  - Microsoft.Management/stable/2023-04-01/management.json
+  - stable/2023-04-01/management.json
 ```
 ### Tag: package-2021-04
 
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2021-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-04'
 input-file:
-  - Microsoft.Management/stable/2021-04-01/management.json
+  - stable/2021-04-01/management.json
 ```
 
 ### Tag: package-2020-10
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-10'
 input-file:
-  - Microsoft.Management/stable/2020-10-01/management.json
+  - stable/2020-10-01/management.json
 ```
 
 ### Tag: package-2020-05
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-05'
 input-file:
-  - Microsoft.Management/stable/2020-05-01/management.json
+  - stable/2020-05-01/management.json
 ```
 
 ### Tag: package-2020-02
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2020-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-02'
 input-file:
-  - Microsoft.Management/stable/2020-02-01/management.json
+  - stable/2020-02-01/management.json
 ```
 
 ### Tag: package-2019-11
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-11'
 input-file:
-  - Microsoft.Management/stable/2019-11-01/management.json
+  - stable/2019-11-01/management.json
 ```
 
 ### Tag: package-2018-03
@@ -98,7 +98,7 @@ These settings apply only when `--tag=package-2018-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-03'
 input-file:
-  - Microsoft.Management/preview/2018-03-01-preview/management.json
+  - preview/2018-03-01-preview/management.json
 ```
 
 ### Tag: package-2018-01
@@ -107,7 +107,7 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-  - Microsoft.Management/preview/2018-01-01-preview/management.json
+  - preview/2018-01-01-preview/management.json
 ```
 
 ### Tag: package-2017-11
@@ -116,7 +116,7 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-  - Microsoft.Management/preview/2017-11-01-preview/management.json
+  - preview/2017-11-01-preview/management.json
 ```
 
 ### Tag: package-2017-08
@@ -125,7 +125,7 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-  - Microsoft.Management/preview/2017-08-31-preview/management.json
+  - preview/2017-08-31-preview/management.json
 ```
 ---
 
