@@ -235,6 +235,7 @@ namespace Language.TextAuthingClientCustomizations;
 @@clientName(TextAnalysisAuthoringExportedDocumentClass, "ExportedDocumentClass");
 @@clientName(TextAnalysisAuthoringExportedCustomMultiLabelClassificationProjectAssets, "ExportedCustomMultiLabelClassificationProjectAsset");
 @@clientName(TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument, "ExportedCustomSingleLabelClassificationDocument");
+@@clientName(TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument.class, "document_class", "python");
 @@clientName(TextAnalysisAuthoringExportedCustomSingleLabelClassificationProjectAssets, "ExportedCustomSingleLabelClassificationProjectAsset");
 @@clientName(TextAnalysisAuthoringExportedCustomTextSentimentDocument, "ExportedCustomTextSentimentDocument");
 @@clientName(TextAnalysisAuthoringExportedDocumentSentimentLabel, "ExportedDocumentSentimentLabel");
