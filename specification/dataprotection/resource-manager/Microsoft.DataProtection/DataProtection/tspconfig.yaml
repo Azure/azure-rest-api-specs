@@ -13,18 +13,18 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-dataprotection"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dataprotection"
     namespace: "azure.mgmt.dataprotection"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dataprotection"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dataprotection"
     namespace: "com.azure.resourcemanager.dataprotection"
     service-name: "Data Protection" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-dataprotection"
+    emitter-output-dir: "{cwd}/{service-dir}/arm-dataprotection"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
@@ -38,7 +38,7 @@ options:
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
-    inject-spans: true
+    inject-spans: true    
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

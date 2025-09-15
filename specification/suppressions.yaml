@@ -479,6 +479,14 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - options.@azure-tools/typespec-csharp.*
+  paths:
+    - dataprotection/resource-manager/Microsoft.DataProtection/DataProtection/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
     - options.@azure-tools/typespec-java.namespace
   paths:
     - dell/Dell.Storage.Management/tspconfig.yaml
@@ -992,6 +1000,14 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - parameters.typespec-csharp.*
+  paths:
+    - relay/resource-manager/Microsoft.Relay/Relay/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
     - parameters.service-dir.default
   paths:
     - relationships/Relationships.Management/tspconfig.yaml
@@ -1086,6 +1102,14 @@
     - parameters.service-dir.default
   paths:
     - splitio/SplitIO.Experimentation.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-csharp.*
+  paths:
+    - storagesync/resource-manager/Microsoft.StorageSync/StorageSync/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated

@@ -12,25 +12,25 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Quota"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-quota"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "azure-resourcemanager-quota"
     enable-bicep-serialization: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-quota"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-quota"
     namespace: "azure.mgmt.quota"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-quota"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-quota"
     namespace: "com.azure.resourcemanager.quota"
     service-name: "Quota"
     flavor: azure
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
-    package-dir: "arm-quota"
+    emitter-output-dir: "{cwd}/{service-dir}/arm-quota"
     flavor: azure
     typespec-title-map:
       QuotaClient: "AzureQuotaExtensionAPI"
