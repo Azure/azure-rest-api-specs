@@ -33,8 +33,6 @@ interface Waves {
 
   @added(ApiVersions.v2025_03_30_preview)
   @doc("Refresh operation to update wave")
-  @action("refresh")
-  @post
   refresh is ArmResourceActionSync<Wave, void, WaveProperties>;
 }
 
@@ -85,7 +83,6 @@ interface Tasks {
   @added(ApiVersions.v2025_03_30_preview)
   @doc("Retrieves task summary across all tasks in the project.")
   @action("taskSummary")
-  @post
   getSummary is ArmResourceActionSync<
     MigrateProject,
     TaskSummaryRequest,
