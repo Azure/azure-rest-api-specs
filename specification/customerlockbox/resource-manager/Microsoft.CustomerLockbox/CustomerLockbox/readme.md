@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-02-28-preview` is specified o
 
 ```yaml $(tag) == 'package-2018-02-28-preview'
 input-file:
-  - Microsoft.CustomerLockbox/preview/2018-02-28-preview/customerlockbox.json
+  - preview/2018-02-28-preview/customerlockbox.json
 ```
 
 ---
