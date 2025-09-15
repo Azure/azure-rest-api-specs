@@ -31,3 +31,9 @@ These settings apply only when `--tag=package-preview-2025-03` is specified on t
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - preview/2025-03-30-preview/waves.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: AMH feature is widely adopted and requires additionalProperties for these swagger properties.
+  - code:  DescriptionMustNotBeNodeName
+    reason: Migrate Project swagger is not in typespec.
+```
