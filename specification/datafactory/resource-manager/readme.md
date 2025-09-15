@@ -45,6 +45,7 @@ input-file:
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/ChangeDataCapture.json
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.
@@ -64,6 +65,8 @@ suppressions:
     reason: ADF feature is widely adopted and requires XmsEnumValidation for most of the swagger properties.
   - code: NestedResourcesMustHaveListOperation
     reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
+  - code: INVALID_TYPE
+    reason: ADF feature is widely adopted and requires INVALID_TYPE for most of the swagger properties.
 ```
 
 ### Suppression
