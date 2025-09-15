@@ -270,10 +270,8 @@ namespace TextAuthoringClient {
 
   op deleteProject is Language.Text.Authoring.TextAuthoringProject.deleteProject;
 
-  @access(Access.internal, "python")
   op getExportStatus is Language.Text.Authoring.TextAuthoringProject.getExportStatus;
 
-  @access(Access.internal, "python")
   op getImportStatus is Language.Text.Authoring.TextAuthoringProject.getImportStatus;
 }
 
@@ -353,13 +351,10 @@ namespace TextAuthoringProjectClient {
   interface ExportedModelOperations {
     getExportedModel is  Language.Text.Authoring.TextAuthoringExportedModel.getExportedModel;
 
-    @access(Access.internal, "python")
     deleteExportedModel is Language.Text.Authoring.TextAuthoringExportedModel.deleteExportedModel;
 
-    @access(Access.internal, "python")
     createOrUpdateExportedModel is Language.Text.Authoring.TextAuthoringExportedModel.createOrUpdateExportedModel;
 
-    @access(Access.internal, "python")
     getExportedModelJobStatus is Language.Text.Authoring.TextAuthoringExportedModel.getExportedModelJobStatus;
 
     getExportedModelManifest is Language.Text.Authoring.TextAuthoringExportedModel.getExportedModelManifest;
@@ -372,20 +367,16 @@ namespace TextAuthoringProjectClient {
 
     deleteTrainedModel is Language.Text.Authoring.TextAuthoringTrainedModel.deleteTrainedModel;
 
-    @access(Access.internal, "python")
     evaluateModel is Language.Text.Authoring.TextAuthoringTrainedModel.evaluateModel;
 
-    @access(Access.internal, "python")
     loadSnapshot is Language.Text.Authoring.TextAuthoringTrainedModel.loadSnapshot;
 
-    @access(Access.internal, "python")
     getEvaluationStatus is Language.Text.Authoring.TextAuthoringTrainedModel.getEvaluationStatus;
 
     getModelEvaluationResults is Language.Text.Authoring.TextAuthoringTrainedModel.getModelEvaluationResults;
 
     getModelEvaluationSummary is Language.Text.Authoring.TextAuthoringTrainedModel.getModelEvaluationSummary;
 
-    @access(Access.internal, "python")
     getLoadSnapshotStatus is Language.Text.Authoring.TextAuthoringTrainedModel.getLoadSnapshotStatus;
   }
 }
