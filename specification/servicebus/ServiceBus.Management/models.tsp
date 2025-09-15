@@ -5,6 +5,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Microsoft.ServiceBus;
 
+model PrivateLinkResourcesListResult
+  is Azure.ResourceManager.ResourceListResult<PrivateLinkResource>;
 /**
  * The type of identity that created the resource.
  */
