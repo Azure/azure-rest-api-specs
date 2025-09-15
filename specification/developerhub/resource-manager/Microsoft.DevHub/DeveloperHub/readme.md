@@ -35,9 +35,9 @@ These settings apply only when `--tag=package-preview-2025-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-03'
 input-file:
-  - Microsoft.DevHub/preview/2025-03-01-preview/iac.json
-  - Microsoft.DevHub/preview/2025-03-01-preview/workflow.json
-  - Microsoft.DevHub/preview/2025-03-01-preview/template.json
+  - preview/2025-03-01-preview/iac.json
+  - preview/2025-03-01-preview/workflow.json
+  - preview/2025-03-01-preview/template.json
 suppressions:
   - code: XmsPageableForListCalls
     reason: False positive error for singleton resource Get API.
@@ -66,8 +66,8 @@ These settings apply only when `--tag=package-preview-2024-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2024-08'
 input-file:
-  - Microsoft.DevHub/preview/2024-08-01-preview/workflow.json
-  - Microsoft.DevHub/preview/2024-08-01-preview/iac.json
+  - preview/2024-08-01-preview/workflow.json
+  - preview/2024-08-01-preview/iac.json
 suppressions:
   - code: XmsPageableForListCalls
     reason: False positive error for singleton resource Get API.
@@ -86,8 +86,8 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
-  - Microsoft.DevHub/preview/2024-05-01-preview/workflow.json
-  - Microsoft.DevHub/preview/2024-05-01-preview/iac.json
+  - preview/2024-05-01-preview/workflow.json
+  - preview/2024-05-01-preview/iac.json
 ```
 
 ### Tag: package-2023-08
@@ -96,7 +96,7 @@ These settings apply only when `--tag=package-2023-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-08'
 input-file:
-  - Microsoft.DevHub/stable/2023-08-01/workflow.json
+  - stable/2023-08-01/workflow.json
 ```
 
 ### Tag: package-preview-2022-10
@@ -105,7 +105,7 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
-  - Microsoft.DevHub/preview/2022-10-11-preview/workflow.json
+  - preview/2022-10-11-preview/workflow.json
 ```
 
 ### Tag: package-preview-2022-04
@@ -114,7 +114,7 @@ These settings apply only when `--tag=package-preview-2022-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-04'
 input-file:
-  - Microsoft.DevHub/preview/2022-04-01-preview/workflow.json
+  - preview/2022-04-01-preview/workflow.json
 ```
 
 ---
