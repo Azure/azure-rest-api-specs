@@ -166,3 +166,4 @@ namespace Microsoft.RecoveryServices;
 );
 @@clientName(IdentityType, "RecoveryServicesIdentityType", "csharp");
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
+@@clientName(Microsoft.RecoveryServices, "RecoveryServicesClient", "python");
