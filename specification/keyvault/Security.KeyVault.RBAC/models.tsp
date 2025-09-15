@@ -261,8 +261,8 @@ model RoleDefinition {
   /**
    * Role definition properties.
    */
-  #suppress "deprecated" "Property flattening is necessary for Key Vault"
-  @flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is necessary for Key Vault"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RoleDefinitionProperties;
 }
 
