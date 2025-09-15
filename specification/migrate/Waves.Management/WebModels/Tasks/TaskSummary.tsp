@@ -40,7 +40,7 @@ model TaskSummaryResponse {
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Summary Item model.")
 model TaskSummaryItem {
-  @doc("stage")
+  @doc("Task Stage")
   stage: string;
 
   @doc("Aggregated status of tasks in this stage.")
