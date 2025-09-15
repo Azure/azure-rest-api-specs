@@ -22,7 +22,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-contoso"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-contoso"
     namespace: "com.azure.resourcemanager.contoso"
     service-name: "Contoso" # human-readable service name, whitespace allowed
     flavor: azure
@@ -34,8 +34,8 @@ options:
       name: "@azure/arm-contoso"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/contoso"
-    package-dir: "armcontoso"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontoso"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontoso"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
