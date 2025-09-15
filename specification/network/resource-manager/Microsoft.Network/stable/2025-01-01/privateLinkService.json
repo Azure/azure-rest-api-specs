@@ -815,15 +815,25 @@
         "accessMode": {
           "type": "string",
           "description": "The access mode of the private link service.",
-          "enum": [
-            "Default",
-            "Restricted"
-          ],
+          "enum": [ "Default", "Restricted" ],
           "x-ms-enum": {
             "name": "AccessMode",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "Allows unrestricted access to the private link service."
+              },
+              {
+                "name": "Restricted",
+                "value": "Restricted",
+                "description": "Limits access to approved subscriptions only."
+              }
+            ]
           }
         },
+
         "networkInterfaces": {
           "type": "array",
           "readOnly": true,
