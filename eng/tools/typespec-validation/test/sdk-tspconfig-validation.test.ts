@@ -223,7 +223,7 @@ const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTest
 const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "package-dir",
+  "emitter-output-dir",
   "arm-aaa-bbb",
   "aaa-bbb",
   [new TspConfigTsMgmtModularEmitterOutputDirSubRule()],
@@ -241,7 +241,7 @@ const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
 const tsDpPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   "",
-  "package-dir",
+  "emitter-output-dir",
   "arm-aaa-rest",
   "aaa--rest",
   [new TspConfigTsDpEmitterOutputDirSubRule()],
@@ -486,7 +486,7 @@ const javaMgmtNamespaceExtendedTestCases: Case[] = [
 const pythonManagementPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   managementTspconfigFolder,
-  "package-dir",
+  "emitter-output-dir",
   "azure-mgmt-aaa",
   "azure-aaa",
   [new TspConfigPythonMgmtEmitterOutputDirSubRule()],
@@ -522,7 +522,7 @@ const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
 const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   "",
-  "package-dir",
+  "emitter-output-dir",
   "azure-aaa-bbb-ccc",
   "azure-aa-b-c-d",
   [new TspConfigPythonDpEmitterOutputDirSubRule()],
@@ -586,10 +586,10 @@ parameters:
     tspconfigContent: `
 options:
   "@azure-tools/typespec-ts":
-    package-dir: "*@#$%(@)*$#@!()#*&"
+    emitter-output-dir: "*@#$%(@)*$#@!()#*&"
 `,
     success: true,
-    ignoredKeyPaths: ["options.@azure-tools/typespec-ts.package-dir"],
+    ignoredKeyPaths: ["options.@azure-tools/typespec-ts.emitter-output-dir"],
   },
   {
     description: "Suppress option with wildcard at the end",
@@ -601,7 +601,7 @@ options:
     tspconfigContent: `
 options:
   "@azure-tools/typespec-go":
-    package-dir: "wrong/directory"
+    emitter-output-dir: "wrong/directory"
     module: "invalid-module"
 `,
     success: true,
