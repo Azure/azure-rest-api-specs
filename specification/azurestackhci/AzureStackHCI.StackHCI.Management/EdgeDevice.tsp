@@ -72,7 +72,7 @@ interface EdgeDevices {
     Extension.ScopeParameter,
     EdgeDevice,
     ValidateRequest,
-    ArmResponse<ValidateResponse>
+    ArmResponse<ValidateResponseResult>
   >;
 }
 
@@ -98,7 +98,7 @@ model ValidateRequest {
 /**
  * An Accepted response with an Operation-Location header.
  */
-model ValidateResponse {
+model ValidateResponseResult {
   /**
    * edge device validation status
    */

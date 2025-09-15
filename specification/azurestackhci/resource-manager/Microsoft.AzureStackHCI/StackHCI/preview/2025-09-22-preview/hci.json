@@ -647,7 +647,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateResponse"
+              "$ref": "#/definitions/ValidateResponseResult"
             }
           },
           "202": {
@@ -5097,12 +5097,12 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<ValidateResponse>": {
+    "Azure.ResourceManager.ArmResponse<ValidateResponseResult>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/ValidateResponse",
+          "$ref": "#/definitions/ValidateResponseResult",
           "description": "The body type of the operation request or response."
         }
       },
@@ -11921,7 +11921,7 @@
         "edgeDeviceIds"
       ]
     },
-    "ValidateResponse": {
+    "ValidateResponseResult": {
       "type": "object",
       "description": "An Accepted response with an Operation-Location header.",
       "properties": {
