@@ -618,9 +618,7 @@ interface Sites {
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+    File | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1970,11 +1968,16 @@ interface WebApps {
   /**
    * Description for Start capturing network packets for the site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("networkTrace/startOperation")
-  startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionAsync<
+  startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]>,
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+      @bodyRoot
+      @OpenAPI.extension("x-ms-identifiers", #[])
+      _?: NetworkTrace[];
+    }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -2309,11 +2312,16 @@ interface WebApps {
   /**
    * Description for Start capturing network packets for the site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("startNetworkTrace")
-  startNetworkTraceSlot is WebAppOps.ActionAsync<
+  startNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]>,
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+      @bodyRoot
+      @OpenAPI.extension("x-ms-identifiers", #[])
+      _?: NetworkTrace[];
+    }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.

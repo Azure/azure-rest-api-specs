@@ -30,7 +30,7 @@ op validateMove(
    */
   @bodyRoot
   moveResourceEnvelope: CsmMoveResourceEnvelope,
-): DefaultErrorResponse;
+): DefaultErrorResponse | NoContentResponse;
 /**
  * Description for Validate if a resource can be created.
  */

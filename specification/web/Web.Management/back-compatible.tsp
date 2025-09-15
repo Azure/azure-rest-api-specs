@@ -1644,9 +1644,6 @@ using Microsoft.Web;
 @@clientLocation(FunctionEnvelopes.deleteFunction, WebApps);
 @@clientLocation(FunctionEnvelopes.listFunctions, WebApps);
 @@clientLocation(FunctionEnvelopes.createOrUpdateFunctionSecret, WebApps);
-// @@clientName(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.key,
-//   "key"
-// );
 @@clientLocation(FunctionEnvelopes.deleteFunctionSecret, WebApps);
 @@clientLocation(FunctionEnvelopes.listFunctionKeys, WebApps);
 @@clientLocation(FunctionEnvelopes.listFunctionSecrets, WebApps);
