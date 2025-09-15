@@ -36,8 +36,8 @@ options:
       name: "@azure/arm-recoveryservices"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/recoveryservices"
-    package-dir: "armrecoveryservices"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservices"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservices"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
