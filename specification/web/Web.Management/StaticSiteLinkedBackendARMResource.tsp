@@ -108,7 +108,9 @@ interface StaticSiteLinkedBackendARMResources {
     StaticSiteLinkedBackendARMResource,
     StaticSiteLinkedBackendARMResource,
     NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -199,7 +201,9 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
     StaticSiteLinkedBackendARMResource,
     StaticSiteLinkedBackendARMResource,
     NoContentResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 
