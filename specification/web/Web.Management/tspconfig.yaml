@@ -31,8 +31,8 @@ options:
       name: "@azure/arm-appservice"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/appservice"
-    package-dir: "armappservice"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armappservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
