@@ -380,6 +380,10 @@ namespace TextAuthoringProjectClient {
     getLoadSnapshotStatus is Language.Text.Authoring.TextAuthoringTrainedModel.getLoadSnapshotStatus;
   }
 }
+@@clientName(TextAuthoringProjectClient.TrainedModelOperations.getModelEvaluationResults,
+  "listModelEvaluationResults",
+  "python"
+);
 
 @@clientInitialization(TextAuthoringProjectClient, {
   parameters: TextAuthoringProjectClientOptions,
