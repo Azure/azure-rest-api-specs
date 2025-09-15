@@ -12,15 +12,15 @@ options:
     arm-types-dir: "{project-root}/../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.WorkloadOrchestration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.WorkloadOrchestration"
     api-version: "2025-06-01"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/workloadorchestration"
-    emitter-output-dir: "{output-dir}/{service-dir}/armplaceholder"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armplaceholder"
+    emitter-output-dir: "{output-dir}/{service-dir}/armworkloadorchestration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armworkloadorchestration"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

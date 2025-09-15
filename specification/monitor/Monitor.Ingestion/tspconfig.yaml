@@ -18,7 +18,7 @@ options:
     output-file: "{azure-resource-provider-folder}/ingestion/{version-status}/{version}/DataCollectionRules.json"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitoring"
-    package-name: "{package-dir}"
+    package-name: "azure-mgmt-monitoring"
     package-mode: dataplane
     flavor: azure
     namespace: azure.monitor.ingestion
@@ -33,8 +33,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/ingestion"
     emitter-output-dir: "{output-dir}/{service-dir}/azlogs"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/ingestion/azlogs"
-    module-version: "0.0.1"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azlogs"
     single-client: true
     rawjson-as-bytes: true
     inject-spans: true
