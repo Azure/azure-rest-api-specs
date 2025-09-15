@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-03-01-beta` is specified on t
 
 ```yaml $(tag) == 'package-2018-03-01-beta'
 input-file:
-  - Microsoft.SaaS/preview/2018-03-01-beta/saas.json
+  - preview/2018-03-01-beta/saas.json
 ```
 
 ---
