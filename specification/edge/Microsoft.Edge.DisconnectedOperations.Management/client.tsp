@@ -7,3 +7,4 @@ using Azure.ClientGenerator.Core;
   "DisconnectedOperationsManagementClient",
   "javascript"
 );
+@@clientName(Microsoft.Edge, "DisconnectedOperationsMgmt", "python");
