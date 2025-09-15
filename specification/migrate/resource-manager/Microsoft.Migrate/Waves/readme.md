@@ -28,7 +28,7 @@ tag: package-preview-2025-03
 ### Tag: package-preview-2025-03
 These settings apply only when `--tag=package-preview-2025-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-03'
+```yaml $(tag) == 'package-preview-2025-03'
 input-file:
   - preview/2025-03-30-preview/waves.json
 suppressions:
