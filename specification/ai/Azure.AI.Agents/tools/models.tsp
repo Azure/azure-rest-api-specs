@@ -921,17 +921,6 @@ model RunStepConnectedAgent {
 //
 
 @doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
-@added(Versions.v2025_05_01)
-model ToolOutput {
-  @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
-  @encodedName("application/json", "tool_call_id")
-  toolCallId?: string;
-
-  @doc("The output from the tool to be submitted.")
-  output?: string;
-}
-
-@doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
 @discriminator("type")
 @added(Versions.v2025_05_15_preview)
 model StructuredToolOutput {
@@ -941,17 +930,17 @@ model StructuredToolOutput {
 
   @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
   @encodedName("application/json", "tool_call_id")
-  toolCallId: string;
+  toolCallId?: string;
 }
 
 @doc("The output from a function tool to be submitted.")
-@added(Versions.v2025_05_15_preview)
-model FunctionToolOutput extends StructuredToolOutput {
+@added(Versions.v2025_05_01)
+model ToolOutput extends StructuredToolOutput {
   @doc("The object type, which is always 'function_call_output'.")
   type: "function_call_output";
 
   @doc("The output from the function tool to be submitted.")
-  output: string;
+  output?: string;
 }
 
 @doc("The output from a computer use tool to be submitted.")

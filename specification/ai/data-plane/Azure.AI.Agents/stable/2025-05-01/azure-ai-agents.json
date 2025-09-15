@@ -6781,6 +6781,25 @@
         ]
       }
     },
+    "StructuredToolOutput": {
+      "type": "object",
+      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type for the tool output."
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "SubmitToolOutputsAction": {
       "type": "object",
       "description": "The details for required tool calls that must be submitted for an agent thread run to continue.",
@@ -7258,18 +7277,19 @@
     },
     "ToolOutput": {
       "type": "object",
-      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "description": "The output from a function tool to be submitted.",
       "properties": {
-        "tool_call_id": {
-          "type": "string",
-          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
-          "x-ms-client-name": "toolCallId"
-        },
         "output": {
           "type": "string",
-          "description": "The output from the tool to be submitted."
+          "description": "The output from the function tool to be submitted."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StructuredToolOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call_output"
     },
     "ToolResources": {
       "type": "object",
