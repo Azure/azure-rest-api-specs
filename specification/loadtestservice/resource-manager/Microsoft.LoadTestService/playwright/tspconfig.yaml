@@ -54,8 +54,8 @@ options:
     service-name: Playwright
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/playwright"
-    package-dir: "armplaywright"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armplaywright"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armplaywright"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
