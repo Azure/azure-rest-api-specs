@@ -46,4 +46,9 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_08_01_preview: "2025-08-01-preview",
+
+  /** Azure Cosmos DB for Mongo vCore clusters api version 2025-09-01. */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_09_01: "2025-09-01",
 }
