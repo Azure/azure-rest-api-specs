@@ -41,13 +41,19 @@
   "tags": [
     {
       "name": "Sites"
+    },
+    {
+      "name": "SitesBySubscription"
     }
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites": {
       "get": {
         "operationId": "SitesBySubscription_List",
-        "description": "List Site resources by subscription ID",
+        "tags": [
+          "SitesBySubscription"
+        ],
+        "description": "List a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -83,6 +89,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites/{siteName}": {
       "get": {
         "operationId": "SitesBySubscription_Get",
+        "tags": [
+          "SitesBySubscription"
+        ],
         "description": "Get a Site",
         "parameters": [
           {
@@ -94,7 +103,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -122,6 +131,9 @@
       },
       "put": {
         "operationId": "SitesBySubscription_CreateOrUpdate",
+        "tags": [
+          "SitesBySubscription"
+        ],
         "description": "Create a Site",
         "parameters": [
           {
@@ -133,7 +145,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -191,6 +203,9 @@
       },
       "patch": {
         "operationId": "SitesBySubscription_Update",
+        "tags": [
+          "SitesBySubscription"
+        ],
         "description": "Update a Site",
         "parameters": [
           {
@@ -202,7 +217,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -210,7 +225,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -239,6 +254,9 @@
       },
       "delete": {
         "operationId": "SitesBySubscription_Delete",
+        "tags": [
+          "SitesBySubscription"
+        ],
         "description": "Delete a Site",
         "parameters": [
           {
@@ -250,7 +268,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -283,7 +301,7 @@
         "tags": [
           "Sites"
         ],
-        "description": "List Site resources by resource group",
+        "description": "List a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -339,7 +357,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -384,7 +402,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -459,7 +477,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -467,7 +485,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -513,7 +531,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"

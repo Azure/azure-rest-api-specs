@@ -16,43 +16,59 @@ namespace Microsoft.Edge;
 
 @doc("Site as ARM Resource")
 model Site is ProxyResource<SiteProperties> {
-  #suppress "@typespec/http/metadata-ignored" ""
-  @doc("Name of Site resource")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  @path
-  @key("siteName")
-  @segment("sites")
-  @visibility(Lifecycle.Read)
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Site,
+    KeyName = "siteName",
+    SegmentName = "sites",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+  >;
 }
+
+alias SiteOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  KeysOf<ResourceNameParameter<
+    Resource = Site,
+    KeyName = "siteName",
+    SegmentName = "sites",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+  >>
+>;
 
 @armResourceOperations
 interface Sites {
-  get is ArmResourceRead<Site>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
-  update is ArmCustomPatchSync<Site, SiteUpdate>;
-  delete is ArmResourceDeleteSync<Site>;
-  listByResourceGroup is ArmResourceListByParent<Site>;
+  get is SiteOps.Read<Site>;
+  createOrUpdate is SiteOps.CreateOrUpdateAsync<Site>;
+  update is SiteOps.CustomPatchSync<Site, SiteUpdate>;
+  delete is SiteOps.DeleteSync<Site>;
+  listByResourceGroup is SiteOps.List<Site>;
 }
 
-alias SubscriptionParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
+alias SiteBySubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  KeysOf<ResourceNameParameter<
+    Resource = Site,
+    KeyName = "siteName",
+    SegmentName = "sites",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+  >>
+>;
+
+@armResourceOperations
 interface SitesBySubscription {
-  list is ArmListBySubscription<Site>;
-  get is ArmResourceRead<Site, BaseParameters = SubscriptionParameters>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Site,
-    BaseParameters = SubscriptionParameters
-  >;
-  update is ArmCustomPatchSync<
-    Site,
-    SiteUpdate,
-    BaseParameters = SubscriptionParameters
-  >;
-  delete is ArmResourceDeleteSync<
-    Site,
-    BaseParameters = SubscriptionParameters
-  >;
+  list is SiteBySubscriptionOps.List<Site>;
+  get is SiteBySubscriptionOps.Read<Site>;
+  createOrUpdate is SiteBySubscriptionOps.CreateOrUpdateAsync<Site>;
+  update is SiteBySubscriptionOps.CustomPatchSync<Site, SiteUpdate>;
+  delete is SiteBySubscriptionOps.DeleteSync<Site>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of Tenant"
