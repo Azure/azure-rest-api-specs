@@ -25,7 +25,7 @@ These settings apply only when `--tag=package-2022-10-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-10-31-preview'
 input-file:
-  - Microsoft.IoTCentral/preview/2022-10-31-preview/iotcentral.json
+  - preview/2022-10-31-preview/iotcentral.json
 ```
 
 ### Tag: package-2022-07-31
@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2022-07-31` is specified on the co
 
 ```yaml $(tag) == 'package-2022-07-31'
 input-file:
-  - Microsoft.IoTCentral/stable/2022-07-31/iotcentral.json
+  - stable/2022-07-31/iotcentral.json
 ```
 
 ### Tag: package-2022-06-30-preview
@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-2022-06-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-06-30-preview'
 input-file:
-  - Microsoft.IoTCentral/preview/2022-06-30-preview/iotcentral.json
+  - preview/2022-06-30-preview/iotcentral.json
 ```
 
 ### Tag: package-2022-05-31
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2022-05-31` is specified on the co
 
 ```yaml $(tag) == 'package-2022-05-31'
 input-file:
-  - Microsoft.IoTCentral/stable/2022-05-31/iotcentral.json
+  - stable/2022-05-31/iotcentral.json
 ```
 
 ### Tag: package-2021-04-30-preview
@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2021-04-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-04-30-preview'
 input-file:
-  - Microsoft.IoTCentral/preview/2021-04-30-preview/iotcentral.json
+  - preview/2021-04-30-preview/iotcentral.json
 ```
 
 ### Tag: package-1.2-preview
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-1.2-preview` is specified on the c
 
 ```yaml $(tag) == 'package-1.2-preview'
 input-file:
-  - Microsoft.IoTCentral/preview/1.2-preview/iotcentral.json
+  - preview/1.2-preview/iotcentral.json
 ```
 
 ### Tag: package-1.1-preview
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-1.1-preview` is specified on the c
 
 ```yaml $(tag) == 'package-1.1-preview'
 input-file:
-  - Microsoft.IoTCentral/preview/1.1-preview/iotcentral.json
+  - preview/1.1-preview/iotcentral.json
 ```
 
 ### Tag: package-1.0
@@ -81,7 +81,7 @@ These settings apply only when `--tag=package-1.0` is specified on the command l
 
 ```yaml $(tag) == 'package-1.0'
 input-file:
-  - Microsoft.IoTCentral/stable/1.0/iotcentral.json
+  - stable/1.0/iotcentral.json
 ```
 ---
 
