@@ -221,7 +221,9 @@ interface StaticSiteARMResources {
   detachStaticSite is ArmResourceActionAsync<
     StaticSiteARMResource,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Error = DefaultErrorResponse
   >;
 
@@ -301,7 +303,9 @@ interface StaticSiteARMResources {
   resetStaticSiteApiKey is ArmResourceActionSync<
     StaticSiteARMResource,
     StaticSiteResetPropertiesARMResource,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Error = DefaultErrorResponse
   >;
 
@@ -324,8 +328,12 @@ interface StaticSiteARMResources {
   createZipDeploymentForStaticSite is ArmResourceActionAsync<
     StaticSiteARMResource,
     StaticSiteZipDeploymentARMResource,
-    OkResponse,
-    Error = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    Error = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

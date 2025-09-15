@@ -120,8 +120,12 @@ interface WorkflowTriggers {
   run is WorkflowTriggersOps.ActionAsync<
     WorkflowTrigger,
     void,
-    OkResponse,
-    OverrideErrorType = ErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = ErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**

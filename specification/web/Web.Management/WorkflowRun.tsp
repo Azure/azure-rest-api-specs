@@ -107,7 +107,9 @@ interface WorkflowRuns {
   cancel is WorkflowRunsOps.ActionSync<
     WorkflowRun,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = ErrorResponse
   >;
 }

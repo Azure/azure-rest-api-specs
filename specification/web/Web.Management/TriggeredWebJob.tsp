@@ -91,7 +91,9 @@ interface TriggeredWebJobs {
   runTriggeredWebJobSlot is TriggeredWebJobOps.ActionSync<
     TriggeredWebJob,
     void,
-    OkResponse | ArmNotFoundResponse,
+    {
+      @body body: void;
+    } | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -155,7 +157,9 @@ interface TriggeredWebJobOperationGroup {
   runTriggeredWebJob is TriggeredWebJobOperationGroupOps.ActionSync<
     TriggeredWebJob,
     void,
-    OkResponse | ArmNotFoundResponse,
+    {
+      @body body: void;
+    } | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }

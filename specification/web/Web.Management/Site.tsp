@@ -384,7 +384,9 @@ interface Sites {
   applySlotConfigToProduction is SiteOps.ActionSync<
     Site,
     CsmSlotEntity,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -491,7 +493,9 @@ interface Sites {
   deleteBackupConfiguration is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -600,7 +604,9 @@ interface Sites {
   getWebSiteContainerLogs is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -612,7 +618,9 @@ interface Sites {
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -918,7 +926,9 @@ interface Sites {
   stopWebSiteNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -990,7 +1000,9 @@ interface Sites {
   generateNewSitePublishingPassword is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1068,7 +1080,9 @@ interface Sites {
   resetProductionSlotConfig is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1078,7 +1092,9 @@ interface Sites {
   restart is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Parameters = {
       /**
        * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
@@ -1101,8 +1117,12 @@ interface Sites {
   restoreFromBackupBlob is SiteOps.ActionAsync<
     Site,
     RestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -1111,8 +1131,12 @@ interface Sites {
   restoreFromDeletedApp is SiteOps.ActionAsync<
     Site,
     DeletedAppRestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -1121,8 +1145,12 @@ interface Sites {
   restoreSnapshot is SiteOps.ActionAsync<
     Site,
     SnapshotRestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -1144,8 +1172,12 @@ interface Sites {
   swapSlotWithProduction is SiteOps.ActionAsync<
     Site,
     CsmSlotEntity,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -1180,7 +1212,9 @@ interface Sites {
   start is ArmResourceActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Error = DefaultErrorResponse
   >;
 
@@ -1227,7 +1261,9 @@ interface Sites {
   stop is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1238,7 +1274,9 @@ interface Sites {
   stopNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1249,7 +1287,9 @@ interface Sites {
   syncRepository is SiteOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1290,7 +1330,9 @@ interface Sites {
   deployWorkflowArtifacts is SiteOps.ActionSync<
     Site,
     WorkflowArtifacts,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OptionalRequestBody = true,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -1311,7 +1353,9 @@ interface Sites {
   regenerateAccessKey is WorkflowRegenerateAccessKeyOps.ActionSync<
     Site,
     RegenerateActionParameter,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = ErrorResponse
   >;
 
@@ -1321,7 +1365,9 @@ interface Sites {
   validate is WorkflowRegenerateAccessKeyOps.ActionSync<
     Site,
     Workflow,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = ErrorResponse
   >;
 }
@@ -1465,7 +1511,9 @@ interface WebApps {
   applySlotConfigurationSlot is WebAppOps.ActionSync<
     Site,
     CsmSlotEntity,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1573,7 +1621,9 @@ interface WebApps {
   deleteBackupConfigurationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1691,7 +1741,9 @@ interface WebApps {
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1953,7 +2005,9 @@ interface WebApps {
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2028,7 +2082,9 @@ interface WebApps {
   generateNewSitePublishingPasswordSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2106,7 +2162,9 @@ interface WebApps {
   resetSlotConfigurationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2117,7 +2175,9 @@ interface WebApps {
   restartSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Parameters = {
       /**
        * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
@@ -2141,8 +2201,12 @@ interface WebApps {
   restoreFromBackupBlobSlot is WebAppOps.ActionAsync<
     Site,
     RestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -2152,8 +2216,12 @@ interface WebApps {
   restoreFromDeletedAppSlot is WebAppOps.ActionAsync<
     Site,
     DeletedAppRestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -2163,8 +2231,12 @@ interface WebApps {
   restoreSnapshotSlot is WebAppOps.ActionAsync<
     Site,
     SnapshotRestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -2186,8 +2258,12 @@ interface WebApps {
   swapSlotSlot is WebAppOps.ActionAsync<
     Site,
     CsmSlotEntity,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -2224,7 +2300,9 @@ interface WebApps {
   startSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2265,7 +2343,9 @@ interface WebApps {
   stopSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2277,7 +2357,9 @@ interface WebApps {
   stopNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse | NoContentResponse,
+    {
+      @body body: void;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2288,7 +2370,9 @@ interface WebApps {
   syncRepositorySlot is WebAppOps.ActionSync<
     Site,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2330,7 +2414,9 @@ interface WebApps {
   deployWorkflowArtifactsSlot is WebAppOps.ActionSync<
     Site,
     WorkflowArtifacts,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OptionalRequestBody = true,
     OverrideErrorType = DefaultErrorResponse
   >;

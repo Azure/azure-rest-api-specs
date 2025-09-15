@@ -79,8 +79,12 @@ interface StaticSiteCustomDomainOverviewARMResources {
   validateCustomDomainCanBeAddedToStaticSite is ArmResourceActionAsync<
     StaticSiteCustomDomainOverviewARMResource,
     StaticSiteCustomDomainRequestPropertiesARMResource,
-    OkResponse,
-    Error = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    Error = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

@@ -232,7 +232,9 @@ interface AppServiceEnvironmentResources {
   testUpgradeAvailableNotification is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Error = DefaultErrorResponse
   >;
 

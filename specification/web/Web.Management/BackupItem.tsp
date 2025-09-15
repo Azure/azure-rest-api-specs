@@ -94,8 +94,12 @@ interface BackupItems {
   restore is BackupItemOps.ActionAsync<
     BackupItem,
     RestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 @armResourceOperations
@@ -175,8 +179,12 @@ interface BackupItemOperationGroup {
   restoreSlot is BackupItemOperationGroupOps.ActionAsync<
     BackupItem,
     RestoreRequest,
-    OkResponse,
-    OverrideErrorType = DefaultErrorResponse
+    {
+      @body body: void;
+    },
+    OverrideErrorType = DefaultErrorResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

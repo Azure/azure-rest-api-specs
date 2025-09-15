@@ -77,7 +77,9 @@ interface RecommendationRules {
   disableRecommendationForHostingEnvironment is RecommendationRuleOps.ActionSync<
     RecommendationRule,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Parameters = {
       /**
        * Site name
@@ -142,7 +144,9 @@ interface Recommendations {
   disableRecommendationForSite is RecommendationOps.ActionSync<
     RecommendationRule,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 }
