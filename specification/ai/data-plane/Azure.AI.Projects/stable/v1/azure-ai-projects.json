@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint. In the form \"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>\" if you want to explicitly\nspecify the Foundry Project name.",
+        "description": "Project endpoint. In the form \"https://your-ai-services-account-name.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://your-ai-services-account-name.services.ai.azure.com/api/projects/your-project-name\" if you want to explicitly\nspecify the Foundry Project name.",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -377,7 +377,7 @@
     "/datasets/{name}/versions/{version}": {
       "get": {
         "operationId": "Datasets_GetVersion",
-        "description": "Get the specific version of the DatasetVersion",
+        "description": "Get the specific version of the DatasetVersion. The service returns 404 Not Found error if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -497,7 +497,7 @@
       },
       "delete": {
         "operationId": "Datasets_DeleteVersion",
-        "description": "Delete the specific version of the DatasetVersion",
+        "description": "Delete the specific version of the DatasetVersion. The service returns 204 No Content if the DatasetVersion was deleted successfully or if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -890,7 +890,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_GetVersion",
-        "description": "Get the specific version of the Index",
+        "description": "Get the specific version of the Index. The service returns 404 Not Found error if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1010,7 +1010,7 @@
       },
       "delete": {
         "operationId": "Indexes_DeleteVersion",
-        "description": "Delete the specific version of the Index",
+        "description": "Delete the specific version of the Index. The service returns 204 No Content if the Index was deleted successfully or if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1443,19 +1443,9 @@
     "CustomCredential": {
       "type": "object",
       "description": "Custom credential definition",
-      "properties": {
-        "keys": {
-          "type": "object",
-          "description": "The credential type",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
+      "additionalProperties": {
+        "type": "string"
       },
-      "required": [
-        "keys"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseCredentials"

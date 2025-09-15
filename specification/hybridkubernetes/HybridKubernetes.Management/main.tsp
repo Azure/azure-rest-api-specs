@@ -39,9 +39,12 @@ enum Versions {
   /**
    * The 2024-12-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_12_01_preview: "2024-12-01-preview",
+
+  /**
+   * The 2025-08-01-preview API version.
+   */
+  v2025_08_01_preview: "2025-08-01-preview",
 }
 
 interface Operations {
@@ -51,6 +54,7 @@ interface Operations {
   @doc("List the operations for the provider")
   @segment("operations")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 

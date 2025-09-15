@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "tuningOption": "table",
+    "recommendationType": "AnalyzeTable"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "",
+            "properties": {
+              "initialRecommendedTime": "2025-06-01T20:30:22.123456Z",
+              "lastRecommendedTime": "2025-06-01T20:30:22.123456Z",
+              "timesRecommended": 1,
+              "improvedQueryIds": [
+                2071439792137543700,
+                7860150533486302000,
+                6411979446509506000,
+                3219604056681277400,
+                -360410933364310600,
+                6171467644166225000,
+                3548728559597612500,
+                -4753875211349607000,
+                -8711548294430095000
+              ],
+              "recommendationReason": "Table \"nation\" in schema \"public\" is unanalyzed and appears in the following queries: 2071439792137543669, 7860150533486301820, 6411979446509505239, 3219604056681277471, -360410933364310591, 6171467644166224729, 3548728559597612316, -4753875211349607298, -8711548294430094920",
+              "recommendationType": "Analyze",
+              "implementationDetails": {
+                "method": "SQL",
+                "script": "analyze table public.nation"
+              },
+              "analyzedWorkload": {
+                "startTime": "2025-06-01T19:30:22.123456Z",
+                "endTime": "2025-06-01T20:30:22.123456Z",
+                "queryCount": 22
+              },
+              "estimatedImpact": [],
+              "details": {
+                "databaseName": "postgres",
+                "schema": "public",
+                "table": "nation"
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/tuningOptions/table/recommendations/1",
+            "name": "Analyze_postgres_public_nation",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/table"
+          },
+          {
+            "kind": "",
+            "properties": {
+              "initialRecommendedTime": "2025-06-01T20:30:22.123456Z",
+              "lastRecommendedTime": "2025-06-01T20:30:22.123456Z",
+              "timesRecommended": 1,
+              "improvedQueryIds": [
+                3219604056681277400,
+                6171467644166225000,
+                -4753875211349607000
+              ],
+              "recommendationReason": "Table \"region\" in schema \"public\" is unanalyzed and appears in the following queries: 3219604056681277471, 6171467644166224729, -4753875211349607298",
+              "recommendationType": "Analyze",
+              "implementationDetails": {
+                "method": "SQL",
+                "script": "analyze table public.region"
+              },
+              "analyzedWorkload": {
+                "startTime": "2025-06-01T19:30:22.123456Z",
+                "endTime": "2025-06-01T20:30:22.123456Z",
+                "queryCount": 22
+              },
+              "estimatedImpact": [],
+              "details": {
+                "databaseName": "postgres",
+                "schema": "public",
+                "table": "region"
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/tuningOptions/table/recommendations/2",
+            "name": "Analyze_postgres_public_region",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/table"
+          }
+        ]
+      }
+    }
+  }
+}
