@@ -26,4 +26,7 @@ using Azure.ClientGenerator.Core;
   "ComputeRecommenderPlacementScore",
   "csharp"
 );
-@@clientName(Microsoft.Compute.ResourceSize, "AzureResourceSize", "csharp");
+@@clientName(Microsoft.Compute.ResourceSize,
+  "ComputeRecommenderResourceSize",
+  "csharp"
+);
