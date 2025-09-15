@@ -80,7 +80,7 @@
         "tags": [
           "BusinessDomain"
         ],
-        "description": "Retrieves a list of business domains.",
+        "description": "Enumerates business domains with optional continuation token and write-obligation filtering.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -97,7 +97,7 @@
             "name": "writeOnly",
             "in": "query",
             "description": "writeOnly",
-            "required": true,
+            "required": false,
             "type": "boolean"
           }
         ],
@@ -141,8 +141,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "domain",
             "in": "body",
+            "description": "Domain payload to create.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Domain"
@@ -182,7 +183,7 @@
         "tags": [
           "BusinessDomain"
         ],
-        "description": "Retrieves an existing business domain.",
+        "description": "Retrieves a business domain by identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -190,7 +191,7 @@
           {
             "name": "domainId",
             "in": "path",
-            "description": "The parent domain identifier.",
+            "description": "Identifier of the domain to retrieve.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -241,9 +242,9 @@
             "format": "uuid"
           },
           {
-            "name": "body",
+            "name": "domain",
             "in": "body",
-            "description": "The updated business domain.",
+            "description": "Updated domain payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Domain"
@@ -289,7 +290,7 @@
           {
             "name": "domainId",
             "in": "path",
-            "description": "The parent domain identifier.",
+            "description": "Identifier of the domain to retrieve.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -396,12 +397,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CriticalDataColumn"
-            }
+            "$ref": "#/parameters/CreateCriticalDataColumnRequest"
           }
         ],
         "responses": {
@@ -445,7 +441,7 @@
           {
             "name": "criticalDataColumnId",
             "in": "path",
-            "description": "The Id of the domain.",
+            "description": "The identifier of the critical data column.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -492,7 +488,7 @@
           {
             "name": "criticalDataColumnId",
             "in": "path",
-            "description": "The Id of the domain.",
+            "description": "The identifier of the critical data column.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -501,7 +497,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The body associated with the critical data element output.",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -648,7 +644,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The body associated with the critical data column",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -801,7 +797,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The body associated with the critical data column",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -900,7 +896,15 @@
             "name": "entityId",
             "in": "query",
             "description": "The unique identifier of the critical data column.",
-            "required": true,
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "criticalDataElementId",
+            "in": "query",
+            "description": "The identifier of the critical data element.",
+            "required": false,
             "type": "string",
             "format": "uuid"
           }
@@ -952,7 +956,7 @@
             "name": "keyword",
             "in": "query",
             "description": "Search keyword.",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
@@ -1005,12 +1009,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CriticalDataElement"
-            }
+            "$ref": "#/parameters/CreateCriticalDataElementRequest"
           }
         ],
         "responses": {
@@ -1103,6 +1102,15 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "name": "criticalDataElement",
+            "in": "body",
+            "description": "the critical data element to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CriticalDataElement"
+            }
           }
         ],
         "responses": {
@@ -1180,7 +1188,7 @@
         "tags": [
           "CriticalDataElements"
         ],
-        "description": "Retrieves relationships for a critical data element.",
+        "description": "Lists relationships for the specified CDE and entity category.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1197,7 +1205,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The body associated with the critical data element output.",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -1327,7 +1335,7 @@
         "tags": [
           "CriticalDataElements"
         ],
-        "description": "Updates relationships for a critical data element.",
+        "description": "Creates a relationship between the specified CDE and another entity.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1344,7 +1352,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity for the relationship.",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -1480,7 +1488,7 @@
         "tags": [
           "CriticalDataElements"
         ],
-        "description": "Deletes relationships for a critical data element.",
+        "description": "Deletes a relationship between the CDE and the specified entity.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1497,7 +1505,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity for the relationship.",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -1596,7 +1604,7 @@
             "name": "entityId",
             "in": "query",
             "description": "The unique identifier of the related entity.",
-            "required": true,
+            "required": false,
             "type": "string",
             "format": "uuid"
           }
@@ -1637,8 +1645,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
+            "description": "The request body containing query criteria.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CriticalDataElementFacetRequest"
@@ -1692,7 +1701,7 @@
             "format": "int32"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "description": "The request body containing query criteria.",
             "required": true,
@@ -1737,7 +1746,7 @@
         "tags": [
           "DataAsset"
         ],
-        "description": "Retrieves a list of data assets.",
+        "description": "Lists data assets with optional ordering and pagination.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1792,8 +1801,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "dataAsset",
             "in": "body",
+            "description": "The data asset payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataAsset"
@@ -1841,7 +1851,7 @@
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Gets or Sets Id.",
+            "description": "The data asset identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1894,7 +1904,7 @@
           {
             "name": "dataAsset",
             "in": "body",
-            "description": "DataAsset.",
+            "description": "Updated data asset payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataAsset"
@@ -1940,7 +1950,7 @@
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Gets or Sets Id.",
+            "description": "The data asset identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1976,7 +1986,7 @@
         "tags": [
           "DataAsset"
         ],
-        "description": "Retrieves relationships for a data asset.",
+        "description": "Lists relationships for a data asset filtered by entity category.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1984,7 +1994,7 @@
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Gets or Sets Id.",
+            "description": "The data asset identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1992,8 +2002,8 @@
           {
             "name": "entityType",
             "in": "query",
-            "description": "The body associated with the critical data element output.",
-            "required": true,
+            "description": "Required entity category to list relationships for.",
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2123,7 +2133,7 @@
         "tags": [
           "DataAsset"
         ],
-        "description": "Creates relationships for a data asset.",
+        "description": "Creates a relationship between the specified data asset and another entity.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2139,8 +2149,8 @@
           {
             "name": "entityType",
             "in": "query",
-            "description": "The type of entity to retrieve relationships for.",
-            "required": true,
+            "description": "Category of the entity to relate to (required).",
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2238,7 +2248,7 @@
           {
             "name": "relationship",
             "in": "body",
-            "description": "The properties of the relationship to create.",
+            "description": "Relationship payload as JSON (required).",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CriticalDataColumnRelationshipRequest"
@@ -2292,8 +2302,8 @@
           {
             "name": "entityType",
             "in": "query",
-            "description": "The type of entity to retrieve relationships for.",
-            "required": true,
+            "description": "Category of the related entity (required).",
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2391,8 +2401,8 @@
           {
             "name": "entityId",
             "in": "query",
-            "description": "The unique identifier of the critical data asset.",
-            "required": true,
+            "description": "Identifier of the related entity (required).",
+            "required": false,
             "type": "string",
             "format": "uuid"
           }
@@ -2433,8 +2443,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
+            "description": "The data asset payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataAssetQueryRequest"
@@ -2477,7 +2488,7 @@
         "tags": [
           "DataProduct"
         ],
-        "description": "Retrieves a list of data products.",
+        "description": "Lists data products with optional domain filter, sorting and pagination.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2494,7 +2505,7 @@
           {
             "name": "domainId",
             "in": "query",
-            "description": "The unique identifier of the domain.",
+            "description": "Optional domain identifier filter.",
             "required": false,
             "type": "string",
             "format": "uuid"
@@ -2540,8 +2551,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "dataProduct",
             "in": "body",
+            "description": "The data product payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataProduct"
@@ -2640,9 +2652,9 @@
             "format": "uuid"
           },
           {
-            "name": "body",
+            "name": "dataProduct",
             "in": "body",
-            "description": "The updated data product.",
+            "description": "Updated data product payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataProduct"
@@ -2724,7 +2736,7 @@
         "tags": [
           "DataProduct"
         ],
-        "description": "Retrieves relationships for a data product.",
+        "description": "Lists relationships for a data product filtered by entity category.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2740,8 +2752,8 @@
           {
             "name": "entityType",
             "in": "query",
-            "description": "The type of entity to retrieve relationships for.",
-            "required": true,
+            "description": "Required entity category to list relationships for.",
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2887,8 +2899,8 @@
           {
             "name": "entityType",
             "in": "query",
-            "description": "The type of entity to retrieve relationships for.",
-            "required": true,
+            "description": "Category of the entity to relate to (required).",
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2986,7 +2998,7 @@
           {
             "name": "relationship",
             "in": "body",
-            "description": "The properties of the relationship to create.",
+            "description": "Relationship payload as JSON.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CriticalDataColumnRelationshipRequest"
@@ -3024,7 +3036,7 @@
         "tags": [
           "DataProduct"
         ],
-        "description": "Deletes a relationship for a data product.",
+        "description": "Deletes a relationship between the data product and a specified entity.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3040,8 +3052,8 @@
           {
             "name": "entityType",
             "in": "query",
-            "description": "The type of entity to retrieve relationships for.",
-            "required": true,
+            "description": "Category of the related entity (required).",
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -3139,8 +3151,8 @@
           {
             "name": "entityId",
             "in": "query",
-            "description": "The unique identifier of the critical data asset.",
-            "required": true,
+            "description": "Identifier of the related entity (required).",
+            "required": false,
             "type": "string",
             "format": "uuid"
           }
@@ -3175,14 +3187,15 @@
         "tags": [
           "DataProduct"
         ],
-        "description": "Retrieves facets for data products.",
+        "description": "Retrieves facets for data products based on the supplied facets request.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
+            "description": "Facet request specifying which facets to compute.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataProductFacetRequest"
@@ -3222,7 +3235,7 @@
         "tags": [
           "DataProduct"
         ],
-        "description": "Queries data products based on specified criteria.",
+        "description": "Queries data products using the provided filter payload.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3230,7 +3243,7 @@
           {
             "name": "duplicatecheck",
             "in": "query",
-            "description": "To check for duplicate data products.",
+            "description": "Optional duplicate-check flag (1 to enable exact search).",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -3238,14 +3251,14 @@
           {
             "name": "dataProductOwner",
             "in": "query",
-            "description": "To filter by data product owner.",
-            "required": true,
+            "description": "Optional flag to restrict results to owned data products.",
+            "required": false,
             "type": "boolean"
           },
           {
             "name": "request",
             "in": "body",
-            "description": "The request body for the query.",
+            "description": "Query request containing filters and pagination.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataProductQueryRequest"
@@ -3288,7 +3301,7 @@
         "tags": [
           "OKR"
         ],
-        "description": "Retrieves a list of objectives (OKRs) based on keyword, domainId, and other filters.",
+        "description": "Lists objectives with optional filters, sorting and pagination.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3305,14 +3318,14 @@
           {
             "name": "keyword",
             "in": "query",
-            "description": "Search keyword for OKRs.",
-            "required": true,
+            "description": "Optional search keyword to match objective definition.",
+            "required": false,
             "type": "string"
           },
           {
             "name": "domainId",
             "in": "query",
-            "description": "The unique identifier of the domain.",
+            "description": "Optional domain identifier filter.",
             "required": false,
             "type": "string"
           }
@@ -3357,8 +3370,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "objective",
             "in": "body",
+            "description": "The objective payload, including additional properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ObjectiveWithAdditionalProperties"
@@ -3398,7 +3412,7 @@
         "tags": [
           "OKR"
         ],
-        "description": "Retrieves an existing objective (OKR) by ID.",
+        "description": "Retrieves an objective by identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3459,7 +3473,7 @@
           {
             "name": "objective",
             "in": "body",
-            "description": "The additional properties for the objective query.",
+            "description": "Updated objective payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ObjectiveQueryAdditionalProperties"
@@ -3497,7 +3511,7 @@
         "tags": [
           "OKR"
         ],
-        "description": "Deletes an existing objective (OKR) by ID.",
+        "description": "Deletes an objective by identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3541,7 +3555,7 @@
         "tags": [
           "OKR"
         ],
-        "description": "Retrieves key results for a specific objective (OKR) by its ID.",
+        "description": "Lists key results for a given objective.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3589,7 +3603,7 @@
         "tags": [
           "OKR"
         ],
-        "description": "Creates a new key result for a specific objective (OKR) by its ID.",
+        "description": "Creates a key result under the specified objective.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3605,7 +3619,7 @@
           {
             "name": "keyResult",
             "in": "body",
-            "description": "The body associated with the key result.",
+            "description": "Key result payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyResult"
@@ -3645,7 +3659,7 @@
         "tags": [
           "OKR"
         ],
-        "description": "Retrieves a specific key result (OKR) by its ID.",
+        "description": "Retrieves a key result by its identifier under the specified objective",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3698,7 +3712,7 @@
         "tags": [
           "OKR"
         ],
-        "description": "Updates an existing key result (OKR) by its ID.",
+        "description": "Updates a key result under the specified objective.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3722,7 +3736,7 @@
           {
             "name": "keyResult",
             "in": "body",
-            "description": "The body associated with the key result output.",
+            "description": "Updated key result payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogModelKeyResult"
@@ -3763,7 +3777,7 @@
         "tags": [
           "OKR"
         ],
-        "description": "Deletes an existing key result (OKR) by ID.",
+        "description": "Deletes a key result by its identifier under the specified objective.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3821,8 +3835,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
+            "description": "Facet request specifying which facets to compute.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ObjectiveFacetRequest"
@@ -3870,15 +3885,15 @@
           {
             "name": "duplicatecheck",
             "in": "query",
-            "description": "Checks for duplicate OKRs.",
+            "description": "Optional duplicate-check flag (1 to enable exact search).",
             "required": false,
             "type": "integer",
             "format": "int32"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
-            "description": "The request body for querying OKRs.",
+            "description": "Query request containing filters and pagination.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ObjectiveQueryRequest"
@@ -3921,7 +3936,7 @@
         "tags": [
           "Term"
         ],
-        "description": "Retrieves a list of terms based on domain, parentId, keyword, and other filters.",
+        "description": "Lists terms with optional domain/parent/keyword filters and pagination.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3955,7 +3970,7 @@
             "name": "keyword",
             "in": "query",
             "description": "Search keyword.",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
@@ -4007,8 +4022,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "term",
             "in": "body",
+            "description": "Term payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Term"
@@ -4048,7 +4064,7 @@
         "tags": [
           "Term"
         ],
-        "description": "Retrieves a term by its unique identifier.",
+        "description": "Retrieves a single term by identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4093,7 +4109,7 @@
         "tags": [
           "Term"
         ],
-        "description": "Retrieves a term by its unique identifier.",
+        "description": "Updates an existing term",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4101,7 +4117,7 @@
           {
             "name": "termId",
             "in": "path",
-            "description": "The unique identifier of the critical data term.",
+            "description": "The unique identifier of the critical data term or Parent term identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -4109,7 +4125,7 @@
           {
             "name": "term",
             "in": "body",
-            "description": "The updated term data.",
+            "description": "Updated term payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Term"
@@ -4191,7 +4207,7 @@
         "tags": [
           "Term"
         ],
-        "description": "Retrieves hierarchies for a term by its unique identifier.",
+        "description": "Lists hierarchical terms under the specified term id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4199,7 +4215,7 @@
           {
             "name": "termId",
             "in": "path",
-            "description": "The unique identifier of the critical data term.",
+            "description": "The unique identifier of the critical data term or Parent term identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -4241,7 +4257,7 @@
         "tags": [
           "Term"
         ],
-        "description": "Retrieves relationships for a term by its unique identifier and specified entity type and relationship type.",
+        "description": "Lists related entities for a term by category and optional relationship type.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4258,7 +4274,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity to retrieve relationships for.",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -4356,7 +4372,7 @@
           {
             "name": "relationshipType",
             "in": "query",
-            "description": "The type of relationship to retrieve.",
+            "description": "Optional relationship type.",
             "required": false,
             "type": "string",
             "enum": [
@@ -4421,7 +4437,7 @@
         "tags": [
           "Term"
         ],
-        "description": "Retrieves relationships for a term by its unique identifier.",
+        "description": "Adds a related entity to a term.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4429,7 +4445,7 @@
           {
             "name": "termId",
             "in": "path",
-            "description": "The unique identifier of the critical data term.",
+            "description": "The unique identifier of the critical data term or Parent term identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -4438,7 +4454,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity to retrieve relationships for.",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -4536,7 +4552,7 @@
           {
             "name": "termRelation",
             "in": "body",
-            "description": "The type of relationship to retrieve.",
+            "description": "Relationship payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TermRelationship"
@@ -4574,7 +4590,7 @@
         "tags": [
           "Term"
         ],
-        "description": "Deletes relationships for a term by its unique identifier and specified entity type and relationship type.",
+        "description": "Deletes a related entity from a term.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4582,7 +4598,7 @@
           {
             "name": "termId",
             "in": "path",
-            "description": "The unique identifier of the critical data term.",
+            "description": "The unique identifier of the critical data term or Parent term identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -4591,7 +4607,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity to retrieve relationships for.",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -4689,7 +4705,7 @@
           {
             "name": "relationshipType",
             "in": "query",
-            "description": "The type of relationship to retrieve.",
+            "description": "Optional relationship type.",
             "required": false,
             "type": "string",
             "enum": [
@@ -4722,8 +4738,8 @@
           {
             "name": "entityId",
             "in": "query",
-            "description": "The unique identifier of the critical data asset.",
-            "required": true,
+            "description": "Related entity identifier.",
+            "required": false,
             "type": "string",
             "format": "uuid"
           }
@@ -4764,8 +4780,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
+            "description": "Facet request specifying which facets to compute.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TermFacetRequest"
@@ -4805,7 +4822,7 @@
         "tags": [
           "Term"
         ],
-        "description": "Retrieves terms based on specified criteria.",
+        "description": "Queries terms based on the provided request.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4813,7 +4830,7 @@
           {
             "name": "duplicatecheck",
             "in": "query",
-            "description": "To check for duplicate terms.",
+            "description": "The bypassObligations to skip obligations.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -5540,7 +5557,7 @@
         },
         "domain": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The Id of the domain.",
+          "description": "The identifier of the critical data column.",
           "readOnly": true
         },
         "assetId": {
@@ -5802,7 +5819,7 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Gets or Sets Id.",
+          "description": "The data asset identifier.",
           "readOnly": true
         },
         "name": {
@@ -6329,7 +6346,7 @@
         },
         "parentId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The parent domain identifier.",
+          "description": "Identifier of the domain to retrieve.",
           "readOnly": true
         },
         "thumbnail": {
@@ -7562,7 +7579,7 @@
     "Azure.Core.SkipQueryParameter": {
       "name": "skip",
       "in": "query",
-      "description": "The number of result items to skip.",
+      "description": "Optional number of records to skip.",
       "required": false,
       "type": "integer",
       "format": "int32",
@@ -7572,10 +7589,30 @@
     "Azure.Core.TopQueryParameter": {
       "name": "top",
       "in": "query",
-      "description": "The number of result items to return.",
+      "description": "Optional max number of records to return.",
       "required": false,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "CreateCriticalDataColumnRequest": {
+      "name": "criticalDataColumn",
+      "in": "body",
+      "description": "The critical data column to create.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CriticalDataColumn"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CreateCriticalDataElementRequest": {
+      "name": "criticalDataElement",
+      "in": "body",
+      "description": "The critical data element to create.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CriticalDataElement"
+      },
       "x-ms-parameter-location": "method"
     }
   }

@@ -286,7 +286,7 @@ model CriticalDataColumn {
   @doc("Gets or Sets SystemData.")
   systemData?: CatalogModelSystemDataWithExpired;
 
-  @doc("The Id of the domain.")
+  @doc("The identifier of the critical data column.")
   @key("criticalDataColumnId")
   @visibility(Lifecycle.Read)
   domain: uuid;
@@ -419,7 +419,7 @@ model CatalogModelDataAssetSchema {
 @doc("DataAsset.")
 @resource("dataAssets")
 model DataAsset {
-  @doc("Gets or Sets Id.")
+  @doc("The data asset identifier.")
   @key("dataAssetId")
   @visibility(Lifecycle.Read)
   id: uuid;
@@ -839,7 +839,7 @@ model Domain {
   @doc("The description of the domain.")
   description?: string;
 
-  @doc("The parent domain identifier.")
+  @doc("Identifier of the domain to retrieve.")
   @key("domainId")
   @visibility(Lifecycle.Read)
   parentId: uuid;
@@ -1388,12 +1388,6 @@ model CatalogModelKeyResultResponse {
   nextLink?: string;
 }
 
-alias CriticalDataElementBody = {
-  @doc("The input documents to analyze.")
-  @visibility(Lifecycle.Read)
-  body: CriticalDataElement;
-};
-
 alias CriticalDataElementIdParameters = {
   @doc("The unique identifier of the critical data element.")
   criticalDataElementId: uuid;
@@ -1546,7 +1540,7 @@ model CreateTermResponse {
 }
 
 alias TermIdParameter = {
-  @doc("The unique identifier of the critical data term.")
+  @doc("The unique identifier of the critical data term or Parent term identifier.")
   termId: uuid;
 };
 
@@ -1584,3 +1578,17 @@ alias GetKeyResultParameter = {
   @doc("The unique identifier of the key result (OKR).")
   keyResultId: uuid;
 };
+
+@doc("Create request for a critical data column.")
+model CreateCriticalDataColumnRequest {
+  @doc("The critical data column to create.")
+  @body
+  criticalDataColumn: CriticalDataColumn;
+}
+
+@doc("Create request for a critical data element.")
+model CreateCriticalDataElementRequest {
+  @doc("The critical data element to create.")
+  @body
+  criticalDataElement: CriticalDataElement;
+}
