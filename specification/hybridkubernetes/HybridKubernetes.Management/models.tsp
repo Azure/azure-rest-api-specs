@@ -544,6 +544,12 @@ model ConnectedClusterPatchProperties {
    * Indicates whether Azure Hybrid Benefit is opted in
    */
   azureHybridBenefit?: AzureHybridBenefit;
+
+  /**
+   * Indicates whether Gateway is enabled for the connected cluster resource
+   */
+  @added(Versions.v2025_12_01_preview)
+  gateway?: Gateway;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
