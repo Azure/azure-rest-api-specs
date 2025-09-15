@@ -922,7 +922,7 @@ model RunStepConnectedAgent {
 
 @doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
 @discriminator("type")
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_05_01)
 model StructuredToolOutput {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type for the tool output. Defaults to `function_call_output` if not provided.")
