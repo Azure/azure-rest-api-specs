@@ -123,13 +123,11 @@ interface TextAuthoringProject {
   /**
    * Gets the status for an import.
    */
-  @access(Access.internal, "python")
   getImportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringImportProjectJobState>;
 
   /**
    * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
    */
-  @access(Access.internal, "python")
   getExportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportProjectJobState>;
 
   /**
@@ -315,14 +313,12 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing copy project job.
    */
-  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<TextAnalysisAuthoringCopyProjectJobState>;
 
   /**
    * Gets the status for a training job.
    */
-  @access(Access.internal, "python")
   getTrainingStatus is languageOperations.ResourceRead<TextAnalysisAuthoringTrainingJobState>;
 
   /**
@@ -354,7 +350,6 @@ interface TextAuthoringProject {
   /**
    * Gets the status for a project deletion job.
    */
-  @access(Access.internal, "python")
   getProjectDeletionStatus is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeletionJobState>;
 
   /**
@@ -390,7 +385,6 @@ interface TextAuthoringProject {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
-  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
@@ -441,7 +435,6 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentResourcesJobState>;
 
@@ -474,7 +467,6 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing swap deployment job.
    */
-  @access(Access.internal, "python")
   getSwapDeploymentsStatus is languageOperations.ResourceRead<TextAnalysisAuthoringSwapDeploymentsJobState>;
 }
 
@@ -548,14 +540,12 @@ interface TextAuthoringDeployment {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
    * Gets the status of an existing deployment job.
    */
-  @access(Access.internal, "python")
   getDeploymentStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentJobState>;
 
   /**
@@ -661,7 +651,6 @@ interface TextAuthoringExportedModel {
   /**
    * Gets the status for an existing job to create or update an exported model.
    */
-  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getExportedModelJobStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportedModelJobState>;
 
@@ -762,7 +751,6 @@ interface TextAuthoringTrainedModel {
   /**
    * Gets the status for an evaluation job.
    */
-  @access(Access.internal, "python")
   @added(Versions.v2024_11_15_preview)
   getEvaluationStatus is languageOperations.ResourceRead<TextAnalysisAuthoringEvaluationJobState>;
 
@@ -804,6 +792,5 @@ interface TextAuthoringTrainedModel {
   /**
    * Gets the status for loading a snapshot.
    */
-  @access(Access.internal, "python")
   getLoadSnapshotStatus is languageOperations.ResourceRead<TextAnalysisAuthoringLoadSnapshotJobState>;
 }
