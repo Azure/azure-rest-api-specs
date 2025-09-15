@@ -110,10 +110,14 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(VaultProvisioningState, "KeyVaultProvisioningState", "csharp");
+@@alternateType(PrivateEndpointConnection.etag, eTag, "csharp");
+@@alternateType(PrivateEndpointConnection.location, azureLocation, "csharp");
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
+@@alternateType(MhsmPrivateEndpointConnection.etag, eTag, "csharp");
+@@alternateType(MhsmPrivateEndpointConnectionItem.etag, eTag, "csharp");
 @@alternateType(MhsmPrivateEndpointConnectionItem.id,
   armResourceIdentifier,
   "csharp"
@@ -125,11 +129,24 @@ using Azure.Core;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(DeletedVaultProperties.location, azureLocation, "csharp");
 @@alternateType(DeletedManagedHsmProperties.mhsmId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(DeletedManagedHsmProperties.mhsmId, "managedHsmId", "csharp");
+@@alternateType(DeletedManagedHsmProperties.location, azureLocation, "csharp");
+@@alternateType(VaultAccessPolicyParameters.location, azureLocation, "csharp");
+@@alternateType(PrivateEndpointConnectionItem.etag, eTag, "csharp");
+@@alternateType(Secret.location, azureLocation, "csharp");
+@@alternateType(Key.location, azureLocation, "csharp");
+@@alternateType(ManagedHsm.location, azureLocation, "csharp");
+@@alternateType(MhsmPrivateEndpointConnection.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(ManagedHsmResource.location, azureLocation, "csharp");
+@@alternateType(PrivateLinkResource.location, azureLocation, "csharp");
 @@alternateType(MhsmNetworkRuleSet.bypass,
   ManagedHsmNetworkRuleBypassOption,
   "csharp"

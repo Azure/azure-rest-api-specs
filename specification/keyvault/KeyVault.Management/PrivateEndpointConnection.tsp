@@ -29,7 +29,7 @@ model PrivateEndpointConnection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  location?: Azure.Core.azureLocation;
+  location?: string;
 
   /**
    * Tags assigned to the key vault resource.
@@ -43,7 +43,7 @@ model PrivateEndpointConnection
    * Modified whenever there is a change in the state of private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  etag?: Azure.Core.eTag;
+  etag?: string;
 }
 
 @armResourceOperations

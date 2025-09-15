@@ -1229,7 +1229,7 @@ model PrivateEndpointConnectionItem {
   /**
    * Modified whenever there is a change in the state of private endpoint connection.
    */
-  etag?: Azure.Core.eTag;
+  etag?: string;
 
   /**
    * Private endpoint connection properties.
@@ -1436,7 +1436,7 @@ model VaultAccessPolicyParameters {
    * The resource type of the access policy.
    */
   @visibility(Lifecycle.Read)
-  location?: Azure.Core.azureLocation;
+  location?: string;
 
   /**
    * Properties of the access policy
@@ -1473,7 +1473,7 @@ model DeletedVaultProperties {
    * The location of the original vault.
    */
   @visibility(Lifecycle.Read)
-  location?: Azure.Core.azureLocation;
+  location?: string;
 
   /**
    * The deleted date.
@@ -1567,7 +1567,7 @@ model PrivateLinkResource
    * Azure location of the key vault resource.
    */
   @visibility(Lifecycle.Read)
-  location?: Azure.Core.azureLocation;
+  location?: string;
 
   /**
    * Tags assigned to the key vault resource.
@@ -1767,7 +1767,7 @@ model MhsmPrivateEndpointConnectionItem {
   /**
    * Modified whenever there is a change in the state of private endpoint connection.
    */
-  etag?: Azure.Core.eTag;
+  etag?: string;
 
   /**
    * Private endpoint connection properties.
@@ -1872,7 +1872,7 @@ model ManagedHsmResource {
    * The supported Azure location where the managed HSM Pool should be created.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
+  location?: string;
 
   /**
    * SKU details
@@ -1963,7 +1963,7 @@ model DeletedManagedHsmProperties {
    * The location of the original managed HSM.
    */
   @visibility(Lifecycle.Read)
-  location?: Azure.Core.azureLocation;
+  location?: string;
 
   /**
    * The deleted date.
