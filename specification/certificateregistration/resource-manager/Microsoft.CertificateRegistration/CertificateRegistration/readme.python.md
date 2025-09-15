@@ -7,14 +7,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 title: WebSiteManagementClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-web
-namespace: azure.mgmt.web
+package-name: azure-mgmt-certificateregistration
+namespace: azure.mgmt.certificateregistration
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web
+output-folder: $(python-sdks-folder)/certificateregistration/azure-mgmt-certificateregistration/azure/mgmt/certificateregistration
 ```
-

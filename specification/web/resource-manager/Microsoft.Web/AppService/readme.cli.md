@@ -5,8 +5,8 @@ These settings apply only when `--cli` is specified on the command line.
 ```yaml $(cli)
 cli:
   cli-name: appservice
-  package-name: azure-mgmt-web
-  namespace: azure.mgmt.web
+  package-name: azure-mgmt-appservice
+  namespace: azure.mgmt.appservice
   test-scenario:
     - name: /StaticSites/put/Create or update a static site
       disabled: true

@@ -1,8 +1,8 @@
-# Web
+# CertificateRegistration
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Web.
+This is the AutoRest configuration file for CertificateRegistration.
 
 The App service RP comprises of services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
@@ -14,7 +14,7 @@ This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) com
 
 ## Getting Started
 
-To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for CertificateRegistration, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -28,11 +28,11 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the Web API.
+These are the global settings for the CertificateRegistration API.
 
 ```yaml
-title: WebSiteManagementClient
-description: WebSite Management Client
+title: CertificateRegistrationClient
+description: Certificate Registration Client
 openapi-type: arm
 tag: package-2024-11
 ```

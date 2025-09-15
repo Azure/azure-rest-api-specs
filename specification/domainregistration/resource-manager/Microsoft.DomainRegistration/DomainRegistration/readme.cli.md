@@ -4,9 +4,9 @@ These settings apply only when `--cli` is specified on the command line.
 
 ```yaml $(cli)
 cli:
-  cli-name: appservice
-  package-name: azure-mgmt-web
-  namespace: azure.mgmt.web
+  cli-name: domainregistration
+  package-name: azure-mgmt-domainregistration
+  namespace: azure.mgmt.domainregistration
   test-scenario:
     - name: /TopLevelDomains/get/Get Top Level Domain
       disabled: true
