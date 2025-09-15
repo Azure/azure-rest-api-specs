@@ -783,6 +783,7 @@ alias TimestampQueryParam = {
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     HealthModel,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

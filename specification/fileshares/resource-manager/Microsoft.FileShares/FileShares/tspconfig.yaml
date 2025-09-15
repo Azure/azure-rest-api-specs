@@ -36,8 +36,8 @@ options:
       name: "@azure/arm-fileshares"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/fileshares"
-    package-dir: "armfileshares"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armfileshares"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfileshares"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

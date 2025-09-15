@@ -32,8 +32,8 @@ options:
       name: "@azure/arm-maintenance"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/maintenance"
-    package-dir: "armmaintenance"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmaintenance"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmaintenance"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

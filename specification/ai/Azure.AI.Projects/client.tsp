@@ -29,13 +29,6 @@ using Azure.ClientGenerator.Core;
 // More accurate naming
 @@clientName(Azure.AI.Projects.AssetCredentialResponse, "DatasetCredential");
 
-// In Python, the emitter changes "keys" to "keys_property", since there is already
-// a "keys" method in the generated code due to usage of MutableMapping. Call it credential_keys instead.
-@@clientName(Azure.AI.Projects.CustomCredential.keys,
-  "credential_keys",
-  "python"
-);
-
 // Less generic names for C# SDK (avoid one-word class names)
 @@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
 @@clientName(Azure.AI.Projects.Deployment, "AssetDeployment", "csharp");

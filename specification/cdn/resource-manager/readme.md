@@ -37,9 +37,7 @@ These settings apply only when `--tag=package-2025-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-06'
 input-file:
-  - Microsoft.Cdn/stable/2025-06-01/afdx.json
-  - Microsoft.Cdn/stable/2025-06-01/cdn.json
-  - Microsoft.Cdn/stable/2025-06-01/cdnwebapplicationfirewall.json
+  - Microsoft.Cdn/stable/2025-06-01/openapi.json
 ```
 
 ### Tag: package-preview-2025-05

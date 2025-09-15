@@ -44,8 +44,8 @@ options:
     inject-spans: true
     remove-unreferenced-types: true
     service-dir: "sdk/resourcemanager/databasewatcher"
-    package-dir: "armdatabasewatcher"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdatabasewatcher"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatabasewatcher"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

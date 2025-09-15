@@ -108,6 +108,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Instances {
   get is ArmResourceRead<InstanceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<InstanceResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<InstanceResource, InstanceResourceUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<InstanceResource>;
   listByResourceGroup is ArmResourceListByParent<InstanceResource>;

@@ -187,9 +187,9 @@ model PrivateCloudUpdate {
   ...ResourceSkuProperty;
   ...ManagedSystemAssignedIdentityProperty;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("The updatable properties of a private cloud resource")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateCloudUpdateProperties;
 }
 

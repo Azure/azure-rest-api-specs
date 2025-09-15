@@ -38,8 +38,8 @@ options:
       name: "@azure/arm-botservice"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/botservice"
-    package-dir: "armbotservice"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armbotservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armbotservice"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

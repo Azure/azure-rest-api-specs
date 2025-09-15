@@ -40,8 +40,8 @@ options:
       name: "@azure/arm-monitoraccounts"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/monitor"
-    package-dir: "armmonitor"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitor"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
