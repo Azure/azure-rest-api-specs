@@ -23,12 +23,12 @@ options:
     package-version: 2.0.0
     flavor: azure
     namespace: azure.monitor.query
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.Monitor.Query.Logs"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    package-name: "Azure.Monitor.Query.Logs"
+    namespace: "{package-name}"
+    generate-convenience-methods: true
+    generate-protocol-methods: false
+    model-namespace: true
   "@azure-tools/typespec-ts":
     package-dir: "monitor-query-logs"
     is-modular-library: true

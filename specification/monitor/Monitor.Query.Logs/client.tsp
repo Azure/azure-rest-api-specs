@@ -89,3 +89,34 @@ interface Client {
   Access.internal,
   "python"
 );
+
+// .NET configuration
+@client(
+  {
+    name: "LogsQueryClient",
+    service: MonitorQueryLogs,
+  },
+  "csharp"
+)
+interface LogsQueryClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  QueryWorkspace is MonitorQueryLogs.Query.execute;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  QueryResource is MonitorQueryLogs.Query.executeWithResourceId;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  QueryBatch is MonitorQueryLogs.Query.batch;
+}
+
+@@clientName(Column, "LogsTableColumn", "csharp");
+@@clientName(ColumnDataType, "LogsColumnType", "csharp");
+@@clientName(Table, "LogsTable", "csharp");
+@@clientName(QueryResults, "LogsQueryResult", "csharp");
+@@clientName(BatchQueryResults, "LogsBatchQueryResult", "csharp");
+
+@@access(QueryBody, Access.internal, "csharp");
+@@access(BatchQueryRequest, Access.internal, "csharp");
+@@access(LogsQueryClient.QueryBatch, Access.internal, "csharp");
+@@access(LogsQueryClient.QueryWorkspace, Access.internal, "csharp");
+@@access(LogsQueryClient.QueryResource, Access.internal, "csharp");
