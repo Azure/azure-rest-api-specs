@@ -925,8 +925,8 @@ model RunStepConnectedAgent {
 @added(Versions.v2025_05_15_preview)
 model StructuredToolOutput {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @doc("The object type for the tool output.")
-  type: string;
+  @doc("The object type for the tool output. Defaults to `function_call_output` if not provided.")
+  type: string = "function_call_output";
 
   @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
   @encodedName("application/json", "tool_call_id")
