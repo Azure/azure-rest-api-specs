@@ -38,8 +38,8 @@ options:
       name: "@azure/arm-web"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/web"
-    package-dir: "armweb"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armweb"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armweb"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
