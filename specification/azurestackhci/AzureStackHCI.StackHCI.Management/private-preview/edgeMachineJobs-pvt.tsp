@@ -167,6 +167,12 @@ model MachineAssistantJobProperties extends EdgeMachineJobProperties {
   @doc("The user intent to be checked on the device.")
   intent: string;
 
+  @doc("The source of the model used for analysis.")
+  source: string;
+
+  @doc("The type of model used for analysis.")
+  type: string;
+
   @doc("Machine Assistant job reported properties.")
   @visibility(Lifecycle.Read)
   reportedProperties?: MachineAssistantReportedProperties;
