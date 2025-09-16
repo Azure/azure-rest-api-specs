@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-preview-2024-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-11'
 input-file:
-  - Microsoft.ContainerInstance/preview/2024-11-01-preview/containerInstance.json
+  - ./preview/2024-11-01-preview/containerInstance.json
 ```
 
 ### Tag: package-preview-2024-10
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
-  - Microsoft.ContainerInstance/preview/2024-10-01-preview/containerInstance.json
+  - ./preview/2024-10-01-preview/containerInstance.json
 ```
 
 ### Tag: package-preview-2024-09
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-preview-2024-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-09'
 input-file:
-  - Microsoft.ContainerInstance/preview/2024-09-01-preview/containerInstance.json
+  - ./preview/2024-09-01-preview/containerInstance.json
 ```
 
 ### Tag: package-preview-2024-05
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
-  - Microsoft.ContainerInstance/preview/2024-05-01-preview/containerInstance.json
+  - ./preview/2024-05-01-preview/containerInstance.json
 ```
 
 ### Tag: package-2023-05
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-05'
 input-file:
-  - Microsoft.ContainerInstance/stable/2023-05-01/containerInstance.json
+  - ./stable/2023-05-01/containerInstance.json
 ```
 
 ### Tag: package-preview-2023-02
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-preview-2023-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-02'
 input-file:
-  - Microsoft.ContainerInstance/preview/2023-02-01-preview/containerInstance.json
+  - ./preview/2023-02-01-preview/containerInstance.json
 ```
 
 ### Tag: package-preview-2022-10
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
-  - Microsoft.ContainerInstance/preview/2022-10-01-preview/containerInstance.json
+  - ./preview/2022-10-01-preview/containerInstance.json
 ```
 
 ### Tag: package-2022-09
@@ -98,7 +98,7 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-09'
 input-file:
-  - Microsoft.ContainerInstance/stable/2022-09-01/containerInstance.json
+  - ./stable/2022-09-01/containerInstance.json
 ```
 
 ### Tag: package-2021-10
@@ -107,7 +107,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
-  - Microsoft.ContainerInstance/stable/2021-10-01/containerInstance.json
+  - ./stable/2021-10-01/containerInstance.json
 ```
 
 ### Tag: package-2021-09
@@ -116,7 +116,7 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-09'
 input-file:
-  - Microsoft.ContainerInstance/stable/2021-09-01/containerInstance.json
+  - ./stable/2021-09-01/containerInstance.json
 ```
 
 ### Tag: package-2021-07
@@ -125,7 +125,7 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-07'
 input-file:
-  - Microsoft.ContainerInstance/stable/2021-07-01/containerInstance.json
+  - ./stable/2021-07-01/containerInstance.json
 ```
 
 ### Tag: package-2021-03
@@ -134,7 +134,7 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-  - Microsoft.ContainerInstance/stable/2021-03-01/containerInstance.json
+  - ./stable/2021-03-01/containerInstance.json
 ```
 
 ### Tag: package-2020-11
@@ -143,7 +143,7 @@ These settings apply only when `--tag=package-2020-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-11'
 input-file:
-  - Microsoft.ContainerInstance/stable/2020-11-01/containerInstance.json
+  - ./stable/2020-11-01/containerInstance.json
 ```
 
 ### Tag: package-2019-12
@@ -152,7 +152,7 @@ These settings apply only when `--tag=package-2019-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-12'
 input-file:
-  - Microsoft.ContainerInstance/stable/2019-12-01/containerInstance.json
+  - ./stable/2019-12-01/containerInstance.json
 ```
 
 ### Tag: package-2018-10
@@ -161,7 +161,7 @@ These settings apply only when `--tag=package-2018-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-10'
 input-file:
-- Microsoft.ContainerInstance/stable/2018-10-01/containerInstance.json
+- ./stable/2018-10-01/containerInstance.json
 ```
 
 ### Tag: package-2018-09
@@ -170,7 +170,7 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-09'
 input-file:
-- Microsoft.ContainerInstance/stable/2018-09-01/containerInstance.json
+- ./stable/2018-09-01/containerInstance.json
 ```
 
 ### Tag: package-2018-06
@@ -179,7 +179,7 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
-- Microsoft.ContainerInstance/stable/2018-06-01/containerInstance.json
+- ./stable/2018-06-01/containerInstance.json
 ```
 
 ### Tag: package-2018-04
@@ -188,7 +188,7 @@ These settings apply only when `--tag=package-2018-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-04'
 input-file:
-- Microsoft.ContainerInstance/stable/2018-04-01/containerInstance.json
+- ./stable/2018-04-01/containerInstance.json
 ```
 
 ### Tag: package-2018-02-preview
@@ -197,7 +197,7 @@ These settings apply only when `--tag=package-2018-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-02-preview'
 input-file:
-- Microsoft.ContainerInstance/preview/2018-02-01-preview/containerInstance.json
+- ./preview/2018-02-01-preview/containerInstance.json
 ```
 
 ### Tag: package-2017-12-preview
@@ -206,7 +206,7 @@ These settings apply only when `--tag=package-2017-12-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-12-preview'
 input-file:
-- Microsoft.ContainerInstance/preview/2017-12-01-preview/containerInstance.json
+- ./preview/2017-12-01-preview/containerInstance.json
 ```
 
 ### Tag: package-2017-10-preview
@@ -215,7 +215,7 @@ These settings apply only when `--tag=package-2017-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-10-preview'
 input-file:
-- Microsoft.ContainerInstance/preview/2017-10-01-preview/containerInstance.json
+- ./preview/2017-10-01-preview/containerInstance.json
 ```
 
 ### Tag: package-2017-08-preview
@@ -224,7 +224,7 @@ These settings apply only when `--tag=package-2017-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-08-preview'
 input-file:
-- Microsoft.ContainerInstance/preview/2017-08-01-preview/containerInstance.json
+- ./preview/2017-08-01-preview/containerInstance.json
 ```
 
 ## Suppression
