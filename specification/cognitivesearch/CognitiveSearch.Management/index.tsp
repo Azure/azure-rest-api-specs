@@ -44,6 +44,7 @@ interface IndexOperations {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Index>;
 
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Index,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

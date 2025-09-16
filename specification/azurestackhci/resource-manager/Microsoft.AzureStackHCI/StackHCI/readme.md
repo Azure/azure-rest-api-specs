@@ -76,6 +76,9 @@ suppressions:
       - securitySettings.json
       - edgeNodePool.json
       - validatedSolutionRecipes.json
+      - clusterJobs.json
+
+
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -92,6 +95,7 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+      - clusterJobs.json
 
   - code: ParametersInPointGet
     reason: already used in GA api version, fixing it will cause a breaking change
@@ -299,6 +303,7 @@ These settings apply only when `--tag=package-preview-2025-06-01-preview` is spe
 input-file:
   - preview/2025-06-01-preview/arcSettings.json
   - preview/2025-06-01-preview/clusters.json
+  - preview/2025-06-01-preview/clusterJobs.json
   - preview/2025-06-01-preview/deploymentSettings.json
   - preview/2025-06-01-preview/edgeDeviceJobs.json
   - preview/2025-06-01-preview/edgeDevices.json

@@ -22,7 +22,6 @@ using Azure.ResourceManager;
   version: "2023-10-04-preview",
 })
 @doc("Microsoft.AlicespringsDataplane Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.AlicespringsDataplane;
 
 interface Operations extends Azure.ResourceManager.Operations {}
