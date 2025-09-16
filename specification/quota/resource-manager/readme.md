@@ -26,12 +26,31 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-03-01
+tag: package-2025-09-01
 ```
 
 ``` yaml !$(csharp)
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Microsoft.Quota/stable/2025-09-01/openapi.json
+```
+
+### Tag: package-2025-07-15
+
+These settings apply only when `--tag=package-2025-07-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-15'
+input-file:
+  - Microsoft.Quota/stable/2025-07-15/groupquota.json
+  - Microsoft.Quota/stable/2025-07-15/quota.json
 ```
 
 ### Tag: package-2025-03-01
@@ -42,6 +61,16 @@ These settings apply only when `--tag=package-2025-03-01` is specified on the co
 input-file:
   - Microsoft.Quota/stable/2025-03-01/groupquota.json
   - Microsoft.Quota/stable/2025-03-01/quota.json
+```
+
+### Tag: package-2025-03-15-preview
+
+These settings apply only when `--tag=package-2025-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-15-preview'
+input-file:
+  - Microsoft.Quota/preview/2025-03-15-preview/groupquota.json
+  - Microsoft.Quota/preview/2025-03-15-preview/quota.json
 ```
 
 ### Tag: package-2024-12-18-preview
@@ -87,7 +116,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-02-01'
+``` yaml $(tag) == 'package-2021-03-15-preview'
 input-file:
   - Microsoft.Quota/preview/2021-03-15-preview/quota.json
 ```

@@ -1,13 +1,13 @@
-import { describe, test, expect } from "vitest";
-import { searchRelatedParentFolders } from "../../src/utils.js";
-import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { readmeMdRegex, typespecProjectRegex } from "../../src/change-files.js";
+import { fileURLToPath } from "node:url";
+import { describe, expect, test } from "vitest";
+import { readmeMdRegex, typespecProjectRegex } from "../../src/spec-helpers.js";
+import { searchRelatedParentFolders } from "../../src/utils.js";
 
 describe("searchRelatedParentFolders", () => {
   // Get the absolute path to the repo root
   const currentFilePath = fileURLToPath(import.meta.url);
-  const repoRoot = path.resolve(path.dirname(currentFilePath), "../../../../../");
+  const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
   test("finds readme files for multiple paths", () => {
     const files = [

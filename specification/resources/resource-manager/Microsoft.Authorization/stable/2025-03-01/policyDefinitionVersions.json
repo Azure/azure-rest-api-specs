@@ -675,13 +675,12 @@
         "allowedValues": {
           "type": "array",
           "items": {
-            "type": "object"
+            "description": "The collection of allowed values for the parameter."
           },
           "x-ms-identifiers": [],
           "description": "The allowed values for the parameter."
         },
         "defaultValue": {
-          "type": "object",
           "description": "The default value for the parameter if no value is provided."
         },
         "schema": {
@@ -777,12 +776,11 @@
       "properties": {
         "missingTokenAction": {
           "type": "string",
-          "description": "What to do when evaluating an enforcement policy that requires an external evaluation and the token is missing. Possible values are Audit and Deny."
+          "description": "What to do when evaluating an enforcement policy that requires an external evaluation and the token is missing. Possible values are Audit and Deny and language expressions are supported."
         },
         "resultLifespan": {
           "type": "string",
-          "description": "The lifespan of the endpoint invocation result after which it's no longer valid. Value is expected to follow the ISO 8601 duration format.",
-          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?$"
+          "description": "The lifespan of the endpoint invocation result after which it's no longer valid. Value is expected to follow the ISO 8601 duration format and language expressions are supported."
         },
         "endpointSettings": {
           "description": "The settings of an external endpoint providing evaluation results.",

@@ -310,6 +310,12 @@ function New-SwaggerAPIViewTokens {
     }
   }
 
+  if ($autoRestConfigInfo.Count -eq 0) {
+    LogWarning " No AutoRest configuration found for the changed swagger files in the current PR..."
+    Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
+    exit 0
+  }
+
   LogGroupStart " Swagger APIView Tokens will be generated for the following configuration files..."
   $autoRestConfigInfo.GetEnumerator() | ForEach-Object {
     LogInfo " - $($_.Key)"
@@ -355,9 +361,15 @@ function New-SwaggerAPIViewTokens {
   }
 
   git checkout $currentBranch
+  $generatedSwaggerArtifacts = Get-ChildItem -Path $swaggerAPIViewArtifactsDirectory -Recurse
+  if ($generatedSwaggerArtifacts.Count -eq 0) {
+    LogWarning " No Swagger APIView Tokens generated..."
+    Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
+    exit 0
+  }
 
   LogGroupStart " See all generated Swagger APIView Artifacts..."
-  Get-ChildItem -Path $swaggerAPIViewArtifactsDirectory -Recurse
+  $generatedSwaggerArtifacts
   LogGroupEnd
 }
 
@@ -452,7 +464,7 @@ function New-TypeSpecAPIViewTokens {
     LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
       # Skip Baseline APIView Token for new projects
-      if (!(Test-Path -Path $typeSpecProject)) {
+      if (!(Test-Path -Path (Join-Path $typeSpecProject "tspconfig.yaml"))) {
         Write-Host "TypeSpec project $typeSpecProject is not found in pull request target branch. API review will not have a baseline revision."
       }
       else {
@@ -550,16 +562,24 @@ function New-RestSpecsAPIViewReviews {
     $query.Add('pullRequestNumber', $PullRequestNumber)
     $query.Add('packageName', $_.BaseName)
     $query.Add('language', $Language)
-    $query.Add('commentOnPR', $true)
+    $query.Add('commentOnPR', $false)
 
     $uri = [System.UriBuilder]$APIViewUri
     $uri.Query = $query.ToString()
 
+    $correlationId = [System.Guid]::NewGuid().ToString()
+    $headers = @{
+      "x-correlation-id" = $correlationId
+    }
+
     LogInfo "Create APIView for resource provider '$($_.BaseName)'"
-    LogInfo "APIView Uri: $($uri.Uri)"
+    LogInfo "Request URI: $($uri.Uri.OriginalString)"
+    LogInfo "Correlation ID: $correlationId"
 
     try {
-      Invoke-WebRequest -Method 'GET' -Uri $uri.Uri -MaximumRetryCount 3
+      $Response = Invoke-WebRequest -Method 'GET' -Uri $uri.Uri -Headers $headers -MaximumRetryCount 3
+      $responseContent = $Response.Content | ConvertFrom-Json | ConvertTo-Json -Depth 10
+      LogSuccess $responseContent
     }
     catch {
       LogError "Failed to create APIView for resource provider '$($_.BaseName)'. Error: $($_.Exception.Response)"

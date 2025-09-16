@@ -1,0 +1,36 @@
+parameters:
+  "service-dir":
+    default: "sdk/contentunderstanding"
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ContentUnderstanding.json"
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.AI.ContentUnderstanding"
+    model-namespace: false
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.AI.ContentUnderstanding
+    model-namespace: false
+  "@azure-tools/typespec-python":
+    package-pprint-name: "Azure AI Content Understanding"
+    package-dir: "azure-ai-contentunderstanding"
+    package-name: "{package-dir}"
+    namespace: "azure.ai.contentunderstanding"
+    package-version: 1.0.0
+    flavor: azure
+    generate-test: true
+    generate-sample: true

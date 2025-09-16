@@ -207,7 +207,6 @@ model AsAsset extends InventoryAsset {
 }
 
 @doc("The page of assets that match the provided metric.")
-@pagedResult
 model AssetPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -220,7 +219,7 @@ model AssetPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @items
+  @pageItems
   value?: AssetResource[];
 }
 
@@ -416,7 +415,7 @@ model AzureDataExplorerDataConnectionProperties
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
 model Banner {
   port?: int32;
   banner?: string;
@@ -708,7 +707,6 @@ model DiscoGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@pagedResult
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -718,7 +716,7 @@ model DiscoRunPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @items
+  @pageItems
   value?: DiscoRunResult[];
 }
 
@@ -980,7 +978,7 @@ model IpAddressAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
 model IpBlock {
   ipBlock?: string;
   sources?: Source[];
@@ -1175,7 +1173,7 @@ model PageCause {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
 model Port {
   port?: int32;
   firstSeen?: utcDateTime;
@@ -1368,7 +1366,7 @@ model SoaRecord {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
 model Source {
   source?: string;
   firstSeen?: utcDateTime;
@@ -1521,7 +1519,6 @@ model DeltaResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-@pagedResult
 model DeltaPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -1531,7 +1528,7 @@ model DeltaPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @items
+  @pageItems
   value?: DeltaResult[];
 }
 

@@ -41,9 +41,9 @@ model ExtractiveSummarizationResult is PreBuiltResult {
   @added(Versions.v2023_04_01)
   @typeChangedFrom(
     Versions.v2024_11_15_preview,
-    Array<ExtractedSummaryDocumentResult>
+    ExtractedSummaryDocumentResult[]
   )
-  documents: Array<ExtractedSummaryDocumentResultWithDetectedLanguage>;
+  documents: ExtractedSummaryDocumentResultWithDetectedLanguage[];
 }
 
 /** The sorting criteria to use for the results of Extractive Summarization. */
@@ -62,7 +62,7 @@ union ExtractiveSummarizationSortingCriteria {
 @added(Versions.v2023_04_01)
 model ExtractedSummaryDocumentResult is DocumentResult {
   /** Specifies the the extracted sentences from the input document. */
-  sentences: Array<ExtractedSummarySentence>;
+  sentences: ExtractedSummarySentence[];
 }
 
 /** A ranked list of sentences representing the extracted summary. */
@@ -138,9 +138,9 @@ model AbstractiveSummarizationResultBase {
   @added(Versions.v2023_04_01)
   @typeChangedFrom(
     Versions.v2024_11_15_preview,
-    Array<AbstractiveSummaryDocumentResult>
+    AbstractiveSummaryDocumentResult[]
   )
-  documents: Array<AbstractiveSummaryDocumentResultWithDetectedLanguage>;
+  documents: AbstractiveSummaryDocumentResultWithDetectedLanguage[];
 }
 
 /** An object representing the pre-built Abstractive Summarization results of each document. */
@@ -153,7 +153,7 @@ model AbstractiveSummarizationResult is PreBuiltResult {
 @added(Versions.v2023_04_01)
 model AbstractiveSummaryDocumentResult is DocumentResult {
   /** A list of abstractive summaries. */
-  summaries: Array<AbstractiveSummary>;
+  summaries: AbstractiveSummary[];
 }
 
 /** An object representing the Abstractive Summarization result of a single document with detected language. */
@@ -170,5 +170,5 @@ model AbstractiveSummary {
   text: string;
 
   /** The context list of the summary. */
-  contexts?: Array<SummaryContext>;
+  contexts?: SummaryContext[];
 }

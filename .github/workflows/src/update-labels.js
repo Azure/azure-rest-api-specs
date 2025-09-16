@@ -1,32 +1,26 @@
 // @ts-check
 
-import { extractInputs } from "../../src/context.js";
-import { PER_PAGE_MAX } from "../../src/github.js";
+import { isFullGitSha } from "../../shared/src/git.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { extractInputs } from "../src/context.js";
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export default async function updateLabels({ github, context, core }) {
-  let owner = process.env.OWNER;
-  let repo = process.env.REPO;
-  let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
-  let run_id = parseInt(process.env.RUN_ID || "");
-
-  if (!owner || !repo || !(issue_number || run_id)) {
-    let inputs = await extractInputs(github, context, core);
-    owner = owner || inputs.owner;
-    repo = repo || inputs.repo;
-    issue_number = issue_number || inputs.issue_number;
-    run_id = run_id || inputs.run_id;
-  }
-
-  await updateLabelsImpl({ owner, repo, issue_number, run_id, github, core });
+  const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
+    github,
+    context,
+    core,
+  );
+  await updateLabelsImpl({ owner, repo, head_sha, issue_number, run_id, github, core });
 }
 
 /**
  * @param {Object} params
  * @param {string} params.owner
  * @param {string} params.repo
+ * @param {string} params.head_sha
  * @param {number} params.issue_number
  * @param {number} params.run_id
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
@@ -35,26 +29,36 @@ export default async function updateLabels({ github, context, core }) {
 export async function updateLabelsImpl({
   owner,
   repo,
+  head_sha,
   issue_number,
   run_id,
   github,
   core,
 }) {
+  if (isFullGitSha(head_sha)) {
+    core.setOutput("head_sha", head_sha);
+  } else {
+    core.info(`head_sha is not a valid full git SHA: '${head_sha}'`);
+  }
+
+  if (Number.isInteger(issue_number) && issue_number > 0) {
+    core.setOutput("issue_number", issue_number);
+  } else {
+    core.info(`issue_number must be a positive integer: ${issue_number}`);
+  }
+
   /** @type {string[]} */
   let artifactNames = [];
 
   if (run_id) {
     // List artifacts from a single run_id
     core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
-    const artifacts = await github.paginate(
-      github.rest.actions.listWorkflowRunArtifacts,
-      {
-        owner: owner,
-        repo: repo,
-        run_id: run_id,
-        per_page: PER_PAGE_MAX,
-      },
-    );
+    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      owner: owner,
+      repo: repo,
+      run_id: run_id,
+      per_page: PER_PAGE_MAX,
+    });
 
     artifactNames = artifacts.map((a) => a.name);
   } else {
@@ -81,6 +85,11 @@ export async function updateLabelsImpl({
 
       if (key.startsWith("label-")) {
         const name = key.substring("label-".length);
+
+        if (!name) {
+          throw new Error(`Invalid value for label name: '${name}'`);
+        }
+
         if (value === "true") {
           labelsToAdd.push(name);
         } else if (value === "false") {
@@ -96,6 +105,15 @@ export async function updateLabelsImpl({
 
   core.info(`labelsToAdd: ${JSON.stringify(labelsToAdd)}`);
   core.info(`labelsToRemove: ${JSON.stringify(labelsToRemove)}`);
+
+  if ((labelsToAdd.length > 0 || labelsToRemove.length > 0) && Number.isNaN(issue_number)) {
+    throw new Error(
+      `Invalid value for 'issue_number':${issue_number}. Expected an 'issue-number' artifact created by the workflow run.`,
+    );
+  }
+
+  const pullRequestUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
+  core.info(`pull request url: ${pullRequestUrl}`);
 
   if (labelsToAdd.length > 0) {
     await github.rest.issues.addLabels({
@@ -117,7 +135,7 @@ export async function updateLabelsImpl({
           name: name,
         });
       } catch (error) {
-        if (error.status === 404) {
+        if (error instanceof Error && "status" in error && error.status === 404) {
           core.info(`Ignoring error: ${error.status} - ${error.message}`);
         } else {
           throw error;

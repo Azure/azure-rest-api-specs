@@ -82,6 +82,7 @@ op trainMultivariateModel is MultivariateServiceAction<
 @route("/multivariate/models")
 @summary("List Multivariate Models")
 @doc("List models of a resource.")
+@list
 op listMultivariateModels(
   ...SkipQueryParameter,
   ...TopQueryParameter,

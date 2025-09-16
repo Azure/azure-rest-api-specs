@@ -1,8 +1,8 @@
-import { spawn, spawnSync, exec } from "node:child_process";
-import path from "node:path";
+import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
-import { LogLevel, logMessage } from "./log.js";
+import path from "node:path";
 import { promisify } from "node:util";
+import { LogLevel, logMessage } from "./log.js";
 
 type Dirent = fs.Dirent;
 
@@ -120,11 +120,20 @@ export function getAllTypeSpecPaths(specRepoPath: string): string[] {
   }
 }
 
-/*
- * Run the PowerShell script
+/**
+ * Runs a PowerShell script with the given arguments.
+ * Automatically detects the correct executable path for the current platform (Windows/Linux/macOS).
+ * Logs errors and warnings as appropriate.
  */
 export function runPowerShellScript(args: string[]): string | undefined {
-  const result = spawnSync("/usr/bin/pwsh", args, { encoding: "utf8" });
+  const pwshPath = getPwshExecutablePath();
+  if (!pwshPath) {
+    logMessage("No valid PowerShell executable found on this system.", LogLevel.Error);
+    return undefined;
+  }
+
+  const result = spawnSync(pwshPath, args, { encoding: "utf8" });
+
   if (result.error) {
     logMessage(`Error executing PowerShell script:${result.error}`, LogLevel.Error);
     return undefined;
@@ -135,13 +144,42 @@ export function runPowerShellScript(args: string[]): string | undefined {
   return result.stdout?.trim();
 }
 
+/**
+ * Determines the appropriate PowerShell executable path for the current OS.
+ * Prefers 'pwsh' (PowerShell Core) over 'powershell' (Windows PowerShell).
+ * Returns undefined if no executable is found.
+ */
+function getPwshExecutablePath(): string | undefined {
+  const isWindows = process.platform === "win32";
+  const candidates = isWindows ? ["pwsh.exe", "powershell.exe"] : ["pwsh"]; // Linux/macOS generally only support pwsh
+  for (const cmd of candidates) {
+    if (isCommandAvailable(cmd)) {
+      return cmd;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Checks if a command is available in PATH by trying to spawn it with '--version'.
+ */
+function isCommandAvailable(command: string): boolean {
+  try {
+    const result = spawnSync(command, ["--version"], { encoding: "utf8" });
+    return result.status === 0;
+  } catch {
+    return false;
+  }
+}
+
 // Function to call Get-ChangedFiles from PowerShell script
 export function getChangedFiles(
   specRepoPath: string,
   baseCommitish: string = "HEAD^",
   targetCommitish: string = "HEAD",
-  diffFilter: string = "d",
 ): string[] | undefined {
+  // set diff filter to include added, copied, modified, deleted, renamed, and type changed files
+  const diffFilter = "ACMDRT";
   const scriptPath = path.resolve(specRepoPath, "eng/scripts/ChangedFiles-Functions.ps1");
   const args = [
     "-Command",
@@ -178,7 +216,7 @@ export function findParentWithFile(
     try {
       const absolutePath = path.resolve(specRepoFolder, currentPath);
       const files = fs.readdirSync(absolutePath);
-      if (files.some((file) => searchFile.test(file.toLowerCase()))) {
+      if (files.some((file) => searchFile.test(file))) {
         return currentPath;
       }
     } catch (error) {
@@ -186,7 +224,9 @@ export function findParentWithFile(
       return undefined;
     }
     currentPath = path.dirname(currentPath);
-    if (stopAtFolder && currentPath === stopAtFolder) {
+    // Check if we've reached the root of the path (stopAtFolder) or
+    // if we've reached '.' which prevents infinite loops with path.dirname('.')
+    if ((stopAtFolder && currentPath === stopAtFolder) || currentPath === ".") {
       return undefined;
     }
   }
@@ -290,7 +330,7 @@ export function searchRelatedTypeSpecProjectBySharedLibrary(
         continue;
       }
 
-      const peerPath = path.join(parentDir, peerDir.name);
+      const peerPath = normalizePath(path.join(parentDir, peerDir.name));
       try {
         const peerFiles = fs.readdirSync(path.resolve(options.specRepoFolder, peerPath));
         if (peerFiles.some((file) => options.searchFileRegex.test(file.toLowerCase()))) {
@@ -370,7 +410,7 @@ export function groupPathsByService(
     }
 
     const info = serviceMap.get(serviceName)!;
-    if (folderPath.endsWith(".Management")) {
+    if (folderPath.endsWith(".Management") || folderPath.includes("resource-manager")) {
       info.managementPaths.push(folderPath);
     } else {
       info.otherTypeSpecPaths.push(folderPath);
@@ -401,6 +441,11 @@ export type ChangedSpecs = {
   specs: string[];
 };
 
+export type SpecConfigs = {
+  readmePath?: string;
+  tspconfigPath?: string;
+};
+
 /**
  * Creates combined specs from readme and typespec paths
  * @param readmePath - Path to the readme file
@@ -421,4 +466,37 @@ export function createCombinedSpecs(
     readmeMd: path.join(readmePath, "readme.md"),
     typespecProject: path.join(tsPath, "tspconfig.yaml"),
   }));
+}
+
+/**
+ * Converts a Map<string, T> to a plain object for JSON serialization.
+ */
+export function mapToObject<T>(map: Map<string, T>): Record<string, T> {
+  const obj: Record<string, T> = {};
+  for (const [key, value] of map.entries()) {
+    obj[key] = value;
+  }
+  return obj;
+}
+
+/**
+ * Converts a plain object (the result of JSON.parse) back into a Map<string, T>.
+ */
+export function objectToMap<T>(obj: Record<string, T>): Map<string, T> {
+  const map = new Map<string, T>();
+  for (const [key, value] of Object.entries(obj)) {
+    map.set(key, value);
+  }
+  return map;
+}
+
+/**
+ * Normalizes a Windows-style path by converting backslashes (`\`) to slashes (`/`)
+ * Only performs conversion on Windows systems. No effect on Linux/macOS.
+ */
+export function normalizePath(p: string): string {
+  if (process.platform === "win32") {
+    return p.replaceAll("\\", "/");
+  }
+  return p;
 }
