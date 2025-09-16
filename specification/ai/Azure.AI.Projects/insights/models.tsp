@@ -107,7 +107,7 @@ model InsightResult {
 
 @doc("Insights from the cluster analysis.")
 @added(Versions.v2025_10_15_preview)
-model ClusterInsights {
+model ClusterInsightResult {
   @doc("Summary of the insights report.")
   summary: InsightSummary;
 
@@ -141,7 +141,7 @@ model EvaluationRunClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.EvaluationRunClusterInsight;
 
-  ...ClusterInsights;
+  ...ClusterInsightResult;
 }
 
 @doc("Insights from the agent cluster analysis.")
@@ -150,7 +150,7 @@ model AgentClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.AgentClusterInsight;
 
-  ...ClusterInsights;
+  ...ClusterInsightResult;
 }
 
 @doc("Summary of the error cluster analysis.")
