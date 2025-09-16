@@ -99,8 +99,10 @@ alias OptionalNullableMetadata = {
  * if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+@doc("Response format options for agent interactions")
 union AgentsResponseFormatOption {
-  string,
+  /** Default value. Let the model handle the return format. */
+  "auto",
 
   /** The model will handle the return format. */
   AgentsResponseFormatMode,
