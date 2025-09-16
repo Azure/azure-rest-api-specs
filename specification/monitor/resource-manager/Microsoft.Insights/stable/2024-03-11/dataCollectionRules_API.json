@@ -1041,6 +1041,16 @@
         }
       }
     },
+    "EnrichWithResourceAttributes": {
+      "description": "Specifies the list of resource attributes that need to be added as labels/dimensions to the telemetry data for further enrichment.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "service.name"
+      ]
+    },
     "ErrorResponseCommonV2": {
       "title": "Error response",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
@@ -1569,14 +1579,7 @@
           ]
         },
         "enrichWithResourceAttributes": {
-          "description": "Specifies the list of resource attributes that need to be added as labels/dimensions to the log record for further enrichment.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": [
-            "service.name"
-          ]
+          "$ref": "#/definitions/EnrichWithResourceAttributes"
         },
         "enrichWithReference": {
           "description": "Specifies the reference alias to enrich the telemetry signal with.",
@@ -1619,14 +1622,7 @@
           ]
         },
         "enrichWithResourceAttributes": {
-          "description": "Specifies the list of resource attributes that need to be added as labels/dimensions to the log record for further enrichment.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": [
-            "service.name"
-          ]
+          "$ref": "#/definitions/EnrichWithResourceAttributes"
         },
         "enrichWithReference": {
           "description": "Specifies the reference to enrich the telemetry signal with.",
@@ -1671,15 +1667,7 @@
           ]
         },
         "enrichWithResourceAttributes": {
-          "description": "Specifies the list of resource attributes that need to be added as labels/dimensions to the metric for further metric enrichment.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": [
-            "service.name",
-            "service.version"
-          ]
+          "$ref": "#/definitions/EnrichWithResourceAttributes"
         },
         "enrichWithReference": {
           "description": "Specifies the reference to enrich the telemetry signal with.",
@@ -1711,15 +1699,7 @@
           ]
         },
         "enrichWithResourceAttributes": {
-          "description": "Specifies the list of resource attributes that need to be added as labels/dimensions to the metric for further metric enrichment.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": [
-            "service.name",
-            "service.version"
-          ]
+          "$ref": "#/definitions/EnrichWithResourceAttributes"
         },
         "enrichWithReference": {
           "description": "Specifies the reference to enrich the telemetry signal with.",
@@ -1770,14 +1750,7 @@
           ]
         },
         "enrichWithResourceAttributes": {
-          "description": "Specifies the list of resource attributes that need to be added as labels/dimensions to the log record for further enrichment.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": [
-            "service.name"
-          ]
+          "$ref": "#/definitions/EnrichWithResourceAttributes"
         },
         "enrichWithReference": {
           "description": "Specifies the reference to enrich the telemetry signal with.",
@@ -1825,14 +1798,7 @@
           ]
         },
         "enrichWithResourceAttributes": {
-          "description": "Specifies the list of resource attributes that need to be added as labels/dimensions to the log record for further enrichment.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": [
-            "service.name"
-          ]
+          "$ref": "#/definitions/EnrichWithResourceAttributes"
         },
         "enrichWithReference": {
           "description": "Specifies the reference to enrich the telemetry signal with.",
