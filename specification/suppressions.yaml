@@ -2226,3 +2226,10 @@
   sub-rules:
     - options.@azure-tools/typespec-ts.*
   paths: [zerotrustsegmentation/Microsoft.ZeroTrustSegmentation.Management/tspconfig.yaml]
+- tool: Avocado
+  reason: Provider rename Microsoft.PlannedQuota → Microsoft.Lionrock; suppress missing-readme errors for legacy plannedquota paths until mapping is updated
+  rules: [MISSING_README]
+  paths:
+    - plannedquota/resource-manager/Microsoft.PlannedQuota/preview/2025-10-01-preview
+    - plannedquota/resource-manager/Microsoft.PlannedQuota/preview/2025-10-01-preview/examples
+    - plannedquota/resource-manager
