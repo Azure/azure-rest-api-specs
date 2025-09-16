@@ -102,7 +102,7 @@ interface SitesByServiceGroup {
   @doc("create or update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
   createOrUpdate is SiteByServiceGroupOps.CreateOrUpdateAsync<Site>;
-  
+
   @patch(#{ implicitOptionality: true })
   @doc("update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
