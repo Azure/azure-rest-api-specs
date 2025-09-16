@@ -472,6 +472,11 @@
                     "update",
                     "create"
                   ]
+                },
+                "usage": {
+                  "$ref": "#/definitions/Usage",
+                  "description": "Resource consumption metrics containing provider-specific usage data such as execution time, quantum shots consumed etc.",
+                  "readOnly": true
                 }
               },
               "required": [
@@ -737,6 +742,11 @@
                     "update",
                     "create"
                   ]
+                },
+                "usage": {
+                  "$ref": "#/definitions/Usage",
+                  "description": "Resource consumption metrics containing provider-specific usage data such as execution time, quantum shots consumed etc.",
+                  "readOnly": true
                 }
               },
               "required": [
@@ -923,6 +933,11 @@
                     "update",
                     "create"
                   ]
+                },
+                "usage": {
+                  "$ref": "#/definitions/Usage",
+                  "description": "Resource consumption metrics containing provider-specific usage data such as execution time, quantum shots consumed etc.",
+                  "readOnly": true
                 }
               },
               "required": [
@@ -2001,6 +2016,11 @@
             "update",
             "create"
           ]
+        },
+        "usage": {
+          "$ref": "#/definitions/Usage",
+          "description": "Resource consumption metrics containing provider-specific usage data such as execution time, quantum shots consumed etc.",
+          "readOnly": true
         }
       },
       "discriminator": "itemType",
@@ -2760,6 +2780,14 @@
         "currentAvailability",
         "averageQueueTime"
       ]
+    },
+    "Usage": {
+      "type": "object",
+      "description": "Resource usage metrics represented as key-value pairs. Keys are provider-defined metric names (e.g. \"standardMinutes\", \"shots\") and values are the corresponding consumption amounts. The specific metrics available depend on the quantum provider and target used.",
+      "additionalProperties": {
+        "format": "double",
+        "type": "number"
+      }
     },
     "UsageEvent": {
       "type": "object",
