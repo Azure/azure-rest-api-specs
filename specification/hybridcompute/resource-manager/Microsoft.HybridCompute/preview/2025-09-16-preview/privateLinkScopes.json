@@ -1617,7 +1617,7 @@
           }
         },
         "serviceExtensions": {
-          "description": "Toggles for service extensions to enable or disable private link validation",
+          "description": "Toggles for service extensions to enforce private link validation",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceExtension"
@@ -1741,22 +1741,43 @@
       "description": "Toggle for private link validation for a given service extension",
       "properties": {
         "serviceExtensionType": {
-          "description": "The type of the Service Extension.",
+          "description": "The type/name of the Service Extension.",
           "$ref": "#/definitions/ServiceExtensionType"
         },
-        "privateLinkValidationEnabled": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Indicates whether private link validation is enabled for the given service extension."
+        "accessMode": {
+          "description": "Determines whether private link validation is enforced for the given service extension.",
+          "$ref": "#/definitions/ServiceExtensionAccessMode"
         }
       }
     },
     "ServiceExtensionType": {
       "type": "string",
-      "description": "The service extension type for which to toggle private link validation",
+      "description": "The service extension type/name",
       "x-ms-enum": {
         "name": "ServiceExtensionType",
         "modelAsString": true
+      }
+    },
+    "ServiceExtensionAccessMode": {
+      "type": "string",
+      "description": "Property to control enforcement of private link validation for a given service extension.",
+      "enum": [
+        "enforced",
+        "learning"
+      ],
+      "x-ms-enum": {
+        "name": "AccessMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "enforced",
+            "description": "Private link validation is enabled for the given service extension."
+          },
+          {
+            "value": "learning",
+            "description": "Private link validation is disabled for the given service extension, but logs will be generated for traffic that would have been blocked if private link validation were enabled."
+          }
+        ]
       }
     }
   },
