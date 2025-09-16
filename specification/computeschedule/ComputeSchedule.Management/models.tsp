@@ -213,22 +213,22 @@ union DistributionStrategy {
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
 @doc("The ranking values for preferences.")
 union PreferenceRank {
-  @doc("Rank0: Most preferred")
+  @doc("Rank 0: Most preferred")
   Rank0: 0,
 
-  @doc("Rank1")
+  @doc("Rank 1")
   Rank1: 1,
 
-  @doc("Rank2")
+  @doc("Rank 2")
   Rank2: 2,
 
-  @doc("Rank3")
+  @doc("Rank 3")
   Rank3: 3,
 
-  @doc("Rank4")
+  @doc("Rank 4")
   Rank4: 4,
 
-  @doc("Rank5: Least preferred")
+  @doc("Rank 5: Least preferred")
   Rank5: 5,
 
   int32,
@@ -237,22 +237,22 @@ union PreferenceRank {
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
 @doc("The names of availability zones")
 union ZoneName {
-  @doc("Zone0")
+  @doc("Azure Zone 0")
   Zone0: 0,
 
-  @doc("Zone1")
+  @doc("Azure Zone 1")
   Zone1: 1,
 
-  @doc("Zone2")
+  @doc("Azure Zone 2")
   Zone2: 2,
 
-  @doc("Zone3")
+  @doc("Azure Zone 3")
   Zone3: 3,
 
-  @doc("Zone4")
+  @doc("Azure Zone 4")
   Zone4: 4,
 
-  @doc("Zone5")
+  @doc("Azure Zone 5")
   Zone5: 5,
 
   int32,
