@@ -39790,10 +39790,12 @@
         },
         "kubeConfig": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -44143,8 +44145,20 @@
       "description": "Application logs to file system configuration.",
       "properties": {
         "level": {
-          "$ref": "#/definitions/LogLevel",
-          "description": "Log level."
+          "type": "string",
+          "description": "Log level.",
+          "default": "Off",
+          "enum": [
+            "Off",
+            "Verbose",
+            "Information",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "LogLevel",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -44967,7 +44981,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password used to upload the image to the container registry."
+          "format": "password",
+          "description": "The password used to upload the image to the container registry.",
+          "x-ms-secret": true
         }
       }
     },
@@ -49627,11 +49643,13 @@
         },
         "ignoreConflictingHostNames": {
           "type": "boolean",
-          "description": "Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to\nthe app's object when it is being restored, but that might fail due to conflicts during the operation."
+          "description": "Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to\nthe app's object when it is being restored, but that might fail due to conflicts during the operation.",
+          "default": false
         },
         "ignoreDatabases": {
           "type": "boolean",
-          "description": "Ignore the databases and only restore the site content"
+          "description": "Ignore the databases and only restore the site content",
+          "default": false
         },
         "appServicePlan": {
           "type": "string",

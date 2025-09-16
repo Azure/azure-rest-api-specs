@@ -3615,7 +3615,7 @@ model DaprConfig {
   /**
    * Boolean indicating if the Dapr side car is enabled
    */
-  enabled?: boolean=false;
+  enabled?: boolean = false;
 
   /**
    * Dapr application identifier
@@ -6196,6 +6196,7 @@ model ArcConfiguration {
   frontEndServiceConfiguration?: FrontEndConfiguration;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   kubeConfig?: string;
 }
@@ -9954,12 +9955,12 @@ model RestoreRequestProperties {
    * Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to
    * the app's object when it is being restored, but that might fail due to conflicts during the operation.
    */
-  ignoreConflictingHostNames?: boolean;
+  ignoreConflictingHostNames?: boolean = false;
 
   /**
    * Ignore the databases and only restore the site content
    */
-  ignoreDatabases?: boolean;
+  ignoreDatabases?: boolean = false;
 
   /**
    * Specify app service plan that will own restored site.
@@ -11197,7 +11198,7 @@ model FileSystemApplicationLogsConfig {
   /**
    * Log level.
    */
-  level?: LogLevel;
+  level?: LogLevel = LogLevel.Off;
 }
 
 /**
@@ -13485,6 +13486,7 @@ model GitHubActionContainerConfiguration {
   /**
    * The password used to upload the image to the container registry.
    */
+  @secret
   password?: string;
 }
 
