@@ -149,8 +149,11 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 }
 
 class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
-  constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType) {
+  private skipValidateNamespace: boolean;
+
+  constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType, skipValidateNamespace: boolean = false) {
     super(emitterName, keyToValidate, expectedValue);
+    this.skipValidateNamespace = skipValidateNamespace;
   }
 
   protected validate(config: any): RuleResult {
@@ -171,20 +174,38 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
 
     let pathToValidate: string;
 
-    // Check if the path contains {output-dir}/{service-dir} or {cwd}/{service-dir} prefix
+    // Check if the path contains {output-dir}/{service-dir} prefix
     const outputDirPrefix = "{output-dir}/{service-dir}/";
-    const cwdPrefix = "{cwd}/{service-dir}/";
 
     if (actualValue.startsWith(outputDirPrefix)) {
       // Extract the part after {output-dir}/{service-dir}/
       pathToValidate = actualValue.substring(outputDirPrefix.length);
-    } else if (actualValue.startsWith(cwdPrefix)) {
-      // Extract the part after {cwd}/{service-dir}/
-      pathToValidate = actualValue.substring(cwdPrefix.length);
     } else {
       // Use existing logic - extract the last part of the path (after the last '/')
       const pathParts = actualValue.split("/");
       pathToValidate = pathParts[pathParts.length - 1];
+    }
+
+    // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
+    if (pathToValidate === "{namespace}" && this.skipValidateNamespace) {
+      return { success: true };
+    }
+
+    // Check if pathToValidate contains variables like {namespace}
+    const variableMatch = pathToValidate.match(/\{([^}]+)\}/);
+    if (variableMatch) {
+      const variableName = variableMatch[1];
+      const variableValue = config?.options?.[this.emitterName]?.[variableName];
+
+      if (variableValue && typeof variableValue === "string") {
+        // Replace the variable with its value
+        pathToValidate = pathToValidate.replace(`{${variableName}}`, variableValue);
+      } else {
+        return this.createFailedResult(
+          `Could not resolve variable {${variableName}} in path "${pathToValidate}". Variable not found in options.${this.emitterName}`,
+          `Please ensure the variable {${variableName}} is defined in your configuration`,
+        );
+      }
     }
 
     if (!this.validateValue(pathToValidate, this.expectedValue))
@@ -513,6 +534,7 @@ export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitter
       "@azure-tools/typespec-python",
       "emitter-output-dir",
       new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
+      true
     );
   }
   protected skip(_: any, folder: string) {

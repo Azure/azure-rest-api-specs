@@ -555,6 +555,45 @@ const csharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtNamespaceSubRule()],
 );
 
+// Test cases for emitter-output-dir with namespace variable resolution
+const emitterOutputDirWithNamespaceVariableTestCases: Case[] = [
+  {
+    description: "Validate Python emitter-output-dir with {namespace} variable",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-python":
+    namespace: "azure.mgmt.testservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+`,
+    success: true,
+    subRules: [new TspConfigPythonMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description: "Validate Java emitter-output-dir with {namespace} variable",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-java":
+    namespace: "com.azure.resourcemanager.testservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+`,
+    success: false,
+    subRules: [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
+  },
+  {
+    description: "Validate emitter-output-dir with undefined variable",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/{undefinedVariable}"
+`,
+    success: false,
+    subRules: [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
+  },
+];
+
 const suppressEntireRuleTestCase: Case = {
   description: "Suppress entire rule",
   folder: managementTspconfigFolder,
@@ -664,6 +703,8 @@ describe("tspconfig", function () {
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtNamespaceTestCases,
+    // variable resolution in emitter-output-dir
+    ...emitterOutputDirWithNamespaceVariableTestCases,
   ])(`$description`, async (c: Case) => {
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
