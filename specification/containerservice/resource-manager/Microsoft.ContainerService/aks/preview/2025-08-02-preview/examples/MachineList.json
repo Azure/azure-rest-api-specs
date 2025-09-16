@@ -44,6 +44,54 @@
                 "kubeletDiskType": "OS",
                 "maxPods": 110
               },
+              "localDNSProfile": {
+                "kubeDNSOverrides": {
+                  ".": {
+                    "cacheDurationInSeconds": 3600,
+                    "forwardDestination": "ClusterCoreDNS",
+                    "forwardPolicy": "Sequential",
+                    "maxConcurrent": 1000,
+                    "protocol": "PreferUDP",
+                    "queryLogging": "Error",
+                    "serveStale": "Immediate",
+                    "serveStaleDurationInSeconds": 3600
+                  },
+                  "cluster.local": {
+                    "cacheDurationInSeconds": 3600,
+                    "forwardDestination": "ClusterCoreDNS",
+                    "forwardPolicy": "Sequential",
+                    "maxConcurrent": 1000,
+                    "protocol": "ForceTCP",
+                    "queryLogging": "Error",
+                    "serveStale": "Immediate",
+                    "serveStaleDurationInSeconds": 3600
+                  }
+                },
+                "mode": "Preferred",
+                "state": "Disabled",
+                "vnetDNSOverrides": {
+                  ".": {
+                    "cacheDurationInSeconds": 3600,
+                    "forwardDestination": "VnetDNS",
+                    "forwardPolicy": "Sequential",
+                    "maxConcurrent": 1000,
+                    "protocol": "PreferUDP",
+                    "queryLogging": "Error",
+                    "serveStale": "Immediate",
+                    "serveStaleDurationInSeconds": 3600
+                  },
+                  "cluster.local": {
+                    "cacheDurationInSeconds": 3600,
+                    "forwardDestination": "ClusterCoreDNS",
+                    "forwardPolicy": "Sequential",
+                    "maxConcurrent": 1000,
+                    "protocol": "ForceTCP",
+                    "queryLogging": "Error",
+                    "serveStale": "Immediate",
+                    "serveStaleDurationInSeconds": 3600
+                  }
+                }
+              },
               "hardware": {
                 "vmSize": "Standard_DS1_v2"
               },
