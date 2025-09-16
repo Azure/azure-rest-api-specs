@@ -151,7 +151,12 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
   private skipValidateNamespace: boolean;
 
-  constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType, skipValidateNamespace: boolean = false) {
+  constructor(
+    emitterName: string,
+    keyToValidate: string,
+    expectedValue: ExpectedValueType,
+    skipValidateNamespace: boolean = false,
+  ) {
     super(emitterName, keyToValidate, expectedValue);
     this.skipValidateNamespace = skipValidateNamespace;
   }
@@ -534,7 +539,7 @@ export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitter
       "@azure-tools/typespec-python",
       "emitter-output-dir",
       new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
-      true
+      true,
     );
   }
   protected skip(_: any, folder: string) {
