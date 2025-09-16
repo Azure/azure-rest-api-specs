@@ -1656,7 +1656,7 @@ model AttributeRule {
   id: string;
 
   @doc("The name of the attribute rule.")
-  name: string[];
+  name: string;
 
   @doc("The description of the attribute rule.")
   dnfCondition: Condition[][];
