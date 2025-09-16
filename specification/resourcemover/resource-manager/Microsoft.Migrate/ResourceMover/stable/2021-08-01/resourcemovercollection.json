@@ -3,7 +3,7 @@
   "info": {
     "title": "Resource Mover Service API",
     "description": "A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between zones within a region.",
-    "version": "2023-08-01"
+    "version": "2021-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1076,18 +1076,6 @@
         }
       }
     },
-    "MoveType": {
-      "description": "Defines the MoveType.",
-      "enum": [
-        "RegionToRegion",
-        "RegionToZone"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "MoveType",
-        "modelAsString": true
-      }
-    },
     "MoveState": {
       "description": "Defines the MoveResource states.",
       "enum": [
@@ -1366,7 +1354,7 @@
           "$ref": "#/definitions/MoveResourceProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true,
           "description": "Metadata pertaining to creation and last modification of the resource."
         }
@@ -1410,6 +1398,10 @@
     "MoveCollectionProperties": {
       "description": "Defines the move collection properties.",
       "type": "object",
+      "required": [
+        "sourceRegion",
+        "targetRegion"
+      ],
       "properties": {
         "sourceRegion": {
           "description": "Gets or sets the source region.",
@@ -1419,19 +1411,8 @@
           "description": "Gets or sets the target region.",
           "type": "string"
         },
-        "moveRegion": {
-          "description": "Gets or sets the move region which indicates the region where the VM Regional to Zonal move will be conducted.",
-          "type": "string"
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
-        },
-        "version": {
-          "description": "Gets or sets the version of move collection.",
-          "type": "string"
-        },
-        "moveType": {
-          "$ref": "#/definitions/MoveType"
         },
         "errors": {
           "description": "Defines the move collection errors.",
@@ -1496,7 +1477,7 @@
           "$ref": "#/definitions/MoveCollectionProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true,
           "description": "Metadata pertaining to creation and last modification of the resource."
         }
@@ -1876,7 +1857,8 @@
       "description": "Gets or sets the resource settings.",
       "type": "object",
       "required": [
-        "resourceType"
+        "resourceType",
+        "targetResourceName"
       ],
       "properties": {
         "resourceType": {
@@ -1889,10 +1871,6 @@
         },
         "targetResourceName": {
           "description": "Gets or sets the target Resource name.",
-          "type": "string"
-        },
-        "targetResourceGroupName": {
-          "description": "Gets or sets the target resource group name.",
           "type": "string"
         }
       },
