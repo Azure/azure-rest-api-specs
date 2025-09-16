@@ -7,8 +7,6 @@ parameters:
     default: ""
   "python-sdk-folder":
     default: "{project-root}/azure-sdk-for-python/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
   "service-directory-name":
     default: "healthinsights"
 emit:
@@ -51,7 +49,7 @@ options:
     namespace: Azure.Health.Insights.RadiologyInsights
     model-namespace: false
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/health-insights-cancerprofiling-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/health-insights-cancerprofiling-rest"
     generate-metadata: true
     is-modular-library: false
     package-details:
