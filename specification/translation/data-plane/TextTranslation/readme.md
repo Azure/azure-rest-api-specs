@@ -26,7 +26,7 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_0'
-input-file: stable/v3.0/openapi.json
+input-file: stable/3.0/openapi.json
 ```
 
 ### Release 2025-05-01-preview
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-2025-05-01-preview'
 version: package-2025-05-01-preview
 input-file:
-  - preview/v2025-05-01-preview/openapi.json
+  - preview/2025-05-01-preview/openapi.json
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
@@ -51,7 +51,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/v2025-05-01-preview/openapi.json
+  - $(this-folder)/preview/2025-05-01-preview/openapi.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,
