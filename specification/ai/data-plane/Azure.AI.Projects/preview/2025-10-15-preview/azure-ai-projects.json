@@ -1718,28 +1718,12 @@
       "type": "object",
       "description": "Insights from the agent cluster analysis.",
       "properties": {
-        "summary": {
-          "$ref": "#/definitions/InsightSummary",
-          "description": "Summary of the insights report."
-        },
-        "clusters": {
-          "type": "array",
-          "description": "List of clusters identified in the insights.",
-          "items": {
-            "$ref": "#/definitions/InsightCluster"
-          }
-        },
-        "coordinates": {
-          "type": "object",
-          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ChartCoordinate"
-          }
+        "clusterInsight": {
+          "$ref": "#/definitions/ClusterInsightResult"
         }
       },
       "required": [
-        "summary",
-        "clusters"
+        "clusterInsight"
       ],
       "allOf": [
         {
@@ -2919,28 +2903,12 @@
       "type": "object",
       "description": "Insights from the evaluation run cluster analysis.",
       "properties": {
-        "summary": {
-          "$ref": "#/definitions/InsightSummary",
-          "description": "Summary of the insights report."
-        },
-        "clusters": {
-          "type": "array",
-          "description": "List of clusters identified in the insights.",
-          "items": {
-            "$ref": "#/definitions/InsightCluster"
-          }
-        },
-        "coordinates": {
-          "type": "object",
-          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ChartCoordinate"
-          }
+        "clusterInsight": {
+          "$ref": "#/definitions/ClusterInsightResult"
         }
       },
       "required": [
-        "summary",
-        "clusters"
+        "clusterInsight"
       ],
       "allOf": [
         {

@@ -141,7 +141,7 @@ model EvaluationRunClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.EvaluationRunClusterInsight;
 
-  ...ClusterInsightResult;
+  clusterInsight: ClusterInsightResult;
 }
 
 @doc("Insights from the agent cluster analysis.")
@@ -150,7 +150,7 @@ model AgentClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.AgentClusterInsight;
 
-  ...ClusterInsightResult;
+  clusterInsight: ClusterInsightResult;
 }
 
 @doc("Summary of the error cluster analysis.")
