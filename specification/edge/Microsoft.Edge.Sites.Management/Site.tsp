@@ -24,12 +24,7 @@ model Site is ProxyResource<SiteProperties> {
 }
 
 alias SiteOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-  },
+  ResourceInstanceParameters<Extension.ResourceGroup>,
   KeysOf<Site>
 >;
 
@@ -43,11 +38,7 @@ interface Sites {
 }
 
 alias SiteBySubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-  },
+  ResourceInstanceParameters<Extension.Subscription>,
   KeysOf<Site>
 >;
 
@@ -98,17 +89,15 @@ interface SitesByServiceGroup {
   @added(Versions.v2025_03_01_preview)
   get is SiteByServiceGroupOps.Read<Site>;
 
-  @put
   @doc("create or update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
   createOrUpdate is SiteByServiceGroupOps.CreateOrUpdateAsync<Site>;
 
-  @patch(#{ implicitOptionality: true })
   @doc("update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
+  @patch(#{ implicitOptionality: true })
   update is SiteByServiceGroupOps.CustomPatchSync<Site, SiteUpdate>;
 
-  @delete
   @doc("delete Site at SG scope")
   @added(Versions.v2025_03_01_preview)
   delete is SiteByServiceGroupOps.DeleteSync<Site>;
