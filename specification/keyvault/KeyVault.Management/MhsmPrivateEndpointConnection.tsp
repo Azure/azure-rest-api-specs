@@ -59,13 +59,14 @@ interface MhsmPrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   put is ArmResourceCreateOrReplaceSync<
     MhsmPrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<MhsmPrivateEndpointConnection> & Azure.Core.Foundations.RetryAfterHeader & {
-      /**
-       * (specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous.
-       */
-      @header("Azure-AsyncOperation")
-      azureAsyncOperation: string;
-    },
+    Response = ArmResourceUpdatedResponse<MhsmPrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * (specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous.
+         */
+        @header("Azure-AsyncOperation")
+        azureAsyncOperation: string;
+      },
     Error = CloudError
   >;
 
