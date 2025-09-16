@@ -55,9 +55,9 @@ model QuantumComputingData {
 }
 
 
-model InputParams {@visibility(Visibility.Read, Visibility.Create) Record<string, object>};
+model InputParams {  @visibility(Lifecycle.Read, Lifecycle.Create) Record<string, object>};
 
-model Metadata {@visibility(Visibility.Read, Visibility.Create) Record<string, string>};
+model Metadata {  @visibility(Lifecycle.Read, Lifecycle.Create) Record<string, string>};
 
 /** A job to be run in the workspace. */
 @resource("jobs")
