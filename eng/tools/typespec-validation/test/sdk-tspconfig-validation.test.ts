@@ -281,8 +281,8 @@ const goManagementEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
   "emitter-output-dir",
-  "{output-dir}/sdk/resourcemanager/compute/armcompute",
-  "{output-dir}/sdk/messaging/eventgrid/azsystemevents",
+  "{output-dir}/{service-dir}/armcompute",
+  "{output-dir}/{service-dir}/azsystemevents",
   [new TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule()],
 );
 
@@ -375,8 +375,8 @@ const goDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   "",
   "emitter-output-dir",
-  "{output-dir}/sdk/messaging/eventgrid/azsystemevents",
-  "{output-dir}/sdk/resourcemanager/compute/armcompute",
+  "{output-dir}/{service-dir}/azsystemevents",
+  "{output-dir}/{service-dir}/armcompute",
   [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
 );
 

@@ -182,14 +182,16 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
     // Handle various path formats with different prefixes
     // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
     // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
+    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
 
-    if (actualValue.includes("/")) {
-      // If it has path separators, get the last part
-      const pathParts = actualValue.split("/");
-      pathToValidate = pathParts[pathParts.length - 1];
-    } else {
-      // If it's just a simple string without path separators
+    if (!actualValue.includes("/")) {
       pathToValidate = actualValue;
+    } else {
+      const pathParts = actualValue.split("/");
+      const filteredParts = pathParts.filter(
+        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
+      );
+      pathToValidate = filteredParts.join("/");
     }
 
     // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
