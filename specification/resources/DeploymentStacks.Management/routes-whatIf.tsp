@@ -17,7 +17,10 @@ namespace Microsoft.Resources.DeploymentStacks;
 @added(Versions.v2025_07_01)
 interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Model> {
   /** Gets the Deployment stack with the given name. */
-  getWhatIf is ArmResourceRead<DeploymentStackWhatIfResult, BaseParameters = TBaseParams>;
+  getWhatIf is ArmResourceRead<
+    DeploymentStackWhatIfResult,
+    BaseParameters = TBaseParams
+  >;
 
   /** Lists Deployment stacks at the specified scope. */
   listWhatIf is ArmResourceListByParent<

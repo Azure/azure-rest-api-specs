@@ -42,52 +42,52 @@ alias DeploymentStackWhatIfNameParameter = ResourceNameParameter<
  */
 @added(Versions.v2025_07_01)
 model DeploymentStackWhatIfResultProperties is DeploymentStacksError {
-    ... DeploymentStackSharedProperties;
-    /**
-     * The deployment stack id to use as the basis for comparison.
-     */
-    deploymentStackId: string;
+  ...DeploymentStackSharedProperties;
 
-    /**
-     * The interval to persist the deployment stack what-if result in ISO 8601 format.
-     */
-    retentionInterval: duration;
+  /**
+   * The deployment stack id to use as the basis for comparison.
+   */
+  deploymentStackId: string;
 
-    /**
-     * All of the changes predicted by the deployment stack what-if operation.
-     */
-    @visibility(Lifecycle.Read)
-    changes?: DeploymentStackWhatIfChange;
+  /**
+   * The interval to persist the deployment stack what-if result in ISO 8601 format.
+   */
+  retentionInterval: duration;
 
-    /**
-     * List of resource diagnostics detected by What-If operation.
-     */
-    @visibility(Lifecycle.Read)
-    @OpenAPI.extension("x-ms-identifiers", #[])
-    diagnostics?: DeploymentStackDiagnostics[];
+  /**
+   * All of the changes predicted by the deployment stack what-if operation.
+   */
+  @visibility(Lifecycle.Read)
+  changes?: DeploymentStackWhatIfChange;
+
+  /**
+   * List of resource diagnostics detected by What-If operation.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  diagnostics?: DeploymentStackDiagnostics[];
 }
 
 /**
  * Changes predicted to the deployment stack as a result of the what-if operation.
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfChange { 
-    
-    /**
-     * List of resource changes predicted by What-If operation.
-     */
-    @OpenAPI.extension("x-ms-identifiers", #["identifiers","resourceId"])
-    resourceChanges: DeploymentStackWhatIfResourceChange[];
+model DeploymentStackWhatIfChange {
+  /**
+   * List of resource changes predicted by What-If operation.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["identifiers", "resourceId"])
+  resourceChanges: DeploymentStackWhatIfResourceChange[];
 
-    /**
-     * Predicted changes to the deployment stack deny settings.
-     */
-    denySettingsChange: DeploymentStackChangeDelta<DenySettings>;
+  /**
+   * Predicted changes to the deployment stack deny settings.
+   */
+  denySettingsChange: DeploymentStackChangeDelta<DenySettings>;
 
-    /**
-     * Predicted changes to the deployment scope for the deployment stack.
-     */
-    deploymentScopeChange: DeploymentStackChangeBase<string>;
+  /**
+   * Predicted changes to the deployment scope for the deployment stack.
+   */
+  deploymentScopeChange: DeploymentStackChangeBase<string>;
 }
 
 /**
@@ -95,52 +95,53 @@ model DeploymentStackWhatIfChange {
  */
 @added(Versions.v2025_07_01)
 model DeploymentStackWhatIfResourceChange {
-    ... ResourceChangeDelta;
-    /**
-     * The resource id of the resource being changed.
-     */
-    resourceId: string;
+  ...ResourceChangeDelta;
 
-    /**
-     * The resource id of the Deployment responsible for this change.
-     */
-    deploymentId: string;
+  /**
+   * The resource id of the resource being changed.
+   */
+  resourceId: string;
 
-    /**
-     * The symbolic name of the resource being changed.
-     */
-    symbolicName: string;
+  /**
+   * The resource id of the Deployment responsible for this change.
+   */
+  deploymentId: string;
 
-    /** 
-     * The extensible resource identifiers.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Extensible resources will have type-specific properties to help with unique identification"
-    identifiers: Record<unknown>;
+  /**
+   * The symbolic name of the resource being changed.
+   */
+  symbolicName: string;
 
-    /**
-     * Type of change that will be made to the resource when the deployment is executed.
-     */
-    changeType: DeploymentStackWhatIfChangeType;
+  /**
+   * The extensible resource identifiers.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Extensible resources will have type-specific properties to help with unique identification"
+  identifiers: Record<unknown>;
 
-    /**
-     * The confidence level of the predicted change.
-     */
-    changeCertainty: DeploymentStackWhatIfChangeCertainty;
+  /**
+   * Type of change that will be made to the resource when the deployment is executed.
+   */
+  changeType: DeploymentStackWhatIfChangeType;
 
-    /**
-     * The predicted changes to the deployment stack management status of the resource.
-     */
-    managementStatusChange: DeploymentStackChangeBase<DeploymentStackManagementStatus>;
+  /**
+   * The confidence level of the predicted change.
+   */
+  changeCertainty: DeploymentStackWhatIfChangeCertainty;
 
-    /**
-     * The predicted changes to the deployment stack deny status of the resource.
-     */
-    denyStatusChange: DeploymentStackChangeBase<DenyStatusMode>;
+  /**
+   * The predicted changes to the deployment stack management status of the resource.
+   */
+  managementStatusChange: DeploymentStackChangeBase<DeploymentStackManagementStatus>;
 
-    /**
-     * The explanation about why the resource is unsupported by What-If.
-     */
-    unsupportedReason: string;
+  /**
+   * The predicted changes to the deployment stack deny status of the resource.
+   */
+  denyStatusChange: DeploymentStackChangeBase<DenyStatusMode>;
+
+  /**
+   * The explanation about why the resource is unsupported by What-If.
+   */
+  unsupportedReason: string;
 }
 
 /**
@@ -148,16 +149,17 @@ model DeploymentStackWhatIfResourceChange {
  */
 @added(Versions.v2025_07_01)
 union DeploymentStackWhatIfChangeCertainty {
-    string,
-    /**
-     * The change is definite.
-     */
-    Definite: "definite";
+  string,
 
-    /**
-     * The change may or may not happen, based on deployment-time conditions.
-     */
-    Potential: "potential";
+  /**
+   * The change is definite.
+   */
+  Definite: "definite",
+
+  /**
+   * The change may or may not happen, based on deployment-time conditions.
+   */
+  Potential: "potential",
 }
 
 /**
@@ -165,18 +167,17 @@ union DeploymentStackWhatIfChangeCertainty {
  */
 @added(Versions.v2025_07_01)
 model DeploymentStackChangeBase<T> {
-    
-    /**
-     * The predicted value before the deployment is executed.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Azure resources are too complex to model"
-    before?: T;
+  /**
+   * The predicted value before the deployment is executed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Azure resources are too complex to model"
+  before?: T;
 
-    /**
-     * The predicted value after the deployment is executed.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Azure resources are too complex to model"
-    after?: T;
+  /**
+   * The predicted value after the deployment is executed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Azure resources are too complex to model"
+  after?: T;
 }
 
 /**
@@ -194,37 +195,36 @@ model ResourceChangeDelta is DeploymentStackChangeDelta<Record<unknown>>;
  */
 @added(Versions.v2025_07_01)
 model DeploymentStackChangeDelta<T> {
-    ... DeploymentStackChangeBase<T>;
+  ...DeploymentStackChangeBase<T>;
 
-    /**
-     * The predicted changes to the properties."
-     */
-    @OpenAPI.extension("x-ms-identifiers", #["path"])
-    delta?: DeploymentStackWhatIfPropertyChange[];
-
+  /**
+   * The predicted changes to the properties."
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  delta?: DeploymentStackWhatIfPropertyChange[];
 }
 
 /**
  * The predicted change to the resource property.
-*/
+ */
 model DeploymentStackWhatIfPropertyChange {
-    ... ResourceChangeBase;
+  ...ResourceChangeBase;
 
-    /**
-     * Type of change that will be made to the resource when the deployment is executed.
-     */
-    path: string;
+  /**
+   * Type of change that will be made to the resource when the deployment is executed.
+   */
+  path: string;
 
-    /**
-     * Type of change that will be made to the resource when the deployment is executed.
-     */
-    changeType: DeploymentStackWhatIfPropertyChangeType;
+  /**
+   * Type of change that will be made to the resource when the deployment is executed.
+   */
+  changeType: DeploymentStackWhatIfPropertyChangeType;
 
-    /**
-     * Nested property changes.
-     */
-    @OpenAPI.extension("x-ms-identifiers", #["path"])
-    children?: DeploymentStackWhatIfPropertyChange[];
+  /**
+   * Nested property changes.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  children?: DeploymentStackWhatIfPropertyChange[];
 }
 
 /**
@@ -232,32 +232,31 @@ model DeploymentStackWhatIfPropertyChange {
  */
 @added(Versions.v2025_07_01)
 model DeploymentStackDiagnostics {
-    
-    /**
-     * Denotes the additional response level.
-     */
-    level: DeploymentStackDiagnosticLevel;
+  /**
+   * Denotes the additional response level.
+   */
+  level: DeploymentStackDiagnosticLevel;
 
-    /**
-     * The error code.
-     */
-    code: string;
+  /**
+   * The error code.
+   */
+  code: string;
 
-    /**
-     * The error message. 
-     */
-    message: string;
+  /**
+   * The error message.
+   */
+  message: string;
 
-    /**
-     * The error target. 
-     */
-    target?: string;
+  /**
+   * The error target.
+   */
+  target?: string;
 
-    /**
-     * Additional error information.
-     */
-    @OpenAPI.extension("x-ms-identifiers", #[])
-    additionalInfo?: ErrorAdditionalInfo[];
+  /**
+   * Additional error information.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  additionalInfo?: ErrorAdditionalInfo[];
 }
 
 /**
@@ -265,21 +264,22 @@ model DeploymentStackDiagnostics {
  */
 @added(Versions.v2025_07_01)
 union DeploymentStackManagementStatus {
-    string,
-    /**
-     * The resource is managed by the deployment stack.
-     */
-    Managed: "managed";
+  string,
 
-    /**
-     * The resource is not managed by the deployment stack.
-     */
-    Unmanaged: "unmanaged";
+  /**
+   * The resource is managed by the deployment stack.
+   */
+  Managed: "managed",
 
-    /**
-     * The management state of the resource could not be determined.
-     */
-    Unknown: "unknown";
+  /**
+   * The resource is not managed by the deployment stack.
+   */
+  Unmanaged: "unmanaged",
+
+  /**
+   * The management state of the resource could not be determined.
+   */
+  Unknown: "unknown",
 }
 
 /**
@@ -287,33 +287,33 @@ union DeploymentStackManagementStatus {
  */
 @added(Versions.v2025_07_01)
 union DeploymentStackWhatIfChangeType {
-    string,
+  string,
 
-    /**
-     * The resource does not exist in the current state but is present in the desired state. The resource will be created when the deployment is executed.
-     */
-    Create: "create";
+  /**
+   * The resource does not exist in the current state but is present in the desired state. The resource will be created when the deployment is executed.
+   */
+  Create: "create",
 
-    /**
-     * The resource exists in the current state and is missing from the desired state. The resource will be deleted from Azure after the deployment is executed.
-     */
-    Delete: "delete";
+  /**
+   * The resource exists in the current state and is missing from the desired state. The resource will be deleted from Azure after the deployment is executed.
+   */
+  Delete: "delete",
 
-    /**
-     * The resource exists in the current state and is missing from the desired state. The resource will be removed from the deployment stack, but will remain in Azure, after the deployment is executed.
-     * 
-     */
-    Detach: "detach";
+  /**
+   * The resource exists in the current state and is missing from the desired state. The resource will be removed from the deployment stack, but will remain in Azure, after the deployment is executed.
+   *
+   */
+  Detach: "detach",
 
-    /**
-     * The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will change.
-     */
-    Modify: "modify";
+  /**
+   * The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will change.
+   */
+  Modify: "modify",
 
-    /**
-     * 	The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will not change.
-     */
-    NoChange: "noChange";
+  /**
+   * 	The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will not change.
+   */
+  NoChange: "noChange",
 }
 
 /**
@@ -321,30 +321,31 @@ union DeploymentStackWhatIfChangeType {
  */
 union DeploymentStackWhatIfPropertyChangeType {
   string,
-    /**
-     * 	The property is an array and contains nested changes.
-     */
-    Array: "array";
 
-    /**
-     * The property does not exist in the current state but is present in the desired state. The property will be created when the deployment is executed.
-     */
-    Create: "create";
+  /**
+   * 	The property is an array and contains nested changes.
+   */
+  Array: "array",
 
-    /**
-     * The property exists in the current state and is missing from the desired state. It will be deleted when the deployment is executed.
-     */
-    Delete: "delete";
+  /**
+   * The property does not exist in the current state but is present in the desired state. The property will be created when the deployment is executed.
+   */
+  Create: "create",
 
-    /**
-     * The property exists in both current and desired state and is different. The value of the property will change when the deployment is executed.
-     */
-    Modify: "modify";
+  /**
+   * The property exists in the current state and is missing from the desired state. It will be deleted when the deployment is executed.
+   */
+  Delete: "delete",
 
-    /**
-     * The property will not be set or updated.
-     */
-    NoEffect: "noEffect";
+  /**
+   * The property exists in both current and desired state and is different. The value of the property will change when the deployment is executed.
+   */
+  Modify: "modify",
+
+  /**
+   * The property will not be set or updated.
+   */
+  NoEffect: "noEffect",
 }
 
 /**
@@ -352,19 +353,20 @@ union DeploymentStackWhatIfPropertyChangeType {
  */
 @added(Versions.v2025_07_01)
 union DeploymentStackDiagnosticLevel {
-    string,
-    /**
-     * Informational message.
-     */
-    Info: "info";
+  string,
 
-    /**
-     * Warning message.
-     */
-    Warning: "warning";
+  /**
+   * Informational message.
+   */
+  Info: "info",
 
-    /**
-     * Error message.
-     */
-    Error: "error";
+  /**
+   * Warning message.
+   */
+  Warning: "warning",
+
+  /**
+   * Error message.
+   */
+  Error: "error",
 }
