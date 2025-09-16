@@ -1,0 +1,86 @@
+{
+  "title": "ServiceApis_CreateOrReplaceOpcuaMapping",
+  "operationId": "ServiceApis_CreateOrReplaceOpcuaMapping",
+  "parameters": {
+    "api-version": "2025-03-01",
+    "entityName": "kgksrpsvclaviaf",
+    "resource": {
+      "entityName": "TestName",
+      "targetEntity": "TestEntity",
+      "updateRelatedNode": true,
+      "relationshipType": "TestRelationshipType",
+      "mappingData": [
+        {
+          "dmmKeys": [
+            {
+              "id": "123"
+            }
+          ],
+          "opcuaName": "urn:assembly.seattle;nsu=http://opcfoundation.org/UA/Station/;i=124"
+        },
+        {
+          "dmmKeys": [
+            {
+              "id": "12345"
+            }
+          ],
+          "opcuaName": "urn:assembly.seattle;nsu=http://opcfoundation.org/UA/Station/;i=400"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "entityName": "TestName",
+        "mappingData": [
+          {
+            "dmmKeys": [
+              {
+                "id": "123"
+              }
+            ],
+            "opcuaName": "urn:assembly.seattle;nsu=http://opcfoundation.org/UA/Station/;i=124"
+          },
+          {
+            "dmmKeys": [
+              {
+                "id": "12345"
+              }
+            ],
+            "opcuaName": "urn:assembly.seattle;nsu=http://opcfoundation.org/UA/Station/;i=400"
+          }
+        ],
+        "targetEntity": "TestEntity",
+        "updateRelatedNode": true,
+        "relationshipType": "TestRelationshipType"
+      }
+    },
+    "201": {
+      "body": {
+        "entityName": "TestName",
+        "mappingData": [
+          {
+            "dmmKeys": [
+              {
+                "id": "123"
+              }
+            ],
+            "opcuaName": "urn:assembly.seattle;nsu=http://opcfoundation.org/UA/Station/;i=124"
+          },
+          {
+            "dmmKeys": [
+              {
+                "id": "12345"
+              }
+            ],
+            "opcuaName": "urn:assembly.seattle;nsu=http://opcfoundation.org/UA/Station/;i=400"
+          }
+        ],
+        "targetEntity": "TestEntity",
+        "updateRelatedNode": true,
+        "relationshipType": "TestRelationshipType"
+      }
+    }
+  }
+}
