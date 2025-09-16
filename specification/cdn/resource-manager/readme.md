@@ -42,6 +42,11 @@ input-file:
   - Microsoft.Cdn/preview/2025-09-01-preview/afdx.json
   - Microsoft.Cdn/preview/2025-09-01-preview/cdn.json
   - Microsoft.Cdn/preview/2025-09-01-preview/cdnwebapplicationfirewall.json
+  suppressions:
+  - code: PatchBodyParametersSchema
+    from: afdx.json
+    line: 549
+    reason: Swagger LintDiff false positive. Property "scenario" is only required inside parent property "mtlsSettings", so only required if "mtlsSettings" is included in PATCH request for AFDDomainUpdateParameters
 ```
 
 ### Tag: package-2025-06
