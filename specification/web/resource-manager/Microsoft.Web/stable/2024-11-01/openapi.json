@@ -10257,6 +10257,10 @@
           "Sites"
         ],
         "description": "Description for Gets the last lines of docker logs for the given site",
+        "produces": [
+          "*/*",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -10277,7 +10281,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "file"
+            }
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
@@ -22591,6 +22598,10 @@
           "WebApps"
         ],
         "description": "Description for Gets the last lines of docker logs for the given site",
+        "produces": [
+          "*/*",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -22618,7 +22629,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "file"
+            }
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
@@ -32713,6 +32727,9 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },

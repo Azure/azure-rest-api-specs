@@ -604,9 +604,7 @@ interface Sites {
   getWebSiteContainerLogs is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+    File | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1196,6 +1194,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  @list
   @action("snapshotsdr")
   listSnapshotsFromDRSecondary is SiteOps.ActionSync<
     Site,
@@ -1739,9 +1738,7 @@ interface WebApps {
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+    File | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
