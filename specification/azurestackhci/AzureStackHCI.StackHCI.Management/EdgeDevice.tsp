@@ -72,7 +72,7 @@ interface EdgeDevices {
     Extension.ScopeParameter,
     EdgeDevice,
     ValidateRequest,
-    ArmResponse<ValidateResponseResult>
+    ValidateResponseResult
   >;
 }
 
