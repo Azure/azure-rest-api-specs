@@ -41,9 +41,6 @@
   "tags": [
     {
       "name": "Sites"
-    },
-    {
-      "name": "SitesBySubscription"
     }
   ],
   "paths": {
@@ -107,7 +104,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -151,7 +148,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -159,7 +156,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The properties of the site",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Site"
@@ -225,7 +222,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -233,7 +230,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The properties of the site",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -278,7 +275,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -308,10 +305,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites": {
       "get": {
         "operationId": "SitesBySubscription_List",
-        "tags": [
-          "SitesBySubscription"
-        ],
-        "description": "List a Site",
+        "description": "List Site resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -347,9 +341,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites/{siteName}": {
       "get": {
         "operationId": "SitesBySubscription_Get",
-        "tags": [
-          "SitesBySubscription"
-        ],
         "description": "Get a Site",
         "parameters": [
           {
@@ -389,9 +380,6 @@
       },
       "put": {
         "operationId": "SitesBySubscription_CreateOrUpdate",
-        "tags": [
-          "SitesBySubscription"
-        ],
         "description": "Create a Site",
         "parameters": [
           {
@@ -461,9 +449,6 @@
       },
       "patch": {
         "operationId": "SitesBySubscription_Update",
-        "tags": [
-          "SitesBySubscription"
-        ],
         "description": "Update a Site",
         "parameters": [
           {
@@ -512,9 +497,6 @@
       },
       "delete": {
         "operationId": "SitesBySubscription_Delete",
-        "tags": [
-          "SitesBySubscription"
-        ],
         "description": "Delete a Site",
         "parameters": [
           {
