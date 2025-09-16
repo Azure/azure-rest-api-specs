@@ -1,22 +1,22 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
-    "packetCoreControlPlaneName": "TestPacketCoreCP",
     "packetCaptureName": "pc1",
+    "packetCoreControlPlaneName": "TestPacketCoreCP",
     "parameters": {
       "properties": {
+        "bytesToCapturePerPacket": 10000,
         "networkInterfaces": [
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP",
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestADN"
         ],
-        "bytesToCapturePerPacket": 10000,
-        "totalBytesPerSession": 100000,
-        "timeLimitInSeconds": 100
+        "timeLimitInSeconds": 100,
+        "totalBytesPerSession": 100000
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -24,16 +24,16 @@
         "name": "pc1",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCaptures/pc1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "status": "Stopped",
+          "bytesToCapturePerPacket": 10000,
           "networkInterfaces": [
             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP",
             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestADN"
           ],
-          "bytesToCapturePerPacket": 10000,
-          "totalBytesPerSession": 100000,
-          "timeLimitInSeconds": 100
+          "provisioningState": "Succeeded",
+          "status": "Stopped",
+          "timeLimitInSeconds": 100,
+          "totalBytesPerSession": 100000
         }
       }
     },
@@ -42,18 +42,20 @@
         "name": "pc1",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCaptures/pc1",
         "properties": {
-          "provisioningState": "Accepted",
-          "status": "NotStarted",
+          "bytesToCapturePerPacket": 10000,
           "networkInterfaces": [
             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP",
             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestADN"
           ],
-          "bytesToCapturePerPacket": 10000,
-          "totalBytesPerSession": 100000,
-          "timeLimitInSeconds": 100
+          "provisioningState": "Accepted",
+          "status": "NotStarted",
+          "timeLimitInSeconds": 100,
+          "totalBytesPerSession": 100000
         }
       }
     }
-  }
+  },
+  "operationId": "PacketCaptures_CreateOrUpdate",
+  "title": "Create packet capture"
 }

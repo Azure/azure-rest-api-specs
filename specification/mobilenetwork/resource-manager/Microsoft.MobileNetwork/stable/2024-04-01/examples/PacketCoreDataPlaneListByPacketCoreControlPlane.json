@@ -1,38 +1,40 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "packetCoreControlPlaneName": "testPacketCoreCP",
     "resourceGroupName": "rg1",
-    "packetCoreControlPlaneName": "testPacketCoreCP"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "nextLink",
         "value": [
           {
             "name": "TestPacketCoreDP",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP",
             "type": "Microsoft.MobileNetwork/packetCoreDataPlane",
-            "systemData": {
-              "createdBy": "user1",
-              "createdByType": "User",
-              "createdAt": "2020-01-01T17:18:19.1234567Z",
-              "lastModifiedBy": "user2",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP",
             "location": "eastus",
-            "tags": {},
             "properties": {
               "provisioningState": "Succeeded",
               "userPlaneAccessInterface": {
                 "name": "N3"
               }
-            }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
           }
-        ],
-        "nextLink": "nextLink"
+        ]
       }
     }
-  }
+  },
+  "operationId": "PacketCoreDataPlanes_ListByPacketCoreControlPlane",
+  "title": "List packet core data planes in a control plane"
 }

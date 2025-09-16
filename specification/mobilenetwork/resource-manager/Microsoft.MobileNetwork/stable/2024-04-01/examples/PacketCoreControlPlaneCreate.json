@@ -1,20 +1,27 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
     "packetCoreControlPlaneName": "TestPacketCoreCP",
     "parameters": {
       "location": "eastus",
       "properties": {
+        "controlPlaneAccessInterface": {
+          "name": "N2"
+        },
+        "coreNetworkTechnology": "5GC",
+        "eventHub": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/contosoNamespace/eventHubs/contosoHub",
+          "reportingInterval": 60
+        },
         "installation": {
           "desiredState": "Installed"
         },
-        "sites": [
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+        "localDiagnosticsAccess": {
+          "authenticationType": "AAD",
+          "httpsServerCertificate": {
+            "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress"
           }
-        ],
+        },
         "platform": {
           "type": "AKS-HCI",
           "azureStackEdgeDevice": {
@@ -27,64 +34,59 @@
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
           }
         },
-        "coreNetworkTechnology": "5GC",
-        "version": "0.2.0",
-        "controlPlaneAccessInterface": {
-          "name": "N2"
-        },
-        "sku": "G0",
-        "ueMtu": 1600,
-        "localDiagnosticsAccess": {
-          "authenticationType": "AAD",
-          "httpsServerCertificate": {
-            "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress"
-          }
-        },
-        "eventHub": {
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/contosoNamespace/eventHubs/contosoHub",
-          "reportingInterval": 60
-        },
         "signaling": {
-          "nasReroute": {
-            "macroMmeGroupId": 1024
-          },
           "nasEncryption": [
             "NEA2/EEA2",
             "NEA1/EEA1",
             "NEA0/EEA0"
-          ]
-        }
+          ],
+          "nasReroute": {
+            "macroMmeGroupId": 1024
+          }
+        },
+        "sites": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+          }
+        ],
+        "sku": "G0",
+        "ueMtu": 1600,
+        "version": "0.2.0"
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "name": "TestPacketCoreCP",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
         "type": "Microsoft.MobileNetwork/packetCoreControlPlane",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
         "location": "eastus",
-        "tags": {},
         "properties": {
-          "provisioningState": "Succeeded",
+          "controlPlaneAccessInterface": {
+            "name": "N2"
+          },
+          "coreNetworkTechnology": "5GC",
+          "eventHub": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/contosoNamespace/eventHubs/contosoHub",
+            "reportingInterval": 60
+          },
           "installation": {
             "desiredState": "Installed",
-            "state": "Installed",
-            "reinstallRequired": "NotRequired"
+            "reinstallRequired": "NotRequired",
+            "state": "Installed"
           },
-          "sites": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+          "localDiagnosticsAccess": {
+            "authenticationType": "AAD",
+            "httpsServerCertificate": {
+              "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress",
+              "provisioning": {
+                "state": "NotProvisioned"
+              }
             }
-          ],
+          },
           "platform": {
             "type": "AKS-HCI",
             "azureStackEdgeDevice": {
@@ -105,71 +107,68 @@
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
             }
           },
-          "coreNetworkTechnology": "5GC",
-          "version": "0.2.0",
-          "controlPlaneAccessInterface": {
-            "name": "N2"
-          },
-          "sku": "G0",
-          "ueMtu": 1600,
-          "localDiagnosticsAccess": {
-            "authenticationType": "AAD",
-            "httpsServerCertificate": {
-              "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress",
-              "provisioning": {
-                "state": "NotProvisioned"
-              }
-            }
-          },
-          "eventHub": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/contosoNamespace/eventHubs/contosoHub",
-            "reportingInterval": 60
-          },
+          "provisioningState": "Succeeded",
           "signaling": {
-            "nasReroute": {
-              "macroMmeGroupId": 1024
-            },
             "nasEncryption": [
               "NEA2/EEA2",
               "NEA1/EEA1",
               "NEA0/EEA0"
-            ]
-          }
-        }
+            ],
+            "nasReroute": {
+              "macroMmeGroupId": 1024
+            }
+          },
+          "sites": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+            }
+          ],
+          "sku": "G0",
+          "ueMtu": 1600,
+          "version": "0.2.0"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
-      },
       "body": {
         "name": "TestPacketCoreCP",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
         "type": "Microsoft.MobileNetwork/packetCoreControlPlane",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
         "location": "eastus",
-        "tags": {},
         "properties": {
-          "provisioningState": "Created",
+          "controlPlaneAccessInterface": {
+            "name": "N2"
+          },
+          "coreNetworkTechnology": "5GC",
+          "eventHub": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/contosoNamespace/eventHubs/contosoHub",
+            "reportingInterval": 60
+          },
           "installation": {
             "desiredState": "Installed",
-            "state": "Installing",
             "operation": {
               "id": "/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation"
+            },
+            "state": "Installing"
+          },
+          "localDiagnosticsAccess": {
+            "authenticationType": "AAD",
+            "httpsServerCertificate": {
+              "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress",
+              "provisioning": {
+                "state": "NotProvisioned"
+              }
             }
           },
-          "sites": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
-            }
-          ],
           "platform": {
             "type": "AKS-HCI",
             "azureStackEdgeDevice": {
@@ -190,38 +189,41 @@
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
             }
           },
-          "coreNetworkTechnology": "5GC",
-          "version": "0.2.0",
-          "controlPlaneAccessInterface": {
-            "name": "N2"
-          },
-          "sku": "G0",
-          "ueMtu": 1600,
-          "localDiagnosticsAccess": {
-            "authenticationType": "AAD",
-            "httpsServerCertificate": {
-              "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress",
-              "provisioning": {
-                "state": "NotProvisioned"
-              }
-            }
-          },
-          "eventHub": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/contosoNamespace/eventHubs/contosoHub",
-            "reportingInterval": 60
-          },
+          "provisioningState": "Created",
           "signaling": {
-            "nasReroute": {
-              "macroMmeGroupId": 1024
-            },
             "nasEncryption": [
               "NEA2/EEA2",
               "NEA1/EEA1",
               "NEA0/EEA0"
-            ]
-          }
-        }
+            ],
+            "nasReroute": {
+              "macroMmeGroupId": 1024
+            }
+          },
+          "sites": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+            }
+          ],
+          "sku": "G0",
+          "ueMtu": 1600,
+          "version": "0.2.0"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
       }
     }
-  }
+  },
+  "operationId": "PacketCoreControlPlanes_CreateOrUpdate",
+  "title": "Create packet core control plane"
 }

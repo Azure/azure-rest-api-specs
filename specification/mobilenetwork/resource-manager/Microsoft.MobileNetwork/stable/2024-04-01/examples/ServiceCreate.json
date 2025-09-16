@@ -1,24 +1,10 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
     "mobileNetworkName": "testMobileNetwork",
-    "serviceName": "TestService",
     "parameters": {
       "location": "eastus",
       "properties": {
-        "servicePrecedence": 255,
-        "serviceQosPolicy": {
-          "5qi": 9,
-          "allocationAndRetentionPriorityLevel": 9,
-          "preemptionCapability": "NotPreempt",
-          "preemptionVulnerability": "Preemptable",
-          "maximumBitRate": {
-            "uplink": "500 Mbps",
-            "downlink": "1 Gbps"
-          }
-        },
         "pccRules": [
           {
             "ruleName": "default-rule",
@@ -26,61 +12,115 @@
             "ruleQosPolicy": {
               "5qi": 9,
               "allocationAndRetentionPriorityLevel": 9,
-              "preemptionCapability": "NotPreempt",
-              "preemptionVulnerability": "Preemptable",
               "maximumBitRate": {
-                "uplink": "500 Mbps",
-                "downlink": "1 Gbps"
-              }
+                "downlink": "1 Gbps",
+                "uplink": "500 Mbps"
+              },
+              "preemptionCapability": "NotPreempt",
+              "preemptionVulnerability": "Preemptable"
             },
-            "trafficControl": "Enabled",
             "serviceDataFlowTemplates": [
               {
-                "templateName": "IP-to-server",
                 "direction": "Uplink",
-                "protocol": [
-                  "ip"
-                ],
+                "ports": [],
                 "remoteIpList": [
                   "10.3.4.0/24"
                 ],
-                "ports": []
+                "templateName": "IP-to-server",
+                "protocol": [
+                  "ip"
+                ]
               }
-            ]
+            ],
+            "trafficControl": "Enabled"
           }
-        ]
+        ],
+        "servicePrecedence": 255,
+        "serviceQosPolicy": {
+          "5qi": 9,
+          "allocationAndRetentionPriorityLevel": 9,
+          "maximumBitRate": {
+            "downlink": "1 Gbps",
+            "uplink": "500 Mbps"
+          },
+          "preemptionCapability": "NotPreempt",
+          "preemptionVulnerability": "Preemptable"
+        }
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "TestService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "name": "testPolicy",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/services/TestService",
         "type": "Microsoft.MobileNetwork/service",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/services/TestService",
         "location": "eastus",
-        "tags": {},
         "properties": {
+          "pccRules": [
+            {
+              "ruleName": "default-rule",
+              "rulePrecedence": 255,
+              "ruleQosPolicy": {
+                "5qi": 9,
+                "allocationAndRetentionPriorityLevel": 9,
+                "maximumBitRate": {
+                  "downlink": "1 Gbps",
+                  "uplink": "500 Mbps"
+                },
+                "preemptionCapability": "NotPreempt",
+                "preemptionVulnerability": "Preemptable"
+              },
+              "serviceDataFlowTemplates": [
+                {
+                  "direction": "Uplink",
+                  "ports": [],
+                  "remoteIpList": [
+                    "10.3.4.0/24"
+                  ],
+                  "templateName": "IP-to-server",
+                  "protocol": [
+                    "ip"
+                  ]
+                }
+              ],
+              "trafficControl": "Enabled"
+            }
+          ],
           "provisioningState": "Succeeded",
           "servicePrecedence": 255,
           "serviceQosPolicy": {
             "5qi": 9,
             "allocationAndRetentionPriorityLevel": 9,
-            "preemptionCapability": "NotPreempt",
-            "preemptionVulnerability": "Preemptable",
             "maximumBitRate": {
-              "uplink": "500 Mbps",
-              "downlink": "1 Gbps"
-            }
-          },
+              "downlink": "1 Gbps",
+              "uplink": "500 Mbps"
+            },
+            "preemptionCapability": "NotPreempt",
+            "preemptionVulnerability": "Preemptable"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testPolicy",
+        "type": "Microsoft.MobileNetwork/service",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/services/TestService",
+        "location": "eastus",
+        "properties": {
           "pccRules": [
             {
               "ruleName": "default-rule",
@@ -88,95 +128,57 @@
               "ruleQosPolicy": {
                 "5qi": 9,
                 "allocationAndRetentionPriorityLevel": 9,
-                "preemptionCapability": "NotPreempt",
-                "preemptionVulnerability": "Preemptable",
                 "maximumBitRate": {
-                  "uplink": "500 Mbps",
-                  "downlink": "1 Gbps"
-                }
+                  "downlink": "1 Gbps",
+                  "uplink": "500 Mbps"
+                },
+                "preemptionCapability": "NotPreempt",
+                "preemptionVulnerability": "Preemptable"
               },
-              "trafficControl": "Enabled",
               "serviceDataFlowTemplates": [
                 {
-                  "templateName": "IP-to-server",
                   "direction": "Uplink",
-                  "protocol": [
-                    "ip"
-                  ],
+                  "ports": [],
                   "remoteIpList": [
                     "10.3.4.0/24"
                   ],
-                  "ports": []
+                  "templateName": "IP-to-server",
+                  "protocol": [
+                    "ip"
+                  ]
                 }
-              ]
+              ],
+              "trafficControl": "Enabled"
             }
-          ]
-        }
-      }
-    },
-    "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
-      },
-      "body": {
-        "name": "testPolicy",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/services/TestService",
-        "type": "Microsoft.MobileNetwork/service",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
-        "location": "eastus",
-        "tags": {},
-        "properties": {
+          ],
           "provisioningState": "Created",
           "servicePrecedence": 255,
           "serviceQosPolicy": {
             "5qi": 9,
             "allocationAndRetentionPriorityLevel": 9,
-            "preemptionCapability": "NotPreempt",
-            "preemptionVulnerability": "Preemptable",
             "maximumBitRate": {
-              "uplink": "500 Mbps",
-              "downlink": "1 Gbps"
-            }
-          },
-          "pccRules": [
-            {
-              "ruleName": "default-rule",
-              "rulePrecedence": 255,
-              "ruleQosPolicy": {
-                "5qi": 9,
-                "allocationAndRetentionPriorityLevel": 9,
-                "preemptionCapability": "NotPreempt",
-                "preemptionVulnerability": "Preemptable",
-                "maximumBitRate": {
-                  "uplink": "500 Mbps",
-                  "downlink": "1 Gbps"
-                }
-              },
-              "trafficControl": "Enabled",
-              "serviceDataFlowTemplates": [
-                {
-                  "templateName": "IP-to-server",
-                  "direction": "Uplink",
-                  "protocol": [
-                    "ip"
-                  ],
-                  "remoteIpList": [
-                    "10.3.4.0/24"
-                  ],
-                  "ports": []
-                }
-              ]
-            }
-          ]
-        }
+              "downlink": "1 Gbps",
+              "uplink": "500 Mbps"
+            },
+            "preemptionCapability": "NotPreempt",
+            "preemptionVulnerability": "Preemptable"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
       }
     }
-  }
+  },
+  "operationId": "Services_CreateOrUpdate",
+  "title": "Create service"
 }

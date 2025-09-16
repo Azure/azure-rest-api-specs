@@ -1,24 +1,24 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "testResourceGroupName",
-    "simGroupName": "testSimGroup",
     "parameters": {
       "sims": [
         "testSim",
         "testSim2"
       ]
-    }
+    },
+    "resourceGroupName": "testResourceGroupName",
+    "simGroupName": "testSimGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation",
         "name": "testOperation",
-        "status": "Succeeded",
+        "endTime": "2021-08-19T03:38:07.000Z",
+        "id": "/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation",
         "startTime": "2021-08-19T03:36:07.000Z",
-        "endTime": "2021-08-19T03:38:07.000Z"
+        "status": "Succeeded"
       }
     },
     "202": {
@@ -27,5 +27,7 @@
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "Sims_BulkDelete",
+  "title": "Bulk delete SIMs from a SIM group"
 }

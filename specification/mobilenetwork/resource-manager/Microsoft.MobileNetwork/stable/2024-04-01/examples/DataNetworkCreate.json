@@ -1,62 +1,64 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
-    "mobileNetworkName": "testMobileNetwork",
     "dataNetworkName": "testDataNetwork",
+    "mobileNetworkName": "testMobileNetwork",
     "parameters": {
       "location": "eastus",
       "properties": {
         "description": "myFavouriteDataNetwork"
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "name": "testDataNetwork",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/dataNetworks/testDataNetwork",
         "type": "Microsoft.MobileNetwork/mobileNetworks/dataNetworks",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/dataNetworks/testDataNetwork",
+        "location": "eastus",
+        "properties": {
+          "description": "myFavouriteDataNetwork",
+          "provisioningState": "Succeeded"
+        },
         "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
           "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+          "lastModifiedByType": "User"
         },
-        "location": "eastus",
-        "tags": {},
-        "properties": {
-          "provisioningState": "Succeeded",
-          "description": "myFavouriteDataNetwork"
-        }
+        "tags": {}
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
-      },
       "body": {
         "name": "testDataNetwork",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/dataNetworks/testDataNetwork",
         "type": "Microsoft.MobileNetwork/mobileNetworks/dataNetworks",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/dataNetworks/testDataNetwork",
+        "location": "eastus",
+        "properties": {
+          "description": "myFavouriteDataNetwork",
+          "provisioningState": "Created"
+        },
         "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
           "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+          "lastModifiedByType": "User"
         },
-        "location": "eastus",
-        "tags": {},
-        "properties": {
-          "provisioningState": "Created",
-          "description": "myFavouriteDataNetwork"
-        }
+        "tags": {}
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
       }
     }
-  }
+  },
+  "operationId": "DataNetworks_CreateOrUpdate",
+  "title": "Create data network"
 }

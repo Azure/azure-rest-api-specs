@@ -1,19 +1,16 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
-    "simGroupName": "testSimGroup",
     "parameters": {
       "sims": [
         {
           "name": "testSim",
           "properties": {
+            "authenticationKey": "00000000000000000000000000000000",
+            "deviceType": "Video camera",
             "integratedCircuitCardIdentifier": "8900000000000000000",
             "internationalMobileSubscriberIdentity": "00000",
-            "authenticationKey": "00000000000000000000000000000000",
             "operatorKeyCode": "00000000000000000000000000000000",
-            "deviceType": "Video camera",
             "simPolicy": {
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
             },
@@ -35,11 +32,11 @@
         {
           "name": "testSim2",
           "properties": {
+            "authenticationKey": "00000000000000000000000000000000",
+            "deviceType": "Video camera",
             "integratedCircuitCardIdentifier": "8900000000000000001",
             "internationalMobileSubscriberIdentity": "00000",
-            "authenticationKey": "00000000000000000000000000000000",
             "operatorKeyCode": "00000000000000000000000000000000",
-            "deviceType": "Video camera",
             "simPolicy": {
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
             },
@@ -59,16 +56,19 @@
           }
         }
       ]
-    }
+    },
+    "resourceGroupName": "rg1",
+    "simGroupName": "testSimGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation",
         "name": "testOperation",
-        "status": "Succeeded",
+        "endTime": "2021-08-19T03:38:07.000Z",
+        "id": "/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation",
         "startTime": "2021-08-19T03:36:07.000Z",
-        "endTime": "2021-08-19T03:38:07.000Z"
+        "status": "Succeeded"
       }
     },
     "202": {
@@ -76,5 +76,7 @@
         "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
       }
     }
-  }
+  },
+  "operationId": "Sims_BulkUpload",
+  "title": "Bulk upload SIMs in a SIM group"
 }

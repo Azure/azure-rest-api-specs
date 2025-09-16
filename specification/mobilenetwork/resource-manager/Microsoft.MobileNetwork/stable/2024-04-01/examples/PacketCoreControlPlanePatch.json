@@ -1,8 +1,6 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
     "packetCoreControlPlaneName": "TestPacketCoreCP",
     "parameters": {
       "identity": {
@@ -15,23 +13,16 @@
         "tag1": "value1",
         "tag2": "value2"
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "name": "TestPacketCoreCP",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
         "type": "Microsoft.MobileNetwork/packetCoreControlPlane",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
-        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -41,20 +32,25 @@
             }
           }
         },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
+        "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
+          "controlPlaneAccessInterface": {
+            "name": "N2"
+          },
+          "coreNetworkTechnology": "5GC",
           "installation": {
             "state": "Installed"
           },
-          "sites": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+          "installedVersion": "0.2.0",
+          "localDiagnosticsAccess": {
+            "authenticationType": "Password",
+            "httpsServerCertificate": {
+              "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress",
+              "provisioning": {
+                "state": "NotProvisioned"
+              }
             }
-          ],
+          },
           "platform": {
             "type": "AKS-HCI",
             "azureStackEdgeDevice": {
@@ -75,26 +71,32 @@
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
             }
           },
-          "coreNetworkTechnology": "5GC",
-          "version": "0.2.0",
-          "installedVersion": "0.2.0",
+          "provisioningState": "Succeeded",
           "rollbackVersion": "0.1.0",
-          "controlPlaneAccessInterface": {
-            "name": "N2"
-          },
+          "sites": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+            }
+          ],
           "sku": "G0",
           "ueMtu": 1600,
-          "localDiagnosticsAccess": {
-            "authenticationType": "Password",
-            "httpsServerCertificate": {
-              "certificateUrl": "https://contosovault.vault.azure.net/certificates/ingress",
-              "provisioning": {
-                "state": "NotProvisioned"
-              }
-            }
-          }
+          "version": "0.2.0"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
         }
       }
     }
-  }
+  },
+  "operationId": "PacketCoreControlPlanes_UpdateTags",
+  "title": "Patch packet core control plane"
 }

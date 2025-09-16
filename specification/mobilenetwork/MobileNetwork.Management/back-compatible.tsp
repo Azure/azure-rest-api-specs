@@ -6,83 +6,83 @@ using Microsoft.MobileNetwork;
 @@clientName(QosPolicy.`5qi`, "fiveQi");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SimNameAndProperties.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SimNameAndProperties.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SimNameAndEncryptedProperties.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SimNameAndEncryptedProperties.properties);
 
 @@clientName(DataNetworkConfiguration.`5qi`, "fiveQi");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeInfo.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeInfo.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DnnIpPair.ueIpAddress);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DnnIpPair.ueIpAddress);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GlobalRanNodeId.plmnId);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalRanNodeId.plmnId);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GlobalRanNodeId.gNbId);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalRanNodeId.gNbId);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeInfo5G.info);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeInfo5G.info);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeInfo5GProperties.fivegGuti);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeInfo5GProperties.fivegGuti);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeInfo5GProperties.connectionInfo);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeInfo5GProperties.connectionInfo);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Guti5G.plmn);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Guti5G.plmn);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Guti5G.amfId);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Guti5G.amfId);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeConnectionInfo5G.locationInfo);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeConnectionInfo5G.locationInfo);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeConnectionInfo5G.globalRanNodeId);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeConnectionInfo5G.globalRanNodeId);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeLocationInfo.plmn);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeLocationInfo.plmn);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeSessionInfo5G.snssai);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeSessionInfo5G.snssai);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeSessionInfo5G.ueIpAddress);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeSessionInfo5G.ueIpAddress);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeSessionInfo5G.ambr);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeSessionInfo5G.ambr);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeQOSFlow.qfi);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeQOSFlow.qfi);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeQOSFlow.fiveqi);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeQOSFlow.fiveqi);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeQOSFlow.mbr);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeQOSFlow.mbr);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeQOSFlow.gbr);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeQOSFlow.gbr);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeInfo4G.info);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeInfo4G.info);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeInfo4GProperties.guti);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeInfo4GProperties.guti);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeInfo4GProperties.connectionInfo);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeInfo4GProperties.connectionInfo);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Guti4G.plmn);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Guti4G.plmn);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Guti4G.mmeId);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Guti4G.mmeId);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeConnectionInfo4G.locationInfo);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeConnectionInfo4G.locationInfo);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeConnectionInfo4G.globalRanNodeId);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeConnectionInfo4G.globalRanNodeId);
 @@clientName(UeConnectionInfo4G.mmeS1apId, "mmeS1ApId");
 @@clientName(UeConnectionInfo4G.enbS1apId, "enbS1ApId");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UeSessionInfo4G.ueIpAddress);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UeSessionInfo4G.ueIpAddress);
 
 @@clientName(AttachedDataNetworks.createOrUpdate::parameters.resource,
   "parameters"
@@ -91,20 +91,20 @@ using Microsoft.MobileNetwork;
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AttachedDataNetwork.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AttachedDataNetwork.properties);
 
 @@clientName(DataNetworks.createOrUpdate::parameters.resource, "parameters");
 @@clientName(DataNetworks.updateTags::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DataNetwork.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DataNetwork.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiagnosticsPackage.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticsPackage.properties);
 
 @@clientName(MobileNetworks.createOrUpdate::parameters.resource, "parameters");
 @@clientName(MobileNetworks.updateTags::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(MobileNetwork.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MobileNetwork.properties);
 
 @@clientName(SimGroups.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SimGroups.updateTags::parameters.properties, "parameters");
@@ -119,11 +119,11 @@ using Microsoft.MobileNetwork;
 @@clientLocation(SimGroups.clone, Sims);
 @@clientName(SimGroups.clone::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SimGroup.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SimGroup.properties);
 
 @@clientName(PacketCaptures.createOrUpdate::parameters.resource, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PacketCapture.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PacketCapture.properties);
 
 @@clientName(PacketCoreControlPlanes.createOrUpdate::parameters.resource,
   "parameters"
@@ -136,12 +136,12 @@ using Microsoft.MobileNetwork;
 );
 @@clientLocation(PacketCoreControlPlanes.list, "UeInformation");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PacketCoreControlPlane.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PacketCoreControlPlane.properties);
 
 @@clientLocation(RoutingInfoModels.get, "RoutingInfo");
 @@clientLocation(RoutingInfoModels.list, "RoutingInfo");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoutingInfoModel.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RoutingInfoModel.properties);
 
 @@clientLocation(PacketCoreControlPlaneVersionOperationGroup.getBySubscription,
   PacketCoreControlPlaneVersions
@@ -150,7 +150,7 @@ using Microsoft.MobileNetwork;
   PacketCoreControlPlaneVersions
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PacketCoreControlPlaneVersion.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PacketCoreControlPlaneVersion.properties);
 
 @@clientName(PacketCoreDataPlanes.createOrUpdate::parameters.resource,
   "parameters"
@@ -159,31 +159,31 @@ using Microsoft.MobileNetwork;
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PacketCoreDataPlane.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PacketCoreDataPlane.properties);
 
 @@clientName(Services.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Services.updateTags::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Service.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Service.properties);
 
 @@clientName(Sims.createOrUpdate::parameters.resource, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Sim.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Sim.properties);
 
 @@clientName(SimPolicies.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SimPolicies.updateTags::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SimPolicy.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SimPolicy.properties);
 
 @@clientName(Sites.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Sites.updateTags::parameters.properties, "parameters");
 @@clientName(Sites.deletePacketCore::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Site.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Site.properties);
 
 @@clientName(Slices.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Slices.updateTags::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Slice.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Slice.properties);
 
 @@clientLocation(ExtendedUeInfos.get, "ExtendedUeInformation");
