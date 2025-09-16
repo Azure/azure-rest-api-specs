@@ -28,4 +28,5 @@ enum Versions {
   v2024_02_05_preview: "2024-02-05-preview",
 
   v2024_09_30_preview: "2024-09-30-preview",
+  v2025_10_13: "2025-10-13",
 }
