@@ -4,15 +4,13 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Autorest;
 
-namespace Microsoft.PlannedQuota;
+namespace Microsoft.Lionrock;
 
 @doc("plannedQuota properties")
 model PlannedQuotaResourceProperties {
@@ -46,19 +44,19 @@ model PlannedQuotaResourceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: PlannedQuotaProvisioningState;
 
-  @added(Microsoft.PlannedQuota.Versions.v2025_10_01_preview)
+  @added(Microsoft.Lionrock.Versions.v2025_10_01_preview)
   @doc("The planned quota request identifier; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   requestId?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @added(Microsoft.PlannedQuota.Versions.v2025_10_01_preview)
+  @added(Microsoft.Lionrock.Versions.v2025_10_01_preview)
   @doc("Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   fulfilledPlan?: {};
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @added(Microsoft.PlannedQuota.Versions.v2025_10_01_preview)
+  @added(Microsoft.Lionrock.Versions.v2025_10_01_preview)
   @doc("Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   alternatives?: {};

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for the Microsoft.PlannedQuota resource provider.
+This is the AutoRest configuration file for the Microsoft.Lionrock resource provider.
 
 ## Configuration
 
@@ -21,5 +21,5 @@ These settings apply only when `--tag=2025-10-01-preview` is specified on the co
 
 ```yaml $(tag) == '2025-10-01-preview'
 input-file:
-  - Microsoft.PlannedQuota/preview/2025-10-01-preview/plannedQuota.json
+  - Microsoft.Lionrock/preview/2025-10-01-preview/plannedQuota.json
 ```

@@ -4,14 +4,13 @@ import "./plannedquota.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Autorest;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
 @service(#{ title: "Azure Planned Quota" })
 @doc("Planned Quota Provider")
-@versioned(Microsoft.PlannedQuota.Versions)
-namespace Microsoft.PlannedQuota;
+@versioned(Microsoft.Lionrock.Versions)
+namespace Microsoft.Lionrock;
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using Autorest.example intentionally to attach provider operations example"
 @@Autorest.example(Operations.list,

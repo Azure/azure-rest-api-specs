@@ -7,8 +7,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-@versioned(Microsoft.PlannedQuota.Versions)
-namespace Microsoft.PlannedQuota;
+@versioned(Microsoft.Lionrock.Versions)
+namespace Microsoft.Lionrock;
 
 @doc("Supported versions.")
 enum Versions {
