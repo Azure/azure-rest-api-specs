@@ -36,13 +36,13 @@ options:
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Developer.Playwright"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.Developer.Playwright"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-developer-playwright"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-playwright"
     namespace: com.azure.developer.playwright
     partial-update: true
     generate-tests: false
