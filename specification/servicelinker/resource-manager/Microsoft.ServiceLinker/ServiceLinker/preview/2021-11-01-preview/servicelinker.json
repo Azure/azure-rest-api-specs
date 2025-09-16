@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft.ServiceLinker",
     "description": "Microsoft.ServiceLinker provider",
-    "version": "2022-01-01-preview"
+    "version": "2021-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -49,7 +49,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -62,7 +62,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -85,7 +85,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -119,9 +119,6 @@
           },
           "PutLinkWithServiceEndpoint": {
             "$ref": "./examples/PutLinkWithServiceEndpoint.json"
-          },
-          "PutLinkWithSecretStore": {
-            "$ref": "./examples/PutLinkWithSecretStore.json"
           }
         },
         "parameters": [
@@ -129,7 +126,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -160,7 +157,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -185,7 +182,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -204,7 +201,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -229,7 +226,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -260,7 +257,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -280,6 +277,9 @@
         "x-ms-examples": {
           "ValidateLinkSuccess": {
             "$ref": "./examples/ValidateLinkSuccess.json"
+          },
+          "ValidateLinkFailure": {
+            "$ref": "./examples/ValidateLinkFailure.json"
           }
         },
         "parameters": [
@@ -287,7 +287,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -306,7 +306,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -329,7 +329,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -345,7 +345,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -365,20 +365,20 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -389,126 +389,6 @@
     }
   },
   "definitions": {
-    "TargetServiceType": {
-      "description": "The target service type.",
-      "type": "string",
-      "enum": [
-        "AzureResource",
-        "ConfluentBootstrapServer",
-        "ConfluentSchemaRegistry"
-      ],
-      "x-ms-enum": {
-        "name": "type",
-        "modelAsString": true
-      }
-    },
-    "TargetServiceBase": {
-      "description": "The target service properties",
-      "discriminator": "type",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The target service type.",
-          "$ref": "#/definitions/TargetServiceType"
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "AzureResourceType": {
-      "description": "The azure resource type.",
-      "type": "string",
-      "enum": [
-        "KeyVault"
-      ],
-      "x-ms-enum": {
-        "name": "type",
-        "modelAsString": true
-      }
-    },
-    "AzureResourcePropertiesBase": {
-      "description": "The azure resource properties",
-      "discriminator": "type",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The azure resource type.",
-          "$ref": "#/definitions/AzureResourceType"
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "AzureResource": {
-      "x-ms-discriminator-value": "AzureResource",
-      "type": "object",
-      "description": "The azure resource info when target service type is AzureResource",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetServiceBase"
-        }
-      ],
-      "properties": {
-        "id": {
-          "description": "The Id of azure resource.",
-          "type": "string"
-        },
-        "resourceProperties": {
-          "description": "The azure resource connection related properties.",
-          "$ref": "#/definitions/AzureResourcePropertiesBase"
-        }
-      }
-    },
-    "AzureKeyVaultProperties": {
-      "x-ms-discriminator-value": "KeyVault",
-      "type": "object",
-      "description": "The resource properties when type is Azure Key Vault",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourcePropertiesBase"
-        }
-      ],
-      "properties": {
-        "connectAsKubernetesCsiDriver": {
-          "description": "True if connect via Kubernetes CSI Driver.",
-          "type": "boolean"
-        }
-      }
-    },
-    "ConfluentBootstrapServer": {
-      "x-ms-discriminator-value": "ConfluentBootstrapServer",
-      "type": "object",
-      "description": "The service properties when target service type is ConfluentBootstrapServer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetServiceBase"
-        }
-      ],
-      "properties": {
-        "endpoint": {
-          "description": "The endpoint of service.",
-          "type": "string"
-        }
-      }
-    },
-    "ConfluentSchemaRegistry": {
-      "x-ms-discriminator-value": "ConfluentSchemaRegistry",
-      "type": "object",
-      "description": "The service properties when target service type is ConfluentSchemaRegistry",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetServiceBase"
-        }
-      ],
-      "properties": {
-        "endpoint": {
-          "description": "The endpoint of service.",
-          "type": "string"
-        }
-      }
-    },
     "AuthType": {
       "description": "The authentication type.",
       "type": "string",
@@ -522,86 +402,6 @@
       "x-ms-enum": {
         "name": "AuthType",
         "modelAsString": true
-      }
-    },
-    "SecretType": {
-      "description": "The secret type.",
-      "type": "string",
-      "enum": [
-        "rawValue",
-        "keyVaultSecretUri",
-        "keyVaultSecretReference"
-      ],
-      "x-ms-enum": {
-        "name": "SecretType",
-        "modelAsString": true
-      }
-    },
-    "SecretInfoBase": {
-      "description": "The secret info",
-      "discriminator": "secretType",
-      "type": "object",
-      "properties": {
-        "secretType": {
-          "description": "The secret type.",
-          "$ref": "#/definitions/SecretType"
-        }
-      },
-      "required": [
-        "secretType"
-      ]
-    },
-    "ValueSecretInfo": {
-      "x-ms-discriminator-value": "rawValue",
-      "type": "object",
-      "description": "The secret info when type is rawValue. It's for scenarios that user input the secret.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecretInfoBase"
-        }
-      ],
-      "properties": {
-        "value": {
-          "description": "The actual value of the secret.",
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "KeyVaultSecretReferenceSecretInfo": {
-      "x-ms-discriminator-value": "keyVaultSecretReference",
-      "type": "object",
-      "description": "The secret info when type is keyVaultSecretReference. It's for scenario that user provides a secret stored in user's keyvault and source is Azure Kubernetes. The key Vault's resource id is linked to secretStore.keyVaultId.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecretInfoBase"
-        }
-      ],
-      "properties": {
-        "name": {
-          "description": "Name of the Key Vault secret.",
-          "type": "string"
-        },
-        "version": {
-          "description": "Version of the Key Vault secret.",
-          "type": "string"
-        }
-      }
-    },
-    "KeyVaultSecretUriSecretInfo": {
-      "x-ms-discriminator-value": "keyVaultSecretUri",
-      "type": "object",
-      "description": "The secret info when type is keyVaultSecretUri. It's for scenario that user provides a secret stored in user's keyvault and source is Web App, Spring Cloud or Container App.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecretInfoBase"
-        }
-      ],
-      "properties": {
-        "value": {
-          "description": "URI to the keyvault secret",
-          "type": "string"
-        }
       }
     },
     "AuthInfoBase": {
@@ -632,9 +432,10 @@
           "description": "Username or account name for secret auth.",
           "type": "string"
         },
-        "secretInfo": {
-          "description": "Password or key vault secret for secret auth.",
-          "$ref": "#/definitions/SecretInfoBase"
+        "secret": {
+          "description": "Password or account key for secret auth.",
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -656,7 +457,11 @@
           "description": "Subscription id for userAssignedIdentity.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "clientId",
+        "subscriptionId"
+      ]
     },
     "SystemAssignedIdentityAuthInfo": {
       "x-ms-discriminator-value": "systemAssignedIdentity",
@@ -733,7 +538,7 @@
       "description": "Linker of source and target resource",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
           "description": "The resource model definition for an Azure Resource Manager proxy resource."
         }
       ],
@@ -748,7 +553,7 @@
         },
         "systemData": {
           "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system data."
         }
       }
@@ -786,9 +591,9 @@
       "description": "The properties of the linker.",
       "type": "object",
       "properties": {
-        "targetService": {
-          "$ref": "#/definitions/TargetServiceBase",
-          "description": "The target service properties"
+        "targetId": {
+          "description": "The resource Id of target service.",
+          "type": "string"
         },
         "authInfo": {
           "description": "The authentication type.",
@@ -826,10 +631,6 @@
         "secretStore": {
           "description": "An option to store secret value in secure place",
           "$ref": "#/definitions/SecretStore"
-        },
-        "scope": {
-          "type": "string",
-          "description": "connection scope in source service."
         }
       }
     },
@@ -867,13 +668,25 @@
       "description": "The validation result for a linker.",
       "type": "object",
       "properties": {
-        "linkerName": {
+        "name": {
           "description": "The linker name.",
           "type": "string"
         },
-        "isConnectionAvailable": {
-          "description": "A boolean value indicating whether the connection is available or not",
-          "type": "boolean"
+        "linkerStatus": {
+          "description": "Specifies if the linker is healthy.",
+          "type": "string",
+          "enum": [
+            "Healthy",
+            "Not healthy"
+          ],
+          "x-ms-enum": {
+            "name": "linkerStatus",
+            "modelAsString": true
+          }
+        },
+        "reason": {
+          "description": "The reason of the error.",
+          "type": "string"
         },
         "reportStartTimeUtc": {
           "type": "string",
@@ -885,10 +698,6 @@
           "format": "date-time",
           "description": "The end time of the validation report."
         },
-        "sourceId": {
-          "description": "The resource id of the linker source application.",
-          "type": "string"
-        },
         "targetId": {
           "description": "The resource Id of target service.",
           "type": "string"
@@ -896,51 +705,6 @@
         "authType": {
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthType"
-        },
-        "validationDetail": {
-          "description": "The detail of validation result",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationResultItem"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "ValidationResultItem": {
-      "description": "The validation item for a linker.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The validation item name.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The display name of validation item",
-          "type": "string"
-        },
-        "result": {
-          "description": "The result of validation",
-          "type": "string",
-          "enum": [
-            "success",
-            "failed",
-            "warning"
-          ],
-          "x-ms-enum": {
-            "name": "validationItemResult",
-            "modelAsString": true
-          }
-        },
-        "errorMessage": {
-          "description": "The error message of validation result",
-          "type": "string"
-        },
-        "errorCode": {
-          "description": "The error code of validation result",
-          "type": "string"
         }
       }
     },
