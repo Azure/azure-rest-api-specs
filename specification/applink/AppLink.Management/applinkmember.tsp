@@ -15,29 +15,46 @@ model AppLinkMember is TrackedResource<AppLinkMemberProperties> {
   ...ResourceNameParameter<AppLinkMember>;
 }
 
-@doc("AppLink Member properties")
+@doc("AppLinkMember properties")
 model AppLinkMemberProperties {
-  @doc("The cluster type of member cluster")
-  clusterType: string;
+  @doc("Cluster type")
+  clusterType?: ClusterType;
 
-  @doc("The metadata for the member cluster")
+  @doc("Metadata")
   metadata: Metadata;
 
-  @doc("Upgrade profile for AppLink Member")
-  upgradeProfile: UpgradeProfile;
+  @doc("Upgrade mode")
+  mode?: UpgradeMode;
 
-  @doc("Provisioning state of the AppLink Member resource")
+  @doc("Fully managed upgrade profile")
+  fullyManagedUpgradeProfile?: FullyManagedUpgradeProfile;
+
+  @doc("Self managed upgrade profile")
+  selfManagedUpgradeProfile?: SelfManagedUpgradeProfile;
+
+  @doc("Observability settings")
+  observabilitySettings?: ObservabilitySettings;
+
+  @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@doc("Metadata for AppLink Member")
+@doc("AppLinkMember cluster type")
+union ClusterType {
+  string,
+
+  @doc("Azure Kubernetes Service")
+  AKS: "AKS"
+}
+
+@doc("AppLinkMember metadata")
 model Metadata {
-  @doc("The resource id of the member cluster")
+  @doc("Resource ID")
   resourceId: string;
 }
 
-@doc("AppLink Member release channel profile for upgrade")
+@doc("AppLinkMember upgrade release channel")
 union UpgradeReleaseChannel {
   string,
 
@@ -46,29 +63,106 @@ union UpgradeReleaseChannel {
 
   @doc("Stable release channel")
   Stable: "Stable",
-
-  @doc("Legacy release channel")
-  legacy: "Legacy",
 }
 
-@doc("Upgrade mode for AppLink Member")
+@doc("AppLinkMember upgrade mode")
 union UpgradeMode {
   string,
 
-  @doc("Auto upgrade mode")
-  AutoUpgrade: "AutoUpgrade",
+  @doc("Fully managed upgrade mode")
+  FullyManaged: "FullyManaged",
 
-  @doc("Disabled upgrade mode")
-  Disabled: "Disabled",
+  @doc("Self managed upgrade mode")
+  SelfManaged: "SelfManaged",
 }
 
-@doc("Upgrade profile for AppLink Member")
-model UpgradeProfile {
-  @doc("The release channel for the upgrade")
+@doc("AppLinkMember fully managed upgrade profile")
+model FullyManagedUpgradeProfile {
+  @doc("Release channel")
   releaseChannel: UpgradeReleaseChannel;
+}
 
-  @doc("The upgrade mode for the member")
-  mode: UpgradeMode;
+@doc("AppLinkMember self managed upgrade profile")
+model SelfManagedUpgradeProfile {
+  @doc("Istio version")
+  version: string;
+}
+
+@doc("AppLinkMember observability state")
+union ObservabilityState {
+  string,
+
+  @doc("Observability state disabled")
+  Disabled: "Disabled",
+
+  @doc("Observability state enabled")
+  Enabled: "Enabled"
+}
+
+@doc("AppLinkMember metrics settings")
+model MetricsSettings {
+  @doc("Metrics state")
+  state: ObservabilityState;
+}
+
+@doc("AppLinkMember logs settings")
+model LogsSettings {
+  @doc("Logs state")
+  state: ObservabilityState;
+}
+
+@doc("AppLinkMember traces settings")
+model TracesSettings {
+  @doc("Traces state")
+  state: ObservabilityState;
+}
+
+@doc("AppLinkMember observability settings")
+model ObservabilitySettings {
+  @doc("Metrics settings")
+  metrics?: MetricsSettings;
+
+  @doc("Logs settings")
+  logs?: LogsSettings;
+
+  @doc("Traces settings")
+  traces?: TracesSettings;
+
+  @doc("Managed identity")
+  managedIdentity?: string;
+}
+
+@doc("AppLinkMember internal metadata")
+model AppLinkMemberInternalMetadata {
+  @doc("UMI resource")
+  umiResource: UMIResource;
+
+  @doc("DNS record set provision resource")
+  dnsRecordSet: ProvisionResource;
+
+  @doc("Extension provision resource")
+  extension: ProvisionResource;
+
+  @doc("Underlay metadata")
+  underlay: UnderlayMetadata;
+
+  @doc("MCP namespace")
+  mcpNameSpace: string;
+
+  @doc("DCE provision resource")
+  dceResource?: ProvisionResource;
+
+  @doc("DCR provision resource")
+  dcrResource?: ProvisionResource;
+}
+
+@doc("User Managed Identity resource")
+model UMIResource {
+  @doc("UMI provision resource")
+  umi: ProvisionResource;
+
+  @doc("UMI role assignments")
+  roleAssignments: ProvisionResource[];
 }
 
 @armResourceOperations
