@@ -23,6 +23,18 @@ union ItemType {
   Session: "Session",
 }
 
+/** Job priority levels. */
+@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+union Priority {
+  string,
+
+  /** The job's base priority. */
+  Standard: "Standard",
+
+  /** The job's priority is elevated. */
+  High: "High",
+}
+
 /** Id of the workspace item. */
 @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
 @maxLength(36)
@@ -74,11 +86,12 @@ model ItemDetails {
   @visibility(Lifecycle.Read)
   errorData?: Errors.WorkspaceItemError;
 
-  /** List of user-supplied tags associated with the job. */
+  /** Priority of job or session. */
   @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   priority?: Priority;
 
+  /** List of user-supplied tags associated with the job. */
   @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
@@ -92,15 +105,3 @@ model ItemDetails {
 /** Resource usage metrics represented as key-value pairs. Keys are provider-defined metric names (e.g. "standardMinutes", "shots") and values are the corresponding consumption amounts. The specific metrics available depend on the quantum provider and target used. */
 @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 model Usage is Record<float64>;
-
-/** Job priority levels. */
-@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
-union Priority {
-  string,
-
-  /** The job's base priority. */
-  Basic: "Basic",
-
-  /** The job's priority is elevated. */
-  High: "High",
-}

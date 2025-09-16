@@ -368,7 +368,7 @@
                   "readOnly": true
                 },
                 "metadata": {
-                  "type": "object",
+                  "$ref": "#/definitions/Metadata",
                   "description": "The job metadata. Metadata provides client the ability to store client-specific information",
                   "x-ms-mutability": [
                     "read",
@@ -388,7 +388,7 @@
                   "readOnly": true
                 },
                 "inputParams": {
-                  "type": "object",
+                  "$ref": "#/definitions/InputParams",
                   "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
                   "x-ms-mutability": [
                     "read",
@@ -408,15 +408,6 @@
                   "description": "The format of the output data.",
                   "x-ms-mutability": [
                     "read",
-                    "create"
-                  ]
-                },
-                "priority": {
-                  "$ref": "#/definitions/Priority",
-                  "description": "Priority of job.",
-                  "x-ms-mutability": [
-                    "read",
-                    "update",
                     "create"
                   ]
                 },
@@ -472,6 +463,15 @@
                   "$ref": "#/definitions/Errors.WorkspaceItemError",
                   "description": "Error information.",
                   "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
                 },
                 "usage": {
                   "$ref": "#/definitions/Usage",
@@ -638,7 +638,7 @@
                   "readOnly": true
                 },
                 "metadata": {
-                  "type": "object",
+                  "$ref": "#/definitions/Metadata",
                   "description": "The job metadata. Metadata provides client the ability to store client-specific information",
                   "x-ms-mutability": [
                     "read",
@@ -658,7 +658,7 @@
                   "readOnly": true
                 },
                 "inputParams": {
-                  "type": "object",
+                  "$ref": "#/definitions/InputParams",
                   "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
                   "x-ms-mutability": [
                     "read",
@@ -678,15 +678,6 @@
                   "description": "The format of the output data.",
                   "x-ms-mutability": [
                     "read",
-                    "create"
-                  ]
-                },
-                "priority": {
-                  "$ref": "#/definitions/Priority",
-                  "description": "Priority of job.",
-                  "x-ms-mutability": [
-                    "read",
-                    "update",
                     "create"
                   ]
                 },
@@ -742,6 +733,15 @@
                   "$ref": "#/definitions/Errors.WorkspaceItemError",
                   "description": "Error information.",
                   "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
                 },
                 "usage": {
                   "$ref": "#/definitions/Usage",
@@ -829,7 +829,7 @@
                   "readOnly": true
                 },
                 "metadata": {
-                  "type": "object",
+                  "$ref": "#/definitions/Metadata",
                   "description": "The job metadata. Metadata provides client the ability to store client-specific information",
                   "x-ms-mutability": [
                     "read",
@@ -849,7 +849,7 @@
                   "readOnly": true
                 },
                 "inputParams": {
-                  "type": "object",
+                  "$ref": "#/definitions/InputParams",
                   "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
                   "x-ms-mutability": [
                     "read",
@@ -869,15 +869,6 @@
                   "description": "The format of the output data.",
                   "x-ms-mutability": [
                     "read",
-                    "create"
-                  ]
-                },
-                "priority": {
-                  "$ref": "#/definitions/Priority",
-                  "description": "Priority of job.",
-                  "x-ms-mutability": [
-                    "read",
-                    "update",
                     "create"
                   ]
                 },
@@ -933,6 +924,15 @@
                   "$ref": "#/definitions/Errors.WorkspaceItemError",
                   "description": "Error information.",
                   "readOnly": true
+                },
+                "priority": {
+                  "$ref": "#/definitions/Priority",
+                  "description": "Priority of job or session.",
+                  "x-ms-mutability": [
+                    "read",
+                    "update",
+                    "create"
+                  ]
                 },
                 "usage": {
                   "$ref": "#/definitions/Usage",
@@ -1919,6 +1919,13 @@
         "message"
       ]
     },
+    "InputParams": {
+      "type": "object",
+      "description": "Input parameters for the job.",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
     "ItemDetails": {
       "type": "object",
       "description": "A workspace item.",
@@ -1991,7 +1998,7 @@
         },
         "priority": {
           "$ref": "#/definitions/Priority",
-          "description": "List of user-supplied tags associated with the job.",
+          "description": "Priority of job or session.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2000,6 +2007,7 @@
         },
         "tags": {
           "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
           "items": {
             "type": "string"
           },
@@ -2103,7 +2111,7 @@
           "readOnly": true
         },
         "metadata": {
-          "type": "object",
+          "$ref": "#/definitions/Metadata",
           "description": "The job metadata. Metadata provides client the ability to store client-specific information",
           "x-ms-mutability": [
             "read",
@@ -2123,7 +2131,7 @@
           "readOnly": true
         },
         "inputParams": {
-          "type": "object",
+          "$ref": "#/definitions/InputParams",
           "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
           "x-ms-mutability": [
             "read",
@@ -2143,15 +2151,6 @@
           "description": "The format of the output data.",
           "x-ms-mutability": [
             "read",
-            "create"
-          ]
-        },
-        "priority": {
-          "$ref": "#/definitions/Priority",
-          "description": "Priority of job.",
-          "x-ms-mutability": [
-            "read",
-            "update",
             "create"
           ]
         }
@@ -2313,6 +2312,13 @@
         }
       }
     },
+    "Metadata": {
+      "type": "object",
+      "description": "Metadata for the job.",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
     "MeterPeriod": {
       "type": "string",
       "description": "The time period in which the quota's underlying meter is accumulated. Based on calendar year. 'None' is used for concurrent quotas.",
@@ -2446,7 +2452,7 @@
       "type": "string",
       "description": "Job priority levels.",
       "enum": [
-        "Basic",
+        "Standard",
         "High"
       ],
       "x-ms-enum": {
@@ -2454,8 +2460,8 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Basic",
-            "value": "Basic",
+            "name": "Standard",
+            "value": "Standard",
             "description": "The job's base priority."
           },
           {
