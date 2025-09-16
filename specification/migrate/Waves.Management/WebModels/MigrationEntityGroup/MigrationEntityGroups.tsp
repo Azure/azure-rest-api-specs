@@ -41,7 +41,7 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
   @doc("Associated Assessment Id")
   associatedAssessmentId?: armResourceIdentifier<[
     {
-      type: "Microsoft.Migrate/assessmentProjects";
+      type: "Microsoft.Migrate/assessmentProjects/assessments";
     }
   ]>;
 
