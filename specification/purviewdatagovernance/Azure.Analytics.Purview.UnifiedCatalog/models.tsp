@@ -1592,3 +1592,5 @@ model CreateCriticalDataElementRequest {
   @body
   criticalDataElement: CriticalDataElement;
 }
+
+alias JObject = Record<unknown>;

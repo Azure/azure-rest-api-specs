@@ -71,6 +71,9 @@
     },
     {
       "name": "OKR"
+    },
+    {
+      "name": "Policy"
     }
   ],
   "paths": {
@@ -3927,6 +3930,53 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/policies": {
+      "get": {
+        "operationId": "ListPolicies",
+        "tags": [
+          "Policy"
+        ],
+        "description": "Lists policies with optional continuation token.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Optional continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListPolicies_MaximumSet": {
+            "$ref": "./examples/ListPolicies_MaximumSet_Gen.json"
+          }
         }
       }
     },

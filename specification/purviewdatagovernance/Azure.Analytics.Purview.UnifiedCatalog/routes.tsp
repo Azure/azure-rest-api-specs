@@ -924,3 +924,18 @@ op DeleteKeyResultByIdAsync is RpcOperation<
   GetKeyResultParameter,
   DeleteResponse
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Policy")
+@route("/policies")
+@doc("Lists policies with optional continuation token.")
+@get
+op ListPolicies is RpcOperation<
+  {
+    @doc("Optional continuation token.")
+    @query
+    skipToken?: string;
+  },
+  JObject
+>;
