@@ -121,11 +121,6 @@ model JobDetails extends ItemDetails {
   /** The format of the output data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataFormat?: string;
-
-  /** List of user-supplied tags associated with the job. */
-  @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: string[];
 }
 
 /** Options for updating a job. */
