@@ -3,11 +3,13 @@
   "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySession",
   "parameters": {
     "apiVersion": "v1.2",
-    "livenessOperationMode": "Passive",
-    "deviceCorrelationIdSetInClient": false,
-    "deviceCorrelationId": "your_device_correlation_id",
-    "authTokenTimeToLiveInSeconds": 60,
-    "verifyImage": "<your-image-bytes-here>"
+    "body": {
+      "livenessOperationMode": "Passive",
+      "deviceCorrelationIdSetInClient": false,
+      "deviceCorrelationId": "your_device_correlation_id",
+      "authTokenTimeToLiveInSeconds": 60,
+      "verifyImage": "<your-image-bytes-here>"
+    }
   },
   "responses": {
     "200": {
