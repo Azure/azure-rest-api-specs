@@ -24,7 +24,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
 model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
@@ -40,8 +40,8 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Webhook property.
    */
-  #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: WebhookProperties; // Replace 'WebhookProperties' with the actual type
 }
 

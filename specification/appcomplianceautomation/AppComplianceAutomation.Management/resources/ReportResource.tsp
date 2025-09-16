@@ -20,7 +20,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 @tenantResource
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
 model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
@@ -36,8 +36,8 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Report property.
    */
-  #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: ReportProperties;
 }
 

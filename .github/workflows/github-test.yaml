@@ -14,14 +14,18 @@ on:
 permissions:
   contents: read
 
-defaults:
-  run:
-    shell: bash
-    working-directory: ./.github
-
 jobs:
   test:
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        folder: [.github, .github/shared]
+        os: [ubuntu, windows]
+
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
+
+    defaults:
+      run:
+        working-directory: ./${{ matrix.folder }}
 
     steps:
       - name: Checkout
@@ -30,19 +34,53 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: Setup Node 20 and install deps
+      # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
+      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
+        name: Add ActionLint Problem Matcher
+        run: echo "::add-matcher::.github/matchers/actionlint.json"
+
+      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
+        name: Lint workflows
+        uses: docker://rhysd/actionlint:1.7.7
+        with:
+          args: -color -verbose
+
+      - if: ${{ matrix.folder == '.github' }}
+        name: Setup Node 20 and install runtime deps
         uses: ./.github/actions/setup-node-install-deps
         with:
           # actions/github-script@v7 uses Node 20
           node-version: 20.x
-          working-directory: ./.github
+          install-command: npm ci --omit dev
+          working-directory: ./${{ matrix.folder }}
 
-      - name: Run tests
-        run: npm run test:ci
+      - if: ${{ matrix.folder == '.github' }}
+        name: Verify all modules are importable
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { join } = await import("path");
+            const { pathToFileURL } = await import("url");
+            const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.js");
+            const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
+            await importAllModules({ core });
+
+      - name: Install dev deps
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          # actions/github-script@v7 uses Node 20
+          node-version: 20.x
+          working-directory: ./${{ matrix.folder }}
+
+      - run: npm run lint
+
+      - run: npm run format:check:ci
+
+      - run: npm run test:ci
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report
-          path: ./.github/coverage
+          name: code-coverage-report-${{ matrix.os }}-${{ fromJSON('{".github":"github", ".github/shared":"github-shared"}')[matrix.folder] }}
+          path: ./${{ matrix.folder }}/coverage
           if-no-files-found: ignore

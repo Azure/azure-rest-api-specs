@@ -29,6 +29,17 @@ union HibernateSupport {
   string,
 }
 
+@doc("Indicates whether single sign on is enabled or disabled on the dev box.")
+union SingleSignOnStatus {
+  @doc("The dev box is configured for single sign on.")
+  Enabled: "Enabled",
+
+  @doc("The dev box is not configured for single sign on.")
+  Disabled: "Disabled",
+
+  string,
+}
+
 @doc("Indicates whether owners of Dev Boxes in a pool are local administrators on the Dev Boxes.")
 union LocalAdminStatus {
   @doc("Owners of Dev Boxes in the pool are local administrators on the Dev Boxes.")
@@ -52,11 +63,26 @@ union DevBoxProvisioningState {
   @doc("Dev Box is stopping.") Stopping: "Stopping",
   @doc("Dev Box is provisioning.") Provisioning: "Provisioning",
 
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("Dev Box is pending approval.")
+  PendingApproval: "PendingApproval",
+
   @doc("Dev Box was provisioned with warning.")
   ProvisionedWithWarning: "ProvisionedWithWarning",
 
   @doc("Dev Box is in grace period.") InGracePeriod: "InGracePeriod",
   @doc("Dev Box is not provisioned.") NotProvisioned: "NotProvisioned",
+  string,
+}
+
+@doc("Indicates the general provisioning state.")
+@added(APIVersions.v2025_04_01_preview)
+union ProvisioningState {
+  @doc("Resource is creating.") Creating: "Creating",
+  @doc("Resource is being updated.") Updating: "Updating",
+  @doc("Resource is being deleted.") Deleting: "Deleting",
+  @doc("Resource was successfully provisioned.") Succeeded: "Succeeded",
+  @doc("Resource failed to provision.") Failed: "Failed",
   string,
 }
 
@@ -172,6 +198,30 @@ union PoolHealthStatus {
   Unhealthy: "Unhealthy",
 
   string,
+}
+
+@doc("Possible values for the pool align target.")
+@added(APIVersions.v2025_04_01_preview)
+union PoolAlignTarget {
+  @doc("Network properties.")
+  NetworkProperties: "NetworkProperties",
+
+  @added(APIVersions.v2025_07_01_preview)
+  @doc("Hibernate support.")
+  HibernateSupport: "HibernateSupport",
+
+  @added(APIVersions.v2025_07_01_preview)
+  @doc("Single sign on status.")
+  SingleSignOnStatus: "SingleSignOnStatus",
+
+  string,
+}
+
+@doc("Indicates which pool properties to align on.")
+@added(APIVersions.v2025_04_01_preview)
+model PoolAlignBody {
+  @doc("The targets to align on.")
+  targets: Array<PoolAlignTarget>;
 }
 
 @doc("The type of the resource that this schedule belongs to.")
@@ -326,6 +376,10 @@ union DevBoxActionType {
   @doc("The action will stop the Dev Box.")
   Stop: "Stop",
 
+  @added(APIVersions.v2025_08_01_preview)
+  @doc("The action will delete the Dev Box.")
+  Delete: "Delete",
+
   string,
 }
 
@@ -337,6 +391,14 @@ union DevBoxActionSourceType {
 
   @doc("The action was triggered by a Dev Box schedule.")
   Schedule: "Schedule",
+
+  @added(APIVersions.v2025_08_01_preview)
+  @doc("The action was triggered by a Dev Box admin.")
+  Admin: "Admin",
+
+  @added(APIVersions.v2025_08_01_preview)
+  @doc("The action was triggered by a Project.")
+  Project: "Project",
 
   string,
 }
@@ -374,6 +436,10 @@ union DevBoxOperationKind {
   @doc("The operation represents a Dev Box manual snapshot creation.")
   @added(APIVersions.v2024_10_01_preview)
   CaptureSnapshot: "CaptureSnapshot",
+
+  @doc("The operation represents a Dev Box align to the current network connection.")
+  @added(APIVersions.v2025_04_01_preview)
+  Align: "Align",
 
   string,
 }
@@ -461,6 +527,14 @@ model Pool {
   @doc("Display name of the pool.")
   @added(APIVersions.v2024_02_01)
   displayName?: string;
+
+  @doc("The default active hours configuration for Dev Boxes created in this pool.")
+  @added(APIVersions.v2025_04_01_preview)
+  activeHoursConfiguration?: PoolActiveHoursConfiguration;
+
+  @doc("Indicates whether single sign on is enabled/disabled or unknown.")
+  @added(APIVersions.v2025_07_01_preview)
+  singleSignOnStatus?: SingleSignOnStatus;
 }
 
 @doc("Hardware specifications for the Dev Box.")
@@ -542,6 +616,112 @@ model StopOnNoConnectConfiguration {
 
   @doc("The specified time in minutes to wait before stopping a Dev Box if no connection is made. This will only be present if stop on no connect is enabled.")
   gracePeriodMinutes?: int32;
+}
+
+@doc("The default active hours configuration settings.")
+@added(APIVersions.v2025_04_01_preview)
+model PoolActiveHoursConfiguration {
+  @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+  keepAwakeEnableStatus: KeepAwakeEnableStatus;
+
+  @doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+  autoStartEnableStatus: AutoStartEnableStatus;
+
+  @doc("The default IANA timezone id of the active hours.")
+  defaultTimeZone?: string;
+
+  @doc("The default start time of the active hours.")
+  defaultStartTimeHour?: int32;
+
+  @doc("The default end time of the active hours.")
+  defaultEndTimeHour?: int32;
+
+  @doc("The days of the week that active hours features will be enabled.")
+  @added(APIVersions.v2025_07_01_preview)
+  defaultDaysOfWeek?: DayOfWeek[];
+
+  @doc("The maximum amount of days per week that a user can enable active hours related features.")
+  @added(APIVersions.v2025_07_01_preview)
+  daysOfWeekLimit?: int32;
+}
+
+@doc("The active hours configuration for a Dev Box.")
+@added(APIVersions.v2025_04_01_preview)
+model ActiveHoursConfiguration {
+  @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+  keepAwakeEnableStatus: KeepAwakeEnableStatus;
+
+  @doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+  autoStartEnableStatus: AutoStartEnableStatus;
+
+  ...UserActiveHoursConfiguration;
+}
+
+@doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+@added(APIVersions.v2025_04_01_preview)
+union KeepAwakeEnableStatus {
+  @doc("Keep awake is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Keep awake is disabled.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+@added(APIVersions.v2025_04_01_preview)
+union AutoStartEnableStatus {
+  @doc("Auto start is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Auto start is disabled.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Manual user set active hours configuration.")
+@added(APIVersions.v2025_04_01_preview)
+model UserActiveHoursConfiguration {
+  @doc("The timezone of the active hours.")
+  timeZone?: string;
+
+  @doc("The start time of the active hours.")
+  startTimeHour?: int32;
+
+  @doc("The end time of the active hours.")
+  endTimeHour?: int32;
+
+  @doc("The days of the week.")
+  @added(APIVersions.v2025_07_01_preview)
+  daysOfWeek?: DayOfWeek[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Days of week will never change."
+@doc("Days of the week.")
+@added(APIVersions.v2025_07_01_preview)
+union DayOfWeek {
+  @doc("Monday")
+  Monday: "Monday",
+
+  @doc("Tuesday")
+  Tuesday: "Tuesday",
+
+  @doc("Wednesday")
+  Wednesday: "Wednesday",
+
+  @doc("Thursday")
+  Thursday: "Thursday",
+
+  @doc("Friday")
+  Friday: "Friday",
+
+  @doc("Saturday")
+  Saturday: "Saturday",
+
+  @doc("Sunday")
+  Sunday: "Sunday",
 }
 
 alias ScheduleListResult = Azure.Core.Page<Schedule>;
@@ -683,6 +863,16 @@ model DevBox {
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
   @visibility(Lifecycle.Read)
   localAdministrator?: LocalAdminStatus;
+
+  @doc("The active hours configuration for this Dev Box, if enabled.")
+  @added(APIVersions.v2025_04_01_preview)
+  @visibility(Lifecycle.Read)
+  activeHoursConfiguration?: ActiveHoursConfiguration;
+
+  @doc("Indicates whether single sign on is enabled/disabled or unknown.")
+  @added(APIVersions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read)
+  singleSignOnStatus?: SingleSignOnStatus;
 }
 
 @doc("Provides remote connection information for a Dev Box.")
@@ -803,6 +993,13 @@ model DevBoxOperation {
 model DevBoxStartOperation extends DevBoxOperation {
   @doc("The kind of operation that occurred.")
   kind: DevBoxOperationKind.Start;
+}
+
+@doc("Information about an align operation on a Dev Box.")
+@added(APIVersions.v2025_04_01_preview)
+model DevBoxAlignOperation extends DevBoxOperation {
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.Align;
 }
 
 @doc("Information about a stop operation on a Dev Box.")
@@ -1047,4 +1244,88 @@ model DevBoxSnapshot {
   @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_10_01_preview)
   snapshotType: SnapshotType;
+}
+
+@doc("A Dev Box addon.")
+@resource("addons")
+@parentResource(DevBox)
+@discriminator("kind")
+@added(APIVersions.v2025_04_01_preview)
+model DevBoxAddOn {
+  @key("addOnName")
+  @doc("Name of the dev box addon.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The type of the Dev Box addon.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  kind: DevBoxAddOnKind;
+
+  @doc("""
+    The current action state of the Dev Box addon. This state is based on previous
+    action performed by user.
+    """)
+  @visibility(Lifecycle.Read)
+  actionState?: string;
+
+  @doc("Provisioning state of this addon.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  @doc("Creation, deletion or action error details. Populated only for error states.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
+}
+
+@doc("The kind of Dev Box addon.")
+@added(APIVersions.v2025_04_01_preview)
+union DevBoxAddOnKind {
+  @doc("The Dev Box Tunnel addon.")
+  DevBoxTunnel: "DevBoxTunnel",
+
+  string,
+}
+
+@doc("The Dev Box Tunnel addon.")
+@added(APIVersions.v2025_04_01_preview)
+model DevBoxTunnel extends DevBoxAddOn {
+  @doc("The kind of Dev Box addon.")
+  kind: DevBoxAddOnKind.DevBoxTunnel;
+
+  @doc("The tunnel status.")
+  @visibility(Lifecycle.Read)
+  status: DevBoxTunnelStatus;
+
+  @doc("The code tunnel name.")
+  @visibility(Lifecycle.Read)
+  codeTunnelName: string;
+
+  @doc("The code tunnel's url.")
+  @visibility(Lifecycle.Read)
+  codeTunnelUrl: url;
+
+  @doc("""
+    The hosting resource name, either a DevBox or HyperV.
+    Leaving it empty or `Default` if it's for DevBox.
+    """)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  hostingResourceName?: string;
+}
+
+@doc("The detailed status of Dev Box Tunnel addon.")
+@added(APIVersions.v2025_04_01_preview)
+union DevBoxTunnelStatus {
+  @doc("The tunnel is active and can be connected.")
+  Enabled: "Enabled",
+
+  @doc("The tunnel is inactive and can't be connected.")
+  Disabled: "Disabled",
+
+  @doc("The tunnel is suspended due to hibernation or other reasons.")
+  Suspended: "Suspended",
+
+  string,
 }

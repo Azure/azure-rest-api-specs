@@ -11,6 +11,14 @@ using Microsoft.ComputeSchedule;
   "java"
 );
 
+@@clientName(CancelOccurrenceRequest, "OccurrenceCancelContent", "csharp");
+@@clientName(DelayRequest, "OccurrenceDelayContent", "csharp");
+@@clientName(Language, "NotificationLanguage", "csharp");
+@@clientName(Month, "ScheduledActionsScheduleMonth", "csharp");
+@@clientName(WeekDay, "ScheduledActionsScheduleWeekDay", "csharp");
+@@clientName(NotificationProperties, "NotificationSettings", "csharp");
+@@clientName(NotificationProperties.disabled, "IsDisabled", "csharp");
+
 @@clientName(ScheduledActions.virtualMachinesSubmitDeallocate,
   "SubmitVirtualMachineDeallocate",
   "csharp"
@@ -46,6 +54,14 @@ using Microsoft.ComputeSchedule;
 );
 @@clientName(ScheduledActions.virtualMachinesGetOperationErrors,
   "GetVirtualMachineOperationErrors",
+  "csharp"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteCreate,
+  "ExecuteVirtualMachineCreateOperation",
+  "csharp"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDelete,
+  "ExecuteVirtualMachineDeleteOperation",
   "csharp"
 );
 
@@ -84,7 +100,15 @@ using Microsoft.ComputeSchedule;
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
-
+@@clientName(ExecuteDeleteRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
+@@clientName(ExecuteCreateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
 @@clientName(SubmitDeallocateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
@@ -127,3 +151,78 @@ using Microsoft.ComputeSchedule;
   "errorDetailsTimestamp",
   "csharp,javascript"
 );
+@@clientName(Versions.`2024-10-01`,
+  "$DO_NOT_NORMALIZE$V2024-10-01",
+  "javascript"
+);
+@@clientName(DeleteResourceOperationResponse,
+  "DeleteResourceOperationResult",
+  "csharp"
+);
+@@clientName(CreateResourceOperationResponse,
+  "CreateResourceOperationResult",
+  "csharp"
+);
+@@clientName(ScheduledActionResource, "ScheduledActionResourceData", "csharp");
+@@clientName(OccurrenceResource, "OccurrenceResourceData", "csharp");
+@@clientName(OccurrenceExtensionResource,
+  "OccurrenceExtensionResourceData",
+  "csharp"
+);
+@@clientName(ResourceOperationResponse,
+  "ScheduledActionResourceOperationResult",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "OccurrenceResourceProvisioningState",
+  "csharp"
+);
+@@clientName(ProvisioningState,
+  "ScheduledActionResourceProvisioningState",
+  "csharp"
+);
+@@clientName(Occurrence, "ScheduledActionOccurrence", "csharp");
+@@clientName(OccurrenceProperties,
+  "ScheduledActionOccurrenceProperties",
+  "csharp"
+);
+@@clientName(OccurrenceState, "ScheduledActionOccurrenceState", "csharp");
+@@clientName(ResourceAttachRequest,
+  "ScheduledActionResourceAttachRequest",
+  "csharp"
+);
+@@clientName(ResourceDetachRequest,
+  "ScheduledActionResourceDetachRequest",
+  "csharp"
+);
+@@clientName(ResourcePatchRequest,
+  "ScheduledActionResourcePatchRequest",
+  "csharp"
+);
+@@clientName(ResourceStatus, "ScheduledActionResourceStatus", "csharp");
+@@clientName(ResourceOperationStatus,
+  "ScheduledActionResourceOperationStatus",
+  "csharp"
+);
+@@clientName(ResourceType, "ScheduledActionResourceType", "csharp");
+
+@@clientName(OccurrenceExtension.listOccurrenceByVms,
+  "GetAssociatedOccurrences",
+  "csharp"
+);
+@@clientName(ScheduledActions.listResources, "GetAttachedResources", "csharp");
+@@clientName(Occurrences.listResources, "GetAttachedResources", "csharp");
+@@clientName(ScheduledActionExtension.listByVms,
+  "GetAssociatedScheduledActions",
+  "csharp"
+);
+
+@@clientName(ResourceOperationResponse,
+  "RecurringActionsResourceOperationResult",
+  "javascript,go,python,java"
+);
+@@clientName(Microsoft.ComputeSchedule.Versions.`2025-05-01`,
+  "V2025-05-01",
+  "javascript"
+);
+@@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");

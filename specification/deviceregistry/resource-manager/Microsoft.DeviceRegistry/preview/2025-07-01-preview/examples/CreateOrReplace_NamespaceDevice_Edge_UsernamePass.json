@@ -1,0 +1,136 @@
+{
+  "title": "Create edge enabled device with UsernamesPassword inbound authentication.",
+  "operationId": "NamespaceDevices_CreateOrReplace",
+  "description": "Create or replace a namespace device.",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "adr-namespace-gbk0925-n01",
+    "deviceName": "namespace-device-on-edge",
+    "resource": {
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+      },
+      "location": "West Europe",
+      "properties": {
+        "endpoints": {
+          "inbound": {
+            "theOnlyOPCUABroker": {
+              "address": "opc.tcp://192.168.86.23:51211/UA/SampleServer",
+              "endpointType": "microsoft.opcua/v1",
+              "version": "2",
+              "authentication": {
+                "method": "UsernamePassword",
+                "usernamePasswordCredentials": {
+                  "usernameSecretName": "user-ref",
+                  "passwordSecretName": "pwd-ref"
+                }
+              }
+            }
+          }
+        },
+        "externalDeviceId": "unique-edge-device-identifier",
+        "enabled": true,
+        "attributes": {
+          "deviceType": "sensor",
+          "deviceOwner": "IT",
+          "deviceCategory": 16
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/private.deviceregistry/namespaces/my-namespace-1/devices/adr-smart-device3-7a848b15-af47-40a7-8c06-a3f43314d44f",
+        "name": "namespace-device-on-edge",
+        "type": "private.deviceregistry/namespaces/devices",
+        "location": "West Europe",
+        "tags": {
+          "sensor": "temperature,humidity,rotation"
+        },
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-10-02T20:15:21.8874648Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-02T20:15:21.8874648Z"
+        },
+        "properties": {
+          "uuid": "3575e690-31d7-4168-a6c9-9ff1b9eed282",
+          "endpoints": {
+            "inbound": {
+              "theOnlyOPCUABroker": {
+                "address": "opc.tcp://192.168.86.23:51211/UA/SampleServer",
+                "endpointType": "microsoft.opcua/v1",
+                "version": "2",
+                "authentication": {
+                  "method": "UsernamePassword",
+                  "usernamePasswordCredentials": {
+                    "usernameSecretName": "user-ref",
+                    "passwordSecretName": "pwd-ref"
+                  }
+                }
+              }
+            }
+          },
+          "externalDeviceId": "unique-edge-device-identifier",
+          "enabled": true,
+          "attributes": {
+            "deviceType": "dough-maker",
+            "deviceOwner": "IT"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/private.deviceregistry/namespaces/my-namespace-1/devices/adr-smart-device3-7a848b15-af47-40a7-8c06-a3f43314d44f",
+        "name": "namespace-device-on-edge",
+        "type": "private.deviceregistry/namespaces/devices",
+        "location": "West Europe",
+        "tags": {
+          "sensor": "temperature,humidity,rotation"
+        },
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-10-02T20:15:21.8874648Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-02T20:15:21.8874648Z"
+        },
+        "properties": {
+          "uuid": "3575e690-31d7-4168-a6c9-9ff1b9eed282",
+          "endpoints": {
+            "inbound": {
+              "theOnlyOPCUABroker": {
+                "address": "opc.tcp://192.168.86.23:51211/UA/SampleServer",
+                "endpointType": "microsoft.opcua/v1",
+                "version": "2",
+                "authentication": {
+                  "method": "UsernamePassword",
+                  "usernamePasswordCredentials": {
+                    "usernameSecretName": "user-ref",
+                    "passwordSecretName": "pwd-ref"
+                  }
+                }
+              }
+            }
+          },
+          "externalDeviceId": "unique-edge-device-identifier",
+          "enabled": true,
+          "attributes": {
+            "deviceType": "dough-maker",
+            "deviceOwner": "IT"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

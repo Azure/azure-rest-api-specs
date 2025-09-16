@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../models/exadata/dbServers.tsp";
+import "../../models/exadata/dbServers.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
@@ -14,7 +14,7 @@ interface DbServers extends OracleReadOnlyResource<DbServer> {
     "./examples/dbServers_listByParent.json",
     "List DbServers by Exadata Infrastructure"
   )
-  listByCloudExadataInfrastructure is ArmResourceListByParent<DbServer>;
+  listByParent is ArmResourceListByParent<DbServer>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"

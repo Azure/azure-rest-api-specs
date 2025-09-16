@@ -4,14 +4,17 @@
   "parameters": {
     "api-version": "2025-02-27-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "SampleResourceGroup",
-    "landingZoneAccountName": "ExampleLZA",
+    "resourceGroupName": "rg-RemApiExample",
+    "landingZoneAccountName": "lza-RemApiExample",
     "resource": {
       "properties": {
-        "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/TestStorageAccount/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
+        "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Storage/storageAccounts/saremapiexample"
       },
       "identity": {
-        "type": "SystemAssigned"
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample": {}
+        }
       },
       "tags": {
         "tag1": "MCFS"
@@ -22,60 +25,66 @@
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "provisioningState": "Succeeded",
-          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleResourceGroup/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
-        },
-        "identity": {
-          "principalId": "e7953ada-b215-4c82-9a4c-7b8dd6e09beb",
-          "tenantId": "8a7a0a60-587f-4774-af1f-4cbf9f1edb6b",
-          "type": "SystemAssigned"
-        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample",
+        "name": "lza-RemApiExample",
+        "type": "microsoft.sovereign/landingzoneaccounts",
+        "location": "northeurope",
         "tags": {
           "tag1": "MCFS"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA",
-        "name": "ExampleLZA",
-        "type": "microsoft.sovereign/landingzoneaccounts",
-        "location": "northeurope",
         "systemData": {
-          "createdBy": "example@example.com",
+          "createdBy": "ExampleUser@example.com",
           "createdByType": "User",
-          "createdAt": "2025-01-25T15:27:06.6937323Z",
-          "lastModifiedBy": "example@example.com",
+          "createdAt": "2025-03-12T17:46:09.4305099Z",
+          "lastModifiedBy": "ExampleUser@example.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-01-25T18:35:56.1267273Z"
+          "lastModifiedAt": "2025-03-12T17:46:09.4305099Z"
+        },
+        "identity": {
+          "principalId": "22222222-2222-2222-2222-222222222222",
+          "tenantId": "11111111-1111-1111-1111-111111111111",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample": {}
+          }
+        },
+        "properties": {
+          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Storage/storageAccounts/saremapiexample",
+          "provisioningState": "Succeeded"
         }
       }
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+        "Azure-AsyncOperation": "https://example.com/operationstatus"
       },
       "body": {
-        "properties": {
-          "provisioningState": "Succeeded",
-          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleResourceGroup/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
-        },
-        "identity": {
-          "principalId": "00000000-0000-0000-0000-000000000002",
-          "tenantId": "00000000-0000-0000-0000-000000000002",
-          "type": "SystemAssigned"
-        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample",
+        "name": "lza-RemApiExample",
+        "type": "microsoft.sovereign/landingzoneaccounts",
+        "location": "northeurope",
         "tags": {
           "tag1": "MCFS"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA",
-        "name": "ExampleLZA",
-        "type": "microsoft.sovereign/landingzoneaccounts",
-        "location": "northeurope",
         "systemData": {
-          "createdBy": "example@example.com",
+          "createdBy": "ExampleUser@example.com",
           "createdByType": "User",
-          "createdAt": "2025-01-25T15:27:06.6937323Z",
-          "lastModifiedBy": "example@example.com",
+          "createdAt": "2025-03-12T17:46:09.4305099Z",
+          "lastModifiedBy": "ExampleUser@example.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-01-25T18:35:56.1267273Z"
+          "lastModifiedAt": "2025-03-12T17:46:09.4305099Z"
+        },
+        "identity": {
+          "principalId": "22222222-2222-2222-2222-222222222222",
+          "tenantId": "11111111-1111-1111-1111-111111111111",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample": {}
+          }
+        },
+        "properties": {
+          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Storage/storageAccounts/saremapiexample",
+          "provisioningState": "Accepted"
         }
       }
     }

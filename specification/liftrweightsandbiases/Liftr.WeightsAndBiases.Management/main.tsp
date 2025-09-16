@@ -20,12 +20,15 @@ namespace Microsoft.WeightsAndBiases;
 
 /** The available API versions. */
 enum Versions {
-  /** 2024-09-18 version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  /** 2024-09-18-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_09_18_preview: "2024-09-18-preview",
+
+  /** 2024-09-18 version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v2_preview)
+  v2024_09_18: "2024-09-18",
 }
 
 /** The available regions */
@@ -67,8 +70,9 @@ model PartnerProperties {
  * BaseResourceProperties contains Marketplace, useDetail related properties*/
 @doc("Properties specific to Instance")
 model InstanceProperties is BaseResourceProperties {
+  @madeRequired(Versions.v2024_09_18)
   @doc("partner properties")
-  partnerProperties?: PartnerProperties;
+  partnerProperties: PartnerProperties;
 
   @doc("Single sign-on properties")
   singleSignOnProperties?: SingleSignOnPropertiesV2;
@@ -104,6 +108,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Instances {
   get is ArmResourceRead<InstanceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<InstanceResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<InstanceResource, InstanceResourceUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<InstanceResource>;
   listByResourceGroup is ArmResourceListByParent<InstanceResource>;
