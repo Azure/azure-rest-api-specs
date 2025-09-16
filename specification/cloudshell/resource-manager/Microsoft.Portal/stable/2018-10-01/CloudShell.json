@@ -788,7 +788,25 @@
     },
     "Resource": {
       "description": "The Resource model definition.",
-      "x-ms-azure-resource": true
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "String Id used to locate any resource on Azure."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of this resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of this resource."
+        }
+      }
     },
     "UserSettingsResponse": {
       "description": "Response to get user settings",
