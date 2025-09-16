@@ -16,28 +16,13 @@ namespace Microsoft.Network;
  */
 @parentResource(PrivateZone)
 model VirtualNetworkLink
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkLinkProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VirtualNetworkLinkProperties> {
   ...ResourceNameParameter<
     Resource = VirtualNetworkLink,
     KeyName = "virtualNetworkLinkName",
     SegmentName = "virtualNetworkLinks",
     NamePattern = ""
   >;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
-
-  /**
-   * The Azure Region where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
 
   /**
    * The ETag of the virtual network link.
