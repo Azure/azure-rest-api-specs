@@ -1007,14 +1007,39 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of identity, can be SystemAssigned or UserAssigned."
+          "description": "The type of identity used for the Streaming Job.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The user assigned identities associated with the streaming job resource.",
           "additionalProperties": {
-            "type": "object"
+            "$ref": "#/definitions/UserAssignedIdentities"
           }
+        }
+      }
+    },
+    "UserAssignedIdentities": {
+      "type": "object",
+      "description": "The list of associated user identities.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of user assigned identity."
         }
       }
     },
