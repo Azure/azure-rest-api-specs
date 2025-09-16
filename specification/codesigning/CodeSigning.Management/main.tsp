@@ -24,4 +24,6 @@ namespace Microsoft.CodeSigning;
 enum Versions {
   @doc("The 2024-02-05-preview API version.")
   v2024_02_05_preview: "2024-02-05-preview",
+
+  v2024_09_30_preview: "2024-09-30-preview",
 }
