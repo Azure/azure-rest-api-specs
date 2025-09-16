@@ -71,7 +71,7 @@ These settings apply only when `--tag=6.2` is specified on the command line.
 
 ``` yaml $(tag) == '6.2'
 input-file:
-- Microsoft.ServiceFabric/stable/6.2/servicefabric.json
+- stable/6.2/servicefabric.json
 
 ```
 
@@ -81,7 +81,7 @@ These settings apply only when `--tag=6.3` is specified on the command line.
 
 ``` yaml $(tag) == '6.3'
 input-file:
-- Microsoft.ServiceFabric/stable/6.3/servicefabric.json
+- stable/6.3/servicefabric.json
 
 ```
 
@@ -91,7 +91,7 @@ These settings apply only when `--tag=6.4` is specified on the command line.
 
 ``` yaml $(tag) == '6.4'
 input-file:
-- Microsoft.ServiceFabric/stable/6.4/servicefabric.json
+- stable/6.4/servicefabric.json
 
 ```
 
@@ -101,7 +101,7 @@ These settings apply only when `--tag=6.5` is specified on the command line.
 
 ``` yaml $(tag) == '6.5'
 input-file:
-- Microsoft.ServiceFabric/stable/6.5/servicefabric.json
+- stable/6.5/servicefabric.json
 
 ```
 
@@ -111,7 +111,7 @@ These settings apply only when `--tag=7.0` is specified on the command line.
 
 ``` yaml $(tag) == '7.0'
 input-file:
-- Microsoft.ServiceFabric/stable/7.0/servicefabric.json
+- stable/7.0/servicefabric.json
 
 ```
 
@@ -121,7 +121,7 @@ These settings apply only when `--tag=7.1` is specified on the command line.
 
 ``` yaml $(tag) == '7.1'
 input-file:
-- Microsoft.ServiceFabric/stable/7.1/servicefabric.json
+- stable/7.1/servicefabric.json
 
 ```
 
@@ -131,7 +131,7 @@ These settings apply only when `--tag=7.2` is specified on the command line.
 
 ``` yaml $(tag) == '7.2'
 input-file:
-- Microsoft.ServiceFabric/stable/7.2/servicefabric.json
+- stable/7.2/servicefabric.json
 
 ```
 
@@ -141,7 +141,7 @@ These settings apply only when `--tag=8.0` is specified on the command line.
 
 ``` yaml $(tag) == '8.0'
 input-file:
-- Microsoft.ServiceFabric/stable/8.0/servicefabric.json
+- stable/8.0/servicefabric.json
 ```
 
 ### Tag: 8.1
@@ -149,7 +149,7 @@ These settings apply only when `--tag=8.1` is specified on the command line.
 
 ``` yaml $(tag) == '8.1'
 input-file:
-- Microsoft.ServiceFabric/stable/8.1/servicefabric.json
+- stable/8.1/servicefabric.json
 ```
 
 ### Tag: 8.2
@@ -157,7 +157,7 @@ These settings apply only when `--tag=8.2` is specified on the command line.
 
 ``` yaml $(tag) == '8.2'
 input-file:
-- Microsoft.ServiceFabric/stable/8.2/servicefabric.json
+- stable/8.2/servicefabric.json
 ```
 ---
 
@@ -194,16 +194,16 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.ServiceFabric/stable/6.2/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/6.3/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/6.4/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/6.5/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/7.0/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/7.1/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/7.2/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/8.0/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/8.1/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/stable/8.2/servicefabric.json
+  - $(this-folder)/stable/6.2/servicefabric.json
+  - $(this-folder)/stable/6.3/servicefabric.json
+  - $(this-folder)/stable/6.4/servicefabric.json
+  - $(this-folder)/stable/6.5/servicefabric.json
+  - $(this-folder)/stable/7.0/servicefabric.json
+  - $(this-folder)/stable/7.1/servicefabric.json
+  - $(this-folder)/stable/7.2/servicefabric.json
+  - $(this-folder)/stable/8.0/servicefabric.json
+  - $(this-folder)/stable/8.1/servicefabric.json
+  - $(this-folder)/stable/8.2/servicefabric.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
