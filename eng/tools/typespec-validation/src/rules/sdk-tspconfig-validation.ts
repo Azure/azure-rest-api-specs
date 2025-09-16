@@ -179,16 +179,17 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
 
     let pathToValidate: string;
 
-    // Check if the path contains {output-dir}/{service-dir} prefix
-    const outputDirPrefix = "{output-dir}/{service-dir}/";
+    // Handle various path formats with different prefixes
+    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
+    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
 
-    if (actualValue.startsWith(outputDirPrefix)) {
-      // Extract the part after {output-dir}/{service-dir}/
-      pathToValidate = actualValue.substring(outputDirPrefix.length);
-    } else {
-      // Use existing logic - extract the last part of the path (after the last '/')
+    if (actualValue.includes("/")) {
+      // If it has path separators, get the last part
       const pathParts = actualValue.split("/");
       pathToValidate = pathParts[pathParts.length - 1];
+    } else {
+      // If it's just a simple string without path separators
+      pathToValidate = actualValue;
     }
 
     // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
@@ -196,6 +197,7 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       return { success: true };
     }
 
+    // Resolve any variables in the pathToValidate
     // Check if pathToValidate contains variables like {namespace}
     const variableMatch = pathToValidate.match(/\{([^}]+)\}/);
     if (variableMatch) {
