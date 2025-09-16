@@ -117,6 +117,6 @@ interface LogsQueryClient {
 
 @@access(QueryBody, Access.internal, "csharp");
 @@access(BatchQueryRequest, Access.internal, "csharp");
-@@access(LogsQueryClient.QueryBatch, Access.internal, "csharp");
-@@access(LogsQueryClient.QueryWorkspace, Access.internal, "csharp");
-@@access(LogsQueryClient.QueryResource, Access.internal, "csharp");
+@@access(LogsQueryClient.queryBatch, Access.internal, "csharp");
+@@access(LogsQueryClient.queryWorkspace, Access.internal, "csharp");
+@@access(LogsQueryClient.queryResource, Access.internal, "csharp");
