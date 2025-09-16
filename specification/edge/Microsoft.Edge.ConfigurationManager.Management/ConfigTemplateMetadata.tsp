@@ -48,7 +48,7 @@ model ConfigTemplateMetadata
   @pattern("^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$")
   @path
   @key("configTemplateMetadataName")
-  @segment("configTemplateMetadata")
+  @segment("configTemplateMetadatas")
   name: string;
 
   ...EntityTagProperty;
