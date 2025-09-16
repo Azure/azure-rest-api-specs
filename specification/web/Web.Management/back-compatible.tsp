@@ -2116,6 +2116,10 @@ using Microsoft.Web;
   "x-ms-identifiers",
   #["name"]
 );
+@@OpenAPI.extension(CsmUsageQuotaCollection.value,
+  "x-ms-identifiers",
+  #["name"]
+);
 @@OpenAPI.extension(SkuInfoCollection.value,
   "x-ms-identifiers",
   #["/sku/name", "resourceType"]
@@ -2124,3 +2128,4 @@ using Microsoft.Web;
   "x-ms-identifiers",
   #["category"]
 );
+

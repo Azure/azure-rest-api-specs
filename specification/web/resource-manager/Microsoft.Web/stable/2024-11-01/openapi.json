@@ -42111,7 +42111,10 @@
           "description": "The CsmUsageQuota items on this page",
           "items": {
             "$ref": "#/definitions/CsmUsageQuota"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -42403,7 +42406,8 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Boolean indicating if the Dapr side car is enabled"
+          "description": "Boolean indicating if the Dapr side car is enabled",
+          "default": false
         },
         "appId": {
           "type": "string",

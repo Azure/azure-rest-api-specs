@@ -3615,7 +3615,7 @@ model DaprConfig {
   /**
    * Boolean indicating if the Dapr side car is enabled
    */
-  enabled?: boolean;
+  enabled?: boolean=false;
 
   /**
    * Dapr application identifier
