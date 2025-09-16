@@ -31,8 +31,8 @@ options:
       name: "@azure/arm-dns"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dns"
-    package-dir: "armdns"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdns"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdns"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
