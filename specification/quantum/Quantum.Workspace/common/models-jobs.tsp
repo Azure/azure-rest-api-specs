@@ -54,6 +54,11 @@ model QuantumComputingData {
   count: int64;
 }
 
+
+model InputParams : @visibility(Visibility.Read, Visibility.Create) Record<string, object>;
+
+model Metadata: @visibility(Visibility.Read, Visibility.Create) Record<string, string>;
+
 /** A job to be run in the workspace. */
 @resource("jobs")
 @parentResource(Quantum.Workspace.QuantumWorkspace)
@@ -145,7 +150,3 @@ model JobUpdateOptions {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
 }
-
-model InputParams : Record<string, object>;
-
-model Metadata: Record<string, string>;
