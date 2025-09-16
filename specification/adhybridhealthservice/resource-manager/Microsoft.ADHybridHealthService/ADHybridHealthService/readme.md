@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2014-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-01'
 input-file:
-- Microsoft.ADHybridHealthService/stable/2014-01-01/ADHybridHealthService.json
+- stable/2014-01-01/ADHybridHealthService.json
 ```
 
 ---
@@ -50,9 +50,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
