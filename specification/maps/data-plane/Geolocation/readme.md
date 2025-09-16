@@ -34,14 +34,13 @@ credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
-
 ### Tag: package-stable-1.0
 
 These settings apply only when `--tag=package-stable-1.0` is specified on the command line.
 
 ``` yaml $(tag) == 'package-stable-1.0'
 input-file:
-  - preview/1.0/geolocation.json
+  - stable/1.0/geolocation.json
 ```
 
 # Code Generation
