@@ -13,7 +13,7 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-@doc("The response body for cluster analysis.")
+@doc("The response body for cluster insights.")
 @added(Versions.v2025_10_15_preview)
 @resource("insights")
 model Insight {
@@ -24,9 +24,9 @@ model Insight {
 
   @doc("Metadata about the insights report.")
   @visibility(Lifecycle.Read)
-  metadata: AnalysisMetadata;
+  metadata: InsightsMetadata;
 
-  @doc("The current state of the analysis.")
+  @doc("The current state of the insights.")
   @visibility(Lifecycle.Read)
   state: OperationState;
 
@@ -34,10 +34,10 @@ model Insight {
   displayName: string;
 
   @doc("Request for the insights analysis.")
-  request: AnalysisRequest;
+  request: InsightRequest;
 
   @doc("Configuration of the model used in the analysis.")
-  modelConfiguration?: ModelConfiguration;
+  modelConfiguration?: AzureOpenAIModelConfiguration;
 
   @doc("The result of the insights report.")
   @visibility(Lifecycle.Read)
@@ -47,126 +47,110 @@ model Insight {
 @doc("The request of the insights report.")
 @added(Versions.v2025_10_15_preview)
 @discriminator("type")
-model AnalysisRequest {
-  @doc("The type of analysis request.")
-  type: AnalysisType;
+model InsightRequest {
+  @doc("The type of request.")
+  type: InsightType;
 }
 
-@doc("Analysis on set of Evaluation Results")
+@doc("Insights on set of Evaluation Results")
 @added(Versions.v2025_10_15_preview)
-model EvaluationRunClusterAnalysis extends AnalysisRequest {
-  @doc("The type of analysis request.")
-  type: AnalysisType.EvaluationRunClusterAnalysis;
+model EvaluationRunClusterInsightsRequest extends InsightRequest {
+  @doc("The type of insights request.")
+  type: InsightType.EvaluationRunClusterInsight;
 
-  @doc("Evaluation Id for the analysis.")
+  @doc("Evaluation Id for the insights.")
   evalId: string;
 
-  @doc("List of evaluation run IDs for the analysis.")
+  @doc("List of evaluation run IDs for the insights.")
   runIds: string[];
 }
 
-@doc("Analysis on set of Agent Evaluation Results")
+@doc("Insights on set of Agent Evaluation Results")
 @added(Versions.v2025_10_15_preview)
-model AgentClusterAnalysis extends AnalysisRequest {
-  @doc("The type of analysis request.")
-  type: AnalysisType.AgentClusterAnalysis;
+model AgentClusterInsightsRequest extends InsightRequest {
+  @doc("The type of request.")
+  type: InsightType.AgentClusterInsight;
 
   @doc("Identifier for the agent.")
   agentName: string;
 }
 
-@doc("The request of the cluster analysis.")
+@doc("The request of the insights.")
 @added(Versions.v2025_10_15_preview)
-union AnalysisType {
-  @doc("Analysis on an Evaluation run result.")
-  EvaluationRunClusterAnalysis: "EvaluationRunClusterAnalysis",
+union InsightType {
+  @doc("Insights on an Evaluation run result.")
+  EvaluationRunClusterInsight: "EvaluationRunClusterInsight",
 
-  @doc("Analysis on an Agent.")
-  AgentClusterAnalysis: "AgentClusterAnalysis",
+  @doc("Cluster Insight on an Agent.")
+  AgentClusterInsight: "AgentClusterInsight",
 
   string,
 }
 
-@doc("Metadata about the analysis.")
+@doc("Metadata about the insights.")
 @added(Versions.v2025_10_15_preview)
-model AnalysisMetadata {
-  @doc("The timestamp when the analysis was created.")
+model InsightsMetadata {
+  @doc("The timestamp when the insights were created.")
   createdAt: utcDateTime;
 
-  @doc("The timestamp when the analysis was completed.")
+  @doc("The timestamp when the insights were completed.")
   completedAt?: utcDateTime;
 }
 
-@doc("Configuration of the model used in the analysis.")
-@added(Versions.v2025_10_15_preview)
-model ModelConfiguration {
-  @doc("The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.")
-  modelDeploymentName: string;
-}
-
-@doc("The result of the analysis.")
+@doc("The result of the insights.")
 @added(Versions.v2025_10_15_preview)
 @discriminator("type")
 model InsightResult {
   @doc("The type of insights result.")
-  type: AnalysisType;
+  type: InsightType;
 }
 
 @doc("Insights from the cluster analysis.")
 @added(Versions.v2025_10_15_preview)
-model ClusterAnalysisInsights {
+model ClusterInsights {
   @doc("Summary of the insights report.")
   summary: InsightSummary;
 
-  @doc("List of clusters identified in the analysis.")
-  clusters: AnalysisCluster[];
+  @doc("List of clusters identified in the insights.")
+  clusters: InsightCluster[];
 
   @doc("""
       Optional mapping of IDs to 2D coordinates used by the UX for visualization.
-
+    
       The map keys are string identifiers (for example, a cluster id or a sample id)
       and the values are the coordinates and visual size for rendering on a 2D chart.
-
+    
       This property is omitted unless the client requests coordinates (for example,
       by passing `includeCoordinates=true` as a query parameter).
-
+    
       Example:
       {
         "cluster-1": { "x": 12, "y": 34, "size": 8 },
         "sample-123": { "x": 18, "y": 22, "size": 4 }
       }
-
+    
       Coordinates are intended only for client-side visualization and do not
-      modify the canonical analysis results.
+      modify the canonical insights results.
     """)
-  coordinates?: Record<AnalysisChartCoordinate>;
+  coordinates?: Record<ChartCoordinate>;
 }
 
 @doc("Insights from the evaluation run cluster analysis.")
 @added(Versions.v2025_10_15_preview)
 model EvaluationRunClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
-  type: AnalysisType.EvaluationRunClusterAnalysis;
+  type: InsightType.EvaluationRunClusterInsight;
 
-  ...ClusterAnalysisInsights;
+  ...ClusterInsights;
 }
 
 @doc("Insights from the agent cluster analysis.")
 @added(Versions.v2025_10_15_preview)
 model AgentClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
-  type: AnalysisType.AgentClusterAnalysis;
+  type: InsightType.AgentClusterInsight;
 
-  ...ClusterAnalysisInsights;
-}
-
-@doc("The type of insights result.")
-@added(Versions.v2025_10_15_preview)
-union InsightResultType {
-  @doc("Insights from the cluster analysis.")
-  ClusterAnalysisInsights: "ClusterAnalysisInsights",
-
-  string,
+  ...ClusterInsights;
 }
 
 @doc("Summary of the error cluster analysis.")
@@ -187,7 +171,7 @@ model InsightSummary {
 
 @doc("Coordinates for the analysis chart.")
 @added(Versions.v2025_10_15_preview)
-model AnalysisChartCoordinate {
+model ChartCoordinate {
   @doc("X-axis coordinate.")
   x: int32;
 
@@ -201,32 +185,32 @@ model AnalysisChartCoordinate {
 @doc("The type of sample used in the analysis.")
 @added(Versions.v2025_10_15_preview)
 union SampleType {
-    @doc("A sample from the evaluation result.")
-    EvaluationResultSample: "EvaluationResultSample",
+  @doc("A sample from the evaluation result.")
+  EvaluationResultSample: "EvaluationResultSample",
 
-    string
+  string,
 }
 
 @doc("A sample from the analysis.")
 @added(Versions.v2025_10_15_preview)
 @discriminator("type")
-model AnalysisSample {
+model InsightSample {
   @doc("The unique identifier for the analysis sample.")
   id: string;
 
   @doc("Sample type")
   type: SampleType;
-  
+
   @doc("Features to help with additional filtering of data in UX.")
   features: Record<unknown>;
-  
+
   @doc("Info about the correlation for the analysis sample.")
   correlationInfo: Record<unknown>;
 }
 
 @doc("A sample from the evaluation result.")
 @added(Versions.v2025_10_15_preview)
-model EvaluationResultAnalysisSample extends AnalysisSample {
+model EvaluationResultSample extends InsightSample {
   @doc("Evaluation Result Sample Type")
   type: SampleType.EvaluationResultSample;
 
@@ -252,7 +236,7 @@ model EvalResult {
 
 @doc("A cluster of analysis samples.")
 @added(Versions.v2025_10_15_preview)
-model AnalysisCluster {
+model InsightCluster {
   @doc("The id of the analysis cluster.")
   id: string;
 
@@ -263,8 +247,8 @@ model AnalysisCluster {
   weight: int32;
 
   @doc("List of subclusters within this cluster. Empty if no subclusters exist.")
-  subClusters?: AnalysisCluster[];
+  subClusters?: InsightCluster[];
 
   @doc("List of samples that belong to this cluster. Empty if samples are part of subclusters.")
-  samples?: AnalysisSample[];
+  samples?: InsightSample[];
 }

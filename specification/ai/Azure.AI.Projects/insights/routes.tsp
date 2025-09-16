@@ -26,7 +26,7 @@ alias IncludeCoordinatesTrait = {
 alias FilterQueryParamsTraits = {
   @query("type")
   @doc("Filter by the type of analysis.")
-  type?: AnalysisType;
+  type?: InsightType;
 
   @query("evalId")
   @doc("Filter by the evaluation ID.")

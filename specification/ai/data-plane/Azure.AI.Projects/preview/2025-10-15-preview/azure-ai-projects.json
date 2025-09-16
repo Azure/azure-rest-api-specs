@@ -1368,22 +1368,22 @@
             "required": false,
             "type": "string",
             "enum": [
-              "EvaluationRunClusterAnalysis",
-              "AgentClusterAnalysis"
+              "EvaluationRunClusterInsight",
+              "AgentClusterInsight"
             ],
             "x-ms-enum": {
-              "name": "AnalysisType",
+              "name": "InsightType",
               "modelAsString": true,
               "values": [
                 {
-                  "name": "EvaluationRunClusterAnalysis",
-                  "value": "EvaluationRunClusterAnalysis",
-                  "description": "Analysis on an Evaluation run result."
+                  "name": "EvaluationRunClusterInsight",
+                  "value": "EvaluationRunClusterInsight",
+                  "description": "Insights on an Evaluation run result."
                 },
                 {
-                  "name": "AgentClusterAnalysis",
-                  "value": "AgentClusterAnalysis",
-                  "description": "Analysis on an Agent."
+                  "name": "AgentClusterInsight",
+                  "value": "AgentClusterInsight",
+                  "description": "Cluster Insight on an Agent."
                 }
               ]
             }
@@ -1714,25 +1714,6 @@
     }
   },
   "definitions": {
-    "AgentClusterAnalysis": {
-      "type": "object",
-      "description": "Analysis on set of Agent Evaluation Results",
-      "properties": {
-        "agentName": {
-          "type": "string",
-          "description": "Identifier for the agent."
-        }
-      },
-      "required": [
-        "agentName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalysisRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "AgentClusterAnalysis"
-    },
     "AgentClusterInsightResult": {
       "type": "object",
       "description": "Insights from the agent cluster analysis.",
@@ -1743,16 +1724,16 @@
         },
         "clusters": {
           "type": "array",
-          "description": "List of clusters identified in the analysis.",
+          "description": "List of clusters identified in the insights.",
           "items": {
-            "$ref": "#/definitions/AnalysisCluster"
+            "$ref": "#/definitions/InsightCluster"
           }
         },
         "coordinates": {
           "type": "object",
-          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical analysis results.",
+          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results.",
           "additionalProperties": {
-            "$ref": "#/definitions/AnalysisChartCoordinate"
+            "$ref": "#/definitions/ChartCoordinate"
           }
         }
       },
@@ -1765,7 +1746,26 @@
           "$ref": "#/definitions/InsightResult"
         }
       ],
-      "x-ms-discriminator-value": "AgentClusterAnalysis"
+      "x-ms-discriminator-value": "AgentClusterInsight"
+    },
+    "AgentClusterInsightsRequest": {
+      "type": "object",
+      "description": "Insights on set of Agent Evaluation Results",
+      "properties": {
+        "agentName": {
+          "type": "string",
+          "description": "Identifier for the agent."
+        }
+      },
+      "required": [
+        "agentName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AgentClusterInsight"
     },
     "AgentEvaluation": {
       "type": "object",
@@ -1925,158 +1925,6 @@
         "samplingPercent",
         "maxRequestRate"
       ]
-    },
-    "AnalysisChartCoordinate": {
-      "type": "object",
-      "description": "Coordinates for the analysis chart.",
-      "properties": {
-        "x": {
-          "type": "integer",
-          "format": "int32",
-          "description": "X-axis coordinate."
-        },
-        "y": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Y-axis coordinate."
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Size of the chart element."
-        }
-      },
-      "required": [
-        "x",
-        "y",
-        "size"
-      ]
-    },
-    "AnalysisCluster": {
-      "type": "object",
-      "description": "A cluster of analysis samples.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the analysis cluster."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the analysis cluster."
-        },
-        "weight": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The weight of the analysis cluster. This indicate number of samples in the cluster."
-        },
-        "subClusters": {
-          "type": "array",
-          "description": "List of subclusters within this cluster. Empty if no subclusters exist.",
-          "items": {
-            "$ref": "#/definitions/AnalysisCluster"
-          }
-        },
-        "samples": {
-          "type": "array",
-          "description": "List of samples that belong to this cluster. Empty if samples are part of subclusters.",
-          "items": {
-            "$ref": "#/definitions/AnalysisSample"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "description",
-        "weight"
-      ]
-    },
-    "AnalysisMetadata": {
-      "type": "object",
-      "description": "Metadata about the analysis.",
-      "properties": {
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the analysis was created."
-        },
-        "completedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the analysis was completed."
-        }
-      },
-      "required": [
-        "createdAt"
-      ]
-    },
-    "AnalysisRequest": {
-      "type": "object",
-      "description": "The request of the insights report.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/AnalysisType",
-          "description": "The type of analysis request."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "AnalysisSample": {
-      "type": "object",
-      "description": "A sample from the analysis.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier for the analysis sample."
-        },
-        "type": {
-          "$ref": "#/definitions/SampleType",
-          "description": "Sample type"
-        },
-        "features": {
-          "type": "object",
-          "description": "Features to help with additional filtering of data in UX.",
-          "additionalProperties": {}
-        },
-        "correlationInfo": {
-          "type": "object",
-          "description": "Info about the correlation for the analysis sample.",
-          "additionalProperties": {}
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "id",
-        "type",
-        "features",
-        "correlationInfo"
-      ]
-    },
-    "AnalysisType": {
-      "type": "string",
-      "description": "The request of the cluster analysis.",
-      "enum": [
-        "EvaluationRunClusterAnalysis",
-        "AgentClusterAnalysis"
-      ],
-      "x-ms-enum": {
-        "name": "AnalysisType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EvaluationRunClusterAnalysis",
-            "value": "EvaluationRunClusterAnalysis",
-            "description": "Analysis on an Evaluation run result."
-          },
-          {
-            "name": "AgentClusterAnalysis",
-            "value": "AgentClusterAnalysis",
-            "description": "Analysis on an Agent."
-          }
-        ]
-      }
     },
     "ApiKeyCredentials": {
       "type": "object",
@@ -2480,7 +2328,33 @@
         "credential"
       ]
     },
-    "ClusterAnalysisInsights": {
+    "ChartCoordinate": {
+      "type": "object",
+      "description": "Coordinates for the analysis chart.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "X-axis coordinate."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Y-axis coordinate."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the chart element."
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "size"
+      ]
+    },
+    "ClusterInsights": {
       "type": "object",
       "description": "Insights from the cluster analysis.",
       "properties": {
@@ -2490,16 +2364,16 @@
         },
         "clusters": {
           "type": "array",
-          "description": "List of clusters identified in the analysis.",
+          "description": "List of clusters identified in the insights.",
           "items": {
-            "$ref": "#/definitions/AnalysisCluster"
+            "$ref": "#/definitions/InsightCluster"
           }
         },
         "coordinates": {
           "type": "object",
-          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical analysis results.",
+          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results.",
           "additionalProperties": {
-            "$ref": "#/definitions/AnalysisChartCoordinate"
+            "$ref": "#/definitions/ChartCoordinate"
           }
         }
       },
@@ -3022,7 +2896,7 @@
         "evaluators"
       ]
     },
-    "EvaluationResultAnalysisSample": {
+    "EvaluationResultSample": {
       "type": "object",
       "description": "A sample from the evaluation result.",
       "properties": {
@@ -3036,37 +2910,10 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalysisSample"
+          "$ref": "#/definitions/InsightSample"
         }
       ],
       "x-ms-discriminator-value": "EvaluationResultSample"
-    },
-    "EvaluationRunClusterAnalysis": {
-      "type": "object",
-      "description": "Analysis on set of Evaluation Results",
-      "properties": {
-        "evalId": {
-          "type": "string",
-          "description": "Evaluation Id for the analysis."
-        },
-        "runIds": {
-          "type": "array",
-          "description": "List of evaluation run IDs for the analysis.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "evalId",
-        "runIds"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalysisRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "EvaluationRunClusterAnalysis"
     },
     "EvaluationRunClusterInsightResult": {
       "type": "object",
@@ -3078,16 +2925,16 @@
         },
         "clusters": {
           "type": "array",
-          "description": "List of clusters identified in the analysis.",
+          "description": "List of clusters identified in the insights.",
           "items": {
-            "$ref": "#/definitions/AnalysisCluster"
+            "$ref": "#/definitions/InsightCluster"
           }
         },
         "coordinates": {
           "type": "object",
-          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical analysis results.",
+          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results.",
           "additionalProperties": {
-            "$ref": "#/definitions/AnalysisChartCoordinate"
+            "$ref": "#/definitions/ChartCoordinate"
           }
         }
       },
@@ -3100,7 +2947,34 @@
           "$ref": "#/definitions/InsightResult"
         }
       ],
-      "x-ms-discriminator-value": "EvaluationRunClusterAnalysis"
+      "x-ms-discriminator-value": "EvaluationRunClusterInsight"
+    },
+    "EvaluationRunClusterInsightsRequest": {
+      "type": "object",
+      "description": "Insights on set of Evaluation Results",
+      "properties": {
+        "evalId": {
+          "type": "string",
+          "description": "Evaluation Id for the insights."
+        },
+        "runIds": {
+          "type": "array",
+          "description": "List of evaluation run IDs for the insights.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "evalId",
+        "runIds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationRunClusterInsight"
     },
     "EvaluationTarget": {
       "type": "object",
@@ -3353,7 +3227,7 @@
     },
     "Insight": {
       "type": "object",
-      "description": "The response body for cluster analysis.",
+      "description": "The response body for cluster insights.",
       "properties": {
         "id": {
           "type": "string",
@@ -3361,13 +3235,13 @@
           "readOnly": true
         },
         "metadata": {
-          "$ref": "#/definitions/AnalysisMetadata",
+          "$ref": "#/definitions/InsightsMetadata",
           "description": "Metadata about the insights report.",
           "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The current state of the analysis.",
+          "description": "The current state of the insights.",
           "readOnly": true
         },
         "displayName": {
@@ -3375,11 +3249,11 @@
           "description": "User friendly display name for the insight."
         },
         "request": {
-          "$ref": "#/definitions/AnalysisRequest",
+          "$ref": "#/definitions/InsightRequest",
           "description": "Request for the insights analysis."
         },
         "modelConfiguration": {
-          "$ref": "#/definitions/ModelConfiguration",
+          "$ref": "#/definitions/AzureOpenAIModelConfiguration",
           "description": "Configuration of the model used in the analysis."
         },
         "result": {
@@ -3396,12 +3270,64 @@
         "request"
       ]
     },
-    "InsightResult": {
+    "InsightCluster": {
       "type": "object",
-      "description": "The result of the analysis.",
+      "description": "A cluster of analysis samples.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the analysis cluster."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the analysis cluster."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight of the analysis cluster. This indicate number of samples in the cluster."
+        },
+        "subClusters": {
+          "type": "array",
+          "description": "List of subclusters within this cluster. Empty if no subclusters exist.",
+          "items": {
+            "$ref": "#/definitions/InsightCluster"
+          }
+        },
+        "samples": {
+          "type": "array",
+          "description": "List of samples that belong to this cluster. Empty if samples are part of subclusters.",
+          "items": {
+            "$ref": "#/definitions/InsightSample"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "weight"
+      ]
+    },
+    "InsightRequest": {
+      "type": "object",
+      "description": "The request of the insights report.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AnalysisType",
+          "$ref": "#/definitions/InsightType",
+          "description": "The type of request."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "InsightResult": {
+      "type": "object",
+      "description": "The result of the insights.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/InsightType",
           "description": "The type of insights result."
         }
       },
@@ -3410,23 +3336,36 @@
         "type"
       ]
     },
-    "InsightResultType": {
-      "type": "string",
-      "description": "The type of insights result.",
-      "enum": [
-        "ClusterAnalysisInsights"
-      ],
-      "x-ms-enum": {
-        "name": "InsightResultType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ClusterAnalysisInsights",
-            "value": "ClusterAnalysisInsights",
-            "description": "Insights from the cluster analysis."
-          }
-        ]
-      }
+    "InsightSample": {
+      "type": "object",
+      "description": "A sample from the analysis.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the analysis sample."
+        },
+        "type": {
+          "$ref": "#/definitions/SampleType",
+          "description": "Sample type"
+        },
+        "features": {
+          "type": "object",
+          "description": "Features to help with additional filtering of data in UX.",
+          "additionalProperties": {}
+        },
+        "correlationInfo": {
+          "type": "object",
+          "description": "Info about the correlation for the analysis sample.",
+          "additionalProperties": {}
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "id",
+        "type",
+        "features",
+        "correlationInfo"
+      ]
     },
     "InsightSummary": {
       "type": "object",
@@ -3457,6 +3396,49 @@
         "uniqueSubclusterCount",
         "uniqueClusterCount",
         "method"
+      ]
+    },
+    "InsightType": {
+      "type": "string",
+      "description": "The request of the insights.",
+      "enum": [
+        "EvaluationRunClusterInsight",
+        "AgentClusterInsight"
+      ],
+      "x-ms-enum": {
+        "name": "InsightType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EvaluationRunClusterInsight",
+            "value": "EvaluationRunClusterInsight",
+            "description": "Insights on an Evaluation run result."
+          },
+          {
+            "name": "AgentClusterInsight",
+            "value": "AgentClusterInsight",
+            "description": "Cluster Insight on an Agent."
+          }
+        ]
+      }
+    },
+    "InsightsMetadata": {
+      "type": "object",
+      "description": "Metadata about the insights.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the insights were created."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the insights were completed."
+        }
+      },
+      "required": [
+        "createdAt"
       ]
     },
     "ManagedAzureAISearchIndex": {
@@ -3502,19 +3484,6 @@
       "discriminator": "role",
       "required": [
         "role"
-      ]
-    },
-    "ModelConfiguration": {
-      "type": "object",
-      "description": "Configuration of the model used in the analysis.",
-      "properties": {
-        "modelDeploymentName": {
-          "type": "string",
-          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'."
-        }
-      },
-      "required": [
-        "modelDeploymentName"
       ]
     },
     "ModelDeployment": {
