@@ -54,10 +54,11 @@ model QuantumComputingData {
   count: int64;
 }
 
+/** Input parameters for the job. */
+model InputParams is Record<{}>;
 
-model InputParams {  @visibility(Lifecycle.Read, Lifecycle.Create) Record<string, object>};
-
-model Metadata {  @visibility(Lifecycle.Read, Lifecycle.Create) Record<string, string>};
+/** Metadata for the job. */
+model Metadata is Record<{}>;
 
 /** A job to be run in the workspace. */
 @resource("jobs")
