@@ -76,8 +76,13 @@ export function createMockCore() {
     setOutput: vi.fn((name, value) => console.log(`setOutput('${name}', '${value}')`)),
     setFailed: vi.fn((msg) => console.log(`setFailed('${msg}')`)),
     summary: {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      addRaw: vi.fn(function (content) {
+      addHeading: vi.fn(function () {
+        return this; // Return 'this' for method chaining
+      }),
+      addRaw: vi.fn(function () {
+        return this; // Return 'this' for method chaining
+      }),
+      addTable: vi.fn(function () {
         return this; // Return 'this' for method chaining
       }),
       write: vi.fn().mockResolvedValue(undefined),
