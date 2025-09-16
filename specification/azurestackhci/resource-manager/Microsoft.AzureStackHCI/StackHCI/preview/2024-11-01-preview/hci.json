@@ -1674,6 +1674,10 @@
         "time": {
           "$ref": "#/definitions/TimeConfiguration",
           "description": "Time configuration."
+        },
+        "storage": {
+          "$ref": "#/definitions/StorageConfiguration",
+          "description": "Storage configuration."
         }
       }
     },
@@ -2928,6 +2932,16 @@
             "$ref": "#/definitions/NetworkAdapter"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "StorageConfiguration": {
+      "type": "object",
+      "description": "Storage configuration.",
+      "properties": {
+        "partitionSize": {
+          "type": "string",
+          "description": "Partition size."
         }
       }
     },

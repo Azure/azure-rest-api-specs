@@ -620,6 +620,9 @@ model DeviceConfiguration {
 
   @doc("Time configuration.")
   time?: TimeConfiguration;
+
+  @doc("Storage configuration.")
+  storage?: StorageConfiguration;
 }
 
 @doc("Network configuration.")
@@ -627,6 +630,12 @@ model NetworkConfiguration {
   @Azure.ResourceManager.identifiers(#[])
   @doc("List of network adapters.")
   networkAdapters?: NetworkAdapter[];
+}
+
+@doc("Storage configuration.")
+model StorageConfiguration {
+  @doc("Partition size.")
+  partitionSize?: string;
 }
 
 @doc("Network adapter configuration.")
