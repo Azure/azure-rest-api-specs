@@ -3381,7 +3381,8 @@
             "DeliveryRuleHeaderActionParameters",
             "DeliveryRuleCacheExpirationActionParameters",
             "DeliveryRuleCacheKeyQueryStringBehaviorActionParameters",
-            "DeliveryRuleRouteConfigurationOverrideActionParameters"
+            "DeliveryRuleRouteConfigurationOverrideActionParameters",
+            "DeliveryRuleEdgeActionParameters"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleActionParametersType",
@@ -5112,7 +5113,8 @@
             "UrlRewrite",
             "UrlSigning",
             "OriginGroupOverride",
-            "RouteConfigurationOverride"
+            "RouteConfigurationOverride",
+            "EdgeAction"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleActionName",
@@ -5313,6 +5315,58 @@
           "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
+        }
+      }
+    },
+    "EdgeAction": {
+      "description": "Defines the edge action for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "EdgeAction",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/DeliveryRuleEdgeActionParameters"
+        }
+      }
+    },
+    "DeliveryRuleEdgeActionParameters": {
+      "description": "Defines the parameters for the edge action.",
+      "type": "object",
+      "required": [
+        "edgeActionReference",
+        "invocationPoint"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleEdgeActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
+      ],
+      "properties": {
+        "edgeActionReference": {
+          "description": "defines the edge action that will be invoked.",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "invocationPoint": {
+          "description": "Defines at which point in the request processing pipeline the edge action will be invoked.",
+          "type": "string",
+          "enum": [
+            "ClientRequest",
+            "OriginRequest"
+          ],
+          "x-ms-enum": {
+            "name": "invocationPoint",
+            "modelAsString": true
+          }
         }
       }
     },
