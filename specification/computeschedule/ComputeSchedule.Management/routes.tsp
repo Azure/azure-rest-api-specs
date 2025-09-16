@@ -23,7 +23,6 @@ alias LocationParameter = {
   @minLength(1)
   @segment("locations")
   @key
-  @typeChangedFrom(Versions.`2024-08-15-preview`, string)
   locationparameter: azureLocation;
 };
 

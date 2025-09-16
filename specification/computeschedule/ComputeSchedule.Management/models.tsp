@@ -185,42 +185,75 @@ union OperatingSystemType {
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
 @doc("These types determines how and where the virtual machines are deployed to optimize for cost, performance, or availability")
-union AllocationStrategyType {
+union AllocationStrategy {
   @doc("Allocation of virtual machines by lowest price, this is available for both Regular and Spot virtual machine PriorityProfileType")
   LowestPrice: "LowestPrice",
 
-  @doc("Allocation of virtual machines by highest available capacity, this is available for Spot virtual machine PriorityProfileType")
-  CapacityOptimized: "CapacityOptimized",
+  string,
+}
 
-  @doc("Allocation of virtual machines by highest available capacity at the lowest price on virtual machines in the selected region, this is available for Spot virtual machine PriorityProfileType")
-  PriceCapacityOptimized: "PriceCapacityOptimized",
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("These types determines how and where the virtual machines are deployed to optimize for cost, performance, or availability")
+union DistributionStrategy {
+  @doc("Distribution of virtual machines using a best effort strategy to create virtual machines in a specific availability zone rather than being spread accross multiple zones")
+  BestEffortSingleZone: "BestEffortSingleZone",
 
-  @doc("Allocation of virtual machines by customer selected priority, it seeks to create virtual machines based on the ranking provided in VmSizePreferenceRank, this is available for Regular virtual machine PriorityProfileType")
+  @doc("Distribution of virtual machines using a best effort strategy to strike a middle ground between availability, cost and performance.")
+  BestEffortBalanced: "BestEffortBalanced",
+
+  @doc("Even distribution of virtual machines adhering strictly to provided zones and vm sizes.")
+  StrictBalanced: "StrictBalanced",
+
+  @doc("Distribution of virtual machines by customer selected priority, it seeks to create virtual machines based on the ranking provided in PreferenceRank, this is available for Regular virtual machine PriorityProfileType")
   Prioritized: "Prioritized",
 
   string,
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
-@doc("The ranking values for VM size preferences, this is applied when AllocationStrategyType is set to Prioritized")
-union VmSizePreferenceRank {
+@doc("The ranking values for preferences.")
+union PreferenceRank {
   @doc("Rank0: Most preferred")
   Rank0: "0",
 
-  @doc("Rank0: Most preferred")
+  @doc("Rank1")
   Rank1: "1",
 
-  @doc("Rank0: Most preferred")
+  @doc("Rank2")
   Rank2: "2",
 
-  @doc("Rank0: Most preferred")
+  @doc("Rank3")
   Rank3: "3",
 
-  @doc("Rank0: Most preferred")
+  @doc("Rank4")
   Rank4: "4",
 
-  @doc("Rank0: Most preferred")
+  @doc("Rank5: Least preferred")
   Rank5: "5",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The names of availability zones")
+union ZoneName {
+  @doc("Zone0")
+  Zone0: "0",
+
+  @doc("Zone1")
+  Zone1: "1",
+
+  @doc("Zone2")
+  Zone2: "2",
+
+  @doc("Zone3")
+  Zone3: "3",
+
+  @doc("Zone4")
+  Zone4: "4",
+
+  @doc("Zone5")
+  Zone5: "5",
 
   string,
 }
@@ -257,13 +290,34 @@ model Resources {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("Policies for distributing virtual machines on creation.")
+model ZoneAllocationPolicy {
+  @doc("The distribution strategy used for virtual machine creation")
+  distributionStrategy: DistributionStrategy;
+
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @doc("Preferences of zonal allocation ranked by preference, this property will be used only when distributionStrategy is set to Prioritized.")
+  zonePreferences: Array<ZonePreferenceProperties>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
 @doc("Virtual machine sizes and their respective ranks for fungible create operations.")
 model VmSizesProfileProperties {
   @doc("The size of the virtual machine")
   name: string;
 
   @doc("Priority order for the virtual machine size selected, the values go from Rank0-Rank5 in ascending order of preference.")
-  rank: VmSizePreferenceRank;
+  rank: PreferenceRank;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("Availability zones and their respective ranks for fungible create operations.")
+model ZonePreferenceProperties {
+  @doc("The name of the zone")
+  zone: ZoneName;
+
+  @doc("Priority order for the zone selected, the values go from Rank0-Rank5 in ascending order of preference.")
+  rank: PreferenceRank;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
@@ -273,15 +327,12 @@ model PriorityProfile {
   type: PriorityProfileType;
 
   @doc("The type of allocation strategy for the selected PriorityProfileType.")
-  allocationStrategy: AllocationStrategyType;
+  allocationStrategy: AllocationStrategy;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
 @doc("The properties that support fungible create operaions")
 model FungibileProperties {
-  @doc("A list of Azure zones to possibly create the virtual machines in")
-  zones?: Array<string>;
-
   @doc("A list of preferred vm sizes to create and the rank of their preferences")
   vmSizesProfile?: Array<VmSizesProfileProperties>;
 
@@ -290,6 +341,9 @@ model FungibileProperties {
 
   @doc("The priority profile")
   priorityProfile?: PriorityProfile;
+
+  @doc("The allocation policy used to determine zonal spread for virtual machine creation")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
