@@ -4,12 +4,14 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureStackHCI;
 
