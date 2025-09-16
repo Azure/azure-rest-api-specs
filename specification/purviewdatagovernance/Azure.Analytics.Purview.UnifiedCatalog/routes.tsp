@@ -937,5 +937,5 @@ op ListPolicies is RpcOperation<
     @query
     skipToken?: string;
   },
-  JObject
+  CatalogResponse
 >;
