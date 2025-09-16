@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-05'
 input-file:
-  - Microsoft.AzureActiveDirectory/preview/2023-05-17-preview/externalIdentities.json
+  - preview/2023-05-17-preview/externalIdentities.json
 ```
 ### Tag: package-preview-2023-01
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
-  - Microsoft.AzureActiveDirectory/preview/2023-01-18-preview/externalIdentities.json
+  - preview/2023-01-18-preview/externalIdentities.json
 ```
 
 ### Tag: package-2019-01-01-preview
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2019-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-01-01-preview'
 input-file:
-  - Microsoft.AzureActiveDirectory/preview/2019-01-01-preview/cpimTenant.json
+  - preview/2019-01-01-preview/cpimTenant.json
 ```
 
 ### Tag: package-2020-05-01-preview
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2020-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-05-01-preview'
 input-file:
-  - Microsoft.AzureActiveDirectory/preview/2020-05-01-preview/cpim.json
+  - preview/2020-05-01-preview/cpim.json
 ```
 
 ### Tag: package-2021-04-01
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2021-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-04-01'
 input-file:
-  - Microsoft.AzureActiveDirectory/stable/2021-04-01/externalIdentities.json
+  - stable/2021-04-01/externalIdentities.json
 ```
 
 ---
