@@ -28,7 +28,55 @@ These are the global settings for the KubernetesConfiguration.
 title: ExtensionsClient
 description: KubernetesConfiguration Extensions Client
 openapi-type: arm
-tag: package-2024-11
+tag: package-2025-03
+```
+
+---
+
+### Tag: package-2025-03
+
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03'
+input-file:
+  - stable/2025-03-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    reason: Breaking change. Existing service contract needs to be backward compatible.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}"]
+  - code: LroLocationHeader
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header. Tracking a work item to add Location header in the upcoming API version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].delete.responses.202
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.responses.202
+  - code: DeleteResponseCodes
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].delete
+  - code: PatchIdentityProperty
+    reason: Existing service contract needs to be backward compatible.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7]
+  - code: PatchResponseCodes
+    reason: Existing service contract needs to be backward compatible.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch
+  - code: PatchBodyParametersSchema
+    reason: Existing service contract needs to be backward compatible.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch.parameters[7].schema.properties.properties
+  - code: AvoidAdditionalProperties
+    reason: Existing service contract needs to be backward compatible.
+    where:
+      - $.definitions.Extension.properties.properties.properties.configurationSettings
+      - $.definitions.Extension.properties.properties.properties.configurationProtectedSettings
+      - $.definitions.Extension.properties.properties.properties.customLocationSettings
+      - $.definitions.patchExtension.properties.properties.properties.configurationSettings
+      - $.definitions.patchExtension.properties.properties.properties.configurationProtectedSettings
 ```
 
 ---
