@@ -447,6 +447,19 @@
               "$ref": "#/definitions/AsyncOperationStatus"
             }
           },
+          "202": {
+            "description": "Tenant create request accepted. The Location header indicates the URL/location in which to check to get the async status of the operation.",
+            "headers": {
+              "Location": {
+                "description": "Contains the URL/location which can return the tenant provisioning status.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Contains the number of seconds to wait before checking the tenant provisioning status.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -490,6 +503,10 @@
               "type": "string"
             }
           }
+        },
+        "origin": {
+          "description": "The origin of the operation.",
+          "type": "string"
         }
       }
     },
@@ -571,6 +588,13 @@
             "message": {
               "type": "string",
               "description": "Error message."
+            },
+            "extendedDetails": {
+              "description": "Extended details of the error",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
             }
           }
         }
