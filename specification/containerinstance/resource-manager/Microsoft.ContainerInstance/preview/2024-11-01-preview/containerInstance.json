@@ -4121,8 +4121,8 @@
       "description": "Application Gateway the CG profile will use to interact with CGs in a backend pool",
       "properties": {
         "resource": {
-          "type": "string",
-          "description": "The Application Gateway ARM resource Id."
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "A reference to the application gateway backend address ARM resource hosted in ACI RP."
         },
         "backendAddressPools": {
           "type": "array",
@@ -4157,8 +4157,8 @@
       "description": "NGroups load balancer backend address pool",
       "properties": {
         "resource": {
-          "type": "string",
-          "description": "The Load Balancer backend address pool ARM resource Id."
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "A reference to the Load Balancer backend address pool ARM resource hosted in ACI RP."
         }
       }
     },
@@ -4167,8 +4167,8 @@
       "description": "NGroups application gateway backend address pool",
       "properties": {
         "resource": {
-          "type": "string",
-          "description": "The application gateway backend address pool ARM resource Id."
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "A reference to the application gateway backend address pool ARM resource hosted in ACI RP."
         }
       }
     },
