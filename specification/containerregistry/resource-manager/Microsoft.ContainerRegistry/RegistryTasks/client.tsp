@@ -8,3 +8,5 @@ using Microsoft.ContainerRegistry;
   "ContainerRegistryTasksManagementClient",
   "javascript"
 );
+
+@@clientName(Architecture.`386`, "ThreeHundredEightySix", "javascript");
