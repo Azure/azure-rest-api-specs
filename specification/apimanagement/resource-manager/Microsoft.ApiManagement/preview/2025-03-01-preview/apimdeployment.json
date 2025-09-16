@@ -1844,30 +1844,8 @@
         },
         "zoneRedundant": {
           "description": "Zone Redundant Requirement when creating StandardV2 and PremiumV2. If this flag is set to True, will return a APIM service with Zone redundant or fail the request if any underneath component cannot be zone redundant.",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "NotApplicable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "zoneRedundant",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Enabled",
-                "description": "Service should be enabled for availability zone balancing."
-              },
-              {
-                "value": "Disabled",
-                "description": "Service is not enabled for availability zone balancing."
-              },
-              {
-                "value": "NotApplicable",
-                "description": "Availability zone balancing is not applicable for this service sku."
-              }
-            ]
-          }
+          "type": "boolean",
+          "default": false
         }
       },
       "description": "Base Properties of an API Management service resource description."
