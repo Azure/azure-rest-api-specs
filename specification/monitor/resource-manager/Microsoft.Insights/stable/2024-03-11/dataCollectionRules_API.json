@@ -1089,7 +1089,15 @@
         "providerType": {
           "description": "Provider type specification: By Manifest GUID or by Event Source name",
           "type": "string",
-          "example": "EventSource"
+          "enum": [
+            "EventSource",
+            "Manifest"
+          ],
+          "example": "EventSource",
+          "x-ms-enum": {
+            "name": "KnownEtwProviderType",
+            "modelAsString": true
+          }
         },
         "logLevel": {
           "description": "Minimal level of detail to be logged",
