@@ -83,7 +83,7 @@ interface Clusters {
   updateSecretsLocations is ArmResourceActionAsync<
     Cluster,
     SecretsLocationsChangeRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**
@@ -116,7 +116,7 @@ interface Clusters {
   extendSoftwareAssuranceBenefit is ArmResourceActionAsync<
     Cluster,
     SoftwareAssuranceChangeRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**
@@ -126,7 +126,7 @@ interface Clusters {
   triggerLogCollection is ArmResourceActionAsync<
     Cluster,
     LogCollectionRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**
@@ -136,7 +136,7 @@ interface Clusters {
   configureRemoteSupport is ArmResourceActionAsync<
     Cluster,
     RemoteSupportRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**
