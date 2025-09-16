@@ -6,60 +6,6 @@
     "version": "2023-06-01-preview"
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "CheckNameAvailability"
-        ],
-        "description": "Checks the name availability of the resource with requested resource name.",
-        "operationId": "CheckNameAvailability_CheckNameAvailability",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "nameAvailabilityRequest",
-            "description": "NameAvailabilityRequest object.",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/CheckNameAvailabilityRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/CheckNameAvailabilityResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CheckNameAvailability_CheckNameAvailability_AlreadyExists": {
-            "$ref": "./examples/CheckNameAvailability_CheckNameAvailability_AlreadyExists.json"
-          },
-          "CheckNameAvailability_CheckNameAvailability_Available": {
-            "$ref": "./examples/CheckNameAvailability_CheckNameAvailability_Available.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}": {
       "get": {
         "tags": [
