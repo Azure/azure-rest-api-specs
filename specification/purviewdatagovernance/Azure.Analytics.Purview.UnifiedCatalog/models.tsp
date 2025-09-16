@@ -1593,4 +1593,95 @@ model CreateCriticalDataElementRequest {
   criticalDataElement: CriticalDataElement;
 }
 
-alias JObject = Record<unknown>;
+@doc("CatalogResponse.")
+model CatalogResponse {
+  @doc("The list of catalog values.")
+  values: CatalogValue[];
+
+  @doc("The continuation token for pagination.")
+  skipToken?: string;
+}
+
+@doc("CatalogValue.")
+model CatalogValue {
+  @doc("The name of the catalog.")
+  name: string;
+
+  @doc("The unique identifier of the catalog.")
+  id: string;
+
+  @doc("The version of the catalog.")
+  version: int32;
+
+  @doc("The properties of the catalog.")
+  properties: CatalogProperties;
+}
+
+@doc("CatalogProperties.")
+model CatalogProperties {
+  @doc("The description of the catalog.")
+  description?: string;
+
+  @doc("The type of the catalog.")
+  decisionRules?: DecisionRule[];
+
+  @doc("The attribute rules of the catalog.")
+  attributeRules?: AttributeRule[];
+
+  @doc("The entity reference of the catalog.")
+  entity: EntityReference;
+
+  @doc("The parent entity name of the catalog.")
+  parentEntityName?: string;
+}
+
+@doc("DecisionRule.")
+model DecisionRule {
+  @doc("The kind of decision rule.")
+  kind: string;
+
+  @doc("The unique identifier of the decision rule.")
+  effect: string;
+
+  @doc("The name of the decision rule.")
+  dnfCondition: Condition[][];
+}
+
+@doc("AttributeRule.")
+model AttributeRule {
+  @doc("The kind of attribute rule.")
+  kind: string;
+
+  @doc("The unique identifier of the attribute rule.")
+  id: string;
+
+  @doc("The name of the attribute rule.")
+  name: string[];
+
+  @doc("The description of the attribute rule.")
+  dnfCondition: Condition[][];
+}
+
+@doc("Condition.")
+model Condition {
+  @doc("The name of the attribute.")
+  attributeName: string;
+
+  @doc("The operator of the condition.")
+  attributeValueIncludes?: string;
+
+  @doc("The values included in the condition.")
+  attributeValueIncludedIn?: string[];
+
+  @doc("The rule from which the condition is derived.")
+  fromRule?: string;
+}
+
+@doc("EntityReference.")
+model EntityReference {
+  @doc("The type of the entity.")
+  type: string;
+
+  @doc("The reference name of the entity.")
+  referenceName: string;
+}
