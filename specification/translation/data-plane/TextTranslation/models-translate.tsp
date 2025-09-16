@@ -378,9 +378,8 @@ model TranslationText {
   @doc("A string giving the translated text.")
   text: string;
 
-  @removed(APIVersion.v2025_05_01_preview)
   @doc("""
-    An object giving the translated text in the script specified by the toScript parameter.
+    An object giving the translated text in the script specified in the request.
     """)
   transliteration?: TransliteratedText;
 
