@@ -15,7 +15,7 @@ typescript:
 ```yaml $(typescript) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-certificateregistration"
-  output-folder: "$(typescript-sdks-folder)/sdk/certificateregistration/@azure/arm-certificateregistration"
+  output-folder: "$(typescript-sdks-folder)/sdk/certificateregistration/arm-certificateregistration"
 ```
 
 ### Profile: profile-hybrid-2019-03-01
