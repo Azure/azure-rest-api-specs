@@ -1,0 +1,1623 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ExternalIdentitiesConfigurationClient",
+    "version": "2024-05-01",
+    "description": "External Identities Configuration Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "GuestUsagesResources"
+    },
+    {
+      "name": "CiamDirectoriesResources"
+    },
+    {
+      "name": "CheckNameApi"
+    },
+    {
+      "name": "B2cDirectoriesResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureActiveDirectory/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/b2cDirectories": {
+      "get": {
+        "operationId": "B2cDirectoriesResources_ListBySubscription",
+        "tags": [
+          "B2cDirectoriesResources"
+        ],
+        "description": "Gets B2c Directory resources under a subscription for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_ListBySubscription": {
+            "$ref": "./examples/B2cDirectoriesResources_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameApi_CheckGlobalName",
+        "tags": [
+          "CheckNameApi"
+        ],
+        "description": "Checks that the trusted signing account name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomCheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameApi_CheckGlobalName": {
+            "$ref": "./examples/CheckNameApi_CheckGlobalName_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/ciamDirectories": {
+      "get": {
+        "operationId": "CiamDirectoriesResources_ListBySubscription",
+        "tags": [
+          "CiamDirectoriesResources"
+        ],
+        "description": "Gets Ciam Directory resources under a subscription for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CiamDirectoryResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_ListBySubscription": {
+            "$ref": "./examples/CiamDirectoriesResources_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/guestUsages": {
+      "get": {
+        "operationId": "GuestUsagesResources_ListBySubscription",
+        "tags": [
+          "GuestUsagesResources"
+        ],
+        "description": "Gets Guest Usages resources under a subscription for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_ListBySubscription": {
+            "$ref": "./examples/GuestUsagesResources_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/b2cDirectories": {
+      "get": {
+        "operationId": "B2cDirectoriesResources_ListByResourceGroup",
+        "tags": [
+          "B2cDirectoriesResources"
+        ],
+        "description": "Gets B2c Directory resources under a resource group for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_ListByResourceGroup": {
+            "$ref": "./examples/B2cDirectoriesResources_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/b2cDirectories/{resourceName}": {
+      "get": {
+        "operationId": "B2cDirectoriesResources_Get",
+        "tags": [
+          "B2cDirectoriesResources"
+        ],
+        "description": "Gets a B2c Directory resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 43,
+            "pattern": "^[a-zA-Z0-9.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_Get": {
+            "$ref": "./examples/B2cDirectoriesResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "B2cDirectoriesResources_CreateOrUpdate",
+        "tags": [
+          "B2cDirectoriesResources"
+        ],
+        "description": "Creates a B2c Directory resource, which is used to linking a subscription to an instance of Azure AD External Identities. [Learn more](https://aka.ms/extidbilling).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 43,
+            "pattern": "^[a-zA-Z0-9.]+"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'B2cDirectoryResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_CreateOrUpdate": {
+            "$ref": "./examples/B2cDirectoriesResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "B2cDirectoriesResources_Update",
+        "tags": [
+          "B2cDirectoriesResources"
+        ],
+        "description": "Updates a B2c Directory resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 43,
+            "pattern": "^[a-zA-Z0-9.]+"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_Update": {
+            "$ref": "./examples/B2cDirectoriesResources_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "B2cDirectoriesResources_Delete",
+        "tags": [
+          "B2cDirectoriesResources"
+        ],
+        "description": "Deletes a B2c Directory resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 43,
+            "pattern": "^[a-zA-Z0-9.]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_Delete": {
+            "$ref": "./examples/B2cDirectoriesResources_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/ciamDirectories": {
+      "get": {
+        "operationId": "CiamDirectoriesResources_ListByResourceGroup",
+        "tags": [
+          "CiamDirectoriesResources"
+        ],
+        "description": "Gets Ciam Directory resources under a resource group for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CiamDirectoryResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_ListByResourceGroup": {
+            "$ref": "./examples/CiamDirectoriesResources_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/ciamDirectories/{resourceName}": {
+      "get": {
+        "operationId": "CiamDirectoriesResources_Get",
+        "tags": [
+          "CiamDirectoriesResources"
+        ],
+        "description": "Gets a Ciam Directory resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 43,
+            "pattern": "^[a-zA-Z0-9.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CiamDirectoryResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_Get": {
+            "$ref": "./examples/CiamDirectoriesResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CiamDirectoriesResources_CreateOrUpdate",
+        "tags": [
+          "CiamDirectoriesResources"
+        ],
+        "description": "Creates a Ciam Directory resource, which is used to linking a subscription to an instance of Azure AD External Identities. [Learn more](https://aka.ms/extidbilling).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 43,
+            "pattern": "^[a-zA-Z0-9.]+"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CiamDirectoryResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CiamDirectoryResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CiamDirectoryResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'CiamDirectoryResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CiamDirectoryResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_CreateOrUpdate": {
+            "$ref": "./examples/CiamDirectoriesResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CiamDirectoriesResources_Update",
+        "tags": [
+          "CiamDirectoriesResources"
+        ],
+        "description": "Updates a Ciam Directory resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 43,
+            "pattern": "^[a-zA-Z0-9.]+"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CiamDirectoryResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CiamDirectoryResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_Update": {
+            "$ref": "./examples/CiamDirectoriesResources_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CiamDirectoriesResources_Delete",
+        "tags": [
+          "CiamDirectoriesResources"
+        ],
+        "description": "Deletes a Ciam Directory resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 43,
+            "pattern": "^[a-zA-Z0-9.]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_Delete": {
+            "$ref": "./examples/CiamDirectoriesResources_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages": {
+      "get": {
+        "operationId": "GuestUsagesResources_ListByResourceGroup",
+        "tags": [
+          "GuestUsagesResources"
+        ],
+        "description": "Gets Guest Usages resources under a resource group for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_ListByResourceGroup": {
+            "$ref": "./examples/GuestUsagesResources_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages/{resourceName}": {
+      "get": {
+        "operationId": "GuestUsagesResources_Get",
+        "tags": [
+          "GuestUsagesResources"
+        ],
+        "description": "Gets a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_Get": {
+            "$ref": "./examples/GuestUsagesResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GuestUsagesResources_CreateOrUpdate",
+        "tags": [
+          "GuestUsagesResources"
+        ],
+        "description": "Creates a Guest Usages resource, which is used to linking a subscription to an instance of Azure AD External Identities. [Learn more](https://aka.ms/extidbilling).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9.]+"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GuestUsagesResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'GuestUsagesResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_CreateOrUpdate": {
+            "$ref": "./examples/GuestUsagesResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "GuestUsagesResources_Update",
+        "tags": [
+          "GuestUsagesResources"
+        ],
+        "description": "Updates a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9.]+"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_Update": {
+            "$ref": "./examples/GuestUsagesResources_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GuestUsagesResources_Delete",
+        "tags": [
+          "GuestUsagesResources"
+        ],
+        "description": "Deletes a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The initial domain name of the Azure AD B2C tenant.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_Delete": {
+            "$ref": "./examples/GuestUsagesResources_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "B2CResourceSKUName": {
+      "type": "string",
+      "description": "The name of the SKU for the tenant.",
+      "enum": [
+        "Standard",
+        "PremiumP1",
+        "PremiumP2"
+      ],
+      "x-ms-enum": {
+        "name": "B2CResourceSKUName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+          },
+          {
+            "name": "PremiumP1",
+            "value": "PremiumP1",
+            "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses number of authentications based billing."
+          },
+          {
+            "name": "PremiumP2",
+            "value": "PremiumP2",
+            "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses number of authentications based billing."
+          }
+        ]
+      }
+    },
+    "B2CResourceSKUTier": {
+      "type": "string",
+      "description": "The tier of the tenant.",
+      "enum": [
+        "A0"
+      ],
+      "x-ms-enum": {
+        "name": "B2CResourceSKUTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "A0",
+            "value": "A0",
+            "description": "The SKU tier used for all Azure AD B2C tenants."
+          }
+        ]
+      }
+    },
+    "B2cDirectoryResource": {
+      "type": "object",
+      "description": "B2C Directory Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/B2cDirectoryResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/B2cResourceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "B2cDirectoryResourceListResult": {
+      "type": "object",
+      "description": "The response of a B2cDirectoryResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The B2cDirectoryResource items on this page",
+          "items": {
+            "$ref": "#/definitions/B2cDirectoryResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "B2cDirectoryResourceProperties": {
+      "type": "object",
+      "description": "Properties of the Azure AD B2C tenant Azure resource.",
+      "properties": {
+        "billingConfig": {
+          "$ref": "#/definitions/B2cTenantResourcePropertiesBillingConfig",
+          "description": "The billing configuration for the tenant."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier of the Azure AD B2C tenant."
+        },
+        "isGoLocalTenant": {
+          "type": "boolean",
+          "description": "Enable GoLocal add-on to store data at rest in the specific Geo. Refer to [aka.ms/B2CDataResidency](https://aka.ms/B2CDataResidency) to see local data residency options."
+        }
+      }
+    },
+    "B2cDirectoryResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the B2cDirectoryResource.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/B2cResourceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/B2cDirectoryResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "B2cDirectoryResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the B2cDirectoryResource.",
+      "properties": {
+        "billingConfig": {
+          "$ref": "#/definitions/B2cTenantResourcePropertiesBillingConfig",
+          "description": "The billing configuration for the tenant."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier of the Azure AD B2C tenant."
+        },
+        "isGoLocalTenant": {
+          "type": "boolean",
+          "description": "Enable GoLocal add-on to store data at rest in the specific Geo. Refer to [aka.ms/B2CDataResidency](https://aka.ms/B2CDataResidency) to see local data residency options."
+        }
+      }
+    },
+    "B2cResourceSku": {
+      "type": "object",
+      "description": "SKU properties of the Azure AD B2C tenant. Learn more about Azure AD B2C billing at [aka.ms/b2cBilling](https://aka.ms/b2cBilling).",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/B2CResourceSKUName",
+          "description": "The name of the SKU for the tenant."
+        },
+        "tier": {
+          "$ref": "#/definitions/B2CResourceSKUTier",
+          "description": "The tier of the tenant."
+        }
+      }
+    },
+    "B2cTenantResourcePropertiesBillingConfig": {
+      "type": "object",
+      "description": "The billing configuration for the tenant.",
+      "properties": {
+        "billingType": {
+          "$ref": "#/definitions/BillingType",
+          "description": "The type of billing. Will be MAU for all new customers. If 'Auths', it can be updated to 'MAU'. Cannot be changed if value is 'MAU'. Learn more about Azure AD B2C billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling)."
+        },
+        "effectiveStartDateUtc": {
+          "type": "string",
+          "description": "The data from which the billing type took effect",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingType": {
+      "type": "string",
+      "description": "The type of billing. Will be MAU for all new customers. If 'Auths', it can be updated to 'MAU'. Cannot be changed if value is 'MAU'. Learn more about Azure AD B2C billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
+      "enum": [
+        "MAU",
+        "Auths"
+      ],
+      "x-ms-enum": {
+        "name": "BillingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MAU",
+            "value": "MAU",
+            "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+          },
+          {
+            "name": "Auths",
+            "value": "Auths",
+            "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses number of authentications based billing."
+          }
+        ]
+      }
+    },
+    "CiamBillingType": {
+      "type": "string",
+      "description": "The type of billing. Will be MAU for all new customers. Cannot be changed if value is 'MAU'. Learn more about Azure AD for customers billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
+      "enum": [
+        "MAU"
+      ],
+      "x-ms-enum": {
+        "name": "CiamBillingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MAU",
+            "value": "MAU",
+            "description": "Azure AD for customers usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+          }
+        ]
+      }
+    },
+    "CiamDirectoryProperties": {
+      "type": "object",
+      "description": "Properties of the Azure AD for customers tenant Azure resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State",
+          "readOnly": true
+        },
+        "createTenantProperties": {
+          "$ref": "#/definitions/CreateCiamTenantProperties",
+          "description": "These properties are used to create the Azure AD for customers tenant. These properties are not part of the Azure resource."
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The domain name of the tenant",
+          "readOnly": true
+        },
+        "billingConfig": {
+          "$ref": "#/definitions/CiamTenantResourcePropertiesBillingConfig",
+          "description": "The billing configuration for the tenant.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier of the Azure AD for customers tenant.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "createTenantProperties"
+      ]
+    },
+    "CiamDirectoryResource": {
+      "type": "object",
+      "description": "Ciam Directory Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CiamDirectoryProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/CiamResourceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CiamDirectoryResourceListResult": {
+      "type": "object",
+      "description": "The response of a CiamDirectoryResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CiamDirectoryResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CiamDirectoryResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CiamDirectoryResourcePatch": {
+      "type": "object",
+      "description": "Ciam Directory Resource for Patch",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Key-value pairs of additional resource provisioning properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/CiamResourceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource"
+        }
+      }
+    },
+    "CiamResourceSKUTier": {
+      "type": "string",
+      "description": "The tier of the tenant.",
+      "enum": [
+        "A0"
+      ],
+      "x-ms-enum": {
+        "name": "CiamResourceSKUTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "A0",
+            "value": "A0",
+            "description": "The SKU tier used for all Azure AD for customers tenants."
+          }
+        ]
+      }
+    },
+    "CiamResourceSku": {
+      "type": "object",
+      "description": "SKU properties of the Azure AD for customers tenant. Learn more about Azure AD for customers billing at [https://aka.ms/ciambilling](https://aka.ms/ciambilling).",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/CiamResourceSkuName",
+          "description": "The name of the SKU for the tenant."
+        },
+        "tier": {
+          "$ref": "#/definitions/CiamResourceSKUTier",
+          "description": "The tier of the tenant.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ]
+    },
+    "CiamResourceSkuName": {
+      "type": "string",
+      "description": "The name of the SKU for the tenant.",
+      "enum": [
+        "Base"
+      ],
+      "x-ms-enum": {
+        "name": "CiamResourceSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Base",
+            "value": "Base"
+          }
+        ]
+      }
+    },
+    "CiamTenantResourcePropertiesBillingConfig": {
+      "type": "object",
+      "description": "The billing configuration for the tenant.",
+      "properties": {
+        "billingType": {
+          "$ref": "#/definitions/CiamBillingType",
+          "description": "The type of billing. Will be MAU for all new customers. Cannot be changed if value is 'MAU'. Learn more about Azure AD for customers billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
+          "readOnly": true
+        },
+        "effectiveStartDateUtc": {
+          "type": "string",
+          "description": "The data from which the billing type took effect",
+          "readOnly": true
+        }
+      }
+    },
+    "CreateCiamTenantProperties": {
+      "type": "object",
+      "description": "These properties are used to create the Azure AD for customers tenant. These properties are not part of the Azure resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the Azure AD for customers tenant.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Country code of Azure tenant (e.g. 'US'). Refer to [https://aka.ms/ciam-data-location](https://aka.ms/ciam-data-location) to see valid country codes and corresponding data residency locations. If you do not see a country code in an valid data residency location, choose one from the list.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "displayName",
+        "countryCode"
+      ]
+    },
+    "CustomCheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "The check availability request body.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource for which availability needs to be checked."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "The country code where the resource will be in"
+        }
+      }
+    },
+    "GuestUsagesResource": {
+      "type": "object",
+      "description": "Guest Usages Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GuestUsagesResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GuestUsagesResourceListResult": {
+      "type": "object",
+      "description": "The response of a GuestUsagesResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GuestUsagesResource items on this page",
+          "items": {
+            "$ref": "#/definitions/GuestUsagesResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GuestUsagesResourcePatch": {
+      "type": "object",
+      "description": "Guest Usages Resource for Patch",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Key-value pairs of additional resource provisioning properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GuestUsagesResourceProperties": {
+      "type": "object",
+      "description": "Guest Usages Resource Properties",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier for the tenant for which the resource is being created"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Deleting",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}
