@@ -1502,6 +1502,275 @@
           }
         }
       }
+    },
+    "/schedules": {
+      "get": {
+        "operationId": "Schedules_List",
+        "description": "List all schedules.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedSchedule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/schedules/{id}": {
+      "get": {
+        "operationId": "Schedules_Get",
+        "description": "Get a schedule by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Schedules_CreateOrUpdate",
+        "description": "Create or update a schedule by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Schedule",
+            "in": "body",
+            "description": "Schedule resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Schedules_Delete",
+        "description": "Delete a schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedules/{scheduleId}/runs": {
+      "get": {
+        "operationId": "Schedules_ListRuns",
+        "description": "List all schedule runs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedScheduleRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedules/{scheduleId}/runs/{runId}": {
+      "get": {
+        "operationId": "Schedules_GetRun",
+        "description": "Get a schedule run by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Identifier of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "Identifier of the schedule run.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2239,6 +2508,39 @@
         ]
       }
     },
+    "CronTrigger": {
+      "type": "object",
+      "description": "Cron based trigger.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Cron expression that defines the schedule frequency."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Time zone for the cron schedule.",
+          "default": "UTC"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start time for the cron schedule in ISO 8601 format."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End time for the cron schedule in ISO 8601 format."
+        }
+      },
+      "required": [
+        "expression",
+        "endTime"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "Cron"
+    },
     "CustomCredential": {
       "type": "object",
       "description": "Custom credential definition",
@@ -2261,6 +2563,29 @@
         }
       ],
       "x-ms-discriminator-value": "CustomKeys"
+    },
+    "DailyRecurrenceSchedule": {
+      "type": "object",
+      "description": "Daily recurrence schedule.",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "description": "Hours for the recurrence schedule.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "hours"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Daily"
     },
     "DatasetType": {
       "type": "string",
@@ -2359,6 +2684,60 @@
         "name",
         "version"
       ]
+    },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "Days of the week for recurrence schedule.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "Sunday",
+            "description": "Sunday."
+          },
+          {
+            "name": "Monday",
+            "value": "Monday",
+            "description": "Monday."
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday",
+            "description": "Tuesday."
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday",
+            "description": "Wednesday."
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday",
+            "description": "Thursday."
+          },
+          {
+            "name": "Friday",
+            "value": "Friday",
+            "description": "Friday."
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday",
+            "description": "Saturday."
+          }
+        ]
+      }
     },
     "Deployment": {
       "type": "object",
@@ -2646,6 +3025,16 @@
       ],
       "x-ms-discriminator-value": "uri_folder"
     },
+    "HourlyRecurrenceSchedule": {
+      "type": "object",
+      "description": "Hourly recurrencce schedule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Hourly"
+    },
     "Index": {
       "type": "object",
       "description": "Index resource Definition",
@@ -2758,6 +3147,19 @@
       ],
       "x-ms-discriminator-value": "dataset"
     },
+    "Insight": {
+      "type": "object",
+      "description": "Insight placeholder model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the insight."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "ManagedAzureAISearchIndex": {
       "type": "object",
       "description": "Managed Azure AI Search Index Definition",
@@ -2855,6 +3257,29 @@
       ],
       "x-ms-discriminator-value": "ModelDeployment"
     },
+    "MonthlyRecurrenceSchedule": {
+      "type": "object",
+      "description": "Monthly recurrence schedule.",
+      "properties": {
+        "daysOfMonth": {
+          "type": "array",
+          "description": "Days of the month for the recurrence schedule.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "daysOfMonth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Monthly"
+    },
     "NoAuthenticationCredentials": {
       "type": "object",
       "description": "Credentials that do not require authentication",
@@ -2864,6 +3289,30 @@
         }
       ],
       "x-ms-discriminator-value": "None"
+    },
+    "OneTimeTrigger": {
+      "type": "object",
+      "description": "One-time trigger.",
+      "properties": {
+        "triggerAt": {
+          "type": "string",
+          "description": "Date and time for the one-time trigger."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Time zone for the one-time trigger.",
+          "default": "UTC"
+        }
+      },
+      "required": [
+        "triggerAt"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "OneTime"
     },
     "PagedConnection": {
       "type": "object",
@@ -2991,6 +3440,48 @@
         "value"
       ]
     },
+    "PagedSchedule": {
+      "type": "object",
+      "description": "Paged collection of Schedule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Schedule items on this page",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedScheduleRun": {
+      "type": "object",
+      "description": "Paged collection of ScheduleRun items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScheduleRun items on this page",
+          "items": {
+            "$ref": "#/definitions/ScheduleRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PendingUploadCredentialType": {
       "type": "string",
       "description": "The type of credential used to access the storage account.",
@@ -3089,6 +3580,94 @@
             "name": "BlobReference",
             "value": "BlobReference",
             "description": "Blob Reference is the only supported type."
+          }
+        ]
+      }
+    },
+    "RecurrenceSchedule": {
+      "type": "object",
+      "description": "Recurrence schedule model.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RecurrenceType",
+          "description": "Recurrence type for the recurrence schedule."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "RecurrenceTrigger": {
+      "type": "object",
+      "description": "Recurrence based trigger.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "Start time for the recurrence schedule in ISO 8601 format."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End time for the recurrence schedule in ISO 8601 format."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Time zone for the recurrence schedule.",
+          "default": "UTC"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interval for the recurrence schedule."
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrenceSchedule",
+          "description": "Recurrence schedule for the recurrence trigger."
+        }
+      },
+      "required": [
+        "interval",
+        "schedule"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "Recurrence"
+    },
+    "RecurrenceType": {
+      "type": "string",
+      "description": "Recurrence type.",
+      "enum": [
+        "Hourly",
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "RecurrenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hourly",
+            "value": "Hourly",
+            "description": "Hourly recurrence pattern."
+          },
+          {
+            "name": "Daily",
+            "value": "Daily",
+            "description": "Daily recurrence pattern."
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly",
+            "description": "Weekly recurrence pattern."
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly",
+            "description": "Monthly recurrence pattern."
           }
         ]
       }
@@ -3244,6 +3823,203 @@
         "type"
       ]
     },
+    "Schedule": {
+      "type": "object",
+      "description": "Schedule model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the schedule.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name of the schedule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the schedule."
+        },
+        "enabled": {
+          "description": "Enabled status of the schedule."
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/ScheduleProvisioningStatus",
+          "description": "Provisioning status of the schedule.",
+          "readOnly": true
+        },
+        "trigger": {
+          "$ref": "#/definitions/Trigger",
+          "description": "Trigger for the schedule."
+        },
+        "task": {
+          "$ref": "#/definitions/ScheduleTask",
+          "description": "Task for the schedule."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Schedule's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Schedule's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "type": "object",
+          "description": "System metadata for the resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "enabled",
+        "trigger",
+        "task",
+        "systemData"
+      ]
+    },
+    "ScheduleProvisioningStatus": {
+      "type": "string",
+      "description": "Schedule provisioning status.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleProvisioningStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Represents the creation status of the schedule."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Represents the updating status of the schedule."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Represents the deleting status of the schedule."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Represents the succeeded status of the schedule."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Represents the failed status of the schedule."
+          }
+        ]
+      }
+    },
+    "ScheduleRun": {
+      "type": "object",
+      "description": "Schedule run model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the schedule run.",
+          "readOnly": true
+        },
+        "scheduleId": {
+          "type": "string",
+          "description": "Identifier of the schedule."
+        },
+        "success": {
+          "description": "Trigger success status of the schedule run.",
+          "readOnly": true
+        },
+        "triggerTime": {
+          "type": "string",
+          "description": "Trigger time of the schedule run."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error information for the schedule run.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of the schedule run.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "scheduleId",
+        "success",
+        "properties"
+      ]
+    },
+    "ScheduleTask": {
+      "type": "object",
+      "description": "Schedule task model.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ScheduleTaskType",
+          "description": "Type of the task."
+        },
+        "configuration": {
+          "type": "object",
+          "description": "Configuration for the task.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "definition": {
+          "description": "Definition of the task."
+        }
+      },
+      "required": [
+        "type",
+        "configuration",
+        "definition"
+      ]
+    },
+    "ScheduleTaskType": {
+      "type": "string",
+      "description": "Type of the task.",
+      "enum": [
+        "Evaluation",
+        "Insight"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleTaskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Evaluation",
+            "value": "Evaluation",
+            "description": "Evaluation task."
+          },
+          {
+            "name": "Insight",
+            "value": "Insight",
+            "description": "Insight task."
+          }
+        ]
+      }
+    },
     "Sku": {
       "type": "object",
       "description": "Sku information",
@@ -3311,6 +4087,50 @@
         "type"
       ]
     },
+    "Trigger": {
+      "type": "object",
+      "description": "Base model for Trigger of the schedule.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TriggerType",
+          "description": "Type of the trigger."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "TriggerType": {
+      "type": "string",
+      "description": "Type of the trigger.",
+      "enum": [
+        "Cron",
+        "Recurrence",
+        "OneTime"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cron",
+            "value": "Cron",
+            "description": "Cron based trigger."
+          },
+          {
+            "name": "Recurrence",
+            "value": "Recurrence",
+            "description": "Recurrence based trigger."
+          },
+          {
+            "name": "OneTime",
+            "value": "OneTime",
+            "description": "One-time trigger."
+          }
+        ]
+      }
+    },
     "UserMessage": {
       "type": "object",
       "description": "A message authored by the end user as input to the model.",
@@ -3329,6 +4149,28 @@
         }
       ],
       "x-ms-discriminator-value": "user"
+    },
+    "WeeklyRecurrenceSchedule": {
+      "type": "object",
+      "description": "Weekly recurrence schedule.",
+      "properties": {
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Days of the week for the recurrence schedule.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
+        }
+      },
+      "required": [
+        "daysOfWeek"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      ],
+      "x-ms-discriminator-value": "Weekly"
     },
     "modelResponseGenerationTarget": {
       "type": "object",
