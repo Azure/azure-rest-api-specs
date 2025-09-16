@@ -100,13 +100,13 @@ interface Client {
 )
 interface LogsQueryClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  QueryWorkspace is MonitorQueryLogs.Query.execute;
+  queryWorkspace is MonitorQueryLogs.Query.execute;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  QueryResource is MonitorQueryLogs.Query.executeWithResourceId;
+  queryResource is MonitorQueryLogs.Query.executeWithResourceId;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  QueryBatch is MonitorQueryLogs.Query.batch;
+  queryBatch is MonitorQueryLogs.Query.batch;
 }
 
 @@clientName(Column, "LogsTableColumn", "csharp");
