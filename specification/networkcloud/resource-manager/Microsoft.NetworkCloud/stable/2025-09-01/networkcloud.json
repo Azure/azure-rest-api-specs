@@ -12,7 +12,7 @@
   "info": {
     "description": "The Network Cloud APIs provide management of the Azure Operator Nexus compute resources such as on-premises clusters, hardware resources, and workload infrastructure resources.",
     "title": "NetworkCloud",
-    "version": "2025-07-01-preview"
+    "version": "2025-09-01"
   },
   "host": "management.azure.com",
   "paths": {
@@ -726,7 +726,7 @@
         }
       },
       "put": {
-        "description": "Create a new bare metal machine or update the properties of the existing one.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
+        "description": "Create a new bare metal machine or update the properties of the existing one. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
         "summary": "Create or update the bare metal machine.",
         "operationId": "BareMetalMachines_CreateOrUpdate",
         "parameters": [
@@ -795,7 +795,7 @@
         }
       },
       "delete": {
-        "description": "Delete the provided bare metal machine.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
+        "description": "Delete the provided bare metal machine. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
         "summary": "Delete the bare metal machine.",
         "operationId": "BareMetalMachines_Delete",
         "parameters": [
@@ -5029,7 +5029,7 @@
         }
       },
       "put": {
-        "description": "Create a new rack or update properties of the existing one.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
+        "description": "Create a new rack or update properties of the existing one. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
         "summary": "Create or update the rack.",
         "operationId": "Racks_CreateOrUpdate",
         "parameters": [
@@ -5098,7 +5098,7 @@
         }
       },
       "delete": {
-        "description": "Delete the provided rack.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
+        "description": "Delete the provided rack. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
         "summary": "Delete the rack.",
         "operationId": "Racks_Delete",
         "parameters": [
@@ -5311,7 +5311,7 @@
         }
       },
       "put": {
-        "description": "Create a new storage appliance or update the properties of the existing one.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
+        "description": "Create a new storage appliance or update the properties of the existing one. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
         "summary": "Create or update the storage appliance.",
         "operationId": "StorageAppliances_CreateOrUpdate",
         "parameters": [
@@ -5380,7 +5380,7 @@
         }
       },
       "delete": {
-        "description": "Delete the provided storage appliance.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
+        "description": "Delete the provided storage appliance. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
         "summary": "Delete the storage appliance.",
         "operationId": "StorageAppliances_Delete",
         "parameters": [
@@ -7710,7 +7710,7 @@
           "maxLength": 256
         },
         "machineName": {
-          "description": "The user-provided name for the bare metal machine created from this specification.\nIf not provided, the machine name will be generated programmatically.",
+          "description": "The user-provided name for the bare metal machine created from this specification. If not provided, the machine name will be generated programmatically.",
           "type": "string",
           "pattern": "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
         },
@@ -8011,7 +8011,7 @@
       "title": "BareMetalMachinePatchProperties represents the properties of the bare metal machine that can be patched.",
       "properties": {
         "machineDetails": {
-          "description": "The details provided by the customer during the creation of rack manifests\nthat allows for custom data to be associated with this machine.",
+          "description": "The details provided by the customer during the creation of rack manifests that allows for custom data to be associated with this machine.",
           "type": "string",
           "maxLength": 256
         }
@@ -8375,7 +8375,7 @@
           }
         },
         "limitTimeSeconds": {
-          "description": "The maximum time the script is allowed to run.\nIf the execution time exceeds the maximum, the script will be stopped, any output produced until then will be captured, and the exit code matching a timeout will be returned (252).",
+          "description": "The maximum time the script is allowed to run. If the execution time exceeds the maximum, the script will be stopped, any output produced until then will be captured, and the exit code matching a timeout will be returned (252).",
           "type": "integer",
           "format": "int64",
           "maximum": 14400,
@@ -8405,7 +8405,7 @@
           "x-ms-identifiers": []
         },
         "limitTimeSeconds": {
-          "description": "The maximum time the commands are allowed to run.\nIf the execution time exceeds the maximum, the script will be stopped, any output produced until then will be captured, and the exit code matching a timeout will be returned (252).",
+          "description": "The maximum time the commands are allowed to run. If the execution time exceeds the maximum, the script will be stopped, any output produced until then will be captured, and the exit code matching a timeout will be returned (252).",
           "type": "integer",
           "format": "int64",
           "maximum": 14400,
@@ -8431,7 +8431,7 @@
           "x-ms-identifiers": []
         },
         "limitTimeSeconds": {
-          "description": "The maximum time the commands are allowed to run.\nIf the execution time exceeds the maximum, the script will be stopped, any output produced until then will be captured, and the exit code matching a timeout will be returned (252).",
+          "description": "The maximum time the commands are allowed to run. If the execution time exceeds the maximum, the script will be stopped, any output produced until then will be captured, and the exit code matching a timeout will be returned (252).",
           "type": "integer",
           "format": "int64",
           "maximum": 14400,
@@ -8764,7 +8764,7 @@
       }
     },
     "CloudServicesNetwork": {
-      "description": "Upon creation, the additional services that are provided by the platform will be allocated and\nrepresented in the status of this resource. All resources associated with this cloud services network will be part\nof the same layer 2 (L2) isolation domain. At least one service network must be created but may be reused across many\nvirtual machines and/or Hybrid AKS clusters.",
+      "description": "Upon creation, the additional services that are provided by the platform will be allocated and represented in the status of this resource. All resources associated with this cloud services network will be part of the same layer 2 (L2) isolation domain. At least one service network must be created but may be reused across many virtual machines and/or Hybrid AKS clusters.",
       "type": "object",
       "title": "CloudServicesNetwork represents additional egress information that will be used by associated virtual machines or hybrid AKS clusters.",
       "required": [
@@ -9682,7 +9682,7 @@
           "x-nullable": true
         },
         "computeRackDefinitions": {
-          "description": "The list of rack definitions for the compute racks in a multi-rack\ncluster, or an empty list in a single-rack cluster.",
+          "description": "The list of rack definitions for the compute racks in a multi-rack cluster, or an empty list in a single-rack cluster.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RackDefinition"
@@ -9867,7 +9867,7 @@
           "description": "The validation threshold indicating the allowable failures of compute machines during environment validation and deployment."
         },
         "computeRackDefinitions": {
-          "description": "The list of rack definitions for the compute racks in a multi-rack\ncluster, or an empty list in a single-rack cluster.",
+          "description": "The list of rack definitions for the compute racks in a multi-rack cluster, or an empty list in a single-rack cluster.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RackDefinition"
@@ -10040,7 +10040,7 @@
       ],
       "properties": {
         "maxUnavailable": {
-          "description": "The maximum number of worker nodes that can be offline within the increment of update, e.g., rack-by-rack.\nLimited by the maximum number of machines in the increment. Defaults to the whole increment size.",
+          "description": "The maximum number of worker nodes that can be offline within the increment of update, e.g., rack-by-rack. Limited by the maximum number of machines in the increment. Defaults to the whole increment size.",
           "type": "integer",
           "format": "int64",
           "minimum": 1
@@ -10113,7 +10113,8 @@
             "BareMetalMachineRunCommand",
             "BareMetalMachineRunDataExtracts",
             "BareMetalMachineRunReadCommands",
-            "StorageRunReadCommands"
+            "StorageRunReadCommands",
+            "BareMetalMachineRunDataExtractsRestricted"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -11930,7 +11931,7 @@
           }
         },
         "ipv4ConnectedPrefix": {
-          "description": "The IPV4 prefix (CIDR) assigned to this L3 network. Required when the IP allocation type\nis IPV4 or DualStack.",
+          "description": "The IPV4 prefix (CIDR) assigned to this L3 network. Required when the IP allocation type is IPV4 or DualStack.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -11938,7 +11939,7 @@
           ]
         },
         "ipv6ConnectedPrefix": {
-          "description": "The IPV6 prefix (CIDR) assigned to this L3 network. Required when the IP allocation type\nis IPV6 or DualStack.",
+          "description": "The IPV6 prefix (CIDR) assigned to this L3 network. Required when the IP allocation type is IPV6 or DualStack.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -12184,7 +12185,7 @@
       ],
       "properties": {
         "attachedNetworkId": {
-          "description": "The resource ID of the associated network attached to the virtual machine.\nIt can be one of cloudServicesNetwork, l3Network, l2Network or trunkedNetwork resources.",
+          "description": "The resource ID of the associated network attached to the virtual machine. It can be one of cloudServicesNetwork, l3Network, l2Network or trunkedNetwork resources.",
           "type": "string",
           "format": "arm-id",
           "x-ms-mutability": [
@@ -12193,7 +12194,7 @@
           ]
         },
         "defaultGateway": {
-          "description": "The indicator of whether this is the default gateway.\nOnly one of the attached networks (including the CloudServicesNetwork attachment) for a single machine may be specified as True.",
+          "description": "The indicator of whether this is the default gateway. Only one of the attached networks (including the CloudServicesNetwork attachment) for a single machine may be specified as True.",
           "type": "string",
           "enum": [
             "True",
@@ -12205,7 +12206,7 @@
           }
         },
         "ipAllocationMethod": {
-          "description": "The IP allocation mechanism for the virtual machine.\nDynamic and Static are only valid for l3Network which may also specify Disabled.\nOtherwise, Disabled is the only permitted value.",
+          "description": "The IP allocation mechanism for the virtual machine. Dynamic and Static are only valid for l3Network which may also specify Disabled. Otherwise, Disabled is the only permitted value.",
           "type": "string",
           "enum": [
             "Dynamic",
@@ -12222,7 +12223,7 @@
           ]
         },
         "ipv4Address": {
-          "description": "The IPv4 address of the virtual machine.\n\nThis field is used only if the attached network has IPAllocationType of IPV4 or DualStack.\n\nIf IPAllocationMethod is:\nStatic - this field must contain a user specified IPv4 address from within the subnet specified in the attached network.\nDynamic - this field is read-only, but will be populated with an address from within the subnet specified in the attached network.\nDisabled - this field will be empty.",
+          "description": "The IPv4 address of the virtual machine.  This field is used only if the attached network has IPAllocationType of IPV4 or DualStack.  If IPAllocationMethod is: Static - this field must contain a user specified IPv4 address from within the subnet specified in the attached network. Dynamic - this field is read-only, but will be populated with an address from within the subnet specified in the attached network. Disabled - this field will be empty.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -12230,7 +12231,7 @@
           ]
         },
         "ipv6Address": {
-          "description": "The IPv6 address of the virtual machine.\n\nThis field is used only if the attached network has IPAllocationType of IPV6 or DualStack.\n\nIf IPAllocationMethod is:\nStatic - this field must contain an IPv6 address range from within the range specified in the attached network.\nDynamic - this field is read-only, but will be populated with an range from within the subnet specified in the attached network.\nDisabled - this field will be empty.",
+          "description": "The IPv6 address of the virtual machine.  This field is used only if the attached network has IPAllocationType of IPV6 or DualStack.  If IPAllocationMethod is: Static - this field must contain an IPv6 address range from within the range specified in the attached network. Dynamic - this field is read-only, but will be populated with an range from within the subnet specified in the attached network. Disabled - this field will be empty.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -12243,7 +12244,7 @@
           "readOnly": true
         },
         "networkAttachmentName": {
-          "description": "The associated network's interface name.\nIf specified, the network attachment name has a maximum length of 15 characters and must be unique to this virtual machine.\nIf the user doesn’t specify this value, the default interface name of the network resource will be used.\nFor a CloudServicesNetwork resource, this name will be ignored.",
+          "description": "The associated network's interface name. If specified, the network attachment name has a maximum length of 15 characters and must be unique to this virtual machine. If the user doesn’t specify this value, the default interface name of the network resource will be used. For a CloudServicesNetwork resource, this name will be ignored.",
           "type": "string",
           "maxLength": 15,
           "x-ms-mutability": [
