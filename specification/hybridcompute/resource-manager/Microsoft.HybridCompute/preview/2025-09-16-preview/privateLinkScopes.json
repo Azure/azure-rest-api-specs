@@ -1615,6 +1615,13 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionDataModel"
           }
+        },
+        "serviceExtensions":{
+          "description": "Toggles for service extensions to enable or disable private link validation",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceExtension"
+          }
         }
       }
     },
@@ -1729,6 +1736,30 @@
         }
       }
     },
+    "ServiceExtension": {
+      "type": "object",
+      "description": "Toggle for private link validation for a given service extension",
+      "properties": {
+        "serviceExtensionType": {
+          "description": "The type of the Service Extension.",
+          "$ref": "#/definitions/ServiceExtensionType"
+        },
+        "privateLinkValidationEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether private link validation is enabled for the given service extension."
+        }
+      }
+    },
+    "ServiceExtensionType": {
+      "type": "string",
+      "description": "The service extension type for which to toggle private link validation",
+      "x-ms-enum": {
+        "name": "ServiceExtensionType",
+        "modelAsString": true
+      }
+    }
+  },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
       "description": "Properties of a private endpoint connection.",
