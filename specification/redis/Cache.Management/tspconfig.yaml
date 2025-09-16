@@ -22,7 +22,6 @@ options:
     namespace: "com.azure.resourcemanager.redis"
     service-name: "Redis" # human-readable service name, whitespace allowed
     premium: true
-    service-dir: "sdk/resourcemanager"
     enable-sync-stack: false
     remove-inner: OperationStatusResult
     use-object-for-unknown: true
@@ -35,8 +34,8 @@ options:
       name: "@azure/arm-rediscache"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/redis"
-    package-dir: "armredis"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armredis"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armredis"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
