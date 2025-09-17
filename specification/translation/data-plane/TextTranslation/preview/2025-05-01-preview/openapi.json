@@ -522,19 +522,6 @@
         "translations"
       ]
     },
-    "SourceText": {
-      "type": "object",
-      "description": "Input text in the default script of the source language. ",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Input text in the default script of the source language."
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
     "TargetDictionaryLanguage": {
       "type": "object",
       "description": "Properties of the target dictionary language",
@@ -814,6 +801,10 @@
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
           "description": "The detectedLanguage property is only present in the result object when language auto-detection is requested."
+        },
+        "text": {
+          "type": "string",
+          "description": "Input text in the default script of the source language. The text property is present only when \nthe input is expressed in a script that's not the usual script for the language. For example, \nif the input were Arabic written in Latin script, then text would be the same Arabic text \nconverted into Arab script."
         },
         "translations": {
           "type": "array",
