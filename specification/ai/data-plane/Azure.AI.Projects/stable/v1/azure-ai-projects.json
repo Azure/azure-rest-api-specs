@@ -1150,6 +1150,35 @@
         }
       }
     },
+    "AzureAIEvaluator": {
+      "type": "object",
+      "title": "AzureAIEvaluator",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type, which is always `label_model`.",
+          "enum": [
+            "azure_ai_evaluator"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-stainless-const": true
+        },
+        "evaluator_name": {
+          "type": "string",
+          "description": "The name of the evaluator."
+        },
+        "version": {
+          "type": "string",
+          "description": "Optional version of the evaluator."
+        }
+      },
+      "required": [
+        "type",
+        "evaluator_name"
+      ]
+    },
     "AzureAISearchIndex": {
       "type": "object",
       "description": "Azure AI Search Index Definition",
@@ -1632,6 +1661,30 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "EvalGraderParams": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GraderType"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvalGraderResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GraderType"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "FieldMapping": {
       "type": "object",
       "description": "Field mapping configuration class",
@@ -1711,6 +1764,53 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
+    },
+    "GraderType": {
+      "type": "string",
+      "enum": [
+        "string_check",
+        "text_similarity",
+        "score_model",
+        "label_model",
+        "python",
+        "multi",
+        "azure_ai_evaluator"
+      ],
+      "x-ms-enum": {
+        "name": "GraderType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "string_check",
+            "value": "string_check"
+          },
+          {
+            "name": "text_similarity",
+            "value": "text_similarity"
+          },
+          {
+            "name": "score_model",
+            "value": "score_model"
+          },
+          {
+            "name": "label_model",
+            "value": "label_model"
+          },
+          {
+            "name": "python",
+            "value": "python"
+          },
+          {
+            "name": "multi",
+            "value": "multi"
+          },
+          {
+            "name": "azure_ai_evaluator",
+            "value": "azure_ai_evaluator",
+            "description": "Foundry evaluator type"
+          }
+        ]
+      }
     },
     "Index": {
       "type": "object",

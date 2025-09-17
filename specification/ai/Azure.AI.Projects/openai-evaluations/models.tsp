@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "../main.tsp";
 import "@typespec/openapi";
-import "../.external-readonly/openai.external.typespec/evals/models.tsp";
+import "../.external-readonly/openai.external.typespec/evals/model.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -14,6 +14,27 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+
+union GraderType {
+  string_check: "string_check",
+  text_similarity: "text_similarity",
+  score_model: "score_model",
+  label_model: "label_model",
+  python: "python",
+  multi: "multi",
+   /** Foundry evaluator type */
+  azure_ai_evaluator: "azure_ai_evaluator",
+}
+
+@discriminator("type")
+model EvalGraderParams {
+  type: GraderType;
+}
+
+@discriminator("type")
+model EvalGraderResource {
+  type: GraderType;
+}
 
 @summary("AzureAIEvaluator")
 model AzureAIEvaluator {
@@ -28,17 +49,21 @@ model AzureAIEvaluator {
   version?: string;
 }
 
-model Eval {
+/*
+model Eval extends OpenAI.Eval {
 
-  ...Omit<OpenAI.Eval, "testing_criteria">;
-
-  /** A list of testing criteria. */
-  testing_criteria: (
-    | OpenAI.EvalGraderLabelModel
-    | OpenAI.EvalGraderStringCheck
-    | OpenAI.EvalGraderTextSimilarity
-    | OpenAI.EvalGraderPython
-    | OpenAI.EvalGraderScoreModel
-    | Azure.AI.Projects.AzureAIEvaluator
-  )[];
+  // Tool customization: Use discriminated type
+  testing_criteria: EvalGraderResource[] | null = null;
 }
+*/
+
+/*
+model CreateEvalRequest extends OpenAI.CreateEvalRequest {
+
+  // Tool customization: Use discriminated type
+  @doc("""
+    A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
+    Includes foundry evaluator type.
+    """)
+  testing_criteria: EvalGraderParams[];
+} */

@@ -3,7 +3,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
-import "../.external-readonly/openai.external.typespec/evals/models.tsp";
+import "../.external-readonly/openai.external.typespec/evals/model.tsp";
 
 using TypeSpec.Http;
 using Azure.Core.Traits;
@@ -21,6 +21,5 @@ alias EvalsOperations = Azure.Core.ResourceOperations<ServiceTraitsEvals>;
 @added(Versions.v2025_10_15_preview)
 @removed(Versions.v1)
 interface Evals {
-
 
 }
