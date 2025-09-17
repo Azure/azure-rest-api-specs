@@ -106,7 +106,7 @@ directive:
       - AvoidAdditionalProperties
 
   - where:
-    - $.definitions.UserRoleAssignment.properties.properties.roles
+    - $.definitions.UserRoleAssignment.properties.roles
     suppress:
       - AvoidAdditionalProperties
 
