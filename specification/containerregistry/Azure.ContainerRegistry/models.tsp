@@ -519,12 +519,11 @@ model Manifest {
 /**
  * List of repositories
  */
-@pagedResult
 model Repositories {
   /**
    * Repository names
    */
-  @items
+  @pageItems
   repositories?: string[];
 
   @nextLink
@@ -625,7 +624,6 @@ model DeleteRepositoryResult {
 /**
  * List of tag details
  */
-@pagedResult
 model TagList {
   /**
    * Registry login server name. This is likely to be similar to
@@ -641,7 +639,7 @@ model TagList {
   /**
    * List of tag attribute details
    */
-  @items
+  @pageItems
   tags: TagAttributesBase[];
 
   @nextLink
@@ -741,7 +739,6 @@ model ArtifactTagProperties {
 /**
  * Manifest attributes
  */
-@pagedResult
 model AcrManifests {
   /**
    * Registry login server name. This is likely to be similar to
@@ -757,7 +754,7 @@ model AcrManifests {
   /**
    * List of manifests
    */
-  @items
+  @pageItems
   manifests?: ManifestAttributesBase[];
 
   @nextLink

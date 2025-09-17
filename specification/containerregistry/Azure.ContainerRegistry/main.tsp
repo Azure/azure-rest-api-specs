@@ -21,10 +21,10 @@ using TypeSpec.Versioning;
 @service(#{ title: "Azure Container Registry" })
 @versioned(Versions)
 @server(
-  "{url}",
+  "{endpoint}",
   "Metadata API definition for the Azure Container Registry runtime",
   {
-    url: string,
+    endpoint: url,
   }
 )
 namespace AzureContainerRegistry;
