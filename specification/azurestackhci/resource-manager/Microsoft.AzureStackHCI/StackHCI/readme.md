@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-08-01-preview
+tag: package-preview-2025-09-15-preview
 ```
 
 ## Suppression
@@ -76,6 +76,9 @@ suppressions:
       - securitySettings.json
       - edgeNodePool.json
       - validatedSolutionRecipes.json
+      - clusterJobs.json
+
+
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -92,6 +95,7 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+      - clusterJobs.json
 
   - code: ParametersInPointGet
     reason: already used in GA api version, fixing it will cause a breaking change
@@ -226,6 +230,30 @@ suppressions:
     reason: Making the body optional now would cause a breaking change in backward compatibility
 ```
 
+### Tag: package-preview-2025-09-15-preview
+
+These settings apply only when `--tag=package-preview-2025-09-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-15-preview'
+input-file:
+  - preview/2025-09-15-preview/arcSettings.json
+  - preview/2025-09-15-preview/clusters.json
+  - preview/2025-09-15-preview/deploymentSettings.json
+  - preview/2025-09-15-preview/edgeDeviceJobs.json
+  - preview/2025-09-15-preview/edgeDevices.json
+  - preview/2025-09-15-preview/extensions.json
+  - preview/2025-09-15-preview/hciCommon.json
+  - preview/2025-09-15-preview/offers.json
+  - ../operations/preview/2025-09-15-preview/operations.json
+  - preview/2025-09-15-preview/publishers.json
+  - preview/2025-09-15-preview/securitySettings.json
+  - preview/2025-09-15-preview/skus.json
+  - preview/2025-09-15-preview/updateRuns.json
+  - preview/2025-09-15-preview/updates.json
+  - preview/2025-09-15-preview/updateSummaries.json
+  - preview/2025-09-15-preview/validatedSolutionRecipes.json
+```
+
 ### Tag: package-preview-2025-08-01-preview
 
 These settings apply only when `--tag=package-preview-2025-08-01-preview` is specified on the command line.
@@ -259,6 +287,7 @@ These settings apply only when `--tag=package-preview-2025-06-01-preview` is spe
 input-file:
   - preview/2025-06-01-preview/arcSettings.json
   - preview/2025-06-01-preview/clusters.json
+  - preview/2025-06-01-preview/clusterJobs.json
   - preview/2025-06-01-preview/deploymentSettings.json
   - preview/2025-06-01-preview/edgeDeviceJobs.json
   - preview/2025-06-01-preview/edgeDevices.json

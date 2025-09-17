@@ -52,9 +52,9 @@ model NetworkBootstrapInterfaceProperties {
 
 @doc("The NetworkBootstrapInterfacePatch resource definition.")
 model NetworkBootstrapInterfacePatch {
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Network Bootstrap Interface Patch properties.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkBootstrapInterfacePatchProperties;
 }
 

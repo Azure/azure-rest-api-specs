@@ -1,0 +1,36 @@
+{
+  "title": "DeviceOperations_ListByParent_MaximumSet",
+  "operationId": "DeviceOperations_ListByParent",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "accessPointAccountName": "testAccessPointAccount",
+    "api-version": "2024-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.AccessPoint/accessPointAccounts/testAccessPointAccount/devices/testDevice",
+            "name": "testDevice",
+            "type": "microsoft.accesspoint/accesspointaccounts/devices",
+            "location": "West us",
+            "tags": {},
+            "properties": {
+              "mac": "AA:BB:CC:DD:EE:FF",
+              "serial": "SN123456789",
+              "deviceState": "Enabled",
+              "updateGroupResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.AccessPoint/accessPointAccounts/testAccessPointAccount/updateGroups/testUpdateGroup",
+              "networkResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.AccessPoint/accessPointAccounts/testAccessPointAccount/networks/testNetwork",
+              "ipAddress": "10.0.0.5",
+              "label": "DEMOLABEL",
+              "description": "Test device for development",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
