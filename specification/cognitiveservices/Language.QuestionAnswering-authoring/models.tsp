@@ -297,6 +297,53 @@ union updateOperationKind {
 }
 
 /**
+ * Collection of files containing project assets the needs to be imported.
+ */
+@added(Versions.v2025_05_15_preview)
+model ImportFiles {
+  /**
+   * Collection of files where the fileName is required.
+   */
+  files: HttpPart<File>[];
+}
+
+/**
+ * A single file operation for updating sources for a project. Used to add, remove or replace a source from a knowledgebase.
+ */
+#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "known issue Multipart parts can only be represented as primitive types in swagger 2.0. Information is lost for part 'fileOperations'"
+@added(Versions.v2025_05_15_preview)
+model UpdateSourceFromFileOperationRecord {
+  /** Update operation type for assets. */
+  operation: updateOperationKind;
+
+  /**
+   * Friendly name of the Source. If not provided, would be equal to fileSource
+   */
+  @maxLength(200)
+  @minLength(1)
+  fileDisplayName?: string;
+
+  /** This would be name of the file. This links to the fileName of the file being sent in multipart. */
+  fileName: string;
+
+  /** Bool value for refresh. */
+  refresh?: boolean;
+}
+
+/**
+ * Collection of files containing project assets the needs to be imported.
+ */
+@added(Versions.v2025_05_15_preview)
+model UpdateSourceFiles {
+  ...ImportFiles;
+
+  /**
+   * Collection of file operations to perform during update of sources.
+   */
+  fileOperations: HttpPart<UpdateSourceFromFileOperationRecord>[];
+}
+
+/**
  * Represents the project.
  */
 @resource("authoring/query-knowledgebases/projects")
