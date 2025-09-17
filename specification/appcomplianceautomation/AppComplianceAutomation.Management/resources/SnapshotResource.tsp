@@ -36,8 +36,8 @@ model SnapshotResource extends Foundations.ProxyResource {
   /**
    * Snapshot's property'.
    */
-  #suppress "deprecated" "Legacy flattening"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @extension("x-ms-client-name", "properties")
   properties?: SnapshotProperties;
 }

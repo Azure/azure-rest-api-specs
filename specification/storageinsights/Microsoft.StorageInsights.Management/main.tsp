@@ -40,18 +40,18 @@ model StorageCollectionRuleProperties {
   @doc("The description of the storage collection rule.")
   description?: string;
 
-  #suppress "deprecated" "Legacy flattening"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @doc("The filters definition of the storage collection rule. The storage collection rule will be applied to all of the storage accounts captured by these filters.")
   filters: StorageCollectionRuleFilters;
 
-  #suppress "deprecated" "Legacy flattening"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @doc("The destinations to which the storage collection rule sends data.")
   destinations: StorageCollectionRuleDestinations;
 
-  #suppress "deprecated" "Legacy flattening"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @doc("The configuration of the storage collection rule.")
   configuration: StorageCollectionRuleConfiguration;
 
@@ -164,6 +164,5 @@ enum NamespaceStructure {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum ApiVersion {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_08_01_preview: "2023-08-01-preview",
 }

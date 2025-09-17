@@ -4,8 +4,6 @@ namespace Oracle.Database;
 
 @doc("Versions for API")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("2023-09-01")
   v20230901: "2023-09-01",
 
@@ -41,4 +39,7 @@ enum Versions {
 
   @doc("2025-08-15-preview")
   v20250815_preview: "2025-08-15-preview",
+
+  @doc("2025-09-01")
+  v20250901: "2025-09-01",
 }
