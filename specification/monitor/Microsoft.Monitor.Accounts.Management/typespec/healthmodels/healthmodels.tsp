@@ -107,7 +107,7 @@ interface HealthModels {
     HealthModel,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       HealthModel,
-      HealthModelProperties
+      {}
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
