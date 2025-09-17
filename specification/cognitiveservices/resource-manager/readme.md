@@ -173,6 +173,8 @@ These settings apply only when `--tag=package-2025-07-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
   - Microsoft.CognitiveServices/preview/2025-07-01-preview/cognitiveservices.json
+modelerfour:
+  lenient-model-deduplication: true
 suppressions:
   - code: PutResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
