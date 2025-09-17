@@ -701,36 +701,54 @@
     },
     "HealthState": {
       "type": "string",
-      "description": "Overall health state for update-specific health checks.",
+      "description": "Overall health state for update-specific health checks. Indicates whether the system is functioning correctly, has warnings or errors, or is undergoing a health evaluation.",
       "enum": [
         "Unknown",
-        "Healthy",
-        "Unhealthy",
-        "Warning"
+        "Success",
+        "Failure",
+        "Warning",
+        "Error",
+        "InProgress",
+        "AN-EXTRA-VALUE"
       ],
       "x-ms-enum": {
         "name": "HealthState",
         "modelAsString": true,
         "values": [
           {
+            "name": "AN-EXTRA-VALUE",
+            "value": "AN-EXTRA-VALUE",
+            "description": "An extra value added to test enum extensibility."
+          },
+          {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "The health state is not known."
+            "description": "The health state is not known or cannot be determined."
           },
           {
-            "name": "Healthy",
-            "value": "Healthy",
-            "description": "The resource is healthy."
+            "name": "Success",
+            "value": "Success",
+            "description": "The health check completed successfully and the system is healthy."
           },
           {
-            "name": "Unhealthy",
-            "value": "Unhealthy",
-            "description": "The resource is unhealthy."
+            "name": "Failure",
+            "value": "Failure",
+            "description": "The health check failed, indicating a critical issue."
           },
           {
             "name": "Warning",
             "value": "Warning",
-            "description": "The resource is in a warning state."
+            "description": "The health check detected a non-critical issue that may require attention."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred during the health check process."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The health check is currently in progress."
           }
         ]
       }
