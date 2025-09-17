@@ -57,19 +57,19 @@ suppressions:
   reason: Required query parameters for proxy 
 - code: GetCollectionResponseSchema
   from: openapi.json
-  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/products"].get
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/products"]
   reason: We returned a more detailed response that can't be aggregated in the listing API
 - code: GetCollectionResponseSchema
   from: openapi.json
-  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/products"].get
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/products"]
   reason: We returned a more detailed response that can't be aggregated in the listing API
 - code: GetCollectionResponseSchema
   from: openapi.json
-  where: $.paths["/providers/Microsoft.Marketplace/products"].get
+  where: $.paths["/providers/Microsoft.Marketplace/products"]
   reason: We returned a more detailed response that can't be aggregated in the listing API
 - code: GetCollectionResponseSchema
   from: openapi.json
-  where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products"].get
+  where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products"]
   reason: We returned a more detailed response that can't be aggregated in the listing API
 - code: AvoidAdditionalProperties
   from: openapi.json
