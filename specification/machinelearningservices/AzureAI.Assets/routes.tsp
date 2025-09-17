@@ -72,7 +72,7 @@ interface DeploymentTemplates {
   @doc("Delete a specific version of a deployment template.")
   @route("/registries/{registryName}/deploymenttemplates/{name}/versions/{version}")
   @delete
-  deleteDeploymentTemplate is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML registry.")
       registryName: string;
@@ -94,7 +94,8 @@ interface DeploymentTemplates {
   @doc("List deployment templates.")
   @route("/registries/{registryName}/deploymenttemplates")
   @get
-  listDeploymentTemplates is Azure.Core.Foundations.Operation<
+  @list
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML registry.")
       @path

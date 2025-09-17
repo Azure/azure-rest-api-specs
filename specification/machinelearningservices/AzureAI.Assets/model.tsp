@@ -81,11 +81,10 @@ model DeploymentTemplate is AssetVersion {
 }
 
 @doc("Paged collection of DeploymentTemplate items.")
-@pagedResult
 model PagedDeploymentTemplate {
   @doc("The list of Deployment Templates.")
   @Azure.ResourceManager.identifiers(#[])
-  @items
+  @pageItems
   value: DeploymentTemplate[];
 
   @doc("The link to the next page of items")
