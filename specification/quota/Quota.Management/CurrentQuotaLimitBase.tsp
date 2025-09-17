@@ -23,6 +23,14 @@ model CurrentQuotaLimitBase
   >;
 }
 
+alias CurrentQuotaLimitBasesResponseHeaders = {
+  /**
+   * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+   */
+  @header("ETag")
+  eTag: string;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface CurrentQuotaLimitBases {
@@ -32,13 +40,8 @@ interface CurrentQuotaLimitBases {
   get is Extension.Read<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
-    Response = ArmResponse<CurrentQuotaLimitBase> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<CurrentQuotaLimitBase> &
+      CurrentQuotaLimitBasesResponseHeaders,
     Error = ExceptionResponse
   >;
 
