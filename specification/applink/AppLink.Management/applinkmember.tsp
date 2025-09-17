@@ -132,15 +132,6 @@ model ObservabilitySettings {
   managedIdentity?: string;
 }
 
-@doc("User Managed Identity resource")
-model UMIResource {
-  @doc("UMI provision resource")
-  umi: ProvisionResource;
-
-  @doc("UMI role assignments")
-  roleAssignments: ProvisionResource[];
-}
-
 @armResourceOperations
 interface AppLinkMembers {
   get is ArmResourceRead<AppLinkMember>;
