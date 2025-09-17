@@ -1,0 +1,1025 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-09-01-preview",
+    "title": "Azure CDN Web Agents Management",
+    "description": "APIs to manage web agents and knowledge sources for Azure CDN"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents": {
+      "get": {
+        "tags": [
+          "WebAgents"
+        ],
+        "description": "Lists all web agents within a resource group.",
+        "operationId": "WebAgents_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebAgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Web Agents in a Resource Group": {
+            "$ref": "./examples/WebAgentsListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/webAgents": {
+      "get": {
+        "tags": [
+          "WebAgents"
+        ],
+        "description": "Lists all web agents within a subscription.",
+        "operationId": "WebAgents_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebAgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Web Agents in a Subscription": {
+            "$ref": "./examples/WebAgentsListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}": {
+      "get": {
+        "tags": [
+          "WebAgents"
+        ],
+        "description": "Gets a web agent with the specified name within a resource group.",
+        "operationId": "WebAgents_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Web Agent": {
+            "$ref": "./examples/WebAgentGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebAgents"
+        ],
+        "description": "Creates or updates a web agent with the specified name within a resource group.",
+        "operationId": "WebAgents_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Web agent to be created or updated.",
+            "in": "body",
+            "name": "webAgent",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebAgent"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new web agent has been created.",
+            "schema": {
+              "$ref": "#/definitions/WebAgent"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/WebAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Web Agent": {
+            "$ref": "./examples/WebAgentCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "WebAgents"
+        ],
+        "description": "Updates an existing web agent with the specified name within a resource group.",
+        "operationId": "WebAgents_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Web agent parameters to be updated.",
+            "in": "body",
+            "name": "webAgentUpdateParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebAgentUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebAgent"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/WebAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Web Agent": {
+            "$ref": "./examples/WebAgentUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "WebAgents"
+        ],
+        "description": "Deletes a web agent with the specified name within a resource group.",
+        "operationId": "WebAgents_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the web agent was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Web Agent": {
+            "$ref": "./examples/WebAgentDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}/knowledgeSources": {
+      "get": {
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Lists all knowledge sources within a web agent.",
+        "operationId": "KnowledgeSources_ListByWebAgent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Knowledge Sources in a Web Agent": {
+            "$ref": "./examples/KnowledgeSourcesListByWebAgent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}/knowledgeSources/{knowledgeSourceName}": {
+      "get": {
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Gets a knowledge source with the specified name within a web agent.",
+        "operationId": "KnowledgeSources_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KnowledgeSourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Creates or updates a knowledge source with the specified name within a web agent.",
+        "operationId": "KnowledgeSources_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KnowledgeSourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Knowledge source to be created or updated.",
+            "in": "body",
+            "name": "knowledgeSource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new knowledge source has been created.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Updates an existing knowledge source with the specified name within a web agent.",
+        "operationId": "KnowledgeSources_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KnowledgeSourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "description": "Knowledge source parameters to be updated.",
+            "in": "body",
+            "name": "knowledgeSourceUpdateParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Deletes a knowledge source with the specified name within a web agent.",
+        "operationId": "KnowledgeSources_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KnowledgeSourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the web agent was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}/knowledgeSources/{knowledgeSourceName}/purge": {
+      "post": {
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Remove the cache of a knowledge source.",
+        "operationId": "KnowledgeSources_Purge",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebAgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KnowledgeSourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The knowledge source cache has been purged successfully."
+          },
+          "202": {
+            "description": "Accepted. The knowledge source cache purge operation has been accepted and will be completed asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Purge Knowledge Source Cache": {
+            "$ref": "./examples/KnowledgeSourcePurge.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "WebAgentList": {
+      "description": "Defines a list of web agents. It contains a list of WebAgent objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/WebAgent"
+          },
+          "description": "List of web agents within a resource group or subscription."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of web agent objects if there are any."
+        }
+      }
+    },
+    "WebAgent": {
+      "description": "Defines a web agent resource for Azure CDN.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the web agent.",
+          "$ref": "#/definitions/WebAgentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WebAgentUpdateParameters": {
+      "type": "object",
+      "description": "Properties required to update a web agent.",
+      "properties": {
+        "tags": {
+          "description": "Web agent tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the web agent to be updated.",
+          "$ref": "#/definitions/WebAgentPropertiesUpdateParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "WebAgentProperties": {
+      "description": "Defines properties of a web agent.",
+      "properties": {
+        "description": {
+          "description": "Optional textual description of the agent.",
+          "type": "string"
+        },
+        "mcpServerEnabled": {
+          "description": "Boolean flag indicating if MCP server functionality is enabled.",
+          "type": "boolean",
+          "default": false
+        },
+        "paths": {
+          "description": "List of paths associated with the web agent.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentPath"
+          }
+        },
+        "profileAgentLinks": {
+          "description": "References to agent links in CDN profiles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentLinkReference"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the web agent.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "WebAgentPropertiesUpdateParameters": {
+      "description": "Defines properties of a web agent that can be updated.",
+      "properties": {
+        "description": {
+          "description": "Optional textual description of the agent.",
+          "type": "string"
+        },
+        "mcpServerEnabled": {
+          "description": "Boolean flag indicating if MCP server functionality is enabled.",
+          "type": "boolean"
+        },
+        "paths": {
+          "description": "List of paths associated with the web agent.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentPath"
+          }
+        }
+      }
+    },
+    "KnowledgeSourceList": {
+      "description": "Defines a list of knowledge sources. It contains a list of KnowledgeSource objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/KnowledgeSource"
+          },
+          "description": "List of knowledge sources within a web agent."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of knowledge source objects if there are any."
+        }
+      }
+    },
+    "KnowledgeSource": {
+      "description": "Defines a knowledge source resource for a web agent.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the knowledge source.",
+          "$ref": "#/definitions/KnowledgeSourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "KnowledgeSourceUpdateParameters": {
+      "type": "object",
+      "description": "Properties required to update a knowledge source.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the knowledge source to be updated.",
+          "$ref": "#/definitions/KnowledgeSourcePropertiesUpdateParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "KnowledgeSourceProperties": {
+      "description": "Defines properties of a knowledge source.",
+      "properties": {
+        "description": {
+          "description": "Description of the knowledge source.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Format or origin of the knowledge source.",
+          "type": "string",
+          "enum": [
+            "SchemaOrgMarkup",
+            "RssFeeds",
+            "Sitemap"
+          ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceType",
+            "modelAsString": true
+          }
+        },
+        "url": {
+          "description": "Endpoint or location of the knowledge source.",
+          "type": "string"
+        },
+        "updateFrequency": {
+          "description": "Specifies how often the knowledge source is crawled.",
+          "type": "string",
+          "enum": [
+            "Hourly",
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateFrequency",
+            "modelAsString": true
+          }
+        },
+        "relevance": {
+          "description": "Required field indicating the relative importance of the source.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "lastUpdatedTime": {
+          "description": "The last time the knowledge source was updated.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the knowledge source.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type",
+        "url",
+        "relevance"
+      ]
+    },
+    "KnowledgeSourcePropertiesUpdateParameters": {
+      "description": "Defines properties of a knowledge source that can be updated.",
+      "properties": {
+        "description": {
+          "description": "Description of the knowledge source.",
+          "type": "string"
+        },
+        "url": {
+          "description": "Endpoint or location of the knowledge source.",
+          "type": "string"
+        },
+        "updateFrequency": {
+          "description": "Specifies how often the knowledge source is crawled.",
+          "type": "string",
+          "enum": [
+            "Hourly",
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateFrequency",
+            "modelAsString": true
+          }
+        },
+        "relevance": {
+          "description": "Required field indicating the relative importance of the source.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      }
+    },
+    "AgentLinkReference": {
+      "description": "Reference to an agent link in a CDN profile.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ARM Resource ID of the agent link.",
+          "type": "string",
+          "readOnly": true
+        },
+        "profileName": {
+          "description": "Name of the CDN profile containing the agent link.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroupName": {
+          "description": "Name of the resource group containing the CDN profile.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AgentPath": {
+      "description": "Defines a path configuration for a web agent.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the path.",
+          "type": "string",
+          "enum": [
+            "Chat",
+            "McpServer"
+          ],
+          "x-ms-enum": {
+            "name": "AgentPathType",
+            "modelAsString": true
+          }
+        },
+        "path": {
+          "description": "The actual path value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "path"
+      ]
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2025-09-01-preview."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "WebAgentNameParameter": {
+      "name": "webAgentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the web agent."
+    },
+    "KnowledgeSourceNameParameter": {
+      "name": "knowledgeSourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the knowledge source."
+    }
+  }
+}
