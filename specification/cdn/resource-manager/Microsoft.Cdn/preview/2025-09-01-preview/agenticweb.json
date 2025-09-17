@@ -721,10 +721,9 @@
           "description": "Optional textual description of the agent.",
           "type": "string"
         },
-        "mcpServerEnabled": {
-          "description": "Boolean flag indicating if MCP server functionality is enabled.",
-          "type": "boolean",
-          "default": false
+        "systemPrompt": {
+          "description": "System prompt for the web agent.",
+          "type": "string"
         },
         "paths": {
           "description": "List of paths associated with the web agent.",
@@ -737,14 +736,14 @@
           "description": "References to agent links in CDN profiles.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentLinkReference"
+            "$ref": "./cdn.json#/definitions/ResourceReference"
           },
           "readOnly": true
         },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Provisioning state of the web agent.",
+          "description": "Provisioning status of the web agent.",
           "enum": [
             "Creating",
             "Succeeded",
@@ -753,7 +752,7 @@
             "Deleting"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "WebAgentProvisioningState",
             "modelAsString": true
           }
         }
@@ -766,9 +765,9 @@
           "description": "Optional textual description of the agent.",
           "type": "string"
         },
-        "mcpServerEnabled": {
-          "description": "Boolean flag indicating if MCP server functionality is enabled.",
-          "type": "boolean"
+        "systemPrompt": {
+          "description": "System prompt for the web agent.",
+          "type": "string"
         },
         "paths": {
           "description": "List of paths associated with the web agent.",
@@ -848,24 +847,21 @@
           "type": "string"
         },
         "updateFrequency": {
-          "description": "Specifies how often the knowledge source is crawled.",
+          "description": "Specifies the units of time for scheduling update intervals for the knowledge source.",
           "type": "string",
           "enum": [
-            "Hourly",
-            "Daily"
+            "EverySixHours",
+            "Daily",
+            "Weekly",
+            "Monthly"
           ],
           "x-ms-enum": {
-            "name": "UpdateFrequency",
+            "name": "KnowledgeSourceUpdateFrequency",
             "modelAsString": true
           }
         },
-        "relevance": {
-          "description": "Required field indicating the relative importance of the source.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0
-        },
-        "lastUpdatedTime": {
+
+        "lastRefreshedTime": {
           "description": "The last time the knowledge source was updated.",
           "type": "string",
           "format": "date-time",
@@ -874,7 +870,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Provisioning state of the knowledge source.",
+          "description": "Provisioning status of the knowledge source.",
           "enum": [
             "Creating",
             "Succeeded",
@@ -883,15 +879,14 @@
             "Deleting"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "KnowledgeSourceProvisioningState",
             "modelAsString": true
           }
         }
       },
       "required": [
         "type",
-        "url",
-        "relevance"
+        "url"
       ]
     },
     "KnowledgeSourcePropertiesUpdateParameters": {
@@ -906,43 +901,18 @@
           "type": "string"
         },
         "updateFrequency": {
-          "description": "Specifies how often the knowledge source is crawled.",
+          "description": "Specifies the units of time for scheduling update intervals for the knowledge source.",
           "type": "string",
           "enum": [
-            "Hourly",
-            "Daily"
+            "EverySixHours",
+            "Daily",
+            "Weekly",
+            "Monthly"
           ],
           "x-ms-enum": {
-            "name": "UpdateFrequency",
+            "name": "KnowledgeSourceUpdateFrequency",
             "modelAsString": true
           }
-        },
-        "relevance": {
-          "description": "Required field indicating the relative importance of the source.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0
-        }
-      }
-    },
-    "AgentLinkReference": {
-      "description": "Reference to an agent link in a CDN profile.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "ARM Resource ID of the agent link.",
-          "type": "string",
-          "readOnly": true
-        },
-        "profileName": {
-          "description": "Name of the CDN profile containing the agent link.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceGroupName": {
-          "description": "Name of the resource group containing the CDN profile.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },

@@ -3371,7 +3371,7 @@
       "properties": {
         "webAgent": {
           "description": "Reference to the web agent resource.",
-          "$ref": "#/definitions/AgentLinkReference"
+          "$ref": "#/definitions/ResourceReference"
         },
         "customDomains": {
           "description": "List of custom domains associated with this agent link.",
@@ -3398,7 +3398,8 @@
         }
       },
       "required": [
-        "webAgent"
+        "webAgent",
+        "customDomains"
       ]
     },
     "ProfileAgentListResult": {
@@ -3439,17 +3440,6 @@
           "items": {
             "$ref": "#/definitions/ResourceReference"
           }
-        }
-      }
-    },
-    "AgentLinkReference": {
-      "description": "Reference to a web agent resource for read-only ARM association.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID of the web agent.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
