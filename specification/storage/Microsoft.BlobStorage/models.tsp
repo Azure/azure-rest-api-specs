@@ -19,7 +19,7 @@ scalar base64Bytes extends bytes;
 model StorageError {
   /** The error code. */
   @header("x-ms-error-code")
-  errorCode?: string;
+  errorCode?: StorageErrorCode;
 
   /** The error code for the copy source. */
   @header("x-ms-copy-source-error-code")
@@ -43,6 +43,352 @@ model StorageError {
 
   /** Copy source error message */
   @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
+}
+
+/** Error codes returned by the Azure Blob Storage service. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+union StorageErrorCode {
+  /** Account already exists. */
+  AccountAlreadyExists: "AccountAlreadyExists",
+
+  /** Account is being created. */
+  AccountBeingCreated: "AccountBeingCreated",
+
+  /** Account is disabled. */
+  AccountIsDisabled: "AccountIsDisabled",
+
+  /** Authentication failed. */
+  AuthenticationFailed: "AuthenticationFailed",
+
+  /** Authorization failure. */
+  AuthorizationFailure: "AuthorizationFailure",
+
+  /** Condition headers not supported. */
+  ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
+
+  /** Condition not met. */
+  ConditionNotMet: "ConditionNotMet",
+
+  /** Empty metadata key. */
+  EmptyMetadataKey: "EmptyMetadataKey",
+
+  /** Insufficient account permissions. */
+  InsufficientAccountPermissions: "InsufficientAccountPermissions",
+
+  /** Internal error. */
+  InternalError: "InternalError",
+
+  /** Invalid authentication information. */
+  InvalidAuthenticationInfo: "InvalidAuthenticationInfo",
+
+  /** Invalid header value. */
+  InvalidHeaderValue: "InvalidHeaderValue",
+
+  /** Invalid HTTP verb. */
+  InvalidHttpVerb: "InvalidHttpVerb",
+
+  /** Invalid input. */
+  InvalidInput: "InvalidInput",
+
+  /** Invalid MD5. */
+  InvalidMd5: "InvalidMd5",
+
+  /** Invalid metadata. */
+  InvalidMetadata: "InvalidMetadata",
+
+  /** Invalid query parameter value. */
+  InvalidQueryParameterValue: "InvalidQueryParameterValue",
+
+  /** Invalid range. */
+  InvalidRange: "InvalidRange",
+
+  /** Invalid request URL. */
+  InvalidRequestUrl: "InvalidRequestUrl",
+
+  /** Invalid URI. */
+  InvalidUri: "InvalidUri",
+
+  /** Invalid XML document. */
+  InvalidXmlDocument: "InvalidXmlDocument",
+
+  /** Invalid XML node value. */
+  InvalidXmlNodeValue: "InvalidXmlNodeValue",
+
+  /** MD5 mismatch. */
+  Md5Mismatch: "Md5Mismatch",
+
+  /** Metadata too large. */
+  MetadataTooLarge: "MetadataTooLarge",
+
+  /** Missing content length header. */
+  MissingContentLengthHeader: "MissingContentLengthHeader",
+
+  /** Missing required XML node. */
+  MissingRequiredXmlNode: "MissingRequiredXmlNode",
+
+  /** Missing required header. */
+  MissingRequiredHeader: "MissingRequiredHeader",
+
+  /** Missing required query parameter. */
+  MissingRequiredQueryParameter: "MissingRequiredQueryParameter",
+
+  /** Multiple condition headers not supported. */
+  MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
+
+  /** Operation timed out. */
+  OperationTimedOut: "OperationTimedOut",
+
+  /** Out of range input. */
+  OutOfRangeInput: "OutOfRangeInput",
+
+  /** Out of range query parameter value. */
+  OutOfRangeQueryParameterValue: "OutOfRangeQueryParameterValue",
+
+  /** Request body too large. */
+  RequestBodyTooLarge: "RequestBodyTooLarge",
+
+  /** Resource type mismatch. */
+  ResourceTypeMismatch: "ResourceTypeMismatch",
+
+  /** Request URL failed to parse. */
+  RequestUrlFailedToParse: "RequestUrlFailedToParse",
+
+  /** Resource already exists. */
+  ResourceAlreadyExists: "ResourceAlreadyExists",
+
+  /** Resource not found. */
+  ResourceNotFound: "ResourceNotFound",
+
+  /** Server busy. */
+  ServerBusy: "ServerBusy",
+
+  /** Unsupported header. */
+  UnsupportedHeader: "UnsupportedHeader",
+
+  /** Unsupported XML node. */
+  UnsupportedXmlNode: "UnsupportedXmlNode",
+
+  /** Unsupported query parameter. */
+  UnsupportedQueryParameter: "UnsupportedQueryParameter",
+
+  /** Unsupported HTTP verb. */
+  UnsupportedHttpVerb: "UnsupportedHttpVerb",
+
+  /** Append position condition not met. */
+  AppendPositionConditionNotMet: "AppendPositionConditionNotMet",
+
+  /** Blob already exists. */
+  BlobAlreadyExists: "BlobAlreadyExists",
+
+  /** Blob is immutable due to policy. */
+  BlobImmutableDueToPolicy: "BlobImmutableDueToPolicy",
+
+  /** Blob not found. */
+  BlobNotFound: "BlobNotFound",
+
+  /** Blob overwritten. */
+  BlobOverwritten: "BlobOverwritten",
+
+  /** Blob tier inadequate for content length. */
+  BlobTierInadequateForContentLength: "BlobTierInadequateForContentLength",
+
+  /** Blob uses customer specified encryption. */
+  BlobUsesCustomerSpecifiedEncryption: "BlobUsesCustomerSpecifiedEncryption",
+
+  /** Block count exceeds limit. */
+  BlockCountExceedsLimit: "BlockCountExceedsLimit",
+
+  /** Block list too long. */
+  BlockListTooLong: "BlockListTooLong",
+
+  /** Cannot change to lower tier. */
+  CannotChangeToLowerTier: "CannotChangeToLowerTier",
+
+  /** Cannot verify copy source. */
+  CannotVerifyCopySource: "CannotVerifyCopySource",
+
+  /** Container already exists. */
+  ContainerAlreadyExists: "ContainerAlreadyExists",
+
+  /** Container being deleted. */
+  ContainerBeingDeleted: "ContainerBeingDeleted",
+
+  /** Container disabled. */
+  ContainerDisabled: "ContainerDisabled",
+
+  /** Container not found. */
+  ContainerNotFound: "ContainerNotFound",
+
+  /** Content length larger than tier limit. */
+  ContentLengthLargerThanTierLimit: "ContentLengthLargerThanTierLimit",
+
+  /** Copy across accounts not supported. */
+  CopyAcrossAccountsNotSupported: "CopyAcrossAccountsNotSupported",
+
+  /** Copy ID mismatch. */
+  CopyIdMismatch: "CopyIdMismatch",
+
+  /** Feature version mismatch. */
+  FeatureVersionMismatch: "FeatureVersionMismatch",
+
+  /** Incremental copy blob mismatch. */
+  IncrementalCopyBlobMismatch: "IncrementalCopyBlobMismatch",
+
+  /** Incremental copy of earlier version snapshot not allowed. */
+  IncrementalCopyOfEarlierVersionSnapshotNotAllowed: "IncrementalCopyOfEarlierVersionSnapshotNotAllowed",
+
+  /** Incremental copy source must be snapshot. */
+  IncrementalCopySourceMustBeSnapshot: "IncrementalCopySourceMustBeSnapshot",
+
+  /** Infinite lease duration required. */
+  InfiniteLeaseDurationRequired: "InfiniteLeaseDurationRequired",
+
+  /** Invalid blob or block. */
+  InvalidBlobOrBlock: "InvalidBlobOrBlock",
+
+  /** Invalid blob tier. */
+  InvalidBlobTier: "InvalidBlobTier",
+
+  /** Invalid blob type. */
+  InvalidBlobType: "InvalidBlobType",
+
+  /** Invalid block ID. */
+  InvalidBlockId: "InvalidBlockId",
+
+  /** Invalid block list. */
+  InvalidBlockList: "InvalidBlockList",
+
+  /** Invalid operation. */
+  InvalidOperation: "InvalidOperation",
+
+  /** Invalid page range. */
+  InvalidPageRange: "InvalidPageRange",
+
+  /** Invalid source blob type. */
+  InvalidSourceBlobType: "InvalidSourceBlobType",
+
+  /** Invalid source blob URL. */
+  InvalidSourceBlobUrl: "InvalidSourceBlobUrl",
+
+  /** Invalid version for page blob operation. */
+  InvalidVersionForPageBlobOperation: "InvalidVersionForPageBlobOperation",
+
+  /** Lease already present. */
+  LeaseAlreadyPresent: "LeaseAlreadyPresent",
+
+  /** Lease already broken. */
+  LeaseAlreadyBroken: "LeaseAlreadyBroken",
+
+  /** Lease ID mismatch with blob operation. */
+  LeaseIdMismatchWithBlobOperation: "LeaseIdMismatchWithBlobOperation",
+
+  /** Lease ID mismatch with container operation. */
+  LeaseIdMismatchWithContainerOperation: "LeaseIdMismatchWithContainerOperation",
+
+  /** Lease ID mismatch with lease operation. */
+  LeaseIdMismatchWithLeaseOperation: "LeaseIdMismatchWithLeaseOperation",
+
+  /** Lease ID missing. */
+  LeaseIdMissing: "LeaseIdMissing",
+
+  /** Lease is breaking and cannot be acquired. */
+  LeaseIsBreakingAndCannotBeAcquired: "LeaseIsBreakingAndCannotBeAcquired",
+
+  /** Lease is breaking and cannot be changed. */
+  LeaseIsBreakingAndCannotBeChanged: "LeaseIsBreakingAndCannotBeChanged",
+
+  /** Lease is broken and cannot be renewed. */
+  LeaseIsBrokenAndCannotBeRenewed: "LeaseIsBrokenAndCannotBeRenewed",
+
+  /** Lease lost. */
+  LeaseLost: "LeaseLost",
+
+  /** Lease not present with blob operation. */
+  LeaseNotPresentWithBlobOperation: "LeaseNotPresentWithBlobOperation",
+
+  /** Lease not present with container operation. */
+  LeaseNotPresentWithContainerOperation: "LeaseNotPresentWithContainerOperation",
+
+  /** Lease not present with lease operation. */
+  LeaseNotPresentWithLeaseOperation: "LeaseNotPresentWithLeaseOperation",
+
+  /** Maximum blob size condition not met. */
+  MaxBlobSizeConditionNotMet: "MaxBlobSizeConditionNotMet",
+
+  /** No pending copy operation. */
+  NoPendingCopyOperation: "NoPendingCopyOperation",
+
+  /** Operation not allowed on incremental copy blob. */
+  OperationNotAllowedOnIncrementalCopyBlob: "OperationNotAllowedOnIncrementalCopyBlob",
+
+  /** Pending copy operation. */
+  PendingCopyOperation: "PendingCopyOperation",
+
+  /** Previous snapshot not found. */
+  PreviousSnapshotNotFound: "PreviousSnapshotNotFound",
+
+  /** Previous snapshot operation not supported. */
+  PreviousSnapshotOperationNotSupported: "PreviousSnapshotOperationNotSupported",
+
+  /** Previous snapshot cannot be newer. */
+  PreviousSnapshotCannotBeNewer: "PreviousSnapshotCannotBeNewer",
+
+  /** Sequence number condition not met. */
+  SequenceNumberConditionNotMet: "SequenceNumberConditionNotMet",
+
+  /** Sequence number increment too large. */
+  SequenceNumberIncrementTooLarge: "SequenceNumberIncrementTooLarge",
+
+  /** Snapshot count exceeded. */
+  SnapshotCountExceeded: "SnapshotCountExceeded",
+
+  /** Snapshot operation rate exceeded. */
+  SnapshotOperationRateExceeded: "SnapshotOperationRateExceeded",
+
+  /** Snapshots present. */
+  SnapshotsPresent: "SnapshotsPresent",
+
+  /** Source condition not met. */
+  SourceConditionNotMet: "SourceConditionNotMet",
+
+  /** System in use. */
+  SystemInUse: "SystemInUse",
+
+  /** Target condition not met. */
+  TargetConditionNotMet: "TargetConditionNotMet",
+
+  /** Unauthorized blob overwrite. */
+  UnauthorizedBlobOverwrite: "UnauthorizedBlobOverwrite",
+
+  /** Blob being rehydrated. */
+  BlobBeingRehydrated: "BlobBeingRehydrated",
+
+  /** Blob archived. */
+  BlobArchived: "BlobArchived",
+
+  /** Blob not archived. */
+  BlobNotArchived: "BlobNotArchived",
+
+  /** Authorization source IP mismatch. */
+  AuthorizationSourceIPMismatch: "AuthorizationSourceIPMismatch",
+
+  /** Authorization protocol mismatch. */
+  AuthorizationProtocolMismatch: "AuthorizationProtocolMismatch",
+
+  /** Authorization permission mismatch. */
+  AuthorizationPermissionMismatch: "AuthorizationPermissionMismatch",
+
+  /** Authorization service mismatch. */
+  AuthorizationServiceMismatch: "AuthorizationServiceMismatch",
+
+  /** Authorization resource type mismatch. */
+  AuthorizationResourceTypeMismatch: "AuthorizationResourceTypeMismatch",
+
+  /** Blob access tier not supported for account type. */
+  BlobAccessTierNotSupportedForAccountType: "BlobAccessTierNotSupportedForAccountType",
+
+  /** Extensible */
+  string,
 }
 
 /// Models
