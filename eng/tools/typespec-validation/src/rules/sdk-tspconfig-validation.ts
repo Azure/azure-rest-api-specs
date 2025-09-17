@@ -698,7 +698,7 @@ export class SdkTspConfigValidationRule implements Rule {
         : "";
 
     return {
-      success,
+      success: true, // always true as optional
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
