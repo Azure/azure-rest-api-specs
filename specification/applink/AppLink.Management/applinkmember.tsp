@@ -5,8 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./applink.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.AppLink;
@@ -132,30 +130,6 @@ model ObservabilitySettings {
 
   @doc("Managed identity")
   managedIdentity?: string;
-}
-
-@doc("AppLinkMember internal metadata")
-model AppLinkMemberInternalMetadata {
-  @doc("UMI resource")
-  umiResource: UMIResource;
-
-  @doc("DNS record set provision resource")
-  dnsRecordSet: ProvisionResource;
-
-  @doc("Extension provision resource")
-  extension: ProvisionResource;
-
-  @doc("Underlay metadata")
-  underlay: UnderlayMetadata;
-
-  @doc("MCP namespace")
-  mcpNameSpace: string;
-
-  @doc("DCE provision resource")
-  dceResource?: ProvisionResource;
-
-  @doc("DCR provision resource")
-  dcrResource?: ProvisionResource;
 }
 
 @doc("User Managed Identity resource")
