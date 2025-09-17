@@ -634,7 +634,99 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "The provisioning state is not specified."
+              },
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "An error occurred during provisioning."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "Provisioning completed successfully."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "Provisioning failed."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "Provisioning was canceled."
+              },
+              {
+                "name": "Connected",
+                "value": "Connected",
+                "description": "The resource is connected."
+              },
+              {
+                "name": "Disconnected",
+                "value": "Disconnected",
+                "description": "The resource is disconnected."
+              },
+              {
+                "name": "Deleted",
+                "value": "Deleted",
+                "description": "The resource has been deleted."
+              },
+              {
+                "name": "Creating",
+                "value": "Creating",
+                "description": "The resource is being created."
+              },
+              {
+                "name": "Updating",
+                "value": "Updating",
+                "description": "The resource is being updated."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The resource is being deleted."
+              },
+              {
+                "name": "Moving",
+                "value": "Moving",
+                "description": "The resource is being moved."
+              },
+              {
+                "name": "PartiallySucceeded",
+                "value": "PartiallySucceeded",
+                "description": "Provisioning partially succeeded."
+              },
+              {
+                "name": "PartiallyConnected",
+                "value": "PartiallyConnected",
+                "description": "The resource is partially connected."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "Provisioning is in progress."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "Provisioning request has been accepted."
+              },
+              {
+                "name": "Provisioning",
+                "value": "Provisioning",
+                "description": "The resource is currently provisioning."
+              },
+              {
+                "name": "DisableInProgress",
+                "value": "DisableInProgress",
+                "description": "The resource is being disabled."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -683,7 +775,99 @@
           ],
           "x-ms-enum": {
             "name": "ArcSettingAggregateState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "The aggregate state is not specified."
+              },
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "An error occurred in the aggregate state."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The operation successfully completed across all nodes."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The operation was canceled across the nodes."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The operation failed on all or most nodes."
+              },
+              {
+                "name": "Connected",
+                "value": "Connected",
+                "description": "All nodes are connected."
+              },
+              {
+                "name": "Disconnected",
+                "value": "Disconnected",
+                "description": "All nodes are disconnected."
+              },
+              {
+                "name": "Deleted",
+                "value": "Deleted",
+                "description": "The Arc agent has been deleted from all nodes."
+              },
+              {
+                "name": "Creating",
+                "value": "Creating",
+                "description": "The Arc agent is being created across the nodes."
+              },
+              {
+                "name": "Updating",
+                "value": "Updating",
+                "description": "The Arc agent is being updated across the nodes."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The Arc agent is being deleted across the nodes."
+              },
+              {
+                "name": "Moving",
+                "value": "Moving",
+                "description": "The Arc agent is being moved across the nodes."
+              },
+              {
+                "name": "PartiallySucceeded",
+                "value": "PartiallySucceeded",
+                "description": "The operation succeeded on some nodes."
+              },
+              {
+                "name": "PartiallyConnected",
+                "value": "PartiallyConnected",
+                "description": "Some nodes are connected, others are not."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The operation is currently in progress across the nodes."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The operation has been accepted and is pending execution."
+              },
+              {
+                "name": "Provisioning",
+                "value": "Provisioning",
+                "description": "The Arc agent is being provisioned across the nodes."
+              },
+              {
+                "name": "DisableInProgress",
+                "value": "DisableInProgress",
+                "description": "The Arc agent is being disabled across the nodes."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -735,7 +919,7 @@
           "readOnly": true
         },
         "state": {
-          "description": "State of Arc agent in this node.",
+          "description": "State of the Arc agent in this node. Indicates the current lifecycle status of the agent, such as whether it's being provisioned, connected, updated, or has encountered an error.",
           "type": "string",
           "enum": [
             "NotSpecified",
@@ -759,7 +943,99 @@
           ],
           "x-ms-enum": {
             "name": "NodeArcState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "The state is not specified."
+              },
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "An error occurred during the agent's lifecycle."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The operation completed successfully."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The operation was canceled before completion."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The operation failed."
+              },
+              {
+                "name": "Connected",
+                "value": "Connected",
+                "description": "The Arc agent is connected on this node."
+              },
+              {
+                "name": "Disconnected",
+                "value": "Disconnected",
+                "description": "The Arc agent is disconnected on this node."
+              },
+              {
+                "name": "Deleted",
+                "value": "Deleted",
+                "description": "The Arc agent has been deleted from this node."
+              },
+              {
+                "name": "Creating",
+                "value": "Creating",
+                "description": "The Arc agent is being created on this node."
+              },
+              {
+                "name": "Updating",
+                "value": "Updating",
+                "description": "The Arc agent is being updated on this node."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The Arc agent is being deleted from this node."
+              },
+              {
+                "name": "Moving",
+                "value": "Moving",
+                "description": "The Arc agent is being moved on this node."
+              },
+              {
+                "name": "PartiallySucceeded",
+                "value": "PartiallySucceeded",
+                "description": "The operation partially succeeded."
+              },
+              {
+                "name": "PartiallyConnected",
+                "value": "PartiallyConnected",
+                "description": "The Arc agent is partially connected on this node."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The operation is currently in progress."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The operation has been accepted and is pending execution."
+              },
+              {
+                "name": "Provisioning",
+                "value": "Provisioning",
+                "description": "The Arc agent is currently being provisioned on this node."
+              },
+              {
+                "name": "DisableInProgress",
+                "value": "DisableInProgress",
+                "description": "The Arc agent is in the process of being disabled on this node."
+              }
+            ]
           },
           "readOnly": true
         }
@@ -813,13 +1089,20 @@
       "properties": {
         "serviceName": {
           "type": "string",
-          "description": "Name of the service.",
+          "description": "Specifies the name of the service associated with the update or operation. This helps identify which system component or tool is involved.",
           "enum": [
             "WAC"
           ],
           "x-ms-enum": {
             "name": "serviceName",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "WAC",
+                "value": "WAC",
+                "description": "Windows Admin Center (WAC) is the service associated with this operation."
+              }
+            ]
           }
         },
         "port": {

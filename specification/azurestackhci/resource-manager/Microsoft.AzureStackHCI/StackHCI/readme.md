@@ -62,10 +62,10 @@ directive:
       - $.definitions.Update.allOf[0]
       - $.definitions.UpdateSummaries.allOf[0]
     transform: >
-      $['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+      $['$ref'] = "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
   - from: swagger-document
     where: $.paths[*]..responses.default
-    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
 ```
 
 ## Suppression

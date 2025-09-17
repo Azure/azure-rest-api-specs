@@ -179,7 +179,7 @@
     },
     "IdentityProvider": {
       "type": "string",
-      "description": "Identity Provider for the cluster",
+      "description": "Specifies the identity provider used for authenticating and managing access to cluster nodes. Choose between Active Directory for domain-based identity or Local Identity for AD-less configurations using Azure Key Vault.",
       "enum": [
         "ActiveDirectory",
         "LocalIdentity"
@@ -192,12 +192,12 @@
           {
             "name": "ActiveDirectory",
             "value": "ActiveDirectory",
-            "description": "Active Directory as the Identity Provider. This is the default option."
+            "description": "Uses Active Directory as the identity provider, enabling domain-based authentication and centralized identity management. This is the default option."
           },
           {
             "name": "LocalIdentity",
             "value": "LocalIdentity",
-            "description": "Use local identity with Azure Keyvault"
+            "description": "Uses a local identity system integrated with Azure Key Vault for authentication. Suitable for AD-less environments where Active Directory is not available or required."
           }
         ]
       }
@@ -368,7 +368,7 @@
           "type": "string"
         },
         "status": {
-          "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed.",
+          "description": "Represents the current status of the check being performed. Indicates whether the check has completed successfully, failed, or is still in progress.",
           "type": "string",
           "enum": [
             "Succeeded",
@@ -377,11 +377,28 @@
           ],
           "x-ms-enum": {
             "name": "status",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The check completed successfully."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The check completed but failed."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The check is currently in progress."
+              }
+            ]
           }
         },
         "severity": {
-          "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
+          "description": "Indicates the importance or impact level of the result. Determines whether the result is informational, a warning, or a critical issue that may block updates.",
           "type": "string",
           "enum": [
             "Critical",
@@ -391,7 +408,29 @@
           ],
           "x-ms-enum": {
             "name": "severity",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Critical",
+                "value": "Critical",
+                "description": "A critical issue that blocks updates and requires immediate attention."
+              },
+              {
+                "name": "Warning",
+                "value": "Warning",
+                "description": "A warning that may indicate a potential issue but does not block updates."
+              },
+              {
+                "name": "Informational",
+                "value": "Informational",
+                "description": "General information that does not indicate any issue."
+              },
+              {
+                "name": "Hidden",
+                "value": "Hidden",
+                "description": "The result is hidden and not shown in the output."
+              }
+            ]
           }
         },
         "description": {

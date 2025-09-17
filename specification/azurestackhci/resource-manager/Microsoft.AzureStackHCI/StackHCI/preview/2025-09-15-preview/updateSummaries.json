@@ -262,7 +262,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the UpdateSummaries proxy resource.",
+          "description": "Provisioning state of the UpdateSummaries proxy resource. Indicates the current lifecycle status of the update summary operation, such as whether it has been accepted, is in progress, or has completed.",
           "type": "string",
           "enum": [
             "Succeeded",
@@ -273,7 +273,34 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The update summary operation completed successfully."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The update summary operation failed."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The update summary operation was canceled before completion."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The update summary operation has been accepted and is pending execution."
+              },
+              {
+                "name": "Provisioning",
+                "value": "Provisioning",
+                "description": "The update summary operation is currently being provisioned."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -341,7 +368,7 @@
           "format": "date-time"
         },
         "state": {
-          "description": "Overall update state of the stamp.",
+          "description": "Overall update state of the stamp. Indicates the current status of update deployment across the stamp, including preparation, application, and any issues encountered.",
           "type": "string",
           "enum": [
             "Unknown",
@@ -355,7 +382,49 @@
           ],
           "x-ms-enum": {
             "name": "updateSummariesPropertiesState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "The update state is not known."
+              },
+              {
+                "name": "AppliedSuccessfully",
+                "value": "AppliedSuccessfully",
+                "description": "Updates have been successfully applied to the stamp."
+              },
+              {
+                "name": "UpdateAvailable",
+                "value": "UpdateAvailable",
+                "description": "Updates are available but have not yet been applied."
+              },
+              {
+                "name": "UpdateInProgress",
+                "value": "UpdateInProgress",
+                "description": "Updates are currently being applied to the stamp."
+              },
+              {
+                "name": "UpdateFailed",
+                "value": "UpdateFailed",
+                "description": "The update process failed."
+              },
+              {
+                "name": "NeedsAttention",
+                "value": "NeedsAttention",
+                "description": "The update process requires user intervention or has encountered issues needing attention."
+              },
+              {
+                "name": "PreparationInProgress",
+                "value": "PreparationInProgress",
+                "description": "Preparation for the update is currently in progress."
+              },
+              {
+                "name": "PreparationFailed",
+                "value": "PreparationFailed",
+                "description": "Preparation for the update failed."
+              }
+            ]
           }
         }
       }
@@ -381,6 +450,7 @@
     },
     "HealthState": {
       "type": "string",
+      "description": "Represents the health status of a system component or operation. Indicates whether the component is functioning correctly, has warnings or errors, or is undergoing a process.",
       "enum": [
         "Unknown",
         "Success",
@@ -391,7 +461,39 @@
       ],
       "x-ms-enum": {
         "name": "HealthState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The health state is not known or cannot be determined."
+          },
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "The component is healthy and operating as expected."
+          },
+          {
+            "name": "Failure",
+            "value": "Failure",
+            "description": "The component has failed and is not functioning properly."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "The component has a warning that may require attention but is still operational."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "The component has encountered an error affecting its functionality."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The health evaluation or operation is currently in progress."
+          }
+        ]
       }
     }
   },
