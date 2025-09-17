@@ -12,7 +12,7 @@ namespace Microsoft.AppLink;
 @doc("AppLinkMember upgrade history")
 @parentResource(AppLinkMember)
 model UpgradeHistory is ProxyResource<UpgradeHistoryProperties> {
-    ...ResourceNameParameter<UpgradeHistory>;
+  ...ResourceNameParameter<UpgradeHistory>;
 }
 
 @doc("AppLinkMember upgrade history properties")
@@ -37,8 +37,7 @@ model UpgradeHistoryProperties {
   provisioningState?: ProvisioningState;
 }
 
-
 @armResourceOperations
 interface UpgradeHistories {
-    listByAppLinkMember is ArmResourceListByParent<UpgradeHistory>;
+  listByAppLinkMember is ArmResourceListByParent<UpgradeHistory>;
 }
