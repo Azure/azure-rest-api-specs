@@ -1,5 +1,6 @@
 import "./common.tsp";
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
@@ -29,4 +30,8 @@ model SessionResourceFile {
 
   @doc("The date time in RFC3339 format when the file was last modified.")
   lastModifiedAt: utcDateTime;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("The directory path of the session resource file.")
+  directory?: string;
 }
