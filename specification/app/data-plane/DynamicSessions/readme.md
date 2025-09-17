@@ -31,7 +31,7 @@ These settings apply only when `--tag=package-2025-10-02-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-10-02-preview'
 input-file:
-  - Microsoft.App.DynamicSessions/preview/2025-10-02-preview/DynamicSessions.json
+  - preview/2025-10-02-preview/DynamicSessions.json
 ```
 
 ### Tag: package-2025-02-02-preview
