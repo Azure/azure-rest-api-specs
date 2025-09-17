@@ -47,7 +47,7 @@ model StorageError {
 
 /** Error codes returned by the Azure Blob Storage service. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
-enum StorageErrorCode {
+union StorageErrorCode {
   /** Account already exists. */
   AccountAlreadyExists: "AccountAlreadyExists",
 
@@ -386,6 +386,9 @@ enum StorageErrorCode {
 
   /** Blob access tier not supported for account type. */
   BlobAccessTierNotSupportedForAccountType: "BlobAccessTierNotSupportedForAccountType",
+
+  /** Extensible */
+  string,
 }
 
 /// Models
