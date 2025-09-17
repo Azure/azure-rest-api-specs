@@ -67,4 +67,3 @@ model ProbeSettings {
   @doc("The HTTP method for the probe request.")
   httpMethod: string;
 }
-

@@ -131,7 +131,6 @@ interface DeploymentTemplates {
     },
     PagedDeploymentTemplate
   >;
-
 }
 
 interface Indexes {
@@ -167,7 +166,7 @@ interface Indexes {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -195,7 +194,7 @@ interface Indexes {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -235,7 +234,7 @@ interface Indexes {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -254,7 +253,7 @@ interface Indexes {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -274,7 +273,8 @@ interface Indexes {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
+
       ...StandardListQueryParameters;
     },
     PagedIndex
@@ -291,7 +291,7 @@ interface Prompts {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the prompt")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -315,7 +315,7 @@ interface Prompts {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the prompt")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -343,7 +343,7 @@ interface Prompts {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the prompt")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -376,7 +376,7 @@ interface Prompts {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the prompt")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -395,7 +395,7 @@ interface Prompts {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       @doc("Name of the prompt")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -415,7 +415,7 @@ interface Prompts {
     {
       @doc("The name of the AzureML workspace or AI project.")
       @path
-      workspaceName: string,
+      workspaceName: string;
 
       ...StandardListQueryParameters;
     },
