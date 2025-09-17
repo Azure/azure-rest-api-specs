@@ -1,0 +1,123 @@
+{
+  "title": "SignalDefinitions_CreateOrUpdate",
+  "operationId": "SignalDefinitions_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-05-03-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "azureMonitorWorkspaceName": "myWorkspace",
+    "healthModelName": "myHealthModel",
+    "signalDefinitionName": "sig1",
+    "resource": {
+      "properties": {
+        "metricNamespace": "microsoft.compute/virtualMachines",
+        "metricName": "cpuusage",
+        "aggregationType": "Average",
+        "dimension": "nodename",
+        "dimensionFilter": "node1",
+        "displayName": "cpu usage",
+        "signalKind": "AzureResourceMetric",
+        "refreshInterval": "PT1M",
+        "tags": {
+          "key4788": "ixfvzsfnpvkkbrce"
+        },
+        "timeGrain": "PT1M",
+        "dataUnit": "byte",
+        "evaluationRules": {
+          "degradedRule": {
+            "operator": "LessThan",
+            "threshold": "65"
+          },
+          "unhealthyRule": {
+            "operator": "LessThan",
+            "threshold": "60"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "metricNamespace": "microsoft.compute/virtualMachines",
+          "metricName": "cpuusage",
+          "aggregationType": "Average",
+          "dimension": "nodename",
+          "dimensionFilter": "node1",
+          "provisioningState": "Succeeded",
+          "displayName": "cpu usage",
+          "signalKind": "AzureResourceMetric",
+          "refreshInterval": "PT1M",
+          "tags": {
+            "key4788": "ixfvzsfnpvkkbrce"
+          },
+          "timeGrain": "PT1M",
+          "dataUnit": "byte",
+          "evaluationRules": {
+            "degradedRule": {
+              "operator": "LessThan",
+              "threshold": "65"
+            },
+            "unhealthyRule": {
+              "operator": "LessThan",
+              "threshold": "60"
+            }
+          }
+        },
+        "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.Monitor/accounts/myWorkspace/healthmodels/myHealthModel/signalDefinitions/sig1",
+        "name": "sig1",
+        "type": "Microsoft.Monitor/accounts/healthModels/signalDefinitions",
+        "systemData": {
+          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdByType": "User",
+          "createdAt": "2023-09-18T14:04:09.327Z",
+          "lastModifiedBy": "arz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "metricNamespace": "microsoft.compute/virtualMachines",
+          "metricName": "cpuusage",
+          "aggregationType": "Average",
+          "dimension": "nodename",
+          "dimensionFilter": "node1",
+          "provisioningState": "Succeeded",
+          "displayName": "cpu usage",
+          "signalKind": "AzureResourceMetric",
+          "refreshInterval": "PT1M",
+          "tags": {
+            "key4788": "ixfvzsfnpvkkbrce"
+          },
+          "timeGrain": "PT1M",
+          "dataUnit": "byte",
+          "evaluationRules": {
+            "degradedRule": {
+              "operator": "LessThan",
+              "threshold": "65"
+            },
+            "unhealthyRule": {
+              "operator": "LessThan",
+              "threshold": "60"
+            }
+          }
+        },
+        "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.Monitor/accounts/myWorkspace/healthmodels/myHealthModel/signalDefinitions/sig1",
+        "name": "sig1",
+        "type": "Microsoft.Monitor/accounts/healthModels/signalDefinitions",
+        "systemData": {
+          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdByType": "User",
+          "createdAt": "2023-09-18T14:04:09.327Z",
+          "lastModifiedBy": "arz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+        }
+      }
+    }
+  }
+}
