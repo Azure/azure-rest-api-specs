@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-08-06-preview",
+    "version": "2021-08-09",
     "title": "bareMetalInfrastructureClient",
     "description": "The BareMetalInfrastructure Management client"
   },
@@ -34,144 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/{azureBareMetalInstanceName}/start": {
-      "post": {
-        "description": "The operation to start an AzureBareMetal instance",
-        "operationId": "AzureBareMetalInstances_Start",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Start an AzureBareMetal instance": {
-            "$ref": "./examples/AzureBareMetalInstances_Start.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/{azureBareMetalInstanceName}/restart": {
-      "post": {
-        "description": "The operation to restart an AzureBareMetal instance",
-        "operationId": "AzureBareMetalInstances_Restart",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Restart an AzureBareMetal instance": {
-            "$ref": "./examples/AzureBareMetalInstances_Restart.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/{azureBareMetalInstanceName}/shutdown": {
-      "post": {
-        "description": "The operation to shutdown an AzureBareMetal instance",
-        "operationId": "AzureBareMetalInstances_Shutdown",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Shutdown an AzureBareMetal instance": {
-            "$ref": "./examples/AzureBareMetalInstances_Shutdown.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances": {
       "get": {
         "tags": [
@@ -187,10 +49,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -214,22 +76,23 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances": {
       "get": {
-        "operationId": "AzureBareMetalInstances_List",
-        "description": "Gets a list of AzureBareMetal instances in the specified subscription and resource group",
+        "operationId": "AzureBareMetalInstances_ListByResourceGroup",
+        "summary": "Gets a list of Azure BareMetal instances in the specified subscription and resource group.",
+        "description": "Gets a list of AzureBareMetal instances in the specified subscription and resource group. The operations returns various properties of each Azure BareMetal instance.",
         "x-ms-examples": {
           "List all AzureBareMetal instances in a resource group": {
-            "$ref": "./examples/AzureBareMetalInstances_List.json"
+            "$ref": "./examples/AzureBareMetalInstances_ListByResourceGroup.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -271,7 +134,7 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -308,13 +171,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
@@ -326,51 +189,6 @@
             "schema": {
               "$ref": "#/definitions/AzureBareMetalInstance"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "BareMetalInfrastructure"
-        ],
-        "operationId": "AzureBareMetalInstances_Delete",
-        "x-ms-long-running-operation": true,
-        "summary": "Deletes a Azure BareMetal instance.",
-        "description": "Deletes a Azure BareMetal instance with the specified subscription, resource group, and instance name.",
-        "x-ms-examples": {
-          "Delete an AzureBareMetal instance": {
-            "$ref": "./examples/AzureBareMetalInstances_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Deleted AzureBareMetalInstance"
-          },
-          "202": {
-            "description": "Deleting AzureBareMetalInstance"
-          },
-          "204": {
-            "description": "No AzureBareMetalInstance to delete"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -397,13 +215,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
@@ -452,11 +270,16 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AzureBareMetalInstanceProperties",
           "description": "AzureBareMetal instance properties"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "AzureBareMetal instance info on Azure (ARM properties and AzureBareMetal properties)"
@@ -751,27 +574,22 @@
         "provider": {
           "readOnly": true,
           "type": "string",
-          "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with \"Microsoft\" for 1st party services."
+          "description": "The localized friendly form of the resource provider name."
         },
         "resource": {
           "readOnly": true,
           "type": "string",
-          "description": "The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the “name” section."
+          "description": "The localized friendly form of the resource type related to this action/operation."
         },
         "operation": {
           "readOnly": true,
           "type": "string",
-          "description": "The localized friendly name for the operation as shown to the user. This name should be concise (to fit in drop downs), but clear (self-documenting). Use Title Casing and include the entity/resource to which it applies."
+          "description": "The localized friendly name for the operation as shown to the user."
         },
         "description": {
           "readOnly": true,
           "type": "string",
-          "description": "The localized friendly description for the operation as shown to the user. This description should be thorough, yet concise. It will be used in tool-tips and detailed views."
-        },
-        "origin": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is 'user,system'"
+          "description": "The localized friendly description for the operation as shown to the user."
         }
       },
       "description": "Detailed BareMetal operation information"
