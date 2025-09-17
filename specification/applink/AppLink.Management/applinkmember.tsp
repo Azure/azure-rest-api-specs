@@ -15,12 +15,12 @@ model AppLinkMember is TrackedResource<AppLinkMemberProperties> {
   ...ResourceNameParameter<AppLinkMember>;
 }
 
-@doc("AppLinkMember properties")
+@doc("AppLink Member properties")
 model AppLinkMemberProperties {
   @doc("Cluster type")
   clusterType?: ClusterType;
 
-  @doc("Metadata")
+  @doc("AppLink Member Metadata")
   metadata: Metadata;
 
   @doc("Upgrade mode")
@@ -45,7 +45,7 @@ union ClusterType {
   string,
 
   @doc("Azure Kubernetes Service")
-  AKS: "AKS"
+  AKS: "AKS",
 }
 
 @doc("AppLinkMember metadata")
@@ -96,7 +96,7 @@ union ObservabilityState {
   Disabled: "Disabled",
 
   @doc("Observability state enabled")
-  Enabled: "Enabled"
+  Enabled: "Enabled",
 }
 
 @doc("AppLinkMember metrics settings")
