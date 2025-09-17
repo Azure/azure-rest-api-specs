@@ -5,6 +5,7 @@ import { resolve } from "path";
 import { flatMapAsync, mapAsync } from "./array.js";
 import { readme } from "./changed-files.js";
 import { Readme } from "./readme.js";
+import { SpecModelError } from "./spec-model-error.js";
 
 /** @type {Map<string, SpecModel>} */
 const specModelCache = new Map();
@@ -161,7 +162,12 @@ export class SpecModel {
 
     // The swagger file supplied does not exist in the given specModel
     if (affectedSwaggers.size === 0) {
-      throw new Error(`No affected swaggers found in specModel for ${swaggerPath}`);
+      throw new SpecModelError(
+        `Swagger file ${swaggerPath} not found in specModel.\n` +
+          `It must be referenced in the "input-file" section of a tag in a readme.md file ` +
+          `or in a swagger JSON file using $ref.`,
+        { source: swaggerPath },
+      );
     }
 
     return affectedSwaggers;

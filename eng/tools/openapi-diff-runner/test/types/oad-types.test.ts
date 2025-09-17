@@ -55,14 +55,14 @@ describe("OAD Trace Functions", () => {
     expect(updatedTrace.baseBranch).toBe("feature-branch");
   });
 
-  it("should generate empty markdown when no traces", () => {
+  it("should generate empty markdown when no traces", async () => {
     const traceData = createOadTrace(mockContext);
-    const markdown = generateOadMarkdown(traceData);
+    const markdown = await generateOadMarkdown(traceData);
 
     expect(markdown).toBe("");
   });
 
-  it("should generate markdown table when traces exist", () => {
+  it("should generate markdown table when traces exist", async () => {
     let traceData = createOadTrace(mockContext);
     traceData = addOadTrace(
       traceData,
@@ -70,7 +70,7 @@ describe("OAD Trace Functions", () => {
       "specification/storage/resource-manager/Microsoft.Storage/stable/2021-09-01/storage.json",
     );
 
-    const markdown = generateOadMarkdown(traceData);
+    const markdown = await generateOadMarkdown(traceData);
 
     expect(markdown).toContain("| Compared specs");
     expect(markdown).toContain("storage.json");
