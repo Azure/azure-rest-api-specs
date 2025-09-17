@@ -18,12 +18,14 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-servicebus"
-    namespace: "com.azure.resourcemanager.servicebus"
+    package-dir: "azure-resourcemanager-servicebus-generated"
+    namespace: "com.azure.resourcemanager.servicebus.generated"
     service-name: "Service Bus" # human-readable service name, whitespace allowed
-    premium: true
+    premium: false
     enable-sync-stack: false
-    service-dir: "sdk/resourcemanager" # TODO remove after package split
+    rename-model:
+      EncryptionKeySource: KeySource
+    use-object-for-unknown: true
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "arm-servicebus"
