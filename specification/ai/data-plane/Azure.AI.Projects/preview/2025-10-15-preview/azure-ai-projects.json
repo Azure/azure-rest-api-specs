@@ -3221,7 +3221,7 @@
           "description": "Request for the insights analysis."
         },
         "modelConfiguration": {
-          "$ref": "#/definitions/AzureOpenAIModelConfiguration",
+          "$ref": "#/definitions/InsightModelConfiguration",
           "description": "Configuration of the model used in the analysis."
         },
         "result": {
@@ -3274,6 +3274,19 @@
         "id",
         "description",
         "weight"
+      ]
+    },
+    "InsightModelConfiguration": {
+      "type": "object",
+      "description": "Configuration of the model used in the insight generation.",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'."
+        }
+      },
+      "required": [
+        "modelDeploymentName"
       ]
     },
     "InsightRequest": {

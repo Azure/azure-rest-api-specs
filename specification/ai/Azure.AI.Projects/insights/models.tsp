@@ -37,11 +37,18 @@ model Insight {
   request: InsightRequest;
 
   @doc("Configuration of the model used in the analysis.")
-  modelConfiguration?: AzureOpenAIModelConfiguration;
+  modelConfiguration?: InsightModelConfiguration;
 
   @doc("The result of the insights report.")
   @visibility(Lifecycle.Read)
   result?: InsightResult;
+}
+
+@doc("Configuration of the model used in the insight generation.")
+@added(Versions.v2025_10_15_preview)
+model InsightModelConfiguration {
+  @doc("The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.")
+  modelDeploymentName: string;
 }
 
 @doc("The request of the insights report.")
