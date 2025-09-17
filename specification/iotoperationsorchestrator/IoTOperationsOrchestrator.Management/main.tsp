@@ -23,7 +23,6 @@ namespace Microsoft.IoTOperationsOrchestrator;
 /** Api versions */
 enum Versions {
   /** 2023-10-04-preview preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-10-04-preview`,
 }
 

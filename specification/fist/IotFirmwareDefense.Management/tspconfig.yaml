@@ -23,14 +23,14 @@ options:
     package-details:
       name: "@azure/arm-iotfirmwaredefense"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-iotfirmwaredefense"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-iotfirmwaredefense"
     namespace: "com.azure.resourcemanager.iotfirmwaredefense"
     flavor: "azure"
     service-name: "IoT Firmware Defense"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/iotfirmwaredefense"
-    package-dir: "armiotfirmwaredefense"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armiotfirmwaredefense"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armiotfirmwaredefense/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

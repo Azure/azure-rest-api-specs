@@ -17,9 +17,6 @@ updates:
       - dependency-name: "typescript"
       # Updated manually by the Liftr team
       - dependency-name: "@azure-tools/typespec-liftr-base"
-      - dependency-name: "@types/js-yaml"
-      - dependency-name: "autorest"
-      - dependency-name: "js-yaml"
       # Only allow patch updates for spec-gen-sdk
       - dependency-name: "@azure-tools/spec-gen-sdk"
         update-types: ["version-update:semver-minor", "version-update:semver-major"]
@@ -38,9 +35,6 @@ updates:
       eslint:
         patterns:
           - "*eslint*"
-      openapi-validator:
-        patterns:
-          - "@microsoft.azure/openapi-validator*"
     versioning-strategy: increase-if-necessary
   - package-ecosystem: "npm"
     directories:
@@ -58,8 +52,6 @@ updates:
       - dependency-name: "typescript"
       # Points to "github:actions/github-script" since package isn't published to npmjs
       - dependency-name: "@types/github-script"
-      # Stay on ^7 until ^10 increases in adoption
-      - dependency-name: "cross-env"
     groups:
       eslint:
         patterns:
