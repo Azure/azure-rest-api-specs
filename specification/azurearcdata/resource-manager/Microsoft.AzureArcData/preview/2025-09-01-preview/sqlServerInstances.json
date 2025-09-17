@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-07-01-preview",
+    "version": "2025-09-01-preview",
     "title": "AzureArcDataManagementClient",
     "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
   },
@@ -102,6 +102,73 @@
           "x-ms-enum": {
             "name": "ConnectionStatus",
             "modelAsString": true
+          }
+        },
+        "discoverySource": {
+          "type": "string",
+          "description": "Indicates the discovery agent or client for this instance.",
+          "enum": [
+            "Azure Arc",
+            "Azure Migrate",
+            "ADS",
+            "SSMS",
+            "SSMA",
+            "Import",
+            "DMS-Portal",
+            "DMS-PS",
+            "DMS-CLI",
+            "DMS-SDK",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "discoverySource",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Azure Arc",
+                "description": "Instance is discovered by Azure Arc enabled agent/extensions."
+              },
+              {
+                "value": "Azure Migrate",
+                "description": "Instance is discovered by Azure Migrate agent."
+              },
+              {
+                "value": "ADS",
+                "description": "Instance is discovered/registered from Azure Data Studio (ADS)."
+              },
+              {
+                "value": "SSMS",
+                "description": "Instance is discovered/registered from SQL Server Management Studio (SSMS)."
+              },
+              {
+                "value": "SSMA",
+                "description": "Instance is discovered/registered from SQL Server Migration Assistant (SSMA)."
+              },
+              {
+                "value": "Import",
+                "description": "Instance is registered via Import."
+              },
+              {
+                "value": "DMS-Portal",
+                "description": "Instance is discovered/registered from Azure Database Migration Service(DMS) Azure Portal."
+              },
+              {
+                "value": "DMS-PS",
+                "description": "Instance is discovered/registered from DMS using PowerShell - Azure DataMigration Service Module."
+              },
+              {
+                "value": "DMS-CLI",
+                "description": "Instance is discovered/registered from DMS using datamigration extension for the Azure CLI"
+              },
+              {
+                "value": "DMS-SDK",
+                "description": "Instance is discovered/registered from Azure Database Migration Service SDK like Python or .NET SDKs."
+              },
+              {
+                "value": "Other",
+                "description": "Instance is discovered/registered from any other source not listed above."
+              }
+            ]
           }
         },
         "patchLevel": {
@@ -390,6 +457,73 @@
           "x-ms-enum": {
             "name": "ConnectionStatus",
             "modelAsString": true
+          }
+        },
+        "discoverySource": {
+          "type": "string",
+          "description": "Indicates the discovery agent or client for this instance. Default is Azure Arc.",
+          "enum": [
+            "Azure Arc",
+            "Azure Migrate",
+            "ADS",
+            "SSMS",
+            "SSMA",
+            "Import",
+            "DMS-Portal",
+            "DMS-PS",
+            "DMS-CLI",
+            "DMS-SDK",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "discoverySource",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Azure Arc",
+                "description": "Instance is discovered by Azure Arc enabled agent/extensions."
+              },
+              {
+                "value": "Azure Migrate",
+                "description": "Instance is discovered by Azure Migrate agent."
+              },
+              {
+                "value": "ADS",
+                "description": "Instance is discovered/registered from Azure Data Studio (ADS)."
+              },
+              {
+                "value": "SSMS",
+                "description": "Instance is discovered/registered from SQL Server Management Studio (SSMS)."
+              },
+              {
+                "value": "SSMA",
+                "description": "Instance is discovered/registered from SQL Server Migration Assistant (SSMA)."
+              },
+              {
+                "value": "Import",
+                "description": "Instance is registered via Import."
+              },
+              {
+                "value": "DMS-Portal",
+                "description": "Instance is discovered/registered from Azure Database Migration Service(DMS) Azure Portal."
+              },
+              {
+                "value": "DMS-PS",
+                "description": "Instance is discovered/registered from DMS using PowerShell - Azure DataMigration Service Module."
+              },
+              {
+                "value": "DMS-CLI",
+                "description": "Instance is discovered/registered from DMS using datamigration extension for the Azure CLI"
+              },
+              {
+                "value": "DMS-SDK",
+                "description": "Instance is discovered/registered from Azure Database Migration Service SDK like Python or .NET SDKs."
+              },
+              {
+                "value": "Other",
+                "description": "Instance is discovered/registered from any other source not listed above."
+              }
+            ]
           }
         },
         "patchLevel": {
@@ -1540,6 +1674,18 @@
         "skipToken": {
           "type": "string",
           "description": "The opaque token to use to skip to a specific page of the report. If not specified, the first page will be returned."
+        },
+        "queryType": {
+          "type": "string",
+          "description": "The type of query to run for summarizing the best practices assessment results. If not specified, the default is 'Basic'.",
+          "enum": [
+            "Basic",
+            "HistoricalTrends"
+          ],
+          "x-ms-enum": {
+            "name": "SqlServerInstanceBpaQueryType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1843,7 +1989,12 @@
         "lastExecutionTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last execution time of the background job."
+          "description": "The last execution time of the background job in ISO 8601 date-time format."
+        },
+        "nextExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The next execution time of the background job in ISO 8601 date-time format."
         }
       }
     },

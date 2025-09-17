@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-07-01-preview",
+    "version": "2025-09-01-preview",
     "title": "AzureArcDataManagementClient",
     "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
   },
@@ -567,7 +567,7 @@
         "properties": {
           "migrationTrackingId": {
             "type": "string",
-            "description": "reference identifier for tracking purposes/optional link to system initiating this migration. e.g. Arc MI link job id OR DMS resource id"
+            "description": "reference identifier for tracking purposes/optional link to system initiating this migration. e.g. Arc MI link job id, DMS resource id."
           },
           "migrationMode": {
             "type": "string",
@@ -600,7 +600,45 @@
             ],
             "x-ms-enum": {
               "name": "initiatedFrom",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Azure Arc",
+                  "description": "Migration is initiated from Azure Arc enabled clients."
+                },
+                {
+                  "value": "ADS",
+                  "description": "Migration is initiated from Azure Data Studio (ADS)."
+                },
+                {
+                  "value": "SSMS",
+                  "description": "Migration is initiated from SQL Server Management Studio (SSMS)."
+                },
+                {
+                  "value": "SSMA",
+                  "description": "Migration is initiated from SQL Server Migration Assistant (SSMA)."
+                },
+                {
+                  "value": "DMS-Portal",
+                  "description": "Migration is initiated from Azure Database Migration Service(DMS) Azure Portal."
+                },
+                {
+                  "value": "DMS-PS",
+                  "description": "Migration is initiated from DMS using PowerShell - Azure DataMigration Service Module."
+                },
+                {
+                  "value": "DMS-CLI",
+                  "description": "Migration is initiated from DMS using datamigration extension for the Azure CLI"
+                },
+                {
+                  "value": "DMS-SDK",
+                  "description": "Migration is initiated from Azure Database Migration Service SDK like Python or .NET SDKs."
+                },
+                {
+                  "value": "Other",
+                  "description": "Migration is initiated from any other client not listed above."
+                }
+              ]
             }
           },
           "status": {
