@@ -46,6 +46,9 @@ union ProvisioningState {
   /** The resource is being deleted */
   Deleting: "Deleting",
 
+  /** Failed to provision the resource */
+  Failed: "Failed",
+
   /** The resource create request has been accepted */
   Accepted: "Accepted",
 
