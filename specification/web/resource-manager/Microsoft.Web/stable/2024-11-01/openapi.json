@@ -13488,7 +13488,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "inputs"
         }
       }
     },
@@ -13709,7 +13710,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "inputs"
         }
       }
     },
@@ -44086,22 +44088,21 @@
       "type": "object",
       "description": "The expression traces.",
       "properties": {
-        "value": {
+        "value": {},
+        "inputs": {
           "type": "array",
-          "description": "The ExpressionRoot items on this page",
           "items": {
             "$ref": "#/definitions/ExpressionRoot"
-          }
+          },
+          "x-ms-identifiers": [
+            "path"
+          ]
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link used to get the next page of recommendations."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ExtendedLocation": {
       "type": "object",

@@ -14258,7 +14258,22 @@ model RetryHistory {
 /**
  * The expression traces.
  */
-model ExpressionTraces is Azure.Core.Page<ExpressionRoot>;
+model ExpressionTraces {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  value?: unknown;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  inputs?: ExpressionRoot[];
+
+  /**
+   * The link used to get the next page of recommendations.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * The expression root.
