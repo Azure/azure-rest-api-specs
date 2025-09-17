@@ -58,6 +58,7 @@ input-file:
   - stable/2024-04-01/DomainRegistrationProvider.json
   - stable/2024-04-01/Domains.json
   - stable/2024-04-01/TopLevelDomains.json
+  - stable/2024-04-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2023-12
@@ -69,6 +70,7 @@ input-file:
   - stable/2023-12-01/Domains.json
   - stable/2023-12-01/TopLevelDomains.json
   - stable/2023-12-01/DomainRegistrationProvider.json
+  - stable/2023-12-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -79,6 +81,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -91,6 +96,7 @@ input-file:
   - stable/2023-01-01/Domains.json
   - stable/2023-01-01/TopLevelDomains.json
   - stable/2023-01-01/DomainRegistrationProvider.json
+  - stable/2023-01-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -101,6 +107,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -113,6 +122,7 @@ input-file:
   - stable/2022-09-01/Domains.json
   - stable/2022-09-01/TopLevelDomains.json
   - stable/2022-09-01/DomainRegistrationProvider.json
+  - stable/2022-09-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -123,6 +133,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -135,6 +148,7 @@ input-file:
     - stable/2022-03-01/Domains.json
     - stable/2022-03-01/TopLevelDomains.json
     - stable/2022-03-01/DomainRegistrationProvider.json
+    - stable/2022-03-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -145,6 +159,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -157,6 +174,7 @@ input-file:
     - stable/2021-03-01/Domains.json
     - stable/2021-03-01/TopLevelDomains.json
     - stable/2021-03-01/DomainRegistrationProvider.json
+    - stable/2021-03-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -167,6 +185,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -179,6 +200,7 @@ input-file:
 - stable/2021-02-01/Domains.json
 - stable/2021-02-01/TopLevelDomains.json
 - stable/2021-02-01/DomainRegistrationProvider.json
+- stable/2021-02-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -189,6 +211,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -201,6 +226,7 @@ input-file:
     - stable/2021-01-15/Domains.json
     - stable/2021-01-15/TopLevelDomains.json
     - stable/2021-01-15/DomainRegistrationProvider.json
+    - stable/2021-01-15/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -211,6 +237,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -223,6 +252,7 @@ input-file:
     - stable/2021-01-01/Domains.json
     - stable/2021-01-01/TopLevelDomains.json
     - stable/2021-01-01/DomainRegistrationProvider.json
+    - stable/2021-01-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -233,6 +263,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -246,6 +279,7 @@ input-file:
     - stable/2020-12-01/Domains.json
     - stable/2020-12-01/TopLevelDomains.json
     - stable/2020-12-01/DomainRegistrationProvider.json
+    - stable/2020-12-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -256,6 +290,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: DomainRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -269,6 +306,7 @@ input-file:
     - stable/2020-10-01/Domains.json
     - stable/2020-10-01/TopLevelDomains.json
     - stable/2020-10-01/DomainRegistrationProvider.json
+    - stable/2020-10-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2020-09
@@ -281,6 +319,7 @@ input-file:
     - stable/2020-09-01/Domains.json
     - stable/2020-09-01/TopLevelDomains.json
     - stable/2020-09-01/DomainRegistrationProvider.json
+    - stable/2020-09-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2020-06
@@ -293,6 +332,7 @@ input-file:
     - stable/2020-06-01/Domains.json
     - stable/2020-06-01/TopLevelDomains.json
     - stable/2020-06-01/DomainRegistrationProvider.json
+    - stable/2020-06-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2019-08
@@ -305,6 +345,7 @@ input-file:
     - stable/2019-08-01/Domains.json
     - stable/2019-08-01/TopLevelDomains.json
     - stable/2019-08-01/DomainRegistrationProvider.json
+    - stable/2019-08-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2018-12
@@ -316,6 +357,7 @@ input-file:
     - stable/2018-02-01/Domains.json
     - stable/2018-02-01/TopLevelDomains.json
     - stable/2018-02-01/DomainRegistrationProvider.json
+    - stable/2018-02-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2018-11
@@ -327,6 +369,7 @@ input-file:
     - stable/2018-02-01/Domains.json
     - stable/2018-02-01/TopLevelDomains.json
     - stable/2018-02-01/DomainRegistrationProvider.json
+    - stable/2018-02-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2018-02
@@ -338,6 +381,7 @@ input-file:
     - stable/2018-02-01/Domains.json
     - stable/2018-02-01/TopLevelDomains.json
     - stable/2018-02-01/DomainRegistrationProvider.json
+    - stable/2018-02-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2018-02-only
@@ -349,6 +393,7 @@ input-file:
     - stable/2018-02-01/Domains.json
     - stable/2018-02-01/TopLevelDomains.json
     - stable/2018-02-01/DomainRegistrationProvider.json
+    - stable/2018-02-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2016-09

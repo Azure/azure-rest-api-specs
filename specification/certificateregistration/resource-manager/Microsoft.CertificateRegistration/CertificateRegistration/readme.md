@@ -54,6 +54,7 @@ input-file:
   - stable/2024-11-01/AppServiceCertificateOrders.json
   - stable/2024-11-01/CertificateOrdersDiagnostics.json
   - stable/2024-11-01/CertificateRegistrationProvider.json
+  - stable/2024-11-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2024-04
@@ -65,6 +66,7 @@ input-file:
   - stable/2024-04-01/AppServiceCertificateOrders.json
   - stable/2024-04-01/CertificateOrdersDiagnostics.json
   - stable/2024-04-01/CertificateRegistrationProvider.json
+  - stable/2024-04-01/CommonDefinitions.json
 ```
 
 ### Tag: package-2023-12
@@ -76,6 +78,7 @@ input-file:
   - stable/2023-12-01/AppServiceCertificateOrders.json
   - stable/2023-12-01/CertificateOrdersDiagnostics.json
   - stable/2023-12-01/CertificateRegistrationProvider.json
+  - stable/2023-12-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -86,6 +89,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: CertificateRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -98,6 +104,7 @@ input-file:
   - stable/2023-01-01/AppServiceCertificateOrders.json
   - stable/2023-01-01/CertificateOrdersDiagnostics.json
   - stable/2023-01-01/CertificateRegistrationProvider.json
+  - stable/2023-01-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -108,6 +115,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: CertificateRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -120,6 +130,7 @@ input-file:
   - stable/2022-09-01/AppServiceCertificateOrders.json
   - stable/2022-09-01/CertificateOrdersDiagnostics.json
   - stable/2022-09-01/CertificateRegistrationProvider.json
+  - stable/2022-09-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -130,6 +141,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: CertificateRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -142,6 +156,7 @@ input-file:
     - stable/2022-03-01/AppServiceCertificateOrders.json
     - stable/2022-03-01/CertificateOrdersDiagnostics.json
     - stable/2022-03-01/CertificateRegistrationProvider.json
+    - stable/2022-03-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -152,6 +167,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: CertificateRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -164,6 +182,7 @@ input-file:
     - stable/2021-03-01/AppServiceCertificateOrders.json
     - stable/2021-03-01/CertificateOrdersDiagnostics.json
     - stable/2021-03-01/CertificateRegistrationProvider.json
+    - stable/2021-03-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -174,6 +193,9 @@ directive:
     reason: SystemData will implement in next version.
   - suppress: R4009
     from: CertificateRegistrationProvider.json
+    reason: SystemData will implement in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
     reason: SystemData will implement in next version.
 ```
 
@@ -186,6 +208,7 @@ input-file:
   - stable/2021-02-01/AppServiceCertificateOrders.json
   - stable/2021-02-01/CertificateOrdersDiagnostics.json
   - stable/2021-02-01/CertificateRegistrationProvider.json
+  - stable/2021-02-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -200,6 +223,9 @@ directive:
   - suppress: OAV107
     from: AppServiceCertificateOrders.json
     reason: Will fix in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
+    reason: SystemData will implement in next version.
 ```
 
 ### Tag: package-2021-01-15
@@ -211,6 +237,7 @@ input-file:
     - stable/2021-01-15/AppServiceCertificateOrders.json
     - stable/2021-01-15/CertificateOrdersDiagnostics.json
     - stable/2021-01-15/CertificateRegistrationProvider.json
+    - stable/2021-01-15/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -225,6 +252,9 @@ directive:
   - suppress: OAV107
     from: AppServiceCertificateOrders.json
     reason: Will fix in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
+    reason: SystemData will implement in next version.
 ```
 
 ### Tag: package-2021-01
@@ -236,6 +266,7 @@ input-file:
     - stable/2021-01-01/AppServiceCertificateOrders.json
     - stable/2021-01-01/CertificateOrdersDiagnostics.json
     - stable/2021-01-01/CertificateRegistrationProvider.json
+    - stable/2021-01-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -250,6 +281,9 @@ directive:
   - suppress: OAV107
     from: AppServiceCertificateOrders.json
     reason: Will fix in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
+    reason: SystemData will implement in next version.
 ```
 
 ### Tag: package-2020-12
@@ -262,6 +296,7 @@ input-file:
     - stable/2020-12-01/AppServiceCertificateOrders.json
     - stable/2020-12-01/CertificateOrdersDiagnostics.json
     - stable/2020-12-01/CertificateRegistrationProvider.json
+    - stable/2020-12-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: R4009
@@ -276,6 +311,9 @@ directive:
   - suppress: OAV107
     from: AppServiceCertificateOrders.json
     reason: Will fix in next version.
+  - suppress: R4009
+    from: CommonDefinitions.json
+    reason: SystemData will implement in next version.
 ```
 
 ### Tag: package-2020-10
@@ -287,6 +325,7 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 input-file:
     - stable/2020-10-01/AppServiceCertificateOrders.json
     - stable/2020-10-01/CertificateRegistrationProvider.json
+    - stable/2020-10-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: OAV107
@@ -303,6 +342,7 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 input-file:
     - stable/2020-09-01/AppServiceCertificateOrders.json
     - stable/2020-09-01/CertificateRegistrationProvider.json
+    - stable/2020-09-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: OAV107
@@ -319,6 +359,7 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 input-file:
     - stable/2020-06-01/AppServiceCertificateOrders.json
     - stable/2020-06-01/CertificateRegistrationProvider.json
+    - stable/2020-06-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3016 error
   - suppress: OAV107
@@ -335,6 +376,7 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 input-file:
     - stable/2019-08-01/AppServiceCertificateOrders.json
     - stable/2019-08-01/CertificateRegistrationProvider.json
+    - stable/2019-08-01/CommonDefinitions.json
 directive:
   - suppress: OAV107
     from: AppServiceCertificateOrders.json
@@ -349,6 +391,7 @@ These settings apply only when `--tag=package-2018-12` is specified on the comma
 input-file:
     - stable/2018-02-01/AppServiceCertificateOrders.json
     - stable/2018-02-01/CertificateRegistrationProvider.json
+    - stable/2018-02-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -364,6 +407,7 @@ These settings apply only when `--tag=package-2018-11` is specified on the comma
 input-file:
     - stable/2018-02-01/AppServiceCertificateOrders.json
     - stable/2018-02-01/CertificateRegistrationProvider.json
+    - stable/2018-02-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -379,6 +423,7 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 input-file:
     - stable/2018-02-01/AppServiceCertificateOrders.json
     - stable/2018-02-01/CertificateRegistrationProvider.json
+    - stable/2018-02-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
@@ -394,6 +439,7 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 input-file:
     - stable/2018-02-01/AppServiceCertificateOrders.json
     - stable/2018-02-01/CertificateRegistrationProvider.json
+    - stable/2018-02-01/CommonDefinitions.json
 directive:
   # suppress each RPC 3019 error
   - suppress: OAV107
