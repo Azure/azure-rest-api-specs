@@ -39,7 +39,7 @@ export async function getChangedFiles(options = {}) {
     ...paths,
   ]);
 
-  const files = result.trim().split("\n");
+  const files = result.trim().split("\n").filter(Boolean);
   logger?.info("Changed Files:");
   for (const file of files) {
     logger?.info(`  ${file}`);

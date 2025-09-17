@@ -57,6 +57,22 @@ describe("changedFiles", () => {
     ]);
   });
 
+  it("getChangedFiles returns empty array when no files are changed", async () => {
+    vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("");
+    await expect(getChangedFiles()).resolves.toEqual([]);
+    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
+  });
+
+  it.each(["head-commit", ""])("getChangedFiles calls simpleGit with head commit only if provided", async (headCommitish) => {
+    const expectedArgs = ["--name-only", "HEAD^"];
+    if (headCommitish) {
+      expectedArgs.push(headCommitish);
+    }
+    
+    await getChangedFiles({ headCommitish });
+    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(expectedArgs);
+  });
+
   const files = [
     "cspell.json",
     "cspell.yaml",
@@ -303,21 +319,25 @@ describe("changedFiles", () => {
       });
     });
 
-    it("should pass git options correctly", async () => {
+    it.each(["feature-branch", ""])("should pass git options correctly", async (headCommitish) => {
       const options = {
         baseCommitish: "origin/main",
-        headCommitish: "feature-branch",
+        headCommitish: headCommitish,
         cwd: "/custom/path",
       };
+
+      const expectedArgs = [
+        "--name-status",
+        "origin/main"
+      ];
+      if (headCommitish) {
+        expectedArgs.push(headCommitish);
+      }
 
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("A\ttest.json");
       await getChangedFilesStatuses(options);
       expect(simpleGit.simpleGit).toHaveBeenCalledWith("/custom/path");
-      expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith([
-        "--name-status",
-        "origin/main",
-        "feature-branch",
-      ]);
+      expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(expectedArgs);
     });
   });
 });
