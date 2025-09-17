@@ -76,9 +76,6 @@ interface KubernetesVersionProfiles {
   >;
 }
 
-// ,
-    //
-
 @@doc(KubernetesVersionProfile.name, "");
 @@doc(KubernetesVersionProfile.properties, "");
 @@doc(KubernetesVersionProfiles.putKubernetesVersions::parameters.resource,

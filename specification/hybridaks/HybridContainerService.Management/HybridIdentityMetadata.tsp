@@ -17,9 +17,7 @@ namespace Microsoft.HybridContainerService;
 @singleton("default")
 @parentResource(provisionedCluster)
 model hybridIdentityMetadata
-  is Azure.ResourceManager.ProxyResource<
-    HybridIdentityMetadataProperties
-  > {
+  is Azure.ResourceManager.ProxyResource<HybridIdentityMetadataProperties> {
   ...ResourceNameParameter<
     Resource = hybridIdentityMetadata,
     KeyName = "hybridIdentityMetadatum",

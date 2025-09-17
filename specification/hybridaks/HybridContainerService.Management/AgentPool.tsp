@@ -17,8 +17,7 @@ namespace Microsoft.HybridContainerService;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
 #suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "Initial suppression to prevent breaking change"
 @parentResource(provisionedCluster)
-model agentPool
-  is Azure.ResourceManager.ProxyResource<AgentPoolProperties> {
+model agentPool is Azure.ResourceManager.ProxyResource<AgentPoolProperties> {
   ...ResourceNameParameter<
     Resource = agentPool,
     KeyName = "agentPoolName",

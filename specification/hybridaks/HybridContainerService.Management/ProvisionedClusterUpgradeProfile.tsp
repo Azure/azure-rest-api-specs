@@ -10,15 +10,13 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-
 namespace Microsoft.HybridContainerService;
 /**
  * The list of available kubernetes version upgrades for the provisioned cluster.
  */
 @singleton("default")
 @parentResource(provisionedCluster)
-model ProvisionedClusterUpgradeProfile
-  is ProxyResource<AgentPoolProperties> {
+model ProvisionedClusterUpgradeProfile is ProxyResource<AgentPoolProperties> {
   ...ResourceNameParameter<
     Resource = ProvisionedClusterUpgradeProfile,
     KeyName = "upgradeProfile",

@@ -51,7 +51,7 @@ interface VirtualNetworks {
    * Patches the virtual network resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-    #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "for backward compatibility"
   @operationId("virtualNetworks_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

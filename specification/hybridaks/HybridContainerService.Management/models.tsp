@@ -10,7 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.HybridContainerService;
 
-
 /**
  * Network policy used for building Kubernetes network. Possible values include: 'calico'.
  */
