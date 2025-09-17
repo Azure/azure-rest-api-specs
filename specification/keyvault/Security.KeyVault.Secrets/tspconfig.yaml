@@ -27,7 +27,7 @@ options:
     "package-dir": "azure-keyvault-secrets"
   "@azure-tools/typespec-java":
     flavor: azure
-    package-dir: "azure-security-keyvault-secrets"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-secrets"
     namespace: "com.azure.security.keyvault.secrets"
     models-subpackage: "implementation.models"
     customization-class: "customizations/src/main/java/SecretsCustomizations.java"
@@ -48,16 +48,14 @@ options:
       description: "Azure Key Vault Secrets"
     flavor: azure
   "@azure-tools/typespec-go":
-    service-dir: "sdk/security/keyvault"
-    package-dir: "azsecrets"
     module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets"
-    module-version: "0.0.1"
-    emitter-output-dir: "{project-root}"
-    override-client-name: "Client"
+    service-dir: "sdk/security/keyvault"
+    emitter-output-dir: "{output-dir}/{service-dir}/azsecrets"
     single-client: true
     inject-spans: true
     generate-fakes: true
   "@azure-tools/typespec-rust":
+    api-version: "7.6"
     crate-name: "azure_security_keyvault_secrets"
     crate-version: "0.0.1"
     emitter-output-dir: "{project-root}/generated"
