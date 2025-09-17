@@ -133,7 +133,25 @@ and add suppression one by one like this
 
 1. If the ongoing PRs are targeting to a release-* or dev-* branch which are not created or syncing from the latest main, we recommend to merge these PRs first.
 1. If the ongoing PRs are targeting to public main branch, Here's the suggestion to resolve the conflict. 
+
    - If the PR change is small, the recommendation is to have a new branch based on latest main and then apply the changes in the new file location. 
+      1. Merge latest main 
+        ```
+        git checkout main
+        git pull origin main // origin points to Azure rest api specs repo.
+        git merge main <your-pr-branch>
+        ```
+      2. Resolve conflicts
+        - For most of the conflicts, accept the incoming changes. 
+        - If it's unclear, please accept both and then update based on your judgement with the folder structure changes above.
+
+      3. Make sure the new change is aligned with folder structure v2  
+
+        There are some cases where the PR is adding a new version in the original location, but the file diff doesn't show as conflict. we should move them into the correct place so that it doesn't break the folder structure v2 as instructions in **Understanding Folder Migration sections** 
+
+      4. clean up the previous folder if exists.
+          
+
    - If the PR change is significant, there are two options to leverage the internal tool [`tsp-migration-agent` in VSCode extension](https://github.com/devdiv-microsoft/tsp-migration-agent/releases/) and ask for help in `Agent` mode with `Claude Sonnet 4` model. See more details from this [demo](https://microsoftapc-my.sharepoint.com/:v:/g/personal/qiaozha_microsoft_com/EVVgVaKuP3JGlBwJYNKgwqgBIe0m4DVL-YjwNsPnZezh0w?e=PZClbT&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D):
       - Copy the file change into the new file location and ask the agent to "help me fix the folder refactor CI"
       - You can also ask the agent to "help me refactor the folder structure" to apply this folder refactor change in your PR branch. 
