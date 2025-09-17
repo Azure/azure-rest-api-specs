@@ -9332,6 +9332,42 @@
     }
   },
   "definitions": {
+    "A2AAgentReinstallBlockingErrorDetails": {
+      "description": "A2A source agent reinstall blocking error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description" : "error code.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description" : "error message.",
+          "type": "string"
+        },
+        "possibleCauses": {
+          "description" : "possible causes.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description" : "recommended action.",
+          "type": "string"
+        },
+        "errorMessageParameters": {
+          "description" : "error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "errorTags": {
+          "description" : "error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "A2AAddDisksInput": {
       "description": "A2A add disk(s) input.",
       "type": "object",
@@ -10807,6 +10843,50 @@
             "name": "ChurnOptionSelected",
             "modelAsString": true
           }
+        },
+        "osFamilyName": {
+          "description": "The OS family name.",
+          "type": "string"
+        },
+        "distroNameForWhichAgentIsInstalled": {
+          "description": "Distro name for which agent is installed.",
+          "type": "string"
+        },
+        "isAgentUpgradeable": {
+          "description": "value indicating whether replication agent upgradeable.",
+          "type": "boolean"
+        },
+        "isAgentReinstallRequired": {
+          "description": "value indicating whether replication agent reinstallation is required.",
+          "type": "boolean"
+        },
+        "reasonsBlockingReInstall": {
+          "description": "value for reason blocking reinstall.",
+          "type": "string"
+        },
+        "reasonsBlockingReinstallDetails": {
+          "description": "whether reinstall is possible or not.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AAgentReinstallBlockingErrorDetails"
+          }
+        },
+        "isAgentUpgradeInProgress": {
+          "description": "value indicating whether replication agent Upgrade is In-Progress.",
+          "type": "boolean"
+        },
+        "autoAgentUpgradeRetryCount": {
+          "format": "int64",
+          "description": "auto agent upgrade retry count.",
+          "type": "integer"
+        },
+        "isAgentUpgradeRetryThresholdExhausted": {
+          "description": "value indicating whether replication agent Upgrade retry exhaused.",
+          "type": "boolean"
+        },
+        "platformFaultDomain": {
+          "description": "the platform fault domain.",
+          "type": "integer"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -17290,6 +17370,42 @@
       },
       "x-ms-discriminator-value": "InMageRcm"
     },
+    "InMageRcmAgentReinstallBlockingErrorDetails": {
+      "description": "InMageRcm source agent reinstall blocking error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description" : "error code.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description" : "error message.",
+          "type": "string"
+        },
+        "possibleCauses": {
+          "description" : "possible causes.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description" : "recommended action.",
+          "type": "string"
+        },
+        "errorMessageParameters": {
+          "description" : "error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "errorTags": {
+          "description" : "error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "InMageRcmAgentUpgradeBlockingErrorDetails": {
       "description": "InMageRcm source agent upgrade blocking error details.",
       "type": "object",
@@ -18664,6 +18780,42 @@
         }
       }
     },
+    "InMageRcmLastAgentReinstallErrorDetails": {
+      "description": "InMageRcm source agent reinstall blocking error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description" : "error code.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description" : "error message.",
+          "type": "string"
+        },
+        "possibleCauses": {
+          "description" : "possible causes.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description" : "recommended action.",
+          "type": "string"
+        },
+        "errorMessageParameters": {
+          "description" : "error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "errorTags": {
+          "description" : "error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "InMageRcmLastAgentUpgradeErrorDetails": {
       "description": "InMageRcm last source agent upgrade error details.",
       "type": "object",
@@ -18784,6 +18936,82 @@
         "isUpgradeable": {
           "description": "A value indicating whether agent is upgradeable or not.",
           "type": "string",
+          "readOnly": true
+        },
+        "agentReinstallState": {
+          "description": "The agent auto reinstall state.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "UserTriggered",
+              "AutoTriggered"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MobilityAgentReinstallType",
+              "modelAsString": true
+            }
+          },
+          "readOnly": true
+        },
+        "lastAgentReinstallType": {
+          "description": "The last agent reinstall type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "agentReinstallJobId": {
+          "description": "The agent reinstall job Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "agentReinstallAttemptToVersion": {
+          "description": "The last agent reinstall type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osFamilyName": {
+          "description": "The OS family name.",
+          "type": "string"
+        },
+        "distroNameForWhichAgentIsInstalled": {
+          "description": "Distro name for which agent is installed.",
+          "type": "string"
+        },
+        "isAgentUpgradeable": {
+          "description": "value indicating whether replication agent upgradeable.",
+          "type": "boolean"
+        },
+        "isAgentReinstallRequired": {
+          "description": "value indicating whether replication agent reinstallation is required.",
+          "type": "boolean"
+        },
+        "isLastReinstallSuccessful": {
+          "description": "value indicating whether replication agent reinstallation is required.",
+          "type": "boolean"
+        },
+        "reasonsBlockingReinstall": {
+          "description": "whether reinstall is possible or not.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "DistroNotSupported",
+              "AgentNoHeartbeat",
+              "Unknown"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AgentReinstallBlockedReason",
+              "modelAsString": true
+            }
+          },
+          "readOnly": true
+        },
+        "reasonsBlockingReinstallDetails": {
+          "description": "whether reinstall is possible or not.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmAgentReinstallBlockingErrorDetails"
+          },
           "readOnly": true
         }
       }
@@ -23758,6 +23986,26 @@
         "isSharedDiskVirtualNode": {
           "description": "A value indicating whether this represents virtual entity hosting all the shared disks.",
           "type": "boolean"
+        }
+      }
+    },
+    "ReinstallMobilityServiceRequest": {
+      "description": "Request to Reinstall the mobility service on a protected item.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReinstallMobilityServiceRequestProperties",
+          "description": "The properties of the reinstall mobility service request"
+        }
+      }
+    },
+    "ReinstallMobilityServiceRequestProperties": {
+      "description": "The properties of an update mobility service request.",
+      "type": "object",
+      "properties": {
+        "runAsAccountId": {
+          "description": "The CS run as account Id.",
+          "type": "string"
         }
       }
     },
