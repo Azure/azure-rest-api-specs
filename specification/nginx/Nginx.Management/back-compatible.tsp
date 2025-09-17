@@ -68,12 +68,12 @@ using Nginx.NginxPlus;
 );
 @@clientLocation(NginxDeployments.list, "Deployments", "!csharp");
 @@clientLocation(NginxDeployments.wafPolicyList, "WafPolicy", "!csharp");
-@@clientName(NginxDeployments.wafPolicyList, "GetWafPolicies");
+@@clientName(NginxDeployments.wafPolicyList, "List");
 @@clientLocation(NginxDeployments.defaultWafPolicyList,
   "DefaultWafPolicy",
   "!csharp"
 );
-@@clientName(NginxDeployments.defaultWafPolicyList, "GetDefaultWafPolicies");
+@@clientName(NginxDeployments.defaultWafPolicyList, "List");
 
 @@clientLocation(NginxDeploymentWafPolicies.get, "WafPolicy", "!csharp");
 @@clientLocation(NginxDeploymentWafPolicies.create, "WafPolicy", "!csharp");
