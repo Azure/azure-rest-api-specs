@@ -5,6 +5,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./applink.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.AppLink;
