@@ -280,6 +280,8 @@ model StorageMoverUpdateParameters {
   /**
    * The resource specific properties for the Storage Mover resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageMoverUpdateProperties;
 
   /**
@@ -482,7 +484,9 @@ model AgentPropertiesErrorDetails {
  * The Agent resource.
  */
 model AgentUpdateParameters {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AgentUpdateProperties;
 }
 
@@ -592,6 +596,8 @@ model ProjectUpdateParameters {
   /**
    * Project properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProjectUpdateProperties;
 }
 
@@ -713,6 +719,12 @@ model JobDefinitionProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * List of connections associated to this job
+   */
+  @added(Versions.v2025_08_01)
+  connections?: Azure.Core.armResourceIdentifier[];
 }
 
 /**
@@ -826,6 +838,8 @@ model JobDefinitionUpdateParameters {
   /**
    * Job definition properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: JobDefinitionUpdateProperties;
 }
 
@@ -847,6 +861,12 @@ model JobDefinitionUpdateProperties {
    * Name of the Agent to assign for new Job Runs of this Job Definition.
    */
   agentName?: string;
+
+  /**
+   * List of connections resourceId associated with the job.
+   */
+  @added(Versions.v2025_08_01)
+  connections?: string[];
 }
 
 /**
@@ -1041,6 +1061,14 @@ model JobRunProperties {
   error?: JobRunError;
 
   /**
+   * Warning details.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  warnings?: JobRunWarning[];
+
+  /**
    * The provisioning state of this resource.
    */
   @visibility(Lifecycle.Read)
@@ -1058,6 +1086,26 @@ model JobRunError {
 
   /**
    * Error message of the given entry.
+   */
+  message?: string;
+
+  /**
+   * Target of the given error entry.
+   */
+  target?: string;
+}
+
+/**
+ * Warning type
+ */
+model JobRunWarning {
+  /**
+   * Error code of the given entry.
+   */
+  code?: string;
+
+  /**
+   * Warning message of the given entry.
    */
   message?: string;
 
@@ -1334,4 +1382,59 @@ model SmbMountEndpointUpdateProperties extends EndpointBaseUpdateProperties {
    * The Endpoint resource type.
    */
   endpointType: "SmbMount";
+}
+
+/**
+ * List of Connections.
+ */
+@added(Versions.v2025_08_01)
+model ConnectionList is Azure.Core.Page<Connection>;
+
+@@visibility(ConnectionList.value, Lifecycle.Read);
+/** Properties of the Connection resource. */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01)
+model ConnectionProperties {
+  /** A description for the Connection. */
+  description?: string;
+
+  /** The connection status. */
+  @visibility(Lifecycle.Read)
+  connectionStatus?: ConnectionStatus;
+
+  /** The PrivateLinkServiceId for the connection. */
+  privateLinkServiceId: Azure.Core.armResourceIdentifier;
+
+  /** The PrivateEndpointName associated with the connection. */
+  privateEndpointName?: string;
+
+  /** List of job definitions associated with this connection. */
+  jobList?: Azure.Core.armResourceIdentifier[];
+
+  /**
+   * The provisioning state of this resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** The connection status. */
+union ConnectionStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Rejected: "Rejected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Disconnected: "Disconnected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  PendingApproval: "Pending Approval",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Stale: "Stale",
+}
+
+/** Parameters for updating a Connection resource. */
+model ConnectionUpdateParameters {
+  /** The status of the Connection. */
+  connectionStatus?: ConnectionStatus;
 }

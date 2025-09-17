@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "connectionName": "example-connection",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95",
+    "connection": {
+      "properties": {
+        "description": "Example Connection Description",
+        "privateLinkServiceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.Network/privateLinkServices/example-pls"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/connections/example-connection",
+        "name": "example-connection",
+        "type": "Microsoft.StorageMover/storageMovers/connections",
+        "properties": {
+          "description": "Example Connection Description",
+          "privateLinkServiceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.Network/privateLinkServices/example-pls",
+          "connectionStatus": "Pending Approval"
+        }
+      }
+    }
+  },
+  "operationId": "Connections_CreateOrUpdate",
+  "title": "Connections_CreateOrUpdate"
+}
