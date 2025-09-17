@@ -81,13 +81,8 @@ interface CurrentQuotaLimitBases {
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
-    Response = ArmResponse<QuotaLimits> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<QuotaLimits> &
+      CurrentQuotaLimitBasesResponseHeaders,
     Error = ExceptionResponse
   >;
 }
