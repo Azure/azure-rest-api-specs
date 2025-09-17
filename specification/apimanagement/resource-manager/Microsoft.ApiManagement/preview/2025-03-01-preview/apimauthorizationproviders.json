@@ -153,6 +153,9 @@
           "ApiManagementCreateAuthorizationProviderAADAuthCode": {
             "$ref": "./examples/ApiManagementCreateAuthorizationProviderAADAuthCode.json"
           },
+          "ApiManagementCreateAuthorizationProviderAADAuthCodeWithKeyVault": {
+            "$ref": "./examples/ApiManagementCreateAuthorizationProviderAADAuthCodeWithKeyVault.json"
+          },
           "ApiManagementCreateAuthorizationProviderAADClientCred": {
             "$ref": "./examples/ApiManagementCreateAuthorizationProviderAADClientCred.json"
           },
@@ -262,6 +265,57 @@
           },
           "204": {
             "description": "The authorization server settings were successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/refreshSecret": {
+      "post": {
+        "tags": [
+          "Authorizations"
+        ],
+        "operationId": "AuthorizationProvider_RefreshSecret",
+        "description": "Refreshes the Key Vault reference secret for the specified authorization provider.",
+        "x-ms-examples": {
+          "ApiManagementAuthorizationProviderRefreshSecret": {
+            "$ref": "./examples/ApiManagementRefreshAuthorizationProviderSecret.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AuthorizationProviderIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing Authorization provider was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
