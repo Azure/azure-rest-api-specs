@@ -12,20 +12,58 @@
         "properties": {
           "displayName": "Recommendation Type",
           "dependsOn": [
-            "category",
-            "impact"
+            "recommendationCategory",
+            "recommendationImpact",
+            "supportedResourceType"
           ],
           "applicableScenarios": [
             "Alerts"
           ],
           "supportedValues": [
             {
-              "id": "6a2b1e70-bd4c-4163-86de-5243d7ac05ee",
-              "displayName": "Upgrade your SKU or add more instances to ensure fault tolerance"
+              "recommendationCategory": "Cost",
+              "recommendationImpact": "High",
+              "supportedResourceType": "microsoft.compute/virtualmachines",
+              "descriptionOfChanges": [],
+              "id": "e10b1381-5f0a-47ff-8c7b-37bd13d7c974",
+              "displayName": "Right-size or shutdown underutilized virtual machines",
+              "properties": [
+                {
+                  "name": "recommendationCategory",
+                  "value": "Cost"
+                },
+                {
+                  "name": "recommendationImpact",
+                  "value": "High"
+                },
+                {
+                  "name": "supportedResourceType",
+                  "value": "microsoft.compute/virtualmachines"
+                }
+              ]
             },
             {
-              "id": "da6630fb-4286-4996-92a3-a43f5f26dd34",
-              "displayName": "Delete ExpressRoute circuits in the provider status of Not Provisioned"
+              "recommendationCategory": "Performance",
+              "recommendationImpact": "High",
+              "supportedResourceType": "microsoft.compute/virtualmachines",
+              "recommendationSubCategory": "ComputeOptimization",
+              "descriptionOfChanges": [],
+              "id": "36c3633b-daac-4e01-af95-11b8c2f4fe20",
+              "displayName": "Use Managed Disks to prevent disk I/O throttling",
+              "properties": [
+                {
+                  "name": "recommendationCategory",
+                  "value": "Performance"
+                },
+                {
+                  "name": "recommendationImpact",
+                  "value": "High"
+                },
+                {
+                  "name": "supportedResourceType",
+                  "value": "microsoft.compute/virtualmachines"
+                }
+              ]
             }
           ]
         }
