@@ -160,7 +160,7 @@ interface ContainerRegistryOperationGroup {
    */
   @operationId("ContainerRegistry_UpdateProperties")
   @route("/acr/v1/{name}")
-  @patch
+  @patch(#{ implicitOptionality: true })
   updateProperties is Azure.Core.Foundations.Operation<
     {
       /**
@@ -248,7 +248,7 @@ interface ContainerRegistryOperationGroup {
    */
   @operationId("ContainerRegistry_UpdateTagAttributes")
   @route("/acr/v1/{name}/_tags/{reference}")
-  @patch
+  @patch(#{ implicitOptionality: true })
   updateTagAttributes is Azure.Core.Foundations.Operation<
     {
       /**
@@ -359,7 +359,7 @@ interface ContainerRegistryOperationGroup {
    */
   @operationId("ContainerRegistry_UpdateManifestProperties")
   @route("/acr/v1/{name}/_manifests/{digest}")
-  @patch
+  @patch(#{ implicitOptionality: true })
   updateManifestProperties is Azure.Core.Foundations.Operation<
     {
       /**
@@ -497,7 +497,7 @@ interface ContainerRegistryBlobOperationGroup {
        * / (must do substring(1) )
        */
       @path
-      location: string;
+      nextBlobUuidLink: string;
     },
     void
   >;
@@ -507,7 +507,7 @@ interface ContainerRegistryBlobOperationGroup {
    */
   @operationId("ContainerRegistryBlob_UploadChunk")
   @route("/{nextBlobUuidLink}")
-  @patch
+  @patch(#{ implicitOptionality: true })
   uploadChunk is Azure.Core.Foundations.Operation<
     {
       /**
@@ -515,7 +515,7 @@ interface ContainerRegistryBlobOperationGroup {
        * / (must do substring(1) )
        */
       @path
-      location: string;
+      nextBlobUuidLink: string;
 
       /**
        * Raw data of blob
@@ -547,7 +547,7 @@ interface ContainerRegistryBlobOperationGroup {
        * / (must do substring(1) )
        */
       @path
-      location: string;
+      nextBlobUuidLink: string;
 
       /**
        * Optional raw data of blob
@@ -572,7 +572,7 @@ interface ContainerRegistryBlobOperationGroup {
        * / (must do substring(1) )
        */
       @path
-      location: string;
+      nextBlobUuidLink: string;
     },
     void
   >;
