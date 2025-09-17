@@ -76,7 +76,7 @@ interface ContainerRegistryOperationGroup {
       @bodyRoot
       payload: Manifest;
     },
-    any
+    void
   >;
 
   /**
@@ -107,24 +107,17 @@ interface ContainerRegistryOperationGroup {
    * List repositories
    */
   @operationId("ContainerRegistry_GetRepositories")
-  getRepositories is Azure.Core.ResourceList<
-    string,
+  @route("/acr/v1/_catalog")
+  @list
+  getRepositories is Azure.Core.Foundations.Operation<
     {
-      parameters: {
-        /**
-         * Query parameter for the last item in previous query. Result set will include
-         * values lexically after last.
-         */
-        @query("last")
-        last?: string;
+      @query("last")
+      last?: string;
 
-        /**
-         * query parameter for max number of items
-         */
-        @query("n")
-        n?: int32;
-      };
-    }
+      @query("n")
+      n?: int32;
+    },
+    Repositories
   >;
 
   /**
