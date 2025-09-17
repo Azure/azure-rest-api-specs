@@ -37,8 +37,8 @@ options:
       name: "@azure/arm-dashboard"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dashboard"
-    package-dir: "armdashboard"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdashboard"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdashboard/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
