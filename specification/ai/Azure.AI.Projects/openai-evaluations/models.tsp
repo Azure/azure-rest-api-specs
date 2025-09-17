@@ -54,8 +54,8 @@ model Eval extends OpenAI.Eval {
 
   // Tool customization: Use discriminated type
   testing_criteria: EvalGraderResource[] | null = null;
-}
-*/
+}*/
+
 
 /*
 model CreateEvalRequest extends OpenAI.CreateEvalRequest {
