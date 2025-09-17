@@ -8,6 +8,43 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-go":
+    service-dir: sdk/resourcemanager/hybridcontainerservice
+    emitter-output-dir: "{output-dir}/{service-dir}/armhybridcontainerservice"
+    package-dir: armhybridcontainerservice
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: azure
+  "@azure-tools/typespec-python":
+    package-dir: azure-mgmt-hybridcontainerservice
+    namespace: azure.mgmt.hybridcontainerservice
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-hybridcontainerservice"
+    namespace: com.azure.resourcemanager.hybridcontainerservice
+    service-name: HybridContainerservice
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-advisor"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-advisor"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.HybridContainerService"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+parameters:
+  service-dir:
+    default: sdk/hybridaks

@@ -41,8 +41,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.HybridContainerService/stable/2024-01-01/provisionedClusterInstances.json
-  - Microsoft.HybridContainerService/stable/2024-01-01/virtualNetworks.json
+  - Microsoft.HybridContainerService/stable/2024-01-01/openai.json
 ```
 ### Tag: package-preview-2023-11
 
