@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra ID OAuth 2.0 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -281,7 +281,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the UpdateRuns proxy resource.",
+          "description": "Provisioning state of the UpdateRuns proxy resource. Indicates the current lifecycle status of the update operation, such as whether it has been accepted, is in progress, or has completed.",
           "type": "string",
           "enum": [
             "Succeeded",
@@ -292,7 +292,34 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The update operation completed successfully."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The update operation failed."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The update operation was canceled before completion."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The update operation has been accepted and is pending execution."
+              },
+              {
+                "name": "Provisioning",
+                "value": "Provisioning",
+                "description": "The update operation is currently being provisioned."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -311,7 +338,7 @@
           "type": "string"
         },
         "state": {
-          "description": "State of the update run.",
+          "description": "Represents the current state of the update run. Indicates whether the update is in progress, has completed successfully, failed, or is in an unknown state.",
           "type": "string",
           "enum": [
             "Unknown",
@@ -321,7 +348,29 @@
           ],
           "x-ms-enum": {
             "name": "updateRunPropertiesState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "The state of the update run is not known."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The update run completed successfully."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The update run is currently in progress."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The update run failed to complete successfully."
+              }
+            ]
           }
         },
         "progress": {

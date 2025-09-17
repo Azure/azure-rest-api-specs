@@ -43,6 +43,7 @@
                   "azureServiceEndpoint": "core.windows.net",
                   "hardwareClass": "Medium"
                 },
+                "identityProvider": "LocalIdentity",
                 "storage": {
                   "configurationMode": "Express"
                 },
@@ -58,9 +59,13 @@
                         "endingAddress": "10.57.48.66"
                       }
                     ],
-                    "dnsServerConfig": "UseDnsServer",
-                    "dnsServers": [
-                      "10.57.50.90"
+                    "dnsZones": [
+                      {
+                        "dnsZoneName": "contoso.com",
+                        "dnsForwarder": [
+                          "192.168.1.1"
+                        ]
+                      }
                     ]
                   }
                 ],
