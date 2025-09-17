@@ -140,9 +140,9 @@ and add suppression one by one like this
           git pull origin main // origin points to Azure rest api specs repo.
           git merge main <your-pr-branch>
           ```
-      2. Resolve conflicts
-        - For most of the conflicts, accept the incoming changes. 
-        - If it's unclear, please accept both and then update based on your judgement with the folder structure changes above.
+      2. Resolve conflicts  
+        - For most of the conflicts, accept the incoming changes.  
+        - If it's unclear, please accept both and then update based on your judgement with the folder structure changes above.  
 
       3. Make sure the new change is aligned with folder structure v2  
 
