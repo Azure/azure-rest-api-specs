@@ -2893,6 +2893,318 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/agents": {
+      "get": {
+        "tags": [
+          "ProfileAgents"
+        ],
+        "description": "Lists all agent links (web agent associations) within a CDN profile.",
+        "operationId": "ProfileAgents_ListByProfile",
+        "x-ms-examples": {
+          "ProfileAgents_ListByProfile": {
+            "$ref": "./examples/ProfileAgents_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProfileAgentListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/agents/{agentName}": {
+      "get": {
+        "tags": [
+          "ProfileAgents"
+        ],
+        "description": "Gets an agent link (web agent association) within a CDN profile.",
+        "operationId": "ProfileAgents_Get",
+        "x-ms-examples": {
+          "ProfileAgents_Get": {
+            "$ref": "./examples/ProfileAgents_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "Name of the web agent association.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProfileAgent"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProfileAgents"
+        ],
+        "description": "Creates or updates an agent link (web agent association) within a CDN profile.",
+        "operationId": "ProfileAgents_CreateOrUpdate",
+        "x-ms-examples": {
+          "ProfileAgents_CreateOrUpdate": {
+            "$ref": "./examples/ProfileAgents_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "Name of the web agent association.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileAgent",
+            "in": "body",
+            "description": "Profile agent association properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileAgent"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProfileAgent"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new profile agent association has been created.",
+            "schema": {
+              "$ref": "#/definitions/ProfileAgent"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProfileAgent"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ProfileAgents"
+        ],
+        "description": "Updates an existing agent link (web agent association) within a CDN profile.",
+        "operationId": "ProfileAgents_Update",
+        "x-ms-examples": {
+          "ProfileAgents_Update": {
+            "$ref": "./examples/ProfileAgents_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "Name of the web agent association.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileAgentUpdateParameters",
+            "in": "body",
+            "description": "Profile agent association update properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileAgentUpdateParameters"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProfileAgent"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProfileAgent"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ProfileAgents"
+        ],
+        "description": "Deletes an existing agent link (web agent association) within a CDN profile.",
+        "operationId": "ProfileAgents_Delete",
+        "x-ms-examples": {
+          "ProfileAgents_Delete": {
+            "$ref": "./examples/ProfileAgents_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "Name of the web agent association.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the profile agent association was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -3035,6 +3347,99 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of profile objects if there are any."
+        }
+      }
+    },
+    "ProfileAgent": {
+      "description": "An agent link (web agent association) within a CDN profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProfileAgentProperties"
+        }
+      }
+    },
+    "ProfileAgentProperties": {
+      "description": "The properties of a profile agent association.",
+      "type": "object",
+      "properties": {
+        "webAgent": {
+          "description": "Reference to the web agent resource.",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "customDomains": {
+          "description": "List of custom domains associated with this agent link.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "description": "Provisioning status of the profile agent association.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "ProfileAgentProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "webAgent",
+        "customDomains"
+      ]
+    },
+    "ProfileAgentListResult": {
+      "description": "Result of the request to list profile agent associations. It contains a list of profile agent objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ProfileAgent"
+          },
+          "description": "List of profile agent associations within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of profile agent objects if there are any."
+        }
+      }
+    },
+    "ProfileAgentUpdateParameters": {
+      "type": "object",
+      "description": "Properties required to update a profile agent association.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProfileAgentUpdateProperties"
+        }
+      }
+    },
+    "ProfileAgentUpdateProperties": {
+      "description": "The properties for updating a profile agent association.",
+      "type": "object",
+      "properties": {
+        "customDomains": {
+          "description": "List of custom domains associated with this agent link.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          }
         }
       }
     },

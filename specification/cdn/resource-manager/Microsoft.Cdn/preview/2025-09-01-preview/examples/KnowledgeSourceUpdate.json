@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "webAgentName": "myWebAgent1",
+    "knowledgeSourceName": "myKnowledgeSource1",
+    "api-version": "2025-09-01-preview",
+    "knowledgeSourceUpdateParameters": {
+      "properties": {
+        "description": "Updated website knowledge source for FAQ and help content",
+        "url": "https://example.com/sitemap.xml",
+        "updateFrequency": "EverySixHours"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myKnowledgeSource1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1/knowledgeSources/myKnowledgeSource1",
+        "type": "Microsoft.Cdn/webAgents/knowledgeSources",
+        "properties": {
+          "description": "Updated website knowledge source for FAQ and help content",
+          "type": "Sitemap",
+          "url": "https://example.com/sitemap.xml",
+          "updateFrequency": "EverySixHours",
+          "lastRefreshedTime": "2025-09-01T11:00:00Z",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myKnowledgeSource1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1/knowledgeSources/myKnowledgeSource1",
+        "type": "Microsoft.Cdn/webAgents/knowledgeSources",
+        "properties": {
+          "description": "Updated website knowledge source for FAQ and help content",
+          "type": "Sitemap",
+          "url": "https://example.com/sitemap.xml",
+          "updateFrequency": "EverySixHours",
+          "lastRefreshedTime": "2025-09-01T11:00:00Z",
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  }
+}
