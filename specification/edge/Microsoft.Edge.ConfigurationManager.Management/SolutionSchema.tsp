@@ -40,7 +40,7 @@ model SolutionSchema is ProxyResource<SolutionSchemaProperties> {
   @pattern("^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$")
   @path
   @key("solutionSchemaName")
-  @segment("solutionSchema")
+  @segment("solutionSchemas")
   name: string;
 
   ...EntityTagProperty;
