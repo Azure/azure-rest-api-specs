@@ -60,3 +60,5 @@ using Microsoft.Quota;
 @@usage(GroupQuotaSubscriptionRequestStatus, Usage.input, "csharp");
 @@usage(GroupQuotaSubscriptionId, Usage.input, "csharp");
 @@usage(SubmittedResourceRequestStatus, Usage.input, "csharp");
+
+@@clientName(Microsoft.Quota, "QuotaMgmtClient", "python");
