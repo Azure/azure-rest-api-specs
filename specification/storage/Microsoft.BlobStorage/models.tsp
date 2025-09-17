@@ -19,7 +19,7 @@ scalar base64Bytes extends bytes;
 model StorageError {
   /** The error code. */
   @header("x-ms-error-code")
-  errorCode?: ErrorCode;
+  errorCode?: StorageErrorCode;
 
   /** The error code for the copy source. */
   @header("x-ms-copy-source-error-code")
@@ -47,7 +47,7 @@ model StorageError {
 
 /** Error codes returned by the Azure Blob Storage service */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
-enum ErrorCode {
+enum StorageErrorCode {
   /** Account already exists */
   AccountAlreadyExists: "AccountAlreadyExists",
 
