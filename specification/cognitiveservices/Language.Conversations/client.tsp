@@ -16,13 +16,9 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(KnowledgeBaseAnswer.id, "qnaId");
 @@clientName(KnowledgeBaseAnswer.answerSpan, "shortAnswer");
 @@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence");
-@@clientName(KnowledgeBaseAnswerContext.previousUserQuery,
-  "previousQuestion"
-);
+@@clientName(KnowledgeBaseAnswerContext.previousUserQuery, "previousQuestion");
 
-@@clientName(AnswersOptions.confidenceScoreThreshold,
-  "confidenceThreshold"
-);
+@@clientName(AnswersOptions.confidenceScoreThreshold, "confidenceThreshold");
 @@clientName(AnswersOptions.context, "answerContext");
 @@clientName(AnswersOptions.rankerType, "rankerKind");
 @@clientName(AnswersOptions.answerSpanRequest, "shortAnswerOptions");
@@ -32,9 +28,7 @@ namespace Language.ConversationsClientCustomizations;
 );
 @@clientName(ShortAnswerOptions.topAnswersWithSpan, "top");
 
-@@clientName(AnalyzeConversationLROTask,
-  "AnalyzeConversationOperationAction"
-);
+@@clientName(AnalyzeConversationLROTask, "AnalyzeConversationOperationAction");
 
 @@clientName(AnalyzeConversationLROTask.taskName, "Name");
 
@@ -65,15 +59,16 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(ConversationCallingOptions, "ConversationCallingConfig");
 @@clientName(LuisCallingOptions, "LuisCallingConfig");
 
-@@clientName(ConversationAnalysisOptions,
-  "ConversationAnalysisInput"
-);
+@@clientName(ConversationAnalysisOptions, "ConversationAnalysisInput");
 
 @@clientName(Tasks, "ConversationActions");
 @@clientName(Tasks.items, "taskResults", "python");
 @@clientName(State, "ConversationActionState");
 @@clientName(role, "ParticipantRole");
-@@clientName(NoneLinkedTargetIntentResult, "NonLinkedTargetIntentResult", "python");
+@@clientName(NoneLinkedTargetIntentResult,
+  "NonLinkedTargetIntentResult",
+  "python"
+);
 
 @@clientName(Entity, "NamedEntity");
 
@@ -85,10 +80,7 @@ namespace Language.ConversationsClientCustomizations;
   "ConversationLanguageUnderstandingActionContent"
 );
 
-@@clientName(ConversationTaskParameters,
-  "ConversationActionContent",
-  "python"
-);
+@@clientName(ConversationTaskParameters, "ConversationActionContent", "python");
 
 @@clientName(ConversationalAIInputParameters,
   "AIConversationLanguageUnderstandingActionContent"
@@ -101,9 +93,7 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(ConversationSummarizationTaskParameters,
   "ConversationSummarizationActionContent"
 );
-@@clientName(ConversationPiiTaskParameters,
-  "ConversationPiiActionContent"
-);
+@@clientName(ConversationPiiTaskParameters, "ConversationPiiActionContent");
 
 @@clientName(Conversation, "ConversationInput");
 
@@ -119,9 +109,7 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(ErrorCode, "ConversationErrorCode");
 
 @@clientName(BaseResolution, "ResolutionBase");
-@@clientName(BaseExtraInformation,
-  "ConversationEntityExtraInformation"
-);
+@@clientName(BaseExtraInformation, "ConversationEntityExtraInformation");
 
 @@clientName(TranscriptConversationItem.itn, "InverseTextNormalized");
 @@clientName(TranscriptConversationItem.maskedItn,
@@ -129,20 +117,14 @@ namespace Language.ConversationsClientCustomizations;
 );
 
 @@clientName(AnalyzeConversationTask, "AnalyzeConversationInput");
-@@clientName(AnalyzeConversationTaskKind,
-  "AnalyzeConversationInputKind"
-);
+@@clientName(AnalyzeConversationTaskKind, "AnalyzeConversationInputKind");
 
-@@clientName(ConversationalTask,
-  "ConversationLanguageUnderstandingInput"
-);
+@@clientName(ConversationalTask, "ConversationLanguageUnderstandingInput");
 
 @@clientName(ConversationalTask.analysisInput, "ConversationInput");
 @@clientName(ConversationalTask.parameters, "ActionContent");
 
-@@clientName(AnalyzeConversationTaskResult,
-  "AnalyzeConversationActionResult"
-);
+@@clientName(AnalyzeConversationTaskResult, "AnalyzeConversationActionResult");
 @@clientName(AnalyzeConversationTaskResultsKind,
   "AnalyzeConversationResultKind"
 );
@@ -153,12 +135,8 @@ namespace Language.ConversationsClientCustomizations;
   "MultiLanguageConversationInput"
 );
 
-@@clientName(AnalyzeConversationJobsInput,
-  "AnalyzeConversationOperationInput"
-);
-@@clientName(AnalyzeConversationJobsInput.analysisInput,
-  "ConversationInput"
-);
+@@clientName(AnalyzeConversationJobsInput, "AnalyzeConversationOperationInput");
+@@clientName(AnalyzeConversationJobsInput.analysisInput, "ConversationInput");
 @@clientName(AnalyzeConversationJobsInput.tasks, "Actions");
 
 @@clientName(AnalyzeConversationLROTask, "AnalyzeConversationOperationAction");
@@ -181,13 +159,9 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(AnalyzeConversationSummarizationTask,
   "SummarizationOperationAction"
 );
-@@clientName(AnalyzeConversationSummarizationTask.parameters,
-  "ActionContent"
-);
+@@clientName(AnalyzeConversationSummarizationTask.parameters, "ActionContent");
 
-@@clientName(AnalyzeConversationJobState,
-  "AnalyzeConversationOperationState"
-);
+@@clientName(AnalyzeConversationJobState, "AnalyzeConversationOperationState");
 @@clientName(AnalyzeConversationJobState.tasks, "Actions");
 
 @@clientName(AnalyzeConversationJobResult,
@@ -221,26 +195,14 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(analyzeConversationsSubmitJob,
   "AnalyzeConversationSubmitOperation"
 );
-@@clientName(analyzeConversationsSubmitJob,
-  "AnalyzeConversationJob", "python"
-);
+@@clientName(analyzeConversationsSubmitJob, "AnalyzeConversationJob", "python");
 
-@@clientName(analyzeConversationsJobStatus,
-  "GetAnalyzeConversationJobStatus"
-);
+@@clientName(analyzeConversationsJobStatus, "GetAnalyzeConversationJobStatus");
 
-@@clientName(analyzeConversationsJobStatus,
-  "getJobStatus", "python"
-);
+@@clientName(analyzeConversationsJobStatus, "getJobStatus", "python");
 
-@@clientName(analyzeConversationsCancelJob,
-  "CancelAnalyzeConversations"
-);
+@@clientName(analyzeConversationsCancelJob, "CancelAnalyzeConversations");
 
-@@clientName(analyzeConversationsCancelJob,
-  "cancelJob", "python"
-);
+@@clientName(analyzeConversationsCancelJob, "cancelJob", "python");
 
-@@clientName(ConversationalPiiResultWithResultBase,
-  "ConversationalPiiResult"
-);
+@@clientName(ConversationalPiiResultWithResultBase, "ConversationalPiiResult");
