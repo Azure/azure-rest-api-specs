@@ -95,7 +95,6 @@ interface SitesByServiceGroup {
 
   @doc("update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  @patch(#{ implicitOptionality: true })
   update is SiteByServiceGroupOps.CustomPatchSync<Site, SiteUpdate>;
 
   @doc("delete Site at SG scope")
