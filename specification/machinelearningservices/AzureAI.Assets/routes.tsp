@@ -142,6 +142,7 @@ interface Indexes {
   get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string;
 
       @doc("Name of the index.")
@@ -165,6 +166,7 @@ interface Indexes {
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the index.")
@@ -192,6 +194,7 @@ interface Indexes {
   list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the index.")
@@ -231,6 +234,7 @@ interface Indexes {
   getLatest is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the index.")
@@ -249,6 +253,7 @@ interface Indexes {
   getNextVersion is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the index.")
@@ -268,6 +273,7 @@ interface Indexes {
   listLatest is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
       ...StandardListQueryParameters;
     },
@@ -284,6 +290,7 @@ interface Prompts {
   get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the prompt")
@@ -307,6 +314,7 @@ interface Prompts {
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the prompt")
@@ -334,6 +342,7 @@ interface Prompts {
   list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the prompt")
@@ -366,6 +375,7 @@ interface Prompts {
   getLatest is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the prompt")
@@ -384,6 +394,7 @@ interface Prompts {
   getNextVersion is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       @doc("Name of the prompt")
@@ -403,6 +414,7 @@ interface Prompts {
   listLatest is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML workspace or AI project.")
+      @path
       workspaceName: string,
 
       ...StandardListQueryParameters;
