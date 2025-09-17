@@ -63,15 +63,18 @@ describe("changedFiles", () => {
     expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
   });
 
-  it.each(["head-commit", ""])("getChangedFiles calls simpleGit with head commit only if provided", async (headCommitish) => {
-    const expectedArgs = ["--name-only", "HEAD^"];
-    if (headCommitish) {
-      expectedArgs.push(headCommitish);
-    }
-    
-    await getChangedFiles({ headCommitish });
-    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(expectedArgs);
-  });
+  it.each(["head-commit", ""])(
+    "getChangedFiles calls simpleGit with head commit only if provided",
+    async (headCommitish) => {
+      const expectedArgs = ["--name-only", "HEAD^"];
+      if (headCommitish) {
+        expectedArgs.push(headCommitish);
+      }
+
+      await getChangedFiles({ headCommitish });
+      expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(expectedArgs);
+    },
+  );
 
   const files = [
     "cspell.json",
@@ -326,10 +329,7 @@ describe("changedFiles", () => {
         cwd: "/custom/path",
       };
 
-      const expectedArgs = [
-        "--name-status",
-        "origin/main"
-      ];
+      const expectedArgs = ["--name-status", "origin/main"];
       if (headCommitish) {
         expectedArgs.push(headCommitish);
       }
