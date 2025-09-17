@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "webAgentName": "myWebAgent1",
+    "api-version": "2025-09-01-preview",
+    "webAgentUpdateParameters": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      },
+      "properties": {
+        "description": "Updated web agent description",
+        "mcpServerEnabled": false,
+        "paths": [
+          {
+            "type": "Chat",
+            "path": "/chat/v2"
+          },
+          {
+            "type": "McpServer",
+            "path": "/mcp/v2"
+          }
+        ],
+        "profileAgentLinks": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1",
+            "profileName": "profile1",
+            "resourceGroupName": "RG"
+          }
+        ],
+        "configuration": {
+          "maxConcurrentRequests": 150,
+          "timeoutInSeconds": 45,
+          "retryPolicy": {
+            "maxRetries": 4,
+            "retryDelayInSeconds": 8
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myWebAgent1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1",
+        "type": "Microsoft.Cdn/webAgents",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "sku": {
+          "name": "Standard_Microsoft"
+        },
+        "properties": {
+          "description": "Updated web agent description",
+          "mcpServerEnabled": false,
+          "paths": [
+            {
+              "type": "Chat",
+              "path": "/chat/v2"
+            },
+            {
+              "type": "McpServer",
+              "path": "/mcp/v2"
+            }
+          ],
+          "profileAgentLinks": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1",
+              "profileName": "profile1",
+              "resourceGroupName": "RG"
+            }
+          ],
+          "configuration": {
+            "maxConcurrentRequests": 150,
+            "timeoutInSeconds": 45,
+            "retryPolicy": {
+              "maxRetries": 4,
+              "retryDelayInSeconds": 8
+            }
+          },
+          "provisioningState": "Succeeded",
+          "resourceState": "Running"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myWebAgent1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1",
+        "type": "Microsoft.Cdn/webAgents",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "sku": {
+          "name": "Standard_Microsoft"
+        },
+        "properties": {
+          "description": "Updated web agent description",
+          "mcpServerEnabled": false,
+          "paths": [
+            {
+              "type": "Chat",
+              "path": "/chat/v2"
+            },
+            {
+              "type": "McpServer",
+              "path": "/mcp/v2"
+            }
+          ],
+          "profileAgentLinks": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1",
+              "profileName": "profile1",
+              "resourceGroupName": "RG"
+            }
+          ],
+          "configuration": {
+            "maxConcurrentRequests": 150,
+            "timeoutInSeconds": 45,
+            "retryPolicy": {
+              "maxRetries": 4,
+              "retryDelayInSeconds": 8
+            }
+          },
+          "provisioningState": "Updating",
+          "resourceState": "Running"
+        }
+      }
+    }
+  }
+}
