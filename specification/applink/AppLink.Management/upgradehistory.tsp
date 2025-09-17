@@ -15,6 +15,7 @@ model UpgradeHistory is ProxyResource<UpgradeHistoryProperties> {
     ...ResourceNameParameter<UpgradeHistory>;
 }
 
+@doc("AppLinkMember upgrade history properties")
 model UpgradeHistoryProperties {
   @doc("Start timestamp")
   startTimestamp: utcDateTime;
@@ -30,6 +31,10 @@ model UpgradeHistoryProperties {
 
   @doc("Version upgraded to")
   toVersion: string;
+
+  @doc("Provisioning state")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 
