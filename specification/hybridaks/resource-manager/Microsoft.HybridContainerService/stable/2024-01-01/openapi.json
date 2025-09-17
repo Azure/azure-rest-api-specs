@@ -2426,6 +2426,46 @@
         }
       }
     },
+    "ProvisionedClusterPoolUpgradeProfile": {
+      "type": "object",
+      "description": "The list of available kubernetes versions for upgrade.",
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version (major.minor.patch).",
+          "readOnly": true
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "The particular KubernetesVersion Image OS Type (Linux, Windows)",
+          "readOnly": true
+        },
+        "upgrades": {
+          "type": "array",
+          "description": "List of available kubernetes versions for upgrade.",
+          "items": {
+            "$ref": "#/definitions/ProvisionedClusterPoolUpgradeProfileProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisionedClusterPoolUpgradeProfileProperties": {
+      "type": "object",
+      "description": "The upgrade properties.",
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version (major.minor.patch).",
+          "readOnly": true
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Whether the Kubernetes version is currently in preview.",
+          "readOnly": true
+        }
+      }
+    },
     "ProvisionedClusterProperties": {
       "type": "object",
       "description": "Properties of the provisioned cluster.",
@@ -2604,7 +2644,7 @@
       "description": "The list of available kubernetes version upgrades for the provisioned cluster.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AgentPoolProperties",
+          "$ref": "#/definitions/ProvisionedClusterUpgradeProfileProperties",
           "description": "The properties of the upgrade profile.",
           "x-ms-client-flatten": true
         }
@@ -2613,6 +2653,24 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "ProvisionedClusterUpgradeProfileProperties": {
+      "type": "object",
+      "description": "Control plane and agent pool upgrade profiles.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource",
+          "readOnly": true
+        },
+        "controlPlaneProfile": {
+          "$ref": "#/definitions/ProvisionedClusterPoolUpgradeProfile",
+          "description": "The list of available kubernetes version upgrades for the control plane."
+        }
+      },
+      "required": [
+        "controlPlaneProfile"
       ]
     },
     "ProvisioningState": {

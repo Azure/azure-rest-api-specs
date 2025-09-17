@@ -16,7 +16,8 @@ namespace Microsoft.HybridContainerService;
  */
 @singleton("default")
 @parentResource(provisionedCluster)
-model ProvisionedClusterUpgradeProfile is ProxyResource<AgentPoolProperties> {
+model ProvisionedClusterUpgradeProfile
+  is ProxyResource<ProvisionedClusterUpgradeProfileProperties> {
   ...ResourceNameParameter<
     Resource = ProvisionedClusterUpgradeProfile,
     KeyName = "upgradeProfile",
