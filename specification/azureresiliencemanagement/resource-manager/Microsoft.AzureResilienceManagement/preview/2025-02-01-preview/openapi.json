@@ -2565,6 +2565,9 @@
           }
         },
         "x-ms-examples": {
+          "GoalResources_Get_Complete_Example": {
+            "$ref": "./examples/GoalResources_Get_Complete_Example.json"
+          },
           "GoalResources_Get_MaximumSet": {
             "$ref": "./examples/GoalResources_Get_MaximumSet_Gen.json"
           },
@@ -8851,7 +8854,7 @@
           "type": "string",
           "description": "A description of the recovery orchestration group.",
           "minLength": 5,
-          "maxLength": 20
+          "maxLength": 50
         },
         "preActions": {
           "type": "array",
@@ -8898,7 +8901,7 @@
           "type": "string",
           "description": "A description of the recovery orchestration group.",
           "minLength": 5,
-          "maxLength": 20
+          "maxLength": 50
         },
         "preActions": {
           "type": "array",
@@ -9124,6 +9127,67 @@
         ]
       }
     },
+    "RecoveryOperationStatus": {
+      "type": "string",
+      "description": "Specifies the operation status for failover and validation.",
+      "enum": [
+        "NotStarted",
+        "ValidationInProgress",
+        "InProgress",
+        "Succeeded",
+        "CompletedWithWarning",
+        "ValidationFailed",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Operation has not started or ran."
+          },
+          {
+            "name": "ValidationInProgress",
+            "value": "ValidationInProgress",
+            "description": "Operation is in the process of being validated."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Operation has completed successfully."
+          },
+          {
+            "name": "CompletedWithWarning",
+            "value": "CompletedWithWarning",
+            "description": "Operation has completed but ran into some warning state."
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "Operation has completed but ran into some validation error state."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Operation has completed but ran into some error state."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Operation has been canceled by the user."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "RecoveryPlan": {
       "type": "object",
       "description": "Represents a recovery orchestration plan resource in the Azure Resilience Management provider namespace.",
@@ -9187,15 +9251,18 @@
         "lastExecutedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent execution time of the recovery orchestration plan in UTC."
+          "description": "The most recent execution time of the recovery orchestration plan in UTC.",
+          "readOnly": true
         },
         "operationStatus": {
-          "type": "string",
-          "description": "The status of the most recent execution of the recovery orchestration plan."
+          "$ref": "#/definitions/RecoveryOperationStatus",
+          "description": "The status of the most recent execution of the recovery orchestration plan.",
+          "readOnly": true
         },
         "errorDetails": {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error details for the most recent execution of the recovery orchestration plan."
+          "description": "Error details for the most recent execution of the recovery orchestration plan.",
+          "readOnly": true
         },
         "recoveryTimeActual": {
           "type": "string",
@@ -9203,11 +9270,7 @@
           "description": "The actual recovery time of the most recent recovery orchestration plan.",
           "readOnly": true
         }
-      },
-      "required": [
-        "lastExecutedAt",
-        "operationStatus"
-      ]
+      }
     },
     "RecoveryPlanListResult": {
       "type": "object",
@@ -9240,21 +9303,20 @@
         "lastExecutedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent execution time of the recovery orchestration plan in UTC."
+          "description": "The most recent execution time of the recovery orchestration plan in UTC.",
+          "readOnly": true
         },
         "operationStatus": {
-          "type": "string",
-          "description": "The status of the most recent execution of the recovery orchestration plan."
+          "$ref": "#/definitions/RecoveryOperationStatus",
+          "description": "The status of the most recent execution of the recovery orchestration plan.",
+          "readOnly": true
         },
         "errorDetails": {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error details for the most recent execution of the recovery orchestration plan."
+          "description": "Error details for the most recent execution of the recovery orchestration plan.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "lastExecutedAt",
-        "operationStatus"
-      ]
+      }
     },
     "RecoveryPlanProperties": {
       "type": "object",
@@ -9754,20 +9816,8 @@
         "reprotectAction": {
           "$ref": "#/definitions/ResourceCustomProtectionAction",
           "description": "The Azure resource ID hosting the reprotect automation script."
-        },
-        "associatedIdentity": {
-          "$ref": "#/definitions/AssociatedIdentity",
-          "description": "Identity details associated to the resource, which will be used for performing any operations on it"
         }
       },
-      "required": [
-        "failoverAction",
-        "failoverCommitAction",
-        "testFailoverAction",
-        "testFailoverCleanupAction",
-        "reprotectAction",
-        "associatedIdentity"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
@@ -9850,7 +9900,8 @@
       "properties": {
         "protectionSolutionType": {
           "$ref": "#/definitions/ResourceProtectionSolutionType",
-          "description": "A setting that indicates the resource protected with which recovery solution."
+          "description": "A setting that indicates the resource protected with which recovery solution.",
+          "readOnly": true
         },
         "protectionStatus": {
           "$ref": "#/definitions/ResourceProtectionStatus",
@@ -9915,7 +9966,6 @@
         }
       },
       "required": [
-        "protectionSolutionType",
         "isAutoFailover"
       ]
     },
@@ -10038,11 +10088,6 @@
           "description": "Reprotect params for azure site recovery solution."
         }
       },
-      "required": [
-        "testFailoverParams",
-        "testFailoverCleanupParams",
-        "reprotectParams"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
@@ -10099,7 +10144,7 @@
         "serviceGroupName": {
           "type": "string",
           "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
         },
         "apiVersion": {
           "type": "string",
@@ -10138,7 +10183,7 @@
         "serviceGroupName": {
           "type": "string",
           "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
         },
         "apiVersion": {
           "type": "string",
@@ -10158,7 +10203,7 @@
         "serviceGroupName": {
           "type": "string",
           "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
         },
         "apiVersion": {
           "type": "string",
@@ -10572,7 +10617,7 @@
       "description": "The name of the service group.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$",
       "x-ms-parameter-location": "method"
     }
   }

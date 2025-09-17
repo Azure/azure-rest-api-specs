@@ -347,17 +347,12 @@
         "evaluationCalculationType": {
           "$ref": "#/definitions/EvaluationCalculationType",
           "description": "Specifies how evaluation is calculated, either based on calendar days or a rolling window."
-        },
-        "enableAlert": {
-          "type": "boolean",
-          "description": "A flag to determine whether alert is enabled."
         }
       },
       "required": [
         "value",
         "evaluationPeriodDays",
-        "evaluationCalculationType",
-        "enableAlert"
+        "evaluationCalculationType"
       ]
     },
     "BaselineProperties": {
@@ -896,6 +891,10 @@
           "description": "The streaming rule last updated timestamp associated with the Sli resource.",
           "readOnly": true
         },
+        "enableAlert": {
+          "type": "boolean",
+          "description": "A flag to determine whether alert is enabled."
+        },
         "sliProperties": {
           "$ref": "#/definitions/SliProperties",
           "description": "Defines the SLI properties associated with the SLI."
@@ -911,6 +910,7 @@
         "baselineProperties",
         "streamingRuleId",
         "streamingRuleLastUpdatedTimestamp",
+        "enableAlert",
         "sliProperties"
       ]
     },

@@ -417,6 +417,30 @@ model WorkspaceResourceProperties {
   @added(Versions.v2025_01_01_preview)
   @visibility(Lifecycle.Read)
   managedStorageAccount?: StorageAccountResourceId;
+
+  /**
+   * Quota allocations associated with this workspace. Available only for special providers.
+   */
+  @added(Versions.v2025_08_11_preview)
+  quotas?: QuotaAllocations;
+}
+
+/**
+ * Quota allocations with each field representing different quota type.
+ */
+@added(Versions.v2025_08_11_preview)
+model QuotaAllocations {
+  /**
+   * Lifetime limit for standard priority jobs execution in minutes.
+   */
+  @minValue(0)
+  standardMinutesLifetime: int32;
+
+  /**
+   * Lifetime limit for high priority jobs execution in minutes.
+   */
+  @minValue(0)
+  highMinutesLifetime?: int32;
 }
 
 /**
@@ -552,4 +576,10 @@ model QuantumSuiteOfferProperties {
 
   /** Description of the offer. */
   description: string;
+
+  /**
+   * Quota allocations associated with this offer.
+   */
+  @added(Versions.v2025_08_11_preview)
+  quotas?: QuotaAllocations;
 }

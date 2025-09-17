@@ -33,7 +33,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("AppSecurity versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Version 2023-02-06-preview")
   v2023_02_06_preview: "2023-02-06-preview",
 }
