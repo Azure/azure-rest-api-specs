@@ -618,7 +618,7 @@ interface VirtualMachineRunCommandsOperationGroup {
     ...LocationResourceParameter,
 
     /**
-     * The command id.
+     * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
      */
     @path
     commandId: string,
