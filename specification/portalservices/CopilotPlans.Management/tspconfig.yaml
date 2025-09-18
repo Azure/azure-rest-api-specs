@@ -18,7 +18,7 @@ options:
     package-dir: "Azure.ResourceManager.PortalServicesCopilotPlans"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.PortalServicesCopilotPlans"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-portalservicescopilotplans"
     namespace: "azure.mgmt.portalservicescopilotplans"
@@ -40,6 +40,7 @@ options:
     service-dir: "sdk/resourcemanager/portalservicescopilotplans"
     package-dir: "armportalservicescopilotplans"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
