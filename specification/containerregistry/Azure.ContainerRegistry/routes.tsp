@@ -666,83 +666,38 @@ interface AuthenticationOperationGroup {
   /**
    * Exchange AAD tokens for an ACR refresh Token
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
   @operationId("Authentication_ExchangeAadAccessTokenForAcrRefreshToken")
   @route("/oauth2/exchange")
   @post
-  exchangeAadAccessTokenForAcrRefreshToken is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Can take a value of access_token_refresh_token, or access_token, or
-       * refresh_token
-       */
-      @bodyRoot
-      grant_type: PostContentSchemaGrantType;
+  exchangeAadAccessTokenForAcrRefreshToken(
+    /** The content type */
+    @header contentType: "multipart/form-data",
 
-      /**
-       * Indicates the name of your Azure container registry.
-       */
-      @bodyRoot
-      service: string;
-
-      /**
-       * AAD tenant associated to the AAD credentials.
-       */
-      @bodyRoot
-      tenant?: string;
-
-      /**
-       * AAD refresh token, mandatory when grant_type is access_token_refresh_token or
-       * refresh_token
-       */
-      @bodyRoot
-      refresh_token?: string;
-
-      /**
-       * AAD access token, mandatory when grant_type is access_token_refresh_token or
-       * access_token.
-       */
-      @bodyRoot
-      access_token?: string;
-    },
-    AcrRefreshToken
-  >;
+    /** The body of the request */
+    @multipartBody body: MultipartBodyParameter,
+  ): AcrRefreshToken;
 
   /**
    * Exchange ACR Refresh token for an ACR Access Token
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
   @operationId("Authentication_ExchangeAcrRefreshTokenForAcrAccessToken")
   @route("/oauth2/token")
   @post
-  exchangeAcrRefreshTokenForAcrAccessToken is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Indicates the name of your Azure container registry.
-       */
-      @bodyRoot
-      service: string;
+  exchangeAcrRefreshTokenForAcrAccessToken(
+    /** The content type */
+    @header contentType: "multipart/form-data",
 
-      /**
-       * Which is expected to be a valid scope, and can be specified more than once for
-       * multiple scope requests. You obtained this from the Www-Authenticate response
-       * header from the challenge.
-       */
-      @bodyRoot
-      scope: string;
-
-      /**
-       * Must be a valid ACR refresh token
-       */
-      @bodyRoot
-      refresh_token: string;
-
-      /**
-       * Grant type is expected to be refresh_token
-       */
-      @bodyRoot
-      grant_type: TokenGrantType;
-    },
-    AcrAccessToken
-  >;
+    /** The body of the request */
+    @multipartBody body: MultipartBodyParameter,
+  ): AcrAccessToken;
 
   /**
    * Exchange Username, Password and Scope for an ACR Access Token

@@ -8,6 +8,37 @@ using Azure.Core;
 
 namespace AzureContainerRegistry;
 
+/** The multipart body parameter for AAD token exchange. */
+model MultipartBodyParameter {
+  /**
+   * Can take a value of access_token_refresh_token, or access_token, or
+   * refresh_token
+   */
+  grantType: HttpPart<PostContentSchemaGrantType>;
+
+  /**
+   * Indicates the name of your Azure container registry.
+   */
+  service: HttpPart<string>;
+
+  /**
+   * AAD tenant associated to the AAD credentials.
+   */
+  tenant?: HttpPart<string>;
+
+  /**
+   * AAD refresh token, mandatory when grant_type is access_token_refresh_token or
+   * refresh_token
+   */
+  refreshToken?: HttpPart<string>;
+
+  /**
+   * AAD access token, mandatory when grant_type is access_token_refresh_token or
+   * access_token.
+   */
+  accessToken?: HttpPart<string>;
+}
+
 /**
  * The artifact platform's architecture.
  */
