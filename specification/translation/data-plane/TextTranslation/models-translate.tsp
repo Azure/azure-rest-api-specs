@@ -317,15 +317,6 @@ model TranslatedTextItem {
   @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
   detectedLanguage?: DetectedLanguage;
 
-  @added(APIVersion.v2025_05_01_preview)
-  @doc("""
-    Input text in the default script of the source language. The text property is present only when 
-    the input is expressed in a script that's not the usual script for the language. For example, 
-    if the input were Arabic written in Latin script, then text would be the same Arabic text 
-    converted into Arab script.
-    """)
-  text?: string;
-
   @doc("""
     An array of translation results. The size of the array matches the number of target 
     languages specified through the to query parameter.
@@ -387,16 +378,9 @@ model TranslationText {
   @doc("A string giving the translated text.")
   text: string;
 
-  @renamedFrom(APIVersion.v2025_05_01_preview, "transliteration")
   @removed(APIVersion.v2025_05_01_preview)
   @doc("""
     An object giving the translated text in the script specified by the toScript parameter.
-    """)
-  transliterationV3?: TransliteratedText;
-
-  @added(APIVersion.v2025_05_01_preview)
-  @doc("""
-    An object giving the translated text in the script specified by the target's script parameter.
     """)
   transliteration?: TransliteratedText;
 
