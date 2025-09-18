@@ -178,9 +178,9 @@ union PostContentSchemaGrantType {
 /**
  * Grant type is expected to be refresh_token
  */
-enum TokenGrantType {
-  refresh_token,
-  password,
+union TokenGrantType {
+  refresh_token: "refresh_token",
+  password: "password",
 }
 
 /**
@@ -255,7 +255,7 @@ model AcrErrorInfo {
   /**
    * Error details
    */
-  detail?: Record<unknown>;
+  detail?: Record<string>;
 }
 
 /**

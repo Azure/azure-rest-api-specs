@@ -14,6 +14,7 @@ interface ContainerRegistry {
    * Tells whether this Docker Registry instance supports Docker Registry HTTP API v2
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/")
   @get
   checkDockerV2Support is Azure.Core.Foundations.Operation<{}, void>;
@@ -22,6 +23,7 @@ interface ContainerRegistry {
    * Get the manifest identified by `name` and `reference` where `reference` can be
    * a tag or digest.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/{name}/manifests/{reference}")
   @get
   getManifest is Azure.Core.Foundations.Operation<
@@ -52,6 +54,7 @@ interface ContainerRegistry {
    * Put the manifest identified by `name` and `reference` where `reference` can be
    * a tag or digest.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/{name}/manifests/{reference}")
   @put
   createManifest is Azure.Core.Foundations.Operation<
@@ -81,6 +84,7 @@ interface ContainerRegistry {
    * Delete the manifest identified by `name` and `reference`. Note that a manifest
    * can _only_ be deleted by `digest`.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/{name}/manifests/{reference}")
   @delete
   deleteManifest is Azure.Core.Foundations.Operation<
@@ -103,6 +107,7 @@ interface ContainerRegistry {
   /**
    * List repositories
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @route("/acr/v1/_catalog")
   @list
@@ -122,6 +127,7 @@ interface ContainerRegistry {
   /**
    * Get repository attributes
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}")
   @get
   getProperties is Azure.Core.Foundations.Operation<
@@ -138,6 +144,7 @@ interface ContainerRegistry {
   /**
    * Delete the repository identified by `name`
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}")
   @delete
   deleteRepository is Azure.Core.Foundations.Operation<
@@ -155,6 +162,7 @@ interface ContainerRegistry {
    * Update the attribute identified by `name` where `reference` is the name of the
    * repository.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}")
   @patch(#{ implicitOptionality: true })
   updateProperties is Azure.Core.Foundations.Operation<
@@ -177,6 +185,7 @@ interface ContainerRegistry {
   /**
    * List tags of a repository
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags")
   @get
   getTags is Azure.Core.Foundations.Operation<
@@ -218,6 +227,7 @@ interface ContainerRegistry {
   /**
    * Get tag attributes by tag
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags/{reference}")
   @get
   getTagProperties is Azure.Core.Foundations.Operation<
@@ -240,6 +250,7 @@ interface ContainerRegistry {
   /**
    * Update tag attributes
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags/{reference}")
   @patch(#{ implicitOptionality: true })
   updateTagAttributes is Azure.Core.Foundations.Operation<
@@ -268,6 +279,7 @@ interface ContainerRegistry {
   /**
    * Delete tag
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags/{reference}")
   @delete
   deleteTag is Azure.Core.Foundations.Operation<
@@ -290,6 +302,7 @@ interface ContainerRegistry {
   /**
    * List manifests of a repository
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_manifests")
   @get
   getManifests is Azure.Core.Foundations.Operation<
@@ -325,6 +338,7 @@ interface ContainerRegistry {
   /**
    * Get manifest attributes
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_manifests/{digest}")
   @get
   getManifestProperties is Azure.Core.Foundations.Operation<
@@ -347,6 +361,7 @@ interface ContainerRegistry {
   /**
    * Update properties of a manifest
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_manifests/{digest}")
   @patch(#{ implicitOptionality: true })
   updateManifestProperties is Azure.Core.Foundations.Operation<
@@ -377,6 +392,7 @@ interface ContainerRegistryBlob {
   /**
    * Retrieve the blob from the registry identified by digest.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @get
@@ -400,6 +416,7 @@ interface ContainerRegistryBlob {
   /**
    * Same as GET, except only the headers are returned.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @head
@@ -423,6 +440,7 @@ interface ContainerRegistryBlob {
   /**
    * Removes an already uploaded blob.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/{name}/blobs/{digest}")
   @delete
   deleteBlob is Azure.Core.Foundations.Operation<
@@ -445,6 +463,7 @@ interface ContainerRegistryBlob {
   /**
    * Mount a blob identified by the `mount` parameter from another repository.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @sharedRoute
   @route("/v2/{name}/blobs/uploads/")
   @post
@@ -475,6 +494,7 @@ interface ContainerRegistryBlob {
    * Retrieve status of upload identified by uuid. The primary purpose of this
    * endpoint is to resolve the current status of a resumable upload.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/{nextBlobUuidLink}")
   @get
   getUploadStatus is Azure.Core.Foundations.Operation<
@@ -492,6 +512,7 @@ interface ContainerRegistryBlob {
   /**
    * Upload a stream of data without completing the upload.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/{nextBlobUuidLink}")
   @patch(#{ implicitOptionality: true })
   uploadChunk is Azure.Core.Foundations.Operation<
@@ -517,6 +538,7 @@ interface ContainerRegistryBlob {
    * request without a body will just complete the upload with previously uploaded
    * content.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/{nextBlobUuidLink}")
   @put
   completeUpload is Azure.Core.Foundations.Operation<
@@ -548,6 +570,7 @@ interface ContainerRegistryBlob {
    * not called, the unfinished uploads will eventually timeout.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/{nextBlobUuidLink}")
   @delete
   cancelUpload is Azure.Core.Foundations.Operation<
@@ -565,6 +588,7 @@ interface ContainerRegistryBlob {
   /**
    * Initiate a resumable blob upload with an empty request body.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @sharedRoute
   @route("/v2/{name}/blobs/uploads/")
   @post
@@ -585,6 +609,7 @@ interface ContainerRegistryBlob {
    * issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range
    * requests can be used to fetch partial content.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @get
@@ -614,6 +639,7 @@ interface ContainerRegistryBlob {
   /**
    * Same as GET, except only the headers are returned.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @head
@@ -679,6 +705,7 @@ interface Authentication {
   /**
    * Exchange Username, Password and Scope for an ACR Access Token
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/oauth2/token")
   @get
   getAcrAccessTokenFromLogin is Azure.Core.Foundations.Operation<

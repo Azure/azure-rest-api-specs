@@ -1602,7 +1602,9 @@
         "detail": {
           "type": "object",
           "description": "Error details",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2868,7 +2870,17 @@
       ],
       "x-ms-enum": {
         "name": "TokenGrantType",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "refresh_token",
+            "value": "refresh_token"
+          },
+          {
+            "name": "password",
+            "value": "password"
+          }
+        ]
       }
     },
     "V1Manifest": {
