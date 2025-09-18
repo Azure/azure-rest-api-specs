@@ -16,9 +16,9 @@ namespace Azure.AI.Projects;
 alias ListEvaluatorVersionsParameters = {};
 alias EvaluatorInputParameters = InputParameters<EvaluatorVersion, "evaluatorVersion">;
 
-// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_15_preview)
 interface Evaluators {
+  // GET /evaluators/{evaluatorName}/versions
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
   @doc("List all versions of the given {name}", EvaluatorVersion)
   @Rest.action("versions")
@@ -31,16 +31,18 @@ interface Evaluators {
     Azure.Core.Page<EvaluatorVersion>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  // GET /evaluators/{evaluatorName}/versions
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List the latest version of each {name}", EvaluatorVersion)
   @Rest.listsResource(EvaluatorVersion)
-  listLatestVersions is Azure.Core.Foundations.ResourceList<
+  listVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters,
     Azure.Core.Page<EvaluatorVersion>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  // GET /evaluators/{evaluatorName}/versions/{version}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc(
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     EvaluatorVersion
@@ -59,7 +61,8 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  // DELETE /evaluators/{evaluatorName}/versions/{version}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc(
     "Delete the specific version of the {name}. The service returns 204 No Content if the {name} was deleted successfully or if the {name} does not exist.",
     EvaluatorVersion
@@ -76,7 +79,8 @@ interface Evaluators {
     Http.NoContentResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  // POST /evaluators/{evaluatorName}/versions
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create an existing {name} with the given version id", EvaluatorVersion)
   @Http.post
   createEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
@@ -85,8 +89,9 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluatorCreateResult>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "@TODO: Validate that empty body is indended"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  // PATCH /evaluators/{evaluatorName}/versions/{version}
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update an existing {name} with the given version id", EvaluatorVersion)
   @Http.patch
   updateEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
