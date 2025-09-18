@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @route("agents/{agentId}/humanEvaluations")
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_10_15_preview)
 @doc("Manage human evaluations for a specific agent.")
 interface HumanEvaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -29,7 +29,7 @@ interface HumanEvaluations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create or update an a reference to an evaluation template for this agent.")
+  @doc("Create or update a reference to an evaluation template for this agent.")
   put is Azure.Core.Foundations.Operation<
     {
       @doc("Identifier of the agent.")

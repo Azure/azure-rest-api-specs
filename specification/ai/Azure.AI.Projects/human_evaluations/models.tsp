@@ -11,26 +11,32 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_10_15_preview)
 @doc("List of human evaluations for a specific agent.")
 model AgentHumanEvaluations {
-  @doc("Identifier of the agent.")
+  @doc("Agent identifier.")
   agentId: string;
 
-  @doc("List of human evaluation templates used with this agent.")
-  humanEvaluationReferences: HumanEvaluationTemplateReference[];
+  @doc("Templates currently associated with the agent (embedded set).")
+  templates: HumanEvaluationTemplateReference[];
+
+  @doc("Primary active template Id.")
+  activeTemplateId?: string;
 }
 
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_10_15_preview)
 @doc("Request body to create or update the agent's human evaluation template references.")
 model HumanEvaluationTemplateReference {
-  @doc("Whether the current human evaluation template for this agent is enabled. If omitted the existing value is preserved.")
-  active?: boolean;
-
-  @doc("The asset id of the referenced human evaluation template.")
+  @doc("Identifier of the evaluation template (server-assigned or user-provided).")
   templateId: AssetId;
+
+  @doc("Display-friendly name or short label for the template.")
+  displayName?: string;
+
+  @doc("UTC ISO 8601 timestamp when this template was first linked to the agent.")
+  addedAt: string;
 }
 
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_10_15_preview)
 @doc("Identifier of a saved asset.")
 scalar AssetId extends string;
