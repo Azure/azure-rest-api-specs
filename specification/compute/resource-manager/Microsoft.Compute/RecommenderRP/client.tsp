@@ -15,12 +15,18 @@ using Microsoft.Compute;
   azureLocation[],
   "csharp"
 );
-@@clientName(SpotPlacementScoresInput, "ComputeRecommenderGenerateContent", "csharp");
+@@clientName(SpotPlacementScoresInput,
+  "ComputeRecommenderGenerateContent",
+  "csharp"
+);
 @@alternateType(SpotPlacementScoresResponse.desiredLocations,
   azureLocation[],
   "csharp"
 );
-@@clientName(SpotPlacementScoresResponse, "ComputeRecommenderGenerateResult", "csharp");
+@@clientName(SpotPlacementScoresResponse,
+  "ComputeRecommenderGenerateResult",
+  "csharp"
+);
 @@alternateType(PlacementScore.region, azureLocation, "csharp");
 @@clientName(PlacementScore, "ComputeRecommenderPlacementScore", "csharp");
 @@clientName(ResourceSize, "ComputeRecommenderResourceSize", "csharp");
