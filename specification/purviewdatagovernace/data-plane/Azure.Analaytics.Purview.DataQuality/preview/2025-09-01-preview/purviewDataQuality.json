@@ -594,7 +594,7 @@
           "201": {
             "description": "The resource is created.",
             "schema": {
-                "$ref": "#/definitions/ScheduleEntity"
+              "$ref": "#/definitions/ScheduleEntity"
             }
           }
         },
@@ -635,7 +635,7 @@
           "200": {
             "description": "Successfully retrieved schedule object",
             "schema": {
-                "$ref": "#/definitions/ScheduleEntity"
+              "$ref": "#/definitions/ScheduleEntity"
             }
           }
         },
@@ -645,95 +645,95 @@
           }
         }
       },
-    "put": {
-      "tags": [
-        "Schedule"
-      ],
-      "description": "Update Schedule",
-      "operationId": "UpdateSchedule",
-      "produces": [
-        "application/json"
-      ],
-      "consumes": [
-        "application/json-patch+json",
-        "application/json",
-        "text/json",
-        "application/*+json"
-      ],
-      "parameters": [
-        {
-          "in": "path",
-          "description": "Unique Identifier for Business Domain",
-          "name": "businessDomainId",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "in": "path",
-          "description": "Unique Identifier for Schedule",
-          "name": "scheduleId",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "in": "body",
-          "name": "body",
-          "schema": {
-            "$ref": "#/definitions/ScheduleEntity"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Successfully updated schedule",
-          "schema": {
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "description": "Update Schedule",
+        "operationId": "UpdateSchedule",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Schedule",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
               "$ref": "#/definitions/ScheduleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated schedule",
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Update": {
+            "$ref": "./examples/Schedule_Update.json"
           }
         }
       },
-      "x-ms-examples": {
-        "Schedule_Update": {
-          "$ref": "./examples/Schedule_Update.json"
+      "delete": {
+        "tags": [
+          "Schedule"
+        ],
+        "description": "Delete Schedule",
+        "operationId": "DeleteSchedule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique identifier for Schedule",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Delete": {
+            "$ref": "./examples/Schedule_Delete.json"
+          }
         }
       }
     },
-    "delete": {
-      "tags": [
-        "Schedule"
-      ],
-      "description": "Delete Schedule",
-      "operationId": "DeleteSchedule",
-      "produces": [
-        "application/json"
-      ],
-      "parameters": [
-        {
-          "in": "path",
-          "description": "Unique Identifier for Business Domain",
-          "name": "businessDomainId",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "in": "path",
-          "description": "Unique identifier for Schedule",
-          "name": "scheduleId",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "No content"
-        }
-      },
-      "x-ms-examples": {
-        "Schedule_Delete": {
-          "$ref": "./examples/Schedule_Delete.json"
-        }
-      }
-    }
-  },
     "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans": {
       "post": {
         "tags": [
@@ -1357,262 +1357,262 @@
           "type": "string"
         }
       }
-  },
-  "ScanDTO": {
-    "type": "object",
-    "properties": {
-      "scanType": {
-        "type": "string"
+    },
+    "ScanDTO": {
+      "type": "object",
+      "properties": {
+        "scanType": {
+          "type": "string"
+        }
       }
-    }
-  },
-  "JobConfigDTO": {
-    "type": "object",
-    "properties": {
-      "redundancyCheck": {
-        "type": "boolean"
-      },
-      "datasetToDatasourceMappings": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/DatasetToDatasourceMapping"
+    },
+    "JobConfigDTO": {
+      "type": "object",
+      "properties": {
+        "redundancyCheck": {
+          "type": "boolean"
+        },
+        "datasetToDatasourceMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetToDatasourceMapping"
+          }
+        }
+      }
+    },
+    "DatasetToDatasourceMapping": {
+      "type": "object",
+      "properties": {
+        "datasetAliasName": {
+          "type": "string"
+        },
+        "datasourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "JobMetadataEntity": {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "dataProductId": {
+          "type": "string"
+        },
+        "redundancyCheck": {
+          "type": "boolean"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "businessDomainId": {
+          "type": "string"
+        },
+        "submissionTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "cancelRequestTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "pfsJobId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "duration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "startedBy": {
+          "type": "string"
+        },
+        "cancelledBy": {
+          "type": "string"
+        },
+        "jobType": {
+          "type": "string"
+        },
+        "jobExecutionRegion": {
+          "type": "string"
+        },
+        "dataAssetId": {
+          "type": "string"
+        },
+        "dataAssetName": {
+          "type": "string"
+        },
+        "scheduleId": {
+          "type": "string"
+        },
+        "scheduleName": {
+          "type": "string"
+        },
+        "qualifiedPath": {
+          "type": "string"
+        },
+        "scanId": {
+          "type": "string"
+        },
+        "scheduleScanType": {
+          "type": "string"
+        },
+        "jobBillingSparkSku": {
+          "type": "string"
+        },
+        "dataSourceType": {
+          "type": "string"
+        },
+        "primaryDataSourceID": {
+          "type": "string"
+        },
+        "puDetail": {
+          "type": "string"
+        }
+      }
+    },
+    "JobHistoryEntity": {
+      "required": [
+        "businessDomainId",
+        "dataAssetId",
+        "dataProductId",
+        "runId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataAssetId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "runId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "dataProductId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "businessDomainId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "submissionTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "jobType": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        }
+      }
+    },
+    "ScheduleScanMonitoringEntity": {
+      "type": "object",
+      "properties": {
+        "succeeded": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "failed": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "skipped": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "scheduleStatus": {
+          "type": "string"
+        },
+        "scheduleName": {
+          "type": "string"
+        },
+        "scheduleId": {
+          "type": "string"
+        },
+        "scanId": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "businessDomainId": {
+          "type": "string"
+        },
+        "totalJobCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "scheduleRunType": {
+          "type": "string"
+        },
+        "scanType": {
+          "type": "string"
+        },
+        "startedBy": {
+          "type": "string"
+        },
+        "cancelledBy": {
+          "type": "string"
+        },
+        "cancelRequestTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "partitionKey": {
+          "type": "string"
+        },
+        "rowKey": {
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "eTag": {
+          "type": "string"
         }
       }
     }
   },
-  "DatasetToDatasourceMapping": {
-    "type": "object",
-    "properties": {
-      "datasetAliasName": {
-        "type": "string"
-      },
-      "datasourceId": {
-        "type": "string"
-      }
-    }
-  },
-  "JobMetadataEntity": {
-    "type": "object",
-    "properties": {
-      "runId": {
-        "type": "string"
-      },
-      "dataProductId": {
-        "type": "string"
-      },
-      "redundancyCheck": {
-        "type": "boolean"
-      },
-      "accountId": {
-        "type": "string"
-      },
-      "businessDomainId": {
-        "type": "string"
-      },
-      "submissionTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "startTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "endTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "cancelRequestTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "status": {
-        "type": "string"
-      },
-      "pfsJobId": {
-        "type": "string"
-      },
-      "message": {
-        "type": "string"
-      },
-      "duration": {
-        "format": "int64",
-        "type": "integer"
-      },
-      "startedBy": {
-        "type": "string"
-      },
-      "cancelledBy": {
-        "type": "string"
-      },
-      "jobType": {
-        "type": "string"
-      },
-      "jobExecutionRegion": {
-        "type": "string"
-      },
-      "dataAssetId": {
-        "type": "string"
-      },
-      "dataAssetName": {
-        "type": "string"
-      },
-      "scheduleId": {
-        "type": "string"
-      },
-      "scheduleName": {
-        "type": "string"
-      },
-      "qualifiedPath": {
-        "type": "string"
-      },
-      "scanId": {
-        "type": "string"
-      },
-      "scheduleScanType": {
-        "type": "string"
-      },
-      "jobBillingSparkSku": {
-        "type": "string"
-      },
-      "dataSourceType": {
-        "type": "string"
-      },
-      "primaryDataSourceID": {
-        "type": "string"
-      },
-      "puDetail": {
-        "type": "string"
-      }
-    }
-  },
-  "JobHistoryEntity": {
-    "required": [
-      "businessDomainId",
-      "dataAssetId",
-      "dataProductId",
-      "runId"
-    ],
-    "type": "object",
-    "properties": {
-      "dataAssetId": {
-        "minLength": 1,
-        "type": "string"
-      },
-      "runId": {
-        "minLength": 1,
-        "type": "string"
-      },
-      "dataProductId": {
-        "minLength": 1,
-        "type": "string"
-      },
-      "businessDomainId": {
-        "minLength": 1,
-        "type": "string"
-      },
-      "startTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "endTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "submissionTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "status": {
-        "type": "string"
-      },
-      "jobType": {
-        "type": "string"
-      },
-      "accountId": {
-        "type": "string"
-      }
-    }
-  },
-  "ScheduleScanMonitoringEntity": {
-    "type": "object",
-    "properties": {
-      "succeeded": {
-        "format": "int64",
-        "type": "integer"
-      },
-      "failed": {
-        "format": "int64",
-        "type": "integer"
-      },
-      "skipped": {
-        "format": "int64",
-        "type": "integer"
-      },
-      "scheduleStatus": {
-        "type": "string"
-      },
-      "scheduleName": {
-        "type": "string"
-      },
-      "scheduleId": {
-        "type": "string"
-      },
-      "scanId": {
-        "type": "string"
-      },
-      "startTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "endTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "accountId": {
-        "type": "string"
-      },
-      "businessDomainId": {
-        "type": "string"
-      },
-      "totalJobCount": {
-        "format": "int64",
-        "type": "integer"
-      },
-      "status": {
-        "type": "string"
-      },
-      "scheduleRunType": {
-        "type": "string"
-      },
-      "scanType": {
-        "type": "string"
-      },
-      "startedBy": {
-        "type": "string"
-      },
-      "cancelledBy": {
-        "type": "string"
-      },
-      "cancelRequestTime": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "partitionKey": {
-        "type": "string"
-      },
-      "rowKey": {
-        "type": "string"
-      },
-      "timestamp": {
-        "format": "date-time",
-        "type": "string"
-      },
-      "eTag": {
-        "type": "string"
-      }
-    }
-  }
-},
   "tags": [
     {
       "name": "Rule",
