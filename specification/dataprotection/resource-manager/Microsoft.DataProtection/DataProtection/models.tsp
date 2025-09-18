@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -871,6 +873,54 @@ model DppIdentityDetails {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * Deletion info for a tracked resource (Backup Vault)
+ */
+@added(Versions.v2025_09_01)
+model ResourceDeletionInfo {
+  /**
+   * Specifies time of deletion for the tracked resource (Backup Vault)
+   */
+  @visibility(Lifecycle.Read)
+  deletionTime?: utcDateTime;
+
+  /**
+   * Specifies the scheduled purge time for the tracked resource (Backup Vault)
+   */
+  @visibility(Lifecycle.Read)
+  scheduledPurgeTime?: utcDateTime;
+
+  /**
+   * Delete activity ID for troubleshooting the deletion of the tracked resource
+   */
+  @visibility(Lifecycle.Read)
+  deleteActivityId?: string;
+}
+
+/**
+ * Deleted Backup Vault - extends BackupVault with additional deletion metadata
+ */
+@added(Versions.v2025_09_01)
+model DeletedBackupVault extends BackupVault {
+  /**
+   * Resource Id of the original backup vault
+   */
+  @visibility(Lifecycle.Read)
+  originalBackupVaultId: string;
+
+  /**
+   * Resource name of the original backup vault  
+   */
+  @visibility(Lifecycle.Read)
+  originalBackupVaultName: string;
+
+  /**
+   * Deletion info for the tracked resource (Backup Vault)
+   */
+  @visibility(Lifecycle.Read)
+  resourceDeletionInfo: ResourceDeletionInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

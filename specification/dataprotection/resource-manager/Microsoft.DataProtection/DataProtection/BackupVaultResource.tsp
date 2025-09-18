@@ -2,8 +2,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -28,6 +30,37 @@ model BackupVaultResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Optional ETag.")
   eTag?: string;
+}
+
+/**
+ * Deleted Backup Vault Resource (available from version 2025-09-01)
+ */
+@added(Versions.v2025_09_01)
+model DeletedBackupVaultResource
+  is Azure.ResourceManager.TrackedResource<DeletedBackupVault, false> {
+  ...ResourceNameParameter<
+    Resource = DeletedBackupVaultResource,
+    KeyName = "deletedVaultName",
+    SegmentName = "deletedBackupVaults",
+    NamePattern = ""
+  >;
+}
+
+/**
+ * List of deleted backup vault resources
+ */
+@added(Versions.v2025_09_01)
+model DeletedBackupVaultResourceList {
+  /**
+   * List of resources.
+   */
+  @pageItems
+  value?: DeletedBackupVaultResource[];
+
+  /**
+   * The uri to fetch the next page of resources. Call ListNext() fetches next page of resources.
+   */
+  nextLink?: string;
 }
 
 @armResourceOperations
@@ -221,6 +254,71 @@ interface BackupVaultOperationResults {
     Response = ArmResponse<BackupVaultResourceList>,
     Error = CloudError
   >;
+}
+
+/**
+ * Deleted backup vault operations (available from version 2025-09-01)
+ */
+@armResourceOperations
+@added(Versions.v2025_09_01)
+interface DeletedBackupVaults {
+  /**
+   * Gets a deleted backup vault
+   */
+  @get
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}")
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationParameter,
+    
+    /**
+     * Name of the deleted backup vault
+     */
+    @path deletedVaultName: string
+  ): ArmResponse<DeletedBackupVaultResource> | ErrorResponse;
+
+  /**
+   * Lists deleted backup vaults by subscription
+   */
+  @get
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/deletedBackupVaults")
+  listBySubscription(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter
+  ): ArmResponse<DeletedBackupVaultResourceList> | ErrorResponse;
+
+  /**
+   * Undeletes a soft deleted backup vault
+   */
+  @post
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}/undelete")
+  undelete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationParameter,
+    
+    /**
+     * Name of the deleted backup vault
+     */
+    @path deletedVaultName: string
+  ): ArmResponse<BackupVaultResource> | ErrorResponse | ArmAcceptedResponse;
+
+  /**
+   * Gets operation status for undelete operation
+   */
+  @get
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationStatus/{operationId}")
+  getOperationStatus(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationParameter,
+    
+    /**
+     * Operation ID
+     */
+    @path operationId: string
+  ): ArmResponse<OperationResource> | ErrorResponse;
 }
 
 @@doc(BackupVaultResource.name, "The name of the backup vault.");
