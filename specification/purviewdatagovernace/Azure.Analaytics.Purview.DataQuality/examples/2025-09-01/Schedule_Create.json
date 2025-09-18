@@ -1,0 +1,65 @@
+{
+  "operationId": "CreateSchedule",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "scheduleEntity": {
+      "name": "DailyCustomerScan",
+      "description": "Scan schedule for daily customer data",
+      "annotations": {
+        "environment": "production",
+        "owner": "data-team",
+        "priority": "high"
+      },
+      "businessDomain": {
+        "type": "BusinessDomain",
+        "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+      },
+      "id": "123e4567-e89b-12d3-a456-426614174000",
+      "scope": {
+        "type": "FullScan",
+        "referenceId": "scope-223e4567-e89b-12d3-a456-426614174111"
+      },
+      "trigger": {
+        "type": "TimeBased",
+        "cron": "0 2"
+      }
+    }
+  },
+  "title": "Schedule_Create",
+  "responses": {
+    "201": {
+      "body": {
+        "name": "DailyCustomerScan",
+        "description": "Scan schedule for daily customer data",
+        "annotations": {
+          "environment": "production",
+          "owner": "data-team",
+          "priority": "high"
+        },
+        "businessDomain": {
+          "type": "BusinessDomain",
+          "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+        },
+        "createdAt": "2025-09-10T08:00:00Z",
+        "createdBy": "user-22222222-3333-4444-5555-666666666666",
+        "executionData": {
+          "durationInSeconds": 1800,
+          "lastRunStatus": "Succeeded",
+          "totalRecordsProcessed": 15000
+        },
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "lastModifiedAt": "2025-09-17T08:00:00Z",
+        "lastModifiedBy": "user-11111111-2222-3333-4444-555555555555",
+        "scope": {
+          "type": "FullScan",
+          "referenceId": "scope-223e4567-e89b-12d3-a456-426614174111"
+        },
+        "trigger": {
+          "type": "TimeBased",
+          "cron": "0 2"
+        }
+      }
+    }
+  }
+}
