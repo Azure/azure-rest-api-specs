@@ -52,6 +52,96 @@
   },
   "tags": [],
   "paths": {
+    "/agents/{agentId}/humanEvaluations": {
+      "get": {
+        "operationId": "HumanEvaluations_Get",
+        "description": "Get all evaluation template used with this agent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "agentId",
+            "in": "path",
+            "description": "Identifier of the agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Whether to return only active templates. If omitted, all templates will be returned.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgentHumanEvaluations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "HumanEvaluations_Put",
+        "description": "Create or update a reference to an evaluation template for this agent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "agentId",
+            "in": "path",
+            "description": "Identifier of the agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body to update an existing human evaluation template reference.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HumanEvaluationTemplateReference"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HumanEvaluationTemplateReference"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/connections": {
       "get": {
         "operationId": "Connections_List",
@@ -1664,6 +1754,31 @@
         "maxRequestRate"
       ]
     },
+    "AgentHumanEvaluations": {
+      "type": "object",
+      "description": "List of human evaluations for a specific agent.",
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "description": "Agent identifier."
+        },
+        "templates": {
+          "type": "array",
+          "description": "Templates currently associated with the agent (embedded set).",
+          "items": {
+            "$ref": "#/definitions/HumanEvaluationTemplateReference"
+          }
+        },
+        "activeTemplateId": {
+          "type": "string",
+          "description": "Primary active template Id."
+        }
+      },
+      "required": [
+        "agentId",
+        "templates"
+      ]
+    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1694,6 +1809,10 @@
       "required": [
         "blobReference"
       ]
+    },
+    "AssetId": {
+      "type": "string",
+      "description": "Identifier of a saved asset."
     },
     "AssistantMessage": {
       "type": "object",
@@ -2645,6 +2764,28 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
+    },
+    "HumanEvaluationTemplateReference": {
+      "type": "object",
+      "description": "Request body to create or update the agent's human evaluation template references.",
+      "properties": {
+        "templateId": {
+          "$ref": "#/definitions/AssetId",
+          "description": "Identifier of the evaluation template (server-assigned or user-provided)."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display-friendly name or short label for the template."
+        },
+        "addedAt": {
+          "type": "string",
+          "description": "UTC ISO 8601 timestamp when this template was first linked to the agent."
+        }
+      },
+      "required": [
+        "templateId",
+        "addedAt"
+      ]
     },
     "Index": {
       "type": "object",
