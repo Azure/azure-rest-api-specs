@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2025-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-01-01'
 input-file:
-  - Microsoft.Marketplace/stable/2025-01-01/Marketplace.json
+  - stable/2025-01-01/Marketplace.json
 ```
 
 ### Tag: package-2023-01-01
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2023-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-01-01'
 input-file:
-  - Microsoft.Marketplace/stable/2023-01-01/Marketplace.json
+  - stable/2023-01-01/Marketplace.json
 ```
 
 ### Tag: package-2022-09
@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-09'
 input-file:
-  - Microsoft.Marketplace/stable/2022-09-01/Marketplace.json
+  - stable/2022-09-01/Marketplace.json
 ```
 
 ### Tag: package-2022-03
@@ -66,7 +66,7 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-03'
 input-file:
-  - Microsoft.Marketplace/stable/2022-03-01/Marketplace.json
+  - stable/2022-03-01/Marketplace.json
 ```
 
 ### Tag: package-2021-12
@@ -75,7 +75,7 @@ These settings apply only when `--tag=package-2021-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-12'
 input-file:
-  - Microsoft.Marketplace/stable/2021-12-01/Marketplace.json
+  - stable/2021-12-01/Marketplace.json
 ```
 
 ### Tag: package-composite-v2
@@ -88,7 +88,7 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
-- Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
+- stable/2021-06-01/Marketplace.json
 ```
 
 ### Tag: package-composite-v1
@@ -101,8 +101,8 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
-- Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
+- stable/2020-01-01/Marketplace.json
+- stable/2020-12-01/Marketplace.json
 
 # Needed when there is more than one input file
 override-info:
@@ -115,7 +115,7 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
-  - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
+  - stable/2020-01-01/Marketplace.json
 ```
 
 ### Tag: package-2020-12-01
@@ -124,7 +124,7 @@ These settings apply only when `--tag=package-2020-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-12-01'
 input-file:
-  - Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
+  - stable/2020-12-01/Marketplace.json
 ```
 
 ### Tag: package-2021-06-01
@@ -133,7 +133,7 @@ These settings apply only when `--tag=package-2021-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-06-01'
 input-file:
-  - Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
+  - stable/2021-06-01/Marketplace.json
 ```
 
 # Code Generation
