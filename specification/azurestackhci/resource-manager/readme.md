@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-01
+tag: package-2024-01
 ```
 
 ## Suppression
@@ -81,29 +81,6 @@ suppressions:
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
-```
-
-### Tag: package-2025-10-01
-
-These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-10-01'
-input-file:
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/arcSettings.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/clusters.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/deploymentSettings.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/edgeDeviceJobs.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/edgeDevices.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/extensions.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/hciCommon.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/offers.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/publishers.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/securitySettings.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/skus.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/updateRuns.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/updates.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/updateSummaries.json
-  - Microsoft.AzureStackHCI/StackHCI//stable/2025-10-01/validatedSolutionRecipes.json
 ```
 
 ### Tag: package-preview-2024-02

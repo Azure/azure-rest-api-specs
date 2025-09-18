@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra ID OAuth 2.0 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -384,7 +384,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the Extension proxy resource.",
+          "description": "Provisioning state of the Extension proxy resource. Indicates the current lifecycle status of the resource, such as whether it's being created, updated, deleted, or has encountered an error.",
           "type": "string",
           "enum": [
             "NotSpecified",
@@ -407,7 +407,94 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "The provisioning state is not specified."
+              },
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "An error occurred during provisioning."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "Provisioning completed successfully."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "Provisioning failed."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "Provisioning was canceled."
+              },
+              {
+                "name": "Connected",
+                "value": "Connected",
+                "description": "The resource is connected."
+              },
+              {
+                "name": "Disconnected",
+                "value": "Disconnected",
+                "description": "The resource is disconnected."
+              },
+              {
+                "name": "Deleted",
+                "value": "Deleted",
+                "description": "The resource has been deleted."
+              },
+              {
+                "name": "Creating",
+                "value": "Creating",
+                "description": "The resource is being created."
+              },
+              {
+                "name": "Updating",
+                "value": "Updating",
+                "description": "The resource is being updated."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The resource is being deleted."
+              },
+              {
+                "name": "Moving",
+                "value": "Moving",
+                "description": "The resource is being moved."
+              },
+              {
+                "name": "PartiallySucceeded",
+                "value": "PartiallySucceeded",
+                "description": "Provisioning partially succeeded."
+              },
+              {
+                "name": "PartiallyConnected",
+                "value": "PartiallyConnected",
+                "description": "The resource is partially connected."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "Provisioning is in progress."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "Provisioning request has been accepted."
+              },
+              {
+                "name": "Provisioning",
+                "value": "Provisioning",
+                "description": "The resource is currently provisioning."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -417,7 +504,7 @@
           "x-ms-client-flatten": true
         },
         "aggregateState": {
-          "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+          "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster. This reflects the overall status of the extension deployment and operation across all nodes.",
           "type": "string",
           "enum": [
             "NotSpecified",
@@ -441,7 +528,99 @@
           ],
           "x-ms-enum": {
             "name": "ExtensionAggregateState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "The aggregate state is not specified."
+              },
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "An error occurred in the aggregate state."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The operation succeeded across all nodes."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The operation was canceled across the nodes."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The operation failed on all or most nodes."
+              },
+              {
+                "name": "Connected",
+                "value": "Connected",
+                "description": "All nodes are connected."
+              },
+              {
+                "name": "Disconnected",
+                "value": "Disconnected",
+                "description": "All nodes are disconnected."
+              },
+              {
+                "name": "Deleted",
+                "value": "Deleted",
+                "description": "The extension has been deleted from all nodes."
+              },
+              {
+                "name": "Creating",
+                "value": "Creating",
+                "description": "The extension is being created across the nodes."
+              },
+              {
+                "name": "Updating",
+                "value": "Updating",
+                "description": "The extension is being updated across the nodes."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The extension is being deleted across the nodes."
+              },
+              {
+                "name": "Moving",
+                "value": "Moving",
+                "description": "The extension is being moved across the nodes."
+              },
+              {
+                "name": "PartiallySucceeded",
+                "value": "PartiallySucceeded",
+                "description": "The operation succeeded on some nodes."
+              },
+              {
+                "name": "PartiallyConnected",
+                "value": "PartiallyConnected",
+                "description": "Some nodes are connected, others are not."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The operation is currently in progress across the nodes."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The operation has been accepted and is pending execution."
+              },
+              {
+                "name": "Provisioning",
+                "value": "Provisioning",
+                "description": "The extension is currently being provisioned across the nodes."
+              },
+              {
+                "name": "UpgradeFailedRollbackSucceeded",
+                "value": "UpgradeFailedRollbackSucceeded",
+                "description": "Extension upgrade failed, but rollback succeeded across the nodes."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -454,7 +633,7 @@
           "readOnly": true
         },
         "managedBy": {
-          "description": "Indicates if the extension is managed by azure or the user.",
+          "description": "Indicates if the extension is managed by Azure or the user. This determines who controls the deployment and lifecycle of the extension.",
           "type": "string",
           "enum": [
             "Azure",
@@ -462,7 +641,19 @@
           ],
           "x-ms-enum": {
             "name": "ExtensionManagedBy",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Azure",
+                "value": "Azure",
+                "description": "The extension is managed by Azure."
+              },
+              {
+                "name": "User",
+                "value": "User",
+                "description": "The extension is managed by the user."
+              }
+            ]
           },
           "readOnly": true
         }
@@ -521,7 +712,7 @@
           "readOnly": true
         },
         "state": {
-          "description": "State of Arc Extension in this node.",
+          "description": "State of Arc Extension in this node. Reflects the current lifecycle status of the extension on the individual node, such as whether it's being created, updated, deleted, or has encountered an error.",
           "type": "string",
           "enum": [
             "NotSpecified",
@@ -544,7 +735,94 @@
           ],
           "x-ms-enum": {
             "name": "NodeExtensionState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "The state is not specified."
+              },
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "An error occurred during the extension lifecycle."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The extension operation completed successfully."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The extension operation was canceled."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The extension operation failed."
+              },
+              {
+                "name": "Connected",
+                "value": "Connected",
+                "description": "The extension is connected on the node."
+              },
+              {
+                "name": "Disconnected",
+                "value": "Disconnected",
+                "description": "The extension is disconnected on the node."
+              },
+              {
+                "name": "Deleted",
+                "value": "Deleted",
+                "description": "The extension has been deleted from the node."
+              },
+              {
+                "name": "Creating",
+                "value": "Creating",
+                "description": "The extension is being created on the node."
+              },
+              {
+                "name": "Updating",
+                "value": "Updating",
+                "description": "The extension is being updated on the node."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The extension is being deleted from the node."
+              },
+              {
+                "name": "Moving",
+                "value": "Moving",
+                "description": "The extension is being moved on the node."
+              },
+              {
+                "name": "PartiallySucceeded",
+                "value": "PartiallySucceeded",
+                "description": "The extension operation partially succeeded."
+              },
+              {
+                "name": "PartiallyConnected",
+                "value": "PartiallyConnected",
+                "description": "The extension is partially connected on the node."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The extension operation is currently in progress."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The extension operation has been accepted and is pending execution."
+              },
+              {
+                "name": "Provisioning",
+                "value": "Provisioning",
+                "description": "The extension is currently being provisioned on the node."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -639,7 +917,7 @@
             },
             "level": {
               "type": "string",
-              "description": "The level code.",
+              "description": "The level code. Indicates the severity or importance of the status message.",
               "enum": [
                 "Info",
                 "Warning",
@@ -647,7 +925,24 @@
               ],
               "x-ms-enum": {
                 "name": "StatusLevelTypes",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "Info",
+                    "value": "Info",
+                    "description": "Informational message indicating normal operation."
+                  },
+                  {
+                    "name": "Warning",
+                    "value": "Warning",
+                    "description": "Warning message indicating a potential issue or non-critical problem."
+                  },
+                  {
+                    "name": "Error",
+                    "value": "Error",
+                    "description": "Error message indicating a failure or critical issue."
+                  }
+                ]
               }
             },
             "displayStatus": {
