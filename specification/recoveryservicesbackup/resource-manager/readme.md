@@ -37,7 +37,7 @@ license-header: MICROSOFT_MIT
 ```
 
 ```yaml $(package-passivestamp)
-tag: package-passivestamp-2023-01-15
+tag: package-2025-08-01
 ```
 
 ```yaml $(package-activestamp)
