@@ -32,14 +32,14 @@
           },
           {
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "Unique Identifier for Data Product",
             "name": "dataProductId",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "Unique Identifier for Data Asset",
             "name": "dataAssetId",
             "required": true,
             "type": "string"
@@ -56,10 +56,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RuleEntity"
-              }
+              "$ref": "#/definitions/RuleEntity"
             }
           }
         },
@@ -329,7 +326,10 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/RuleEntity"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
+              }
             }
           }
         ],
@@ -346,7 +346,811 @@
         },
         "x-ms-examples": {
           "Rules_Create": {
-            "$ref": "./examples/Rules_Create.json"
+            "$ref": "./examples/RulesBulk_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata": {
+      "post": {
+        "tags": [
+          "AssetMetadataObserver"
+        ],
+        "operationId": "CreateAssetMetaData",
+        "description": "Create Asset Metadata Observer",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataProductId",
+            "description": "Unique Identifier for Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataAssetId",
+            "description": "Unique Identifier for Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and new resource has been created.",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Create": {
+            "$ref": "./examples/AssetMetaData_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AssetMetadataObserver"
+        ],
+        "operationId": "GetObserver",
+        "description": "Get Observer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataProductId",
+            "description": "Unique Identifier for Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataAssetId",
+            "description": "Unique Identifier for Data Asset",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Get": {
+            "$ref": "./examples/AssetMetaData_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AssetMetadataObserver"
+        ],
+        "operationId": "UpdateObserver",
+        "description": "Update Observer",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataProductId",
+            "description": "Unique Identifier for Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataAssetId",
+            "description": "Unique Identifier for Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Update": {
+            "$ref": "./examples/AssetMetaData_Update.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "operationId": "GetSchedules",
+        "description": "Get Schedules",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "token",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved schedules.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScheduleEntity"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_Get": {
+            "$ref": "./examples/Schedules_Get.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "description": "Create Schedule",
+        "operationId": "CreateSchedule",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The resource is created.",
+            "schema": {
+                "$ref": "#/definitions/ScheduleEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Create": {
+            "$ref": "./examples/Schedule_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "description": "Get Schedule",
+        "operationId": "GetSchedule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "name": "businessDomainId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Unique Identifier for Schedule",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved schedule object",
+            "schema": {
+                "$ref": "#/definitions/ScheduleEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Get": {
+            "$ref": "./examples/Schedule_Get.json"
+          }
+        }
+      },
+    "put": {
+      "tags": [
+        "Schedule"
+      ],
+      "description": "Update Schedule",
+      "operationId": "UpdateSchedule",
+      "produces": [
+        "application/json"
+      ],
+      "consumes": [
+        "application/json-patch+json",
+        "application/json",
+        "text/json",
+        "application/*+json"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "description": "Unique Identifier for Business Domain",
+          "name": "businessDomainId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "description": "Unique Identifier for Schedule",
+          "name": "scheduleId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "body",
+          "schema": {
+            "$ref": "#/definitions/ScheduleEntity"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successfully updated schedule",
+          "schema": {
+              "$ref": "#/definitions/ScheduleEntity"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Schedule_Update": {
+          "$ref": "./examples/Schedule_Update.json"
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "Schedule"
+      ],
+      "description": "Delete Schedule",
+      "operationId": "DeleteSchedule",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "description": "Unique Identifier for Business Domain",
+          "name": "businessDomainId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "description": "Unique identifier for Schedule",
+          "name": "scheduleId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "No content"
+        }
+      },
+      "x-ms-examples": {
+        "Schedule_Delete": {
+          "$ref": "./examples/Schedule_Delete.json"
+        }
+      }
+    }
+  },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans": {
+      "post": {
+        "tags": [
+          "Scan"
+        ],
+        "description": "Create Scan",
+        "operationId": "CreateScan",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Get business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "description": "Get schedule id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get scanDTO",
+            "schema": {
+              "$ref": "#/definitions/ScanDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Create Scan request is accepted",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_Create": {
+            "$ref": "./examples/Scan_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/cancel": {
+      "post": {
+        "tags": [
+          "Scan"
+        ],
+        "description": "Cancel Scan",
+        "operationId": "CancelScan",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Get business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "description": "Get schedule id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanId",
+            "description": "Get scan id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel scan request accepted",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_Cancel": {
+            "$ref": "./examples/Scan_Cancel.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}": {
+      "get": {
+        "tags": [
+          "Scan"
+        ],
+        "description": "Get Scan by ScanId",
+        "operationId": "ScanByScanId",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Get business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "description": "Get schedule id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanId",
+            "description": "Get scan id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success in returning scan object",
+            "schema": {
+              "$ref": "#/definitions/ScheduleScanMonitoringEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_Get": {
+            "$ref": "./examples/Scan_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/runs/{runId}": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "description": "Get the run status by run id",
+        "operationId": "GetRunStatus",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Get Business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "description": "Get run id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success in getting run status",
+            "schema": {
+              "$ref": "#/definitions/JobMetadataEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Run_Get": {
+            "$ref": "./examples/Run_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/runs/{runId}/cancel": {
+      "post": {
+        "tags": [
+          "Monitoring"
+        ],
+        "description": "Cancel Scan",
+        "operationId": "CancelScanByRunId",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Get Business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "description": "Get run id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel request accepted.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_CancelByRunId": {
+            "$ref": "./examples/Scan_CancelByRunId.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/runs": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "description": "Get runs for asset",
+        "operationId": "GetRunsForAsset",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Get Business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataProductId",
+            "description": "Get data product id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataAssetId",
+            "description": "Get data asset id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "runType",
+            "description": "Get run type",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned runs for asset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JobHistoryEntity"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_Get": {
+            "$ref": "./examples/Runs_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations": {
+      "post": {
+        "tags": [
+          "Assessment"
+        ],
+        "description": "Do an observation",
+        "operationId": "observe",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataProductId",
+            "description": "Get Data Product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataAssetId",
+            "description": "Get Data Asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobConfigDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Create observation request is accepted",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Onservation_Create": {
+            "$ref": "./examples/Observation_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}": {
+      "delete": {
+        "tags": [
+          "Assessment"
+        ],
+        "description": "Deletes a specific observation.",
+        "operationId": "Delete Observation",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessDomainId",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataProductId",
+            "description": "Get Data Product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataAssetId",
+            "description": "Get Data Asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "observationId",
+            "description": "Get Observation Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Onservation_Delete": {
+            "$ref": "./examples/Observation_Delete.json"
           }
         }
       }
@@ -388,22 +1192,6 @@
         "score": {
           "type": "number",
           "format": "double"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "createdBy": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "format": "uuid"
         }
       },
       "required": [
@@ -446,12 +1234,409 @@
           "format": "uuid"
         }
       }
+    },
+    "AssetMetadataObserver": {
+      "description": "Represents metadata observer entity for a data asset.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "executionData": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference"
+        },
+        "eTag": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Basic"
+          ]
+        }
+      }
+    },
+    "ScheduleEntity": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference"
+        },
+        "scope": {
+          "$ref": "#/definitions/ScanScope"
+        },
+        "trigger": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "executionData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ScanScope": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "referenceId": {
+          "type": "string"
+        }
+      }
+    },
+    "Trigger": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "cron": {
+          "type": "string"
+        }
+      }
+  },
+  "ScanDTO": {
+    "type": "object",
+    "properties": {
+      "scanType": {
+        "type": "string"
+      }
     }
   },
+  "JobConfigDTO": {
+    "type": "object",
+    "properties": {
+      "redundancyCheck": {
+        "type": "boolean"
+      },
+      "datasetToDatasourceMappings": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/DatasetToDatasourceMapping"
+        }
+      }
+    }
+  },
+  "DatasetToDatasourceMapping": {
+    "type": "object",
+    "properties": {
+      "datasetAliasName": {
+        "type": "string"
+      },
+      "datasourceId": {
+        "type": "string"
+      }
+    }
+  },
+  "JobMetadataEntity": {
+    "type": "object",
+    "properties": {
+      "runId": {
+        "type": "string"
+      },
+      "dataProductId": {
+        "type": "string"
+      },
+      "redundancyCheck": {
+        "type": "boolean"
+      },
+      "accountId": {
+        "type": "string"
+      },
+      "businessDomainId": {
+        "type": "string"
+      },
+      "submissionTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "startTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "endTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "cancelRequestTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "pfsJobId": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "duration": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "startedBy": {
+        "type": "string"
+      },
+      "cancelledBy": {
+        "type": "string"
+      },
+      "jobType": {
+        "type": "string"
+      },
+      "jobExecutionRegion": {
+        "type": "string"
+      },
+      "dataAssetId": {
+        "type": "string"
+      },
+      "dataAssetName": {
+        "type": "string"
+      },
+      "scheduleId": {
+        "type": "string"
+      },
+      "scheduleName": {
+        "type": "string"
+      },
+      "qualifiedPath": {
+        "type": "string"
+      },
+      "scanId": {
+        "type": "string"
+      },
+      "scheduleScanType": {
+        "type": "string"
+      },
+      "jobBillingSparkSku": {
+        "type": "string"
+      },
+      "dataSourceType": {
+        "type": "string"
+      },
+      "primaryDataSourceID": {
+        "type": "string"
+      },
+      "puDetail": {
+        "type": "string"
+      }
+    }
+  },
+  "JobHistoryEntity": {
+    "required": [
+      "businessDomainId",
+      "dataAssetId",
+      "dataProductId",
+      "runId"
+    ],
+    "type": "object",
+    "properties": {
+      "dataAssetId": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "runId": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "dataProductId": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "businessDomainId": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "startTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "endTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "submissionTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "jobType": {
+        "type": "string"
+      },
+      "accountId": {
+        "type": "string"
+      }
+    }
+  },
+  "ScheduleScanMonitoringEntity": {
+    "type": "object",
+    "properties": {
+      "succeeded": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "failed": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "skipped": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "scheduleStatus": {
+        "type": "string"
+      },
+      "scheduleName": {
+        "type": "string"
+      },
+      "scheduleId": {
+        "type": "string"
+      },
+      "scanId": {
+        "type": "string"
+      },
+      "startTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "endTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "accountId": {
+        "type": "string"
+      },
+      "businessDomainId": {
+        "type": "string"
+      },
+      "totalJobCount": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "status": {
+        "type": "string"
+      },
+      "scheduleRunType": {
+        "type": "string"
+      },
+      "scanType": {
+        "type": "string"
+      },
+      "startedBy": {
+        "type": "string"
+      },
+      "cancelledBy": {
+        "type": "string"
+      },
+      "cancelRequestTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "partitionKey": {
+        "type": "string"
+      },
+      "rowKey": {
+        "type": "string"
+      },
+      "timestamp": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "eTag": {
+        "type": "string"
+      }
+    }
+  }
+},
   "tags": [
     {
       "name": "Rule",
       "description": "Controller to create rules"
+    },
+    {
+      "name": "Schedule",
+      "description": "Controller for creating schedules for jobs"
+    },
+    {
+      "name": "Scan",
+      "description": "Controller for scanning jobs"
+    },
+    {
+      "name": "Monitoring",
+      "description": "Controller for Monitoring"
+    },
+    {
+      "name": "Assessment",
+      "description": "Controller for assessment"
+    },
+    {
+      "name": "Assetmetadata",
+      "description": "Controller to assetmetadata"
     }
   ]
 }
