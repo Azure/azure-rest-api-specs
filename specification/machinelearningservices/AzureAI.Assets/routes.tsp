@@ -65,7 +65,7 @@ interface DeploymentTemplates {
       @bodyRoot
       body: DeploymentTemplate;
     },
-    TypeSpec.Http.Response<202>
+    Azure.Core.Foundations.AcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
