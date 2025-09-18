@@ -1085,32 +1085,6 @@
           "x-ms-identifiers": [
             "localAvailabilityZoneName"
           ]
-        },
-        "identityProvider": {
-          "type": "string",
-          "description": "Identity Provider for the cluster",
-          "default": "ActiveDirectory",
-          "enum": [
-            "ActiveDirectory",
-            "LocalIdentity"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityProvider",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "ActiveDirectory",
-                "value": "ActiveDirectory",
-                "description": "Uses Active Directory as the identity provider, enabling domain-based authentication and centralized identity management. This is the default option."
-              },
-              {
-                "name": "LocalIdentity",
-                "value": "LocalIdentity",
-                "description": "Uses a local identity system integrated with Azure Key Vault for authentication. Suitable for AD-less environments where Active Directory is not available or required."
-              }
-            ]
-          },
-          "readOnly": true
         }
       }
     },
