@@ -108,8 +108,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongRunningNullResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -987,6 +990,19 @@
       "required": [
         "id",
         "storageUri"
+      ]
+    },
+    "LongRunningNullResponse": {
+      "type": "object",
+      "description": "LongRunningOperation response",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location uri to poll for status"
+        }
+      },
+      "required": [
+        "location"
       ]
     },
     "OnlineRequestSettings": {

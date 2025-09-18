@@ -29,6 +29,12 @@ model SystemData {
   lastModifiedAt?: utcDateTime;
 }
 
+@doc("LongRunningOperation response")
+model LongRunningNullResponse {
+  @doc("The location uri to poll for status")
+  location: string;
+}
+
 @doc("Settings for online request configuration.")
 model OnlineRequestSettings {
   @doc("The timeout duration for requests.")
