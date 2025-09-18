@@ -12,7 +12,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-// TODO: Need to ask a PM for categories to support
 @doc("The category of the evaluator")
 union EvaluatorCategory {
   string,
