@@ -4,14 +4,82 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.ComputeSchedule;
+
+// ------------------ RequestBody ---------------
+
+@@clientName(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitDeallocate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitHibernate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesSubmitStart::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesSubmitStart::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteDeallocate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteHibernate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteStart::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteStart::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteCreate::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteCreate::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesExecuteDelete::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesExecuteDelete::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesGetOperationStatus::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesCancelOperations::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesCancelOperations::parameters.body,
+  "The request body"
+);
+@@clientName(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body,
+  "requestBody"
+);
+@@doc(ScheduledActions.virtualMachinesGetOperationErrors::parameters.body,
+  "The request body"
+);
 
 // ------------------ Enums ---------------
 @doc("The types of deadlines supported by ScheduledActions")
@@ -91,6 +159,105 @@ union OperationState {
   string,
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The type of profile to use for prioritizing virtual machine availability. This defines how the virtual machine is billed and managed in the Azure.")
+union PriorityProfileType {
+  @doc("Offers guaranteed availability.")
+  Regular: "Regular",
+
+  @doc("Offers flexible availability and is a cheaper option.")
+  Spot: "Spot",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The type of operating stystem supported by Azure")
+union OperatingSystemType {
+  @doc("Windows operating system")
+  Windows: "Windows",
+
+  @doc("Linux operating system")
+  Linux: "Linux",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("These types determines how and where the virtual machines are deployed to optimize for cost, performance, or availability")
+union AllocationStrategy {
+  @doc("Allocation of virtual machines by lowest price, this is available for both Regular and Spot virtual machine PriorityProfileType")
+  LowestPrice: "LowestPrice",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("These types determines how and where the virtual machines are deployed to optimize for cost, performance, or availability")
+union DistributionStrategy {
+  @doc("Distribution of virtual machines using a best effort strategy to create virtual machines in a specific availability zone rather than being spread accross multiple zones")
+  BestEffortSingleZone: "BestEffortSingleZone",
+
+  @doc("Distribution of virtual machines using a best effort strategy to strike a middle ground between availability, cost and performance.")
+  BestEffortBalanced: "BestEffortBalanced",
+
+  @doc("Even distribution of virtual machines adhering strictly to provided zones and vm sizes.")
+  StrictBalanced: "StrictBalanced",
+
+  @doc("Distribution of virtual machines by customer selected priority, it seeks to create virtual machines based on the ranking provided in PreferenceRank, this is available for Regular virtual machine PriorityProfileType")
+  Prioritized: "Prioritized",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The ranking values for preferences.")
+union PreferenceRank {
+  @doc("Rank 0: Most preferred")
+  Rank0: 0,
+
+  @doc("Rank 1")
+  Rank1: 1,
+
+  @doc("Rank 2")
+  Rank2: 2,
+
+  @doc("Rank 3")
+  Rank3: 3,
+
+  @doc("Rank 4")
+  Rank4: 4,
+
+  @doc("Rank 5: Least preferred")
+  Rank5: 5,
+
+  int32,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The names of availability zones")
+union ZoneName {
+  @doc("Azure Zone 0")
+  Zone0: 0,
+
+  @doc("Azure Zone 1")
+  Zone1: 1,
+
+  @doc("Azure Zone 2")
+  Zone2: 2,
+
+  @doc("Azure Zone 3")
+  Zone3: 3,
+
+  @doc("Azure Zone 4")
+  Zone4: 4,
+
+  @doc("Azure Zone 5")
+  Zone5: 5,
+
+  int32,
+}
+
 // ------------------ Models ---------------
 @doc("The schedule details for the user request")
 model Schedule {
@@ -122,6 +289,63 @@ model Resources {
   ids: Array<armResourceIdentifier>;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("Policies for distributing virtual machines on creation.")
+model ZoneAllocationPolicy {
+  @doc("The distribution strategy used for virtual machine creation")
+  distributionStrategy: DistributionStrategy;
+
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @doc("Preferences of zonal allocation ranked by preference, this property will be used only when distributionStrategy is set to Prioritized.")
+  zonePreferences: Array<ZonePreferenceProperties>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("Virtual machine sizes and their respective ranks for fungible create operations.")
+model VmSizesProfileProperties {
+  @doc("The size of the virtual machine")
+  name: string;
+
+  @doc("Priority order for the virtual machine size selected, the values go from Rank0-Rank5 in ascending order of preference.")
+  rank: PreferenceRank;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("Availability zones and their respective ranks for fungible create operations.")
+model ZonePreferenceProperties {
+  @doc("The name of the zone")
+  zone: ZoneName;
+
+  @doc("Priority order for the zone selected, the values go from Rank0-Rank5 in ascending order of preference.")
+  rank: PreferenceRank;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The strategy for virtual machine creation in terms of highly available or flexible availability.")
+model PriorityProfile {
+  @doc("The type of priority profile, this could be Regular or Spot")
+  type: PriorityProfileType;
+
+  @doc("The type of allocation strategy for the selected PriorityProfileType.")
+  allocationStrategy: AllocationStrategy;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+@doc("The properties that support fungible create operaions")
+model FungibileProperties {
+  @doc("A list of preferred vm sizes to create and the rank of their preferences")
+  vmSizesProfile?: Array<VmSizesProfileProperties>;
+
+  @doc("The OS type for the vms")
+  osType: OperatingSystemType;
+
+  @doc("The priority profile")
+  priorityProfile?: PriorityProfile;
+
+  @doc("The allocation policy used to determine zonal spread for virtual machine creation")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
+}
+
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
@@ -138,6 +362,10 @@ model ResourceProvisionPayload {
 
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
   resourcePrefix?: string;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
+  @doc("Properties that support fungible create, when this value is null, Create will proceed with the default non-fungible route.")
+  fungibleProperties?: FungibileProperties;
 }
 
 @doc("The retry policy for the user request")
