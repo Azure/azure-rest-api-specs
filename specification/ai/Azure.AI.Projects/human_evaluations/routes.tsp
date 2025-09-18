@@ -14,32 +14,32 @@ namespace Azure.AI.Projects;
 @doc("Manage human evaluations for a specific agent.")
 interface HumanEvaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get all evaluation template associated with this agent.")
+  @doc("Get all evaluation template used with this agent.")
   get is Azure.Core.Foundations.Operation<
     {
       @doc("Identifier of the agent.")
       @path
       agentId: string;
 
-      @doc("Whether to return only active associations. If omitted, all associations are returned.")
+      @doc("Whether to return only active templates. If omitted, all templates will be returned.")
       @query
       active?: boolean;
     },
-    OkResponse<HumanEvaluation>
+    OkResponse<AgentHumanEvaluations>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create or update an association between an evaluation template and this agent.")
+  @doc("Create or update an a reference to an evaluation template for this agent.")
   put is Azure.Core.Foundations.Operation<
     {
       @doc("Identifier of the agent.")
       @path
       agentId: string;
 
-      @doc("Request body to update an existing human evaluation template association.")
+      @doc("Request body to update an existing human evaluation template reference.")
       @body
-      body: HumanEvaluationAssociation;
+      body: HumanEvaluationTemplateReference;
     },
-    OkResponse<HumanEvaluationAssociation>
+    OkResponse<HumanEvaluationTemplateReference>
   >;
 }

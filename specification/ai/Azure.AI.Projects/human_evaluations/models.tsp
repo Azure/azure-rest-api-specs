@@ -12,22 +12,22 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @added(Versions.v2025_05_15_preview)
-@doc("List of human evaluation template associations for a specific agent.")
-model HumanEvaluation {
+@doc("List of human evaluations for a specific agent.")
+model AgentHumanEvaluations {
   @doc("Identifier of the agent.")
   agentId: string;
 
-  @doc("List of human evaluation template associations for this agent.")
-  associations: HumanEvaluationAssociation[];
+  @doc("List of human evaluation templates used with this agent.")
+  humanEvaluationReferences: HumanEvaluationTemplateReference[];
 }
 
 @added(Versions.v2025_05_15_preview)
-@doc("Request body to update an existing human evaluation template association.")
-model HumanEvaluationAssociation {
+@doc("Request body to create or update the agent's human evaluation template references.")
+model HumanEvaluationTemplateReference {
   @doc("Whether the current human evaluation template for this agent is enabled. If omitted the existing value is preserved.")
   active?: boolean;
 
-  @doc("Identifier of the human evaluation template associated with this agent.")
+  @doc("The asset id of the referenced human evaluation template.")
   templateId: AssetId;
 }
 
