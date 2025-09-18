@@ -28,7 +28,7 @@ model ClientEvent {
   except for `voice`. However, note that once a session has been
   initialized with a particular `model`, it can’t be changed to
   another model using `session.update`.
-  
+
   When the server receives a `session.update`, it will respond
   with a `session.updated` event showing the full, effective configuration.
   Only the fields that are present are updated. To clear a field like
@@ -220,7 +220,7 @@ model ClientEventInputAudioBufferAppend extends ClientEvent {
   if the input audio buffer is empty. When in Server VAD mode, the client does
   not need to send this event, the server will commit the audio buffer
   automatically.
-  
+
   Committing the input audio buffer will trigger input audio transcription
   (if enabled in session configuration), but it will not create a response
   from the model. The server will respond with an `input_audio_buffer.committed`
@@ -251,7 +251,7 @@ model ClientEventInputAudioBufferClear extends ClientEvent {
   calls, and function call responses. This event can be used both to populate a
   "history" of the conversation and to add new items mid-stream, but has the
   current limitation that it cannot populate assistant audio messages.
-  
+
   If successful, the server will respond with a `conversation.item.created`
   event, otherwise an `error` event will be sent.
   """)
@@ -286,10 +286,10 @@ model ClientEventConversationItemCreate extends ClientEvent {
   interrupts to truncate audio that has already been sent to the client but not
   yet played. This will synchronize the server's understanding of the audio with
   the client's playback.
-  
+
   Truncating audio will delete the server-side text transcript to ensure there
   is not text in the context that hasn't been heard by the user.
-  
+
   If successful, the server will respond with a `conversation.item.truncated`
   event.
   """)
@@ -338,15 +338,15 @@ model ClientEventConversationItemDelete extends ClientEvent {
   This event instructs the server to create a Response, which means triggering
   model inference. When in Server VAD mode, the server will create Responses
   automatically.
-  
+
   A Response will include at least one Item, and may have two, in which case
   the second will be a function call. These Items will be appended to the
   conversation history.
-  
+
   The server will respond with a `response.created` event, events for Items
   and content created, and finally a `response.done` event to indicate the
   Response is complete.
-  
+
   The `response.create` event includes inference configuration like
   `instructions`, and `temperature`. These fields will override the Session's
   configuration for this Response only.
@@ -510,7 +510,7 @@ model ServerEventInputAudioBufferCleared extends ServerEvent {
   detected in the audio buffer. This can happen any time audio is added to the
   buffer (unless speech is already detected). The client may want to use this
   event to interrupt audio playback or provide visual feedback to the user.
-  
+
   The client should expect to receive a `input_audio_buffer.speech_stopped` event
   when speech stops. The `item_id` property is the ID of the user message item
   that will be created when speech stops and will also be included in the
@@ -593,7 +593,7 @@ model ServerEventConversationItemCreated extends ServerEvent {
   committed by the client or server (in `server_vad` mode). Transcription runs
   asynchronously with Response creation, so this event may come before or after
   the Response events.
-  
+
   VoiceLive API models accept audio natively, and thus input transcription is a
   separate process run on a separate ASR (Automatic Speech Recognition) model.
   The transcript may diverge somewhat from the model's interpretation, and
@@ -646,7 +646,7 @@ model ServerEventConversationItemInputAudioTranscriptionFailed
   Returned when an earlier assistant audio message item is truncated by the
   client with a `conversation.item.truncate` event. This event is used to
   synchronize the server's understanding of the audio with the client's playback.
-  
+
   This action will truncate the audio and remove the server-side text transcript
   to ensure there is no text in the context that hasn't been heard by the user.
   """)
@@ -987,19 +987,6 @@ model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
 }
 
 @doc("""
-Represents an emotion hypothesis detected from response audio with multiple candidates.
-""")
-model ServerEventResponseEmotionHypothesis extends ServerEvent {
-  type: ServerEventType.response_emotion_hypothesis;
-  emotion: string;
-  candidates: EmotionCandidate[];
-  audio_offset_ms: int32;
-  audio_duration_ms: int32;
-  response_id?: string;
-  item_id: string;
-}
-
-@doc("""
 Represents a word-level audio timestamp delta for a response.
 """)
 model ServerEventResponseAudioTimestampDelta extends ServerEvent {
@@ -1088,7 +1075,7 @@ model ResponseCreateParams {
     into your voice", "laugh frequently"). The instructions are not guaranteed
     to be followed by the model, but they provide guidance to the model on the
     desired behavior.
-    
+
     Note that the server sets default instructions which will be used if this
     field is not set and are visible in the `session.created` event at the
     start of the session.
@@ -1181,11 +1168,6 @@ model ServerEventConversationItemRetrieved extends ServerEvent {
   // Tool customization: apply enriched item definition hierarchy
   item?: ResponseItem;
   event_id?: string;
-}
-
-model EmotionCandidate {
-  emotion: string;
-  confidence: float32;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type

@@ -15,10 +15,14 @@ model RequestSession {
   animation?: Animation;
   voice?: Voice;
   instructions?: string;
-  input_audio?: InputAudio;
+  @doc("""
+    Input audio sampling rate in Hz. Available values:
+    - For pcm16: 8000, 16000, 24000
+    - For g711_alaw/g711_ulaw: 8000
+    """)
   input_audio_sampling_rate?: int32 = 24000;
-  input_audio_format?: AudioFormat = AudioFormat.pcm16;
-  output_audio_format?: AudioFormat = AudioFormat.pcm16;
+  input_audio_format?: InputAudioFormat = InputAudioFormat.pcm16;
+  output_audio_format?: OutputAudioFormat = OutputAudioFormat.pcm16;
   turn_detection?: TurnDetection | null;
   input_audio_noise_reduction?: AudioNoiseReduction;
   input_audio_echo_cancellation?: AudioEchoCancellation;
@@ -29,11 +33,11 @@ model RequestSession {
   tool_choice?: ToolChoice;
   temperature?: float32;
   max_response_output_tokens?: int32 | "inf";
-  agent?: AgentConfig;
 }
 
 model ResponseSession extends RequestSession{
   ...SessionBase;
+  agent?: AgentConfig;
   id?: string;
 }
 
@@ -52,7 +56,7 @@ union OAIVoice {
 
 @doc("""
   OpenAI voice configuration with explicit type field.
-  
+
   This provides a unified interface for OpenAI voices, complementing the
   existing string-based OAIVoice for backward compatibility.
   """)
@@ -69,7 +73,7 @@ model AzureVoice {
   type: string;
 }
 
-@doc("Azure custom voice configuration (preferred).")
+@doc("Azure custom voice configuration.")
 model AzureCustomVoice extends AzureVoice {
   type: "azure-custom";
   @minLength(1) @doc("Voice name cannot be empty.") name: string;
@@ -108,25 +112,6 @@ model AzureStandardVoice extends AzureVoice {
   volume?: string;
 }
 
-@doc("Azure platform voice configuration (variant of standard).")
-model AzurePlatformVoice extends AzureVoice {
-  type: "azure-platform";
-  @minLength(1) @doc("Voice name cannot be empty.") name: string;
-
-  @minValue(0)
-  @maxValue(1)
-  @doc("Temperature must be between 0.0 and 1.0.")
-  temperature?: float32;
-
-  custom_lexicon_url?: string;
-  prefer_locales?: string[];
-  locale?: string;
-  style?: string;
-  pitch?: string;
-  rate?: string;
-  volume?: string;
-}
-
 @doc("Azure personal voice configuration.")
 model AzurePersonalVoice extends AzureVoice {
   type: "azure-personal";
@@ -141,22 +126,6 @@ model AzurePersonalVoice extends AzureVoice {
   `model`: "DragonLatestNeural" | "PhoenixLatestNeural" | "PhoenixV2Neural";
 }
 
-// --- Phi4mm voices ---------------------------------------------------------
-
-@doc("Voice identifier for Phi4mm voices.")
-union Phi4mmVoice {
-  string,
-  "cosyvoice",
-}
-
-@doc("""
-  Voice configuration for LLM (Large Language Model) voices.
-  """)
-model LLMVoice {
-  type: "llm";
-  name: Phi4mmVoice;
-}
-
 // --- Top-level Voice union -------------------------------------------------
 
 @doc("Union of all supported voice configurations.")
@@ -164,14 +133,26 @@ union Voice {
   OAIVoice,
   OpenAIVoice,
   AzureVoice, // includes AzureCustomVoice, CustomVoice, AzurePersonalVoice
-  Phi4mmVoice,
-  LLMVoice,
 }
 
-union AudioFormat {
+union InputAudioFormat {
   string,
   pcm16: "pcm16",
   g711_ulaw: "g711_ulaw",
+  g711_alaw: "g711_alaw",
+}
+
+union OutputAudioFormat {
+  string,
+  @doc("16-bit PCM audio format at default sampling rate (24kHz)")
+  pcm16: "pcm16",
+  @doc("16-bit PCM audio format at 8kHz sampling rate")
+  pcm16_8000hz: "pcm16-8000hz",
+  @doc("16-bit PCM audio format at 16kHz sampling rate")
+  pcm16_16000hz: "pcm16-16000hz",
+  @doc("G.711 μ-law (mu-law) audio format at 8kHz sampling rate")
+  g711_ulaw: "g711_ulaw",
+  @doc("G.711 A-law audio format at 8kHz sampling rate")
   g711_alaw: "g711_alaw",
 }
 
@@ -185,17 +166,16 @@ model AudioInputTranscriptionSettings {
   @doc("""
     The transcription model to use. Supported values:
     'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
-    'azure-fast-transcription', 'azure-speech'.
+    'azure-speech'.
     """)
   `model`:
     | string
     | "whisper-1"
     | "gpt-4o-transcribe"
     | "gpt-4o-mini-transcribe"
-    | "azure-fast-transcription"
     | "azure-speech";
 
-  @doc("Optional BCP-47 language code (e.g., 'en-US').")
+  @doc("Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh').")
   language?: string;
 
   @doc("Optional configuration for custom speech models.")
@@ -222,31 +202,19 @@ model EOUDetection {
 @doc("Azure semantic end-of-utterance detection (default).")
 model AzureSemanticDetection extends EOUDetection {
   `model`: "semantic_detection_v1";
+  @minValue(0)
+  @maxValue(1)
   threshold?: float32;
   timeout?: float32;
-  secondary_threshold?: float32;
-  secondary_timeout?: float32;
-  disable_rules?: boolean;
-
-  // developer options
-  sr_boost?: float32;
-
-  extra_imend_check?: boolean;
 }
 
 @doc("Azure semantic end-of-utterance detection (English-optimized).")
 model AzureSemanticDetectionEn extends EOUDetection {
   `model`: "semantic_detection_v1_en";
+  @minValue(0)
+  @maxValue(1)
   threshold?: float32;
   timeout?: float32;
-  secondary_threshold?: float32;
-  secondary_timeout?: float32;
-  disable_rules?: boolean;
-
-  // developer options
-  sr_boost?: float32;
-
-  extra_imend_check?: boolean;
 }
 
 @doc("Azure semantic end-of-utterance detection (multilingual).")
@@ -254,36 +222,23 @@ model AzureSemanticDetectionMultilingual extends EOUDetection {
   `model`: "semantic_detection_v1_multilingual";
   threshold?: float32;
   timeout?: float32;
-  secondary_threshold?: float32;
-  secondary_timeout?: float32;
-  disable_rules?: boolean;
-
-  // developer options
-  sr_boost?: float32;
-
-  extra_imend_check?: boolean;
 }
 
 @discriminator("type")
 @doc("Top-level union for turn detection configuration.")
 model TurnDetection {
   type:
-    | "none"
     | "server_vad"
     | "azure_semantic_vad"
     | "azure_semantic_vad_en"
-    | "server_sd"
     | "azure_semantic_vad_multilingual";
-}
-
-@doc("Disables turn detection.")
-model NoTurnDetection extends TurnDetection {
-  type: "none";
 }
 
 @doc("Base model for VAD-based turn detection.")
 model ServerVad extends TurnDetection {
   type: "server_vad";
+  @minValue(0)
+  @maxValue(1)
   threshold?: float32;
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
@@ -294,15 +249,13 @@ model ServerVad extends TurnDetection {
 @doc("Server Speech Detection (Azure semantic VAD, default variant).")
 model AzureSemanticVad extends TurnDetection {
   type: "azure_semantic_vad";
+  @minValue(0)
+  @maxValue(1)
   threshold?: float32;
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;
-  neg_threshold?: float32;
   speech_duration_ms?: int32;
-  window_size?: int32;
-  distinct_ci_phones?: int32;
-  require_vowel?: boolean;
   remove_filler_words?: boolean = false;
   languages?: string[];
   auto_truncate?: boolean = false;
@@ -311,49 +264,27 @@ model AzureSemanticVad extends TurnDetection {
 @doc("Server Speech Detection (Azure semantic VAD, English-only).")
 model AzureSemanticVadEn extends TurnDetection {
   type: "azure_semantic_vad_en";
+  @minValue(0)
+  @maxValue(1)
   threshold?: float32;
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;
-  neg_threshold?: float32;
   speech_duration_ms?: int32;
-  window_size?: int32;
-  distinct_ci_phones?: int32;
-  require_vowel?: boolean;
   remove_filler_words?: boolean = false;
-  languages?: string[];
-  auto_truncate?: boolean = false;
-}
-
-@doc("Server Speech Detection (legacy `server_sd` alias).")
-model AzureSemanticVadServer extends TurnDetection {
-  type: "server_sd";
-  threshold?: float32;
-  prefix_padding_ms?: int32;
-  silence_duration_ms?: int32;
-  end_of_utterance_detection?: EOUDetection;
-  neg_threshold?: float32;
-  speech_duration_ms?: int32;
-  window_size?: int32;
-  distinct_ci_phones?: int32;
-  require_vowel?: boolean;
-  remove_filler_words?: boolean = false;
-  languages?: string[];
   auto_truncate?: boolean = false;
 }
 
 @doc("Server Speech Detection (Azure semantic VAD).")
 model AzureMultilingualSemanticVad extends TurnDetection {
   type: "azure_semantic_vad_multilingual";
+  @minValue(0)
+  @maxValue(1)
   threshold?: float32;
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;
-  neg_threshold?: float32;
   speech_duration_ms?: int32;
-  window_size?: int32;
-  distinct_ci_phones?: int32;
-  require_vowel?: boolean;
   remove_filler_words?: boolean = false;
   languages?: string[];
   auto_truncate?: boolean = false;
@@ -362,16 +293,7 @@ model AzureMultilingualSemanticVad extends TurnDetection {
 @doc("Configuration for input audio noise reduction.")
 model AudioNoiseReduction {
   @doc("The type of noise reduction model.")
-  type: "azure_deep_noise_suppression";
-}
-
-@doc("Configuration for client audio input. Used to specify the audio model and optional phrase list.")
-model InputAudio {
-  @doc("The name of the model to use for input audio (currently only 'azure-standard' is supported).")
-  `model`: "azure-standard";
-
-  @doc("Optional list of phrases to bias the speech recognition engine.")
-  phrase_list?: string[];
+  type: "azure_deep_noise_suppression" | "near_field" | "far_field";
 }
 
 @doc("Echo cancellation configuration for server-side audio processing.")
@@ -392,19 +314,15 @@ union AudioTimestampType {
 union AnimationOutputType {
   blendshapes: "blendshapes",
   viseme_id: "viseme_id",
-  emotion: "emotion",
 }
 
-@doc("Configuration for animation outputs including blendshapes, visemes, and emotion metadata.")
+@doc("Configuration for animation outputs including blendshapes and visemes metadata.")
 model Animation {
   @doc("The name of the animation model to use.")
   model_name?: string = "default";
 
   @doc("Set of output data types requested from the animation system.")
   outputs?: AnimationOutputType[] = #[AnimationOutputType.blendshapes];
-
-  @doc("Interval for emotion detection in milliseconds. If not set, emotion detection is disabled.")
-  emotion_detection_interval_ms?: int32;
 }
 
 @doc("Configuration for avatar streaming and behavior during the session.")
