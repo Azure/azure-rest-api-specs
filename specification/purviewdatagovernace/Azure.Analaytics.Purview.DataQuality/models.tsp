@@ -1,13 +1,21 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace PurviewDataQuality;
 
+/**
+ * AssetMetaDataObserverType
+ */
 union AssetMetadataObserverType {
   string,
+
+  /**
+   * Basic
+   */
   Basic: "Basic",
 }
 
@@ -43,7 +51,6 @@ model RuleEntity {
   /**
    * Unique identifier of the rule.
    */
-  @format("uuid")
   id: string;
 
   /**
@@ -104,7 +111,6 @@ model Reference {
   /**
    * Unique identifier of the referenced entity.
    */
-  @format("uuid")
   referenceId?: string;
 }
 
@@ -115,7 +121,6 @@ model AssetMetadataObserver {
   /**
    * Unique identifier of the observer.
    */
-  @format("uuid")
   id?: string;
 
   /**
@@ -151,7 +156,7 @@ model AssetMetadataObserver {
   /**
    * Dictionary containing execution data.
    */
-  executionData?: Record<unknown>;
+  executionData?: Record<string>;
 
   /**
    * Indicates if the observer is deleted.
@@ -201,7 +206,7 @@ model ScheduleEntity {
   /**
    * Dictionary of annotations for the schedule.
    */
-  annotations?: Record<unknown>;
+  annotations?: Record<string>;
 
   /**
    * Reference to the related BusinessDomain entity.
@@ -241,7 +246,7 @@ model ScheduleEntity {
   /**
    * Dictionary of execution data for the schedule.
    */
-  executionData?: Record<unknown>;
+  executionData?: Record<string>;
 }
 
 /**
@@ -277,6 +282,8 @@ model Trigger {
 /**
  * Data transfer object for scan information.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 model ScanDTO {
   /**
    * Type of the scan.
@@ -536,6 +543,8 @@ model JobMetadataEntity {
   /**
    * Primary data source identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   primaryDataSourceID?: string;
 
   /**
@@ -606,6 +615,8 @@ model JobHistoryEntity {
 /**
  * Configuration for jobs.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 model JobConfigDTO {
   /**
    * Indicates if redundancy check is enabled.
