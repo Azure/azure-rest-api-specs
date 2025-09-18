@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core.Traits;
-using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 

@@ -36,9 +36,6 @@ model Insight {
   @doc("Request for the insights analysis.")
   request: InsightRequest;
 
-  @doc("Configuration of the model used in the analysis.")
-  modelConfiguration?: InsightModelConfiguration;
-
   @doc("The result of the insights report.")
   @visibility(Lifecycle.Read)
   result?: InsightResult;
@@ -70,6 +67,9 @@ model EvaluationRunClusterInsightsRequest extends InsightRequest {
 
   @doc("List of evaluation run IDs for the insights.")
   runIds: string[];
+
+  @doc("Configuration of the model used in the insight generation.")
+  modelConfiguration?: InsightModelConfiguration;
 }
 
 @doc("Insights on set of Agent Evaluation Results")
@@ -80,6 +80,9 @@ model AgentClusterInsightsRequest extends InsightRequest {
 
   @doc("Identifier for the agent.")
   agentName: string;
+
+  @doc("Configuration of the model used in the insight generation.")
+  modelConfiguration?: InsightModelConfiguration;
 }
 
 @doc("The request of the insights.")

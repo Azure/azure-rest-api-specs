@@ -1739,6 +1739,10 @@
         "agentName": {
           "type": "string",
           "description": "Identifier for the agent."
+        },
+        "modelConfiguration": {
+          "$ref": "#/definitions/InsightModelConfiguration",
+          "description": "Configuration of the model used in the insight generation."
         }
       },
       "required": [
@@ -2931,6 +2935,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "modelConfiguration": {
+          "$ref": "#/definitions/InsightModelConfiguration",
+          "description": "Configuration of the model used in the insight generation."
         }
       },
       "required": [
@@ -3219,10 +3227,6 @@
         "request": {
           "$ref": "#/definitions/InsightRequest",
           "description": "Request for the insights analysis."
-        },
-        "modelConfiguration": {
-          "$ref": "#/definitions/InsightModelConfiguration",
-          "description": "Configuration of the model used in the analysis."
         },
         "result": {
           "$ref": "#/definitions/InsightResult",
