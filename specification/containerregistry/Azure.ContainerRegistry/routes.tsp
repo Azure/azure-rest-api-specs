@@ -13,6 +13,7 @@ interface ContainerRegistry {
   /**
    * Tells whether this Docker Registry instance supports Docker Registry HTTP API v2
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @route("/v2/")
   @get
   checkDockerV2Support is Azure.Core.Foundations.Operation<{}, void>;
@@ -102,6 +103,7 @@ interface ContainerRegistry {
   /**
    * List repositories
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @route("/acr/v1/_catalog")
   @list
   getRepositories is Azure.Core.Foundations.Operation<
@@ -545,6 +547,7 @@ interface ContainerRegistryBlob {
    * Cancel outstanding upload processes, releasing associated resources. If this is
    * not called, the unfinished uploads will eventually timeout.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @route("/{nextBlobUuidLink}")
   @delete
   cancelUpload is Azure.Core.Foundations.Operation<
