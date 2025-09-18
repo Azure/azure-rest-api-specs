@@ -33,6 +33,19 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "OAuth2Auth": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {}
+    }
+  },
   "tags": [],
   "paths": {
     "/{nextBlobUuidLink}": {

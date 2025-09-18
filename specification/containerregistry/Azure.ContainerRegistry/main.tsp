@@ -27,6 +27,15 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: [],
+    }
+  ]>
+)
 namespace AzureContainerRegistry;
 
 /**
