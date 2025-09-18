@@ -41,8 +41,8 @@ options:
       name: "@azure/arm-storage"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storage"
-    package-dir: "armstorage"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armstorage"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstorage"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
