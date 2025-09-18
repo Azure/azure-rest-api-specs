@@ -3652,6 +3652,11 @@
           "type": "string",
           "description": "Customer vnet resource id. VirtualNetworkGateway of type local gateway is associated with the customer vnet."
         },
+        "zones": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The availability zones configuration of the virtual network gateway. Returns 'Regional' for non-zonal gateways, comma-separated zone numbers (e.g., '1', '1,2', '1,3') for specific zones, or 'ZoneRedundant' for zone-redundant deployments."
+        },
         "natRules": {
           "type": "array",
           "items": {
