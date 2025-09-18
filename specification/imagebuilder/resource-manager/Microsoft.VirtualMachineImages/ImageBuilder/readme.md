@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.VirtualMachineImages/stable/2024-02-01/imagebuilder.json
+  - stable/2024-02-01/imagebuilder.json
 ```
 
 ### Tag: package-2023-07
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2023-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-07'
 input-file:
-  - Microsoft.VirtualMachineImages/stable/2023-07-01/imagebuilder.json
+  - stable/2023-07-01/imagebuilder.json
 ```
 ### Tag: package-2022-07
 
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2022-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-07'
 input-file:
-  - Microsoft.VirtualMachineImages/stable/2022-07-01/imagebuilder.json
+  - stable/2022-07-01/imagebuilder.json
 ```
 
 ### Tag: package-2022-02
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2022-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-02'
 input-file:
-  - Microsoft.VirtualMachineImages/stable/2022-02-14/imagebuilder.json
+  - stable/2022-02-14/imagebuilder.json
 ```
 
 ### Tag: package-2021-10
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
-  - Microsoft.VirtualMachineImages/stable/2021-10-01/imagebuilder.json
+  - stable/2021-10-01/imagebuilder.json
 ```
 
 ### Tag: package-2020-02
@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2020-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-02'
 input-file:
-  - Microsoft.VirtualMachineImages/stable/2020-02-14/imagebuilder.json
+  - stable/2020-02-14/imagebuilder.json
 ```
 
 ### Tag: package-preview-2019-05
@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-preview-2019-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
-  - Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json
+  - preview/2019-05-01-preview/imagebuilder.json
 ```
 
 ### Tag: package-2018-02
@@ -101,7 +101,7 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.VirtualMachineImages/preview/2018-02-01-preview/imagebuilder.json
+- preview/2018-02-01-preview/imagebuilder.json
 ```
 
 ### Tag: package-2019-02
@@ -110,7 +110,7 @@ These settings apply only when `--tag=package-2019-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-02'
 input-file:
-- Microsoft.VirtualMachineImages/preview/2019-02-01-preview/imagebuilder.json
+- preview/2019-02-01-preview/imagebuilder.json
 ```
 
 # Code Generation
