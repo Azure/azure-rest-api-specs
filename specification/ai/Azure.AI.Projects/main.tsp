@@ -7,6 +7,7 @@ import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
 import "./datasets/routes.tsp";
 import "./indexes/routes.tsp";
+import "./insights/routes.tsp";
 import "./deployments/routes.tsp";
 import "./red-teams/routes.tsp";
 
@@ -49,10 +50,13 @@ namespace Azure.AI.Projects {
     @doc("Azure AI API version 2025-05-01.")
     v2025_05_01: "2025-05-01",
 
+    @doc("Azure AI API version v1.")
+    v1: "v1",
+
     @doc("Azure AI API version 2025-05-15-preview.")
     v2025_05_15_preview: "2025-05-15-preview",
 
-    @doc("Azure AI API version v1.")
-    v1: "v1",
+    @doc("Azure AI API version 2025-10-15-preview.")
+    v2025_10_15_preview: "2025-10-15-preview",
   }
 }
