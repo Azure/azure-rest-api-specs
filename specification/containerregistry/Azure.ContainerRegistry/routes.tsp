@@ -389,6 +389,7 @@ interface ContainerRegistryBlobOperationGroup {
    * Retrieve the blob from the registry identified by digest.
    */
   @operationId("ContainerRegistryBlob_GetBlob")
+  @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @get
   getBlob is Azure.Core.Foundations.Operation<
@@ -412,6 +413,7 @@ interface ContainerRegistryBlobOperationGroup {
    * Same as GET, except only the headers are returned.
    */
   @operationId("ContainerRegistryBlob_CheckBlobExists")
+  @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @head
   checkBlobExists is Azure.Core.Foundations.Operation<
@@ -458,6 +460,7 @@ interface ContainerRegistryBlobOperationGroup {
    * Mount a blob identified by the `mount` parameter from another repository.
    */
   @operationId("ContainerRegistryBlob_MountBlob")
+  @sharedRoute
   @route("/v2/{name}/blobs/uploads/")
   @post
   mountBlob is Azure.Core.Foundations.Operation<
@@ -581,6 +584,7 @@ interface ContainerRegistryBlobOperationGroup {
    * Initiate a resumable blob upload with an empty request body.
    */
   @operationId("ContainerRegistryBlob_StartUpload")
+  @sharedRoute
   @route("/v2/{name}/blobs/uploads/")
   @post
   startUpload is Azure.Core.Foundations.Operation<
@@ -601,6 +605,7 @@ interface ContainerRegistryBlobOperationGroup {
    * requests can be used to fetch partial content.
    */
   @operationId("ContainerRegistryBlob_GetChunk")
+  @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @get
   getChunk is Azure.Core.Foundations.Operation<
@@ -630,6 +635,7 @@ interface ContainerRegistryBlobOperationGroup {
    * Same as GET, except only the headers are returned.
    */
   @operationId("ContainerRegistryBlob_CheckChunkExists")
+  @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @head
   checkChunkExists is Azure.Core.Foundations.Operation<
