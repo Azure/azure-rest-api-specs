@@ -26,7 +26,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-devtestlabs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-devtestlabs"
     namespace: "com.azure.resourcemanager.devtestlabs"
     service-name: "DevTestLabs"
     payload-flattening-threshold: 1
@@ -40,8 +40,8 @@ options:
       name: "@azure/arm-devtestlabs"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/devtestlabs"
-    package-dir: "armdevtestlabs"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdevtestlabs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdevtestlabs"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
