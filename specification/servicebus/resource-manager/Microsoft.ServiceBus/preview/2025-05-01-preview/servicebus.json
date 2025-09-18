@@ -1593,7 +1593,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MigrationConfigPropertiesListResult"
+              "$ref": "#/definitions/MigrationConfigListResult"
             }
           },
           "default": {
@@ -5181,6 +5181,27 @@
         }
       }
     },
+    "MigrationConfigListResult": {
+      "type": "object",
+      "description": "The response of a MigrationConfigProperties list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MigrationConfigProperties items on this page",
+          "items": {
+            "$ref": "#/definitions/MigrationConfigProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "MigrationConfigProperties": {
       "type": "object",
       "description": "Single item in List or Get Migration Config operation",
@@ -5200,27 +5221,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "MigrationConfigPropertiesListResult": {
-      "type": "object",
-      "description": "The response of a MigrationConfigProperties list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The MigrationConfigProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/MigrationConfigProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "MigrationConfigPropertiesProperties": {

@@ -62,9 +62,9 @@ interface MigrationConfigs {
    */
   list is ArmResourceListByParent<
     MigrationConfigProperties,
+    Response = ArmResponse<MigrationConfigListResult>,
     Error = ErrorResponse
   >;
-
   /**
    * This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any entities created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.
    */

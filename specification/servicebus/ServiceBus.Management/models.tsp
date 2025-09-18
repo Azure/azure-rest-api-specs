@@ -5,6 +5,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Microsoft.ServiceBus;
 
+model MigrationConfigListResult
+  is Azure.ResourceManager.ResourceListResult<MigrationConfigProperties>;
+
 model PrivateLinkResourcesListResult
   is Azure.ResourceManager.ResourceListResult<PrivateLinkResource>;
 /**
