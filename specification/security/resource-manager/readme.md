@@ -115,6 +115,15 @@ input-file:
   - Microsoft.Security/preview/2025-09-01-preview/privateLinks.json
 ```
 
+### Tag: package-preview-2025-08-01-preview
+
+These settings apply only when `--tag=package-preview-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08-01-preview'
+input-file:
+  - Microsoft.Security/preview/2025-08-01-preview/securityConnectors.json
+```
+
 ### Tag: package-preview-2025-05-04-preview
 
 These settings apply only when `--tag=package-preview-2025-05-04-preview` is specified on the command line.
