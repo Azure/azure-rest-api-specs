@@ -1,10 +1,9 @@
 {
-  "title": "List copilot plans by resource group",
-  "operationId": "CopilotPlans_ListByResourceGroup",
+  "title": "List copilot plans by subscription",
+  "operationId": "CopilotPlans_ListBySubscription",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg-copilot",
-    "api-version": "2025-09-01-preview"
+    "api-version": "2025-10-01-preview"
   },
   "responses": {
     "200": {
@@ -33,14 +32,13 @@
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilotPlans/dev-copilot-plan",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-dev/providers/Microsoft.PortalServices/copilotPlans/dev-copilot-plan",
             "name": "dev-copilot-plan",
             "type": "Microsoft.PortalServices/copilotPlans",
             "location": "West US 2",
             "properties": {
               "blockedAgents": [
-                "agent-premium-only",
-                "agent-paid-tier-only"
+                "agent-001"
               ],
               "provisioningState": "Succeeded"
             },

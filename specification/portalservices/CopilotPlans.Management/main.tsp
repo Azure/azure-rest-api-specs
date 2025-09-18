@@ -18,8 +18,8 @@ namespace Microsoft.PortalServices;
 
 @doc("Azure Portal Services Copilot Plans Management API versions.")
 enum Versions {
-  @doc("Azure Portal Services Copilot Plans Management API version 2025-09-01-preview.")
+  @doc("Azure Portal Services Copilot Plans Management API version 2025-10-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2025_09_01_preview: "2025-09-01-preview",
+  v2025_09_01_preview: "2025-10-01-preview",
 }
