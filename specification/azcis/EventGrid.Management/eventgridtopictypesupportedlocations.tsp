@@ -26,6 +26,10 @@ model EventGridTopicTypeSupportedLocationsResourceProperties {
   @doc("Provisioning status of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: EventGridProvisioningState;
+
+  @doc("Resource event argument result; a part of provisioning ResultData output.")
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  properties?: string;
 }
 
 @doc("EventGridTopicTypeSupportedLocations Resource")
