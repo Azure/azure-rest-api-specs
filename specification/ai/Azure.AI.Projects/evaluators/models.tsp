@@ -21,7 +21,10 @@ union EvaluatorCategory {
   quality: "Quality",
 
   @doc("Safety evaluator")
-  safety: "Risk and Safety", // TODO: Spaces in enum value is inconsistent with other multiword enum values
+  safety: "Risk and Safety",
+
+  @doc("Performance evaluator")
+  performance: "Performance",
 }
 
 @doc("The type of the evaluator")
@@ -31,9 +34,9 @@ union EvaluatorType {
   @doc("Built-in evaluator")
   built_in: "Built-In",
 
+  @visibility(Lifecycle.Read)
   @doc("Custom evaluator")
   custom: "Custom",
-
 }
 
 @doc("The type of evaluator definition")
@@ -68,17 +71,14 @@ model EvaluatorDefinition {
   @doc("The type of evaluator definition")
   type: EvaluatorDefinitionType;
 
-  @doc("The blob reference of the evaluator")
-  blob_reference: string; 
-  
-  @doc("The evaluator's input parameters")
-  init_parameters: string;
+  @doc("The JSON schema for the evaluator's input parameters")
+  init_parameters?: unknown;
 
-  @doc("The data mapping of the evaluator's inputs to the provided dataset")
-  data_schema: string;
+  @doc("The JSON schema for the data mapping of the evaluator to the dataset")
+  data_schema?: unknown;
 
-  @doc("The result of the evaluator representing metrics schema")
-  results: string;
+  @doc("The JSON schema for the resulting metrics of the evaluator")
+  results?: unknown;
 }
 
 @doc("Metadata about the evaluator")
@@ -89,15 +89,13 @@ model EvaluatorMetadata {
 
   @doc("The value of the evaluator metadata")
   value: string;
-
-
 }
 
 /* Allowed parameter types */
 alias ScalarParamType = string | "number" | "string"; // TODO: need to confirm allowed values
 
 /* The evaluator's input parameters */
-alias InputParameters = Record<ScalarParamType>; 
+alias InputParameters = Record<ScalarParamType>;
 
 /* The evaluator's output parameters */
 alias OutputParameters = Record<ScalarParamType>;
@@ -128,8 +126,8 @@ model EvaluatorVersion {
   @doc("The metadata of the evaluator")
   metadata: Record<string>;
 
-  @doc("The tags of the evaluator")
-  tags?: Record<string>;
+  @doc("The category of the evaluator")
+  categories: EvaluatorCategory[];
 
   @doc("Definition of the evaluator")
   definition: EvaluatorDefinition;
