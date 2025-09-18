@@ -75,11 +75,13 @@ using Nginx.NginxPlus;
 );
 @@clientLocation(NginxDeployments.list, "Deployments", "!csharp");
 @@clientLocation(NginxDeployments.wafPolicyList, "WafPolicy", "!csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(NginxDeployments.wafPolicyList, "List");
 @@clientLocation(NginxDeployments.defaultWafPolicyList,
   "DefaultWafPolicy",
   "!csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(NginxDeployments.defaultWafPolicyList, "List");
 
 @@clientLocation(NginxDeploymentWafPolicies.get, "WafPolicy", "!csharp");
