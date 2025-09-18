@@ -24,6 +24,9 @@ union EvaluatorCategory {
 
   @doc("Performance evaluator")
   performance: "Performance",
+
+  @doc("Agent evaluator")
+  agents: "Agents",
 }
 
 @doc("The type of the evaluator")
