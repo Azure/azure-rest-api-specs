@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import { join } from "node:path";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { afterAll, beforeAll, beforeEach, describe, expect, Mock, test, vi } from "vitest";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
 import {
@@ -10,10 +10,6 @@ import {
   getOpenapiType,
   getRelatedArmRpcFromDoc,
 } from "../src/markdown-utils.js";
-
-// Mock the global fetch function
-const mockFetch = vi.fn();
-vi.stubGlobal("fetch", mockFetch);
 
 function isWindows(): boolean {
   return process.platform === "win32";
@@ -156,9 +152,20 @@ describe("getOpenapiType", () => {
 });
 
 describe("getRelatedArmRpcFromDoc", () => {
+  let mockFetch: Mock;
+
+  beforeAll(() => {
+    mockFetch = vi.fn();
+    vi.stubGlobal("fetch", mockFetch);
+  });
+
   // Tests are run sequentially to avoid concurrency issues with fetch mocking
   beforeEach(() => {
     mockFetch.mockReset();
+  });
+
+  afterAll(() => {
+    vi.unstubAllGlobals();
   });
 
   async function mockResponseFile(fileName: string): Promise<void> {
