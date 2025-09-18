@@ -1,19 +1,16 @@
-/*
- * This file was automatically generated from an OpenAPI .yaml file.
- * Edits made directly to this file will be lost.
- */
-
 import "./client.tsp";
 import "./common";
 import "./custom.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace VoiceLive;
 
 // Tool customization: Adjust union to be a discriminated type base
 /** A voicelive client event. */
 @discriminator("type")
+@usage(RequestUsage)
 model ClientEvent {
   /** The type of event. */
   type: ClientEventType;
@@ -34,6 +31,7 @@ model ClientEvent {
   Only the fields that are present are updated. To clear a field like
   `instructions`, pass an empty string.
   """)
+@usage(RequestUsage)
 model ClientEventSessionUpdate extends ClientEvent {
   @doc("""
     The event type, must be `session.update`.
@@ -45,9 +43,10 @@ model ClientEventSessionUpdate extends ClientEvent {
 }
 
 @doc("""
-    Sent when the client connects and provides its SDP (Session Description Protocol)
-    for avatar-related media negotiation.
-  """)
+      Sent when the client connects and provides its SDP (Session Description Protocol)
+      for avatar-related media negotiation.
+    """)
+@usage(RequestUsage)
 model ClientEventSessionAvatarConnect extends ClientEvent {
   @doc("The event type, must be 'session.avatar.connect'.")
   type: ClientEventType.session_avatar_connect;
@@ -57,8 +56,9 @@ model ClientEventSessionAvatarConnect extends ClientEvent {
 }
 
 @doc("""
-    Indicates the start of a new audio input turn.
-  """)
+      Indicates the start of a new audio input turn.
+    """)
+@usage(RequestUsage)
 model ClientEventInputAudioTurnStart extends ClientEvent {
   @doc("The event type, must be 'input_audio.turn.start'.")
   type: ClientEventType.input_audio_turn_start;
@@ -68,8 +68,9 @@ model ClientEventInputAudioTurnStart extends ClientEvent {
 }
 
 @doc("""
-    Appends audio data to an ongoing input turn.
-  """)
+      Appends audio data to an ongoing input turn.
+    """)
+@usage(RequestUsage)
 model ClientEventInputAudioTurnAppend extends ClientEvent {
   @doc("The event type, must be 'input_audio.turn.append'.")
   type: ClientEventType.input_audio_turn_append;
@@ -82,8 +83,9 @@ model ClientEventInputAudioTurnAppend extends ClientEvent {
 }
 
 @doc("""
-    Marks the end of an audio input turn.
-  """)
+      Marks the end of an audio input turn.
+    """)
+@usage(RequestUsage)
 model ClientEventInputAudioTurnEnd extends ClientEvent {
   @doc("The event type, must be 'input_audio.turn.end'.")
   type: ClientEventType.input_audio_turn_end;
@@ -93,8 +95,9 @@ model ClientEventInputAudioTurnEnd extends ClientEvent {
 }
 
 @doc("""
-    Cancels an in-progress input audio turn.
-  """)
+      Cancels an in-progress input audio turn.
+    """)
+@usage(RequestUsage)
 model ClientEventInputAudioTurnCancel extends ClientEvent {
   @doc("The event type, must be 'input_audio.turn.cancel'.")
   type: ClientEventType.input_audio_turn_cancel;
@@ -104,8 +107,9 @@ model ClientEventInputAudioTurnCancel extends ClientEvent {
 }
 
 @doc("""
-    Clears all input audio currently being streamed.
-  """)
+      Clears all input audio currently being streamed.
+    """)
+@usage(RequestUsage)
 model ClientEventInputAudioClear extends ClientEvent {
   @doc("The event type, must be 'input_audio.clear'.")
   type: ClientEventType.input_audio_clear;
@@ -113,11 +117,13 @@ model ClientEventInputAudioClear extends ClientEvent {
 
 // Tool customization: establish custom, enriched discriminated type hierarchy
 /** The item to add to the conversation. */
+@usage(RequestUsage)
 model ConversationItemBase {
   /** Customized to enriched Conversation{Request,Response}Item models */
 }
 
 /** The response resource. */
+@usage(ResponseUsage)
 model Response {
   /** The unique ID of the response. */
   id?: string;
@@ -146,7 +152,7 @@ model Response {
    * Items to the Conversation, thus output from previous turns (text and
    * audio tokens) will become the input for later turns.
    */
-  usage?: Usage;
+  usage?: TokenUsage;
 
   @doc("""
     Which conversation the response is added to, determined by the `conversation`
@@ -199,6 +205,7 @@ model Response {
  * VAD to be more responsive. Unlike made other client events, the server will
  * not send a confirmation response to this event.
  */
+@usage(RequestUsage)
 model ClientEventInputAudioBufferAppend extends ClientEvent {
   @doc("""
     The event type, must be `input_audio_buffer.append`.
@@ -293,6 +300,7 @@ model ClientEventConversationItemCreate extends ClientEvent {
   If successful, the server will respond with a `conversation.item.truncated`
   event.
   """)
+@usage(RequestUsage)
 model ClientEventConversationItemTruncate extends ClientEvent {
   @doc("""
     The event type, must be `conversation.item.truncate`.
@@ -323,6 +331,7 @@ model ClientEventConversationItemTruncate extends ClientEvent {
   unless the item does not exist in the conversation history, in which case the
   server will respond with an error.
   """)
+@usage(RequestUsage)
 model ClientEventConversationItemDelete extends ClientEvent {
   @doc("""
     The event type, must be `conversation.item.delete`.
@@ -351,6 +360,7 @@ model ClientEventConversationItemDelete extends ClientEvent {
   `instructions`, and `temperature`. These fields will override the Session's
   configuration for this Response only.
   """)
+@usage(RequestUsage)
 model ClientEventResponseCreate extends ClientEvent {
   @doc("""
     The event type, must be `response.create`.
@@ -371,6 +381,7 @@ model ClientEventResponseCreate extends ClientEvent {
   with a `response.cancelled` event or an error if there is no response to
   cancel.
   """)
+@usage(RequestUsage)
 model ClientEventResponseCancel extends ClientEvent {
   @doc("""
     The event type, must be `response.cancel`.
@@ -390,6 +401,7 @@ model ClientEventResponseCancel extends ClientEvent {
  * problem. Most errors are recoverable and the session will stay open, we
  * recommend to implementors to monitor and log error messages by default.
  */
+@usage(ResponseUsage)
 model ServerEventError extends ServerEvent {
   @doc("""
     The event type, must be `error`.
@@ -401,6 +413,7 @@ model ServerEventError extends ServerEvent {
 }
 
 /** Details of the error. */
+@usage(ResponseUsage)
 model ServerEventErrorDetails {
   /** The type of error (e.g., "invalid_request_error", "server_error"). */
   type: string;
@@ -424,6 +437,7 @@ model ServerEventErrorDetails {
  * connection is established as the first server event. This event will contain
  * the default Session configuration.
  */
+@usage(ResponseUsage)
 model ServerEventSessionCreated extends ServerEvent {
   @doc("""
     The event type, must be `session.created`.
@@ -439,6 +453,7 @@ model ServerEventSessionCreated extends ServerEvent {
   Returned when a session is updated with a `session.update` event, unless
   there is an error.
   """)
+@usage(ResponseUsage)
 model ServerEventSessionUpdated extends ServerEvent {
   @doc("""
     The event type, must be `session.updated`.
@@ -450,6 +465,7 @@ model ServerEventSessionUpdated extends ServerEvent {
 }
 
 @doc("Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer.")
+@usage(ResponseUsage)
 model ServerEventSessionAvatarConnecting extends ServerEvent {
   @doc("The event type, must be 'session.avatar.connecting'.")
   type: ServerEventType.session_avatar_connecting;
@@ -460,11 +476,13 @@ model ServerEventSessionAvatarConnecting extends ServerEvent {
 
 // Tool customization: establish base for enriched request/response split models
 /** VoiceLive session object configuration. */
+@usage(ResponseUsage)
 model SessionBase {}
 
 // Tool customization: Adjust union to be a discriminated type base
 /** A voicelive server event. */
 @discriminator("type")
+@usage(ResponseUsage)
 model ServerEvent {
   /** The type of event. */
   type: ServerEventType;
@@ -479,6 +497,7 @@ model ServerEvent {
   message item that will be created, thus a `conversation.item.created` event
   will also be sent to the client.
   """)
+@usage(ResponseUsage)
 model ServerEventInputAudioBufferCommitted extends ServerEvent {
   @doc("""
     The event type, must be `input_audio_buffer.committed`.
@@ -497,6 +516,7 @@ model ServerEventInputAudioBufferCommitted extends ServerEvent {
   Returned when the input audio buffer is cleared by the client with a
   `input_audio_buffer.clear` event.
   """)
+@usage(ResponseUsage)
 model ServerEventInputAudioBufferCleared extends ServerEvent {
   @doc("""
     The event type, must be `input_audio_buffer.cleared`.
@@ -517,6 +537,7 @@ model ServerEventInputAudioBufferCleared extends ServerEvent {
   `input_audio_buffer.speech_stopped` event (unless the client manually commits
   the audio buffer during VAD activation).
   """)
+@usage(ResponseUsage)
 model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
   @doc("""
     The event type, must be `input_audio_buffer.speech_started`.
@@ -541,6 +562,7 @@ model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
   the audio buffer. The server will also send an `conversation.item.created`
   event with the user message item that is created from the audio buffer.
   """)
+@usage(ResponseUsage)
 model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
   @doc("""
     The event type, must be `input_audio_buffer.speech_stopped`.
@@ -570,6 +592,7 @@ model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
     - The client has sent a `conversation.item.create` event to add a new Item
       to the Conversation.
   """)
+@usage(ResponseUsage)
 model ServerEventConversationItemCreated extends ServerEvent {
   @doc("""
     The event type, must be `conversation.item.created`.
@@ -599,6 +622,7 @@ model ServerEventConversationItemCreated extends ServerEvent {
   The transcript may diverge somewhat from the model's interpretation, and
   should be treated as a rough guide.
   """)
+@usage(ResponseUsage)
 model ServerEventConversationItemInputAudioTranscriptionCompleted
   extends ServerEvent {
   @doc("""
@@ -623,6 +647,7 @@ model ServerEventConversationItemInputAudioTranscriptionCompleted
   request for a user message failed. These events are separate from other
   `error` events so that the client can identify the related Item.
   """)
+@usage(ResponseUsage)
 model ServerEventConversationItemInputAudioTranscriptionFailed
   extends ServerEvent {
   @doc("""
@@ -650,6 +675,7 @@ model ServerEventConversationItemInputAudioTranscriptionFailed
   This action will truncate the audio and remove the server-side text transcript
   to ensure there is no text in the context that hasn't been heard by the user.
   """)
+@usage(ResponseUsage)
 model ServerEventConversationItemTruncated extends ServerEvent {
   @doc("""
     The event type, must be `conversation.item.truncated`.
@@ -674,6 +700,7 @@ model ServerEventConversationItemTruncated extends ServerEvent {
   `conversation.item.delete` event. This event is used to synchronize the
   server's understanding of the conversation history with the client's view.
   """)
+@usage(ResponseUsage)
 model ServerEventConversationItemDeleted extends ServerEvent {
   @doc("""
     The event type, must be `conversation.item.deleted`.
@@ -691,6 +718,7 @@ model ServerEventConversationItemDeleted extends ServerEvent {
   Returned when a new Response is created. The first event of response creation,
   where the response is in an initial state of `in_progress`.
   """)
+@usage(ResponseUsage)
 model ServerEventResponseCreated extends ServerEvent {
   @doc("""
     The event type, must be `response.created`.
@@ -706,6 +734,7 @@ model ServerEventResponseCreated extends ServerEvent {
   final state. The Response object included in the `response.done` event will
   include all output Items in the Response but will omit the raw audio data.
   """)
+@usage(ResponseUsage)
 model ServerEventResponseDone extends ServerEvent {
   @doc("""
     The event type, must be `response.done`.
@@ -717,6 +746,7 @@ model ServerEventResponseDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when a new Item is created during Response generation. */
+@usage(ResponseUsage)
 model ServerEventResponseOutputItemAdded extends ServerEvent {
   @doc("""
     The event type, must be `response.output_item.added`.
@@ -738,6 +768,7 @@ model ServerEventResponseOutputItemAdded extends ServerEvent {
  * Returned when an Item is done streaming. Also emitted when a Response is
  * interrupted, incomplete, or cancelled.
  */
+@usage(ResponseUsage)
 model ServerEventResponseOutputItemDone extends ServerEvent {
   @doc("""
     The event type, must be `response.output_item.done`.
@@ -759,6 +790,7 @@ model ServerEventResponseOutputItemDone extends ServerEvent {
  * Returned when a new content part is added to an assistant message item during
  * response generation.
  */
+@usage(ResponseUsage)
 model ServerEventResponseContentPartAdded extends ServerEvent {
   @doc("""
     The event type, must be `response.content_part.added`.
@@ -787,6 +819,7 @@ model ServerEventResponseContentPartAdded extends ServerEvent {
  * Returned when a content part is done streaming in an assistant message item.
  * Also emitted when a Response is interrupted, incomplete, or cancelled.
  */
+@usage(ResponseUsage)
 model ServerEventResponseContentPartDone extends ServerEvent {
   @doc("""
     The event type, must be `response.content_part.done`.
@@ -812,6 +845,7 @@ model ServerEventResponseContentPartDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the text value of a "text" content part is updated. */
+@usage(ResponseUsage)
 model ServerEventResponseTextDelta extends ServerEvent {
   @doc("""
     The event type, must be `response.text.delta`.
@@ -839,6 +873,7 @@ model ServerEventResponseTextDelta extends ServerEvent {
  * Returned when the text value of a "text" content part is done streaming. Also
  * emitted when a Response is interrupted, incomplete, or cancelled.
  */
+@usage(ResponseUsage)
 model ServerEventResponseTextDone extends ServerEvent {
   @doc("""
     The event type, must be `response.text.done`.
@@ -863,6 +898,7 @@ model ServerEventResponseTextDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the model-generated transcription of audio output is updated. */
+@usage(ResponseUsage)
 model ServerEventResponseAudioTranscriptDelta extends ServerEvent {
   @doc("""
     The event type, must be `response.audio_transcript.delta`.
@@ -891,6 +927,7 @@ model ServerEventResponseAudioTranscriptDelta extends ServerEvent {
  * streaming. Also emitted when a Response is interrupted, incomplete, or
  * cancelled.
  */
+@usage(ResponseUsage)
 model ServerEventResponseAudioTranscriptDone extends ServerEvent {
   @doc("""
     The event type, must be `response.audio_transcript.done`.
@@ -915,6 +952,7 @@ model ServerEventResponseAudioTranscriptDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the model-generated audio is updated. */
+@usage(ResponseUsage)
 model ServerEventResponseAudioDelta extends ServerEvent {
   @doc("""
     The event type, must be `response.audio.delta`.
@@ -944,6 +982,7 @@ model ServerEventResponseAudioDelta extends ServerEvent {
  * Returned when the model-generated audio is done. Also emitted when a Response
  * is interrupted, incomplete, or cancelled.
  */
+@usage(ResponseUsage)
 model ServerEventResponseAudioDone extends ServerEvent {
   @doc("""
     The event type, must be `response.audio.done`.
@@ -964,8 +1003,9 @@ model ServerEventResponseAudioDone extends ServerEvent {
 }
 
 @doc("""
-  Represents a delta update of blendshape animation frames for a specific output of a response.
-  """)
+    Represents a delta update of blendshape animation frames for a specific output of a response.
+    """)
+@usage(ResponseUsage)
 model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_delta;
   response_id: string;
@@ -977,8 +1017,9 @@ model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
 }
 
 @doc("""
-  Indicates the completion of blendshape animation processing for a specific output of a response.
-  """)
+    Indicates the completion of blendshape animation processing for a specific output of a response.
+    """)
+@usage(ResponseUsage)
 model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_done;
   response_id: string;
@@ -987,8 +1028,9 @@ model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
 }
 
 @doc("""
-  Represents a word-level audio timestamp delta for a response.
-  """)
+    Represents a word-level audio timestamp delta for a response.
+    """)
+@usage(ResponseUsage)
 model ServerEventResponseAudioTimestampDelta extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_delta;
   response_id: string;
@@ -1002,8 +1044,9 @@ model ServerEventResponseAudioTimestampDelta extends ServerEvent {
 }
 
 @doc("""
-  Indicates completion of audio timestamp delivery for a response.
-  """)
+    Indicates completion of audio timestamp delivery for a response.
+    """)
+@usage(ResponseUsage)
 model ServerEventResponseAudioTimestampDone extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_done;
   response_id: string;
@@ -1013,8 +1056,9 @@ model ServerEventResponseAudioTimestampDone extends ServerEvent {
 }
 
 @doc("""
-  Represents a viseme ID delta update for animation based on audio.
-  """)
+    Represents a viseme ID delta update for animation based on audio.
+    """)
+@usage(ResponseUsage)
 model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
   type: ServerEventType.response_animation_viseme_delta;
   response_id: string;
@@ -1026,8 +1070,9 @@ model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
 }
 
 @doc("""
-  Indicates completion of viseme animation delivery for a response.
-  """)
+    Indicates completion of viseme animation delivery for a response.
+    """)
+@usage(ResponseUsage)
 model ServerEventResponseAnimationVisemeDone extends ServerEvent {
   type: ServerEventType.response_animation_viseme_done;
   response_id: string;
@@ -1037,6 +1082,7 @@ model ServerEventResponseAnimationVisemeDone extends ServerEvent {
 }
 
 /** Create a new VoiceLive response with these parameters */
+@usage(ResponseUsage)
 model ResponseCreateParams {
   @doc("""
     Whether to commit the response to the conversation. Defaults to true.
@@ -1123,6 +1169,7 @@ model ResponseCreateParams {
   unless the item does not exist in the conversation history, in which case the
   server will respond with an error.
   """)
+@usage(RequestUsage)
 model ClientEventConversationItemRetrieve extends ClientEvent {
   @doc("""
     The event type, must be `conversation.item.retrieve`.
@@ -1135,6 +1182,7 @@ model ClientEventConversationItemRetrieve extends ClientEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the text value of an input audio transcription content part is updated. */
+@usage(ResponseUsage)
 model ServerEventConversationItemInputAudioTranscriptionDelta
   extends ServerEvent {
   @doc("""
@@ -1159,6 +1207,7 @@ model ServerEventConversationItemInputAudioTranscriptionDelta
 @doc("""
   Returned when a conversation item is retrieved with `conversation.item.retrieve`.
   """)
+@usage(ResponseUsage)
 model ServerEventConversationItemRetrieved extends ServerEvent {
   @doc("""
     The event type, must be `conversation.item.retrieved`.
@@ -1173,6 +1222,7 @@ model ServerEventConversationItemRetrieved extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the model-generated function call arguments are updated. */
+@usage(ResponseUsage)
 model ServerEventResponseFunctionCallArgumentsDelta extends ServerEvent {
   @doc("""
     The event type, must be `response.function_call_arguments.delta`.
@@ -1200,6 +1250,7 @@ model ServerEventResponseFunctionCallArgumentsDelta extends ServerEvent {
  * Returned when the model-generated function call arguments are done streaming.
  * Also emitted when a Response is interrupted, incomplete, or cancelled.
  */
+@usage(ResponseUsage)
 model ServerEventResponseFunctionCallArgumentsDone extends ServerEvent {
   @doc("""
     The event type, must be `response.function_call_arguments.done`.
