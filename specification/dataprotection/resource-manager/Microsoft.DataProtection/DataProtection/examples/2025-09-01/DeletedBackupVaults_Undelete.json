@@ -1,0 +1,68 @@
+{
+  "title": "Undelete a soft deleted backup vault",
+  "operationId": "DeletedBackupVaults_Undelete",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "westus",
+    "deletedVaultName": "deleted-vault-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.DataProtection/backupVaults/sample-vault",
+        "name": "sample-vault",
+        "type": "Microsoft.DataProtection/backupVaults",
+        "properties": {
+          "monitoringSettings": {
+            "azureMonitorAlertSettings": {
+              "alertsForAllJobFailures": "Enabled"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "resourceMoveState": "Unknown",
+          "securitySettings": {
+            "softDeleteSettings": {
+              "state": "On",
+              "retentionDurationInDays": 14.0
+            },
+            "immutabilitySettings": {
+              "state": "Disabled"
+            }
+          },
+          "storageSettings": [
+            {
+              "datastoreType": "VaultStore",
+              "type": "LocallyRedundant"
+            }
+          ],
+          "isVaultProtectedByResourceGuard": false,
+          "featureSettings": {
+            "crossSubscriptionRestoreSettings": {
+              "state": "Disabled"
+            },
+            "crossRegionRestoreSettings": {
+              "state": "Disabled"
+            }
+          },
+          "secureScore": "Maximum",
+          "resourceGuardOperationRequests": [],
+          "replicatedRegions": []
+        },
+        "location": "westus",
+        "tags": {
+          "key1": "value1"
+        },
+        "identity": {
+          "type": "None"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DataProtection/locations/westus/operationStatus/00000000-0000-0000-0000-000000000000",
+        "Retry-After": "10"
+      }
+    }
+  }
+}
