@@ -1,0 +1,198 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "gcpResourceGroup",
+    "securityConnectorName": "gcp-enterprise-cspm-connector",
+    "securityConnector": {
+      "tags": {
+        "environment": "enterprise",
+        "team": "platform-security",
+        "cost-center": "CC-12345",
+        "updated": "2025-07-21"
+      },
+      "properties": {
+        "environmentData": {
+          "scanInterval": 4
+        },
+        "offerings": [
+          {
+            "offeringType": "DefenderCspmGcp",
+            "ciemDiscovery": {
+              "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-ciem-provider",
+              "serviceAccountEmailAddress": "mdc-ciem-enterprise@enterprise-security-project.iam.gserviceaccount.com",
+              "azureActiveDirectoryAppName": "GCP-CIEM-Enterprise-Security",
+              "enableAuditLogIngestion": true
+            },
+            "ciem": {
+              "logCollectionOidc": {
+                "workloadIdentityProviderId": "My log collection workload identity provider Id",
+                "serviceAccountEmailAddress": "logcollection@projectName.com"
+              },
+              "ciemOidc": {
+                "workloadIdentityProviderId": "My ciem workload identity provider Id",
+                "serviceAccountEmailAddress": "ciem@projectName.com"
+              },
+              "gcpAuditLogIngestion": {
+                "provisioningType": "BringYourOwn",
+                "resourceSets": [
+                  {
+                    "pubSubSubscriptionName": "projects/enterprise-security-project/subscriptions/audit-logs-subscription-us-central1"
+                  },
+                  {
+                    "pubSubSubscriptionName": "projects/enterprise-security-project/subscriptions/audit-logs-subscription-us-east1"
+                  },
+                  {
+                    "pubSubSubscriptionName": "projects/enterprise-security-project/subscriptions/audit-logs-subscription-europe-west1"
+                  },
+                  {
+                    "pubSubSubscriptionName": "projects/enterprise-security-project/subscriptions/audit-logs-subscription-asia-southeast1"
+                  }
+                ]
+              }
+            },
+            "vmScanners": {
+              "enabled": true,
+              "configuration": {
+                "scanningMode": "Default",
+                "exclusionTags": {
+                  "scan-excluded": "true",
+                  "security-level": "public",
+                  "maintenance-window": "active"
+                }
+              }
+            },
+            "dataSensitivityDiscovery": {
+              "enabled": true,
+              "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-datasensitivity-provider",
+              "serviceAccountEmailAddress": "mdc-datasensitivity-enterprise@enterprise-security-project.iam.gserviceaccount.com"
+            },
+            "mdcContainersImageAssessment": {
+              "enabled": true,
+              "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-containers-provider",
+              "serviceAccountEmailAddress": "mdc-containers-enterprise@enterprise-security-project.iam.gserviceaccount.com"
+            },
+            "mdcContainersAgentlessDiscoveryK8s": {
+              "enabled": true,
+              "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-k8s-discovery-provider",
+              "serviceAccountEmailAddress": "mdc-k8s-discovery-enterprise@enterprise-security-project.iam.gserviceaccount.com"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/gcpResourceGroup/providers/Microsoft.Security/securityConnectors/gcp-enterprise-cspm-connector",
+        "name": "gcp-enterprise-cspm-connector",
+        "type": "Microsoft.Security/securityConnectors",
+        "location": "East US",
+        "tags": {
+          "environment": "enterprise",
+          "team": "platform-security",
+          "cost-center": "CC-12345",
+          "updated": "2025-07-21"
+        },
+        "systemData": {
+          "createdBy": "admin@enterprise.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-21T14:15:00.0000000Z",
+          "lastModifiedBy": "admin@enterprise.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-21T20:15:00.0000000Z"
+        },
+        "properties": {
+          "hierarchyIdentifier": "2023456789012",
+          "environmentName": "GCP",
+          "environmentData": {
+            "environmentType": "GcpProject",
+            "projectDetails": {
+              "projectId": "enterprise-security-project",
+              "projectNumber": "2023456789012",
+              "workloadIdentityPoolId": "enterprise-mdc-pool",
+              "projectName": "Enterprise Security Management Project"
+            },
+            "organizationalData": {
+              "organizationMembershipType": "Organization",
+              "excludedProjectNumbers": [
+                "1111111111111",
+                "2222222222222"
+              ],
+              "serviceAccountEmailAddress": "mdc-org-sa@enterprise-security-project.iam.gserviceaccount.com",
+              "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-mdc-provider",
+              "organizationName": "Enterprise Corp GCP Organization"
+            },
+            "scanInterval": 4
+          },
+          "offerings": [
+            {
+              "offeringType": "DefenderCspmGcp",
+              "description": "Defender CSPM for GCP provides comprehensive cloud security posture management including permissions management, data sensitivity discovery, and advanced threat protection",
+              "ciemDiscovery": {
+                "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-ciem-provider",
+                "serviceAccountEmailAddress": "mdc-ciem-enterprise@enterprise-security-project.iam.gserviceaccount.com",
+                "azureActiveDirectoryAppName": "GCP-CIEM-Enterprise-Security",
+                "enableAuditLogIngestion": true
+              },
+              "ciem": {
+                "logCollectionOidc": {
+                  "workloadIdentityProviderId": "My log collection workload identity provider Id",
+                  "serviceAccountEmailAddress": "logcollection@projectName.com"
+                },
+                "ciemOidc": {
+                  "workloadIdentityProviderId": "My ciem workload identity provider Id",
+                  "serviceAccountEmailAddress": "ciem@projectName.com"
+                },
+                "gcpAuditLogIngestion": {
+                  "provisioningType": "BringYourOwn",
+                  "resourceSets": [
+                    {
+                      "pubSubSubscriptionName": "projects/enterprise-security-project/subscriptions/audit-logs-subscription-us-central1"
+                    },
+                    {
+                      "pubSubSubscriptionName": "projects/enterprise-security-project/subscriptions/audit-logs-subscription-us-east1"
+                    },
+                    {
+                      "pubSubSubscriptionName": "projects/enterprise-security-project/subscriptions/audit-logs-subscription-europe-west1"
+                    },
+                    {
+                      "pubSubSubscriptionName": "projects/enterprise-security-project/subscriptions/audit-logs-subscription-asia-southeast1"
+                    }
+                  ]
+                }
+              },
+              "vmScanners": {
+                "enabled": true,
+                "configuration": {
+                  "scanningMode": "Default",
+                  "exclusionTags": {
+                    "scan-excluded": "true",
+                    "security-level": "public",
+                    "maintenance-window": "active"
+                  }
+                }
+              },
+              "dataSensitivityDiscovery": {
+                "enabled": true,
+                "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-datasensitivity-provider",
+                "serviceAccountEmailAddress": "mdc-datasensitivity-enterprise@enterprise-security-project.iam.gserviceaccount.com"
+              },
+              "mdcContainersImageAssessment": {
+                "enabled": true,
+                "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-containers-provider",
+                "serviceAccountEmailAddress": "mdc-containers-enterprise@enterprise-security-project.iam.gserviceaccount.com"
+              },
+              "mdcContainersAgentlessDiscoveryK8s": {
+                "enabled": true,
+                "workloadIdentityProviderId": "projects/2023456789012/locations/global/workloadIdentityPools/enterprise-mdc-pool/providers/enterprise-k8s-discovery-provider",
+                "serviceAccountEmailAddress": "mdc-k8s-discovery-enterprise@enterprise-security-project.iam.gserviceaccount.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
