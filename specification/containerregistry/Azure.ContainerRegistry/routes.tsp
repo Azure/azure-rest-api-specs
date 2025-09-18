@@ -9,11 +9,10 @@ using TypeSpec.OpenAPI;
 
 namespace AzureContainerRegistry;
 
-interface ContainerRegistryOperationGroup {
+interface ContainerRegistry {
   /**
    * Tells whether this Docker Registry instance supports Docker Registry HTTP API v2
    */
-  @operationId("ContainerRegistry_CheckDockerV2Support")
   @route("/v2/")
   @get
   checkDockerV2Support is Azure.Core.Foundations.Operation<{}, void>;
@@ -22,7 +21,6 @@ interface ContainerRegistryOperationGroup {
    * Get the manifest identified by `name` and `reference` where `reference` can be
    * a tag or digest.
    */
-  @operationId("ContainerRegistry_GetManifest")
   @route("/v2/{name}/manifests/{reference}")
   @get
   getManifest is Azure.Core.Foundations.Operation<
@@ -53,7 +51,6 @@ interface ContainerRegistryOperationGroup {
    * Put the manifest identified by `name` and `reference` where `reference` can be
    * a tag or digest.
    */
-  @operationId("ContainerRegistry_CreateManifest")
   @route("/v2/{name}/manifests/{reference}")
   @put
   createManifest is Azure.Core.Foundations.Operation<
@@ -83,7 +80,6 @@ interface ContainerRegistryOperationGroup {
    * Delete the manifest identified by `name` and `reference`. Note that a manifest
    * can _only_ be deleted by `digest`.
    */
-  @operationId("ContainerRegistry_DeleteManifest")
   @route("/v2/{name}/manifests/{reference}")
   @delete
   deleteManifest is Azure.Core.Foundations.Operation<
@@ -106,7 +102,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * List repositories
    */
-  @operationId("ContainerRegistry_GetRepositories")
   @route("/acr/v1/_catalog")
   @list
   getRepositories is Azure.Core.Foundations.Operation<
@@ -123,7 +118,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * Get repository attributes
    */
-  @operationId("ContainerRegistry_GetProperties")
   @route("/acr/v1/{name}")
   @get
   getProperties is Azure.Core.Foundations.Operation<
@@ -140,7 +134,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * Delete the repository identified by `name`
    */
-  @operationId("ContainerRegistry_DeleteRepository")
   @route("/acr/v1/{name}")
   @delete
   deleteRepository is Azure.Core.Foundations.Operation<
@@ -158,7 +151,6 @@ interface ContainerRegistryOperationGroup {
    * Update the attribute identified by `name` where `reference` is the name of the
    * repository.
    */
-  @operationId("ContainerRegistry_UpdateProperties")
   @route("/acr/v1/{name}")
   @patch(#{ implicitOptionality: true })
   updateProperties is Azure.Core.Foundations.Operation<
@@ -181,7 +173,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * List tags of a repository
    */
-  @operationId("ContainerRegistry_GetTags")
   @route("/acr/v1/{name}/_tags")
   @get
   getTags is Azure.Core.Foundations.Operation<
@@ -223,7 +214,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * Get tag attributes by tag
    */
-  @operationId("ContainerRegistry_GetTagProperties")
   @route("/acr/v1/{name}/_tags/{reference}")
   @get
   getTagProperties is Azure.Core.Foundations.Operation<
@@ -246,7 +236,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * Update tag attributes
    */
-  @operationId("ContainerRegistry_UpdateTagAttributes")
   @route("/acr/v1/{name}/_tags/{reference}")
   @patch(#{ implicitOptionality: true })
   updateTagAttributes is Azure.Core.Foundations.Operation<
@@ -275,7 +264,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * Delete tag
    */
-  @operationId("ContainerRegistry_DeleteTag")
   @route("/acr/v1/{name}/_tags/{reference}")
   @delete
   deleteTag is Azure.Core.Foundations.Operation<
@@ -298,7 +286,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * List manifests of a repository
    */
-  @operationId("ContainerRegistry_GetManifests")
   @route("/acr/v1/{name}/_manifests")
   @get
   getManifests is Azure.Core.Foundations.Operation<
@@ -334,7 +321,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * Get manifest attributes
    */
-  @operationId("ContainerRegistry_GetManifestProperties")
   @route("/acr/v1/{name}/_manifests/{digest}")
   @get
   getManifestProperties is Azure.Core.Foundations.Operation<
@@ -357,7 +343,6 @@ interface ContainerRegistryOperationGroup {
   /**
    * Update properties of a manifest
    */
-  @operationId("ContainerRegistry_UpdateManifestProperties")
   @route("/acr/v1/{name}/_manifests/{digest}")
   @patch(#{ implicitOptionality: true })
   updateManifestProperties is Azure.Core.Foundations.Operation<
@@ -384,11 +369,10 @@ interface ContainerRegistryOperationGroup {
   >;
 }
 
-interface ContainerRegistryBlobOperationGroup {
+interface ContainerRegistryBlob {
   /**
    * Retrieve the blob from the registry identified by digest.
    */
-  @operationId("ContainerRegistryBlob_GetBlob")
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @get
@@ -412,7 +396,6 @@ interface ContainerRegistryBlobOperationGroup {
   /**
    * Same as GET, except only the headers are returned.
    */
-  @operationId("ContainerRegistryBlob_CheckBlobExists")
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @head
@@ -436,7 +419,6 @@ interface ContainerRegistryBlobOperationGroup {
   /**
    * Removes an already uploaded blob.
    */
-  @operationId("ContainerRegistryBlob_DeleteBlob")
   @route("/v2/{name}/blobs/{digest}")
   @delete
   deleteBlob is Azure.Core.Foundations.Operation<
@@ -459,7 +441,6 @@ interface ContainerRegistryBlobOperationGroup {
   /**
    * Mount a blob identified by the `mount` parameter from another repository.
    */
-  @operationId("ContainerRegistryBlob_MountBlob")
   @sharedRoute
   @route("/v2/{name}/blobs/uploads/")
   @post
@@ -490,7 +471,6 @@ interface ContainerRegistryBlobOperationGroup {
    * Retrieve status of upload identified by uuid. The primary purpose of this
    * endpoint is to resolve the current status of a resumable upload.
    */
-  @operationId("ContainerRegistryBlob_GetUploadStatus")
   @route("/{nextBlobUuidLink}")
   @get
   getUploadStatus is Azure.Core.Foundations.Operation<
@@ -508,7 +488,6 @@ interface ContainerRegistryBlobOperationGroup {
   /**
    * Upload a stream of data without completing the upload.
    */
-  @operationId("ContainerRegistryBlob_UploadChunk")
   @route("/{nextBlobUuidLink}")
   @patch(#{ implicitOptionality: true })
   uploadChunk is Azure.Core.Foundations.Operation<
@@ -534,7 +513,6 @@ interface ContainerRegistryBlobOperationGroup {
    * request without a body will just complete the upload with previously uploaded
    * content.
    */
-  @operationId("ContainerRegistryBlob_CompleteUpload")
   @route("/{nextBlobUuidLink}")
   @put
   completeUpload is Azure.Core.Foundations.Operation<
@@ -565,7 +543,6 @@ interface ContainerRegistryBlobOperationGroup {
    * Cancel outstanding upload processes, releasing associated resources. If this is
    * not called, the unfinished uploads will eventually timeout.
    */
-  @operationId("ContainerRegistryBlob_CancelUpload")
   @route("/{nextBlobUuidLink}")
   @delete
   cancelUpload is Azure.Core.Foundations.Operation<
@@ -583,7 +560,6 @@ interface ContainerRegistryBlobOperationGroup {
   /**
    * Initiate a resumable blob upload with an empty request body.
    */
-  @operationId("ContainerRegistryBlob_StartUpload")
   @sharedRoute
   @route("/v2/{name}/blobs/uploads/")
   @post
@@ -604,7 +580,6 @@ interface ContainerRegistryBlobOperationGroup {
    * issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range
    * requests can be used to fetch partial content.
    */
-  @operationId("ContainerRegistryBlob_GetChunk")
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @get
@@ -634,7 +609,6 @@ interface ContainerRegistryBlobOperationGroup {
   /**
    * Same as GET, except only the headers are returned.
    */
-  @operationId("ContainerRegistryBlob_CheckChunkExists")
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @head
@@ -662,7 +636,7 @@ interface ContainerRegistryBlobOperationGroup {
   >;
 }
 
-interface AuthenticationOperationGroup {
+interface Authentication {
   /**
    * Exchange AAD tokens for an ACR refresh Token
    */
@@ -670,7 +644,6 @@ interface AuthenticationOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
-  @operationId("Authentication_ExchangeAadAccessTokenForAcrRefreshToken")
   @route("/oauth2/exchange")
   @post
   exchangeAadAccessTokenForAcrRefreshToken(
@@ -688,7 +661,6 @@ interface AuthenticationOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
-  @operationId("Authentication_ExchangeAcrRefreshTokenForAcrAccessToken")
   @route("/oauth2/token")
   @post
   exchangeAcrRefreshTokenForAcrAccessToken(
@@ -702,7 +674,6 @@ interface AuthenticationOperationGroup {
   /**
    * Exchange Username, Password and Scope for an ACR Access Token
    */
-  @operationId("Authentication_GetAcrAccessTokenFromLogin")
   @route("/oauth2/token")
   @get
   getAcrAccessTokenFromLogin is Azure.Core.Foundations.Operation<
