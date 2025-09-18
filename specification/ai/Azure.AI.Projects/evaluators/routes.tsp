@@ -14,10 +14,7 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
 
 alias ListEvaluatorVersionsParameters = {};
-alias EvaluatorInputParameters = InputParameters<
-  EvaluatorVersion,
-  "evaluatorVersion"
->;
+alias EvaluatorInputParameters = InputParameters<EvaluatorVersion, "evaluatorVersion">;
 
 // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_15_preview)
@@ -28,7 +25,7 @@ interface Evaluators {
   @Rest.actionSeparator("/")
   @Http.get
   @list
-  listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
+  listEvaluatorVersions is Azure.Core.StandardResourceOperations.ResourceAction<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters,
     Azure.Core.Page<EvaluatorVersion>
@@ -37,7 +34,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc("List the latest version of each {name}", EvaluatorVersion)
   @Rest.listsResource(EvaluatorVersion)
-  listLatest is Azure.Core.Foundations.ResourceList<
+  listLatestVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters,
     Azure.Core.Page<EvaluatorVersion>
@@ -48,7 +45,7 @@ interface Evaluators {
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     EvaluatorVersion
   )
-  getVersion is Azure.Core.Foundations.ResourceOperation<
+  getEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
       @doc(
@@ -68,7 +65,7 @@ interface Evaluators {
     EvaluatorVersion
   )
   @Http.delete
-  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
       @doc("The version of the {name} to delete.", EvaluatorVersion)
@@ -82,7 +79,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc("Create an existing {name} with the given version id", EvaluatorVersion)
   @Http.post
-  createVersion is Azure.Core.Foundations.ResourceOperation<
+  createEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters,
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluatorCreateResult>
@@ -92,7 +89,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc("Update an existing {name} with the given version id", EvaluatorVersion)
   @Http.patch
-  updateVersion is Azure.Core.Foundations.ResourceOperation<
+  updateEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
       @doc("The version of the {name} to delete.", EvaluatorVersion)

@@ -28,38 +28,69 @@ union EvaluatorCategory {
 union EvaluatorType {
   string,
 
-  @doc("LLM-based evaluator")
-  llm: "LLM_Based",
+  @doc("Built-in evaluator")
+  built_in: "Built-In",
 
-  @doc("Code-based evaluator")
-  code: "Code_Based",
+  @doc("Custom evaluator")
+  custom: "Custom",
 
-  @doc("Service-based evaluator")
-  service: "Service_Based",
-
-  @doc("Container-based evaluator")
-  Container: "Container_Based",
 }
 
-@doc("The type of evaluator configuration")
-union EvaluatorConfigType {
+@doc("The type of evaluator definition")
+union EvaluatorDefinitionType {
   string,
 
-  @doc("Prompt-based configuration")
+  @doc("Prompt-based definition")
   prompt: "prompt",
 
-  @doc("Code-based configuration")
+  @doc("Code-based definition")
   code: "code",
 
-  @doc("Container-based configuration")
-  container: "container",
+  @doc("Prompty-based definition")
+  prompty: "prompty",
+
+  @visibility(Lifecycle.Read)
+  @doc("Prompt & Code Based definition")
+  prompt_and_code: "prompt_and_code",
+
+  @visibility(Lifecycle.Read)
+  @doc("Service-based evaluator")
+  service: "service",
+
+  @visibility(Lifecycle.Read)
+  @doc("AOAI graders")
+  aoai_graders: "aoai_graders",
 }
 
 @doc("Base evaluator configuration with discriminator")
-@discriminator("config_type")
-model EvaluatorConfig {
-  @doc("The type of evaluator configuration")
-  config_type: EvaluatorConfigType;
+@discriminator("type")
+model EvaluatorDefinition {
+  @doc("The type of evaluator definition")
+  type: EvaluatorDefinitionType;
+
+  @doc("The blob reference of the evaluator")
+  blob_reference: string; 
+  
+  @doc("The evaluator's input parameters")
+  init_parameters: string;
+
+  @doc("The data mapping of the evaluator's inputs to the provided dataset")
+  data_schema: string;
+
+  @doc("The result of the evaluator representing metrics schema")
+  results: string;
+}
+
+@doc("Metadata about the evaluator")
+@discriminator("type")
+model EvaluatorMetadata {
+  @doc("The key of the evaluator metadata")
+  key: string;
+
+  @doc("The value of the evaluator metadata")
+  value: string;
+
+
 }
 
 /* Allowed parameter types */
@@ -71,49 +102,20 @@ alias InputParameters = Record<ScalarParamType>;
 /* The evaluator's output parameters */
 alias OutputParameters = Record<ScalarParamType>;
 
-@doc("Code-based evaluator configuration using container images")
-model CodeEvaluatorConfig extends EvaluatorConfig {
-  config_type: EvaluatorConfigType.code;
+@doc("Code-based evaluator definition using python code")
+model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.code;
 
-  @doc("URI of the container image")
-  inline_code: string;
-
-  @doc("The evaluator's input parameters")
-  input_params: InputParameters;
-
-  @doc("The evaluator's output parameters")
-  output_params: OutputParameters;
-}
-
-@doc("Code-based evaluator configuration using container images")
-model ContainerEvaluatorConfig extends EvaluatorConfig {
-  config_type: EvaluatorConfigType.container;
-
-  @doc("URI of the container image")
-  container_image_uri: string;
-
-  @doc("Environment variables to pass to the container")
-  env_variables: Record<string>;
-
-  @doc("The evaluator's input parameters")
-  input_params: InputParameters;
-
-  @doc("The evaluator's output parameters")
-  output_params: OutputParameters;
+  @doc("Inline code text for the evaluator")
+  code_text: string;
 }
 
 @doc("Prompt-based evaluator")
-model PromptBasedEvaluatorConfig extends EvaluatorConfig {
-  config_type: EvaluatorConfigType.prompt;
+model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.prompt;
 
   @doc("The prompt text used for evaluation")
   prompt_text: string;
-
-  @doc("The evaluator's input parameters")
-  input_params: InputParameters;
-
-  @doc("The evaluator's output parameters")
-  output_params: OutputParameters;
 }
 
 @doc("Evaluator Definition")
@@ -123,20 +125,14 @@ model EvaluatorVersion {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
   display_name?: string;
 
-  @doc("evaluator's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
-  properties?: Record<string>;
+  @doc("The metadata of the evaluator")
+  metadata: Record<string>;
 
-  @doc("The category of this evaluator")
-  category: EvaluatorCategory;
+  @doc("The tags of the evaluator")
+  tags?: Record<string>;
 
-  @doc("The evaluator type")
-  type: EvaluatorType;
-
-  @doc("Configuration specific to the evaluator type")
-  evaluator_config: EvaluatorConfig;
-
-  @doc("The Evaluator's provider")
-  provider: string;
+  @doc("Definition of the evaluator")
+  definition: EvaluatorDefinition;
 
   ...AssetBase;
 }
@@ -145,4 +141,10 @@ model EvaluatorVersion {
 model EvaluatorCreateResult {
   @doc("The Evaluator's id")
   id: string;
+
+  @doc("The Evaluator's version")
+  version: string;
+
+  @doc("The Evaluator's name")
+  name: string;
 }
