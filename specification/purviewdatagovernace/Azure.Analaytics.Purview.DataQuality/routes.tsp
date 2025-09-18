@@ -14,6 +14,7 @@ namespace PurviewDataQuality;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules")
 @post
 op createRules is Azure.Core.Foundations.Operation<
@@ -110,6 +111,9 @@ op updateRule is Azure.Core.Foundations.Operation<
     @path
     ruleId: string;
 
+    /**
+     * Body Rule Entity
+     */
     @bodyRoot
     body?: RuleEntity;
   },
@@ -218,6 +222,10 @@ op createBulkRules is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
 
+    /**
+     * Body Rule Entity
+     */
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem"
     @bodyRoot
     body?: RuleEntity[];
   },
@@ -552,7 +560,7 @@ op scanByScanId is Azure.Core.Foundations.Operation<
   },
   ScheduleScanMonitoringEntity & {
     @header
-    contentType: "application/json" | "text/json";
+    contentType: "application/json" | "text/json" | "string";
   }
 >;
 
@@ -580,7 +588,7 @@ op getRunStatus is Azure.Core.Foundations.Operation<
   },
   JobMetadataEntity & {
     @header
-    contentType: "application/json" | "text/json";
+    contentType: "application/json" | "text/json" | "string";
   }
 >;
 
@@ -652,7 +660,6 @@ op getRunsForAsset is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@operationId("observe")
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations")
 @post
 op observe is Azure.Core.Foundations.Operation<
@@ -675,6 +682,9 @@ op observe is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
 
+    /**
+     * Body Job Config DTO
+     */
     @bodyRoot
     body: JobConfigDTO;
   },
