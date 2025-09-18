@@ -1,24 +1,31 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Nginx.NginxPlus;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AnalysisCreate.config, "autorest");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AnalysisResult.data, "autorest");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NginxDeploymentProperties.nginxAppProtect, "autorest");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NginxDeploymentScalingProperties.autoScaleSettings);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ScaleProfile.capacity, "autorest");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NginxDeploymentUpdateProperties.nginxAppProtect, "autorest");
 
 @@clientLocation(NginxDeploymentApiKeyResponses.get, "ApiKeys", "!csharp");
