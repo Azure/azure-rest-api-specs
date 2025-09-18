@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-03-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-03-15-preview'
 input-file:
-  - Microsoft.ExtendedLocation/preview/2021-03-15-preview/customlocations.json
+  - preview/2021-03-15-preview/customlocations.json
 ```
 
 ### Tag: package-2021-08-15
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2021-08-15` is specified on the co
 
 ```yaml $(tag) == 'package-2021-08-15'
 input-file:
-  - Microsoft.ExtendedLocation/stable/2021-08-15/customlocations.json
+  - stable/2021-08-15/customlocations.json
 ```
 
 
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2021-08-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-08-31-preview'
 input-file:
-  - Microsoft.ExtendedLocation/preview/2021-08-31-preview/customlocations.json
+  - preview/2021-08-31-preview/customlocations.json
 ```
 
 ---
