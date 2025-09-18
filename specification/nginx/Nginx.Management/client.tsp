@@ -160,3 +160,8 @@ using Azure.Core;
   "WebApplicationFirewallSettings",
   "csharp"
 );
+@@clientName(NginxDeployments.wafPolicyList, "GetWafPolicies", "csharp");
+@@clientName(NginxDeployments.defaultWafPolicyList,
+  "GetDefaultWafPolicies",
+  "csharp"
+);
