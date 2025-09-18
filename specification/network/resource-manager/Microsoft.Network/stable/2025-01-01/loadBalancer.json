@@ -2539,6 +2539,18 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the load balancer resource."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Indicates the scope of the load balancer: external (Public) or internal (Private).",
+          "enum": [
+            "Public",
+            "Private"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerScope",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the load balancer."
