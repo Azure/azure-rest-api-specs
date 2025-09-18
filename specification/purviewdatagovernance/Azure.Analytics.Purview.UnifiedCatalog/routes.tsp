@@ -41,7 +41,11 @@ op ListCriticalDataElementAsync is UnifiedCatalogOperations.ResourceList<
 @route("/criticalDataElements")
 @post
 op CreateCriticalDataElementAsync is RpcOperation<
-  CreateCriticalDataElementRequest,
+  {
+    @doc("the critical data element to update.")
+    @body
+    criticalDataElement: CriticalDataElement;
+  },
   CreateCriticalDataElementResponse
 >;
 
@@ -84,7 +88,7 @@ op ListCriticalDataElementRelationshipsAsync is UnifiedCatalogOperations.Resourc
   ListQueryParametersTrait<{
     @doc("The body associated with the critical data element output.")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
   }>
 >;
 

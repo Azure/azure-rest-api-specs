@@ -1012,7 +1012,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/CreateCriticalDataElementRequest"
+            "name": "criticalDataElement",
+            "in": "body",
+            "description": "the critical data element to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CriticalDataElement"
+            }
           }
         ],
         "responses": {
@@ -1208,7 +1214,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The body associated with the critical data element output.",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -7844,16 +7850,6 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/CriticalDataColumn"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "CreateCriticalDataElementRequest": {
-      "name": "criticalDataElement",
-      "in": "body",
-      "description": "The critical data element to create.",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/CriticalDataElement"
       },
       "x-ms-parameter-location": "method"
     }
