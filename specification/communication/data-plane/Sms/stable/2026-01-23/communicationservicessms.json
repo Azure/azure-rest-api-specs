@@ -197,6 +197,53 @@
           }
         }
       }
+    },
+    "/deliveryReports/{outgoingMessageId}": {
+      "get": {
+        "tags": [
+          "DeliveryReports"
+        ],
+        "summary": "Gets delivery report for a specific outgoing message.",
+        "operationId": "DeliveryReports_Get",
+        "x-ms-examples": {
+          "GetDeliveryReport": {
+            "$ref": "./examples/DeliveryReportGet.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "outgoingMessageId",
+            "in": "path",
+            "description": "The identifier of the outgoing message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeliveryReport"
+            }
+          },
+          "404": {
+            "description": "Not Found - Delivery report for this message is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -428,6 +475,114 @@
         },
         "errorMessage": {
           "description": "Optional error message in case of 4xx/5xx errors.",
+          "type": "string"
+        }
+      }
+    },
+    "DeliveryReport": {
+      "description": "Delivery report for an outgoing SMS message.",
+      "required": [
+        "deliveryStatus",
+        "messageId",
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "deliveryStatus": {
+          "description": "The delivery status of the message.",
+          "type": "string",
+          "enum": [
+            "Delivered",
+            "Failed"
+          ]
+        },
+        "deliveryStatusDetails": {
+          "description": "Detailed information about the delivery status.",
+          "type": "string"
+        },
+        "deliveryAttempts": {
+          "description": "Array of delivery attempts made for this message.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttempt"
+          }
+        },
+        "receivedTimestamp": {
+          "description": "The timestamp when the delivery report was received.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "tag": {
+          "description": "Custom tag provided when sending the message.",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The identifier of the outgoing message.",
+          "type": "string"
+        },
+        "from": {
+          "description": "The sender's phone number in E.164 format.",
+          "type": "string"
+        },
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "type": "string"
+        }
+      }
+    },
+    "DeliveryAttempt": {
+      "description": "Details of a delivery attempt.",
+      "required": [
+        "timestamp",
+        "segmentsSucceeded",
+        "segmentsFailed"
+      ],
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The timestamp of the delivery attempt.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "segmentsSucceeded": {
+          "description": "Number of message segments that were successfully delivered.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "segmentsFailed": {
+          "description": "Number of message segments that failed to be delivered.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response for failed requests.",
+      "required": [
+        "type",
+        "title",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "A URI reference that identifies the problem type.",
+          "type": "string"
+        },
+        "title": {
+          "description": "A short, human-readable summary of the problem type.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The HTTP status code.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "traceId": {
+          "description": "The trace identifier for the request.",
           "type": "string"
         }
       }
