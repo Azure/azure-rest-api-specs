@@ -1,0 +1,44 @@
+{
+  "title": "Run_GetStatus",
+  "operationId": "GetRunStatus",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "runId": "12345678-abcd-1234-ef00-123456abcdef"
+  },
+  "responses": {
+    "200": {
+      "body": {
+
+          "runId": "run-123e4567-e89b-12d3-a456-426614174000",
+          "dataProductId": "dp-223e4567-e89b-12d3-a456-426614174111",
+          "redundancyCheck": true,
+          "accountId": "acc-333e4567-e89b-12d3-a456-426614174222",
+          "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+          "submissionTime": "2025-09-17T08:00:00Z",
+          "startTime": "2025-09-17T08:05:00Z",
+          "endTime": "2025-09-17T08:45:00Z",
+          "cancelRequestTime": null,
+          "status": "Succeeded",
+          "pfsJobId": "pfs-444e4567-e89b-12d3-a456-426614174333",
+          "message": "Job completed successfully",
+          "duration": 2400,
+          "startedBy": "user-555e4567-e89b-12d3-a456-426614174444",
+          "cancelledBy": null,
+          "jobType": "Scan",
+          "jobExecutionRegion": "East US",
+          "dataAssetId": "asset-666e4567-e89b-12d3-a456-426614174555",
+          "dataAssetName": "CustomerTable",
+          "scheduleId": "sched-777e4567-e89b-12d3-a456-426614174666",
+          "scheduleName": "DailyCustomerScan",
+          "qualifiedPath": "azure://storageaccount/container/customers",
+          "scanId": "scan-888e4567-e89b-12d3-a456-426614174777",
+          "scheduleScanType": "FullScan",
+          "jobBillingSparkSku": "Standard_D3_v2",
+          "dataSourceType": "AzureBlob",
+          "primaryDataSourceID": "ds-999e4567-e89b-12d3-a456-426614174888",
+          "puDetail": "ComputeUnit:4;Memory:16GB"
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "title": "AssetMetaData_Get",
+  "operationId": "GetAssetMetaData",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataProductId": "223e4567-e89b-12d3-a456-426614174111",
+    "dataAssetId": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "name": "CustomerDataObserver",
+        "dataAsset": {
+          "type": "DataAsset",
+          "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
+        },
+        "createdAt": "2025-09-17T08:00:00Z",
+        "createdBy": "user-11111111-2222-3333-4444-555555555555",
+        "lastModifiedAt": "2025-09-17T12:00:00Z",
+        "lastModifiedBy": "user-22222222-3333-4444-5555-666666666666",
+        "executionData": {
+          "lastRunStatus": "Succeeded",
+          "totalRecordsProcessed": 15000,
+          "durationInSeconds": 1800
+        },
+        "isDeleted": false,
+        "businessDomain": {
+          "type": "BusinessDomain",
+          "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+        },
+        "dataProduct": {
+          "type": "DataProduct",
+          "referenceId": "dp-323e4567-e89b-12d3-a456-426614174222"
+        },
+        "eTag": "etag-1234567890",
+        "type": "Basic"
+      }
+    }
+  }
+}

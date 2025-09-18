@@ -1,0 +1,44 @@
+{
+  "title": "Get Schedule",
+  "operationId": "GetSchedule",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "scheduleId": "12345678-abcd-1234-ef00-123456abcdeg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DailyCustomerScan",
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "description": "Scan schedule for daily customer data",
+        "annotations": {
+          "owner": "data-team",
+          "environment": "production",
+          "priority": "high"
+        },
+        "businessDomain": {
+          "type": "BusinessDomain",
+          "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+        },
+        "scope": {
+          "type": "FullScan",
+          "referenceId": "scope-223e4567-e89b-12d3-a456-426614174111"
+        },
+        "trigger": {
+          "type": "TimeBased",
+          "cron": "0 2"
+        },
+        "lastModifiedAt": "2025-09-17T08:00:00Z",
+        "lastModifiedBy": "user-11111111-2222-3333-4444-555555555555",
+        "createdAt": "2025-09-10T08:00:00Z",
+        "createdBy": "user-22222222-3333-4444-5555-666666666666",
+        "executionData": {
+          "lastRunStatus": "Succeeded",
+          "totalRecordsProcessed": 15000,
+          "durationInSeconds": 1800
+        }
+      }
+    }
+  }
+}
