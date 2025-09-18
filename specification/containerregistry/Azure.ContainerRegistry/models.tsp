@@ -186,7 +186,7 @@ enum TokenGrantType {
 /**
  * Sort options for ordering tags in a collection.
  */
-enum ArtifactTagOrderBy {
+union ArtifactTagOrderBy {
   /**
    * Do not provide an orderby value in the request.
    */
@@ -208,7 +208,7 @@ enum ArtifactTagOrderBy {
 /**
  * Sort options for ordering manifests in a collection.
  */
-enum ArtifactManifestOrderBy {
+union ArtifactManifestOrderBy {
   /**
    * Do not provide an orderby value in the request.
    */
