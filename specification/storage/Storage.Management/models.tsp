@@ -2094,7 +2094,7 @@ model FileShareProperties {
   @visibility(Lifecycle.Read)
   @encode("date-time-rfc1123")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  nextAllowedQuotaDowngradeTime?: string;
+  nextAllowedQuotaDowngradeTime?: utcDateTime;
 
   /**
    * Returns the next allowed provisioned IOPS downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.
@@ -2103,7 +2103,7 @@ model FileShareProperties {
   @visibility(Lifecycle.Read)
   @encode("date-time-rfc1123")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  nextAllowedProvisionedIopsDowngradeTime?: string;
+  nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
   /**
    * Returns the next allowed provisioned bandwidth downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.
@@ -2112,7 +2112,7 @@ model FileShareProperties {
   @visibility(Lifecycle.Read)
   @encode("date-time-rfc1123")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  nextAllowedProvisionedBandwidthDowngradeTime?: string;
+  nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
   /**
    * The authentication protocol that is used for the file share. Can only be specified when creating a share.
