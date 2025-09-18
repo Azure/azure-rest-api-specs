@@ -114,7 +114,7 @@ interface SBNamespaces {
   failover is ArmResourceActionAsyncBase<
     SBNamespace,
     FailOver,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult= FailOver> &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SBNamespace>,
     Error = ErrorResponse
