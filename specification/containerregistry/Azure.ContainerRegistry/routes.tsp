@@ -499,8 +499,8 @@ interface ContainerRegistryBlobOperationGroup {
        * Link acquired from upload start or previous chunk. Note, do not include initial
        * / (must do substring(1) )
        */
-      @path
-      nextBlobUuidLink: string;
+      @path("nextBlobUuidLink")
+      location: string;
     },
     void
   >;
@@ -517,8 +517,8 @@ interface ContainerRegistryBlobOperationGroup {
        * Link acquired from upload start or previous chunk. Note, do not include initial
        * / (must do substring(1) )
        */
-      @path
-      nextBlobUuidLink: string;
+      @path("nextBlobUuidLink")
+      location: string;
 
       /**
        * Raw data of blob
@@ -549,8 +549,8 @@ interface ContainerRegistryBlobOperationGroup {
        * Link acquired from upload start or previous chunk. Note, do not include initial
        * / (must do substring(1) )
        */
-      @path
-      nextBlobUuidLink: string;
+      @path("nextBlobUuidLink")
+      location: string;
 
       /**
        * Optional raw data of blob
@@ -574,8 +574,8 @@ interface ContainerRegistryBlobOperationGroup {
        * Link acquired from upload start or previous chunk. Note, do not include initial
        * / (must do substring(1) )
        */
-      @path
-      nextBlobUuidLink: string;
+      @path("nextBlobUuidLink")
+      location: string;
     },
     void
   >;
