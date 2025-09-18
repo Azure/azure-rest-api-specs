@@ -681,29 +681,6 @@ model NamespaceReplicaLocation {
 }
 
 /**
- * The Resource definition for other than namespace.
- */
-model Resource {
-  /**
-   * Resource Id
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
-/**
  * The resource management error response.
  */
 @error
@@ -877,7 +854,8 @@ model SBNamespaceUpdateProperties {
  * The Resource definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceNamespacePatch extends Resource {
+model ResourceNamespacePatch
+  extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Resource location
    */
