@@ -429,13 +429,7 @@ op createScan is Azure.Core.Foundations.Operation<
     @bodyRoot
     body?: ScanDTO;
   },
-  (string & {
-    @header
-    contentType: "text/plain";
-  }) | (string & {
-    @header
-    contentType: "application/json" | "text/json";
-  })
+  ScheduleEntity
 >;
 
 /**
@@ -463,13 +457,7 @@ op cancelScan is Azure.Core.Foundations.Operation<
     @path
     scanId: string;
   },
-  (string & {
-    @header
-    contentType: "text/plain";
-  }) | (string & {
-    @header
-    contentType: "application/json" | "text/json";
-  })
+  ScheduleEntity
 >;
 
 /**
@@ -547,13 +535,7 @@ op cancelScanByRunId is Azure.Core.Foundations.Operation<
     @path
     runId: string;
   },
-  (string & {
-    @header
-    contentType: "text/plain";
-  }) | (string & {
-    @header
-    contentType: "application/json" | "text/json";
-  })
+  ScheduleEntity
 >;
 
 /**
@@ -587,10 +569,7 @@ op getRunsForAsset is Azure.Core.Foundations.Operation<
     @query("runType")
     runType: string;
   },
-  JobHistoryEntity[] & {
-    @header
-    contentType: "application/json" | "text/json";
-  }
+  JobHistoryEntity
 >;
 
 /**
@@ -622,13 +601,7 @@ op observe is Azure.Core.Foundations.Operation<
     @bodyRoot
     body: JobConfigDTO;
   },
-  (string & {
-    @header
-    contentType: "text/plain";
-  }) | (string & {
-    @header
-    contentType: "application/json" | "text/json";
-  })
+  AssetMetadataObserver
 >;
 
 /**
