@@ -37,8 +37,8 @@ options:
       name: "@azure/arm-storageactions"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storageactions"
-    package-dir: "armstorageactions"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armstorageactions"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstorageactions"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -46,6 +46,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-name: "Azure.ResourceManager.StorageActions"
     namespace: "{package-name}"
 linter:

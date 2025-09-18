@@ -39,8 +39,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/computefleet"
-    package-dir: "armcomputefleet"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcomputefleet"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcomputefleet"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
