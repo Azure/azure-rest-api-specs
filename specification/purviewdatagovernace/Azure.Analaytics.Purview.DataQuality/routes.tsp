@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace PurviewDataQuality;
 
@@ -21,13 +23,13 @@ op createRules is Azure.Core.Foundations.Operation<
     businessDomainId: string;
 
     /**
-     * Unique Identifier for Business Domain
+     * Unique Identifier for Data Product
      */
     @path
     dataProductId: string;
 
     /**
-     * Unique Identifier for Business Domain
+     * Unique Identifier for Data Asset
      */
     @path
     dataAssetId: string;
@@ -35,7 +37,7 @@ op createRules is Azure.Core.Foundations.Operation<
     @bodyRoot
     body?: RuleEntity;
   },
-  RuleEntity[]
+  RuleEntity
 >;
 
 /**
@@ -197,7 +199,468 @@ op createBulkRules is Azure.Core.Foundations.Operation<
     dataAssetId: string;
 
     @bodyRoot
-    body?: RuleEntity;
+    body?: RuleEntity[];
   },
   RuleEntity[]
+>;
+
+/**
+ * Create Asset Metadata Observer
+ */
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
+@post
+op createAssetMetaData is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Unique Identifier for Business Domain
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Unique Identifier for Data Product
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Unique Identifier for Data Asset
+     */
+    @path
+    dataAssetId: string;
+
+    @bodyRoot
+    body?: AssetMetadataObserver;
+  },
+  AssetMetadataObserver
+>;
+
+/**
+ * Get Observer
+ */
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
+@get
+op getObserver is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Unique Identifier for Business Domain
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Unique Identifier for Data Product
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Unique Identifier for Data Asset
+     */
+    @path
+    dataAssetId: string;
+  },
+  AssetMetadataObserver
+>;
+
+/**
+ * Update Observer
+ */
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
+@put
+op updateObserver is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Unique Identifier for Business Domain
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Unique Identifier for Data Product
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Unique Identifier for Data Asset
+     */
+    @path
+    dataAssetId: string;
+
+    @bodyRoot
+    body?: AssetMetadataObserver;
+  },
+  AssetMetadataObserver
+>;
+
+/**
+ * Get Schedules
+ */
+@route("/business-domains/{businessDomainId}/schedules")
+@get
+op getSchedules is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Unique Identifier for Business Domain
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * token
+     */
+    @query("$skipToken")
+    $skipToken?: string;
+  },
+  ScheduleEntity[]
+>;
+
+/**
+ * Create Schedule
+ */
+@route("/business-domains/{businessDomainId}/schedules")
+@post
+op createSchedule is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Unique Identifier for Business Domain
+     */
+    @path
+    businessDomainId: string;
+
+    @bodyRoot
+    body?: ScheduleEntity;
+  },
+  ScheduleEntity
+>;
+
+/**
+ * Get Schedule
+ */
+@route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
+@get
+op getSchedule is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Unique Identifier for Business Domain
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Unique Identifier for Schedule
+     */
+    @path
+    scheduleId: string;
+  },
+  ScheduleEntity
+>;
+
+/**
+ * Update Schedule
+ */
+@route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
+@put
+op updateSchedule is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Unique Identifier for Business Domain
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Unique Identifier for Schedule
+     */
+    @path
+    scheduleId: string;
+
+    @bodyRoot
+    body?: ScheduleEntity;
+  },
+  ScheduleEntity
+>;
+
+/**
+ * Delete Schedule
+ */
+@route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
+@delete
+op deleteSchedule is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Unique Identifier for Business Domain
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Unique identifier for Schedule
+     */
+    @path
+    scheduleId: string;
+  },
+  void
+>;
+
+/**
+ * Create Scan
+ */
+@route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans")
+@post
+op createScan is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get business domain id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get schedule id
+     */
+    @path
+    scheduleId: string;
+
+    /**
+     * Get scanDTO
+     */
+    @bodyRoot
+    body?: ScanDTO;
+  },
+  (string & {
+    @header
+    contentType: "text/plain";
+  }) | (string & {
+    @header
+    contentType: "application/json" | "text/json";
+  })
+>;
+
+/**
+ * Cancel Scan
+ */
+@route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/cancel")
+@post
+op cancelScan is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get business domain id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get schedule id
+     */
+    @path
+    scheduleId: string;
+
+    /**
+     * Get scan id
+     */
+    @path
+    scanId: string;
+  },
+  (string & {
+    @header
+    contentType: "text/plain";
+  }) | (string & {
+    @header
+    contentType: "application/json" | "text/json";
+  })
+>;
+
+/**
+ * Get Scan by ScanId
+ */
+@route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}")
+@get
+op scanByScanId is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get business domain id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get schedule id
+     */
+    @path
+    scheduleId: string;
+
+    /**
+     * Get scan id
+     */
+    @path
+    scanId: string;
+  },
+  ScheduleScanMonitoringEntity & {
+    @header
+    contentType: "application/json" | "text/json";
+  }
+>;
+
+/**
+ * Get the run status by run id
+ */
+@route("/business-domains/{businessDomainId}/runs/{runId}")
+@get
+op getRunStatus is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business domain id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get run id
+     */
+    @path
+    runId: string;
+  },
+  JobMetadataEntity & {
+    @header
+    contentType: "application/json" | "text/json";
+  }
+>;
+
+/**
+ * Cancel Scan
+ */
+@route("/business-domains/{businessDomainId}/runs/{runId}/cancel")
+@post
+op cancelScanByRunId is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business domain id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get run id
+     */
+    @path
+    runId: string;
+  },
+  (string & {
+    @header
+    contentType: "text/plain";
+  }) | (string & {
+    @header
+    contentType: "application/json" | "text/json";
+  })
+>;
+
+/**
+ * Get runs for asset
+ */
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/runs")
+@get
+op getRunsForAsset is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business domain id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get data product id
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Get data asset id
+     */
+    @path
+    dataAssetId: string;
+
+    /**
+     * Get run type
+     */
+    @query("runType")
+    runType: string;
+  },
+  JobHistoryEntity[] & {
+    @header
+    contentType: "application/json" | "text/json";
+  }
+>;
+
+/**
+ * Do an observation
+ */
+@operationId("observe")
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations")
+@post
+op observe is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business Domain Id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get Data Product Id
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Get Data Asset Id
+     */
+    @path
+    dataAssetId: string;
+
+    @bodyRoot
+    body: JobConfigDTO;
+  },
+  (string & {
+    @header
+    contentType: "text/plain";
+  }) | (string & {
+    @header
+    contentType: "application/json" | "text/json";
+  })
+>;
+
+/**
+ * Deletes a specific observation.
+ */
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}")
+@delete
+op `delete Observation` is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business Domain Id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get Data Product Id
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Get Data Asset Id
+     */
+    @path
+    dataAssetId: string;
+
+    /**
+     * Get Observation Id
+     */
+    @path
+    observationId: string;
+  },
+  void
 >;
