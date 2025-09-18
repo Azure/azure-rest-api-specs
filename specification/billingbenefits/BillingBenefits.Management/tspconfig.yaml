@@ -22,15 +22,16 @@ options:
     namespace: "com.azure.resourcemanager.billingbenefits"
     service-name: "BillingBenefits" # human-readable service name, whitespace allowed
     flavor: azure
-  "@azure-tools/typespec-ts":
-    package-dir: "arm-billingbenefits"
-    typespec-title-map:
-      BillingBenefitsClient: BillingBenefitsRP
-    is-modular-library: true
-    flavor: "azure"
-    experimental-extensible-enums: true
-    package-details:
-      name: "@azure/arm-billingbenefits"
+  # disable by known issue: https://github.com/Azure/autorest.typescript/issues/3391
+  # "@azure-tools/typespec-ts":
+  #   package-dir: "arm-billingbenefits"
+  #   typespec-title-map:
+  #     BillingBenefitsClient: BillingBenefitsRP
+  #   is-modular-library: true
+  #   flavor: "azure"
+  #   experimental-extensible-enums: true
+  #   package-details:
+  #     name: "@azure/arm-billingbenefits"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/billingbenefits"
     emitter-output-dir: "{output-dir}/{service-dir}/armbillingbenefits"
