@@ -96,8 +96,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   }
 
   // Use marked to parse the markdown and extract the related ARM guideline codes
-  const responseText = await response.text();
-  const tokens = marked.lexer(responseText);
+  const tokens = marked.lexer(await response.text());
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
     if (
