@@ -24,12 +24,13 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-storage"
-    namespace: "com.azure.resourcemanager.storage"
+    package-dir: "azure-resourcemanager-storage-generated"
+    namespace: "com.azure.resourcemanager.storage.generated"
     service-name: "Storage" # human-readable service name, whitespace allowed
     flavor: azure
-    premium: true
-    service-dir: "sdk/storage"
+    premium: false # TODO(change it to true when release)
+    rename-model:
+      FailoverRequestFailoverType: FailoverType
     enable-sync-stack: false
   "@azure-tools/typespec-ts":
     service-dir: sdk/storage

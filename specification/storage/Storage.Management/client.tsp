@@ -7,5 +7,39 @@ using Microsoft.Storage;
 @@clientName(ProvisioningState, "StorageProvisioningState", "csharp");
 @@clientName(Microsoft.Storage, "StorageManagementClient", "javascript");
 
-@@clientName(AccountType, "ActiveDirectoryPropertiesAccountType", "go");
-@@clientName(AllowedMethods, "CorsRuleAllowedMethodsItem", "go");
+@@clientName(AccountType, "ActiveDirectoryPropertiesAccountType", "go, java");
+@@clientName(AllowedMethods, "CorsRuleAllowedMethodsItem", "go, java");
+
+// Java customization for mitigating breaking changes
+@@clientName(SKUCapability, "SkuCapability", "java");
+@@clientName(IPRule, "IpRule", "java");
+@@clientName(IPRule.value, "ipAddressOrRange", "java");
+@@clientName(StorageAccounts.listAccountSAS, "listAccountSas", "java");
+@@clientName(StorageAccounts.listServiceSAS, "listServiceSas", "java");
+@@clientName(ImmutableStorageWithVersioning.timeStamp, "timestamp", "java");
+@@clientName(FileShareRecommendations.baseIOPS, "baseIops", "java");
+@@clientName(AccountSasParameters.signedIp, "ipAddressOrRange", "java");
+@@clientName(AccountLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
+@@clientName(FileShareLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
+@@clientName(FileShareLimits.minProvisionedIOPS, "minProvisionedIops", "java");
+@@clientName(BurstingConstants.burstFloorIOPS, "burstFloorIops", "java");
+@@clientName(AccountUsageElements.provisionedIOPS, "provisionedIops", "java");
+@@clientName(ServiceSasParameters.signedIp, "ipAddressOrRange", "java");
+
+// should only be used in Java
+enum Action {
+  ALLOW: "Allow",
+}
+@@alternateType(IPRule.action, Action, "java");
+@@alternateType(VirtualNetworkRule.action, Action, "java");
+
+enum IntervalUnit {
+  DAYS: "Days",
+}
+@@alternateType(TriggerParameters.intervalUnit, IntervalUnit, "java");
+@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnit, "java");
+
+@@usage(StorageAccount,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
