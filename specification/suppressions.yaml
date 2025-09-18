@@ -312,6 +312,14 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - options.@azure-tools/typespec-ts.*
+  paths:
+    - billingbenefits/BillingBenefits.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
     - options.@azure-tools/typespec-go.flavor
     - options.@azure-tools/typespec-go.generate-fakes
     - options.@azure-tools/typespec-go.inject-spans
@@ -443,6 +451,7 @@
     - options.@azure-tools/typespec-go.generate-samples
     - options.@azure-tools/typespec-ts.experimental-extensible-enums
     - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.*
   paths:
     - connectedcache/ConnectedCache.Management/tspconfig.yaml
 
@@ -473,6 +482,14 @@
     - options.@azure-tools/typespec-go.generate-samples
   paths:
     - databasefleetmanager/DatabaseFleetManager.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-ts.*
+  paths:
+    - dataprotection/resource-manager/Microsoft.DataProtection/DataProtection/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
