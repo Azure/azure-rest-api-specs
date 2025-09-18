@@ -27,17 +27,16 @@ These are the global settings for the portal.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-09-01-preview
+tag: package-2025-09-10-preview
 ```
 
-### Tag:package-2025-09-01-preview
+### Tag: package-2025-09-10-preview
 
-These settings apply only when `--tag=package-2025-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-09-10-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-09-01-preview'
+```yaml $(tag) == 'package-2025-09-10-preview'
 input-file:
-  - Microsoft.PortalServices/copilotPlans/preview/2025-09-01-preview/copilotPlans.json
-  - Microsoft.PortalServices/copilotSettings/preview/2025-08-01-preview/copilotSettings.json
+  - Microsoft.PortalServices/copilotSettings/preview/2025-09-10-preview/copilotSettings.json
   - Microsoft.PortalServices/copilotConnectors/preview/2025-05-15-preview/copilotConnectors.json
   - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2024-09-01-preview/azurecoreexperiencesassistant.json
   - Microsoft.PortalServices/dashboards/preview/2024-09-01-preview/dashboards.json

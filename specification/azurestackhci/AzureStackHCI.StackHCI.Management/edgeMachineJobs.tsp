@@ -2,6 +2,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "./models.tsp";
+import "./edgeMachine.tsp";
+import "./hciCommon.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -90,47 +93,6 @@ union EdgeMachineJobType {
   ProvisionOs: "ProvisionOs",
 }
 
-@doc("Represents the various statuses a job can have throughout its lifecycle.")
-union JobStatus {
-  string,
-
-  @doc("The job status has not been specified.")
-  NotSpecified: "NotSpecified",
-
-  @doc("The job is currently undergoing validation.")
-  ValidationInProgress: "ValidationInProgress",
-
-  @doc("The job has successfully passed validation.")
-  ValidationSuccess: "ValidationSuccess",
-
-  @doc("The job has failed validation.")
-  ValidationFailed: "ValidationFailed",
-
-  @doc("The job's deployment is currently in progress.")
-  DeploymentInProgress: "DeploymentInProgress",
-
-  @doc("The job's deployment has failed.")
-  DeploymentFailed: "DeploymentFailed",
-
-  @doc("The job has been successfully deployed.")
-  DeploymentSuccess: "DeploymentSuccess",
-
-  @doc("The job has succeeded.")
-  Succeeded: "Succeeded",
-
-  @doc("The job has failed.")
-  Failed: "Failed",
-
-  @doc("The job has been canceled.")
-  Canceled: "Canceled",
-
-  @doc("The job is paused.")
-  Paused: "Paused",
-
-  @doc("The job is scheduled to run.")
-  Scheduled: "Scheduled",
-}
-
 @doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
 model ProvisionOsJobProperties extends EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
@@ -141,11 +103,6 @@ model ProvisionOsJobProperties extends EdgeMachineJobProperties {
 
   @doc("Reported Properties for Provision Os job")
   reportedProperties?: ProvisionOsReportedProperties;
-}
-
-@doc("Reported Properties for Provision Os job")
-model ProvisionOsReportedProperties {
-  ...JobReportedProperties;
 }
 
 @doc("Represents a provisioning request.")
@@ -171,168 +128,25 @@ model ProvisioningRequest {
   customConfiguration?: string;
 }
 
-@doc("Represents the provisioning operating system type.")
-union ProvisioningOsType {
-  string,
+// @doc("Properties for pausing a server in the cluster.")
+// model CollectLogJobProperties extends EdgeMachineJobProperties {
+//   @doc("ClusterJob Type to support polymorphic resource.")
+//   jobType: EdgeMachineJobType.CollectLog;
 
-  @doc("AzureLinux OS.")
-  AzureLinux: "AzureLinux",
+//   @doc("From date for log collection.")
+//   fromDate: utcDateTime;
 
-  @doc("HCI OS.")
-  HCI: "HCI",
-}
+//   @doc("To date for log collection.")
+//   toDate: utcDateTime;
 
-@doc("Properties for pausing a server in the cluster.")
-model CollectLogJobProperties extends EdgeMachineJobProperties {
-  @doc("ClusterJob Type to support polymorphic resource.")
-  jobType: EdgeMachineJobType.CollectLog;
+//   @doc("To date for log collection.")
+//   @visibility(Lifecycle.Read)
+//   lastLogGenerated?: utcDateTime;
 
-  @doc("From date for log collection.")
-  fromDate: utcDateTime;
-
-  @doc("To date for log collection.")
-  toDate: utcDateTime;
-
-  @doc("To date for log collection.")
-  @visibility(Lifecycle.Read)
-  lastLogGenerated?: utcDateTime;
-
-  @doc("log collection job reported properties.")
-  @visibility(Lifecycle.Read)
-  reportedProperties?: LogCollectionReportedProperties;
-}
-
-@doc("Represents the reported properties of a log collection job.")
-model LogCollectionReportedProperties {
-  ...JobReportedProperties;
-
-  @doc("Details of the log collection session.")
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["correlationId"])
-  logCollectionSessionDetails?: LogCollectionSession[];
-}
-
-@doc("Represents a session for collecting logs from an edge device.")
-model LogCollectionSession {
-  @doc("The timestamp when log collection started, in ISO 8601 format.")
-  @visibility(Lifecycle.Read)
-  startTime?: string;
-
-  @doc("The timestamp when log collection ended, in ISO 8601 format.")
-  @visibility(Lifecycle.Read)
-  endTime?: string;
-
-  @doc("The total time logs were collected for, in ISO 8601 duration format.")
-  @visibility(Lifecycle.Read)
-  timeCollected?: string;
-
-  @doc("The size of the collected logs in bytes.")
-  @visibility(Lifecycle.Read)
-  logSize?: int32;
-
-  @doc("The status of the log collection session.")
-  @visibility(Lifecycle.Read)
-  status?: DeviceLogCollectionStatus;
-
-  @doc("A unique identifier for correlating this log collection session with other operations or sessions.")
-  @visibility(Lifecycle.Read)
-  correlationId?: string;
-}
-
-@doc("Reported Properties for job triggered from cloud.")
-model JobReportedProperties {
-  @doc("The percentage of the job that is complete.")
-  @visibility(Lifecycle.Read)
-  percentComplete?: int32;
-
-  @doc("Validation status of job.")
-  @visibility(Lifecycle.Read)
-  validationStatus?: EceActionStatus;
-
-  @doc("Deployment status of job.")
-  @visibility(Lifecycle.Read)
-  deploymentStatus?: EceActionStatus;
-}
-
-@doc("Represents the status of a log collection operation.")
-union DeviceLogCollectionStatus {
-  @doc("A custom status provided as a string.")
-  string,
-
-  @doc("Log collection operation has not been initiated.")
-  NotStarted: "NotStarted",
-
-  @doc("Indicates that the log collection operation is currently running.")
-  Running: "Running",
-
-  @doc("Indicates that the log collection operation has failed.")
-  Failed: "Failed",
-
-  @doc("Indicates that the log collection operation has completed successfully.")
-  Succeeded: "Succeeded",
-
-  @doc("Indicates that the log collection operation has completed successfully.")
-  Canceled: "Canceled",
-}
-
-@doc("Validation / deployment status details for Job.")
-model EceActionStatus {
-  @doc("Job status.")
-  @visibility(Lifecycle.Read)
-  status?: string;
-
-  @doc("List of steps of Edge device job.")
-  @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
-  steps?: Step[];
-}
-
-@doc("Deployment mode to trigger job.")
-union DeploymentMode {
-  string,
-
-  @doc("Validate ECE action deployment for a cluster.")
-  Validate: "Validate",
-
-  @doc("Deploy ECE action deployment for a cluster.")
-  Deploy: "Deploy",
-}
-
-@doc("Step details during job execution.")
-model Step {
-  @doc("Name of step.")
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  @doc("Description of step.")
-  @visibility(Lifecycle.Read)
-  description?: string;
-
-  @doc("FullStepIndex of step.")
-  @visibility(Lifecycle.Read)
-  fullStepIndex?: string;
-
-  @doc("Start time in utc of step.")
-  @visibility(Lifecycle.Read)
-  startTimeUtc?: string;
-
-  @doc("End time in utc of step.")
-  @visibility(Lifecycle.Read)
-  endTimeUtc?: string;
-
-  @doc("Status of step. Allowed values are 'Error', 'Success', 'InProgress'")
-  @visibility(Lifecycle.Read)
-  status?: string;
-
-  @doc("List of nested steps during job execution..")
-  @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
-  steps?: Step[];
-
-  @doc("List of exceptions in job execution.")
-  @visibility(Lifecycle.Read)
-  exception?: string[];
-}
+//   @doc("log collection job reported properties.")
+//   @visibility(Lifecycle.Read)
+//   reportedProperties?: LogCollectionReportedProperties;
+// }
 
 @doc("Operating system profile.")
 model OsProvisionProfile {
@@ -389,100 +203,4 @@ model OnboardingConfiguration {
 
   @doc("Azure Arc virtual machine ID.")
   arcVirtualMachineId?: string;
-}
-
-@doc("Device configuration.")
-model DeviceConfiguration {
-  @doc("Network configuration.")
-  network?: NetworkConfiguration;
-
-  @doc("Hostname of the device.")
-  hostName?: string;
-
-  @doc("Web proxy configuration.")
-  webProxy?: WebProxyConfiguration;
-
-  @doc("Time configuration.")
-  time?: TimeConfiguration;
-}
-
-@doc("Network configuration.")
-model NetworkConfiguration {
-  @Azure.ResourceManager.identifiers(#[])
-  @doc("List of network adapters.")
-  networkAdapters?: NetworkAdapter[];
-}
-
-@doc("Network adapter configuration.")
-model NetworkAdapter {
-  @doc("Type of IP assignment.")
-  ipAssignmentType: IpAssignmentType;
-
-  @doc("IP address.")
-  ipAddress?: string;
-
-  @doc("Adapter Name.")
-  adapterName?: string;
-
-  @doc("MAC address.")
-  macAddress?: string;
-
-  @doc("IP address range.")
-  ipAddressRange?: IpAddressRange;
-
-  @doc("Gateway id.")
-  gateway?: string;
-
-  @doc("Subnet mask.")
-  subnetMask?: string;
-
-  @doc("Array of DNS addresses.")
-  dnsAddressArray?: string[];
-
-  @doc("VLAN ID for the network setup.")
-  vlanId?: string;
-}
-
-@doc("IP assignment types")
-union IpAssignmentType {
-  string,
-
-  @doc("Automatic IP assignment")
-  Automatic: "Automatic",
-
-  @doc("Manual IP assignment")
-  Manual: "Manual",
-}
-
-@doc("IP address range configuration.")
-model IpAddressRange {
-  @doc("Start IP address.")
-  startIp: string;
-
-  @doc("End IP address.")
-  endIp: string;
-}
-
-@doc("Web proxy configuration.")
-model WebProxyConfiguration {
-  @doc("Connection URI of the web proxy.")
-  connectionUri?: string;
-
-  @doc("Port of the web proxy.")
-  port?: string;
-
-  @doc("Bypass list for the web proxy.")
-  bypassList?: string[];
-}
-
-@doc("Time configuration.")
-model TimeConfiguration {
-  @doc("Primary NTP server.")
-  primaryTimeServer?: string;
-
-  @doc("Secondary NTP server.")
-  secondaryTimeServer?: string;
-
-  @doc("Time zone.")
-  timeZone?: string;
 }
