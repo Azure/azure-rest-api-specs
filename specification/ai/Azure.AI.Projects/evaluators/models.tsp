@@ -31,10 +31,10 @@ union EvaluatorCategory {
 union EvaluatorType {
   string,
 
-  @doc("Built-in evaluator")
+  @visibility(Lifecycle.Read)
+  @doc("Built-in evaluator (Microsoft provided)")
   built_in: "Built-In",
 
-  @visibility(Lifecycle.Read)
   @doc("Custom evaluator")
   custom: "Custom",
 }
@@ -81,25 +81,6 @@ model EvaluatorDefinition {
   results?: unknown;
 }
 
-@doc("Metadata about the evaluator")
-@discriminator("type")
-model EvaluatorMetadata {
-  @doc("The key of the evaluator metadata")
-  key: string;
-
-  @doc("The value of the evaluator metadata")
-  value: string;
-}
-
-/* Allowed parameter types */
-alias ScalarParamType = string | "number" | "string"; // TODO: need to confirm allowed values
-
-/* The evaluator's input parameters */
-alias InputParameters = Record<ScalarParamType>;
-
-/* The evaluator's output parameters */
-alias OutputParameters = Record<ScalarParamType>;
-
 @doc("Code-based evaluator definition using python code")
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
@@ -123,14 +104,29 @@ model EvaluatorVersion {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
   display_name?: string;
 
-  @doc("The metadata of the evaluator")
-  metadata: Record<string>;
+  @doc("Metadata about the evaluator")
+  metadata?: Record<string>;
+
+  @doc("The type of the evaluator")
+  evaluator_type: EvaluatorType;
 
   @doc("The category of the evaluator")
   categories: EvaluatorCategory[];
 
   @doc("Definition of the evaluator")
   definition: EvaluatorDefinition;
+
+  @visibility(Lifecycle.Read)
+  @doc("Creator of the evaluator")
+  created_by: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Creation date of the evaluator")
+  created_on: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Last modified date of the evaluator")
+  modified_on: string;
 
   ...AssetBase;
 }
