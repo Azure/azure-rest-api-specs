@@ -181,7 +181,7 @@ op getRule is Azure.Core.Foundations.Operation<
 op createBulkRules is Azure.Core.Foundations.Operation<
   {
     /**
-     * Unique Identifier for Busienss Domain
+     * Unique Identifier for Business Domain
      */
     @path
     businessDomainId: string;
