@@ -10,16 +10,41 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/containerregistry.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-containerregistry"
+    package-name: "azure-containerregistry"
+    package-pprint-name: "Azure Container Registry"
+    namespace: "azure.containerregistry"
+    package-version: "1.2.0"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-containers-containerregistry"
+    package-name: "com.azure.containers.containerregistry"
+    package-version: "1.2.19"
+    namespace: "com.azure.containers.containerregistry"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-csharp":
+    package-name: "Azure.Containers.ContainerRegistry"
+    package-dir: "Azure.Containers.ContainerRegistry"
+    package-version: "1.1.1"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/containerregistry/"
+    is-modular-library: true
+    package-dir: "container-registry"
+    package-details:
+      name: "@azure/container-registry"
+      version: "1.1.0"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
