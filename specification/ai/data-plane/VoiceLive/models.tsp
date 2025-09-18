@@ -28,7 +28,7 @@ model ClientEvent {
   except for `voice`. However, note that once a session has been
   initialized with a particular `model`, it can’t be changed to
   another model using `session.update`.
-
+  
   When the server receives a `session.update`, it will respond
   with a `session.updated` event showing the full, effective configuration.
   Only the fields that are present are updated. To clear a field like
@@ -45,9 +45,9 @@ model ClientEventSessionUpdate extends ClientEvent {
 }
 
 @doc("""
-  Sent when the client connects and provides its SDP (Session Description Protocol)
-  for avatar-related media negotiation.
-""")
+    Sent when the client connects and provides its SDP (Session Description Protocol)
+    for avatar-related media negotiation.
+  """)
 model ClientEventSessionAvatarConnect extends ClientEvent {
   @doc("The event type, must be 'session.avatar.connect'.")
   type: ClientEventType.session_avatar_connect;
@@ -57,8 +57,8 @@ model ClientEventSessionAvatarConnect extends ClientEvent {
 }
 
 @doc("""
-  Indicates the start of a new audio input turn.
-""")
+    Indicates the start of a new audio input turn.
+  """)
 model ClientEventInputAudioTurnStart extends ClientEvent {
   @doc("The event type, must be 'input_audio.turn.start'.")
   type: ClientEventType.input_audio_turn_start;
@@ -68,8 +68,8 @@ model ClientEventInputAudioTurnStart extends ClientEvent {
 }
 
 @doc("""
-  Appends audio data to an ongoing input turn.
-""")
+    Appends audio data to an ongoing input turn.
+  """)
 model ClientEventInputAudioTurnAppend extends ClientEvent {
   @doc("The event type, must be 'input_audio.turn.append'.")
   type: ClientEventType.input_audio_turn_append;
@@ -82,8 +82,8 @@ model ClientEventInputAudioTurnAppend extends ClientEvent {
 }
 
 @doc("""
-  Marks the end of an audio input turn.
-""")
+    Marks the end of an audio input turn.
+  """)
 model ClientEventInputAudioTurnEnd extends ClientEvent {
   @doc("The event type, must be 'input_audio.turn.end'.")
   type: ClientEventType.input_audio_turn_end;
@@ -93,8 +93,8 @@ model ClientEventInputAudioTurnEnd extends ClientEvent {
 }
 
 @doc("""
-  Cancels an in-progress input audio turn.
-""")
+    Cancels an in-progress input audio turn.
+  """)
 model ClientEventInputAudioTurnCancel extends ClientEvent {
   @doc("The event type, must be 'input_audio.turn.cancel'.")
   type: ClientEventType.input_audio_turn_cancel;
@@ -104,8 +104,8 @@ model ClientEventInputAudioTurnCancel extends ClientEvent {
 }
 
 @doc("""
-  Clears all input audio currently being streamed.
-""")
+    Clears all input audio currently being streamed.
+  """)
 model ClientEventInputAudioClear extends ClientEvent {
   @doc("The event type, must be 'input_audio.clear'.")
   type: ClientEventType.input_audio_clear;
@@ -128,9 +128,9 @@ model Response {
   object?: "realtime.response";
 
   @doc("""
-  The final status of the response.
-  One of: `completed`, `cancelled`, `failed`, `incomplete`, or `in_progress`.
-  """)
+    The final status of the response.
+    One of: `completed`, `cancelled`, `failed`, `incomplete`, or `in_progress`.
+    """)
   status?: ResponseStatus;
 
   /** Additional details about the status. */
@@ -174,7 +174,7 @@ model Response {
   @doc("""
     The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
     """)
-  output_audio_format?: AudioFormat = AudioFormat.pcm16;
+  output_audio_format?: OutputAudioFormat = OutputAudioFormat.pcm16;
 
   /** Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8. */
   temperature?: float32;
@@ -220,7 +220,7 @@ model ClientEventInputAudioBufferAppend extends ClientEvent {
   if the input audio buffer is empty. When in Server VAD mode, the client does
   not need to send this event, the server will commit the audio buffer
   automatically.
-
+  
   Committing the input audio buffer will trigger input audio transcription
   (if enabled in session configuration), but it will not create a response
   from the model. The server will respond with an `input_audio_buffer.committed`
@@ -251,7 +251,7 @@ model ClientEventInputAudioBufferClear extends ClientEvent {
   calls, and function call responses. This event can be used both to populate a
   "history" of the conversation and to add new items mid-stream, but has the
   current limitation that it cannot populate assistant audio messages.
-
+  
   If successful, the server will respond with a `conversation.item.created`
   event, otherwise an `error` event will be sent.
   """)
@@ -286,10 +286,10 @@ model ClientEventConversationItemCreate extends ClientEvent {
   interrupts to truncate audio that has already been sent to the client but not
   yet played. This will synchronize the server's understanding of the audio with
   the client's playback.
-
+  
   Truncating audio will delete the server-side text transcript to ensure there
   is not text in the context that hasn't been heard by the user.
-
+  
   If successful, the server will respond with a `conversation.item.truncated`
   event.
   """)
@@ -338,15 +338,15 @@ model ClientEventConversationItemDelete extends ClientEvent {
   This event instructs the server to create a Response, which means triggering
   model inference. When in Server VAD mode, the server will create Responses
   automatically.
-
+  
   A Response will include at least one Item, and may have two, in which case
   the second will be a function call. These Items will be appended to the
   conversation history.
-
+  
   The server will respond with a `response.created` event, events for Items
   and content created, and finally a `response.done` event to indicate the
   Response is complete.
-
+  
   The `response.create` event includes inference configuration like
   `instructions`, and `temperature`. These fields will override the Session's
   configuration for this Response only.
@@ -402,21 +402,21 @@ model ServerEventError extends ServerEvent {
 
 /** Details of the error. */
 model ServerEventErrorDetails {
-    /** The type of error (e.g., "invalid_request_error", "server_error"). */
-    type: string;
+  /** The type of error (e.g., "invalid_request_error", "server_error"). */
+  type: string;
 
-    /** Error code, if any. */
-    code?: string | null;
+  /** Error code, if any. */
+  code?: string | null;
 
-    /** A human-readable error message. */
-    message: string;
+  /** A human-readable error message. */
+  message: string;
 
-    /** Parameter related to the error, if any. */
-    param?: string | null;
+  /** Parameter related to the error, if any. */
+  param?: string | null;
 
-    /** The event_id of the client event that caused the error, if applicable. */
-    event_id?: string | null;
-  };
+  /** The event_id of the client event that caused the error, if applicable. */
+  event_id?: string | null;
+}
 
 // Tool customization (apply_discriminator): apply discriminated type
 /**
@@ -510,7 +510,7 @@ model ServerEventInputAudioBufferCleared extends ServerEvent {
   detected in the audio buffer. This can happen any time audio is added to the
   buffer (unless speech is already detected). The client may want to use this
   event to interrupt audio playback or provide visual feedback to the user.
-
+  
   The client should expect to receive a `input_audio_buffer.speech_stopped` event
   when speech stops. The `item_id` property is the ID of the user message item
   that will be created when speech stops and will also be included in the
@@ -593,7 +593,7 @@ model ServerEventConversationItemCreated extends ServerEvent {
   committed by the client or server (in `server_vad` mode). Transcription runs
   asynchronously with Response creation, so this event may come before or after
   the Response events.
-
+  
   VoiceLive API models accept audio natively, and thus input transcription is a
   separate process run on a separate ASR (Automatic Speech Recognition) model.
   The transcript may diverge somewhat from the model's interpretation, and
@@ -646,7 +646,7 @@ model ServerEventConversationItemInputAudioTranscriptionFailed
   Returned when an earlier assistant audio message item is truncated by the
   client with a `conversation.item.truncate` event. This event is used to
   synchronize the server's understanding of the audio with the client's playback.
-
+  
   This action will truncate the audio and remove the server-side text transcript
   to ensure there is no text in the context that hasn't been heard by the user.
   """)
@@ -964,8 +964,8 @@ model ServerEventResponseAudioDone extends ServerEvent {
 }
 
 @doc("""
-Represents a delta update of blendshape animation frames for a specific output of a response.
-""")
+  Represents a delta update of blendshape animation frames for a specific output of a response.
+  """)
 model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_delta;
   response_id: string;
@@ -977,8 +977,8 @@ model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
 }
 
 @doc("""
-Indicates the completion of blendshape animation processing for a specific output of a response.
-""")
+  Indicates the completion of blendshape animation processing for a specific output of a response.
+  """)
 model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_done;
   response_id: string;
@@ -987,8 +987,8 @@ model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
 }
 
 @doc("""
-Represents a word-level audio timestamp delta for a response.
-""")
+  Represents a word-level audio timestamp delta for a response.
+  """)
 model ServerEventResponseAudioTimestampDelta extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_delta;
   response_id: string;
@@ -1002,8 +1002,8 @@ model ServerEventResponseAudioTimestampDelta extends ServerEvent {
 }
 
 @doc("""
-Indicates completion of audio timestamp delivery for a response.
-""")
+  Indicates completion of audio timestamp delivery for a response.
+  """)
 model ServerEventResponseAudioTimestampDone extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_done;
   response_id: string;
@@ -1013,8 +1013,8 @@ model ServerEventResponseAudioTimestampDone extends ServerEvent {
 }
 
 @doc("""
-Represents a viseme ID delta update for animation based on audio.
-""")
+  Represents a viseme ID delta update for animation based on audio.
+  """)
 model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
   type: ServerEventType.response_animation_viseme_delta;
   response_id: string;
@@ -1026,8 +1026,8 @@ model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
 }
 
 @doc("""
-Indicates completion of viseme animation delivery for a response.
-""")
+  Indicates completion of viseme animation delivery for a response.
+  """)
 model ServerEventResponseAnimationVisemeDone extends ServerEvent {
   type: ServerEventType.response_animation_viseme_done;
   response_id: string;
@@ -1039,24 +1039,24 @@ model ServerEventResponseAnimationVisemeDone extends ServerEvent {
 /** Create a new VoiceLive response with these parameters */
 model ResponseCreateParams {
   @doc("""
-  Whether to commit the response to the conversation. Defaults to true.
-  """)
+    Whether to commit the response to the conversation. Defaults to true.
+    """)
   commit?: boolean = true;
 
   @doc("""
-  Whether to cancel any ongoing generation before starting this one. Defaults to true.
-  """)
+    Whether to cancel any ongoing generation before starting this one. Defaults to true.
+    """)
   cancel_previous?: boolean = true;
 
   @doc("""
-  Input items to append to the conversation context before generating a response.
-  """)
+    Input items to append to the conversation context before generating a response.
+    """)
   append_input_items?: ConversationRequestItem[];
 
   @doc("""
-  Input items to be used as the context for this response.
-  An empty array clears previous context.
-  """)
+    Input items to be used as the context for this response.
+    An empty array clears previous context.
+    """)
   input_items?: ConversationRequestItem[];
 
   // Tool customization: Apply reusable modality representation
@@ -1075,7 +1075,7 @@ model ResponseCreateParams {
     into your voice", "laugh frequently"). The instructions are not guaranteed
     to be followed by the model, but they provide guidance to the model on the
     desired behavior.
-
+    
     Note that the server sets default instructions which will be used if this
     field is not set and are visible in the `session.created` event at the
     start of the session.
@@ -1091,7 +1091,7 @@ model ResponseCreateParams {
   @doc("""
     The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
     """)
-  output_audio_format?: AudioFormat = AudioFormat.pcm16;
+  output_audio_format?: OutputAudioFormat = OutputAudioFormat.pcm16;
 
   // Tool customization: use enriched tool definition
   /** Tools (functions) available to the model. */
@@ -1167,6 +1167,7 @@ model ServerEventConversationItemRetrieved extends ServerEvent {
 
   // Tool customization: apply enriched item definition hierarchy
   item?: ResponseItem;
+
   event_id?: string;
 }
 

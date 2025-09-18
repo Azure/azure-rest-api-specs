@@ -15,12 +15,14 @@ model RequestSession {
   animation?: Animation;
   voice?: Voice;
   instructions?: string;
+
   @doc("""
     Input audio sampling rate in Hz. Available values:
     - For pcm16: 8000, 16000, 24000
     - For g711_alaw/g711_ulaw: 8000
     """)
   input_audio_sampling_rate?: int32 = 24000;
+
   input_audio_format?: InputAudioFormat = InputAudioFormat.pcm16;
   output_audio_format?: OutputAudioFormat = OutputAudioFormat.pcm16;
   turn_detection?: TurnDetection | null;
@@ -35,7 +37,7 @@ model RequestSession {
   max_response_output_tokens?: int32 | "inf";
 }
 
-model ResponseSession extends RequestSession{
+model ResponseSession extends RequestSession {
   ...SessionBase;
   agent?: AgentConfig;
   id?: string;
@@ -56,7 +58,7 @@ union OAIVoice {
 
 @doc("""
   OpenAI voice configuration with explicit type field.
-
+  
   This provides a unified interface for OpenAI voices, complementing the
   existing string-based OAIVoice for backward compatibility.
   """)
@@ -144,14 +146,19 @@ union InputAudioFormat {
 
 union OutputAudioFormat {
   string,
+
   @doc("16-bit PCM audio format at default sampling rate (24kHz)")
   pcm16: "pcm16",
+
   @doc("16-bit PCM audio format at 8kHz sampling rate")
   pcm16_8000hz: "pcm16-8000hz",
+
   @doc("16-bit PCM audio format at 16kHz sampling rate")
   pcm16_16000hz: "pcm16-16000hz",
+
   @doc("G.711 μ-law (mu-law) audio format at 8kHz sampling rate")
   g711_ulaw: "g711_ulaw",
+
   @doc("G.711 A-law audio format at 8kHz sampling rate")
   g711_alaw: "g711_alaw",
 }
@@ -202,18 +209,22 @@ model EOUDetection {
 @doc("Azure semantic end-of-utterance detection (default).")
 model AzureSemanticDetection extends EOUDetection {
   `model`: "semantic_detection_v1";
+
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
+
   timeout?: float32;
 }
 
 @doc("Azure semantic end-of-utterance detection (English-optimized).")
 model AzureSemanticDetectionEn extends EOUDetection {
   `model`: "semantic_detection_v1_en";
+
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
+
   timeout?: float32;
 }
 
@@ -237,9 +248,11 @@ model TurnDetection {
 @doc("Base model for VAD-based turn detection.")
 model ServerVad extends TurnDetection {
   type: "server_vad";
+
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
+
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;
@@ -249,9 +262,11 @@ model ServerVad extends TurnDetection {
 @doc("Server Speech Detection (Azure semantic VAD, default variant).")
 model AzureSemanticVad extends TurnDetection {
   type: "azure_semantic_vad";
+
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
+
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;
@@ -264,9 +279,11 @@ model AzureSemanticVad extends TurnDetection {
 @doc("Server Speech Detection (Azure semantic VAD, English-only).")
 model AzureSemanticVadEn extends TurnDetection {
   type: "azure_semantic_vad_en";
+
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
+
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;
@@ -278,9 +295,11 @@ model AzureSemanticVadEn extends TurnDetection {
 @doc("Server Speech Detection (Azure semantic VAD).")
 model AzureMultilingualSemanticVad extends TurnDetection {
   type: "azure_semantic_vad_multilingual";
+
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
+
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;

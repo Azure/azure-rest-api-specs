@@ -48,6 +48,8 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseContentPartDone, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseDone, Access.public, "python");
+@@access(VoiceLive.ServerEventResponseFunctionCallArgumentsDelta, Access.public, "python");
+@@access(VoiceLive.ServerEventResponseFunctionCallArgumentsDone, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseOutputItemAdded, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseOutputItemDone, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseTextDelta, Access.public, "python");
