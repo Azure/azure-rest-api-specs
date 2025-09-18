@@ -13,7 +13,7 @@ import {
 
 // Mock the global fetch function
 const mockFetch = vi.fn();
-vi.stubGlobal('fetch', mockFetch);
+vi.stubGlobal("fetch", mockFetch);
 
 function isWindows(): boolean {
   return process.platform === "win32";
