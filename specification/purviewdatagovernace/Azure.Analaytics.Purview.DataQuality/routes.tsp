@@ -558,10 +558,7 @@ op scanByScanId is Azure.Core.Foundations.Operation<
     @path
     scanId: string;
   },
-  ScheduleScanMonitoringEntity & {
-    @header
-    contentType: "application/json" | "text/json" | "string";
-  }
+  ScheduleScanMonitoringEntity
 >;
 
 /**
@@ -586,10 +583,7 @@ op getRunStatus is Azure.Core.Foundations.Operation<
     @path
     runId: string;
   },
-  JobMetadataEntity & {
-    @header
-    contentType: "application/json" | "text/json" | "string";
-  }
+  JobMetadataEntity
 >;
 
 /**
