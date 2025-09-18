@@ -1,0 +1,626 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-04-15",
+    "title": "CdnManagementClient",
+    "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within an Azure subscription.",
+        "operationId": "Profiles_List",
+        "x-ms-examples": {
+          "Profiles_List": {
+            "$ref": "./examples/Profiles_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within a resource group.",
+        "operationId": "Profiles_ListByResourceGroup",
+        "x-ms-examples": {
+          "Profiles_ListByResourceGroup": {
+            "$ref": "./examples/Profiles_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Gets an Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.",
+        "operationId": "Profiles_Get",
+        "x-ms-examples": {
+          "Profiles_Get": {
+            "$ref": "./examples/Profiles_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Creates a new Azure Front Door Standard or Azure Front Door Premium or CDN profile with a profile name under the specified subscription and resource group.",
+        "operationId": "Profiles_Create",
+        "x-ms-examples": {
+          "Profiles_Create": {
+            "$ref": "./examples/Profiles_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "description": "Profile properties needed to create a new profile.",
+            "in": "body",
+            "name": "profile",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new profile has been created.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Updates an existing Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.",
+        "operationId": "Profiles_Update",
+        "x-ms-examples": {
+          "Profiles_Update": {
+            "$ref": "./examples/Profiles_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "name": "profileUpdateParameters",
+            "in": "body",
+            "description": "Profile properties needed to update an existing profile.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileUpdateParameters"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Deletes an existing  Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.",
+        "operationId": "Profiles_Delete",
+        "x-ms-examples": {
+          "Profiles_Delete": {
+            "$ref": "./examples/Profiles_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the profile was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ResourceReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another resource.",
+      "type": "object",
+      "x-ms-azure-resource": true
+    },
+    "Profile": {
+      "description": "A profile is a logical grouping of endpoints that share the same settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "description": "The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider, feature list and rate) of the profile.",
+          "$ref": "#/definitions/Sku"
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
+        },
+        "identity": {
+          "description": "Managed service identity (system assigned and/or user assigned identities).",
+          "type": "object",
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProfileProperties"
+        }
+      },
+      "required": [
+        "sku"
+      ]
+    },
+    "ProfileProperties": {
+      "description": "The JSON object that contains the properties required to create a profile.",
+      "type": "object",
+      "properties": {
+        "resourceState": {
+          "description": "Resource status of the profile.",
+          "readOnly": true,
+          "enum": [
+            "Creating",
+            "Active",
+            "Deleting",
+            "Disabled",
+            "Migrating",
+            "Migrated",
+            "PendingMigrationCommit",
+            "CommittingMigration",
+            "AbortingMigration"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProfileResourceState",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "description": "Provisioning status of the profile.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "ProfileProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for profiles.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "frontDoorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Id of the frontdoor."
+        },
+        "originResponseTimeoutSeconds": {
+          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 16,
+          "exclusiveMinimum": false
+        },
+        "logScrubbing": {
+          "description": "Defines rules that scrub sensitive fields in the Azure Front Door profile logs.",
+          "$ref": "#/definitions/ProfileLogScrubbing"
+        }
+      }
+    },
+    "ProfileLogScrubbing": {
+      "description": "Defines rules that scrub sensitive fields in the Azure Front Door profile logs.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State of the log scrubbing config. Default value is Enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ProfileScrubbingState",
+            "modelAsString": true
+          }
+        },
+        "scrubbingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProfileScrubbingRules"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of log scrubbing rules applied to the Azure Front Door profile logs."
+        }
+      }
+    },
+    "ProfileListResult": {
+      "description": "Result of the request to list profiles. It contains a list of profile objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Profile"
+          },
+          "description": "List of CDN profiles within a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of profile objects if there are any."
+        }
+      }
+    },
+    "ProfileUpdateParameters": {
+      "type": "object",
+      "description": "Properties required to update a profile.",
+      "properties": {
+        "tags": {
+          "description": "Profile tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "description": "Managed service identity (system assigned and/or user assigned identities).",
+          "type": "object",
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProfilePropertiesUpdateParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProfilePropertiesUpdateParameters": {
+      "type": "object",
+      "description": "The JSON object containing profile update parameters.",
+      "properties": {
+        "originResponseTimeoutSeconds": {
+          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 16,
+          "exclusiveMinimum": false
+        },
+        "logScrubbing": {
+          "description": "Defines rules to scrub sensitive fields in logs",
+          "$ref": "#/definitions/ProfileLogScrubbing"
+        }
+      }
+    },
+    "ProfileScrubbingRules": {
+      "description": "Defines the contents of the log scrubbing rules.",
+      "type": "object",
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator"
+      ],
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestIPAddress",
+            "RequestUri",
+            "QueryStringArgNames"
+          ],
+          "description": "The variable to be scrubbed from the logs.",
+          "x-ms-enum": {
+            "name": "scrubbingRuleEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "EqualsAny"
+          ],
+          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this rule applies to."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Defines the state of a log scrubbing rule. Default value is enabled.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Sku": {
+      "description": "Standard_Verizon = The SKU name for a Standard Verizon CDN profile.\nPremium_Verizon = The SKU name for a Premium Verizon CDN profile.\nCustom_Verizon = The SKU name for a Custom Verizon CDN profile.\nStandard_Akamai = The SKU name for an Akamai CDN profile.\nStandard_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using GB based billing model.\nStandard_Microsoft = The SKU name for a Standard Microsoft CDN profile.\nStandard_AzureFrontDoor =  The SKU name for an Azure Front Door Standard profile.\nPremium_AzureFrontDoor = The SKU name for an Azure Front Door Premium profile.\nStandard_955BandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using 95-5 peak bandwidth billing model.\nStandard_AvgBandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using monthly average peak bandwidth billing model.\nStandardPlus_ChinaCdn = The SKU name for a China CDN profile for live-streaming using GB based billing model.\nStandardPlus_955BandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using 95-5 peak bandwidth billing model.\nStandardPlus_AvgBandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using monthly average peak bandwidth billing model.\n",
+      "properties": {
+        "name": {
+          "description": "Name of the pricing tier.",
+          "enum": [
+            "Standard_Verizon",
+            "Premium_Verizon",
+            "Custom_Verizon",
+            "Standard_Akamai",
+            "Standard_ChinaCdn",
+            "Standard_Microsoft",
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor",
+            "Standard_955BandWidth_ChinaCdn",
+            "Standard_AvgBandWidth_ChinaCdn",
+            "StandardPlus_ChinaCdn",
+            "StandardPlus_955BandWidth_ChinaCdn",
+            "StandardPlus_AvgBandWidth_ChinaCdn"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "profileNameParameter": {
+      "name": "profileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Azure Front Door Standard or Azure Front Door Premium which is unique within the resource group."
+    }
+  }
+}
