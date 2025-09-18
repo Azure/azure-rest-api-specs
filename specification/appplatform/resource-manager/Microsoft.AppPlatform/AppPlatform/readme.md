@@ -66,7 +66,7 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
-  - Microsoft.AppPlatform/preview/2024-05-01-preview/appplatform.json
+  - preview/2024-05-01-preview/appplatform.json
 ```
 ### Tag: package-preview-2024-01
 
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - Microsoft.AppPlatform/preview/2024-01-01-preview/appplatform.json
+  - preview/2024-01-01-preview/appplatform.json
 ```
 
 ### Tag: package-2023-12
@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2023-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-12'
 input-file:
-  - Microsoft.AppPlatform/stable/2023-12-01/appplatform.json
+  - stable/2023-12-01/appplatform.json
 ```
 
 ### Tag: package-preview-2023-11
@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
-  - Microsoft.AppPlatform/preview/2023-11-01-preview/appplatform.json
+  - preview/2023-11-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2023-09
@@ -101,7 +101,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.AppPlatform/preview/2023-09-01-preview/appplatform.json
+  - preview/2023-09-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2023-07
@@ -110,7 +110,7 @@ These settings apply only when `--tag=package-preview-2023-07` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-07'
 input-file:
-  - Microsoft.AppPlatform/preview/2023-07-01-preview/appplatform.json
+  - preview/2023-07-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2023-05
@@ -119,7 +119,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
-  - Microsoft.AppPlatform/preview/2023-05-01-preview/appplatform.json
+  - preview/2023-05-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2023-03
@@ -128,7 +128,7 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - Microsoft.AppPlatform/preview/2023-03-01-preview/appplatform.json
+  - preview/2023-03-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2023-01
@@ -137,7 +137,7 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
-  - Microsoft.AppPlatform/preview/2023-01-01-preview/appplatform.json
+  - preview/2023-01-01-preview/appplatform.json
 ```
 
 ### Tag: package-2022-12
@@ -146,7 +146,7 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-12'
 input-file:
-  - Microsoft.AppPlatform/stable/2022-12-01/appplatform.json
+  - stable/2022-12-01/appplatform.json
 ```
 
 ### Tag: package-preview-2022-11
@@ -155,7 +155,7 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - Microsoft.AppPlatform/preview/2022-11-01-preview/appplatform.json
+  - preview/2022-11-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2022-09
@@ -164,7 +164,7 @@ These settings apply only when `--tag=package-preview-2022-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
-  - Microsoft.AppPlatform/preview/2022-09-01-preview/appplatform.json
+  - preview/2022-09-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2022-05
@@ -173,7 +173,7 @@ These settings apply only when `--tag=package-preview-2022-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
-  - Microsoft.AppPlatform/preview/2022-05-01-preview/appplatform.json
+  - preview/2022-05-01-preview/appplatform.json
 ```
 
 ### Tag: package-2022-04
@@ -182,7 +182,7 @@ These settings apply only when `--tag=package-2022-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-04'
 input-file:
-  - Microsoft.AppPlatform/stable/2022-04-01/appplatform.json
+  - stable/2022-04-01/appplatform.json
 ```
 
 ### Tag: package-preview-2022-03
@@ -191,7 +191,7 @@ These settings apply only when `--tag=package-preview-2022-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-03'
 input-file:
-  - Microsoft.AppPlatform/preview/2022-03-01-preview/appplatform.json
+  - preview/2022-03-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2022-01
@@ -200,7 +200,7 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
-  - Microsoft.AppPlatform/preview/2022-01-01-preview/appplatform.json
+  - preview/2022-01-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2021-09
@@ -209,7 +209,7 @@ These settings apply only when `--tag=package-preview-2021-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-09'
 input-file:
-  - Microsoft.AppPlatform/preview/2021-09-01-preview/appplatform.json
+  - preview/2021-09-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2021-06
@@ -218,7 +218,7 @@ These settings apply only when `--tag=package-preview-2021-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
-  - Microsoft.AppPlatform/preview/2021-06-01-preview/appplatform.json
+  - preview/2021-06-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2020-11
@@ -227,7 +227,7 @@ These settings apply only when `--tag=package-preview-2020-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-11'
 input-file:
-  - Microsoft.AppPlatform/preview/2020-11-01-preview/appplatform.json
+  - preview/2020-11-01-preview/appplatform.json
 ```
 
 ### Tag: package-2020-07
@@ -236,7 +236,7 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-07'
 input-file:
-  - Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
+  - stable/2020-07-01/appplatform.json
 ```
 
 ---
