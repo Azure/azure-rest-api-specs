@@ -45,4 +45,8 @@ enum Versions {
   v2021_06_01: "2021-06-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+ extends Azure.ResourceManager.Legacy.Operations<
+     ArmResponse<OperationList>,
+     CloudError
+   > {}

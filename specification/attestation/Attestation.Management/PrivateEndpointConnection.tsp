@@ -15,49 +15,50 @@ namespace Microsoft.Attestation;
  * The Private Endpoint Connection resource.
  */
 @parentResource(AttestationProvider)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
-}
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the attestation provider.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is PrivateEndpointOperations.Read<
+    AttestationProvider,
+    Error = CloudError
+  >;
 
   /**
    * Update the state of specified private endpoint connection associated with the attestation provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceSync<
-    PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  create is PrivateEndpointOperations.CreateOrReplaceSync<
+    AttestationProvider,
+    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>,
+    Error = CloudError
   >;
 
   /**
    * Deletes the specified private endpoint connection associated with the attestation provider.
    */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
+  delete is PrivateEndpointOperations.DeleteSync<
+    AttestationProvider,
+    Error = CloudError
+  >;
 
   /**
    * List all the private endpoint connections associated with the attestation provider.
    */
-  list is ArmResourceListByParent<
-    PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
+  list is PrivateEndpointOperations.ListByParent<
+    AttestationProvider,
+    Error = CloudError
   >;
 }
-
+/*
 @@doc(PrivateEndpointConnection.name,
   "The name of the private endpoint connection associated with the Azure resource"
 );
+*/
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection properties."

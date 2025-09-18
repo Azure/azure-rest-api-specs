@@ -1,14 +1,46 @@
+parameters:
+  "service-dir":
+    default: "sdk/attestation"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    omit-unreachable-types: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/attestation.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-attestation"
+    namespace: "azure.mgmt.attestation"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-keyvault"
+    namespace: "com.azure.resourcemanager.keyvault"
+    service-name: "KeyVault" # human-readable service name, whitespace allowed
+    flavor: azure
+    service-dir: "sdk/keyvault"
+    premium: true
+    enable-sync-stack: false
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-keyvault"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-keyvault"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/keyvault"
+    emitter-output-dir: "{output-dir}/{service-dir}/armkeyvault"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armkeyvault"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

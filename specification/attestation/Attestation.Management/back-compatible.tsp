@@ -12,14 +12,14 @@ using Microsoft.Attestation;
   "updateParams"
 );
 @@clientLocation(AttestationProviders.listByProvider, "PrivateLinkResources");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AttestationProvider.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AttestationProvider.properties
+);
 
 @@clientName(PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientLocation(AttestationProvidersOperationGroup.listDefault,
   AttestationProviders

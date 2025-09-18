@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Attestation;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AttestationProvidersOperationGroup {
   /**
    * Get the default provider
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AttestationProviders_ListDefault")
   @autoRoute
   @get
@@ -26,12 +26,13 @@ interface AttestationProvidersOperationGroup {
   listDefault is ArmProviderActionSync<
     Response = AttestationProviderListResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = CloudError
   >;
   /**
    * Get the default provider by location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AttestationProviders_GetDefaultByLocation")
   @autoRoute
   @get
@@ -39,6 +40,7 @@ interface AttestationProvidersOperationGroup {
   getDefaultByLocation is ArmProviderActionSync<
     Response = AttestationProvider,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }

@@ -19,21 +19,44 @@ model AttestationProvider
     Resource = AttestationProvider,
     KeyName = "providerName",
     SegmentName = "attestationProviders",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
   >;
 }
+
+@armResourceOperations
+interface AttestationProvidersOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * aaaaaaaaaaaaaaaaaaaaa
+         */
+        @path
+        @segment("attestationProviders")
+        providerName: string,
+      },
+      {}
+    > {}
 
 @armResourceOperations
 interface AttestationProviders {
   /**
    * Get the status of Attestation Provider.
    */
-  get is ArmResourceRead<AttestationProvider>;
+  get is ArmResourceRead<AttestationProvider, Error = CloudError>;
 
   /**
    * Creates or updates an Attestation Provider.
    */
-  create is ArmResourceCreateOrReplaceSync<AttestationProvider>;
+  create is AttestationProvidersOps.CreateOrUpdateSync<
+    AttestationProvider,
+    Request = AttestationServiceCreationParams,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Updates the Attestation Provider.
@@ -41,16 +64,19 @@ interface AttestationProviders {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AttestationProvider,
-    PatchModel = AttestationServicePatchParams
+    PatchModel = AttestationServicePatchParams,
+    Error = CloudError
   >;
 
   /**
    * Delete Attestation Service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     AttestationProvider,
-    Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -58,7 +84,8 @@ interface AttestationProviders {
    */
   listByResourceGroup is ArmResourceListByParent<
     AttestationProvider,
-    Response = ArmResponse<AttestationProviderListResult>
+    Response = ArmResponse<AttestationProviderListResult>,
+    Error = CloudError
   >;
 
   /**
@@ -66,20 +93,22 @@ interface AttestationProviders {
    */
   list is ArmListBySubscription<
     AttestationProvider,
-    Response = ArmResponse<AttestationProviderListResult>
+    Response = ArmResponse<AttestationProviderListResult>,
+    Error = CloudError
   >;
 
   /**
    * Gets the private link resources supported for the attestation provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkResources_ListByProvider")
   @get
   @action("privateLinkResources")
   listByProvider is ArmResourceActionSync<
     AttestationProvider,
     void,
-    ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>
+    ArmResponse<ResourceListResult<PrivateLinkResource>>,
+    Error = CloudError
   >;
 }
 

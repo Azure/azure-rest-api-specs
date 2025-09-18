@@ -14,13 +14,13 @@ namespace Microsoft.Attestation;
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
@@ -29,11 +29,11 @@ union CreatedByType {
  */
 union AttestationServiceStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Ready: "Ready",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotReady: "NotReady",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Error: "Error",
 }
 
@@ -155,7 +155,9 @@ model LogSpecification {
 /**
  * An error response from Attestation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * An error response from Attestation.
@@ -166,6 +168,8 @@ model CloudError {
 /**
  * An error response from Attestation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -181,7 +185,7 @@ model CloudErrorBody {
 /**
  * Status of attestation service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StatusResult {
   /**
    * Trust model for the attestation provider.
@@ -227,7 +231,7 @@ model AttestationServiceCreationParams {
   /**
    * The tags that will be assigned to the attestation provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -256,7 +260,7 @@ model AttestationServiceCreationSpecificParams {
   tpmAttestationAuthentication?: TpmAttestationAuthenticationType = TpmAttestationAuthenticationType.Enabled;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JsonWebKeySet {
   /**
    * The value of the "keys" parameter is an array of JWK values.  By
@@ -269,7 +273,7 @@ model JsonWebKeySet {
   keys?: JsonWebKey[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JsonWebKey {
   /**
    * The "alg" (algorithm) parameter identifies the algorithm intended for
@@ -389,7 +393,7 @@ model AttestationServicePatchParams {
   /**
    * The tags that will be assigned to the attestation provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -426,5 +430,24 @@ model AttestationProviderListResult {
   /**
    * Attestation Provider array.
    */
+  @pageItems
   value?: AttestationProvider[];
+}
+
+/**
+ * aaaaaaaaaaa
+ */
+model OperationList {
+  /**
+   * aaaaaaaaaa
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+
+  /**
+   * aaaaaaaaaaa
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: OperationsDefinition[];
 }
