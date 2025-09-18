@@ -2904,6 +2904,10 @@
         }
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -3962,7 +3966,7 @@
           "description": "Managed service identity"
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
         }
       },
@@ -3981,7 +3985,7 @@
           "description": "Id of private endpoint connection."
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
         },
         "properties": {
@@ -4980,7 +4984,7 @@
           "readOnly": true
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
         }
       },
@@ -4999,7 +5003,7 @@
           "description": "Id of private endpoint connection."
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
         },
         "properties": {

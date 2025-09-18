@@ -1229,7 +1229,7 @@ model PrivateEndpointConnectionItem {
   /**
    * Modified whenever there is a change in the state of private endpoint connection.
    */
-  etag?: string;
+  etag?: Azure.Core.eTag;
 
   /**
    * Private endpoint connection properties.
@@ -1767,7 +1767,7 @@ model MhsmPrivateEndpointConnectionItem {
   /**
    * Modified whenever there is a change in the state of private endpoint connection.
    */
-  etag?: string;
+  etag?: Azure.Core.eTag;
 
   /**
    * Private endpoint connection properties.
