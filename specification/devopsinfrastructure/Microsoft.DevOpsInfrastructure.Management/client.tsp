@@ -104,3 +104,6 @@ using Microsoft.DevOpsInfrastructure;
 
 /* Rename opeartions */
 @@clientName(SubscriptionUsages.usages, "GetUsages", "csharp");
+
+@@clientName(StorageAccountType.StandardSSDLRS, "StandardSSDLRS", "javascript");
+@@clientName(StorageAccountType.StandardSSDZRS, "StandardSSDZRS", "javascript");
