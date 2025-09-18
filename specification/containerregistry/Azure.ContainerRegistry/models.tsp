@@ -111,21 +111,50 @@ union ArtifactArchitecture {
   Wasm: "wasm",
 }
 
+/** The artifact platform's operating system. */
 union ArtifactOperatingSystem {
   string,
+
+  /** AIX operating system */
   Aix: "aix",
+
+  /** Android operating system */
   Android: "android",
+
+  /** Darwin operating system */
   Darwin: "darwin",
+
+  /** Dragonfly operating system */
   Dragonfly: "dragonfly",
+
+  /** FreeBSD operating system */
   FreeBsd: "freebsd",
+
+  /** Illumos operating system */
   Illumos: "illumos",
+
+  /** iOS operating system */
   iOS: "ios",
+
+  /** JavaScript operating system */
   JS: "js",
+
+  /** Linux operating system */
   Linux: "linux",
+
+  /** NetBSD operating system */
   NetBsd: "netbsd",
+
+  /** OpenBSD operating system */
   OpenBsd: "openbsd",
+
+  /** Plan 9 operating system */
   Plan9: "plan9",
+
+  /** Solaris operating system */
   Solaris: "solaris",
+
+  /** Windows operating system */
   Windows: "windows",
 }
 
@@ -135,8 +164,14 @@ union ArtifactOperatingSystem {
  */
 union PostContentSchemaGrantType {
   string,
+
+  /** Grant type for exchanging both access token and refresh token */
   access_token_refresh_token: "access_token_refresh_token",
+
+  /** Grant type for exchanging access token only */
   access_token: "access_token",
+
+  /** Grant type for exchanging refresh token only */
   refresh_token: "refresh_token",
 }
 
@@ -284,6 +319,7 @@ model ManifestWrapper extends Manifest {
   signatures?: ImageSignature[];
 }
 
+/** Attributes of a manifest in a manifest list. */
 model ManifestListAttributes {
   /**
    * The MIME type of the referenced object. This will generally be
@@ -557,6 +593,9 @@ model Repositories {
   @pageItems
   repositories?: string[];
 
+  /**
+   * Link to the next page of results
+   */
   @nextLink
   link?: string;
 }
@@ -673,6 +712,9 @@ model TagList {
   @pageItems
   tags: TagAttributesBase[];
 
+  /**
+   * Link to the next page of results
+   */
   @nextLink
   link?: string;
 }
@@ -788,6 +830,9 @@ model AcrManifests {
   @pageItems
   manifests?: ManifestAttributesBase[];
 
+  /**
+   * Link to the next page of results
+   */
   @nextLink
   link?: string;
 }
@@ -931,6 +976,7 @@ model ArtifactManifestProperties {
   manifest: ManifestAttributesBase;
 }
 
+/** The ACR refresh token response containing the refresh token for authentication. */
 model AcrRefreshToken {
   /**
    * The refresh token to be used for generating access tokens
@@ -938,6 +984,7 @@ model AcrRefreshToken {
   refresh_token?: string;
 }
 
+/** The ACR access token response containing the access token for authentication. */
 model AcrAccessToken {
   /**
    * The access token for performing authenticated requests

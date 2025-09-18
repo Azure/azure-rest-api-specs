@@ -767,12 +767,14 @@
           {
             "name": "last",
             "in": "query",
+            "description": "Query parameter for the last item in previous query. Result set will include values lexically after last.",
             "required": false,
             "type": "string"
           },
           {
             "name": "n",
             "in": "query",
+            "description": "Query parameter for max number of items",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -834,15 +836,18 @@
               "values": [
                 {
                   "name": "access_token_refresh_token",
-                  "value": "access_token_refresh_token"
+                  "value": "access_token_refresh_token",
+                  "description": "Grant type for exchanging both access token and refresh token"
                 },
                 {
                   "name": "access_token",
-                  "value": "access_token"
+                  "value": "access_token",
+                  "description": "Grant type for exchanging access token only"
                 },
                 {
                   "name": "refresh_token",
-                  "value": "refresh_token"
+                  "value": "refresh_token",
+                  "description": "Grant type for exchanging refresh token only"
                 }
               ]
             }
@@ -964,15 +969,18 @@
               "values": [
                 {
                   "name": "access_token_refresh_token",
-                  "value": "access_token_refresh_token"
+                  "value": "access_token_refresh_token",
+                  "description": "Grant type for exchanging both access token and refresh token"
                 },
                 {
                   "name": "access_token",
-                  "value": "access_token"
+                  "value": "access_token",
+                  "description": "Grant type for exchanging access token only"
                 },
                 {
                   "name": "refresh_token",
-                  "value": "refresh_token"
+                  "value": "refresh_token",
+                  "description": "Grant type for exchanging refresh token only"
                 }
               ]
             }
@@ -1557,6 +1565,7 @@
   "definitions": {
     "AcrAccessToken": {
       "type": "object",
+      "description": "The ACR access token response containing the access token for authentication.",
       "properties": {
         "access_token": {
           "type": "string",
@@ -1616,12 +1625,14 @@
           }
         },
         "link": {
-          "type": "string"
+          "type": "string",
+          "description": "Link to the next page of results"
         }
       }
     },
     "AcrRefreshToken": {
       "type": "object",
+      "description": "The ACR refresh token response containing the refresh token for authentication.",
       "properties": {
         "refresh_token": {
           "type": "string",
@@ -1858,6 +1869,7 @@
     },
     "ArtifactOperatingSystem": {
       "type": "string",
+      "description": "The artifact platform's operating system.",
       "enum": [
         "aix",
         "android",
@@ -1880,59 +1892,73 @@
         "values": [
           {
             "name": "Aix",
-            "value": "aix"
+            "value": "aix",
+            "description": "AIX operating system"
           },
           {
             "name": "Android",
-            "value": "android"
+            "value": "android",
+            "description": "Android operating system"
           },
           {
             "name": "Darwin",
-            "value": "darwin"
+            "value": "darwin",
+            "description": "Darwin operating system"
           },
           {
             "name": "Dragonfly",
-            "value": "dragonfly"
+            "value": "dragonfly",
+            "description": "Dragonfly operating system"
           },
           {
             "name": "FreeBsd",
-            "value": "freebsd"
+            "value": "freebsd",
+            "description": "FreeBSD operating system"
           },
           {
             "name": "Illumos",
-            "value": "illumos"
+            "value": "illumos",
+            "description": "Illumos operating system"
           },
           {
             "name": "iOS",
-            "value": "ios"
+            "value": "ios",
+            "description": "iOS operating system"
           },
           {
             "name": "JS",
-            "value": "js"
+            "value": "js",
+            "description": "JavaScript operating system"
           },
           {
             "name": "Linux",
-            "value": "linux"
+            "value": "linux",
+            "description": "Linux operating system"
           },
           {
             "name": "NetBsd",
-            "value": "netbsd"
+            "value": "netbsd",
+            "description": "NetBSD operating system"
           },
           {
             "name": "OpenBsd",
-            "value": "openbsd"
+            "value": "openbsd",
+            "description": "OpenBSD operating system"
           },
           {
             "name": "Plan9",
-            "value": "plan9"
+            "value": "plan9",
+            "description": "Plan 9 operating system"
           },
           {
             "name": "Solaris",
-            "value": "solaris"
+            "value": "solaris",
+            "description": "Solaris operating system"
           },
           {
             "name": "Windows",
-            "value": "windows"
+            "value": "windows",
+            "description": "Windows operating system"
           }
         ]
       }
@@ -2352,6 +2378,7 @@
     },
     "ManifestListAttributes": {
       "type": "object",
+      "description": "Attributes of a manifest in a manifest list.",
       "properties": {
         "mediaType": {
           "type": "string",
@@ -2618,15 +2645,18 @@
         "values": [
           {
             "name": "access_token_refresh_token",
-            "value": "access_token_refresh_token"
+            "value": "access_token_refresh_token",
+            "description": "Grant type for exchanging both access token and refresh token"
           },
           {
             "name": "access_token",
-            "value": "access_token"
+            "value": "access_token",
+            "description": "Grant type for exchanging access token only"
           },
           {
             "name": "refresh_token",
-            "value": "refresh_token"
+            "value": "refresh_token",
+            "description": "Grant type for exchanging refresh token only"
           }
         ]
       }
@@ -2643,7 +2673,8 @@
           }
         },
         "link": {
-          "type": "string"
+          "type": "string",
+          "description": "Link to the next page of results"
         }
       }
     },
@@ -2759,7 +2790,8 @@
           }
         },
         "link": {
-          "type": "string"
+          "type": "string",
+          "description": "Link to the next page of results"
         }
       },
       "required": [

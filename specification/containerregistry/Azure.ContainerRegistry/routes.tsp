@@ -106,9 +106,11 @@ interface ContainerRegistry {
   @list
   getRepositories is Azure.Core.Foundations.Operation<
     {
+      /** Query parameter for the last item in previous query. Result set will include values lexically after last. */
       @query("last")
       last?: string;
 
+      /** Query parameter for max number of items */
       @query("n")
       n?: int32;
     },
