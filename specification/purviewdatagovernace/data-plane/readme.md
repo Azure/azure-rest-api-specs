@@ -27,7 +27,7 @@ title: PurviewDataQualityClient
 
 ``` yaml $(tag) == 'package-2025-09-01-preview'
 input-file:
-- ./Azure.Analytics.Purview.DataQuality/preview/2025-09-01-preview/purviewDataQuality.json
+- ./Azure.Analaytics.Purview.DataQuality/preview/2025-09-01-preview/purviewDataQuality.json
 modelerfour:
   lenient-model-deduplication: true
 ```
