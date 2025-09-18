@@ -105,10 +105,7 @@ interface HealthModels {
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
   update is ArmCustomPatchAsync<
     HealthModel,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      HealthModel,
-      {}
-    >
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<HealthModel, {}>
   >;
   delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
   listByParentResource is ArmResourceListByParent<HealthModel>;
