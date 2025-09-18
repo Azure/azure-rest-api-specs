@@ -36,15 +36,15 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
-- Microsoft.DataFactory/stable/2018-06-01/datafactory.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/ChangeDataCapture.json
+- stable/2018-06-01/datafactory.json
+- stable/2018-06-01/entityTypes/DataFlow.json
+- stable/2018-06-01/entityTypes/Dataset.json
+- stable/2018-06-01/entityTypes/IntegrationRuntime.json
+- stable/2018-06-01/entityTypes/LinkedService.json
+- stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
+- stable/2018-06-01/entityTypes/Pipeline.json
+- stable/2018-06-01/entityTypes/Trigger.json
+- stable/2018-06-01/entityTypes/ChangeDataCapture.json
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.
@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2017-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-09-preview'
 input-file:
-- Microsoft.DataFactory/preview/2017-09-01-preview/datafactory.json
+- preview/2017-09-01-preview/datafactory.json
 ```
 
 ---
@@ -206,7 +206,7 @@ directive:
       - The other properties are simple and self explanatory
   - suppress: OAV131  # EnumInsteadOfBoolean
     where:
-      - $(this-folder)/Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
+      - $(this-folder)/stable/2018-06-01/entityTypes/LinkedService.json
     reason:
       - DataFlow add type required  
 ```
