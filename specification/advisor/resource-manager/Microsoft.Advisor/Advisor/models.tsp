@@ -336,7 +336,7 @@ model MetadataEntityProperties {
  * A simple name/value pair used in metadata properties.
  */
 model NameValuePair {
-   /**
+  /**
    * The property name.
    */
   name: string;
