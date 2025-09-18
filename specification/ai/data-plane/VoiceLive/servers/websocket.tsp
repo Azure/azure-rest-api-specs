@@ -82,7 +82,6 @@ alias ForceModelServerEvent =
   ServerEventResponseFunctionCallArgumentsDone |
   ServerEventResponseAnimationBlendshapeDelta |
   ServerEventResponseAnimationBlendshapeDone |
-  ServerEventResponseEmotionHypothesis |
   ServerEventResponseAudioTimestampDelta |
   ServerEventResponseAudioTimestampDone |
   ServerEventResponseAnimationVisemeDelta |

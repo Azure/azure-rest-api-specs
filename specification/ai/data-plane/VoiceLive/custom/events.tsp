@@ -55,7 +55,6 @@ union ServerEventType {
   response_audio_done: "response.audio.done",
   response_animation_blendshapes_delta: "response.animation_blendshapes.delta",
   response_animation_blendshapes_done: "response.animation_blendshapes.done",
-  response_emotion_hypothesis: "response.emotion_hypothesis",
   response_audio_timestamp_delta: "response.audio_timestamp.delta",
   response_audio_timestamp_done: "response.audio_timestamp.done",
   response_animation_viseme_delta: "response.animation_viseme.delta",

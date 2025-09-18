@@ -67,7 +67,5 @@ model ToolChoiceObject {
  */
 model ToolChoiceFunctionObject extends ToolChoiceObject {
   type: ToolType.function;
-  function: {
-    name: string;
-  };
+  name: string;
 }
