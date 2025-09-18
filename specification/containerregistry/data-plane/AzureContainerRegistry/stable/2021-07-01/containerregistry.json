@@ -1569,7 +1569,8 @@
       "properties": {
         "access_token": {
           "type": "string",
-          "description": "The access token for performing authenticated requests"
+          "description": "The access token for performing authenticated requests",
+          "x-ms-client-name": "accessToken"
         }
       }
     },
@@ -1636,7 +1637,8 @@
       "properties": {
         "refresh_token": {
           "type": "string",
-          "description": "The refresh token to be used for generating access tokens"
+          "description": "The refresh token to be used for generating access tokens",
+          "x-ms-client-name": "refreshToken"
         }
       }
     },
@@ -1647,51 +1649,63 @@
         "org.opencontainers.image.created": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time on which the image was built (string, date-time as defined by\nhttps://tools.ietf.org/html/rfc3339#section-5.6)"
+          "description": "Date and time on which the image was built (string, date-time as defined by\nhttps://tools.ietf.org/html/rfc3339#section-5.6)",
+          "x-ms-client-name": "created"
         },
         "org.opencontainers.image.authors": {
           "type": "string",
-          "description": "Contact details of the people or organization responsible for the image."
+          "description": "Contact details of the people or organization responsible for the image.",
+          "x-ms-client-name": "authors"
         },
         "org.opencontainers.image.url": {
           "type": "string",
-          "description": "URL to find more information on the image."
+          "description": "URL to find more information on the image.",
+          "x-ms-client-name": "url"
         },
         "org.opencontainers.image.documentation": {
           "type": "string",
-          "description": "URL to get documentation on the image."
+          "description": "URL to get documentation on the image.",
+          "x-ms-client-name": "documentation"
         },
         "org.opencontainers.image.source": {
           "type": "string",
-          "description": "URL to get source code for building the image."
+          "description": "URL to get source code for building the image.",
+          "x-ms-client-name": "source"
         },
         "org.opencontainers.image.version": {
           "type": "string",
-          "description": "Version of the packaged software. The version MAY match a label or tag in the\nsource code repository, may also be Semantic versioning-compatible"
+          "description": "Version of the packaged software. The version MAY match a label or tag in the\nsource code repository, may also be Semantic versioning-compatible",
+          "x-ms-client-name": "version"
         },
         "org.opencontainers.image.revision": {
           "type": "string",
-          "description": "Source control revision identifier for the packaged software."
+          "description": "Source control revision identifier for the packaged software.",
+          "x-ms-client-name": "revision"
         },
         "org.opencontainers.image.vendor": {
           "type": "string",
-          "description": "Name of the distributing entity, organization or individual."
+          "description": "Name of the distributing entity, organization or individual.",
+          "x-ms-client-name": "vendor"
         },
         "org.opencontainers.image.licenses": {
           "type": "string",
-          "description": "License(s) under which contained software is distributed as an SPDX License\nExpression."
+          "description": "License(s) under which contained software is distributed as an SPDX License\nExpression.",
+          "x-ms-client-name": "licenses"
         },
         "org.opencontainers.image.ref.name": {
           "type": "string",
-          "description": "Name of the reference for a target."
+          "description": "Name of the reference for a target.",
+          "x-ms-client-name": "name"
         },
         "org.opencontainers.image.title": {
           "type": "string",
-          "description": "Human-readable title of the image"
+          "description": "Human-readable title of the image",
+          "x-ms-client-name": "title"
         },
         "org.opencontainers.image.description": {
           "type": "string",
-          "description": "Human-readable description of the software packaged in the image"
+          "description": "Human-readable description of the software packaged in the image",
+          "x-ms-client-name": "description"
         }
       },
       "additionalProperties": {
@@ -2086,24 +2100,28 @@
         "registry": {
           "type": "string",
           "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
           "type": "string",
           "description": "Image name",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "name"
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
           "description": "Image created time",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Image last update time",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "lastUpdatedOn"
         },
         "manifestCount": {
           "type": "integer",
@@ -2542,7 +2560,7 @@
     "Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema": {
       "type": "object",
       "properties": {
-        "grant_type": {
+        "grantType": {
           "$ref": "#/definitions/PostContentSchemaGrantType",
           "description": "Can take a value of access_token_refresh_token, or access_token, or\nrefresh_token"
         },
@@ -2554,17 +2572,17 @@
           "type": "string",
           "description": "AAD tenant associated to the AAD credentials."
         },
-        "refresh_token": {
+        "acrRefreshToken": {
           "type": "string",
           "description": "AAD refresh token, mandatory when grant_type is access_token_refresh_token or\nrefresh_token"
         },
-        "access_token": {
+        "accessToken": {
           "type": "string",
           "description": "AAD access token, mandatory when grant_type is access_token_refresh_token or\naccess_token."
         }
       },
       "required": [
-        "grant_type",
+        "grantType",
         "service"
       ]
     },
@@ -2579,11 +2597,11 @@
           "type": "string",
           "description": "Which is expected to be a valid scope, and can be specified more than once for\nmultiple scope requests. You obtained this from the Www-Authenticate response\nheader from the challenge."
         },
-        "refresh_token": {
+        "refreshToken": {
           "type": "string",
           "description": "Must be a valid ACR refresh token"
         },
-        "grant_type": {
+        "grantType": {
           "$ref": "#/definitions/TokenGrantType",
           "description": "Grant type is expected to be refresh_token"
         }
@@ -2591,8 +2609,8 @@
       "required": [
         "service",
         "scope",
-        "refresh_token",
-        "grant_type"
+        "refreshToken",
+        "grantType"
       ]
     },
     "Platform": {
@@ -2609,14 +2627,16 @@
         },
         "os.version": {
           "type": "string",
-          "description": "The optional os.version field specifies the operating system version, for\nexample 10.0.10586."
+          "description": "The optional os.version field specifies the operating system version, for\nexample 10.0.10586.",
+          "x-ms-client-name": "osVersion"
         },
         "os.features": {
           "type": "array",
           "description": "The optional os.features field specifies an array of strings, each listing a\nrequired OS feature (for example on Windows win32k",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "osFeatures"
         },
         "variant": {
           "type": "string",
@@ -2701,19 +2721,23 @@
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
-          "description": "Delete enabled"
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
         },
         "writeEnabled": {
           "type": "boolean",
-          "description": "Write enabled"
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
         },
         "listEnabled": {
           "type": "boolean",
-          "description": "List enabled"
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
         },
         "readEnabled": {
           "type": "boolean",
-          "description": "Read enabled"
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         }
       }
     },

@@ -366,13 +366,15 @@ model Platform {
    * The optional os.version field specifies the operating system version, for
    * example 10.0.10586.
    */
-  `os.version`?: string;
+  @encodedName("application/json", "os.version")
+  osVersion?: string;
 
   /**
    * The optional os.features field specifies an array of strings, each listing a
    * required OS feature (for example on Windows win32k
    */
-  `os.features`?: string[];
+  @encodedName("application/json", "os.features")
+  osFeatures?: string[];
 
   /**
    * The optional variant field specifies a variant of the CPU, for example armv6l
@@ -428,64 +430,76 @@ model Annotations {
    * https://tools.ietf.org/html/rfc3339#section-5.6)
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  `org.opencontainers.image.created`?: utcDateTime;
+  @encodedName("application/json", "org.opencontainers.image.created")
+  created?: utcDateTime;
 
   /**
    * Contact details of the people or organization responsible for the image.
    */
-  `org.opencontainers.image.authors`?: string;
+  @encodedName("application/json", "org.opencontainers.image.authors")
+  authors?: string;
 
   /**
    * URL to find more information on the image.
    */
-  `org.opencontainers.image.url`?: string;
+  @encodedName("application/json", "org.opencontainers.image.url")
+  url?: string;
 
   /**
    * URL to get documentation on the image.
    */
-  `org.opencontainers.image.documentation`?: string;
+  @encodedName("application/json", "org.opencontainers.image.documentation")
+  documentation?: string;
 
   /**
    * URL to get source code for building the image.
    */
-  `org.opencontainers.image.source`?: string;
+  @encodedName("application/json", "org.opencontainers.image.source")
+  source?: string;
 
   /**
    * Version of the packaged software. The version MAY match a label or tag in the
    * source code repository, may also be Semantic versioning-compatible
    */
-  `org.opencontainers.image.version`?: string;
+  @encodedName("application/json", "org.opencontainers.image.version")
+  version?: string;
 
   /**
    * Source control revision identifier for the packaged software.
    */
-  `org.opencontainers.image.revision`?: string;
+  @encodedName("application/json", "org.opencontainers.image.revision")
+  revision?: string;
 
   /**
    * Name of the distributing entity, organization or individual.
    */
-  `org.opencontainers.image.vendor`?: string;
+  @encodedName("application/json", "org.opencontainers.image.vendor")
+  vendor?: string;
 
   /**
    * License(s) under which contained software is distributed as an SPDX License
    * Expression.
    */
-  `org.opencontainers.image.licenses`?: string;
+  @encodedName("application/json", "org.opencontainers.image.licenses")
+  licenses?: string;
 
   /**
    * Name of the reference for a target.
    */
-  `org.opencontainers.image.ref.name`?: string;
+  @encodedName("application/json", "org.opencontainers.image.ref.name")
+  name?: string;
 
   /**
    * Human-readable title of the image
    */
-  `org.opencontainers.image.title`?: string;
+  @encodedName("application/json", "org.opencontainers.image.title")
+  title?: string;
 
   /**
    * Human-readable description of the software packaged in the image
    */
-  `org.opencontainers.image.description`?: string;
+  @encodedName("application/json", "org.opencontainers.image.description")
+  description?: string;
 }
 
 /**
@@ -609,27 +623,31 @@ model ContainerRepositoryProperties {
    * {registry-name}.azurecr.io.
    */
   @visibility(Lifecycle.Read)
-  registry: string;
+  @encodedName("application/json", "registry")
+  registryLoginServer: string;
 
   /**
    * Image name
    */
   @visibility(Lifecycle.Read)
-  imageName: string;
+  @encodedName("application/json", "imageName")
+  name: string;
 
   /**
    * Image created time
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdTime: utcDateTime;
+  @encodedName("application/json", "createdTime")
+  createdOn: utcDateTime;
 
   /**
    * Image last update time
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastUpdateTime: utcDateTime;
+  @encodedName("application/json", "lastUpdateTime")
+  lastUpdatedOn: utcDateTime;
 
   /**
    * Number of the manifests
@@ -656,22 +674,26 @@ model RepositoryWriteableProperties {
   /**
    * Delete enabled
    */
-  deleteEnabled?: boolean;
+  @encodedName("application/json", "deleteEnabled")
+  canDelete?: boolean;
 
   /**
    * Write enabled
    */
-  writeEnabled?: boolean;
+  @encodedName("application/json", "writeEnabled")
+  canWrite?: boolean;
 
   /**
    * List enabled
    */
-  listEnabled?: boolean;
+  @encodedName("application/json", "listEnabled")
+  canList?: boolean;
 
   /**
    * Read enabled
    */
-  readEnabled?: boolean;
+  @encodedName("application/json", "readEnabled")
+  canRead?: boolean;
 }
 
 /**
@@ -981,7 +1003,8 @@ model AcrRefreshToken {
   /**
    * The refresh token to be used for generating access tokens
    */
-  refresh_token?: string;
+  @encodedName("application/json", "refresh_token")
+  refreshToken?: string;
 }
 
 /** The ACR access token response containing the access token for authentication. */
@@ -989,7 +1012,8 @@ model AcrAccessToken {
   /**
    * The access token for performing authenticated requests
    */
-  access_token?: string;
+  @encodedName("application/json", "access_token")
+  accessToken?: string;
 }
 
 /**
@@ -1142,7 +1166,8 @@ model Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlenco
    * Can take a value of access_token_refresh_token, or access_token, or
    * refresh_token
    */
-  grant_type: PostContentSchemaGrantType;
+  @encodedName("application/x-www-form-urlencoded", "grant_type")
+  grantType: PostContentSchemaGrantType;
 
   /**
    * Indicates the name of your Azure container registry.
@@ -1158,13 +1183,15 @@ model Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlenco
    * AAD refresh token, mandatory when grant_type is access_token_refresh_token or
    * refresh_token
    */
-  refresh_token?: string;
+  @encodedName("application/x-www-form-urlencoded", "refresh_token")
+  acrRefreshToken?: string;
 
   /**
    * AAD access token, mandatory when grant_type is access_token_refresh_token or
    * access_token.
    */
-  access_token?: string;
+  @encodedName("application/x-www-form-urlencoded", "access_token")
+  accessToken?: string;
 }
 
 model PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema {
@@ -1183,10 +1210,12 @@ model PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedS
   /**
    * Must be a valid ACR refresh token
    */
-  refresh_token: string;
+  @encodedName("application/x-www-form-urlencoded", "refresh_token")
+  refreshToken: string;
 
   /**
    * Grant type is expected to be refresh_token
    */
-  grant_type: TokenGrantType;
+  @encodedName("application/x-www-form-urlencoded", "grant_type")
+  grantType: TokenGrantType;
 }
