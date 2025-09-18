@@ -20,9 +20,6 @@ tag: package-2025-09-01-preview
 title: PurviewDataQuality
 ```
 
-tag: package-2022-09-01-preview
-title: PurviewDataQualityClient
-
 ### Tag: package-2025-09-01-preview
 
 ``` yaml $(tag) == 'package-2025-09-01-preview'
