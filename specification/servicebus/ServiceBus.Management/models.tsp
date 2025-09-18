@@ -604,35 +604,6 @@ model ConnectionState {
   description?: string;
 }
 
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model ProxyResource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.EventHub/Namespaces" or "Microsoft.EventHub/Namespaces/EventHubs"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The geo-location where the resource lives
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PlatformCapabilities {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
