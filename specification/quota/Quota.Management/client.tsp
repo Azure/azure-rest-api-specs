@@ -64,4 +64,4 @@ using Microsoft.Quota;
 @@clientName(Microsoft.Quota, "QuotaMgmtClient", "python");
 
 // Java-specific fixes for breaking changes
-@@clientName(CurrentQuotaLimitBasesResponseHeaders.eTag, "etag", "java");
+@@clientName(ResponseETagHeader.eTag, "etag", "java");
