@@ -209,6 +209,7 @@ union ScheduleTaskType {
 }
 
 @doc("Insight placeholder model.")
+@added(Versions.v2025_10_15_preview)
 model Insight {
   @doc("Identifier of the insight.")
   id: string;
