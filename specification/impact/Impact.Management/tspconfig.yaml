@@ -25,14 +25,14 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-impactreporting"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-impactreporting"
     namespace: "com.azure.resourcemanager.impactreporting"
     service-name: "Impact Reporting"
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/impactreporting"
-    package-dir: "armimpactreporting"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armimpactreporting"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armimpactreporting"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
