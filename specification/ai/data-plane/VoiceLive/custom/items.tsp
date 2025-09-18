@@ -1,5 +1,7 @@
 import "./content_parts.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
@@ -13,16 +15,19 @@ union ItemType {
 
 // Base for user content parts
 @discriminator("type")
+@usage(RequestUsage)
 model UserContentPart {
   type: string;
 }
 
 // Variants
+@usage(RequestUsage)
 model InputTextContentPart extends UserContentPart {
   type: "input_text";
   text: string;
 }
 
+@usage(RequestUsage)
 model InputAudioContentPart extends UserContentPart {
   type: "input_audio";
   audio: string;
@@ -30,6 +35,7 @@ model InputAudioContentPart extends UserContentPart {
 }
 
 @doc("Output text content part.")
+@usage(ResponseUsage)
 model OutputTextContentPart {
   type: "text";
   text: string;
@@ -43,6 +49,7 @@ enum ItemParamStatus {
 
 @doc("Base for any response item; discriminated by `type`.")
 @discriminator("type")
+@usage(RequestUsage)
 model ConversationRequestItem {
   type: ItemType;
   id?: string;
@@ -50,28 +57,33 @@ model ConversationRequestItem {
 
 // ----- Message Items -----
 @discriminator("role")
+@usage(RequestUsage)
 model MessageItem extends ConversationRequestItem {
   type: ItemType.message;
   role: string;
   status?: ItemParamStatus;
 }
 
+@usage(RequestUsage)
 model SystemMessageItem extends MessageItem {
   role: "system";
   content: InputTextContentPart[];
 }
 
+@usage(RequestUsage)
 model UserMessageItem extends MessageItem {
   role: "user";
   content: UserContentPart[];
 }
 
+@usage(RequestUsage)
 model AssistantMessageItem extends MessageItem {
   role: "assistant";
   content: OutputTextContentPart[];
 }
 
 // ----- Function Call Items -----
+@usage(RequestUsage)
 model FunctionCallItem extends ConversationRequestItem {
   type: ItemType.function_call;
   name: string;
@@ -80,6 +92,7 @@ model FunctionCallItem extends ConversationRequestItem {
   status?: ItemParamStatus;
 }
 
+@usage(RequestUsage)
 model FunctionCallOutputItem extends ConversationRequestItem {
   type: ItemType.function_call_output;
   call_id: string;
@@ -88,6 +101,7 @@ model FunctionCallOutputItem extends ConversationRequestItem {
 }
 
 @discriminator("type")
+@usage(ResponseUsage)
 model ResponseItem {
   // must stay here, required, broad type
   type: ItemType;
@@ -95,6 +109,7 @@ model ResponseItem {
   object?: "realtime.item";
 }
 
+@usage(ResponseUsage)
 model ResponseMessageItem extends ResponseItem {
   type: ItemType.message;
   role: MessageRole;
@@ -102,6 +117,7 @@ model ResponseMessageItem extends ResponseItem {
   status: ResponseItemStatus;
 }
 
+@usage(ResponseUsage)
 model ResponseFunctionCallItem
   extends ResponseItem {
   type: ItemType.function_call;
@@ -111,6 +127,7 @@ model ResponseFunctionCallItem
   status: ResponseItemStatus;
 }
 
+@usage(ResponseUsage)
 model ResponseFunctionCallOutputItem
   extends ResponseItem {
   type: ItemType.function_call_output;
@@ -118,6 +135,7 @@ model ResponseFunctionCallOutputItem
   output: string;
 }
 
+@usage(ResponseUsage)
 union ResponseItemStatus {
   string,
   in_progress: "in_progress",
@@ -133,7 +151,8 @@ union MessageRole {
 }
 
 @doc("Terminal status of a response.")
-enum ResponseStatus {
+union ResponseStatus {
+  string,
   completed: "completed",
   cancelled: "cancelled",
   failed: "failed",
@@ -143,12 +162,14 @@ enum ResponseStatus {
 
 @doc("Base for all non-success response details.")
 @discriminator("type")  // or just @discriminator("type") if imported unqualified
+@usage(ResponseUsage)
 model ResponseStatusDetails {
   // Required discriminator key on the base; keep it as a broad string.
-  type: string;
+  type: ResponseStatus;
 }
 
 @doc("Details for a cancelled response.")
+@usage(ResponseUsage)
 model ResponseCancelledDetails extends ResponseStatusDetails {
   // Narrow the discriminator to a literal in each child:
   type: "cancelled";
@@ -156,18 +177,21 @@ model ResponseCancelledDetails extends ResponseStatusDetails {
 }
 
 @doc("Details for an incomplete response.")
+@usage(ResponseUsage)
 model ResponseIncompleteDetails extends ResponseStatusDetails {
   type: "incomplete";
   reason: "max_output_tokens" | "content_filter";
 }
 
 @doc("Details for a failed response.")
+@usage(ResponseUsage)
 model ResponseFailedDetails extends ResponseStatusDetails {
   type: "failed";
   error: unknown;
 }
 
 @doc("Details of input token usage.")
+@usage(ResponseUsage)
 model InputTokenDetails {
   @doc("Number of cached tokens used in the input.")
   cached_tokens: int32;
@@ -183,6 +207,7 @@ model InputTokenDetails {
 }
 
 @doc("Details of output token usage.")
+@usage(ResponseUsage)
 model OutputTokenDetails {
   @doc("Number of text tokens generated in the output.")
   text_tokens: int32;
@@ -192,6 +217,7 @@ model OutputTokenDetails {
 }
 
 @doc("Details of output token usage.")
+@usage(ResponseUsage)
 model CachedTokenDetails {
   @doc("Number of cached text tokens.")
   text_tokens: int32;
@@ -201,7 +227,8 @@ model CachedTokenDetails {
 }
 
 @doc("Overall usage statistics for a response.")
-model Usage {
+@usage(ResponseUsage)
+model TokenUsage {
   @doc("Total number of tokens (input + output).")
   total_tokens: int32;
 

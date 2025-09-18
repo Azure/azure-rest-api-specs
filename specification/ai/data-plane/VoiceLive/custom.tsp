@@ -3,11 +3,14 @@ import "./custom/items.tsp";
 import "./custom/tools.tsp";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace VoiceLive;
 
+@usage(RequestUsage)
 model RequestSession {
   ...SessionBase;
   `model`?: string;
@@ -32,6 +35,7 @@ model RequestSession {
   agent?: AgentConfig;
 }
 
+@usage(ResponseUsage)
 model ResponseSession extends RequestSession{
   ...SessionBase;
   id?: string;
@@ -56,6 +60,7 @@ union OAIVoice {
   This provides a unified interface for OpenAI voices, complementing the
   existing string-based OAIVoice for backward compatibility.
   """)
+@usage(RequestUsage)
 model OpenAIVoice {
   type: "openai";
   name: OAIVoice;
@@ -65,10 +70,12 @@ model OpenAIVoice {
 
 @doc("Base for Azure voice configurations.")
 @discriminator("type")
+@usage(DualUsage)
 model AzureVoice {
   type: string;
 }
 
+@usage(DualUsage)
 @doc("Azure custom voice configuration (preferred).")
 model AzureCustomVoice extends AzureVoice {
   type: "azure-custom";
@@ -90,6 +97,7 @@ model AzureCustomVoice extends AzureVoice {
 }
 
 @doc("Azure standard voice configuration.")
+@usage(DualUsage)
 model AzureStandardVoice extends AzureVoice {
   type: "azure-standard";
   @minLength(1) @doc("Voice name cannot be empty.") name: string;
@@ -109,6 +117,7 @@ model AzureStandardVoice extends AzureVoice {
 }
 
 @doc("Azure platform voice configuration (variant of standard).")
+@usage(DualUsage)
 model AzurePlatformVoice extends AzureVoice {
   type: "azure-platform";
   @minLength(1) @doc("Voice name cannot be empty.") name: string;
@@ -128,6 +137,7 @@ model AzurePlatformVoice extends AzureVoice {
 }
 
 @doc("Azure personal voice configuration.")
+@usage(DualUsage)
 model AzurePersonalVoice extends AzureVoice {
   type: "azure-personal";
   @minLength(1) @doc("Voice name cannot be empty.") name: string;
@@ -138,7 +148,15 @@ model AzurePersonalVoice extends AzureVoice {
   temperature?: float32;
 
   @doc("Underlying neural model to use for personal voice.")
-  `model`: "DragonLatestNeural" | "PhoenixLatestNeural" | "PhoenixV2Neural";
+  `model`: PersonalVoiceModels
+}
+
+@doc("PersonalVoice models")
+union PersonalVoiceModels {
+  string,
+  "DragonLatestNeural",
+  "PhoenixLatestNeural",
+  "PhoenixV2Neural"
 }
 
 // --- Phi4mm voices ---------------------------------------------------------
@@ -152,6 +170,7 @@ union Phi4mmVoice {
 @doc("""
   Voice configuration for LLM (Large Language Model) voices.
   """)
+@usage(DualUsage)
 model LLMVoice {
   type: "llm";
   name: Phi4mmVoice;
@@ -181,6 +200,7 @@ union AudioInputTranscriptionModel {
 }
 
 @doc("Configuration for input audio transcription.")
+@usage(RequestUsage)
 model AudioInputTranscriptionSettings {
   @doc("""
     The transcription model to use. Supported values:
@@ -215,11 +235,13 @@ union Modality {
 
 @discriminator("model")
 @doc("Top-level union for end-of-utterance (EOU) semantic detection configuration.")
+@usage(RequestUsage)
 model EOUDetection {
   `model`: "semantic_detection_v1" | "semantic_detection_v1_en" | "semantic_detection_v1_multilingual";
 }
 
 @doc("Azure semantic end-of-utterance detection (default).")
+@usage(RequestUsage)
 model AzureSemanticDetection extends EOUDetection {
   `model`: "semantic_detection_v1";
   threshold?: float32;
@@ -235,6 +257,7 @@ model AzureSemanticDetection extends EOUDetection {
 }
 
 @doc("Azure semantic end-of-utterance detection (English-optimized).")
+@usage(RequestUsage)
 model AzureSemanticDetectionEn extends EOUDetection {
   `model`: "semantic_detection_v1_en";
   threshold?: float32;
@@ -250,6 +273,7 @@ model AzureSemanticDetectionEn extends EOUDetection {
 }
 
 @doc("Azure semantic end-of-utterance detection (multilingual).")
+@usage(RequestUsage)
 model AzureSemanticDetectionMultilingual extends EOUDetection {
   `model`: "semantic_detection_v1_multilingual";
   threshold?: float32;
@@ -266,6 +290,7 @@ model AzureSemanticDetectionMultilingual extends EOUDetection {
 
 @discriminator("type")
 @doc("Top-level union for turn detection configuration.")
+@usage(RequestUsage)
 model TurnDetection {
   type:
     | "none"
@@ -282,6 +307,7 @@ model NoTurnDetection extends TurnDetection {
 }
 
 @doc("Base model for VAD-based turn detection.")
+@usage(RequestUsage)
 model ServerVad extends TurnDetection {
   type: "server_vad";
   threshold?: float32;
@@ -292,6 +318,7 @@ model ServerVad extends TurnDetection {
 }
 
 @doc("Server Speech Detection (Azure semantic VAD, default variant).")
+@usage(RequestUsage)
 model AzureSemanticVad extends TurnDetection {
   type: "azure_semantic_vad";
   threshold?: float32;
@@ -309,6 +336,7 @@ model AzureSemanticVad extends TurnDetection {
 }
 
 @doc("Server Speech Detection (Azure semantic VAD, English-only).")
+@usage(RequestUsage)
 model AzureSemanticVadEn extends TurnDetection {
   type: "azure_semantic_vad_en";
   threshold?: float32;
@@ -326,6 +354,7 @@ model AzureSemanticVadEn extends TurnDetection {
 }
 
 @doc("Server Speech Detection (legacy `server_sd` alias).")
+@usage(RequestUsage)
 model AzureSemanticVadServer extends TurnDetection {
   type: "server_sd";
   threshold?: float32;
@@ -343,6 +372,7 @@ model AzureSemanticVadServer extends TurnDetection {
 }
 
 @doc("Server Speech Detection (Azure semantic VAD).")
+@usage(RequestUsage)
 model AzureMultilingualSemanticVad extends TurnDetection {
   type: "azure_semantic_vad_multilingual";
   threshold?: float32;
@@ -360,12 +390,14 @@ model AzureMultilingualSemanticVad extends TurnDetection {
 }
 
 @doc("Configuration for input audio noise reduction.")
+@usage(RequestUsage)
 model AudioNoiseReduction {
   @doc("The type of noise reduction model.")
   type: "azure_deep_noise_suppression";
 }
 
 @doc("Configuration for client audio input. Used to specify the audio model and optional phrase list.")
+@usage(RequestUsage)
 model InputAudio {
   @doc("The name of the model to use for input audio (currently only 'azure-standard' is supported).")
   `model`: "azure-standard";
@@ -375,6 +407,7 @@ model InputAudio {
 }
 
 @doc("Echo cancellation configuration for server-side audio processing.")
+@usage(RequestUsage)
 model AudioEchoCancellation {
   @doc("The type of echo cancellation model to use.")
   type: "server_echo_cancellation";
@@ -396,6 +429,7 @@ union AnimationOutputType {
 }
 
 @doc("Configuration for animation outputs including blendshapes, visemes, and emotion metadata.")
+@usage(RequestUsage)
 model Animation {
   @doc("The name of the animation model to use.")
   model_name?: string = "default";
@@ -408,6 +442,7 @@ model Animation {
 }
 
 @doc("Configuration for avatar streaming and behavior during the session.")
+@usage(RequestUsage)
 model AvatarConfig {
   @doc("Optional list of ICE servers to use for WebRTC connection establishment.")
   ice_servers?: IceServer[];
@@ -426,6 +461,7 @@ model AvatarConfig {
 }
 
 @doc("ICE server configuration for WebRTC connection negotiation.")
+@usage(RequestUsage)
 model IceServer {
   @doc("List of ICE server URLs (e.g., TURN or STUN endpoints).")
   urls: url[];
@@ -437,6 +473,7 @@ model IceServer {
   credential?: string;
 }
 
+@usage(RequestUsage)
 model AgentConfig {
   type: "agent";
   name: string;
@@ -446,6 +483,7 @@ model AgentConfig {
 }
 
 @doc("Video streaming parameters for avatar.")
+@usage(RequestUsage)
 model VideoParams {
   @doc("Bitrate in bits per second (e.g., 2000000 for 2 Mbps).")
   bitrate?: int32 = 2000000;
@@ -461,6 +499,7 @@ model VideoParams {
 }
 
 @doc("Defines a video crop rectangle using top-left and bottom-right coordinates.")
+@usage(RequestUsage)
 model VideoCrop {
   @doc("Top-left corner of the crop region. Array of [x, y], must be non-negative integers.")
   @minItems(2)
@@ -474,6 +513,7 @@ model VideoCrop {
 }
 
 @doc("Resolution of the video feed in pixels.")
+@usage(RequestUsage)
 model VideoResolution {
   @doc("Width of the video in pixels. Must be greater than 0.")
   width: int32;

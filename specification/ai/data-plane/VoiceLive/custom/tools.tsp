@@ -1,3 +1,7 @@
+
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
@@ -15,6 +19,7 @@ union ToolType {
  * The base representation of a voicelive tool definition.
  */
 @discriminator("type")
+@usage(RequestUsage)
 model Tool {
   type: ToolType;
 }
@@ -22,6 +27,7 @@ model Tool {
 /**
  * The definition of a function tool as used by the voicelive endpoint.
  */
+@usage(RequestUsage)
 model FunctionTool extends Tool {
   type: ToolType.function;
   name: string;
@@ -58,6 +64,7 @@ union ToolChoiceLiteral {
  * A base representation for a voicelive tool_choice selecting a named tool.
  */
 @discriminator("type")
+@usage(RequestUsage)
 model ToolChoiceObject {
   type: ToolType;
 }
@@ -65,6 +72,7 @@ model ToolChoiceObject {
 /**
  * The representation of a voicelive tool_choice selecting a named function tool.
  */
+@usage(RequestUsage)
 model ToolChoiceFunctionObject extends ToolChoiceObject {
   type: ToolType.function;
   function: {

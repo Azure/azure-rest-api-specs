@@ -2,11 +2,17 @@
 // Removed models not defined or needed based on your Python code baseline
 import "@typespec/http";
 import "@typespec/openapi";
-using TypeSpec.OpenAPI;
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
 
 namespace VoiceLive;
+alias RequestUsage = Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.json;
+alias ResponseUsage = Azure.ClientGenerator.Core.Usage.output | Azure.ClientGenerator.Core.Usage.json;
+alias DualUsage = RequestUsage | ResponseUsage;
 
 @doc("Error object returned in case of API failure.")
+@usage(ResponseUsage)
 model VoiceLiveErrorDetails {
   @doc("Error code, or null if unspecified.")
   code?: string;
@@ -26,12 +32,14 @@ model VoiceLiveErrorDetails {
 
 @error
 @doc("Standard error response envelope.")
+@usage(ResponseUsage)
 model ErrorResponse {
   @doc("Error object returned in case of API failure.")
   error: VoiceLiveErrorDetails;
 }
 
 @doc("A single log probability entry for a token.")
+@usage(ResponseUsage)
 model LogProbProperties {
   @doc("The token that was used to generate the log probability.")
   token: string;
