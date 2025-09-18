@@ -18,7 +18,7 @@ model MongoSite
   ...ResourceNameParameter<
     Resource = MongoSite,
     KeyName = "siteName",
-    SegmentName = "MongoSites",
+    SegmentName = "mongoSites",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }
@@ -75,5 +75,5 @@ interface MongoSites {
 @@doc(MongoSite.name, "The name of Site");
 @@doc(MongoSite.properties, "Resource properties.");
 @@doc(MongoSites.createOrUpdate::parameters.resource,
-  "The machines to add to the assessment"
+  "The request body for creating or updating a MongoSite resource."
 );

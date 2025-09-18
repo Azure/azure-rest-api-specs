@@ -20,7 +20,7 @@ model MongoInstance
   ...ResourceNameParameter<
     Resource = MongoInstance,
     KeyName = "instanceName",
-    SegmentName = "MongoInstances",
+    SegmentName = "mongoInstances",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }
@@ -65,6 +65,8 @@ interface MongoInstances {
 @@doc(MongoInstance.name, "The name of Instance");
 @@doc(MongoInstance.properties, "Resource properties.");
 @@doc(MongoInstances.createOrUpdate::parameters.resource,
-  "The machines to add to the assessment"
+  "The request body for creating or updating a MongoInstance resource."
 );
-@@doc(MongoInstances.update::parameters.properties, "Clouds patch payload.");
+@@doc(MongoInstances.update::parameters.properties,
+  "The request body for updating a MongoInstance resource."
+);

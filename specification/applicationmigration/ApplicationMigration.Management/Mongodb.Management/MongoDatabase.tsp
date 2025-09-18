@@ -20,7 +20,7 @@ model MongoDatabase
   ...ResourceNameParameter<
     Resource = MongoDatabase,
     KeyName = "databaseName",
-    SegmentName = "MongoDatabases",
+    SegmentName = "mongoDatabases",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }
@@ -65,6 +65,8 @@ interface MongoDatabases {
 @@doc(MongoDatabase.name, "The name of Database");
 @@doc(MongoDatabase.properties, "Resource properties.");
 @@doc(MongoDatabases.createOrUpdate::parameters.resource,
-  "The machines to add to the assessment"
+  "The request body for creating or updating a MongoDatabase resource."
 );
-@@doc(MongoDatabases.update::parameters.properties, "Clouds patch payload.");
+@@doc(MongoDatabases.update::parameters.properties,
+  "The request body for updating a MongoDatabase resource."
+);

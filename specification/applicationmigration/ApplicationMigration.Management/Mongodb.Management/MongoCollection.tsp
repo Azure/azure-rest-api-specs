@@ -20,7 +20,7 @@ model MongoCollection
   ...ResourceNameParameter<
     Resource = MongoCollection,
     KeyName = "collectionName",
-    SegmentName = "MongoCollections",
+    SegmentName = "mongoCollections",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }
@@ -68,6 +68,8 @@ interface MongoCollections {
 @@doc(MongoCollection.name, "The name of Collection");
 @@doc(MongoCollection.properties, "Resource properties.");
 @@doc(MongoCollections.createOrUpdate::parameters.resource,
-  "The machines to add to the assessment"
+  "The request body for creating or updating a MongoCollection resource."
 );
-@@doc(MongoCollections.update::parameters.properties, "Clouds patch payload.");
+@@doc(MongoCollections.update::parameters.properties,
+  "The request body for updating a MongoCollection resource."
+);
