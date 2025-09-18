@@ -29,6 +29,16 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.ProgrammableConnectivity"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/programmableconnectivity"
+    emitter-output-dir: "{output-dir}/{service-dir}/armprogrammableconnectivity"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armprogrammableconnectivity"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
