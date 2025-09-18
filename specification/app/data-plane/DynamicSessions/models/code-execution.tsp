@@ -1,6 +1,7 @@
 import "./common.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
@@ -17,6 +18,18 @@ model SessionCodeExecutionRequest {
 
   @doc("Code execution timeout in seconds.")
   timeoutInSeconds: int32;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("The maximum length of the output streams. Default value is 4096.")
+  outputStreamsMaxLength?: int32;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("Whether to use empty kernel for this execution. Default is false.")
+  useEmptyKernel?: boolean;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("Whether to formats primitive Python results (bool, int, float, string, None) as JSON strings or null. Default to false.")
+  returnJupyterFormat?: boolean;
 }
 
 @doc("The result of the code execution.")

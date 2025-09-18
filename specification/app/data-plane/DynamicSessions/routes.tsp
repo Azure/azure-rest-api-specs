@@ -45,22 +45,36 @@ interface CodeExecution {
   get is CodeExecutionOperations.ResourceRead<SessionCodeExecutionResource>;
 }
 
-alias SessionResourceFilesTraits = BaseOperationTraits &
-  QueryParametersTrait<{
-    ...SessionIdentifier;
-    ...SessionResourceFilePathQueryParameter;
-  }>;
-alias SessionResourceFilesOperations = Azure.Core.ResourceOperations<SessionResourceFilesTraits>;
+alias SessionResourceFilesQueryParamsTrait = QueryParametersTrait<{
+  ...SessionIdentifier;
+  ...SessionResourceFilePathQueryParameter;
+}>;
+alias SessionResourceFilesListQueryParamsTrait = QueryParametersTrait<{
+  ...SessionIdentifier;
+  ...SessionResourceFilePathQueryParameter;
+  ...SessionResourceFileRecursiveListParameter;
+}>;
+
+alias SessionResourceFilesOperations = Azure.Core.ResourceOperations<BaseOperationTraits>;
 
 interface SessionResourceFiles {
   @doc("List the file resources.")
-  list is SessionResourceFilesOperations.ResourceList<SessionResourceFile>;
+  list is SessionResourceFilesOperations.ResourceList<
+    SessionResourceFile,
+    SessionResourceFilesListQueryParamsTrait
+  >;
 
   @doc("Get the file resource.")
-  get is SessionResourceFilesOperations.ResourceRead<SessionResourceFile>;
+  get is SessionResourceFilesOperations.ResourceRead<
+    SessionResourceFile,
+    SessionResourceFilesQueryParamsTrait
+  >;
 
   @doc("Delete the file.")
-  delete is SessionResourceFilesOperations.ResourceDelete<SessionResourceFile>;
+  delete is SessionResourceFilesOperations.ResourceDelete<
+    SessionResourceFile,
+    SessionResourceFilesQueryParamsTrait
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/byos" "Storage service is not used"
   @doc("Upload a file to a session.")
@@ -78,7 +92,7 @@ interface SessionResourceFiles {
       };
     },
     SessionResourceFile,
-    SessionResourceFilesTraits
+    SessionResourceFilesQueryParamsTrait
   >;
 
   // Azure standard operations require resource identifier (here session id) to be passed in the request path.
@@ -94,7 +108,8 @@ interface SessionResourceFiles {
     {},
     {
       @body _: bytes;
-    }
+    },
+    SessionResourceFilesQueryParamsTrait
   >;
 }
 
