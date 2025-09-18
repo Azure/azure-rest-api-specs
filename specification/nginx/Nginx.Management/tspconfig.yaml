@@ -38,8 +38,8 @@ options:
       name: "@azure/arm-nginx"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/nginx"
-    package-dir: "armnginx"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnginx"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnginx"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
