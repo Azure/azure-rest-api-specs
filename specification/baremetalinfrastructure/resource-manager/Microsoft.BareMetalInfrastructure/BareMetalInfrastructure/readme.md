@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-preview-2024-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-08'
 input-file:
-  - Microsoft.BareMetalInfrastructure/preview/2024-08-01-preview/baremetalinfrastructure.json
+  - ./preview/2024-08-01-preview/baremetalinfrastructure.json
 ```
 
 ### Tag: package-preview-2023-11
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-11'
 input-file:
-  - Microsoft.BareMetalInfrastructure/preview/2023-11-01-preview/baremetalinfrastructure.json
+  - ./preview/2023-11-01-preview/baremetalinfrastructure.json
 ```
 
 ### Tag: package-preview-2023-08
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-preview-2023-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
-  - Microsoft.BareMetalInfrastructure/preview/2023-08-04-preview/baremetalinfrastructure.json
+  - ./preview/2023-08-04-preview/baremetalinfrastructure.json
 ```
 
 ### Tag: package-2023-04-06
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2023-04-06` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-04-06'
 input-file:
-  - Microsoft.BareMetalInfrastructure/stable/2023-04-06/baremetalinfrastructure.json
+  - ./stable/2023-04-06/baremetalinfrastructure.json
 ```
 
 ### Tag: package-2021-08-09
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2021-08-09` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-08-09'
 input-file:
-  - Microsoft.BareMetalInfrastructure/stable/2021-08-09/baremetalinfrastructure.json
+  - ./stable/2021-08-09/baremetalinfrastructure.json
 ```
 
 ### Tag: package-2020-08-06-preview
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2020-08-06-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-08-06-preview'
 input-file:
-  - Microsoft.BareMetalInfrastructure/preview/2020-08-06-preview/baremetalinfrastructure.json
+  - ./preview/2020-08-06-preview/baremetalinfrastructure.json
 ```
 
 ---
