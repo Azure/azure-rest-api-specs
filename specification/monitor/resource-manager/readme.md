@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2025-05-03-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-05-03-preview'
 input-file:
-  - Microsoft.Monitor/preview/2025-05-03-preview.json
+  - Microsoft.Monitor/Accounts/preview/2025-05-03-preview/azuremonitorworkspace.json
 ```
 
 
