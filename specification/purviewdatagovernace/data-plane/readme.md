@@ -46,14 +46,14 @@ To see additional help and options, run:
 
 These are the global settings for the Azure Purview Catalog API.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-2025-09-01-preview
 ```
 ### Tag: package-2025-09-01-preview
 These settings apply only when `--tag=package-2025-09-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-09-01-preview'
+```yaml $(tag) == 'package-2025-09-01-preview'
 input-file:
   - Azure.Analaytics.Purview.DataQuality/preview/2025-09-01-preview/purviewDataQuality.json
 ```
@@ -67,7 +67,7 @@ input-file:
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Azure.Analaytics.Purview.DataQuality
