@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-11'
 input-file:
-- Microsoft.DataLakeStore/stable/2016-11-01/filesystem.json
+- stable/2016-11-01/filesystem.json
 ```
 
 ### Tag: package-2015-10-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-10-preview'
 input-file:
-- Microsoft.DataLakeStore/preview/2015-10-01-preview/filesystem.json
+- preview/2015-10-01-preview/filesystem.json
 ```
 
 ---
@@ -81,8 +81,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DataLakeStore/stable/2016-11-01/filesystem.json
-  - $(this-folder)/Microsoft.DataLakeStore/preview/2015-10-01-preview/filesystem.json
+  - $(this-folder)/stable/2016-11-01/filesystem.json
+  - $(this-folder)/preview/2015-10-01-preview/filesystem.json
 
 ```
 
