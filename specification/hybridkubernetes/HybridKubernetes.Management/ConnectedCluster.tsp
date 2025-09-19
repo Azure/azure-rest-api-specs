@@ -63,6 +63,7 @@ interface ConnectedClusters {
   /**
    * API to update certain properties of the connected cluster resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Keep explicit operationId for back-compat"
   @patch(#{ implicitOptionality: false })
   @added(Versions.v2025_12_01_preview)
   @sharedRoute
