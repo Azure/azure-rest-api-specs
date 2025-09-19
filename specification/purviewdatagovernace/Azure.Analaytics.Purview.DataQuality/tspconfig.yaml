@@ -1,3 +1,8 @@
+parameters:
+  "service-dir":
+    default: "sdk/purview"
+  "dependencies":
+    default: ""'
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -10,15 +15,31 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Azure.Analaytics.Purview.DataQuality/{version-status}/{version}/purviewDataQuality.json"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-purview-dataquality"
+    namespace: "azure.purview.dataquality"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Analaytics.Purview.DataQuality
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "purview-dataquality-rest"
+    package-details:
+      name: "@azure-rest/purview-dataquality"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-analyatics-purview-dataquality"
+    namespace: com.azure.analyatics.purview.dataquality
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azpurviewdataquality"
+    service-dir: "sdk/purview"
+    emitter-output-dir: "{output-dir}/{service-dir}/azpurviewdataquality"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
