@@ -1,4 +1,7 @@
-import "../versions.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
+
+import "./versions.tsp";
 import "./dsmsallowlist.tsp";
 import "./dsmsrootfolder.tsp";
 import "./dstsapplication.tsp";
@@ -6,8 +9,8 @@ import "./dstsserviceaccount.tsp";
 import "./dstsserviceaccountgroup.tsp";
 import "./dstsserviceclientidentity.tsp";
 
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
