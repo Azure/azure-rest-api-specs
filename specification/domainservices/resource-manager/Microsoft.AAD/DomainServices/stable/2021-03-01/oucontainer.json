@@ -3,7 +3,7 @@
   "info": {
     "title": "Domain Services Resource Provider",
     "description": "The AAD Domain Services API.",
-    "version": "2025-06-01"
+    "version": "2021-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -43,7 +43,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./domainservices.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           },
           "200": {
@@ -89,7 +89,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./domainservices.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           },
           "200": {
@@ -138,7 +138,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./domainservices.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           },
           "200": {
@@ -191,7 +191,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./domainservices.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           },
           "200": {
@@ -248,7 +248,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./domainservices.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           },
           "200": {
@@ -305,7 +305,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./domainservices.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           },
           "200": {
@@ -333,7 +333,6 @@
   "definitions": {
     "Resource": {
       "description": "The Resource model definition.",
-      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -372,13 +371,12 @@
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
     },
     "OuContainerListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -397,7 +395,6 @@
     },
     "OuContainer": {
       "description": "Resource for OuContainer.",
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -413,7 +410,6 @@
     },
     "OuContainerProperties": {
       "description": "Properties of the OuContainer.",
-      "type": "object",
       "properties": {
         "tenantId": {
           "readOnly": true,
@@ -462,7 +458,6 @@
     },
     "ContainerAccount": {
       "description": "Container Account Description",
-      "type": "object",
       "properties": {
         "accountName": {
           "type": "string",
@@ -535,6 +530,41 @@
           "type": "string"
         }
       }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "An error response from the Domain Services.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Domain Services."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Domain Services."
     }
   },
   "parameters": {
