@@ -1234,7 +1234,6 @@ model PrivateEndpointConnectionItem {
   /**
    * Private endpoint connection properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -1560,7 +1559,6 @@ model PrivateLinkResource
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PrivateLinkResourceProperties;
 
   /**
@@ -1709,6 +1707,12 @@ model MhsmNetworkRuleSet {
   ipRules?: MhsmipRule[];
 
   /**
+   * The list of service tags.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["tag"])
+  serviceTags?: MhsmServiceTagRule[];
+
+  /**
    * The list of virtual network rules.
    */
   virtualNetworkRules?: MhsmVirtualNetworkRule[];
@@ -1722,6 +1726,16 @@ model MhsmipRule {
    * An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78).
    */
   value: string;
+}
+
+/**
+ * A rule governing the accessibility of a managed hsm pool from a specific service tags.
+ */
+model MhsmServiceTagRule {
+  /**
+   * Name of the service tag.
+   */
+  tag: string;
 }
 
 /**
@@ -1772,7 +1786,6 @@ model MhsmPrivateEndpointConnectionItem {
   /**
    * Private endpoint connection properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: MhsmPrivateEndpointConnectionProperties;
 }
 
@@ -2011,7 +2024,6 @@ model MhsmPrivateLinkResource extends ManagedHsmResource {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: MhsmPrivateLinkResourceProperties;
 }
 
@@ -2405,7 +2417,7 @@ model Operation {
   display?: OperationDisplay;
 
   /**
-   * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+   * The origin of operations.
    */
   origin?: string;
 
@@ -2415,7 +2427,7 @@ model Operation {
   properties?: OperationProperties;
 
   /**
-   * Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane operations.
+   * Property to specify whether the action is a data action.
    */
   isDataAction?: boolean;
 }

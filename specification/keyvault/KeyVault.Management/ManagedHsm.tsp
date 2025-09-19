@@ -120,7 +120,6 @@ interface ManagedHsms {
   /**
    * Gets the private link resources supported for the managed hsm pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
@@ -134,7 +133,6 @@ interface ManagedHsms {
   /**
    * The List operation gets information about the regions associated with the managed HSM Pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("regions")
   @list

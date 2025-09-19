@@ -145,3 +145,4 @@ using Azure.Core;
   "python"
 );
 @@clientName(VaultListResult, "ResourceListResult");
+@@clientName(MhsmServiceTagRule, "MHSMServiceTagRule");

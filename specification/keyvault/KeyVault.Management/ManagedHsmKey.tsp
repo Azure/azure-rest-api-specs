@@ -72,33 +72,11 @@ interface ManagedHsmKeys {
    * Creates the first version of a new key if it does not exist. If it already exists, then the existing key is returned without any write operations being performed. This API does not create subsequent versions, and does not update existing keys.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @put
-  createIfNotExist is Azure.ResourceManager.Legacy.CreateOperation<
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-      ...Azure.ResourceManager.Legacy.Provider;
-
-      /** The name of the Managed HSM Pool within the specified resource group. */
-      @path
-      @segment("managedHSMs")
-      @key
-      @pattern("^[A-Za-z]([A-Za-z0-9]|\\-[A-Za-z0-9])+$")
-      @minLength(3)
-      @maxLength(24)
-      name: string;
-
-      /** The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information. */
-      @path
-      @segment("keys")
-      @key
-      @pattern("^[a-zA-Z0-9-]{1,127}$")
-      keyName: string;
-    },
-    ManagedHsmKeyCreateParameters,
+  createIfNotExist is ManagedHsmKeyOps.CreateOrUpdateSync<
+    ManagedHsmKey,
+    Request = ManagedHsmKeyCreateParameters,
     Response = ArmResourceUpdatedResponse<ManagedHsmKey>,
-    ErrorResponse = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -141,6 +119,7 @@ interface ManagedHsmKeyOperationGroupOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ManagedHsmKeyOperationGroup {
   /**
