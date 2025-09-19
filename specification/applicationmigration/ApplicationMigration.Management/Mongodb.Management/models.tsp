@@ -379,6 +379,11 @@ model MongoInstanceProperties is AzureResourceProperties {
    * The mongo server version.
    */
   version?: string;
+  
+   /**
+   * The mongo server region.
+   */
+  region?: string;
 
   /**
    * The number of databases.
