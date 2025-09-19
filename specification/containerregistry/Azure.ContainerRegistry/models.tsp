@@ -555,6 +555,7 @@ model ImageSignature {
  * A JSON web signature
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
 model JWK {
   /**
    * JSON web key parameter
@@ -611,6 +612,7 @@ model Manifest {
 /**
  * List of repositories
  */
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
 model Repositories {
   /**
    * Repository names

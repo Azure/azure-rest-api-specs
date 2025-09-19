@@ -513,6 +513,7 @@ interface ContainerRegistryBlob {
    * Upload a stream of data without completing the upload.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @route("/{nextBlobUuidLink}")
   @patch(#{ implicitOptionality: true })
   uploadChunk is Azure.Core.Foundations.Operation<
@@ -539,6 +540,7 @@ interface ContainerRegistryBlob {
    * content.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @route("/{nextBlobUuidLink}")
   @put
   completeUpload is Azure.Core.Foundations.Operation<
@@ -630,6 +632,7 @@ interface ContainerRegistryBlob {
       /**
        * Format : bytes=<start>-<end>,  HTTP Range header specifying blob chunk.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "backward compatibility"
       @header
       Range: string;
     },
@@ -660,6 +663,7 @@ interface ContainerRegistryBlob {
       /**
        * Format : bytes=<start>-<end>,  HTTP Range header specifying blob chunk.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "backward compatibility"
       @header
       Range: string;
     },
