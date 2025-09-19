@@ -32,3 +32,5 @@ using Microsoft.DataProtection;
   "getDefaultBackupSecurityPinRequestsObject",
   "java"
 );
+
+@@clientName(Microsoft.DataProtection, "DataProtectionMgmtClient", "python");
