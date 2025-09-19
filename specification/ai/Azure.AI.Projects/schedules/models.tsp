@@ -71,7 +71,7 @@ model CronTrigger extends Trigger {
   startTime?: string;
 
   @doc("End time for the cron schedule in ISO 8601 format.")
-  endTime: string;
+  endTime?: string;
 }
 
 @doc("Recurrence type.")
@@ -190,7 +190,7 @@ model RecurrenceTrigger extends Trigger {
 model OneTimeTrigger extends Trigger {
   type: TriggerType.OneTime;
 
-  @doc("Date and time for the one-time trigger.")
+  @doc("Date and time for the one-time trigger in ISO 8601 format.")
   triggerAt: string;
 
   @doc("Time zone for the one-time trigger.")
@@ -242,7 +242,7 @@ model Schedule {
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported"
   @doc("Enabled status of the schedule.")
-  enabled: true | false;
+  enabled: boolean;
 
   @doc("Provisioning status of the schedule.")
   @visibility(Lifecycle.Read)
@@ -281,7 +281,7 @@ model ScheduleRun {
   #suppress "@azure-tools/typespec-autorest/union-unsupported"
   @doc("Trigger success status of the schedule run.")
   @visibility(Lifecycle.Read)
-  success: true | false;
+  success: boolean;
 
   @doc("Trigger time of the schedule run.")
   triggerTime?: string;
