@@ -179,6 +179,8 @@ union PostContentSchemaGrantType {
  * Grant type is expected to be refresh_token
  */
 union TokenGrantType {
+  string,
+
   /** Grant type for refreshing the token */
   refresh_token: "refresh_token",
 
@@ -190,6 +192,8 @@ union TokenGrantType {
  * Sort options for ordering tags in a collection.
  */
 union ArtifactTagOrderBy {
+  string,
+
   /**
    * Do not provide an orderby value in the request.
    */
@@ -212,6 +216,8 @@ union ArtifactTagOrderBy {
  * Sort options for ordering manifests in a collection.
  */
 union ArtifactManifestOrderBy {
+  string,
+
   /**
    * Do not provide an orderby value in the request.
    */
