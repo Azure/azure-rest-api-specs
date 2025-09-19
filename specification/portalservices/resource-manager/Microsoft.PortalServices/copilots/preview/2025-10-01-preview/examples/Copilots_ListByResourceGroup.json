@@ -1,6 +1,6 @@
 {
-  "title": "List copilot plans by resource group",
-  "operationId": "CopilotPlans_ListByResourceGroup",
+  "title": "List copilots by resource group",
+  "operationId": "Copilots_ListByResourceGroup",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg-copilot",
@@ -11,16 +11,12 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilotPlans/my-copilot-plan",
-            "name": "my-copilot-plan",
-            "type": "Microsoft.PortalServices/copilotPlans",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilots/my-copilot",
+            "name": "my-copilot",
+            "type": "Microsoft.PortalServices/copilots",
             "location": "East US",
             "properties": {
-              "budgetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.Consumption/budgets/copilot-budget-001",
-              "blockedAgents": [
-                "agent-malicious",
-                "agent-unauthorized"
-              ],
+              "spendingLimit": 1000,
               "provisioningState": "Succeeded"
             },
             "systemData": {
@@ -33,15 +29,12 @@
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilotPlans/dev-copilot-plan",
-            "name": "dev-copilot-plan",
-            "type": "Microsoft.PortalServices/copilotPlans",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilots/dev-copilot",
+            "name": "dev-copilot",
+            "type": "Microsoft.PortalServices/copilots",
             "location": "West US 2",
             "properties": {
-              "blockedAgents": [
-                "agent-premium-only",
-                "agent-paid-tier-only"
-              ],
+              "spendingLimit": 500,
               "provisioningState": "Succeeded"
             },
             "systemData": {

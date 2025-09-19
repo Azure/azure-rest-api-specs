@@ -1,25 +1,21 @@
 {
-  "title": "Get a copilot plan",
-  "operationId": "CopilotPlans_Get",
+  "title": "Get a copilot",
+  "operationId": "Copilots_Get",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg-copilot",
-    "copilotPlanName": "my-copilot-plan",
+    "copilotName": "my-copilot",
     "api-version": "2025-10-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilotPlans/my-copilot-plan",
-        "name": "my-copilot-plan",
-        "type": "Microsoft.PortalServices/copilotPlans",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilots/my-copilot",
+        "name": "my-copilot",
+        "type": "Microsoft.PortalServices/copilots",
         "location": "East US",
         "properties": {
-          "budgetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.Consumption/budgets/copilot-budget-001",
-          "blockedAgents": [
-            "agent-premium-only",
-            "agent-enterprise-only"
-          ],
+          "spendingLimit": 1000,
           "provisioningState": "Succeeded"
         },
         "systemData": {

@@ -9,17 +9,10 @@ namespace Microsoft.PortalServices;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The Copilot Plan properties.")
-model CopilotPlanProperties {
-  @doc("Azure Cost Management budget resource ID for spending limits integration. This enables budget enforcement and cost monitoring for the copilot plan.")
-  budgetResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Consumption/budgets";
-    }
-  ]>;
-
-  @doc("List of agent IDs that are blocked from being used with this copilot plan. If not specified, no agents are blocked.")
-  blockedAgents?: string[];
+@doc("The Copilot properties.")
+model CopilotProperties {
+  @doc("The maximum number of Azure Agentic Units (AAUs) that can be consumed by this copilot. This serves as a spending limit to prevent unexpected charges.")
+  spendingLimit?: int32;
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
@@ -28,10 +21,10 @@ model CopilotPlanProperties {
 
 // Patch request workaround for Swagger LintDiff.
 // TypeSpec Bug: ArmResourcePatchAsync auto-generates update model that extends TrackedResource
-@doc("The properties of a CopilotPlan that can be updated.")
-model CopilotPlanUpdate {
+@doc("The properties of a Copilot that can be updated.")
+model CopilotUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("The resource-specific properties for this resource.")
-  properties?: CopilotPlanProperties;
+  properties?: CopilotProperties;
 }
