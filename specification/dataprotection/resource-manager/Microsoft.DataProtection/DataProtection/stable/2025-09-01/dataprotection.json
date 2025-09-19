@@ -196,42 +196,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/deletedBackupVaults": {
-      "get": {
-        "operationId": "DeletedBackupVaults_ListBySubscription",
-        "description": "Lists deleted backup vaults by subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DeletedBackupVaultResourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List deleted backup vaults by subscription": {
-            "$ref": "./examples/DeletedBackupVaults_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/checkFeatureSupport": {
       "post": {
         "operationId": "DataProtection_CheckFeatureSupport",
@@ -275,6 +239,40 @@
           "Check Azure Vm Backup Feature Support": {
             "$ref": "./examples/CheckfeatureSupport.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults": {
+      "get": {
+        "operationId": "DeletedBackupVaults_ListByLocation",
+        "description": "Lists deleted backup vaults by location",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeletedBackupVaultResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6454,23 +6452,6 @@
         }
       ]
     },
-    "DeletedBackupVaultResourceList": {
-      "type": "object",
-      "description": "List of deleted backup vault resources",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of resources.",
-          "items": {
-            "$ref": "#/definitions/DeletedBackupVaultResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of resources. Call ListNext() fetches next page of resources."
-        }
-      }
-    },
     "DeletionInfo": {
       "type": "object",
       "description": "Deletion Info",
@@ -7634,6 +7615,27 @@
           "type": "string"
         }
       }
+    },
+    "PagedDeletedBackupVaultResource": {
+      "type": "object",
+      "description": "Paged collection of DeletedBackupVaultResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeletedBackupVaultResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DeletedBackupVaultResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PatchBackupVaultInput": {
       "type": "object",
