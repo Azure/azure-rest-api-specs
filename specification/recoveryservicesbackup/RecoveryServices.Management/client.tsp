@@ -1,8 +1,11 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
+using Azure.ResourceManager;
 
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
@@ -430,3 +433,1150 @@ using Microsoft.RecoveryServices;
   "ResourceGuardProxyOperation",
   "java"
 );
+
+// Custom operations to reorder parameters (resourceGroupName after vaultName) for various operations
+
+// BMSPrepareDataMoveOperationResult operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op bmsPrepareDataMoveOperationResultGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupStorageConfigName: "vaultstorageconfig",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): VaultStorageConfigOperationResultResponse;
+
+@@override(BMSPrepareDataMoveOperationResult.get,
+  bmsPrepareDataMoveOperationResultGet,
+  "java,go,python"
+);
+
+// BackupEngines operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupEnginesGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupEngineName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $filter?: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $skipToken?: string,
+): BackupEngineBaseResource;
+
+@@override(BackupEngines.get, backupEnginesGet, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupEnginesList(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $filter?: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $skipToken?: string,
+): ArmResponse<BackupEngineBaseResourceList>;
+
+@@override(BackupEngines.list, backupEnginesList, "java,go,python");
+
+// BackupJobs operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupJobsList(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $filter?: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $skipToken?: string,
+): ArmResponse<JobResourceList>;
+
+@@override(BackupJobs.list, backupJobsList, "java,go,python");
+
+// BackupPolicies operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupPoliciesList(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $filter?: string,
+): ArmResponse<ProtectionPolicyResourceList>;
+
+@@override(BackupPolicies.list, backupPoliciesList, "java,go,python");
+
+// BackupResourceEncryptionConfigs operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupResourceEncryptionConfigsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupEncryptionConfig: string,
+): BackupResourceEncryptionConfigExtendedResource;
+
+@@override(BackupResourceEncryptionConfigs.get,
+  backupResourceEncryptionConfigsGet,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupResourceEncryptionConfigsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupEncryptionConfig: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: BackupResourceEncryptionConfigResource,
+): ArmResponse<BackupResourceEncryptionConfig>;
+
+@@override(BackupResourceEncryptionConfigs.update,
+  backupResourceEncryptionConfigsUpdate,
+  "java,go,python"
+);
+
+// BackupResourceStorageConfigsNonCRR operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+op backupResourceStorageConfigsNonCRRGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  provider: "Microsoft.ThisWillBeReplaced",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupstorageconfig: string,
+): BackupResourceConfigResource;
+
+@@override(BackupResourceStorageConfigsNonCRR.get,
+  backupResourceStorageConfigsNonCRRGet,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+op backupResourceStorageConfigsNonCRRPatch(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  provider: "Microsoft.ThisWillBeReplaced",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupstorageconfig: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  properties: BackupResourceConfigResource,
+): ArmNoContentResponse;
+
+@@override(BackupResourceStorageConfigsNonCRR.patch,
+  backupResourceStorageConfigsNonCRRPatch,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+op backupResourceStorageConfigsNonCRRUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  provider: "Microsoft.ThisWillBeReplaced",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupstorageconfig: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: BackupResourceConfigResource,
+): ArmResourceUpdatedResponse<BackupResourceConfigResource>;
+
+@@override(BackupResourceStorageConfigsNonCRR.update,
+  backupResourceStorageConfigsNonCRRUpdate,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  provider: "Microsoft.ThisWillBeReplaced",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupstorageconfig: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: PrepareDataMoveRequest,
+): ArmAcceptedLroResponse;
+
+@@override(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
+  backupResourceStorageConfigsNonCRRBmsPrepareDataMove,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  provider: "Microsoft.ThisWillBeReplaced",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupstorageconfig: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: TriggerDataMoveRequest,
+): ArmAcceptedLroResponse;
+
+@@override(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
+  backupResourceStorageConfigsNonCRRBmsTriggerDataMove,
+  "java,go,python"
+);
+
+// BackupResourceVaultConfigs operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupResourceVaultConfigsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupconfig: string,
+): BackupResourceVaultConfigResource;
+
+@@override(BackupResourceVaultConfigs.get,
+  backupResourceVaultConfigsGet,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupResourceVaultConfigsPut(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupconfig: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: BackupResourceVaultConfigResource,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+  `x-ms-authorization-auxiliary`?: string,
+): ArmResourceUpdatedResponse<BackupResourceVaultConfigResource>;
+
+@@override(BackupResourceVaultConfigs.put,
+  backupResourceVaultConfigsPut,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupResourceVaultConfigsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupconfig: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  properties: BackupResourceVaultConfigResource,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+  `x-ms-authorization-auxiliary`?: string,
+): ArmNoContentResponse;
+
+@@override(BackupResourceVaultConfigs.update,
+  backupResourceVaultConfigsUpdate,
+  "java,go,python"
+);
+
+// BackupWorkloadItems operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupWorkloadItemsList(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $filter?: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $skipToken?: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: void,
+): ArmResponse<WorkloadItemResourceList>;
+
+@@override(BackupWorkloadItems.list, backupWorkloadItemsList, "java,go,python");
+
+// Backups operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupsTrigger(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: BackupRequestResource,
+): void;
+
+@@override(Backups.trigger, backupsTrigger, "java,go,python");
+
+// RecoveryPoints operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op recoveryPointsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  recoveryPointId: string,
+): RecoveryPointResource;
+
+@@override(RecoveryPoints.get, recoveryPointsGet, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op recoveryPointsList(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $filter?: string,
+): ArmResponse<RecoveryPointResourceList>;
+
+@@override(RecoveryPoints.list, recoveryPointsList, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op recoveryPointsMoveRecoveryPoint(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  recoveryPointId: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: MoveRPAcrossTiersRequest,
+): ArmAcceptedLroResponse;
+
+@@override(RecoveryPoints.moveRecoveryPoint,
+  recoveryPointsMoveRecoveryPoint,
+  "java,go,python"
+);
+
+// RecoveryPointsRecommendedForMove operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op recoveryPointsRecommendedForMoveList(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: ListRecoveryPointsRecommendedForMoveRequest,
+): ArmResponse<RecoveryPointResourceList>;
+
+@@override(RecoveryPointsRecommendedForMove.list,
+  recoveryPointsRecommendedForMoveList,
+  "java,go,python"
+);
+
+// BackupResourceConfigOperationStatuses operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op backupResourceConfigOperationStatusesGetOperationStatus(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupStorageConfigName: "vaultstorageconfig",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): ArmResponse<OperationStatus>;
+
+@@override(BackupResourceConfigOperationStatuses.getOperationStatus,
+  backupResourceConfigOperationStatusesGetOperationStatus,
+  "java,go,python"
+);
+
+// ExportJobsOperationResults operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op exportJobsOperationResultsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  backupJobs: "backupJobs",
+): OperationResultInfoBaseResource;
+
+@@override(ExportJobsOperationResults.get,
+  exportJobsOperationResultsGet,
+  "java,go,python"
+);
+
+// ItemLevelRecoveryConnections operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op itemLevelRecoveryConnectionsProvision(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  recoveryPointId: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: ILRRequestResource,
+): void;
+
+@@override(ItemLevelRecoveryConnections.provision,
+  itemLevelRecoveryConnectionsProvision,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op itemLevelRecoveryConnectionsRevoke(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  recoveryPointId: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: void,
+): void;
+
+@@override(ItemLevelRecoveryConnections.revoke,
+  itemLevelRecoveryConnectionsRevoke,
+  "java,go,python"
+);
+
+// JobCancellations operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op jobCancellationsTrigger(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  jobName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: void,
+): void;
+
+@@override(JobCancellations.trigger, jobCancellationsTrigger, "java,go,python");
+
+// JobDetails operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op jobDetailsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  jobName: string,
+): JobResource;
+
+@@override(JobDetails.get, jobDetailsGet, "java,go,python");
+
+// JobOperationResults operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op jobOperationResultsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  jobName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): JobResource;
+
+@@override(JobOperationResults.get, jobOperationResultsGet, "java,go,python");
+
+// PrivateEndpointConnectionResources operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op privateEndpointConnectionResourcesGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  privateEndpointConnectionName: string,
+): Microsoft.RecoveryServices.PrivateEndpointConnectionResource;
+
+@@override(PrivateEndpointConnectionResources.get,
+  privateEndpointConnectionResourcesGet,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op privateEndpointConnectionResourcesPut(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  privateEndpointConnectionName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: Microsoft.RecoveryServices.PrivateEndpointConnectionResource,
+): Microsoft.RecoveryServices.PrivateEndpointConnectionResource | ArmAcceptedLroResponse;
+
+@@override(PrivateEndpointConnectionResources.put,
+  privateEndpointConnectionResourcesPut,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op privateEndpointConnectionResourcesDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  privateEndpointConnectionName: string,
+): ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse;
+
+@@override(PrivateEndpointConnectionResources.delete,
+  privateEndpointConnectionResourcesDelete,
+  "java,go,python"
+);
+
+// PrivateEndpointOperationStatuses operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op privateEndpointOperationStatusesGetOperationStatus(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  privateEndpointConnectionName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): ArmResponse<OperationStatus>;
+
+@@override(PrivateEndpointOperationStatuses.getOperationStatus,
+  privateEndpointOperationStatusesGetOperationStatus,
+  "java,go,python"
+);
+
+// ProtectedItemOperationResults operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectedItemOperationResultsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): ProtectedItemResource;
+
+@@override(ProtectedItemOperationResults.get,
+  protectedItemOperationResultsGet,
+  "java,go,python"
+);
+
+// ProtectedItemOperationStatuses operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectedItemOperationStatusesGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): ArmResponse<OperationStatus>;
+
+@@override(ProtectedItemOperationStatuses.get,
+  protectedItemOperationStatusesGet,
+  "java,go,python"
+);
+
+// ProtectedItems operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectedItemsCreateOrUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: ProtectedItemResource,
+): ProtectedItemResource;
+
+@@override(ProtectedItems.createOrUpdate,
+  protectedItemsCreateOrUpdate,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectedItemsDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+): ArmDeletedResponse | ArmDeletedNoContentResponse;
+
+@@override(ProtectedItems.delete, protectedItemsDelete, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectedItemsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $filter?: string,
+): ProtectedItemResource;
+
+@@override(ProtectedItems.get, protectedItemsGet, "java,go,python");
+
+// ProtectionContainerOperationResults operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionContainerOperationResultsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): ProtectionContainerResource;
+
+@@override(ProtectionContainerOperationResults.get,
+  protectionContainerOperationResultsGet,
+  "java,go,python"
+);
+
+// ProtectionContainers operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionContainersRegister(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: ProtectionContainerResource,
+): ProtectionContainerResource;
+
+@@override(ProtectionContainers.register,
+  protectionContainersRegister,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionContainersGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+): ProtectionContainerResource;
+
+@@override(ProtectionContainers.get, protectionContainersGet, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionContainersInquire(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  $filter?: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: void,
+): void;
+
+@@override(ProtectionContainers.inquire,
+  protectionContainersInquire,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionContainersUnregister(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+): void;
+
+@@override(ProtectionContainers.unregister,
+  protectionContainersUnregister,
+  "java,go,python"
+);
+
+// ProtectionIntentResources operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionIntentResourcesCreateOrUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  intentObjectName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: ProtectionIntentResource,
+): ProtectionIntentResource;
+
+@@override(ProtectionIntentResources.createOrUpdate,
+  protectionIntentResourcesCreateOrUpdate,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionIntentResourcesDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  intentObjectName: string,
+): ArmDeletedNoContentResponse;
+
+@@override(ProtectionIntentResources.delete,
+  protectionIntentResourcesDelete,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionIntentResourcesGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  intentObjectName: string,
+): ProtectionIntentResource;
+
+@@override(ProtectionIntentResources.get,
+  protectionIntentResourcesGet,
+  "java,go,python"
+);
+
+// ProtectionPolicies operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionPoliciesGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  policyName: string,
+): ProtectionPolicyResource;
+
+@@override(ProtectionPolicies.get, protectionPoliciesGet, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionPoliciesCreateOrUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  policyName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: ProtectionPolicyResource,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+  `x-ms-authorization-auxiliary`?: string,
+): ArmResourceUpdatedResponse<ProtectionPolicyResource>;
+
+@@override(ProtectionPolicies.createOrUpdate,
+  protectionPoliciesCreateOrUpdate,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionPoliciesDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  policyName: string,
+): ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse;
+
+@@override(ProtectionPolicies.delete,
+  protectionPoliciesDelete,
+  "java,go,python"
+);
+
+// ProtectionPolicyOperationResults operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionPolicyOperationResultsGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  policyName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): ProtectionPolicyResource;
+
+@@override(ProtectionPolicyOperationResults.get,
+  protectionPolicyOperationResultsGet,
+  "java,go,python"
+);
+
+// ResourceGuardProxies operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op resourceGuardProxiesGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+): ArmResponse<ResourceGuardProxyBaseResourceList>;
+
+@@override(ResourceGuardProxies.get, resourceGuardProxiesGet, "java,go,python");
+
+// ResourceGuardProxy operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op resourceGuardProxyDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resourceGuardProxyName: string,
+): ArmDeletedNoContentResponse;
+
+@@override(ResourceGuardProxy.delete,
+  resourceGuardProxyDelete,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op resourceGuardProxyGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resourceGuardProxyName: string,
+): ResourceGuardProxyBaseResource;
+
+@@override(ResourceGuardProxy.get, resourceGuardProxyGet, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op resourceGuardProxyPut(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resourceGuardProxyName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resource: ResourceGuardProxyBaseResource,
+): ResourceGuardProxyBaseResource;
+
+@@override(ResourceGuardProxy.put, resourceGuardProxyPut, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op resourceGuardProxyUnlockDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resourceGuardProxyName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: UnlockDeleteRequest,
+): UnlockDeleteResponse;
+
+@@override(ResourceGuardProxy.unlockDelete,
+  resourceGuardProxyUnlockDelete,
+  "java,go,python"
+);
+
+// Restores operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op restoresTrigger(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  fabricName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  containerName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  protectedItemName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  recoveryPointId: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  body: RestoreRequestResource,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+  `x-ms-authorization-auxiliary`?: string,
+): ArmAcceptedLroResponse;
+
+@@override(Restores.trigger, restoresTrigger, "java,go,python");
