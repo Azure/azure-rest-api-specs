@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import { join } from "node:path";
-import { afterAll, beforeAll, beforeEach, describe, expect, Mock, test, vi } from "vitest";
+import { beforeEach, describe, expect, Mock, test, vi } from "vitest";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
 import {
@@ -10,6 +10,8 @@ import {
   getOpenapiType,
   getRelatedArmRpcFromDoc,
 } from "../src/markdown-utils.js";
+
+vi.stubGlobal("fetch", vi.fn());
 
 function isWindows(): boolean {
   return process.platform === "win32";
@@ -152,20 +154,9 @@ describe("getOpenapiType", () => {
 });
 
 describe("getRelatedArmRpcFromDoc", () => {
-  let mockFetch: Mock;
-
-  beforeAll(() => {
-    mockFetch = vi.fn();
-    vi.stubGlobal("fetch", mockFetch);
-  });
-
   // Tests are run sequentially to avoid concurrency issues with fetch mocking
   beforeEach(() => {
-    mockFetch.mockReset();
-  });
-
-  afterAll(() => {
-    vi.unstubAllGlobals();
+    (fetch as Mock).mockReset();
   });
 
   async function mockResponseFile(fileName: string): Promise<void> {
@@ -173,7 +164,7 @@ describe("getRelatedArmRpcFromDoc", () => {
       encoding: "utf-8",
     });
 
-    mockFetch.mockResolvedValue({
+    (fetch as Mock).mockResolvedValue({
       ok: true,
       text: () => Promise.resolve(content),
     });
@@ -191,7 +182,7 @@ describe("getRelatedArmRpcFromDoc", () => {
     await getRelatedArmRpcFromDoc("LroPatch202");
     await getRelatedArmRpcFromDoc("LroPatch202");
 
-    expect(mockFetch.mock.calls.length).toBe(1);
+    expect((fetch as Mock).mock.calls.length).toBe(1);
   });
 
   test("returns an empty array when no rules are found", async () => {
@@ -215,7 +206,7 @@ describe("getRelatedArmRpcFromDoc", () => {
   });
 
   test("returns an empty set when the docUrl is not found", async () => {
-    mockFetch.mockResolvedValue({
+    (fetch as Mock).mockResolvedValue({
       ok: false,
       status: 404,
       statusText: "Not Found",
@@ -226,7 +217,7 @@ describe("getRelatedArmRpcFromDoc", () => {
   });
 
   test("does not throw on fetch errors", () => {
-    mockFetch.mockRejectedValue(new Error("404 Not Found"));
+    (fetch as Mock).mockRejectedValue(new Error("404 Not Found"));
 
     expect(async () => await getRelatedArmRpcFromDoc("DoesNotExist")).not.toThrow();
   });
