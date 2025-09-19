@@ -186,6 +186,11 @@ namespace Azure.AI.Agents {
         @added(Versions.v2025_05_15_preview)
         toolApprovals?: ToolApproval[];
 
+        @doc("A list of OAuth consents allowing connection to proceed.")
+        @encodedName("application/json", "oauth_consents")
+        @added(Versions.v2025_05_15_preview)
+        oauthConsents?: OAuthConsent[];
+
         #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability"
         @doc("If true, returns a stream of events that happen during the Run as SSE, terminating at `[DONE]`.")
         stream?: boolean | null;

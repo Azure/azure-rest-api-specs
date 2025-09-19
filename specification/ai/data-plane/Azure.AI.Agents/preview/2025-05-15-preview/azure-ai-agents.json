@@ -1782,6 +1782,14 @@
                   },
                   "x-ms-client-name": "toolApprovals"
                 },
+                "oauth_consents": {
+                  "type": "array",
+                  "description": "A list of OAuth consents allowing connection to proceed.",
+                  "items": {
+                    "$ref": "#/definitions/OAuthConsent"
+                  },
+                  "x-ms-client-name": "oauthConsents"
+                },
                 "stream": {
                   "type": "boolean",
                   "description": "If true, returns a stream of events that happen during the Run as SSE, terminating at `[DONE]`.",
@@ -3617,6 +3625,36 @@
       ],
       "x-ms-discriminator-value": "azure_function"
     },
+    "BaseRunStepDetailsActivity": {
+      "type": "object",
+      "description": "Represents the list of activities, associated with the given step.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The activity type, which is always 'mcp_list_tools'.",
+          "enum": [
+            "mcp_list_tools"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The activity ID."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "Server label.",
+          "x-ms-client-name": "serverLabel"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "server_label"
+      ]
+    },
     "BingCustomSearchConfiguration": {
       "type": "object",
       "description": "A bing custom search configuration.",
@@ -4831,6 +4869,40 @@
       }
     },
     "MCPRequiredApproval": {},
+    "MCPServerAuthentication": {
+      "type": "object",
+      "description": "The server authentication details for MCP tool definition",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of authentication"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "MCPServerConnectionAuthentication": {
+      "type": "object",
+      "description": "The MCP server authentication details using a connection",
+      "properties": {
+        "connection_name": {
+          "type": "string",
+          "description": "Name of the connection",
+          "x-ms-client-name": "connectionName"
+        }
+      },
+      "required": [
+        "connection_name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MCPServerAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
+    },
     "MCPToolDefinition": {
       "type": "object",
       "description": "The input definition information for a MCP tool which defines a MCP server endpoint",
@@ -4852,6 +4924,11 @@
             "type": "string"
           },
           "x-ms-client-name": "allowedTools"
+        },
+        "server_authentication": {
+          "$ref": "#/definitions/MCPServerAuthentication",
+          "description": "Server authentication information",
+          "x-ms-client-name": "serverAuthentication"
         }
       },
       "required": [
@@ -5818,6 +5895,83 @@
         }
       ],
       "x-ms-discriminator-value": "fabric_dataagent"
+    },
+    "OAuthConsent": {
+      "type": "object",
+      "description": "The data provided during an outputs submission to resolve pending OAuth consent actions and allow the model to continue.",
+      "properties": {
+        "activity_id": {
+          "type": "string",
+          "description": "The ID of the activity being resolved, as provided in the activities of a required action from a run.",
+          "x-ms-client-name": "activityId"
+        },
+        "consented": {
+          "type": "boolean",
+          "description": "The consented boolean value to be submitted."
+        }
+      },
+      "required": [
+        "activity_id",
+        "consented"
+      ]
+    },
+    "OAuthConsentAction": {
+      "type": "object",
+      "description": "The details for required tool call approval that must be submitted for an agent thread run to continue.",
+      "properties": {
+        "activities": {
+          "type": "array",
+          "description": "The activities needed to complete OAuth consent.",
+          "items": {
+            "$ref": "#/definitions/OAuthConsentActivity"
+          }
+        }
+      },
+      "required": [
+        "activities"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequiredAction"
+        }
+      ],
+      "x-ms-discriminator-value": "oauth_consent"
+    },
+    "OAuthConsentActivity": {
+      "type": "object",
+      "description": "Represents the list of activities, associated with the given step.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The activity type, which is always 'mcp_list_tools'.",
+          "enum": [
+            "mcp_list_tools"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The activity ID."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "Server label.",
+          "x-ms-client-name": "serverLabel"
+        },
+        "consent_link": {
+          "type": "string",
+          "description": "The consent link to complete authentication.",
+          "x-ms-client-name": "consentLink"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "server_label",
+        "consent_link"
+      ]
     },
     "OpenApiAnonymousAuthDetails": {
       "type": "object",
