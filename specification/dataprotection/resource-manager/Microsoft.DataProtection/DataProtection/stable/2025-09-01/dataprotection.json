@@ -52,9 +52,6 @@
       "name": "BackupVaultOperationResults"
     },
     {
-      "name": "DeletedBackupVaults"
-    },
-    {
       "name": "BaseBackupPolicyResources"
     },
     {
@@ -199,12 +196,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/deletedBackupVaults/subscriptions/{subscriptionId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/deletedBackupVaults": {
       "get": {
         "operationId": "DeletedBackupVaults_ListBySubscription",
-        "tags": [
-          "DeletedBackupVaults"
-        ],
         "description": "Lists deleted backup vaults by subscription",
         "parameters": [
           {
@@ -281,12 +275,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}/subscriptions/{subscriptionId}/locations/{location}/{deletedVaultName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}": {
       "get": {
         "operationId": "DeletedBackupVaults_Get",
-        "tags": [
-          "DeletedBackupVaults"
-        ],
         "description": "Gets a deleted backup vault",
         "parameters": [
           {
@@ -327,12 +318,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}/undelete/subscriptions/{subscriptionId}/locations/{location}/{deletedVaultName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}/undelete": {
       "post": {
         "operationId": "DeletedBackupVaults_Undelete",
-        "tags": [
-          "DeletedBackupVaults"
-        ],
         "description": "Undeletes a soft deleted backup vault",
         "parameters": [
           {
@@ -360,8 +348,12 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Location",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -380,7 +372,11 @@
           "Undelete a soft deleted backup vault": {
             "$ref": "./examples/DeletedBackupVaults_Undelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationResults/{operationId}": {
@@ -480,52 +476,6 @@
         "x-ms-examples": {
           "Get OperationStatus": {
             "$ref": "./examples/GetOperationStatus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationStatus/{operationId}/subscriptions/{subscriptionId}/locations/{location}/{operationId}": {
-      "get": {
-        "operationId": "DeletedBackupVaults_GetOperationStatus",
-        "tags": [
-          "DeletedBackupVaults"
-        ],
-        "description": "Gets operation status for undelete operation",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OperationResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get operation status for undelete operation": {
-            "$ref": "./examples/DeletedBackupVaults_GetOperationStatus.json"
           }
         }
       }
@@ -6397,8 +6347,72 @@
     },
     "DeletedBackupVault": {
       "type": "object",
-      "description": "Deleted Backup Vault - extends BackupVault with additional deletion metadata",
+      "description": "Deleted Backup Vault - uses composition with BackupVault and additional deletion metadata",
       "properties": {
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettings",
+          "description": "Monitoring Settings"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the BackupVault resource",
+          "readOnly": true
+        },
+        "resourceMoveState": {
+          "$ref": "#/definitions/ResourceMoveState",
+          "description": "Resource move state for backup vault",
+          "readOnly": true
+        },
+        "resourceMoveDetails": {
+          "$ref": "#/definitions/ResourceMoveDetails",
+          "description": "Resource move details for backup vault",
+          "readOnly": true
+        },
+        "securitySettings": {
+          "$ref": "#/definitions/SecuritySettings",
+          "description": "Security Settings"
+        },
+        "storageSettings": {
+          "type": "array",
+          "description": "Storage Settings",
+          "items": {
+            "$ref": "#/definitions/StorageSetting"
+          },
+          "x-ms-identifiers": []
+        },
+        "isVaultProtectedByResourceGuard": {
+          "type": "boolean",
+          "description": "Is vault protected by resource guard",
+          "readOnly": true
+        },
+        "featureSettings": {
+          "$ref": "#/definitions/FeatureSettings",
+          "description": "Feature Settings"
+        },
+        "secureScore": {
+          "$ref": "#/definitions/SecureScoreLevel",
+          "description": "Secure Score of Backup Vault",
+          "readOnly": true
+        },
+        "bcdrSecurityLevel": {
+          "$ref": "#/definitions/BCDRSecurityLevel",
+          "description": "Security Level of Backup Vault",
+          "readOnly": true
+        },
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed",
+          "items": {
+            "type": "string"
+          }
+        },
+        "replicatedRegions": {
+          "type": "array",
+          "description": "List of replicated regions for Backup Vault",
+          "items": {
+            "type": "string"
+          }
+        },
         "originalBackupVaultId": {
           "type": "string",
           "description": "Resource Id of the original backup vault",
@@ -6416,14 +6430,10 @@
         }
       },
       "required": [
+        "storageSettings",
         "originalBackupVaultId",
         "originalBackupVaultName",
         "resourceDeletionInfo"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupVault"
-        }
       ]
     },
     "DeletedBackupVaultResource": {

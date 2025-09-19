@@ -259,7 +259,6 @@ interface BackupVaultOperationResults {
 /**
  * Deleted backup vault operations (available from version 2025-09-01)
  */
-@armResourceOperations
 @added(Versions.v2025_09_01)
 interface DeletedBackupVaults {
   /**
@@ -302,23 +301,7 @@ interface DeletedBackupVaults {
      * Name of the deleted backup vault
      */
     @path deletedVaultName: string
-  ): ArmResponse<BackupVaultResource> | ErrorResponse | ArmAcceptedResponse;
-
-  /**
-   * Gets operation status for undelete operation
-   */
-  @get
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationStatus/{operationId}")
-  getOperationStatus(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationParameter,
-    
-    /**
-     * Operation ID
-     */
-    @path operationId: string
-  ): ArmResponse<OperationResource> | ErrorResponse;
+  ): ArmResponse<BackupVaultResource> | ErrorResponse | ArmAcceptedLroResponse<"Location">;
 }
 
 @@doc(BackupVaultResource.name, "The name of the backup vault.");

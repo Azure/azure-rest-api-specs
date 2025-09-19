@@ -872,7 +872,7 @@ model DppIdentityDetails {
    * Gets or sets the user assigned identities.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
+  userAssignedIdentities?: Record<Azure.ResourceManager.Foundations.UserAssignedIdentity>;
 }
 
 /**
@@ -900,10 +900,11 @@ model ResourceDeletionInfo {
 }
 
 /**
- * Deleted Backup Vault - extends BackupVault with additional deletion metadata
+ * Deleted Backup Vault - uses composition with BackupVault and additional deletion metadata
  */
 @added(Versions.v2025_09_01)
-model DeletedBackupVault extends BackupVault {
+model DeletedBackupVault {
+  ...BackupVault;
   /**
    * Resource Id of the original backup vault
    */
@@ -963,7 +964,7 @@ model DppBaseTrackedResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
@@ -997,7 +998,7 @@ model Error {
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  additionalInfo?: ErrorAdditionalInfo[];
+  additionalInfo?: Azure.ResourceManager.Foundations.ErrorAdditionalInfo[];
 
   /**
    * The error code.
@@ -1348,7 +1349,7 @@ model DppResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
@@ -1744,7 +1745,7 @@ model DppProxyResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
