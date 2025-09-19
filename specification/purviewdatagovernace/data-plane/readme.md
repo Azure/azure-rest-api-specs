@@ -1,3 +1,5 @@
+markdown
+
 # Azure Purview Data Quality
 
 > This service has been migrated to TypeSpec. For the latest specification, see the TypeSpec project at `../Azure.Analaytics.Purview.DataQuality/`.
