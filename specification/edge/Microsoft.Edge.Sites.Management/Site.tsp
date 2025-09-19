@@ -6,154 +6,77 @@ import "./models.tsp";
 import "@typespec/versioning";
 import "./main.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
 
 @doc("Site as ARM Resource")
 model Site is ProxyResource<SiteProperties> {
-  #suppress "@typespec/http/metadata-ignored" ""
-  @doc("Name of Site resource")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  @path
-  @key("siteName")
-  @segment("sites")
-  @visibility(Lifecycle.Read)
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Site,
+    KeyName = "siteName",
+    SegmentName = "sites",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+  >;
 }
 
 @armResourceOperations
 interface Sites {
-  get is ArmResourceRead<Site>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
-  update is ArmCustomPatchSync<Site, SiteUpdate>;
-  delete is ArmResourceDeleteSync<Site>;
-  listByResourceGroup is ArmResourceListByParent<Site>;
+  get is Extension.Read<Extension.ResourceGroup, Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
+    Site
+  >;
+  update is Extension.CustomPatchSync<
+    Extension.ResourceGroup,
+    Site,
+    SiteUpdate
+  >;
+  delete is Extension.DeleteSync<Extension.ResourceGroup, Site>;
+  /** List a Site */
+  listByResourceGroup is Extension.ListByTarget<Extension.ResourceGroup, Site>;
 }
 
-alias SubscriptionParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
+@armResourceOperations(#{ omitTags: true })
 interface SitesBySubscription {
-  list is ArmListBySubscription<Site>;
-  get is ArmResourceRead<Site, BaseParameters = SubscriptionParameters>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Site,
-    BaseParameters = SubscriptionParameters
-  >;
-  update is ArmCustomPatchSync<
-    Site,
-    SiteUpdate,
-    BaseParameters = SubscriptionParameters
-  >;
-  delete is ArmResourceDeleteSync<
-    Site,
-    BaseParameters = SubscriptionParameters
-  >;
+  /** List Site resources by subscription ID */
+  list is Extension.ListByTarget<Extension.Subscription, Site>;
+  get is Extension.Read<Extension.Subscription, Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<Extension.Subscription, Site>;
+  update is Extension.CustomPatchSync<Extension.Subscription, Site, SiteUpdate>;
+  delete is Extension.DeleteSync<Extension.Subscription, Site>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of Tenant"
+/** A service group */
+@tenantResource
+model ServiceGroup
+  is Extension.ExternalResource<
+    "Microsoft.Management",
+    "serviceGroups",
+    "servicegroupName"
+  >;
+
+@armResourceOperations(#{ omitTags: true })
 interface SitesByServiceGroup {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operation for tenant scope"
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
   @doc("list Site at SG scope")
   @added(Versions.v2025_03_01_preview)
   @list
-  listByServiceGroup(
-    ...ApiVersionParameter,
+  listByServiceGroup is Extension.ListByTarget<ServiceGroup, Site>;
 
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
-    servicegroupName: string,
-  ): ArmResponse<ResourceListResult<Site>> | ErrorResponse;
-
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @doc("Get Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  get(
-    ...ApiVersionParameter,
+  get is Extension.Read<ServiceGroup, Site>;
 
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
-    servicegroupName: string,
-
-    @path
-    @doc("The name of the site")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    siteName: string,
-  ): ArmResponse<Site> | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PUT call"
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  @put
   @doc("create or update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  createOrUpdate(
-    ...ApiVersionParameter,
+  createOrUpdate is Extension.CreateOrUpdateAsync<ServiceGroup, Site>;
 
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
-    servicegroupName: string,
-
-    @path
-    @doc("The name of the site")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    siteName: string,
-
-    @body
-    @doc("The properties of the site")
-    resource: Site,
-  ): ArmResourceUpdatedResponse<Site> | ArmResourceCreatedResponse<
-    Site,
-    ArmAsyncOperationHeader<FinalResult = Site> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PATCH call"
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  @patch(#{ implicitOptionality: true })
   @doc("update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  update(
-    ...ApiVersionParameter,
+  update is Extension.CustomPatchSync<ServiceGroup, Site, SiteUpdate>;
 
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
-    servicegroupName: string,
-
-    @path
-    @doc("The name of the site")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    siteName: string,
-
-    @body
-    @doc("The properties of the site")
-    properties: SiteUpdate,
-  ): ArmResponse<Site> | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom DELETE call"
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  @delete
   @doc("delete Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  delete(
-    ...ApiVersionParameter,
-
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
-    servicegroupName: string,
-
-    @path
-    @doc("The name of the site")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    siteName: string,
-  ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
+  delete is Extension.DeleteSync<ServiceGroup, Site>;
 }
