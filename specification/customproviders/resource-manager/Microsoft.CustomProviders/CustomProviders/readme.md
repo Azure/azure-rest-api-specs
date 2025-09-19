@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2018-09-01-preview'
 input-file:
-  - Microsoft.CustomProviders/preview/2018-09-01-preview/customproviders.json
+  - preview/2018-09-01-preview/customproviders.json
 ```
 
 ---
