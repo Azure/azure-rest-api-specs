@@ -2090,27 +2090,24 @@ model FileShareProperties {
   /**
    * Returns the next allowed provisioned storage size downgrade time for the share. This property is only for file shares created under Files Provisioned v1 SSD and Files Provisioned v2 account type
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @encode("date-time-rfc1123")
+  @encode(DateTimeKnownEncoding.rfc7231)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextAllowedQuotaDowngradeTime?: utcDateTime;
 
   /**
    * Returns the next allowed provisioned IOPS downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @encode("date-time-rfc1123")
+  @encode(DateTimeKnownEncoding.rfc7231)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
   /**
    * Returns the next allowed provisioned bandwidth downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @encode("date-time-rfc1123")
+  @encode(DateTimeKnownEncoding.rfc7231)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
