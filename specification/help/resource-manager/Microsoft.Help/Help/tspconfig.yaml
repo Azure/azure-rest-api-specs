@@ -20,7 +20,7 @@ options:
     namespace: "Azure.ResourceManager.SelfHelp"
   "@azure-tools/typespec-python":
     service-dir: "sdk/selfhelp"
-    package-dir: "azure-mgmt-selfhelp"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-selfhelp"
     namespace: "azure.mgmt.selfhelp"
     generate-test: true
     generate-sample: true
@@ -32,7 +32,7 @@ options:
     service-name: "Self Help" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-selfhelp"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-selfhelp"
     "service-dir": "sdk/selfhelp"
     is-modular-library: true
     flavor: "azure"

@@ -13,12 +13,12 @@ options:
     use-read-only-status-schema: true # https://azure.github.io/typespec-azure/docs/troubleshoot/status-read-only-error/
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Resources.DeploymentStacks"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Resources.DeploymentStacks"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-resources-deploymentstacks"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resources-deploymentstacks"
     namespace: "azure.mgmt.resources.deploymentstacks"
     generate-test: true
     generate-sample: true
@@ -29,7 +29,7 @@ options:
     service-name: "Deployment Stacks"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-resourcesdeploymentstacks"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesdeploymentstacks"
     service-dir: "sdk/resourcesdeploymentstacks"
     flavor: azure
     experimental-extensible-enums: true

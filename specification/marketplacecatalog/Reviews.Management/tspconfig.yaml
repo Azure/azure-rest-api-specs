@@ -21,7 +21,7 @@ options:
     service-name: "reviews"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-reviews"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-reviews"
     is-modular-library: true
     flavor: "azure"
     experimentalExtensibleEnums: true
@@ -45,8 +45,8 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-reviews"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-reviews"
+    package-name: "azure-mgmt-reviews"
     namespace: "azure.mgmt.reviews"
     generate-test: true
     generate-sample: true

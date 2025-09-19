@@ -10,7 +10,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/main.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-carbonoptimization"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-carbonoptimization"
     namespace: "azure.mgmt.carbonoptimization"
     flavor: "azure"
     generate-test: true
@@ -24,7 +24,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-carbonoptimization"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-carbonoptimization"
     flavor: azure
     package-details:
       name: "@azure/arm-carbonoptimization"
