@@ -150,12 +150,11 @@ union LanguageRuntime {
 /**
  * List containing this Resource Provider's available operations.
  */
-@pagedResult
 model ResourceProviderOperationList {
   /**
    * The list of operations.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   @visibility(Lifecycle.Read)
   value?: ResourceProviderOperationDefinition[];
