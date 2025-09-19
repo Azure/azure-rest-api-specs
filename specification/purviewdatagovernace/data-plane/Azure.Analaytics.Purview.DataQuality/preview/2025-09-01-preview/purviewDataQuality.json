@@ -14,14 +14,16 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{$host}",
+    "hostTemplate": "{endpoint}/purviewdataquality/api",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "$host",
+        "name": "endpoint",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
