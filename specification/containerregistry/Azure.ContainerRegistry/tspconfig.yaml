@@ -1,3 +1,7 @@
+parameters:
+  "service-dir":
+    default: "sdk/containerregistry"
+
 emit:
   - "@azure-tools/typespec-autorest"
 
@@ -29,10 +33,9 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-csharp":
-    package-name: "Azure.Containers.ContainerRegistry"
     package-dir: "Azure.Containers.ContainerRegistry"
     package-version: "1.1.1"
-    namespace: "Azure.Containers.ContainerRegistry"
+    namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     generate-test: true
