@@ -1353,6 +1353,230 @@
         }
       }
     },
+    "/insights": {
+      "get": {
+        "operationId": "Insights_ListInsights",
+        "description": "List all insights in reverse chronological order (newest first).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by the type of analysis.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "EvaluationRunClusterInsight",
+              "AgentClusterInsight"
+            ],
+            "x-ms-enum": {
+              "name": "InsightType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "EvaluationRunClusterInsight",
+                  "value": "EvaluationRunClusterInsight",
+                  "description": "Insights on an Evaluation run result."
+                },
+                {
+                  "name": "AgentClusterInsight",
+                  "value": "AgentClusterInsight",
+                  "description": "Cluster Insight on an Agent."
+                }
+              ]
+            }
+          },
+          {
+            "name": "evalId",
+            "in": "query",
+            "description": "Filter by the evaluation ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "query",
+            "description": "Filter by the evaluation run ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "description": "Filter by the agent name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "includeCoordinates",
+            "in": "query",
+            "description": "Whether to include coordinates for visualization in the response. Defaults to false.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedInsight"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Insights_ListInsights": {
+            "$ref": "./examples/Insights_ListInsights_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Insights_GenerateInsights",
+        "description": "Generate Insights",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "insight",
+            "in": "body",
+            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Insights_GenerateInsights": {
+            "$ref": "./examples/Insights_GenerateInsights_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/insights/{id}": {
+      "get": {
+        "operationId": "Insights_GetInsight",
+        "description": "Get a specific insight by Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the insights report.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "includeCoordinates",
+            "in": "query",
+            "description": "Whether to include coordinates for visualization in the response. Defaults to false.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Insight"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Insights_GetInsight": {
+            "$ref": "./examples/Insights_GetInsight_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_List",
@@ -1774,6 +1998,47 @@
     }
   },
   "definitions": {
+    "AgentClusterInsightResult": {
+      "type": "object",
+      "description": "Insights from the agent cluster analysis.",
+      "properties": {
+        "clusterInsight": {
+          "$ref": "#/definitions/ClusterInsightResult"
+        }
+      },
+      "required": [
+        "clusterInsight"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightResult"
+        }
+      ],
+      "x-ms-discriminator-value": "AgentClusterInsight"
+    },
+    "AgentClusterInsightsRequest": {
+      "type": "object",
+      "description": "Insights on set of Agent Evaluation Results",
+      "properties": {
+        "agentName": {
+          "type": "string",
+          "description": "Identifier for the agent."
+        },
+        "modelConfiguration": {
+          "$ref": "#/definitions/InsightModelConfiguration",
+          "description": "Configuration of the model used in the insight generation."
+        }
+      },
+      "required": [
+        "agentName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AgentClusterInsight"
+    },
     "AgentEvaluation": {
       "type": "object",
       "description": "Evaluation response for agent evaluation run.",
@@ -2199,6 +2464,48 @@
         }
       }
     },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "AzureAISearchIndex": {
       "type": "object",
       "description": "Azure AI Search Index Definition",
@@ -2291,6 +2598,60 @@
         "blobUri",
         "storageAccountArmId",
         "credential"
+      ]
+    },
+    "ChartCoordinate": {
+      "type": "object",
+      "description": "Coordinates for the analysis chart.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "X-axis coordinate."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Y-axis coordinate."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the chart element."
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "size"
+      ]
+    },
+    "ClusterInsightResult": {
+      "type": "object",
+      "description": "Insights from the cluster analysis.",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/InsightSummary",
+          "description": "Summary of the insights report."
+        },
+        "clusters": {
+          "type": "array",
+          "description": "List of clusters identified in the insights.",
+          "items": {
+            "$ref": "#/definitions/InsightCluster"
+          }
+        },
+        "coordinates": {
+          "type": "object",
+          "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ChartCoordinate"
+          }
+        }
+      },
+      "required": [
+        "summary",
+        "clusters"
       ]
     },
     "Connection": {
@@ -2829,6 +3190,35 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "EvalResult": {
+      "type": "object",
+      "description": "Result of the evaluation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the check"
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the check"
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "score"
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "indicates if the check passed or failed"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "score",
+        "passed"
+      ]
+    },
     "Evaluation": {
       "type": "object",
       "description": "Evaluation Definition",
@@ -2887,6 +3277,74 @@
         "data",
         "evaluators"
       ]
+    },
+    "EvaluationResultSample": {
+      "type": "object",
+      "description": "A sample from the evaluation result.",
+      "properties": {
+        "evaluationResult": {
+          "$ref": "#/definitions/EvalResult",
+          "description": "Evaluation result for the analysis sample."
+        }
+      },
+      "required": [
+        "evaluationResult"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightSample"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationResultSample"
+    },
+    "EvaluationRunClusterInsightResult": {
+      "type": "object",
+      "description": "Insights from the evaluation run cluster analysis.",
+      "properties": {
+        "clusterInsight": {
+          "$ref": "#/definitions/ClusterInsightResult"
+        }
+      },
+      "required": [
+        "clusterInsight"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightResult"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationRunClusterInsight"
+    },
+    "EvaluationRunClusterInsightsRequest": {
+      "type": "object",
+      "description": "Insights on set of Evaluation Results",
+      "properties": {
+        "evalId": {
+          "type": "string",
+          "description": "Evaluation Id for the insights."
+        },
+        "runIds": {
+          "type": "array",
+          "description": "List of evaluation run IDs for the insights.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "modelConfiguration": {
+          "$ref": "#/definitions/InsightModelConfiguration",
+          "description": "Configuration of the model used in the insight generation."
+        }
+      },
+      "required": [
+        "evalId",
+        "runIds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationRunClusterInsight"
     },
     "EvaluationTarget": {
       "type": "object",
@@ -3149,15 +3607,227 @@
     },
     "Insight": {
       "type": "object",
-      "description": "Insight placeholder model.",
+      "description": "The response body for cluster insights.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier of the insight."
+          "description": "The unique identifier for the insights report.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/InsightsMetadata",
+          "description": "Metadata about the insights report.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current state of the insights.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User friendly display name for the insight."
+        },
+        "request": {
+          "$ref": "#/definitions/InsightRequest",
+          "description": "Request for the insights analysis."
+        },
+        "result": {
+          "$ref": "#/definitions/InsightResult",
+          "description": "The result of the insights report.",
+          "readOnly": true
         }
       },
       "required": [
-        "id"
+        "id",
+        "metadata",
+        "state",
+        "displayName",
+        "request"
+      ]
+    },
+    "InsightCluster": {
+      "type": "object",
+      "description": "A cluster of analysis samples.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the analysis cluster."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the analysis cluster."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight of the analysis cluster. This indicate number of samples in the cluster."
+        },
+        "subClusters": {
+          "type": "array",
+          "description": "List of subclusters within this cluster. Empty if no subclusters exist.",
+          "items": {
+            "$ref": "#/definitions/InsightCluster"
+          }
+        },
+        "samples": {
+          "type": "array",
+          "description": "List of samples that belong to this cluster. Empty if samples are part of subclusters.",
+          "items": {
+            "$ref": "#/definitions/InsightSample"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "weight"
+      ]
+    },
+    "InsightModelConfiguration": {
+      "type": "object",
+      "description": "Configuration of the model used in the insight generation.",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'."
+        }
+      },
+      "required": [
+        "modelDeploymentName"
+      ]
+    },
+    "InsightRequest": {
+      "type": "object",
+      "description": "The request of the insights report.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/InsightType",
+          "description": "The type of request."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "InsightResult": {
+      "type": "object",
+      "description": "The result of the insights.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/InsightType",
+          "description": "The type of insights result."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "InsightSample": {
+      "type": "object",
+      "description": "A sample from the analysis.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the analysis sample."
+        },
+        "type": {
+          "$ref": "#/definitions/SampleType",
+          "description": "Sample type"
+        },
+        "features": {
+          "type": "object",
+          "description": "Features to help with additional filtering of data in UX.",
+          "additionalProperties": {}
+        },
+        "correlationInfo": {
+          "type": "object",
+          "description": "Info about the correlation for the analysis sample.",
+          "additionalProperties": {}
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "id",
+        "type",
+        "features",
+        "correlationInfo"
+      ]
+    },
+    "InsightSummary": {
+      "type": "object",
+      "description": "Summary of the error cluster analysis.",
+      "properties": {
+        "sampleCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of samples analyzed."
+        },
+        "uniqueSubclusterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of unique subcluster labels."
+        },
+        "uniqueClusterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of unique clusters."
+        },
+        "method": {
+          "type": "string",
+          "description": "Method used for clustering."
+        }
+      },
+      "required": [
+        "sampleCount",
+        "uniqueSubclusterCount",
+        "uniqueClusterCount",
+        "method"
+      ]
+    },
+    "InsightType": {
+      "type": "string",
+      "description": "The request of the insights.",
+      "enum": [
+        "EvaluationRunClusterInsight",
+        "AgentClusterInsight"
+      ],
+      "x-ms-enum": {
+        "name": "InsightType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EvaluationRunClusterInsight",
+            "value": "EvaluationRunClusterInsight",
+            "description": "Insights on an Evaluation run result."
+          },
+          {
+            "name": "AgentClusterInsight",
+            "value": "AgentClusterInsight",
+            "description": "Cluster Insight on an Agent."
+          }
+        ]
+      }
+    },
+    "InsightsMetadata": {
+      "type": "object",
+      "description": "Metadata about the insights.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the insights were created."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the insights were completed."
+        }
+      },
+      "required": [
+        "createdAt"
       ]
     },
     "ManagedAzureAISearchIndex": {
@@ -3407,6 +4077,27 @@
           "description": "The Index items on this page",
           "items": {
             "$ref": "#/definitions/Index"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedInsight": {
+      "type": "object",
+      "description": "Paged collection of Insight items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Insight items on this page",
+          "items": {
+            "$ref": "#/definitions/Insight"
           }
         },
         "nextLink": {
@@ -3796,6 +4487,24 @@
         }
       ],
       "x-ms-discriminator-value": "SAS"
+    },
+    "SampleType": {
+      "type": "string",
+      "description": "The type of sample used in the analysis.",
+      "enum": [
+        "EvaluationResultSample"
+      ],
+      "x-ms-enum": {
+        "name": "SampleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EvaluationResultSample",
+            "value": "EvaluationResultSample",
+            "description": "A sample from the evaluation result."
+          }
+        ]
+      }
     },
     "SasCredential": {
       "type": "object",

@@ -7,6 +7,7 @@ import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
 import "./datasets/routes.tsp";
 import "./indexes/routes.tsp";
+import "./insights/routes.tsp";
 import "./deployments/routes.tsp";
 import "./red-teams/routes.tsp";
 import "./schedules/routes.tsp";

@@ -5,6 +5,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "../common/models.tsp";
+import "../insights/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -206,13 +207,6 @@ union ScheduleTaskType {
 
   @doc("Insight task.")
   Insight: "Insight",
-}
-
-@doc("Insight placeholder model.")
-@added(Versions.v2025_10_15_preview)
-model Insight {
-  @doc("Identifier of the insight.")
-  id: string;
 }
 
 @doc("Schedule task model.")
