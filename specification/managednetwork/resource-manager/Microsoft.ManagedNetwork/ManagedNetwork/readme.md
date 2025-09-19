@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2019-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-06-01-preview'
 input-file:
-- Microsoft.ManagedNetwork/preview/2019-06-01-preview/managedNetwork.json
+- preview/2019-06-01-preview/managedNetwork.json
 ```
 # Code Generation
 
