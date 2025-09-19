@@ -179,7 +179,10 @@ union PostContentSchemaGrantType {
  * Grant type is expected to be refresh_token
  */
 union TokenGrantType {
+  /** Grant type for refreshing the token */
   refresh_token: "refresh_token",
+
+  /** Grant type for password authentication */
   password: "password",
 }
 
@@ -545,6 +548,7 @@ model ImageSignature {
 /**
  * A JSON web signature
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model JWK {
   /**
    * JSON web key parameter
@@ -560,6 +564,7 @@ model JWK {
 /**
  * JSON web key parameter
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model JWKHeader {
   /**
    * crv value
@@ -1092,6 +1097,7 @@ model V2Manifest extends Manifest {
  * Returns the requested OCI Manifest file
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model OCIManifest extends Manifest {
   /**
    * V2 image config descriptor
@@ -1113,6 +1119,7 @@ model OCIManifest extends Manifest {
  * Returns the requested OCI index file
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model OCIIndex extends Manifest {
   /**
    * List of OCI image layer information
@@ -1161,6 +1168,10 @@ model V1Manifest extends Manifest {
   signatures?: ImageSignature[];
 }
 
+/**
+ * Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema {
   /**
    * Can take a value of access_token_refresh_token, or access_token, or
@@ -1194,6 +1205,10 @@ model Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlenco
   accessToken?: string;
 }
 
+/**
+ * Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema {
   /**
    * Indicates the name of your Azure container registry.
