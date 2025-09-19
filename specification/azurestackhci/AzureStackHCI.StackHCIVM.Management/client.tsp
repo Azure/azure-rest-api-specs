@@ -265,7 +265,7 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 @@clientName(VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig,
-  "HciVmInstanceHardwareProfileDynamicMemoryConfigiuration",
+  "HciVmInstanceHardwareProfileDynamicMemoryConfiguration",
   "csharp"
 );
 @@clientName(VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig.maximumMemoryMB,
