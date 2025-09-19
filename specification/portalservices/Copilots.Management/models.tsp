@@ -11,7 +11,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The Copilot properties.")
 model CopilotProperties {
-  @doc("The maximum number of Azure Agentic Units (AAUs) that can be consumed by this copilot. This serves as a spending limit to prevent unexpected charges.")
+  @doc("The maximum number of Azure Agent Units (AAUs) that can be consumed by this copilot. This serves as a spending limit to prevent unexpected charges.")
   spendingLimit?: int32;
 
   @doc("The status of the last provisioning operation performed on the resource.")
