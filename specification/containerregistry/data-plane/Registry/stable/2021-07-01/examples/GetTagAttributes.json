@@ -1,28 +1,30 @@
 {
   "parameters": {
-    "url": "acrapi.azurecr-test.io",
     "name": "test/bash",
+    "api-version": "2021-07-01",
     "reference": "sha256:eabe547f78d4c18c708dd97ec3166cf7464cc651f1cbb67e7afas407405b7ad7b6",
-    "api-version": "2021-07-01"
+    "url": "acrapi.azurecr-test.io"
   },
   "responses": {
     "200": {
       "body": {
-        "registry": "acrapi.azurecr-test.io",
         "imageName": "test/bash",
+        "registry": "acrapi.azurecr-test.io",
         "tag": {
           "name": "tagName",
-          "digest": "sha256:eabe547f78d4c18c708dd97ec3166cf7464cc651f1cbb67e70d407405b7ad7b6",
-          "createdTime": "2018-10-05T20:54:24.1286047Z",
-          "lastUpdateTime": "2018-10-05T20:54:24.1286047Z",
           "changeableAttributes": {
             "deleteEnabled": true,
-            "writeEnabled": false,
+            "listEnabled": true,
             "readEnabled": true,
-            "listEnabled": true
-          }
+            "writeEnabled": false
+          },
+          "createdTime": "2018-10-05T20:54:24.1286047Z",
+          "digest": "sha256:eabe547f78d4c18c708dd97ec3166cf7464cc651f1cbb67e70d407405b7ad7b6",
+          "lastUpdateTime": "2018-10-05T20:54:24.1286047Z"
         }
       }
     }
-  }
+  },
+  "operationId": "ContainerRegistry_GetTagProperties",
+  "title": "Get tag attributes"
 }

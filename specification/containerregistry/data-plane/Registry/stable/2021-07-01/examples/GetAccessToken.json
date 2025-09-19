@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "url": "acrapi.azurecr-test.io",
+    "scope": "registry:catalog:*",
     "service": "someregistry.azurecr.io",
-    "scope": "registry:catalog:*"
+    "url": "acrapi.azurecr-test.io"
   },
   "responses": {
     "200": {
@@ -10,5 +10,7 @@
         "access_token": "eyJ0eXAiOiJKJhbGcigdCI6IkN0ZlFaOExlLTMejlnIiwidGlkIjoiNzbmOTgWItMmQ3Y2QwMTFkYjQ3Ii..."
       }
     }
-  }
+  },
+  "operationId": "Authentication_GetAcrAccessTokenFromLogin",
+  "title": "Get Access Token with username and password"
 }
