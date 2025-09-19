@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-06'
 input-file:
-- Microsoft.WindowsIoT/stable/2019-06-01/WindowsIotServices.json
+- stable/2019-06-01/WindowsIotServices.json
 ```
 
 ### Tag: package-2018-02-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2018-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-02-preview'
 input-file:
-- Microsoft.WindowsIoT/preview/2018-02-16-preview/WindowsIotServices.json
+- preview/2018-02-16-preview/WindowsIotServices.json
 ```
 
 ---
