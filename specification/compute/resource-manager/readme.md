@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-04-01
+tag: package-2025-11-01
 
 directive:
   - where:
@@ -350,6 +350,16 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
 ```
+
+### Tag: package-2025-11-01
+
+These settings apply only when `--tag=package-2025-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-11-01'
+input-file:
+  - Microsoft.Compute/ComputeRP/stable/2025-11-01/ComputeRP.json
+```
+
 
 ### Tag: package-2025-04-01
 
