@@ -37,7 +37,7 @@ model BackupVaultResource
  */
 @added(Versions.v2025_09_01)
 model DeletedBackupVaultResource
-  is Azure.ResourceManager.TrackedResource<DeletedBackupVault, false> {
+  is Azure.ResourceManager.ProxyResource<DeletedBackupVault> {
   ...ResourceNameParameter<
     Resource = DeletedBackupVaultResource,
     KeyName = "deletedVaultName",
@@ -281,13 +281,15 @@ interface DeletedBackupVaults {
   /**
    * Lists deleted backup vaults by subscription
    */
+  @list
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/deletedBackupVaults")
+  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Manual routing required for subscription-level resource listing"
   listBySubscription(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter
-  ): ArmResponse<DeletedBackupVaultResourceList> | ErrorResponse;
+  ): DeletedBackupVaultResourceList | ErrorResponse;
 
   /**
    * Undeletes a soft deleted backup vault
