@@ -205,7 +205,13 @@ model MongoClusterProperties {
 
   /** The encryption configuration for the cluster. Depends on identity being configured. */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01_preview)
+  @renamedFrom(Versions.v2025_08_01_preview, "encryption")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  oldEncryption?: EncryptionProperties;
+
+  /** The encryption configuration for the cluster. Depends on identity being configured. */
+  @added(Versions.v2025_08_01_preview)
   encryption?: EncryptionProperties;
 }
 
