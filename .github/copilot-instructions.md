@@ -249,7 +249,7 @@ Do not skip the step that choose SDK generation method to ensure the user select
 3. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
 4. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main". Do not create pull request yet.
 5. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created. This is required only if there are TypeSpec changes in current branch.
-6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
+6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline).
 7. **Generate SDKs via Pipeline**: Generate SDKs using [run sdk gen pipeline](..\eng\common\instructions\azsdk-tools\run-sdk-gen-pipeline.instructions.md), monitor the pipeline status and displaying generated SDK PR links.
 8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
 9. **Validate Label and then Codeowners**: Validate the service label and codeowners for the created SDK service using both [validate service label](..\eng\common\instructions\azsdk-tools\validate-service-label.instructions.md) and [validate codeowners](..\eng\common\instructions\azsdk-tools\validate-codeowners.instructions.md).
