@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../common/provisioningState.tsp";
 import "../common/status.tsp";
+import "../common/x509CertificateCredentials.tsp";
 
 using TypeSpec.Versioning;
 
@@ -130,7 +131,8 @@ model HostAuthentication {
   usernamePasswordCredentials?: UsernamePasswordCredentials;
 
   @doc("Defines the certificate reference when Certificate user authentication mode is selected.")
-  x509Credentials?: X509Credentials;
+  @typeChangedFrom(Versions.v2025_10_01, X509Credentials)
+  x509Credentials?: X509CertificateCredentials;
 }
 
 @doc("Defines the device status properties.")
