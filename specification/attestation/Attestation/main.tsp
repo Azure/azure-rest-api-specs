@@ -33,7 +33,7 @@ using TypeSpec.Versioning;
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["https://webpubsub.azure.com/.default"],
+      scopes: ["https://attest.azure.net/.default"],
     }
   ]>
 )
