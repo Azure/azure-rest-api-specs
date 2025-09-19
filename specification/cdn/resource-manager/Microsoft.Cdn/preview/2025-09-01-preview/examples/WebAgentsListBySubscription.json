@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myWebAgent1",
+            "id": "/subscriptions/subid/resourcegroups/RG1/providers/Microsoft.Cdn/webAgents/myWebAgent1",
+            "type": "Microsoft.Cdn/webAgents",
+            "tags": {
+              "key1": "value1"
+            },
+            "location": "WestUs",
+            "sku": {
+              "name": "Standard_Microsoft"
+            },
+            "properties": {
+              "description": "Primary web agent for content processing",
+              "systemPrompt": "You are a helpful AI assistant for customer support. Please provide accurate and friendly responses.",
+              "paths": [
+                {
+                  "type": "Chat",
+                  "path": "/chat"
+                },
+                {
+                  "type": "McpServer",
+                  "path": "/mcp"
+                }
+              ],
+              "profileAgentLinks": [
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG1/providers/Microsoft.Cdn/profiles/profile1/agents/agent1",
+                  "profileName": "profile1",
+                  "resourceGroupName": "RG1"
+                }
+              ],
+              "configuration": {
+                "maxConcurrentRequests": 100,
+                "timeoutInSeconds": 30,
+                "retryPolicy": {
+                  "maxRetries": 3,
+                  "retryDelayInSeconds": 5
+                }
+              },
+              "provisioningState": "Succeeded",
+              "resourceState": "Running"
+            }
+          },
+          {
+            "name": "myWebAgent2",
+            "id": "/subscriptions/subid/resourcegroups/RG2/providers/Microsoft.Cdn/webAgents/myWebAgent2",
+            "type": "Microsoft.Cdn/webAgents",
+            "tags": {
+              "environment": "production"
+            },
+            "location": "EastUs",
+            "sku": {
+              "name": "Premium_Microsoft"
+            },
+            "properties": {
+              "description": "Secondary web agent for backup processing",
+              "systemPrompt": "You are a backup AI assistant. Handle requests when the primary system is unavailable.",
+              "paths": [
+                {
+                  "type": "Chat",
+                  "path": "/chat/backup"
+                }
+              ],
+              "profileAgentLinks": [],
+              "configuration": {
+                "maxConcurrentRequests": 200,
+                "timeoutInSeconds": 60,
+                "retryPolicy": {
+                  "maxRetries": 5,
+                  "retryDelayInSeconds": 10
+                }
+              },
+              "provisioningState": "Succeeded",
+              "resourceState": "Running"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

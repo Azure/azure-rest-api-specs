@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "agentName": "agent1",
+    "profileAgentUpdateParameters": {
+      "properties": {
+        "customDomains": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/newdomain.com"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1",
+        "name": "agent1",
+        "type": "Microsoft.Cdn/profiles/agents",
+        "properties": {
+          "webAgent": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/webagent1"
+          },
+          "customDomains": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/newdomain.com"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1",
+        "name": "agent1",
+        "type": "Microsoft.Cdn/profiles/agents",
+        "properties": {
+          "webAgent": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/webagent1"
+          },
+          "customDomains": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/newdomain.com"
+            }
+          ],
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  }
+}

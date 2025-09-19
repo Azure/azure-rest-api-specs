@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "originGroupName": "origingroup1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "name": "origingroup1",
+        "properties": {
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "authentication": {
+            "type": "UserAssignedIdentity",
+            "userAssignedIdentity": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+            },
+            "scope": "https://www.contoso.com/.default"
+          },
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}
