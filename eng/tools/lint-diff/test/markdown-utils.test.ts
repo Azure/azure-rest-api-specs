@@ -166,7 +166,7 @@ describe("getRelatedArmRpcFromDoc", () => {
 
     (fetch as Mock).mockResolvedValue({
       ok: true,
-      text: async () => content,
+      text: () => Promise.resolve(content),
     });
   }
 
