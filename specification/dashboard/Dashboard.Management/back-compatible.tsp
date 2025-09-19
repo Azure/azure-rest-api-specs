@@ -11,11 +11,13 @@ using Azure.Core;
   "requestBodyParameters"
 );
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(ManagedPrivateEndpointModels.create::parameters.resource,
   "requestBodyParameters"
@@ -23,8 +25,9 @@ using Azure.Core;
 @@clientName(ManagedPrivateEndpointModels.update::parameters.properties,
   "requestBodyParameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ManagedPrivateEndpointModel.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedPrivateEndpointModel.properties
+);
 
 @@clientName(IntegrationFabrics.create::parameters.resource,
   "requestBodyParameters"
@@ -40,8 +43,9 @@ using Azure.Core;
   "requestBodyParameters"
 );
 @@clientName(PrivateEndpointConnections.approve::parameters.resource, "body");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ManagedDashboard.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedDashboard.properties
+);
 @@alternateType(ManagedPrivateEndpointModelProperties.privateLinkResourceId,
   armResourceIdentifier
 );
@@ -52,23 +56,32 @@ using Azure.Core;
   armResourceIdentifier
 );
 
-@@clientLocation(ManagedGrafanas.get, "Grafana");
-@@clientLocation(ManagedGrafanas.create, "Grafana");
-@@clientLocation(ManagedGrafanas.update, "Grafana");
-@@clientLocation(ManagedGrafanas.delete, "Grafana");
-@@clientLocation(ManagedGrafanas.listByResourceGroup, "Grafana");
-@@clientLocation(ManagedGrafanas.list, "Grafana");
-@@clientLocation(ManagedGrafanas.checkEnterpriseDetails, "Grafana");
-@@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana");
-@@clientLocation(ManagedGrafanas.refresh, "ManagedPrivateEndpoints");
-@@clientLocation(ManagedPrivateEndpointModels.get, "ManagedPrivateEndpoints");
+@@clientLocation(ManagedGrafanas.get, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.create, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.update, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.delete, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.listByResourceGroup, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.list, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.checkEnterpriseDetails, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.refresh, "ManagedPrivateEndpoints", "!csharp");
+@@clientLocation(ManagedPrivateEndpointModels.get,
+  "ManagedPrivateEndpoints",
+  "!csharp"
+);
 @@clientLocation(ManagedPrivateEndpointModels.create,
-  "ManagedPrivateEndpoints"
+  "ManagedPrivateEndpoints",
+  "!csharp"
 );
 @@clientLocation(ManagedPrivateEndpointModels.update,
-  "ManagedPrivateEndpoints"
+  "ManagedPrivateEndpoints",
+  "!csharp"
 );
 @@clientLocation(ManagedPrivateEndpointModels.delete,
-  "ManagedPrivateEndpoints"
+  "ManagedPrivateEndpoints",
+  "!csharp"
 );
-@@clientLocation(ManagedPrivateEndpointModels.list, "ManagedPrivateEndpoints");
+@@clientLocation(ManagedPrivateEndpointModels.list,
+  "ManagedPrivateEndpoints",
+  "!csharp"
+);

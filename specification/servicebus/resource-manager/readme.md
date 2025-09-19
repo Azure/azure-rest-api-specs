@@ -26,7 +26,7 @@ These are the global settings for the ServiceBus API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-01
+tag: package-2025-05-preview
 ```
 
 ### Tag: package-2021-01-preview
@@ -209,6 +209,15 @@ input-file:
 - Microsoft.ServiceBus/stable/2024-01-01/Rules.json
 - Microsoft.ServiceBus/stable/2024-01-01/subscriptions.json
 - Microsoft.ServiceBus/stable/2024-01-01/CheckNameAvailability.json
+```
+
+### Tag: package-2025-05-preview
+
+These settings apply only when `--tag=package-2025-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2025-05-01-preview/servicebus.json
 ```
 
 Important notes:

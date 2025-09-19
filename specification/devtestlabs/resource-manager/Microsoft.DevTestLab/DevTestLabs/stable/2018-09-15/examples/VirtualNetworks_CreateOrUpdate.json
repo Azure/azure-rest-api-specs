@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "name": "{virtualNetworkName}",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "virtualNetwork": {
+      "properties": {
+        "allowedSubnets": [
+          {
+            "allowPublicIp": "Allow",
+            "labSubnetName": "{virtualNetworkName}Subnet",
+            "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet"
+          }
+        ]
+      },
+      "location": "{location}",
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{virtualNetworkName}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+        "properties": {
+          "createdDate": "2018-10-01T13:01:44.6005134-07:00",
+          "provisioningState": "Creating",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{virtualNetworkName}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+        "properties": {
+          "createdDate": "2018-10-01T13:01:44.6005134-07:00",
+          "provisioningState": "Creating",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworks_CreateOrUpdate",
+  "title": "VirtualNetworks_CreateOrUpdate"
+}
