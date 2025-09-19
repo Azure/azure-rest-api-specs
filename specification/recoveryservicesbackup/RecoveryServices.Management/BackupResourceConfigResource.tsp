@@ -22,13 +22,18 @@ namespace Microsoft.RecoveryServices;
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model BackupResourceConfigResource extends Resource {
-  ...ResourceNameParameter<
-    Resource = BackupResourceConfigResource,
-    KeyName = "backupstorageconfig",
-    SegmentName = "backupstorageconfig",
-    NamePattern = "",
-    Type = "vaultstorageconfig"
-  >;
+  /**
+   * The name of the BackupResourceConfigResource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.defaultResourceKeySegmentName(
+    Resource,
+    "backupstorageconfig",
+    "backupstorageconfig"
+  )
+  @path
+  name: "vaultstorageconfig";
 
   /**
    * BackupResourceConfigResource properties
