@@ -39,6 +39,19 @@ model FileSearchToolDefinition extends ToolDefinition {
   fileSearch?: FileSearchToolDefinitionDetails;
 }
 
+@doc("The input definition information for an image generation and editing tool as used to configure an agent.")
+@added(Versions.v2025_05_01)
+model ImageGenerationToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'image_generation'.")
+  type: "image_generation";
+
+  /**
+   * Options overrides for the image generation and editing tool.
+   */
+  @encodedName("application/json", "image_generation")
+  imageGeneration?: ImageGenerationToolDefinitionDetails;
+}
+
 @doc("The input definition information for a function tool as used to configure an agent.")
 @added(Versions.v2025_05_01)
 model FunctionToolDefinition extends ToolDefinition {
@@ -195,6 +208,45 @@ model FileSearchToolDefinitionDetails {
    */
   @encodedName("application/json", "ranking_options")
   rankingOptions?: FileSearchRankingOptions;
+}
+
+/**
+ * Options overrides for the image generation and editing tool.
+ */
+@added(Versions.v2025_05_01)
+model ImageGenerationToolDefinitionDetails {
+  /**
+   * The default size for generated or edited images. Either 1024x1024, 1024x1536, or 1536x1024.
+   */
+  size?: "1024x1024" | "1024x1536" | "1536x1024";
+
+  /**
+   * The default quality setting for generated or edited images. Either low, medium, or high.
+   */
+  quality?: "low" | "medium" | "high";
+
+  /**
+   * The default output format for generated or edited images. Either png, webp, or jpeg.
+   */
+  @encodedName("application/json", "output_format")
+  outputFormat?: "png" | "webp" | "jpeg";
+
+  /**
+   * The default background setting for generated or edited images. Either transparent or opaque.
+   */
+  background?: "transparent" | "opaque";
+
+  /**
+   * The default number of images to generate or edit. Must be between 1 and 10.
+   */
+  @minValue(1)
+  @maxValue(10)
+  n?: int32;
+
+  /**
+   * The operation mode for the image tool. Either generation, edit, or variation.
+   */
+  mode?: "generation" | "edit" | "variation";
 }
 
 @doc("The input definition information for a azure function tool as used to configure an agent.")
@@ -508,6 +560,69 @@ model FileSearchToolCallContent {
 
   @doc("The text content of the file.")
   text: string;
+}
+
+@doc("""
+  A record of a call to an image generation tool, issued by the model in evaluation of a defined tool, that represents
+  executed image generation or editing operations.
+  """)
+@added(Versions.v2025_05_01)
+model RunStepImageGenerationToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'image_generation'.")
+  type: "image_generation";
+
+  @doc("The details of the image generation tool call.")
+  @encodedName("application/json", "image_generation")
+  imageGeneration: RunStepImageGenerationToolCallDetails;
+}
+
+@doc("The detailed information about an image generation and editing tool call.")
+@added(Versions.v2025_05_01)
+model RunStepImageGenerationToolCallDetails {
+  @doc("The prompt used for image generation or editing.")
+  prompt: string;
+
+  @doc("The base image to edit (base64-encoded PNG or JPEG). Required for image editing operations.")
+  image?: string;
+
+  @doc("An additional image whose fully transparent areas indicate where the base image should be edited (base64-encoded PNG). Required for image inpainting.")
+  mask?: string;
+
+  @doc("The generated image output.")
+  output?: ImageOutput;
+}
+
+@doc("The image generation response following OpenAI's contract.")
+@added(Versions.v2025_05_01)
+model ImageOutput {
+  @doc("The background parameter used for the image generation. Either transparent or opaque.")
+  background?: "transparent" | "opaque";
+  
+  @doc("The Unix timestamp (in seconds) of when the image was created.")
+  created: int64;
+  
+  @doc("The list of generated images.")
+  data: ImageData[];
+  
+  @doc("The output format of the image generation. Either png, webp, or jpeg.")
+  @encodedName("application/json", "output_format")
+  outputFormat: "png" | "webp" | "jpeg";
+  
+  @doc("The quality of the image generated. Either low, medium, or high.")
+  quality: "low" | "medium" | "high";
+  
+  @doc("The size of the image generated. Either 1024x1024, 1024x1536, or 1536x1024.")
+  size: "1024x1024" | "1024x1536" | "1536x1024";
+}
+
+@doc("Individual image data within the image generation response.")
+@added(Versions.v2025_05_01)
+model ImageData {
+  @doc("The base64-encoded image data.")
+  b64_json?: string;
+  
+  @doc("The URL of the generated image (if applicable).")
+  url?: string;
 }
 
 @doc("""
