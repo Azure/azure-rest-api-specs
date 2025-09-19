@@ -1,44 +1,44 @@
 {
   "parameters": {
     "api-version": "2025-06-11",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor",
     "body": {
+      "azureSubscriptionId": "subscriptionId",
+      "resourceGroup": "resourceGroup",
       "sku": {
         "name": "planName"
-      },
-      "azureSubscriptionId": "subscriptionId",
-      "resourceGroup": "resourceGroup"
-    }
+      }
+    },
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
         "name": "myMonitor",
         "type": "Microsoft.Datadog/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "location": "West US",
+        "properties": {
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "enterpriseAppId": null,
+            "id": "myOrg123",
+            "linkingAuthCode": null,
+            "linkingClientId": null
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1,
+          "marketplaceSubscriptionStatus": "Active",
+          "monitoringStatus": "Enabled",
+          "provisioningState": "Succeeded"
+        },
         "sku": {
           "name": "free_Monthly"
         },
-        "properties": {
-          "provisioningState": "Succeeded",
-          "monitoringStatus": "Enabled",
-          "marketplaceSubscriptionStatus": "Active",
-          "datadogOrganizationProperties": {
-            "name": "myOrg",
-            "id": "myOrg123",
-            "linkingAuthCode": null,
-            "linkingClientId": null,
-            "enterpriseAppId": null
-          },
-          "liftrResourceCategory": "MonitorLogs",
-          "liftrResourcePreference": 1
-        },
         "tags": {
           "Environment": "Dev"
-        },
-        "location": "West US"
+        }
       }
     },
     "202": {
@@ -46,5 +46,7 @@
         "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.Datadog/monitor/monitorname/resubscribe?api-version=2025-06-11"
       }
     }
-  }
+  },
+  "operationId": "Organizations_Resubscribe",
+  "title": "Organizations_Resubscribe"
 }
