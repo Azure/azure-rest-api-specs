@@ -259,8 +259,8 @@ interface BackupVaultOperationResults {
 /**
  * Deleted backup vault operations (available from version 2025-09-01)
  */
-@added(Versions.v2025_09_01)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "DeletedBackupVaults interface uses manual routing for location-scoped resources"
+@added(Versions.v2025_09_01)
 interface DeletedBackupVaults {
   /**
    * Gets a deleted backup vault
@@ -271,24 +271,24 @@ interface DeletedBackupVaults {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationParameter,
-    
+
     /**
      * Name of the deleted backup vault
      */
-    @path deletedVaultName: string
+    @path deletedVaultName: string,
   ): ArmResponse<DeletedBackupVaultResource> | ErrorResponse;
 
   /**
    * Lists deleted backup vaults by location
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Manual routing required for location-scoped resource listing"
   @list
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Manual routing required for location-scoped resource listing"
   listByLocation(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...LocationParameter
+    ...LocationParameter,
   ): Azure.Core.Page<DeletedBackupVaultResource> | ErrorResponse;
 
   /**
@@ -300,11 +300,11 @@ interface DeletedBackupVaults {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationParameter,
-    
+
     /**
      * Name of the deleted backup vault
      */
-    @path deletedVaultName: string
+    @path deletedVaultName: string,
   ): ArmResponse<BackupVaultResource> | ErrorResponse | ArmAcceptedLroResponse<"Location">;
 }
 

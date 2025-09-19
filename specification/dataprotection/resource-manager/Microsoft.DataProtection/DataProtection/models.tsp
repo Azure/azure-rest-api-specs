@@ -905,6 +905,7 @@ model ResourceDeletionInfo {
 @added(Versions.v2025_09_01)
 model DeletedBackupVault {
   ...BackupVault;
+
   /**
    * Resource Id of the original backup vault
    */
@@ -912,7 +913,7 @@ model DeletedBackupVault {
   originalBackupVaultId: string;
 
   /**
-   * Resource name of the original backup vault  
+   * Resource name of the original backup vault
    */
   @visibility(Lifecycle.Read)
   originalBackupVaultName: string;
