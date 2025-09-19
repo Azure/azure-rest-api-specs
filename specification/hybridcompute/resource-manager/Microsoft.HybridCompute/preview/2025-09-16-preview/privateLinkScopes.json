@@ -1744,9 +1744,9 @@
           "description": "The type/name of the Service Extension.",
           "$ref": "#/definitions/ServiceExtensionType"
         },
-        "accessMode": {
+        "serviceExtensionPublicNetworkAccess": {
           "description": "Determines whether private link validation is enforced for the given service extension.",
-          "$ref": "#/definitions/ServiceExtensionAccessMode"
+          "$ref": "#/definitions/ServiceExtensionPublicNetworkAccess"
         }
       }
     },
@@ -1758,23 +1758,23 @@
         "modelAsString": true
       }
     },
-    "ServiceExtensionAccessMode": {
+    "ServiceExtensionPublicNetworkAccess": { 
       "type": "string",
       "description": "Property to control enforcement of private link validation for a given service extension.",
       "enum": [
-        "Enforced",
-        "Learning"
+        "Enabled",
+        "Disabled"
       ],
       "x-ms-enum": {
-        "name": "AccessMode",
+        "name": "ServiceExtensionPublicNetworkAccess",
         "modelAsString": true,
         "values": [
           {
-            "value": "enforced",
+            "value": "enabled",
             "description": "Private link validation is enabled for the given service extension."
           },
           {
-            "value": "learning",
+            "value": "disabled",
             "description": "Private link validation is disabled for the given service extension, but logs will be generated for traffic that would have been blocked if private link validation were enabled."
           }
         ]
