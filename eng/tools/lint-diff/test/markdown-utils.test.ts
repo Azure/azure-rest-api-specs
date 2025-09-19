@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import { join } from "node:path";
-import { beforeEach, describe, expect, Mock, test, vi } from "vitest";
+import { Mock, beforeEach, describe, expect, test, vi } from "vitest";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
 import {
