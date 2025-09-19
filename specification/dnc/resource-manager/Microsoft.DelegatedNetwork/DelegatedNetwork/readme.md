@@ -35,11 +35,11 @@ These settings apply only when `--tag=package-2023-06-27-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-06-27-preview'
 input-file:
-- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/controller.json
-- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/orchestrators.json
-- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/delegatedSubnets.json
-- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/operations.json
-- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/common-types.json
+- preview/2023-06-27-preview/controller.json
+- preview/2023-06-27-preview/orchestrators.json
+- preview/2023-06-27-preview/delegatedSubnets.json
+- preview/2023-06-27-preview/operations.json
+- preview/2023-06-27-preview/common-types.json
 ```
 
 ### Tag: package-2023-05-18-preview
@@ -48,11 +48,11 @@ These settings apply only when `--tag=package-2023-05-18-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-05-18-preview'
 input-file:
-- Microsoft.DelegatedNetwork/preview/2023-05-18-preview/controller.json
-- Microsoft.DelegatedNetwork/preview/2023-05-18-preview/orchestrators.json
-- Microsoft.DelegatedNetwork/preview/2023-05-18-preview/delegatedSubnets.json
-- Microsoft.DelegatedNetwork/preview/2023-05-18-preview/operations.json
-- Microsoft.DelegatedNetwork/preview/2023-05-18-preview/common-types.json
+- preview/2023-05-18-preview/controller.json
+- preview/2023-05-18-preview/orchestrators.json
+- preview/2023-05-18-preview/delegatedSubnets.json
+- preview/2023-05-18-preview/operations.json
+- preview/2023-05-18-preview/common-types.json
 ```
 
 ### Tag: package-2021-03-15
@@ -61,11 +61,11 @@ These settings apply only when `--tag=package-2021-03-15` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-03-15'
 input-file:
-- Microsoft.DelegatedNetwork/stable/2021-03-15/controller.json
-- Microsoft.DelegatedNetwork/stable/2021-03-15/orchestrators.json
-- Microsoft.DelegatedNetwork/stable/2021-03-15/delegatedSubnets.json
-- Microsoft.DelegatedNetwork/stable/2021-03-15/operations.json
-- Microsoft.DelegatedNetwork/stable/2021-03-15/common-types.json
+- stable/2021-03-15/controller.json
+- stable/2021-03-15/orchestrators.json
+- stable/2021-03-15/delegatedSubnets.json
+- stable/2021-03-15/operations.json
+- stable/2021-03-15/common-types.json
 ```
 
 ### Tag: package-2020-08-08-preview
@@ -74,11 +74,11 @@ These settings apply only when `--tag=package-2020-08-08-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-08-08-preview'
 input-file:
-  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/controller.json
-  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestrators.json
-  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
-  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
-  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/common-types.json
+  - preview/2020-08-08-preview/controller.json
+  - preview/2020-08-08-preview/orchestrators.json
+  - preview/2020-08-08-preview/delegatedSubnets.json
+  - preview/2020-08-08-preview/operations.json
+  - preview/2020-08-08-preview/common-types.json
 ```
 
 
