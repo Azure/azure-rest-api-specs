@@ -584,7 +584,7 @@ op backupResourceStorageConfigsNonCRRGet(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: string,
+  backupstorageconfig: "vaultstorageconfig",
 ): BackupResourceConfigResource;
 
 @@override(BackupResourceStorageConfigsNonCRR.get,
@@ -604,7 +604,7 @@ op backupResourceStorageConfigsNonCRRPatch(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: string,
+  backupstorageconfig: "vaultstorageconfig",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   properties: BackupResourceConfigResource,
 ): ArmNoContentResponse;
@@ -626,7 +626,7 @@ op backupResourceStorageConfigsNonCRRUpdate(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: string,
+  backupstorageconfig: "vaultstorageconfig",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: BackupResourceConfigResource,
 ): ArmResourceUpdatedResponse<BackupResourceConfigResource>;
@@ -648,7 +648,7 @@ op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: string,
+  backupstorageconfig: "vaultstorageconfig",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: PrepareDataMoveRequest,
 ): ArmAcceptedLroResponse;
@@ -670,7 +670,7 @@ op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: string,
+  backupstorageconfig: "vaultstorageconfig",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: TriggerDataMoveRequest,
 ): ArmAcceptedLroResponse;
