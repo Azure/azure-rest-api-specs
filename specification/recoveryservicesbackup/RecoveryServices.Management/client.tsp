@@ -433,6 +433,10 @@ using Azure.ResourceManager;
   "ResourceGuardProxyOperation",
   "java"
 );
+@@clientName(Microsoft.RecoveryServices,
+  "RecoveryServicesBackupClient",
+  "javascript"
+);
 
 // Custom operations to reorder parameters (resourceGroupName after vaultName) for various operations
 
