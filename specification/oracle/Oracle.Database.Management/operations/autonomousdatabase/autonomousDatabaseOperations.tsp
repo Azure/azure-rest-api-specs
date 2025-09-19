@@ -1,17 +1,25 @@
-import "../../../models/autonomousdatabase/autonomousDatabase.tsp";
+import "../../models/autonomousdatabase/autonomousDatabase.tsp";
 import "../commons.tsp";
+import "@typespec/http";
 
 using Azure.ResourceManager;
 using Autorest;
 using TypeSpec.Versioning;
+using Http;
+
 namespace Oracle.Database;
 
 @armResourceOperations(AutonomousDatabase)
 interface AutonomousDatabases
-  extends OracleTrackedResource<
-      AutonomousDatabase,
-      AutonomousDatabaseBaseProperties
-    > {
+  extends ResourceListBySubscription<AutonomousDatabase>,
+    ResourceCreateAsync<AutonomousDatabase>,
+    ResourceRead<AutonomousDatabase>,
+    ResourceDeleteWithoutOkAsync<AutonomousDatabase> {
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<AutonomousDatabase, AutonomousDatabaseUpdate>;
+
+  listByResourceGroup is ArmResourceListByParent<AutonomousDatabase>;
+
   //OCI switchover API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/SwitchoverAutonomousDatabase
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Perform switchover action on Autonomous Database")

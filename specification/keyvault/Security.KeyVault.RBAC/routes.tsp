@@ -1,10 +1,10 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace KeyVault;
 
@@ -20,6 +20,7 @@ interface RoleDefinitions {
       /**
        * The scope of the role definition to delete. Managed HSM only supports '/'.
        */
+      @alternateType(RoleScope, "go")
       scope: string;
 
       /**
@@ -41,6 +42,7 @@ interface RoleDefinitions {
       /**
        * The scope of the role definition to create or update. Managed HSM only supports '/'.
        */
+      @alternateType(RoleScope, "go")
       scope: string;
 
       /**
@@ -68,6 +70,7 @@ interface RoleDefinitions {
       /**
        * The scope of the role definition to get. Managed HSM only supports '/'.
        */
+      @alternateType(RoleScope, "go")
       scope: string;
 
       /**
@@ -84,11 +87,13 @@ interface RoleDefinitions {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions")
   @get
+  @list
   list is KeyVaultOperation<
     {
       /**
        * The scope of the role definition.
        */
+      @alternateType(RoleScope, "go")
       scope: string;
 
       /**
@@ -113,6 +118,7 @@ interface RoleAssignments {
       /**
        * The scope of the role assignment to delete.
        */
+      @alternateType(RoleScope, "go")
       scope: string;
 
       /**
@@ -134,6 +140,7 @@ interface RoleAssignments {
       /**
        * The scope of the role assignment to create.
        */
+      @alternateType(RoleScope, "go")
       scope: string;
 
       /**
@@ -161,6 +168,7 @@ interface RoleAssignments {
       /**
        * The scope of the role assignment.
        */
+      @alternateType(RoleScope, "go")
       scope: string;
 
       /**
@@ -177,11 +185,13 @@ interface RoleAssignments {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments")
   @get
+  @list
   listForScope is KeyVaultOperation<
     {
       /**
        * The scope of the role assignments.
        */
+      @alternateType(RoleScope, "go")
       scope: string;
 
       /**

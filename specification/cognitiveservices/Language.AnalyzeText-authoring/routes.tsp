@@ -26,7 +26,9 @@ alias languageOperations = ResourceOperations<
 /**
  * Lists the existing projects.
  */
-op listProjects is languageOperations.ResourceList<
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@clientName("listProjects", "csharp")
+op textAnalysisAuthoringListProjects is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -34,7 +36,9 @@ op listProjects is languageOperations.ResourceList<
 /**
  * Lists the deployments belonging to a project.
  */
-op listDeployments is languageOperations.ResourceList<
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@clientName("listDeployments", "csharp")
+op textAnalysisAuthoringListDeployments is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectDeployment,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -42,8 +46,10 @@ op listDeployments is languageOperations.ResourceList<
 /**
  * Lists the exported models belonging to a project.
  */
-@added(Versions.v2023_04_15_preview)
-op listExportedModels is languageOperations.ResourceList<
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@clientName("listExportedModels", "csharp")
+@added(Versions.v2024_11_15_preview)
+op textAnalysisAuthoringListExportedModels is languageOperations.ResourceList<
   TextAnalysisAuthoringExportedTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -51,7 +57,9 @@ op listExportedModels is languageOperations.ResourceList<
 /**
  * Lists the trained models belonging to a project.
  */
-op listTrainedModels is languageOperations.ResourceList<
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@clientName("listTrainedModels", "csharp")
+op textAnalysisAuthoringListTrainedModels is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -59,8 +67,10 @@ op listTrainedModels is languageOperations.ResourceList<
 /**
  * Lists the deployments resources assigned to the project.
  */
-@added(Versions.v2023_04_15_preview)
-op listDeploymentResources is languageOperations.ResourceList<
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@clientName("listDeploymentResources", "csharp")
+@added(Versions.v2024_11_15_preview)
+op textAnalysisAuthoringListDeploymentResources is languageOperations.ResourceList<
   TextAnalysisAuthoringAssignedDeploymentResource,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -68,7 +78,9 @@ op listDeploymentResources is languageOperations.ResourceList<
 /**
  * Lists the non-expired training jobs created for a project.
  */
-op listTrainingJobs is languageOperations.ResourceList<
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@clientName("listTrainingJobs", "csharp")
+op textAnalysisAuthoringListTrainingJobs is languageOperations.ResourceList<
   TextAnalysisAuthoringTrainingJobState,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -76,8 +88,10 @@ op listTrainingJobs is languageOperations.ResourceList<
 /**
  * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
  */
-@added(Versions.v2023_04_15_preview)
-op listAssignedResourceDeployments is languageOperations.ResourceList<
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@clientName("listAssignedResourceDeployments", "csharp")
+@added(Versions.v2024_11_15_preview)
+op textAnalysisAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -86,7 +100,8 @@ op listAssignedResourceDeployments is languageOperations.ResourceList<
  * Lists the supported languages.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-op getSupportedLanguages is languageOperations.ResourceList<
+@clientName("getSupportedLanguages", "csharp")
+op textAnalysisAuthoringGetSupportedLanguages is languageOperations.ResourceList<
   TextAnalysisAuthoringSupportedLanguage,
   ListQueryParametersTrait<ProjectKindQueryParameter &
     StandardListQueryParameters>
@@ -96,8 +111,9 @@ op getSupportedLanguages is languageOperations.ResourceList<
  * Lists the supported prebuilt entities that can be used while creating composed entities.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-@added(Versions.v2023_04_15_preview)
-op getSupportedPrebuiltEntities is languageOperations.ResourceList<
+@clientName("getSupportedPrebuiltEntities", "csharp")
+@added(Versions.v2024_11_15_preview)
+op textAnalysisAuthoringGetSupportedPrebuiltEntities is languageOperations.ResourceList<
   TextAnalysisAuthoringPrebuiltEntity,
   SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
 >;
@@ -105,7 +121,9 @@ op getSupportedPrebuiltEntities is languageOperations.ResourceList<
 /**
  * Lists the support training config version for a given project type.
  */
-op listTrainingConfigVersions is languageOperations.ResourceList<
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@clientName("listTrainingConfigVersions", "csharp")
+op textAnalysisAuthoringListTrainingConfigVersions is languageOperations.ResourceList<
   TextAnalysisAuthoringTrainingConfigVersion,
   ListQueryParametersTrait<ProjectKindQueryParameter &
     StandardListQueryParameters>
@@ -169,7 +187,7 @@ interface TextAuthoringProject {
    * Generates a copy project operation authorization to the current target Azure resource.
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
   @clientName("AuthorizeProjectCopy", "csharp")
@@ -186,7 +204,7 @@ interface TextAuthoringProject {
   @route("/authoring/analyze-text/projects/{projectName}/:copy")
   @post
   @pollingOperation(TextAuthoringProject.getCopyProjectStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
       /**
@@ -262,7 +280,7 @@ interface TextAuthoringProject {
       /**
        * The format of the project to import. The currently supported formats are json and aml formats. If not provided, the default is set to json.
        */
-      @added(Versions.v2023_04_15_preview)
+      @added(Versions.v2024_11_15_preview)
       @header
       format?: string;
 
@@ -306,7 +324,7 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing copy project job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<TextAnalysisAuthoringCopyProjectJobState>;
 
   /**
@@ -352,7 +370,7 @@ interface TextAuthoringProject {
   @route("/authoring/analyze-text/projects/{projectName}/resources/:unassign")
   @post
   @pollingOperation(TextAuthoringProject.getUnassignDeploymentResourcesStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -375,8 +393,28 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing unassign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
-  getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
+  @get
+  @added(Versions.v2024_11_15_preview)
+  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The new project name.
+       */
+      @path
+      projectName: string;
+
+      /**
+       * The job ID.
+       */
+      @path
+      jobId: string;
+    },
+    TextAnalysisAuthoringDeploymentResourcesJobState,
+    {},
+    Foundations.ErrorResponse
+  >;
 
   /**
    * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
@@ -385,7 +423,7 @@ interface TextAuthoringProject {
   @route("/authoring/analyze-text/projects/{projectName}/resources/:assign")
   @post
   @pollingOperation(TextAuthoringProject.getAssignDeploymentResourcesStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -408,8 +446,8 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringAssignDeploymentResourcesJobState>;
+  @added(Versions.v2024_11_15_preview)
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentResourcesJobState>;
 
   /**
    * Swaps two existing deployments with each other.
@@ -484,7 +522,7 @@ interface TextAuthoringDeployment {
   @pollingOperation(
     TextAuthoringDeployment.getDeploymentDeleteFromResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
@@ -513,7 +551,7 @@ interface TextAuthoringDeployment {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
@@ -558,7 +596,7 @@ interface TextAuthoringExportedModel {
   /**
    * Gets the details of an exported model.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getExportedModel is languageOperations.ResourceRead<TextAnalysisAuthoringExportedTrainedModel>;
 
   /**
@@ -568,7 +606,7 @@ interface TextAuthoringExportedModel {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @put
   @pollingOperation(TextAuthoringExportedModel.getExportedModelJobStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
       /**
@@ -601,7 +639,7 @@ interface TextAuthoringExportedModel {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
   @pollingOperation(TextAuthoringExportedModel.getExportedModelJobStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   deleteExportedModel is Foundations.LongRunningOperation<
     {
       /**
@@ -624,7 +662,7 @@ interface TextAuthoringExportedModel {
   /**
    * Gets the status for an existing job to create or update an exported model.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getExportedModelJobStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportedModelJobState>;
 
   /**
@@ -633,7 +671,7 @@ interface TextAuthoringExportedModel {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/manifest")
   @get
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getExportedModelManifest is Azure.Core.Foundations.Operation<
     {
       /**
@@ -672,7 +710,7 @@ interface TextAuthoringTrainedModel {
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
   @pollingOperation(TextAuthoringTrainedModel.getEvaluationStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
       /**
@@ -724,7 +762,7 @@ interface TextAuthoringTrainedModel {
   /**
    * Gets the status for an evaluation job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getEvaluationStatus is languageOperations.ResourceRead<TextAnalysisAuthoringEvaluationJobState>;
 
   /**

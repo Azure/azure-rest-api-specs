@@ -24,12 +24,58 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the azuredatatransfer.
 
+### Tag: default
+
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-09-27
+tag: package-2025-05-30-preview
 ```
 
+### Tag: package-2025-05-30-preview
+
+These settings apply only when `--tag=package-2025-05-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-30-preview'
+input-file:
+  - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
+```
+
+### Tag: package-2025-05-21
+
+These settings apply only when `--tag=package-2025-05-21` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-21'
+input-file:
+  - Microsoft.AzureDataTransfer/stable/2025-05-21/azuredatatransfer.json
+```
+
+### Tag: package-2025-04-11-preview
+
+These settings apply only when `--tag=package-2025-04-11-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-11-preview'
+input-file:
+  - Microsoft.AzureDataTransfer/preview/2025-04-11-preview/azuredatatransfer.json
+```
+
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+  - Microsoft.AzureDataTransfer/preview/2025-03-01-preview/azuredatatransfer.json
+```
+
+### Tag: package-2024-09-11
+
+These settings apply only when `--tag=package-2024-09-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-11'
+input-file:
+  - Microsoft.AzureDataTransfer/stable/2024-09-11/azuredatatransfer.json
+```
 
 ### Tag: package-2024-09-27
 
@@ -40,32 +86,24 @@ input-file:
   - Microsoft.AzureDataTransfer/stable/2024-09-27/azuredatatransfer.json
 ```
 
-### Tag: package-2024-09
+### Tag: package-2024-05-07
 
-These settings apply only when `--tag=package-2024-09` is specified on the command line.
+These settings apply only when `--tag=package-2024-05-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-09'
-input-file:
-  - Microsoft.AzureDataTransfer/stable/2024-09-11/azuredatatransfer.json
-```
-
-### Tag: package-2024-05
-
-These settings apply only when `--tag=package-2024-05` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-05'
+```yaml $(tag) == 'package-2024-05-07'
 input-file:
   - Microsoft.AzureDataTransfer/stable/2024-05-07/azuredatatransfer.json
 ```
 
-### Tag: package-2024-01
+### Tag: package-preview-2024-01-25
 
-These settings apply only when `--tag=package-2024-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-01-25` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+```yaml $(tag) == 'package-2024-01-25'
 input-file:
   - Microsoft.AzureDataTransfer/stable/2024-01-25/azuredatatransfer.json
 ```
+
 ### Tag: package-2023-10-11-preview
 
 These settings apply only when `--tag=package-2023-10-11-preview` is specified on the command line.
@@ -73,6 +111,39 @@ These settings apply only when `--tag=package-2023-10-11-preview` is specified o
 ``` yaml $(tag) == 'package-2023-10-11-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2023-10-11-preview/azuredatatransfer.json
+```
+
+## Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: azuredatatransfer.json
+    where: $.definitions.ReadPipelineConnection
+    reason:
+      This is due to the migration to make use of [lifecycle visibility transforms](https://typespec.io/docs/language-basics/visibility/#lifecycle-visibility-transforms)
+      typespec (which changed the name), the old OpenAPI v2 JSON spec had this property already in the original model.
+      This is required as the Pipeline and Connection that this references exist across ARM Subscription(s) and Entra Id
+      Tenant boundaries. This metadata is meant to be readOnly and exposed as information to a user. i.e.
+      This connection exists as in tenant id 11111111-1111-1111-1111-111111111111.
+  - code: AvoidAdditionalProperties
+    from: azuredatatransfer.json
+    where: $.definitions.ReadReadPipelineConnectionProperties
+    reason:
+      This was inherited from a new model being created in typespec, the old OpenAPI v2 JSON spec had this
+      property in the original model (just it was an inline model). This is required as the Pipeline and Connection
+      that this references exist across ARM Subscription and Entra Id Tenant boundaries. This metadata is meant to be
+      readOnly and exposed as information to a user. i.e. This connection exists as in tenant id
+      11111111-1111-1111-1111-111111111111.
+  - code: AvoidAdditionalProperties
+    from: azuredatatransfer.json
+    where: $.definitions.ReadReadInternalMetadataProperties
+    reason:
+      This is due to the migration to make use of [lifecycle visibility transforms](https://typespec.io/docs/language-basics/visibility/#lifecycle-visibility-transforms)
+      typespec (which changed the name), the old OpenAPI v2 JSON spec had this property already in the original model.
+      This is required as the Pipeline and Connection that this references exist across ARM Subscription(s) and Entra Id
+      Tenant boundaries. This metadata is meant to be readOnly and exposed as information to a user. i.e.
+      This connection exists as in tenant id 11111111-1111-1111-1111-111111111111.
 ```
 
 ---

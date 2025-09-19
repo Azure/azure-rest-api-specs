@@ -1,0 +1,27 @@
+name: TypeSpec Migration Validation
+
+on:
+  pull_request:
+    types: [edited, labeled, unlabeled, opened, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  typespec-migration-validation:
+    name: TypeSpec Migration Validation
+    if: contains(github.event.pull_request.labels.*.name, 'typespec-conversion-w1') || contains(github.event.pull_request.labels.*.name, 'typespec-conversion-w2') || contains(github.event.pull_request.labels.*.name, 'typespec-conversion-w3')
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Run TypeSpec Migration Validation
+        run: |
+          ./eng/tools/typespec-migration-validation/scripts/download-main.ps1 -Verbose -reportFile $env:GITHUB_STEP_SUMMARY
+        shell: pwsh

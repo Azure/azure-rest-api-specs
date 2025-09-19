@@ -3736,7 +3736,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Project"
             },
             "description": "The parameters to provide for the created project."
           },
@@ -3751,19 +3751,19 @@
           "200": {
             "description": "If resource is created successfully or already existed, the service should return 200 (OK).",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Project"
             }
           },
           "201": {
             "description": "If resource is created successfully, the service should return 201 (OK).",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Project"
             }
           },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Project"
             }
           },
           "default": {
@@ -3801,7 +3801,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Project"
             },
             "description": "The parameters to provide for the created project."
           },
@@ -3816,13 +3816,13 @@
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Project"
             }
           },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Project"
             }
           },
           "default": {
@@ -3913,7 +3913,7 @@
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Project"
             }
           },
           "default": {
@@ -3955,7 +3955,7 @@
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AccountListResult"
+              "$ref": "#/definitions/ProjectListResult"
             }
           },
           "default": {
@@ -5220,6 +5220,27 @@
         },
         "raiMonitorConfig": {
           "$ref": "#/definitions/RaiMonitorConfig"
+        },
+        "networkInjections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInjection"
+          }
+        },
+        "allowProjectManagement": {
+          "type": "boolean",
+          "description": "Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry."
+        },
+        "defaultProject": {
+          "type": "string",
+          "description": "Specifies the project that is targeted when data plane endpoints are called without a project parameter."
+        },
+        "associatedProjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the projects that are associated with this resource."
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -6664,6 +6685,10 @@
         "parentDeploymentName": {
           "type": "string",
           "description": "The name of parent deployment."
+        },
+        "spilloverDeploymentName": {
+          "type": "string",
+          "description": "Specifies the deployment name that should serve requests when the request would have otherwise been throttled due to reaching current deployment throughput limit."
         }
       },
       "description": "Properties of Cognitive Services account deployment."
@@ -8787,6 +8812,146 @@
         }
       },
       "additionalProperties": false
+    },
+    "NetworkInjection": {
+      "description": "Specifies in AI Foundry where virtual network injection occurs to secure scenarios like Agents entirely within the user's private network, eliminating public internet exposure while maintaining control over network configurations and resources.",
+      "type": "object",
+      "properties": {
+        "scenario": {
+          "type": "string",
+          "enum": [
+            "none",
+            "agent"
+          ],
+          "x-ms-enum": {
+            "name": "scenarioType",
+            "modelAsString": true
+          },
+          "description": "Specifies what features in AI Foundry network injection applies to. Currently only supports 'agent' for agent scenarios. 'none' means no network injection."
+        },
+        "subnetArmId": {
+          "description": "Specify the subnet for which your Agent Client is injected into.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "useMicrosoftManagedNetwork": {
+          "description": "Boolean to enable Microsoft Managed Network for subnet delegation",
+          "type": "boolean"
+        }
+      }
+    },
+    "Project": {
+      "description": "Cognitive Services project is an Azure resource representing the provisioned account's project, it's type, location and SKU.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "Properties of Cognitive Services project."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/AzureEntityResource"
+        }
+      ]
+    },
+    "ProjectProperties": {
+      "description": "Properties of Cognitive Services Project'.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the cognitive services project at the time the operation was called.",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "ResolvingDNS"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the Cognitive Services Project."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the Cognitive Services Project."
+        },
+        "endpoints": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The list of endpoint for this Cognitive Services Project.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isDefault": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicates whether the project is the default project for the account."
+        }
+      }
+    },
+    "ProjectListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of projects.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          },
+          "description": "Gets the list of Cognitive Services projects and their properties."
+        }
+      },
+      "description": "The list of cognitive services projects operation response."
     }
   },
   "parameters": {

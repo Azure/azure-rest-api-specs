@@ -27,26 +27,18 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("Versions info.")
 enum Versions {
   @doc("The 2023-09-01-preview version.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_09_01_preview: "2023-09-01-preview",
 
   @doc("The 2024-07-17-preview version.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_07_19_preview: "2024-07-19-preview",
 
   @doc("The 2024-10-01-preview version.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_10_01_preview: "2024-10-01-preview",
 
   @doc("The 2025-01-02 version.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_01_02: "2025-01-02",
 }
 @doc("The DatabaseWatcherProviderHub resource.")
@@ -58,7 +50,8 @@ model Watcher is TrackedResource<WatcherProperties> {
   @segment("watchers")
   name: string;
 
-  ...Legacy.ManagedServiceIdentityV4Property;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("The RP specific properties of the resource.")
@@ -138,6 +131,7 @@ interface Watchers {
     Watcher,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Watcher,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

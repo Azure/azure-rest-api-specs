@@ -5,8 +5,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Quantum;
 
@@ -388,7 +390,8 @@ model WorkspaceResourceProperties {
   /**
    * ARM Resource Id of the storage account associated with this workspace.
    */
-  storageAccount?: string;
+  @typeChangedFrom(Versions.v2025_01_01_preview, string)
+  storageAccount?: StorageAccountResourceId;
 
   /**
    * The URI of the workspace endpoint.
@@ -400,7 +403,56 @@ model WorkspaceResourceProperties {
    * Indicator of enablement of the Quantum workspace Api keys.
    */
   apiKeyEnabled?: boolean;
+
+  /**
+   * Managed On Behalf Of configuration.
+   */
+  @added(Versions.v2025_01_01_preview)
+  @visibility(Lifecycle.Read)
+  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
+
+  /**
+   * ARM Resource Id of the managed storage account associated with this workspace.
+   */
+  @added(Versions.v2025_01_01_preview)
+  @visibility(Lifecycle.Read)
+  managedStorageAccount?: StorageAccountResourceId;
+
+  /**
+   * Quota allocations associated with this workspace. Available only for special providers.
+   */
+  @added(Versions.v2025_08_11_preview)
+  quotas?: QuotaAllocations;
 }
+
+/**
+ * Quota allocations with each field representing different quota type.
+ */
+@added(Versions.v2025_08_11_preview)
+model QuotaAllocations {
+  /**
+   * Lifetime limit for standard priority jobs execution in minutes.
+   */
+  @minValue(0)
+  standardMinutesLifetime: int32;
+
+  /**
+   * Lifetime limit for high priority jobs execution in minutes.
+   */
+  @minValue(0)
+  highMinutesLifetime?: int32;
+}
+
+/**
+ * ARM Resource Id of a storage account.
+ */
+@added(Versions.v2025_01_01_preview)
+scalar StorageAccountResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts",
+    }
+  ]>;
 
 /**
  * Information about a Provider. A Provider is an entity that offers Targets to run Azure Quantum Jobs.
@@ -493,4 +545,40 @@ model ApiKeys {
    * A list of api key names.
    */
   keys?: KeyType[];
+}
+
+/** A Quantum Suite Offer that is available to a subscription. */
+@added(Versions.v2025_08_11_preview)
+model QuantumSuiteOffer
+  is Azure.ResourceManager.ProxyResource<QuantumSuiteOfferProperties> {
+  ...ResourceNameParameter<
+    Resource = QuantumSuiteOffer,
+    KeyName = "offerName",
+    SegmentName = "suiteOffers"
+  >;
+}
+
+/** Properties of a Quantum Suite Offer */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Only offers that are fully provisioned as available to subscriptions."
+@added(Versions.v2025_08_11_preview)
+model QuantumSuiteOfferProperties {
+  /** The provider ID of the offer. */
+  providerId: string;
+
+  /** The provider name of the offer. */
+  providerName: string;
+
+  /** The name of the company that is providing this offer. */
+  companyName: string;
+
+  /** The location where this offer is available. */
+  location: string;
+
+  /** Description of the offer. */
+  description: string;
+
+  /**
+   * Quota allocations associated with this offer.
+   */
+  quotas?: QuotaAllocations;
 }

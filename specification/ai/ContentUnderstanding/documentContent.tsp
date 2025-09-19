@@ -42,8 +42,9 @@ model DocumentContent extends MediaContent {
   @doc("List of figures in the document.  Only if enableLayout and returnDetails are true.")
   figures?: DocumentFigure[];
 
-  @doc("List of faces in the document.  Only if enableFace and returnDetails are true.")
-  faces?: ImageFace[];
+  @added(Versions.v2025_05_01_preview)
+  @doc("List of detected persons in the document.  Only if enableFace and returnDetails are true.")
+  persons?: DetectedPerson[];
 }
 
 @doc("Length unit used by the width, height, and source properties.")
@@ -104,7 +105,7 @@ model DocumentWord {
   content: string;
 
   @doc("Encoded source that identifies the position of the word in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the word in the markdown content.")
   span?: ContentSpan;
@@ -121,7 +122,7 @@ model DocumentLine {
   content: string;
 
   @doc("Encoded source that identifies the position of the line in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the line in the markdown content.")
   span?: ContentSpan;
@@ -136,7 +137,7 @@ model DocumentBarcode {
   value: string;
 
   @doc("Encoded source that identifies the position of the barcode in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the barcode in the markdown content.")
   span?: ContentSpan;
@@ -156,7 +157,7 @@ model DocumentFormula {
   value: string;
 
   @doc("Encoded source that identifies the position of the formula in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the formula in the markdown content.")
   span?: ContentSpan;
@@ -179,7 +180,7 @@ model DocumentParagraph {
   content: string;
 
   @doc("Encoded source that identifies the position of the paragraph in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the paragraph in the markdown content.")
   span?: ContentSpan;
@@ -199,7 +200,7 @@ model DocumentTable {
   cells: DocumentTableCell[];
 
   @doc("Encoded source that identifies the position of the table in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the table in the markdown content.")
   span?: ContentSpan;
@@ -234,7 +235,7 @@ model DocumentTableCell {
   content: string;
 
   @doc("Encoded source that identifies the position of the table cell in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the table cell in the markdown content.")
   span?: ContentSpan;
@@ -249,7 +250,7 @@ model DocumentFigure {
   id: string;
 
   @doc("Encoded source that identifies the position of the figure in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the figure in the markdown content.")
   span?: ContentSpan;
@@ -279,7 +280,7 @@ model DocumentCaption {
   content: string;
 
   @doc("Encoded source that identifies the position of the caption in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the caption in the markdown content.")
   span?: ContentSpan;
@@ -294,7 +295,7 @@ model DocumentFootnote {
   content: string;
 
   @doc("Encoded source that identifies the position of the footnote in the content.")
-  source?: string;
+  source?: SourceExpression;
 
   @doc("Span of the footnote in the markdown content.")
   span?: ContentSpan;
@@ -422,6 +423,7 @@ union DocumentTableCellKind {
   description: "description",
 }
 
+@removed(Versions.v2025_05_01_preview)
 @doc("Face in an image.")
 model ImageFace {
   @doc("Face identifier.")
@@ -431,5 +433,5 @@ model ImageFace {
   confidence?: float32;
 
   @doc("Encoded source that identifies the position of the face in the content.")
-  source?: string;
+  source?: SourceExpression;
 }
