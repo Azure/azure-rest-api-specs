@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-08-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-08-01'
 input-file:
-  - Microsoft.StoragePool/stable/2021-08-01/storagepool.json
+  - stable/2021-08-01/storagepool.json
 ```
 
 ### Tag: package-2021-04-01-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2021-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-04-01-preview'
 input-file:
-  - Microsoft.StoragePool/preview/2021-04-01-preview/storagepool.json
+  - preview/2021-04-01-preview/storagepool.json
 ```
 
 
@@ -53,7 +53,7 @@ input-file:
 These settings apply only when 
 ```yaml $(tag) == 'package-2020-03-15-preview'
 input-file:
-  - Microsoft.StoragePool/preview/2020-03-15-preview/storagepool.json
+  - preview/2020-03-15-preview/storagepool.json
 ```
 
 
