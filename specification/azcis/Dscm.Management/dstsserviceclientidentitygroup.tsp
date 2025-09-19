@@ -15,9 +15,6 @@ model ClaimProvisioningsForGroup {
   @doc("The claim identity instance. Required.")
   claimInstance: Claim;
 
-  @doc("Flag to indicate if the claim is unscoped. If the claim needs to work for all service accounts set the IsUnscoped to true, but the claim's type and value will need to be previously added a as global claim to dSCM. Optional.")
-  isUnscoped?: IsUnscoped;
-
   @doc("Scoped to service account group id. If IsUnscoped is false, set the ScopedToServiceAccountGroupId to the ID of group the claim will apply to. If IsUnscoped is true, you can omit the ScopedToServiceAccountGroupId. Optional.")
   scopedToServiceAccountGroupId?: string;
 
@@ -26,18 +23,6 @@ model ClaimProvisioningsForGroup {
 
   @doc("Scoped to service account group service tree id. Optional.")
   scopedToServiceAccountGroupServiceTreeId?: string;
-}
-
-@added(Versions.v2024_06_24_preview)
-@doc("IsUnscoped enum.")
-union IsUnscoped {
-  string,
-
-  @doc("False value")
-  False: "False",
-
-  @doc("True value")
-  True: "True",
 }
 
 @added(Versions.v2024_06_24_preview)
