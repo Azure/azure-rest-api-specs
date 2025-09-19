@@ -15,7 +15,7 @@ namespace Microsoft.AzureCis;
 
 @added(Versions.v2024_06_24_preview)
 @doc("DSTS service client identity (SCI) group, which is subjectName based.")
-model DstsServiceClientIdentityGroupSubjectNameBasedResourceProperties {
+model DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties {
   @doc("List of common subject names for the service client identity group. Client identification is based on the combination of the Subject Name and Issuer of the certificate. For groups, the CommonSubjectNames can be explicitly specified. When creating a SubjectName-Based SCI Group and subsequently creating SCIs, the subject names associated with the group automatically appear in the SCI. Optional.")
   commonSubjectNames?: Array<string>;
 
@@ -66,13 +66,13 @@ model DstsServiceClientIdentityGroupSubjectNameBasedResourceProperties {
 }
 
 @added(Versions.v2024_06_24_preview)
-@doc("DstsServiceClientIdentityGroupSubjectNameBased Resource")
-model DstsServiceClientIdentityGroupSubjectNameBasedResource
-  is ProxyResource<DstsServiceClientIdentityGroupSubjectNameBasedResourceProperties> {
+@doc("DstsSubjectNameBasedServiceClientIdentityGroup Resource.")
+model DstsSubjectNameBasedServiceClientIdentityGroupResource
+  is ProxyResource<DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties> {
   @doc("The name of resource.")
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
-  @segment("dstsServiceClientIdentityGroupSubjectNameBaseds") // Start with lower case. Should be plural
+  @segment("dstsSubjectNameBasedServiceClientIdentityGroups") // Start with lower case. Should be plural
   @visibility(Lifecycle.Read)
   @path
   name: string;
@@ -81,9 +81,9 @@ model DstsServiceClientIdentityGroupSubjectNameBasedResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @added(Versions.v2024_06_24_preview)
 @armResourceOperations
-interface DstsServiceClientIdentityGroupSubjectNameBased {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsServiceClientIdentityGroupSubjectNameBasedResource>;
-  get is ArmResourceRead<DstsServiceClientIdentityGroupSubjectNameBasedResource>;
-  listByResourceGroup is ArmResourceListByParent<DstsServiceClientIdentityGroupSubjectNameBasedResource>;
-  listBySubscription is ArmListBySubscription<DstsServiceClientIdentityGroupSubjectNameBasedResource>;
+interface DstsSubjectNameBasedServiceClientIdentityGroup {
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsSubjectNameBasedServiceClientIdentityGroupResource>;
+  get is ArmResourceRead<DstsSubjectNameBasedServiceClientIdentityGroupResource>;
+  listByResourceGroup is ArmResourceListByParent<DstsSubjectNameBasedServiceClientIdentityGroupResource>;
+  listBySubscription is ArmListBySubscription<DstsSubjectNameBasedServiceClientIdentityGroupResource>;
 }

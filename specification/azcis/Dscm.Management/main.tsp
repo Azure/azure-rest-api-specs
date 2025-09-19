@@ -8,6 +8,9 @@ import "./dstsapplication.tsp";
 import "./dstsserviceaccount.tsp";
 import "./dstsserviceaccountgroup.tsp";
 import "./dstsserviceclientidentity.tsp";
+import "./dstsserviceclientidentitygroup.tsp";
+import "./dstsmanagedserviceclientidentitygroup.tsp";
+import "./dstssubjectnamebasedserviceclientidentitygroup.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

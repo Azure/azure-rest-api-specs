@@ -15,7 +15,7 @@ namespace Microsoft.AzureCis;
 
 @added(Versions.v2024_06_24_preview)
 @doc("DSTS service client identity (SCI) group, which is managed by DSTS.")
-model DstsServiceClientIdentityGroupManagedResourceProperties {
+model DstsManagedServiceClientIdentityGroupResourceProperties {
   @doc("List of common subscriptions. Optional.")
   commonSubscriptions?: Array<string>;
 
@@ -66,13 +66,13 @@ model DstsServiceClientIdentityGroupManagedResourceProperties {
 }
 
 @added(Versions.v2024_06_24_preview)
-@doc("DstsServiceClientIdentityGroupManaged Resource.")
-model DstsServiceClientIdentityGroupManagedResource
-  is ProxyResource<DstsServiceClientIdentityGroupManagedResourceProperties> {
+@doc("DstsManagedServiceClientIdentityGroup Resource.")
+model DstsManagedServiceClientIdentityGroupResource
+  is ProxyResource<DstsManagedServiceClientIdentityGroupResourceProperties> {
   @doc("The name of resource.")
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
-  @segment("dstsServiceClientIdentityGroupManageds") // Start with lower case. Should be plural
+  @segment("dstsManagedServiceClientIdentityGroups") // Start with lower case. Should be plural
   @visibility(Lifecycle.Read)
   @path
   name: string;
@@ -81,9 +81,9 @@ model DstsServiceClientIdentityGroupManagedResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @added(Versions.v2024_06_24_preview)
 @armResourceOperations
-interface DstsServiceClientIdentityGroupManaged {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsServiceClientIdentityGroupManagedResource>;
-  get is ArmResourceRead<DstsServiceClientIdentityGroupManagedResource>;
-  listByResourceGroup is ArmResourceListByParent<DstsServiceClientIdentityGroupManagedResource>;
-  listBySubscription is ArmListBySubscription<DstsServiceClientIdentityGroupManagedResource>;
+interface DstsManagedServiceClientIdentityGroup {
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsManagedServiceClientIdentityGroupResource>;
+  get is ArmResourceRead<DstsManagedServiceClientIdentityGroupResource>;
+  listByResourceGroup is ArmResourceListByParent<DstsManagedServiceClientIdentityGroupResource>;
+  listBySubscription is ArmListBySubscription<DstsManagedServiceClientIdentityGroupResource>;
 }
