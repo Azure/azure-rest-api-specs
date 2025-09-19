@@ -1,9 +1,10 @@
 {
-  "title": "List deleted backup vaults by subscription",
-  "operationId": "DeletedBackupVaults_ListBySubscription",
+  "title": "List deleted backup vaults by location",
+  "operationId": "DeletedBackupVaults_ListByLocation",
   "parameters": {
     "api-version": "2025-09-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "westus"
   },
   "responses": {
     "200": {
@@ -27,10 +28,14 @@
                 }
               },
               "provisioningState": "Succeeded",
+              "resourceMoveState": "Unknown",
               "securitySettings": {
                 "softDeleteSettings": {
                   "state": "On",
                   "retentionDurationInDays": 14.0
+                },
+                "immutabilitySettings": {
+                  "state": "Disabled"
                 }
               },
               "storageSettings": [
@@ -38,15 +43,20 @@
                   "datastoreType": "VaultStore",
                   "type": "LocallyRedundant"
                 }
-              ]
-            },
-            "location": "westus",
-            "tags": {
-              "key1": "value1"
+              ],
+              "isVaultProtectedByResourceGuard": false,
+              "featureSettings": {
+                "crossSubscriptionRestoreSettings": {
+                  "state": "Disabled"
+                }
+              },
+              "secureScore": "Maximum",
+              "resourceGuardOperationRequests": [],
+              "replicatedRegions": []
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DataProtection/locations/eastus/deletedBackupVaults/deleted-vault-02",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DataProtection/locations/westus/deletedBackupVaults/deleted-vault-02",
             "name": "deleted-vault-02",
             "type": "Microsoft.DataProtection/deletedBackupVaults",
             "properties": {
@@ -63,10 +73,14 @@
                 }
               },
               "provisioningState": "Succeeded",
+              "resourceMoveState": "Unknown",
               "securitySettings": {
                 "softDeleteSettings": {
-                  "state": "AlwaysOn",
+                  "state": "On",
                   "retentionDurationInDays": 30.0
+                },
+                "immutabilitySettings": {
+                  "state": "Enabled"
                 }
               },
               "storageSettings": [
@@ -74,14 +88,20 @@
                   "datastoreType": "VaultStore",
                   "type": "GeoRedundant"
                 }
-              ]
-            },
-            "location": "eastus",
-            "tags": {
-              "environment": "production"
+              ],
+              "isVaultProtectedByResourceGuard": true,
+              "featureSettings": {
+                "crossSubscriptionRestoreSettings": {
+                  "state": "Enabled"
+                }
+              },
+              "secureScore": "Adequate",
+              "resourceGuardOperationRequests": [],
+              "replicatedRegions": ["eastus", "centralus"]
             }
           }
-        ]
+        ],
+        "nextLink": null
       }
     }
   }
