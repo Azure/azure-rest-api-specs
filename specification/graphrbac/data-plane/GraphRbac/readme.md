@@ -36,7 +36,7 @@ These settings apply only when `--tag=1.6` is specified on the command line.
 
 ``` yaml $(tag) == '1.6'
 input-file:
-- Microsoft.GraphRbac/stable/1.6/graphrbac.json
+- stable/1.6/graphrbac.json
 ```
 
 ## Suppression
@@ -99,7 +99,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.GraphRbac/stable/1.6/graphrbac.json
+  - $(this-folder)/stable/1.6/graphrbac.json
 
 ```
 
