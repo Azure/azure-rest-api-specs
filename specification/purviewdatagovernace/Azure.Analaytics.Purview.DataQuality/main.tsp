@@ -22,10 +22,10 @@ using TypeSpec.Versioning;
  */
 @service(#{ title: "PurviewDataQuality" })
 @server(
-  "{$host}",
+  "{endpoint}/purviewdataquality/api",
   "Purview Data Quality Service is a fully managed cloud service whose users can run Data Quality Job to get some score. This spec defines REST API of Purview Data Quality Service.",
   {
-    $host: string,
+    endpoint: url,
   }
 )
 @useAuth(AuthToken)
