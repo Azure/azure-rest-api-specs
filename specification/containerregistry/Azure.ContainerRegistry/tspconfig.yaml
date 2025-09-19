@@ -16,7 +16,7 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Registry/{version-status}/{version}/containerregistry.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-containerregistry"
+    package-dir: "azure-containerregistry"
     package-name: "azure-containerregistry"
     package-pprint-name: "Azure Container Registry"
     namespace: "azure.containerregistry"
@@ -34,7 +34,7 @@ options:
     flavor: "azure"
   "@azure-tools/typespec-csharp":
     package-name: "Azure.Containers.ContainerRegistry"
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Containers.ContainerRegistry"
+    package-dir: "Azure.Containers.ContainerRegistry"
     package-version: "1.1.1"
     namespace: "Azure.Containers.ContainerRegistry"
     clear-output-folder: true
@@ -45,7 +45,7 @@ options:
   "@azure-tools/typespec-ts":
     service-dir: "sdk/containerregistry/"
     is-modular-library: true
-    emitter-output-dir: "{output-dir}/{service-dir}/container-registry"
+    package-dir: "container-registry"
     package-details:
       name: "@azure/container-registry"
       version: "1.1.0"
