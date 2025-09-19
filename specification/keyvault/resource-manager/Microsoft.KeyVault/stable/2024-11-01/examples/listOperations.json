@@ -9,96 +9,106 @@
           {
             "name": "Microsoft.KeyVault/vaults/read",
             "display": {
-              "description": "View the properties of a key vault",
-              "operation": "View Key Vault",
               "provider": "Microsoft Key Vault",
-              "resource": "Key Vault"
+              "resource": "Key Vault",
+              "operation": "View Key Vault",
+              "description": "View the properties of a key vault"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/write",
             "display": {
-              "description": "Create a new key vault or update the properties of an existing key vault",
-              "operation": "Update Key Vault",
               "provider": "Microsoft Key Vault",
-              "resource": "Key Vault"
+              "resource": "Key Vault",
+              "operation": "Update Key Vault",
+              "description": "Create a new key vault or update the properties of an existing key vault"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/delete",
             "display": {
-              "description": "Delete a key vault",
-              "operation": "Delete Key Vault",
               "provider": "Microsoft Key Vault",
-              "resource": "Key Vault"
+              "resource": "Key Vault",
+              "operation": "Delete Key Vault",
+              "description": "Delete a key vault"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/deploy/action",
             "display": {
-              "description": "Enables access to secrets in a key vault when deploying Azure resources",
-              "operation": "Use Vault for Azure Deployments",
               "provider": "Microsoft Key Vault",
-              "resource": "Key Vault"
+              "resource": "Key Vault",
+              "operation": "Use Vault for Azure Deployments",
+              "description": "Enables access to secrets in a key vault when deploying Azure resources"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/secrets/read",
             "display": {
-              "description": "View the properties of a secret, but not its value",
-              "operation": "View Secret Properties",
               "provider": "Microsoft Key Vault",
-              "resource": "Secret"
+              "resource": "Secret",
+              "operation": "View Secret Properties",
+              "description": "View the properties of a secret, but not its value"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/secrets/write",
             "display": {
-              "description": "Create a new secret or update the value of an existing secret",
-              "operation": "Update Secret",
               "provider": "Microsoft Key Vault",
-              "resource": "Secret"
+              "resource": "Secret",
+              "operation": "Update Secret",
+              "description": "Create a new secret or update the value of an existing secret"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/accessPolicies/write",
             "display": {
-              "description": "Update an existing access policy by merging or replacing, or add a new access policy to a vault.",
-              "operation": "Update Access Policy",
               "provider": "Microsoft Key Vault",
-              "resource": "Access Policy"
+              "resource": "Access Policy",
+              "operation": "Update Access Policy",
+              "description": "Update an existing access policy by merging or replacing, or add a new access policy to a vault."
             },
             "isDataAction": false
           },
           {
+            "origin": "system",
             "name": "Microsoft.KeyVault/vaults/providers/Microsoft.Insights/logDefinitions/read",
             "display": {
-              "description": "Gets the available logs for a key vault",
-              "operation": "Read log definition",
               "provider": "Microsoft Key Vault",
-              "resource": "Key Vault Log Definition"
+              "resource": "Key Vault Log Definition",
+              "operation": "Read log definition",
+              "description": "Gets the available logs for a key vault"
             },
             "isDataAction": false,
-            "origin": "system",
             "properties": {
               "serviceSpecification": {
                 "logSpecifications": [
                   {
                     "name": "AuditEvent",
-                    "blobDuration": "PT1H",
-                    "displayName": "Audit Logs"
+                    "displayName": "Audit Logs",
+                    "blobDuration": "PT1H"
                   }
                 ],
                 "metricSpecifications": [
                   {
                     "name": "ServiceApiHit",
+                    "displayName": "",
+                    "displayDescription": "",
+                    "unit": "",
                     "aggregationType": "",
+                    "supportedAggregationTypes": [
+                      ""
+                    ],
+                    "supportedTimeGrainTypes": [
+                      ""
+                    ],
+                    "lockAggregationType": "",
                     "dimensions": [
                       {
                         "name": "ActivityType",
@@ -111,224 +121,212 @@
                         "toBeExportedForShoebox": true
                       }
                     ],
-                    "displayDescription": "",
-                    "displayName": "",
                     "fillGapWithZero": false,
-                    "internalMetricName": "AuditEvent",
-                    "lockAggregationType": "",
-                    "supportedAggregationTypes": [
-                      ""
-                    ],
-                    "supportedTimeGrainTypes": [
-                      ""
-                    ],
-                    "unit": ""
+                    "internalMetricName": "AuditEvent"
                   }
                 ]
               }
             }
           },
           {
+            "origin": "system",
             "name": "Microsoft.KeyVault/vaults/providers/Microsoft.Insights/diagnosticSettings/Read",
             "display": {
-              "description": "Gets the diagnostic setting for the resource",
-              "operation": "Read diagnostic setting",
               "provider": "Microsoft Key Vault",
-              "resource": "Key Vault Diagnostic Settings"
+              "resource": "Key Vault Diagnostic Settings",
+              "operation": "Read diagnostic setting",
+              "description": "Gets the diagnostic setting for the resource"
             },
-            "isDataAction": false,
-            "origin": "system"
+            "isDataAction": false
           },
           {
+            "origin": "system",
             "name": "Microsoft.KeyVault/vaults/providers/Microsoft.Insights/diagnosticSettings/Write",
             "display": {
-              "description": "Creates or updates the diagnostic setting for the resource",
-              "operation": "Write diagnostic setting",
               "provider": "Microsoft Key Vault",
-              "resource": "Key Vault Diagnostic Settings"
+              "resource": "Key Vault Diagnostic Settings",
+              "operation": "Write diagnostic setting",
+              "description": "Creates or updates the diagnostic setting for the resource"
             },
-            "isDataAction": false,
-            "origin": "system"
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/register/action",
             "display": {
-              "description": "Registers a subscription",
-              "operation": "Register Subscription",
               "provider": "Microsoft Key Vault",
-              "resource": "Subscription"
+              "resource": "Subscription",
+              "operation": "Register Subscription",
+              "description": "Registers a subscription"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/unregister/action",
             "display": {
-              "description": "Unregisters a subscription",
-              "operation": "Unregister Subscription",
               "provider": "Microsoft Key Vault",
-              "resource": "Subscription"
+              "resource": "Subscription",
+              "operation": "Unregister Subscription",
+              "description": "Unregisters a subscription"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/operations/read",
             "display": {
-              "description": "Lists operations available on Microsoft.KeyVault resource provider",
-              "operation": "Available Key Vault Operations",
               "provider": "Microsoft Key Vault",
-              "resource": "Operations"
+              "resource": "Operations",
+              "operation": "Available Key Vault Operations",
+              "description": "Lists operations available on Microsoft.KeyVault resource provider"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/checkNameAvailability/read",
             "display": {
-              "description": "Checks that a key vault name is valid and is not in use",
-              "operation": "Check Name Availability",
               "provider": "Microsoft Key Vault",
-              "resource": "Name Availability"
+              "resource": "Name Availability",
+              "operation": "Check Name Availability",
+              "description": "Checks that a key vault name is valid and is not in use"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/deletedVaults/read",
             "display": {
-              "description": "View the properties of soft deleted key vaults",
-              "operation": "View Soft Deleted Vaults",
               "provider": "Microsoft Key Vault",
-              "resource": "Soft Deleted Key Vault"
+              "resource": "Soft Deleted Key Vault",
+              "operation": "View Soft Deleted Vaults",
+              "description": "View the properties of soft deleted key vaults"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/locations/deletedVaults/read",
             "display": {
-              "description": "View the properties of a soft deleted key vault",
-              "operation": "View Soft Deleted Key Vault",
               "provider": "Microsoft Key Vault",
-              "resource": "Soft Deleted Key Vault"
+              "resource": "Soft Deleted Key Vault",
+              "operation": "View Soft Deleted Key Vault",
+              "description": "View the properties of a soft deleted key vault"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/locations/deletedVaults/purge/action",
             "display": {
-              "description": "Purge a soft deleted key vault",
-              "operation": "Purge Soft Deleted Key Vault",
               "provider": "Microsoft Key Vault",
-              "resource": "Soft Deleted Key Vault"
+              "resource": "Soft Deleted Key Vault",
+              "operation": "Purge Soft Deleted Key Vault",
+              "description": "Purge a soft deleted key vault"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/locations/operationResults/read",
             "display": {
-              "description": "Check the result of a long run operation",
-              "operation": "Check Operation Result",
               "provider": "Microsoft Key Vault",
-              "resource": "Long Run Operation Result"
+              "resource": "Long Run Operation Result",
+              "operation": "Check Operation Result",
+              "description": "Check the result of a long run operation"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/hsmPools/read",
             "display": {
-              "description": "View the properties of an HSM pool",
-              "operation": "View HSM pool",
               "provider": "Microsoft Key Vault",
-              "resource": "HSM pool"
+              "resource": "HSM pool",
+              "operation": "View HSM pool",
+              "description": "View the properties of an HSM pool"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/hsmPools/write",
             "display": {
-              "description": "Create a new HSM pool of update the properties of an existing HSM pool",
-              "operation": "Create or Update HSM pool",
               "provider": "Microsoft Key Vault",
-              "resource": "HSM pool"
+              "resource": "HSM pool",
+              "operation": "Create or Update HSM pool",
+              "description": "Create a new HSM pool of update the properties of an existing HSM pool"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/hsmPools/delete",
             "display": {
-              "description": "Delete an HSM pool",
-              "operation": "Delete HSM pool",
               "provider": "Microsoft Key Vault",
-              "resource": "HSM pool"
+              "resource": "HSM pool",
+              "operation": "Delete HSM pool",
+              "description": "Delete an HSM pool"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/hsmPools/joinVault/action",
             "display": {
-              "description": "Join a key vault to an HSM pool",
-              "operation": "Join KeyVault to HSM pool",
               "provider": "Microsoft Key Vault",
-              "resource": "HSM pool"
+              "resource": "HSM pool",
+              "operation": "Join KeyVault to HSM pool",
+              "description": "Join a key vault to an HSM pool"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/managedHSMs/read",
             "display": {
-              "description": "View the properties of a Managed HSM",
-              "operation": "View Managed HSM",
               "provider": "Microsoft Key Vault",
-              "resource": "Managed HSM"
+              "resource": "Managed HSM",
+              "operation": "View Managed HSM",
+              "description": "View the properties of a Managed HSM"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/managedHSMs/write",
             "display": {
-              "description": "Create a new Managed HSM of update the properties of an existing Managed HSM",
-              "operation": "Create or Update Managed HSM",
               "provider": "Microsoft Key Vault",
-              "resource": "Managed HSM"
+              "resource": "Managed HSM",
+              "operation": "Create or Update Managed HSM",
+              "description": "Create a new Managed HSM of update the properties of an existing Managed HSM"
             },
             "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/managedHSMs/delete",
             "display": {
-              "description": "Delete a Managed HSM",
-              "operation": "Delete Managed HSM",
               "provider": "Microsoft Key Vault",
-              "resource": "Managed HSM"
+              "resource": "Managed HSM",
+              "operation": "Delete Managed HSM",
+              "description": "Delete a Managed HSM"
             },
             "isDataAction": false
           },
           {
+            "origin": "system",
             "name": "Microsoft.KeyVault/vaults/providers/Microsoft.Insights/metricDefinitions/read",
             "display": {
-              "description": "Gets the available metrics for a key vault",
-              "operation": "Read metric definition",
               "provider": "Microsoft Key Vault",
-              "resource": "Key Vault Metric Definition"
+              "resource": "Key Vault Metric Definition",
+              "operation": "Read metric definition",
+              "description": "Gets the available metrics for a key vault"
             },
             "isDataAction": false,
-            "origin": "system",
             "properties": {
               "serviceSpecification": {}
             }
           },
           {
+            "origin": "system",
             "name": "Microsoft.KeyVault/locations/deleteVirtualNetworkOrSubnets/action",
             "display": {
-              "description": "Notifies Microsoft.KeyVault that a virtual network or subnet is being deleted",
-              "operation": "Modify Network ACLs containing the deleted Vitual Network or Subnet ",
               "provider": "Microsoft Key Vault",
-              "resource": "Location"
+              "resource": "Location",
+              "operation": "Modify Network ACLs containing the deleted Vitual Network or Subnet ",
+              "description": "Notifies Microsoft.KeyVault that a virtual network or subnet is being deleted"
             },
-            "isDataAction": false,
-            "origin": "system"
+            "isDataAction": false
           }
         ]
       }
     }
-  },
-  "operationId": "Operations_List",
-  "title": "Lists available Rest API operations."
+  }
 }

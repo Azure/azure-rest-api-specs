@@ -1,30 +1,22 @@
 {
-  "operationId": "Vaults_CreateOrUpdate",
   "parameters": {
+    "resourceGroupName": "sample-resource-group",
+    "vaultName": "sample-vault",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "properties": {
+        "tenantId": "00000000-0000-0000-0000-000000000000",
+        "sku": {
+          "family": "A",
+          "name": "standard"
+        },
         "accessPolicies": [
           {
+            "tenantId": "00000000-0000-0000-0000-000000000000",
             "objectId": "00000000-0000-0000-0000-000000000000",
             "permissions": {
-              "certificates": [
-                "get",
-                "list",
-                "delete",
-                "create",
-                "import",
-                "update",
-                "managecontacts",
-                "getissuers",
-                "listissuers",
-                "setissuers",
-                "deleteissuers",
-                "manageissuers",
-                "recover",
-                "purge"
-              ],
               "keys": [
                 "encrypt",
                 "decrypt",
@@ -52,91 +44,55 @@
                 "restore",
                 "recover",
                 "purge"
+              ],
+              "certificates": [
+                "get",
+                "list",
+                "delete",
+                "create",
+                "import",
+                "update",
+                "managecontacts",
+                "getissuers",
+                "listissuers",
+                "setissuers",
+                "deleteissuers",
+                "manageissuers",
+                "recover",
+                "purge"
               ]
-            },
-            "tenantId": "00000000-0000-0000-0000-000000000000"
+            }
           }
         ],
         "enabledForDeployment": true,
         "enabledForDiskEncryption": true,
         "enabledForTemplateDeployment": true,
-        "publicNetworkAccess": "Enabled",
-        "sku": {
-          "name": "standard",
-          "family": "A"
-        },
-        "tenantId": "00000000-0000-0000-0000-000000000000"
+        "publicNetworkAccess": "Enabled"
       }
-    },
-    "resourceGroupName": "sample-resource-group",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "vaultName": "sample-vault"
+    }
   },
-  "title": "Create a new vault or update an existing vault",
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
         "name": "sample-vault",
         "type": "Microsoft.KeyVault/vaults",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
         "location": "westus",
+        "tags": {},
+        "systemData": {
+          "createdBy": "keyVaultUser1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T12:00:00.0000000Z",
+          "lastModifiedBy": "keyVaultUser2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z"
+        },
         "properties": {
-          "accessPolicies": [
-            {
-              "objectId": "00000000-0000-0000-0000-000000000000",
-              "permissions": {
-                "certificates": [
-                  "get",
-                  "list",
-                  "delete",
-                  "create",
-                  "import",
-                  "update",
-                  "managecontacts",
-                  "getissuers",
-                  "listissuers",
-                  "setissuers",
-                  "deleteissuers",
-                  "manageissuers",
-                  "recover",
-                  "purge"
-                ],
-                "keys": [
-                  "encrypt",
-                  "decrypt",
-                  "wrapKey",
-                  "unwrapKey",
-                  "sign",
-                  "verify",
-                  "get",
-                  "list",
-                  "create",
-                  "update",
-                  "import",
-                  "delete",
-                  "backup",
-                  "restore",
-                  "recover",
-                  "purge"
-                ],
-                "secrets": [
-                  "get",
-                  "list",
-                  "set",
-                  "delete",
-                  "backup",
-                  "restore",
-                  "recover",
-                  "purge"
-                ]
-              },
-              "tenantId": "00000000-0000-0000-0000-000000000000"
-            }
-          ],
-          "enabledForDeployment": true,
-          "enabledForDiskEncryption": true,
-          "enabledForTemplateDeployment": true,
-          "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
           "networkAcls": {
             "bypass": "AzureServices",
             "defaultAction": "Deny",
@@ -152,69 +108,11 @@
               }
             ]
           },
-          "privateEndpointConnections": [
-            {
-              "etag": "",
-              "id": "",
-              "properties": {
-                "privateEndpoint": {
-                  "id": ""
-                },
-                "privateLinkServiceConnectionState": {
-                  "actionsRequired": "None",
-                  "status": "Approved"
-                },
-                "provisioningState": "Succeeded"
-              }
-            }
-          ],
-          "provisioningState": "Succeeded",
-          "publicNetworkAccess": "Enabled",
-          "sku": {
-            "name": "standard",
-            "family": "A"
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
-          "vaultUri": "https://sample-vault.vault.azure.net"
-        },
-        "systemData": {
-          "createdAt": "2020-01-01T12:00:00.0000000Z",
-          "createdBy": "keyVaultUser1",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
-          "lastModifiedBy": "keyVaultUser2",
-          "lastModifiedByType": "User"
-        },
-        "tags": {}
-      }
-    },
-    "201": {
-      "body": {
-        "name": "sample-vault",
-        "type": "Microsoft.KeyVault/vaults",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
-        "location": "westus",
-        "properties": {
           "accessPolicies": [
             {
+              "tenantId": "00000000-0000-0000-0000-000000000000",
               "objectId": "00000000-0000-0000-0000-000000000000",
               "permissions": {
-                "certificates": [
-                  "get",
-                  "list",
-                  "delete",
-                  "create",
-                  "import",
-                  "update",
-                  "managecontacts",
-                  "getissuers",
-                  "listissuers",
-                  "setissuers",
-                  "deleteissuers",
-                  "manageissuers",
-                  "recover",
-                  "purge"
-                ],
                 "keys": [
                   "encrypt",
                   "decrypt",
@@ -242,33 +140,133 @@
                   "restore",
                   "recover",
                   "purge"
+                ],
+                "certificates": [
+                  "get",
+                  "list",
+                  "delete",
+                  "create",
+                  "import",
+                  "update",
+                  "managecontacts",
+                  "getissuers",
+                  "listissuers",
+                  "setissuers",
+                  "deleteissuers",
+                  "manageissuers",
+                  "recover",
+                  "purge"
                 ]
-              },
-              "tenantId": "00000000-0000-0000-0000-000000000000"
+              }
+            }
+          ],
+          "privateEndpointConnections": [
+            {
+              "id": "",
+              "etag": "",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": ""
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "actionsRequired": "None"
+                }
+              }
             }
           ],
           "enabledForDeployment": true,
           "enabledForDiskEncryption": true,
           "enabledForTemplateDeployment": true,
           "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net",
           "provisioningState": "Succeeded",
-          "publicNetworkAccess": "Enabled",
-          "sku": {
-            "name": "standard",
-            "family": "A"
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
-          "vaultUri": "https://sample-vault.vault.azure.net"
-        },
+          "publicNetworkAccess": "Enabled"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "location": "westus",
+        "tags": {},
         "systemData": {
-          "createdAt": "2020-01-01T12:00:00.0000000Z",
           "createdBy": "keyVaultUser1",
           "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
+          "createdAt": "2020-01-01T12:00:00.0000000Z",
           "lastModifiedBy": "keyVaultUser2",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z"
         },
-        "tags": {}
+        "properties": {
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "accessPolicies": [
+            {
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "objectId": "00000000-0000-0000-0000-000000000000",
+              "permissions": {
+                "keys": [
+                  "encrypt",
+                  "decrypt",
+                  "wrapKey",
+                  "unwrapKey",
+                  "sign",
+                  "verify",
+                  "get",
+                  "list",
+                  "create",
+                  "update",
+                  "import",
+                  "delete",
+                  "backup",
+                  "restore",
+                  "recover",
+                  "purge"
+                ],
+                "secrets": [
+                  "get",
+                  "list",
+                  "set",
+                  "delete",
+                  "backup",
+                  "restore",
+                  "recover",
+                  "purge"
+                ],
+                "certificates": [
+                  "get",
+                  "list",
+                  "delete",
+                  "create",
+                  "import",
+                  "update",
+                  "managecontacts",
+                  "getissuers",
+                  "listissuers",
+                  "setissuers",
+                  "deleteissuers",
+                  "manageissuers",
+                  "recover",
+                  "purge"
+                ]
+              }
+            }
+          ],
+          "enabledForDeployment": true,
+          "enabledForDiskEncryption": true,
+          "enabledForTemplateDeployment": true,
+          "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled"
+        }
       }
     }
   }

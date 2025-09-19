@@ -1,19 +1,17 @@
 {
-  "operationId": "PrivateEndpointConnections_Delete",
   "parameters": {
-    "api-version": "2024-11-01",
-    "privateEndpointConnectionName": "sample-pec",
-    "resourceGroupName": "sample-group",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "vaultName": "sample-vault"
+    "resourceGroupName": "sample-group",
+    "vaultName": "sample-vault",
+    "privateEndpointConnectionName": "sample-pec",
+    "api-version": "2024-11-01"
   },
-  "title": "KeyVaultDeletePrivateEndpointConnection",
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec",
         "name": "sample-pec",
         "type": "Microsoft.KeyVault/vaults/privateEndpointConnections",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec",
         "properties": {
           "provisioningState": "Disconnected"
         }
@@ -21,8 +19,8 @@
     },
     "202": {
       "headers": {
-        "Location": "https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec?operationid=25334578",
-        "Retry-After": "60"
+        "Retry-After": "60",
+        "Location": "https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec?operationid=25334578"
       }
     },
     "204": {}

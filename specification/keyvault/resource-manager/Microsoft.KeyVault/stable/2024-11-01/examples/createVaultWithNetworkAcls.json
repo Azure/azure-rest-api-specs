@@ -1,16 +1,20 @@
 {
-  "operationId": "Vaults_CreateOrUpdate",
   "parameters": {
+    "resourceGroupName": "sample-resource-group",
+    "vaultName": "sample-vault",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "properties": {
-        "enabledForDeployment": true,
-        "enabledForDiskEncryption": true,
-        "enabledForTemplateDeployment": true,
+        "tenantId": "00000000-0000-0000-0000-000000000000",
+        "sku": {
+          "family": "A",
+          "name": "standard"
+        },
         "networkAcls": {
-          "bypass": "AzureServices",
           "defaultAction": "Deny",
+          "bypass": "AzureServices",
           "ipRules": [
             {
               "value": "124.56.78.91"
@@ -25,33 +29,37 @@
             }
           ]
         },
-        "sku": {
-          "name": "standard",
-          "family": "A"
-        },
-        "tenantId": "00000000-0000-0000-0000-000000000000"
+        "enabledForDeployment": true,
+        "enabledForDiskEncryption": true,
+        "enabledForTemplateDeployment": true
       }
-    },
-    "resourceGroupName": "sample-resource-group",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "vaultName": "sample-vault"
+    }
   },
-  "title": "Create or update a vault with network acls",
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
         "name": "sample-vault",
         "type": "Microsoft.KeyVault/vaults",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
         "location": "westus",
+        "tags": {},
+        "systemData": {
+          "createdBy": "keyVaultUser1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T12:00:00.0000000Z",
+          "lastModifiedBy": "keyVaultUser2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z"
+        },
         "properties": {
-          "enabledForDeployment": true,
-          "enabledForDiskEncryption": true,
-          "enabledForTemplateDeployment": true,
-          "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
           "networkAcls": {
-            "bypass": "AzureServices",
             "defaultAction": "Deny",
+            "bypass": "AzureServices",
             "ipRules": [
               {
                 "value": "124.56.78.91/32"
@@ -66,38 +74,38 @@
               }
             ]
           },
-          "sku": {
-            "name": "standard",
-            "family": "A"
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "enabledForDeployment": true,
+          "enabledForDiskEncryption": true,
+          "enabledForTemplateDeployment": true,
+          "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
           "vaultUri": "https://sample-vault.vault.azure.net"
-        },
-        "systemData": {
-          "createdAt": "2020-01-01T12:00:00.0000000Z",
-          "createdBy": "keyVaultUser1",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
-          "lastModifiedBy": "keyVaultUser2",
-          "lastModifiedByType": "User"
-        },
-        "tags": {}
+        }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
         "name": "sample-vault",
         "type": "Microsoft.KeyVault/vaults",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
         "location": "westus",
+        "tags": {},
+        "systemData": {
+          "createdBy": "keyVaultUser1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T12:00:00.0000000Z",
+          "lastModifiedBy": "keyVaultUser2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z"
+        },
         "properties": {
-          "enabledForDeployment": true,
-          "enabledForDiskEncryption": true,
-          "enabledForTemplateDeployment": true,
-          "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
           "networkAcls": {
-            "bypass": "AzureServices",
             "defaultAction": "Deny",
+            "bypass": "AzureServices",
             "ipRules": [
               {
                 "value": "124.56.78.91/32"
@@ -112,22 +120,12 @@
               }
             ]
           },
-          "sku": {
-            "name": "standard",
-            "family": "A"
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "enabledForDeployment": true,
+          "enabledForDiskEncryption": true,
+          "enabledForTemplateDeployment": true,
+          "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
           "vaultUri": "https://sample-vault.vault.azure.net"
-        },
-        "systemData": {
-          "createdAt": "2020-01-01T12:00:00.0000000Z",
-          "createdBy": "keyVaultUser1",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
-          "lastModifiedBy": "keyVaultUser2",
-          "lastModifiedByType": "User"
-        },
-        "tags": {}
+        }
       }
     }
   }
