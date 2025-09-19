@@ -17,9 +17,36 @@ union ProfanityFilterMode {
   string,
 }
 
+@doc("Enhanced mode properties for transcription.")
+model EnhancedModeProperties {
+  @doc("Enable enhanced mode for transcription.")
+  enabled?: boolean;
+
+  @doc("Task type for enhanced mode.")
+  task?: string;
+
+  @doc("Target language for enhanced mode.")
+  targetLanguage?: string;
+
+  @doc("A list of user prompts.")
+  prompt?: string[];
+}
+
+@doc("Phrase list properties for transcription.")
+model PhraseListProperties {
+  @doc("List of phrases for recognition.")
+  phrases?: string[];
+
+  @doc("Biasing weight for phrase list (1.0 to 20.0).")
+  biasingWeight?: float32;
+}
+
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
 @doc("Metadata for a transcription request.")
 model TranscriptionOptions {
+  @doc("The URL of the audio to be transcribed. The audio must be shorter than 2 hours in audio duration and smaller than 250 MB in size. If both Audio and AudioUrl are provided, Audio is used.")
+  audioUrl?: url;
+
   @doc("A list of possible locales for the transcription. If not specified, the locale of the speech in the audio is detected automatically from all supported locales.")
   locales?: Array<string>;
 
@@ -34,6 +61,12 @@ model TranscriptionOptions {
 
   @doc("The 0-based indices of the channels to be transcribed separately. If not specified, multiple channels are merged and transcribed jointly. Only up to two channels are supported.")
   channels?: Array<int32>;
+
+  @doc("Enhanced mode properties.")
+  enhancedMode?: EnhancedModeProperties;
+
+  @doc("Phrase list properties.")
+  phraseList?: PhraseListProperties;
 }
 
 @doc("The Speaker Identification settings. Diarization settings must be specified to enable speaker identification.")
