@@ -83,7 +83,7 @@ op currentQuotaLimitBasesCreateOrUpdate(
 
 @@override(CurrentQuotaLimitBases.createOrUpdate,
   currentQuotaLimitBasesCreateOrUpdate,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -101,7 +101,7 @@ op currentQuotaLimitBasesGet(
 
 @@override(CurrentQuotaLimitBases.get,
   currentQuotaLimitBasesGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -121,7 +121,7 @@ op currentQuotaLimitBasesUpdate(
 
 @@override(CurrentQuotaLimitBases.update,
   currentQuotaLimitBasesUpdate,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -152,4 +152,7 @@ op currentUsagesBasesGet(
   scope: string,
 ): CurrentUsagesBase;
 
-@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,go,python");
+@@override(CurrentUsagesBases.get,
+  currentUsagesBasesGet,
+  "java,go,python,javascript"
+);
