@@ -14,11 +14,11 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/PurviewDataQuality/api",
+    "hostTemplate": "{$host}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "endpoint",
+        "name": "$host",
         "in": "path",
         "required": true,
         "type": "string"
@@ -31,32 +31,24 @@
   "consumes": [
     "application/json"
   ],
-  "tags": [
+  "security": [
     {
-      "name": "Rule",
-      "description": "Controller to create rules"
-    },
-    {
-      "name": "Schedule",
-      "description": "Controller for creating schedules for jobs"
-    },
-    {
-      "name": "Scan",
-      "description": "Controller for scanning jobs"
-    },
-    {
-      "name": "Monitoring",
-      "description": "Controller for Monitoring"
-    },
-    {
-      "name": "Assessment",
-      "description": "Controller for assessment"
-    },
-    {
-      "name": "Assetmetadata",
-      "description": "Controller to assetmetadata"
+      "OAuth2Auth": [
+        "https://purview.azure.net/.default"
+      ]
     }
   ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://purview.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
   "paths": {
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata": {
       "get": {
@@ -145,6 +137,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "AssetMetaDataObserver",
             "required": false,
             "schema": {
               "$ref": "#/definitions/AssetMetadataObserver"
@@ -208,6 +201,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Asset Meta data observer",
             "required": false,
             "schema": {
               "$ref": "#/definitions/AssetMetadataObserver"
@@ -273,6 +267,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body Rule Entity",
             "required": false,
             "schema": {
               "type": "array",
@@ -402,6 +397,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body of rule entity",
             "required": false,
             "schema": {
               "$ref": "#/definitions/RuleEntity"
@@ -536,6 +532,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body Rule Entity",
             "required": false,
             "schema": {
               "$ref": "#/definitions/RuleEntity"
@@ -630,8 +627,12 @@
     },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations": {
       "post": {
-        "operationId": "observe",
+        "operationId": "Observe",
         "description": "Do an observation",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -660,6 +661,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body Job Config DTO",
             "required": true,
             "schema": {
               "$ref": "#/definitions/JobConfigDTO"
@@ -670,7 +672,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AssetMetadataObserver"
+              "type": "string"
             }
           },
           "default": {
@@ -684,11 +686,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Observation_Create": {
-            "$ref": "./examples/Observation_Create.json"
           }
         }
       }
@@ -822,10 +819,6 @@
       "get": {
         "operationId": "GetRunStatus",
         "description": "Get the run status by run id",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -876,6 +869,10 @@
       "post": {
         "operationId": "CancelScanByRunId",
         "description": "Cancel Scan",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -899,7 +896,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntity"
+              "type": "string"
             }
           },
           "default": {
@@ -991,6 +988,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Schedule Entity",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ScheduleEntity"
@@ -1097,6 +1095,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body for Schedule Entity",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ScheduleEntity"
@@ -1179,6 +1178,10 @@
       "post": {
         "operationId": "CreateScan",
         "description": "Create Scan",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1211,7 +1214,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntity"
+              "type": "string"
             }
           },
           "default": {
@@ -1238,10 +1241,6 @@
       "get": {
         "operationId": "ScanByScanId",
         "description": "Get Scan by ScanId",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1299,6 +1298,10 @@
       "post": {
         "operationId": "CancelScan",
         "description": "Cancel Scan",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1329,7 +1332,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntity"
+              "type": "string"
             }
           },
           "default": {
@@ -1360,55 +1363,66 @@
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "Unique identifier of the observer."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the observer."
         },
         "dataAsset": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Reference to the associated DataAsset entity."
         },
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the observer was created."
         },
         "createdBy": {
-          "type": "string"
+          "type": "string",
+          "description": "User who created the observer."
         },
         "lastModifiedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the observer was last modified."
         },
         "lastModifiedBy": {
-          "type": "string"
+          "type": "string",
+          "description": "User who last modified the observer."
         },
         "executionData": {
           "type": "object",
-          "description": "Dictionary of <any>",
-          "additionalProperties": {}
+          "description": "Dictionary containing execution data.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "isDeleted": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates if the observer is deleted."
         },
         "businessDomain": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Reference to the related BusinessDomain entity."
         },
         "dataProduct": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Reference to the related DataProduct entity."
         },
         "eTag": {
-          "type": "string"
+          "type": "string",
+          "description": "ETag used for concurrency control."
         },
         "type": {
-          "$ref": "#/definitions/AssetMetadataObserverType"
+          "$ref": "#/definitions/AssetMetadataObserverType",
+          "description": "Type of the observer."
         }
       }
     },
     "AssetMetadataObserverType": {
       "type": "string",
+      "description": "AssetMetaDataObserverType",
       "enum": [
         "Basic"
       ],
@@ -1418,7 +1432,8 @@
         "values": [
           {
             "name": "Basic",
-            "value": "Basic"
+            "value": "Basic",
+            "description": "Basic"
           }
         ]
       }
@@ -1488,32 +1503,40 @@
       "description": "Represents a column in a dataset.",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of the column."
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "The value of the column."
         }
       }
     },
     "DatasetToDatasourceMapping": {
       "type": "object",
+      "description": "Maps a dataset to a datasource.",
       "properties": {
         "datasetAliasName": {
-          "type": "string"
+          "type": "string",
+          "description": "Alias name of the dataset."
         },
         "datasourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the datasource."
         }
       }
     },
     "JobConfigDTO": {
       "type": "object",
+      "description": "Configuration for jobs.",
       "properties": {
         "redundancyCheck": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates if redundancy check is enabled."
         },
         "datasetToDatasourceMappings": {
           "type": "array",
+          "description": "Mappings between datasets and data sources.",
           "items": {
             "$ref": "#/definitions/DatasetToDatasourceMapping"
           }
@@ -1522,43 +1545,54 @@
     },
     "JobHistoryEntity": {
       "type": "object",
+      "description": "Job history information.",
       "properties": {
         "dataAssetId": {
           "type": "string",
+          "description": "Identifier of the data asset.",
           "minLength": 1
         },
         "runId": {
           "type": "string",
+          "description": "Job run identifier.",
           "minLength": 1
         },
         "dataProductId": {
           "type": "string",
+          "description": "Identifier of the data product.",
           "minLength": 1
         },
         "businessDomainId": {
           "type": "string",
+          "description": "Business domain identifier.",
           "minLength": 1
         },
         "startTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the job started."
         },
         "endTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the job ended."
         },
         "submissionTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the job was submitted."
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Status of the job."
         },
         "jobType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of job."
         },
         "accountId": {
-          "type": "string"
+          "type": "string",
+          "description": "Account identifier."
         }
       },
       "required": [
@@ -1570,95 +1604,124 @@
     },
     "JobMetadataEntity": {
       "type": "object",
+      "description": "Metadata for jobs.",
       "properties": {
         "runId": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique run identifier for the job."
         },
         "dataProductId": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the data product."
         },
         "redundancyCheck": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates if redundancy check is enabled."
         },
         "accountId": {
-          "type": "string"
+          "type": "string",
+          "description": "Account identifier."
         },
         "businessDomainId": {
-          "type": "string"
+          "type": "string",
+          "description": "Business domain identifier."
         },
         "submissionTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the job was submitted."
         },
         "startTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the job started."
         },
         "endTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the job ended."
         },
         "cancelRequestTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when a cancel request was made."
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Current job status."
         },
         "pfsJobId": {
-          "type": "string"
+          "type": "string",
+          "description": "Platform job ID."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Job-related message."
         },
         "duration": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "Duration of the job in milliseconds."
         },
         "startedBy": {
-          "type": "string"
+          "type": "string",
+          "description": "User who started the job."
         },
         "cancelledBy": {
-          "type": "string"
+          "type": "string",
+          "description": "User who cancelled the job."
         },
         "jobType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of job."
         },
         "jobExecutionRegion": {
-          "type": "string"
+          "type": "string",
+          "description": "Region where the job executed."
         },
         "dataAssetId": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the associated data asset."
         },
         "dataAssetName": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the associated data asset."
         },
         "scheduleId": {
-          "type": "string"
+          "type": "string",
+          "description": "Schedule identifier if job is scheduled."
         },
         "scheduleName": {
-          "type": "string"
+          "type": "string",
+          "description": "Schedule name if job is scheduled."
         },
         "qualifiedPath": {
-          "type": "string"
+          "type": "string",
+          "description": "Fully qualified path related to the job."
         },
         "scanId": {
-          "type": "string"
+          "type": "string",
+          "description": "Scan identifier associated with the job."
         },
         "scheduleScanType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of schedule scan."
         },
         "jobBillingSparkSku": {
-          "type": "string"
+          "type": "string",
+          "description": "Spark SKU used for job billing."
         },
         "dataSourceType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of data source."
         },
         "primaryDataSourceID": {
-          "type": "string"
+          "type": "string",
+          "description": "Primary data source identifier."
         },
         "puDetail": {
-          "type": "string"
+          "type": "string",
+          "description": "Additional details related to Purview."
         }
       }
     },
@@ -1667,11 +1730,12 @@
       "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset).",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of the referenced entity."
         },
         "referenceId": {
           "type": "string",
-          "format": "uuid"
+          "description": "Unique identifier of the referenced entity."
         }
       }
     },
@@ -1680,16 +1744,20 @@
       "description": "Represents a business/data quality rule entity.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Represents description of the rule."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Represents the type of rule."
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Represents the status of the rule."
         },
         "typeProperties": {
           "$ref": "#/definitions/TypeProperties",
@@ -1697,23 +1765,24 @@
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "Unique identifier of the rule."
         },
         "businessDomain": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Reference to the related BusinessDomain entity."
         },
         "dataProduct": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Reference to the related DataProduct entity."
         },
         "dataAsset": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Reference to the related DataAsset entity."
         },
         "score": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Represents the rule's score."
         }
       },
       "required": [
@@ -1725,158 +1794,203 @@
     },
     "ScanDTO": {
       "type": "object",
+      "description": "Data transfer object for scan information.",
       "properties": {
         "scanType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of the scan."
         }
       }
     },
     "ScanScope": {
       "type": "object",
+      "description": "Defines the scan scope.",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of the scope."
         },
         "referenceId": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the referenced entity for the scope."
         }
       }
     },
     "ScheduleEntity": {
       "type": "object",
+      "description": "Represents a scheduled scan entity.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the schedule."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier of the schedule."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Description of the schedule."
         },
         "annotations": {
           "type": "object",
-          "description": "Dictionary of <AnyObject>",
-          "additionalProperties": {}
+          "description": "Dictionary of annotations for the schedule.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "businessDomain": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Reference to the related BusinessDomain entity."
         },
         "scope": {
-          "$ref": "#/definitions/ScanScope"
+          "$ref": "#/definitions/ScanScope",
+          "description": "Scope of the scan."
         },
         "trigger": {
-          "$ref": "#/definitions/Trigger"
+          "$ref": "#/definitions/Trigger",
+          "description": "Trigger configuration for the schedule."
         },
         "lastModifiedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the schedule was last modified."
         },
         "lastModifiedBy": {
-          "type": "string"
+          "type": "string",
+          "description": "User who last modified the schedule."
         },
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the schedule was created."
         },
         "createdBy": {
-          "type": "string"
+          "type": "string",
+          "description": "User who created the schedule."
         },
         "executionData": {
           "type": "object",
-          "description": "Dictionary of <AnyObject>",
-          "additionalProperties": {}
+          "description": "Dictionary of execution data for the schedule.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "ScheduleScanMonitoringEntity": {
       "type": "object",
+      "description": "Monitoring information for schedule scans.",
       "properties": {
         "succeeded": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "Number of succeeded scans."
         },
         "failed": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "Number of failed scans."
         },
         "skipped": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "Number of skipped scans."
         },
         "scheduleStatus": {
-          "type": "string"
+          "type": "string",
+          "description": "Status of the schedule."
         },
         "scheduleName": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the schedule."
         },
         "scheduleId": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier of the schedule."
         },
         "scanId": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier of the scan."
         },
         "startTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the scan started."
         },
         "endTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when the scan ended."
         },
         "accountId": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the account."
         },
         "businessDomainId": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the business domain."
         },
         "totalJobCount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "Total number of jobs in the scan."
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Status of the scan."
         },
         "scheduleRunType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of schedule run."
         },
         "scanType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of the scan."
         },
         "startedBy": {
-          "type": "string"
+          "type": "string",
+          "description": "User who started the scan."
         },
         "cancelledBy": {
-          "type": "string"
+          "type": "string",
+          "description": "User who cancelled the scan."
         },
         "cancelRequestTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp when a cancel request was made."
         },
         "partitionKey": {
-          "type": "string"
+          "type": "string",
+          "description": "Partition key for storage."
         },
         "rowKey": {
-          "type": "string"
+          "type": "string",
+          "description": "Row key for storage."
         },
         "timestamp": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Timestamp of the record."
         },
         "eTag": {
-          "type": "string"
+          "type": "string",
+          "description": "ETag for concurrency control."
         }
       }
     },
     "Trigger": {
       "type": "object",
+      "description": "Defines a trigger for scans.",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of trigger (e.g., manual, scheduled)."
         },
         "cron": {
-          "type": "string"
+          "type": "string",
+          "description": "Cron expression for scheduled triggers."
         }
       }
     },
