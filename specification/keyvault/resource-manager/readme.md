@@ -35,13 +35,7 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
-  - Microsoft.KeyVault/stable/2025-05-01/common.json
-  - Microsoft.KeyVault/stable/2025-05-01/keys.json
-  - Microsoft.KeyVault/stable/2025-05-01/keysManagedHsm.json
-  - Microsoft.KeyVault/stable/2025-05-01/keyvault.json
-  - Microsoft.KeyVault/stable/2025-05-01/managedHsm.json
-  - Microsoft.KeyVault/stable/2025-05-01/providers.json
-  - Microsoft.KeyVault/stable/2025-05-01/secrets.json
+  - Microsoft.KeyVault/stable/2025-05-01/openapi.json
 ```
 
 ### Tag: package-2024-11-01
