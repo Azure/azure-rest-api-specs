@@ -260,6 +260,7 @@ interface BackupVaultOperationResults {
  * Deleted backup vault operations (available from version 2025-09-01)
  */
 @added(Versions.v2025_09_01)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "DeletedBackupVaults interface uses manual routing for subscription-level resources"
 interface DeletedBackupVaults {
   /**
    * Gets a deleted backup vault
@@ -282,6 +283,7 @@ interface DeletedBackupVaults {
    */
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/deletedBackupVaults")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Manual routing required for subscription-level resource listing"
   listBySubscription(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter
