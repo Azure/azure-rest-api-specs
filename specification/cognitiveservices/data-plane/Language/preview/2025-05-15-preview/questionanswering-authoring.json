@@ -1404,6 +1404,179 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:import?_overload=importFromFiles": {
+      "post": {
+        "operationId": "QuestionAnsweringProjects_ImportFromFiles",
+        "description": "Import project assets from file.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "assetKind",
+            "in": "query",
+            "description": "Kind of the asset of the project.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "qnas",
+              "synonyms"
+            ],
+            "x-ms-enum": {
+              "name": "AssestKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "qnas",
+                  "value": "qnas",
+                  "description": "Question and Answers."
+                },
+                {
+                  "name": "synonyms",
+                  "value": "synonyms",
+                  "description": "Synonyms."
+                }
+              ]
+            }
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "Collection of files where the fileName is required.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create project from file": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulImportProjectFromFile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/sources?_overload=updateSourcesFromFiles": {
+      "patch": {
+        "operationId": "QuestionAnsweringProjects_UpdateSourcesFromFiles",
+        "description": "Updates the sources of a project from files.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "Collection of files where the fileName is required.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          {
+            "name": "fileOperations",
+            "in": "formData",
+            "description": "Collection of file operations to perform during update of sources.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update sources from files": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSourcesFromFile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
   "definitions": {
     "AcceptedResponse": {
       "type": "object",
@@ -2899,6 +3072,34 @@
         "source",
         "sourceUri",
         "sourceKind"
+      ]
+    },
+    "UpdateSourceFromFileOperationRecord": {
+      "type": "object",
+      "description": "A single file operation for updating sources for a project. Used to add, remove or replace a source from a knowledgebase.",
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/updateOperationKind",
+          "description": "Update operation type for assets."
+        },
+        "fileDisplayName": {
+          "type": "string",
+          "description": "Friendly name of the Source. If not provided, would be equal to fileSource",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "fileName": {
+          "type": "string",
+          "description": "This would be name of the file. This links to the fileName of the file being sent in multipart."
+        },
+        "refresh": {
+          "type": "boolean",
+          "description": "Bool value for refresh."
+        }
+      },
+      "required": [
+        "operation",
+        "fileName"
       ]
     },
     "UpdateSourceRecord": {
