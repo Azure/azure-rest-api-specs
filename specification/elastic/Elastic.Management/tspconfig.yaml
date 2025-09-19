@@ -39,8 +39,8 @@ options:
       name: "@azure/arm-elastic"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/elastic"
-    package-dir: "armelastic"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armelastic"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armelastic"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
