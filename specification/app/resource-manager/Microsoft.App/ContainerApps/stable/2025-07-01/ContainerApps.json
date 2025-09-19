@@ -40,7 +40,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -82,7 +82,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -135,7 +135,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -195,7 +195,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -208,6 +208,12 @@
           },
           "Create or Update ManagedBy App": {
             "$ref": "./examples/ContainerApps_ManagedBy_CreateOrUpdate.json"
+          },
+          "Create or Update WorkflowApp Kind": {
+            "$ref": "./examples/ContainerApps_Kind_WorkflowApp_CreateOrUpdate.json"
+          },
+          "Create or Update FunctionApp Kind": {
+            "$ref": "./examples/ContainerApps_Kind_FunctionApp_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -258,7 +264,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -324,7 +330,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -377,7 +383,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -423,7 +429,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -473,7 +479,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -528,7 +534,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -587,7 +593,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -698,6 +704,22 @@
             "update"
           ],
           "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "workflowapp",
+            "functionapp"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
+          "description": "Metadata to represent the container app kind, representing if a container app is workflowapp or functionapp."
         },
         "properties": {
           "description": "ContainerApp resource specific properties",
@@ -902,6 +924,43 @@
         "enableApiLogging": {
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
+        },
+        "appHealth": {
+          "description": "Dapr application health check configuration",
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "description": "Boolean indicating if the health probe is enabled",
+              "type": "boolean"
+            },
+            "path": {
+              "description": "Path for the health probe",
+              "type": "string"
+            },
+            "probeIntervalSeconds": {
+              "description": "Interval for the health probe in seconds",
+              "format": "int32",
+              "type": "integer",
+              "minimum": 1
+            },
+            "probeTimeoutMilliseconds": {
+              "description": "Timeout for the health probe in milliseconds",
+              "format": "int32",
+              "type": "integer",
+              "minimum": 1
+            },
+            "threshold": {
+              "description": "Threshold for the health probe",
+              "format": "int32",
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "maxConcurrency": {
+          "description": "Maximum number of concurrent requests, events handled by the Dapr sidecar",
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -974,7 +1033,7 @@
           "description": "custom domain bindings for Container Apps' hostnames.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CustomDomain"
+            "$ref": "./CommonDefinitions.json#/definitions/CustomDomain"
           },
           "x-ms-identifiers": [
             "name"
@@ -1130,35 +1189,6 @@
         },
         "label": {
           "description": "Associates a traffic label with a revision",
-          "type": "string"
-        }
-      }
-    },
-    "CustomDomain": {
-      "description": "Custom Domain of a Container App",
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "description": "Hostname.",
-          "type": "string"
-        },
-        "bindingType": {
-          "description": "Custom Domain binding type.",
-          "enum": [
-            "Disabled",
-            "SniEnabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "bindingType",
-            "modelAsString": true
-          }
-        },
-        "certificateId": {
-          "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
         }
       }
