@@ -458,6 +458,9 @@
           "Updates the allowed authentication modes to remove Native authentication.": {
             "$ref": "./examples/MongoClusters_PatchDisableNativeAuth.json"
           },
+          "Updates the customer managed encryption key on a mongo cluster resource.": {
+            "$ref": "./examples/MongoClusters_PatchCMK.json"
+          },
           "Updates the disk size on a Mongo Cluster resource.": {
             "$ref": "./examples/MongoClusters_PatchDiskSize.json"
           }
@@ -1702,11 +1705,7 @@
           "type": "string",
           "description": "The URI of the key vault key used for encryption."
         }
-      },
-      "required": [
-        "keyEncryptionKeyIdentity",
-        "keyEncryptionKeyUrl"
-      ]
+      }
     },
     "DataApiMode": {
       "type": "string",
@@ -1989,11 +1988,7 @@
           "type": "string",
           "description": "The user assigned identity resource id."
         }
-      },
-      "required": [
-        "identityType",
-        "userAssignedIdentityResourceId"
-      ]
+      }
     },
     "KeyEncryptionKeyIdentityType": {
       "type": "string",
@@ -2178,11 +2173,7 @@
         },
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
-          "description": "The encryption configuration for the cluster. Depends on identity being configured.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The encryption configuration for the cluster. Depends on identity being configured."
         }
       }
     },
@@ -2356,6 +2347,10 @@
         "authConfig": {
           "$ref": "#/definitions/AuthConfigProperties",
           "description": "The authentication configuration for the cluster."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperties",
+          "description": "The encryption configuration for the cluster. Depends on identity being configured."
         }
       }
     },

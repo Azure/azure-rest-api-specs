@@ -103,7 +103,7 @@
             "customerManagedKeyEncryption": {
               "keyEncryptionKeyIdentity": {
                 "identityType": "UserAssignedIdentity",
-                "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster"
+                "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
               },
               "keyEncryptionKeyUrl": "https://myVault.vault.azure.net/keys/myKey"
             }
@@ -112,7 +112,7 @@
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
               "principalId": "00000000-0000-0000-0000-000000000000",
               "clientId": "11111111-1111-1111-1111-111111111111"
             }
@@ -175,7 +175,7 @@
             "customerManagedKeyEncryption": {
               "keyEncryptionKeyIdentity": {
                 "identityType": "UserAssignedIdentity",
-                "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster"
+                "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
               },
               "keyEncryptionKeyUrl": "https://myVault.vault.azure.net/keys/myKey"
             }
@@ -184,7 +184,10 @@
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster": {}
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "11111111-1111-1111-1111-111111111111"
+            }
           }
         }
       }
