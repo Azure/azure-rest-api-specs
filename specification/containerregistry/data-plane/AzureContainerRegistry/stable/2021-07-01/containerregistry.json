@@ -1627,11 +1627,13 @@
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io."
+          "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io.",
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
           "type": "string",
-          "description": "Image name"
+          "description": "Image name",
+          "x-ms-client-name": "repository"
         },
         "manifests": {
           "type": "array",
@@ -1865,7 +1867,8 @@
         "os": {
           "$ref": "#/definitions/ArtifactOperatingSystem",
           "description": "Operating system",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "operatingSystem"
         }
       },
       "required": [
@@ -1879,12 +1882,14 @@
         "registry": {
           "type": "string",
           "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
           "type": "string",
           "description": "Repository name",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "repositoryName"
         },
         "manifest": {
           "$ref": "#/definitions/ManifestAttributesBase",
@@ -2029,12 +2034,14 @@
         "registry": {
           "type": "string",
           "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
           "type": "string",
           "description": "Image name",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "repositoryName"
         },
         "tag": {
           "$ref": "#/definitions/TagAttributesBase",
@@ -2175,7 +2182,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "deletedManifests"
         },
         "tagsDeleted": {
           "type": "array",
@@ -2183,7 +2191,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "deletedTags"
         }
       }
     },
@@ -2319,19 +2328,22 @@
           "type": "integer",
           "format": "int64",
           "description": "Image size",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "size"
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
           "description": "Created time",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Last update time",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "lastUpdatedOn"
         },
         "architecture": {
           "$ref": "#/definitions/ArtifactArchitecture",
@@ -2341,7 +2353,8 @@
         "os": {
           "$ref": "#/definitions/ArtifactOperatingSystem",
           "description": "Operating system",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "operatingSystem"
         },
         "references": {
           "type": "array",
@@ -2349,7 +2362,8 @@
           "items": {
             "$ref": "#/definitions/ArtifactManifestPlatform"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "relatedArtifacts"
         },
         "configMediaType": {
           "type": "string",
@@ -2508,19 +2522,23 @@
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
-          "description": "Delete enabled"
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
         },
         "writeEnabled": {
           "type": "boolean",
-          "description": "Write enabled"
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
         },
         "listEnabled": {
           "type": "boolean",
-          "description": "List enabled"
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
         },
         "readEnabled": {
           "type": "boolean",
-          "description": "Read enabled"
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         }
       }
     },
@@ -2776,13 +2794,15 @@
           "type": "string",
           "format": "date-time",
           "description": "Tag created time",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Tag last update time",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "lastUpdatedOn"
         },
         "signed": {
           "type": "boolean",
@@ -2817,18 +2837,21 @@
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io."
+          "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io.",
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
           "type": "string",
-          "description": "Image name"
+          "description": "Image name",
+          "x-ms-client-name": "repository"
         },
         "tags": {
           "type": "array",
           "description": "List of tag attribute details",
           "items": {
             "$ref": "#/definitions/TagAttributesBase"
-          }
+          },
+          "x-ms-client-name": "tagAttributeBases"
         },
         "link": {
           "type": "string",
@@ -2847,19 +2870,23 @@
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
-          "description": "Delete enabled"
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
         },
         "writeEnabled": {
           "type": "boolean",
-          "description": "Write enabled"
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
         },
         "listEnabled": {
           "type": "boolean",
-          "description": "List enabled"
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
         },
         "readEnabled": {
           "type": "boolean",
-          "description": "Read enabled"
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         }
       }
     },

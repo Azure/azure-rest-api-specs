@@ -4,43 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using AzureContainerRegistry;
 
-@@clientName(DeleteRepositoryResult.manifestsDeleted, "deletedManifests");
-@@clientName(DeleteRepositoryResult.tagsDeleted, "deletedTags");
-
-@@clientName(TagList.registry, "registryLoginServer");
-@@clientName(TagList.imageName, "repository");
-@@clientName(TagList.tags, "tagAttributeBases");
-
-@@clientName(TagAttributesBase.createdTime, "createdOn");
-@@clientName(TagAttributesBase.lastUpdateTime, "lastUpdatedOn");
-
-@@clientName(TagWriteableProperties.deleteEnabled, "canDelete");
-@@clientName(TagWriteableProperties.writeEnabled, "canWrite");
-@@clientName(TagWriteableProperties.listEnabled, "canList");
-@@clientName(TagWriteableProperties.readEnabled, "canRead");
-
-@@clientName(ArtifactTagProperties.registry, "registryLoginServer");
-@@clientName(ArtifactTagProperties.imageName, "repositoryName");
-
-@@clientName(AcrManifests.registry, "registryLoginServer");
-@@clientName(AcrManifests.imageName, "repository");
-
-@@clientName(ManifestAttributesBase.imageSize, "size");
-@@clientName(ManifestAttributesBase.createdTime, "createdOn");
-@@clientName(ManifestAttributesBase.lastUpdateTime, "lastUpdatedOn");
-@@clientName(ManifestAttributesBase.os, "operatingSystem");
-@@clientName(ManifestAttributesBase.references, "relatedArtifacts");
-
-@@clientName(ArtifactManifestPlatform.os, "operatingSystem");
-
-@@clientName(ManifestWriteableProperties.deleteEnabled, "canDelete");
-@@clientName(ManifestWriteableProperties.writeEnabled, "canWrite");
-@@clientName(ManifestWriteableProperties.listEnabled, "canList");
-@@clientName(ManifestWriteableProperties.readEnabled, "canRead");
-
-@@clientName(ArtifactManifestProperties.registry, "registryLoginServer");
-@@clientName(ArtifactManifestProperties.imageName, "repositoryName");
-
 @@clientLocation(ContainerRegistry.checkDockerV2Support, "ContainerRegistry");
 @@clientLocation(ContainerRegistry.getManifest, "ContainerRegistry");
 @@clientLocation(ContainerRegistry.createManifest, "ContainerRegistry");
