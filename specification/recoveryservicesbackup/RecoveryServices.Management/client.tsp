@@ -430,3 +430,7 @@ using Microsoft.RecoveryServices;
   "ResourceGuardProxyOperation",
   "java"
 );
+@@clientName(Microsoft.RecoveryServices,
+  "RecoveryServicesBackupClient",
+  "javascript"
+);
