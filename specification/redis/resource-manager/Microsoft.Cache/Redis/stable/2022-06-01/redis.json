@@ -3,7 +3,7 @@
   "info": {
     "title": "RedisManagementClient",
     "description": "REST API for Azure Redis Cache Service.",
-    "version": "2021-06-01"
+    "version": "2022-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -61,7 +61,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -106,7 +106,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -164,7 +164,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -180,6 +180,12 @@
         ],
         "operationId": "Redis_Create",
         "x-ms-examples": {
+          "RedisCacheCreateDefaultVersion": {
+            "$ref": "./examples/RedisCacheCreateDefaultVersion.json"
+          },
+          "RedisCacheCreateLatestVersion": {
+            "$ref": "./examples/RedisCacheCreateLatestVersion.json"
+          },
           "RedisCacheCreate": {
             "$ref": "./examples/RedisCacheCreate.json"
           }
@@ -233,7 +239,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -249,6 +255,7 @@
           }
         },
         "description": "Update an existing Redis cache.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -287,10 +294,16 @@
               "$ref": "#/definitions/RedisResource"
             }
           },
+          "202": {
+            "description": "The existing redis cache was successfully updated. Check Azure-AsyncOperation headers to poll detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -342,7 +355,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -390,7 +403,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -433,7 +446,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -472,7 +485,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -525,7 +538,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -584,7 +597,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -643,7 +656,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -706,7 +719,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -769,7 +782,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -820,7 +833,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -896,7 +909,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -952,7 +965,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1008,7 +1021,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1059,7 +1072,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1142,7 +1155,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1205,7 +1218,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1268,7 +1281,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1341,7 +1354,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1357,6 +1370,7 @@
           }
         },
         "description": "Deletes the linked server from a redis cache (requires Premium SKU).",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1390,13 +1404,13 @@
           "200": {
             "description": "Linked server was successfully deleted."
           },
-          "204": {
-            "description": "Linked server was successfully deleted."
+          "202": {
+            "description": "The linked server 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1451,7 +1465,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1501,7 +1515,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1538,23 +1552,23 @@
             "description": "The name of the Redis cache."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1591,26 +1605,26 @@
             "description": "The name of the Redis cache."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Get the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1643,20 +1657,20 @@
             "description": "The name of the Redis cache."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "properties",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "The private endpoint connection properties."
           }
@@ -1665,19 +1679,19 @@
           "200": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1709,13 +1723,13 @@
             "description": "The name of the Redis cache."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -1728,7 +1742,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1762,23 +1776,23 @@
             "description": "The name of the Redis cache."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1815,10 +1829,10 @@
             "description": "The ID of asynchronous operation"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1831,7 +1845,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1890,7 +1904,7 @@
             },
             "rdb-backup-frequency": {
               "type": "string",
-              "description": "Specifies the frequency for creating rdb backup"
+              "description": "Specifies the frequency for creating rdb backup in minutes. Valid values: (15, 30, 60, 360, 720, 1440)"
             },
             "rdb-backup-max-snapshot-count": {
               "type": "string",
@@ -1944,8 +1958,7 @@
             },
             "preferred-data-persistence-auth-method": {
               "type": "string",
-              "description": "Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS",
-              "readOnly": true
+              "description": "Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS"
             },
             "zonal-configuration": {
               "type": "string",
@@ -1962,7 +1975,7 @@
         },
         "redisVersion": {
           "type": "string",
-          "description": "Redis version. This should be in the form 'major[.minor[.build]]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Only the major and minor version are used in a PUT/PATCH request. Supported versions: 4.0, 6.0."
+          "description": "Redis version. This should be in the form 'major[.minor]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'."
         },
         "enableNonSslPort": {
           "type": "boolean",
@@ -2029,17 +2042,6 @@
         },
         "subnetId": {
           "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks/subnets"
-              },
-              {
-                "type": "Microsoft.ClassicNetwork/virtualNetworks/subnets"
-              }
-            ]
-          },
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
           "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
@@ -2149,7 +2151,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "description": "List of private endpoint connection associated with the specified redis cache"
         }
@@ -2192,7 +2194,7 @@
           "description": "Resource tags."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         }
       },
@@ -2217,7 +2219,7 @@
           "description": "Resource tags."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         }
       },
@@ -2252,7 +2254,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2313,7 +2315,7 @@
           "description": "A list of availability zones denoting where the resource needs to come from."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         }
       },
@@ -2322,7 +2324,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "A single Redis item in List or Get Operation."
@@ -2445,6 +2447,10 @@
         "container": {
           "type": "string",
           "description": "Container name to export to."
+        },
+        "preferred-data-archive-auth-method": {
+          "type": "string",
+          "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS"
         }
       },
       "required": [
@@ -2465,6 +2471,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "preferred-data-archive-auth-method": {
+          "type": "string",
+          "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS"
         }
       },
       "required": [
@@ -2545,7 +2555,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Response to put/get patch schedules for Redis cache."
@@ -2598,7 +2608,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2639,14 +2649,6 @@
       "properties": {
         "linkedRedisCacheId": {
           "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Cache/Redis"
-              }
-            ]
-          },
           "description": "Fully qualified resourceId of the linked redis cache."
         },
         "linkedRedisCacheLocation": {
@@ -2668,6 +2670,16 @@
             "name": "ReplicationRole",
             "modelAsString": false
           }
+        },
+        "geoReplicatedPrimaryHostName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unchanging DNS name which will always point to current geo-primary cache among the linked redis caches for seamless Geo Failover experience."
+        },
+        "primaryHostName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The changing DNS name that resolves to the current geo-primary cache among the linked redis caches before or after the Geo Failover."
         }
       },
       "required": [
@@ -2814,7 +2826,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
         }
       ]
     }
