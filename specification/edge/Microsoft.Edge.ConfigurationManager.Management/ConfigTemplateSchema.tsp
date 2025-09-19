@@ -17,6 +17,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Edge;
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("ConfigTemplateSchema Properties")
 model ConfigTemplateSchemaProperties {
   @doc("Value of schema")
@@ -29,6 +30,7 @@ model ConfigTemplateSchemaProperties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("SolutionSchema Resource")
 @parentResource(ConfigTemplateVersion)
 model ConfigTemplateSchema is ProxyResource<ConfigTemplateSchemaProperties> {
@@ -43,6 +45,7 @@ model ConfigTemplateSchema is ProxyResource<ConfigTemplateSchemaProperties> {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface ConfigTemplateSchemas {
   @doc("Get a ConfigTemplateSchema Resource")

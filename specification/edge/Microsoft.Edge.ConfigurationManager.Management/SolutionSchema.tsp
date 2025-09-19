@@ -17,6 +17,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Edge;
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("SolutionSchema Properties")
 model SolutionSchemaProperties {
   @doc("Value of schema")
@@ -33,6 +34,7 @@ model SolutionSchemaProperties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("SolutionSchema Resource")
 @parentResource(SolutionTemplateVersion)
 model SolutionSchema is ProxyResource<SolutionSchemaProperties> {
@@ -47,6 +49,7 @@ model SolutionSchema is ProxyResource<SolutionSchemaProperties> {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface SolutionSchemas {
   @doc("Get a SolutionSchema Resource")
