@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2023-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-06'
 input-file:
-  - Microsoft.Devices/stable/2023-06-30/iothub.json
+  - stable/2023-06-30/iothub.json
 ```
 
 ### Tag: package-preview-2023-06
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-06'
 input-file:
-  - Microsoft.Devices/preview/2023-06-30-preview/iothub.json
+  - preview/2023-06-30-preview/iothub.json
 ```
 
 ### Tag: package-preview-2022-11
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - Microsoft.Devices/preview/2022-11-15-preview/iothub.json
+  - preview/2022-11-15-preview/iothub.json
 ```
 
 ### Tag: package-preview-2022-04-30
@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-preview-2022-04-30` is specified o
 
 ``` yaml $(tag) == 'package-preview-2022-04-30'
 input-file:
-  - Microsoft.Devices/preview/2022-04-30-preview/iothub.json
+  - preview/2022-04-30-preview/iothub.json
 ```
 
 ### Tag: package-2021-07-02
@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2021-07-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-07-02'
 input-file:
-  - Microsoft.Devices/stable/2021-07-02/iothub.json
+  - stable/2021-07-02/iothub.json
 ```
 
 ### Tag: package-preview-2021-07-02
@@ -81,7 +81,7 @@ These settings apply only when `--tag=package-preview-2021-07-02` is specified o
 
 ``` yaml $(tag) == 'package-preview-2021-07-02'
 input-file:
-  - Microsoft.Devices/preview/2021-07-02-preview/iothub.json
+  - preview/2021-07-02-preview/iothub.json
 ```
 
 ### Tag: package-2021-07
@@ -90,7 +90,7 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-07'
 input-file:
-  - Microsoft.Devices/stable/2021-07-01/iothub.json
+  - stable/2021-07-01/iothub.json
 ```
 
 ### Tag: package-preview-2021-07
@@ -99,7 +99,7 @@ These settings apply only when `--tag=package-preview-2021-07` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-07'
 input-file:
-  - Microsoft.Devices/preview/2021-07-01-preview/iothub.json
+  - preview/2021-07-01-preview/iothub.json
 ```
 
 ### Tag: package-2021-03
@@ -108,7 +108,7 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-  - Microsoft.Devices/stable/2021-03-31/iothub.json
+  - stable/2021-03-31/iothub.json
 ```
 
 ### Tag: package-preview-2021-03
@@ -117,7 +117,7 @@ These settings apply only when `--tag=package-preview-2021-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-03'
 input-file:
-  - Microsoft.Devices/preview/2021-03-03-preview/iothub.json
+  - preview/2021-03-03-preview/iothub.json
 ```
 
 ### Tag: package-preview-2021-02
@@ -126,7 +126,7 @@ These settings apply only when `--tag=package-preview-2021-02` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-02'
 input-file:
-  - Microsoft.Devices/preview/2021-02-01-preview/iothub.json
+  - preview/2021-02-01-preview/iothub.json
 ```
 
 ### Tag: package-2020-08-31
@@ -135,7 +135,7 @@ These settings apply only when `--tag=package-2020-08-31` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-08-31'
 input-file:
-  - Microsoft.Devices/stable/2020-08-31/iothub.json
+  - stable/2020-08-31/iothub.json
 ```
 
 ### Tag: package-preview-2020-08-31
@@ -144,7 +144,7 @@ These settings apply only when `--tag=package-preview-2020-08-31` is specified o
 
 ``` yaml $(tag) == 'package-preview-2020-08-31'
 input-file:
-  - Microsoft.Devices/preview/2020-08-31-preview/iothub.json
+  - preview/2020-08-31-preview/iothub.json
 ```
 
 ### Tag: package-2020-08
@@ -153,7 +153,7 @@ These settings apply only when `--tag=package-2020-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-08'
 input-file:
-  - Microsoft.Devices/stable/2020-08-01/iothub.json
+  - stable/2020-08-01/iothub.json
 ```
 
 ### Tag: package-preview-2020-07
@@ -162,7 +162,7 @@ These settings apply only when `--tag=package-preview-2020-07` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-07'
 input-file:
-  - Microsoft.Devices/preview/2020-07-10-preview/iothub.json
+  - preview/2020-07-10-preview/iothub.json
 ```
 
 ### Tag: package-2020-06
@@ -171,7 +171,7 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-06'
 input-file:
-  - Microsoft.Devices/stable/2020-06-15/iothub.json
+  - stable/2020-06-15/iothub.json
 ```
 
 ### Tag: package-2020-04
@@ -180,7 +180,7 @@ These settings apply only when `--tag=package-2020-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-04'
 input-file:
-  - Microsoft.Devices/stable/2020-04-01/iothub.json
+  - stable/2020-04-01/iothub.json
 ```
 
 ### Tag: package-2020-03
@@ -189,7 +189,7 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
-  - Microsoft.Devices/stable/2020-03-01/iothub.json
+  - stable/2020-03-01/iothub.json
 ```
 
 ### Tag: package-2019-11
@@ -198,7 +198,7 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-11'
 input-file:
-  - Microsoft.Devices/stable/2019-11-04/iothub.json
+  - stable/2019-11-04/iothub.json
 ```
 
 ### Tag: package-preview-2019-07
@@ -207,7 +207,7 @@ These settings apply only when `--tag=package-preview-2019-07` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2019-07'
 input-file:
-  - Microsoft.Devices/preview/2019-07-01-preview/iothub.json
+  - preview/2019-07-01-preview/iothub.json
 ```
 
 ### Tag: package-2019-03
@@ -216,7 +216,7 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-03'
 input-file:
-  - Microsoft.Devices/stable/2019-03-22/iothub.json
+  - stable/2019-03-22/iothub.json
 ```
 
 ### Tag: package-preview-2019-03
@@ -225,7 +225,7 @@ These settings apply only when `--tag=package-preview-2019-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2019-03'
 input-file:
-  - Microsoft.Devices/preview/2019-03-22-preview/iothub.json
+  - preview/2019-03-22-preview/iothub.json
 ```
 
 ### Tag: package-2018-12-preview
@@ -234,7 +234,7 @@ These settings apply only when `--tag=package-2018-12-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-12-preview'
 input-file:
-- Microsoft.Devices/preview/2018-12-01-preview/iothub.json
+- preview/2018-12-01-preview/iothub.json
 ```
 
 ### Tag: package-2018-04
@@ -243,7 +243,7 @@ These settings apply only when `--tag=package-2018-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-04'
 input-file:
-- Microsoft.Devices/stable/2018-04-01/iothub.json
+- stable/2018-04-01/iothub.json
 ```
 
 ### Tag: package-2018-01
@@ -252,7 +252,7 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.Devices/stable/2018-01-22/iothub.json
+- stable/2018-01-22/iothub.json
 ```
 
 ### Tag: package-2017-07
@@ -261,7 +261,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.Devices/stable/2017-07-01/iothub.json
+- stable/2017-07-01/iothub.json
 ```
 
 ### Tag: package-2017-01
@@ -270,7 +270,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.Devices/stable/2017-01-19/iothub.json
+- stable/2017-01-19/iothub.json
 ```
 
 ### Tag: package-2016-02
@@ -279,7 +279,7 @@ These settings apply only when `--tag=package-2016-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-02'
 input-file:
-- Microsoft.Devices/stable/2016-02-03/iothub.json
+- stable/2016-02-03/iothub.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -288,7 +288,7 @@ These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.Devices/preview/2019-07-01-preview/iothub.json
+- preview/2019-07-01-preview/iothub.json
 ```
 
 ---
