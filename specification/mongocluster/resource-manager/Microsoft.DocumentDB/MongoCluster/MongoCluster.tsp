@@ -591,18 +591,22 @@ model EncryptionProperties {
 @added(Versions.v2025_07_01_preview)
 model CustomerManagedKeyEncryptionProperties {
   /** The identity used to access the key encryption key. */
-  keyEncryptionKeyIdentity: KeyEncryptionKeyIdentity;
+  @madeOptional(Versions.v2025_08_01_preview)
+  keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentity;
 
   /** The URI of the key vault key used for encryption. */
-  keyEncryptionKeyUrl: string;
+  @madeOptional(Versions.v2025_08_01_preview)
+  keyEncryptionKeyUrl?: string;
 }
 
 /** The identity used for key encryption key. */
 @added(Versions.v2025_07_01_preview)
 model KeyEncryptionKeyIdentity {
   /** The type of identity. Only 'UserAssignedIdentity' is supported. */
-  identityType: KeyEncryptionKeyIdentityType;
+  @madeOptional(Versions.v2025_08_01_preview)
+  identityType?: KeyEncryptionKeyIdentityType;
 
   /** The user assigned identity resource id. */
-  userAssignedIdentityResourceId: string;
+  @madeOptional(Versions.v2025_08_01_preview)
+  userAssignedIdentityResourceId?: string;
 }
