@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2018-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-09-01-preview'
 input-file:
-- Microsoft.ServiceFabricMesh/preview/2018-09-01-preview/servicefabricmesh.json
+- preview/2018-09-01-preview/servicefabricmesh.json
 ```
 ### Tag: package-2018-07-01-preview
 
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2018-07-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-07-01-preview'
 input-file:
-- Microsoft.ServiceFabricMesh/preview/2018-07-01-preview/servicefabricmesh.json
+- preview/2018-07-01-preview/servicefabricmesh.json
 ```
 ---
 # Code Generation
