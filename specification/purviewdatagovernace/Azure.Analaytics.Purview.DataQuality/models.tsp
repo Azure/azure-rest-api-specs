@@ -175,6 +175,61 @@ model RuleEntityResponse {
 }
 
 /**
+ * Represents a business/data quality rule entity.
+ */
+model RuleEntityBulkResponse {
+  /**
+   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   */
+  name: string;
+
+  /**
+   * Represents description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Represents the type of rule.
+   */
+  type: string;
+
+  /**
+   * Represents the status of the rule.
+   */
+  status: string;
+
+  /**
+   * Holds additional properties related to rule type.
+   */
+  typeProperties?: TypeProperties;
+
+  /**
+   * Unique identifier of the rule.
+   */
+  id: string;
+
+  /**
+   * Reference to the related BusinessDomain entity.
+   */
+  businessDomain?: Reference;
+
+  /**
+   * Reference to the related DataProduct entity.
+   */
+  dataProduct?: Reference;
+
+  /**
+   * Reference to the related DataAsset entity.
+   */
+  dataAsset?: Reference;
+
+  /**
+   * Represents the rule's score.
+   */
+  score?: float64;
+}
+
+/**
  * Rule entity response
  */
 model RuleEntityListResponse {
@@ -187,7 +242,7 @@ model RuleEntityListResponse {
   /**
    * Value RuleEntity
    */
-  value: RuleEntityResponse[];
+  value: RuleEntityBulkResponse[];
 }
 
 /**

@@ -4,6 +4,7 @@ import "./models.tsp";
 import "@typespec/http";
 
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.Core.Traits;
 
 namespace PurviewDataQuality;
@@ -477,6 +478,7 @@ op deleteSchedule is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "LroExtension" "This operation returns 202"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans")
 @post
 op createScan is Azure.Core.Foundations.Operation<
@@ -508,6 +510,7 @@ op createScan is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "LroExtension" "This operation returns 202"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/cancel")
 @post
 op cancelScan is Azure.Core.Foundations.Operation<
@@ -657,6 +660,7 @@ op getRunsForAsset is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "LroExtension" "This operation returns 202"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations")
 @post
 op observe is Azure.Core.Foundations.Operation<
