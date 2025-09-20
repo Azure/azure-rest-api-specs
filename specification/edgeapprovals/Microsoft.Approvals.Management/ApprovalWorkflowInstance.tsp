@@ -99,6 +99,9 @@ union ApprovalStageExecutionState {
   @doc("The stage has ended with rejected result.")
   Rejected: "Rejected",
 
+  @doc("The stage has been timed out.")
+  Timedout: "Timedout",
+
   @doc("The stage has been faulted.")
   Faulted: "Faulted",
 }
