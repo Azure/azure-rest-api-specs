@@ -7,7 +7,7 @@ Confidential Ledger provides SDKs for the following languages:
 - [Java](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/confidentialledger/azure-security-confidentialledger/swagger/README.md)
 - [C#](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/confidentialledger/Azure.Security.ConfidentialLedger/src/autorest.md)
 
-Please look to the files `Microsoft.ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json` and `Microsoft.ConfidentialLedger/preview/2024-12-09-preview/identityservice.json` for the most up-to-date API changes.
+Please look to the typespec files under `Microsoft.ConfidentialLedger/` for the most up-to-date API changes.
 
 > see https://aka.ms/autorest
 
@@ -17,7 +17,7 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2024-12-09-previe
 
 These are the global settings for Confidential Ledger.
 
-``` yaml
+```yaml
 tag: package-preview-2024-12-09
 openapi-type: data-plane
 ```
@@ -114,7 +114,7 @@ suppressions:
   - code: PageableOperation
     from: cts.json
     reason: Not pageable
-  - code:  PaginationResponse
+  - code: PaginationResponse
     from: cts.json
     reason: Defined as in the RFC but the remaining ones are not pageable
   - code: PathParameterSchema
@@ -188,6 +188,30 @@ directive:
     reason: Existing API, change would potentially be breaking.
 ```
 
+### Tag: package-2024-12-09-preview-ledger-tsp
+
+These settings apply only when `--tag=package-2024-12-09-preview-ledger-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-09-preview-ledger-tsp'
+input-file:
+  - ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
+### Tag: package-2024-12-09-preview-identity-tsp
+
+These settings apply only when `--tag=package-2024-12-09-preview-identity-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-09-preview-identity-tsp'
+input-file:
+  - ConfidentialLedgerIdentity/preview/2024-12-09-preview/identityservice.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
 ### Tag: package-2025-01-31-preview-codetransparency
 
 These settings apply only when `--tag=package-2025-01-31-preview-codetransparency` is specified on the command line.
@@ -203,4 +227,3 @@ suppressions:
     from: cts.json
     reason: No way to express when using CBOR
 ```
-
