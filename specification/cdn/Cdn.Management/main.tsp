@@ -22,12 +22,17 @@ import "./RuleSet.tsp";
 import "./Rule.tsp";
 import "./SecurityPolicy.tsp";
 import "./Secret.tsp";
+import "./KeyGroup.tsp";
+import "./DeploymentVersion.tsp";
 import "./Profile.tsp";
 import "./Endpoint.tsp";
 import "./Origin.tsp";
 import "./OriginGroup.tsp";
 import "./CustomDomain.tsp";
+import "./ProfileAgent.tsp";
 import "./CdnWebApplicationFirewallPolicy.tsp";
+import "./WebAgent.tsp";
+import "./KnowledgeSource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -53,6 +58,13 @@ enum Versions {
    * The 2025-06-01 API version.
    */
   v2025_06_01: "2025-06-01",
+
+  /**
+   * The 2025-09-01-preview API version.
+   */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 interface Operations

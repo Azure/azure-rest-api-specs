@@ -32,7 +32,24 @@ openapi-type: arm
 tag: package-2025-06
 ```
 
-### Tag: package-2025-04
+### Tag: package-preview-2025-09
+
+These settings apply only when `--tag=package-preview-2025-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09'
+input-file:
+  - Microsoft.Cdn/preview/2025-09-01-preview/openapi.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: afdx.json
+    line: 549
+    reason: Swagger LintDiff false positive. Property "scenario" is only required inside parent property "mtlsSettings", so only required if "mtlsSettings" is included in PATCH request for AFDDomainUpdateParameters
+modelerfour:
+  lenient-model-deduplication: true
+  prenamer: true
+```
+
+### Tag: package-2025-06
 These settings apply only when `--tag=package-2025-06` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-06'

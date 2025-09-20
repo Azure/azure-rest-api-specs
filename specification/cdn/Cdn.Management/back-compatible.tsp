@@ -34,6 +34,10 @@ using Microsoft.Cdn;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(DeploymentVersionUpdate.properties);
+
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProfileUpdateParameters.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -83,7 +87,27 @@ using Microsoft.Cdn;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(ProfileAgentUpdateParameters.properties);
+
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ManagedRuleSetDefinition.properties);
+
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(WebAgentUpdateParameters.properties);
+
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(KnowledgeSourceUpdateParameters.properties);
+
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(WebApplicationFirewallPolicy.properties);
+
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(PolicySettingsAfd.logScrubbing);
 
 @@clientName(Profiles.create::parameters.resource, "profile");
 @@clientName(Profiles.update::parameters.properties, "profileUpdateParameters");
@@ -155,6 +179,24 @@ using Microsoft.Cdn;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Secret.properties);
 
+@@clientName(KeyGroups.createUpdate::parameters.resource, "keyGroup");
+@@clientName(KeyGroups.update::parameters.properties,
+  "keyGroupUpdateProperties"
+);
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(KeyGroup.properties);
+
+@@clientName(DeploymentVersions.update::parameters.properties,
+  "deploymentVersionUpdateProperties"
+);
+@@clientName(DeploymentVersions.compare::parameters.body,
+  "compareDeploymentVersionsParameter"
+);
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(DeploymentVersion.properties);
+
 @@clientName(Endpoints.create::parameters.resource, "endpoint", "!csharp");
 @@clientName(Endpoints.update::parameters.properties,
   "endpointUpdateProperties"
@@ -188,6 +230,14 @@ using Microsoft.Cdn;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomDomain.properties);
 
+@@clientName(ProfileAgents.createOrUpdate::parameters.resource, "profileAgent");
+@@clientName(ProfileAgents.update::parameters.properties,
+  "profileAgentUpdateParameters"
+);
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(ProfileAgent.properties);
+
 @@clientName(CdnWebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
   "cdnWebApplicationFirewallPolicy"
 );
@@ -196,6 +246,25 @@ using Microsoft.Cdn;
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CdnWebApplicationFirewallPolicy.properties);
+
+@@clientName(WebAgents.createOrUpdate::parameters.resource, "webAgent");
+@@clientName(WebAgents.update::parameters.properties,
+  "webAgentUpdateParameters"
+);
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(WebAgent.properties);
+
+@@clientName(KnowledgeSources.createOrUpdate::parameters.resource,
+  "knowledgeSource"
+);
+@@clientName(KnowledgeSources.update::parameters.properties,
+  "knowledgeSourceUpdateParameters"
+);
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(KnowledgeSource.properties);
+
 @@clientName(checkNameAvailability::parameters.body,
   "checkNameAvailabilityInput"
 );
