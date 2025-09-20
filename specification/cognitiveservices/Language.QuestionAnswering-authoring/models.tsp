@@ -297,7 +297,7 @@ union updateOperationKind {
 }
 
 /**
- * Collection of files containing project assets the needs to be imported.
+ * Collection of files containing project assets that need to be imported.
  */
 @added(Versions.v2025_05_15_preview)
 model ImportFiles {
@@ -331,7 +331,7 @@ model UpdateSourceFromFileOperationRecord {
 }
 
 /**
- * Collection of files containing project assets the needs to be imported.
+ * Collection of files containing project assets that need to be imported.
  */
 @added(Versions.v2025_05_15_preview)
 model UpdateSourceFiles {
@@ -576,7 +576,7 @@ model ExportJobResultUrl {
 }
 
 /**
- * Project assets the needs to be imported.
+ * Project assets that need to be imported.
  */
 model ImportJobOptions {
   /**
