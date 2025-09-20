@@ -9,6 +9,7 @@ import "./models.tsp";
 import "./models-items.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Quantum.Workspace;
 
@@ -53,6 +54,12 @@ model QuantumComputingData {
   count: int64;
 }
 
+/** Input parameters for the job. */
+model InputParams is Record<{}>;
+
+/** Metadata for the job. */
+model Metadata is Record<{}>;
+
 /** A job to be run in the workspace. */
 @resource("jobs")
 @parentResource(Quantum.Workspace.QuantumWorkspace)
@@ -93,15 +100,11 @@ model JobDetails extends ItemDetails {
 
   /** The job metadata. Metadata provides client the ability to store client-specific information */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  metadata?: {};
+  metadata?: Metadata;
 
   /** The time when a job was successfully cancelled. */
   @visibility(Lifecycle.Read)
   cancellationTime?: utcDateTime;
-
-  /** List of user-supplied tags associated with the job. */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: string[];
 
   /** Quantum computing data. */
   @visibility(Lifecycle.Read)
@@ -109,7 +112,7 @@ model JobDetails extends ItemDetails {
 
   /** The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputParams?: {};
+  inputParams?: InputParams;
 
   /** The output blob uri. When a job finishes successfully, results will be uploaded to this blob. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -118,4 +121,34 @@ model JobDetails extends ItemDetails {
   /** The format of the output data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataFormat?: string;
+
+  /** List of user-supplied tags associated with the job. */
+  @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "tags")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  oldTags?: string[];
+}
+
+/** Options for updating a job. */
+@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+@parentResource(Quantum.Workspace.QuantumWorkspace)
+@resource("jobUpdateOptions")
+model JobUpdateOptions {
+  /** Id of the job. */
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
+  @key("jobId")
+  @visibility(Lifecycle.Read)
+  id: WorkspaceItemId;
+
+  /** Priority of job. */
+  @visibility(Lifecycle.Update)
+  priority?: Priority;
+
+  /** The name of the job. */
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  name?: string;
+
+  /** List of user-supplied tags associated with the job. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: string[];
 }
