@@ -29,7 +29,7 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2025-06
+tag: package-preview-2025-09
 ```
 
 ### Tag: package-preview-2025-09
@@ -38,15 +38,15 @@ These settings apply only when `--tag=package-preview-2025-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-09'
 input-file:
-  - Microsoft.Cdn/preview/2025-09-01-preview/afdwebapplicationfirewalldefinition.json
-  - Microsoft.Cdn/preview/2025-09-01-preview/afdx.json
-  - Microsoft.Cdn/preview/2025-09-01-preview/cdn.json
-  - Microsoft.Cdn/preview/2025-09-01-preview/cdnwebapplicationfirewall.json
-  suppressions:
+  - Microsoft.Cdn/preview/2025-09-01-preview/openapi.json
+suppressions:
   - code: PatchBodyParametersSchema
     from: afdx.json
     line: 549
     reason: Swagger LintDiff false positive. Property "scenario" is only required inside parent property "mtlsSettings", so only required if "mtlsSettings" is included in PATCH request for AFDDomainUpdateParameters
+modelerfour:
+  lenient-model-deduplication: true
+  prenamer: true
 ```
 
 ### Tag: package-2025-06
