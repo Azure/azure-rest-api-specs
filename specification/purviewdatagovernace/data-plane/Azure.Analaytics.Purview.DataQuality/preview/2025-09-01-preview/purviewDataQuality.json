@@ -211,10 +211,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "Represents metadata observer entity for a data asset.",
             "schema": {
-              "$ref": "#/definitions/AssetMetadataObserver"
+              "$ref": "#/definitions/AssetMetadataObserverResponse"
             }
           },
           "default": {
@@ -280,13 +280,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "Rule entity response",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RuleEntity"
-              }
+              "$ref": "#/definitions/RuleEntityListResponse"
             }
           },
           "default": {
@@ -343,10 +340,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RuleEntity"
-              }
+              "$ref": "#/definitions/RuleEntity"
             }
           },
           "default": {
@@ -399,18 +393,18 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body of rule entity",
-            "required": false,
+            "description": "Rule entity",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RuleEntity"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "Represents a business/data quality rule entity.",
             "schema": {
-              "$ref": "#/definitions/RuleEntity"
+              "$ref": "#/definitions/RuleEntityResponse"
             }
           },
           "default": {
@@ -631,10 +625,6 @@
       "post": {
         "operationId": "Observe",
         "description": "Do an observation",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -671,10 +661,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "Job Config DTO Response",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JobConfigDTOResponse"
             }
           },
           "default": {
@@ -871,10 +861,6 @@
       "post": {
         "operationId": "CancelScanByRunId",
         "description": "Cancel Scan",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -895,10 +881,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "Job Config DTO Response",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/ScanDTOResponse"
             }
           },
           "default": {
@@ -998,10 +984,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "Represents a scheduled scan entity.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntity"
+              "$ref": "#/definitions/ScheduleEntityResponse"
             }
           },
           "default": {
@@ -1180,10 +1166,6 @@
       "post": {
         "operationId": "CreateScan",
         "description": "Create Scan",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1213,10 +1195,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "Job Config DTO Response",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/ScanDTOResponse"
             }
           },
           "default": {
@@ -1300,10 +1282,6 @@
       "post": {
         "operationId": "CancelScan",
         "description": "Cancel Scan",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1331,10 +1309,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "Job Config DTO Response",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/ScanDTOResponse"
             }
           },
           "default": {
@@ -1419,6 +1397,69 @@
         "type": {
           "$ref": "#/definitions/AssetMetadataObserverType",
           "description": "Type of the observer."
+        }
+      }
+    },
+    "AssetMetadataObserverResponse": {
+      "type": "object",
+      "description": "Represents metadata observer entity for a data asset.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "name"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "created at"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "created by"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last modified by"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "last modified"
+        },
+        "executionData": {
+          "type": "object",
+          "description": "Dictionary of <any>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "isDeleted"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag"
+        },
+        "type": {
+          "$ref": "#/definitions/AssetMetadataObserverType",
+          "description": "type"
         }
       }
     },
@@ -1544,6 +1585,19 @@
           }
         }
       }
+    },
+    "JobConfigDTOResponse": {
+      "type": "object",
+      "description": "Job Config DTO Response",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "JobHistoryEntity": {
       "type": "object",
@@ -1794,6 +1848,136 @@
         "id"
       ]
     },
+    "RuleEntityListResponse": {
+      "type": "object",
+      "description": "Rule entity response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Value RuleEntity",
+          "items": {
+            "$ref": "#/definitions/RuleEntityResponseItem"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RuleEntityResponse": {
+      "type": "object",
+      "description": "Represents a business/data quality rule entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Represents description of the rule."
+        },
+        "type": {
+          "type": "string",
+          "description": "Represents the type of rule."
+        },
+        "status": {
+          "type": "string",
+          "description": "Represents the status of the rule."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Holds additional properties related to rule type."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the rule."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataProduct entity."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataAsset entity."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the rule's score."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "status",
+        "id"
+      ]
+    },
+    "RuleEntityResponseItem": {
+      "type": "object",
+      "description": "Represents a business/data quality rule entity.",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "description": "Status Code",
+          "enum": [
+            201
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Represents description of the rule."
+        },
+        "type": {
+          "type": "string",
+          "description": "Represents the type of rule."
+        },
+        "status": {
+          "type": "string",
+          "description": "Represents the status of the rule."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Holds additional properties related to rule type."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the rule."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataProduct entity."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataAsset entity."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the rule's score."
+        }
+      },
+      "required": [
+        "statusCode",
+        "name",
+        "type",
+        "status",
+        "id"
+      ]
+    },
     "ScanDTO": {
       "type": "object",
       "description": "Data transfer object for scan information.",
@@ -1801,6 +1985,16 @@
         "scanType": {
           "type": "string",
           "description": "Type of the scan."
+        }
+      }
+    },
+    "ScanDTOResponse": {
+      "type": "object",
+      "description": "Job Config DTO Response",
+      "properties": {
+        "scanType": {
+          "type": "string",
+          "description": "Scan Type"
         }
       }
     },
@@ -1819,6 +2013,68 @@
       }
     },
     "ScheduleEntity": {
+      "type": "object",
+      "description": "Represents a scheduled scan entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the schedule."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the schedule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the schedule."
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Dictionary of annotations for the schedule.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "scope": {
+          "$ref": "#/definitions/ScanScope",
+          "description": "Scope of the scan."
+        },
+        "trigger": {
+          "$ref": "#/definitions/Trigger",
+          "description": "Trigger configuration for the schedule."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the schedule was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User who last modified the schedule."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the schedule was created."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User who created the schedule."
+        },
+        "executionData": {
+          "type": "object",
+          "description": "Dictionary of execution data for the schedule.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ScheduleEntityResponse": {
       "type": "object",
       "description": "Represents a scheduled scan entity.",
       "properties": {
