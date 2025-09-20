@@ -32,14 +32,14 @@ options:
     namespace: "com.azure.resourcemanager.terraform"
     service-name: "Azure Terraform"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-terraform"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-terraform"
     namespace: "azure.mgmt.terraform"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-terraform"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-terraform"
     flavor: azure
     package-details:
       name: "@azure/arm-terraform"

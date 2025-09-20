@@ -11,7 +11,7 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/webpubsub.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-messaging-webpubsubservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-webpubsubservice"
     package-name: "azure-messaging-webpubsubservice"
     package-pprint-name: "Azure WebPubSub Service"
     namespace: "azure.messaging.webpubsubservice"
@@ -29,9 +29,9 @@ options:
     flavor: "azure"
   "@azure-tools/typespec-csharp":
     package-name: "Azure.Messaging.WebPubSub"
-    package-dir: "Azure.Security.Attestation"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-version: "1.6.0"
-    namespace: "{package-dir}"
+    namespace: "Azure.Security.Attestation"
     clear-output-folder: true
     model-namespace: false
     generate-test: true
@@ -40,7 +40,7 @@ options:
   "@azure-tools/typespec-ts":
     service-dir: "sdk/web-pubsub"
     is-modular-library: true
-    package-dir: "web-pubsub"
+    emitter-output-dir: "{output-dir}/{service-dir}/web-pubsub"
     package-details:
       name: "@azure/web-pubsub"
       version: "1.2.0"

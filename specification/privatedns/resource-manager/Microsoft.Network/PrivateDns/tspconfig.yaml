@@ -14,7 +14,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
     service-dir: "sdk/network"
-    package-dir: "azure-mgmt-privatedns"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-privatedns"
     namespace: "azure.mgmt.privatedns"
     generate-test: true
     generate-sample: true
@@ -25,7 +25,7 @@ options:
     service-name: "PrivateDns" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-privatedns"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-privatedns"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
