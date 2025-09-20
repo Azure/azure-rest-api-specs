@@ -124,8 +124,9 @@ model JobDetails extends ItemDetails {
 
   /** List of user-supplied tags associated with the job. */
   @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "tags")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: string[];
+  oldTags?: string[];
 }
 
 /** Options for updating a job. */
