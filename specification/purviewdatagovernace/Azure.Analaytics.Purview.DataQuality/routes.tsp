@@ -1,14 +1,17 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
+import "@typespec/http";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using Azure.Core.Traits;
 
 namespace PurviewDataQuality;
 
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+alias DataQualityOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 /**
  * Create Rules for Assets
  */
@@ -17,7 +20,7 @@ namespace PurviewDataQuality;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules")
 @post
-op createRules is Azure.Core.Foundations.Operation<
+op CreateRules is Azure.Core.Foundations.Operation<
   {
     /**
      * Unique Identifier for Business Domain
@@ -38,12 +41,12 @@ op createRules is Azure.Core.Foundations.Operation<
     dataAssetId: string;
 
     /**
-     * Body of rule entity
+     * Rule entity
      */
     @bodyRoot
-    body?: RuleEntity;
+    body: RuleEntity;
   },
-  RuleEntity
+  RuleEntityResponse
 >;
 
 /**
@@ -74,7 +77,7 @@ op getRules is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
   },
-  RuleEntity[]
+  RuleEntity
 >;
 
 /**
@@ -229,7 +232,7 @@ op createBulkRules is Azure.Core.Foundations.Operation<
     @bodyRoot
     body?: RuleEntity[];
   },
-  RuleEntity[]
+  RuleEntityListResponse
 >;
 
 /**
@@ -266,7 +269,7 @@ op createAssetMetaData is Azure.Core.Foundations.Operation<
     @bodyRoot
     body?: AssetMetadataObserver;
   },
-  AssetMetadataObserver
+  AssetMetadataObserverResponse
 >;
 
 /**
@@ -384,7 +387,7 @@ op createSchedule is Azure.Core.Foundations.Operation<
     @bodyRoot
     body?: ScheduleEntity;
   },
-  ScheduleEntity
+  ScheduleEntityResponse
 >;
 
 /**
@@ -496,7 +499,7 @@ op createScan is Azure.Core.Foundations.Operation<
     @bodyRoot
     body?: ScanDTO;
   },
-  string
+  ScanDTOResponse
 >;
 
 /**
@@ -527,7 +530,7 @@ op cancelScan is Azure.Core.Foundations.Operation<
     @path
     scanId: string;
   },
-  string
+  ScanDTOResponse
 >;
 
 /**
@@ -608,7 +611,7 @@ op cancelScanByRunId is Azure.Core.Foundations.Operation<
     @path
     runId: string;
   },
-  string
+  ScanDTOResponse
 >;
 
 /**
@@ -682,7 +685,7 @@ op observe is Azure.Core.Foundations.Operation<
     @bodyRoot
     body: JobConfigDTO;
   },
-  string
+  JobConfigDTOResponse
 >;
 
 /**
@@ -693,7 +696,7 @@ op observe is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}")
 @delete
-op `delete Observation` is Azure.Core.Foundations.Operation<
+op `Delete Observation` is Azure.Core.Foundations.Operation<
   {
     /**
      * Get Business Domain Id

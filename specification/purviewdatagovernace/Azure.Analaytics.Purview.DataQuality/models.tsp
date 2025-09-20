@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace PurviewDataQuality;
@@ -115,6 +114,83 @@ model Reference {
 }
 
 /**
+ * Represents a business/data quality rule entity.
+ */
+model RuleEntityResponse {
+  /**
+   * Status Code
+   */
+  @statusCode
+  statusCode: 201;
+
+  /**
+   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   */
+  name: string;
+
+  /**
+   * Represents description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Represents the type of rule.
+   */
+  type: string;
+
+  /**
+   * Represents the status of the rule.
+   */
+  status: string;
+
+  /**
+   * Holds additional properties related to rule type.
+   */
+  typeProperties?: TypeProperties;
+
+  /**
+   * Unique identifier of the rule.
+   */
+  id: string;
+
+  /**
+   * Reference to the related BusinessDomain entity.
+   */
+  businessDomain?: Reference;
+
+  /**
+   * Reference to the related DataProduct entity.
+   */
+  dataProduct?: Reference;
+
+  /**
+   * Reference to the related DataAsset entity.
+   */
+  dataAsset?: Reference;
+
+  /**
+   * Represents the rule's score.
+   */
+  score?: float64;
+}
+
+/**
+ * Rule entity response
+ */
+model RuleEntityListResponse {
+  /**
+   * Status Code
+   */
+  @statusCode
+  statusCode: 201;
+
+  /**
+   * Value RuleEntity
+   */
+  value: RuleEntityResponse[];
+}
+
+/**
  * Represents metadata observer entity for a data asset.
  */
 model AssetMetadataObserver {
@@ -182,6 +258,77 @@ model AssetMetadataObserver {
    * Type of the observer.
    */
   type?: AssetMetadataObserverType;
+}
+
+/**
+ * Represents a scheduled scan entity.
+ */
+model ScheduleEntityResponse {
+  /**
+   * Status Code
+   */
+  @statusCode
+  statusCode: 201;
+
+  /**
+   * Name of the schedule.
+   */
+  name?: string;
+
+  /**
+   * Unique identifier of the schedule.
+   */
+  id?: string;
+
+  /**
+   * Description of the schedule.
+   */
+  description?: string;
+
+  /**
+   * Dictionary of annotations for the schedule.
+   */
+  annotations?: Record<string>;
+
+  /**
+   * Reference to the related BusinessDomain entity.
+   */
+  businessDomain?: Reference;
+
+  /**
+   * Scope of the scan.
+   */
+  scope?: ScanScope;
+
+  /**
+   * Trigger configuration for the schedule.
+   */
+  trigger?: Trigger;
+
+  /**
+   * Timestamp when the schedule was last modified.
+   */
+  lastModifiedAt?: utcDateTime;
+
+  /**
+   * User who last modified the schedule.
+   */
+  lastModifiedBy?: string;
+
+  /**
+   * Timestamp when the schedule was created.
+   */
+  createdAt?: utcDateTime;
+
+  /**
+   * User who created the schedule.
+   */
+  createdBy?: string;
+
+  /**
+   * Dictionary of execution data for the schedule.
+   */
+  executionData?: Record<string>;
 }
 
 /**
@@ -642,4 +789,118 @@ model DatasetToDatasourceMapping {
    * Identifier of the datasource.
    */
   datasourceId?: string;
+}
+
+/**
+ * Job Config DTO Response
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+model JobConfigDTOResponse {
+  /**
+   * Status Code
+   */
+  @statusCode
+  statusCode: 202;
+
+  /**
+   * Value
+   */
+  value: string;
+}
+
+/**
+ * Job Config DTO Response
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+model ScanDTOResponse {
+  /**
+   * Status Code
+   */
+  @statusCode
+  statusCode: 202;
+
+  /**
+   * Scan Type
+   */
+  scanType?: string;
+}
+
+/**
+ * Represents metadata observer entity for a data asset.
+ */
+model AssetMetadataObserverResponse {
+  /**
+   * Status Code
+   */
+  @statusCode
+  statusCode: 201;
+
+  /**
+   * id
+   */
+  id?: string;
+
+  /**
+   * name
+   */
+  name?: string;
+
+  /**
+   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   */
+  dataAsset?: Reference;
+
+  /**
+   * created at
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  /**
+   * created by
+   */
+  createdBy?: string;
+
+  /**
+   * last modified by
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedAt?: utcDateTime;
+
+  /**
+   * last modified
+   */
+  lastModifiedBy?: string;
+
+  /**
+   * Dictionary of <any>
+   */
+  executionData?: Record<string>;
+
+  /**
+   * isDeleted
+   */
+  isDeleted?: boolean;
+
+  /**
+   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   */
+  businessDomain?: Reference;
+
+  /**
+   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   */
+  dataProduct?: Reference;
+
+  /**
+   * eTag
+   */
+  eTag?: string;
+
+  /**
+   * type
+   */
+  type?: AssetMetadataObserverType;
 }
