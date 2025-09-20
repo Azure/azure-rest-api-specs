@@ -13,6 +13,9 @@ using Microsoft.Kubernetes;
 @@clientName(ConnectedClusters.update::parameters.properties,
   "ConnectedClusterPatch"
 );
+@@clientName(ConnectedClusters.updateAsync::parameters.properties,
+  "ConnectedClusterPatch"
+);
 @@clientName(ConnectedClusters.listClusterUserCredential::parameters.body,
   "Properties"
 );
@@ -31,6 +34,7 @@ using Microsoft.Kubernetes;
   "!csharp"
 );
 @@clientLocation(ConnectedClusters.update, "ConnectedCluster", "!csharp");
+@@clientLocation(ConnectedClusters.updateAsync, "ConnectedCluster", "!csharp");
 @@clientLocation(ConnectedClusters.delete, "ConnectedCluster", "!csharp");
 @@clientLocation(ConnectedClusters.listByResourceGroup,
   "ConnectedCluster",
