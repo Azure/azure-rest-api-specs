@@ -261,15 +261,19 @@ model AzureSemanticDetectionMultilingual extends EOUDetection {
 @doc("Top-level union for turn detection configuration.")
 @usage(RequestUsage)
 model TurnDetection {
-  type:
-    | "server_vad"
-    | "azure_semantic_vad"
-    | "azure_semantic_vad_en"
-    | "azure_semantic_vad_multilingual";
+  type: TurnDetectionType;
+}
+
+union TurnDetectionType {
+  string,
+  server_vad: "server_vad",
+  azure_semantic_vad: "azure_semantic_vad",
+  azure_semantic_vad_en: "azure_semantic_vad_en",
+  azure_semantic_vad_multilingual: "azure_semantic_vad_multilingual",
 }
 
 @doc("Base model for VAD-based turn detection.")
-@usage(RequestUsage)
+@usage(DualUsage)
 model ServerVad extends TurnDetection {
   type: "server_vad";
 
@@ -284,7 +288,7 @@ model ServerVad extends TurnDetection {
 }
 
 @doc("Server Speech Detection (Azure semantic VAD, default variant).")
-@usage(RequestUsage)
+@usage(DualUsage)
 model AzureSemanticVad extends TurnDetection {
   type: "azure_semantic_vad";
 
@@ -302,7 +306,7 @@ model AzureSemanticVad extends TurnDetection {
 }
 
 @doc("Server Speech Detection (Azure semantic VAD, English-only).")
-@usage(RequestUsage)
+@usage(DualUsage)
 model AzureSemanticVadEn extends TurnDetection {
   type: "azure_semantic_vad_en";
 
@@ -318,8 +322,8 @@ model AzureSemanticVadEn extends TurnDetection {
 }
 
 @doc("Server Speech Detection (Azure semantic VAD).")
-@usage(RequestUsage)
-model AzureMultilingualSemanticVad extends TurnDetection {
+@usage(DualUsage)
+model AzureSemanticVadMultilingual extends TurnDetection {
   type: "azure_semantic_vad_multilingual";
 
   @minValue(0)
