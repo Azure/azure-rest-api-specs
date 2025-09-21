@@ -3360,6 +3360,10 @@
             "modelAsString": true
           },
           "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
+        },
+        "geoPriorityReplicationStatus": {
+          "$ref": "#/definitions/GeoPriorityReplicationStatus",
+          "description": "Status indicating whether Geo Priority Replication is enabled for the account."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -4188,6 +4192,10 @@
           "x-ms-client-name": "AccountMigrationInProgress",
           "description": "If customer initiated account migration is in progress, the value will be true else it will be null.",
           "readOnly": true
+        },
+        "geoPriorityReplicationStatus": {
+          "$ref": "#/definitions/GeoPriorityReplicationStatus",
+          "description": "Status indicating whether Geo Priority Replication is enabled for the account."
         }
       },
       "description": "Properties of the storage account."
@@ -4503,6 +4511,10 @@
             "modelAsString": true
           },
           "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
+        },
+        "geoPriorityReplicationStatus": {
+          "$ref": "#/definitions/GeoPriorityReplicationStatus",
+          "description": "Status indicating whether Geo Priority Replication is enabled for the account."
         }
       },
       "description": "The parameters used when updating a storage account."
@@ -5915,6 +5927,16 @@
         "name": "PublicNetworkAccess",
         "modelAsString": true
       }
+    },
+    "GeoPriorityReplicationStatus": {
+      "type": "object",
+      "properties": {
+        "isBlobEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether Blob Geo Priority Replication is enabled for the storage account."
+        }
+      },
+      "description": "Geo Priority Replication enablement status for the storage account."
     }
   },
   "parameters": {
