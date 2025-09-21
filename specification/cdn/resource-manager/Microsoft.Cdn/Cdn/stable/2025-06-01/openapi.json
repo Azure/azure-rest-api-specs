@@ -5761,6 +5761,361 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups": {
+      "get": {
+        "operationId": "KeyGroups_ListByProfile",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Lists existing AzureFrontDoor KeyGroups.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_ListByProfile": {
+            "$ref": "./examples/KeyGroups_ListByProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}": {
+      "get": {
+        "operationId": "KeyGroups_Get",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Gets an existing KeyGroup within a profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupName",
+            "in": "path",
+            "description": "Name of the KeyGroup under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Get": {
+            "$ref": "./examples/KeyGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "KeyGroups_CreateUpdate",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Creates or updates a new KeyGroup within the specified profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupName",
+            "in": "path",
+            "description": "Name of the KeyGroup under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroup",
+            "in": "body",
+            "description": "The KeyGroup properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'KeyGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'KeyGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Create": {
+            "$ref": "./examples/KeyGroups_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "KeyGroups_Update",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Updates an existing KeyGroup within the specified profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupName",
+            "in": "path",
+            "description": "Name of the KeyGroup under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupUpdateProperties",
+            "in": "body",
+            "description": "The KeyGroup properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyGroupUpdatePropertiesParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Update": {
+            "$ref": "./examples/KeyGroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "KeyGroups_Delete",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Deletes an existing KeyGroup within profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupName",
+            "in": "path",
+            "description": "Name of the KeyGroup under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Delete": {
+            "$ref": "./examples/KeyGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationAbort": {
       "post": {
         "operationId": "Profiles_MigrationAbort",
@@ -10409,6 +10764,69 @@
         "action"
       ]
     },
+    "CustomRuleAfd": {
+      "type": "object",
+      "description": "Defines contents of a web application rule",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Describes the name of the rule.",
+          "maxLength": 128
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value."
+        },
+        "enabledState": {
+          "$ref": "#/definitions/CustomRuleEnabledState",
+          "description": "Describes if the custom rule is in enabled or disabled state. Defaults to Enabled if not specified."
+        },
+        "ruleType": {
+          "$ref": "#/definitions/RuleType",
+          "description": "Describes type of rule."
+        },
+        "rateLimitDurationInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time window for resetting the rate limit count. Default is 1 minute.",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "rateLimitThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of allowed requests per client within the time window.",
+          "minimum": 0
+        },
+        "groupBy": {
+          "type": "array",
+          "description": "Describes the list of variables to group the rate limit requests",
+          "items": {
+            "$ref": "#/definitions/GroupByVariable"
+          },
+          "x-ms-identifiers": []
+        },
+        "matchConditions": {
+          "type": "array",
+          "description": "List of match conditions.",
+          "items": {
+            "$ref": "#/definitions/MatchConditionAfd"
+          },
+          "x-ms-identifiers": []
+        },
+        "action": {
+          "$ref": "#/definitions/ActionType",
+          "description": "Describes what action to be applied when rule matches."
+        }
+      },
+      "required": [
+        "priority",
+        "ruleType",
+        "matchConditions",
+        "action"
+      ]
+    },
     "CustomRuleEnabledState": {
       "type": "string",
       "description": "Describes if the custom rule is in enabled or disabled state. Defaults to Enabled if not specified.",
@@ -12704,6 +13122,35 @@
         "ruleGroupName"
       ]
     },
+    "ManagedRuleGroupOverrideAfd": {
+      "type": "object",
+      "description": "Defines a managed rule group override setting.",
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "Describes the managed rule group to override."
+        },
+        "exclusions": {
+          "type": "array",
+          "description": "Describes the exclusions that are applied to all rules in the group.",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleExclusion"
+          },
+          "x-ms-identifiers": []
+        },
+        "rules": {
+          "type": "array",
+          "description": "List of rules that will be disabled. If none specified, all rules in the group will be disabled.",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleOverrideAfd"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ]
+    },
     "ManagedRuleOverride": {
       "type": "object",
       "description": "Defines a managed rule group override setting.",
@@ -12753,6 +13200,71 @@
           "x-ms-identifiers": [
             "ruleGroupName"
           ]
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "ManagedRuleSetActionType": {
+      "type": "string",
+      "description": "Defines the action to take when a managed rule set score threshold is met.",
+      "enum": [
+        "Block",
+        "Log",
+        "Redirect"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedRuleSetActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Block",
+            "value": "Block"
+          },
+          {
+            "name": "Log",
+            "value": "Log"
+          },
+          {
+            "name": "Redirect",
+            "value": "Redirect"
+          }
+        ]
+      }
+    },
+    "ManagedRuleSetAfd": {
+      "type": "object",
+      "description": "Defines a managed rule set.",
+      "properties": {
+        "ruleSetType": {
+          "type": "string",
+          "description": "Defines the rule set type to use."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "Defines the version of the rule set to use."
+        },
+        "ruleSetAction": {
+          "$ref": "#/definitions/ManagedRuleSetActionType",
+          "description": "Defines the rule set action."
+        },
+        "exclusions": {
+          "type": "array",
+          "description": "Describes the exclusions that are applied to all rules in the set.",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleExclusion"
+          },
+          "x-ms-identifiers": []
+        },
+        "ruleGroupOverrides": {
+          "type": "array",
+          "description": "Defines the rule group overrides to apply to the rule set.",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupOverrideAfd"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -12847,6 +13359,20 @@
             "ruleSetType",
             "ruleSetVersion"
           ]
+        }
+      }
+    },
+    "ManagedRuleSetListAfd": {
+      "type": "object",
+      "description": "Defines the list of managed rule sets for the policy.",
+      "properties": {
+        "managedRuleSets": {
+          "type": "array",
+          "description": "List of rule sets.",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetAfd"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -16677,6 +17203,30 @@
       ],
       "x-ms-discriminator-value": "WebApplicationFirewall"
     },
+    "SecurityPolicyWebApplicationFirewallParametersWithEmbeddedWafPolicy": {
+      "type": "object",
+      "description": "Contains security policy waf parameters",
+      "properties": {
+        "wafPolicy": {
+          "$ref": "#/definitions/WebApplicationFirewallPolicy",
+          "description": "Properties of the web application firewall policy."
+        },
+        "associations": {
+          "type": "array",
+          "description": "Waf associations",
+          "items": {
+            "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallAssociation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityPolicyPropertiesParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "SecurityPolicyWebApplicationFirewallParametersWithEmbeddedWafPolicy"
+    },
     "ServerPortMatchConditionParameters": {
       "type": "object",
       "description": "Defines the parameters for ServerPort match conditions",
@@ -18165,6 +18715,278 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "WebAgent": {
+      "type": "object",
+      "description": "Defines a web agent resource for Azure CDN.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebAgentProperties",
+          "description": "Properties of the web agent.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WebAgentList": {
+      "type": "object",
+      "description": "Defines a list of web agents. It contains a list of WebAgent objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebAgent items on this page",
+          "items": {
+            "$ref": "#/definitions/WebAgent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebAgentProperties": {
+      "type": "object",
+      "description": "Defines properties of a web agent.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Optional textual description of the agent."
+        },
+        "systemPrompt": {
+          "type": "string",
+          "description": "System prompt for the web agent."
+        },
+        "paths": {
+          "type": "array",
+          "description": "List of paths associated with the web agent.",
+          "items": {
+            "$ref": "#/definitions/AgentPath"
+          },
+          "x-ms-identifiers": []
+        },
+        "profileAgentLinks": {
+          "type": "array",
+          "description": "References to agent links in CDN profiles.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/WebAgentProvisioningState",
+          "description": "Provisioning status of the web agent.",
+          "readOnly": true
+        }
+      }
+    },
+    "WebAgentPropertiesUpdateParameters": {
+      "type": "object",
+      "description": "Defines properties of a web agent that can be updated.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Optional textual description of the agent."
+        },
+        "systemPrompt": {
+          "type": "string",
+          "description": "System prompt for the web agent."
+        },
+        "paths": {
+          "type": "array",
+          "description": "List of paths associated with the web agent.",
+          "items": {
+            "$ref": "#/definitions/AgentPath"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WebAgentProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the web agent.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "WebAgentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          }
+        ]
+      }
+    },
+    "WebAgentUpdateParameters": {
+      "type": "object",
+      "description": "Properties required to update a web agent.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Web agent tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WebAgentPropertiesUpdateParameters",
+          "description": "Properties of the web agent to be updated.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WebApplicationFirewallPolicy": {
+      "type": "object",
+      "description": "Defines web application firewall policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebApplicationFirewallPolicyProperties",
+          "description": "Properties of the web application firewall policy.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "WebApplicationFirewallPolicyProperties": {
+      "type": "object",
+      "description": "Defines web application firewall policy properties.",
+      "properties": {
+        "policySettings": {
+          "$ref": "#/definitions/PolicySettingsAfd",
+          "description": "Describes settings for the policy."
+        },
+        "customRules": {
+          "$ref": "#/definitions/CustomRuleListAfd",
+          "description": "Describes custom rules inside the policy."
+        },
+        "managedRules": {
+          "$ref": "#/definitions/ManagedRuleSetListAfd",
+          "description": "Describes managed rules inside the policy."
+        },
+        "frontendEndpointLinks": {
+          "type": "array",
+          "description": "Describes Frontend Endpoints associated with this Web Application Firewall policy.",
+          "items": {
+            "$ref": "#/definitions/FrontendEndpointLink"
+          },
+          "readOnly": true
+        },
+        "routingRuleLinks": {
+          "type": "array",
+          "description": "Describes Routing Rules associated with this Web Application Firewall policy.",
+          "items": {
+            "$ref": "#/definitions/RoutingRuleLink"
+          },
+          "readOnly": true
+        },
+        "securityPolicyLinks": {
+          "type": "array",
+          "description": "Describes Security Policy associated with this Web Application Firewall policy.",
+          "items": {
+            "$ref": "#/definitions/SecurityPolicyLink"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the policy.",
+          "readOnly": true
+        },
+        "resourceState": {
+          "$ref": "#/definitions/PolicyResourceState",
+          "readOnly": true
+        }
+      }
+    },
+    "WebApplicationFirewallScrubbingRules": {
+      "type": "object",
+      "description": "Defines the contents of the log scrubbing rules.",
+      "properties": {
+        "matchVariable": {
+          "$ref": "#/definitions/ScrubbingRuleEntryMatchVariable",
+          "description": "The variable to be scrubbed from the logs."
+        },
+        "selectorMatchOperator": {
+          "$ref": "#/definitions/ScrubbingRuleEntryMatchOperator",
+          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to."
+        },
+        "selector": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this rule applies to."
+        },
+        "state": {
+          "$ref": "#/definitions/ScrubbingRuleEntryState",
+          "description": "Defines the state of a log scrubbing rule. Default value is enabled."
+        }
+      },
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator"
+      ]
+    },
+    "WebApplicationFirewallScrubbingState": {
+      "type": "string",
+      "description": "State of the log scrubbing config. Default value is Enabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "WebApplicationFirewallScrubbingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
       }
     },
     "cidrIpAddress": {

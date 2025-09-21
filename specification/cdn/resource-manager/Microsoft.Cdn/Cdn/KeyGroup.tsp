@@ -27,8 +27,14 @@ model KeyGroup is Azure.ResourceManager.ProxyResource<KeyGroupProperties> {
   >;
 }
 
+/**
+ * Defines a KeyGroup response body for long-running operations.
+ */
 @added(Versions.v2025_09_01_preview)
 model KeyGroupAcceptedBody {
+  /**
+   * Defines a KeyGroup response body
+   */
   @bodyRoot
   @added(Versions.v2025_09_01_preview)
   _: KeyGroup;
@@ -49,10 +55,9 @@ interface KeyGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createUpdate is ArmResourceCreateOrReplaceAsync<
     KeyGroup,
-    Response = ArmResourceUpdatedResponse<KeyGroup> | ArmResourceCreatedResponse<
-      KeyGroup,
-      ArmLroLocationHeader
-    > | KeyGroupAcceptedBody
+    Response = ArmResourceUpdatedResponse<KeyGroup> 
+      | ArmResourceCreatedResponse<KeyGroup> 
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & KeyGroupAcceptedBody)
   >;
 
   /**
@@ -71,7 +76,7 @@ interface KeyGroups {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     KeyGroup,
-    Response =  ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

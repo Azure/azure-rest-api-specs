@@ -28,8 +28,14 @@ model KnowledgeSource
   >;
 }
 
+/**
+ * Defines a KnowledgeSource response body for long-running operation
+ */
 @added(Versions.v2025_09_01_preview)
 model KnowledgeSourceAcceptedBody {
+  /**
+   * Defines a KnowledgeSource response body
+   */
   @bodyRoot
   @added(Versions.v2025_09_01_preview)
   _: KnowledgeSource;

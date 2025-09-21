@@ -28,8 +28,14 @@ model ProfileAgent
   >;
 }
 
+/**
+ * Defines a ProfileAgent response body for long-running operations.
+ */
 @added(Versions.v2025_09_01_preview)
 model ProfileAgentAcceptedBody {
+  /**
+   * Defines a ProfileAgent response body
+   */
   @bodyRoot
   @added(Versions.v2025_09_01_preview)
   _: ProfileAgent;

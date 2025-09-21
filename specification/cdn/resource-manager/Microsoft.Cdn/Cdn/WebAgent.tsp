@@ -25,8 +25,14 @@ model WebAgent is Azure.ResourceManager.TrackedResource<WebAgentProperties> {
   >;
 }
 
+/**
+ * Defines a WebAgent response body for long-running operations.
+ */
 @added(Versions.v2025_09_01_preview)
 model WebAgentAcceptedBody {
+  /**
+   * Defines a WebAgent response body
+   */
   @bodyRoot
   @added(Versions.v2025_09_01_preview)
   _: WebAgent;

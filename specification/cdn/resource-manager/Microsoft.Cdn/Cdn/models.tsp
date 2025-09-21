@@ -539,7 +539,6 @@ union DeliveryRuleActionName {
   OriginGroupOverride: "OriginGroupOverride",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RouteConfigurationOverride: "RouteConfigurationOverride",
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   EdgeAction: "EdgeAction",
@@ -5663,6 +5662,7 @@ model WebAgentProperties {
   /**
    * List of paths associated with the web agent.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   paths?: AgentPath[];
 
   /**
@@ -5731,6 +5731,7 @@ model WebAgentPropertiesUpdateParameters {
   /**
    * List of paths associated with the web agent.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   paths?: AgentPath[];
 }
 
@@ -6047,6 +6048,7 @@ model CustomRuleAfd {
   /**
    * List of match conditions.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   matchConditions: MatchConditionAfd[];
 
   /**
@@ -6110,6 +6112,7 @@ model ManagedRuleSetListAfd {
   /**
    * List of rule sets.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   managedRuleSets?: ManagedRuleSetAfd[];
 }
 
@@ -6136,11 +6139,13 @@ model ManagedRuleSetAfd {
   /**
    * Describes the exclusions that are applied to all rules in the set.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   exclusions?: ManagedRuleExclusion[];
 
   /**
    * Defines the rule group overrides to apply to the rule set.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ruleGroupOverrides?: ManagedRuleGroupOverrideAfd[];
 }
 
@@ -6178,11 +6183,13 @@ model ManagedRuleGroupOverrideAfd {
   /**
    * Describes the exclusions that are applied to all rules in the group.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   exclusions?: ManagedRuleExclusion[];
 
   /**
    * List of rules that will be disabled. If none specified, all rules in the group will be disabled.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   rules?: ManagedRuleOverrideAfd[];
 }
 
@@ -6436,6 +6443,7 @@ model SecurityPolicyWebApplicationFirewallParametersWithEmbeddedWafPolicy
   /**
    * Waf associations
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   associations?: SecurityPolicyWebApplicationFirewallAssociation[];
 
   /**
