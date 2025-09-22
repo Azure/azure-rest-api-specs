@@ -20,7 +20,7 @@ union EvaluatorCategory {
   quality: "Quality",
 
   @doc("Safety evaluator")
-  safety: "Risk and Safety",
+  safety: "Safety",
 
   @doc("Performance evaluator")
   performance: "Performance",
@@ -63,8 +63,8 @@ union EvaluatorDefinitionType {
   service: "service",
 
   @visibility(Lifecycle.Read)
-  @doc("AOAI graders")
-  aoai_graders: "aoai_graders",
+  @doc("OpenAI graders")
+  openai_graders: "openai_graders",
 }
 
 @doc("Base evaluator configuration with discriminator")

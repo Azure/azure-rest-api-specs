@@ -31,7 +31,7 @@ interface Evaluators {
     Azure.Core.Page<EvaluatorVersion>
   >;
 
-  // GET /evaluators/{evaluatorName}/versions
+  // GET /evaluators
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List the latest version of each {name}", EvaluatorVersion)
   @Rest.listsResource(EvaluatorVersion)
@@ -97,11 +97,30 @@ interface Evaluators {
   updateEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
-      @doc("The version of the {name} to delete.", EvaluatorVersion)
+      @doc("The version of the {name} to update.", EvaluatorVersion)
       @Rest.segment("versions")
       @Http.path
       version: string;
     },
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluatorVersion>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Start a new or get an existing pending upload of a evaluator for a specific version.")
+  @Rest.action("startPendingUpload")
+  startPendingUploadVersion is Azure.Core.Foundations.ResourceOperation<
+    EvaluatorVersion,
+    {
+      @doc("The pending upload request parameters")
+      @Http.bodyRoot
+      @clientName("configuration", "csharp")
+      pendingUploadRequest: PendingUploadRequest;
+
+      @doc("The version of the {name} to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+    },
+    PendingUploadResponse
   >;
 }
