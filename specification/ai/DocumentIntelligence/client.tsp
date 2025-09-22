@@ -9,13 +9,12 @@ using DocumentIntelligence;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2024_11_30)
-namespace ClientCustomizations;
-
-@client({
-  name: "DocumentIntelligenceClient",
-  service: DocumentIntelligence,
-})
-interface DocumentIntelligenceClient {
+namespace ClientCustomizations {
+  @client({
+    name: "DocumentIntelligenceClient",
+    service: DocumentIntelligence,
+  })
+  interface DocumentIntelligenceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   analyzeDocument is DocumentModels.analyzeDocument;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -34,13 +33,13 @@ interface DocumentIntelligenceClient {
   getAnalyzeBatchResult is DocumentModels.getAnalyzeBatchResult;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   classifyDocument is DocumentClassifiers.classifyDocument;
-}
+  }
 
-@client({
-  name: "DocumentIntelligenceAdministrationClient",
-  service: DocumentIntelligence,
-})
-interface DocumentIntelligenceAdministrationClient {
+  @client({
+    name: "DocumentIntelligenceAdministrationClient",
+    service: DocumentIntelligence,
+  })
+  interface DocumentIntelligenceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   buildDocumentModel is DocumentModels.buildModel;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -273,3 +272,4 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(ClassifyDocumentRequest.base64Source, "bytesSource", "python");
 @@clientName(DocumentFieldSchema.items, "itemsSchema", "python");
 @@clientName(AnalyzeFromStreamRequestParams.input, "body", "python");
+}
