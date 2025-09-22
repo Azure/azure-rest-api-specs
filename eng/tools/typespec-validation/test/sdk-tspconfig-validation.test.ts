@@ -222,12 +222,12 @@ const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTest
   [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
 );
 
-const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
+const tsManagementEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
   "emitter-output-dir",
-  "arm-aaa-bbb",
-  "aaa-bbb",
+  "{output-dir}/{service-dir}/arm-aaa-bbb",
+  "{output-dir}/{service-dir}/aaa-bbb",
   [new TspConfigTsMgmtModularEmitterOutputDirSubRule()],
 );
 
@@ -240,12 +240,12 @@ const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
   [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
 );
 
-const tsDpPackageDirTestCases = createEmitterOptionTestCases(
+const tsDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   "",
   "emitter-output-dir",
-  "arm-aaa-rest",
-  "aaa--rest",
+  "{output-dir}/{service-dir}/arm-aaa-rest",
+  "{output-dir}/{service-dir}/aaa--rest",
   [new TspConfigTsDpEmitterOutputDirSubRule()],
 );
 
@@ -397,7 +397,7 @@ const javaAzEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "",
   "emitter-output-dir",
   "{output-dir}/{service-dir}/azure-aaa",
-  "aaa",
+  "{output-dir}/{service-dir}/aaa",
   [new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule()],
   true,
 );
@@ -406,8 +406,8 @@ const javaMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-java",
   managementTspconfigFolder,
   "emitter-output-dir",
-  "{service-dir}/azure-resourcemanager-aaa-bbb",
-  "azure-aaa",
+  "{output-dir}/{service-dir}/azure-resourcemanager-aaa-bbb",
+  "{output-dir}/{service-dir}/azure-aaa",
   [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
   true,
 );
@@ -485,12 +485,12 @@ const javaMgmtNamespaceExtendedTestCases: Case[] = [
   },
 ];
 
-const pythonManagementPackageDirTestCases = createEmitterOptionTestCases(
+const pythonManagementEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   managementTspconfigFolder,
   "emitter-output-dir",
-  "azure-mgmt-aaa",
-  "azure-aaa",
+  "{output-dir}/{service-dir}/azure-mgmt-aaa",
+  "{output-dir}/{service-dir}/azure-aaa",
   [new TspConfigPythonMgmtEmitterOutputDirSubRule()],
 );
 
@@ -525,8 +525,8 @@ const pythonDpEmitterOutputTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   "",
   "emitter-output-dir",
-  "azure-aaa-bbb-ccc",
-  "azure-aa-b-c-d",
+  "{output-dir}/{service-dir}/azure-aaa-bbb-ccc",
+  "{output-dir}/{service-dir}/azure-aa-b-c-d",
   [new TspConfigPythonDpEmitterOutputDirSubRule()],
 );
 
@@ -534,8 +534,8 @@ const csharpAzEmitterOutputTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   "",
   "emitter-output-dir",
-  "Azure.AAA",
-  "AAA",
+  "{output-dir}/{service-dir}/Azure.AAA",
+  "{output-dir}/{service-dir}/AAA",
   [new TspConfigCsharpAzEmitterOutputDirSubRule()],
 );
 
@@ -557,12 +557,12 @@ const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
 );
 
-const csharpMgmtEmitterOutputTestCases = createEmitterOptionTestCases(
+const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   managementTspconfigFolder,
   "emitter-output-dir",
-  "Azure.ResourceManager.AAA",
-  "Azure.Management.AAA",
+  "{output-dir}/{service-dir}/Azure.ResourceManager.AAA",
+  "{output-dir}/{service-dir}/Azure.Management.AAA",
   [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
 );
 
@@ -688,9 +688,9 @@ describe("tspconfig", function () {
     ...commonAzureServiceDirWithOutputDirTestCases,
     // ts
     ...tsManagementExperimentalExtensibleEnumsTestCases,
-    ...tsManagementPackageDirTestCases,
+    ...tsManagementEmitterOutputDirTestCases,
     ...tsManagementPackageNameTestCases,
-    ...tsDpPackageDirTestCases,
+    ...tsDpEmitterOutputDirTestCases,
     ...tsDpPackageNameTestCases,
     ...tsDpModularPackageNameTestCases,
     // go
@@ -713,7 +713,7 @@ describe("tspconfig", function () {
     ...javaMgmtNamespaceTestCases,
     ...javaMgmtNamespaceExtendedTestCases,
     // python
-    ...pythonManagementPackageDirTestCases,
+    ...pythonManagementEmitterOutputDirTestCases,
     ...pythonManagementNamespaceTestCases,
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
@@ -722,7 +722,7 @@ describe("tspconfig", function () {
     ...csharpAzEmitterOutputTestCases,
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
-    ...csharpMgmtEmitterOutputTestCases,
+    ...csharpMgmtEmitterOutputDirTestCases,
     ...csharpMgmtNamespaceTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,

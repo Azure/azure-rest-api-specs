@@ -611,7 +611,7 @@ export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmit
   }
 }
 
-export class TspConfigCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-csharp",
