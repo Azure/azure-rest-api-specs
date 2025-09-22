@@ -73,6 +73,7 @@ model SchedulerSku {
   redundancyState?: RedundancyState;
 }
 
+@added(Versions.v2025_11_01)
 @doc("The name of the Stock Keeping Unit (SKU) of a Durable Task Scheduler")
 union SchedulerSkuName {
   string,
