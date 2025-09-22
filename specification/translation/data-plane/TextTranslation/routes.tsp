@@ -78,9 +78,26 @@ op translate is CustomOperation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
+@sharedRoute
 @route("transliterate")
 @summary("Transliterate Text")
 @doc("Transliterate Text")
+@renamedFrom(APIVersion.v2025_05_01_preview, "transliterate")
+@removed(APIVersion.v2025_05_01_preview)
+op transliterateV3 is CustomOperation<
+  InputTextItem[],
+  TransliterateParameters,
+  TransliterateResultV3,
+  ErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+@post
+@sharedRoute
+@route("transliterate")
+@summary("Transliterate Text")
+@doc("Transliterate Text")
+@added(APIVersion.v2025_05_01_preview)
 op transliterate is CustomOperation<
   InputTextItem[],
   TransliterateParameters,

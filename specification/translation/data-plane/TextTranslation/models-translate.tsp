@@ -285,7 +285,7 @@ model TranslationResultV3 {
 model TranslationResult {
   ...CommonResultHeaders;
 
-  @doc("Array of the translated text elements in the response body.")
+  @doc("Array of the translated text elements.")
   values: TranslatedTextItem[];
 
   @header("x-mt-system")

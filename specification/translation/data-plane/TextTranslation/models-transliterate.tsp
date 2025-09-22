@@ -4,6 +4,7 @@ import "./models-shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace TextTranslation;
@@ -36,12 +37,23 @@ model TransliterateParameters {
 }
 
 @doc("Response for the transliteration API.")
-model TransliterateResult {
+@renamedFrom(APIVersion.v2025_05_01_preview, "TransliterateResult")
+@removed(APIVersion.v2025_05_01_preview)
+model TransliterateResultV3 {
   ...CommonResultHeaders;
 
   @bodyRoot
   @doc("Array of transliterated texts")
   result: TransliteratedText[];
+}
+
+@doc("Response for the transliteration API.")
+@added(APIVersion.v2025_05_01_preview)
+model TransliterateResult {
+  ...CommonResultHeaders;
+
+  @doc("Array of transliterated texts")
+  values: TransliteratedText[];
 }
 
 @doc("Transliterated text element.")

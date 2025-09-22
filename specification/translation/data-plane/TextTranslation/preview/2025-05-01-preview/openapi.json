@@ -234,12 +234,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Response for the transliteration API.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TransliteratedText"
-              }
+              "$ref": "#/definitions/TransliterateResult"
             },
             "headers": {
               "X-RequestId": {
@@ -839,7 +836,7 @@
       "properties": {
         "values": {
           "type": "array",
-          "description": "Array of the translated text elements in the response body.",
+          "description": "Array of the translated text elements.",
           "items": {
             "$ref": "#/definitions/TranslatedTextItem"
           }
@@ -917,7 +914,7 @@
       "type": "object",
       "description": "Response for the transliteration API.",
       "properties": {
-        "result": {
+        "values": {
           "type": "array",
           "description": "Array of transliterated texts",
           "items": {
@@ -926,7 +923,7 @@
         }
       },
       "required": [
-        "result"
+        "values"
       ]
     },
     "TransliteratedText": {
