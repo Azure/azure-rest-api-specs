@@ -1,20 +1,22 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
-    "subscriptionId": "subid",
     "locationName": "japaneast",
     "parameters": {
       "name": "existingaccountname",
       "type": "Microsoft.Batch/batchAccounts"
-    }
+    },
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "message": "An account named 'existingaccountname' is already in use.",
         "nameAvailable": false,
-        "reason": "AlreadyExists",
-        "message": "An account named 'existingaccountname' is already in use."
+        "reason": "AlreadyExists"
       }
     }
-  }
+  },
+  "operationId": "Location_CheckNameAvailability",
+  "title": "LocationCheckNameAvailability_AlreadyExists"
 }

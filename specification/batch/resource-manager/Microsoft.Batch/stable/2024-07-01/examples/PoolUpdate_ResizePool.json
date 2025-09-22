@@ -1,79 +1,81 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
-    "poolName": "testpool",
     "api-version": "2024-07-01",
     "parameters": {
       "properties": {
         "scaleSettings": {
           "fixedScale": {
-            "targetDedicatedNodes": 5,
-            "targetLowPriorityNodes": 0,
+            "nodeDeallocationOption": "TaskCompletion",
             "resizeTimeout": "PT8M",
-            "nodeDeallocationOption": "TaskCompletion"
+            "targetDedicatedNodes": 5,
+            "targetLowPriorityNodes": 0
           }
         }
       }
-    }
+    },
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {
-        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
-      },
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "name": "testpool",
         "type": "Microsoft.Batch/batchAccounts/pools",
         "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "properties": {
-          "lastModified": "2017-08-29T10:22:55.9407275Z",
-          "creationTime": "2017-08-28T10:22:55.9407275Z",
-          "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
           "allocationState": "Resizing",
           "allocationStateTransitionTime": "2017-08-29T10:22:55.9407275Z",
-          "vmSize": "STANDARD_D4",
-          "interNodeCommunication": "Disabled",
-          "taskSlotsPerNode": 1,
-          "taskSchedulingPolicy": {
-            "nodeFillType": "Spread"
+          "autoScaleRun": {
+            "evaluationTime": "2017-08-29T10:22:55.9407275Z",
+            "results": "$TargetDedicatedNodes=34;NodeDeallocationOption=requeue"
           },
+          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "currentDedicatedNodes": 12,
+          "currentLowPriorityNodes": 0,
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "MicrosoftWindowsServer",
                 "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
                 "sku": "2016-Datacenter-SmallDisk",
                 "version": "latest"
               },
               "nodeAgentSkuId": "batch.node.windows amd64"
             }
           },
+          "interNodeCommunication": "Disabled",
+          "lastModified": "2017-08-29T10:22:55.9407275Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "resizeOperationStatus": {
+            "nodeDeallocationOption": "TaskCompletion",
+            "resizeTimeout": "PT8M",
+            "startTime": "2017-08-29T10:22:55.9407275Z",
+            "targetDedicatedNodes": 8
+          },
           "scaleSettings": {
             "fixedScale": {
-              "targetDedicatedNodes": 1,
-              "targetLowPriorityNodes": 0,
+              "nodeDeallocationOption": "TaskCompletion",
               "resizeTimeout": "PT8M",
-              "nodeDeallocationOption": "TaskCompletion"
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0
             }
           },
-          "autoScaleRun": {
-            "evaluationTime": "2017-08-29T10:22:55.9407275Z",
-            "results": "$TargetDedicatedNodes=34;NodeDeallocationOption=requeue"
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
           },
-          "currentDedicatedNodes": 12,
-          "currentLowPriorityNodes": 0,
-          "resizeOperationStatus": {
-            "startTime": "2017-08-29T10:22:55.9407275Z",
-            "targetDedicatedNodes": 8,
-            "nodeDeallocationOption": "TaskCompletion",
-            "resizeTimeout": "PT8M"
-          }
+          "taskSlotsPerNode": 1,
+          "vmSize": "STANDARD_D4"
         }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
       }
     }
-  }
+  },
+  "operationId": "Pool_Update",
+  "title": "UpdatePool - Resize Pool"
 }

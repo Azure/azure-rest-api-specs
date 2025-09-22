@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
-    "subscriptionId": "subid",
-    "locationName": "japaneast"
+    "locationName": "japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -10,7 +10,6 @@
         "value": [
           {
             "name": "Standard_D1_v2",
-            "familyName": "standardDFamily",
             "capabilities": [
               {
                 "name": "MaxResourceVolumeMB",
@@ -40,11 +39,12 @@
                 "name": "EphemeralOSDiskSupported",
                 "value": "False"
               }
-            ]
+            ],
+            "familyName": "standardDFamily"
           },
           {
             "name": "Standard_A1",
-            "familyName": "standardA0_A7Family",
+            "batchSupportEndOfLife": "2024-08-31T00:00:00Z",
             "capabilities": [
               {
                 "name": "MaxResourceVolumeMB",
@@ -127,10 +127,12 @@
                 "value": "2"
               }
             ],
-            "batchSupportEndOfLife": "2024-08-31T00:00:00Z"
+            "familyName": "standardA0_A7Family"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Location_ListSupportedVirtualMachineSkus",
+  "title": "LocationListVirtualMachineSkus"
 }

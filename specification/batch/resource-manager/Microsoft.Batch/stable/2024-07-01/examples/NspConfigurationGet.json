@@ -1,72 +1,74 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
+    "api-version": "2024-07-01",
     "networkSecurityPerimeterConfigurationName": "00000000-0000-0000-0000-000000000000.sampleassociation",
-    "api-version": "2024-07-01"
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/networkSecurityPerimeterConfigurations/00000000-0000-0000-0000-000000000000.sampleassociation",
         "name": "00000000-0000-0000-0000-000000000000.sampleassociation",
         "type": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterConfigurations",
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/networkSecurityPerimeterConfigurations/00000000-0000-0000-0000-000000000000.sampleassociation",
         "properties": {
-          "provisioningState": "Succeeded",
-          "provisioningIssues": [],
           "networkSecurityPerimeter": {
             "id": "/subscriptions/perimeterSubscriptionId/resourceGroups/perimeterResourceGroupName/providers/Microsoft.Network/networkSecurityPerimeters/perimeterName",
-            "perimeterGuid": "00000000-0000-0000-0000-000000000000",
-            "location": "perimeterLocation"
-          },
-          "resourceAssociation": {
-            "name": "sampleassociation",
-            "accessMode": "Learning"
+            "location": "perimeterLocation",
+            "perimeterGuid": "00000000-0000-0000-0000-000000000000"
           },
           "profile": {
             "name": "profileName",
-            "accessRulesVersion": 1,
             "accessRules": [
               {
                 "name": "accessRule1",
                 "properties": {
-                  "direction": "Inbound",
                   "addressPrefixes": [
                     "10.11.0.0/16",
                     "10.10.1.0/24"
                   ],
-                  "fullyQualifiedDomainNames": [],
-                  "subscriptions": [],
-                  "networkSecurityPerimeters": [],
+                  "direction": "Inbound",
                   "emailAddresses": [],
-                  "phoneNumbers": []
+                  "fullyQualifiedDomainNames": [],
+                  "networkSecurityPerimeters": [],
+                  "phoneNumbers": [],
+                  "subscriptions": []
                 }
               },
               {
                 "name": "accessRule2",
                 "properties": {
-                  "direction": "Outbound",
                   "addressPrefixes": [],
+                  "direction": "Outbound",
+                  "emailAddresses": [],
                   "fullyQualifiedDomainNames": [
                     "paasrp1.contoso.org",
                     "paasrp2.contoso.org"
                   ],
-                  "subscriptions": [],
                   "networkSecurityPerimeters": [],
-                  "emailAddresses": [],
-                  "phoneNumbers": []
+                  "phoneNumbers": [],
+                  "subscriptions": []
                 }
               }
             ],
+            "accessRulesVersion": 1,
             "diagnosticSettingsVersion": 1,
             "enabledLogCategories": [
               "logCategory1",
               "logCategory2"
             ]
+          },
+          "provisioningIssues": [],
+          "provisioningState": "Succeeded",
+          "resourceAssociation": {
+            "name": "sampleassociation",
+            "accessMode": "Learning"
           }
         }
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeter_GetConfiguration",
+  "title": "GetNspConfiguration"
 }

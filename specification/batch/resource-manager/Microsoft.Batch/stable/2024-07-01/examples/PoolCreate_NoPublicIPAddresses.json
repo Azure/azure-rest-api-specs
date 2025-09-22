@@ -1,19 +1,9 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
-    "poolName": "testpool",
     "api-version": "2024-07-01",
     "parameters": {
       "properties": {
-        "vmSize": "STANDARD_D4",
-        "networkConfiguration": {
-          "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-          "publicIPAddressConfiguration": {
-            "provision": "NoPublicIPAddresses"
-          }
-        },
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
             "imageReference": {
@@ -21,39 +11,33 @@
             },
             "nodeAgentSkuId": "batch.node.ubuntu 18.04"
           }
-        }
+        },
+        "networkConfiguration": {
+          "publicIPAddressConfiguration": {
+            "provision": "NoPublicIPAddresses"
+          },
+          "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123"
+        },
+        "vmSize": "STANDARD_D4"
       }
-    }
+    },
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {
-        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
-      },
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "name": "testpool",
         "type": "Microsoft.Batch/batchAccounts/pools",
         "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "properties": {
-          "lastModified": "2017-08-28T10:22:55.9407275Z",
-          "creationTime": "2017-08-28T10:22:55.9407275Z",
-          "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
           "allocationState": "Steady",
           "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
-          "vmSize": "STANDARD_D4",
-          "interNodeCommunication": "Disabled",
-          "taskSlotsPerNode": 1,
-          "taskSchedulingPolicy": {
-            "nodeFillType": "Spread"
-          },
-          "networkConfiguration": {
-            "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-            "publicIPAddressConfiguration": {
-              "provision": "NoPublicIPAddresses"
-            }
-          },
+          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0,
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
@@ -62,16 +46,34 @@
               "nodeAgentSkuId": "batch.node.ubuntu 18.04"
             }
           },
+          "interNodeCommunication": "Disabled",
+          "lastModified": "2017-08-28T10:22:55.9407275Z",
+          "networkConfiguration": {
+            "publicIPAddressConfiguration": {
+              "provision": "NoPublicIPAddresses"
+            },
+            "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123"
+          },
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
           "scaleSettings": {
             "fixedScale": {
               "targetDedicatedNodes": 0,
               "targetLowPriorityNodes": 0
             }
           },
-          "currentDedicatedNodes": 0,
-          "currentLowPriorityNodes": 0
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "taskSlotsPerNode": 1,
+          "vmSize": "STANDARD_D4"
         }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
       }
     }
-  }
+  },
+  "operationId": "Pool_Create",
+  "title": "CreatePool - No public IP"
 }

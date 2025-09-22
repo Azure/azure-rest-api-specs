@@ -1,30 +1,32 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
+    "api-version": "2024-07-01",
     "certificateName": "sha1-0a0e4f50d51beadeac1d35afc5116098e7902e6e",
-    "api-version": "2024-07-01"
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {
-        "ETag": "W/\"0x8D4EDD5118668F7\""
-      },
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/samplecct/certificates/sha1-0a0e4f50d51beadeac1d35afc5116098e7902e6e",
         "name": "sha1-0a0e4f50d51beadeac1d35afc5116098e7902e6e",
         "type": "Microsoft.Batch/batchAccounts/certificates",
         "etag": "W/\"0x8D4EDD5118668F7\"",
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/samplecct/certificates/sha1-0a0e4f50d51beadeac1d35afc5116098e7902e6e",
         "properties": {
-          "thumbprintAlgorithm": "sha1",
-          "thumbprint": "0a0e4f50d51beadeac1d35afc5116098e7902e6e",
+          "format": "Pfx",
           "provisioningState": "Succeeded",
           "provisioningStateTransitionTime": "2017-07-21T01:47:38.4420202Z",
-          "format": "Pfx",
-          "publicData": "MIICrjCCAZagAwI..."
+          "publicData": "MIICrjCCAZagAwI...",
+          "thumbprint": "0a0e4f50d51beadeac1d35afc5116098e7902e6e",
+          "thumbprintAlgorithm": "sha1"
         }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDD5118668F7\""
       }
     }
-  }
+  },
+  "operationId": "Certificate_Get",
+  "title": "Get Certificate"
 }

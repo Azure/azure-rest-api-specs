@@ -1,26 +1,28 @@
 {
   "parameters": {
     "accountName": "sampleacct",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "api-version": "2024-07-01",
-    "subscriptionId": "subid",
-    "applicationName": "app1"
+    "applicationName": "app1",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {
-        "ETag": "W/\"0x8D64F915BDF7F00\""
-      },
       "body": {
-        "type": "Microsoft.Batch/batchAccounts/applications",
-        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app1",
         "name": "app1",
+        "type": "Microsoft.Batch/batchAccounts/applications",
         "etag": "W/\"0x8D64F915BDF7F00\"",
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app1",
         "properties": {
           "allowUpdates": true,
           "displayName": "Sample Application"
         }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D64F915BDF7F00\""
       }
     }
-  }
+  },
+  "operationId": "Application_Get",
+  "title": "ApplicationGet"
 }

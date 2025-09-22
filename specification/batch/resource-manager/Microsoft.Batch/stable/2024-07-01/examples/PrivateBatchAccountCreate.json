@@ -1,9 +1,7 @@
 {
   "parameters": {
     "accountName": "sampleacct",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "api-version": "2024-07-01",
-    "subscriptionId": "subid",
     "parameters": {
       "location": "japaneast",
       "properties": {
@@ -16,38 +14,42 @@
         },
         "publicNetworkAccess": "Disabled"
       }
-    }
+    },
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
-    "202": {},
     "200": {
       "body": {
         "name": "sampleacct",
+        "type": "Microsoft.Batch/batchAccounts",
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct",
+        "identity": {
+          "type": "None"
+        },
         "location": "japaneast",
         "properties": {
           "accountEndpoint": "sampleacct.japaneast.batch.azure.com",
-          "provisioningState": "Succeeded",
-          "poolAllocationMode": "UserSubscription",
-          "dedicatedCoreQuota": 20,
-          "lowPriorityCoreQuota": 20,
-          "poolQuota": 20,
           "activeJobAndJobScheduleQuota": 20,
           "autoStorage": {
-            "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage",
-            "lastKeySync": "2016-03-10T23:48:38.9878479Z"
+            "lastKeySync": "2016-03-10T23:48:38.9878479Z",
+            "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
           },
+          "dedicatedCoreQuota": 20,
           "keyVaultReference": {
             "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
             "url": "http://sample.vault.azure.net/"
           },
+          "lowPriorityCoreQuota": 20,
+          "poolAllocationMode": "UserSubscription",
+          "poolQuota": 20,
+          "provisioningState": "Succeeded",
           "publicNetworkAccess": "Disabled"
-        },
-        "identity": {
-          "type": "None"
-        },
-        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct",
-        "type": "Microsoft.Batch/batchAccounts"
+        }
       }
-    }
-  }
+    },
+    "202": {}
+  },
+  "operationId": "BatchAccount_Create",
+  "title": "PrivateBatchAccountCreate"
 }

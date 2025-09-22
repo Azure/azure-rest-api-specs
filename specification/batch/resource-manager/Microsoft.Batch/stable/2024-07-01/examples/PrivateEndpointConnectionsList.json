@@ -1,35 +1,37 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
+    "api-version": "2024-07-01",
     "privateEndpointConnectionName": "testprivateEndpointConnection",
-    "api-version": "2024-07-01"
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/privateEndpointConnections/testprivateEndpointConnection",
             "name": "testprivateEndpointConnection",
             "type": "Microsoft.Batch/batchAccounts/privateEndpointConnections",
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/privateEndpointConnections/testprivateEndpointConnection",
             "properties": {
-              "provisioningState": "Succeeded",
-              "privateEndpoint": {
-                "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Network/privateEndpoints/testprivateEndpoint"
-              },
               "groupIds": [
                 "batchAccount"
               ],
+              "privateEndpoint": {
+                "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Network/privateEndpoints/testprivateEndpoint"
+              },
               "privateLinkServiceConnectionState": {
-                "status": "Approved",
-                "description": "Approved by xyz.abc@company.com"
-              }
+                "description": "Approved by xyz.abc@company.com",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "PrivateEndpointConnection_ListByBatchAccount",
+  "title": "ListPrivateEndpointConnections"
 }

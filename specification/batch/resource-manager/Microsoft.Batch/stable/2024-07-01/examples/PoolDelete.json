@@ -1,19 +1,21 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
+    "api-version": "2024-07-01",
     "poolName": "testpool",
-    "api-version": "2024-07-01"
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {},
-    "204": {},
     "202": {
       "headers": {
-        "Retry-After": "15",
-        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/poolOperationResults/delete-testpool-8D4EDFF164A11C9?api-version=2024-07-01"
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/poolOperationResults/delete-testpool-8D4EDFF164A11C9?api-version=2024-07-01",
+        "Retry-After": "15"
       }
-    }
-  }
+    },
+    "204": {}
+  },
+  "operationId": "Pool_Delete",
+  "title": "DeletePool"
 }

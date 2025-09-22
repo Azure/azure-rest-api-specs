@@ -1,27 +1,23 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
-    "poolName": "testpool",
     "api-version": "2024-07-01",
     "parameters": {
       "properties": {
-        "vmSize": "Standard_d4s_v3",
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
             "imageReference": {
-              "publisher": "MicrosoftWindowsServer",
               "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
               "sku": "2019-datacenter-smalldisk",
               "version": "latest"
             },
             "nodeAgentSkuId": "batch.node.windows amd64",
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": false
-            },
             "serviceArtifactReference": {
               "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/vmArtifactsProfile"
+            },
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": false
             }
           }
         },
@@ -32,77 +28,83 @@
           }
         },
         "upgradePolicy": {
-          "mode": "automatic",
           "automaticOSUpgradePolicy": {
             "enableAutomaticOSUpgrade": true
-          }
-        }
+          },
+          "mode": "automatic"
+        },
+        "vmSize": "Standard_d4s_v3"
       }
-    }
+    },
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {
-        "ETag": "W/\"0x8DB51F14DC1A8AD\""
-      },
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "name": "mypool41",
         "type": "Microsoft.Batch/batchAccounts/pools",
         "etag": "W/\"0x8DB51F396992B8D\"",
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "properties": {
-          "lastModified": "2023-05-11T07:44:44.8580493Z",
-          "creationTime": "2023-05-11T07:44:44.8580493Z",
-          "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2023-05-11T07:44:44.8580493Z",
           "allocationState": "Resizing",
           "allocationStateTransitionTime": "2023-05-11T07:44:44.8580493Z",
-          "vmSize": "STANDARD_D4S_V3",
-          "interNodeCommunication": "Disabled",
-          "taskSlotsPerNode": 1,
-          "taskSchedulingPolicy": {
-            "nodeFillType": "Spread"
-          },
+          "creationTime": "2023-05-11T07:44:44.8580493Z",
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0,
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "MicrosoftWindowsServer",
                 "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
                 "sku": "2019-datacenter-smalldisk",
                 "version": "latest"
               },
               "nodeAgentSkuId": "batch.node.windows amd64",
-              "windowsConfiguration": {
-                "enableAutomaticUpdates": false
-              },
               "serviceArtifactReference": {
                 "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/vmArtifactsProfile"
+              },
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": false
               }
             }
           },
-          "scaleSettings": {
-            "fixedScale": {
-              "targetDedicatedNodes": 2,
-              "targetLowPriorityNodes": 0,
-              "resizeTimeout": "PT15M"
-            }
-          },
+          "interNodeCommunication": "Disabled",
+          "lastModified": "2023-05-11T07:44:44.8580493Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-05-11T07:44:44.8580493Z",
           "resizeOperationStatus": {
-            "targetDedicatedNodes": 2,
             "nodeDeallocationOption": "Requeue",
             "resizeTimeout": "PT15M",
-            "startTime": "2023-05-11T07:44:44.8580493Z"
+            "startTime": "2023-05-11T07:44:44.8580493Z",
+            "targetDedicatedNodes": 2
           },
-          "currentDedicatedNodes": 0,
-          "currentLowPriorityNodes": 0,
+          "scaleSettings": {
+            "fixedScale": {
+              "resizeTimeout": "PT15M",
+              "targetDedicatedNodes": 2,
+              "targetLowPriorityNodes": 0
+            }
+          },
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "taskSlotsPerNode": 1,
           "upgradePolicy": {
-            "mode": "automatic",
             "automaticOSUpgradePolicy": {
               "enableAutomaticOSUpgrade": true
-            }
-          }
+            },
+            "mode": "automatic"
+          },
+          "vmSize": "STANDARD_D4S_V3"
         }
+      },
+      "headers": {
+        "ETag": "W/\"0x8DB51F14DC1A8AD\""
       }
     }
-  }
+  },
+  "operationId": "Pool_Create",
+  "title": "CreatePool - VirtualMachineConfiguration ServiceArtifactReference"
 }

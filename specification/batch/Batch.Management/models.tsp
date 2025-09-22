@@ -3338,3 +3338,259 @@ model AccessRulePropertiesSubscriptionsItem {
    */
   id?: Azure.Core.armResourceIdentifier;
 }
+
+/**
+ * Provisioning state of NetworkSecurityPerimeter configuration propagation
+ */
+union NetworkSecurityPerimeterConfigurationProvisioningState {
+  string,
+
+  /** Unknown provisioning state */
+  Unknown: "Unknown",
+
+  /** Configuration is being created */
+  Creating: "Creating",
+
+  /** Configuration is being updated */
+  Updating: "Updating",
+
+  /** Configuration has been accepted */
+  Accepted: "Accepted",
+
+  /** Invalid response received */
+  InvalidResponse: "InvalidResponse",
+
+  /** Configuration succeeded */
+  Succeeded: "Succeeded",
+
+  /** Configuration succeeded with issues */
+  SucceededWithIssues: "SucceededWithIssues",
+
+  /** Configuration failed */
+  Failed: "Failed",
+
+  /** Configuration is being deleted */
+  Deleting: "Deleting",
+
+  /** Configuration has been deleted */
+  Deleted: "Deleted",
+
+  /** Configuration was canceled */
+  Canceled: "Canceled",
+}
+
+/**
+ * Access Mode of the resource association
+ */
+union ResourceAssociationAccessMode {
+  string,
+
+  /** No association mode */
+  NoAssociationMode: "NoAssociationMode",
+
+  /** Enforced mode */
+  EnforcedMode: "EnforcedMode",
+
+  /** Learning mode */
+  LearningMode: "LearningMode",
+
+  /** Audit mode */
+  AuditMode: "AuditMode",
+}
+
+/**
+ * Properties of NetworkSecurityPerimeterConfiguration
+ */
+model NetworkSecurityPerimeterConfigurationProperties {
+  /**
+   * Provisioning state of NetworkSecurityPerimeter configuration propagation
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NetworkSecurityPerimeterConfigurationProvisioningState;
+
+  /**
+   * List of Provisioning Issues if any
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  provisioningIssues?: ProvisioningIssue[];
+
+  /**
+   * NetworkSecurityPerimeter related information
+   */
+  networkSecurityPerimeter?: NetworkSecurityPerimeter;
+
+  /**
+   * Information about resource association
+   */
+  @visibility(Lifecycle.Read)
+  resourceAssociation?: NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation;
+
+  /**
+   * Information about current network profile
+   */
+  @visibility(Lifecycle.Read)
+  profile?: NetworkSecurityPerimeterConfigurationPropertiesProfile;
+}
+
+/**
+ * Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration
+ */
+model ProvisioningIssue {
+  /**
+   * Name of the issue
+   */
+  name?: string;
+
+  /**
+   * Properties of Provisioning Issue
+   */
+  @visibility(Lifecycle.Read)
+  properties?: ProvisioningIssueProperties;
+}
+
+/**
+ * Properties of Provisioning Issue
+ */
+model ProvisioningIssueProperties {
+  /**
+   * Type of Issue
+   */
+  issueType?: IssueType;
+
+  /**
+   * Severity of the issue
+   */
+  severity?: Severity;
+
+  /**
+   * Description of the issue
+   */
+  description?: string;
+}
+
+/**
+ * NetworkSecurityPerimeter related information
+ */
+model NetworkSecurityPerimeter {
+  /**
+   * Fully qualified identifier of the resource
+   */
+  id?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/networkSecurityPerimeters";
+    }
+  ]>;
+
+  /**
+   * Guid of the resource
+   */
+  perimeterGuid?: string;
+
+  /**
+   * Location of the resource
+   */
+  location?: string;
+}
+
+/**
+ * Information about resource association
+ */
+model NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation {
+  /**
+   * Name of the resource association
+   */
+  name?: string;
+
+  /**
+   * Access Mode of the resource association
+   */
+  accessMode?: ResourceAssociationAccessMode;
+}
+
+/**
+ * Information about current network profile
+ */
+model NetworkSecurityPerimeterConfigurationPropertiesProfile {
+  /**
+   * Name of the resource
+   */
+  name?: string;
+
+  /**
+   * Current access rules version
+   */
+  accessRulesVersion?: string;
+
+  /**
+   * List of Access Rules
+   */
+  accessRules?: NspAccessRule[];
+}
+
+/**
+ * Network security perimeter access rule
+ */
+model NspAccessRule {
+  /**
+   * Name of the NSP access rule
+   */
+  name?: string;
+
+  /**
+   * Properties of the NSP access rule
+   */
+  properties?: NspAccessRuleProperties;
+}
+
+/**
+ * Properties of NSP access rule
+ */
+model NspAccessRuleProperties {
+  /**
+   * Direction of the access rule
+   */
+  direction?: NspAccessRuleDirection;
+
+  /**
+   * Address prefixes in the CIDR format for inbound rules
+   */
+  addressPrefixes?: string[];
+
+  /**
+   * Subscriptions for inbound rules
+   */
+  subscriptions?: AccessRulePropertiesSubscriptionsItem[];
+
+  /**
+   * Network security perimeters for inbound rules
+   */
+  networkSecurityPerimeters?: NetworkSecurityPerimeter[];
+
+  /**
+   * Fully qualified domain names (FQDNs) for outbound rules
+   */
+  fullyQualifiedDomainNames?: string[];
+
+  /**
+   * Email addresses for notifications
+   */
+  emailAddresses?: string[];
+
+  /**
+   * Phone numbers for notifications
+   */
+  phoneNumbers?: string[];
+}
+
+/**
+ * Direction of the access rule
+ */
+union NspAccessRuleDirection {
+  string,
+
+  /** Inbound access rule */
+  Inbound: "Inbound",
+
+  /** Outbound access rule */
+  Outbound: "Outbound",
+}
