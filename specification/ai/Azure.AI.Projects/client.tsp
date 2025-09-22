@@ -62,13 +62,16 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(Azure.AI.Projects.EntraIDCredentials,
-  "AIProjectConnectionEntraIDCredential",
+  "AIProjectConnectionEntraIdCredential",
   "csharp"
 );
 @@clientName(Azure.AI.Projects.SASCredentials,
   "AIProjectConnectionSasCredential",
   "csharp"
 );
+@@clientName(Azure.AI.Projects.DatasetVersion, "AIProjectDatasetVersion", "csharp");
+@@clientName(Azure.AI.Projects.FileDatasetVersion, "FileDataset", "csharp");
+@@clientName(Azure.AI.Projects.FolderDatasetVersion, "FolderDataset", "csharp");
 
 // Do not use terms "request" or "response" in C# class names as these are REST API terms
 @@clientName(Azure.AI.Projects.PendingUploadRequest,
