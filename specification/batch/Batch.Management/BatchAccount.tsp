@@ -128,6 +128,7 @@ interface BatchAccounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BatchAccount_ListOutboundNetworkDependenciesEndpoints")
   @get
+  @list
   @action("outboundNetworkDependenciesEndpoints")
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     BatchAccount,

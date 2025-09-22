@@ -41,6 +41,7 @@ interface LocationOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Location_ListSupportedVirtualMachineSkus")
   @autoRoute
+  @list
   @get
   @action("virtualMachineSkus")
   listSupportedVirtualMachineSkus is ArmProviderActionSync<

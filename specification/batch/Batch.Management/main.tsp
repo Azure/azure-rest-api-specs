@@ -31,7 +31,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Batch Client
+ * The Batch Management Client.
  */
 @armProviderNamespace
 @service(#{ title: "BatchManagementClient" })
