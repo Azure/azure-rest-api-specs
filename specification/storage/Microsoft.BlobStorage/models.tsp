@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Storage.Blob;
@@ -2320,4 +2321,41 @@ alias PageWriteParameter<TPageWrite extends string> = {
   /** Required. You may specify one of the following options:\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size. */
   @header("x-ms-page-write")
   pageWrite: TPageWrite;
+};
+
+alias IfBlobMatchHeader = {
+  /** Specify an ETag value to operate only on blobs with a matching value. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-match")
+  ifMatch?: string;
+};
+
+alias IfBlobModifiedSinceHeader = {
+  /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-modified-since")
+  @encode("rfc7231")
+  ifModifiedSince?: utcDateTime;
+};
+
+alias IfBlobNoneMatchHeader = {
+  /** Specify an ETag value to operate only on blobs without a matching value. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-none-match")
+  ifNoneMatch?: string;
+};
+
+alias IfBlobUnmodifiedSinceHeader = {
+  /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-unmodified-since")
+  @encode("rfc7231")
+  ifUnmodifiedSince?: utcDateTime;
+};
+
+alias ListBlobsStartFrom = {
+  /** Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive) */
+  @added(Versions.v2026_02_06)
+  @query
+  startFrom?: string;
 };

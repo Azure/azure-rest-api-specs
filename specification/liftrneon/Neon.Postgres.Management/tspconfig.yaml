@@ -34,8 +34,8 @@ options:
     flavor: "azure"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/neonpostgres"
-    package-dir: "armneonpostgres"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armneonpostgres"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armneonpostgres"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

@@ -28,8 +28,8 @@ options:
 
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/avs"
-    package-dir: "armavs"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armavs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armavs/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

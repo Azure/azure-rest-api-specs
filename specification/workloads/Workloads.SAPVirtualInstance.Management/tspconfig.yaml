@@ -14,7 +14,7 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/SAPVirtualInstance/{version-status}/{version}/SAPVirtualInstance.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/sdk/workloadssapvirtualinstance/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: false
@@ -39,8 +39,8 @@ options:
     flavor: "azure"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/workloadssapvirtualinstance"
-    package-dir: "armworkloadssapvirtualinstance"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armworkloadssapvirtualinstance"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armworkloadssapvirtualinstance"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
