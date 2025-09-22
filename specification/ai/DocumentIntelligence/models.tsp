@@ -1321,7 +1321,7 @@ model ClassifierCopyAuthorization {
 model DocumentIntelligenceOperationDetails {
   @doc("Operation ID")
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read)
   operationId: string;
 
   @doc("Operation status.  notStarted, running, completed, or failed")
@@ -1358,9 +1358,9 @@ model DocumentIntelligenceOperationDetails {
 @doc("Document model info.")
 model DocumentModelDetails {
   @key
-  @visibility("read", "create")
   @doc("Unique document model name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  @visibility(Lifecycle.Read)
   modelId: string;
 
   @doc("Document model description.")
@@ -1368,40 +1368,33 @@ model DocumentModelDetails {
   description?: string;
 
   @doc("Date and time (UTC) when the document model was created.")
-  @visibility("read")
   createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the document model will expire.")
-  @visibility("read")
   expirationDateTime?: utcDateTime;
 
   @doc("Date and time (UTC) when the document model was last modified.")
-  @visibility("read")
   modifiedDateTime?: utcDateTime;
 
   @doc("API version used to create this document model.")
-  @visibility("read")
   apiVersion?: string;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
 
   @doc("Custom document model build mode.")
-  @visibility("read")
   buildMode?: DocumentBuildMode;
 
   @doc("""
     Azure Blob Storage location containing the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
-  @visibility("read")
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
     Azure Blob Storage file list specifying the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
-  @visibility("read")
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
   @doc("For composed models, the custom classifier to split and classify the input file.")
@@ -1411,15 +1404,12 @@ model DocumentModelDetails {
   split?: SplitMode = SplitMode.none;
 
   @doc("Supported document types.")
-  @visibility("read")
   docTypes?: Record<DocumentTypeDetails>;
 
   @doc("List of warnings encountered while building the model.")
-  @visibility("read")
   warnings?: DocumentIntelligenceWarning[];
 
   @doc("Number of V100-equivalent GPU hours consumed for model training.")
-  @visibility("read")
   trainingHours?: float32;
 }
 
@@ -1520,10 +1510,10 @@ model ClassifierDocumentTypeDetails {
 @resource("documentClassifiers")
 model DocumentClassifierDetails {
   @key
-  @visibility("read", "create")
   @doc("Unique document classifier name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   @maxLength(64)
+  @visibility(Lifecycle.Read)
   classifierId: string;
 
   @doc("Document classifier description.")
@@ -1537,7 +1527,6 @@ model DocumentClassifierDetails {
   expirationDateTime?: utcDateTime;
 
   @doc("Date and time (UTC) when the document model was last modified.")
-  @visibility("read")
   modifiedDateTime?: utcDateTime;
 
   @doc("API version used to create this document classifier.")
