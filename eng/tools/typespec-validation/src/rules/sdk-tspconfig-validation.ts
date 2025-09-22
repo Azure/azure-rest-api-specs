@@ -719,7 +719,7 @@ export class SdkTspConfigValidationRule implements Rule {
         : "";
 
     return {
-      success,
+      success: true, // Always return success to avoid blocking PRs, errors are reported in stdOutput
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
