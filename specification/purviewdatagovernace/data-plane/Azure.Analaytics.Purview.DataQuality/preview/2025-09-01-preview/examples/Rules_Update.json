@@ -27,12 +27,38 @@
           "value": "CustomerName"
         }
       }
-    }
+    },
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890"
   },
   "title": "Rules_Update",
   "responses": {
-    "204": {
-      "body": ""
+    "200": {
+      "body": {
+        "name": "GetRules",
+        "type": "CustomSQL",
+        "description": "Rule to check completeness of data",
+        "businessDomain": {
+          "type": "BusinessDomain",
+          "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+        },
+        "dataAsset": {
+          "type": "DataAsset",
+          "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
+        },
+        "dataProduct": {
+          "type": "DataProduct",
+          "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
+        },
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "score": 95.5,
+        "status": "Active",
+        "typeProperties": {
+          "column": {
+            "type": "string",
+            "value": "CustomerName"
+          }
+        }
+      }
     }
   }
 }
