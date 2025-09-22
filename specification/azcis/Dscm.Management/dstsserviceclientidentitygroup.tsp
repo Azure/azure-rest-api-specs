@@ -15,9 +15,6 @@ model ClaimProvisioningsForGroup {
   @doc("The claim identity instance. Required.")
   claimInstance: Claim;
 
-  @doc("Scoped to service account group id. If IsUnscoped is false, set the ScopedToServiceAccountGroupId to the ID of group the claim will apply to. If IsUnscoped is true, you can omit the ScopedToServiceAccountGroupId. Optional.")
-  scopedToServiceAccountGroupId?: string;
-
   @doc("Scoped to service account group name. Optional.")
   scopedToServiceAccountGroup?: string;
 
