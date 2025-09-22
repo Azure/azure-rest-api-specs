@@ -165,15 +165,15 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
     const option = this.tryFindOption(config);
     if (option === undefined)
       return this.createFailedResult(
-        `Missing configuration for "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with a path matching the SDK naming convention "${this.expectedValue}"`,
       );
 
     const actualValue = option as unknown as undefined | string | boolean;
     if (typeof actualValue !== "string") {
       return this.createFailedResult(
-        `Invalid type for options.${this.emitterName}.${this.keyToValidate}: expected string but got "${typeof actualValue}"`,
-        `Please update "options.${this.emitterName}.${this.keyToValidate}" to be a string path value`,
+        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a string`,
+        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to be a string path`,
       );
     }
 
