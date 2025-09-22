@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "res6977",
+    "accountName": "sto2527",
+    "advancedPlatformMetricsRuleType": "ContainerLevelCapacityMetrics",
+    "api-version": "2025-06-01",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "enabled": true,
+        "ruleConfig": {
+          "frequency": "Hourly",
+          "filterType": "AllContainersFilter",
+          "filterValues": []
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/advancedPlatformMetrics/ContainerLevelCapacityMetrics",
+        "name": "DefaultAdvancedPlatformMetricsRule",
+        "type": "Microsoft.Storage/storageAccounts/advancedPlatformMetrics",
+        "properties": {
+          "ruleType": "ContainerLevelCapacityMetrics",
+          "enabled": true,
+          "lastModifiedTime": "2024-04-26T11:00:00Z",
+          "ruleConfig": {
+            "metricsEmitted": [
+              "ContainerUsedSize",
+              "ContainerBlobCount"
+            ],
+            "frequency": "Hourly",
+            "filterType": "AllContainersFilter",
+            "filterValues": []
+          }
+        }
+      }
+    },
+    "201": {}
+  }
+}
