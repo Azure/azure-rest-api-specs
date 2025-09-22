@@ -310,7 +310,7 @@ model CriticalDataColumn {
 @doc("Properties for critical data column relationships.")
 model CriticalDataColumnProperties {
   @doc("System metadata for the relationship.")
-  systemData?: string[];
+  systemData?: SystemData;
 
   @doc("Description of the relationship.")
   description?: string;
@@ -320,6 +320,9 @@ model CriticalDataColumnProperties {
 
   @doc("Unique identifier of the associated asset.")
   assetId?: uuid;
+
+  @doc("Name of the associated asset.")
+  entityId: uuid;
 }
 
 @doc("Request body for creating relationships with critical data column properties.")
@@ -464,7 +467,7 @@ model DataAsset {
   openInUrl?: url;
 
   @doc("Type properties of the asset.")
-  typeProperties?: Record<string[]>;
+  typeProperties?: Record<string>;
 }
 
 @doc("DataAssetQueryRequest.")
