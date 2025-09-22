@@ -1,8 +1,3 @@
-import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/http";
-import "@typespec/rest";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
@@ -20,17 +15,6 @@ model ClaimProvisioningsForGroup {
 
   @doc("Scoped to service account group service tree id. Optional.")
   scopedToServiceAccountGroupServiceTreeId?: string;
-}
-
-@added(Versions.v2024_06_24_preview)
-@doc("Authentication requirement.")
-model AuthenticationRequirement {
-  @doc("Authentication requirement value. E.g. SAWEnforcement or PTH. Required.")
-  value: string;
-
-  @doc("List of required IP ranges. Optional.")
-  @Azure.ResourceManager.identifiers(#[])
-  requiredIpRanges?: Array<RequiredIpRange>;
 }
 
 @added(Versions.v2024_06_24_preview)
@@ -59,39 +43,6 @@ model ClaimExpansion {
 
   @doc("Flag to indicate if the claim is regional enforced or not. Optional.")
   isRegionalEnforced?: IsRegionalEnforced;
-}
-
-@added(Versions.v2024_06_24_preview)
-@doc("Cloud Id")
-union CloudId {
-  string,
-
-  @doc("Public cloud")
-  Public: "Public",
-
-  @doc("BlackForest cloud")
-  BlackForest: "BlackForest",
-
-  @doc("Bleu cloud")
-  Bleu: "Bleu",
-
-  @doc("Delos cloud")
-  Delos: "Delos",
-
-  @doc("Fairfax cloud")
-  Fairfax: "Fairfax",
-
-  @doc("GovSG cloud")
-  GovSG: "GovSG",
-
-  @doc("Mooncake cloud")
-  Mooncake: "Mooncake",
-
-  @doc("USNat cloud")
-  USNat: "USNat",
-
-  @doc("USSec cloud")
-  USSec: "USSec",
 }
 
 @added(Versions.v2024_06_24_preview)

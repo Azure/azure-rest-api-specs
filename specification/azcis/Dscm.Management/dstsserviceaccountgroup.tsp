@@ -40,17 +40,7 @@ model DstsServiceAccountGroupResourceProperties {
   authenticationRequirements?: Array<AuthenticationRequirement>;
 
   @doc("The cloud ID where the Service Account Group should be added.")
-  cloudId?:
-    | "Public"
-    | "BlackForest"
-    | "Fairfax"
-    | "Mooncake"
-    | "USNat"
-    | "USSec"
-    | "Bleu"
-    | "Delos"
-    | "GovSG"
-    | string;
+  cloudId?: CloudId;
 
   @doc("Allowed actor ids.")
   allowedActorIds?: Array<string>;
@@ -88,6 +78,39 @@ model AuthenticationRequirement {
   @doc("A list of required IP ranges.")
   @Azure.ResourceManager.identifiers(#[])
   requiredIpRanges: Array<RequiredIpRange>;
+}
+
+@added(Versions.v2024_06_24_preview)
+@doc("Cloud Id")
+union CloudId {
+  string,
+
+  @doc("Public cloud")
+  Public: "Public",
+
+  @doc("BlackForest cloud")
+  BlackForest: "BlackForest",
+
+  @doc("Bleu cloud")
+  Bleu: "Bleu",
+
+  @doc("Delos cloud")
+  Delos: "Delos",
+
+  @doc("Fairfax cloud")
+  Fairfax: "Fairfax",
+
+  @doc("GovSG cloud")
+  GovSG: "GovSG",
+
+  @doc("Mooncake cloud")
+  Mooncake: "Mooncake",
+
+  @doc("USNat cloud")
+  USNat: "USNat",
+
+  @doc("USSec cloud")
+  USSec: "USSec",
 }
 
 @added(Versions.v2024_06_24_preview)
