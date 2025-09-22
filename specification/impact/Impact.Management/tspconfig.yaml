@@ -31,8 +31,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/impactreporting"
-    package-dir: "armimpactreporting"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armimpactreporting"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armimpactreporting"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

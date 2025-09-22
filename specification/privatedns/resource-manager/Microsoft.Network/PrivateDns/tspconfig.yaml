@@ -32,8 +32,8 @@ options:
       name: "@azure/arm-privatedns"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/privatedns"
-    package-dir: "armprivatedns"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armprivatedns"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armprivatedns"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
