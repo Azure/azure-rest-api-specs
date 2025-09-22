@@ -3,10 +3,6 @@
   "info": {
     "title": "Azure Table",
     "version": "2019-02-02",
-    "x-ms-code-generation-settings": {
-      "header": "MIT",
-      "strictSpecAdherence": false
-    }
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{url}",
@@ -19,6 +15,7 @@
     ]
   },
   "securityDefinitions": {
+    "description": "Shared Key Lite authentication for Table service",
     "table_shared_key": {
       "type": "apiKey",
       "name": "Authorization",
@@ -1400,6 +1397,7 @@
     },
     "Metrics": {
       "xml": {},
+      "type": "object",
       "description": "",
       "required": [
         "Enabled"
@@ -1476,6 +1474,7 @@
         "MaxAgeInSeconds": {
           "description": "The maximum amount time that a browser should cache the preflight OPTIONS request.",
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "xml": {
             "name": "MaxAgeInSeconds"
@@ -1503,6 +1502,7 @@
         "Days": {
           "description": "Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted.",
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "xml": {
             "name": "Days"
@@ -1728,6 +1728,7 @@
       "description": "The URL of the service account or table that is the target of the desired operation.",
       "required": true,
       "type": "string",
+      "format": "url",
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
@@ -1746,6 +1747,7 @@
       "in": "query",
       "required": false,
       "type": "integer",
+      "format": "int32",
       "minimum": 0,
       "x-ms-parameter-location": "method",
       "description": "The timeout parameter is expressed in seconds."

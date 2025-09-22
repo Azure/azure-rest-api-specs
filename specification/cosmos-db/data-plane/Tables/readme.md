@@ -39,141 +39,40 @@ input-file:
 - preview/2019-02-02/table.json
 ```
 
----
-# Suppressions
+### Suppression
 
-``` yaml
+
+```yaml
 directive:
-  - suppress: D5001
-    where: $["x-ms-paths"]["/?ServiceProperties"].put
-    reason: The path only supports XML input/outputm which is not supported
-  - suppress: D5001
-    where: $["x-ms-paths"]["/?ServiceProperties"].get
-    reason: The path only supports XML input/outputm which is not supported
-  - suppress: D5001
-    where: $["x-ms-paths"]["/?ServiceStats"].get
-    reason: The path only supports XML input/outputm which is not supported
-  - suppress: D5001
-    where: $.paths["/{table}"].get
-    reason: The path only supports XML input/outputm which is not supported
-  - suppress: D5001
-    where: $.paths["/{table}"].put
-    reason: The path only supports XML input/outputm which is not supported
-  - suppress: R3016
-    where: $.definitions.TableServiceError.properties.Message
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableServiceProperties.properties.Logging
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableServiceProperties.properties.HourMetrics
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableServiceProperties.properties.MinuteMetrics
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableServiceProperties.properties.Cors
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Logging.properties.Version
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Logging.properties.Delete
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Logging.properties.Read
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Logging.properties.Write
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Logging.properties.RetentionPolicy
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Metrics.properties.Version
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Metrics.properties.Enabled
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Metrics.properties.IncludeAPIs
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.Metrics.properties.RetentionPolicy
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.CorsRule.properties.AllowedOrigins
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.CorsRule.properties.AllowedMethods
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.CorsRule.properties.AllowedHeaders
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.CorsRule.properties.ExposedHeaders
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.CorsRule.properties.MaxAgeInSeconds
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.RetentionPolicy.properties.Enabled
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.RetentionPolicy.properties.Days
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableServiceStats.properties.GeoReplication
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.GeoReplication.properties.Status
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.GeoReplication.properties.LastSyncTime
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableProperties.properties.TableName
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableResponse.properties["odata.metadata"]
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableQueryResponse.properties["odata.metadata"]
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableResponseProperties.properties.TableName
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableResponseProperties.properties["odata.type"]
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableResponseProperties.properties["odata.id"]
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableResponseProperties.properties["odata.editLink"]
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.SignedIdentifier.properties.Id
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.SignedIdentifier.properties.AccessPolicy
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.AccessPolicy.properties.Start
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.AccessPolicy.properties.Expiry
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.AccessPolicy.properties.Permission
-    reason: Response from service is not camel case
-  - suppress: R3016
-    where: $.definitions.TableEntityQueryResponse.properties["odata.metadata"]
-    reason: Response from service is not camel case
-  - suppress: R2058
-    where: $["x-ms-paths"]["/?ServiceStats"]
-    reason: Cannot provide operation in "paths"
-  - suppress: R2058
-    where: $["x-ms-paths"]["/?ServiceProperties"]
-    reason: Cannot provide operation in "paths"
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: table.json
+    reason: Service uses XML, not JSON, so cannot validate.
+  - suppress: XmsPathsMustOverloadPaths
+    from: table.json
+    reason: Service has paths made up only of endpoint + parameters.
+  - suppress: HostParametersValidation
+    from: table.json
+    reason: Existing API contract using "url" instead of "endpoint".
+  - suppress: PageableOperation
+    from: table.json
+    reason: Tables pageable require two continuation tokens.
+  - suppress: PaginationResponse
+    from: table.json
+    reason: Tables pageable require two continuation tokens.
+  - suppress: ListInOperationName
+    from: table.json
+    reason: Existing API contract.
+  - suppress: GetInOperationName
+    from: table.json
+    reason: Existing API contract.
+  - suppress: OperationId
+    from: table.json
+    reason: Existing API contract.
+  - suppress: VersionPolicy
+    from: table.json
+    reason: Existing API with api version header.
+  - suppress: ErrorResponse
+    from: table.json
+    reason: Existing API contract.
 ```
+
