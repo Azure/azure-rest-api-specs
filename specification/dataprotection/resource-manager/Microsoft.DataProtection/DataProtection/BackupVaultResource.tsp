@@ -14,6 +14,8 @@ namespace Microsoft.DataProtection;
 /**
  * Backup Vault Resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-missing-delete" "BackupVaultResource has delete operation in dataprotection.json lines 707-774, but automated check doesn't detect it"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-missing-patch" "BackupVaultResource has patch operation in dataprotection.json lines 707-774, but automated check doesn't detect it"
 model BackupVaultResource
   is Azure.ResourceManager.TrackedResource<BackupVault, false> {
   ...ResourceNameParameter<
@@ -41,7 +43,7 @@ model DeletedBackupVaultResource
   ...ResourceNameParameter<
     Resource = DeletedBackupVaultResource,
     KeyName = "deletedVaultName",
-    SegmentName = "deletedBackupVaults",
+    SegmentName = "deletedVaults",
     NamePattern = ""
   >;
 }
@@ -266,7 +268,7 @@ interface DeletedBackupVaults {
    * Gets a deleted backup vault
    */
   @get
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults/{deletedVaultName}")
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -284,7 +286,7 @@ interface DeletedBackupVaults {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Manual routing required for location-scoped resource listing"
   @list
   @get
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults")
   listByLocation(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -295,7 +297,7 @@ interface DeletedBackupVaults {
    * Undeletes a soft deleted backup vault
    */
   @post
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}/undelete")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults/{deletedVaultName}/undelete")
   undelete(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

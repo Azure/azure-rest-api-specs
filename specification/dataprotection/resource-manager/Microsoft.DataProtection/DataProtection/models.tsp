@@ -919,6 +919,12 @@ model DeletedBackupVault {
   originalBackupVaultName: string;
 
   /**
+   * Resource path of the original backup vault
+   */
+  @visibility(Lifecycle.Read)
+  originalBackupVaultResourcePath: string;
+
+  /**
    * Deletion info for the tracked resource (Backup Vault)
    */
   @visibility(Lifecycle.Read)

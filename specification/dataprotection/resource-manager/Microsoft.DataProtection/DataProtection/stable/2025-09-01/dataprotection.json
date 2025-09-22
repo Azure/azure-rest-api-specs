@@ -242,7 +242,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults": {
       "get": {
         "operationId": "DeletedBackupVaults_ListByLocation",
         "description": "Lists deleted backup vaults by location",
@@ -281,7 +281,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults/{deletedVaultName}": {
       "get": {
         "operationId": "DeletedBackupVaults_Get",
         "description": "Gets a deleted backup vault",
@@ -324,7 +324,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedBackupVaults/{deletedVaultName}/undelete": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults/{deletedVaultName}/undelete": {
       "post": {
         "operationId": "DeletedBackupVaults_Undelete",
         "description": "Undeletes a soft deleted backup vault",
@@ -6429,6 +6429,11 @@
           "description": "Resource name of the original backup vault",
           "readOnly": true
         },
+        "originalBackupVaultResourcePath": {
+          "type": "string",
+          "description": "Resource path of the original backup vault",
+          "readOnly": true
+        },
         "resourceDeletionInfo": {
           "$ref": "#/definitions/ResourceDeletionInfo",
           "description": "Deletion info for the tracked resource (Backup Vault)",
@@ -6439,6 +6444,7 @@
         "storageSettings",
         "originalBackupVaultId",
         "originalBackupVaultName",
+        "originalBackupVaultResourcePath",
         "resourceDeletionInfo"
       ]
     },
