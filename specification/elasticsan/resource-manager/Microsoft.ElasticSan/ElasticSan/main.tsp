@@ -40,6 +40,12 @@ namespace Microsoft.ElasticSan;
  */
 enum Versions {
   /**
+   * The 2025-09-01 stable API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2025_09_01: "2025-09-01",
+
+  /**
    * The 2024-07-01-preview API version.
    */
   v2024_07_01_preview: "2024-07-01-preview",
