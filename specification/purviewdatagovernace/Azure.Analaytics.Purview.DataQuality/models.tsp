@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace PurviewDataQuality;
 
@@ -862,6 +863,12 @@ model JobConfigDTOResponse {
    * Value
    */
   value: string;
+
+  /**
+   * lro status
+   */
+  @lroStatus
+  statuslro: LroStatus;
 }
 
 /**
@@ -880,6 +887,34 @@ model ScanDTOResponse {
    * Scan Type
    */
   scanType?: string;
+
+  /**
+   * lro status
+   */
+  @lroStatus
+  statuslro: LroStatus;
+}
+
+/**
+ * lro status
+ */
+union LroStatus {
+  /**
+   * In Progress status
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Succeeded status
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Failed status
+   */
+  Failed: "Failed",
+
+  string,
 }
 
 /**
