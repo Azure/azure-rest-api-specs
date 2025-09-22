@@ -4603,6 +4603,91 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/reinstallMobilityService": {
+      "post": {
+        "tags": [
+          "ReplicationProtectedItems"
+        ],
+        "summary": "Reinstall the mobility service on a protected item.",
+        "description": "The operation to reinstall the installed mobility service software on a replication protected item to the latest available version.",
+        "operationId": "ReplicationProtectedItems_ReinstallMobilityService",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the fabric containing the protected item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "The name of the container containing the protected item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "description": "The name of the protected item on which the agent is to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateMobilityServiceRequest",
+            "in": "body",
+            "description": "Request to update the mobility service on the protected item.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateMobilityServiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update the mobility service on a protected item.": {
+            "$ref": "./examples/ReplicationProtectedItems_UpdateMobilityService.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters": {
       "get": {
         "tags": [
@@ -9912,6 +9997,10 @@
           "description": "The recovery capacity reservation group Id.",
           "type": "string"
         },
+        "platformFaultDomain": {
+          "description": "the platform fault domain.",
+          "type": "integer"
+        },
         "autoProtectionOfDataDisk": {
           "description": "A value indicating whether the auto protection is enabled.",
           "enum": [
@@ -10844,8 +10933,16 @@
             "modelAsString": true
           }
         },
+        "agentReinstallAttemptToVersion": {
+          "description": "The agent version to which last agent reinstall was attempted.",
+          "type": "string"
+        },   
         "osFamilyName": {
           "description": "The OS family name.",
+          "type": "string"
+        },
+        "distroName": {
+          "description": "The distro name.",
           "type": "string"
         },
         "distroNameForWhichAgentIsInstalled": {
@@ -11366,6 +11463,10 @@
           "description": "The recovery capacity reservation group Id.",
           "type": "string"
         },
+        "platformFaultDomain": {
+          "description": "the platform fault domain.",
+          "type": "integer"
+        },
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information."
@@ -11524,7 +11625,15 @@
         "recoveryCapacityReservationGroupId": {
           "description": "The recovery capacity reservation group Id.",
           "type": "string"
-        }
+        },
+        "recoveryAvailabilityZone": {
+          "description": "The recovery availability zone.",
+          "type": "string"
+        },
+        "platformFaultDomain": {
+          "description": "The platform fault domain.",
+          "type": "integer"
+        }    
       },
       "x-ms-discriminator-value": "A2A"
     },
@@ -18309,6 +18418,7 @@
               "MissingUpgradePath",
               "InvalidAgentVersion",
               "InvalidDriverVersion",
+              "ReInstallRequired",
               "Unknown"
             ],
             "type": "string",
@@ -18971,6 +19081,10 @@
         },
         "osFamilyName": {
           "description": "The OS family name.",
+          "type": "string"
+        },
+        "distroName": {
+          "description": "The distro name.",
           "type": "string"
         },
         "distroNameForWhichAgentIsInstalled": {
