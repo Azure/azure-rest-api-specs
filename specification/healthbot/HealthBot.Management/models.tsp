@@ -257,12 +257,12 @@ model Error {
    * The error object.
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  error?: ErrorError;
+  error?: ErrorDetail;
 }
 /**
  * The error object.
  */
-model ErrorError {
+model ErrorDetail {
   /**
    * The error code.
    */
