@@ -1,0 +1,85 @@
+{
+  "title": "StageProgressions_ListByParentAtSubscriptionLevel",
+  "operationId": "StageProgressions_ListByParentAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "subscriptionSecurityChangeState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stageReference": "security-baseline-validation",
+              "status": "Completed",
+              "sequence": 1,
+              "stageVariables": {
+                "securityFramework": "CIS-Azure",
+                "complianceLevel": "enterprise",
+                "validationScope": "subscription",
+                "securityChecks": [
+                  "access-controls",
+                  "network-security",
+                  "data-protection"
+                ]
+              },
+              "comments": "Subscription-level security baseline validation stage for enterprise security framework deployment. This stage validates security configurations, access controls, and compliance with enterprise security standards.",
+              "links": [
+                {
+                  "name": "workTrackingItem",
+                  "uri": "https://dev.azure.com/contoso/AnalyticsProject/_workitems/edit/12369",
+                  "description": "Work item for analytics platform deployment with ML capabilities"
+                },
+                {
+                  "name": "approvalRequest",
+                  "uri": "https://approval.contoso.com/requests/67914",
+                  "description": "Analytics platform deployment approval with data governance review"
+                },
+                {
+                  "name": "supportIncident",
+                  "uri": "https://support.contoso.com/incidents/INC001258",
+                  "description": "Support incident for analytics platform deployment and data pipeline monitoring"
+                },
+                {
+                  "name": "accessElevationRequest",
+                  "uri": "https://access.contoso.com/requests/AER-5702",
+                  "description": "Access elevation request for analytics platform deployment with data access"
+                },
+                {
+                  "name": "relatedChangeState",
+                  "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/dataLakeUpgradeState",
+                  "description": "Related data lake upgrade change state for analytics platform coordination"
+                },
+                {
+                  "name": "testResults",
+                  "uri": "https://testresults.contoso.com/runs/TR-9900",
+                  "description": "Analytics platform deployment test results with data quality validation"
+                },
+                {
+                  "name": "serviceCatalog",
+                  "uri": "https://catalog.contoso.com/services/analytics-platform",
+                  "description": "Analytics platform service catalog entry with ML and data processing specifications"
+                }
+              ]
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionSecurityChangeState/stageProgressions/securityBaselineProgression",
+            "name": "securityBaselineProgression",
+            "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+            "systemData": {
+              "createdBy": "derek.security@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-09T07:30:16.534Z",
+              "lastModifiedBy": "derek.security@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-09T09:05:30.442Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionSecurityChangeState/stageProgressions?api-version=2025-07-01-preview&$skiptoken=jkl456"
+      }
+    }
+  }
+}

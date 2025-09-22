@@ -40,7 +40,13 @@ model StageProgressionProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("StageProgression resource state.")
+  @removed(Versions.v2025_09_01_preview)
   state: StageProgressionState;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("StageProgression resource status.")
+  @added(Versions.v2025_09_01_preview)
+  status: StageProgressionState;
 
   @visibility(Lifecycle.Read)
   @renamedFrom(Versions.v2025_07_01_preview, "sequence")
@@ -50,9 +56,17 @@ model StageProgressionProperties {
   sequenceOld?: int32;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @renamedFrom(Versions.v2025_09_01_preview, "sequence")
+  @removed(Versions.v2025_09_01_preview)
   @doc("The sequence of the stage within the ChangeStage parent resource.")
   @minValue(1)
   @added(Versions.v2025_07_01_preview)
+  sequenceOld1?: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The sequence of the stage within the ChangeStage parent resource.")
+  @minValue(1)
+  @added(Versions.v2025_09_01_preview)
   sequence?: int32;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
@@ -75,14 +89,27 @@ model StageProgressionProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Collection of related links for the change.")
+  @renamedFrom(Versions.v2025_09_01_preview, "links")
   @added(Versions.v2025_07_01_preview)
-  links?: ChangeLinks;
+  @removed(Versions.v2025_09_01_preview)
+  links0701?: ChangeLinks;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Collection of related links for the change.")
+  @added(Versions.v2025_09_01_preview)
+  links?: Link[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Defines a flexible placeholder for stage specific meta data for diverse orchestration and change scenarios."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Additional metadata for the stageProgression resource.")
   @added(Versions.v2025_07_01_preview)
   additionalData?: {};
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the current Stage.Value can be any type, hence using Unknown type."
+  @doc("Stage specific key value pairs of parameter names & their values for the current Stage, If any.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2025_09_01_preview)
+  parameters?: Record<unknown>;
 }
 
 @doc("Indicates the current status of the progression of the change within the stage.")
@@ -170,6 +197,28 @@ interface StageProgressions {
   listByParent is ArmResourceListByParent<StageProgression>;
   listByParentAtSubscriptionLevel is ArmResourceListByParent<
     StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
+  @doc("Retrieve the audit trail action, for a StageProgression.")
+  @action("retrieveAuditTrail")
+  @added(Versions.v2025_09_01_preview)
+  retrieveAuditTrail is ArmResourceActionSync<
+    StageProgression,
+    void,
+    RetrieveAuditTrailResponse
+  >;
+
+  @doc("Retrieve the audit trail action, for a StageProgression at subscription level.")
+  @action("retrieveAuditTrail")
+  @added(Versions.v2025_09_01_preview)
+  retrieveAuditTrailAtSubscriptionLevel is ArmResourceActionSync<
+    StageProgression,
+    void,
+    RetrieveAuditTrailResponse,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;

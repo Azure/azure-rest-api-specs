@@ -171,11 +171,22 @@ model NestedStageMap {
   @doc("ARM resource ID for the nested stagemap resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the stagemap.Value can be any type, hence using Unknown type."
+  @doc("Key value pairs of parameter names & their values for the stageMap referenced by the resourceId field.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2025_09_01_preview)
+  parameters?: Record<unknown>;
 }
 
 @doc("Link model for related resources and references.")
 @added(Versions.v2025_07_01_preview)
 model Link {
+  @added(Versions.v2025_09_01_preview)
+  @doc("name of the link.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  name: string;
+
   @doc("URL or comma separated URLs for the link.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   uri: string;
@@ -186,16 +197,19 @@ model Link {
   description?: string;
 
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_09_01_preview)
   @doc("User who last modified this link.")
   lastModifiedBy?: string;
 
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_09_01_preview)
   @doc("The date and time when this link was last modified (ISO 8601 format).")
   lastModifiedAt?: utcDateTime;
 }
 
 @doc("Collection of predefined link types for change-related references.")
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_09_01_preview)
 model ChangeLinks {
   @doc("Link to work tracking item.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -229,6 +243,7 @@ model ChangeLinks {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Intentionally empty model for flexible stage variables storage."
 @doc("Stage variables object type that allows flexible key-value pairs")
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_09_01_preview)
 model StageVariables {
   // Flexible object model for stage variables - allows any properties
 }
