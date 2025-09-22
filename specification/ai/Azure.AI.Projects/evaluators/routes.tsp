@@ -123,4 +123,20 @@ interface Evaluators {
     },
     PendingUploadResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get the SAS credential to access the storage account associated with a Evaluator version.")
+  @post
+  @Rest.action("credentials")
+  @Rest.actionSeparator("/")
+  getCredentials is Azure.Core.Foundations.ResourceOperation<
+    EvaluatorVersion,
+    {
+      @doc("The specific version id of the EvaluatorVersion to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+    },
+    AssetCredentialResponse
+  >;
 }
