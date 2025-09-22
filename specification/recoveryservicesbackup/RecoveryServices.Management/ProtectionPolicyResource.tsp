@@ -5,22 +5,16 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup policy. Workload-specific backup policies are derived from this class.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(VaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(ProtectionPolicy)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ProtectionPolicyResource extends Resource {
+model ProtectionPolicyResource
+  is TrackedResourceWithOptionalLocation<ProtectionPolicy> {
   ...ResourceNameParameter<
     Resource = ProtectionPolicyResource,
     KeyName = "policyName",
@@ -29,10 +23,10 @@ model ProtectionPolicyResource extends Resource {
   >;
 
   /**
-   * ProtectionPolicyResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ProtectionPolicy;
+  eTag?: string;
 }
 
 @armResourceOperations
@@ -167,6 +161,9 @@ interface ProtectionPolicyOperationStatuses {
 
 @@doc(ProtectionPolicyResource.name,
   "Backup policy information to be fetched."
+);
+@@doc(ProtectionPolicyResource.properties,
+  "ProtectionPolicyResource properties"
 );
 @@doc(ProtectionPolicies.createOrUpdate::parameters.resource,
   "resource backup policy"

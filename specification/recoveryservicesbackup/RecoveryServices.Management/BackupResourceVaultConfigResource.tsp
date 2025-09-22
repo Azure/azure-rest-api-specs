@@ -5,23 +5,17 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Backup resource vault config details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("vaultconfig")
 @parentResource(VaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(BackupResourceVaultConfig)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model BackupResourceVaultConfigResource extends Resource {
+model BackupResourceVaultConfigResource
+  is TrackedResourceWithOptionalLocation<BackupResourceVaultConfig> {
   ...ResourceNameParameter<
     Resource = BackupResourceVaultConfigResource,
     KeyName = "backupconfig",
@@ -30,10 +24,10 @@ model BackupResourceVaultConfigResource extends Resource {
   >;
 
   /**
-   * BackupResourceVaultConfigResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: BackupResourceVaultConfig;
+  eTag?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -76,6 +70,9 @@ interface BackupResourceVaultConfigs {
 }
 
 @@doc(BackupResourceVaultConfigResource.name, "");
+@@doc(BackupResourceVaultConfigResource.properties,
+  "BackupResourceVaultConfigResource properties"
+);
 @@doc(BackupResourceVaultConfigs.put::parameters.resource,
   "resource config request"
 );

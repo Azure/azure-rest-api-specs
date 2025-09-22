@@ -5,22 +5,16 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Base class for container with backup items. Containers with specific workloads are derived from this class.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BackupFabricResource)
-@Azure.ResourceManager.Private.armResourceInternal(ProtectionContainer)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ProtectionContainerResource extends Resource {
+model ProtectionContainerResource
+  is TrackedResourceWithOptionalLocation<ProtectionContainer> {
   ...ResourceNameParameter<
     Resource = ProtectionContainerResource,
     KeyName = "containerName",
@@ -29,10 +23,10 @@ model ProtectionContainerResource extends Resource {
   >;
 
   /**
-   * ProtectionContainerResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ProtectionContainer;
+  eTag?: string;
 }
 
 @armResourceOperations
@@ -157,6 +151,9 @@ interface ProtectionContainerOperationResults {
 
 @@doc(ProtectionContainerResource.name,
   "Name of the container whose details need to be fetched."
+);
+@@doc(ProtectionContainerResource.properties,
+  "ProtectionContainerResource properties"
 );
 @@doc(ProtectionContainers.register::parameters.resource,
   "Request body for operation"

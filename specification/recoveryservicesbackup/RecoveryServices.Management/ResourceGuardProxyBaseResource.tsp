@@ -5,20 +5,15 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 
 namespace Microsoft.RecoveryServices;
 
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("")
 @parentResource(VaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(ResourceGuardProxyBase)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ResourceGuardProxyBaseResource extends Resource {
+model ResourceGuardProxyBaseResource
+  is TrackedResourceWithOptionalLocation<ResourceGuardProxyBase> {
   ...ResourceNameParameter<
     Resource = ResourceGuardProxyBaseResource,
     KeyName = "resourceGuardProxyName",
@@ -27,10 +22,10 @@ model ResourceGuardProxyBaseResource extends Resource {
   >;
 
   /**
-   * ResourceGuardProxyBaseResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ResourceGuardProxyBase;
+  eTag?: string;
 }
 
 @armResourceOperations
@@ -78,6 +73,9 @@ interface ResourceGuardProxies {
 }
 
 @@doc(ResourceGuardProxyBaseResource.name, "");
+@@doc(ResourceGuardProxyBaseResource.properties,
+  "ResourceGuardProxyBaseResource properties"
+);
 @@doc(ResourceGuardProxy.put::parameters.resource,
   "Request body for operation"
 );

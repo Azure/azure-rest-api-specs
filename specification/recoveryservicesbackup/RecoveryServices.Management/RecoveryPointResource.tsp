@@ -6,23 +6,17 @@ import "./ProtectedItemResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ProtectedItemResource)
-@Azure.ResourceManager.Private.armResourceInternal(RecoveryPoint)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model RecoveryPointResource extends Resource {
+model RecoveryPointResource
+  is TrackedResourceWithOptionalLocation<RecoveryPoint> {
   ...ResourceNameParameter<
     Resource = RecoveryPointResource,
     KeyName = "recoveryPointId",
@@ -31,10 +25,10 @@ model RecoveryPointResource extends Resource {
   >;
 
   /**
-   * RecoveryPointResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: RecoveryPoint;
+  eTag?: string;
 }
 
 @armResourceOperations
@@ -127,6 +121,7 @@ interface ItemLevelRecoveryConnections {
 @@doc(RecoveryPointResource.name,
   "RecoveryPointID represents the backed up data to be fetched."
 );
+@@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
 );

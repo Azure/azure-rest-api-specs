@@ -5,21 +5,15 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup ProtectionIntent.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BackupFabricResource)
-@Azure.ResourceManager.Private.armResourceInternal(ProtectionIntent)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ProtectionIntentResource extends Resource {
+model ProtectionIntentResource
+  is TrackedResourceWithOptionalLocation<ProtectionIntent> {
   ...ResourceNameParameter<
     Resource = ProtectionIntentResource,
     KeyName = "intentObjectName",
@@ -28,10 +22,10 @@ model ProtectionIntentResource extends Resource {
   >;
 
   /**
-   * ProtectionIntentResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ProtectionIntent;
+  eTag?: string;
 }
 
 @armResourceOperations
@@ -63,6 +57,9 @@ interface ProtectionIntentResources {
 
 @@doc(ProtectionIntentResource.name,
   "Backed up item name whose details are to be fetched."
+);
+@@doc(ProtectionIntentResource.properties,
+  "ProtectionIntentResource properties"
 );
 @@doc(ProtectionIntentResources.createOrUpdate::parameters.resource,
   "resource backed up item"

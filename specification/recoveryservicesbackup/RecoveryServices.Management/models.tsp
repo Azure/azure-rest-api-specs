@@ -1305,50 +1305,6 @@ model BackupResourceConfig {
 }
 
 /**
- * ARM Resource.
- */
-model Resource {
-  /**
-   * Resource Id represents the complete path to the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name associated with the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Resource location.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  eTag?: string;
-}
-
-/**
  * Contract to validate if backup can be enabled on the given resource in a given vault and given configuration.
  * It will validate followings
  * 1. Vault capacity
@@ -2198,11 +2154,34 @@ model RecoveryPoint {
   objectType: string;
 }
 
+alias ResourceProperties = {
+  /**
+   * Resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /**
+   * Optional ETag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  eTag?: string;
+};
+
 /**
  * Base class for restore request. Workload-specific restore requests are derived from this class.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RestoreRequestResource extends Resource {
+  ...ResourceProperties;
+
   /**
    * RestoreRequestResource properties
    */
@@ -2587,6 +2566,8 @@ model ProtectableContainerResourceList extends ResourceList {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProtectableContainerResource extends Resource {
+  ...ResourceProperties;
+
   /**
    * ProtectableContainerResource properties
    */
@@ -2685,6 +2666,8 @@ model WorkloadItemResourceList extends ResourceList {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkloadItemResource extends Resource {
+  ...ResourceProperties;
+
   /**
    * WorkloadItemResource properties
    */
@@ -2728,6 +2711,8 @@ model WorkloadItem {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackupRequestResource extends Resource {
+  ...ResourceProperties;
+
   /**
    * BackupRequestResource properties
    */
@@ -2752,6 +2737,8 @@ model BackupRequest {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ILRRequestResource extends Resource {
+  ...ResourceProperties;
+
   /**
    * ILRRequestResource properties
    */
@@ -2788,6 +2775,8 @@ model WorkloadProtectableItemResourceList extends ResourceList {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkloadProtectableItemResource extends Resource {
+  ...ResourceProperties;
+
   /**
    * WorkloadProtectableItemResource properties
    */

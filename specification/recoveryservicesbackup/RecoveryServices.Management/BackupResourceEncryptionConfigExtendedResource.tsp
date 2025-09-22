@@ -5,24 +5,17 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("backupResourceEncryptionConfig")
 @parentResource(VaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(
-  BackupResourceEncryptionConfigExtended
-)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model BackupResourceEncryptionConfigExtendedResource extends Resource {
+@doc("")
+model BackupResourceEncryptionConfigExtendedResource
+  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfigExtended> {
   ...ResourceNameParameter<
     Resource = BackupResourceEncryptionConfigExtendedResource,
     KeyName = "backupEncryptionConfig",
@@ -31,26 +24,18 @@ model BackupResourceEncryptionConfigExtendedResource extends Resource {
   >;
 
   /**
-   * BackupResourceEncryptionConfigExtendedResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: BackupResourceEncryptionConfigExtended;
+  eTag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("backupResourceEncryptionConfig")
 @parentResource(VaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(
-  BackupResourceEncryptionConfig
-)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model BackupResourceEncryptionConfigResource extends Resource {
+@doc("")
+model BackupResourceEncryptionConfigResource
+  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfig> {
   ...ResourceNameParameter<
     Resource = BackupResourceEncryptionConfigResource,
     KeyName = "backupEncryptionConfig",
@@ -59,10 +44,10 @@ model BackupResourceEncryptionConfigResource extends Resource {
   >;
 
   /**
-   * BackupResourceEncryptionConfigResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: BackupResourceEncryptionConfig;
+  eTag?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -86,8 +71,14 @@ interface BackupResourceEncryptionConfigs {
 }
 
 @@doc(BackupResourceEncryptionConfigExtendedResource.name, "");
+@@doc(BackupResourceEncryptionConfigExtendedResource.properties,
+  "BackupResourceEncryptionConfigExtendedResource properties"
+);
 @@doc(BackupResourceEncryptionConfigs.update::parameters.resource,
   "Vault encryption input config request"
 );
 
 @@doc(BackupResourceEncryptionConfigResource.name, "");
+@@doc(BackupResourceEncryptionConfigResource.properties,
+  "BackupResourceEncryptionConfigResource properties"
+);

@@ -5,41 +5,29 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 /**
  * The resource storage details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("vaultstorageconfig")
 @parentResource(VaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(BackupResourceConfig)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model BackupResourceConfigResource extends Resource {
-  /**
-   * The name of the BackupResourceConfigResource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.defaultResourceKeySegmentName(
-    Resource,
-    "backupstorageconfig",
-    "backupstorageconfig"
-  )
-  @path
-  name: "vaultstorageconfig";
+model BackupResourceConfigResource
+  is TrackedResourceWithOptionalLocation<BackupResourceConfig> {
+  ...ResourceNameParameter<
+    Resource = BackupResourceConfigResource,
+    KeyName = "backupstorageconfig",
+    SegmentName = "backupstorageconfig",
+    NamePattern = ""
+  >;
 
   /**
-   * BackupResourceConfigResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: BackupResourceConfig;
+  eTag?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -175,6 +163,9 @@ interface BackupResourceConfigOperationStatuses {
 }
 
 @@doc(BackupResourceConfigResource.name, "");
+@@doc(BackupResourceConfigResource.properties,
+  "BackupResourceConfigResource properties"
+);
 @@doc(BackupResourceStorageConfigsNonCRR.update::parameters.resource,
   "Vault storage config request"
 );

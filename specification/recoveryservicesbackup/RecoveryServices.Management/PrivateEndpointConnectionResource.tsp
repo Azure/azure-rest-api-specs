@@ -5,22 +5,16 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Private Endpoint Connection Response Properties
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(VaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(PrivateEndpointConnection)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model PrivateEndpointConnectionResource extends Resource {
+model PrivateEndpointConnectionResource
+  is TrackedResourceWithOptionalLocation<PrivateEndpointConnection> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnectionResource,
     KeyName = "privateEndpointConnectionName",
@@ -29,10 +23,10 @@ model PrivateEndpointConnectionResource extends Resource {
   >;
 
   /**
-   * PrivateEndpointConnectionResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: PrivateEndpointConnection;
+  eTag?: string;
 }
 
 @armResourceOperations
@@ -102,6 +96,9 @@ interface PrivateEndpointOperationStatuses {
 
 @@doc(PrivateEndpointConnectionResource.name,
   "The name of the private endpoint connection."
+);
+@@doc(PrivateEndpointConnectionResource.properties,
+  "PrivateEndpointConnectionResource properties"
 );
 @@doc(PrivateEndpointConnectionResources.put::parameters.resource,
   "Request body for operation"

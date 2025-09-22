@@ -314,7 +314,55 @@ using Azure.ResourceManager;
 );
 
 // ETag property mapping to preserve backward compatibility
-@@clientName(Microsoft.RecoveryServices.Resource.eTag, "etag", "java");
+@@clientName(Microsoft.RecoveryServices.BackupEngineBaseResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.BackupResourceConfigResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.BackupResourceEncryptionConfigExtendedResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.BackupResourceEncryptionConfigResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.BackupResourceVaultConfigResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.JobResource.eTag, "etag", "java");
+@@clientName(Microsoft.RecoveryServices.PrivateEndpointConnectionResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.ProtectedItemResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.ProtectionContainerResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.ProtectionIntentResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.ProtectionPolicyResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.RecoveryPointResource.eTag,
+  "etag",
+  "java"
+);
+@@clientName(Microsoft.RecoveryServices.ResourceGuardProxyBaseResource.eTag,
+  "etag",
+  "java"
+);
 
 // UTC/PIN/VM abbreviation fixes for backward compatibility
 @@clientName(Microsoft.RecoveryServices.TokenInformation.securityPIN,
@@ -584,7 +632,7 @@ op backupResourceStorageConfigsNonCRRGet(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: "vaultstorageconfig",
+  backupstorageconfig: string,
 ): BackupResourceConfigResource;
 
 @@override(BackupResourceStorageConfigsNonCRR.get,
@@ -604,7 +652,7 @@ op backupResourceStorageConfigsNonCRRPatch(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: "vaultstorageconfig",
+  backupstorageconfig: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   properties: BackupResourceConfigResource,
 ): ArmNoContentResponse;
@@ -626,7 +674,7 @@ op backupResourceStorageConfigsNonCRRUpdate(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: "vaultstorageconfig",
+  backupstorageconfig: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: BackupResourceConfigResource,
 ): ArmResourceUpdatedResponse<BackupResourceConfigResource>;
@@ -648,7 +696,7 @@ op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: "vaultstorageconfig",
+  backupstorageconfig: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: PrepareDataMoveRequest,
 ): ArmAcceptedLroResponse;
@@ -670,7 +718,7 @@ op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
   vaultName: string,
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  backupstorageconfig: "vaultstorageconfig",
+  backupstorageconfig: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: TriggerDataMoveRequest,
 ): ArmAcceptedLroResponse;

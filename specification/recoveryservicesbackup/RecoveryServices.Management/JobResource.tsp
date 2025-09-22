@@ -5,22 +5,15 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Defines workload agnostic properties for a job.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(VaultResource)
-@Azure.ResourceManager.Private.armResourceInternal(Job)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model JobResource extends Resource {
+model JobResource is TrackedResourceWithOptionalLocation<Job> {
   ...ResourceNameParameter<
     Resource = JobResource,
     KeyName = "jobName",
@@ -29,10 +22,10 @@ model JobResource extends Resource {
   >;
 
   /**
-   * JobResource properties
+   * Optional ETag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: Job;
+  eTag?: string;
 }
 
 @armResourceOperations
@@ -163,3 +156,4 @@ interface ExportJobsOperationResults {
 }
 
 @@doc(JobResource.name, "Name of the job whose details are to be fetched.");
+@@doc(JobResource.properties, "JobResource properties");
