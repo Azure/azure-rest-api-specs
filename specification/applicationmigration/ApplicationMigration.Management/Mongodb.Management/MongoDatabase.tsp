@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -41,6 +42,7 @@ interface MongoDatabases {
    * Patch the MongoDatabases resource.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.ClientGenerator.Core.convenientAPI(false)
   update is ArmCustomPatchSync<MongoDatabase, MongoDatabaseResourcePatch>;
 
   /**

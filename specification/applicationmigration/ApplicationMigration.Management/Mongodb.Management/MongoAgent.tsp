@@ -41,6 +41,7 @@ interface MongoAgents {
    * Patch the Agents resource.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.ClientGenerator.Core.convenientAPI(false)
   update is ArmCustomPatchSync<MongoAgent, PatchModel = AgentResourcePatch>;
 
   /**

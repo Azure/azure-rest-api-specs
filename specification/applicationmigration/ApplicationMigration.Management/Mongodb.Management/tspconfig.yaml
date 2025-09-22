@@ -1,7 +1,5 @@
 emit:
   - "@azure-tools/typespec-autorest"
-  - "@azure-tools/typespec-ts"
-  - "@azure-tools/typespec-csharp"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -33,13 +31,13 @@ options:
     service-name: Place Holder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-ts":
     flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    package-dir: "arm-ApplicationMigration"  # Must match /^arm-[^\/]+$/
+    package-dir: "arm-applicationmigration" # Must match /^arm-[^\/]+$/
     package-details:
-      name: "@azure/arm-ApplicationMigration"  # Must match /^\@azure\/arm(?:-[a-z]+)+$/
+      name: "@azure/arm-applicationmigration" # Must match /^\@azure\/arm(?:-[a-z]+)+$/
     experimental-extensible-enums: true
   "@azure-tools/typespec-csharp":
     flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    namespace: "Azure.ResourceManager.ApplicationMigration"  # Must match /^Azure\.ResourceManager\./
+    namespace: "Azure.ResourceManager.ApplicationMigration" # Must match /^Azure\.ResourceManager\./
     clear-output-folder: true
 linter:
   extends:
