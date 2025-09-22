@@ -43,9 +43,14 @@ interface EvaluationTaxonomies
   delete is EvaluationTaxonomiesOperations.ResourceDelete<EvaluationTaxonomy>;
 
   @doc("Create an evaluation taxonomy.")
-  @post
+  @put
+  @route("/evaluation_taxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
     {
+      @doc("The name of the evaluation taxonomy.")
+      @path
+      name: string;
+
       @doc("The evaluation taxonomy.")
       @body
       body: EvaluationTaxonomy;
@@ -55,8 +60,13 @@ interface EvaluationTaxonomies
 
   @doc("Update an evaluation taxonomy.")
   @patch(#{ implicitOptionality: true })
+  @route("/evaluation_taxonomies/{name}")
   update is Azure.Core.Foundations.Operation<
     {
+      @doc("The name of the evaluation taxonomy.")
+      @path
+      name: string;
+      
       @doc("The evaluation taxonomy.")
       @body
       body: EvaluationTaxonomy;
