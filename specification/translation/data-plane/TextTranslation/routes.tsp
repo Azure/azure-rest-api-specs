@@ -99,7 +99,7 @@ op transliterateV3 is CustomOperation<
 @doc("Transliterate Text")
 @added(APIVersion.v2025_05_01_preview)
 op transliterate is CustomOperation<
-  InputTextItem[],
+  TransliterateBody,
   TransliterateParameters,
   TransliterateResult,
   ErrorResponse

@@ -36,6 +36,13 @@ model TransliterateParameters {
   toScript: string;
 }
 
+@doc("Request body for the transliterate API.")
+@added(APIVersion.v2025_05_01_preview)
+model TransliterateBody {
+  @doc("Array of the input text elements to transliterate.")
+  inputs: InputTextItem[];
+}
+
 @doc("Response for the transliteration API.")
 @renamedFrom(APIVersion.v2025_05_01_preview, "TransliterateResult")
 @removed(APIVersion.v2025_05_01_preview)

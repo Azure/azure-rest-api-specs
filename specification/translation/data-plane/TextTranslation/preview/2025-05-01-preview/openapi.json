@@ -222,10 +222,7 @@
             "description": "Defines the content of the request",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/InputTextItem"
-              }
+              "$ref": "#/definitions/TransliterateBody"
             }
           }
         ],
@@ -867,6 +864,22 @@
         {
           "$ref": "#/definitions/LanguageScript"
         }
+      ]
+    },
+    "TransliterateBody": {
+      "type": "object",
+      "description": "Request body for the transliterate API.",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "description": "Array of the input text elements to transliterate.",
+          "items": {
+            "$ref": "#/definitions/InputTextItem"
+          }
+        }
+      },
+      "required": [
+        "inputs"
       ]
     },
     "TransliterateResult": {
