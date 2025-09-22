@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.0
- * Date: 2025-04-28T01:57:40.862Z
+ * Version: 0.11.9
+ * Date: 2025-09-19T02:46:17.676Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -29,6 +29,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Microsoft.Datadog" })
 @versioned(Versions)
+// FIXME: Common type version v1 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Datadog;
 
@@ -37,11 +38,9 @@ namespace Microsoft.Datadog;
  */
 enum Versions {
   /**
-   * The 2023-10-20 API version.
+   * The 2025-06-11 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_10_20: "2023-10-20",
+  v2025_06_11: "2025-06-11",
 }
 
 /**

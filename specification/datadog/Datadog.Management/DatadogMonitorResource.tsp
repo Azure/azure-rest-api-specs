@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+
 namespace Microsoft.Datadog;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -17,7 +18,7 @@ model DatadogMonitorResource
     Resource = DatadogMonitorResource,
     KeyName = "monitorName",
     SegmentName = "monitors",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9_][a-zA-Z0-9_-]+$"
   >;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -26,26 +27,6 @@ model DatadogMonitorResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityProperties;
 }
-
-@armResourceOperations
-interface DatadogMonitorResourcesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        /**
-         * Monitor resource name
-         */
-        @path
-        @segment("monitors")
-        monitorName: string,
-      },
-      ErrorResponse
-    > {}
 
 @armResourceOperations
 interface DatadogMonitorResources {
@@ -57,7 +38,8 @@ interface DatadogMonitorResources {
   /**
    * Create a monitor resource.
    */
-  create is DatadogMonitorResourcesOps.CreateOrUpdateAsync<
+  create is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
     DatadogMonitorResource,
     OptionalRequestBody = true
   >;
@@ -66,15 +48,19 @@ interface DatadogMonitorResources {
    * Update a monitor resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is DatadogMonitorResourcesOps.CustomPatchAsync<
-    DatadogMonitorResource,
-    PatchModel = DatadogMonitorResourceUpdateParameters,
+  update is Azure.ResourceManager.Legacy.UpdateOperation<
+    ResourceInstanceParameters<
+      DatadogMonitorResource,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<DatadogMonitorResource>
+    >,
+    DatadogMonitorResourceUpdateParameters,
     Response = ArmResponse<DatadogMonitorResource> | ArmResourceCreatedResponse<
       DatadogMonitorResource,
       LroHeaders = ArmLroLocationHeader<FinalResult = DatadogMonitorResource> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    ErrorResponse = ErrorResponse
   >;
 
   /**
@@ -179,8 +165,22 @@ interface DatadogMonitorResources {
     void,
     ArmResponse<BillingInfoResponse>
   >;
+
+  /**
+   * Reinstate integration with your Datadog organization by choosing one of the available subscription plans.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Organizations_Resubscribe")
+  resubscribe is ArmResourceActionAsync<
+    DatadogMonitorResource,
+    ResubscribeProperties,
+    DatadogMonitorResource,
+    OptionalRequestBody = true
+  >;
 }
 
+@@maxLength(DatadogMonitorResource.name, 32);
+@@minLength(DatadogMonitorResource.name, 2);
 @@doc(DatadogMonitorResource.name, "Monitor resource name");
 @@doc(DatadogMonitorResource.properties,
   "Properties specific to the monitor resource."
@@ -188,3 +188,6 @@ interface DatadogMonitorResources {
 @@doc(DatadogMonitorResources.create::parameters.resource, "");
 @@doc(DatadogMonitorResources.update::parameters.properties, "");
 @@doc(DatadogMonitorResources.setDefaultKey::parameters.body, "");
+@@doc(DatadogMonitorResources.resubscribe::parameters.body,
+  "Resubscribe Properties"
+);

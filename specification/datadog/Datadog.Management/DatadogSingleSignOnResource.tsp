@@ -23,33 +23,6 @@ model DatadogSingleSignOnResource
   >;
 }
 
-@armResourceOperations
-interface DatadogSingleSignOnResourcesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * Monitor resource name
-         */
-        @path
-        @segment("monitors")
-        monitorName: string,
-      },
-      {
-        /**
-         * Configuration name
-         */
-        @path
-        @segment("singleSignOnConfigurations")
-        configurationName: string,
-      },
-      ErrorResponse
-    > {}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface DatadogSingleSignOnResources {
@@ -61,7 +34,8 @@ interface DatadogSingleSignOnResources {
   /**
    * Configures single-sign-on for this resource.
    */
-  createOrUpdate is DatadogSingleSignOnResourcesOps.CreateOrUpdateAsync<
+  create is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
     DatadogSingleSignOnResource,
     OptionalRequestBody = true
   >;
@@ -77,4 +51,4 @@ interface DatadogSingleSignOnResources {
 
 @@doc(DatadogSingleSignOnResource.name, "Configuration name");
 @@doc(DatadogSingleSignOnResource.properties, "");
-@@doc(DatadogSingleSignOnResources.createOrUpdate::parameters.resource, "");
+@@doc(DatadogSingleSignOnResources.create::parameters.resource, "");

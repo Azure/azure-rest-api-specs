@@ -26,33 +26,6 @@ model MonitoredSubscriptionProperties
 }
 
 @armResourceOperations
-interface MonitoredSubscriptionsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * Monitor resource name
-         */
-        @path
-        @segment("monitors")
-        monitorName: string,
-      },
-      {
-        /**
-         * The configuration name. Only 'default' value is supported.
-         */
-        @path
-        @segment("monitoredSubscriptions")
-        configurationName: string,
-      },
-      ErrorResponse
-    > {}
-
-@armResourceOperations
 interface MonitoredSubscriptions {
   /**
    * List the subscriptions currently being monitored by the Datadog monitor resource.
@@ -63,7 +36,8 @@ interface MonitoredSubscriptions {
    * Add the subscriptions that should be monitored by the Datadog monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createorUpdate is MonitoredSubscriptionsOps.CreateOrUpdateAsync<
+  createorUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
     MonitoredSubscriptionProperties,
     Response = ArmResourceUpdatedResponse<MonitoredSubscriptionProperties> | ArmResourceCreatedResponse<
       MonitoredSubscriptionProperties,
@@ -77,10 +51,16 @@ interface MonitoredSubscriptions {
    * Updates the subscriptions that are being monitored by the Datadog monitor resource
    */
   @patch(#{ implicitOptionality: false })
-  update is MonitoredSubscriptionsOps.CustomPatchAsync<
+  update is Azure.ResourceManager.Legacy.UpdateOperation<
+    ResourceInstanceParameters<
+      MonitoredSubscriptionProperties,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<MonitoredSubscriptionProperties>
+    >,
     MonitoredSubscriptionProperties,
-    PatchModel = MonitoredSubscriptionProperties,
-    OptionalRequestBody = true
+    Response = ArmResponse<MonitoredSubscriptionProperties> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OptionalRequestBody = true,
+    ErrorResponse = ErrorResponse
   >;
 
   /**

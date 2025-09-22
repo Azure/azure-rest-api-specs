@@ -64,7 +64,8 @@ interface TagRules {
    * Create or update a tag rule set for a given monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is TagRulesOps.CreateOrUpdateAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
     MonitoringTagRules,
     Response = ArmResourceUpdatedResponse<MonitoringTagRules>,
     OptionalRequestBody = true

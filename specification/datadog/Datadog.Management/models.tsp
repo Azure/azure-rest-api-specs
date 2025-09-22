@@ -7,30 +7,59 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Azure.Core;
 
 namespace Microsoft.Datadog;
+/**
+ * Represents a paginated list of operation results.
+ */
+model OperationListResult {
+  /**
+   * The list of operations.
+   */
+  @pageItems
+  value: OperationResult[];
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * The URL to get the next set of results, if any.
+   */
+  @nextLink
+  nextLink?: string;
+}
+/**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Key: "Key",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NotSpecified: "NotSpecified",
 }
 
@@ -39,9 +68,9 @@ union ProvisioningState {
  */
 union MonitoringStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
 }
 
@@ -50,22 +79,22 @@ union MonitoringStatus {
  */
 union MarketplaceSubscriptionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspended: "Suspended",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unsubscribed: "Unsubscribed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union LiftrResourceCategories {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MonitorLogs: "MonitorLogs",
 }
 
@@ -74,9 +103,9 @@ union LiftrResourceCategories {
  */
 union ManagedIdentityTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   UserAssigned: "UserAssigned",
 }
 
@@ -85,9 +114,9 @@ union ManagedIdentityTypes {
  */
 union TagAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Include: "Include",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Exclude: "Exclude",
 }
 
@@ -96,13 +125,13 @@ union TagAction {
  */
 union SingleSignOnStates {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Initial: "Initial",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enable: "Enable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disable: "Disable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Existing: "Existing",
 }
 
@@ -111,15 +140,15 @@ union SingleSignOnStates {
  */
 union Operation {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AddBegin: "AddBegin",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AddComplete: "AddComplete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   DeleteBegin: "DeleteBegin",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   DeleteComplete: "DeleteComplete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Active: "Active",
 }
 
@@ -128,13 +157,13 @@ union Operation {
  */
 union Status {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
 }
 
@@ -144,7 +173,7 @@ union Status {
 model DatadogAgreementResourceListResponse
   is Azure.Core.Page<DatadogAgreementResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatadogAgreementResource {
   /**
    * ARM id of the resource.
@@ -208,6 +237,7 @@ model DatadogAgreementProperties {
   /**
    * Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   retrieveDatetime?: utcDateTime;
 
   /**
@@ -221,7 +251,7 @@ model DatadogAgreementProperties {
   accepted?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CreateResourceSupportedResponseList
   is Azure.Core.Page<CreateResourceSupportedResponse>;
 
@@ -257,7 +287,7 @@ model CreateResourceSupportedProperties {
  */
 model DatadogApiKeyListResponse is Azure.Core.Page<DatadogApiKey>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatadogApiKey {
   /**
    * The user that created the API key.
@@ -285,7 +315,7 @@ model DatadogApiKey {
  */
 model DatadogHostListResponse is Azure.Core.Page<DatadogHost>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatadogHost {
   /**
    * The name of the host.
@@ -302,24 +332,24 @@ model DatadogHost {
    */
   apps?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   meta?: DatadogHostMetadata;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatadogHostMetadata {
   /**
    * The agent version.
    */
   agentVersion?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   installMethod?: DatadogInstallMethod;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   logsAgent?: DatadogLogsAgent;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatadogInstallMethod {
   /**
    * The tool.
@@ -337,7 +367,7 @@ model DatadogInstallMethod {
   installerVersion?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatadogLogsAgent {
   /**
    * The transport.
@@ -421,16 +451,49 @@ model OperationResult {
 }
 
 /**
+ * The object that represents the operation.
+ */
+model OperationDisplay {
+  /**
+   * Service provider, i.e., Microsoft.Datadog.
+   */
+  provider?: string;
+
+  /**
+   * Type on which the operation is performed, e.g., 'monitors'.
+   */
+  resource?: string;
+
+  /**
+   * Operation type, e.g., read, write, delete, etc.
+   */
+  operation?: string;
+
+  /**
+   * Description of the operation, e.g., 'Write monitors'.
+   */
+  description?: string;
+}
+
+/**
  * Response of a list operation.
  */
 model DatadogMonitorResourceListResponse
   is Azure.Core.Page<DatadogMonitorResource>;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ResourceSku {
+  /**
+   * Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'Linked'.
+   */
+  name: string;
+}
+
 /**
  * Properties specific to the monitor resource.
  */
 model MonitorProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
@@ -455,7 +518,7 @@ model MonitorProperties {
    */
   userInfo?: UserInfo;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
   liftrResourceCategory?: LiftrResourceCategories;
 
@@ -526,6 +589,11 @@ model DatadogOrganizationProperties {
    * The configuration which describes the state of cloud security posture management. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.
    */
   cspm?: boolean;
+
+  /**
+   * The configuration which describes the state of resource collection. This collects configuration information for all resources in a subscription.
+   */
+  resourceCollection?: boolean;
 }
 
 /**
@@ -551,7 +619,7 @@ model UserInfo {
   phoneNumber?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model IdentityProperties {
   /**
    * The identity ID.
@@ -584,10 +652,10 @@ model DatadogMonitorResourceUpdateParameters {
   /**
    * The new tags of the monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   sku?: ResourceSku;
 }
 
@@ -604,6 +672,11 @@ model MonitorUpdateProperties {
    * The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.
    */
   cspm?: boolean;
+
+  /**
+   * The new resource collection value of the monitor resource. This collects configuration information for all resources in a subscription.
+   */
+  resourceCollection?: boolean;
 }
 
 /**
@@ -672,9 +745,9 @@ model PartnerBillingEntity {
   partnerEntityUri?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatadogSetPasswordLink {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   setPasswordLink?: string;
 }
 
@@ -687,7 +760,7 @@ model MonitoringTagRulesListResponse is Azure.Core.Page<MonitoringTagRules>;
  * Definition of the properties for a TagRules resource.
  */
 model MonitoringTagRulesProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
@@ -700,6 +773,11 @@ model MonitoringTagRulesProperties {
    * Set of rules for sending metrics for the Monitor resource.
    */
   metricRules?: MetricRules;
+
+  /**
+   * Set of rules for managing agents for the Monitor resource.
+   */
+  agentRules?: AgentRules;
 
   /**
    * Configuration to enable/disable auto-muting flag
@@ -768,14 +846,29 @@ model MetricRules {
 }
 
 /**
+ * Set of rules for managing agents for the Monitor resource.
+ */
+model AgentRules {
+  /**
+   * Flag specifying if agent monitoring should be enabled for the Monitor resource.
+   */
+  enableAgentMonitoring?: boolean;
+
+  /**
+   * List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
+   */
+  filteringTags?: FilteringTag[];
+}
+
+/**
  * Response of a list operation.
  */
 model DatadogSingleSignOnResourceListResponse
   is Azure.Core.Page<DatadogSingleSignOnResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatadogSingleSignOnProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
@@ -796,14 +889,14 @@ model DatadogSingleSignOnProperties {
   singleSignOnUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MonitoredSubscriptionPropertiesList
   is Azure.Core.Page<MonitoredSubscriptionProperties>;
 
 /**
  * The request to update subscriptions needed to be monitored by the Datadog monitor resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SubscriptionList {
   /**
    * The operation for the patch on the resource.
@@ -842,54 +935,21 @@ model MonitoredSubscription {
    */
   tagRules?: MonitoringTagRulesProperties;
 }
-/**
- * Represents the SKU of a resource.
- */
-model ResourceSku {
-  /**
-   * The name of the SKU.
-   */
-  name: string;
-}
 
 /**
- * Represents the display information for an operation.
+ * Resubscribe Properties
  */
-model OperationDisplay {
-  /**
-   * The service provider: Microsoft.Datadog.
-   */
-  provider?: string;
+model ResubscribeProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  sku?: ResourceSku;
 
   /**
-   * The resource on which the operation is performed.
+   * Newly selected Azure Subscription Id in which the new Marketplace subscription will be created for Resubscribe
    */
-  resource?: string;
+  azureSubscriptionId?: string;
 
   /**
-   * The type of operation: create, update, delete, etc.
+   * Newly selected Azure resource group in which the new Marketplace subscription will be created for Resubscribe
    */
-  operation?: string;
-
-  /**
-   * A localized description of the operation.
-   */
-  description?: string;
-}
-
-/**
- * Represents a paginated list of operation results.
- */
-model OperationListResult {
-  /**
-   * The list of operations.
-   */
-  @pageItems
-  value: OperationResult[];
-
-  /**
-   * The URL to get the next set of results, if any.
-   */
-  @nextLink
-  nextLink?: string;
+  resourceGroup?: string;
 }

@@ -55,6 +55,7 @@ using Microsoft.Datadog;
 
 @@clientLocation(DatadogMonitorResources.billingInfoGet, "BillingInfo");
 @@clientName(DatadogMonitorResources.billingInfoGet, "Get");
+@@clientLocation(DatadogMonitorResources.resubscribe, "Organizations");
 
 // DatadogSingleSignOnResources operations
 @@clientLocation(DatadogSingleSignOnResources.get,
@@ -62,10 +63,10 @@ using Microsoft.Datadog;
 );
 @@clientName(DatadogSingleSignOnResources.get, "Get");
 
-@@clientLocation(DatadogSingleSignOnResources.createOrUpdate,
+@@clientLocation(DatadogSingleSignOnResources.create,
   "SingleSignOnConfigurations"
 );
-@@clientName(DatadogSingleSignOnResources.createOrUpdate, "CreateOrUpdate");
+@@clientName(DatadogSingleSignOnResources.create, "CreateOrUpdate");
 
 @@clientLocation(DatadogSingleSignOnResources.list,
   "SingleSignOnConfigurations"
@@ -98,9 +99,7 @@ using Microsoft.Datadog;
 
 @@clientName(TagRules.createOrUpdate::parameters.resource, "body");
 
-@@clientName(DatadogSingleSignOnResources.createOrUpdate::parameters.resource,
-  "body"
-);
+@@clientName(DatadogSingleSignOnResources.create::parameters.resource, "body");
 
 @@clientName(MonitoredSubscriptions.createorUpdate::parameters.resource,
   "body"
