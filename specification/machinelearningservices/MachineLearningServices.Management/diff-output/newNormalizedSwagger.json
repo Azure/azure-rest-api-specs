@@ -21447,11 +21447,13 @@
       "properties": {
         "featureWindowEnd": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "x-nullable": true
         },
         "featureWindowStart": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "x-nullable": true
         }
       }
     },
@@ -21522,7 +21524,8 @@
       "type": "object",
       "properties": {
         "path": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -21568,7 +21571,8 @@
           "type": "string"
         },
         "featureWindow": {
-          "$ref": "#/definitions/FeatureWindow"
+          "$ref": "#/definitions/FeatureWindow",
+          "x-nullable": true
         },
         "jobId": {
           "type": "string"
@@ -21576,7 +21580,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "resource": {
@@ -21585,13 +21590,15 @@
         "sparkConfiguration": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -21601,6 +21608,7 @@
       "properties": {
         "jobIds": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -21612,12 +21620,14 @@
       "properties": {
         "entities": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "materializationSettings": {
-          "$ref": "#/definitions/MaterializationSettings"
+          "$ref": "#/definitions/MaterializationSettings",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -21636,10 +21646,12 @@
           "readOnly": true
         },
         "specification": {
-          "$ref": "#/definitions/FeaturesetSpecification"
+          "$ref": "#/definitions/FeaturesetSpecification",
+          "x-nullable": true
         },
         "stage": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -21753,6 +21765,7 @@
       "properties": {
         "indexColumns": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/IndexColumn"
           }
@@ -21774,7 +21787,8 @@
           "readOnly": true
         },
         "stage": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -21808,7 +21822,8 @@
       "type": "object",
       "properties": {
         "datasetLanguage": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -21821,7 +21836,8 @@
         "outputs": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -21830,6 +21846,7 @@
         },
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -21903,7 +21920,8 @@
           "$ref": "#/definitions/JobInput"
         },
         "validationData": {
-          "$ref": "#/definitions/JobInput"
+          "$ref": "#/definitions/JobInput",
+          "x-nullable": true
         }
       },
       "discriminator": "modelProvider",
@@ -21919,8 +21937,10 @@
       "properties": {
         "hyperParameters": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "studentModel": {
@@ -21945,8 +21965,10 @@
       "properties": {
         "data": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -22024,6 +22046,7 @@
         },
         "primaryMetric": {
           "type": "string",
+          "default": "NormalizedRootMeanSquaredError",
           "enum": [
             "SpearmanCorrelation",
             "NormalizedRootMeanSquaredError",
@@ -22036,7 +22059,8 @@
           }
         },
         "trainingSettings": {
-          "$ref": "#/definitions/ForecastingTrainingSettings"
+          "$ref": "#/definitions/ForecastingTrainingSettings",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -22050,14 +22074,17 @@
       "type": "object",
       "properties": {
         "countryOrRegionForHolidays": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "cvStepSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "featureLags": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "Auto"
@@ -22071,13 +22098,15 @@
           "$ref": "#/definitions/ForecastHorizon"
         },
         "frequency": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "seasonality": {
           "$ref": "#/definitions/Seasonality"
         },
         "shortSeriesHandlingConfig": {
           "type": "string",
+          "default": "Auto",
           "enum": [
             "None",
             "Auto",
@@ -22091,6 +22120,7 @@
         },
         "targetAggregateFunction": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "Sum",
@@ -22104,22 +22134,27 @@
           }
         },
         "targetLags": {
-          "$ref": "#/definitions/TargetLags"
+          "$ref": "#/definitions/TargetLags",
+          "x-nullable": true
         },
         "targetRollingWindowSize": {
-          "$ref": "#/definitions/TargetRollingWindowSize"
+          "$ref": "#/definitions/TargetRollingWindowSize",
+          "x-nullable": true
         },
         "timeColumnName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timeSeriesIdColumnNames": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "useStl": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "Season",
@@ -22137,6 +22172,7 @@
       "properties": {
         "allowedTrainingAlgorithms": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -22168,6 +22204,7 @@
         },
         "blockedTrainingAlgorithms": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -22223,13 +22260,16 @@
       "properties": {
         "blobUri": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "x-nullable": true
         },
         "credential": {
-          "$ref": "#/definitions/DataReferenceCredential"
+          "$ref": "#/definitions/DataReferenceCredential",
+          "x-nullable": true
         },
         "storageAccountArmId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -22237,11 +22277,13 @@
       "type": "object",
       "properties": {
         "assetId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "blobUri": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "x-nullable": true
         }
       }
     },
@@ -22249,7 +22291,8 @@
       "type": "object",
       "properties": {
         "blobReferenceForConsumption": {
-          "$ref": "#/definitions/GetBlobReferenceForConsumptionDto"
+          "$ref": "#/definitions/GetBlobReferenceForConsumptionDto",
+          "x-nullable": true
         }
       }
     },
@@ -22266,22 +22309,27 @@
       "type": "object",
       "properties": {
         "environmentId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "environmentVariables": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/StringStringKeyValuePair"
           }
         },
         "livenessProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         },
         "readinessProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         },
         "startupProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         }
       }
     },
@@ -22289,7 +22337,8 @@
       "type": "object",
       "properties": {
         "modelId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -22297,15 +22346,18 @@
       "type": "object",
       "properties": {
         "actualCapacityInfo": {
-          "$ref": "#/definitions/ActualCapacityInfo"
+          "$ref": "#/definitions/ActualCapacityInfo",
+          "x-nullable": true
         },
         "endpointCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "requestedCapacity": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         }
       }
     },
@@ -22411,6 +22463,7 @@
       "properties": {
         "type": {
           "type": "string",
+          "title": "Type of the Image",
           "default": "docker",
           "enum": [
             "docker",
@@ -22434,10 +22487,12 @@
       "type": "object",
       "properties": {
         "modelSettings": {
-          "$ref": "#/definitions/ImageModelSettingsClassification"
+          "$ref": "#/definitions/ImageModelSettingsClassification",
+          "x-nullable": true
         },
         "searchSpace": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
           }
@@ -22446,17 +22501,21 @@
           "$ref": "#/definitions/ImageLimitSettings"
         },
         "sweepSettings": {
-          "$ref": "#/definitions/ImageSweepSettings"
+          "$ref": "#/definitions/ImageSweepSettings",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
+          "default": "Accuracy",
           "enum": [
             "AUCWeighted",
             "Accuracy",
@@ -22484,10 +22543,12 @@
       "type": "object",
       "properties": {
         "modelSettings": {
-          "$ref": "#/definitions/ImageModelSettingsClassification"
+          "$ref": "#/definitions/ImageModelSettingsClassification",
+          "x-nullable": true
         },
         "searchSpace": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
           }
@@ -22496,17 +22557,21 @@
           "$ref": "#/definitions/ImageLimitSettings"
         },
         "sweepSettings": {
-          "$ref": "#/definitions/ImageSweepSettings"
+          "$ref": "#/definitions/ImageSweepSettings",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
+          "default": "IOU",
           "enum": [
             "AUCWeighted",
             "Accuracy",
@@ -22538,10 +22603,12 @@
           "type": "boolean"
         },
         "image": {
-          "$ref": "#/definitions/ImageInfo"
+          "$ref": "#/definitions/ImageInfo",
+          "x-nullable": true
         },
         "vulnerabilityFindings": {
-          "$ref": "#/definitions/VulnerabilityFindings"
+          "$ref": "#/definitions/VulnerabilityFindings",
+          "x-nullable": true
         }
       }
     },
@@ -22549,16 +22616,20 @@
       "type": "object",
       "properties": {
         "digest": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "hostname": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "repository": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "tag": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -22566,10 +22637,12 @@
       "type": "object",
       "properties": {
         "modelSettings": {
-          "$ref": "#/definitions/ImageModelSettingsObjectDetection"
+          "$ref": "#/definitions/ImageModelSettingsObjectDetection",
+          "x-nullable": true
         },
         "searchSpace": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsObjectDetection"
           }
@@ -22578,17 +22651,21 @@
           "$ref": "#/definitions/ImageLimitSettings"
         },
         "sweepSettings": {
-          "$ref": "#/definitions/ImageSweepSettings"
+          "$ref": "#/definitions/ImageSweepSettings",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
+          "default": "MeanAveragePrecision",
           "enum": [
             "MeanAveragePrecision"
           ],
@@ -22623,7 +22700,8 @@
         },
         "timeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "P7D"
         }
       }
     },
@@ -22649,88 +22727,116 @@
       "type": "object",
       "properties": {
         "amsGradient": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "augmentations": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "beta1": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "beta2": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "distributed": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "earlyStopping": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "earlyStoppingDelay": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "earlyStoppingPatience": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "enableOnnxNormalization": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "evaluationFrequency": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "gradientAccumulationStep": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "layersToFreeze": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "learningRate": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "learningRateScheduler": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "modelName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "momentum": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "nesterov": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "numberOfEpochs": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "numberOfWorkers": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "optimizer": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "randomSeed": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "stepLRGamma": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "stepLRStepSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "trainingBatchSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "validationBatchSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "warmupCosineLRCycles": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "warmupCosineLRWarmupEpochs": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "weightDecay": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -22738,16 +22844,20 @@
       "type": "object",
       "properties": {
         "trainingCropSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "validationCropSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "validationResizeSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "weightedLoss": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -22760,43 +22870,56 @@
       "type": "object",
       "properties": {
         "boxDetectionsPerImage": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "boxScoreThreshold": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "imageSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "maxSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "minSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "modelSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "multiScale": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "nmsIouThreshold": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "tileGridSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "tileOverlapRatio": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "tilePredictionsNmsThreshold": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "validationIouThreshold": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "validationMetricType": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -22809,67 +22932,85 @@
       "type": "object",
       "properties": {
         "advancedSettings": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "amsGradient": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "augmentations": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "beta1": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "beta2": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "checkpointFrequency": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "checkpointModel": {
-          "$ref": "#/definitions/MLFlowModelJobInput"
+          "$ref": "#/definitions/MLFlowModelJobInput",
+          "x-nullable": true
         },
         "checkpointRunId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "distributed": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "earlyStopping": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "earlyStoppingDelay": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "earlyStoppingPatience": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "enableOnnxNormalization": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "evaluationFrequency": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "gradientAccumulationStep": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "layersToFreeze": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "learningRate": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "learningRateScheduler": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "WarmupCosine",
@@ -22881,25 +23022,31 @@
           }
         },
         "modelName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "momentum": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "nesterov": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "numberOfEpochs": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "numberOfWorkers": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "optimizer": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "Sgd",
@@ -22913,35 +23060,43 @@
         },
         "randomSeed": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "stepLRGamma": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "stepLRStepSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "trainingBatchSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "validationBatchSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "warmupCosineLRCycles": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "warmupCosineLRWarmupEpochs": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "weightDecay": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         }
       }
     },
@@ -22950,19 +23105,23 @@
       "properties": {
         "trainingCropSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "validationCropSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "validationResizeSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "weightedLoss": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -22976,26 +23135,32 @@
       "properties": {
         "boxDetectionsPerImage": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "boxScoreThreshold": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "imageSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "maxSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "minSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "modelSize": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "Small",
@@ -23009,29 +23174,36 @@
           }
         },
         "multiScale": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "nmsIouThreshold": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "tileGridSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "tileOverlapRatio": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "tilePredictionsNmsThreshold": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "validationIouThreshold": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "x-nullable": true
         },
         "validationMetricType": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "Coco",
@@ -23054,10 +23226,12 @@
       "type": "object",
       "properties": {
         "modelSettings": {
-          "$ref": "#/definitions/ImageModelSettingsObjectDetection"
+          "$ref": "#/definitions/ImageModelSettingsObjectDetection",
+          "x-nullable": true
         },
         "searchSpace": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsObjectDetection"
           }
@@ -23066,17 +23240,21 @@
           "$ref": "#/definitions/ImageLimitSettings"
         },
         "sweepSettings": {
-          "$ref": "#/definitions/ImageSweepSettings"
+          "$ref": "#/definitions/ImageSweepSettings",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
+          "default": "MeanAveragePrecision",
           "enum": [
             "MeanAveragePrecision"
           ],
@@ -23100,7 +23278,8 @@
       "type": "object",
       "properties": {
         "earlyTermination": {
-          "$ref": "#/definitions/EarlyTerminationPolicy"
+          "$ref": "#/definitions/EarlyTerminationPolicy",
+          "x-nullable": true
         },
         "samplingAlgorithm": {
           "type": "string",
@@ -23123,10 +23302,12 @@
       "type": "object",
       "properties": {
         "columnName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "dataType": {
           "type": "string",
+          "default": "String",
           "enum": [
             "String",
             "Integer",
@@ -23157,7 +23338,8 @@
           "$ref": "#/definitions/Route"
         },
         "startupRoute": {
-          "$ref": "#/definitions/Route"
+          "$ref": "#/definitions/Route",
+          "x-nullable": true
         }
       }
     },
@@ -23202,6 +23384,7 @@
         "endpointUri": {
           "type": "string",
           "format": "uri",
+          "x-nullable": true,
           "readOnly": true
         },
         "groupName": {
@@ -23226,7 +23409,8 @@
           "readOnly": true
         },
         "requestConfiguration": {
-          "$ref": "#/definitions/RequestConfiguration"
+          "$ref": "#/definitions/RequestConfiguration",
+          "x-nullable": true
         }
       },
       "required": [
@@ -23289,13 +23473,16 @@
       "type": "object",
       "properties": {
         "environmentConfiguration": {
-          "$ref": "#/definitions/GroupEnvironmentConfiguration"
+          "$ref": "#/definitions/GroupEnvironmentConfiguration",
+          "x-nullable": true
         },
         "modelConfiguration": {
-          "$ref": "#/definitions/GroupModelConfiguration"
+          "$ref": "#/definitions/GroupModelConfiguration",
+          "x-nullable": true
         },
         "nodeSkuType": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -23390,7 +23577,8 @@
           "readOnly": true
         },
         "scaleUnitConfiguration": {
-          "$ref": "#/definitions/ScaleUnitConfiguration"
+          "$ref": "#/definitions/ScaleUnitConfiguration",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -23425,8 +23613,10 @@
       "properties": {
         "nodeSelector": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "resources": {
@@ -23472,6 +23662,7 @@
       "properties": {
         "componentId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23479,6 +23670,7 @@
         },
         "computeId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23486,6 +23678,7 @@
         },
         "displayName": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23501,6 +23694,7 @@
         },
         "identity": {
           "$ref": "#/definitions/IdentityConfiguration",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23508,6 +23702,7 @@
         },
         "isArchived": {
           "type": "boolean",
+          "default": false,
           "x-ms-mutability": [
             "create",
             "read",
@@ -23536,6 +23731,7 @@
         },
         "notificationSetting": {
           "$ref": "#/definitions/NotificationSetting",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read",
@@ -23543,12 +23739,15 @@
           ]
         },
         "parentJobName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "services": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobService"
+            "$ref": "#/definitions/JobService",
+            "x-nullable": true
           }
         },
         "status": {
@@ -23612,6 +23811,7 @@
       "properties": {
         "description": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23659,7 +23859,8 @@
         },
         "timeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "x-nullable": true
         }
       },
       "discriminator": "jobLimitsType",
@@ -23672,6 +23873,7 @@
       "properties": {
         "description": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23707,6 +23909,7 @@
       "properties": {
         "dockerArgs": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23714,6 +23917,7 @@
         },
         "dockerArgsList": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -23780,6 +23984,7 @@
       "properties": {
         "endpoint": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23787,21 +23992,25 @@
         },
         "errorMessage": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         },
         "jobServiceType": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
         "nodes": {
-          "$ref": "#/definitions/Nodes"
+          "$ref": "#/definitions/Nodes",
+          "x-nullable": true
         },
         "port": {
           "type": "integer",
           "format": "int32",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -23809,12 +24018,15 @@
         },
         "properties": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "status": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -23876,7 +24088,8 @@
       "type": "object",
       "properties": {
         "containerResourceRequirements": {
-          "$ref": "#/definitions/ContainerResourceRequirements"
+          "$ref": "#/definitions/ContainerResourceRequirements",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -23890,13 +24103,20 @@
       "type": "object",
       "properties": {
         "relayConnectionString": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "serviceBusConnectionString": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "extensionPrincipalId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "extensionInstanceReleaseTrain": {
           "type": "string"
@@ -23923,10 +24143,12 @@
       "type": "object",
       "properties": {
         "trainingData": {
-          "$ref": "#/definitions/JobInput"
+          "$ref": "#/definitions/JobInput",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/JobInput"
+          "$ref": "#/definitions/JobInput",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -23954,7 +24176,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AmlUserFeature"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -23971,11 +24194,15 @@
       "properties": {
         "primaryAccessKey": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secondaryAccessKey": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -23984,7 +24211,9 @@
       "properties": {
         "userStorageKey": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -23997,7 +24226,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Usage"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -24014,7 +24244,9 @@
       "properties": {
         "appInsightsInstrumentationKey": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "containerRegistryCredentials": {
           "$ref": "#/definitions/RegistryListCredentialsResult"
@@ -24028,7 +24260,9 @@
         },
         "userStorageKey": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -24041,7 +24275,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ResourceQuota"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -24152,6 +24387,7 @@
       "properties": {
         "referencedUris": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -24247,7 +24483,8 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -24262,7 +24499,7 @@
       "properties": {
         "clientId": {
           "type": "string",
-          "format": "uuid",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -24270,7 +24507,7 @@
         },
         "objectId": {
           "type": "string",
-          "format": "uuid",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -24278,6 +24515,7 @@
         },
         "resourceId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -24309,19 +24547,24 @@
       "type": "object",
       "properties": {
         "managedIdentityType": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "userManagedIdentityClientId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "userManagedIdentityPrincipalId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "userManagedIdentityResourceId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "userManagedIdentityTenantId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -24383,7 +24626,8 @@
       "type": "object",
       "properties": {
         "enableNetworkMonitor": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "isolationMode": {
           "type": "string",
@@ -24403,6 +24647,7 @@
         },
         "outboundRules": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/OutboundRule"
           }
@@ -24434,6 +24679,7 @@
         },
         "firewallPublicIpAddress": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -24611,6 +24857,7 @@
       "properties": {
         "assignedIdentities": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ManagedResourceGroupAssignedIdentities"
           }
@@ -24622,14 +24869,17 @@
       "properties": {
         "offerId": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         },
         "planId": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         },
         "publisherId": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -24655,6 +24905,7 @@
       "properties": {
         "marketplacePlan": {
           "$ref": "#/definitions/MarketplacePlan",
+          "x-nullable": true,
           "readOnly": true
         },
         "marketplaceSubscriptionStatus": {
@@ -24721,7 +24972,8 @@
       "type": "object",
       "properties": {
         "instanceType": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -24729,22 +24981,28 @@
       "type": "object",
       "properties": {
         "notification": {
-          "$ref": "#/definitions/NotificationSetting"
+          "$ref": "#/definitions/NotificationSetting",
+          "x-nullable": true
         },
         "resource": {
-          "$ref": "#/definitions/MaterializationComputeResource"
+          "$ref": "#/definitions/MaterializationComputeResource",
+          "x-nullable": true
         },
         "schedule": {
-          "$ref": "#/definitions/RecurrenceTrigger"
+          "$ref": "#/definitions/RecurrenceTrigger",
+          "x-nullable": true
         },
         "sparkConfiguration": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "storeType": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "Online",
@@ -24834,7 +25092,8 @@
       "type": "object",
       "properties": {
         "modelId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -24859,18 +25118,23 @@
       "properties": {
         "flavors": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/FlavorData"
+            "$ref": "#/definitions/FlavorData",
+            "x-nullable": true
           }
         },
         "jobName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "modelType": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "modelUri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -24889,10 +25153,12 @@
           "readOnly": true
         },
         "stage": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "datasets": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/DatasetReference"
           }
@@ -24977,6 +25243,7 @@
       "properties": {
         "alertNotificationSettings": {
           "$ref": "#/definitions/MonitorNotificationSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -24991,6 +25258,7 @@
         },
         "monitoringTarget": {
           "$ref": "#/definitions/MonitoringTarget",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -24999,7 +25267,8 @@
         "signals": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/MonitoringSignalBase"
+            "$ref": "#/definitions/MonitoringSignalBase",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -25017,6 +25286,7 @@
       "properties": {
         "emails": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -25032,6 +25302,7 @@
       "properties": {
         "emailNotificationSettings": {
           "$ref": "#/definitions/MonitorEmailNotificationSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -25110,8 +25381,10 @@
       "properties": {
         "columns": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -25120,6 +25393,7 @@
         },
         "dataContext": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -25183,6 +25457,7 @@
       "properties": {
         "notificationTypes": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -25200,8 +25475,10 @@
         },
         "properties": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "signalType": {
@@ -25233,6 +25510,7 @@
       "properties": {
         "deploymentId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -25240,6 +25518,7 @@
         },
         "modelId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -25271,6 +25550,7 @@
         "value": {
           "type": "number",
           "format": "double",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -25284,6 +25564,7 @@
         "processCountPerInstance": {
           "type": "integer",
           "format": "int32",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -25366,7 +25647,8 @@
         },
         "timeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "P7D"
         }
       }
     },
@@ -25376,31 +25658,37 @@
         "idleNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Idle node count.",
           "readOnly": true
         },
         "runningNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Running node count.",
           "readOnly": true
         },
         "preparingNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Preparing node count.",
           "readOnly": true
         },
         "unusableNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Unusable node count.",
           "readOnly": true
         },
         "leavingNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Leaving node count.",
           "readOnly": true
         },
         "preemptedNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Preempted node count.",
           "readOnly": true
         }
       }
@@ -25451,7 +25739,9 @@
       "properties": {
         "accessToken": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "expiresIn": {
           "type": "integer",
@@ -25472,7 +25762,9 @@
         },
         "refreshToken": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "scope": {
           "type": "string",
@@ -25518,6 +25810,7 @@
       "properties": {
         "emailOn": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -25537,6 +25830,7 @@
         },
         "emails": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -25547,8 +25841,10 @@
         },
         "webhooks": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/Webhook"
+            "$ref": "#/definitions/Webhook",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -25726,6 +26022,7 @@
         },
         "endpoint": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -25742,6 +26039,7 @@
         },
         "serviceDataAccessAuthIdentity": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "WorkspaceSystemAssignedIdentity",
@@ -25797,13 +26095,16 @@
       "type": "object",
       "properties": {
         "appInsightsEnabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "dataCollector": {
-          "$ref": "#/definitions/DataCollector"
+          "$ref": "#/definitions/DataCollector",
+          "x-nullable": true
         },
         "egressPublicNetworkAccess": {
           "type": "string",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -25828,6 +26129,7 @@
         "instanceType": {
           "type": "string",
           "default": "Standard_F4s_v2",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -29723,13 +30025,16 @@
       "type": "object",
       "properties": {
         "featurizationSettings": {
-          "$ref": "#/definitions/NlpVerticalFeaturizationSettings"
+          "$ref": "#/definitions/NlpVerticalFeaturizationSettings",
+          "x-nullable": true
         },
         "limitSettings": {
-          "$ref": "#/definitions/NlpVerticalLimitSettings"
+          "$ref": "#/definitions/NlpVerticalLimitSettings",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
@@ -29757,13 +30062,16 @@
       "type": "object",
       "properties": {
         "featurizationSettings": {
-          "$ref": "#/definitions/NlpVerticalFeaturizationSettings"
+          "$ref": "#/definitions/NlpVerticalFeaturizationSettings",
+          "x-nullable": true
         },
         "limitSettings": {
-          "$ref": "#/definitions/NlpVerticalLimitSettings"
+          "$ref": "#/definitions/NlpVerticalLimitSettings",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
@@ -29793,13 +30101,16 @@
       "type": "object",
       "properties": {
         "featurizationSettings": {
-          "$ref": "#/definitions/NlpVerticalFeaturizationSettings"
+          "$ref": "#/definitions/NlpVerticalFeaturizationSettings",
+          "x-nullable": true
         },
         "limitSettings": {
-          "$ref": "#/definitions/NlpVerticalLimitSettings"
+          "$ref": "#/definitions/NlpVerticalLimitSettings",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",

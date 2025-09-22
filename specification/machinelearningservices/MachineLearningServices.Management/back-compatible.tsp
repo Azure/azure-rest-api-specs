@@ -3,20 +3,20 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.MachineLearningServices;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ClusterUpdateParameters.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RegistryPrivateEndpointConnection.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RegistryPrivateEndpointConnection.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SharedPrivateLinkResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedPrivateLinkResource.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(WorkspaceUpdateParameters.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkspaceUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientLocation(ComputeResources.get, "Compute");
 @@clientLocation(ComputeResources.createOrUpdate, "Compute");
@@ -262,7 +262,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(Registries.update::parameters.properties, "body");
 @@clientLocation(Registries.getBlobReferenceSAS, "RegistryDataReferences");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Registry.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
 @@clientName(Workspaces.update::parameters.properties, "body");
@@ -274,14 +274,13 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(Workspaces.provisionManagedNetwork,
   "ManagedNetworkProvisions"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Workspace.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "body"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.get,
   "WorkspaceConnections"

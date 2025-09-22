@@ -4248,6 +4248,7 @@ model Image {
   /**
    * Type of the image. Possible values are: docker - For docker images. azureml - For AzureML Environment images (custom and curated)
    */
+  @summary("Type of the Image")
   type?: ImageType = ImageType.docker;
 
   /**
@@ -4893,12 +4894,12 @@ model GetBlobReferenceSASRequestDto {
   /**
    * Id of the asset to be accessed
    */
-  assetId?: string;
+  assetId?: string | null;
 
   /**
    * Blob uri of the asset to be accessed
    */
-  blobUri?: url;
+  blobUri?: url | null;
 }
 
 /**
@@ -4908,7 +4909,7 @@ model GetBlobReferenceSASResponseDto {
   /**
    * Blob reference for consumption details
    */
-  blobReferenceForConsumption?: GetBlobReferenceForConsumptionDto;
+  blobReferenceForConsumption?: GetBlobReferenceForConsumptionDto | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4916,17 +4917,17 @@ model GetBlobReferenceForConsumptionDto {
   /**
    * Blob uri, example: https://blob.windows.core.net/Container/Path
    */
-  blobUri?: url;
+  blobUri?: url | null;
 
   /**
    * Credential info to access storage account
    */
-  credential?: DataReferenceCredential;
+  credential?: DataReferenceCredential | null;
 
   /**
    * The ARM id of the storage account
    */
-  storageAccountArmId?: string;
+  storageAccountArmId?: string | null;
 }
 
 /**
@@ -5062,12 +5063,12 @@ model ImageDetails {
   /**
    * Container image details
    */
-  image?: ImageInfo;
+  image?: ImageInfo | null;
 
   /**
    * Vulnerability findings details
    */
-  vulnerabilityFindings?: VulnerabilityFindings;
+  vulnerabilityFindings?: VulnerabilityFindings | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5075,22 +5076,22 @@ model ImageInfo {
   /**
    * Image digest
    */
-  digest?: string;
+  digest?: string | null;
 
   /**
    * Container registry host name
    */
-  hostname?: string;
+  hostname?: string | null;
 
   /**
    * Repository name
    */
-  repository?: string;
+  repository?: string | null;
 
   /**
    * Image tag
    */
-  tag?: string;
+  tag?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5260,7 +5261,7 @@ model InferenceContainerProperties {
   /**
    * The route to check the startup of the application in the container.
    */
-  startupRoute?: Route;
+  startupRoute?: Route | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5308,22 +5309,22 @@ model ModelVersionProperties extends AssetBase {
    * Mapping of model flavors to their properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  flavors?: Record<FlavorData>;
+  flavors?: Record<FlavorData | null> | null;
 
   /**
    * Name of the training job which produced this model
    */
-  jobName?: string;
+  jobName?: string | null;
 
   /**
    * The storage format for this entity. Used for NCD.
    */
-  modelType?: string;
+  modelType?: string | null;
 
   /**
    * The URI path to the model contents.
    */
-  modelUri?: string;
+  modelUri?: string | null;
 
   /**
    * Provisioning state for the model version.
@@ -5334,12 +5335,12 @@ model ModelVersionProperties extends AssetBase {
   /**
    * Stage in the model lifecycle assigned to this model
    */
-  stage?: string;
+  stage?: string | null;
 
   /**
    * Array of dataset references
    */
-  datasets?: DatasetReference[];
+  datasets?: DatasetReference[] | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5348,7 +5349,7 @@ model FlavorData {
    * Model flavor-specific data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  data?: Record<string>;
+  data?: Record<string | null> | null;
 }
 
 /**
@@ -5897,12 +5898,12 @@ model FeaturesetVersionProperties extends AssetBase {
   /**
    * Specifies list of entities
    */
-  entities?: string[];
+  entities?: string[] | null;
 
   /**
    * Specifies the materialization settings
    */
-  materializationSettings?: MaterializationSettings;
+  materializationSettings?: MaterializationSettings | null;
 
   /**
    * Provisioning state for the featureset version container.
@@ -5913,12 +5914,12 @@ model FeaturesetVersionProperties extends AssetBase {
   /**
    * Specifies the feature spec details
    */
-  specification?: FeaturesetSpecification;
+  specification?: FeaturesetSpecification | null;
 
   /**
    * Specifies the asset stage
    */
-  stage?: string;
+  stage?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5926,28 +5927,28 @@ model MaterializationSettings {
   /**
    * Specifies the notification details
    */
-  notification?: NotificationSetting;
+  notification?: NotificationSetting | null;
 
   /**
    * Specifies the compute resource settings
    */
-  resource?: MaterializationComputeResource;
+  resource?: MaterializationComputeResource | null;
 
   /**
    * Specifies the schedule details
    */
-  schedule?: RecurrenceTrigger;
+  schedule?: RecurrenceTrigger | null;
 
   /**
    * Specifies the spark compute settings
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  sparkConfiguration?: Record<string>;
+  sparkConfiguration?: Record<string | null> | null;
 
   /**
    * Specifies the stores to which materialization should happen
    */
-  storeType?: MaterializationStoreType;
+  storeType?: MaterializationStoreType = MaterializationStoreType.None;
 }
 
 /**
@@ -5958,20 +5959,20 @@ model NotificationSetting {
    * Send email notification to user on specified notification type
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  emailOn?: EmailNotificationEnableType[];
+  emailOn?: EmailNotificationEnableType[] | null;
 
   /**
    * This is the email recipient list which has a limitation of 499 characters in total concat with comma separator
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  emails?: string[];
+  emails?: string[] | null;
 
   /**
    * Send webhook callback to a service. Key is a user-provided name for the webhook.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  webhooks?: Record<Webhook>;
+  webhooks?: Record<Webhook | null> | null;
 }
 
 /**
@@ -5999,7 +6000,7 @@ model MaterializationComputeResource {
   /**
    * Specifies the instance type
    */
-  instanceType?: string;
+  instanceType?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6083,7 +6084,7 @@ model FeaturesetSpecification {
   /**
    * Specifies the spec path
    */
-  path?: string;
+  path?: string | null;
 }
 
 /**
@@ -6108,7 +6109,7 @@ model FeaturesetVersionBackfillRequest {
   /**
    * Specifies the backfill feature window to be materialized
    */
-  featureWindow?: FeatureWindow;
+  featureWindow?: FeatureWindow | null;
 
   /**
    * Specify the jobId to retry the failed materialization
@@ -6119,7 +6120,7 @@ model FeaturesetVersionBackfillRequest {
    * Specifies the properties
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<string>;
+  properties?: Record<string | null>;
 
   /**
    * Specifies the compute resource settings
@@ -6130,13 +6131,13 @@ model FeaturesetVersionBackfillRequest {
    * Specifies the spark compute settings
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  sparkConfiguration?: Record<string>;
+  sparkConfiguration?: Record<string | null>;
 
   /**
    * Specifies the tags
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
+  tags?: Record<string | null>;
 }
 
 /**
@@ -6147,13 +6148,13 @@ model FeatureWindow {
    * Specifies the feature window end time
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  featureWindowEnd?: utcDateTime;
+  featureWindowEnd?: utcDateTime | null;
 
   /**
    * Specifies the feature window start time
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  featureWindowStart?: utcDateTime;
+  featureWindowStart?: utcDateTime | null;
 }
 
 /**
@@ -6163,7 +6164,7 @@ model FeaturesetVersionBackfillResponse {
   /**
    * List of jobs submitted as part of the backfill request.
    */
-  jobIds?: string[];
+  jobIds?: string[] | null;
 }
 
 /**
@@ -6199,7 +6200,7 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
    * Specifies index columns
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  indexColumns?: IndexColumn[];
+  indexColumns?: IndexColumn[] | null;
 
   /**
    * Provisioning state for the featurestore entity version.
@@ -6210,7 +6211,7 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies the asset stage
    */
-  stage?: string;
+  stage?: string | null;
 }
 
 /**
@@ -6220,12 +6221,12 @@ model IndexColumn {
   /**
    * Specifies the column name
    */
-  columnName?: string;
+  columnName?: string | null;
 
   /**
    * Specifies the data type
    */
-  dataType?: FeatureDataType;
+  dataType?: FeatureDataType = FeatureDataType.String;
 }
 
 /**
@@ -6248,7 +6249,7 @@ model InferencePoolProperties extends PropertiesBase {
   /**
    * Gets or sets ScaleUnitConfiguration for the inference pool. Used if PoolType=ScaleUnit.
    */
-  scaleUnitConfiguration?: ScaleUnitConfiguration;
+  scaleUnitConfiguration?: ScaleUnitConfiguration | null;
 }
 
 /**
@@ -6356,7 +6357,7 @@ model InferenceEndpointProperties extends PropertiesBase {
    * Endpoint URI for the inference endpoint.
    */
   @visibility(Lifecycle.Read)
-  endpointUri?: url;
+  endpointUri?: url | null;
 
   /**
    * [Required] Group within the same pool with which this endpoint needs to be associated with.
@@ -6374,7 +6375,7 @@ model InferenceEndpointProperties extends PropertiesBase {
   /**
    * RequestConfiguration for endpoint.
    */
-  requestConfiguration?: RequestConfiguration;
+  requestConfiguration?: RequestConfiguration | null;
 }
 
 /**
@@ -6407,17 +6408,17 @@ model InferenceGroupProperties extends PropertiesBase {
   /**
    * Gets or sets environment configuration for the inference group. Used if PoolType=ScaleUnit.
    */
-  environmentConfiguration?: GroupEnvironmentConfiguration;
+  environmentConfiguration?: GroupEnvironmentConfiguration | null;
 
   /**
    * Gets or sets model configuration for the inference group. Used if PoolType=ScaleUnit.
    */
-  modelConfiguration?: GroupModelConfiguration;
+  modelConfiguration?: GroupModelConfiguration | null;
 
   /**
    * Gets or sets compute instance type.
    */
-  nodeSkuType?: string;
+  nodeSkuType?: string | null;
 
   /**
    * Provisioning state for the inference group.
@@ -6438,27 +6439,27 @@ model GroupEnvironmentConfiguration {
   /**
    * ARM resource ID of the environment specification for the inference pool.
    */
-  environmentId?: string;
+  environmentId?: string | null;
 
   /**
    * Environment variables configuration for the inference pool.
    */
-  environmentVariables?: StringStringKeyValuePair[];
+  environmentVariables?: StringStringKeyValuePair[] | null;
 
   /**
    * Liveness probe monitors the health of the container regularly.
    */
-  livenessProbe?: ProbeSettings;
+  livenessProbe?: ProbeSettings | null;
 
   /**
    * Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.
    */
-  readinessProbe?: ProbeSettings;
+  readinessProbe?: ProbeSettings | null;
 
   /**
    * This verifies whether the application within a container is started. Startup probes run before any other probe, and, unless it finishes successfully, disables other probes.
    */
-  startupProbe?: ProbeSettings;
+  startupProbe?: ProbeSettings | null;
 }
 
 /**
@@ -6498,7 +6499,7 @@ model GroupModelConfiguration {
   /**
    * The URI path to the model.
    */
-  modelId?: string;
+  modelId?: string | null;
 }
 
 /**
@@ -6632,17 +6633,17 @@ model GroupStatus {
   /**
    * Gets or sets the actual capacity info for the group.
    */
-  actualCapacityInfo?: ActualCapacityInfo;
+  actualCapacityInfo?: ActualCapacityInfo | null;
 
   /**
    * Gets or sets the actual number of endpoints in the group.
    */
-  endpointCount?: int32;
+  endpointCount?: int32 = 0;
 
   /**
    * Gets or sets the request number of instances for the group.
    */
-  requestedCapacity?: int32;
+  requestedCapacity?: int32 = 0;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6757,19 +6758,19 @@ model JobBaseProperties extends ResourceBase {
    * ARM resource ID of the component resource.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  componentId?: string;
+  componentId?: string | null;
 
   /**
    * ARM resource ID of the compute resource.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  computeId?: string;
+  computeId?: string | null;
 
   /**
    * Display name of job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  displayName?: string;
+  displayName?: string | null;
 
   /**
    * The name of the experiment the job belongs to. If not set, the job is placed in the "Default" experiment.
@@ -6782,13 +6783,13 @@ model JobBaseProperties extends ResourceBase {
    * Defaults to AmlToken if null.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  identity?: IdentityConfiguration;
+  identity?: IdentityConfiguration | null;
 
   /**
    * Is the asset archived?
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  isArchived?: boolean;
+  isArchived?: boolean = false;
 
   /**
    * [Required] Specifies the type of job.
@@ -6800,19 +6801,19 @@ model JobBaseProperties extends ResourceBase {
    * Notification setting for the job
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  notificationSetting?: NotificationSetting;
+  notificationSetting?: NotificationSetting | null;
 
   /**
    * Parent job name.
    */
-  parentJobName?: string;
+  parentJobName?: string | null;
 
   /**
    * List of JobEndpoints.
    * For local jobs, a job endpoint will have an endpoint value of FileStreamObject.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  services?: Record<JobService>;
+  services?: Record<JobService | null> | null;
 
   /**
    * Status of the job.
@@ -6841,43 +6842,43 @@ model JobService {
    * Url for endpoint.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  endpoint?: string;
+  endpoint?: string | null;
 
   /**
    * Any error in the service.
    */
   @visibility(Lifecycle.Read)
-  errorMessage?: string;
+  errorMessage?: string | null;
 
   /**
    * Endpoint type.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  jobServiceType?: string;
+  jobServiceType?: string | null;
 
   /**
    * Nodes that user would like to start the service on.
    * If Nodes is not set or set to null, the service will only be started on leader node.
    */
-  nodes?: Nodes;
+  nodes?: Nodes | null;
 
   /**
    * Port for endpoint.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  port?: int32;
+  port?: int32 | null;
 
   /**
    * Additional properties to set on the endpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<string>;
+  properties?: Record<string | null> | null;
 
   /**
    * Status of endpoint.
    */
   @visibility(Lifecycle.Read)
-  status?: string;
+  status?: string | null;
 }
 
 /**
@@ -6904,7 +6905,7 @@ model MarketplaceSubscriptionProperties {
    * Marketplace Plan associated with the Marketplace Subscription.
    */
   @visibility(Lifecycle.Read)
-  marketplacePlan?: MarketplacePlan;
+  marketplacePlan?: MarketplacePlan | null;
 
   /**
    * Current status of the Marketplace Subscription.
@@ -6932,19 +6933,19 @@ model MarketplacePlan {
    * The identifying name of the Offer of the Marketplace Plan.
    */
   @visibility(Lifecycle.Read)
-  offerId?: string;
+  offerId?: string | null;
 
   /**
    * The identifying name of the Plan of the Marketplace Plan.
    */
   @visibility(Lifecycle.Read)
-  planId?: string;
+  planId?: string | null;
 
   /**
    * The identifying name of the Publisher of the Marketplace Plan.
    */
   @visibility(Lifecycle.Read)
-  publisherId?: string;
+  publisherId?: string | null;
 }
 
 /**
@@ -7001,17 +7002,17 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * If true, enables Application Insights logging.
    */
-  appInsightsEnabled?: boolean;
+  appInsightsEnabled?: boolean = false;
 
   /**
    * The mdc configuration, we disable mdc when it's null.
    */
-  dataCollector?: DataCollector;
+  dataCollector?: DataCollector | null;
 
   /**
    * If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.
    */
-  egressPublicNetworkAccess?: EgressPublicNetworkAccessType;
+  egressPublicNetworkAccess?: EgressPublicNetworkAccessType = EgressPublicNetworkAccessType.Enabled;
 
   /**
    * [Required] The compute type of the endpoint.
@@ -7022,7 +7023,7 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
    * Compute instance type. Default: Standard_F4s_v2.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  instanceType?: string = "Standard_F4s_v2";
+  instanceType?: string | null = "Standard_F4s_v2";
 
   /**
    * Liveness probe monitors the health of the container regularly.
@@ -7349,7 +7350,7 @@ model ModelSettings {
   /**
    * The unique model identifier that this ServerlessEndpoint should provision.
    */
-  modelId?: string;
+  modelId?: string | null;
 }
 
 /**
@@ -7424,7 +7425,7 @@ model ManagedResourceGroupSettings {
    * List of assigned identities for the managed resource group
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  assignedIdentities?: ManagedResourceGroupAssignedIdentities[];
+  assignedIdentities?: ManagedResourceGroupAssignedIdentities[] | null;
 }
 
 /**
@@ -8019,7 +8020,7 @@ model ManagedNetworkSettings {
   /**
    * A flag to indicate if monitoring needs to be enabled for the managed network.
    */
-  enableNetworkMonitor?: boolean;
+  enableNetworkMonitor?: boolean = false;
 
   /**
    * Isolation mode for the managed network of a machine learning workspace.
@@ -8034,7 +8035,7 @@ model ManagedNetworkSettings {
    * Dictionary of <OutboundRule>
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  outboundRules?: Record<OutboundRule>;
+  outboundRules?: Record<OutboundRule> | null;
 
   /**
    * Status of the Provisioning for the managed network of a machine learning workspace.
@@ -8055,7 +8056,7 @@ model ManagedNetworkSettings {
    * Public IP address assigned to the Azure Firewall.
    */
   @visibility(Lifecycle.Read)
-  firewallPublicIpAddress?: string;
+  firewallPublicIpAddress?: string | null;
 }
 
 /**
@@ -9051,6 +9052,7 @@ model ListWorkspaceKeysResult {
    * The access key of the workspace app insights
    */
   @visibility(Lifecycle.Read)
+  @secret
   appInsightsInstrumentationKey?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -9068,6 +9070,7 @@ model ListWorkspaceKeysResult {
    * The access key of the workspace storage
    */
   @visibility(Lifecycle.Read)
+  @secret
   userStorageKey?: string;
 }
 
@@ -9107,12 +9110,14 @@ model ListNotebookKeysResult {
    * The primary access key of the Notebook
    */
   @visibility(Lifecycle.Read)
+  @secret
   primaryAccessKey?: string;
 
   /**
    * The secondary access key of the Notebook
    */
   @visibility(Lifecycle.Read)
+  @secret
   secondaryAccessKey?: string;
 }
 
@@ -9120,6 +9125,7 @@ model ListNotebookKeysResult {
 model NotebookAccessTokenResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @secret
   accessToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -9140,6 +9146,7 @@ model NotebookAccessTokenResult {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @secret
   refreshToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -9157,6 +9164,7 @@ model ListStorageAccountKeysResult {
    * The access key of the storage
    */
   @visibility(Lifecycle.Read)
+  @secret
   userStorageKey?: string;
 }
 
@@ -9521,17 +9529,19 @@ model KubernetesProperties {
   /**
    * Relay connection string.
    */
-  relayConnectionString?: string;
+  @secret
+  relayConnectionString?: string | null;
 
   /**
    * ServiceBus connection string.
    */
-  serviceBusConnectionString?: string;
+  @secret
+  serviceBusConnectionString?: string | null;
 
   /**
    * Extension principal-id.
    */
-  extensionPrincipalId?: string;
+  extensionPrincipalId?: string | null;
 
   /**
    * Extension instance release train.
@@ -9568,7 +9578,7 @@ model InstanceTypeSchema {
    * Node Selector
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  nodeSelector?: Record<string>;
+  nodeSelector?: Record<string | null> | null;
 
   /**
    * Resource requests/limits for this instance type
@@ -9738,36 +9748,42 @@ model NodeStateCounts {
    * Number of compute nodes in idle state.
    */
   @visibility(Lifecycle.Read)
+  @summary("Idle node count.")
   idleNodeCount?: int32;
 
   /**
    * Number of compute nodes which are running jobs.
    */
   @visibility(Lifecycle.Read)
+  @summary("Running node count.")
   runningNodeCount?: int32;
 
   /**
    * Number of compute nodes which are being prepared.
    */
   @visibility(Lifecycle.Read)
+  @summary("Preparing node count.")
   preparingNodeCount?: int32;
 
   /**
    * Number of compute nodes which are in unusable state.
    */
   @visibility(Lifecycle.Read)
+  @summary("Unusable node count.")
   unusableNodeCount?: int32;
 
   /**
    * Number of compute nodes which are leaving the amlCompute.
    */
   @visibility(Lifecycle.Read)
+  @summary("Leaving node count.")
   leavingNodeCount?: int32;
 
   /**
    * Number of compute nodes which are in preempted state.
    */
   @visibility(Lifecycle.Read)
+  @summary("Preempted node count.")
   preemptedNodeCount?: int32;
 }
 
@@ -11043,7 +11059,7 @@ model JobOutput {
    * Description for the output.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  description?: string;
+  description?: string | null;
 
   /**
    * [Required] Specifies the type of job.
@@ -11068,13 +11084,13 @@ model JobResourceConfiguration extends ResourceConfiguration {
    * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  dockerArgs?: string;
+  dockerArgs?: string | null;
 
   /**
    * Extra arguments to pass to the Docker run command, as a collection. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  dockerArgsList?: string[];
+  dockerArgsList?: string[] | null;
 
   /**
    * Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes).
@@ -11132,7 +11148,7 @@ model JobInput {
    * Description for the input.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  description?: string;
+  description?: string | null;
 
   /**
    * [Required] Specifies the type of job.
@@ -11471,7 +11487,7 @@ model FineTuningVertical {
   /**
    * Validation data for fine tuning.
    */
-  validationData?: JobInput;
+  validationData?: JobInput | null;
 }
 
 /**
@@ -11623,7 +11639,7 @@ model MonitoringThreshold {
    * The threshold value. If null, the set default is dependent on the metric type.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  value?: float64;
+  value?: float64 | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -11967,7 +11983,7 @@ model FeaturizationSettings {
   /**
    * Dataset language, useful for the text data.
    */
-  datasetLanguage?: string;
+  datasetLanguage?: string | null;
 }
 
 /**
@@ -12126,7 +12142,7 @@ model JobLimits {
   /**
    * The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.
    */
-  timeout?: duration;
+  timeout?: duration | null;
 }
 
 /**
@@ -12185,7 +12201,7 @@ model MonitorDefinition {
    * The monitor's notification settings.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  alertNotificationSettings?: MonitorNotificationSettings;
+  alertNotificationSettings?: MonitorNotificationSettings | null;
 
   /**
    * [Required] The ARM resource ID of the compute resource to run the monitoring job on.
@@ -12197,14 +12213,14 @@ model MonitorDefinition {
    * The entities targeted by the monitor.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  monitoringTarget?: MonitoringTarget;
+  monitoringTarget?: MonitoringTarget | null;
 
   /**
    * [Required] The signals to monitor.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  signals: Record<MonitoringSignalBase>;
+  signals: Record<MonitoringSignalBase | null>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12213,7 +12229,7 @@ model MonitorNotificationSettings {
    * The AML notification email settings.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  emailNotificationSettings?: MonitorEmailNotificationSettings;
+  emailNotificationSettings?: MonitorEmailNotificationSettings | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12223,7 +12239,7 @@ model MonitorEmailNotificationSettings {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  emails?: string[];
+  emails?: string[] | null;
 }
 
 /**
@@ -12246,13 +12262,13 @@ model MonitoringTarget {
    * Reference to the deployment asset targeted by this monitor.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  deploymentId?: string;
+  deploymentId?: string | null;
 
   /**
    * Reference to the model asset targeted by this monitor.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  modelId?: string;
+  modelId?: string | null;
 
   /**
    * [Required] The machine learning task type of the monitored model.
@@ -12269,13 +12285,13 @@ model MonitoringSignalBase {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  notificationTypes?: MonitoringNotificationType[];
+  notificationTypes?: MonitoringNotificationType[] | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<string>;
+  properties?: Record<string | null> | null;
 
   /**
    * [Required] Specifies the type of signal to monitor.
@@ -12413,13 +12429,13 @@ model MonitoringInputDataBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  columns?: Record<string>;
+  columns?: Record<string | null> | null;
 
   /**
    * The context metadata of the data source.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  dataContext?: string;
+  dataContext?: string | null;
 
   /**
    * [Required] Specifies the type of signal to monitor.
@@ -12742,7 +12758,7 @@ model FinetuningDetails {
    * Finetuning Hyperparameters
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  hyperParameters?: Record<string>;
+  hyperParameters?: Record<string | null> | null;
 
   /**
    * [Required] Student model for fine tuning.
@@ -12877,13 +12893,13 @@ model FineTuningJob extends JobBaseProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  outputs: Record<JobOutput>;
+  outputs: Record<JobOutput | null>;
 
   /**
    * Queue settings for the job
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  queueSettings?: QueueSettings;
+  queueSettings?: QueueSettings | null;
 
   /**
    * Instance types and other resources for the job
@@ -12921,12 +12937,12 @@ model Forecasting extends AutoMLVertical {
   /**
    * Primary metric for forecasting task.
    */
-  primaryMetric?: ForecastingPrimaryMetrics;
+  primaryMetric?: ForecastingPrimaryMetrics = ForecastingPrimaryMetrics.NormalizedRootMeanSquaredError;
 
   /**
    * Inputs for training phase for an AutoML Job.
    */
-  trainingSettings?: ForecastingTrainingSettings;
+  trainingSettings?: ForecastingTrainingSettings | null;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -12942,29 +12958,29 @@ model ForecastingSettings {
    * Country or region for holidays for forecasting tasks.
    * These should be ISO 3166 two-letter country/region codes, for example 'US' or 'GB'.
    */
-  countryOrRegionForHolidays?: string;
+  countryOrRegionForHolidays?: string | null;
 
   /**
    * Number of periods between the origin time of one CV fold and the next fold. For
    * example, if `CVStepSize` = 3 for daily data, the origin time for each fold will be
    * three days apart.
    */
-  cvStepSize?: int32;
+  cvStepSize?: int32 | null;
 
   /**
    * Flag for generating lags for the numeric features with 'auto' or null.
    */
-  featureLags?: FeatureLags;
+  featureLags?: FeatureLags = FeatureLags.None;
 
   /**
    * The desired maximum forecast horizon in units of time-series frequency.
    */
-  forecastHorizon?: ForecastHorizon;
+  forecastHorizon?: ForecastHorizon = #{ mode: "Custom" };
 
   /**
    * When forecasting, this parameter represents the period with which the forecast is desired, for example daily, weekly, yearly, etc. The forecast frequency is dataset frequency by default.
    */
-  frequency?: string;
+  frequency?: string | null;
 
   /**
    * Set time series seasonality as an integer multiple of the series frequency.
@@ -12975,39 +12991,39 @@ model ForecastingSettings {
   /**
    * The parameter defining how if AutoML should handle short time series.
    */
-  shortSeriesHandlingConfig?: ShortSeriesHandlingConfiguration;
+  shortSeriesHandlingConfig?: ShortSeriesHandlingConfiguration = ShortSeriesHandlingConfiguration.Auto;
 
   /**
    * The function to be used to aggregate the time series target column to conform to a user specified frequency.
    * If the TargetAggregateFunction is set i.e. not 'None', but the freq parameter is not set, the error is raised. The possible target aggregation functions are: "sum", "max", "min" and "mean".
    */
-  targetAggregateFunction?: TargetAggregationFunction;
+  targetAggregateFunction?: TargetAggregationFunction = TargetAggregationFunction.None;
 
   /**
    * The number of past periods to lag from the target column.
    */
-  targetLags?: TargetLags;
+  targetLags?: TargetLags | null;
 
   /**
    * The number of past periods used to create a rolling window average of the target column.
    */
-  targetRollingWindowSize?: TargetRollingWindowSize;
+  targetRollingWindowSize?: TargetRollingWindowSize | null;
 
   /**
    * The name of the time column. This parameter is required when forecasting to specify the datetime column in the input data used for building the time series and inferring its frequency.
    */
-  timeColumnName?: string;
+  timeColumnName?: string | null;
 
   /**
    * The names of columns used to group a timeseries. It can be used to create multiple series.
    * If grain is not defined, the data set is assumed to be one time-series. This parameter is used with task type forecasting.
    */
-  timeSeriesIdColumnNames?: string[];
+  timeSeriesIdColumnNames?: string[] | null;
 
   /**
    * Configure STL Decomposition of the time-series target column.
    */
-  useStl?: UseStl;
+  useStl?: UseStl = UseStl.None;
 }
 
 /**
@@ -13018,12 +13034,12 @@ model ForecastingTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for forecasting task.
    */
-  allowedTrainingAlgorithms?: ForecastingModels[];
+  allowedTrainingAlgorithms?: ForecastingModels[] | null;
 
   /**
    * Blocked models for forecasting task.
    */
-  blockedTrainingAlgorithms?: ForecastingModels[];
+  blockedTrainingAlgorithms?: ForecastingModels[] | null;
 }
 
 /**
@@ -13046,7 +13062,7 @@ model ImageClassification extends AutoMLVertical {
   /**
    * Primary metric to optimize for this task.
    */
-  primaryMetric?: ClassificationPrimaryMetrics;
+  primaryMetric?: ClassificationPrimaryMetrics = ClassificationPrimaryMetrics.Accuracy;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -13060,13 +13076,13 @@ model ImageClassificationBase extends ImageVertical {
   /**
    * Settings used for training the model.
    */
-  modelSettings?: ImageModelSettingsClassification;
+  modelSettings?: ImageModelSettingsClassification | null;
 
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  searchSpace?: ImageModelDistributionSettingsClassification[];
+  searchSpace?: ImageModelDistributionSettingsClassification[] | null;
 }
 
 /**
@@ -13079,23 +13095,23 @@ model ImageModelSettingsClassification extends ImageModelSettings {
   /**
    * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
    */
-  trainingCropSize?: int32;
+  trainingCropSize?: int32 | null;
 
   /**
    * Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.
    */
-  validationCropSize?: int32;
+  validationCropSize?: int32 | null;
 
   /**
    * Image size to which to resize before cropping for validation dataset. Must be a positive integer.
    */
-  validationResizeSize?: int32;
+  validationResizeSize?: int32 | null;
 
   /**
    * Weighted loss. The accepted values are 0 for no weighted loss.
    * 1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.
    */
-  weightedLoss?: int32;
+  weightedLoss?: int32 | null;
 }
 
 /**
@@ -13107,81 +13123,81 @@ model ImageModelSettings {
   /**
    * Settings for advanced scenarios.
    */
-  advancedSettings?: string;
+  advancedSettings?: string | null;
 
   /**
    * Enable AMSGrad when optimizer is 'adam' or 'adamw'.
    */
-  amsGradient?: boolean;
+  amsGradient?: boolean | null;
 
   /**
    * Settings for using Augmentations.
    */
-  augmentations?: string;
+  augmentations?: string | null;
 
   /**
    * Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
-  beta1?: float32;
+  beta1?: float32 | null;
 
   /**
    * Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
-  beta2?: float32;
+  beta2?: float32 | null;
 
   /**
    * Frequency to store model checkpoints. Must be a positive integer.
    */
-  checkpointFrequency?: int32;
+  checkpointFrequency?: int32 | null;
 
   /**
    * The pretrained checkpoint model for incremental training.
    */
-  checkpointModel?: MLFlowModelJobInput;
+  checkpointModel?: MLFlowModelJobInput | null;
 
   /**
    * The id of a previous run that has a pretrained checkpoint for incremental training.
    */
-  checkpointRunId?: string;
+  checkpointRunId?: string | null;
 
   /**
    * Whether to use distributed training.
    */
-  distributed?: boolean;
+  distributed?: boolean | null;
 
   /**
    * Enable early stopping logic during training.
    */
-  earlyStopping?: boolean;
+  earlyStopping?: boolean | null;
 
   /**
    * Minimum number of epochs or validation evaluations to wait before primary metric improvement
    * is tracked for early stopping. Must be a positive integer.
    */
-  earlyStoppingDelay?: int32;
+  earlyStoppingDelay?: int32 | null;
 
   /**
    * Minimum number of epochs or validation evaluations with no primary metric improvement before
    * the run is stopped. Must be a positive integer.
    */
-  earlyStoppingPatience?: int32;
+  earlyStoppingPatience?: int32 | null;
 
   /**
    * Enable normalization when exporting ONNX model.
    */
-  enableOnnxNormalization?: boolean;
+  enableOnnxNormalization?: boolean | null;
 
   /**
    * Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.
    */
-  evaluationFrequency?: int32;
+  evaluationFrequency?: int32 | null;
 
   /**
    * Gradient accumulation means running a configured number of "GradAccumulationStep" steps without
    * updating the model weights while accumulating the gradients of those steps, and then using
    * the accumulated gradients to compute the weight updates. Must be a positive integer.
    */
-  gradientAccumulationStep?: int32;
+  gradientAccumulationStep?: int32 | null;
 
   /**
    * Number of layers to freeze for the model. Must be a positive integer.
@@ -13189,89 +13205,89 @@ model ImageModelSettings {
    * freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
    * see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
-  layersToFreeze?: int32;
+  layersToFreeze?: int32 | null;
 
   /**
    * Initial learning rate. Must be a float in the range [0, 1].
    */
-  learningRate?: float32;
+  learningRate?: float32 | null;
 
   /**
    * Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.
    */
-  learningRateScheduler?: LearningRateScheduler;
+  learningRateScheduler?: LearningRateScheduler = LearningRateScheduler.None;
 
   /**
    * Name of the model to use for training.
    * For more information on the available models please visit the official documentation:
    * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
-  modelName?: string;
+  modelName?: string | null;
 
   /**
    * Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].
    */
-  momentum?: float32;
+  momentum?: float32 | null;
 
   /**
    * Enable nesterov when optimizer is 'sgd'.
    */
-  nesterov?: boolean;
+  nesterov?: boolean | null;
 
   /**
    * Number of training epochs. Must be a positive integer.
    */
-  numberOfEpochs?: int32;
+  numberOfEpochs?: int32 | null;
 
   /**
    * Number of data loader workers. Must be a non-negative integer.
    */
-  numberOfWorkers?: int32;
+  numberOfWorkers?: int32 | null;
 
   /**
    * Type of optimizer.
    */
-  optimizer?: StochasticOptimizer;
+  optimizer?: StochasticOptimizer = StochasticOptimizer.None;
 
   /**
    * Random seed to be used when using deterministic training.
    */
-  randomSeed?: int32;
+  randomSeed?: int32 | null;
 
   /**
    * Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].
    */
-  stepLRGamma?: float32;
+  stepLRGamma?: float32 | null;
 
   /**
    * Value of step size when learning rate scheduler is 'step'. Must be a positive integer.
    */
-  stepLRStepSize?: int32;
+  stepLRStepSize?: int32 | null;
 
   /**
    * Training batch size. Must be a positive integer.
    */
-  trainingBatchSize?: int32;
+  trainingBatchSize?: int32 | null;
 
   /**
    * Validation batch size. Must be a positive integer.
    */
-  validationBatchSize?: int32;
+  validationBatchSize?: int32 | null;
 
   /**
    * Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].
    */
-  warmupCosineLRCycles?: float32;
+  warmupCosineLRCycles?: float32 | null;
 
   /**
    * Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.
    */
-  warmupCosineLRWarmupEpochs?: int32;
+  warmupCosineLRWarmupEpochs?: int32 | null;
 
   /**
    * Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].
    */
-  weightDecay?: float32;
+  weightDecay?: float32 | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -13304,23 +13320,23 @@ model ImageModelDistributionSettingsClassification
   /**
    * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
    */
-  trainingCropSize?: string;
+  trainingCropSize?: string | null;
 
   /**
    * Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.
    */
-  validationCropSize?: string;
+  validationCropSize?: string | null;
 
   /**
    * Image size to which to resize before cropping for validation dataset. Must be a positive integer.
    */
-  validationResizeSize?: string;
+  validationResizeSize?: string | null;
 
   /**
    * Weighted loss. The accepted values are 0 for no weighted loss.
    * 1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.
    */
-  weightedLoss?: string;
+  weightedLoss?: string | null;
 }
 
 /**
@@ -13343,61 +13359,61 @@ model ImageModelDistributionSettings {
   /**
    * Enable AMSGrad when optimizer is 'adam' or 'adamw'.
    */
-  amsGradient?: string;
+  amsGradient?: string | null;
 
   /**
    * Settings for using Augmentations.
    */
-  augmentations?: string;
+  augmentations?: string | null;
 
   /**
    * Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
-  beta1?: string;
+  beta1?: string | null;
 
   /**
    * Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
-  beta2?: string;
+  beta2?: string | null;
 
   /**
    * Whether to use distributer training.
    */
-  distributed?: string;
+  distributed?: string | null;
 
   /**
    * Enable early stopping logic during training.
    */
-  earlyStopping?: string;
+  earlyStopping?: string | null;
 
   /**
    * Minimum number of epochs or validation evaluations to wait before primary metric improvement
    * is tracked for early stopping. Must be a positive integer.
    */
-  earlyStoppingDelay?: string;
+  earlyStoppingDelay?: string | null;
 
   /**
    * Minimum number of epochs or validation evaluations with no primary metric improvement before
    * the run is stopped. Must be a positive integer.
    */
-  earlyStoppingPatience?: string;
+  earlyStoppingPatience?: string | null;
 
   /**
    * Enable normalization when exporting ONNX model.
    */
-  enableOnnxNormalization?: string;
+  enableOnnxNormalization?: string | null;
 
   /**
    * Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.
    */
-  evaluationFrequency?: string;
+  evaluationFrequency?: string | null;
 
   /**
    * Gradient accumulation means running a configured number of "GradAccumulationStep" steps without
    * updating the model weights while accumulating the gradients of those steps, and then using
    * the accumulated gradients to compute the weight updates. Must be a positive integer.
    */
-  gradientAccumulationStep?: string;
+  gradientAccumulationStep?: string | null;
 
   /**
    * Number of layers to freeze for the model. Must be a positive integer.
@@ -13405,89 +13421,89 @@ model ImageModelDistributionSettings {
    * freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
    * see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
-  layersToFreeze?: string;
+  layersToFreeze?: string | null;
 
   /**
    * Initial learning rate. Must be a float in the range [0, 1].
    */
-  learningRate?: string;
+  learningRate?: string | null;
 
   /**
    * Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.
    */
-  learningRateScheduler?: string;
+  learningRateScheduler?: string | null;
 
   /**
    * Name of the model to use for training.
    * For more information on the available models please visit the official documentation:
    * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
-  modelName?: string;
+  modelName?: string | null;
 
   /**
    * Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].
    */
-  momentum?: string;
+  momentum?: string | null;
 
   /**
    * Enable nesterov when optimizer is 'sgd'.
    */
-  nesterov?: string;
+  nesterov?: string | null;
 
   /**
    * Number of training epochs. Must be a positive integer.
    */
-  numberOfEpochs?: string;
+  numberOfEpochs?: string | null;
 
   /**
    * Number of data loader workers. Must be a non-negative integer.
    */
-  numberOfWorkers?: string;
+  numberOfWorkers?: string | null;
 
   /**
    * Type of optimizer. Must be either 'sgd', 'adam', or 'adamw'.
    */
-  optimizer?: string;
+  optimizer?: string | null;
 
   /**
    * Random seed to be used when using deterministic training.
    */
-  randomSeed?: string;
+  randomSeed?: string | null;
 
   /**
    * Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].
    */
-  stepLRGamma?: string;
+  stepLRGamma?: string | null;
 
   /**
    * Value of step size when learning rate scheduler is 'step'. Must be a positive integer.
    */
-  stepLRStepSize?: string;
+  stepLRStepSize?: string | null;
 
   /**
    * Training batch size. Must be a positive integer.
    */
-  trainingBatchSize?: string;
+  trainingBatchSize?: string | null;
 
   /**
    * Validation batch size. Must be a positive integer.
    */
-  validationBatchSize?: string;
+  validationBatchSize?: string | null;
 
   /**
    * Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].
    */
-  warmupCosineLRCycles?: string;
+  warmupCosineLRCycles?: string | null;
 
   /**
    * Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.
    */
-  warmupCosineLRWarmupEpochs?: string;
+  warmupCosineLRWarmupEpochs?: string | null;
 
   /**
    * Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].
    */
-  weightDecay?: string;
+  weightDecay?: string | null;
 }
 
 /**
@@ -13503,19 +13519,19 @@ model ImageVertical {
   /**
    * Model sweeping and hyperparameter sweeping related settings.
    */
-  sweepSettings?: ImageSweepSettings;
+  sweepSettings?: ImageSweepSettings | null;
 
   /**
    * Validation data inputs.
    */
-  validationData?: MLTableJobInput;
+  validationData?: MLTableJobInput | null;
 
   /**
    * The fraction of training dataset that needs to be set aside for validation purpose.
    * Values between (0.0 , 1.0)
    * Applied when validation dataset is not provided.
    */
-  validationDataSize?: float64;
+  validationDataSize?: float64 | null;
 }
 
 /**
@@ -13535,7 +13551,7 @@ model ImageLimitSettings {
   /**
    * AutoML job timeout.
    */
-  timeout?: duration;
+  timeout?: duration = duration.fromISO("P7D");
 }
 
 /**
@@ -13545,7 +13561,7 @@ model ImageSweepSettings {
   /**
    * Type of early termination policy.
    */
-  earlyTermination?: EarlyTerminationPolicy;
+  earlyTermination?: EarlyTerminationPolicy | null;
 
   /**
    * [Required] Type of the hyperparameter sampling algorithms.
@@ -13563,7 +13579,7 @@ model ImageClassificationMultilabel extends AutoMLVertical {
   /**
    * Primary metric to optimize for this task.
    */
-  primaryMetric?: ClassificationMultilabelPrimaryMetrics;
+  primaryMetric?: ClassificationMultilabelPrimaryMetrics = ClassificationMultilabelPrimaryMetrics.IOU;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -13581,7 +13597,7 @@ model ImageInstanceSegmentation extends AutoMLVertical {
   /**
    * Primary metric to optimize for this task.
    */
-  primaryMetric?: InstanceSegmentationPrimaryMetrics;
+  primaryMetric?: InstanceSegmentationPrimaryMetrics = InstanceSegmentationPrimaryMetrics.MeanAveragePrecision;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -13595,13 +13611,13 @@ model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Settings used for training the model.
    */
-  modelSettings?: ImageModelSettingsObjectDetection;
+  modelSettings?: ImageModelSettingsObjectDetection | null;
 
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  searchSpace?: ImageModelDistributionSettingsObjectDetection[];
+  searchSpace?: ImageModelDistributionSettingsObjectDetection[] | null;
 }
 
 /**
@@ -13615,83 +13631,83 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    * Maximum number of detections per image, for all classes. Must be a positive integer.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  boxDetectionsPerImage?: int32;
+  boxDetectionsPerImage?: int32 | null;
 
   /**
    * During inference, only return proposals with a classification score greater than
    * BoxScoreThreshold. Must be a float in the range[0, 1].
    */
-  boxScoreThreshold?: float32;
+  boxScoreThreshold?: float32 | null;
 
   /**
    * Image size for train and validation. Must be a positive integer.
    * Note: The training run may get into CUDA OOM if the size is too big.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  imageSize?: int32;
+  imageSize?: int32 | null;
 
   /**
    * Maximum size of the image to be rescaled before feeding it to the backbone.
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  maxSize?: int32;
+  maxSize?: int32 | null;
 
   /**
    * Minimum size of the image to be rescaled before feeding it to the backbone.
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  minSize?: int32;
+  minSize?: int32 | null;
 
   /**
    * Model size. Must be 'small', 'medium', 'large', or 'xlarge'.
    * Note: training run may get into CUDA OOM if the model size is too big.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  modelSize?: ModelSize;
+  modelSize?: ModelSize = ModelSize.None;
 
   /**
    * Enable multi-scale image by varying image size by +/- 50%.
    * Note: training run may get into CUDA OOM if no sufficient GPU memory.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  multiScale?: boolean;
+  multiScale?: boolean | null;
 
   /**
    * IOU threshold used during inference in NMS post processing. Must be a float in the range [0, 1].
    */
-  nmsIouThreshold?: float32;
+  nmsIouThreshold?: float32 | null;
 
   /**
    * The grid size to use for tiling each image. Note: TileGridSize must not be
    * None to enable small object detection logic. A string containing two integers in mxn format.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  tileGridSize?: string;
+  tileGridSize?: string | null;
 
   /**
    * Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  tileOverlapRatio?: float32;
+  tileOverlapRatio?: float32 | null;
 
   /**
    * The IOU threshold to use to perform NMS while merging predictions from tiles and image.
    * Used in validation/ inference. Must be float in the range [0, 1].
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  tilePredictionsNmsThreshold?: float32;
+  tilePredictionsNmsThreshold?: float32 | null;
 
   /**
    * IOU threshold to use when computing validation metric. Must be float in the range [0, 1].
    */
-  validationIouThreshold?: float32;
+  validationIouThreshold?: float32 | null;
 
   /**
    * Metric computation method to use for validation metrics.
    */
-  validationMetricType?: ValidationMetricType;
+  validationMetricType?: ValidationMetricType = ValidationMetricType.None;
 }
 
 /**
@@ -13715,66 +13731,66 @@ model ImageModelDistributionSettingsObjectDetection
    * Maximum number of detections per image, for all classes. Must be a positive integer.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  boxDetectionsPerImage?: string;
+  boxDetectionsPerImage?: string | null;
 
   /**
    * During inference, only return proposals with a classification score greater than
    * BoxScoreThreshold. Must be a float in the range[0, 1].
    */
-  boxScoreThreshold?: string;
+  boxScoreThreshold?: string | null;
 
   /**
    * Image size for train and validation. Must be a positive integer.
    * Note: The training run may get into CUDA OOM if the size is too big.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  imageSize?: string;
+  imageSize?: string | null;
 
   /**
    * Maximum size of the image to be rescaled before feeding it to the backbone.
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  maxSize?: string;
+  maxSize?: string | null;
 
   /**
    * Minimum size of the image to be rescaled before feeding it to the backbone.
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  minSize?: string;
+  minSize?: string | null;
 
   /**
    * Model size. Must be 'small', 'medium', 'large', or 'xlarge'.
    * Note: training run may get into CUDA OOM if the model size is too big.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  modelSize?: string;
+  modelSize?: string | null;
 
   /**
    * Enable multi-scale image by varying image size by +/- 50%.
    * Note: training run may get into CUDA OOM if no sufficient GPU memory.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  multiScale?: string;
+  multiScale?: string | null;
 
   /**
    * IOU threshold used during inference in NMS post processing. Must be float in the range [0, 1].
    */
-  nmsIouThreshold?: string;
+  nmsIouThreshold?: string | null;
 
   /**
    * The grid size to use for tiling each image. Note: TileGridSize must not be
    * None to enable small object detection logic. A string containing two integers in mxn format.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  tileGridSize?: string;
+  tileGridSize?: string | null;
 
   /**
    * Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  tileOverlapRatio?: string;
+  tileOverlapRatio?: string | null;
 
   /**
    * The IOU threshold to use to perform NMS while merging predictions from tiles and image.
@@ -13782,17 +13798,17 @@ model ImageModelDistributionSettingsObjectDetection
    * Note: This settings is not supported for the 'yolov5' algorithm.
    * NMS: Non-maximum suppression
    */
-  tilePredictionsNmsThreshold?: string;
+  tilePredictionsNmsThreshold?: string | null;
 
   /**
    * IOU threshold to use when computing validation metric. Must be float in the range [0, 1].
    */
-  validationIouThreshold?: string;
+  validationIouThreshold?: string | null;
 
   /**
    * Metric computation method to use for validation metrics. Must be 'none', 'coco', 'voc', or 'coco_voc'.
    */
-  validationMetricType?: string;
+  validationMetricType?: string | null;
 }
 
 /**
@@ -13805,7 +13821,7 @@ model ImageObjectDetection extends AutoMLVertical {
   /**
    * Primary metric to optimize for this task.
    */
-  primaryMetric?: ObjectDetectionPrimaryMetrics;
+  primaryMetric?: ObjectDetectionPrimaryMetrics = ObjectDetectionPrimaryMetrics.MeanAveragePrecision;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -13834,7 +13850,7 @@ model KubernetesOnlineDeployment extends OnlineDeploymentProperties {
   /**
    * The resource requirements for the container (cpu and memory).
    */
-  containerResourceRequirements?: ContainerResourceRequirements;
+  containerResourceRequirements?: ContainerResourceRequirements | null;
 
   /**
    * [Required] The compute type of the endpoint.
@@ -13847,12 +13863,12 @@ model LabelGeneration extends DataGenerationVertical {
   /**
    * Training data for fine tuning.
    */
-  trainingData?: JobInput;
+  trainingData?: JobInput | null;
 
   /**
    * Validation data for fine tuning.
    */
-  validationData?: JobInput;
+  validationData?: JobInput | null;
 
   /**
    * [Required] Enum to determine the type of Data Generation.
@@ -13922,7 +13938,7 @@ model MLTableData extends DataVersionBaseProperties {
    * Uris referenced in the MLTable definition (required for lineage)
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  referencedUris?: string[];
+  referencedUris?: string[] | null;
 
   /**
    * [Required] Specifies the type of data.
@@ -13947,7 +13963,7 @@ model ManagedComputeIdentity extends MonitorComputeIdentityBase {
   /**
    * The identity which will be leveraged by the monitoring jobs.
    */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity | null;
 
   /**
    * [Required] Specifies the type of identity to use within the monitoring jobs.
@@ -13965,7 +13981,7 @@ model ManagedIdentity extends IdentityConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
-  clientId?: string;
+  clientId?: string | null;
 
   /**
    * Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.
@@ -13973,13 +13989,13 @@ model ManagedIdentity extends IdentityConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
-  objectId?: string;
+  objectId?: string | null;
 
   /**
    * Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  resourceId?: string;
+  resourceId?: string | null;
 
   /**
    * [Required] Specifies the type of identity framework.
@@ -13994,27 +14010,27 @@ model ManagedIdentityCredential extends DataReferenceCredential {
   /**
    * ManagedIdentityCredential identity type
    */
-  managedIdentityType?: string;
+  managedIdentityType?: string | null;
 
   /**
    * ClientId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
-  userManagedIdentityClientId?: string;
+  userManagedIdentityClientId?: string | null;
 
   /**
    * PrincipalId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
-  userManagedIdentityPrincipalId?: string;
+  userManagedIdentityPrincipalId?: string | null;
 
   /**
    * Full arm scope for the Id. For ManagedIdentityType = SystemManaged, this field is null.
    */
-  userManagedIdentityResourceId?: string;
+  userManagedIdentityResourceId?: string | null;
 
   /**
    * TenantId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
-  userManagedIdentityTenantId?: string;
+  userManagedIdentityTenantId?: string | null;
 
   /**
    * [Required] Credential type used to authentication with storage.
@@ -14082,7 +14098,7 @@ model Mpi extends DistributionConfiguration {
    * Number of processes per MPI node.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  processCountPerInstance?: int32;
+  processCountPerInstance?: int32 | null;
 
   /**
    * [Required] Specifies the type of distribution framework.
@@ -14098,17 +14114,17 @@ model NlpVertical {
   /**
    * Featurization inputs needed for AutoML job.
    */
-  featurizationSettings?: NlpVerticalFeaturizationSettings;
+  featurizationSettings?: NlpVerticalFeaturizationSettings | null;
 
   /**
    * Execution constraints for AutoMLJob.
    */
-  limitSettings?: NlpVerticalLimitSettings;
+  limitSettings?: NlpVerticalLimitSettings | null;
 
   /**
    * Validation data inputs.
    */
-  validationData?: MLTableJobInput;
+  validationData?: MLTableJobInput | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -14132,7 +14148,7 @@ model NlpVerticalLimitSettings {
   /**
    * AutoML job timeout.
    */
-  timeout?: duration;
+  timeout?: duration = duration.fromISO("P7D");
 }
 
 /**
@@ -14219,7 +14235,7 @@ model OneLakeDatastore extends DatastoreProperties {
    * OneLake endpoint to use for the datastore.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  endpoint?: string;
+  endpoint?: string | null;
 
   /**
    * [Required] OneLake workspace name.
@@ -14233,7 +14249,7 @@ model OneLakeDatastore extends DatastoreProperties {
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
+  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity = ServiceDataAccessAuthIdentity.None;
 
   /**
    * [Required] Storage type backing the datastore.
@@ -15820,3 +15836,7 @@ model ManagedNetworkListResult
   is Azure.Core.Page<ManagedNetworkSettingsPropertiesBasicResource>;
 
 model OutboundRuleListResult is Azure.Core.Page<OutboundRuleBasicResource>;
+
+@@visibility(ListAmlUserFeatureResult.value, Lifecycle.Read);
+@@visibility(ListUsagesResult.value, Lifecycle.Read);
+@@visibility(ListWorkspaceQuotas.value, Lifecycle.Read);

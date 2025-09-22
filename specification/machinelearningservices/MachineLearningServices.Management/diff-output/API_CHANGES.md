@@ -827,7 +827,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturesetVersionProperties__added` | added | `{"type":"object","properties":{"entities":{"type":"array","items":{"type":"string"}},"materializatio...` |
+| `definitions.FeaturesetVersionProperties__added` | added | `{"type":"object","properties":{"entities":{"type":"array","x-nullable":true,"items":{"type":"string"...` |
 
 ### Changes for `FeaturestoreEntityContainerProperties`
 
@@ -839,7 +839,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturestoreEntityVersionProperties__added` | added | `{"type":"object","properties":{"indexColumns":{"type":"array","items":{"$ref":"#/definitions/IndexCo...` |
+| `definitions.FeaturestoreEntityVersionProperties__added` | added | `{"type":"object","properties":{"indexColumns":{"type":"array","x-nullable":true,"items":{"$ref":"#/d...` |
 
 ### Changes for `InferenceEndpointProperties`
 
@@ -869,13 +869,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBaseProperties__added` | added | `{"type":"object","properties":{"componentId":{"type":"string","x-ms-mutability":["create","read"]},"...` |
+| `definitions.JobBaseProperties__added` | added | `{"type":"object","properties":{"componentId":{"type":"string","x-nullable":true,"x-ms-mutability":["...` |
 
 ### Changes for `MarketplaceSubscriptionProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MarketplaceSubscriptionProperties__added` | added | `{"type":"object","properties":{"marketplacePlan":{"$ref":"#/definitions/MarketplacePlan","readOnly":...` |
+| `definitions.MarketplaceSubscriptionProperties__added` | added | `{"type":"object","properties":{"marketplacePlan":{"$ref":"#/definitions/MarketplacePlan","x-nullable...` |
 
 ### Changes for `ModelContainerProperties`
 
@@ -887,13 +887,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelVersionProperties__added` | added | `{"type":"object","properties":{"flavors":{"type":"object","additionalProperties":{"$ref":"#/definiti...` |
+| `definitions.ModelVersionProperties__added` | added | `{"type":"object","properties":{"flavors":{"type":"object","x-nullable":true,"additionalProperties":{...` |
 
 ### Changes for `OnlineDeploymentProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeploymentProperties__added` | added | `{"type":"object","properties":{"appInsightsEnabled":{"type":"boolean"},"dataCollector":{"$ref":"#/de...` |
+| `definitions.OnlineDeploymentProperties__added` | added | `{"type":"object","properties":{"appInsightsEnabled":{"type":"boolean","default":false},"dataCollecto...` |
 
 ### Changes for `OnlineEndpointProperties`
 
@@ -1020,6 +1020,17 @@
 |------|------------|-------|
 | `definitions.AccountApiKeys.properties.key1.format__added` | added | `password` |
 | `definitions.AccountApiKeys.properties.key2.format__added` | added | `password` |
+| `definitions.KubernetesProperties.properties.relayConnectionString.format__added` | added | `password` |
+| `definitions.KubernetesProperties.properties.serviceBusConnectionString.format__added` | added | `password` |
+| `definitions.ListNotebookKeysResult.properties.primaryAccessKey.format__added` | added | `password` |
+| `definitions.ListNotebookKeysResult.properties.secondaryAccessKey.format__added` | added | `password` |
+| `definitions.ListStorageAccountKeysResult.properties.userStorageKey.format__added` | added | `password` |
+| `definitions.ListWorkspaceKeysResult.properties.appInsightsInstrumentationKey.format__added` | added | `password` |
+| `definitions.ListWorkspaceKeysResult.properties.userStorageKey.format__added` | added | `password` |
+| `definitions.ManagedIdentity.properties.clientId.format__deleted` | deleted | `uuid` |
+| `definitions.ManagedIdentity.properties.objectId.format__deleted` | deleted | `uuid` |
+| `definitions.NotebookAccessTokenResult.properties.accessToken.format__added` | added | `password` |
+| `definitions.NotebookAccessTokenResult.properties.refreshToken.format__added` | added | `password` |
 
 ### Changes for `x-ms-secret`
 
@@ -1029,15 +1040,6 @@
 | `definitions.CertificateDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.EndpointKeys.properties.keys['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.EndpointPropertiesBase.properties.keys['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.KubernetesProperties.properties.relayConnectionString['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.KubernetesProperties.properties.serviceBusConnectionString['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.ListNotebookKeysResult.properties.primaryAccessKey['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.ListNotebookKeysResult.properties.secondaryAccessKey['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.ListStorageAccountKeysResult.properties.userStorageKey['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.ListWorkspaceKeysResult.properties.appInsightsInstrumentationKey['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.ListWorkspaceKeysResult.properties.userStorageKey['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.NotebookAccessTokenResult.properties.accessToken['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.NotebookAccessTokenResult.properties.refreshToken['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.Password.properties.name['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.Password.properties.value['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.SASCredentialDto.properties.sasUri['x-ms-secret__deleted']` | deleted | `true` |
@@ -1123,29 +1125,8 @@
 | `definitions.CommandJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.DistillationJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.FineTuningJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.Forecasting.properties.primaryMetric.default__deleted` | deleted | `NormalizedRootMeanSquaredError` |
-| `definitions.ForecastingSettings.properties.featureLags.default__deleted` | deleted | `None` |
 | `definitions.ForecastingSettings.properties.forecastHorizon.default__deleted` | deleted | `{"Mode": "Custom", "Value": 1}` |
 | `definitions.ForecastingSettings.properties.seasonality.default__deleted` | deleted | `{"Mode": "Auto"}` |
-| `definitions.ForecastingSettings.properties.shortSeriesHandlingConfig.default__deleted` | deleted | `Auto` |
-| `definitions.ForecastingSettings.properties.targetAggregateFunction.default__deleted` | deleted | `None` |
-| `definitions.ForecastingSettings.properties.useStl.default__deleted` | deleted | `None` |
-| `definitions.GroupStatus.properties.endpointCount.default__deleted` | deleted | `0` |
-| `definitions.GroupStatus.properties.requestedCapacity.default__deleted` | deleted | `0` |
-| `definitions.ImageClassification.properties.primaryMetric.default__deleted` | deleted | `Accuracy` |
-| `definitions.ImageClassificationMultilabel.properties.primaryMetric.default__deleted` | deleted | `IOU` |
-| `definitions.ImageInstanceSegmentation.properties.primaryMetric.default__deleted` | deleted | `MeanAveragePrecision` |
-| `definitions.ImageLimitSettings.properties.timeout.default__deleted` | deleted | `P7D` |
-| `definitions.ImageModelSettings.properties.learningRateScheduler.default__deleted` | deleted | `None` |
-| `definitions.ImageModelSettings.properties.optimizer.default__deleted` | deleted | `None` |
-| `definitions.ImageModelSettingsObjectDetection.properties.modelSize.default__deleted` | deleted | `None` |
-| `definitions.ImageModelSettingsObjectDetection.properties.validationMetricType.default__deleted` | deleted | `None` |
-| `definitions.ImageObjectDetection.properties.primaryMetric.default__deleted` | deleted | `MeanAveragePrecision` |
-| `definitions.IndexColumn.properties.dataType.default__deleted` | deleted | `String` |
-| `definitions.ManagedNetworkSettings.properties.enableNetworkMonitor.default__deleted` | deleted | `false` |
-| `definitions.MaterializationSettings.properties.storeType.default__deleted` | deleted | `None` |
-| `definitions.NlpVerticalLimitSettings.properties.timeout.default__deleted` | deleted | `P7D` |
-| `definitions.OneLakeDatastore.properties.serviceDataAccessAuthIdentity.default__deleted` | deleted | `None` |
 | `definitions.OnlineRequestSettings.properties.maxQueueWait.default__deleted` | deleted | `PT0.5S` |
 | `definitions.OnlineRequestSettings.properties.requestTimeout.default__deleted` | deleted | `PT5S` |
 | `definitions.PendingUploadRequestDto.properties.pendingUploadType.default__deleted` | deleted | `TemporaryBlobReference` |
@@ -1498,9 +1479,9 @@
 | `definitions.Classification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
 | `definitions.Forecasting.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
 | `definitions.Regression.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
-| `definitions.TextClassification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings"}` |
-| `definitions.TextClassificationMultilabel.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings"}` |
-| `definitions.TextNer.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings"}` |
+| `definitions.TextClassification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","x-nullable":true}` |
+| `definitions.TextClassificationMultilabel.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","x-nullable":true}` |
+| `definitions.TextNer.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","x-nullable":true}` |
 
 ### Changes for `limitSettings`
 
@@ -1513,9 +1494,9 @@
 | `definitions.ImageInstanceSegmentation.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
 | `definitions.ImageObjectDetection.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
 | `definitions.Regression.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","x-nullable":true}` |
-| `definitions.TextClassification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings"}` |
-| `definitions.TextClassificationMultilabel.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings"}` |
-| `definitions.TextNer.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings"}` |
+| `definitions.TextClassification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","x-nullable":true}` |
+| `definitions.TextClassificationMultilabel.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","x-nullable":true}` |
+| `definitions.TextNer.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","x-nullable":true}` |
 
 ### Changes for `nCrossValidations`
 
@@ -1547,14 +1528,14 @@
 |------|------------|-------|
 | `definitions.Classification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
 | `definitions.Forecasting.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.ImageClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.ImageClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.ImageInstanceSegmentation.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.ImageObjectDetection.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
+| `definitions.ImageClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.ImageClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.ImageInstanceSegmentation.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.ImageObjectDetection.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
 | `definitions.Regression.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.TextClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.TextClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.TextNer.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
+| `definitions.TextClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.TextClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.TextNer.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
 
 ### Changes for `validationDataSize`
 
@@ -1562,10 +1543,10 @@
 |------|------------|-------|
 | `definitions.Classification.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
 | `definitions.Forecasting.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.ImageClassification.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
-| `definitions.ImageClassificationMultilabel.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
-| `definitions.ImageInstanceSegmentation.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
-| `definitions.ImageObjectDetection.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
+| `definitions.ImageClassification.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
+| `definitions.ImageClassificationMultilabel.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
+| `definitions.ImageInstanceSegmentation.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
+| `definitions.ImageObjectDetection.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
 | `definitions.Regression.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
 
 ### Changes for `weightColumnName`
@@ -1594,9 +1575,6 @@
 |------|------------|-------|
 | `definitions.ComputeInstanceConnectivityEndpoints.readOnly__deleted` | deleted | `true` |
 | `definitions.ComputeInstanceCreatedBy.readOnly__deleted` | deleted | `true` |
-| `definitions.ListAmlUserFeatureResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ListUsagesResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ListWorkspaceQuotas.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.ServerlessEndpointInferenceEndpoint.properties.uri.readOnly__added` | added | `true` |
 | `definitions.ServerlessInferenceEndpoint.properties.uri.readOnly__added` | added | `true` |
 | `definitions.UpdateWorkspaceQuotas.properties.status.readOnly__deleted` | deleted | `false` |
@@ -1624,211 +1602,9 @@
 | `definitions.ComputeInstanceProperties.properties.enableSSO['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceProperties.properties.releaseQuotaOnStop['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeaturesetSpecification.properties.path['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeaturesetVersionBackfillRequest.properties.featureWindow['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeaturesetVersionBackfillRequest.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeaturesetVersionBackfillRequest.properties.sparkConfiguration.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeaturesetVersionBackfillRequest.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeaturesetVersionBackfillResponse.properties.jobIds['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeatureWindow.properties.featureWindowEnd['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeatureWindow.properties.featureWindowStart['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FeaturizationSettings.properties.datasetLanguage['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FinetuningDetails.properties.hyperParameters.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FinetuningDetails.properties.hyperParameters['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FineTuningJob.properties.outputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FineTuningJob.properties.queueSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FineTuningVertical.properties.validationData['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FlavorData.properties.data.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.FlavorData.properties.data['x-nullable__deleted']` | deleted | `true` |
 | `definitions.Forecasting.properties.forecastingSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Forecasting.properties.trainingSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingSettings.properties.countryOrRegionForHolidays['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingSettings.properties.cvStepSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingSettings.properties.frequency['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingSettings.properties.targetLags['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingSettings.properties.targetRollingWindowSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingSettings.properties.timeColumnName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingSettings.properties.timeSeriesIdColumnNames['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingTrainingSettings.properties.allowedTrainingAlgorithms['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ForecastingTrainingSettings.properties.blockedTrainingAlgorithms['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GetBlobReferenceForConsumptionDto.properties.blobUri['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GetBlobReferenceForConsumptionDto.properties.credential['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GetBlobReferenceForConsumptionDto.properties.storageAccountArmId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GetBlobReferenceSASRequestDto.properties.assetId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GetBlobReferenceSASRequestDto.properties.blobUri['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GetBlobReferenceSASResponseDto.properties.blobReferenceForConsumption['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GroupEnvironmentConfiguration.properties.environmentId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GroupEnvironmentConfiguration.properties.environmentVariables['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GroupEnvironmentConfiguration.properties.livenessProbe['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GroupEnvironmentConfiguration.properties.readinessProbe['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GroupEnvironmentConfiguration.properties.startupProbe['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GroupModelConfiguration.properties.modelId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.GroupStatus.properties.actualCapacityInfo['x-nullable__deleted']` | deleted | `true` |
 | `definitions.HDInsightProperties.properties.administratorAccount['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageDetails.properties.image['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageDetails.properties.vulnerabilityFindings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageInfo.properties.digest['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageInfo.properties.hostname['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageInfo.properties.repository['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageInfo.properties.tag['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.amsGradient['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.augmentations['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.beta1['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.beta2['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.distributed['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.earlyStopping['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.earlyStoppingDelay['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.earlyStoppingPatience['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.enableOnnxNormalization['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.evaluationFrequency['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.gradientAccumulationStep['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.layersToFreeze['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.learningRate['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.learningRateScheduler['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.modelName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.momentum['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.nesterov['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.numberOfEpochs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.numberOfWorkers['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.optimizer['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.randomSeed['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.stepLRGamma['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.stepLRStepSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.trainingBatchSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.validationBatchSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.warmupCosineLRCycles['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.warmupCosineLRWarmupEpochs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettings.properties.weightDecay['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsClassification.properties.trainingCropSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsClassification.properties.validationCropSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsClassification.properties.validationResizeSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsClassification.properties.weightedLoss['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.boxDetectionsPerImage['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.boxScoreThreshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.imageSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.maxSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.minSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.modelSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.multiScale['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.nmsIouThreshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tileGridSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tileOverlapRatio['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tilePredictionsNmsThreshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.validationIouThreshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.validationMetricType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.advancedSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.amsGradient['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.augmentations['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.beta1['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.beta2['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.checkpointFrequency['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.checkpointModel['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.checkpointRunId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.distributed['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.earlyStopping['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.earlyStoppingDelay['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.earlyStoppingPatience['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.enableOnnxNormalization['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.evaluationFrequency['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.gradientAccumulationStep['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.layersToFreeze['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.learningRate['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.modelName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.momentum['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.nesterov['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.numberOfEpochs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.numberOfWorkers['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.randomSeed['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.stepLRGamma['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.stepLRStepSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.trainingBatchSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.validationBatchSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.warmupCosineLRCycles['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.warmupCosineLRWarmupEpochs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettings.properties.weightDecay['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsClassification.properties.trainingCropSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsClassification.properties.validationCropSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsClassification.properties.validationResizeSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsClassification.properties.weightedLoss['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.boxDetectionsPerImage['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.boxScoreThreshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.imageSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.maxSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.minSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.multiScale['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.nmsIouThreshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.tileGridSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.tileOverlapRatio['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.tilePredictionsNmsThreshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageModelSettingsObjectDetection.properties.validationIouThreshold['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ImageSweepSettings.properties.earlyTermination['x-nullable__deleted']` | deleted | `true` |
-| `definitions.IndexColumn.properties.columnName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.InferenceContainerProperties.properties.startupRoute['x-nullable__deleted']` | deleted | `true` |
-| `definitions.InstanceTypeSchema.properties.nodeSelector.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.InstanceTypeSchema.properties.nodeSelector['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobInput.properties.description['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobLimits.properties.timeout['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobOutput.properties.description['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobResourceConfiguration.properties.dockerArgs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobResourceConfiguration.properties.dockerArgsList['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobService.properties.endpoint['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobService.properties.errorMessage['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobService.properties.jobServiceType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobService.properties.nodes['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobService.properties.port['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobService.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobService.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.JobService.properties.status['x-nullable__deleted']` | deleted | `true` |
-| `definitions.KubernetesOnlineDeployment.properties.containerResourceRequirements['x-nullable__deleted']` | deleted | `true` |
-| `definitions.KubernetesProperties.properties.extensionPrincipalId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.KubernetesProperties.properties.relayConnectionString['x-nullable__deleted']` | deleted | `true` |
-| `definitions.KubernetesProperties.properties.serviceBusConnectionString['x-nullable__deleted']` | deleted | `true` |
-| `definitions.LabelGeneration.properties.trainingData['x-nullable__deleted']` | deleted | `true` |
-| `definitions.LabelGeneration.properties.validationData['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedComputeIdentity.properties.identity['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedIdentity.properties.clientId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedIdentity.properties.objectId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedIdentity.properties.resourceId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedIdentityCredential.properties.managedIdentityType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedIdentityCredential.properties.userManagedIdentityClientId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedIdentityCredential.properties.userManagedIdentityPrincipalId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedIdentityCredential.properties.userManagedIdentityResourceId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedIdentityCredential.properties.userManagedIdentityTenantId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedNetworkSettings.properties.firewallPublicIpAddress['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedNetworkSettings.properties.outboundRules['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ManagedResourceGroupAssignedIdentities.properties.principalId['x-nullable__deleted']` | deleted | `false` |
-| `definitions.ManagedResourceGroupSettings.properties.assignedIdentities['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MarketplacePlan.properties.offerId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MarketplacePlan.properties.planId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MarketplacePlan.properties.publisherId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MaterializationComputeResource.properties.instanceType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MaterializationSettings.properties.notification['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MaterializationSettings.properties.resource['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MaterializationSettings.properties.schedule['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MaterializationSettings.properties.sparkConfiguration.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MaterializationSettings.properties.sparkConfiguration['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MLTableData.properties.referencedUris['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ModelSettings.properties.modelId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitorDefinition.properties.alertNotificationSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitorDefinition.properties.monitoringTarget['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitorDefinition.properties.signals.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitorEmailNotificationSettings.properties.emails['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringInputDataBase.properties.columns.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringInputDataBase.properties.columns['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringInputDataBase.properties.dataContext['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringSignalBase.properties.notificationTypes['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringSignalBase.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringSignalBase.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringTarget.properties.deploymentId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringTarget.properties.modelId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitoringThreshold.properties.value['x-nullable__deleted']` | deleted | `true` |
-| `definitions.MonitorNotificationSettings.properties.emailNotificationSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Mpi.properties.processCountPerInstance['x-nullable__deleted']` | deleted | `true` |
-| `definitions.NotificationSetting.properties.emailOn['x-nullable__deleted']` | deleted | `true` |
-| `definitions.NotificationSetting.properties.emails['x-nullable__deleted']` | deleted | `true` |
-| `definitions.NotificationSetting.properties.webhooks.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.NotificationSetting.properties.webhooks['x-nullable__deleted']` | deleted | `true` |
-| `definitions.OneLakeDatastore.properties.endpoint['x-nullable__deleted']` | deleted | `true` |
 | `definitions.OsPatchingStatus.properties.osPatchingErrors['x-nullable__deleted']` | deleted | `true` |
 | `definitions.OutputPathAssetReference.properties.jobId['x-nullable__deleted']` | deleted | `true` |
 | `definitions.OutputPathAssetReference.properties.path['x-nullable__deleted']` | deleted | `true` |
@@ -2139,66 +1915,33 @@
 |------|------------|-------|
 | `definitions.FeaturestoreEntityVersion.properties.indexColumns__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/IndexColumn"}}` |
 
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Image.properties.type.title__deleted` | deleted | `Type of the image` |
-| `definitions.NodeStateCounts.properties.idleNodeCount.title__deleted` | deleted | `Idle node count.` |
-| `definitions.NodeStateCounts.properties.leavingNodeCount.title__deleted` | deleted | `Leaving node count.` |
-| `definitions.NodeStateCounts.properties.preemptedNodeCount.title__deleted` | deleted | `Preempted node count.` |
-| `definitions.NodeStateCounts.properties.preparingNodeCount.title__deleted` | deleted | `Preparing node count.` |
-| `definitions.NodeStateCounts.properties.runningNodeCount.title__deleted` | deleted | `Running node count.` |
-| `definitions.NodeStateCounts.properties.unusableNodeCount.title__deleted` | deleted | `Unusable node count.` |
-| `definitions.PersonalComputeInstanceSettings.properties.assignedUser.title__deleted` | deleted | `Assigned User.` |
-| `definitions.QuotaBaseProperties.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
-| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
-| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
-| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
-| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
-| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
-| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
-| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
-| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
-| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
-| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
-| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
-| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
-| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
-| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
-| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
-| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
-
 ### Changes for `modelSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ImageClassification.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsClassification"}` |
-| `definitions.ImageClassificationMultilabel.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsClassification"}` |
-| `definitions.ImageInstanceSegmentation.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsObjectDetection"}` |
-| `definitions.ImageObjectDetection.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsObjectDetection"}` |
+| `definitions.ImageClassification.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsClassification","x-nullable":true}` |
+| `definitions.ImageClassificationMultilabel.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsClassification","x-nullable":true}` |
+| `definitions.ImageInstanceSegmentation.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsObjectDetection","x-nullable":true}` |
+| `definitions.ImageObjectDetection.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsObjectDetection","x-nullable":true}` |
 | `definitions.ServerlessEndpoint.properties.modelSettings__deleted` | deleted | `{"$ref":"#/definitions/ModelSettings","x-nullable":true}` |
 
 ### Changes for `searchSpace`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ImageClassification.properties.searchSpace__added` | added | `{"type":"array","items":{"$ref":"#/definitions/ImageModelDistributionSettingsClassification"}}` |
-| `definitions.ImageClassificationMultilabel.properties.searchSpace__added` | added | `{"type":"array","items":{"$ref":"#/definitions/ImageModelDistributionSettingsClassification"}}` |
-| `definitions.ImageInstanceSegmentation.properties.searchSpace__added` | added | `{"type":"array","items":{"$ref":"#/definitions/ImageModelDistributionSettingsObjectDetection"}}` |
-| `definitions.ImageObjectDetection.properties.searchSpace__added` | added | `{"type":"array","items":{"$ref":"#/definitions/ImageModelDistributionSettingsObjectDetection"}}` |
+| `definitions.ImageClassification.properties.searchSpace__added` | added | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/ImageModelDistributionSettingsClass...` |
+| `definitions.ImageClassificationMultilabel.properties.searchSpace__added` | added | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/ImageModelDistributionSettingsClass...` |
+| `definitions.ImageInstanceSegmentation.properties.searchSpace__added` | added | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/ImageModelDistributionSettingsObjec...` |
+| `definitions.ImageObjectDetection.properties.searchSpace__added` | added | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/ImageModelDistributionSettingsObjec...` |
 
 ### Changes for `sweepSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ImageClassification.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings"}` |
-| `definitions.ImageClassificationMultilabel.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings"}` |
-| `definitions.ImageInstanceSegmentation.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings"}` |
-| `definitions.ImageObjectDetection.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings"}` |
+| `definitions.ImageClassification.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","x-nullable":true}` |
+| `definitions.ImageClassificationMultilabel.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","x-nullable":true}` |
+| `definitions.ImageInstanceSegmentation.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","x-nullable":true}` |
+| `definitions.ImageObjectDetection.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","x-nullable":true}` |
 
 ### Changes for `authMode`
 
@@ -2457,6 +2200,32 @@
 |------|------------|-------|
 | `definitions.OnlineEndpoint.properties.traffic__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"format":"int32","type":"integer"}}` |
 
+### Changes for `title`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PersonalComputeInstanceSettings.properties.assignedUser.title__deleted` | deleted | `Assigned User.` |
+| `definitions.QuotaBaseProperties.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
+| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
+| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
+| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
+| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
+| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
+| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
+| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
+| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
+| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
+| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
+| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
+| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
+| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
+| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
+| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
+| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
+
 ### Changes for `nextLink`
 
 | Path | Change Type | Value |
@@ -2613,6 +2382,7 @@
 | `definitions.FeaturestoreEntityVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/FeaturestoreEntityVersionResource` | `#/definitions/FeaturestoreEntityVersion` |
 | `definitions.FineTuningJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.Image.additionalProperties` | `true` | `{}` |
+| `definitions.Image.properties.type.title` | `Type of the image` | `Type of the Image` |
 | `definitions.InferenceEndpoint.allOf[0].$ref` | `#/definitions/PropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
 | `definitions.InferenceEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/InferenceEndpointTrackedResource` | `#/definitions/InferenceEndpoint` |
 | `definitions.InferenceGroup.allOf[0].$ref` | `#/definitions/PropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
