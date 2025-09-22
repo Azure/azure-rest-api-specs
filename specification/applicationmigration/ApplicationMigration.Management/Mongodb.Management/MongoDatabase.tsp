@@ -41,10 +41,7 @@ interface MongoDatabases {
    * Patch the MongoDatabases resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    MongoDatabase,
-    MongoDatabaseResourcePatchProperties
-  >;
+  update is ArmCustomPatchSync<MongoDatabase, MongoDatabaseResourcePatch>;
 
   /**
    * Deletes the MongoDatabases resource.

@@ -44,10 +44,7 @@ interface MongoCollections {
    * Patch the MongoCollection resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    MongoCollection,
-    MongoCollectionResourcePatchProperties
-  >;
+  update is ArmCustomPatchSync<MongoCollection, MongoCollectionResourcePatch>;
 
   /**
    * Deletes the MongoCollection resource.
