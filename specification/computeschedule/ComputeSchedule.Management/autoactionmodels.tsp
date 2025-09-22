@@ -168,6 +168,7 @@ union Language {
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The information about notifications to be send to about upcoming operations.")
 model NotificationProperties {
+  @secret
   @doc("Where the notification should be sent. For email, it should follow email format.")
   destination: string;
 
