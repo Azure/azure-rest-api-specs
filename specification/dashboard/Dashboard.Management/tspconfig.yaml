@@ -15,7 +15,7 @@ options:
     clear-output-folder: true
     model-namespace: true
     namespace: "Azure.ResourceManager.Grafana"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/sdk/grafana/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dashboard"
     namespace: "azure.mgmt.dashboard"
@@ -38,7 +38,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dashboard"
     emitter-output-dir: "{output-dir}/{service-dir}/armdashboard"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdashboard"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdashboard/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
