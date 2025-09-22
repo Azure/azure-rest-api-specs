@@ -4,55 +4,59 @@
   "parameters": {
     "X-ClientTraceId": "ndbkaatzsnoetqkiehappoza",
     "api-version": "2025-05-01-preview",
-    "body": [
-      {
-        "text": "This is a test.",
-        "script": "Latn",
-        "language": "en",
-        "textType": "Plain",
-        "targets": [
+    "body": {
+      "inputs": [
+        {
+          "text": "This is a test.",
+          "script": "Latn",
+          "language": "en",
+          "textType": "Plain",
+          "targets": [
+            {
+              "language": "cs",
+              "script": "Latn",
+              "profanityAction": "NoAction",
+              "profanityMarker": "Asterisk",
+              "deploymentName": "gpt-4o-mini",
+              "allowFallback": true,
+              "grade": "basic",
+              "tone": "formal",
+              "gender": "neutral",
+              "adaptiveDatasetId": "21000",
+              "referenceTextPairs": [
+                {
+                  "source": "Please test this out.",
+                  "target": "Vyzkoušejte si to."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "values": [
           {
-            "language": "cs",
-            "script": "Latn",
-            "profanityAction": "NoAction",
-            "profanityMarker": "Asterisk",
-            "deploymentName": "gpt-4o-mini",
-            "allowFallback": true,
-            "grade": "basic",
-            "tone": "formal",
-            "gender": "neutral",
-            "adaptiveDatasetId": "21000",
-            "referenceTextPairs": [
+            "detectedLanguage": {
+              "language": "en",
+              "score": 1.0
+            },
+            "translations": [
               {
-                "source": "Please test this out.",
-                "target": "Vyzkoušejte si to."
+                "language": "cs",
+                "instructionTokens": 302,
+                "sourceTokens": 5,
+                "responseTokens": 9,
+                "targetTokens": 5,
+                "text": "Toto je test."
               }
             ]
           }
         ]
       }
-    ]
-  },
-  "responses": {
-    "200": {
-      "body": [
-        {
-          "detectedLanguage": {
-            "language": "en",
-            "score": 1.0
-          },
-          "translations": [
-            {
-              "language": "cs",
-              "instructionTokens": 302,
-              "sourceTokens": 5,
-              "responseTokens": 9,
-              "targetTokens": 5,
-              "text": "Toto je test."
-            }
-          ]
-        }
-      ]
     }
   }
 }

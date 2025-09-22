@@ -3,34 +3,38 @@
   "operationId": "Translate",
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "body": [
-      {
-        "text": "This is a test.",
-        "targets": [
-          {
-            "language": "cs"
-          }
-        ]
-      }
-    ]
-  },
-  "responses": {
-    "200": {
-      "body": [
+    "body": {
+      "inputs": [
         {
-          "detectedLanguage": {
-            "language": "en",
-            "score": 0.12345
-          },
-          "translations": [
+          "text": "This is a test.",
+          "targets": [
             {
-              "language": "cs",
-              "sourceCharacters": 15,
-              "text": "Tohle je test."
+              "language": "cs"
             }
           ]
         }
       ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "values": [
+          {
+            "detectedLanguage": {
+              "language": "en",
+              "score": 0.12345
+            },
+            "translations": [
+              {
+                "language": "cs",
+                "sourceCharacters": 15,
+                "text": "Tohle je test."
+              }
+            ]
+          }
+        ]
+      }
     }
   }
 }
