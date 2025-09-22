@@ -478,8 +478,8 @@ op deleteSchedule is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-#suppress "LroExtension" "This operation returns 202"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans")
+@extension("x-ms-long-running-operation", true)
 @post
 op createScan is Azure.Core.Foundations.Operation<
   {
@@ -510,8 +510,8 @@ op createScan is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-#suppress "LroExtension" "This operation returns 202"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/cancel")
+@extension("x-ms-long-running-operation", true)
 @post
 op cancelScan is Azure.Core.Foundations.Operation<
   {
@@ -599,6 +599,7 @@ op getRunStatus is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/runs/{runId}/cancel")
+@extension("x-ms-long-running-operation", true)
 @post
 op cancelScanByRunId is Azure.Core.Foundations.Operation<
   {
@@ -660,8 +661,8 @@ op getRunsForAsset is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-#suppress "LroExtension" "This operation returns 202"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations")
+@extension("x-ms-long-running-operation", true)
 @post
 op observe is Azure.Core.Foundations.Operation<
   {
