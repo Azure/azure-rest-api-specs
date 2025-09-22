@@ -23,54 +23,6 @@ model AppServiceEnvironmentResource
   >;
 }
 
-@armResourceOperations
-interface AppServiceEnvironmentOpsTemporary
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** Name of the app. */
-        @path
-        @segment("hostingEnvironments")
-        @key
-        hostingEnvironmentName: string,
-      },
-      {
-        /** Name of the app. */
-        @path
-        @segment("recommendations")
-        @key
-        recommendations: string,
-      }
-    > {}
-
-@armResourceOperations
-interface AppServiceEnvironmentOps2Temporary
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** Name of the app. */
-        @path
-        @segment("hostingEnvironments")
-        @key
-        hostingEnvironmentName: string,
-      },
-      {
-        /** Name of the app. */
-        @path
-        @segment("recommendationHistory")
-        @key
-        recommendationHistory: string,
-      }
-    > {}
-
 alias DiagnosticsParameters = {
   ...ResourceInstanceParameters<AppServiceEnvironmentResource>;
 
@@ -386,11 +338,18 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "name",
+    "hostingEnvironmentName"
+  )
   @get
+  @action("recommendationHistory")
   @list
-  listHistoryForHostingEnvironment is AppServiceEnvironmentOps2Temporary.List<
+  listHistoryForHostingEnvironment is ArmResourceActionSync<
     AppServiceEnvironmentResource,
-    Response = ArmResponse<RecommendationCollection>,
+    void,
+    ArmResponse<RecommendationCollection>,
     Parameters = {
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
@@ -404,17 +363,24 @@ interface AppServiceEnvironmentResources {
       @query("$filter")
       $filter?: string;
     },
-    OverrideErrorType = DefaultErrorResponse
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Description for Get all recommendations for a hosting environment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "name",
+    "hostingEnvironmentName"
+  )
   @get
+  @action("recommendations")
   @list
-  listRecommendedRulesForHostingEnvironment is AppServiceEnvironmentOpsTemporary.List<
+  listRecommendedRulesForHostingEnvironment is ArmResourceActionSync<
     AppServiceEnvironmentResource,
-    Response = ArmResponse<RecommendationCollection>,
+    void,
+    ArmResponse<RecommendationCollection>,
     Parameters = {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
@@ -428,9 +394,8 @@ interface AppServiceEnvironmentResources {
       @query("$filter")
       $filter?: string;
     },
-    OverrideErrorType = DefaultErrorResponse
+    Error = DefaultErrorResponse
   >;
-
   /**
    * Description for Disable all recommendations for an app.
    */

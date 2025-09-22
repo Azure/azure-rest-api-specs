@@ -3544,6 +3544,7 @@ model FunctionsRuntime {
   /**
    * Function app runtime version. Example: 8 (for dotnet-isolated)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   version?: string | null;
 }
 

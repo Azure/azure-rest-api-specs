@@ -35,54 +35,6 @@ model Site is Azure.ResourceManager.TrackedResource<SiteProperties> {
 }
 
 @armResourceOperations
-interface SiteOpsTemporary
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** Name of the app. */
-        @path
-        @segment("sites")
-        @key
-        siteName: string,
-      },
-      {
-        /** Name of the app. */
-        @path
-        @segment("recommendationHistory")
-        @key
-        recommendationHistory: string,
-      }
-    > {}
-
-@armResourceOperations
-interface SiteOps2Temporary
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** Name of the app. */
-        @path
-        @segment("sites")
-        @key
-        siteName: string,
-      },
-      {
-        /** Name of the app. */
-        @path
-        @segment("recommendations")
-        @key
-        recommendations: string,
-      }
-    > {}
-
-@armResourceOperations
 interface SiteOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -268,10 +220,15 @@ interface Sites {
   /**
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
   @get
-  listHistoryForWebApp is SiteOpsTemporary.List<
+  @list
+  @action("recommendationHistory")
+  listHistoryForWebApp is SiteOps.ActionSync<
     Site,
-    Response = ArmResponse<RecommendationCollection>,
+    void,
+    ArmResponse<RecommendationCollection>,
     Parameters = {
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
@@ -291,10 +248,15 @@ interface Sites {
   /**
    * Description for Get all recommendations for an app.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
   @get
-  listRecommendedRulesForWebApp is SiteOps2Temporary.List<
+  @list
+  @action("recommendations")
+  listRecommendedRulesForWebApp is SiteOps.ActionSync<
     Site,
-    Response = ArmResponse<RecommendationCollection>,
+    void,
+    ArmResponse<RecommendationCollection>,
     Parameters = {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
