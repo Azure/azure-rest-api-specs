@@ -127,13 +127,7 @@ interface FileShares {
       `x-ms-snapshot`?: string;
     },
     Error = CloudError,
-    Response = ArmResponse<LeaseShareResponse> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<LeaseShareResponse> & ETagHeader,
     OptionalRequestBody = true
   >;
 }

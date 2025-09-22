@@ -86,13 +86,7 @@ interface ImmutabilityPolicies {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = ArmResponse<ImmutabilityPolicy> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<ImmutabilityPolicy> & ETagHeader,
     Error = ErrorResponse
   >;
 
@@ -110,13 +104,7 @@ interface ImmutabilityPolicies {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ImmutabilityPolicy> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResourceUpdatedResponse<ImmutabilityPolicy> & ETagHeader,
     OverrideErrorType = ErrorResponse,
     OptionalRequestBody = true
   >;
@@ -135,13 +123,7 @@ interface ImmutabilityPolicies {
       @header("If-Match")
       `If-Match`: string;
     },
-    Response = ArmResponse<ImmutabilityPolicy> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<ImmutabilityPolicy> & ETagHeader,
     Error = ErrorResponse
   >;
 
@@ -160,13 +142,7 @@ interface ImmutabilityPolicies {
       @header("If-Match")
       `If-Match`: string;
     },
-    Response = ArmResponse<ImmutabilityPolicy> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<ImmutabilityPolicy> & ETagHeader,
     Error = ErrorResponse
   >;
 
@@ -185,13 +161,7 @@ interface ImmutabilityPolicies {
       @header("If-Match")
       `If-Match`: string;
     },
-    Response = ArmResponse<ImmutabilityPolicy> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<ImmutabilityPolicy> & ETagHeader,
     Error = ErrorResponse,
     OptionalRequestBody = true
   >;

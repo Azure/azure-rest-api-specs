@@ -5970,3 +5970,12 @@ model StorageTaskReportInstance
    */
   properties?: StorageTaskReportProperties;
 }
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Just for reference, not part of API"
+alias ETagHeader = {
+  /**
+   * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+   */
+  @header("ETag")
+  eTag: string;
+};
