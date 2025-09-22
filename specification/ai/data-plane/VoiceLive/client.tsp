@@ -3,9 +3,6 @@ import "./servers/websocket.tsp";
 
 using Azure.ClientGenerator.Core;
 
-//@@access(VoiceLive.force_models, Access.internal, "python");
-//@@access(VoiceLive.force_models, Access.internal, "csharp");
-
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.public, "python");
@@ -145,3 +142,13 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.AzureSemanticDetection.timeout, "TimeoutMs", "csharp");
 @@clientName(VoiceLive.AzureSemanticDetectionEn.timeout, "TimeoutMs", "csharp");
 @@clientName(VoiceLive.AzureSemanticDetectionMultilingual.timeout, "TimeoutMs", "csharp");
+@@clientName(VoiceLive.ServerVad, "ServerVadTurnDetection", "csharp");
+@@clientName(VoiceLive.AzureSemanticVad, "AzureSemanticVadTurnDetection", "csharp");
+@@clientName(VoiceLive.AzureSemanticVadEn, "AzureSemanticVadEnTurnDetection", "csharp");
+@@clientName(VoiceLive.AzureSemanticVadMultilingual, "AzureSemanticVadMultilingualTurnDetection", "csharp");
+@@clientName(VoiceLive.AzureSemanticDetection, "AzureSemanticEouDetection", "csharp");
+@@clientName(VoiceLive.AzureSemanticDetectionEn, "AzureSemanticEnEouDetection", "csharp");
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual, "AzureSemanticMultilingualEouDetection", "csharp");
+
+@@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
+
