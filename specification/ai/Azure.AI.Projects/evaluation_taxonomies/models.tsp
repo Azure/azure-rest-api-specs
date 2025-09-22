@@ -30,8 +30,8 @@ model EvaluationTaxonomy {
 union EvaluationTaxonomyInputType {
   string,
 
-  @doc("Agent tool.")
-  agentTool: "agentTool",
+  @doc("Agent")
+  agent: "agent",
 
   @doc("Policy.")
   policy: "policy",
@@ -58,13 +58,13 @@ model EvaluationTaxonomyInput {
 }
 
 @added(Versions.v2025_10_15_preview)
-@doc("Input configuration for the evaluation taxonomy when the input type is agent tool.")
-model AgentToolInput extends EvaluationTaxonomyInput {
+@doc("Input configuration for the evaluation taxonomy when the input type is agent.")
+model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
-  type: EvaluationTaxonomyInputType.agentTool;
+  type: EvaluationTaxonomyInputType.agent;
 
   @doc("Tool description.")
-  tool: ToolDescription[];
+  tools: ToolDescription[];
 }
 
 @added(Versions.v2025_10_15_preview)

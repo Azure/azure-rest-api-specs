@@ -4,20 +4,63 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias EvaluationTaxonomiesOperations = Azure.Core.ResourceOperations<ServiceTraits>;
-alias ListEvaluationTaxonomiesParameters = {};
+alias EvaluationTaxonomiesServiceTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests;
+
+alias EvaluationTaxonomiesOperations = Azure.Core.ResourceOperations<EvaluationTaxonomiesServiceTraits>;
+
+alias EvaluationTaxonomiesFilterQueryParamsTraits = {
+  @query("inputName")
+  @doc("Filter by the evaluation input name.")
+  inputName?: string;
+
+  @query("inputType")
+  @doc("Filter by taxonomy input type.")
+  inputType?: string;
+};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_10_15_preview)
 interface EvaluationTaxonomies
-  extends VersionedOperations<
-      EvaluationTaxonomy,
-      InputParameters<EvaluationTaxonomy, "evaluationTaxonomy">,
-      ListEvaluationTaxonomiesParameters,
-      ListEvaluationTaxonomiesParameters
-    > {
-      }
+{
+  @doc("Get an evaluation run by name.")
+  get is EvaluationTaxonomiesOperations.ResourceRead<EvaluationTaxonomy>;
+
+  @doc("List evaluation taxonomies")
+  list is EvaluationTaxonomiesOperations.ResourceList<
+    EvaluationTaxonomy,
+    ListQueryParametersTrait<EvaluationTaxonomiesFilterQueryParamsTraits>
+  >;
+
+  @doc("Delete an evaluation taxonomy by name.")
+  delete is EvaluationTaxonomiesOperations.ResourceDelete<EvaluationTaxonomy>;
+
+  @doc("Create an evaluation taxonomy.")
+  @post
+  create is Azure.Core.Foundations.Operation<
+    {
+      @doc("The evaluation taxonomy.")
+      @body
+      body: EvaluationTaxonomy;
+    },
+    ResourceCreatedResponse<EvaluationTaxonomy>
+  >;
+
+  @doc("Update an evaluation taxonomy.")
+  @patch(#{ implicitOptionality: true })
+  update is Azure.Core.Foundations.Operation<
+    {
+      @doc("The evaluation taxonomy.")
+      @body
+      body: EvaluationTaxonomy;
+    },
+    OkResponse<EvaluationTaxonomy>
+  >;
+}

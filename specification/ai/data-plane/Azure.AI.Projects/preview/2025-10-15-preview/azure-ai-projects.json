@@ -52,6 +52,97 @@
   },
   "tags": [],
   "paths": {
+    "/": {
+      "post": {
+        "operationId": "EvaluationTaxonomies_Create",
+        "description": "Create an evaluation taxonomy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The evaluation taxonomy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationTaxonomy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationTaxonomy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationTaxonomies_Create_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_Create_MaximumSet_Gen.json"
+          },
+          "EvaluationTaxonomies_Create_MinimumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EvaluationTaxonomies_Update",
+        "description": "Update an evaluation taxonomy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The evaluation taxonomy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationTaxonomyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationTaxonomy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationTaxonomies_Update_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_Update_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/connections": {
       "get": {
         "operationId": "Connections_List",
@@ -170,6 +261,12 @@
         "x-ms-examples": {
           "Connections_List_MaximumSet": {
             "$ref": "./examples/Connections_List_MaximumSet_Gen.json"
+          },
+          "Connections_List_MaximumSet_Gen": {
+            "$ref": "./examples/Connections_List_MaximumSet_Gen.json"
+          },
+          "Connections_List_MinimumSet_Gen": {
+            "$ref": "./examples/Connections_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -226,6 +323,12 @@
         "x-ms-examples": {
           "Connections_Get_MaximumSet": {
             "$ref": "./examples/Connections_Get_MaximumSet_Gen.json"
+          },
+          "Connections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Connections_Get_MaximumSet_Gen.json"
+          },
+          "Connections_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Connections_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -279,6 +382,12 @@
         "x-ms-examples": {
           "Connections_GetWithCredentials_MaximumSet": {
             "$ref": "./examples/Connections_GetWithCredentials_MaximumSet_Gen.json"
+          },
+          "Connections_GetWithCredentials_MaximumSet_Gen": {
+            "$ref": "./examples/Connections_GetWithCredentials_MaximumSet_Gen.json"
+          },
+          "Connections_GetWithCredentials_MinimumSet_Gen": {
+            "$ref": "./examples/Connections_GetWithCredentials_MinimumSet_Gen.json"
           }
         }
       }
@@ -317,6 +426,12 @@
             "$ref": "./examples/Datasets_ListLatest_MaximumSet_Gen.json"
           },
           "Datasets_ListLatest_MinimumSet": {
+            "$ref": "./examples/Datasets_ListLatest_MinimumSet_Gen.json"
+          },
+          "Datasets_ListLatest_MaximumSet_Gen": {
+            "$ref": "./examples/Datasets_ListLatest_MaximumSet_Gen.json"
+          },
+          "Datasets_ListLatest_MinimumSet_Gen": {
             "$ref": "./examples/Datasets_ListLatest_MinimumSet_Gen.json"
           }
         },
@@ -366,6 +481,12 @@
             "$ref": "./examples/Datasets_ListVersions_MaximumSet_Gen.json"
           },
           "Datasets_ListVersions_MinimumSet": {
+            "$ref": "./examples/Datasets_ListVersions_MinimumSet_Gen.json"
+          },
+          "Datasets_ListVersions_MaximumSet_Gen": {
+            "$ref": "./examples/Datasets_ListVersions_MaximumSet_Gen.json"
+          },
+          "Datasets_ListVersions_MinimumSet_Gen": {
             "$ref": "./examples/Datasets_ListVersions_MinimumSet_Gen.json"
           }
         },
@@ -422,6 +543,12 @@
             "$ref": "./examples/Datasets_GetVersion_MaximumSet_Gen.json"
           },
           "Datasets_GetVersion_MinimumSet": {
+            "$ref": "./examples/Datasets_GetVersion_MinimumSet_Gen.json"
+          },
+          "Datasets_GetVersion_MaximumSet_Gen": {
+            "$ref": "./examples/Datasets_GetVersion_MaximumSet_Gen.json"
+          },
+          "Datasets_GetVersion_MinimumSet_Gen": {
             "$ref": "./examples/Datasets_GetVersion_MinimumSet_Gen.json"
           }
         }
@@ -492,6 +619,12 @@
           },
           "Datasets_CreateOrUpdateVersion_MinimumSet": {
             "$ref": "./examples/Datasets_CreateOrUpdateVersion_MinimumSet_Gen.json"
+          },
+          "Datasets_CreateOrUpdateVersion_MaximumSet_Gen": {
+            "$ref": "./examples/Datasets_CreateOrUpdateVersion_MaximumSet_Gen.json"
+          },
+          "Datasets_CreateOrUpdateVersion_MinimumSet_Gen": {
+            "$ref": "./examples/Datasets_CreateOrUpdateVersion_MinimumSet_Gen.json"
           }
         }
       },
@@ -539,6 +672,12 @@
             "$ref": "./examples/Datasets_DeleteVersion_MaximumSet_Gen.json"
           },
           "Datasets_DeleteVersion_MinimumSet": {
+            "$ref": "./examples/Datasets_DeleteVersion_MinimumSet_Gen.json"
+          },
+          "Datasets_DeleteVersion_MaximumSet_Gen": {
+            "$ref": "./examples/Datasets_DeleteVersion_MaximumSet_Gen.json"
+          },
+          "Datasets_DeleteVersion_MinimumSet_Gen": {
             "$ref": "./examples/Datasets_DeleteVersion_MinimumSet_Gen.json"
           }
         }
@@ -592,6 +731,12 @@
             "$ref": "./examples/Datasets_GetCredentials_MaximumSet_Gen.json"
           },
           "Datasets_GetCredentials_MinimumSet": {
+            "$ref": "./examples/Datasets_GetCredentials_MinimumSet_Gen.json"
+          },
+          "Datasets_GetCredentials_MaximumSet_Gen": {
+            "$ref": "./examples/Datasets_GetCredentials_MaximumSet_Gen.json"
+          },
+          "Datasets_GetCredentials_MinimumSet_Gen": {
             "$ref": "./examples/Datasets_GetCredentials_MinimumSet_Gen.json"
           }
         }
@@ -654,6 +799,12 @@
             "$ref": "./examples/Datasets_StartPendingUploadVersion_MaximumSet_Gen.json"
           },
           "Datasets_StartPendingUploadVersion_MinimumSet": {
+            "$ref": "./examples/Datasets_StartPendingUploadVersion_MinimumSet_Gen.json"
+          },
+          "Datasets_StartPendingUploadVersion_MaximumSet_Gen": {
+            "$ref": "./examples/Datasets_StartPendingUploadVersion_MaximumSet_Gen.json"
+          },
+          "Datasets_StartPendingUploadVersion_MinimumSet_Gen": {
             "$ref": "./examples/Datasets_StartPendingUploadVersion_MinimumSet_Gen.json"
           }
         }
@@ -736,6 +887,12 @@
         "x-ms-examples": {
           "Deployments_List_MaximumSet": {
             "$ref": "./examples/Deployments_List_MaximumSet_Gen.json"
+          },
+          "Deployments_List_MaximumSet_Gen": {
+            "$ref": "./examples/Deployments_List_MaximumSet_Gen.json"
+          },
+          "Deployments_List_MinimumSet_Gen": {
+            "$ref": "./examples/Deployments_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -792,17 +949,40 @@
         "x-ms-examples": {
           "Deployments_Get_MaximumSet": {
             "$ref": "./examples/Deployments_Get_MaximumSet_Gen.json"
+          },
+          "Deployments_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Deployments_Get_MaximumSet_Gen.json"
+          },
+          "Deployments_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Deployments_Get_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/evaluation_taxonomies": {
       "get": {
-        "operationId": "EvaluationTaxonomies_ListLatest",
-        "description": "List the latest version of each EvaluationTaxonomy",
+        "operationId": "EvaluationTaxonomies_List",
+        "description": "List evaluation taxonomies",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "inputName",
+            "in": "query",
+            "description": "Filter by the evaluation input name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inputType",
+            "in": "query",
+            "description": "Filter by taxonomy input type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -810,6 +990,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedEvaluationTaxonomy"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -823,25 +1010,25 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "EvaluationTaxonomies_ListLatest_MaximumSet_Gen - generated by [MaximumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_ListLatest_MaximumSet_Gen.json"
-          },
-          "EvaluationTaxonomies_ListLatest_MaximumSet_Gen - generated by [MinimumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_ListLatest_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EvaluationTaxonomies_List_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_List_MaximumSet_Gen.json"
+          },
+          "EvaluationTaxonomies_List_MinimumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_List_MinimumSet_Gen.json"
+          }
         }
       }
     },
-    "/evaluation_taxonomies/{name}/versions": {
+    "/evaluation_taxonomies/{name}": {
       "get": {
-        "operationId": "EvaluationTaxonomies_ListVersions",
-        "description": "List all versions of the given EvaluationTaxonomy",
+        "operationId": "EvaluationTaxonomies_Get",
+        "description": "Get an evaluation run by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -852,13 +1039,23 @@
             "description": "The name of the resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedEvaluationTaxonomy"
+              "$ref": "#/definitions/EvaluationTaxonomy"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -875,142 +1072,17 @@
           }
         },
         "x-ms-examples": {
-          "EvaluationTaxonomies_ListVersions_MaximumSet_Gen - generated by [MaximumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_ListVersions_MaximumSet_Gen.json"
+          "EvaluationTaxonomies_Get_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_Get_MaximumSet_Gen.json"
           },
-          "EvaluationTaxonomies_ListVersions_MaximumSet_Gen - generated by [MinimumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_ListVersions_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/evaluation_taxonomies/{name}/versions/{version}": {
-      "get": {
-        "operationId": "EvaluationTaxonomies_GetVersion",
-        "description": "Get the specific version of the EvaluationTaxonomy. The service returns 404 Not Found error if the EvaluationTaxonomy does not exist.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The specific version id of the EvaluationTaxonomy to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationTaxonomy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EvaluationTaxonomies_GetVersion_MaximumSet_Gen - generated by [MaximumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_GetVersion_MaximumSet_Gen.json"
-          },
-          "EvaluationTaxonomies_GetVersion_MaximumSet_Gen - generated by [MinimumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_GetVersion_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "EvaluationTaxonomies_CreateOrUpdateVersion",
-        "description": "Create a new or update an existing EvaluationTaxonomy with the given version id",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The specific version id of the EvaluationTaxonomy to create or update.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "evaluationTaxonomy",
-            "in": "body",
-            "description": "The EvaluationTaxonomy to create or update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EvaluationTaxonomy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationTaxonomy"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationTaxonomy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EvaluationTaxonomies_CreateOrUpdateVersion_MaximumSet_Gen - generated by [MaximumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_CreateOrUpdateVersion_MaximumSet_Gen.json"
-          },
-          "EvaluationTaxonomies_CreateOrUpdateVersion_MaximumSet_Gen - generated by [MinimumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_CreateOrUpdateVersion_MinimumSet_Gen.json"
+          "EvaluationTaxonomies_Get_MinimumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_Get_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "EvaluationTaxonomies_DeleteVersion",
-        "description": "Delete the specific version of the EvaluationTaxonomy. The service returns 204 No Content if the EvaluationTaxonomy was deleted successfully or if the EvaluationTaxonomy does not exist.",
+        "operationId": "EvaluationTaxonomies_Delete",
+        "description": "Delete an evaluation taxonomy by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1023,16 +1095,19 @@
             "type": "string"
           },
           {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the EvaluationTaxonomy to delete.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1048,11 +1123,11 @@
           }
         },
         "x-ms-examples": {
-          "EvaluationTaxonomies_DeleteVersion_MaximumSet_Gen - generated by [MaximumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_DeleteVersion_MaximumSet_Gen.json"
+          "EvaluationTaxonomies_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_Delete_MaximumSet_Gen.json"
           },
-          "EvaluationTaxonomies_DeleteVersion_MaximumSet_Gen - generated by [MinimumSet] rule": {
-            "$ref": "./examples/EvaluationTaxonomies_DeleteVersion_MinimumSet_Gen.json"
+          "EvaluationTaxonomies_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/EvaluationTaxonomies_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -1099,6 +1174,12 @@
         "x-ms-examples": {
           "Evaluations_List_MaximumSet": {
             "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
+          },
+          "Evaluations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
+          },
+          "Evaluations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Evaluations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1155,6 +1236,12 @@
         "x-ms-examples": {
           "Evaluations_Get_MaximumSet": {
             "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
+          },
+          "Evaluations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
+          },
+          "Evaluations_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Evaluations_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -1203,6 +1290,12 @@
         "x-ms-examples": {
           "Evaluations_Delete_MaximumSet": {
             "$ref": "./examples/Evaluations_Delete_MaximumSet_Gen.json"
+          },
+          "Evaluations_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_Delete_MaximumSet_Gen.json"
+          },
+          "Evaluations_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Evaluations_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -1253,6 +1346,12 @@
         "x-ms-examples": {
           "Evaluations_Cancel_MaximumSet": {
             "$ref": "./examples/Evaluations_Cancel_MaximumSet_Gen.json"
+          },
+          "Evaluations_Cancel_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_Cancel_MaximumSet_Gen.json"
+          },
+          "Evaluations_Cancel_MinimumSet_Gen": {
+            "$ref": "./examples/Evaluations_Cancel_MinimumSet_Gen.json"
           }
         }
       }
@@ -1300,6 +1399,12 @@
             "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
           },
           "Evaluations_Create_MinimumSet": {
+            "$ref": "./examples/Evaluations_Create_MinimumSet_Gen.json"
+          },
+          "Evaluations_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
+          },
+          "Evaluations_Create_MinimumSet_Gen": {
             "$ref": "./examples/Evaluations_Create_MinimumSet_Gen.json"
           }
         }
@@ -1349,6 +1454,12 @@
           },
           "Evaluations_CreateAgentEvaluation_MinimumSet": {
             "$ref": "./examples/Evaluations_CreateAgentEvaluation_MinimumSet_Gen.json"
+          },
+          "Evaluations_CreateAgentEvaluation_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_CreateAgentEvaluation_MaximumSet_Gen.json"
+          },
+          "Evaluations_CreateAgentEvaluation_MinimumSet_Gen": {
+            "$ref": "./examples/Evaluations_CreateAgentEvaluation_MinimumSet_Gen.json"
           }
         }
       }
@@ -1387,6 +1498,12 @@
             "$ref": "./examples/Indexes_ListLatest_MaximumSet_Gen.json"
           },
           "Indexes_ListLatest_MinimumSet": {
+            "$ref": "./examples/Indexes_ListLatest_MinimumSet_Gen.json"
+          },
+          "Indexes_ListLatest_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_ListLatest_MaximumSet_Gen.json"
+          },
+          "Indexes_ListLatest_MinimumSet_Gen": {
             "$ref": "./examples/Indexes_ListLatest_MinimumSet_Gen.json"
           }
         },
@@ -1436,6 +1553,12 @@
             "$ref": "./examples/Indexes_ListVersions_MaximumSet_Gen.json"
           },
           "Indexes_ListVersions_MinimumSet": {
+            "$ref": "./examples/Indexes_ListVersions_MinimumSet_Gen.json"
+          },
+          "Indexes_ListVersions_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_ListVersions_MaximumSet_Gen.json"
+          },
+          "Indexes_ListVersions_MinimumSet_Gen": {
             "$ref": "./examples/Indexes_ListVersions_MinimumSet_Gen.json"
           }
         },
@@ -1492,6 +1615,12 @@
             "$ref": "./examples/Indexes_GetVersion_MaximumSet_Gen.json"
           },
           "Indexes_GetVersion_MinimumSet": {
+            "$ref": "./examples/Indexes_GetVersion_MinimumSet_Gen.json"
+          },
+          "Indexes_GetVersion_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_GetVersion_MaximumSet_Gen.json"
+          },
+          "Indexes_GetVersion_MinimumSet_Gen": {
             "$ref": "./examples/Indexes_GetVersion_MinimumSet_Gen.json"
           }
         }
@@ -1562,6 +1691,12 @@
           },
           "Indexes_CreateOrUpdateVersion_MinimumSet": {
             "$ref": "./examples/Indexes_CreateOrUpdateVersion_MinimumSet_Gen.json"
+          },
+          "Indexes_CreateOrUpdateVersion_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_CreateOrUpdateVersion_MaximumSet_Gen.json"
+          },
+          "Indexes_CreateOrUpdateVersion_MinimumSet_Gen": {
+            "$ref": "./examples/Indexes_CreateOrUpdateVersion_MinimumSet_Gen.json"
           }
         }
       },
@@ -1609,6 +1744,12 @@
             "$ref": "./examples/Indexes_DeleteVersion_MaximumSet_Gen.json"
           },
           "Indexes_DeleteVersion_MinimumSet": {
+            "$ref": "./examples/Indexes_DeleteVersion_MinimumSet_Gen.json"
+          },
+          "Indexes_DeleteVersion_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_DeleteVersion_MaximumSet_Gen.json"
+          },
+          "Indexes_DeleteVersion_MinimumSet_Gen": {
             "$ref": "./examples/Indexes_DeleteVersion_MinimumSet_Gen.json"
           }
         }
@@ -1711,6 +1852,9 @@
         "x-ms-examples": {
           "Insights_ListInsights": {
             "$ref": "./examples/Insights_ListInsights_MinimumSet_Gen.json"
+          },
+          "Insights_ListInsights_MaximumSet_Gen": {
+            "$ref": "./examples/Insights_ListInsights_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1774,6 +1918,9 @@
         "x-ms-examples": {
           "Insights_GenerateInsights": {
             "$ref": "./examples/Insights_GenerateInsights_MinimumSet_Gen.json"
+          },
+          "Insights_GenerateInsights_MaximumSet_Gen": {
+            "$ref": "./examples/Insights_GenerateInsights_MaximumSet_Gen.json"
           }
         }
       }
@@ -1834,6 +1981,9 @@
         "x-ms-examples": {
           "Insights_GetInsight": {
             "$ref": "./examples/Insights_GetInsight_MinimumSet_Gen.json"
+          },
+          "Insights_GetInsight_MaximumSet_Gen": {
+            "$ref": "./examples/Insights_GetInsight_MaximumSet_Gen.json"
           }
         }
       }
@@ -1880,6 +2030,12 @@
         "x-ms-examples": {
           "RedTeams_List_MaximumSet": {
             "$ref": "./examples/RedTeams_List_MaximumSet_Gen.json"
+          },
+          "RedTeams_List_MaximumSet_Gen": {
+            "$ref": "./examples/RedTeams_List_MaximumSet_Gen.json"
+          },
+          "RedTeams_List_MinimumSet_Gen": {
+            "$ref": "./examples/RedTeams_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1936,6 +2092,12 @@
         "x-ms-examples": {
           "RedTeams_Get_MaximumSet": {
             "$ref": "./examples/RedTeams_Get_MaximumSet_Gen.json"
+          },
+          "RedTeams_Get_MaximumSet_Gen": {
+            "$ref": "./examples/RedTeams_Get_MaximumSet_Gen.json"
+          },
+          "RedTeams_Get_MinimumSet_Gen": {
+            "$ref": "./examples/RedTeams_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -1983,6 +2145,12 @@
             "$ref": "./examples/RedTeams_Create_MaximumSet_Gen.json"
           },
           "RedTeams_Create_MinimumSet": {
+            "$ref": "./examples/RedTeams_Create_MinimumSet_Gen.json"
+          },
+          "RedTeams_Create_MaximumSet_Gen": {
+            "$ref": "./examples/RedTeams_Create_MaximumSet_Gen.json"
+          },
+          "RedTeams_Create_MinimumSet_Gen": {
             "$ref": "./examples/RedTeams_Create_MinimumSet_Gen.json"
           }
         }
@@ -2190,11 +2358,11 @@
         "maxRequestRate"
       ]
     },
-    "AgentToolInput": {
+    "AgentTaxonomyInput": {
       "type": "object",
-      "description": "Input configuration for the evaluation taxonomy when the input type is agent tool.",
+      "description": "Input configuration for the evaluation taxonomy when the input type is agent.",
       "properties": {
-        "tool": {
+        "tools": {
           "type": "array",
           "description": "Tool description.",
           "items": {
@@ -2203,14 +2371,33 @@
         }
       },
       "required": [
-        "tool"
+        "tools"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/EvaluationTaxonomyInput"
         }
       ],
-      "x-ms-discriminator-value": "agentTool"
+      "x-ms-discriminator-value": "agent"
+    },
+    "AgentTaxonomyInputUpdate": {
+      "type": "object",
+      "description": "Input configuration for the evaluation taxonomy when the input type is agent.",
+      "properties": {
+        "tools": {
+          "type": "array",
+          "description": "Tool description.",
+          "items": {
+            "$ref": "#/definitions/ToolDescription"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTaxonomyInputUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "agent"
     },
     "ApiKeyCredentials": {
       "type": "object",
@@ -3373,7 +3560,7 @@
       "type": "string",
       "description": "Type of the evaluation taxonomy input.",
       "enum": [
-        "agentTool",
+        "agent",
         "policy"
       ],
       "x-ms-enum": {
@@ -3381,9 +3568,9 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "agentTool",
-            "value": "agentTool",
-            "description": "Agent tool."
+            "name": "agent",
+            "value": "agent",
+            "description": "Agent"
           },
           {
             "name": "policy",
@@ -3391,6 +3578,72 @@
             "description": "Policy."
           }
         ]
+      }
+    },
+    "EvaluationTaxonomyInputUpdate": {
+      "type": "object",
+      "description": "Input configuration for the evaluation taxonomy.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluationTaxonomyInputType",
+          "description": "Input type of the evaluation taxonomy."
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the evaluation taxonomy input."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the evaluation taxonomy input."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the evaluation taxonomy input."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation taxonomy input."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluationTaxonomyUpdate": {
+      "type": "object",
+      "description": "Evaluation Taxonomy Definition",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "input": {
+          "$ref": "#/definitions/EvaluationTaxonomyInputUpdate",
+          "description": "Input configuration for the evaluation taxonomy."
+        },
+        "taxonomyCategories": {
+          "type": "array",
+          "description": "List of taxonomy categories.",
+          "items": {
+            "$ref": "#/definitions/TaxonomyCategory"
+          }
+        }
       }
     },
     "EvaluatorConfiguration": {
