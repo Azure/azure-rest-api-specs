@@ -18,13 +18,13 @@
       "description": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
       "domain": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
       "source": {
-        "type": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-        "assetId": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-        "assetType": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-        "fqn": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-        "accountName": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-        "lastRefreshedAt": "2025-06-16T21:01:48.225Z",
-        "lastRefreshedBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba"
+        "type": "DataMap",
+        "assetId": "7e74f902-62f5-49f4-8258-92ed2b8537ba",
+        "assetType": "adls_gen2_path",
+        "fqn": "https://test.dfs.core.windows.net/prip3/adf/moviesDB.csv",
+        "accountName": "test",
+        "lastRefreshedAt": "1970-01-01T00:00:00Z",
+        "lastRefreshedBy": "766bf2b9-5d8a-4fb1-b8d5-d30a53e22a9e"
       },
       "contacts": {
         "key5536": [
@@ -50,7 +50,14 @@
         }
       ],
       "dataQualityScore": 1,
-      "openInUrl": "http://example.com/dataproduct"
+      "openInUrl": "http://example.com/dataproduct",
+      "typeProperties": {
+        "format": "Table",
+        "serverEndpoint": "myserver.database.windows.net",
+        "databaseName": "db",
+        "schemaName": "dbo",
+        "tableName": "table"
+      }
     }
   },
   "responses": {
@@ -126,13 +133,13 @@
           }
         ],
         "lineage": [],
-        "typeProperties": [
-          "Table",
-          "myserver.database.windows.net",
-          "db",
-          "dbo",
-          "mytable"
-        ]
+        "typeProperties": {
+          "format": "Table",
+          "serverEndpoint": "myserver.database.windows.net",
+          "databaseName": "db",
+          "schemaName": "dbo",
+          "tableName": "table"
+        }
       }
     }
   }

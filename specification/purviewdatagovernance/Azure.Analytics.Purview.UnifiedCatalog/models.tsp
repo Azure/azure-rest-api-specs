@@ -455,7 +455,7 @@ model DataAsset {
   schema?: CatalogModelDataAssetSchema[];
 
   @doc("Lineage information associated with the asset.")
-  lineage?: string[];
+  lineage?: Record<string[]>;
 
   @doc("Data quality score for the data asset.")
   dataQualityScore?: float64;
@@ -464,7 +464,7 @@ model DataAsset {
   openInUrl?: url;
 
   @doc("Type properties of the asset.")
-  typeProperties?: string[];
+  typeProperties?: Record<string[]>;
 }
 
 @doc("DataAssetQueryRequest.")

@@ -2012,7 +2012,7 @@
             "name": "entityType",
             "in": "query",
             "description": "Required entity category to list relationships for.",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2159,7 +2159,7 @@
             "name": "entityType",
             "in": "query",
             "description": "Category of the entity to relate to (required).",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2909,7 +2909,7 @@
             "name": "entityType",
             "in": "query",
             "description": "Category of the entity to relate to (required).",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -3062,7 +3062,7 @@
             "name": "entityType",
             "in": "query",
             "description": "Category of the related entity (required).",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -3161,7 +3161,7 @@
             "name": "entityId",
             "in": "query",
             "description": "Identifier of the related entity (required).",
-            "required": false,
+            "required": true,
             "type": "string",
             "format": "uuid"
           }
@@ -6076,10 +6076,13 @@
           }
         },
         "lineage": {
-          "type": "array",
+          "type": "object",
           "description": "Lineage information associated with the asset.",
-          "items": {
-            "type": "string"
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "dataQualityScore": {
@@ -6093,10 +6096,13 @@
           "description": "A redirection link.."
         },
         "typeProperties": {
-          "type": "array",
+          "type": "object",
           "description": "Type properties of the asset.",
-          "items": {
-            "type": "string"
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         }
       },

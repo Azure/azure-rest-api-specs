@@ -342,7 +342,7 @@ op ListDataAssetRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
   ListQueryParametersTrait<{
     @doc("Required entity category to list relationships for.")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
   }>
 >;
 
@@ -356,7 +356,7 @@ op CreateDataAssetRelationshipAsync is RpcOperation<
   DataAssetIdParameter & {
     @doc("Category of the entity to relate to (required).")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
 
     @doc("Relationship payload as JSON (required).")
     @bodyRoot
@@ -507,7 +507,7 @@ op CreateDataProductRelationshipAsync is RpcOperation<
   DataProductIdParameter & {
     @doc("Category of the entity to relate to (required).")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
 
     @doc("Relationship payload as JSON.")
     @bodyRoot
@@ -526,11 +526,11 @@ op DeleteDataProductRelationshipAsync is RpcOperation<
   DataProductIdParameter & {
     @doc("Category of the related entity (required).")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
 
     @doc("Identifier of the related entity (required).")
     @query
-    entityId?: uuid;
+    entityId: uuid;
   },
   DeleteResponse
 >;
