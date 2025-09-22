@@ -50,7 +50,7 @@ interface QueueServices {
   /**
    * List all queue services for the storage account
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     QueueServiceProperties,
     Response = ArmResponse<ListQueueServices>,
     Error = CloudError

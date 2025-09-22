@@ -58,7 +58,7 @@ interface FileServices {
   /**
    * List all file services in storage accounts
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     FileServiceProperties,
     Response = ArmResponse<FileServiceItems>,
     Error = CloudError

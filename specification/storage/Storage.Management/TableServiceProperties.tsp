@@ -50,7 +50,7 @@ interface TableServices {
   /**
    * List all table services for the storage account.
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     TableServiceProperties,
     Response = ArmResponse<ListTableServices>,
     Error = CloudError
