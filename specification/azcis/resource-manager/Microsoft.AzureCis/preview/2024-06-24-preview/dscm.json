@@ -2085,8 +2085,15 @@
           "description": "Service account group service tree id. Optional."
         },
         "isRegionalEnforced": {
-          "$ref": "#/definitions/IsRegionalEnforced",
-          "description": "Flag to indicate if the claim is regional enforced or not. Optional."
+          "type": "string",
+          "description": "Flag to indicate if the claim is regional enforced or not. Optional.",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -2697,7 +2704,7 @@
         },
         "enforceServiceClientIdentityIds": {
           "type": "array",
-          "description": "List of member SCI ids to enforce group properties on. Each ServiceClientIdentityId element should contain a valid guid. Optional.",
+          "description": "It is used only during update request. List of member SCI ids to enforce group properties on. Each element should be a valid GUID. Optional.",
           "items": {
             "type": "string"
           }
@@ -3205,7 +3212,7 @@
         },
         "enforceServiceClientIdentityIds": {
           "type": "array",
-          "description": "List of member SCI ids to enforce group properties on. Each ServiceClientIdentityId element should contain a valid guid. Optional.",
+          "description": "It is used only during update request. List of member SCI ids to enforce group properties on. Each element should be a valid GUID. Optional.",
           "items": {
             "type": "string"
           }
@@ -3269,30 +3276,6 @@
         "fromIpAddress",
         "toIpAddress"
       ]
-    },
-    "IsRegionalEnforced": {
-      "type": "string",
-      "description": "IsRegionalEnforced enum.",
-      "enum": [
-        "False",
-        "True"
-      ],
-      "x-ms-enum": {
-        "name": "IsRegionalEnforced",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "False",
-            "value": "False",
-            "description": "False value"
-          },
-          {
-            "name": "True",
-            "value": "True",
-            "description": "True value"
-          }
-        ]
-      }
     },
     "JitAccessLevel": {
       "type": "object",

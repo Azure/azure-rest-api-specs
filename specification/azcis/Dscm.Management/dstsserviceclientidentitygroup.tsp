@@ -42,17 +42,5 @@ model ClaimExpansion {
   serviceAccountGroupServiceTreeId?: string;
 
   @doc("Flag to indicate if the claim is regional enforced or not. Optional.")
-  isRegionalEnforced?: IsRegionalEnforced;
-}
-
-@added(Versions.v2024_06_24_preview)
-@doc("IsRegionalEnforced enum.")
-union IsRegionalEnforced {
-  string,
-
-  @doc("False value")
-  False: "False",
-
-  @doc("True value")
-  True: "True",
+  isRegionalEnforced?: string | "False" | "True";
 }

@@ -45,7 +45,7 @@ model DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties {
   @doc("List of dSTS instances for the service client identity group. A list contains specific dSTS instances to create identities on. Optional.")
   dstsInstances?: Array<string>;
 
-  @doc("List of member SCI ids to enforce group properties on. Each ServiceClientIdentityId element should contain a valid guid. Optional.")
+  @doc("It is used only during update request. List of member SCI ids to enforce group properties on. Each element should be a valid GUID. Optional.")
   enforceServiceClientIdentityIds?: Array<string>;
 
   @doc("The Azure location.")
