@@ -1,0 +1,160 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./BatchAccount.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Batch;
+/**
+ * Contains information about a pool.
+ */
+@parentResource(BatchAccount)
+model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
+  ...ResourceNameParameter<
+    Resource = Pool,
+    KeyName = "poolName",
+    SegmentName = "pools",
+    NamePattern = "^[a-zA-Z0-9_-]+$"
+  >;
+
+  /**
+   * The type of identity used for the Batch Pool.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: BatchPoolIdentity;
+}
+
+@armResourceOperations
+interface Pools {
+  /**
+   * Gets information about the specified pool.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Pool_Get")
+  get is ArmResourceRead<Pool>;
+
+  /**
+   * Creates a new pool inside the specified account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("Pool_Create")
+  create is ArmResourceCreateOrReplaceSync<
+    Pool,
+    Parameters = {
+      /**
+       * The entity state (ETag) version of the pool to update. A value of "*" can be used to apply the operation only if the pool already exists. If omitted, this operation will always be applied.
+       */
+      @header
+      `If-Match`?: string;
+
+      /**
+       * Set to '*' to allow a new pool to be created, but to prevent updating an existing pool. Other values will be ignored.
+       */
+      @header
+      `If-None-Match`?: string;
+    },
+    Response = ArmResourceUpdatedResponse<Pool>
+  >;
+
+  /**
+   * Updates the properties of an existing pool.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Pool_Update")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    Pool,
+    PatchModel = Pool,
+    Parameters = {
+      /**
+       * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
+       */
+      @header
+      `If-Match`?: string;
+    }
+  >;
+
+  /**
+   * Deletes the specified pool.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("Pool_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Pool,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists all of the pools in the specified account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Pool_ListByBatchAccount")
+  listByBatchAccount is ArmResourceListByParent<
+    Pool,
+    Parameters = {
+      /**
+       * The maximum number of items to return in the response.
+       */
+      @query("maxresults")
+      maxresults?: int32;
+
+      /**
+       * Comma separated list of properties that should be returned. e.g. "properties/provisioningState". Only top level properties under properties/ are valid for selection.
+       */
+      @query("$select")
+      $select?: string;
+
+      /**
+       * OData filter expression. Valid properties for filtering are:
+       *
+       *  name
+       *  properties/allocationState
+       *  properties/allocationStateTransitionTime
+       *  properties/creationTime
+       *  properties/provisioningState
+       *  properties/provisioningStateTransitionTime
+       *  properties/lastModified
+       *  properties/vmSize
+       *  properties/interNodeCommunication
+       *  properties/scaleSettings/autoScale
+       *  properties/scaleSettings/fixedScale
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Response = ArmResponse<ListPoolsResult>
+  >;
+
+  /**
+   * Disables automatic scaling for a pool.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Pool_DisableAutoScale")
+  disableAutoScale is ArmResourceActionSync<Pool, void, ArmResponse<Pool>>;
+
+  /**
+   * This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state. After stopping, the pool stabilizes at the number of nodes it was at when the stop operation was done. During the stop operation, the pool allocation state changes first to stopping and then to steady. A resize operation need not be an explicit resize pool request; this API can also be used to halt the initial sizing of the pool when it is created.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Pool_StopResize")
+  stopResize is ArmResourceActionSync<Pool, void, ArmResponse<Pool>>;
+}
+
+@@maxLength(Pool.name, 64);
+@@minLength(Pool.name, 1);
+@@doc(Pool.name, "The pool name. This must be unique within the account.");
+@@doc(Pool.properties, "The properties associated with the pool.");
+@@doc(Pools.create::parameters.resource,
+  "Additional parameters for pool creation."
+);
+@@doc(Pools.update::parameters.properties,
+  "Pool properties that should be updated. Properties that are supplied will be updated, any property not supplied will be unchanged."
+);
