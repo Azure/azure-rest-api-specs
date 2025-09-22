@@ -1597,10 +1597,15 @@
         "value": {
           "type": "string",
           "description": "Value"
+        },
+        "statuslro": {
+          "$ref": "#/definitions/LroStatus",
+          "description": "lro status"
         }
       },
       "required": [
-        "value"
+        "value",
+        "statuslro"
       ]
     },
     "JobHistoryEntity": {
@@ -1783,6 +1788,36 @@
           "type": "string",
           "description": "Additional details related to Purview."
         }
+      }
+    },
+    "LroStatus": {
+      "type": "string",
+      "description": "lro status",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "LroStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "In Progress status"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded status"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed status"
+          }
+        ]
       }
     },
     "Reference": {
@@ -1991,8 +2026,15 @@
         "scanType": {
           "type": "string",
           "description": "Scan Type"
+        },
+        "statuslro": {
+          "$ref": "#/definitions/LroStatus",
+          "description": "lro status"
         }
-      }
+      },
+      "required": [
+        "statuslro"
+      ]
     },
     "ScanScope": {
       "type": "object",
