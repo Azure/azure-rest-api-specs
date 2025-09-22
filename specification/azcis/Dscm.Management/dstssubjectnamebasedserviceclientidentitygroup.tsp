@@ -29,10 +29,6 @@ model DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties {
   @Azure.ResourceManager.identifiers(#[])
   listOfClaimProvisioningsForGroup?: Array<ClaimProvisioningsForGroup>;
 
-  @doc("List of common certificates for the service client identity group. Optional.")
-  @Azure.ResourceManager.identifiers(#[])
-  commonCertificates?: Array<CertificateInfo>;
-
   @doc("List of common authentication requirements for the service client identity group. Optional.")
   @Azure.ResourceManager.identifiers(#[])
   commonAuthenticationRequirements?: Array<AuthenticationRequirement>;
