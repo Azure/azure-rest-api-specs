@@ -145,12 +145,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Response for the translation API.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TranslatedTextItem"
-              }
+              "$ref": "#/definitions/TranslationResult"
             },
             "headers": {
               "X-RequestId": {
@@ -840,16 +837,16 @@
       "type": "object",
       "description": "Response for the translation API.",
       "properties": {
-        "result": {
+        "values": {
           "type": "array",
-          "description": "Array of the translated text elements.",
+          "description": "Array of the translated text elements in the response body.",
           "items": {
             "$ref": "#/definitions/TranslatedTextItem"
           }
         }
       },
       "required": [
-        "result"
+        "values"
       ]
     },
     "TranslationText": {

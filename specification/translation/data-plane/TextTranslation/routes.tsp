@@ -58,7 +58,7 @@ op getSupportedLanguages is CustomGetOperation<
 op translateV3 is CustomOperation<
   InputTextItem[],
   TranslateParameters,
-  TranslationResult,
+  TranslationResultV3,
   ErrorResponse
 >;
 

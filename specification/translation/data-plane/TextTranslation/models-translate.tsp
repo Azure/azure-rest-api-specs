@@ -252,12 +252,41 @@ model ReferenceSentencePair {
 }
 
 @doc("Response for the translation API.")
-model TranslationResult {
+@renamedFrom(APIVersion.v2025_05_01_preview, "TranslationResult")
+@removed(APIVersion.v2025_05_01_preview)
+model TranslationResultV3 {
   ...CommonResultHeaders;
 
   @bodyRoot
   @doc("Array of the translated text elements.")
   result: TranslatedTextItem[];
+
+  @header("x-mt-system")
+  @doc("""
+    Specifies the system type that was used for translation for each 'to' language requested for translation. 
+    The value is a comma-separated list of strings. Each string indicates a type:
+    
+    * Custom - Request includes a custom system and at least one custom system was used during translation.
+    * Team - All other requests
+    """)
+  mtSystem: string;
+
+  @header("x-metered-usage")
+  @doc("""
+    Specifies consumption (the number of characters for which the user will be charged) for the translation 
+    job request. For example, if the word "Hello" is translated from English (en) to French (fr), 
+    this field will return the value '5'.
+    """)
+  meteredUsage: int32;
+}
+
+@doc("Response for the translation API.")
+@added(APIVersion.v2025_05_01_preview)
+model TranslationResult {
+  ...CommonResultHeaders;
+
+  @doc("Array of the translated text elements in the response body.")
+  values: TranslatedTextItem[];
 
   @header("x-mt-system")
   @doc("""
