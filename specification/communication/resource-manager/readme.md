@@ -263,6 +263,7 @@ These settings apply only when `--tag=package-2020-08-20` is specified on the co
 ```yaml $(tag) == 'package-2020-08-20'
 input-file:
   - Microsoft.Communication/stable/2020-08-20/CommunicationService.json
+  - Microsoft.Communication/stable/2020-08-20/CommunicationService-private.json
 ```
 
 ### Tag: package-2020-08-20-private
