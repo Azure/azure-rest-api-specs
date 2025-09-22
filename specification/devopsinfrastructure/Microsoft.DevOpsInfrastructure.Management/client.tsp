@@ -86,6 +86,8 @@ using Microsoft.DevOpsInfrastructure;
   "csharp"
 );
 
+@@clientName(DeleteResourcesDetails, "DevOpsDeleteResourcesDetails", "csharp");
+
 @@clientName(ResourceStatus, "DevOpsResourceStatus", "csharp");
 
 @@clientName(ResourceSku, "DevOpsResourceSku", "csharp");
@@ -102,3 +104,6 @@ using Microsoft.DevOpsInfrastructure;
 
 /* Rename opeartions */
 @@clientName(SubscriptionUsages.usages, "GetUsages", "csharp");
+
+@@clientName(StorageAccountType.StandardSSDLRS, "StandardSSDLRS", "javascript");
+@@clientName(StorageAccountType.StandardSSDZRS, "StandardSSDZRS", "javascript");

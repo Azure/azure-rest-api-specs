@@ -23,8 +23,9 @@ options:
     flavor: "azure"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computerecommender"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-computerecommender"
-    namespace: "com.azure.resourcemanager.computerecommender"
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-recommender"
+    namespace: "com.azure.resourcemanager.compute.recommender"
     service-name: "Compute Recommender"
     flavor: azure
   "@azure-tools/typespec-ts":
@@ -35,9 +36,9 @@ options:
     package-details:
       name: "@azure/arm-computerecommender"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/computerecommender"
-    emitter-output-dir: "{output-dir}/{service-dir}/armcomputerecommender"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcomputerecommender"
+    service-dir: "sdk/resourcemanager/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrecommender"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecommender"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
