@@ -3544,7 +3544,7 @@ model FunctionsRuntime {
   /**
    * Function app runtime version. Example: 8 (for dotnet-isolated)
    */
-  version?: string;
+  version?: string | null;
 }
 
 /**
@@ -6222,6 +6222,7 @@ model LogAnalyticsConfiguration {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   sharedKey?: string;
 }
 

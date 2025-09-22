@@ -44800,7 +44800,8 @@
         },
         "version": {
           "type": "string",
-          "description": "Function app runtime version. Example: 8 (for dotnet-isolated)"
+          "description": "Function app runtime version. Example: 8 (for dotnet-isolated)",
+          "x-nullable": true
         }
       }
     },
@@ -46339,10 +46340,12 @@
         },
         "sharedKey": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
