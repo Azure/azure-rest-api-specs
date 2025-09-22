@@ -213,7 +213,7 @@ op CreateCriticalDataColumnRelationshipAsync is RpcOperation<
   CriticalDataColumnIdParameters & {
     @doc("The body associated with the critical data column")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
 
     @doc("CriticalDataColumnProperties")
     @bodyRoot
@@ -233,7 +233,7 @@ op ListCriticalDataColumnRelationshipsAsync is UnifiedCatalogOperations.Resource
   ListQueryParametersTrait<{
     @doc("The body associated with the critical data element output.")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
   }>
 >;
 
@@ -247,7 +247,7 @@ op DeleteCriticalDataColumnRelationshipAsync is RpcOperation<
   CriticalDataColumnIdParameters & {
     @doc("The body associated with the critical data column")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
 
     @doc("The unique identifier of the critical data column.")
     @query
@@ -375,11 +375,11 @@ op DeleteDataAssetRelationshipAsync is RpcOperation<
   DataAssetIdParameter & {
     @doc("Category of the related entity (required).")
     @query
-    entityType?: EntityCategory;
+    entityType: EntityCategory;
 
     @doc("Identifier of the related entity (required).")
     @query
-    entityId?: uuid;
+    entityId: uuid;
   },
   DeleteResponse
 >;

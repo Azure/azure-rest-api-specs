@@ -500,7 +500,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The body associated with the critical data element output.",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -647,7 +647,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The body associated with the critical data column",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -800,7 +800,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The body associated with the critical data column",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2312,7 +2312,7 @@
             "name": "entityType",
             "in": "query",
             "description": "Category of the related entity (required).",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2411,7 +2411,7 @@
             "name": "entityId",
             "in": "query",
             "description": "Identifier of the related entity (required).",
-            "required": false,
+            "required": true,
             "type": "string",
             "format": "uuid"
           }
@@ -5797,11 +5797,8 @@
       "description": "Properties for critical data column relationships.",
       "properties": {
         "systemData": {
-          "type": "array",
-          "description": "System metadata for the relationship.",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the relationship."
         },
         "description": {
           "type": "string",
@@ -5814,8 +5811,15 @@
         "assetId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique identifier of the associated asset."
+        },
+        "entityId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Name of the associated asset."
         }
-      }
+      },
+      "required": [
+        "entityId"
+      ]
     },
     "CriticalDataColumnRelationshipRequest": {
       "type": "object",
@@ -6099,10 +6103,7 @@
           "type": "object",
           "description": "Type properties of the asset.",
           "additionalProperties": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
+            "type": "string"
           }
         }
       },
