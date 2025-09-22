@@ -49,8 +49,8 @@ options:
       - "EncryptionPropertiesIdentity.resourceId"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/loadtesting"
-    package-dir: "armloadtesting"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armloadtesting"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armloadtesting"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true

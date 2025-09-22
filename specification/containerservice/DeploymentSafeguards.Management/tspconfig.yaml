@@ -34,8 +34,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerservice"
-    package-dir: "armdeploymentsafeguards"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdeploymentsafeguards"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdeploymentsafeguards"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
