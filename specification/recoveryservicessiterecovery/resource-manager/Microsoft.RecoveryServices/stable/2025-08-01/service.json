@@ -4625,7 +4625,12 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/ResourceName"
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -4635,21 +4640,24 @@
             "in": "path",
             "description": "The name of the fabric containing the protected item.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "The name of the container containing the protected item.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "replicatedProtectedItemName",
             "in": "path",
             "description": "The name of the protected item on which the agent is to be updated.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "updateMobilityServiceRequest",
@@ -4682,7 +4690,7 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Update the mobility service on a protected item.": {
+          "Reinstall the mobility service on a protected item.": {
             "$ref": "./examples/ReplicationProtectedItems_UpdateMobilityService.json"
           }
         }
@@ -9998,6 +10006,7 @@
           "type": "string"
         },
         "platformFaultDomain": {
+          "format": "int32",
           "description": "the platform fault domain.",
           "type": "integer"
         },
@@ -10950,11 +10959,11 @@
           "type": "string"
         },
         "isAgentUpgradeable": {
-          "description": "value indicating whether replication agent upgradeable.",
+          "description": "Value indicating whether replication agent upgradeable.",
           "type": "boolean"
         },
         "isAgentReinstallRequired": {
-          "description": "value indicating whether replication agent reinstallation is required.",
+          "description": "Value indicating whether replication agent reinstallation is required.",
           "type": "boolean"
         },
         "reasonsBlockingReInstall": {
@@ -10969,7 +10978,7 @@
           }
         },
         "isAgentUpgradeInProgress": {
-          "description": "value indicating whether replication agent Upgrade is In-Progress.",
+          "description": "Value indicating whether replication agent Upgrade is In-Progress.",
           "type": "boolean"
         },
         "autoAgentUpgradeRetryCount": {
@@ -10978,10 +10987,11 @@
           "type": "integer"
         },
         "isAgentUpgradeRetryThresholdExhausted": {
-          "description": "value indicating whether replication agent Upgrade retry exhaused.",
+          "description": "Value indicating whether replication agent Upgrade retry exhausted.",
           "type": "boolean"
         },
         "platformFaultDomain": {
+          "format": "int32",
           "description": "the platform fault domain.",
           "type": "integer"
         }
@@ -11464,6 +11474,7 @@
           "type": "string"
         },
         "platformFaultDomain": {
+          "format": "int32",
           "description": "the platform fault domain.",
           "type": "integer"
         },
@@ -11631,6 +11642,7 @@
           "type": "string"
         },
         "platformFaultDomain": {
+          "format": "int32",
           "description": "The platform fault domain.",
           "type": "integer"
         }    
@@ -19033,6 +19045,7 @@
               "MissingUpgradePath",
               "InvalidAgentVersion",
               "InvalidDriverVersion",
+              "ReInstallRequired",
               "Unknown"
             ],
             "type": "string",
