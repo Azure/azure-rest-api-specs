@@ -8,7 +8,9 @@ import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
+  TspConfigCsharpAzEmitterOutputDirSubRule,
   TspConfigCsharpAzNamespaceSubRule,
+  TspConfigCsharpMgmtEmitterOutputDirSubRule,
   TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoContainingModuleMatchPatternSubRule,
@@ -519,13 +521,22 @@ const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule()],
 );
 
-const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
+const pythonDpEmitterOutputTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   "",
   "emitter-output-dir",
   "azure-aaa-bbb-ccc",
   "azure-aa-b-c-d",
   [new TspConfigPythonDpEmitterOutputDirSubRule()],
+);
+
+const csharpAzEmitterOutputTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-csharp",
+  "",
+  "emitter-output-dir",
+  "Azure.AAA",
+  "AAA",
+  [new TspConfigCsharpAzEmitterOutputDirSubRule()],
 );
 
 const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
@@ -544,6 +555,15 @@ const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   true,
   false,
   [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
+);
+
+const csharpMgmtEmitterOutputTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-csharp",
+  managementTspconfigFolder,
+  "emitter-output-dir",
+  "Azure.ResourceManager.AAA",
+  "Azure.Management.AAA",
+  [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
 );
 
 const csharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
@@ -697,11 +717,12 @@ describe("tspconfig", function () {
     ...pythonManagementNamespaceTestCases,
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
-    ...pythonDpPackageDirTestCases,
+    ...pythonDpEmitterOutputTestCases,
     // csharp
-    ...csharpAzNamespaceTestCases,
+    ...csharpAzEmitterOutputTestCases,
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
+    ...csharpMgmtEmitterOutputTestCases,
     ...csharpMgmtNamespaceTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,
@@ -723,7 +744,7 @@ describe("tspconfig", function () {
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(c.folder);
-    strictEqual(result.success, true);
+    strictEqual(result.success, c.success);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
     if (!c.success)
@@ -773,7 +794,7 @@ describe("tspconfig", function () {
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(c.folder);
-    strictEqual(result.success, c.success);
+    strictEqual(result.success, true);
     strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation skipped."), true);
   });
 

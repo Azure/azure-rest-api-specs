@@ -165,15 +165,15 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
     const option = this.tryFindOption(config);
     if (option === undefined)
       return this.createFailedResult(
-        `Failed to find "options.${this.emitterName}.${this.keyToValidate}" with expected pattern "${this.expectedValue}"`,
-        `Please add "options.${this.emitterName}.${this.keyToValidate}" with a path ending in the required pattern`,
+        `Missing configuration for "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}" with a path matching the SDK naming convention "${this.expectedValue}"`,
       );
 
     const actualValue = option as unknown as undefined | string | boolean;
     if (typeof actualValue !== "string") {
       return this.createFailedResult(
-        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a string`,
-        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to be a string path`,
+        `Invalid type for options.${this.emitterName}.${this.keyToValidate}: expected string but got "${typeof actualValue}"`,
+        `Please update "options.${this.emitterName}.${this.keyToValidate}" to be a string path value`,
       );
     }
 
@@ -211,16 +211,16 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
         pathToValidate = pathToValidate.replace(`{${variableName}}`, variableValue);
       } else {
         return this.createFailedResult(
-          `Could not resolve variable {${variableName}} in path "${pathToValidate}". Variable not found in options.${this.emitterName}`,
-          `Please ensure the variable {${variableName}} is defined in your configuration`,
+          `Could not resolve variable {${variableName}} in path "${pathToValidate}". The variable is not defined in options.${this.emitterName}`,
+          `Please define the ${variableName} variable in your configuration or use a direct path value`,
         );
       }
     }
 
     if (!this.validateValue(pathToValidate, this.expectedValue))
       return this.createFailedResult(
-        `The path part "${pathToValidate}" in options.${this.emitterName}.${this.keyToValidate} does not match pattern "${this.expectedValue}"`,
-        `Please update the path to match the required pattern`,
+        `The path part "${pathToValidate}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
+        `Please update the emitter-output-dir path to follow the SDK naming convention`,
       );
 
     return { success: true };
@@ -593,6 +593,12 @@ export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOp
 }
 
 // ----- CSharp sub rules -----
+export class TspConfigCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
+  }
+}
+
 export class TspConfigCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-csharp", "namespace", new RegExp(/^Azure\./));
@@ -602,6 +608,19 @@ export class TspConfigCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSu
 export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-csharp", "clear-output-folder", true);
+  }
+}
+
+export class TspConfigCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-csharp",
+      "emitter-output-dir",
+      new RegExp(/^Azure\.ResourceManager\./),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
   }
 }
 
@@ -643,6 +662,8 @@ export const defaultRules = [
   new TspConfigCsharpAzNamespaceSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
   new TspConfigCsharpMgmtNamespaceSubRule(),
+  new TspConfigCsharpAzEmitterOutputDirSubRule(),
+  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
@@ -698,7 +719,7 @@ export class SdkTspConfigValidationRule implements Rule {
         : "";
 
     return {
-      success: true, // always true as optional
+      success,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
