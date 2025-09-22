@@ -205,12 +205,17 @@ model TranslateTarget {
   referenceTextPairs?: ReferenceSentencePair[];
 }
 
-@doc("Request body parameters for the translate API.")
+@doc("Request body for the translate API.")
 @added(APIVersion.v2025_05_01_preview)
-model TranslateBodyDetails {
-  @doc("""
-    Specifies the text string to be translated in the translate API.
-    """)
+model TranslateBody {
+  @doc("Array of the input text elements to translate.")
+  inputs: TranslateInputItem[];
+}
+
+@doc("Element containing the text for translation.")
+@added(APIVersion.v2025_05_01_preview)
+model TranslateInputItem {
+  @doc("Text to translate.")
   text: string;
 
   @doc("""
@@ -234,7 +239,6 @@ model TranslateBodyDetails {
     """)
   textType?: TextType = "Plain";
 
-  @added(APIVersion.v2025_05_01_preview)
   @doc("""
     Translation target parameters.
     """)
