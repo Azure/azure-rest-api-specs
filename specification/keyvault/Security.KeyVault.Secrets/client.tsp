@@ -134,7 +134,7 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
 @@clientName(getSecrets, "ListSecretProperties", "go");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");
-@@clientName(updateSecret, "UpdateSecretProperties", "go");
+@@clientName(KeyVault.updateSecret, "UpdateSecretProperties", "go");
 
 // renaming SecretItem to SecretProperties.
 // renaming existing SecretProperties to something else
@@ -155,6 +155,7 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(SecretListResult, "SecretPropertiesListResult", "go");
 @@clientName(SecretRestoreParameters.secretBundleBackup, "SecretBackup", "go");
 @@clientName(SecretBundle.kid, "KID", "go");
+@@alternateType(SecretAttributes.recoveryLevel, string, "go");
 
 // Rust configuration
 @@clientName(SecretProperties, "OmitSecretProperties", "rust");
