@@ -42,3 +42,11 @@ options:
     single-client: true
     slice-elements-byval: true
     flavor: azure
+    
+tools:
+  - tool: OpenAPIValidation
+    paths:
+      - "specification/purviewdatagovernace/data-plane/Azure.Analaytics.Purview.DataQuality/preview/2025-09-01-preview/purviewDataQuality.json"
+    rules:
+      - LroExtension
+    reason: "This operation returns 202 but is not a true long-running operation."
