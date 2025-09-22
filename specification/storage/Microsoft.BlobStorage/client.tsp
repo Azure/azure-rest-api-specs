@@ -7,6 +7,7 @@ using Storage.Blob;
 
 namespace Customizations;
 
+
 /** Parameters to be added in client constructors */
 model BlobServiceClientParameters {
   ...ContainerNamePathParameter;
