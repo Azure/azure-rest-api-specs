@@ -323,7 +323,7 @@ model AzureSemanticVadEn extends TurnDetection {
 
 @doc("Server Speech Detection (Azure semantic VAD).")
 @usage(DualUsage)
-model AzureMultilingualSemanticVad extends TurnDetection {
+model AzureSemanticVadMultilingual extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_multilingual;
 
   @minValue(0)
