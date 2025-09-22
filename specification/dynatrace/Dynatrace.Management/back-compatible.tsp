@@ -37,16 +37,17 @@ using Dynatrace.Observability;
   "request"
 );
 #suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(MonitorResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MonitorResource.properties);
 
 #suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(TagRule.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRule.properties);
 
 @@clientLocation(DynatraceSingleSignOnResources.get, "SingleSignOn");
 @@clientLocation(DynatraceSingleSignOnResources.createOrUpdate, "SingleSignOn");
 @@clientLocation(DynatraceSingleSignOnResources.list, "SingleSignOn");
 #suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DynatraceSingleSignOnResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DynatraceSingleSignOnResource.properties
+);
 
 @@clientLocation(MonitorsOperationGroup.getAllConnectedResourcesCount,
   "Monitors"
