@@ -69,6 +69,7 @@ interface ContentAnalyzers {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @doc("Get the result of an analysis operation.")
   @route("/analyzerResults/{operationId}")
+  @access(Access.internal)
   getResult is Foundations.GetOperationStatus<
     GetResultParameters,
     AnalyzeResult
