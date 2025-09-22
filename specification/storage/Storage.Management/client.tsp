@@ -6,6 +6,7 @@ using Microsoft.Storage;
 
 @@clientName(ProvisioningState, "StorageProvisioningState", "csharp");
 @@clientName(Microsoft.Storage, "StorageManagementClient", "javascript");
+@@clientName(Microsoft.Storage, "StorageManagementClient", "python");
 
 @@clientName(AccountType, "ActiveDirectoryPropertiesAccountType", "go, java");
 @@clientName(AllowedMethods, "CorsRuleAllowedMethodsItem", "go, java");
