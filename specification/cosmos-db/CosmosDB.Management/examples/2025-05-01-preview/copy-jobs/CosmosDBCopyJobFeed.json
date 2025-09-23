@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-05-01-preview",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.DocumentDB/databaseAccounts/copyJobs",
+            "id": "ab1b6f34-b33c-46b1-98c7-3a0a63fd0d16",
+            "properties": {
+              "duration": "00:00:00",
+              "jobProperties": {
+                "jobType": "NoSqlRUToNoSqlRU",
+                "tasks": [
+                  {
+                    "destination": {
+                      "containerName": "destTable1",
+                      "databaseName": "destDB1"
+                    },
+                    "source": {
+                      "containerName": "sourceTable1",
+                      "databaseName": "sourceDb1"
+                    }
+                  },
+                  {
+                    "destination": {
+                      "containerName": "destTable2",
+                      "databaseName": "destDB2"
+                    },
+                    "source": {
+                      "containerName": "sourceTable2",
+                      "databaseName": "sourceDb2"
+                    }
+                  }
+                ]
+              },
+              "lastUpdatedUtcTime": "2021-06-12T11:10:55.2780000Z",
+              "mode": "Offline",
+              "processedCount": 0,
+              "status": "Running",
+              "totalCount": 0
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CopyJobs_ListByDatabaseAccount",
+  "title": "CosmosDBCopyJobFeed"
+}

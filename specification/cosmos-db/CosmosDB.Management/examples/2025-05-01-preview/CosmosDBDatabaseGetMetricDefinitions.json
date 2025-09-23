@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-05-01-preview",
+    "databaseRid": "databaseRid",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": {
+              "localizedValue": "Total Requests",
+              "value": "Total Requests"
+            },
+            "metricAvailabilities": [
+              {
+                "retention": "P2D",
+                "timeGrain": "PT5M"
+              },
+              {
+                "retention": "P14D",
+                "timeGrain": "PT1H"
+              },
+              {
+                "retention": "P60D",
+                "timeGrain": "P1D"
+              }
+            ],
+            "primaryAggregationType": "Total",
+            "resourceUri": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Database_ListMetricDefinitions",
+  "title": "CosmosDBDatabaseGetMetricDefinitions"
+}

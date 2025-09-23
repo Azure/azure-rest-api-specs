@@ -1,0 +1,94 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./DatabaseAccountGetResults.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DocumentDB;
+/**
+ * A Cosmos DB Data Transfer Job
+ */
+@parentResource(DatabaseAccountGetResults)
+model DataTransferJobGetResults
+  is Azure.ResourceManager.ProxyResource<DataTransferJobProperties> {
+  ...ResourceNameParameter<
+    Resource = DataTransferJobGetResults,
+    KeyName = "jobName",
+    SegmentName = "dataTransferJobs",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface DataTransferJobs {
+  /**
+   * Get a Data Transfer Job.
+   */
+  get is ArmResourceRead<DataTransferJobGetResults>;
+
+  /**
+   * Creates a Data Transfer Job.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+    DataTransferJobGetResults,
+    Request = CreateJobRequest,
+    Response = ArmResourceUpdatedResponse<DataTransferJobGetResults>
+  >;
+
+  /**
+   * Get a list of Data Transfer jobs.
+   */
+  listByDatabaseAccount is ArmResourceListByParent<
+    DataTransferJobGetResults,
+    Response = ArmResponse<DataTransferJobFeedResults>
+  >;
+
+  /**
+   * Pause a Data Transfer Job.
+   */
+  pause is ArmResourceActionSync<
+    DataTransferJobGetResults,
+    void,
+    ArmResponse<DataTransferJobGetResults>
+  >;
+
+  /**
+   * Resumes a Data Transfer Job.
+   */
+  resume is ArmResourceActionSync<
+    DataTransferJobGetResults,
+    void,
+    ArmResponse<DataTransferJobGetResults>
+  >;
+
+  /**
+   * Cancels a Data Transfer Job.
+   */
+  cancel is ArmResourceActionSync<
+    DataTransferJobGetResults,
+    void,
+    ArmResponse<DataTransferJobGetResults>
+  >;
+
+  /**
+   * Completes a Data Transfer Online Job.
+   */
+  complete is ArmResourceActionSync<
+    DataTransferJobGetResults,
+    void,
+    ArmResponse<DataTransferJobGetResults>
+  >;
+}
+
+@@doc(DataTransferJobGetResults.name, "Name of the Data Transfer Job");
+@@doc(DataTransferJobGetResults.properties,
+  "The properties of a DataTransfer Job"
+);
+@@doc(DataTransferJobs.create::parameters.resource, "");

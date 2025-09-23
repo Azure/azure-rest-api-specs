@@ -1,0 +1,89 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DocumentDB;
+/**
+ * An Azure Cosmos DB Throughputpool.
+ */
+model ThroughputPoolResource
+  is Azure.ResourceManager.TrackedResource<ThroughputPoolProperties> {
+  ...ResourceNameParameter<
+    Resource = ThroughputPoolResource,
+    KeyName = "throughputPoolName",
+    SegmentName = "throughputPools",
+    NamePattern = "^[a-z0-9]+(-[a-z0-9]+)*"
+  >;
+}
+
+@armResourceOperations
+interface ThroughputPoolResources {
+  /**
+   * Retrieves the properties of an existing Azure Cosmos DB Throughput Pool
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ThroughputPool_Get")
+  get is ArmResourceRead<ThroughputPoolResource>;
+
+  /**
+   * Creates or updates an Azure Cosmos DB ThroughputPool account. The "Update" method is preferred when performing updates on an account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ThroughputPool_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ThroughputPoolResource>;
+
+  /**
+   * Updates the properties of an existing Azure Cosmos DB Throughput Pool.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ThroughputPool_Update")
+  @patch(#{ implicitOptionality: false })
+  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
+    ThroughputPoolResource,
+    PatchModel = ThroughputPoolUpdate,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ThroughputPoolResource> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * Deletes an existing Azure Cosmos DB Throughput Pool.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ThroughputPool_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<ThroughputPoolResource>;
+
+  /**
+   * List all the ThroughputPools in a given resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ThroughputPools_ListByResourceGroup")
+  listByResourceGroup is ArmResourceListByParent<ThroughputPoolResource>;
+
+  /**
+   * Lists all the Azure Cosmos DB Throughput Pools available under the subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ThroughputPools_List")
+  list is ArmListBySubscription<ThroughputPoolResource>;
+}
+
+@@maxLength(ThroughputPoolResource.name, 50);
+@@minLength(ThroughputPoolResource.name, 3);
+@@doc(ThroughputPoolResource.name, "Cosmos DB Throughput Pool name.");
+@@doc(ThroughputPoolResource.properties,
+  "Properties to update Azure Cosmos DB throughput pool."
+);
+@@doc(ThroughputPoolResources.createOrUpdate::parameters.resource,
+  "The parameters to provide for the current ThroughputPool."
+);
+@@doc(ThroughputPoolResources.update::parameters.properties,
+  "The parameters to provide for the current Throughput Pool."
+);

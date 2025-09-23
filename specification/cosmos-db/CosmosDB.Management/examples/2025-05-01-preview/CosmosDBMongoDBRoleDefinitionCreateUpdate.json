@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "accountName": "myAccountName",
+    "api-version": "2025-05-01-preview",
+    "createUpdateMongoRoleDefinitionParameters": {
+      "properties": {
+        "databaseName": "sales",
+        "privileges": [
+          {
+            "actions": [
+              "insert",
+              "find"
+            ],
+            "resource": {
+              "collection": "sales",
+              "db": "sales"
+            }
+          }
+        ],
+        "roleName": "myRoleName",
+        "roles": [
+          {
+            "db": "sales",
+            "role": "myInheritedRole"
+          }
+        ]
+      }
+    },
+    "mongoRoleDefinitionId": "myMongoRoleDefinitionId",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMongoDbRoleDefinitionId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongoDbRoleDefinitionId",
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbRoleDefinitions/myMongoDbRoleDefinitionId",
+        "properties": {
+          "type": "CustomRole",
+          "databaseName": "sales",
+          "privileges": [
+            {
+              "actions": [
+                "find",
+                "insert"
+              ],
+              "resource": {
+                "collection": "coll",
+                "db": "sales"
+              }
+            }
+          ],
+          "roleName": "myRoleName",
+          "roles": [
+            {
+              "db": "sales",
+              "role": "myReadRole"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
+      }
+    }
+  },
+  "operationId": "MongoDBResources_CreateUpdateMongoRoleDefinition",
+  "title": "CosmosDBMongoDBRoleDefinitionCreateUpdate"
+}
