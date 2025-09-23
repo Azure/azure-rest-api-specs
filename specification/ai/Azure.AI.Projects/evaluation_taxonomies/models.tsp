@@ -16,13 +16,13 @@ namespace Azure.AI.Projects;
 @added(Versions.v2025_10_15_preview)
 @resource("evaluation_taxonomies")
 model EvaluationTaxonomy {
-    ...AssetBase;
+  ...AssetBase;
 
-    @doc("Input configuration for the evaluation taxonomy.")
-    input: EvaluationTaxonomyInput;
+  @doc("Input configuration for the evaluation taxonomy.")
+  input: EvaluationTaxonomyInput;
 
-    @doc("List of taxonomy categories.")
-    taxonomyCategories: TaxonomyCategory[];
+  @doc("List of taxonomy categories.")
+  taxonomyCategories: TaxonomyCategory[];
 }
 
 @added(Versions.v2025_10_15_preview)
@@ -70,35 +70,35 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
 @added(Versions.v2025_10_15_preview)
 @doc("Tool description.")
 model ToolDescription {
-    @doc("Name of the tool.")
-    name: string;
-    
-    @doc("Description of the tool.")
-    description: string;
+  @doc("Name of the tool.")
+  name: string;
+
+  @doc("Description of the tool.")
+  description: string;
 }
 
 @added(Versions.v2025_10_15_preview)
 @doc("Taxonomy category definition.")
 model TaxonomyCategory {
-    @doc("Name of the taxonomy category.")
-    name: string;
+  @doc("Name of the taxonomy category.")
+  name: string;
 
-    @doc("Description of the taxonomy category.")
-    description?: string;
+  @doc("Description of the taxonomy category.")
+  description?: string;
 
-    @doc("List of taxonomy sub categories.")
-    subCategories: TaxonomySubCategory[];
+  @doc("List of taxonomy sub categories.")
+  subCategories: TaxonomySubCategory[];
 }
 
 @added(Versions.v2025_10_15_preview)
 @doc("Taxonomy sub-category definition.")
 model TaxonomySubCategory {
-    @doc("Name of the taxonomy sub-category.")
-    name: string;
+  @doc("Name of the taxonomy sub-category.")
+  name: string;
 
-    @doc("Description of the taxonomy sub-category.")
-    description?: string;
+  @doc("Description of the taxonomy sub-category.")
+  description?: string;
 
-    @doc("List of taxonomy items under this sub-category.")
-    enabled: boolean;
+  @doc("List of taxonomy items under this sub-category.")
+  enabled: boolean;
 }
