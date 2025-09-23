@@ -26,7 +26,7 @@ These are the global settings for the Azure Maintenance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-preview-2025-10
 ```
 
 ### Tag: package-preview-2025-10
