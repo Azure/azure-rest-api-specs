@@ -3406,6 +3406,28 @@
         "aggregationType"
       ]
     },
+    "DiscoveryError": {
+      "type": "object",
+      "description": "Error details for a failed discovery operation",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error message",
+          "readOnly": true
+        },
+        "context": {
+          "type": "array",
+          "description": "Additional context information, like resource IDs or query details",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
     "DiscoveryRule": {
       "type": "object",
       "description": "A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query",
@@ -3502,7 +3524,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "$ref": "#/definitions/DiscoveryError",
           "description": "Error details if the last discovery operation failed.",
           "readOnly": true
         },

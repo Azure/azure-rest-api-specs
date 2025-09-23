@@ -634,11 +634,22 @@ model DiscoveryRuleProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Error details if the last discovery operation failed.")
-  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+  error?: DiscoveryError;
 
   @visibility(Lifecycle.Read)
   @doc("Name of the entity which represents the discovery rule. Note: It might take a few minutes after creating the discovery rule until the entity is created.")
   entityName: string;
+}
+
+@doc("Error details for a failed discovery operation")
+model DiscoveryError{
+  @visibility(Lifecycle.Read)
+  @doc("Error message")
+  message: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Additional context information, like resource IDs or query details")
+  context?: string[];
 }
 
 @doc("Discovery rule relationship discovery behavior")
