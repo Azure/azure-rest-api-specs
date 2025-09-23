@@ -16,8 +16,9 @@ options:
     output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.Speech.BatchTranscription"
-    namespace: "{package-dir}"
+    namespace: "Azure.AI.Speech.BatchTranscription"
     clear-output-folder: true
+    emitter-output-dir: "{project-root}/../../../azure-sdk-for-net/sdk/cognitiveservices/Azure.AI.Speech.BatchTranscription"
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-java":
@@ -31,12 +32,14 @@ options:
       name: "@azure-rest/ai-speech-batchtranscription"
       version: "1.0.0"
       description: "Speech BatchTranscription Service"
+    emitter-output-dir: "{project-root}/../../../azure-sdk-for-js/sdk/cognitiveservices/ai-speech-batchtranscription-rest"
     flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-batchtranscription"
     package-version: "1.0.0"
     package-name: "{package-dir}"
     package-pprint-name: '"Azure AI Speech BatchTranscription"'
+    emitter-output-dir: "{project-root}/../../../azure-sdk-for-python/sdk/cognitiveservices/azure-ai-batchtranscription"
     flavor: azure
     generate-test: true
     generate-sample: true
@@ -44,6 +47,7 @@ options:
     service-dir: "sdk/ai/azspeechbatchtranscription"
     package-dir: "azspeechbatchtranscription"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/sdk/ai/azspeechbatchtranscription/azspeechbatchtranscription"
     flavor: "azure"
     generate-fakes: true
     inject-spans: true
