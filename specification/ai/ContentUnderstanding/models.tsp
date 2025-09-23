@@ -22,7 +22,7 @@ model ContentAnalyzer {
   description?: string;
 
   @doc("Tags associated with the analyzer.")
-  tags?: Record<string>;
+  tags?: Record<string?>;
 
   @doc("The status of the analyzer.")
   @visibility(Lifecycle.Read)
@@ -79,6 +79,7 @@ model ContentAnalyzer {
 
   @added(Versions.v2025_05_01_preview)
   @doc("Additional knowledge sources used to enhance the analyzer.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   knowledgeSources?: KnowledgeSource[];
 }
 
