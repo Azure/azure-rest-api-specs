@@ -1,3 +1,7 @@
+import "@typespec/http";
+
+using TypeSpec.Http;
+
 namespace Azure.Ai.Speech.Transcription;
 
 @doc("Mode of profanity filtering.")
@@ -132,4 +136,20 @@ model TranscribedWord {
 
   @doc("The duration of the word in milliseconds.")
   durationMilliseconds: int32;
+}
+
+#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
+@doc("Request model for transcription operation.")
+model TranscribeRequestContent {
+  @header @doc("request content type") contentType: "multipart/form-data";
+
+  @doc("The body of the multipart request.")
+  @multipartBody
+  body: {
+    @doc("Metadata for a transcription request. This field contains a JSON-serialized object of type `TranscriptionOptions`.")
+    definition?: HttpPart<string>;
+
+    @doc("The content of the audio file to be transcribed. The audio file must be shorter than 2 hours in audio duration and smaller than 250 MB in size. Optional if audioUrl is provided in the definition.")
+    audio?: HttpPart<bytes>;
+  };
 }
