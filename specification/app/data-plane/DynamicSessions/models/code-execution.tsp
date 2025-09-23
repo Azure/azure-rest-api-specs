@@ -29,7 +29,7 @@ model SessionCodeExecutionRequest {
 
   @added(Versions.v2025_10_02_preview)
   @doc("Whether to formats primitive Python results (bool, int, float, string, None) as JSON strings or null. Default to false.")
-  returnJupyterFormat?: boolean;
+  returnJupyterFormatExecutionResult?: boolean;
 }
 
 @doc("The result of the code execution.")
