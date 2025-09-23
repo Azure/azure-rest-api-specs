@@ -3,7 +3,7 @@
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "examplerg",
     "environmentName": "testcontainerenv",
-    "api-version": "2025-01-01",
+    "api-version": "2025-07-01",
     "environmentEnvelope": {
       "location": "East US",
       "identity": {
@@ -62,6 +62,12 @@
           "encryption": {
             "enabled": true
           }
+        },
+        "ingressConfiguration": {
+          "workloadProfileName": "My-CO-01",
+          "terminationGracePeriodSeconds": 3600,
+          "headerCountLimit": 30,
+          "requestIdleTimeout": 5
         }
       }
     }
@@ -135,6 +141,12 @@
             "mtls": {
               "enabled": true
             }
+          },
+          "ingressConfiguration": {
+            "workloadProfileName": "My-CO-01",
+            "terminationGracePeriodSeconds": 3600,
+            "headerCountLimit": 30,
+            "requestIdleTimeout": 5
           }
         }
       }
@@ -207,6 +219,12 @@
             "mtls": {
               "enabled": true
             }
+          },
+          "ingressConfiguration": {
+            "workloadProfileName": "My-CO-01",
+            "terminationGracePeriodSeconds": 3600,
+            "headerCountLimit": 30,
+            "requestIdleTimeout": 5
           }
         }
       }

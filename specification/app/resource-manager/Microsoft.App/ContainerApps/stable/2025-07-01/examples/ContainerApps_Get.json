@@ -3,7 +3,7 @@
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
     "containerAppName": "testcontainerapp0",
-    "api-version": "2025-01-01"
+    "api-version": "2025-07-01"
   },
   "responses": {
     "200": {
@@ -85,7 +85,15 @@
               "httpReadBufferSize": 30,
               "httpMaxRequestSize": 10,
               "logLevel": "debug",
-              "enableApiLogging": true
+              "enableApiLogging": true,
+              "appHealth": {
+                "enabled": true,
+                "path": "/health",
+                "probeIntervalSeconds": 3,
+                "probeTimeoutMilliseconds": 1000,
+                "threshold": 3
+              },
+              "maxConcurrency": 10
             },
             "runtime": {
               "java": {
