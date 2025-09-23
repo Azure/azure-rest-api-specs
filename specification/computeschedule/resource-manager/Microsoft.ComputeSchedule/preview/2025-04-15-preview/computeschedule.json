@@ -3747,7 +3747,7 @@
       "description": "The scheduled action extension",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ScheduledActionProperties",
+          "$ref": "#/definitions/ScheduledActionsExtensionProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -3837,6 +3837,72 @@
           "default": false
         }
       }
+    },
+    "ScheduledActionsExtensionProperties": {
+      "type": "object",
+      "description": "Scheduled action extension properties",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the scheduled action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the scheduled action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the scheduled action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the scheduled action is supposed to stop scheduling"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduledActionsSchedule",
+          "description": "The schedule the scheduled action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the scheduled action is disabled or not",
+          "default": false
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        },
+        "resourceNotificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action at a resource level. Resource level notification settings are scope to specific resources only and submitted through attach requests.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "resourceType",
+        "actionType",
+        "startTime",
+        "schedule",
+        "notificationSettings"
+      ]
     },
     "ScheduledActionsId": {
       "type": "string",

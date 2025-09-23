@@ -2,6 +2,13 @@ name: ARM Incremental TypeSpec
 
 on:
   pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
     paths:
       # Always trigger on changes to WF itself
       - ".github/**"
