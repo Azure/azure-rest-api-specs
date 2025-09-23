@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-03-01",
+    "version": "2025-05-16-preview",
     "title": "WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules."
   },
@@ -855,6 +855,10 @@
           "description": "Describes the override action to be applied when rule matches.",
           "$ref": "#/definitions/ActionType"
         },
+        "sensitivity": {
+          "description": "Describes the override sensitivity to be applied when rule matches.",
+          "$ref": "#/definitions/SensitivityType"
+        },
         "exclusions": {
           "type": "array",
           "items": {
@@ -1035,6 +1039,20 @@
       ],
       "x-ms-enum": {
         "name": "ActionType",
+        "modelAsString": true
+      }
+    },
+    "SensitivityType": {
+      "description": "Defines the sensitivity for the rule.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "SensitivityType",
         "modelAsString": true
       }
     },

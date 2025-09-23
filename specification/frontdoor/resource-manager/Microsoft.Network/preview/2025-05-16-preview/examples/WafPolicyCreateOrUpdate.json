@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
+    "api-version": "2025-05-16-preview",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "policyName": "Policy1",
@@ -135,7 +135,24 @@
                   ]
                 }
               ]
-            }
+            },
+            {
+              "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+              "ruleSetVersion": "1.0",
+              "ruleGroupOverrides": [
+                {
+                  "ruleGroupName": "ExcessiveRequests",
+                  "rules": [
+                    {
+                      "ruleId": "500100",
+                      "enabledState": "Enabled",
+                      "action": "Block",
+                      "sensitivity": "High"
+                    }
+                  ]
+                }
+              ]
+           }
           ]
         }
       },
@@ -297,6 +314,23 @@
                       {
                         "ruleId": "942110",
                         "enabledState": "Disabled"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "ruleId": "500100",
+                        "enabledState": "Enabled",
+                        "action": "Block",
+                        "sensitivity": "High"
                       }
                     ]
                   }
@@ -584,6 +618,23 @@
                       {
                         "ruleId": "942110",
                         "enabledState": "Disabled"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "ruleId": "500100",
+                        "enabledState": "Enabled",
+                        "action": "Block",
+                        "sensitivity": "High"
                       }
                     ]
                   }
